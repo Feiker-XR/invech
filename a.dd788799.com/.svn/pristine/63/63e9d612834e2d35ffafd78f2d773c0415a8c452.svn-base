@@ -1,0 +1,108 @@
+{layout name="layout" /}
+<div class="row">
+  <div class="col-xs-12">
+    <div class="box">
+      <div class="box-header">
+         <i class="fa fa-plus-square pull-right add_member"></i>
+        <form>
+           <div class="pull-left" >
+              <input class="form-control input-sm search" value="{$Think.get.keywords}"  name="keywords"   placeholder="名称" type="text">
+            </div> 
+            <div class="pull-left" style="margin-left:15px;">
+                <select class="form-control input-sm" name="type" aria-hidden="true">
+                  <option value="" >全部类别</option>
+                    {foreach $types as $k=>$v}
+                      <option value="{$k}" {if($Think.get.type==$k)} selected="selected"{/if}>{$v}</option>
+                    {/foreach}
+                </select>
+            </div>
+            <div class="pull-left" style="margin-left:15px;">
+                <select class="form-control input-sm" name="enable" aria-hidden="true">
+                  <option value="" >全部状态</option>
+                  <option value="1" {if($Think.get.enable=='1')} selected="selected"{/if}>开启</option>
+                  <option value="0" {if($Think.get.enable=='0')} selected="selected"{/if}>关闭</option>
+                </select>
+            </div>
+             <div class="pull-left" style="margin-left:15px;">
+                <select class="form-control input-sm" name="is_kqwf" aria-hidden="true">
+                  <option value="" >全部玩法</option>
+                  <option value="1" {if($Think.get.is_kqwf=='1')} selected="selected"{/if}>快钱玩法</option>
+                  <option value="0" {if($Think.get.is_kqwf=='0')} selected="selected"{/if}>官方玩法</option>
+                </select>
+            </div>
+            <div class="has-feedback pull-left" style="margin-left:15px;">
+              <button type="submit" class="btn btn-block btn-default btn-sm filter">查询</button>
+            </div>
+         </form>
+    
+
+      </div>
+      <!-- /.box-header -->
+      <div class="box-body table-responsive no-padding">
+        <table class="table table-hover">
+            <tr>
+              <th>#</th>
+              <th >类别</th>
+              <th >状态</th>            
+              <th >名称</th>
+              <th >分类</th>
+              <th >操作</th>
+          </tr>
+          {foreach $list as $item}
+           <tr>
+             <td>{$item->id}</td>
+              <td>
+               {if(isset($types[$item->type]))} {$types[$item->type]}{/if}
+              </td>
+              <td>
+                {eq name="$item->enable" value="1"} <span class="btn-success">开启</span>{/eq}
+                {eq name="$item->enable" value="0"} <span class="btn-danger">关闭</span>{/eq}
+              </td>
+              <td>{$item->groupName}</td>
+              <td>
+                {eq name="$item->is_kqwf" value="1"} <span class="btn-success">快钱玩法</span>{/eq}
+                {eq name="$item->is_kqwf" value="0"} <span class="btn-danger">官方玩法</span>{/eq}
+              </td>
+              <td>
+                <i  data-id="{$item->id}" class="edit fa fa-pencil"></i>
+              </td>
+          </tr>
+          {/foreach}
+        </table>
+        {$list->render()}
+      </div>
+      <!-- /.box-body -->
+    </div>
+    <!-- /.box -->
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){
+  $(".add_member").click(function(){
+    $.get('/lottery/playedGroup_edit.html',{},function(data){
+      layer.open({
+        type: 1,
+        title: '新增彩种',
+        maxmin: true, //开启最大化最小化按钮
+        area: ['900px', '600px'],
+        content: data
+      });
+    },'html');
+  });
+  
+  $(".edit").click(function(){
+    var id = $(this).attr('data-id');
+    $.get('/lottery/playedGroup_edit.html',{id:id},function(data){
+      layer.open({
+        type: 1,
+        title: '修改彩种',
+        maxmin: true, //开启最大化最小化按钮
+        area: ['900px', '600px'],
+        content: data
+      });
+    },'html');
+  });
+
+});
+
+</script>

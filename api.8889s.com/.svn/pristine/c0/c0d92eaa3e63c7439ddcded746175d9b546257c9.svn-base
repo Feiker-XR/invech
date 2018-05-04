@@ -1,0 +1,81 @@
+	<?php if(Session('uid')!= '' && Session('username') != '') {?>
+	<!--登陆后-->
+		<!--底部nav固定-->
+		<div class="menu">
+			<ul>
+				<li>
+					<a class="menu-home " href="/">
+						<i class="iconfont icon-iconfonthome0"></i>
+						首 页
+					</a>
+				</li>
+				<li>
+					<a class="menu-color" href="/promotions/index.html">
+						<i class="iconfont icon-shengriliwu"></i>
+						优 惠
+					</a>
+				</li>
+				<li>
+					<a class="menu-lot" href="/pay/index.html">
+						<i class="iconfont icon-meiyuan8"></i>
+						存 款
+					</a>
+				</li>
+				<li>
+					<a class="menu-news" href="http://api1.pop800.com/chat/322051" target="_blank">
+						<i class="iconfont icon-kefu"></i>
+						客 服
+					</a>
+				</li>
+				<li>
+					<a class="menu-my on" href="/user/index.html">
+						<i class="iconfont icon-ren"></i>
+						个 人
+					</a>
+				</li>
+			</ul>
+		</div>
+
+	<?php }else{?>
+	<!--登陆前-->
+		<!--底部nav固定-->
+		<div class="menu">
+			<ul>
+				<li>
+					<a class="menu-home" href="/">
+						<i class="iconfont icon-iconfonthome0"></i>
+						首 页
+					</a>
+				</li>
+				<li>
+					<a class="menu-color" href="/promotions/index.html">
+						<i class="iconfont icon-shengriliwu"></i>
+						优 惠
+					</a>
+				</li>
+				<li>
+					<a class="menu-lot" href="/pay/index.html">
+						<i class="iconfont icon-meiyuan8"></i>
+						存 款
+					</a>
+				</li>
+				<li>
+					<a class="menu-news" href="http://api1.pop800.com/chat/322051" target="_blank">
+						<i class="iconfont icon-kefu"></i>
+						客 服
+					</a>
+				</li>
+				<li>
+					<a class="menu-my on" href="/user/index.html">
+						<i class="iconfont icon-ren"></i>
+						个 人
+					</a>
+				</li>
+			</ul>
+		</div>
+		
+
+		
+
+
+	<?php }?>

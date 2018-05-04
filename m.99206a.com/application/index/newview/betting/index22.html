@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>99206 手机投注页面</title>
+<link rel="stylesheet" type="text/css" href="/newview/css/style.css"/>
+</head>
+<body>
+<!--头部登陆-->	
+
+{include file='common/nav'}
+
+<div class="block_0"></div>	
+<!--手机投注-->	
+<div class="betting_all">
+	<div class="block_20"></div>
+	<div class="betting">
+		<img src="/newview/img/code.png" />
+		<span>
+			m.99206a.com
+		</span>
+	</div>
+	<div class="block_40"></div>
+</div>
+
+<div class="block_0"></div>
+<!--底部footer-->
+{include file='common/footer'}
+	
+</body>
+<script src="/newview/js/jquery1.9.0.min.js"></script>
+<script type="text/javascript" src="/newview/js/jquery.SuperSlide.2.1.1.js"></script>
+<script type="text/javascript" src="/newview/js/jquery.easing.1.3.js" ></script>
+<script type="text/javascript" src="/newview/js/slides.jquery.js" ></script>
+<script type="text/javascript" src="/newview/js/main.js"></script>
+<script type="text/javascript">
+$(function(){
+//首页全屏带进度条大轮播图
+$('#indexslider').slides({
+	effect: 'fade, fade',
+	crossfade: true,
+	container:'index-img',
+	paginationClass: 'index-pagination',
+	preloadImage: '',//loading 图片地址
+	play:3000,
+	fadeSpeed: 500,
+	pause:1,
+	generatePagination: false,
+	animationStart: function(current){
+		$('.index-pagination span').stop().animate({width:0}).hide();
+	},
+	animationComplete: function(current){
+		var leftw=(current-1)*34;
+		$('.index-pagination li').eq(current-1).find('span').show().animate({width:50},3000);
+	},
+	slidesLoaded: function(){
+		$('.index-pagination li').eq(0).find('span').animate({width:50},3000);
+	}
+});
+$(".slides_control").css({width : "100%"});
+
+	
+setInterval(function() {
+	$.ajax({
+		type: "post",
+		url: "{:Url('index/home')}",
+		data:{'ajax':1,'get_money':'1'},
+		success:function(data) {
+			if (/^[\d\.]+$/.test(data)) {
+				$('#money,#money_2').text(data);
+			}
+		}
+	});
+},2000);
+
+})
+</script>
+</html>

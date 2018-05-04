@@ -1,0 +1,150 @@
+{extend name="mobile/base/common"/}
+{block name="title"}<title>推广链接－{$Think.session.WEB_NAME}</title>{/block}
+{block name="style"}
+<link rel="stylesheet" type="text/css" href="__CSS__/user.css">
+<link href="__CSS__/bootstrap.min.css" rel="stylesheet">
+<link href="__CSS__/bootstrap-datetimepicker.min.css" rel="stylesheet">
+{/block}
+{block name="header"}{/block}
+{block name="body"}
+<div class="m-user">
+	<div class="m-simpleHeader" id="dvHeader">
+		<a href="javascript:history.back(-1);" data-pro="back" data-back="true" class="m-simpleHeader-back"><i class="ico ico-back"></i></a>
+		<a href="#" data-pro="ok" class="m-simpleHeader-ok queryMask" id="aHome"><i class="ico ico-add"></i></a>
+		<h1 style="margin-top:12px;">推广链接</h1>		
+	</div>
+	<div class="mask" id="queryMask" style="bottom: 0px; display: none;">
+		<div class="maskbox">
+			<div class="win">
+				<div class="winhead">
+					添    加
+				</div>
+				<div class="winmain">
+					<ul class="writebox">
+					
+						<li>
+						<div>
+							类型
+						</div>
+						<p>
+							<select name="type" class="form-control" id="type">
+								<option value="1">代理</option>
+								<option value="0">会员</option>
+							</select>
+						</p>
+						</li>					
+						<li>
+						<div>
+							返点
+						</div>
+						<p>
+							<input name="fanDian" class="form-control" id="fanDian" type="number" placeholder="0-{:number_format($user['fanDian']-0.1,1)}" value="">
+						</p>
+						</li>
+					</ul>
+				</div>
+				<div class="winfoot">
+					<p>
+						<input class="btn btnblock" type="submit" data-pro="add" data-action="{:Url('team/addLink')}" id="btn-ok" value="提交">
+					</p>
+					<p>
+						<input class="btn btnblock btnblue" onclick="$('#queryMask').css('display', 'none');" type="button" value="取消">
+					</p>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="m-user-duobaoRecord" id="duobaoRcd_dvWrapper">
+		
+		<div id="pro-view-6">
+			<div data-pro="loading">
+			</div>
+			<span id="record-span">
+				<ul class="w-goodsList w-goodsList-l m-user-goodsList" data-pro="list">
+					{php} foreach($data as $vo){ {/php}
+					<li id="pro-view-8" class="w-goodsList-item">
+					<div class="w-goods w-goods-l w-goods-ing m-user-goods">
+						<div class="w-goods-info">
+							<p>
+								返点：{$vo.fanDian} 
+							</p>
+							<p>
+								用户类型：{php} echo $this->iff($vo['type'],'代理','会员') {/php}
+							</p>							
+							<p>
+								建立时间：{php} echo date('Y/m/d H:i',$vo['regTime']) {/php}
+							</p>
+							<p>
+							{php}
+								$url = 'http://'.$_SERVER['HTTP_HOST'].U('home/user/register?lid='.$vo['lid'].'&uid='.$user['uid']);
+								$url = $this->shortUrl($url);	
+							{/php}
+								链接地址：{$url}
+							</p>
+							
+							<p>
+								<a class="text-primary" target="ajax" href="{:Url('team/deletelink')}" data-id="{$vo.lid}">删除</a>&nbsp;&nbsp;
+								<a class="text-primary" href="javascript:void(0);" data-clipboard-text="{$url}">复制链接</a>&nbsp;&nbsp;
+							</p>						
+						</div>
+					</div>
+					</li>
+					{php} } if(!$data) { {/php}
+					<div style="text-align:center">当前条件下没有记录</div>
+					{php} } {/php}
+				</ul>
+			</span>
+		</div>
+	</div>
+</div>
+<button id="pro-view-0" class="w-button w-button-round w-button-backToTop" style="bottom: 55px; display: none;">返回顶部</button>
+<script type="text/javascript">
+    
+</script>
+{/block}
+{block name="script"}
+<script src="__JS__/clipboard.min.js"></script>
+<script type="text/javascript">
+var lid=0;
+$(function(){
+	$('.queryMask').live('click', function () {
+		$('#type').val(1);
+		$('#fanDian').val('');
+		
+		$('#queryMask').css('display', 'block');
+	});
+	
+	$('a[target=ajax]').live('click', function(){
+		//if(!confirm('确定删除吗？'))
+			//return false;
+		wait();
+		var url = $(this).attr('href');
+		var lid = $(this).attr('data-id');
+		$.post(url,{lid:lid},function(result){
+			destroyWait();
+			if(result.status){
+				showDialog('删除成功');
+				window.location.href=result.url;
+			}
+			else
+				showDialog(result.info);
+		});
+		return false;
+	});
+	
+	var btns = document.querySelectorAll('a');
+    var clipboard = new Clipboard(btns);
+
+    clipboard.on('success', function(e) {
+        console.log(e);
+		showDialog(e.text + ' 复制成功！')
+    });
+
+    clipboard.on('error', function(e) {
+        console.log(e);
+		showDialog('复制失败！请长按地址手动复制');
+    });
+});
+</script>
+{/block}
+{block name="footer"}{/block}

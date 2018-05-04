@@ -1,0 +1,82 @@
+<extend name="Public/base" />
+
+<block name="body">
+	<!-- 标题栏 -->
+	<div class="main-title">
+		<h2>管理员列表</h2>
+	</div>
+	<form action="{:Url('index')}" method="post">
+		<div class="cf">			
+			<a class="btn" href="{:Url('User/add_admin')}">新 增</a>
+			<button style="display:none"></button><!-- 屏蔽回车时，默认点击form内部的第一个按钮 -->
+			<!-- 高级搜索 -->		
+			
+		</div>
+	</form>
+    <!-- 数据列表 -->
+    <div class="data-table table-striped">
+	<table class="">
+    <thead>
+        <tr>
+		<th class="row-selected row-selected"><input class="check-all" type="checkbox"/></th>
+		<th class="">用户UID</th>
+		<th class="">昵称</th>
+		<th class="">登录ip</th>
+		<th class="">最后登录时间</th>
+		<th class="">状态</th>
+		<th class="">操作</th>
+		</tr>
+    </thead>
+    <tbody>
+		<volist name="_list" id="vo">
+		<tr>
+            <td><input class="ids" type="checkbox" name="id[]" value="{$vo.uid}" /></td>
+			<td>{$vo.uid} </td>
+			<td><a href="{:Url('User/edit?id='.$vo['uid'])}">{$vo.username}</a></td>
+			
+			<td><span>{:long2ip($vo['loginIP'])}</span></td>
+			<td><span>{:date('Y/m/d H:i:s', $vo['loginTime'])}</span></td>
+			<td><?php
+			//dump(time().'-'.$vo['accessTime'].'<'.C('SESSION_TIME'));
+			if( $vo['loginIP']>0 && $vo['accessTime']>0 && (time()-$vo['accessTime'])<C('SESSION_TIME') )
+						echo '<font color="#FF0000">在线</font>';
+					  else echo '离线';
+				?>
+			</td>
+			<td>
+				<eq name="vo.username" value="admin">
+				<a href="{:Url('User/add_admin?id='.$vo['uid'])}">修改密码</a>
+				<else/>
+				<a href="{:Url('User/add_admin?id='.$vo['uid'])}">修改密码</a>
+				<eq name="vo.isDelete" value="0">
+				<a href="{:Url('User/del_admin?isDelete=1&id='.$vo['uid'])}" class="confirm ajax-get">删除</a>
+				<else/>
+				<a href="{:Url('User/del_admin?isDelete=0&id='.$vo['uid'])}" class="confirm ajax-get">恢复</a>
+				</eq>
+				</eq>
+                </td>
+		</tr>
+		</volist>
+	</tbody>
+    </table> 
+	</div>
+    <div class="page">
+        {$_page}
+    </div>
+</block>
+
+<block name="script">
+	<script src="__STATIC__/thinkbox/jquery.thinkbox.js"></script>
+
+	<script type="text/javascript">
+	//回车搜索
+	$("body").keyup(function(e){
+		if(e.keyCode === 13){
+			$("#search").click();
+			return false;
+		}
+	});
+    //导航高亮
+    $('.side-sub-menu').find('a[href="{:Url('User/admin_list')}"]').closest('li').addClass('current');
+	</script>
+</block>

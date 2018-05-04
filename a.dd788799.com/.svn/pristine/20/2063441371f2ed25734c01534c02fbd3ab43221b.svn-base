@@ -1,0 +1,134 @@
+<?php
+namespace app\admin\controller;
+use app\admin\Login;
+
+use app\common\model\Config as ConfigModel;
+use app\common\model\Notice as NoticeModel;
+
+use think\Hook;
+use app\common\model\Member as UserModel;
+use app\common\model\ActionLog as ActionLogModel;
+
+use app\service\UserAgent;
+use app\service\JsonExtra;
+use app\service\Sms;
+use app\service\CacheStorage;
+
+class System extends Login{
+    
+    public function config(){
+
+        $this->view->page_header = '参数列表';
+
+        $request = request();
+        $list = ConfigModel::getList($request);
+        $list->appends($request->param());
+        $this->assign('list',$list);
+
+        return $this->fetch();
+    }
+
+    public function notice(){
+        //$i = config('sms.interval');
+        //var_dump(input());die;
+/*
+    	$client = UserAgent::client();
+
+    	$jx = new JsonExtra('');
+    	$jx['a'] = 'a';
+    	$jx['b'] = 'b';
+    	$jx->toJson(); 
+*/
+    	$user = UserModel::get(321);                
+    	$tid = 313;//推荐人
+    	$abc = 12;
+    	$extra = [$tid,$abc];
+    	//$ret = Hook::listen('user.register',$user,$extra);
+        //ActionLogModel::log(1,$user,'修改');
+
+        /*
+        $mdata = [
+            'bank_name'=>'银行名称',
+            'bank_account'=>'开户行账户',
+            'bank_address'=>'开户行地址',
+        ];        
+        //$user->validate('Member.bank')->save($mdata);
+        
+        //UserModel::create($mdata);和$user->save();不会验证        
+        //save([])会验证,但是 不存在bank_name字段,不能通过这种方式进行验证;
+        //不使用模型方式验证;
+
+        $validate = validate('Member')->scene('bank');
+        if(!$validate->check($mdata)){
+            $error = $validate->getError();    
+        }
+        
+        $user->bank->bank_name = '银行名称';
+        $user->bank->bank_account = '开户行账户';
+        $user->bank->bank_address = '开户行地址';
+        $user->save();
+        */
+
+        $this->view->page_header = '公告列表';
+
+        $request = request();
+        $list = NoticeModel::getList($request);
+        $list->appends($request->param());
+        $this->assign('list',$list);
+
+        return $this->fetch();
+    }
+
+    public function action_log(){
+
+        $request = request();
+        $list = ActionLogModel::getList($request);
+        $list->appends($request->param());
+        $this->assign('list',$list);
+
+        $businesses = ActionLogModel::BUSINESS_TYPES;
+        $this->assign('businesses',$businesses);
+        
+        $this->view->page_header = '操作日志';
+        return $this->fetch();
+    }
+
+    //access_token可以用client_ip+time
+    //发送 system/sms_send?access_token=access_token&mobile=15912345678
+    //验证 system/sms_verify?access_token=access_token&code=32026
+    public function sms_send(){
+        //$cache = new CacheStorage();
+        //$set = $cache->set('think_sms.access_token._state',[]);
+        //$get = $cache->get('think_sms.access_token._state',[]);
+        $sms = new Sms();
+        $res = $sms->validateSendable();
+        if (!$res['success']) {
+            return json($res);
+        }
+	
+	/*
+        $res = $sms->validateFields();
+        if (!$res['success']) {
+            return json($res);
+        }
+	*/
+
+        $res = $sms->requestVerifySms();
+
+        return json($res);
+    }   
+
+    public function sms_verify($code=''){
+        $sms = new Sms();
+        $state_code = $sms->retrieveState('code');
+        
+        $ret = $code === $state_code;
+
+        if($ret){               
+            $sms->forgetState();   
+            echo "验证成功!";  
+        }
+
+        echo "验证失败!";
+    }    
+}

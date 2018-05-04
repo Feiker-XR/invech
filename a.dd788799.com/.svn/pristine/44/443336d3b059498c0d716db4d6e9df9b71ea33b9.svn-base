@@ -1,0 +1,39 @@
+<?php
+namespace app\common\model\attach;
+
+trait MoneyRecordTrait
+{
+    public static function attachToRequest(&$query){
+            
+        $params = request()->param();
+
+        //$query = self::alias('x')->field('x.*')->order('id desc');
+        //静态方法创建了新查询对象;分组查询有自己的field和order
+        $query->alias('x');
+
+        if($params['username']??''){
+            
+            $subsql = db()->table('gygy_members')
+                    ->field('uid,username,nickname')->buildSql();
+            $query->join([$subsql=> 'u'], 'u.uid = x.uid')
+            ->where('nickname|username','like','%'.trim($params['username']).'%');           
+        }
+
+        if($params['startTime']??''){
+            $query->where('x.created_at', '>=',$params['startTime']);
+        }
+        if($params['endTime']??''){
+            $query->where('x.created_at', '<=',$params['endTime']);
+         }
+
+        if(!empty($params['id']??'')){
+            $query->where('x.id', $params['id']);
+        }
+
+        $class_name = get_class();
+        if(method_exists($class_name,'attachToSelfRequest')){
+           $class_name::attachToSelfRequest($query);
+        }
+    }	
+
+}

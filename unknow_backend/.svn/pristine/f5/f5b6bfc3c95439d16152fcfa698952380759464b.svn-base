@@ -1,0 +1,73 @@
+<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:84:"/mnt/wwwroot/www.dd788799.com/houtai/../application/admin/view/config/addmanage.html";i:1505452684;}*/ ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>系统设置</title>
+<link href="/css/base.css" rel="stylesheet" type="text/css" />
+<link href="/css/admin.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="/js/jquery.js"></script>
+<script type="text/javascript" src="/js/jquery.tools.js"></script>
+<script type="text/javascript" src="/js/base.js"></script>
+</head>
+<body class="input">
+	<!--<div class="bar">
+		添加管理账户
+	</div>-->
+
+	<div class="body">
+	  <ul id="tab" class="tab">
+				<li>
+					<input type="button" value="添加管理账户" hidefocus class="current"/>
+			</li>
+			</ul>
+			<form action="?action=save" method="post"  name="form1">
+			<table class="inputTable tabContent">
+				<tr>
+					<th>
+						登录账号: 
+					</th>
+					<td><input name="login_name" type="text" id="login_name" size="30" class="formText"/></td>
+				</tr>
+				<tr>
+				  <th>登录密码:</th>
+				  <td><input name="login_pwd" type="text" id="login_pwd" size="30" class="formText"/></td>
+			  </tr>
+				<tr>
+				  <th>权限设置: </th>
+				  <td>
+				  <?php
+	 				$temp_i=0;
+     				foreach($adminquanxian as $t)
+	 				{
+					$temp_i++;
+	 			  ?>
+      				<input type="checkbox" name="quanxian[]" value="<?=$t['en']?>"><span><?php echo $t['cn']?></span>
+   				<?php
+    				if($temp_i%5==0) echo "<br />";
+    			} ?>
+   			 </td>
+			  </tr>
+				<tr>
+				  <th>描述:</th>
+				  <td><input name="about" type="text" id="about" size="30" class="formText"/></td>
+			  </tr>
+				<tr>
+				  <th>IP限制:</th>
+				  <td><input name="ip" type="text" id="ip" size="30" maxlength="20" class="formText"/>
+为空则任意IP都可以登陆</td>
+			  </tr>
+				<tr>
+				  <th>地区限制:</th>
+				  <td><input name="address" type="text" id="address" size="30" maxlength="49" class="formText"/>
+为空则任意地区都可以登陆</td>
+			  </tr>
+			</table>
+			<div class="buttonArea">
+      			<input type="submit" class="formButton" value="确  定" hidefocus />&nbsp;&nbsp;
+				<input type="button" class="formButton" onClick="window.location.href='<?php echo Url('main/info'); ?>'" value="返  回" hidefocus />
+	  		</div>
+		</form>
+	</div>
+</body>
+</html>

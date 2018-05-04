@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset='utf-8'>
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+    <title>提现记录</title>
+    <link type="text/css" rel="stylesheet" href="./css/personal.css">
+    <style type="text/css">
+        ul.condition li:last-child span{
+            float: left;
+        }
+    </style>
+</head>
+<body>
+<header class="header">
+    <i class='left'>返回</i>
+    <h1>提现记录</h1>
+</header>
+<main class="inner_body">
+    <section class="fund_detail">
+        <ul class="condition">
+            <li>
+               <p class="active" _long="3">最近三天</p>
+               <p _long="7">最近七天</p>
+               <p _long="30">最近一月</p>
+            </li>
+            <li><span>提现时间：</span><input type="date" value="" id="_date"/></li>
+        </ul>
+    </section>
+    <section class="table">
+        <!--如果thead 要fix 则另外一个thead需要hidden, add class hide-->
+        <!--<table class="fix">
+            <thead>
+            <tr>
+                <th>日期</th>
+                <th>资金类别</th>
+                <th>变更金额</th>
+                <th>之前金额</th>
+                <th>之后金额</th>
+            </tr>
+            </thead>
+        </table>-->
+        <table>
+            <thead class="">
+            <tr>
+                <th width="50%">日期时间</th>
+                <th>金额</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>2018.04.02  18:35:45</td>
+                <td>300</td>
+            </tr>
+            <tr>
+                <td>2018.04.02  18:35:45</td>
+                <td>300</td>
+            </tr>
+            <tr>
+                <td>2018.04.02  18:35:45</td>
+                <td>300</td>
+            </tr>
+            <tr>
+                <td>2018.04.02  18:35:45</td>
+                <td>300</td>
+            </tr>
+            <tr>
+                <td>2018.04.02  18:35:45</td>
+                <td>300</td>
+            </tr>
+            <tr>
+                <td>2018.04.02  18:35:45</td>
+                <td>300</td>
+            </tr>
+            </tbody>
+        </table>
+    </section>
+
+</main>
+<script type="text/javascript" src="./js/jquery.1.9.1.min.js"></script>
+<script type="text/javascript" src="./js/show.js"></script>
+<script type="text/javascript">
+    $(function () {
+        //给时间选择器赋默认值
+        var _date = new Date();
+        var _y = _date.getFullYear();
+        var _m = _date.getMonth()+1;
+        _m = _m < 10 ? '0'+ _m : _m;
+        var _d = _date.getDate();
+        _d = _d < 10 ? '0'+ _d : _d;
+        _date = _y + '-' + _m  + '-' + _d;
+        $('ul.condition li input[type=date]').val(_date)
+    });
+    // 时间改变
+    $('#_date').change(function () {
+        console.log($(this).val());
+    });
+    // 充值方式改变
+    $('ul.condition li p').click(function () {
+        var _long = $(this).attr('_long');
+        console.log(_long);
+        $(this).addClass('active').siblings().removeClass('active');
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,106 @@
+<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:79:"/mnt/wwwroot/www.dd788799.com/houtai/../application/admin/view/money/zhifu.html";i:1511176540;}*/ ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>系统设置</title>
+<link href="/css/base.css" rel="stylesheet" type="text/css" />
+<link href="/css/admin.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="/js/jquery.js"></script>
+<script type="text/javascript" src="/js/jquery.tools.js"></script>
+<script type="text/javascript" src="/js/base.js"></script>
+<script type="text/javascript" src="/js/calendar.js"></script>
+</head>
+<body class="list">
+	<div class="bar">
+		会员存款记录
+	</div>
+	<div class="body">
+	<form name="form1" method="GET" action="" >
+		<div class="listBar">
+			<select name="status" id="status">
+				<option value="2" <?php if($status == '2'): ?>selected<?php endif; ?> style="color:#FF9900;">未处理</option>
+				<option value="0" <?php if($status == '0'): ?>selected<?php endif; ?> style="color:#FF0000;">存款失败</option>
+				<option value="1" <?php if($status == '1'): ?>selected<?php endif; ?> style="color:#006600;">存款成功</option>
+				<option value="3" <?php if($status == '3'): ?>selected<?php endif; ?> >全部存款</option>
+			</select>&nbsp;&nbsp;
+			<select name="type" id="type">
+				<option value="1,2,3,4" <?php if($type == '1,2,3,4'): ?>selected<?php endif; ?> >全部类型</option>
+				<option value="1" <?php if($type == '1'): ?>selected<?php endif; ?> >会员存款</option>
+				<option value="3" <?php if($type == '3'): ?>selected<?php endif; ?> >投注反水</option>
+				<option value="200" <?php if($type == '200'): ?>selected<?php endif; ?> style="color:#006600;">红利赠送</option>
+			</select>&nbsp;&nbsp;
+			<select name="order" id="order">
+				<option value="m_id" <?php if($order == 'm_id'): ?>selected<?php endif; ?> >默认排序</option>
+				<option value="m_value" <?php if($order == 'm_value'): ?>selected<?php endif; ?> >存款金额</option>
+	        </select>&nbsp;&nbsp;日期：
+	        <input name="sdate" type="text" id="sdate" value="<?php echo $sdate; ?>" onClick="new Calendar(2008,2020).show(this);" size="10" maxlength="10" readonly="readonly" /> 
+	        ~ <input name="edate" type="text" id="edate" value="<?php echo $edate; ?>" onClick="new Calendar(2008,2020).show(this);" size="10" maxlength="10" readonly="readonly" />
+	          &nbsp;&nbsp;会员名称：
+	          <input name="username" type="text" id="username" value="<?php echo $username; ?>" size="15" maxlength="20"/>&nbsp;&nbsp;
+	          <input name="find" type="submit" id="find" value="查找" class="formButton"/>
+		</div>
+	</form>
+
+	<table id="listTable" class="listTable">
+		<tr>
+			<th align="center">编号</th>
+			<th align="center">订单号</th>
+			<th align="center">存款金额</th>
+			<th align="center">手续费</th>
+			<th align="center">申请时间</th>
+			<!--<th align="center">申请时间（北京）</th>-->
+            <th align="center">存款会员</th>
+			<th align="center">说明</th>
+            <th align="center">操作</th>
+		</tr>
+
+		<?php if(is_array($list) || $list instanceof \think\Collection || $list instanceof \think\Paginator): $i = 0; $__LIST__ = $list;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$v): $mod = ($i % 2 );++$i;?>
+  		<tr>
+	        <td align="center"><?php echo $v["m_id"]; ?></td>
+	        <td align="center"><?php echo $v["m_order"]; ?></td>
+	        <td align="center"><?php echo $v['m_value']; ?></td>
+	        <td align="center"><?php echo $v["sxf"]; ?></td>
+	        <td align="center"><?php echo $v["m_make_time"]; ?></td>
+	        <!--<td align="center"><?php echo $v["m_make_time"]; ?></td>-->
+	        <td align="center"><?php echo $v['username']; ?></td>
+	        <td align="center"><font color="#0000FF"><?php echo $v["about"]; ?></font></td>
+	        <td align="center">
+	        <?php if($v['status'] == '0'): ?>
+	        	<span style="color:#FF0000;">存款失败</span>
+	        <?php elseif($v['status'] == '1'): ?>
+	        	<span style='color:#009900;'>存款成功</span>
+	        <?php else: ?>
+	        	<div style="float:left;">
+	        		<a onclick="return confirm('确定存款成功?')" href="zhifu_ok.php?ok=1&id=<?php echo $v['m_id']; ?>">成功</a>
+	        	</div>
+	        	<div style="float:right;">
+	        		<a onclick="return confirm('确定存款失败?')" href="zhifu_ok.php?ok=0&id=<?php echo $v['m_id']; ?>">失败</a>
+	        	</div>
+	        <?php endif; ?>
+	        </td>
+        </tr>
+        <?php $currentsum = $currentsum + $v['m_value'];$currentzsjrsum = $currentzsjrsum + $v['sxf']; endforeach; endif; else: echo "" ;endif; ?>
+		<tr>
+				<td colspan="2" align="right">小计:</td>
+				<td align="center"><?php echo $currentsum; ?></td>
+				<td align="center"><?php echo $currentzsjrsum; ?></td>
+				<td colspan="6"></td>
+			</tr>
+			<tr>
+				<td colspan="2" align="right">总计:</td>
+				<td align="center"><?php echo $sum; ?></td>
+				<td align="center"><?php echo $sumzsjr; ?></td>
+				<td colspan="6"></td>
+			</tr>
+
+  	</table>
+	  <!-- page -->
+	  <?php echo $list->render(); ?>
+	  <!-- page end-->
+		<style>
+			.pagination li{display:inline-block;}
+	  	</style>
+	</div>
+</body>
+</html>

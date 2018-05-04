@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<script src="../js/common/shake.js"></script>
+		<style type="text/css">
+			.demo {
+				width: 320px;
+				margin: 40px auto 0 auto;
+			}
+			
+			.hand {
+				width: 190px;
+				height: 300px;
+				margin: 0 auto;
+				background: url(hand.png) no-repeat;
+			}
+			
+			.hand-animate {
+				-webkit-animation: hand_move infinite 2s;
+			}
+			
+			.result {
+				background: #393B3C;
+				border: #2C2C2C 1px solid;
+				box-shadow: inset #4D4F50 0 0 0 1px;
+				border-radius: 10px;
+				color: #fff;
+				padding: 10px;
+				width: 300px;
+			}
+			
+			
+		</style>
+	</head>
+
+	<body>
+		<div class="demo">
+			<div id="hand" class="hand hand-animate"></div>
+			<div id="result"></div>
+		</div>
+	</body>
+	<script>
+		window.onload = function() {
+			var myShakeEvent = new Shake({
+				threshold: 15
+			});
+
+			myShakeEvent.start();
+
+			window.addEventListener('shake', shakeEventDidOccur, false);
+
+			function shakeEventDidOccur() {
+			   alert(12332);
+
+			}
+		};
+	</script>
+
+</html>

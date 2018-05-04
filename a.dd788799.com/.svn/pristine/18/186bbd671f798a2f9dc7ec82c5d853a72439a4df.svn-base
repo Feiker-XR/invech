@@ -1,0 +1,112 @@
+{layout name="layout" /}
+<div class="row">
+  <div class="col-xs-12">
+    <div class="box">
+      <div class="box-header">
+   <form>
+          <div class="has-feedback pull-right">
+            <button type="submit" class="btn btn-block btn-default btn-sm filter">查询</button>
+          </div>
+        
+          <div class="pull-right" style="margin-left:15px;">
+            <input class="form-control input-sm search" value="{$Think.get.keywords}"  name="keywords" id="keywords"  placeholder="用户名、会员昵称" type="text"  style="width: 250px;">
+          </div> 
+          <div class="pull-right">
+              <input type="text" name="endtime"  value="{$Think.get.endtime}" placeholder="结束时间" class="form-control input-sm" id="datepicker2">
+          </div>  
+        <div class="pull-right" style="margin-left:20px;">
+               <input type="text" name="starttime"  value="{$Think.get.starttime}" placeholder="开始时间" class="form-control input-sm" id="datepicker1">
+          </div>
+        <div class="pull-right">
+            <select class="form-control input-sm" name="status" aria-hidden="true">
+                <option value="">全部状态</option>
+                  {foreach($statuses as $key=>$status)}
+                <option value="{$key}" {if($get_status == $key)}selected{/if} >{$status}</option>
+                {/foreach}
+            </select>
+        </div>
+     </form>
+
+      </div>
+      <!-- /.box-header -->
+      <div class="box-body table-responsive no-padding">
+        <table class="table table-hover">
+          <tr>
+            <th>#</th>
+            <th>用户昵称</th>                       
+            <th>银行名称</th>
+            <th>开户名</th>
+            <th>开户行账户</th>
+            <th>开户行地址</th>
+            <th>提款金额</th>
+            <th>申请时间</th>  
+            <th>所需打码量</th>
+            <th>状态</th>      
+            <th>操作</th>            
+            <th>处理时间</th>
+            <th>处理原因</th>
+        </tr>
+        {foreach($list as $item)}
+          <tr>
+            <td>{$item->id}</td>
+            <td>{$item->user->nickname}</td>
+            <td>{$item->bank_name}</td>
+            <td>{$item->bank_username}</td>
+            <td>{$item->bank_account}</font></td>
+            <td>{$item->bank_address}</font></td>            
+            <td>{$item->amount}</td>
+            <td>{$item->created_at}</td>
+            <td>{$item->user->withdraw_remain_amount}</td>
+            <td>
+              {eq name="$item->status" value="0"} <span class="btn-success">未处理</span>{/eq}
+              {eq name="$item->status" value="1"} <span class="btn-danger">通过</span>{/eq}
+              {eq name="$item->status" value="2"} <span class="btn-danger">拒绝</span>{/eq}
+            </td>
+            <td>  <i  data-id="{$item->id}" class="edit fa fa-pencil"></i></td>
+            <td>{$item->handled_at}</td>
+            <td>{$item->reason}</td>
+          </tr>
+          {/foreach}
+
+        </table>
+        {$list->render();}
+      </div>
+      <!-- /.box-body -->
+    </div>
+    <!-- /.box -->
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){
+  var obj = {
+                autoclose: true,
+                todayHighlight: true,
+                language:"zh-CN", 
+                format:"yyyy-mm-dd" 
+           };
+  $("#datepicker1").datepicker(obj)
+  $("#datepicker2").datepicker(obj);
+$(".edit").click(function(){
+    var id = $(this).attr('data-id');
+    $.get('/withdraw/form.html',{id:id},function(data){
+      layer.open({
+        type: 1,
+        title: '修改会员',
+        maxmin: true, //开启最大化最小化按钮
+        area: ['600px', '400px'],
+        content: data
+      });
+    },'html');
+  });
+
+});
+
+</script>
+
+
+
+
+
+
+
+

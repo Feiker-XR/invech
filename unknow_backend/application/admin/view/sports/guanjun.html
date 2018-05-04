@@ -1,0 +1,87 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>系统设置</title>
+<link href="/css/base.css" rel="stylesheet" type="text/css" />
+<link href="/css/admin.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="/js/jquery.js"></script>
+<script type="text/javascript" src="/js/jquery.tools.js"></script>
+<script type="text/javascript" src="/js/base.js"></script>
+<script language="JavaScript" src="/js/calendar.js"></script>
+<script language="javascript">
+function gopage(value)
+{
+location.href=value;
+}
+</script>
+</head>
+<body class="list">
+	<div class="bar">
+		体育比分管理
+	</div>
+	
+
+	<div class="body">
+<form name="form1" method="get" action="">
+
+
+<div class="listBar">
+选择项目：
+<select name="type" id="type">
+<option value="2" {eq name="Request.get.type" value="2"}'selected'{/eq}>金融项目</option>
+<option value="1" {eq name="Request.get.type" value="1"}'selected'{/eq}>冠军项目</option>
+<option value="3" {eq name="Request.get.type" value="3"}'selected'{/eq}>全部项目</option></select>
+</select>&nbsp;&nbsp;
+日期：<input name="dates" type="text" id="dates" value="{$Request.get.date}" onClick="new Calendar(2008,2020).show(this);" size="10" maxlength="10" readonly="readonly" />      
+&nbsp;&nbsp;联赛名：
+<input name="x_title" type="text" id="x_title" size="20" value="{$Request.get.x_title}">&nbsp;&nbsp;<input type="submit" name="Submit" value="搜索" class="formButton">
+</div>
+</form>
+<ul id="tab" class="tab">
+                <li><input type="button" value="足球比分" hidefocus onClick="window.location.href='{:url('sports/zuqiu')}?date=<?=$page_date?>'" /></li>
+                <li><input type="button" value="篮球比分" hidefocus onClick="window.location.href='{:url('sports/lanqiu')}?date=<?=$page_date?>'" /></li>
+                <li><input type="button" value="网球比分" hidefocus onClick="window.location.href='{:url('sports/tennis')}?date=<?=$page_date?>'" /></li>
+                <li><input type="button" value="排球比分" hidefocus onClick="window.location.href='{:url('sports/volleyball')}?date=<?=$page_date?>'" /></li>
+                <li><input type="button" value="棒球比分" hidefocus onClick="window.location.href='{:url('sports/baseball')}?date=<?=$page_date?>'" /></li>
+                <li><input type="button" value="冠军比分" hidefocus class="current" onClick="window.location.href='{:url('sports/guanjun')}?date=<?=$page_date?>'" /></li>
+			</ul>
+
+<table id="listTables" class="listTables">
+  
+				<tr>
+
+					<th>编号</th>
+
+					<th>赛事项目名称</th>
+
+					<th>数量</th>
+					<th>封盘时间</th>
+					<th>比赛结果</th>
+				  <th>添加时间</th>
+				  <th>操作</th>
+
+			    </tr>
+{volist name='match_info' id='rows'}
+      <tr>
+        <td align="center">{$rows["x_id"]}</td>
+        <td align="center"><strong>{$rows["match_name"]}</strong>
+			  <br/><span style="color:#FF6600">{$rows["x_title"]}</span></td>
+        <td align="center">{$rows["num"]}</td>
+        <td align="center">{$rows["match_coverdate"]}</td>
+        <td align="center">
+          {empty name="rows.x_result"}
+          暂无结果
+          {else /}
+          <font style="color:#FF0000">{$rows["x_result"]}</font>
+          {/empty}
+        </td>
+        <td align="center"><?=$rows["add_time"]?></td>
+        <td align="center"><a href="{:url('danshi/setresult')}?id=<?=$rows["x_id"]?>">设置结果</a></td>
+      </tr>
+{/volist}
+  </table>
+{$list->render()}
+	</div>
+</body>
+</html>

@@ -1,0 +1,63 @@
+{extend name="mobile/base/common"/>
+
+{block name="title"}<title>搜索商品－{$Think.session.WEB_NAME}</title>{/block}
+{block name="style"}
+<link rel="stylesheet" type="text/css" href="__CSS__/query.css">
+{/block}
+{block name="script"}
+<script>
+$(function(){
+	$('.w-query-button').click(function(event){
+		var value = $('#w-input-input').val();
+		//var value = $value.val();
+		var url = $(this).attr('action');
+		$.get(url,{content:value},function(result){
+			$('.g-body').html(result);
+		});
+	});
+	
+	$("a[data-keyword!='']").click(function(event){
+		var value = $(this).attr('data-keyword');
+		//var value = $value.val();
+		var url = $(this).attr('action');
+		$.get(url,{content:value},function(result){
+			$('.g-body').html(result);
+		});
+	});
+});
+</script>
+{/block}
+{block name="header"}{/block}
+{block name="body"}
+<div class="g-header">
+	<div class="m-simpleHeader" id="dvHeader">
+	    <a href="javascript:history.back(-1);" data-pro="back" data-back="true" class="m-simpleHeader-back"><i class="ico-back"></i></a>
+	    <h1>搜索商品</h1>
+	</div>
+</div>
+<div class="g-body">
+	<div class="g-wrap">
+		<div class="m-query">
+			<div class="w-query">
+				<div class="w-query-form">
+					<div class="w-input">
+						<input class="w-input-input" id="w-input-input" maxlength="50" type="text">
+						<span style="display: none;" afmoldstyle="block" class="w-input-placeholder">请输入要搜索的商品</span>
+						<i class="ico ico-query w-input-ico"></i>
+					</div>
+					<a class="w-button w-query-button" href="javascript:void(0)" action="{:Url('index/search')}">搜索</a>
+				</div>
+			</div>
+			<h2>热门搜索</h2>
+			<ul class="popular-list">
+				<li><a href="javascript:void(0)" action="{:Url('index/search')}" data-keyword="iphone">苹果</a></li>
+				<li><a href="javascript:void(0)" action="{:Url('index/search')}" data-keyword="华为">华为</a></li>
+				<li><a href="javascript:void(0)" action="{:Url('index/search')}" data-keyword="小米">小米</a></li>
+				<li><a href="javascript:void(0)" action="{:Url('index/search')}" data-keyword="手机">手机</a></li>
+			</ul>
+		</div>
+	</div>
+</div>
+{/block}
+
+

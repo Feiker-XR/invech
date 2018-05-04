@@ -1,0 +1,63 @@
+<?php
+namespace app\common\model\member;
+
+use app\common\model\Bet;
+use app\service\Str;
+
+trait BasicTrait
+{
+    //----------------前台------------------
+
+    // (new Member)->register();
+    public static function register($request){
+         $params = $request->param();
+        try{
+            db()->startTrans();
+            $query = self::order('uid');
+            $list = $query->validate('Member.register')->save($params);
+            event('user.register',[$query]);
+            db()->commit();
+            return true;
+        }catch(\Exception $e){
+            db()->rollback();
+            return false;
+        }
+    }
+
+    //----------------后台------------------
+
+    public static function getList($request){
+
+        $query = (new static())->getBuild($request);
+
+        $data = $query->paginate(10);
+     
+        return $data;
+    }   
+
+    private function getBuild($request){
+        
+        $query = $this->db(true,false);
+
+        $query->order('uid');
+
+        $params = $request->param();
+        if($params['keywords']??''){
+             $query->where('username|nickname', 'like','%'.trim($params['keywords']).'%');
+         }
+        if($params['starttime']??''){
+            $query->where('regTime', '>=',strtotime($params['starttime']));
+        }
+        if($params['endtime']??''){
+            $query->where('regTime', '<=',strtotime($params['endtime']));
+         }
+        if($params['type']??''){
+            $query->where('type', $params['type']);
+        }
+        if($params['enable']??''){
+            $query->where('enable', $params['enable']);
+        }
+
+        return $query; 
+    }    
+}

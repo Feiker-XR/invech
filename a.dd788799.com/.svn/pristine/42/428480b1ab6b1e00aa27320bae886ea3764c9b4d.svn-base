@@ -1,0 +1,75 @@
+<input type="hidden" name="playedGroup" value="<?=$groupId?>"/>
+<input type="hidden" name="playedId" value="<?=$playedId?>"/>
+<input type="hidden" name="type" value="<?=$type?>"/>
+<input type="hidden" name="playedName" value="<?=$played['name']?>"/>
+<!-- PK拾_冠亚和 -->
+<div id="sscContent">
+    <div class="lot-content clearfix">
+        <div class="fl main-left">
+            <div class="hd clearfix rehd tzgz" id="toptouzhu">
+                <div class="fl refl">
+                    快捷金额：
+                    <input type="text" class="txt" id="inputMoney">
+                </div>
+                <div class="kjanniu">
+                    <a href="javascript:void(0)" class="img-50" data-num="50"></a>
+                    <a href="javascript:void(0)" class="img-100" data-num="100"></a>
+                    <a href="javascript:void(0)" class="img-500" data-num="500"></a>
+                    <a href="javascript:void(0)" class="img-1000" data-num="1000"></a>
+                    <a href="javascript:void(0)" class="img-5000" data-num="5000"></a>
+                    <a href="javascript:void(0)" class="img-10000" data-num="10000"></a>
+                </div>
+            </div>
+            <div class="table-common" id="table-common">
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/html" id="pk10_gyh">
+    <table width="100%" border="1" class="pp" action="pk10_gyh">
+        <thead>
+        <tr>
+            <th colspan="12">{{plg.name}}</th>
+        </tr>
+        </thead>
+        <tbody>
+        {{each plg.sz.lines line index1}}
+        <tr>
+            {{each line pl index2}}
+            <td colspan="3" style="cursor: pointer;" onclick="setQuickPick(this)"><strong>{{pl.value}}</strong></td>
+            <td colspan="2" style="cursor: pointer;" onclick="setQuickPick(this)"><strong
+                    class="color-red pl">{{pl.pl}}</strong></td>
+            <td><input type="text" class="table-txt" data-name="{{plg.name}}-{{pl.value}}" data-plid="{{pl.id}}"
+                       data-pl="{{pl.pl}}"></td>
+            {{/each}}
+        </tr>
+        {{/each}}
+        <tr>
+            {{each plg.sm pl}}
+            <td style="cursor: pointer;" onclick="setQuickPick(this)"><strong>{{pl.value}}</strong></td>
+            <td style="cursor: pointer;" onclick="setQuickPick(this)"><strong class="color-red pl">{{pl.pl}}</strong>
+            </td>
+            <td><input type="text" class="table-txt" data-name="{{plg.name}}-{{pl.value}}" data-plid="{{pl.id}}"
+                       data-pl="{{pl.pl}}"></td>
+            {{/each}}
+        </tr>
+        </tbody>
+    </table>
+</script>
+<script>
+    //var pls;//玩法的所有赔率
+    //var plg;//当前赔率组
+    $(function () {
+        var playedId = "<?=$playedId?>";
+        $.getJSON("/game/pl/playedId/" + playedId, function (data) {
+            pls = data;
+            plg = pls[0];
+            plg.sz = plg.pls.slice(0, 5);      // 数字盘
+            plg.sz.lines = group(plg.sz, 2);
+            plg.sm = plg.pls.slice(5);         // 大小单双盘            
+            console.log(plg)
+            var html = template("pk10_gyh", {plg: plg});
+            $('.table-common').html(html);
+        });
+    });
+</script>    

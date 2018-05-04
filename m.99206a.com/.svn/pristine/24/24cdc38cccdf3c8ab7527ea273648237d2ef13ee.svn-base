@@ -1,0 +1,1007 @@
+<?php
+namespace app\admin\controller;
+use app\admin\Login;
+use app\live\agGame;
+use app\live\mg;
+use app\live\pt;
+use app\live\mycrypt;
+use app\live\mgGame;
+use think\Db;
+
+class live extends Login{
+    
+    
+    public function transfer(){
+        $param = input('param.');
+        $platform = $param['platform'] ?? '';
+        $transType = $param['transType'] ?? '';
+        $transType = trim($transType);
+        $username = $param['username'] ?? '';
+        $s_time = $param['s_time'] ?? '';
+        $e_time = $param['e_time'] ?? '';
+        $ZZMinMoney = $param['ZZMinMoney']??0;
+        $ZZMaxMoney = $param['ZZMaxMoney']??0;
+        $conf = [];
+        $where = [];
+        $where2 = [];
+        $where_money = '';
+        $types = [
+            'AG'    => ['IN'=>12,'OUT'=>22],
+            'BB'    => ['IN'=>111,'OUT' => 222],
+            'MG'    => ['IN'=>13,'OUT'=>23],
+            'PT'    => ['IN'=>77,'OUT'=>87],
+        ];
+        $allin = [];
+        $allout = [];
+        foreach ($types as $v){
+            $allin[] = $v['IN'];
+            $allout[] = $v['OUT'];
+        }
+        if($platform){
+            //$where['platform'] = ['eq',$platform];
+            $where['type'] = ['in',array_values($types[$platform])];
+            $conf['platform'] = $platform;
+        }
+        if($transType){
+            //$where['transType'] = ['eq',$transType];
+            if($platform){
+                $where['type'] = ['in',$types[$platform][$transType]]; 
+            }else{
+                if($transType == 'IN'){
+                    $where['type'] = ['in',$allin];
+                }else{
+                    $where['type'] = ['in',$allout];
+                }
+            }
+            $conf['transType'] = $transType;
+        }
+        if($username){
+            $where['username'] = ['eq',$username];
+            $conf['username'] = $username;
+        }
+        if($s_time){
+            $where['actionTime'] = ['gt',strtotime($s_time.' 00:00:00')];
+            $conf['s_time'] = $s_time;
+        }
+        if($e_time){
+            $where2['actionTime'] = ['lt',strtotime($e_time .' 23:59:59')];
+            $conf['e_time'] = $e_time ;
+        }
+        if ($ZZMinMoney&&$ZZMaxMoney){
+            $where_money = "amount > $ZZMinMoney and amount < $ZZMaxMoney";
+        }else if ($ZZMinMoney){
+            $where_money = "amount > $ZZMinMoney";
+        }else if ($ZZMaxMoney){
+            $where_money = "amount < $ZZMaxMoney";
+        }
+        $live = new \app\model\livezz();
+        if($where){
+            $live->where($where);
+        }
+        if($where2){
+            $live ->where($where2);
+        }
+        if ($where_money){
+            $live->where($where_money);
+        }
+//        config('paginate.query',$conf);
+        $list = $live->order('actionTime desc')->paginate(20,false,['query'=>request()->param(),]);
+        //$call = $live ->sum('amount');
+        $zhuanru_all = $live->where('type','in',$allin)->sum('amount');
+        $zhuanchu_all = $live->where('type','in',$allout)->sum('amount');
+        //$this->assign('call',$call);
+        $this->assign('zhuanru_all', $zhuanru_all ?? 0);
+        $this->assign('zhuanchu_all',$zhuanchu_all ?? 0);
+        $this->assign('username',$username);
+        $this->assign('platform',$platform);
+        $this->assign('transType',$transType);
+        $this->assign('s_time',$s_time);
+        $this->assign('e_time',$e_time);
+        $this->assign('list',$list);
+        $this->assign('ZZMinMoney',$ZZMinMoney);
+        $this->assign('ZZMaxMoney',$ZZMaxMoney);
+        return $this->fetch();
+    }
+
+    public function aglist(){
+        include_once (COMM_PATH.'live/agConfig/ag.function.php');
+        $plateform = include_once (COMM_PATH."live/agConfig/plateformname.php");
+        $gamename = include_once(COMM_PATH.'live/agConfig/gamename.php');
+        $slottype = include_once COMM_PATH.'live/agConfig/slottype.php';
+        $flag = include_once COMM_PATH.'live/agConfig/flag.php';
+        $playtype = include_once COMM_PATH.'live/agConfig/playtype.php';
+        $ag = db('ag_gameresult');
+        $param = $this->request->param();
+        $username = $param['username'] ?? '';
+        $billNo = $param['billNo'] ?? '';
+        $s = $param['start_time'] ?? '';
+        $end = $param['end_time'] ?? '';
+        $where = [];
+        $where2 = [];
+        $conf = [];
+        if($username){
+            $where['username'] = ['eq',$username];
+            $conf['username'] = $username;
+        }
+        if($billNo){
+            $where['billNo|gameCode'] = ['eq',$billNo];
+            $conf['billNo'] = $billNo;
+        }
+        if($s){
+            $where['betTime'] = ['gt',$s.' 00:00:00'];
+            $conf['start_time'] = $s;
+        }
+        if($end){
+            $where2['betTime'] = ['lt',$end.' 23:59:59'];
+            $conf['end_time'] = $end;
+        }
+        if($where){
+            $ag->where($where);
+        }
+        if($where2){
+            $ag->where($where2);
+        }
+        //$list = $ag->order('id desc')->paginate(20);
+        $list = $ag->order('betTime desc')->paginate(20);
+        $extral = [];
+        foreach($list as $k => $rows){
+            $extral[$k]['playtypename'] = $playtype[convertType($rows['gameType'])][$rows['playType']] ?? '未知的'.$rows['gameType'];
+            $extral[$k]['gamename'] = $gamename[$rows['gameType']] ?? '未知的'.$rows['gameType'];
+            $extral[$k]['moneycolor'] = $rows['netAmount'] >= 0 ? 'black' : 'red';
+            switch ($extral[$k]['playtypename']){
+                case '庄':
+                case '庄对':
+                case '庄保險':
+                case '庄免佣':
+                case '庄龙宝':
+                case '大':
+                    $typecolor ="red";
+                    break;
+                case '闲':
+                case '闲对':
+                case '闲保險':
+                case '闲龙宝':
+                case '小':
+                    $typecolor = "blue";
+                    break;
+                case '和':
+                    $typecolor = "green";
+                    break;
+                default:
+                    $typecolor = 'black';
+                    break;
+            }
+            $extral[$k]['typecolor'] = $typecolor;
+        }
+        if($where){
+            $ag->where($where);
+        }
+        if($where2){
+            $ag->where($where2);
+        }
+        $result_sum = $ag->field(['sum(betAmount) as bet1','sum(validBetAmount) as bet','sum(netAmount) as win'])->find();
+        $this->assign('list',$list);
+        $this->assign('result_sum',$result_sum);
+        $this->assign('billNo',$billNo);
+        $this->assign('s',$s);
+        $this->assign('e',$end);
+        $this->assign('username',$username);
+        $this->assign('moneycolor','');
+        $this->assign('typecolor','');
+        $this->assign('playtypename','');
+        $this->assign('gamename',$gamename);
+        $this->assign('plateform',$plateform);
+        $this->assign('slottype',$slottype);
+        $this->assign('flag',$flag);
+        $this->assign('extral',$extral);
+        $this->assign('result_xj',['xjbet1'=>0,'xjbet'=>0,'xjwin'=>0]);
+        $this->assign('playtype',$playtype);
+        return $this->fetch('ag');
+    }
+
+    public function aglist_n(){
+        include_once (COMM_PATH.'live/agConfig/ag.function.php');
+        $plateform = include_once (COMM_PATH."live/agConfig/plateformname.php");
+        $gamename = include_once(COMM_PATH.'live/agConfig/gamename.php');
+        $slottype = include_once COMM_PATH.'live/agConfig/slottype.php';
+        $flag = include_once COMM_PATH.'live/agConfig/flag.php';
+        $playtype = include_once COMM_PATH.'live/agConfig/playtype.php';
+
+//        $ag = db('ag_gameresult', 'mongo');
+        $ag = db('ag_gameresult', 'mongo');
+        $param = $this->request->param();
+        $username = $param['username'] ?? '';
+        $billNo = $param['billNo'] ?? '';
+        $s = $param['start_time'] ?? date('Y-m-d');
+        $end = $param['end_time'] ?? date('Y-m-d');
+        $type = $param['type']?? 1;
+        switch ($type) {
+            case 1:
+                $view = 'ag_video';
+                $plateform = "AGIN";
+                break;  //视讯
+            case 2:
+                $view = 'ag_electric';
+                $plateform = "XIN";
+                break;   //电子
+            case 3:
+                $view = 'ag_hunter';
+                $plateform = "HUNTER";
+                break;   //捕鱼
+            case 4:
+                $view = 'ag_yoplay';
+                $plateform = "YOPLAY";
+                break;   //新电子
+            default:$view = 'ag_video';$plateform = "AGIN";
+        }
+        if($username){
+            $where['username'] = is_numeric($username)?$username+0:$username;
+        }
+        $where['suffix'] = 'hga';
+        $where['platformType'] = $plateform;
+        if($plateform == 'HUNTER'){
+            $where['creationTime'] = ['between',[$s.' 00:00:00',$end.' 23:59:59']];
+            $sort['creationTime'] = -1;
+            if($billNo){
+                $where['sceneId'] = is_numeric($billNo)?$billNo+0:$billNo;
+            }
+        }else{
+            $where['betTime'] = ['between',[$s.' 00:00:00',$end.' 23:59:59']];
+            $sort['betTime'] = -1;
+            if($billNo){
+                $where['billNo|gameCode'] = is_numeric($billNo)?$billNo+0:$billNo;
+            }
+        }
+
+        //$list = $ag->order('id desc')->paginate(20);
+        config('paginate.query',$param);
+        $list = $ag->where($where)->order($sort)->paginate(20);echo $ag->getLastSql();
+
+        $extral = [];
+        foreach($list as $k => $rows){
+            if($plateform != 'HUNTER'){
+                $extral[$k]['playtypename'] = $playtype[convertType($rows['gameType'])][$rows['playType']] ?? '未知的'.$rows['gameType'];
+                $extral[$k]['gamename'] = $gamename[$rows['gameType']] ?? '未知的'.$rows['gameType'];
+                $extral[$k]['moneycolor'] = $rows['netAmount'] >= 0 ? 'black' : 'red';
+                switch ($extral[$k]['playtypename']){
+                    case '庄':
+                    case '庄对':
+                    case '庄保險':
+                    case '庄免佣':
+                    case '庄龙宝':
+                    case '大':
+                        $typecolor ="red";
+                        break;
+                    case '闲':
+                    case '闲对':
+                    case '闲保險':
+                    case '闲龙宝':
+                    case '小':
+                        $typecolor = "blue";
+                        break;
+                    case '和':
+                        $typecolor = "green";
+                        break;
+                    default:
+                        $typecolor = 'black';
+                        break;
+                }
+                $extral[$k]['typecolor'] = $typecolor;
+            }
+        }
+
+        if($plateform == 'HUNTER'){
+            $result = $ag->where($where)->sum('Cost,Earn');//['sum(betAmount) as bet1','sum(validBetAmount) as bet','sum(netAmount) as win']
+
+            $result_sum['bet'] = $result['Cost'];
+            $result_sum['win'] = $result['Earn'];
+        }else{
+            $result = $ag->where($where)->sum('betAmount,validBetAmount,netAmount');//['sum(betAmount) as bet1','sum(validBetAmount) as bet','sum(netAmount) as win']
+
+            $result_sum['bet1'] = $result['betAmount'];
+            $result_sum['bet'] = $result['validBetAmount'];
+            $result_sum['win'] = $result['netAmount'];
+        }
+
+//        echo $ag->getLastSql();
+        //var_dump($result_sum);die;
+        $this->assign('list',$list);
+        $this->assign('result_sum',$result_sum);
+        $this->assign('billNo',$billNo);
+        $this->assign('s',$s);
+        $this->assign('e',$end);
+        $this->assign('username',$username);
+        $this->assign('moneycolor','');
+        $this->assign('typecolor','');
+        $this->assign('playtypename','');
+        $this->assign('gamename',$gamename);
+        $this->assign('plateform',$plateform);
+        $this->assign('slottype',$slottype);
+        $this->assign('flag',$flag);
+        $this->assign('extral',$extral);
+        $this->assign('result_xj',['xjbet1'=>0,'xjbet'=>0,'xjwin'=>0]);
+        $this->assign('playtype',$playtype);
+        return $this->fetch($view);
+    }
+
+    public function aghunter(){
+        $aght = new \app\model\aghunter();
+        $param = $this->request->param();
+        $username = $param['username'] ?? '';
+        $billNo = $param['billNo'] ?? '';
+        $s = $param['start_time'] ?? '';
+        $end = $param['end_time'] ?? '';
+        $where = [];
+        $where2 = [];
+        $conf = [];
+        if($username){
+            $where['username'] = ['eq',$username];
+            $conf['username'] = $username;
+        }
+        if($billNo){
+            $where['billNo|gameCode'] = ['eq',$billNo];
+            $conf['billNo'] = $billNo;
+        }
+        if($s){
+            $where['betTime'] = ['gt',$s.' 00:00:00'];
+            $conf['start_time'] = $s;
+        }
+        if($end){
+            $where2['betTime'] = ['lt',$end.' 23:59:59'];
+            $conf['end_time'] = $end;
+        }
+        if($where){
+            $aght->where($where);
+        }
+        if($where2){
+            $aght->where($where2);
+        }
+        //$list = $aght->order('id desc')->paginate(20);
+        $list = $aght->order('betTime desc')->paginate(20);
+        if($where){
+            $aght ->where($where);
+        }
+        if($where2){
+            $aght->where($where2);
+        }
+        $result_sum = $aght->field(['sum(Cost) as bet1','sum(Cost) as bet','sum(Earn) as win'])->find();
+        $typename = array(
+            '1'=>'場景捕魚',
+            '2' => '抽獎',
+            '3'	=> '轉帳',
+            '7'	=> '捕魚王獎勵',
+        );
+        $flag  = array('0'=>'成功');
+        $this->assign('typename',$typename);
+        $this->assign('flag',$flag);
+        $this->assign('list',$list);
+        $this->assign('result_sum',$result_sum);
+        $this->assign('result_xj',['xjbet1'=>0,'xjbet'=>0,'xjwin'=>0]);
+        $this->assign('billNo',$billNo);
+        $this->assign('s',$s);
+        $this->assign('e',$end);
+        $this->assign('username',$username);
+        return $this->fetch();
+    }
+
+    public function bbin(){
+        include_once (COMM_PATH."live/bbConfig/function.bbin.php");
+        $gamename = include_once(COMM_PATH.'live/bbConfig/gamename.php');
+        $playtype = include_once COMM_PATH.'live/bbConfig/playtype.php';
+        $resultType = include_once COMM_PATH.'live/bbConfig/resultType.php';
+        $bbin = new \app\model\bbin();
+        $param = $this->request->param();
+        $username = $param['username'] ?? '';
+        $billNo = $param['billNo'] ?? '';
+        $s = $param['start_time'] ?? '';
+        $end = $param['end_time'] ?? '';
+        $where = [];
+        $where2 = [];
+        $conf = [];
+        if($username){
+            $where['username'] = ['eq',$username];
+            $conf['username'] = $username;
+        }
+        if($s){
+            $where['WagersDate'] = ['gt',$s.' 00:00:00'];
+            $conf['start_time'] = $s;
+        }
+        if($end){
+            $where2['WagersDate'] = ['lt',$end.' 23:59:59'];
+            $conf['end_time'] = $end;
+        }
+        if($where){
+            $bbin->where($where);
+        }
+        if($where2){
+            $bbin->where($where2);
+        }
+        $list = $bbin->order('WagersDate',-1)->paginate(20);
+        $extral = [];
+        foreach ($list as $k => $rows){
+            $tmp = explode("*",$rows['WagerDetail']);
+            //1,1:0.95,10.00,9.50*3,1:8,10.00,-10.00
+            $info = '';
+            foreach ($tmp as $v){
+                $detail = explode(',', $v);
+                $info .= @$playtype[$rows['GameType']][$detail[0]];
+                $info .= ',';
+            }
+            $extral[$k]['info'] = trim($info,',');
+            if(!empty($rows['Card']) && $rows['GameType'] == '3001'){
+                $tmp = explode(",",$rows['Result']);
+                $tmpz = $tmp[0];
+                $tmpx = $tmp[1];
+                $tmp = explode('*',$rows['Card']);
+                $images = '';
+                $tmpimg = array();
+                foreach ($tmp as $v){
+                    $imgs = explode(",",$v);
+                    foreach($imgs as $i){
+                        $images .= "<img src='./images/{$i}.gif' />";
+                    }
+                    $tmpimg[] = $images;
+                    $images = '';
+                }
+                $extral[$k]['zxinfo'] = ['tmpz'=>$tmpz,'tmpx'=>$tmpx,'tmpimg'=>$tmpimg];
+            }else{
+                //var_dump(getGameType($rows['GameType']));
+                $extral[$k]['resultType'] = @$resultType[getGameType($rows['GameType'])][$rows['Result']];
+            }
+        }
+        if($where){
+            $bbin ->where($where);
+        }
+        if($where2){
+            $bbin->where($where2);
+        }
+        $result_sum = $bbin->field(['sum(BetAmount) as bet1','sum(Commissionable) as bet','sum(Payoff) as win'])->find();
+        $this->assign('list',$list);
+        $this->assign('gamename',$gamename);
+        $this->assign('extral',$extral);
+        $this->assign('result_sum',$result_sum);
+        $this->assign('result_xj',['xjbet1'=>0,'xjbet'=>0,'xjwin'=>0]);
+        $this->assign('s',$s);
+        $this->assign('e',$end);
+        $this->assign('username',$username);
+        return $this->fetch();
+
+    }
+
+    public function bbin_n(){
+        include_once (COMM_PATH."live/bbConfig/function.bbin.php");
+        $gamename = include_once(COMM_PATH.'live/bbConfig/gamename.php');
+        $playtype = include_once COMM_PATH.'live/bbConfig/playtype.php';
+        $resultType = include_once COMM_PATH.'live/bbConfig/resultType.php';
+        $bbin = Db('bbin_gameresult', 'mongo');
+        $param = $this->request->param();
+        $username = $param['username'] ?? '';
+//        $billNo = $param['billNo'] ?? '';
+        $type = input('type/d',1);
+        switch ($type){
+            case 1:
+                $view = 'bbin_sport';
+                $gametype = [ 'FT','BK','FB','IH','BS','IN','F1','SP','CB'];
+                break;
+            case 2:
+                $view = 'bbin_video';
+                $gametype = [3001,3002,3003,3005,3006, 3007, 3008, 3010, 3011, 3012, 3014, 3015, 3016];
+                break;   //视讯
+            case 3:
+                $view = 'bbin_electric';
+                $gametype = [
+                    5005, 5006, 5007, 5008, 5009, 5010, 5012, 5013
+                    , 5014, 5015, 5016, 5017, 5029, 5030, 5034
+                    , 5035, 5039, 5040, 5041, 5042
+                    , 5043, 5044, 5048, 5049, 5054, 5057, 5058
+                    , 5060, 5061, 5062, 5063, 5064, 5065, 5066
+                    , 5067, 5068, 5069, 5070, 5073, 5076, 5077
+                    , 5078, 5079, 5080, 5083, 5084, 5088, 5089
+                    , 5090, 5091, 5092, 5093, 5094, 5095, 5105
+                    , 5106, 5107, 5108, 5109, 5115, 5116, 5117
+                    , 5118, 5131, 5201, 5202, 5203, 5204, 5402
+                    , 5404, 5406, 5407, 5601, 5701, 5703, 5704
+                    , 5705, 5706, 5707, 5801, 5802, 5803, 5804
+                    , 5805, 5806, 5808, 5809, 5810, 5811, 5821
+                    , 5823, 5824, 5825, 5826, 5827, 5828, 5831
+                    , 5832, 5833, 5835, 5836, 5837, 5901, 5902
+                    , 5903, 5904, 5905, 5907, 5888
+                ];
+                break;   //电子
+            case 4:
+                $view = 'bbin_lottery';
+                $gametype = ['LT', 'BJ3D', 'PL3D', 'RDPK', 'LDDR', 'BBPK', 'BB3D'
+                    , 'BBKN', 'BBRB', 'BCRA', 'BCRB', 'BCRC', 'BCRD', 'BCRE', 'SH3D'
+                    , 'CQSC', 'TJSC', 'XJSC', 'CQSF', 'GXSF', 'TJSF', 'BJPK'
+                    , 'BBQK', 'BJKN', 'CAKN', 'GDE5', 'JXE5', 'SDE5', 'LKPA'
+                    , 'BBLM', 'CQWC', 'JSQ3', 'AHQ3'
+                ];
+                break; // 彩票
+            default:
+                $view = 'bbin_sport';
+                $gametype = [ 'FT','BK','FB','IH','BS','IN','F1','SP','CB'];    //体育
+        }
+        $s = $param['start_time'] ?? date('Y-m-d');
+        $end = $param['end_time'] ?? date('Y-m-d');
+        $where = ['suffix'=>'hga'];
+        $where['suffix'] = ['eq','hga'];
+        $where['GameType'] = ['in', $gametype];
+        if($username){
+            $where['username'] = is_numeric($username)?$username+0:$username;
+        }
+        $where['WagersDate'] = ['between',[$s.' 00:00:00',$end.' 23:59:59']];
+        if($where){
+            $bbin->where($where);
+        }
+        $list = $bbin->order('WagersDate',-1)->paginate(20);
+        $extral = [];
+        $page = $list->appends($param)->render();
+        $list = $list->items();
+
+        foreach ($list as $k => $rows){
+            if($type == 2) {
+                $tmp = explode("*", $rows['WagerDetail']);
+                //1,1:0.95,10.00,9.50*3,1:8,10.00,-10.00
+                $info = '';
+                foreach ($tmp as $v) {
+                    $detail = explode(',', $v);
+                    $info .= @$playtype[$rows['GameType']][$detail[0]];
+                    $info .= ',';
+                }
+                $extral[$k]['info'] = trim($info, ',');
+                if(mb_strlen($extral[$k]['info']) > 10){
+                    $extral[$k]['info'] = "<a href='javascript:;' title='{$extral[$k]['info']}'>".mb_substr($extral[$k]['info'], 0 , 5)."...</a>";
+                }
+            }
+            if (!empty($rows['Card']) && $rows['GameType'] == '3001') {
+                $tmp = explode(",", $rows['Result']);
+                $tmpz = $tmp[0];
+                $tmpx = $tmp[1];
+                $tmp = explode('*', $rows['Card']);
+                $images = '';
+                $tmpimg = array();
+                foreach ($tmp as $v) {
+                    $imgs = explode(",", $v);
+                    foreach ($imgs as $i) {
+                        $images .= "<img src='./images/{$i}.gif' />";
+                    }
+                    $tmpimg[] = $images;
+                    $images = '';
+                }
+                $extral[$k]['zxinfo'] = ['tmpz' => $tmpz, 'tmpx' => $tmpx, 'tmpimg' => $tmpimg];
+            } else {
+                $list[$k]['resultType'] = @$resultType[getGameType($rows['GameType'])][$rows['Result']];
+            }
+        }
+
+        $result = $bbin->where($where)->sum('BetAmount,Commissionable,Payoff');//['sum(betAmount) as bet1','sum(validBetAmount) as bet','sum(netAmount) as win']
+
+        $result_sum['bet1'] = $result['BetAmount'];
+        $result_sum['bet'] = $result['Commissionable'];
+        $result_sum['win'] = $result['Payoff'];
+//        echo $bbin->getLastSql();
+        $this->assign('list',$list);
+        $this->assign('page',$page);
+        $this->assign('gamename',$gamename);
+        $this->assign('extral',$extral);
+        $this->assign('result_sum',$result_sum);
+        $this->assign('result_xj',['xjbet1'=>0,'xjbet'=>0,'xjwin'=>0]);
+        $this->assign('s',$s);
+        $this->assign('e',$end);
+        $this->assign('username',$username);
+        return $this->fetch($view);
+
+    }
+
+    public function oglist(){
+        $gamename = include_once(COMM_PATH.'live/ogConfig/gamename.php');
+        $GameBettingKind = include_once COMM_PATH.'live/ogConfig/GameBettingKind.php';
+        $GameResult = include_once COMM_PATH.'live/ogConfig/GameResult.php';
+        $ResultType = include_once COMM_PATH.'live/ogConfig/ResultType.php';
+        $og = new \app\model\og();
+        $param = $this->request->param();
+        $username = $param['username'] ?? '';
+        $billNo = $param['billNo'] ?? '';
+        $s = $param['start_time'] ?? '';
+        $end = $param['end_time'] ?? '';
+        $where = [];
+        $where2 = [];
+        $conf = [];
+        if($username){
+            $where['username'] = is_numeric($username)?$username+0:$username;
+            $conf['username'] = $username;
+        }
+        if($billNo){
+            $where['OrderNumber|GameRecordID'] = ['eq',$billNo];
+            $conf['billNo'] = $billNo;
+        }
+        if($s){
+            $where['AddTime'] = ['gt',$s.' 00:00:00'];
+            $conf['start_time'] = $s;
+        }
+        if($end){
+            $where2['AddTime'] = ['lt',$end.' 23:59:59'];
+            $conf['end_time'] = $end;
+        }
+        if($where){
+            $og->where($where);
+        }
+        if($where2){
+            $og->where($where2);
+        }
+        $list = $og->order('AddTime desc')->paginate(20);
+        if($where){
+            $og ->where($where);
+        }
+        if($where2){
+            $og->where($where2);
+        }
+        $result_sum = $og ->field(['sum(BettingAmount) as bet1','sum(ValidAmount) as bet','sum(WinLoseAmount) as win'])->find();
+        $this->assign('GameBettingKind',$GameBettingKind);
+        $this->assign('GameResult',$GameResult);
+        $this->assign('ResultType',$ResultType);
+        $this->assign('list',$list);
+        $this->assign('gamename',$gamename);
+        $this->assign('result_sum',$result_sum);
+        $this->assign('result_xj',['xjbet1'=>0,'xjbet'=>0,'xjwin'=>0]);
+        $this->assign('s',$s);
+        $this->assign('e',$end);
+        $this->assign('billNo',$billNo);
+        $this->assign('username',$username);
+        return $this->fetch();
+    }
+
+    public function oglist_n(){
+        $gamename = include_once(COMM_PATH.'live/ogConfig/gamename.php');
+        $GameBettingKind = include_once COMM_PATH.'live/ogConfig/GameBettingKind.php';
+        $GameResult = include_once COMM_PATH.'live/ogConfig/GameResult.php';
+        $ResultType = include_once COMM_PATH.'live/ogConfig/ResultType.php';
+        $og = db('og_gameresult', 'mongo');
+        $param = $this->request->param();
+        $username = $param['username'] ?? '';
+        $billNo = $param['billNo'] ?? '';
+        $s = $param['start_time'] ?? date('Y-m-d');
+        $end = $param['end_time'] ?? date('Y-m-d');
+        $where = ['suffix'=>'hga'];
+        if($username){
+            $where['UserName'] = is_numeric($username)?$username+0:$username;
+        }
+        if($billNo){
+            $where['OrderNumber|GameRecordID'] = is_numeric($billNo)?$billNo+0:$billNo;
+        }
+        $where['AddTime'] = ['between',[$s.' 00:00:00',$end.' 23:59:59']];
+        if($where){
+            $og->where($where);
+        }
+
+        config('paginate.query',$param);
+        $list = $og->order('AddTime', -1)->paginate(20);
+//        echo $og->getLastSql();
+
+        $result = $og->where($where)->sum('BettingAmount,ValidAmount,WinLoseAmount');//['sum(betAmount) as bet1','sum(validBetAmount) as bet','sum(netAmount) as win']
+
+        $result_sum['bet1'] = $result['BettingAmount'];
+        $result_sum['bet'] = $result['ValidAmount'];
+        $result_sum['win'] = $result['WinLoseAmount'];
+        $this->assign('GameBettingKind',$GameBettingKind);
+        $this->assign('GameResult',$GameResult);
+        $this->assign('ResultType',$ResultType);
+        $this->assign('list',$list);
+        $this->assign('gamename',$gamename);
+        $this->assign('result_sum',$result_sum);
+        $this->assign('result_xj',['xjbet1'=>0,'xjbet'=>0,'xjwin'=>0]);
+        $this->assign('s',$s);
+        $this->assign('e',$end);
+        $this->assign('billNo',$billNo);
+        $this->assign('username',$username);
+        return $this->fetch();
+    }
+
+    public function mglist(){
+        include_once (COMM_PATH.'live/mgConfig/mg.function.php');
+        $mg = new \app\model\mg();
+        $param = $this->request->param();
+        $username = $param['username'] ?? '';
+        $billNo = $param['billNo'] ?? '';
+        $s = $param['start_time'] ?? '';
+        $end = $param['end_time'] ?? '';
+        $where = [];
+        $where2 = [];
+        $conf = [];
+        if($username){
+            $where['username'] = ['eq',$username];
+            $conf['username'] = $username;
+        }
+        if($billNo){
+            $where['OrderNumber|GameRecordID'] = ['eq',$billNo];
+            $conf['billNo'] = $billNo;
+        }
+        if($s){
+            $where['transaction_time'] = ['gt',$s.' 00:00:00'];
+            $conf['start_time'] = $s;
+        }
+        if($end){
+            $where2['transaction_time'] = ['lt',$end.' 23:59:59'];
+            $conf['end_time'] = $end;
+        }
+        if($where){
+            $mg->where($where);
+        }
+        if($where2){
+            $mg->where($where2);
+        }
+        $list = $mg->order('transaction_time desc')->paginate(20);
+        if($where){
+            $mg ->where($where);
+        }
+        if($where2){
+            $mg;
+        }
+        $result_sum = $mg ->field(["sum(if(category='PAYOUT',amount,0)) as win","sum(if(category = 'WAGER',amount,0)) as bet"])->find();
+        $this->assign('list',$list);
+        $this->assign('result_sum',$result_sum);
+        $this->assign('result_xj',['bet'=>0,'win'=>0]);
+        $this->assign('s',$s);
+        $this->assign('e',$end);
+        $this->assign('billNo',$billNo);
+        $this->assign('username',$username);
+        $this->assign('GameName',$GameName);
+        return $this->fetch();
+    }
+
+    public function mglist_n(){
+        include_once (COMM_PATH.'live/mgConfig/mg.function.php');
+//        $mg = new \app\model\mg();
+        $mg = db('mg_gameresult','mongo');
+        $param = $this->request->param();
+        $username = $param['username'] ?? '';
+        $billNo = $param['billNo'] ?? '';
+        $s = $param['start_time'] ?? date('Y-m-d');
+        $end = $param['end_time'] ?? date('Y-m-d');
+        $where = ['suffix'=>'hga'];
+
+        if($username){
+            $where['username'] = is_numeric($username)?$username+0:$username;['eq',$username];
+        }
+        if($billNo){
+            $where['mgid'] = is_numeric($billNo)?$billNo+0:$billNo;
+        }
+        $where['transaction_time'] = ['between',[$s.' 00:00:00',$end.' 23:59:59']];
+
+        if($where){
+            $mg->where($where);
+        }
+        $list = $mg->order('transaction_time',-1)->paginate(20);
+//        echo $mg->getLastSql();
+        $item = $list->items();
+        foreach ($item as &$rows){
+            $rows['gamename'] = isset($GameName[$rows['item_id']]) ? $GameName[$rows['item_id']]:'未知游戏';
+        }
+
+        $result_sum['win'] = $mg->where($where)->where(['category'=>'PAYOUT'])->sum('amount');
+        $result_sum['bet'] = $mg->where($where)->where(['category'=>'WAGER'])->sum('amount');
+        $this->assign('list',$item);
+        $this->assign('page',$list->appends($param)->render());
+        $this->assign('result_sum',$result_sum);
+        $this->assign('result_xj',['bet'=>0,'win'=>0]);
+        $this->assign('s',$s);
+        $this->assign('e',$end);
+        $this->assign('billNo',$billNo);
+        $this->assign('username',$username);
+        return $this->fetch();
+    }
+
+    public function ptlist(){
+        $game_name = include(COMM_PATH.'live/ptConfig/gamename.php');
+        $pt = new \app\model\pt();
+        $param = $this->request->param();
+        $username = $param['username'] ?? '';
+        $billNo = $param['billNo'] ?? '';
+        $s = $param['start_time'] ?? '';
+        $end = $param['end_time'] ?? '';
+        $where = [];
+        $where2 = [];
+        $conf = [];
+        if($username){
+            $where['username'] = ['eq',$username];
+            $conf['username'] = $username;
+        }
+        if($billNo){
+            $where['GAMECODE'] = ['eq',$billNo];
+            $conf['billNo'] = $billNo;
+        }
+        if($s){
+            $where['GAMEDATE'] = ['gt',$s.' 00:00:00'];
+            $conf['start_time'] = $s;
+        }
+        if($end){
+            $where2['GAMEDATE'] = ['lt',$end.' 23:59:59'];
+            $conf['end_time'] = $end;
+        }
+        if($where){
+            $pt->where($where);
+        }
+        if($where2){
+            $pt->where($where2);
+        }
+        $list = $pt->order('GAMEDATE desc')->paginate(20);
+        if($where){
+            $pt ->where($where);
+        }
+        if($where2){
+            $pt->where($where2);
+        }
+        $result_sum = $pt ->field(["sum(WIN) as win ","sum(BET) as bet"])->find();
+        $this->assign('list',$list);
+        $this->assign('result_sum',$result_sum);
+        $this->assign('result_xj',['bet'=>0,'win'=>0]);
+        $this->assign('s',$s);
+        $this->assign('e',$end);
+        $this->assign('billNo',$billNo);
+        $this->assign('username',$username);
+        $this->assign('game_name',$game_name);
+        return $this->fetch();
+    }
+
+    public function ptlist_n(){
+        $game_name = include(COMM_PATH.'live/ptConfig/gamename.php');
+        $pt = db('pt_gameresult', 'mongo');
+        $param = $this->request->param();
+        $username = $param['username'] ?? '';
+        $billNo = $param['billNo'] ?? '';
+        $s = $param['start_time'] ?? date('Y-m-d');
+        $end = $param['end_time'] ?? date('Y-m-d');
+        $where = ['suffix'=>'hga'];
+        if($username){
+            $where['username'] = is_numeric($username)?$username+0:$username;
+        }
+        if($billNo){
+            $where['GAMECODE'] = is_numeric($billNo)?$billNo+0:$billNo;
+        }
+        $where['GAMEDATE'] = ['between',[$s.' 00:00:00',$end.' 23:59:59']];
+
+        if($where){
+            $pt->where($where);
+        }
+        $list = $pt->order('GAMEDATE',-1)->paginate(20);
+
+        $item = $list->items();
+        foreach ($item as &$row){
+            $row['GAMENAME'] = isset($game_name[$row['code']])?$game_name[$row['code']]:'未知游戏';
+        }
+
+        $result = $pt->where($where)->sum('BET,WIN');//['sum(betAmount) as bet1','sum(validBetAmount) as bet','sum(netAmount) as win']
+        $result_sum['bet'] = $result['BET'];
+        $result_sum['win'] = $result['WIN'];
+//        echo $pt->getLastSql();
+
+        $this->assign('page',$list->appends($param)->render());
+        $this->assign('list',$item);
+        $this->assign('result_sum',$result_sum);
+        $this->assign('result_xj',['bet'=>0,'win'=>0]);
+        $this->assign('s',$s);
+        $this->assign('e',$end);
+        $this->assign('billNo',$billNo);
+        $this->assign('username',$username);
+        $this->assign('game_name',$game_name);
+        return $this->fetch();
+    }
+  
+    public function loginag($username){
+        $temp_username = $username.'hga';
+        if($result = agGame::regUser($temp_username)){
+        }
+        if($result['Code']){
+            $this->error('登录失败!');
+        }
+        
+        $type	=	$this->request->param("type");
+        $res = '';
+        if(is_null($type)||$type==''){
+            $res = agGame::playAG($temp_username);
+        }else if($type=='buyu'){
+            $res = agGame::playAG($temp_username,6);
+        }else if($type=='dianzi'){
+            $res = agGame::playAG($temp_username,8);
+        }else{
+            echo 'run here';
+            $res = agGame::playAG($temp_username,$type);
+        }
+        $this->assign('res',$res);
+        return $this->fetch();
+    }
+    
+    public function loginmg($username){
+        
+    }
+    
+    public function mgpwd($username){
+        $info = db('k_userlive')->where(['username'=>$username,'platform'=>'mg'])->find();
+        if(!$info){
+            $auth = mgGame::authenticate();
+            if($auth['success']){
+                $access_token = $auth['body']['access_token'];
+                $mgusername = $username.'@hga';
+                $userinfo = mgGame::getAccountByExtref($access_token,$mgusername);
+                $salt = mycrypt::generate_password(4);
+                $password = mycrypt::generate_password();
+                $uid = db('k_user')->where(['username'=>$username])->field('uid')->find();
+                if($userinfo['success']){
+                    
+                    $updateinfo = mgGame::updateMemberPassword($access_token, $password, $mgusername);
+                    if($updateinfo['success']){
+                        $insertData = array(
+                            'username'=>$username,
+                            'salt' => $salt,
+                            'code' => mycrypt::encrypt($password, $salt),
+                            'platform'=>'mg',
+                            'uid'   => $uid['uid'],
+                        );
+                        db('k_userlive')->insert($insertData);
+                        $info = db('k_userlive')->where(['username'=>$username,'platform'=>'mg'])->find();
+                        echo '<script>alert("用户注册了MG账户,但是数据库中并不存在,已经更新用户密码并同步到本地数据库!")</script>';
+                    }else{
+                        echo '<script>alert("用户注册了MG账户,但是数据库中并不存在,尝试更新用户信息和本地数据库时失败!")</script>';
+                    }
+                }else{
+                    $createinfo = mgGame::createMember($access_token,$mgusername, $password,$mgusername);
+                    if($createinfo['success']){
+                        $insertData = array(
+                            'username'=>$username,
+                            'salt' => $salt,
+                            'code' => mycrypt::encrypt($password, $salt),
+                            'platform'=>'mg',
+                            'uid'   => $uid['uid'],
+                        );
+                        db('k_userlive')->insert($insertData);
+                        $info = db('k_userlive')->where(['username'=>$username,'platform'=>'mg'])->find();
+                        echo('<script>alert("此用户并没有注册MG账户!")</script>');
+                    }else{
+                        var_dump($createinfo);
+                        echo '<script>alert("注册用户失败!")</script>';
+                    }
+                    
+                }
+            }else{
+                exit('<script>alert("获取MG授权失败");</script>');
+            }
+        }
+        $password = mycrypt::decrypt($info['code'], $info['salt']);
+        $this->assign('password',$password);
+        $this->assign($info);
+        return $this->fetch();
+    }
+    
+    public function mgpwdsave($username,$password){
+       db('k_userlive')->where(['username'=>$username,'platform'=>'mg'])->delete();
+       $auth = mgGame::authenticate();
+       if($auth['success']){
+           $access_token = $auth['body']['access_token'];
+           $mgusername = $username.'@hga';
+           $userinfo = mgGame::getAccountByExtref($access_token,$mgusername);
+           if($userinfo['success']){
+               $salt = mycrypt::generate_password(4);
+               $uid = db('k_user')->where(['username'=>$username])->field('uid')->find();
+               $updateinfo = mgGame::updateMemberPassword($access_token, $password, $mgusername);
+               if($updateinfo['success']){
+                   $insertData = array(
+                       'username'=>$username,
+                       'salt' => $salt,
+                       'code' => mycrypt::encrypt($password, $salt),
+                       'platform'=>'mg',
+                       'uid'   => $uid['uid'],
+                   );
+                   db('k_userlive')->insert($insertData);
+                   $info = db('k_userlive')->where(['username'=>$username,'platform'=>'mg'])->find();
+                   echo '<script>alert("更新用户信息成功!");history.go("-1");</script>';
+               }else{
+                   echo '<script>alert("更新用户信息失败!");history.go("-1");</script>';
+               }
+           }else{
+               exit('<script>alert("此用户并没有注册MG账户!");history.go("-1");</script>');
+           }
+       }else{
+           exit('<script>alert("获取MG授权失败");history.go("-1");</script>');
+       }
+    }
+}

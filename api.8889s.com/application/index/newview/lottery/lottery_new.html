@@ -1,0 +1,123 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>澳门金沙娱乐场</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<script type="text/javascript" src="/js/jquery-1.7.2.min.js"></script>
+<link rel="stylesheet" type="text/css" href="CSS/style.css?123"/>
+<script type="text/javascript" src="/js/js/jquery1.42.min.js"></script>
+<script type="text/javascript" src="/js/js/jquery-1.8.0.min.js"></script>
+<script type="text/javascript" src="/js/js/jquery.jslides.js"></script>
+<script type="text/javascript" src="/js/js/jquery.SuperSlide.2.1.1.js"></script>
+<script src="Scripts/swfobject_modified.js" type="text/javascript"></script>
+<!--Self-->
+<script type="text/javascript" language="JavaScript" src="/js/main.js"></script>
+<script type="text/javascript" language="JavaScript" src="/js/main.new.js"></script>
+<script type="text/javascript" language="JavaScript" src="/js/layer.js"></script>
+<!--Self-->
+</head>
+<body>
+<div class="head">
+		<!--欢迎-->
+		
+{include file='common/nav'}	
+
+ 
+</div>
+<div class="block_0"></div>
+	<!--体育赛事背景-->
+	<div class="game_s_center">
+		<div class="game_l_login">
+			<div class="game_l_login_nav">
+	<h3>Vip会员登录</h3>
+	<form method="post">
+		<ul>
+			<li class="game_l_login_nav_1"><input type="text" name="username" id="username" placeholder="输入用户名"></li>
+			<li class="game_l_login_nav_2"><input type="password" id="password"  name="password" placeholder="输入密码"></li>
+			<li class="game_l_login_nav_3"><a href="javascript:;" onclick="alert('请联系在线客服!');return false;">忘记密码？</a></li>
+			<li class="game_l_login_nav_4"><button onclick="Login()">登录</button></li>
+			<li class="game_l_login_nav_5"><a class="button" href="/reg.php">立即开户</a></li>
+		</ul>
+	</form>
+</div>
+			<div class="block_0"></div>
+<div class="big_my_content">
+<div class="big_my_content2">
+<div class="big_my_content_header"></div>
+<div class="big_my_content_cent">
+
+
+<div style="width: 1000px;  margin:0px auto;">
+
+ <table  border="0" align="center" cellpadding="0"  style="margin: 0 auto;" cellspacing="0" bgcolor="#333333">
+	<tr>
+	  <td align="center" valign="middle"><iframe id="mainFrame" name="mainFrame" border="0" marginwidth="0" framespacing="0" src="/lottery/new/cqssc.php" frameborder="0" width="1000" scrolling="no" height="1000" vspale="0" allowtransparency="true" style="background-color=transparent"></iframe></td>
+	  </tr>
+	</table>
+ 
+</div>
+
+
+</div>
+<div class="big_my_content_footer"></div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="block_0"></div>	
+{include file='common/footer'}
+
+<script type="text/javascript">
+function open_new_888(url) {
+    window.open(url,'newwindow','height=640,width=600,top=150,left='+(screen.width-640)/2+',toolbar=no,menubar=no,scrollbars=no, resizable=no,location=no, status=no');
+}
+</script>
+
+	
+<script>
+function goPay(){
+	if($("#payUsername").val() == ''){
+		alert("请登录后再进行冲值！");
+		return false;
+	}
+	//alert($("#payCoin").val() );
+	if( $("#payCoin").val() <= '50'){
+		//alert("冲值金额不能小于50");
+		//return false;
+	}
+	$("#payForm").submit();
+}
+$(function(){
+	
+	$('#qian_dao .qian_dao').click(function(){
+		//window.open('qian_dao.php','qian_dao','menubar=no,status=yes,scrollbars=yes,top=150,left=400,toolbar=no,width=805,height=520');
+			$.ajax({
+				type: "post",
+				url: '/qian_dao.php',
+				data:{'ajax':1},
+				success:function(data) {
+					alert(data);
+				}
+			});
+	});
+	
+	
+setInterval(function() {
+	$.ajax({
+		type: "post",
+		url: "{:Url('index/home')}",
+		data:{'ajax':1,'get_money':'1'},
+		success:function(data) {
+			if (/^[\d\.]+$/.test(data)) {
+				$('#money,#money_2').text(data);
+			}
+		}
+	});
+},2000);
+
+})
+
+</script>
+</body>
+</html>

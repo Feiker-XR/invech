@@ -1,0 +1,111 @@
+<input type="hidden" name="playedGroup" value="<?=$groupId?>"/>
+<input type="hidden" name="playedId" value="<?=$playedId?>"/>
+<input type="hidden" name="type" value="<?=$type?>"/>
+<input type="hidden" name="playedName" value="<?=$played['name']?>"/>
+<!-- mobile 六合彩_定位 --->
+<div id="sscContent">
+    <div class="lot-content clearfix">
+        <div class="hd clearfix rehd" id="toptouzhu">
+            <div class="fl refl">
+                快捷金额：<input type="text" class="txt" id="inputMoney">
+            </div>
+            <div class="kjanniu">
+                <a href="javascript:void(0)" class="img-50" data-num="50"></a>
+                <a href="javascript:void(0)" class="img-100" data-num="100"></a>
+                <a href="javascript:void(0)" class="img-500" data-num="500"></a>
+                <a href="javascript:void(0)" class="img-1000" data-num="1000"></a>
+                <a href="javascript:void(0)" class="img-5000" data-num="5000"></a>
+                <a href="javascript:void(0)" class="img-10000" data-num="10000"></a>
+            </div>
+        </div>
+
+        <div class="fl main-left">
+            <div class="fr">
+                <div class="T-tab clearfix f-tab f-bottom">
+                    <a href="javascript:void(0)" onclick="changeTab(this)">正一</a>
+                    <a href="javascript:void(0)" onclick="changeTab(this)">正二</a>
+                    <a href="javascript:void(0)" onclick="changeTab(this)">正三</a>
+                    <a href="javascript:void(0)" onclick="changeTab(this)">正四</a>
+                    <a href="javascript:void(0)" onclick="changeTab(this)">正五</a>
+                    <a href="javascript:void(0)" onclick="changeTab(this)">正六</a>
+                    <a href="javascript:void(0)" onclick="changeTab(this)">特码</a>
+                </div>
+            </div>
+            <div class="table-common" id="table-common"></div>
+
+        </div>
+    </div>
+</div>
+<script type="text/html" id="six_dw">
+    <table width="100%" border="0" cellspacing="0" cellpadding="0" class="pp" action="six_dw" data-line="5"
+           style="overflow: auto;">
+        <thead>
+        <tr>
+            <th>号码</th>
+            <th>赔率</th>
+            <th>金额</th>
+            <th>号码</th>
+            <th>赔率</th>
+            <th>金额</th>
+        </tr>
+        </thead>
+        <tbody>
+        {{each plg.sz.lines line index1}}
+        <tr>
+            {{each line pl index2}}
+            <td onclick="setQuickPick(this,true)"><span
+                    class="ball-icon ball-{{pl.value | number}}"></span></td>
+            <td onclick="setQuickPick(this,true)"><strong
+                    class="color-red pl">{{pl.pl}}</strong>
+            </td>
+            <td><input type="text" oninput="checkAmount()" class="table-txt" data-name="{{plg.name}}-{{pl.value}}" data-plid="{{pl.id}}"
+                       data-pl="{{pl.pl}}"></td>
+            {{/each}}
+        </tr>
+        {{/each}}
+        </tbody>
+        <tbody>
+        {{each plg.sm.lines line index1}}
+        <tr>
+            {{each line pl index2}}
+            <td onclick="setQuickPick(this,true)">{{pl.value}}</td>
+            <td onclick="setQuickPick(this,true)"><strong
+                    class="color-red pl">{{pl.pl}}</strong>
+            </td>
+            <td><input type="text" oninput="checkAmount()" class="table-txt" data-name="{{plg.name}}-{{pl.value}}"
+                       data-plid="{{pl.id}}"
+                       data-pl="{{pl.pl}}"></td>
+            {{/each}}
+        </tr>
+        {{/each}}
+        </tbody>
+    </table>
+</script>
+<script>
+    //var pls;//玩法的所有赔率
+    //var plg;//当前赔率组
+    function changeTab(self) {
+        $(self).siblings().removeClass('active');
+        $(self).addClass('active');
+        var $tabs = $(self).parent().children();
+        var index = $tabs.index(self);
+        plg = pls[index];
+        plg.sz = plg.pls.slice(0, 49);		// 数字盘
+        plg.sm = plg.pls.slice(49);			// 大小单双盘
+        //plg.sz.lines = group_six_sz(plg.sz);
+        plg.sz.lines = group(plg.sz, 2);
+        //plg.sm.lines = group_six_sm(plg.sm);
+        plg.sm.lines = group(plg.sm, 2);
+        var html = template("six_dw", {plg: plg});
+        $('.table-common').html(html);
+    }
+
+    $(function () {
+        var playedId = "<?=$playedId?>";
+        $.getJSON("/game/pl/playedId/" + playedId, function (data) {
+            pls = data;
+            //console.log(data);
+            $('.T-tab.clearfix').children().eq(0).click();
+        });
+    });
+</script>    

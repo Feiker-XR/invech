@@ -1,0 +1,259 @@
+
+body {
+    background-color: #FFFFFF;
+    /*border: 5px solid #ccccca;*/
+    font-family: ΢���ź�;
+    font-size: 12px;
+    margin: 0;
+    padding: 0;
+}
+div, form, ul, ol, li, dl, dt, dd, p, span, img, input {
+    border: 0 none;
+    margin: 0;
+    padding: 0;
+}
+li, dl {
+    list-style-type: none;
+}
+a {
+    color: #197857;
+    font-size: 12px;
+    font-weight: bold;
+    text-decoration: none;
+}
+a:hover {
+    color:#FF0000;
+   text-decoration: underline;
+}
+.red {
+    color: #f00;
+}
+.top {
+    background-color: #197857;
+    border: 0 solid #8f6d50;
+    height: 50px;
+    line-height: 25px;
+    /*margin-bottom: 5px;
+    position: fixed;
+    width: 99%;*/
+}
+#datashow {
+    /*margin-top: 25px;*/
+}
+.box {
+    width: 100%;
+}
+.box th {
+    background-color: #00925f;
+    color: #fff;
+    font-weight: 100;
+    line-height: 24px;
+}
+.box td {
+    background-color:#fcfcfc;
+}
+.box .zhu {
+    color:#202020;
+}
+.box .ke {
+    color: #636363;
+}
+.box .he {
+    color: #202020;
+}
+.box .ding {
+    vertical-align: top;
+}
+.box .zhong {
+    text-align: center;
+}
+.box .line {
+    line-height: 22px;
+	padding-left: 10px;
+}
+.box .gq_shijians {
+    width: 30px;
+}
+.box .gq_bifens {
+    width: 30px;
+}
+.box .shijian {
+    width: 50px;
+}
+.box .duiwu {
+}
+.box .quanchang {
+}
+.box .shangbanchang {
+}
+.box .duying {
+    width: 40px;
+}
+.box .rangqiu {
+    width: 95px;
+}
+.box .daxiao {
+    width: 95px;
+}
+.box .liansai {
+    background-color: #eee;
+    line-height: 28px;
+    padding-left: 10px;
+}
+.box .liansai a {
+    color:#00925f;
+}
+.box .liansai a:hover {
+    color: #72B337;
+}
+.box .bian_out {
+    background-color: #fff;
+}
+.box .bian_over {
+    background-color: #ffe;
+}
+.box .rangqiu_odds {
+    line-height: 22px;
+    padding: 0 5px;
+    width: 91px;
+}
+.box .rangqiu_odds .odds {
+    float: right;
+    text-align: right;
+    width: 30px;
+}
+.box .rangqiu_odds .pankou {
+    color:#FF8500;
+    float: left;
+    font-weight: bold;
+    width: 60px;
+}
+.box .ruqiushu {
+    width: 70px;
+}
+.box .banquanchang {
+    width: 50px;
+}
+.box .liansai_g {
+    text-align: left;
+}
+.box .liansai_g a {
+    color: #fff;
+    display: inline;
+    margin-left: 5px;
+}
+.box .liansai_g a:hover {
+    color: #fff;
+}
+.box .liansai_g span {
+    float: right;
+    margin-right: 5px;
+}
+.box .saishi_g {
+    background-color: #ffe;
+    font-weight: bold;
+    line-height: 22px;
+    text-align: center;
+}
+.box .xiangmu_g {
+    padding-left: 5px;
+}
+.box .xiangmu_g span {
+    float: right;
+    margin-right: 5px;
+}
+.page {
+    color: #fff;
+    cursor: pointer;
+    float: left;
+    font-weight: bold;
+    width: 550px;
+	padding-top: 13px;
+
+}
+.page span {
+    float: left;
+    padding-left: 20px;
+	font-size: 14px;
+}
+.page ul {
+    float: left;
+    list-style-type: none;
+}
+.page li {
+    background: none repeat scroll 0 0 #fff;
+    float: left;
+    margin-left: 5px;
+    margin-top: 3px;
+    text-align: center;
+}
+.page li a {
+    color: #197857;
+    display: block;
+    font-weight: bold;
+    line-height: 20px;
+    width: 20px;
+    cursor: pointer;
+}
+.page li a:hover, .page li.i {
+    background: none repeat scroll 0 0 #72B337;
+    color: #fff;
+    font-weight: bold;
+}
+.button_sx {
+    background: none repeat scroll 0 0 #fff;
+    display: inline;
+    float: left;
+    height: 20px;
+    margin: 3px 0 0 5px;
+    width: 80px;
+    cursor: pointer;
+}
+.button_ls {
+    background: none repeat scroll 0 0 #fff;
+    display: inline;
+    float: left;
+    height: 20px;
+    margin: 3px 0 0 5px;
+    width: 80px;
+    cursor: pointer;
+}
+.result_title {
+    color: #fff;
+    cursor: pointer;
+    float: left;
+    font-weight: bold;
+    width: 600px;
+}
+.result_title span {
+    float: left;
+    padding-left: 20px;
+	font-size: 14px;
+}
+.result_title ul {
+    float: left;
+    list-style-type: none;
+}
+.result_title li {
+    background: none repeat scroll 0 0 #fff;
+    float: left;
+    margin-left: 5px;
+    margin-top: 3px;
+    text-align: center;
+	margin-top: 15px;
+}
+.result_title li a {
+    color: #197857;
+    display: block;
+    font-weight: bold;
+    line-height: 20px;
+    padding: 0 10px;
+}
+.result_title li a:hover, .result_title li.i {
+    background: none repeat scroll 0 0 #72B337;
+    color: #fff;
+    font-weight: bold;
+    line-height: 20px;
+    padding: 0 10px;
+	
+}

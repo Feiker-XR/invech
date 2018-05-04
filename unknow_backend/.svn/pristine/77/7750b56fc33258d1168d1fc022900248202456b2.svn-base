@@ -1,0 +1,67 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>系统设置</title>
+<link href="/css/base.css" rel="stylesheet" type="text/css" />
+<link href="/css/admin.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="/js/jquery.js"></script>
+<script type="text/javascript" src="/js/jquery.tools.js"></script>
+<script type="text/javascript" src="/js/base.js"></script>
+<script type="text/javascript">
+function del(v){
+    v=v.split('|')
+	if(v[0]>0){
+	    alert("该会员组下有会员，请先将该会员组下的会员转移，再来删除该会员组！");
+		return false;
+	}else{
+	    return confirm('您确定要删除：'+v[1]+" 吗？") ? true : false;
+	}
+}
+</script>
+</head>
+<body class="list">
+	<!--<div class="bar">
+		会员等级设置
+	</div>-->
+	
+
+	<div class="body">
+<ul id="tab" class="tab">
+				<li>
+					<input type="button" value="会员组列表" hidefocus class="current" onClick="window.location.href='{:Url('level/index')}'" />
+				</li>
+                <li>
+					<input type="button" value="添加会员组" hidefocus onClick="window.location.href='{:Url('level/add')}'" />
+				</li>
+			</ul>
+
+<table id="listTable" class="listTable">
+
+	<tr>
+
+		<th>编号</th>
+
+		<th>会员组名称</th>
+
+		<th>会员总数</th>
+		<th>冲值优惠</th>
+		<th>公司入款优惠</th>
+		<th>操作</th>
+	</tr>
+	  {volist id="list" name="list"}
+      <tr>
+        <td align="center">{$list.id}</td>
+        <td align="center">{$list.name}</td>
+        <td align="center"><a href="list.php?gid=1">{$list.total} 人</a></td>
+		<td align="center">{$list.czyh}%</td>
+		<td align="center">{$list.rkyh}%</td>
+        <td align="center"><a href="{:Url('level/edit','id='.$list.id)}" >修改</a> | <a href="{:Url('level/delete','id='.$list.id)}" >删除</a></td>
+      </tr>
+      {/volist}
+      
+  </table>
+	</div>
+</body>
+</html>

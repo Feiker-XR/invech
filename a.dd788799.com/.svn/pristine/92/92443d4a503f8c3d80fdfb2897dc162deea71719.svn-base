@@ -1,0 +1,52 @@
+<?php
+namespace app\behavior;
+
+//初始化服务容器;
+
+use think\Request;
+
+class Container 
+{
+
+    public function initEvents(){
+        $dispatcher = container('events');
+        $file = APP_PATH.'required/events.php';
+        $events = is_file($file)?require($file):[];
+        foreach($events as $event => $listeners){
+            foreach($listeners as $listener){
+                $dispatcher->listen($event,$listener);
+            }
+        }
+    }
+
+    private function initQueue(){
+        // 容器内的'queue' 从某个queue驱动 升级为 queue缓存
+    }
+
+    private function initBroadcast(){
+        $this->initChannels();
+    }
+
+	public function run(&$dispatch)
+	{		
+        $this->initEvents();
+        //$this->initQueue();
+        $this->initBroadcast();
+        $this->initAuth();
+	}
+
+    private function initChannels(){
+        
+	   require_once(APP_PATH.'required/channels.php');
+       
+    }
+
+    private function initAuth(){
+        $callback = function (Request $request,$name = null) {
+            return container('auth')->user();
+        }; 
+        //$request = request(); $request->user = $callback;
+        Request::hook('user',$callback);              
+    }
+
+}

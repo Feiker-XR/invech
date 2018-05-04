@@ -1,0 +1,29 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Member</title>
+<link rel="stylesheet" type="text/css" href="css/general.css"/>
+<link rel="stylesheet" type="text/css" href="css/jquery-ui.css" />
+<script type="text/javascript" src="Scripts/jquery.js"></script>
+<script type="text/javascript" src="Scripts/member.js"></script>
+</head>
+<body>
+  <div class="ui-moneyBox">
+    <ul>
+     <table width="100%" border="0" cellspacing="0" cellpadding="5" id="thetable">
+    <tr>
+      <th align="center" bgcolor="#F9F9F9" style=" font-size:14px; color:#900">{$info.msg_title}</th>
+	  </tr>
+    <tr>
+      <td align="left" style="line-height:22px;">{$info.msg_info}</td>
+      </tr>
+    <tr>
+      <td align="right" style="line-height:22px;" bgcolor="#F9F9F9"><br>{$info.msg_time}</td>
+    </tr>
+    </table>
+    </ul>
+  </div>
+<script language="javascript">bianse("thetable","#F5F5F5","#FFFFFF","#FFFFCC","#FFFFCC");</script> 
+</body>
+</html>

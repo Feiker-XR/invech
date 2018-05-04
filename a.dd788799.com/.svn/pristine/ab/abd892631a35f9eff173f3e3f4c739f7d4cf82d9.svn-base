@@ -1,0 +1,84 @@
+
+<ul class="w-goodsList w-goodsList-l m-user-goodsList" data-pro="list">
+	<li id="pro-view-8" class="w-goodsList-item">
+	<div class="w-goods w-goods-l w-goods-ing m-user-goods">
+		<div class="w-goods-info">
+			<p>
+				用户账号：<strong>团队总结</strong>
+			</p>
+			<p>
+				有效余额：<{php} echo $this->ifs($all['coin'], '0.0000')?>
+			</p>
+			<p>
+				充值总额：<{php} echo $this->ifs($all['rechargeAmount'], '0.0000')?>
+			</p>
+			<p>
+				提现总额：<{php} echo $this->ifs($all['cashAmount'], '0.0000')?>
+			</p>
+			<p>
+				投注总额：<{php} echo $this->ifs($all['betAmount'], '0.0000')?>
+			</p>
+			<p>
+				中奖总额：<{php} echo $this->ifs($all['zjAmount'], '0.0000')?>
+			</p>
+			<p>
+				返水总额：<{php} echo $this->ifs($all['fanDianAmount'], '0.0000')?>
+			</p>
+			<p>
+				活动佣金：<{php} echo $this->ifs($all['brokerageAmount'], '0.0000')?>
+			</p>
+			<p>
+				合计盈亏：<{php} echo $this->ifs($all['zjAmount']-$all['betAmount']+$all['fanDianAmount'], '0.0000')?>
+			</p>
+		</div>
+	</div>
+	</li>
+	{php} foreach($data as $vo){  {/php}
+	<li id="pro-view-8" class="w-goodsList-item">
+	<div class="w-goods w-goods-l w-goods-ing m-user-goods">
+		<div class="w-goods-info">
+			<p>
+				用户账号：{$vo.username} 
+			</p>
+			<p>
+				有效余额：<{php} echo $this->ifs($vo['coin'], '0.0000') {/php}
+			</p>
+			<p>
+				充值总额：<{php} echo $this->ifs($vo['rechargeAmount'], '0.0000') {/php}
+			</p>
+			<p>
+				提现总额：<{php} echo $this->ifs($vo['cashAmount'], '0.0000') {/php}
+			</p>
+			<p>
+				投注总额：<{php} echo $this->ifs($vo['betAmount'], '0.0000') {/php}
+			</p>
+			<p>
+				中奖总额：<{php} echo $this->ifs($vo['zjAmount'], '0.0000') {/php}
+			</p>
+			<p>
+				返水总额：<{php} echo $this->ifs($vo['fanDianAmount'], '0.0000') {/php}
+			</p>
+			<p>
+				活动佣金：<{php} echo $this->ifs($vo['brokerageAmount'], '0.0000') {/php}
+			</p>
+			<p>
+				合计盈亏：<{php} echo $this->ifs($vo['zjAmount']-$vo['betAmount']+$vo['fanDianAmount'], '0.0000') {/php}
+			</p>
+			<p>
+				{php} {  {/php}
+                <a target="ajax" class="text-primary" href="<{php} echo U('team/searchReport?parentId='.$vo['uid'].'&fromTime='.$para['fromTime'].'&toTime='.$para['toTime']) {/php}">查看下级</a>
+				{php} } {/php}&nbsp;&nbsp;&nbsp;
+                {php} if($vo['uid']!=$user['uid'] && $vo['parentId']){ {/php}
+                  <a target="ajax" class="text-primary" href="<{php} echo U('team/searchReport?uid='.$vo['uid'].'&fromTime='.$para['fromTime'].'&toTime='.$para['toTime']) {/php}">查看上级</a>
+				{php} } {/php}
+			</p>
+		</div>
+	</div>
+	</li>
+	{php} } if(!$data) { {/php}
+	<div style="text-align:center">此用户没有下级</div>
+	{php} } {/php}
+</ul>
+<div class="page">
+	{$_page}
+</div>

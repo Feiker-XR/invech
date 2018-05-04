@@ -1,0 +1,111 @@
+{extend name="base/common"/}
+
+{block name="title"}<title>用户中心－{$settings.webName}</title>{/block}
+
+{block name="body"}
+
+
+<div class="help_r_main">
+	<div class="eveb_content">
+		<div class="eveb_nav_sub">
+			<ul class="clearfix">
+				<li class="on"><a href="javascript:void(0)" onclick="parent.goSubUrl('/member/zhsz.html?module=grzl')">个人资料</a></li>
+				<li><a href="javascript:void(0)" onclick="parent.goSubUrl('/member/zhsz.html?module=dlmm')">登录密码</a></li>
+				<li><a href="javascript:void(0)" onclick="parent.goSubUrl('/member/zhsz.html?module=yhkgl')">银行卡管理</a></li>
+				<li><a href="javascript:void(0)" onclick="parent.goSubUrl('/member/zhsz.html?module=aqxx')">安全信息</a></li>
+			</ul>
+		</div><table class="eveb_setting_table">
+		<tbody>
+		<tr>
+			<td class="tit">会员名</td>
+			<td class="wid">test129</td>
+			<td class="tit">手机号码</td>
+			<td class="wid">
+				<a href="javascript:void(0)" onclick="eveb_popup_show('#eveb_setting_edit')">立即绑定</a>
+			</td>
+		</tr>
+		<tr>
+			<td class="tit">真实姓名</td>
+			<td class="wid">电风扇</td>
+			<td class="tit">电子邮箱</td>
+			<td colspan="2" class="wid">
+				<a href="javascript:void(0)" onclick="eveb_popup_show('#eveb_setting_edit')">立即绑定</a>
+			</td>
+		</tr>
+		<tr>
+			<td class="tit">昵称</td>
+			<td class="ff wid">test129<a href="javascript:void(0)" onclick="eveb_popup_show('#eveb_setting_edit')"> 编辑</a>
+			</td>
+			<td class="tit">QQ</td>
+			<td class="ff wid"><a href="javascript:void(0)" onclick="eveb_popup_show('#eveb_setting_edit')"> 编辑</a></td>
+		</tr>
+		<tr>
+			<td class="tit">生日</td>
+			<td class="ff wid">2018-03-30<a href="javascript:void(0)" onclick="eveb_popup_show('#eveb_setting_edit')"> 编辑</a></td>
+			<td class="tit">性别</td>
+			<td class="ff wid">
+				男<a href="javascript:void(0)" onclick="eveb_popup_show('#eveb_setting_edit')"> 编辑</a>
+			</td>
+		</tr>
+		</tbody>
+	</table>
+		<div class="eveb_tip light">
+			请完善资料
+		</div>
+	</div>
+	<!-- help content e -->
+	<div class="eveb_popup_wrap" style="display: none;"></div>
+	<div class="eveb_popup" id="eveb_setting_edit" style="display: none;">
+		<div class="eveb_popup_hd">
+			<h4 class="fl">编辑个人资料</h4>
+			<a href="javascript:void(0)" onclick="eveb_popup_hide()" class="icon_mini icon_close fr" title="关闭"></a>
+		</div>
+		<div class="eveb_popup_bd">
+			<form name="editUserInfoForm" novalidate="novalidate" onsubmit="return false;">
+				<ul class="eveb_form">
+					<li>
+						<span>会员名：</span>
+						test129</li>
+					<li>
+						<span>昵称：</span>
+						<input type="text" style="width:140px;" class="_border" value="test129" name="nickname" id="nickname">
+						<label class="error" for="nickname"></label>
+					</li>
+					<li>
+						<span>生日：</span>
+						<input onclick="laydate({istime: true, format: 'YYYY-MM-DD'})" name="birthday" id="birthday" type="text" size="16" class="_border" style="width:140px;" value="2018-03-30" readonly="">
+						<label class="error" for="birthday"></label>
+					</li>
+					<li>
+						<span>QQ：</span>
+						<input type="text" style="width:140px;" maxlength="11" class="_border" value="" name="qq" id="qq" onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')">
+						<label class="error" for="qq"></label>
+					</li>
+					<li>
+						<span>性别：</span>
+						<select name="sex" id="sex">
+							<option value="1" selected="selected">男</option>
+							<option value="2">女</option>
+						</select>
+					</li>
+					<li>
+						<span>手机号码：</span>
+						<input name="telephone" maxlength="11" type="text" size="20" class="_border" id="telephone" onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')">
+						<label class="error" for="telephone"></label>
+					</li>
+					<li>
+						<span>电子邮箱：</span>
+						<input name="email" type="text" size="20" class="_border">
+						<label class="error" for="email"></label>
+					</li>
+
+				</ul>
+				<div class="eveb_popup_btn">
+					<input type="submit" class="button_medium button_1" value="确认">
+					<a href="javascript:void(0)" class="button_medium button_3" onclick="eveb_popup_hide()">取消</a>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+{/block}

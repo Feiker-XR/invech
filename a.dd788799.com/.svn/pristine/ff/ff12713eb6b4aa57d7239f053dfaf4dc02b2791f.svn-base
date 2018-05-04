@@ -1,0 +1,47 @@
+<?php
+namespace app\common\model;
+use think\Model;
+class PayThird extends Base{
+
+	
+    protected $table = 'gygy_pay_third';
+    protected $pk = 'id';
+    protected $createTime = 'created_at';
+    protected $updateTime = 'updated_at';
+    protected $autoWriteTimestamp = 'datetime';
+
+    public function setIdAttr($value){
+        return $this->data['id'] = $value;
+    }
+
+    public function getIdAttr($value)
+    {
+        return $this->data['id'];
+    }
+
+    //----------------后台------------------
+
+    public static function getList($request){
+    
+        $params = $request->param();
+         $query = self::order('id');
+         $where = [];
+        if($params['keywords']??''){
+             $where['username|nickname'] = ['like','%'.$params['keywords'].'%'];
+        }
+        if($params['starttime']??''){
+             $where['regTime'] = ['>=',strtotime($params['starttime'])];
+        }
+        if($params['endtime']??''){
+             $where['regTime'] = ['<=',strtotime($params['endtime'])];
+        }
+        if($params['type']??''){
+             $where['type'] = ['=',$params['type']];
+        }
+
+        $data = $query->where($where)->paginate(10);
+     
+        return $data;
+    }	
+    
+}

@@ -1,0 +1,70 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Welcome</title>
+<link href="/sports/css/sports_right.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div class="top" style="height:25px; border:1px #ACACAC solid; margin-bottom:5px; background-color:#838383; line-height:25px;">
+<div class="result_title"><span>网球结果 >></span>
+<?php 
+for($i=0;$i<7;$i++){ 
+	$d	=	date('Y-m-d',time()-$i*86400);
+	$dd	=	date('m-d',time()-$i*86400);
+?>
+	<li<?= $d==$date ? ' class="i"' : ''?>><?= $d==$date ? ' ' : '<a href="?ymd='.$d.'">'?><?=$dd?><?= $d==$date ? '' : '</a>'?></li>
+<?php } ?>
+</div>
+<table border="0" cellspacing="1" cellpadding="0" class="box" bgcolor='#ACACAC'>
+  <tr>
+    <th width="100">开赛时间</th>
+    <th>主场/客场</th>
+    <th width="80">完赛（局）</th>
+    <th width="80">完赛（盘）</th>
+  </tr>
+{empty name = "rows"}
+	<tr><td height='100' colspan='4' align='center' bgcolor='#FFFFFF'>暂无任何赛果</td></tr>
+{else}
+	{volist name="rows" id="vo"}
+		{if $temp_match_name neq $vo['match_name']}
+			<?php $temp_match_name = $vo['match_name']; ?>
+			<tr>
+				<td colspan="4" align="center" class='liansai'><strong>{$vo["match_name"]}</strong></td>
+			</tr>
+		{/if}
+			<tr>
+				<td class='zhong line'>{$vo["Match_Date"]} {$vo["Match_Time"]}</td>
+				<td class='line'>{$vo["match_master"]}<br /><font color="#990000">{$vo["match_guest"]}</font></td>
+				<td class='zhong line red'>
+					{if $vo["MB_Inball"]<0}
+			    		赛事无效
+			    	{else}
+			    		{$vo["MB_Inball"]}
+					{/if}
+					<br />
+					{if $vo["TG_Inball"]<0}
+						赛事无效
+					{else}
+						{$vo["TG_Inball"]}
+					{/if}
+				</td>
+				<td class='zhong line red'>
+					{if $vo["MB_Inball"]<0} 
+						赛事无效
+					{else}
+						{$vo["MB_Inball"]}
+					{/if}
+					<br />
+					{if $vo["TG_Inball"]<0} 
+						赛事无效
+					{else}
+						{$vo["TG_Inball"]}
+					{/if}
+				</td>
+			</tr>
+	{/volist}
+{/empty}
+</table>
+</body>
+</html>

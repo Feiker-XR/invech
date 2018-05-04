@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>扫码二维码页面 </title>
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">	
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+<link rel="stylesheet" href="/css/font-awesome.min.css">	
+<link rel="stylesheet" href="/styles/ezweb.css">
+<link rel="stylesheet" type="text/css" href="/fonts-new/iconfont.css">	
+<link rel="stylesheet" href="/css/500f_new_wap.css">	
+<link rel="stylesheet" href="/css/pay-500F.css" />
+
+<script type="text/javascript" src="/js/jquery1.8.1.min.js"></script>
+<script src="/js/clipboard.min.js"></script> 
+<script type="text/javascript" src="/js/pay-500F.js"></script>
+</head>
+<body>
+<div class="block_60"></div>	
+<!--扫码二维码-->	
+<div class="pay_saoma_tit">
+	
+	<ul class="">
+		<li><img src="" /></li>
+		<li>888888</li>
+	</ul>
+	
+</div>
+<div class="block_10"></div>
+<div class="block_line"></div>	
+<div class="pay_saoma_name">
+	<ul>
+		<li>收款账号：</li>
+		<li class="pay_saoma_count">888888</li>
+		<li>
+			<!--<a href="javascript:;" class="pay_saoma_copy" id="copyBtn">复制</a>-->
+		    <button class="btn pay_saoma_copy" id="copyBtn">复制</button>
+		</li>
+	</ul>
+</div>
+<div class="block_0"></div>
+<div class="block_line"></div>		
+<div class="pay_saoma_two">
+	<h2>二维码：</h2>
+	<div class="block_20"></div>
+	<div class="pay_saoma_img">
+		<img src="" id="pay_saoma_img_2"/>
+	</div>
+	<div class="block_30"></div>	
+	<div class="pay_saoma_save">点击保存二维码</div>
+	
+</div>
+
+
+<!--银行入款第一步-->	
+<div class="pay_saoma_tit">
+	<ul class="">
+		<li><img src="" /></li>
+		<li>8888888888</li>
+	</ul>
+</div>
+<div class="block_10"></div>
+<div class="block_line"></div>	
+<div class="pay_saoma_name">
+	<ul>
+		<li>开户姓名：</li>
+		<li class="pay_saoma_count">8888888</li>
+	</ul>
+</div>
+<div class="block_0"></div>
+<div class="block_line"></div>	
+<div class="pay_saoma_name">
+	<ul>
+		<li>开户卡号：</li>
+		<li class="pay_saoma_count">888888888888</li>
+	</ul>
+</div>
+<div class="block_0"></div>
+<div class="block_line"></div>	
+<div class="pay_saoma_name">
+	<ul>
+		<li>开户地区：</li>
+		<li class="pay_saoma_count">8888888888</li>
+	</ul>
+</div>
+<div class="block_0"></div>
+<div class="block_line"></div>		
+<div class="pay_saoma_two">
+	<h2>温馨提示：</h2>
+	<div class="block_20"></div>
+	<div class="pay_saoma_img">
+		<ul>
+			<li>1.请在金额转出之后务必填写网页下方的汇款信息表格，以便我们财务人员能及时为您确认添加金额到您的会员账户。</li>
+			<li>2.本公司最低汇款金额为100元。</li>
+			<li>3.本公司不支持跨行转账方式进行汇款。</li>
+		</ul>
+	</div>
+	
+</div>
+
+<div class="block_30"></div>
+<!--<a class="pay_saoma_a">填写汇款信息</a>-->
+<a href="/huikuan_form.php?id=<?=$id?>" class="pay_firstpart_btn">填写汇款信息</a>	
+
+<div class="block_60"></div>	
+<div class="block_60"></div>
+<div class="block_60"></div>
+
+
+<!--顶部固定nav-->
+<div class="nav500">
+	<div class="nav500_logo">
+		<a href='/'><img src="img/logo.png"/></a>
+	</div>
+	<div class="nav500_left">
+		<i class="iconfont icon-caidan"></i>
+	</div>
+	<div class="nav500_right_had">
+		<a href="/cunkuan.php"  class="cl_fff f14 blue_focus">￥:<span id="user_money">88888</span></a>
+	</div>
+</div>
+<script language="javascript">	
+	function refresh_money(){
+	$.ajax({
+	    cache: false,
+	    url: "/get_money.php",
+	    success:function(data){
+	        if(data==""){
+	        }else{
+	         $data_arr=data.split("||");
+			 $("#user_money,#money").html($data_arr[0]);
+			 // $("#user_jifen").html($data_arr[1]);
+	        }
+	    }
+	}); 
+	window.setTimeout("refresh_money();", 15000); 
+	}
+	refresh_money();
+</script> 
+
+<!--------------->
+
+<!--底部nav固定-->
+<div class="nav500_bottom">
+	<span>
+		<a href='/' class="nav500_bottom_a nav500_bottom_active">
+			<i class="iconfont icon-zhuye"></i>首页
+		</a>
+	</span>
+	<span>
+		<a href="/activities-page.php" class="nav500_bottom_a">
+			<i class="iconfont icon-zhuanxianglibao" style="font-size: 25px;"></i>优惠
+		</a>
+	</span>
+	<span>
+		<a href="/cunkuan.php" class="nav500_bottom_a">
+			<i class="iconfont icon-tubiao207"></i>存款
+		</a>
+	</span>
+	<span>
+		<a href="https://messenger.providesupport.com/messenger/1x5b67gp1rcy50kqxa0qpsa0jx.html" class="nav500_bottom_a" target="_blank">
+			<i class="iconfont icon-kefu"></i>客服
+		</a>
+	</span>
+	<span>
+		<a href="/user/left.php" class="nav500_bottom_a">
+			<i class="iconfont icon-iconfontcolor19-copy"></i>个人
+		</a>
+	</span>
+</div>
+<script>
+$(function(){
+	//点击底部固定导航条切换
+	$(".nav500_bottom_a").click(function(){
+		var navThis = $(this);
+		navThis.css("color","#d9901e")
+		navThis.parent().siblings("span").find("a").css("color","#999999")
+		navThis.find("i").addClass("nav500_b_active");
+		navThis.parent().siblings("span").find("i").removeClass("nav500_b_active");
+		navThis.addClass("nav500_bottom_active").parent().siblings("span").find("a").removeClass("nav500_bottom_active")
+	});
+	
+	
+})
+</script>	
+
+
+
+
+
+</body>
+
+<script type="text/javascript">
+$('.pay_saoma_save').click(function(){
+	var locationHref = window.location.host
+	window.open(locationHref + $('#pay_saoma_img_2').attr("src"),"_blank");
+})	
+	
+var clipboard = new Clipboard('.pay_saoma_copy', {
+    target: function() {
+        return document.querySelector('.pay_saoma_count');
+    }
+});
+clipboard.on('success', function(e) {
+//      console.log(e);
+	alert("复制成功")
+});
+clipboard.on('error', function(e) {
+//      console.log(e);
+});	
+  
+</script>
+<script>
+$(function(){
+	//子页面传递高度给顶层iframe	
+	function changeFrameHeight(){
+		bodyClientH = document.body.clientHeight;
+		bodyClientW = document.body.clientWidth;
+		var iframeId = $(window.parent.document).find("#iframeid")
+		iframeId.css("height",bodyClientH + 50)
+	//	alert(iframeId)
+
+		var trendHeightS = window.screen.availHeight - 93;
+		$(".wap_500_style").css({
+			"top" : trendHeightS
+		});
+		$(".wap_500_middle").css({
+			"top" : trendHeightS - 300
+		});
+	}	
+	changeFrameHeight()		
+})
+</script>
+</html>

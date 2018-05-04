@@ -1,0 +1,77 @@
+<extend name="Public/base"/>
+
+<block name="body">
+	<!-- 标题栏 -->
+	<div class="main-title">
+		<h2>登录日志</h2>
+	</div>
+
+	<!-- 高级搜索 -->
+	<div class="search-form fr cf">
+		<div class="sleft">
+			<input type="text" name="username" class="search-input" value="{:I('username')}" placeholder="请输入用户名">
+			<a class="sch-btn" href="javascript:;" id="search" url="{:Url('Action/actionlog')}"><i class="btn-search"></i></a>
+		</div>
+	</div>
+	<!-- 数据列表 -->
+	<div class="data-table">
+	<table class="">
+    <thead>
+        <tr>
+		<th class="">id</th>
+		<th class="">用户名</th>
+		<th class="">IP</th>
+		<th class="">执行时间</th>
+		<th class="">行为名称</th>
+		</tr>
+    </thead>
+    <tbody>
+		<volist name="_list" id="vo">
+		<tr>
+			<td>{$vo.id} </td>
+			<td>{$vo.username}</td>
+			<td>{:long2ip($vo['loginIP'])}</td>
+			<td>{:date('y-m-d H:i:s',$vo['loginTime'])}</td>
+			<td>登录</td>
+		</tr>
+		</volist>
+	</tbody>
+    </table> 
+	</div>
+	<!-- 分页 -->
+	<div class="page">{$_page}</div>
+	<!-- /分页 -->
+
+</block>
+<block name="script">
+<script type="text/javascript">
+$(function(){
+	$("#action_add").click(function(){
+		window.location.href = $(this).attr('url');
+	})
+	
+	//搜索功能
+	$("#search").click(function(){
+		var url = $(this).attr('url');
+        var query  = $('.search-form').find('input').serialize();
+        query = query.replace(/(&|^)(\w*?\d*?\-*?_*?)*?=?((?=&)|(?=$))/g,'');
+        query = query.replace(/^&/g,'');
+        if( url.indexOf('?')>0 ){
+            url += '&' + query;
+        }else{
+            url += '?' + query;
+        }
+		window.location.href = url;
+	});
+	//回车搜索
+	$(".search-input").keyup(function(e){
+		if(e.keyCode === 13){
+			$("#search").click();
+			return false;
+		}
+	});
+    //导航高亮
+    $('.side-sub-menu').find('a[href="{:Url('Action/adminloginlog')}"]').closest('li').addClass('current');
+})
+</script>
+</block>

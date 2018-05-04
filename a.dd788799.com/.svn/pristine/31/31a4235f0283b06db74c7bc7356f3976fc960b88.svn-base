@@ -1,0 +1,61 @@
+{extend name="public/user_head"/}
+{block name="body"}
+<style type="text/css">
+    section.security.margin{
+        background: none;
+    }
+</style>
+<div class="container">
+    <header class="header">
+        <i class='left' onclick="javascript:history.back(-1);">返回</i>
+        <h1>修改支付密码</h1>
+    </header>
+    <main class="inner_body">
+        <section class="charge_user ol_box security">
+            <ol>
+                <li>
+                    <span>登录密码</span><input type="password" id="password" class="disabled" value="" placeholder="请输入登录密码"/>
+                </li>
+                <li>
+                    <span>支付密码</span><input type="password" id="coinPassword" class="disabled" value="" placeholder="请输支付密码"/>
+                </li>
+                <li>
+                    <span>确认支付密码</span><input type="password" id="confirmcoinPassword" class="disabled" value="" placeholder="请确认支付密码"/>
+                </li>
+            </ol>
+        </section>
+
+        <section class="charge_user ol_box security margin">
+            <p>温馨提示:忘记密码请联系24小时在线客服！</p>
+        </section>
+
+        <section class="charge_pay sub">
+            <button>提交修改</button>
+        </section>
+    </main>
+</div>
+<script type="text/javascript">
+    // 提交数据
+    $('.sub button').click(function () {
+        //$(this).attr('disabled','disabled');
+        var obj = {
+            password:'',
+            coinPassword:'',
+            confirmcoinPassword:'',
+           
+        }
+        obj.password = $('#password').val();   
+        obj.coinPassword = $('#coinPassword').val();     
+        obj.confirmcoinPassword = $('#confirmcoinPassword').val();      
+       	$.ajax({
+        	url: "/user/save_coinpassword",
+        	data:obj,
+            dataType:'json',//服务器返回json格式数据
+            type:'POST',//HTTP请求类型
+            success:function(data){
+             	mui.toast(data.msg,{ duration:'short', type:'div' }) 
+            },
+        });
+    })
+</script>
+{/block}

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>万丰国际</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+<link rel="stylesheet" href="/css/font-awesome.min.css">
+<link rel="stylesheet" href="/styles/ucenter.css">
+<link rel="stylesheet" type="text/css" href="/fonts-new/iconfont.css">	
+<link rel="stylesheet" href="/styles/ezweb.css">
+<link rel="stylesheet" href="/css/500f_new_wap.css">	
+<link href="/gfwf/iconfont/iconfont.css" rel="stylesheet" type="text/css"/>
+<link rel="stylesheet" href="/gfwf/assets/statics/css/global_header.css" type="text/css">
+
+<script src="/assets/jquery.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<style type="text/css">
+.row{padding: 0px 5px;margin: 0px;}
+</style>
+</head> 
+<body>
+
+{include file='common/user-nav'}
+{include file='common/header_other_lottery'}	
+		
+<div class="block_50"></div>
+<div class="ucenter">
+	<div class="container" >
+		<div class="row">
+			<div class="panel panel-default">
+			  <div class="panel-heading">
+			    <h3 class="panel-title">串关历史查询<span class="pull-right" ><a href="/user/report">返回报表</a></span></h3>
+			  </div>
+
+			  <div class="panel-body">
+			    <div role="tabpanel">
+				  <div class="tab-content">
+				    <div role="tabpanel" class="tab-pane active">
+				    	<div class="table-responsive">
+						  <table class="table table-bordered">
+						    <tr class="success">
+							  <td class="zd_item_header">时间/单号</td>
+							  <td class="zd_item_header">投注详细</td>
+                              <td class="zd_item_header">结果</td>
+							  <td class="zd_item_header">盈利金额</td>
+							</tr>
+
+
+			 	<?php if(!$cbet){?>	
+					<tr align="center" bgcolor="#FFFFFF">
+				    <td colspan="4" valign="middle" bgcolor="#FFFFFF"><p class="bg-danger">暂无记录</p></td>
+				    </tr>
+				<?php }else{?>
+					<?php foreach ($cbet as $v){?>
+					<?php 
+						if(($v['id']%2)=='0'){
+							$bgcolor="#FFFFFF";
+						}else{
+							$bgcolor="#F5F5F5";
+						}					
+						if($v['jine']>0){								
+							$status	=	"<span style='color:#FF0000;'>".number_format($v['jine'],2)."</span>";
+						}else{
+							$status	=	"<span style='color:#00CC00;'>".number_format($v['jine'],2)."</span>";
+						}						
+					?>					
+						<tr bgcolor="<?=$bgcolor?>" align="center" onMouseOver="this.style.backgroundColor='#FFFFCC'" onMouseOut="this.style.backgroundColor='<?=$bgcolor?>'" style="height:60px;" >
+							<td>
+							<span style="color:#46AF98"><?=$v["addtime"]?></span><br>
+							<span style="color:#0DC4FF"><?=$v['type']?></span><br>第<span style="color:#F30"><?=$v["qishu"]?></span>期<br><span style="color:#F90"><?=$v["id"]?></span>
+							</td>
+						    <td align="center"><?php echo $v["mingxi_1"]?>【<font color="#FF0000"><?php echo $v["mingxi_2"]?></font>】</td>
+						    <td align="center"><?=$v["win"]>0 ? '<font color="red">全赢</font>' : '<font color="#006600">全输</font>'?></td>
+						    <td align="center"><?php echo $status?></td>
+				    </tr>
+				    <?php } ?>
+				<?php }?>
+    <th colspan="5" align="center">共 <font color="red">{$count}</font> 条已结算注单，总盈利金额：<font color="red">{$sum} RMB</font></th>
+    </tr>				
+				</table>
+			</ul>
+		</div>
+	</body>
+</html>

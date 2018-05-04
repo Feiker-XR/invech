@@ -1,0 +1,10 @@
+<table border="0" cellspacing="1" cellpadding="0" class="order_info"><tr><th>期号</th><th>玩法</th><th>内容</th><th>金额</th><th>赔率</th><th>可赢</th></tr>
+{foreach $betinfo as $vo}
+<tr>
+<td class="qihao">{$vo['qishu']}</td>
+<td class="wanfa">{$vo['mingxi_1']}</td>
+<td class="neirong">{$vo['mingxi_2']}</td>
+<td class="jine">{$vo['money']}</td>
+<td class="peilv">{$vo['odds']}</td>
+<td class="keying">{$vo['money']*$vo['odds']}</td></tr>
+{/foreach}

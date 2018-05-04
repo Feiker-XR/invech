@@ -1,0 +1,99 @@
+<form class="form-horizontal" id="send_add" method="post" enctype="multipart/form-data">
+  <div class="box box-primary">
+    <div class="box-body">
+       <div class="input-group">
+        <div class="input-group-btn">
+          <button type="button" class="btn btn-danger">标题</button>
+        </div>
+        <input type="text" name="title" class="form-control" >
+      </div>
+      <div class="input-group" style="margin-top:15px;margin-bottom:15px">
+        <div class="input-group-btn">
+          <button type="button" class="btn btn-danger">收件群组</button>
+        </div>
+        <!-- /btn-group -->
+        <select class="form-control select2 select2-hidden-accessible"  name="recv_type" style="width:200px;"  aria-hidden="true">
+          <option value="member">普通会员</option>
+          <option value="agent">代理</option>
+        </select>
+      </div>
+      <div class="input-group" style="margin-top:15px;margin-bottom:15px">
+        <div class="input-group-btn">
+          <button type="button" class="btn btn-danger">收件人</button>
+        </div>
+        <!-- /btn-group -->
+        <input type="text" name="recv_uid" class="form-control" style="width:200px;">
+        <span style="color:red;margin-left:20px;">(说明:为空就是发送群组下的所有用户 如果需要发送群组下的某个用户请查询用户信息后输入 用户id 或者 用户名称.只能输入一个收件人)</span>
+      </div>
+
+      <script id="sendemail" name="text" type="text/plain"></script>
+    </div>
+
+    <div class="box-footer">
+      <div class="pull-right">
+          <button id="btnajax" class="btn btn-primary"><i class="fa fa-envelope-o"></i> Send</button>
+      </div>
+    
+    </div>
+  </div>
+</form>
+<style>
+  #edui1_iframeholder {
+    height:420px!important;
+  }
+  #edui_fixedlayer {
+    z-index:100500000!important;
+  }
+  #edui1{
+    width:100%!important;
+  }
+</style>
+
+<!-- 实例化编辑器 -->
+<script type="text/javascript">
+    $(function() {
+
+        var ue = UE.getEditor('sendemail');
+        //ue.execCommand('insertHtml', '<link rel="stylesheet" href="/css/style400.css">');
+        //ue.execCommand('inserthtml', '<span>hello!</span>');
+        ue.ready(function() {
+            this.execCommand('insertHtml', '<link rel="stylesheet" href="/css/style400.css">',true);//第三个参数表示忽略标签过滤规则
+            //this.execCommand('inserthtml', '<span>hello!</span>');
+        })
+
+       $(".layui-layer-close").click(function(){
+            window.location.href = document.URL;
+        });
+        $("#btnajax").click(function () {
+            var options = {
+              url: "{:url('send')}",
+              dataType : 'json',
+              success : function(data) {
+               $(".layui-layer-close").click();
+
+               layer.alert(data.msg, {
+                  time: 20000,
+                  skin: 'layui-layer-molv', //该皮肤由layer.seaning.com友情扩展。关于皮肤的扩展规则，去这里查阅
+                  closeBtn: 0,
+                  anim: 4
+                }, function(){
+                   window.location.href = document.URL;
+                })
+            },
+            error: function(data) {
+               $(".layui-layer-close").click();
+              layer.alert(data.msg, {
+                time: 20000,
+                skin: 'layui-layer-molv', //该皮肤由layer.seaning.com友情扩展。关于皮肤的扩展规则，去这里查阅
+                closeBtn: 0,
+                anim: 4
+              }, function(){
+                 window.location.href = document.URL;
+              })
+            }
+          };
+            $("#send_add").ajaxForm(options);
+        })
+
+    });
+</script>    

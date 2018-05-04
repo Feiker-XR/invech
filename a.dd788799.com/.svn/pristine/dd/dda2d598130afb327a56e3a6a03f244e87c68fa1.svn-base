@@ -1,0 +1,21 @@
+<?php
+namespace app\index;
+use app\index\Base;
+use think\Db;
+use think\Session;
+class Login extends Base{
+    public function _initialize(){
+        parent::_initialize();
+        $actionName     = strtolower(request()->action()) ;
+        $controllerName = strtolower(request()->controller()) ;
+
+        if (! Session('user')) {
+            if ($this->request->isAjax()) {
+                //echo json_encode(array('status'=>0,'message'=>'请登录后执行操作!'));
+                return ['status'=>0,'msg'=>'请登录后执行操作!'];
+            } else {
+                $this->redirect(Url('index/login')) ;
+            }
+        }
+    }
+}

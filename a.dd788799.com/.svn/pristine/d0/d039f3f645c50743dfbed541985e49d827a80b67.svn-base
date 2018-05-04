@@ -1,0 +1,201 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset='utf-8'>
+	<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+	<title>个人中心</title>
+	<link type="text/css" rel="stylesheet" href="/css/personal.css">
+</head>
+<body>
+<div class="container">
+	<header class="header">
+		<a href="/user/logout"><i class='right'>退出</i></a>
+		<h1>会员中心</h1>
+	</header>
+	<main class="inner_body">
+		<section class="profile">
+			<div class="center_box">
+				<div>
+					<img src="/images/center/avator.png" alt="avator"/>
+				</div>
+				<div>
+					<h2>姓名: 	<span>{$user->nickname}</span></h2>
+					<h2>用户名: <span>{$user->username}</span></h2>
+				</div>
+				<div id="signIn">
+					<span>立即签到</span>
+					<span>+10积分</span>
+				</div>
+			</div>
+		</section>
+
+		<section class="info">
+			<div>
+				<ul>
+					<li>
+						<img src="/images/center/agent.png" alt="申请代理"/>
+						<strong>申请代理</strong>
+					</li>
+
+					<li>
+						<a href="/user/inbox" >
+							<img src="/images/center/msg.png" alt="我的消息"/>
+							<strong>我的消息<span>{$user->getMessWudu()}</span></strong>
+						</a>
+
+					</li>
+				</ul>
+			</div>
+			<div>
+				<ol>
+					<li>
+						<strong>{$user->coin}</strong>
+						<span>余额</span>
+					</li>
+					<li>
+						<strong>{$user->score}</strong>
+						<span>积分</span>
+					</li>
+					<li>
+						<strong>{$user->getwithdraw()}</strong>
+						<span>提现</span>
+					</li>
+				</ol>
+			</div>
+		</section>
+		<section class="charge">
+			<div>
+				<ul>
+					<li  data-url="./charge.html">
+						<a href="/user/recharge.html">
+							<img src="/images/center/charge.png" alt="充值"/>
+							<strong>充值</strong>
+						</a>
+					</li>
+					<li id="withdraw">
+						<img src="/images/center/withdraw.png" alt="提现"/>
+						<strong>提现</strong>
+					</li>
+				</ul>
+			</div>
+		</section>
+		<section class="records">
+			<div>
+				<ul>
+					<li data-url="./charge_record.html">
+						<a href="/user/recharge_record" >
+							<img src="/images/center/charge_record.png" alt="充值记录"/>
+							<strong>充值记录</strong>
+							<span>查看全部充值</span>
+						</a>
+					</li>
+					<li data-url="./withdraw_record.html">
+						<a href="/user/withdraw_record" >
+							<img src="/images/center/withdraw_record.png" alt="提现记录"/>
+							<strong>提现记录</strong>
+							<span>查看全部提现</span>
+						</a>
+					</li>
+				</ul>
+			</div>
+			<div>
+				<ul>
+					<li data-url="./bet_record.html">
+						<a href="/user/bet_record">
+							<img src="/images/center/bet_record.png" alt="投注记录"/>
+							<strong>投注记录</strong>
+							<span>查看全部订单</span>
+						</a>
+					</li>
+					<li data-url="./return_record.html">
+						<a href="/user/backwater_record">
+							<img src="/images/center/return_record.png" alt="返水记录"/>
+							<strong>返水记录</strong>
+							<span>查看返水记录</span>
+						</a>
+					</li>
+				</ul>
+			</div>
+		</section>
+		<section class="security">
+			<div>
+				<ul>
+					<li data-url="./money_change.html">
+						<a href="/user/money_record">
+							<img src="/images/center/money_change.png" alt="账变明细"/>
+							<strong>账变明细</strong>
+							<span>查看资金流向</span>
+						</a>
+					</li>
+					<li data-url="./security.html">
+						<a href="/user/info">
+							<img src="/images/center/security.png" alt="安全中心"/>
+							<strong>安全中心</strong>
+							<span>修改绑定信息</span>
+						</a>
+					</li>
+				</ul>
+			</div>
+		</section>
+	</main>
+	<div class="g-footer">
+		<div class="g-wrap">
+			<ul class="m-state f-clear">
+				<li><a href="/user/main"><img src="/__IMG__/icon_home.png" alt="home"/> </i>首页</a></li>
+				<li><a href="/user/main"><img src="/__IMG__/icon_hall.png" alt="hall"/>购彩大厅</a></li>
+				<li><a href="/user/main"><img src="/__IMG__/icon_discount.png" alt="discount"/>最新优惠</a></li>
+				<li><a href="/user/main"><img src="/__IMG__/icon_contact.png" alt="contact"/>联系客服</a></li>
+				<li class="last active"><a href="/user/main"><img src="/__IMG__/icon_profile_active.png" alt="profile"/>个人</a></li>
+			</ul>
+		</div>
+	</div>
+</div>
+<script type="text/javascript" src="/js/jquery-1.8.0.min.js"></script>
+<script type="text/javascript" src="/js/show.js"></script>
+<script type="text/javascript">
+    // 签到
+    $('#signIn').click(function (evt) {
+        $.ajax({
+            url:'签到',
+            success:function (data) {
+                alert(data.msg);
+            },
+            error:function (error) {
+                console.log(error);
+                alert('ajax error');
+
+            }
+        })
+    });
+    // 提现
+    $('#withdraw').click(function(){
+        $.ajax({
+            url: "/user/is_bank",
+            dataType:'json',
+            type:'POST',
+            success:function (data) {
+                var _url = null;
+                if(data.code == '1'){
+                    _url = "/user/withdraw";
+                }else{
+                    _url = "/user/bank";
+                    alert('尚未绑定银行卡，前往绑定？');
+                    /*mui.alert(data.msg, "提示", "前往绑定",function(){
+                        window.location.href =
+                    },'div');*/
+                }
+                setTimeout(function () {
+					location.href = _url;
+                },200);
+            },
+			error:function () {
+                console.log(error);
+				alert('ajax error');
+            }
+
+        })
+
+    })
+</script>
+</body>
+</html>

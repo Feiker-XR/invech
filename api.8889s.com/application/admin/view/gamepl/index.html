@@ -1,0 +1,53 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>系统设置</title>
+<link href="/css/base.css" rel="stylesheet" type="text/css" />
+<link href="/css/admin.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="/js/jquery.js"></script>
+<script type="text/javascript" src="/js/jquery.tools.js"></script>
+<script type="text/javascript" src="/js/base.js"></script>
+
+</head>
+<body class="list">
+	<!--<div class="bar">
+		会员等级设置
+	</div>-->
+	
+
+<div class="body">
+	<ul id="tab" class="tab">
+		<li>
+			<input type="button" value="{$gameinfo['name']}" hidefocus class="current" onClick="window.location.href='{:Url('playtype/index','gid='.$gameinfo.id)}'" />
+		</li>
+	</ul>
+	<form>
+	<table id="listTable" class="listTable">
+		<tr>
+			<th>玩法</th>
+			{volist id="list" name="ballinfo"}
+			<th colspan="2"  text-align="center">{$list.ball_name}</th>
+			{/volist}
+		</tr>
+		{volist id="playtype" name="playtypes"}
+		<tr>
+			<td>{$playtype.type_name}</td>
+			{volist id="list" name="ballinfo"}
+				<td  align="center">
+					<label>启用<input type="checkbox" name="selected" value="{$list['id']}_{$playtype['id']}" {if @$plinfo[$list.id][$playtype.id] gt 0}checked=checked{/if} /></label>
+				</td>
+				<td align="center">
+					<span>
+						<label>赔率:<input type="text" name="pl_{$list['id']}_{$playtype['id']}" value="{if @$plinfo[$list.id][$playtype.id] gt 0}{$plinfo[$list.id][$playtype.id]}{/if}" style="width:35px;"/></label>
+					</span>
+				</td>
+			{/volist}
+		</tr>
+		{/volist}
+	</table>
+		<input  type="submit" /><input type="reset" />
+	</form>
+</div>
+</body>
+</html>

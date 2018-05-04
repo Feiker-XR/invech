@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>皇冠娱乐城----皇冠娱乐城官方网址打造东方最具公信力的第一线上娱乐城</title>
+<meta http-equiv="Cache-Control" content="max-age=864000" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+	<link rel="stylesheet" href="/css/bootstrap.min.css">
+	<link rel="stylesheet" href="/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/css/footable.core.min.css">
+	<link href="../css/jquery_dialog.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="/fonts-new/iconfont.css">
+	<link rel="stylesheet" href="/styles/ucenter.css">
+<link rel="stylesheet" href="../styles/ezweb.css">
+<style type="text/css">
+  .panel-body{padding: 5px;}
+</style>
+</head>
+<body onload="loaded(document.getElementById('league').value,0);">
+<!--头部-->
+<div class="nav500">
+    <div class="nav500_logo">
+        <a href="/"><img src="/img/logo.png"/></a>
+    </div>
+    <div class="nav500_right_had">
+        <a href="javascript:void(0)" class="cl_fff f14 blue_focus" onclick="javascript:history.back(-1);">
+            <img src="/img/narrow-leftwap2.png"></a>
+    </div>
+</div>
+
+<!--底部-->
+<div class="nav500_bottom" style="z-index: 10000;">
+  <span>
+      <a href="/" class="nav500_bottom_a nav500_bottom_active" target="_self">
+          <i class="iconfont icon-zhuye"></i>首页
+      </a>
+  </span>
+    <span>
+      <a class="nav500_bottom_a" href="/promotions/index.html"  target="_self">
+          <i class="iconfont icon-zhuanxianglibao" style="font-size: 25px;"></i>优惠
+      </a>
+  </span>
+    <span>
+      <a href="/pay/member.html" class="nav500_bottom_a"  target="_self">
+          <i class="iconfont icon-tubiao207"></i>存款
+      </a>
+  </span>
+    <span>
+      <a href="https://messenger.providesupport.com/messenger/0nye75kga3q931e9lwrn16k4q0.html" class="nav500_bottom_a" target="_self">
+          <i class="iconfont icon-kefu"></i>客服
+      </a>
+  </span>
+    <span>
+      <a href="/user/index.html" class="nav500_bottom_a">
+          <i class="iconfont icon-iconfontcolor19-copy"></i>个人
+      </a>
+  </span>
+</div>
+
+<div class="btn-group pull-right ft_danshi_contain" role="group" style="margin-top:60px;">
+<input type="button" value="< 返回" class="ft_danshi_default ft_danshi_contain_yellow" onclick="history.back();">
+	<input type="button" id="xzls" value="选择联赛" class="ft_danshi_default ft_danshi_contain_blue" />
+  <input type="button" value="刷新" class="ft_danshi_default" id="sx_f5" onclick="javascript:shuaxin(document.getElementById('league').value);"/>
+<input type="hidden" name="top_f5" id="top_f5" value="0" />
+<input type="hidden" name="league" id="league" value="" />
+<div style="display:none" id="aaaaa">0</div>
+</div>
+<div class="h10 cleafix"></div>
+
+<div class="panel panel-default" style="margin-bottom:60px;">
+  <div class="panel-heading">
+    <h3 class="panel-title">篮球（早餐 - 单式） ></h3>
+  </div>
+  <div class="panel-body">
+    <ul id="top" class="pagination"></ul>
+    <p>说明：点击+号图标展开；投注时请选择对应按钮，主队(<span class="zhu">绿色</span>)客队(<span class="ke">蓝色</span>)和(<span class="he">黄色</span>),赔率水位变化时背景变<span class="hong">红色</span>。</p>
+    <div id="datashow">
+    	<table class="table table-bordered table-hover">
+      <thead><tr class="success">
+      <th data-toggle="true">赛程<br>点击每行展开</th>
+      <th>时间<br>主队 / 客队</th>
+  <th data-hide="phone,tablet">让分</th>
+  <th data-hide="phone,tablet">大小</th>
+  <th data-hide="phone,tablet">单双</th></tr></thead><tbody>
+  <tr>
+    <td height="100" colspan="5" align="center" bgcolor="#FFFFFF" style="line-height:25px;"><img src="/images/loading.gif" border="0" /><br />
+      赛事数据正在加载中......</td>
+    </tr></tbody>
+</table>
+    </div>
+  </div>
+</div>
+<!--赛事选择弹层-->
+<div class="curtions" id="s_box">
+
+</div>
+<div  class="curtions" id="d_box" style="">
+    <div id="jd_dialog_m_h" style="border-bottom:1px solid #CCC;height:32px;">
+    <span id="jd_dialog_m_h_r" title="关闭" onclick="_close();">
+      <img src="/images/tb1.gif" width="15" height="15">
+    </span>
+    </div>
+    <div id="showTable"></div>
+    <div id="jd_dialog_m_t" class="curtions"style="background-color:#FFFFFF;">
+    <span class="jd_dialog_m_t_s">
+      <input id="jd_submit" value="提交" type="button" onclick="Ok();" class="btn btn-info">
+    </span>
+        <span class="jd_dialog_m_t_s">
+      <input id="jd_fx" value="反选" type="button" class="btn btn-info" onclick="fx();">
+    </span>
+        <span class="jd_dialog_m_t_s">
+      <input id="jd_cancel" value="取消" type="button" onclick="cx();" class="btn btn-info">
+    </span>
+        <span class="jd_dialog_m_t_s">
+      <input id="jd_cl" value="关闭" type="button" class="btn btn-info" onclick="_close();">
+    </span>
+    </div>
+</div>
+<!---下注弹框-->
+<div id="bet_box">
+    <div id="xp" class="panel panel-danger panel_contain">
+        <div class="panel-heading">
+            <h3 class="fl">投注信息</h3>
+            <button id="idclose" type="button" class="btn pull-right" onclick="quxiao_bet()"><i class="fa fa-lg fa-close"></i></button>
+        </div>
+        <div class="betiframe_touzhu">
+            <div class="well1">
+
+                <div id="ds_msg" class="bg-success row">
+                    <p class="bg-primary">投注赛事信息</p>
+                    <form class="form-horizontal" id="form1" onsubmit="return false">
+                        <input type="hidden" name="touzhutype" id="touzhutype" value="0" />
+                        <div class="touzhu_4 text-center" id="cg_msg" style="display:none;">已选择 <span id="cg_num" style="color:#FF0000;"></span> 场赛事</div>
+                        <div id="touzhudiv" style="text-align:center;" ></div>
+                        <div class="clearfix"></div>
+                        <div class="bg-info" style="padding:10px;">
+                            <div class="form-group">
+                                <div class="col-xs-6">交易金额：</div>
+                                <div class="col-xs-6"><input type="text" class="form-control" name="bet_money" id="bet_money" autocomplete="off" maxlength="5" onpaste="return false" oncontextmenu="return true" oncopy="return false" oncut="return false" size="8"/></div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-xs-6">可赢金额：</div>
+                                <div class="col-xs-6"><span id="win_span" class="tou_red">0.00</span><input type="hidden" value="0" name="bet_win" id="bet_win"  /></div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-xs-6">最低限额：</div>
+                                <div class="col-xs-6">50</div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-xs-6">单注限额：</div>
+                                <div class="col-xs-6"><span id="max_ds_point_span">0</span></div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-xs-6">单场最高：</div>
+                                <div class="col-xs-6"><span id="max_cg_point_span">0</span></div>
+                            </div>
+                            <div id="istz" class="form-group text-center" style="display:none;padding:0px 10px;">
+                                <p class="bg-warning text-danger">可赢金额：<span id="win_span1">0.00</span><br>是否确定交易？</p>
+                            </div>
+                        </div>
+                        <div class="clear"></div>
+                        <div class="touzhu_8" style="padding-top: 15px;">
+                            <div class="col-xs-6"><input class="btn btn-danger btn-block btn-lg" name="" type="button" onclick="quxiao_bet()" value="取消"/></div>
+                            <div class="col-xs-6"><input class="btn btn-success btn-block btn-lg"  id="submit_from" name=""  type="submit" value="投注"/></div>
+                            <div class="clear"></div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="darrow">
+        <a href="#"><i class="fa fa-chevron-down"></i></a>
+    </div>
+</div>
+
+<script src="/assets/jquery.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/footable.min.js"></script>
+<script language="javascript" src="/js/jquery_dialog.js"></script>
+<script language="javascript" src="/js/common.js"></script>
+<script language="javascript" src="bkz_danshi.js"></script>
+<script language="javascript" src="/js/lq_match.js"></script>
+<script language="javascript" src="/js/times.js"></script>
+<script language="javascript" src="/js/mouse.js"></script>
+<script language="javascript" src="/js/ifsports.js"></script>
+<script type="text/javascript" src="/js/touzhu.js?v=15"></script>
+<script type="text/javascript">
+  $(function () {
+    $('.table').footable();
+  });
+</script>
+</body>
+</html>

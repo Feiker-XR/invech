@@ -1,0 +1,119 @@
+<link rel="stylesheet" type="text/css" href="/__CSS__/user/reset.css?v=20170715">
+<link rel="stylesheet" type="text/css" href="/__CSS__/user/hpn-common.css">
+<link rel="stylesheet" type="text/css" href="/__CSS__/user/index.css?v=20171117">
+<link rel="stylesheet" type="text/css" href="/__CSS__/user/global.css">
+<link rel="stylesheet" type="text/css" href="/__CSS__/user/info.css">
+<script type="text/javascript" src="/__JS__/user/jquery.min.js?v=2017"></script><!--jQuery库-->
+<script type="text/javascript" src="/__JS__/user/jquery.validate.min.js"></script>
+<script type="text/javascript" src="/__JS__/user/validate.js"></script>
+<script type="text/javascript" src="/__JS__/user/jquery.form.min.js"></script>
+<script type="text/javascript" src="/__JS__/layer/layer.js"></script>
+<div class="eveb_content">
+	<div class="eveb_nav_sub">
+		<ul class="clearfix">
+			<li><a href="/user/info.html">个人资料</a></li>
+			<li><a href="/user/save_password.html">登录密码</a></li>
+			<li  class="on"><a href="/user/bank.html">银行卡管理</a></li>
+		</ul>
+	</div>
+	<div class="mb10 color-888">绑定银行卡：</div>
+	<div class="eveb_content">
+		<form name="addYhkForm" onsubmit="return false;" novalidate="novalidate">
+			<ul class="eveb_form eveb_withdraw">
+				<li>
+					<span>银行名称：</span>
+					<select name="bank_name" id="bank_name" style="width:182px" class="valid">
+						{volist name="banklist" id="vo"}
+							{if($vo == $user.bank_name)}
+								<option value="{$vo}" selected>{$vo}</option>
+							{else /}
+								<option value="{$vo}">{$vo}</option>
+							{/if}
+						{/volist}
+					</select>
+					<label class="error" for="bank_name" style="display: none;"></label>
+				</li>
+				<li>
+					<span>开户支行：</span>
+					<input type="text" class="passwinp error" id="bank_address" name="bank_address" style="width:180px;" placeholder="请输入开户支行"
+					value="{$user.bank_address|default=''}" >
+					<label class="error" for="bank_address">* 请填写开户支行</label>
+				</li>
+				<li>
+					<span>开户人：</span>
+					<input type="text" class="passwinp" id="bank_username" name="bank_username" style="width:180px;" placeholder="请输入真实姓名" 
+					value="{$user.bank_username|default=''}">
+				
+					<label class="error" for="bank_username" style="display: none;"></label>
+				</li>
+				<li>
+					<span>银行账号：</span>
+					<input type="text" name="bank_account" id="bank_account" style="width:180px;" class="passwinp error" placeholder="请输入银行卡号" 
+					value="{$user.bank_account|default=''}">
+					<label class="error" for="bank_account">* 请填写银行账号</label>
+				</li>
+			</ul>
+			<div class="eveb_form_submit">
+				<input type="submit"  value="提交" class="button_medium button_1">
+			</div>
+		</form>
+	</div>
+</div>
+<script>
+    $(function() {
+      
+			$("form[name='addYhkForm']").validate({
+				rules: {
+					bank_name: {required: true},
+					bank_address: {required: true},
+					bank_username: {required: true},
+					bank_account: {
+						required: true,
+						minlength: 15,
+						maxlength: 20
+					}
+				},
+				messages: {
+					bank_name: {required: '* 请填写银行名称'},
+					bank_address: {required: '* 请填写开户支行'},
+					bank_username: {required: '* 请填写真实姓名'},
+					bank_account: {
+						required: '* 请填写银行账号',
+						minlength: '* 请填写15~20位的银行账号',
+						maxlength: '* 请填写15~20位的银行账号'
+					}
+				},
+				submitHandler:function(form){
+		            var options = {
+		                url: "/user/bank",
+		                clearForm: true,            //成功提交后，清除所有表单元素的值
+		                type: 'post',               //默认是form的method（get or post），如果申明，则会覆盖
+		                dataType: 'json',           //html(默认), xml, script, json...接受服务端返回的类型
+		                timeout: 3000 ,              //限制请求的时间，当请求大于3秒后，跳出请求
+		                success : function(data) {
+			        		layer.alert(data.msg, {
+					          time: 20000,
+					          skin: 'layui-layer-molv', //该皮肤由layer.seaning.com友情扩展。关于皮肤的扩展规则，去这里查阅
+					          closeBtn: 0,
+					          anim: 4
+					        }, function(){
+					           window.location.href = document.URL;
+					        })
+					    },
+					    error: function(data) {
+					       layer.alert(data.msg, {
+					          time: 20000,
+					          skin: 'layui-layer-molv', //该皮肤由layer.seaning.com友情扩展。关于皮肤的扩展规则，去这里查阅
+					          closeBtn: 0,
+					          anim: 4
+					        }, function(){
+					           window.location.href = document.URL;
+					        })
+					    } 
+
+		            }
+		           $(form).ajaxSubmit(options);
+		        }
+			});
+	 });
+</script>

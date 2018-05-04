@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>皇冠娱乐城</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+	<link rel="stylesheet" href="/css/bootstrap.min.css">
+	<link rel="stylesheet" href="/css/font-awesome.min.css">
+	<link rel="stylesheet" href="/styles/ucenter.css">
+	<link rel="stylesheet" type="text/css" href="/fonts-new/iconfont.css">	
+	<link rel="stylesheet" href="/styles/ezweb.css">
+	<link rel="stylesheet" href="/css/500f_new_wap.css">			
+	<script src="/assets/jquery.js"></script>
+	<script src="/js/bootstrap.min.js"></script>
+    <script>
+    function Go(url){
+		alert('请在PC版中浏览代理详情');
+	}
+    </script>
+</head> 
+<body class="body_msg">
+	
+
+	
+<div class="h10"></div>
+<div class="ucenter">
+	<div class="container" style="margin-left: 0px;margin-bottom: 60px;margin-top: 60px;">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h3>{$info.msg_title}</h3>
+			</div>
+			<div class="panel-body">
+				<p>{$info.msg_info}</p>
+				<p>
+					<a href="javascript:history.go(-1);" class="btn btn-green pull-left">[返回上一页]</a>
+					<a href="{:url('user/smsdel','id='.$info.msg_id)}" class="btn btn-danger pull-right">[删除]</a>
+				</p>
+			</div>
+			<div class="panel-footer text-right">{$info.msg_time}</div>
+		</div>
+	</div>
+</div>
+<script>
+$(function(){
+	//点击底部固定导航条切换
+$(".nav500_bottom_a").click(function(){
+	var navThis = $(this);
+	navThis.css("color","#d9901e")
+	navThis.parent().siblings("span").find("a").css("color","#999999")
+	navThis.find("i").addClass("nav500_b_active");
+	navThis.parent().siblings("span").find("i").removeClass("nav500_b_active");
+	navThis.addClass("nav500_bottom_active").parent().siblings("span").find("a").removeClass("nav500_bottom_active")
+	});
+	
+})
+</script>
+<script type="text/javascript" language="javascript" src="/js/left_mouse.js"></script>
+</body> 
+</html>

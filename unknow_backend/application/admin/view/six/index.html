@@ -1,0 +1,93 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>系统设置</title>
+<link href="/css/base.css" rel="stylesheet" type="text/css" />
+<link href="/css/admin.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="/js/jquery.js"></script>
+<script type="text/javascript" src="/js/jquery.tools.js"></script>
+<script type="text/javascript" src="/js/base.js"></script>
+<script language="javascript">
+function check_submit(){
+	if($("#qishu").val()==""){
+		alert("请填写开奖期数");
+		$("#qishu").focus();
+		return false;
+	}
+	if($("#opentime").val()==""){
+		alert("请填写开盘时间");
+		$("#opentime").focus();
+		return false;
+	}
+	if($("#endtime").val()==""){
+		alert("请填写封盘时间");
+		$("#endtime").focus();
+		return false;
+	}
+	if($("#datetime").val()==""){
+		alert("请填写开奖时间");
+		$("#datetime").focus();
+		return false;
+	}
+	return true;
+}
+</script>
+</head>
+<body class="list">
+	<!--<div class="bar">
+		六合彩开奖管理
+	</div>-->
+<div class="body">
+<ul id="tab" class="tab">
+	<li><input type="button" value="六合彩开奖" hidefocus class="current"/></li>
+</ul>
+<table id="listTables" class="listTables"> 
+	<tr>
+		<th align="center">彩票期号</th>
+		<th align="center">开盘时间</th>
+		<th align="center">封盘时间</th>
+		<th align="center">正一</th>
+		<th align="center">正二</th>
+		<th align="center">正三</th>
+		<th align="center">正四</th>
+		<th height="25" align="center">正五</th>
+		<th align="center">正六</th>
+		<th align="center">特码</th>
+		<th align="center">总和</th>
+		<th align="center">开奖时间</th>
+		<th align="center">总投注</th>
+		<th align="center">总派彩</th>
+		<th align="center">结算</th>
+		<th align="center">操作</th>
+	</tr>
+	{foreach name="list" item="rows" key='k'}
+	<tr>
+        <td height="25" align="center" valign="middle">{$rows['qishu']}</td>
+        <td align="center" valign="middle">{$rows['opentime']}</td>
+        <td align="center" valign="middle">{$rows['endtime']}</td>
+        <td align="center" valign="middle">{$info[$k]['ball_1']}</td>
+        <td align="center" valign="middle">{$info[$k]['ball_2']}</td>
+        <td align="center" valign="middle">{$info[$k]['ball_3']}</td>
+        <td align="center" valign="middle">{$info[$k]['ball_4']}</td>
+        <td align="center" valign="middle">{$info[$k]['ball_5']}</td>
+        <td align="center" valign="middle">{$info[$k]['ball_6']}</td>
+        <td align="center" valign="middle">{$info[$k]['ball_7']}</td>
+        <td align="center" valign="middle">{$info[$k]['hm']}</td>
+        <td align="center">{$rows['datetime']}</td>
+		<td align="center">{$info[$k]['bet']}</td>
+		<td  align="center">{$info[$k]['win']}</td>
+        <td align="center">
+        {if $info[$k]['ok'] eq 0}
+        	<a href="{:url('six/js','qi='.$rows['qishu'])}">点击结算</a>
+        {else}
+        	<a href="{:url('six/rejs','qi='.$rows['qishu'])}">已结算</a>
+        {/if}
+        </td>
+        <td align="center"><a href="{:url('six/edit','id='.$rows.id)}">编辑</a></td>
+    </tr>
+    {/foreach}
+</table>
+<div class="pagerBar">{$list->render()}</div>
+</div>
+</body>
+</html>

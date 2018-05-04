@@ -1,0 +1,57 @@
+{layout name="layout" /}
+
+<form action="" method="post">
+<div class="box-body">
+
+  <div class="form-group">
+    <label>挂载点</label>
+    <select class="form-control input-sm filterStatus" name="cat_id">
+      <option value="0">无</option>      
+    {foreach($cats as $cat)}
+      <option value="{$cat->id}" {if($cat->id == ($help->helpCat->id??0) )}selected{/if} >{$cat->name}</option>
+    {/foreach}
+    </select>
+
+  </div>
+  <div class="form-group">
+    <label>标题</label>
+    <input type="text" class="form-control" placeholder="请输入标题..." name="title"
+    value='{$help->title | default = ''}'>
+  </div>
+
+  <!-- 加载编辑器的容器 -->
+  
+    <script id="container" name="content" type="text/plain">
+        {$help->content | default = ''}
+    </script>
+ 
+
+</div>
+
+<input type="hidden" name="id" value="{$help->id | default = ''}"/>
+
+<div class="box-footer">
+  <button type="submit" class="btn btn-primary">Submit</button>
+</div>
+
+ </form>
+
+
+<!-- 配置文件 -->
+<script type="text/javascript" src="/js/ueditor/ueditor.config.js"></script>
+<!-- 编辑器源码文件 -->
+<script type="text/javascript" src="/js/ueditor/ueditor.all.js"></script>
+
+<!-- 实例化编辑器 -->
+<script type="text/javascript">
+    $(function() {
+        var ue = UE.getEditor('container');
+        //ue.execCommand('insertHtml', '<link rel="stylesheet" href="/css/style400.css">');
+        //ue.execCommand('inserthtml', '<span>hello!</span>');
+        ue.ready(function() {
+            this.execCommand('insertHtml', '<link rel="stylesheet" href="/css/style400.css">',true);//第三个参数表示忽略标签过滤规则
+            //this.execCommand('inserthtml', '<span>hello!</span>');
+        })
+
+    });
+</script>    

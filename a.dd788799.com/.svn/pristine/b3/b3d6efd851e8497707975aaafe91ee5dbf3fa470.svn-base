@@ -1,0 +1,55 @@
+<?php
+namespace app\common\model;
+use think\Model;
+
+/**
+ *  玩法组表表模型
+ * @author mack
+ */
+class PlayedGroup extends Model {
+	//protected $table = 'gygy_played_group';
+	//protected $pk = 'id';
+
+	//自动完成
+    //protected $auto = ['name', 'ip'];		//save
+    //protected $insert = ['status' => 1];  //insert
+    //protected $update = [];  				//update
+
+	//动态属性
+	/*
+	public function getStatusAttr($value)
+	{
+		$status = [-1=>'删除',0=>'禁用',1=>'正常',2=>'待审核'];
+		return $status[$value];
+	}
+	public function setNameAttr($value,$data)
+	{
+		return serialize($data);
+	}
+	*/
+	
+    public function playeds()
+    {
+    	return $this->hasMany('Played','groupId')->where('enable',1);
+    }
+
+    //----------------后台------------------
+
+    public static function getList($request){
+    
+        $params = $request->param();
+
+        $query = self::order('type')->order('id desc');
+
+        if($params['name']??null){
+        	$query->where('groupName','like','%'.trim($params['name']).'%');
+        }
+        if($params['type']??null){
+        	$query->where('type',$params['type']);
+        }
+
+        $data = $query->paginate(10);
+        
+        return $data;
+    }
+}

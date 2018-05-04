@@ -1,0 +1,54 @@
+{block name="body"}
+<div class="container">
+    <main>
+        <img src="/images/auth/logo.jpg" alt="logo"/>
+        <ul class="login">
+            <li>
+                <img src="/images/auth/uname.png" alt="uname">
+                <input type="text" id="username" placeholder="请输入账户名称" minlength="6" maxlength="8"> 
+            </li>
+            <li>
+                <img src="/images/auth/pwd.png" alt="pwd">
+                <input type="password" id="password" placeholder="请输入登录密码" minlength="6" maxlength="20">
+            </li>
+            <li>
+                <img src="/images/auth/yzm.png" alt="yam">
+                <input type="text" id="code" placeholder="输入验证码" maxlength="4">
+                <img id="captcha" style= "width:70px; height: 25px" src="{:url('indexcaptcha/get_captcha?id=login')}">
+            </li>
+        </ul>
+        <button id="submit">登录</button>
+        <p><a href="#">注册</a><a href="#" class="right">忘记密码？</a></p>
+    </main>
+</div>
+ <script type="text/javascript">
+    $("#captcha").click(function(){
+        $(this).attr('src',"{:url('indexcaptcha/get_captcha?id=login')}");
+    })
+    $('#submit').click(function(){
+        var obj = {
+            username:'',
+            password:'',
+            code:'',
+          
+        }
+        obj.username  = $('#username').val();     
+        obj.password  = $('#password').val();     
+        obj.code      = $('#code').val();
+        $.ajax({
+            url: "/index/login",
+            data:obj,
+            dataType:'json',//服务器返回json格式数据1
+            type:'POST',//HTTP请求类型
+            success:function(data){
+                if(data.code == 1){
+                    window.location.href = "/user/main";    
+                }else{
+                   mui.toast(data.msg,{duration:'short', type:'div' }); 
+                }
+                
+            },
+        });
+    })
+</script>
+{/block}

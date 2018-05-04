@@ -1,0 +1,75 @@
+<?php
+namespace app\admin\controller;
+
+use app\admin\Base;
+use app\common\model\PasswrodReset as PasswrodResetModel;
+use app\common\model\Admin as AdminModel;
+
+
+use bong\service\Mail;
+
+class password extends Base{
+    
+    public function email(){
+
+        if($this->request->isGet()){
+            $domain = $this->request->domain();
+            $this->view->domain = $domain;
+            return $this->fetch();
+        }else{
+            $to = 'admin@admin.com';        
+            $subject = 'Reset Password';
+            $template = 'password/reset';
+            $token = PasswrodResetModel::genToken($to);            
+
+            $introLines[] = $this->format('You are receiving this email because we received a password reset request for your account.');
+            $outroLines[] = $this->format('If you did not request a password reset, no further action is required.');        
+            $actionText = 'Reset Password';
+            $actionUrl = url('password/reset',['token'=>$token],true,true);
+
+            $vars = [
+                'introLines' => $introLines,
+                'outroLines' => $outroLines,
+                'actionText' => $actionText,
+                'actionUrl'  => $actionUrl,
+            ];
+
+            $mailer = new Mail();
+            $ret = $mailer->send($to,$subject,$template,$vars);                       
+        }
+    }
+
+    public function reset($token=null){
+        if($this->request->isGet()){
+            $post = input('get.');
+            $g = $this->request->get();
+            
+            $token = input('token');        
+            $domain = $this->request->domain();
+            $this->view->domain = $domain;
+            $this->view->token = $token;
+            return $this->fetch();
+        }else{
+            $post = input('post.');
+            //$post['password'] != $post['password_confirmation']
+
+            if(PasswrodResetModel::validateReset($post)){
+                $admin = AdminModel::get(['email'=>$post['email']]);
+                $admin->password = trim($post['email']);
+                $admin->save();
+                return $this->success('重置密码成功!','index/login');
+            }
+            return $this->error('token无效!');
+        }
+    }
+
+    protected function format($line)
+    {
+        if (is_array($line)) {
+            return implode(' ', array_map('trim', $line));
+        }
+
+        return trim(implode(' ', array_map('trim', preg_split('/\\r\\n|\\r|\\n/', $line))));
+    }    
+
+}

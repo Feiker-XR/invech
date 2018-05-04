@@ -1,0 +1,40 @@
+<?php
+namespace app\admin\controller;
+use app\admin\Login;
+use think\Cache;
+
+use app\common\model\Member as UserModel;
+use app\service\JsonExtra;
+
+class Member extends Login{
+    
+    public function index(){
+     
+        $param = $this->request->param();
+        $where = [];
+        if($param['username']??''){
+            $where['username'] = ['like','%'.$param['username'].'%'];
+        }
+
+        $members = db('members')->where($where)->order('uid desc')->paginate(10);
+        $this->assign('members',$members);
+        $this->view->page_header = '会员列表';
+         return $this->fetch();
+    }
+    public function level(){
+         $where = [];
+        $member_level = db('member_level')->where($where)->order('id desc')->paginate(10);
+        $this->assign('member_level',$member_level);
+        $this->view->page_header = '会员等级';
+        return $this->fetch();
+    }
+  
+    public function bank(){
+        $request = request();
+        $list = UserModel::getList($request);
+        $this->assign('list',$list);
+        $this->view->page_header = '取款银行';
+        return $this->fetch();
+    }
+
+}

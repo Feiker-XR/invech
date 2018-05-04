@@ -1,0 +1,41 @@
+<?php
+namespace app\admin\controller;
+use app\admin\Login;
+
+use app\common\model\Apply as ApplyModel;
+
+class Apply extends Login{
+
+    public function _initialize(){
+
+        parent::_initialize();
+
+        $classname = ApplyModel::class;
+        foreach (ApplyModel::BUSINESS_ARRAY as $business) {
+            $event = 'audit.'.$business;
+            $handle = $classname . '@audit' . ucfirst($business);
+            container('events')->listen($event,$handle); 
+        }
+        
+    }    
+
+    function audit(){
+        $apply = ApplyModel::create([
+            'uid'   =>  312,
+            'business'  =>  'agent',
+            'params'    =>  '{}',
+
+        ]);
+        $uid = 1;$b = 2;
+        $apply->agree('同意此代理',$uid,$b);
+    }
+
+    function detail($id){
+        $this->view->page_header = '提案详情';
+
+        $apply = ApplyModel::get($id);
+        
+        return $this->fetch('apply/'.$apply->business);
+    }
+    
+}

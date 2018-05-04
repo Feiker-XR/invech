@@ -1,0 +1,27 @@
+<?php
+namespace app\admin\controller;
+use app\admin\Login;
+use app\common\model\Withdraw as WithdrawModel;
+
+class Withdraw extends Login{
+    
+    public function index(){
+        $this->view->page_header = '提款申请';
+
+        $request = request();
+
+        $list = WithdrawModel::getList($request);
+        $list->appends($request->param());
+        $this->assign('list',$list);
+        $statuses = WithdrawModel::STATUSES;
+        $this->assign('statuses',$statuses);
+        $get_status = input('status');
+        if(!is_numeric($get_status)){
+            $get_status = -1;
+        }
+        $this->assign('get_status',$get_status);
+        //null == 0 //true
+        return $this->fetch();
+    }
+
+}

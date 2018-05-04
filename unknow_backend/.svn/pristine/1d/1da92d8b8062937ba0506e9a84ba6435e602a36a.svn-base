@@ -1,0 +1,125 @@
+<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:80:"/mnt/wwwroot/www.dd788799.com/houtai/../application/admin/view/config/index.html";i:1505452684;}*/ ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>系统设置</title>
+<link rel="stylesheet" type="text/css" href="/css/page.css" />
+<link rel="stylesheet" type="text/css" href="/css/base.css" />
+<link rel="stylesheet" type="text/css" href="/css/admin.css" />
+<script type="text/javascript" src="/js/jquery.js"></script>
+<style>
+span.runInfo{
+	padding-top:3px; margin-left:90px;
+}
+.toggleCheckBox{
+	/*display:none;*/	
+}
+.toggleBtn{
+	border:none;
+	width:48px;
+	height:24px;
+	background:none;
+	font-size:14px;
+	line-height:24px;
+	font-family:'微软雅黑';
+	padding:0px;
+	margin:0px;
+	outline:0px;
+}
+.runBtn{
+	margin-left:30px;
+}
+.closeBtn{
+	margin-left:10px;
+}
+
+.toggleBtn:focus{
+    outline: 0;
+}
+input[type='button'].normal{
+	color:#666666;
+	background:url(/images/radio_normal.png) top left no-repeat;
+}
+input[type='button'].run{
+	color:#f2f2f2;
+	background:url(/images/radio_on.png) top left no-repeat;
+}
+input[type='button'].closed{
+	color:#f2f2f2;
+	background:url(/images/radio_close.png) top left no-repeat;
+}
+</style>
+<script type="text/javascript">
+$(function(){
+	$(".toggleCheckBox").each(function(){
+		$(this).hide();
+		$p = $(this).parent();
+		$checked = $(this).attr('checked');
+		if($checked != 'checked'){
+			$runflag = 'run';
+			$closedflag = 'normal';
+		}else{
+			$runflag = 'normal';
+			$closedflag = 'closed';
+		}
+		var runbtn = "<input type='button' onclick='' value='运行' class='toggleBtn runBtn "+ $runflag +" ' />";
+		var closebtn = "<input type='button' onclic='' value='关闭' class='toggleBtn closeBtn "+ $closedflag+"'/>";
+		$p.prepend(closebtn);
+		$p.prepend(runbtn);
+	})
+	$(".runBtn").click(function(){
+		$close = $(this).parent().find('.closeBtn');
+		$checkBox = $(this).parent().find(".toggleCheckBox");
+		if($(this).hasClass('normal')){
+			$(this).addClass('run');
+			$(this).removeClass('normal');
+			$close.addClass('normal');
+			$close.removeClass('closed');
+			$checkBox.removeAttr('checked');
+		}
+	})
+	$(".closeBtn").click(function(){
+		$run = $(this).parent().find('.runBtn');
+		$checkBox = $(this).parent().find(".toggleCheckBox");
+		if($(this).hasClass('normal')){
+			$(this).addClass('closed');
+			$(this).removeClass('normal');
+			$run.addClass('normal');
+			$run.removeClass('run');
+			$checkBox.attr({'checked':'checked'})
+			
+		}
+	})
+})
+</script>
+</head>
+
+<body class="input">
+	<div class="bar">
+		系统设置
+	</div>
+	<div class="body">
+		<form method="post">
+			<table class="inputTable tabContent">
+                <?php foreach ($setArr as $key => $value) {?>
+				<tr>
+					<td>
+                    	<input  class="toggleCheckBox" type="checkbox" <?php if($value['weihu']==1){?>checked="checked" <?php }?> name="<?php echo $value['name'];?>_is_close" />
+                        <span class="runInfo"><?php echo $value['name1'];?>-<?php if($value['weihu']==1){?> <font color="red">已关闭</font><?php }else{?><font color="green">正常运行中</font><?php }?></span>
+                    </td>
+                    
+                    <td>
+                    	关闭原因&nbsp;> &nbsp;<input type="text" name="<?php echo $value['name'];?>_reason" value="<?php echo $value['reason'];?>" />
+                    </td>
+				</tr>
+
+                <?php }?>
+			</table>
+			<div class="buttonArea">
+      			<input type="submit" name="set_submit" class="formButton" value="确  定" hidefocus />&nbsp;&nbsp;
+		  </div>
+		</form>
+	</div>
+</body>
+</html>

@@ -1,0 +1,58 @@
+{layout name="layout" /}
+
+
+<div class="row">
+  <div class="col-xs-12">
+    <div class="box">
+      <div class="box-header">
+            <form>
+                          <div class="has-feedback pull-right">
+                            <button type="submit" class="btn btn-block btn-default btn-sm filter">查询</button>
+                          </div>
+
+                          <div class="pull-right" style="margin-left:15px;">
+                            <input class="form-control input-sm search" value="{$Request.get.username|default=''}" placeholder="请输入会员名称" type="text" name="username" style="width: 250px;">
+                          </div>
+             </form>
+
+      </div>
+
+      <!-- /.box-header -->
+      <div class="box-body table-responsive no-padding">
+        <table class="table table-hover">
+          <tr>
+            <th >会员ID</th>
+            <th >会员名称</th>
+            <th >注册时间</th>
+            <th >最后登录时间</th>
+            <th >会员等级</th>
+            <th >会员流水</th>
+          </tr>
+          {foreach($members as $member)} 
+          <tr>
+            <td>{$member['uid']}</td>
+            <td>{$member['username']}</td>
+            <td>{$member['reg_date']}</td>
+            <td>{$member['login_time']}</td>
+            <td>{$member['gid']}</td>
+            <td>{$member['liushui']}</td>           
+          </tr>
+          {/foreach}
+        </table>
+        {$members->render()}
+      </div>
+      <!-- /.box-body -->
+    </div>
+    <!-- /.box -->
+  </div>
+</div>
+
+
+<script type="text/javascript">
+$(document).ready(function(){
+  $('.datepicker').datepicker({
+      //startDate: '-3d',
+      format: 'yyyy-mm',
+  });
+});
+</script>

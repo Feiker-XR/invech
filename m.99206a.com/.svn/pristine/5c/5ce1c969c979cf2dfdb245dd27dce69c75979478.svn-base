@@ -1,0 +1,201 @@
+<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:87:"/mnt/wwwroot/www.dd788799.com/houtai/../application/admin/view/lottery/bjpk10_odds.html";i:1505452686;}*/ ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>系统设置</title>
+<link href="/css/base.css" rel="stylesheet" type="text/css" />
+<link href="/css/admin.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="/js/jquery.js"></script>
+<script type="text/javascript" src="/js/jquery.tools.js"></script>
+<script type="text/javascript" src="/js/base.js"></script>
+<script type="text/javascript">
+//读取当前期数盘口赔率与投注总额
+function loadinfo(){
+	$.get("<?php echo url('lottery/getodds'); ?>", {type : 'bjpk10',playtype:'<?php echo $type; ?>'}, function(data)
+		{
+			for(var key in data.oddslist){
+			odds = data.oddslist[key];
+			$("#Num_"+key).val(odds);
+			}
+		}, "json");
+}
+</script>
+</head>
+<?php switch($type): case "1": $lh = '1V10'; break; case "2": $lh = '2V9'; break; case "3": $lh = '3V8'; break; case "4": $lh = '4V7'; break; case "5": $lh = '5V6'; break; default: $lh = ''; endswitch; ?>
+<body class="list">
+	<!--<div class="bar">
+		北京PK拾赔率修改
+	</div>-->
+
+<div class="body">
+	<ul id="tab" class="tab">
+		<li><input type="button" value="重庆时时彩" hidefocus  onClick="window.location.href='<?php echo url('lottery/odds','type=cqssc'); ?>'" /></li>
+		<li><input type="button" value="新疆时时彩" hidefocus onClick="window.location.href='<?php echo url('lottery/odds','type=xjssc'); ?>'" /></li>
+		<li><input type="button" value="重庆快乐十分" hidefocus onClick="window.location.href='<?php echo url('lottery/odds','type=cqklsf'); ?>'" /></li>
+		<li><input type="button" value="广东快乐十分" hidefocus onClick="window.location.href='<?php echo url('lottery/odds','type=gdklsf'); ?>'" /></li>
+		<li><input type="button" value="北京PK拾" hidefocus class="current" onClick="window.location.href='<?php echo url('lottery/odds','type=bjpk10'); ?>'" /></li>
+		<li><input type="button" value="广西快乐十分" hidefocus onClick="window.location.href='<?php echo url('lottery/odds','type=gxklsf'); ?>'" /></li>
+		<li><input type="button" value="江苏快3" hidefocus onClick="window.location.href='<?php echo url('lottery/odds','type=jsk3'); ?>'" /></li>
+		<li><input type="button" value="幸运飞艇" hidefocus onClick="window.location.href='<?php echo url('lottery/odds','type=xyft'); ?>'" /></li>
+	</ul>
+<table id="listTables" class="listTables" style="margin-bottom:5px;">
+	<form name="form1" method="post" action="<?php echo url('lottery/oddsave','type=bjpk10&playtype='.$type); ?>">
+	    <tr>
+	      <td height="40" align="center"bgcolor="#F2F4F6">
+		      <input type="button"  class="<?php if($type == 11): ?>int_1<?php else: ?>int_2<?php endif; ?>" value="冠、亚军和" onClick="window.location.href='<?php echo url('lottery/odds','type=bjpk10&playtype=11'); ?>'"/>
+		      <input type="button"  class="<?php if($type == 1): ?>int_1<?php else: ?>int_2<?php endif; ?>" value="第一名" onClick="window.location.href='<?php echo url('lottery/odds','type=bjpk10&playtype=1'); ?>'"/>
+		      <input type="button"  class="<?php if($type == 2): ?>int_1<?php else: ?>int_2<?php endif; ?>" value="第二名" onClick="window.location.href='<?php echo url('lottery/odds','type=bjpk10&playtype=2'); ?>'"/>
+		      <input type="button"  class="<?php if($type == 3): ?>int_1<?php else: ?>int_2<?php endif; ?>" value="第三名" onClick="window.location.href='<?php echo url('lottery/odds','type=bjpk10&playtype=3'); ?>'"/>
+		      <input type="button"  class="<?php if($type == 4): ?>int_1<?php else: ?>int_2<?php endif; ?>" value="第四名" onClick="window.location.href='<?php echo url('lottery/odds','type=bjpk10&playtype=4'); ?>'"/>
+		      <input type="button"  class="<?php if($type == 5): ?>int_1<?php else: ?>int_2<?php endif; ?>" value="第五名" onClick="window.location.href='<?php echo url('lottery/odds','type=bjpk10&playtype=5'); ?>'"/>
+		      <input type="button"  class="<?php if($type == 6): ?>int_1<?php else: ?>int_2<?php endif; ?>" value="第六名" onClick="window.location.href='<?php echo url('lottery/odds','type=bjpk10&playtype=6'); ?>'"/>
+		      <input type="button"  class="<?php if($type == 7): ?>int_1<?php else: ?>int_2<?php endif; ?>" value="第七名" onClick="window.location.href='<?php echo url('lottery/odds','type=bjpk10&playtype=7'); ?>'"/>
+		      <input type="button"  class="<?php if($type == 8): ?>int_1<?php else: ?>int_2<?php endif; ?>" value="第八名" onClick="window.location.href='<?php echo url('lottery/odds','type=bjpk10&playtype=8'); ?>'"/>
+		      <input type="button"  class="<?php if($type == 9): ?>int_1<?php else: ?>int_2<?php endif; ?>" value="第九名" onClick="window.location.href='<?php echo url('lottery/odds','type=bjpk10&playtype=9'); ?>'"/>
+		      <input type="button"  class="<?php if($type == 10): ?>int_1<?php else: ?>int_2<?php endif; ?>" value="第十名" onClick="window.location.href='<?php echo url('lottery/odds','type=bjpk10&playtype=10'); ?>'"/>
+	      </td>
+	    </tr>
+	</form>
+</table>
+<?php if($type < 11): ?>
+<table id="listTables" class="listTables">
+    <form name="form1" method="post" action="<?php echo url('lottery/oddsave','type=bjpk10&playtype='.$type); ?>">
+        <tr>
+          <th width="50" height="22" align="center">号码</th>
+          <th align="center">当前赔率</th>
+          <th width="50" align="center">号码</th>
+          <th align="center">当前赔率</th>
+          <th width="50" align="center">号码</th>
+          <th align="center">当前赔率</th>
+          <th width="50" align="center">号码</th>
+          <th align="center">当前赔率</th>
+          <th width="50" align="center">号码</th>
+          <th align="center">当前赔率</th>
+        </tr>
+        <tr>
+          <td height="28" align="center"bgcolor="#FFFFFF">一号车</td>
+          <td align="center"bgcolor="#FFFFFF"><input class="formOdds captcha" maxlength="6" size="4" value="0" name="Num_1" id="Num_1" /></td>
+          <td align="center"bgcolor="#FFFFFF">二号车</td>
+          <td align="center"bgcolor="#FFFFFF"><input class="formOdds captcha" maxlength="6" size="4" value="0" name="Num_2" id="Num_2" /></td>
+          <td align="center"bgcolor="#FFFFFF">三号车</td>
+          <td align="center"bgcolor="#FFFFFF"><input class="formOdds captcha" maxlength="6" size="4" value="0" name="Num_3" id="Num_3" /></td>
+          <td align="center"bgcolor="#FFFFFF">四号车</td>
+          <td align="center"bgcolor="#FFFFFF"><input class="formOdds captcha" maxlength="6" size="4" value="0" name="Num_4" id="Num_4" /></td>
+          <td align="center"bgcolor="#FFFFFF">五号车</td>
+          <td align="center"bgcolor="#FFFFFF"><input class="formOdds captcha" maxlength="6" size="4" value="0" name="Num_5" id="Num_5" /></td>
+        </tr>
+        <tr>
+          <td height="28" align="center"bgcolor="#FFFFFF">六号车</td>
+          <td align="center"bgcolor="#FFFFFF"><input class="formOdds captcha" maxlength="6" size="4" value="0" name="Num_6" id="Num_6" /></td>
+          <td align="center"bgcolor="#FFFFFF">七号车</td>
+          <td align="center"bgcolor="#FFFFFF"><input class="formOdds captcha" maxlength="6" size="4" value="0" name="Num_7" id="Num_7" /></td>
+          <td align="center"bgcolor="#FFFFFF">八号车</td>
+          <td align="center"bgcolor="#FFFFFF"><input class="formOdds captcha" maxlength="6" size="4" value="0" name="Num_8" id="Num_8" /></td>
+          <td align="center"bgcolor="#FFFFFF">九号车</td>
+          <td align="center"bgcolor="#FFFFFF"><input class="formOdds captcha" maxlength="6" size="4" value="0" name="Num_9" id="Num_9" /></td>
+          <td align="center"bgcolor="#FFFFFF">十号车</td>
+          <td align="center"bgcolor="#FFFFFF"><input class="formOdds captcha" maxlength="6" size="4" value="0" name="Num_10" id="Num_10" /></td>
+        </tr>
+        <tr>
+          <td height="28" align="center"bgcolor="#FFFFFF">大</td>
+          <td align="center"bgcolor="#FFFFFF"><input class="formOdds captcha" maxlength="6" size="4" value="0" name="Num_11" id="Num_11" /></td>
+          <td align="center"bgcolor="#FFFFFF">小</td>
+          <td align="center"bgcolor="#FFFFFF"><input class="formOdds captcha" maxlength="6" size="4" value="0" name="Num_12" id="Num_12" /></td>
+          <td align="center"bgcolor="#FFFFFF">单</td>
+          <td align="center"bgcolor="#FFFFFF"><input class="formOdds captcha" maxlength="6" size="4" value="0" name="Num_13" id="Num_13" /></td>
+          <td align="center"bgcolor="#FFFFFF">双</td>
+          <td align="center"bgcolor="#FFFFFF"><input class="formOdds captcha" maxlength="6" size="4" value="0" name="Num_14" id="Num_14" /></td>
+          <td colspan="2" align="center"bgcolor="#FFFFFF">&nbsp;</td>
+        </tr>
+        <tr <?php if($type>5): ?>style="display:none"<?php endif; ?>>
+          <td height="28" align="center"bgcolor="#FFFFFF"><?=$lh?>龙</td>
+          <td align="center"bgcolor="#FFFFFF"><input class="formOdds captcha" maxlength="6" size="4" value="0" name="Num_15" id="Num_15" /></td>
+          <td align="center"bgcolor="#FFFFFF"><?=$lh?>虎</td>
+          <td align="center"bgcolor="#FFFFFF"><input class="formOdds captcha" maxlength="6" size="4" value="0" name="Num_16" id="Num_16" /></td>
+          <td colspan="6" align="center"bgcolor="#FFFFFF">&nbsp;</td>
+        </tr>
+        <tr>
+          <td height="40" colspan="10" align="center"bgcolor="#F2F4F6"><input type="submit"  class="formButton" name="Submit" value="确认修改" /></td>
+        </tr>
+	</form>
+</table>
+<?php elseif($type == 11): ?>
+<table id="listTables" class="listTables">
+    <form name="form1" method="post" action="<?php echo url('lottery/oddsave','type=bjpk10&playtype='.$type); ?>">
+        <tr>
+          <th width="80" height="22" align="center">号码</th>
+          <th align="center">当前赔率</th>
+          <th width="80" align="center">号码</th>
+          <th align="center">当前赔率</th>
+          <th width="80" align="center">号码</th>
+          <th align="center">当前赔率</th>
+          <th width="80" align="center">号码</th>
+          <th align="center">当前赔率</th>
+          <th width="80" align="center">号码</th>
+          <th align="center">当前赔率</th>
+        </tr>
+        <tr>
+          <td height="28" align="center"bgcolor="#FFFFFF">冠亚和3</td>
+          <td align="center"bgcolor="#FFFFFF"><input class="formOdds captcha" maxlength="6" size="4" value="0" name="Num_1" id="Num_1" /></td>
+          <td align="center"bgcolor="#FFFFFF">冠亚和4</td>
+          <td align="center"bgcolor="#FFFFFF"><input class="formOdds captcha" maxlength="6" size="4" value="0" name="Num_2" id="Num_2" /></td>
+          <td align="center"bgcolor="#FFFFFF">冠亚和5</td>
+          <td align="center"bgcolor="#FFFFFF"><input class="formOdds captcha" maxlength="6" size="4" value="0" name="Num_3" id="Num_3" /></td>
+          <td align="center"bgcolor="#FFFFFF">冠亚和6</td>
+          <td align="center"bgcolor="#FFFFFF"><input class="formOdds captcha" maxlength="6" size="4" value="0" name="Num_4" id="Num_4" /></td>
+          <td align="center"bgcolor="#FFFFFF">冠亚和7</td>
+          <td align="center"bgcolor="#FFFFFF"><input class="formOdds captcha" maxlength="6" size="4" value="0" name="Num_5" id="Num_5" /></td>
+        </tr>
+        <tr>
+          <td height="28" align="center"bgcolor="#FFFFFF">冠亚和8</td>
+          <td align="center"bgcolor="#FFFFFF"><input class="formOdds captcha" maxlength="6" size="4" value="0" name="Num_6" id="Num_6" /></td>
+          <td align="center"bgcolor="#FFFFFF">冠亚和9</td>
+          <td align="center"bgcolor="#FFFFFF"><input class="formOdds captcha" maxlength="6" size="4" value="0" name="Num_7" id="Num_7" /></td>
+          <td align="center"bgcolor="#FFFFFF">冠亚和10</td>
+          <td align="center"bgcolor="#FFFFFF"><input class="formOdds captcha" maxlength="6" size="4" value="0" name="Num_8" id="Num_8" /></td>
+          <td align="center"bgcolor="#FFFFFF">冠亚和11</td>
+          <td align="center"bgcolor="#FFFFFF"><input class="formOdds captcha" maxlength="6" size="4" value="0" name="Num_9" id="Num_9" /></td>
+          <td align="center"bgcolor="#FFFFFF">冠亚和12</td>
+          <td align="center"bgcolor="#FFFFFF"><input class="formOdds captcha" maxlength="6" size="4" value="0" name="Num_10" id="Num_10" /></td>
+        </tr>
+        <tr>
+          <td height="28" align="center"bgcolor="#FFFFFF">冠亚和13</td>
+          <td align="center"bgcolor="#FFFFFF"><input class="formOdds captcha" maxlength="6" size="4" value="0" name="Num_11" id="Num_11" /></td>
+          <td align="center"bgcolor="#FFFFFF">冠亚和14</td>
+          <td align="center"bgcolor="#FFFFFF"><input class="formOdds captcha" maxlength="6" size="4" value="0" name="Num_12" id="Num_12" /></td>
+          <td align="center"bgcolor="#FFFFFF">冠亚和15</td>
+          <td align="center"bgcolor="#FFFFFF"><input class="formOdds captcha" maxlength="6" size="4" value="0" name="Num_13" id="Num_13" /></td>
+          <td align="center"bgcolor="#FFFFFF">冠亚和16</td>
+          <td align="center"bgcolor="#FFFFFF"><input class="formOdds captcha" maxlength="6" size="4" value="0" name="Num_14" id="Num_14" /></td>
+          <td align="center"bgcolor="#FFFFFF">冠亚和17</td>
+          <td align="center"bgcolor="#FFFFFF"><input class="formOdds captcha" maxlength="6" size="4" value="0" name="Num_15" id="Num_15" /></td>
+        </tr>
+        <tr>
+          <td height="28" align="center"bgcolor="#FFFFFF">冠亚和18</td>
+          <td align="center"bgcolor="#FFFFFF"><input class="formOdds captcha" maxlength="6" size="4" value="0" name="Num_16" id="Num_16" /></td>
+          <td align="center"bgcolor="#FFFFFF">冠亚和19</td>
+          <td align="center"bgcolor="#FFFFFF"><input class="formOdds captcha" maxlength="6" size="4" value="0" name="Num_17" id="Num_17" /></td>
+          <td colspan="6" align="center"bgcolor="#FFFFFF">&nbsp;</td>
+        </tr>
+        <tr>
+          <td height="28" align="center"bgcolor="#FFFFFF">冠亚大</td>
+          <td align="center"bgcolor="#FFFFFF"><input class="formOdds captcha" maxlength="6" size="4" value="0" name="Num_18" id="Num_18" /></td>
+          <td align="center"bgcolor="#FFFFFF">冠亚小</td>
+          <td align="center"bgcolor="#FFFFFF"><input class="formOdds captcha" maxlength="6" size="4" value="0" name="Num_19" id="Num_19" /></td>
+          <td align="center"bgcolor="#FFFFFF">冠亚单</td>
+          <td align="center"bgcolor="#FFFFFF"><input class="formOdds captcha" maxlength="6" size="4" value="0" name="Num_20" id="Num_20" /></td>
+          <td align="center"bgcolor="#FFFFFF">双</td>
+          <td align="center"bgcolor="#FFFFFF"><input class="formOdds captcha" maxlength="6" size="4" value="0" name="Num_21" id="Num_21" /></td>
+          <td colspan="2" align="center"bgcolor="#FFFFFF">&nbsp;</td>
+        </tr>
+        <tr>
+          <td height="40" colspan="10" align="center"bgcolor="#F2F4F6"><input type="submit"  class="formButton" name="Submit" value="确认修改" /></td>
+        </tr>
+    </form>
+</table>
+<?php endif; ?>
+</div>
+<script type="text/javascript">loadinfo();</script>
+</body>
+</html>

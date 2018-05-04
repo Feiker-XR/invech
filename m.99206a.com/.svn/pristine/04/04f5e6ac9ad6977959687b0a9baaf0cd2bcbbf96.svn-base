@@ -1,0 +1,82 @@
+<!DOCTYPE HTML>
+<HTML>
+<head>
+<meta charset="UTF-8">
+<title>六合彩开奖结果</title>
+<meta http-equiv="Cache-Control" content="max-age=864000" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+<link rel="stylesheet" href="/css/font-awesome.min.css">
+<link rel="stylesheet" type="text/css" href="/fonts-new/iconfont.css">
+<link rel="stylesheet" href="/styles/ucenter.css">
+<link rel="stylesheet" href="/styles/ezweb.css">
+<link type="text/css" rel="stylesheet" href="/css/6hc.css"/>
+<script src="/assets/jquery.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+</head>
+<style type='text/css'>
+body{}
+.line_list{font-size:12px;padding:0px 0px 0px 0px;}
+.table{float:left;margin-top:0px;}
+.img{padding-top:4px;}
+.pull-right {font-size: 14px; color: #00925f; font-weight:500;}
+</style>
+<body>
+    {include file='common/nav'}
+    {include file='common/header'}
+<div class="panel panel-default" style="margin-top:60px;">
+	<div class="panel-heading">
+	    <h3 class="panel-title">六合彩开奖结果 <span class="pull-right" ><a href="#" onClick="url('Six.php');">返回投注</a></span></h3>
+	</div>
+</div>
+<div class="table-responsive" style="margin-bottom: 60px;">
+<table class="table">	
+    <tr align="center" style="color:#FFF;background: #00925f;font-size:13px; font-weight:bold;">
+      <th height="24">期数</th>
+      <th>开奖号码</th>
+      <th>生肖</th>
+    </tr>
+{foreach $list as $rs}
+<?php
+            $dx     = Six_DaXiao($rs['ball_7']);
+            $ds     = Six_DanShuang($rs['ball_7']);
+            $hsdx   = Six_HeShuDaXiao($rs['ball_7']);
+            $hsds   = Six_HeShuDanShuang($rs['ball_7']);
+            $wsdx   = Six_WeiShuDaXiao($rs['ball_7']);
+            //$ws     = Six_WeiShu($rs['ball_7']);
+            $bs     = Six_Bose($rs['ball_7']);
+            $sx1        = Get_ShengXiao($rs['ball_1']);
+            $sx2        = Get_ShengXiao($rs['ball_2']);
+            $sx3        = Get_ShengXiao($rs['ball_3']);
+            $sx4        = Get_ShengXiao($rs['ball_4']);
+            $sx5        = Get_ShengXiao($rs['ball_5']);
+            $sx6        = Get_ShengXiao($rs['ball_6']);
+            $sx7        = Get_ShengXiao($rs['ball_7']); 
+            $zhdx = Six_ZongHeDaXiao($rs['ball_1']+$rs['ball_2']+$rs['ball_3']+$rs['ball_4']+$rs['ball_5']+$rs['ball_6']+$rs['ball_7']);
+            $zhds = Six_ZongHeDanShuang($rs['ball_1']+$rs['ball_2']+$rs['ball_3']+$rs['ball_4']+$rs['ball_5']+$rs['ball_6']+$rs['ball_7']); 
+?>
+     <tr align="left" bgcolor="#FFFFFF" style="color:#030" class="line_list" onMouseOver="this.style.backgroundColor='#FFFF99'" onMouseOut="this.style.backgroundColor='#FFFFFF'">  
+    <td class="bian_td_no">第<font color="#731208"><?=$rs['qishu']?></font>期</td>
+    <td><?=BuLing($rs['ball_1'])?> <?=BuLing($rs['ball_2'])?> <?=BuLing($rs['ball_3'])?><br/> <?=BuLing($rs['ball_4'])?> <?=BuLing($rs['ball_5'])?> <?=BuLing($rs['ball_6'])?> + <span style="color:#9f3333;"><?=BuLing($rs['ball_7'])?></span></td>
+    <td class="bian_td_no"><?=$sx1?> <?=$sx2?> <?=$sx3?><br/> <?=$sx4?> <?=$sx5?> <?=$sx6?> + <span style="color:#9f3333;"><?=$sx7?></span></td>
+    </tr>    
+    </tr>
+{/foreach}    
+        </table>
+</div>
+    <script type="text/javascript" language="javascript" src="/js/left_mouse.js"></script>
+    <script type="text/javascript" language="javascript" src="/js/ifhk.js"></script>
+    <!--<script>
+    var wb = $(top.window).width()-10;
+    $('.table-responsive').width(wb);
+    if(self==top){
+        //top.location='/';
+    }
+    function url(u){
+        window.location.href=u;
+    }
+    </script>
+    -->
+</body>
+
+</html>

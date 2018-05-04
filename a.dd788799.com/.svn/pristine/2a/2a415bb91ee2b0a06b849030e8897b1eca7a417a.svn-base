@@ -1,0 +1,31 @@
+<?php
+
+return [    
+    'default' => [  'admin'=>'web',
+                    'index'=>'web',
+                    'api'=>'jwt',
+                ],
+
+    'guards' => [
+        'web' => [
+            'driver' => 'session',
+            'model' => \app\common\model\Admin::class, 
+            //'model' => \app\common\model\Member::class,
+        ],
+
+        'api' => [
+            'driver' => 'token',//要求Member模型有api_token字段,
+            'model' => \app\common\model\Member::class,
+            'cache_time' => 3600,//定义过期时间,连续1小时未访问token失效
+        ],
+
+        'jwt' => [
+            'driver' => 'jwt_refresh_token',
+            'model' => \app\common\model\Member::class,
+            'expire_time' => 3600,
+            'refresh_time' => 60,
+            'jwt_key' => 'XXXX',//没有长度要求
+        ],        
+    ],
+
+];

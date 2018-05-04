@@ -1,0 +1,208 @@
+<?php
+namespace app\admin\controller;
+use app\admin\Login;
+use think\Cache;
+class Order extends Login{
+      /**
+     *菜单入口:订单列表
+    */  
+    public function index(){
+
+    	$setcg = db('pay_way')->select();//所有支付方式
+        $this->assign('setcg',$setcg);
+        $export_args = [];
+        $param = $this->request->param();
+        $where =[];
+         if($param['keywords']??''){
+            $where['o.name|o.type'] = ['like','%'.$param['keywords'].'%'];
+         }
+        if($param['start_time']??''){
+            $where['o.created_at'] = ['EGT',$param['start_time']];
+         }
+        if($param['end_time']??''){
+            $where['o.created_at'] = ['ELT',$param['end_time']];
+         }
+        if($param['pay_type']??''){
+            $where['o.local_code'] = ['EQ',$param['pay_type']];
+         }
+         if($param['order_state']??''){
+            $where['o.status'] = ['EQ',$param['order_state']];
+         }
+     
+        $export_args = http_build_query($export_args);
+        
+         $join = [
+         	['members m','o.uid=m.uid','left'],
+		    ['pay_way pw','o.local_code=pw.code','left'],
+		];
+		$orlist =  db('orders')->alias('o')->field('o.*, m.username,pw.name as pwname')->join($join)->where($where)->order('o.id asc')->paginate(10);
+		$this->assign('export_args',$export_args);
+     	$this->assign('orlist',$orlist);
+    	$this->view->page_header = '订单列表';
+      return $this->fetch();
+
+    }
+ 
+
+    public function export(){
+        date_default_timezone_set('PRC');
+        $file_date = date('Ymd');
+        
+        $p = input('p',0);
+        
+        $this->assign('p',$p);
+        echo $this->fetch();
+        
+        if(empty($p)){//首页           
+            if(file_exists("./export/".$file_date.".xls")){
+                unlink("./export/".$file_date.".xls");
+            }
+            file_put_contents("./export/".$file_date.".xls","");            
+        }
+        
+        //$objReader = \PHPExcel_IOFactory::createReader('Excel5');
+        if($p){
+            $objPHPExcel = \PHPExcel_IOFactory::load("./export/".$file_date.".xls");
+        }else{
+            $objPHPExcel = \PHPExcel_IOFactory::load("./export/template.xls");
+        }
+        $objPHPExcel->setActiveSheetIndex(0); //设置第一张表为当前活动表
+        $objPHPExcel->getActiveSheet()->freezePane('A2'); //设置第一行固定，不随滚动条滚动
+        
+        //首行作为标题,设为绿色
+        $sharedStyle1 = new \PHPExcel_Style();
+        $sharedStyle1->applyFromArray(
+            array('fill' => array(
+                'type'  => \PHPExcel_Style_Fill::FILL_SOLID,
+                'color' => array('argb' => 'FFCCFFCC')
+            ),
+                'borders' => array(
+                    'bottom'=> array('style' => \PHPExcel_Style_Border::BORDER_THIN),
+                    'right' => array('style' => \PHPExcel_Style_Border::BORDER_MEDIUM)
+                )
+            ));
+        
+        //设置单元格
+        $sharedStyle2 = new \PHPExcel_Style();
+        $sharedStyle2->applyFromArray(
+            array('fill' => array(
+                'type'  => \PHPExcel_Style_Fill::FILL_SOLID,
+                'color' => array('argb' => 'fff4f4f4')
+            )
+            ));
+        
+        if(empty($p)){//首页数据之前 添加 列号 和 列名
+            $objPHPExcel->getActiveSheet()->getColumnDimension('A')->setWidth(8);
+            $objPHPExcel->getActiveSheet()->getColumnDimension('B')->setWidth(40);
+            $objPHPExcel->getActiveSheet()->getColumnDimension('C')->setWidth(40);
+            $objPHPExcel->getActiveSheet()->getColumnDimension('D')->setWidth(20);
+            $objPHPExcel->getActiveSheet()->getColumnDimension('E')->setWidth(20);
+            $objPHPExcel->getActiveSheet()->getColumnDimension('F')->setWidth(20);
+            $objPHPExcel->getActiveSheet()->getColumnDimension('G')->setWidth(20);
+            $objPHPExcel->getActiveSheet()->getColumnDimension('H')->setWidth(20);
+            $objPHPExcel->getActiveSheet()->getColumnDimension('I')->setWidth(20);
+            $objPHPExcel->getActiveSheet()->getColumnDimension('J')->setWidth(20);
+            
+            $objPHPExcel->getActiveSheet()->setTitle('All Lottery Info');
+            
+            $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(0, 1,'编号');
+            $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(1, 1,'订单编号');
+            $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(2, 1,'千网订单号');
+            $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(3, 1,'用户名');
+            $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(4, 1,'订单金额');
+            $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(5, 1,'订单时间');
+            $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(6, 1,'订单状态');
+            $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(7, 1,'处理状态');
+            $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(8, 1,'备注');
+            $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(9, 1,'');
+            $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(10, 1,'');
+        }
+        
+        $allrow = $objPHPExcel->getSheet(0)->getHighestRow();
+
+        
+        $query = db('orders');
+        $export_args = [];
+        
+        $order_state = input('order_state');
+        if(is_numeric($order_state) ){
+            $query->where('order_state',$order_state);
+            $export_args['order_state'] = $order_state;
+        }
+        
+        $status = input('status');
+        if(is_numeric($status) ){
+            $query->where('status',$status);
+           
+        }
+
+        $start_time = input('start_time');
+        $end_time = input('end_time');
+        if($start_time||$end_time){
+            if($start_time&&$end_time){
+                $stime = strtotime($start_time);
+                $etime = strtotime($end_time);
+                if($stime > $etime){//开始时间大于结束时间时,结束时间当作无效参数
+                    $query->where('order_time','>=',$stime);
+                    $export_args['start_time'] = $start_time;
+                }else{
+                    $query->where('order_time','between',[$stime,$etime]);
+                    $export_args['start_time'] = $start_time;
+                    $export_args['end_time'] = $end_time;
+                }
+            }elseif($start_time){
+                $stime = strtotime($start_time);
+                $query->where('order_time','>=',$stime);
+                $export_args['start_time'] = $start_time;
+            }else{
+                $etime = strtotime($end_time);
+                $query->where('order_time','<=',$etime);
+                $export_args['end_time'] = $end_time;
+            }
+        }
+        
+        $options = $query->getOptions();
+        $datas = $query->order('id desc')->limit($p,500)->select();
+        $allnum = $query->options($options)->count();
+        
+        if($allnum == 0){
+            echo '<script>document.getElementById("log").innerHTML="没有可以导出的数据";</script>'; //循环操作
+            return;
+        }
+
+        //判断，当excel里的总行数大于等于数据表里的总行数时，出现下载地址，并退出程序
+        if(($allrow > $allnum) && $allrow != 1 ){           
+            echo '<script>document.getElementById("log").innerHTML="已经导出完成。<br>点击 <a href=\"/export/'.$file_date.'.xls\">这里</a> 下载;"</script>';
+            return;
+        }
+        
+        $num = $allrow;
+        for($m = 0; $m < count($datas); $m ++){            
+            $arr = $datas[$m];            
+            $num++; //从总行数的下一行开始操作
+            
+            $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(0, $num,$arr['id']);
+            $objPHPExcel->getActiveSheet()->setCellValueExplicit('B'. $num,$arr['order_id'],\PHPExcel_Cell_DataType::TYPE_STRING);
+            $objPHPExcel->getActiveSheet()->setCellValueExplicit('C'.$num,$arr['pay_order'],\PHPExcel_Cell_DataType::TYPE_STRING);
+            //$objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(2, $num,$arr['pay_order']);
+            //$objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(3, $num,$arr['user_name']);
+            $objPHPExcel->getActiveSheet()->setCellValueExplicit('D'.$num,$arr['user_name'],\PHPExcel_Cell_DataType::TYPE_STRING);
+            $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(4, $num,$arr['order_money']);
+            $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(5, $num,date('Y-m-d H:i:s',$arr['order_time']));
+            $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(6, $num,$this->order_state($arr['order_state']));
+            $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(7, $num,$this->deal_state($arr['state']));
+            $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow(8, $num,$arr['order_desc'].$arr['order_msg']);
+        }
+        $objWriter = \PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel5');
+        $objWriter->save ("./export/".$file_date.".xls"); //数据保存到到excel中
+        
+        //数据库记录数没有多页
+        if($allnum <= 500){
+            echo '<script>document.getElementById("log").innerHTML="已经导出完成。<br>点击 <a href=\"/export/'.$file_date.'.xls\">这里</a> 下载;"</script>';
+            return;
+        }
+        
+        echo '<script>window.location.href="' . url('export') . '?p=' . ($num-1) . '&' . http_build_query($export_args) . '";</script>'; //循环操作
+        return;
+    }
+}

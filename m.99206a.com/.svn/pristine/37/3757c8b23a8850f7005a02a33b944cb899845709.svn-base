@@ -1,0 +1,21 @@
+<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:78:"/mnt/wwwroot/www.dd788799.com/houtai/../application/admin/view/main/index.html";i:1505452686;}*/ ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>后台管理系统</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+</head>
+<frameset id="parentFrameset" rows="94,*" cols="*" frameborder="no" border="0" framespacing="0">
+	<frame id="headerFrame" name="headerFrame" src="<?php echo Url('main/top'); ?>" frameborder="no" scrolling="no" noresize="noresize" />
+	<frameset id="mainFrameset" name="mainFrameset" cols="178,*" frameborder="no" border="0" framespacing="0">
+		<frame id="menuFrame" name="menuFrame" src="<?php echo Url('main/left'); ?>" frameborder="no" scrolling="no" noresize="noresize" />
+		<!--<frame id="middleFrame" name="middleFrame" src="center.php" frameborder="no" scrolling="no" noresize="noresize" />-->
+		<frame id="mainFrame" name="mainFrame" src="<?php echo Url('main/info'); ?>" frameborder="no" noresize="noresize" />
+	</frameset>
+</frameset>
+<noframes>
+<body>
+		noframes
+	</body>
+</noframes>
+</html>

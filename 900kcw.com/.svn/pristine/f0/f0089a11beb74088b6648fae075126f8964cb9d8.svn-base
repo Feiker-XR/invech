@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:esun="" class="has-js">
+
+	<head>
+		<meta charset="utf-8" /><meta name="format-detection" content="telephone=no" />
+		<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE11" />
+		<title>【{$parentCategoryInfo.name}{$categoryInfo.name}】{$parentCategoryInfo.name}号码开奖结果查询 - {$sys.site_title}</title>
+		<meta name="keywords" content="{$categoryInfo.keywords}" />
+		<meta name="distribution" content="{$categoryInfo.description}" />
+		<link rel="stylesheet" href="css/headorfood.css" />
+		<link rel="stylesheet" href="css/shishicai.css" />
+		<link rel="stylesheet" href="css/calendar.css" />
+		<link rel="shortcut icon" href="img/icon/168favicon.ico/v=2017981058.html">
+		<link rel="stylesheet" href="css/user_adv.css" />
+		<script src="js/lib/bootstrap-3.3.0/js/tests/vendor/jquery.min.js"></script>
+		<script src="js/lib/bootstrap-3.3.0/dist/js/bootstrap.min.js"></script>
+
+		<script type="text/javascript" src="js/lib/jquery-1.7.2.min.js"></script>
+	</head>
+
+	<body>
+		<div class="bodybox pk10lzzhfxymbox zsbox">
+<!--#include file="head.html"-->
+			<!--#include file="html/shishicai_cq/kj.html"-->
+			<div class="zhlzbox margt20">
+				<div class="listhead">
+					<div class="listheadl">
+						<span class="lmms"><i>3</i>龙虎走势</span>
+					</div>
+					<div class="listheadr">
+						<!--<div class="listheadrr">
+							<div class="rightime">
+								<div id="dateframe">
+									<input type="text" class="date" placeholder="">
+									<div id="datebox"></div>
+									<i class="dropicond"></i>
+								</div>
+							</div>
+							<div>选择日期&nbsp;</div>
+						</div>-->
+						<div class="listheadrl">
+							<span id="today">今天</span>
+							<span id="yesterday">昨天</span>
+							<span id="qianday">前天</span>
+							<span id="thirty" class="checked">最近30期</span>
+							<span id="sixty">最近50期</span>
+							<span id="ninety">最近100期</span>
+						</div>
+					</div>
+				</div>
+				<div class="listbox">
+					<div class="checkbox">
+						<div id="biaozxz" class="checkbtnzh checkbtnmc">
+							<ul>
+								<li class="title">标注选择：</li>
+								<li class="sinli checked"><i>1</i>
+									<a href="javascript:void(0)">遗漏</a>
+								</li>
+								<li class="sinli checked"><i>2</i>
+									<a href="javascript:void(0)">拆线</a>
+								</li>
+								<li class="sinli"><i>3</i>
+									<a href="javascript:void(0)">遗漏分成</a>
+								</li>
+								<li class="sinli"><i>4</i>
+									<a href="javascript:void(0)">分隔线</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+					<div class="listcontent">
+						<div class="box">
+							<div id="waitBox" class="bastren w1200">
+								<div id="chartLinediv" style="position:relative;*position:static;">
+									<table id="table_weizhi" width="100%" border="0" cellpadding="0" cellspacing="0" style="display: table;">
+										<thead>
+											<tr class="firthtd">
+												<th rowspan="2" width="150" height="38" class="left_border left_b left_strong_down">期号</th>
+												<th rowspan="2" width="150">开奖<br>号码</th>
+												<th colspan="10" width="40" id="qiuhao">第<span class="title1">一</span>球号码走势</th>
+												<th colspan="10" width="40" id="qiuhao">第<span class="title2">五</span>球号码走势</th>
+												<th colspan="3" width="40" id="qiuhao"><span class="title3">龙虎</span></th>
+											</tr>
+											<tr class="secondtd">
+												<th width="40">0</th>
+												<th width="40">1</th>
+												<th width="40">2</th>
+												<th width="40">3</th>
+												<th width="40">4</th>
+												<th width="40">5</th>
+												<th width="40">6</th>
+												<th width="40">7</th>
+												<th width="40">8</th>
+												<th width="40">9</th>
+												<th width="40">0</th>
+												<th width="40">1</th>
+												<th width="40">2</th>
+												<th width="40">3</th>
+												<th width="40">4</th>
+												<th width="40">5</th>
+												<th width="40">6</th>
+												<th width="40">7</th>
+												<th width="40">8</th>
+												<th width="40">9</th>
+												<th width="40">龙</th>
+												<th width="40">虎</th>
+												<th width="40">和</th>
+											</tr>
+										</thead>
+										<tbody>
+										</tbody>
+									</table>
+								</div>
+								<div id="chartbottom" style="display: none;">
+									<table>
+										<tr>
+											<th rowspan="2" colspan="2" width="85" height="38" class="left_border left_b left_strong_down">数据统计</th>
+											<th colspan="10" width="40">冠军分布</th>
+											<th colspan="6" width="40">形态特征</th>
+											<th colspan="3" width="40">012路</th>
+											<th colspan="3" width="40">升平降</th>
+										</tr>
+										<tr>
+											<th width="40">1</th>
+											<th width="40">2</th>
+											<th width="40">3</th>
+											<th width="40">4</th>
+											<th width="40">5</th>
+											<th width="40">6</th>
+											<th width="40">7</th>
+											<th width="40">8</th>
+											<th width="40">9</th>
+											<th width="40">10</th>
+											<th width="40">奇</th>
+											<th width="40">偶</th>
+											<th width="40">大</th>
+											<th width="40">小</th>
+											<th width="40">质</th>
+											<th width="40">合</th>
+											<th width="40">0</th>
+											<th width="40">1</th>
+											<th width="40">2</th>
+											<th width="40">升</th>
+											<th width="40">平</th>
+											<th width="40">降</th>
+										</tr>
+									</table>
+								</div>
+							</div>
+
+						</div>
+						<div class="infortxt">
+							<p>龙：开出之号码第一球大于第五球，为龙。如，第一球开出4第五球开出2。</p>
+							<p>虎：开出之号码第一球小于第五球，为虎。如，第一球开出7第五球开出9</p>
+							<p>和：开出之号码第一球等于第五球，为和；如开出结果：2***2、9***9等则和局</p>
+							<p>遗漏期数：自上期开出到本期间隔的期数。</p>
+							<p>分隔线：每五期使用分隔线，使横向导航更加清晰</p>
+							<p>出现次数：统计周期内，某个号码的累计出现次数。</p>
+							<p>平均遗漏：统计期数内遗漏的平均值（计算公式：平均遗漏＝统计期内的总遗漏数/(出现次数+1)）</p>
+							<p>最大遗漏：是指统计周期内所有遗漏值的最大值。</p>
+							<p>组最大连出：是指统计周期内所有连出值的最大值。</p>
+						</div>
+
+					</div>
+				</div>
+			</div>
+			<!--#include file="head.html"-->
+
+			<script type="text/javascript" src="js/lib/calendar.js"></script>
+	</body>
+	<script type="text/javascript" src="js/lib/config.js"></script>
+	<script type="text/javascript" charset="utf-8" src="js/lib/drawLines.js"></script>
+	<script type="text/javascript" src="js/lib/GA.js"></script>
+	<script type="text/javascript" src="js/loacal/animate/animate.js"></script>
+	<script type="text/javascript" src="js/loacal/shishicai_900/ssc_kaijiang.js"></script>
+	<script type="text/javascript" src="js/loacal/shishicai_900/ssc_longhuzs.js"></script>
+	<script type="text/javascript" charset="utf-8" src="js/lib/jquery.async.js"></script>
+	<script type="text/javascript" charset="utf-8" src="js/lib/pk10BaseTrend.js"></script>
+
+</html>

@@ -1,0 +1,147 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>系统设置</title>
+<link href="/css/base.css" rel="stylesheet" type="text/css" />
+<link href="/css/admin.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="/js/jquery.js"></script>
+<script type="text/javascript" src="/js/jquery.tools.js"></script>
+<script type="text/javascript" src="/js/base.js"></script>
+<script language="javascript">   
+function chang(){
+	var type	=	$("input[name='status']:checked").val();
+	if(type == 1){
+		$("#d_txt").html('请填写本次汇款的实际手续费');
+		$("#d_text").html("<input name=\"sxf\" type=\"text\" id=\"sxf\" size=\"20\" maxlength=\"20\">&nbsp;元");
+	}else if(type == 0){
+		$("#d_txt").html('请填写未支付原因');
+		$("#d_text").html("<textarea name=\"about\" id=\"about\" cols=\"45\" rows=\"5\"><?=$rows["about"]?></textarea>");
+	}else{
+		$("#d_txt").html('&nbsp;');
+		$("#d_text").html('&nbsp;');
+	}
+}
+
+function check(){
+	var type	=	$("input[name='status']:checked").val();
+	if(type == 1){
+		if($("#sxf").val().length < 1){
+			alert('请您填写本次汇款的实际手续费');
+			$("#sxf").focus();
+			return false;
+		}else{
+			var sxf = $("#sxf").val()*1;
+			if(sxf>45 || sxf<0){
+				alert('请输入正确的手续费');
+				$("#sxf").select();
+				return false;
+			}
+		}
+	}else{
+		if($("#about").val().length < 4){
+			alert('请填写未支付原因');
+			$("#about").focus();
+			return false;
+		}
+	}
+	return true;
+}
+</script>
+</head>
+<body class="input">
+	<!--<div class="bar">
+		会员提款记录
+	</div>-->
+<div class="body">
+<ul id="tab" class="tab">
+				<li>
+					<input type="button" value="提款审核" class="current" hidefocus />
+				</li>
+  </ul>
+
+<form action="?action=save&m_id={$rows.m_id}" method="post" name="form1" id="form1" onSubmit="return check();">
+<table class="inputTable tabContent">
+<tr>
+	<th align="center">用户名:</th>
+	<td align="left">
+		{$rows["username"]}
+		<input name="uid" type="hidden" id="uid" value="{$rows['uid']}">
+		<input name="username" type="hidden" value="{$rows.username}">
+	</td>
+</tr>
+<tr>
+	<th align="center">订单号:</th>
+	<td align="left">{$rows["m_order"]}
+		<input name="m_order" type="hidden" id="m_order" value="{$rows.m_order}">
+	</td>
+</tr>
+<tr>
+	<th align="center">开户行:</th>
+	<td align="left">{$rows["pay_card"]}</td>
+</tr>
+<tr>
+	<th align="center">卡号:</th>
+	<td align="left">{$rows["pay_num"]}</td>
+</tr>
+<tr>
+	<th align="center">开户姓名:</th>
+	<td align="left">{$rows["pay_name"]}</td>
+</tr>
+<tr>
+	<th align="center">开户地址:</th>
+	<td align="left">{$rows["pay_address"]}</td>
+</tr>
+<tr>
+  	<th align="center">提款金额:</th>
+  	<td align="left">{$rows["m_value"]|abs}
+		<input name="title" type="hidden" id="title" value="您于：{$rows["m_make_time"]} 申请的提款：{$rows["m_value"]|abs} 失败了！">
+	</td>
+</tr>
+<tr>
+  <th align="center">申请时间:</th>
+  <td align="left">{$rows["m_make_time"]}</td>
+</tr>
+{if $rows.status eq 2}
+<tr>
+	<th align="center">操作:</th>
+	<td align="left"><input name="status" type="radio" id="status" onClick="chang()" value="1" checked><span style="color:#009900">已支付</span>
+	&nbsp;
+	<input type="radio" name="status" id="radio" onClick="chang()" value="0">
+	<span style="color:#FF0000">未支付</span></td>
+</tr>
+<tr>
+	<th align="center"><div id="d_txt">本次汇款的实际手续费:</div></th>
+	<td align="left"><div id="d_text"><input name="sxf" type="text" id="sxf" size="20" maxlength="20" class="formText">&nbsp;元</div></td>
+</tr>
+{/if}
+{if $rows.status eq 2}   
+<tr>
+	<th align="center">操作</th>
+	<td align="left"><input type="submit" class="formButton" value="提交"/></td>
+</tr>
+{else}
+<tr>
+    <th align="center">状态</th>
+    <td align="left">
+   	{if $rows.status eq 1}
+   		<span style="color:#006600;">成功</span>
+   	{else}
+   		<span style="color:#FF0000;">失败</span>
+   	{/if}
+	</td>
+</tr>
+    <tr>
+    <th align="center">处理时间</th>
+    <td align="left">{$rows["update_time"]}</td>
+  </tr>
+<tr>
+    <th align="center">原因</th>
+    <td align="left">{$rows["about"]}</td>
+  </tr>
+{/if}
+  </table>
+</form>
+	</div>
+</body>
+</html>

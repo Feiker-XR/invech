@@ -1,0 +1,19 @@
+<?php
+
+namespace app\listeners;
+
+use app\queue\Contracts\ShouldQueue;
+
+class Test2Listener// implements ShouldQueue
+{
+
+    public $queue = 'admin_action';
+
+    public function handle($event){
+
+        $a = 1;
+    }
+
+}
+
+

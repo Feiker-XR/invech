@@ -1,0 +1,166 @@
+<?php
+namespace app\common\model;
+use think\Model;
+
+/**
+ *  玩法模型
+ * @author mack
+ */
+class Played extends Base {
+	protected $table = 'gygy_played';
+	//protected $pk = 'id';
+    //protected $auto = ['name', 'ip'];		//save
+    //protected $insert = ['status' => 1];  //insert
+    //protected $update = [];  				//update
+
+
+	public function playedgroup(){
+
+		return $this->belongsTo('PlayedGroup','groupId')->where('enable',1);
+	}
+
+	public function plgroups(){
+        
+		return $this->hasMany('PlayedPlGroup','playedId');
+	}
+
+    static public function kqwfPls($id=''){
+    	$pls = cache('gygy_pls');
+    	if(!$pls){
+    	
+    		$playeds = self::with('plgroups.pls')
+    		->where(['enable'=>1,'is_kqwf'=>1])
+    		->select()->toArray();
+
+    		$playeds_map = [];
+    		foreach ($playeds as $played) {
+    			$playeds_map[$played['id']] = $played;
+    		}
+
+    		$pls = $playeds_map;
+    		cache('gygy_pls',$pls);
+            cache('gygy_pls_version',time());
+    	}
+
+    	if($id){
+    		return $pls[$id]['plgroups']??null;
+    	}else{
+    		return $pls;	
+    	}    	
+    }
+
+    static public function kqwfPls_bak($id=''){
+    	$pls = cache('gygy_pls_bak');
+    	if(!$pls){
+    		
+    		$playeds = self::all(['enable'=>1,'is_kqwf'=>1]);
+
+    		$playeds_map = [];
+    		foreach ($playeds as $played) {
+
+    			$groups_map = [];
+    			foreach ($played->plgroups as $group) {
+    				
+    				$pls_map = [];
+    				foreach ($group->pls as $pl) {
+    					$pls_map[$pl->id] = $pl->toArray();
+    				}
+
+    				$groups_map[$group->id] = $group->toArray();
+    				$groups_map[$group->id]['pls'] = $pls_map;
+    			}
+
+    			$playeds_map[$played->id] = $played->toArray();
+    			$playeds_map[$played->id]['plgroups'] = $groups_map;
+
+    		}
+
+    		$pls = $playeds_map;
+    		cache('gygy_pls_bak',$pls);
+    	}
+
+    	if($id){
+    		return $pls[$id]['plgroups']??null;
+    	}else{
+    		return $pls;	
+    	}    	
+    }
+
+    //混合玩法的赔率 是 相关玩法的赔率列表
+    static public function gfwfPl($id=''){
+        $pls = cache('gfwf_pls');
+        if(!$pls){
+
+            $playeds = self::where(['enable'=>1,'is_kqwf'=>0])
+            ->field('id,is_mix,mix_ids,bonusProp, bonusPropBase')
+            ->select();
+
+            $playeds_map = [];
+            foreach($playeds as $played){
+                if($played->is_mix){
+                    $playeds_mix = self::where(['enable'=>1,'is_kqwf'=>0])
+                        ->where('id','in',$played->mix_ids)
+                        ->field('bonusProp, bonusPropBase')->select();
+                    $data = $playeds_mix->toArray();
+                }else{
+                    $data = $played->toArray();
+                    $data = [$data];
+                }
+                $playeds_map[$played['id']] = $data;
+            }
+
+            $pls = $playeds_map;
+            cache('gfwf_pls',$pls);            
+        }
+
+        if($id){
+            return $pls[$id]??[];
+        }else{
+            return $pls;    
+        }
+    }
+    static public function getQAll(){
+        $playeds = cache('gygy_all_played_Q');
+        if(!$playeds){
+            $playeds = self::where('enable',1)->field('id,name,type,is_kqwf')->order('sort')->select();
+            $playeds_map = [];
+            foreach ($playeds as $played) {
+                $playeds_map[$played->id] = $played;//$played->toArray();
+            }
+            $playeds = $playeds_map;
+            cache('gygy_all_played_Q',$playeds);
+        }
+        return $playeds;
+    }
+
+    static public function getAll(){
+        $playeds = cache('gygy_all_played');
+        if(!$playeds){
+            $playeds = self::where('enable',1)->order('sort')->select();
+            $playeds_map = [];
+            foreach ($playeds as $played) {                
+                $playeds_map[$played->id] = $played;//$played->toArray();
+            }
+            $playeds = $playeds_map;
+            cache('gygy_all_played',$playeds);
+        }
+        return $playeds;        
+    }
+
+    //----------------后台------------------
+    public static function getList(){
+        $params = request()->param();
+        $query = self::order('type')->order('id desc');
+        if($params['name']??null){
+            $query->where('name','like','%'.trim($params['name']).'%');
+        }
+        if($params['type']??null){
+            $query->where('type',$params['type']);
+        }
+        $is_kqwf = $params['is_kqwf']??'';
+        if(is_numeric($is_kqwf)){
+            $query->where('is_kqwf',$is_kqwf);
+        }
+        return $query->paginate();
+    }   
+}

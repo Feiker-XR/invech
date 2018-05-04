@@ -1,0 +1,118 @@
+<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:86:"/mnt/wwwroot/www.dd788799.com/public/../application/index/mview/result/basketball.html";i:1505452696;}*/ ?>
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>万丰国际</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/css/footable.core.min.css">
+  <link href="../css/jquery_dialog.css" rel="stylesheet" type="text/css" />
+  <link rel="stylesheet" href="/styles/ucenter.css">
+<link rel="stylesheet" href="../styles/ezweb.css">
+  <style type="text/css">
+  .panel-body{padding: 5px;}
+</style>
+</head>
+<body>
+<input type="button" value="< 返回" class="ft_danshi_default ft_danshi_contain_yellow" onclick="$('#J_SportsIFrame',parent.document).attr('src','left.php');"><div class="h10"></div>
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">篮球结果 ></h3>
+  </div>
+  <div class="panel-body">
+    <ul class="pagination"><?php
+for($i=0;$i<7;$i++){
+  $d  = date('Y-m-d',time()-$i*86400);
+  $dd = date('m-d',time()-$i*86400);
+  if($d==$date ){
+?>
+    <li class="active"><a href="#"><?=$dd?></a></li>
+        <?php echo '<?'; ?>
+ }else{ ?>
+        <li><a href="?ymd=<?=$d?>"><?=$dd?></a></li>
+     
+        <?php echo '<?'; ?>
+ } 
+}
+?></ul>
+
+      <table class="table table-bordered table-hover">
+      <thead><tr class="success">
+  <th data-toggle="true">赛程<br>点击每行展开</th>
+    <th>开赛时间<br>主场/客场</th>
+    <th data-hide="phone,tablet">1</th>
+    <th data-hide="phone,tablet">2</th>
+    <th data-hide="phone,tablet">3</th>
+    <th data-hide="phone,tablet">4</th>
+    <th data-hide="phone,tablet">上半</th>
+    <th data-hide="phone,tablet">下半</th>
+    <th data-hide="phone,tablet">加时</th>
+    <th data-hide="phone,tablet">全场</th>
+  </tr></thead><tbody>
+
+      <?php if(empty($rows)): ?>
+      <tr><td height='100' colspan='4' align='center' bgcolor='#FFFFFF'>暂无任何赛果</td></tr>
+      <?php endif; foreach($rows as $row): ?>
+      <tr>
+        <td><strong><?php echo $row['match_name']; ?></strong></td>
+        <td><span class="red"><?php echo $row['Match_Date']; ?> <?php echo $row['Match_Time']; ?></span><br><span class="zhu"><?php echo $row['match_master']; ?></span>-<span class="ke"><?php echo $row['match_guest']; ?></span></td>
+        <td><?php if(($row['MB_Inball_1st']<0)): ?>
+          <span class="zhu">无效</span>-<span class="ke">无效</span>
+        <?php else: ?>
+          <span class="zhu"><?php echo $row['MB_Inball_1st']; ?></span>-<span class="ke"><?php echo $row['TG_Inball_1st']; ?></span>
+        <?php endif; ?></td>
+        <td><?php if(($row['MB_Inball_2st']<0)): ?>
+          <span class="zhu">无效</span>-<span class="ke">无效</span>
+        <?php else: ?>
+          <span class="zhu"><?php echo $row['MB_Inball_2st']; ?></span>-<span class="ke"><?php echo $row['TG_Inball_2st']; ?></span>
+        <?php endif; ?></td>
+        <td><?php if(($row['MB_Inball_3st']<0)): ?>
+          <span class="zhu">无效</span>-<span class="ke">无效</span>
+        <?php else: ?>
+          <span class="zhu"><?php echo $row['MB_Inball_3st']; ?></span>-<span class="ke"><?php echo $row['TG_Inball_3st']; ?></span>
+        <?php endif; ?></td>
+        <td><?php if(($row['MB_Inball_4st']<0)): ?>
+          <span class="zhu">无效</span>-<span class="ke">无效</span>
+        <?php else: ?>
+          <span class="zhu"><?php echo $row['MB_Inball_4st']; ?></span>-<span class="ke"><?php echo $row['TG_Inball_4st']; ?></span>
+        <?php endif; ?></td>
+        <td><?php if(($row['MB_Inball_HR']<0)): ?>
+          <span class="zhu">无效</span>-<span class="ke">无效</span>
+        <?php else: ?>
+          <span class="zhu"><?php echo $row['MB_Inball_HR']; ?></span>-<span class="ke"><?php echo $row['TG_Inball_HR']; ?></span>
+        <?php endif; ?></td>
+        <td><?php if(($row['MB_Inball_ER']<0)): ?>
+          <span class="zhu">无效</span>-<span class="ke">无效</span>
+        <?php else: ?>
+          <span class="zhu"><?php echo $row['MB_Inball_ER']; ?></span>-<span class="ke"><?php echo $row['TG_Inball_ER']; ?></span>
+        <?php endif; ?></td>
+        <td><?php if(($row['MB_Inball_Add']<0)): ?>
+          <span class="zhu">无效</span>-<span class="ke">无效</span>
+        <?php else: ?>
+          <span class="zhu"><?php echo $row['MB_Inball_Add']; ?></span>-<span class="ke"><?php echo $row['MB_Inball_Add']; ?></span>
+        <?php endif; ?></td>
+        <td><?php if(($row['MB_Inball']<0)): ?>
+          <span class="zhu">无效</span>-<span class="ke">无效</span>
+        <?php else: ?>
+          <span class="zhu"><?php echo $row['MB_Inball']; ?></span>-<span class="ke"><?php echo $row['TG_Inball']; endif; ?></span></td>
+      </tr>
+      <?php endforeach; ?>          
+
+      </tbody>
+    </table>
+  </div>
+</div>
+<script src="/assets/jquery.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/footable.min.js"></script>
+<script language="javascript" src="/js/mouse.js"></script>
+<script language="javascript" src="/js/ifsports.js"></script>
+<script type="text/javascript">
+$(function (){
+    $('.table').footable();
+});
+</script>
+</body>
+</html>  

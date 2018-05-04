@@ -1,0 +1,140 @@
+{extend name="public/user_head"/}
+{block name="body"}
+<header class="header">
+    <i class='left' onclick="javascript:history.back(-1);">返回</i>
+    <h1>投注记录</h1>
+</header>
+<style type="text/css">
+    ul.condition li:last-child span{
+        float: left;
+    }
+</style>
+<main class="inner_body">
+    <section class="fund_detail">
+         <ul class="condition">
+          <li>
+                <span>彩种筛选：</span>
+                <select id="_type" class="left">
+                    <option>所有类别</option>
+                    <option value="0">xx</option>
+                    <option value="1">xx</option>
+                    <option value="2">xxx</option>
+                    <option value="3">xxx</option>
+                </select>
+            </li>
+            <li><span>提现时间：</span><input type="date" value="" id="_date"/></li>
+        </ul>
+    </section>
+    <section class="table">
+       <table>
+            <thead>
+                <tr>
+                    <th>日期</th>
+                    <th>彩种</th>
+                    <th>玩法</th>
+                    <th>投注金额</th>
+                    <th>盈亏</th>
+               </tr>
+            </thead>
+            <tbody id="lists">
+                {if(!$list['list']->isEmpty())}
+                    {foreach $list['list'] as $v}
+                        <tr>
+                            <td>{$v->created_at}</td>
+                            <td>{$v->types->title}</td>
+                            <td>{$v->played->name}</td>
+                            <td>{$v->actionNum*$v->mode*$v->beiShu}</td>
+                            {if(!empty($v->lotteryNo))}
+                               {if($v->cha>0)}
+                                    <td><span style="color:red">{$v->cha}</span></td> 
+                                {else}
+                                    <td><span style="color:green">{$v->cha}</span></td>
+                                {/if}
+                            {else}
+                               <td><span style="color:green">未开奖</span></td>
+                            {/if}
+                           
+                        </tr>
+                    {/foreach}
+                {else}
+                    <tr><td colspan="5" styl="text-align:center;">暂无数据</td></tr>
+                {/if}
+            </tbody>
+        </table>
+    </section>
+    <div class="dropload-down"><div class="dropload-noData"></div></div>
+</main>
+<script type="text/javascript">
+
+    $(function(){
+    // 页数
+    var page = 1;
+
+    // dropload
+    var isLoading = false;
+    var _limit = $('.inner_body').height() - $('.table').height(); // 首次触底点
+    var _step = $('#lists').height();   // 触底步长
+    $('#_date').change(function(){
+        var stime = $(this).val();
+        $.ajax({
+            type: 'GET',
+            url: '/user/bet_record?startTime='+stime,
+            dataType: 'json',
+            success: function(data){
+                var rel     = data.data;
+                $('.dropload-noData').text('');
+                if(rel){
+                    result = rel;
+                }else{
+                    result ='<tr><td colspan="5" styl="text-align:center;">暂无数据</td></tr>';
+                }
+                page = 1;
+                $('#lists').html(result);  
+            },
+            error: function(xhr, type){
+                $('.dropload-noData').text('加载出错了...');
+            }
+        });
+    });
+    $('main').on('touchend',function(evt){
+
+        var _top = Math.round($('.table').position().top);
+        if(_top == _limit-_step*(page-1)){
+            if(!isLoading){
+                page++;
+                isLoading = true;
+                var stime = $("#_date").val();
+                $('.dropload-noData').text('请求数据中...');
+                $.ajax({
+                    type: 'GET',
+                    url: '/user/bet_record?page='+page+'&startTime='+stime,
+                    dataType: 'json',
+                    success: function(data){
+                        isLoading = false;
+                        var rel     = data.data;
+                        if(rel){
+                            result = rel;
+                            $('#lists').append(result);  
+                            if($('#lists tr').length%15 != 0){
+                                $('.dropload-noData').text('没有更多数据了...');
+                            }else{
+                                $('.dropload-noData').text('下拉加载更多...');
+                            }
+                        }else{
+                            $('.dropload-noData').text('暂无数据');  
+                        }
+                    },
+                    error: function(xhr, type){
+                        isLoading = false;
+                       $('.dropload-noData').text('加载出错了...');
+                    }
+                });
+
+            }
+        }
+    });
+
+       
+    });
+ </script>
+{/block}

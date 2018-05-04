@@ -1,0 +1,57 @@
+<?php
+namespace app\admin;
+use think\Controller;
+use think\Cache;
+use app\model\config;
+
+class Base extends Controller{
+	protected function _initialize(){
+
+	}
+
+    protected function doLogin($username,$pwd='',$remember=false){
+
+            if($pwd){
+                $pwd = md5($pwd);
+
+                $admin = db('admin')
+                ->where('username',$username)
+                ->where('password',$pwd)
+                ->find();
+
+            }else{//记住我
+                $admin = db('admin')
+                ->where('remember',$username)
+                ->find();
+            }
+
+            if(empty($admin)){
+                return null;
+            }
+
+            session('adminid',$admin['id']);
+            session('admin',$admin);
+
+            //只记住7天;
+            if ($remember) {
+                $remember_token = md5($admin['username'].$admin['password'].time());
+                cookie('remember', $remember_token, 24 * 3600 * 7);
+                db('admin')->where('id',$admin['id'])->update(['remember'=>$remember_token,]);
+            }            
+
+            return $admin;
+    }	
+
+    protected function isLogin(){
+    	$adminid = session('adminid');
+        if($adminid == ''){
+            if (cookie('?remember')) {
+            	$admin = $this->doLogin(cookie('remember'));
+            	if($admin)return $admin['id'];
+            }
+            return 0;
+        }else{
+        	return $adminid;
+        }
+    }    
+}

@@ -1,0 +1,67 @@
+@charset "utf-8";
+#guide { z-index:501; background:url(/images/nsc/skin/blue_skin/shade/shade.png); display:none; }
+.guideBox { height:870px; z-index:502; top:0px; }
+.guideBox1 { background:url(/images/nsc/skin/blue_skin/guide/guide1_2.png) no-repeat center 0px; display:none; }
+.guideBox1 .show1 { background:url(/images/nsc/skin/blue_skin/guide/guide1_1.png) no-repeat center 0px; width:506px; height:146px; top:0px; right:-40px; }
+.guideBox2 { background:url(/images/nsc/skin/blue_skin/guide/guide2.png) no-repeat center 12px; left:211px; display:none; }
+.guideBox3 { background:url(/images/nsc/skin/blue_skin/guide/guide3.png) no-repeat center 65px; left:211px; display:none; }
+.guideBox4 { background:url(/images/nsc/skin/blue_skin/guide/guide4.png) no-repeat left 25px; display:none; }
+.guideBoxX { /*background:url(/images/nsc/skin/blue_skin/guide/1.png) no-repeat center 161px; left:0px; display:none;*/ }
+
+/*主体样式*/
+.guide{width:100%;height:100%;position:fixed;left:0;top:0;z-index:9999;display:none;}
+.guide .guide-mask{width:100%;height:100%;background:url(/images/nsc/guide/guide_bg.png) repeat;position:fixed;left:0;top:0;z-index:9999;}
+.guide .guide-container{width:980px; height:440px;position:fixed;top:50%;left:50%;margin:-220px 0 0 -490px;z-index:10000;}
+.guide .guide-content{}
+.guide .guide-content .step{height:0;opacity:0;overflow:hidden;background-position:center top;background-repeat:no-repeat;transition:opacity 1.2s;-webkit-transition:opacity 1.2s;-moz-transition:opacity 1.2s;}
+.guide .guide-container-ie .guide-content .step{background-position:70px top;}
+.guide .guide-content .step_00{background-image:url(/images/nsc/guide/guide_00.png);}
+.guide .guide-content .step_01{padding:2px;background-image:url(/images/nsc/guide/guide_01.png);background-image:url(/images/nsc/guide/guide_01_01.png)\9;background-image:url(/images/nsc/guide/guide_01_01.png)\0;}
+.guide .guide-content .step_02{background-image:url(/images/nsc/guide/guide_02_02.png);background-image:url(/images/nsc/guide/guide_02.png)\9;background-image:url(/images/nsc/guide/guide_02.png)\0;}
+.guide .guide-content .step_03{background-image:url(/images/nsc/guide/guide_03_03.png);background-image:url(/images/nsc/guide/guide_03.png)\9;background-image:url(/images/nsc/guide/guide_03.png)\0;}
+.guide .guide-close{width:40px;height:40px;position:absolute;right:90px;top:-5px;background:url(/images/nsc/guide/guide_icon.png) -145px -5px no-repeat;cursor:pointer;transition:all .5s;-webkit-transition:all .5s;-moz-transition:all .5s;}
+.guide .guide-close-04{top:-30px;right:75px;}
+/* .guide .guide-content .step_00.active{height:344px;}
+.guide .guide-content .step_01.active{height:330px;}
+.guide .guide-content .step_02.active{height:436px;}
+.guide .guide-content .step_03.active{height:436px;} */
+.guide .guide-content .step_00.active{height:344px;opacity:1;}
+.guide .guide-content .step_01.active{height:330px;height:332px\9;height:332px\0;opacity:1;}
+.guide .guide-content .step_02.active{height:436px;opacity:1;}
+.guide .guide-content .step_03.active{height:436px;opacity:1;}
+
+/*线条进入样式*/
+.guide .guide-content .step .line{position:absolute;background-repeat:no-repeat;background-position:center center;opacity:0;transition:all .5s 0.4s;display:none\9;display:none\0;}
+.guide .guide-content .step_01 .line-top{width:608px;height:1px;left:-390px;top:-5px;background-image:url(/images/nsc/guide/line_top.png);}
+.guide .guide-content .step_01 .line-right{width:1px;height:380px;left:671px;top:325px;background-image:url(/images/nsc/guide/line_left.png);}
+.guide .guide-content .step_01 .line-bottom{width:608px;height:1px;left:-390px;bottom:110px;background-image:url(/images/nsc/guide/line_top.png);}
+.guide .guide-content .step_01 .line-left{width:1px;height:380px;left:119px;top:325px;background-image:url(/images/nsc/guide/line_left.png);}
+.guide .guide-content .step_02 .line-top{width:681px;height:1px;left:-480px;top:5px;background-image:url(/images/nsc/guide/line2_top.png);}
+.guide .guide-content .step_02 .line-right{width:1px;height:436px;left:673px;top:435px;background-image:url(/images/nsc/guide/line2_left.png);}
+.guide .guide-content .step_02 .line-bottom{width:681px;height:1px;left:-480px;bottom:88px;background-image:url(/images/nsc/guide/line2_top.png);}
+.guide .guide-content .step_02 .line-left{width:1px;height:436px;left:123px;top:435px;background-image:url(/images/nsc/guide/line2_left.png);}
+.guide .guide-content .step_03 .line-top{width:681px;height:1px;left:-480px;top:-20px;background-image:url(/images/nsc/guide/line2_top.png);}
+.guide .guide-content .step_03 .line-right{width:1px;height:436px;left:673px;top:465px;background-image:url(/images/nsc/guide/line2_left.png);}
+.guide .guide-content .step_03 .line-bottom{width:681px;height:1px;left:-520px;bottom:115px;background-image:url(/images/nsc/guide/line2_top.png);}
+.guide .guide-content .step_03 .line-left{width:1px;height:436px;left:123px;top:465px;background-image:url(/images/nsc/guide/line2_left.png);}
+.guide .guide-content .step.active .line{opacity:1;}
+.guide .guide-content .step_01.active .line-top{left:90px;}
+.guide .guide-content .step_01.active .line-right{top:-25px;}
+.guide .guide-content .step_01.active .line-bottom{left:90px;}
+.guide .guide-content .step_01.active .line-left{top:-25px;}
+.guide .guide-content .step_02.active .line-top{left:60px;}
+.guide .guide-content .step_02.active .line-right{top:-35px;}
+.guide .guide-content .step_02.active .line-bottom{left:90px;}
+.guide .guide-content .step_02.active .line-left{top:-35px;}
+.guide .guide-content .step_03.active .line-top{left:60px;}
+.guide .guide-content .step_03.active .line-right{top:-65px;}
+.guide .guide-content .step_03.active .line-bottom{left:90px;}
+.guide .guide-content .step_03.active .line-left{top:-65px;}
+
+/*按钮样式*/
+.guide .guide-btn{width:120px;height:45px;position:absolute;/* bottom:0; */top:280px;right:130px;background:url(/images/nsc/guide/guide_icon.png) -27px -5px no-repeat;cursor:pointer;transition:all .5s;-webkit-transition:all .5s;-moz-transition:all .5s;}
+.guide .guide-container-ie .guide-btn{width:90px;height:30px;}
+.guide .guide-btn-done{background-position:-27px -50px;}
+.guide .guide-dots{width:20px;position:absolute;left:90px;/* top:50%;margin-top:-30px; */top:150px;}
+.guide .guide-dots li{display:block;width:15px;height:15px;background:url(/images/nsc/guide/guide_icon.png) -7px -27px;margin-bottom:2px;cursor:pointer;transition:all .3s;-webkit-transition:all .3s;-moz-transition:all .3s;}
+.guide .guide-dots li.active{background-position:-7px -7px;}

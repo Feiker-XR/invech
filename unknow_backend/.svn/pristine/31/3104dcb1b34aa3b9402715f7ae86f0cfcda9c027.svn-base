@@ -1,0 +1,41 @@
+<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:79:"/mnt/wwwroot/www.dd788799.com/mobile/../application/index/mview/six/list_s.html";i:1505452698;}*/ ?>
+<!DOCTYPE HTML>
+<HTML>
+<head>
+<title></title>
+<meta http-equiv="Cache-Control" content="max-age=864000" />
+<meta http-equiv="content-type" content="text/html;charset=UTF-8">
+<style type='text/css'>
+body{font:normal 13px/20px 宋体;}
+.line_list{font-size:13px;padding:0px 0px 0px 0px;}
+.table{float:left;margin-top:0px;}
+.img{padding-top:4px;}
+</style>
+</head>
+<body>
+	<div class="table">
+		<table width="100%" cellspacing="0" cellpadding="0" align="center">
+			<tr class="line_list">
+				<td><font color="#000">生肖：</font></td>
+				<td>
+					<font color="#111f87">
+						<?php echo $sx1; ?><font color="#fdfbe9">-</font>
+						<?php echo $sx2; ?><font color="#fdfbe9">-</font>
+						<?php echo $sx3; ?>
+						<?php echo $sx4; ?><font color="#fdfbe9">-</font>
+						<?php echo $sx5; ?><font color="#fdfbe9">-</font>
+						<?php echo $sx6; ?><font color="#fdfbe9">-</font> +  <?php echo $sx7; ?>
+					</font>
+				</td>
+			</tr>
+		</table>
+	</div>		
+</body>
+</html>
+
+<script language="JavaScript"> 
+function myrefresh(){ 
+window.location.reload(); 
+} 
+setTimeout('myrefresh()',60000); //指定1秒刷新一次 
+</script> 

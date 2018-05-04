@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>系统设置</title>
+<link href="/css/base.css" rel="stylesheet" type="text/css" />
+<link href="/css/admin.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="/js/jquery.js"></script>
+<script type="text/javascript" src="/js/jquery.tools.js"></script>
+<script type="text/javascript" src="/js/base.js"></script>
+<script type="text/javascript" src="/js/calendar.js"></script>
+</head>
+<body class="list">
+	<div class="bar">会员汇款记录</div>
+	<div class="body">
+		<form name="form1" method="GET" action="">
+			<div class="listBar">
+				<select name="status" id="status">
+					<option value="0" {if $status eq '0'}selected{/if} style="color: #FF9900;">未处理</option>
+					<option value="2" {if $status eq '2'}selected{/if} style="color: #FF0000;">汇款失败</option>
+					<option value="1" {if $status eq '1'}selected{/if} style="color: #006600;">汇款成功</option>
+					<option value="3" {if $status eq '3'}selected{/if}>全部汇款</option>
+				</select>&nbsp;&nbsp; 
+				<select name="order" id="order">
+					<option value="id"    {if $order eq 'id'}selected{/if}>默认排序</option>
+					<option value="money" {if $order eq 'money'}selected{/if}>汇款金额</option>
+					<option value="zsjr"  {if $order eq 'zsjr'}selected{/if}>赠送金额</option>
+				</select>&nbsp;&nbsp;
+				日期: 
+				<input name="stime" type="text" id="stime" value="{$stime}" onClick="new Calendar(2008,2020).show(this);" size="10" maxlength="10" readonly="readonly" /> ~ 
+				<input name="etime"	type="text" id="etime" value="{$etime}" onClick="new Calendar(2008,2020).show(this);" size="10" maxlength="10" readonly="readonly" /> 
+					&nbsp;&nbsp;
+				会员名称：
+				<input name="username" type="text" id="username" 	value="{$username}" size="15" maxlength="20" />&nbsp;&nbsp;
+				<input name="find" type="submit" id="find" value="查找" class="formButton" />
+				</td>
+
+			</div>
+		</form>
+
+		<table id="listTable" class="listTable">
+			<tr>
+				<th align="center">编号</th>
+				<th align="center">订单号</th>
+				<th align="center">存款金额</th>
+				<th align="center">赠送金额</th>
+				<th align="center">申请时间</th>
+				<th align="center">汇款银行</th>
+				<th align="center">汇款方式/汇款地址</th>
+				<th align="center">汇款会员</th>
+				<th align="center">汇款状态</th>
+			</tr>
+			{volist name="list" id='rows'}
+				
+			<tr>
+				<td align="center">{$rows.id}</td>
+				<td align="center"><a href="{:url('money/huikuan_ok')}?id={$rows.id}">{$rows.lsh}</a></td>
+				<td align="center">{$rows.money}</td>
+				<td align="center">{$rows.zsjr}</td>
+				<td align="center">{$rows.adddate}</td>
+				<td align="center">{$rows.bank}</td>
+				<td align="center" style="line-height: 22px;">{$rows.manner}<br/>{$rows.address}</td>
+				<td align="center">{$rows.username}</td>
+				<td align="center">
+					{if $rows.status eq 1}
+						<span style="color:#006600;">汇款成功</span>
+					{elseif $rows.status eq 2}
+						<span style="color:#FF0000;">汇款失败</span>
+					{else}
+						<span style="color:#FF9900;">审核中</span>
+					{/if}
+				</td>
+				<?php $currentsum = $currentsum + $rows['money'];?>
+				<?php $currentzsjrsum = $currentzsjrsum + $rows['zsjr']; ?>
+			</tr>
+			
+				
+			{/volist}
+			<tr>
+				<td colspan="2" align="right">小计:</td>
+				<td align="center">{$currentsum}|<font color="red">{$currentsum-$currentzsjrsum}</font></td>
+				<td align="center">{$currentzsjrsum}</td>
+				<td colspan="6"></td>
+			</tr>
+			<tr>
+				<td colspan="2" align="right">总计:</td>
+				<td align="center">{$sum|0}|<font color="red">{$sum-$sumzsjr}</font></td>
+				<td align="center">{$sumzsjr|0}</td>
+				<td colspan="6"></td>
+			</tr>
+
+		</table>
+		<!-- page -->
+		{notempty name='list'}{$list->render()}{/notempty}
+		<!-- page end-->
+	</div>
+</body>
+</html>

@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>彩票游戏 Lottery</title>
+<link rel="stylesheet" type="text/css" href="/css/style.css"/>
+<!-- <script src="https://cdn.bootcss.com/jquery/1.9.0/jquery.min.js"></script>-->
+<script type="text/javascript" src="/js/jquery1.9.0.min.js"></script>
+<script type="text/javascript" src="/js/jquery.SuperSlide.2.1.1.js"></script>
+<script type="text/javascript" src="/js/main.js"></script>
+<script type="text/javascript" src="/js/main.new.js"></script>
+</head>
+<body onkeydown="keyLogin();">
+<div class="head">
+	
+	{include file='common/lottery-nav'}
+		
+<script type="text/javascript">
+$(function(){
+	//顶部导航二级菜单
+	$(".nav_right_div").mouseenter(function(){
+		$(this).find("ul").show();
+	}).mouseleave(function(){
+		$(this).find("ul").hide();
+	})
+	
+})
+</script>
+
+</div>
+	<div class="block_0"></div>
+	<!--彩票游戏背景-->
+	<div class="game_c_center">
+		<div class="game_l_login">
+		<?php if(!$user){?>
+			<div class="game_l_login_nav">
+				<h3>Vip会员登录</h3>
+				<ul>
+					<li class="game_l_login_nav_1"><input type="text" name="username" id="username" placeholder="输入用户名"></li>
+					<li class="game_l_login_nav_2"><input type="password" name="password" id="password" placeholder="输入密码"></li>
+					<li class="game_l_login_nav_3"><a href="javascript:;" onclick="alert('请联系在线客服!');return false;">忘记密码？</a></li>
+					<li class="game_l_login_nav_4"><button onclick="Login()" id="logkey">登录</button></li>
+					<li class="game_l_login_nav_5"><a class="button" href="{:Url('index/reg')}">立即开户</a></li>
+				</ul>
+			</div>
+			<?php }else{?>
+			<div class="game_l_login_nav game_hadlogin">
+				<h3>Vip会员登录</h3>
+				<span class="ml15 fl">账户：<i class="head_w_hadlogin_name"><?php echo $user['username']?></i></span>
+				<span class="ml15 fl">余额：<i class="head_w_hadlogin_count"><?php echo $user['money']?></i></span>
+				<ul class="fr">
+					<li><a href="javascript:void(0);" onclick="GoToMember(0,2);return false">会员资料</a></li>
+					<li><a href="javascript:void(0);" onclick="GoToMember(3,0);return false">账户历史</a></li>
+					<li><a href="javascript:void(0);" onclick="GoToMember(2,0);return false">交易记录</a></li>
+					<li><a href="javascript:void(0);" onclick="GoToMember(0,2);return false">财务中心</a></li>
+					<li><a href="javascript:void(0);" onclick="GoToMember(5,0);return false">代理中心</a></li>		
+					<li><a href="javascript:void(0);" onclick="GoToMember(1,0);return false">会员存款</a></li>
+					<li><a href="javascript:void(0);" onclick="GoToMember(0,2);return false">额度转换</a></li>
+					<li><a href="javascript:void(0);" onclick="GoToMember(1,1);return false">会员提款</a></li>
+					<li><a href="javascript:GoTo('1','logout');">安全退出</a></li>						
+				</ul>
+			</div>
+			<?php }?>
+			<div class="block_0"></div>
+			<div class="game_l_login_all">
+				<div class="focusBox" style="margin:0 auto">
+					<ul class="pic">
+						<li><a href="/electric-game.php" target="index"><img src="/img/electr-slider-bg1.png"/></a></li>
+						<li><a href="{:Url('lottery/index')}" target="index"><img src="/img/game-slider-bg.png"/></a></li>
+						<li><a href="{:Url('live/index')}" target="index"><img src="/img/live-slider-bg.png"/></a></li>
+						<li><a href="{:Url('sport/index')}" target="index"><img src="/img/sport-bg1.png"/></a></li>					
+					</ul>
+					<a class="prev" href="javascript:void(0)"></a>
+					<a class="next" href="javascript:void(0)"></a>
+					<ul class="hd">
+						<li></li>
+						<li></li>
+						<li></li>
+						<li></li>						
+					</ul>
+				</div>	
+				<div class="block_30"></div>
+				<div class="banner_notice txtMarquee-left">
+					<div class="bd">
+						<img src="/img/notice.png" class="fl"/>
+						<ul class="fl f14 ">
+							<li></li>
+						</ul>
+					</div>
+				</div>				
+				<div class="block_20"></div>
+				<div class="lottery_open">
+					<div class="lottery_open_1">
+						<span class="lottery_open_span_1"><img src="/img/lottery-open-1.png"></span>
+						<a href="{:Url('six/index')}">
+							<span class="lottery_open_span_2"><img src="/img/lottery-open-4.png"></span>
+						</a>
+					</div>
+					<div class="lottery_open_1">
+						<span class="lottery_open_span_1"><img src="/img/lottery-open-2.png"></span>
+						<a href="/lottery/index/type/csc">
+							<span class="lottery_open_span_2"><img src="/img/lottery-open-5.png"></span>
+						</a>
+					</div>					
+					<div class="lottery_open_1">
+						<span class="lottery_open_span_1"><img src="/img/lottery-open-3.png"></span>
+						<a href="/lottery_new.php">
+							<span class="lottery_open_span_2"><img src="/img/lottery-open-6.png"></span>
+						</a>
+					</div>					
+				</div>				
+			</div>
+		</div>
+	</div>
+	
+	{include file='common/footer'}
+	
+<script type="text/javascript">
+function open_new_888(url) {
+    window.open(url,'newwindow','height=640,width=600,top=150,left='+(screen.width-640)/2+',toolbar=no,menubar=no,scrollbars=no, resizable=no,location=no, status=no');
+}
+</script>
+
+{include file='common/fix-left-right'}
+	
+	
+<script>
+function goPay(){
+	if($("#payUsername").val() == ''){
+		alert("请登录后再进行冲值！");
+		return false;
+	}
+	//alert($("#payCoin").val() );
+	if( $("#payCoin").val() <= '50'){
+		//alert("冲值金额不能小于50");
+		//return false;
+	}
+	$("#payForm").submit();
+}
+$(function(){
+	
+	$('#qian_dao .qian_dao').click(function(){
+		//window.open('qian_dao.php','qian_dao','menubar=no,status=yes,scrollbars=yes,top=150,left=400,toolbar=no,width=805,height=520');
+			$.ajax({
+				type: "post",
+				url: '/qian_dao.php',
+				data:{'ajax':1},
+				success:function(data) {
+					alert(data);
+				}
+			});
+	});
+	
+	setInterval(function() {
+		$.ajax({
+			type: "post",
+			url: "{:Url('index/home')}",
+			data:{'ajax':1,'get_money':'1'},
+			success:function(data) {
+				if (/^[\d\.]+$/.test(data)) {
+					$('#money').text(data);
+				}
+			}
+		});
+	},2000);
+})
+
+</script>
+	</body>
+	</html>

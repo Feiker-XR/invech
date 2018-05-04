@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Member</title>
+<link rel="stylesheet" type="text/css" href="/css/general.css"/>
+<link rel="stylesheet" type="text/css" href="/Scripts/jquery-ui.css" />
+<script type="text/javascript" src="/Scripts/jquery.js"></script>
+<script type="text/javascript" src="/Scripts/member.js"></script>
+<script type="text/javascript" src="/Scripts/jquery-ui-datepicker.js"></script>
+<script type="text/javascript">
+$(function(){
+	$("#data_k").datepicker({
+		//minDate: -31,
+		maxDate: 0
+	});
+	$("#data_o").datepicker({
+		//minDate: -31,
+		maxDate: 0
+	});
+});
+</script>
+</head>
+<body>
+  <div class="ui-moneyBox">
+<div class="ui-moneyBox">
+  <table width="100%" border="0" cellspacing="0" cellpadding="0">
+    <tr>
+    <form id="MyForm" action="" method="post">
+      <td align="center"><table border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td>日期范围：</td>
+          <td><input name="data_k" type="text" id="data_k" readonly="readonly" value="" class="Input_100"/></td>
+          <td align="center">&nbsp;~&nbsp;</td>
+          <td><input name="data_o" type="text" id="data_o" readonly="readonly" value="" class="Input_100"/></td>
+          <td>用户名：</td>
+          <td><input name="username" value="" /></td>
+          <td><input type="submit" name="Button" value="" id="Button" class="S_btn" /></td>
+        </tr>
+      </table></td>
+      </form>
+    </tr>
+    </table>
+<ul style="margin-top:10px;">
+    <table width="100%" border="0" cellspacing="0" cellpadding="5" id="thetable">
+     <tr>
+	    <th align="center">用户姓名</th>   
+	    <th align="center">会员账号</th>
+	    <th align="center">存款</th>
+	    <th align="center">汇款</th>
+	    <th align="center">提款</th>
+	    <th align="center">体育投注</th>
+	    <th align="center">体育输赢</th>
+	    <th align="center">彩票投注</th>
+	    <th align="center">彩票输赢</th>
+	    <th align="center">新彩票投注</th>
+	    <th align="center">新彩票输赢</th>
+	    <th align="center">真人投注</th>
+	    <th align="center">真人输赢</th>
+	    <th align="center">状态</th>
+   </tr>
+  <tr align="center" bgcolor=""  onMouseOver="this.style.backgroundColor='#FFFFCC'" onMouseOut="this.style.backgroundColor=''">
+  	<td align="center"></td>
+    <td align="center"></td>
+    <td align="center"></td>
+    <td align="center"></td>
+    <td align="center"></td>
+    <td align="center"><a href="">[查看]</a></td>
+    <td align="center"></td>
+    <td align="center"><a href="">[查看]</a></td>
+    <td align="center"></td>
+    <td align="center"><a href="">[查看]</a></td>
+    <td align="center"></td>
+    <td align="center"><a href="">[查看]</a></td>
+    <td align="center"></td>
+    <td align="center"></td>
+  </tr>
+  <tr>
+    <th colspan="15" align="center">体育输赢：<font color="red"></font> 彩票输赢：<font color="red"></font> 新彩票输赢：<font color="red"></font> 真人输赢：<font color="red"></font> 输赢总计: <font color="red"></font></th>
+  </tr>
+    </table>
+    </ul>
+  </div>
+<script language="javascript">bianse("thetable","#F5F5F5","#FFFFFF","#FFFFCC","#FFFFCC");</script> 
+</body>
+</html>

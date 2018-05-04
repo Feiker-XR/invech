@@ -1,0 +1,53 @@
+<?php
+
+namespace app\common\model;
+
+class Perm extends Base
+{
+	//permission
+    protected $table='gygy_admin_perm';
+    protected $createTime = 'created_at';
+    protected $updateTime = 'updated_at';
+    protected $autoWriteTimestamp = 'datetime';
+
+    public function roles()
+    {
+        return $this->belongsToMany(Role::class,'AdminPermRole','perm_id','role_id');
+    }
+
+    public function topMenu()
+    {
+        return $this->belongsTo(Perm::class,'pid','id');
+    }
+
+    public static function getTreeData() {
+    	$perm = cache('gygy_admin_perm');
+		if(!$perm){
+    		$query 	=	self::order("id");
+	    	$data 	=	$query->where('pid','neq',0)->select();
+	    	$list 	=	$query->where('pid',0)->select();
+	    	$arr 	=	[];
+	    	foreach($list as $k=>$v){
+
+	    		$arr[$k] 	=	$v->toArray();
+	    		foreach($data as $val){
+					if($val['pid']==$v['id']){
+						$arr[$k]['chird'][] = $val->toArray();
+					}
+	    		}
+	    	}
+	    	$perm 	=	$arr;	
+	    	cache('gygy_admin_perm',$perm);
+    	}
+    	
+    	return $perm;
+    }
+
+  /*  public static function getLastId($pid=0){
+    	$query 	=	self::order("id desc");
+    	$query->where('pid',$pid);
+    	$id 	=	$query->max('id');
+    	return $id;
+	}*/
+
+}

@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>皇冠娱乐城</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+<!--<link href="../css/tikuan2.css" rel="stylesheet" type="text/css" />-->
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+<link rel="stylesheet" href="/css/font-awesome.min.css">
+<link rel="stylesheet" href="/styles/ucenter.css">
+<link rel="stylesheet" type="text/css" href="/fonts-new/iconfont.css">	
+<link rel="stylesheet" href="/styles/ezweb.css">
+<link rel="stylesheet" href="/css/500f_new_wap.css">
+
+<script src="/assets/jquery.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+</head> 
+<script language="javascript">
+//if(self==top){
+//	top.location='/';
+//}
+</script>
+<body>
+
+
+{include file='common/user-nav'}
+{include file='common/header'}
+<div class="block_0"></div>
+<div class="ucenter">
+	<div class="container" style="margin-top: 60px;">
+		<div class="row" style="margin-left: 0px;">
+			<div class="panel panel-default">
+			  <div class="panel-heading">
+			    <h3 class="panel-title">财务明细查询</h3>
+			  </div>
+			  <div class="panel-zd">
+			    <div role="tabpanel">
+				  <!-- Nav tabs -->
+				  <ul class="nav nav-tabs nav-tile" role="tablist">
+				    <li class="active"><a href="/user/data_money?type=4">存款记录</a></li>
+				    <li><a href="/user/data_h_money?type=4">汇款记录</a></li>
+				    <li><a href="/user/data_t_money?type=4">取款记录</a></li>
+                    <!--<li><a href="cha_zhenren.php?type=4">娱乐场记录</a></li>
+                    <li><a href="cha_jifen.php?type=4">积分记录</a></li>-->
+				  </ul>
+				  <!-- Tab panes -->
+				  <div class="tab-content">
+                    <div id="top_lishi">
+                      <div class="waikuang00">
+                        <table class="table table-bordered">
+	                        <tr class="sekuai_01">
+		                        <td width="100">充值时间</td>
+		                        <td width="100">金额</td>
+		                        <td width="120">类型</td>
+		                        <td width="100">状态</td>
+	                        </tr>
+
+	                        <?php $i = 0; $sum = 0; ?>
+
+	                        {if empty($money)}
+							<tr align="center" bgcolor="#FFFFFF"  height="20" onmouseover="this.style.background='#EEEEEE'" onmouseout="this.style.background='#ffffff'">
+								<td height="35" colspan="4"><span class="STYLE2">暂无存款记录</span></td>
+							</tr>
+							{/if}
+
+							{foreach $money as $row}					<?php
+								if(($i%2)==0) $bgcolor="#FFFFFF";
+								else $bgcolor="#F5F5F5";
+								$i++;
+								if($row["status"] == 1) $sum += abs($row["m_value"]);
+							?>                        
+							<tr bgcolor="<?=$bgcolor?>" align="center" onMouseOver="this.style.backgroundColor='#FFFFCC'" onMouseOut="this.style.backgroundColor='<?=$bgcolor?>'" >
+								<td align="center"><?=date("Y-m-d H:i:s",strtotime($row["m_make_time"]))?></td>
+								<td align="center"><?=sprintf("%.2f",$row["m_value"])?></td>
+								<td align="center">在线充值</td>
+			
+								<td align="center">
+								{if $row["status"]==1}
+									<span style="color:#FF0000;">成功</span>
+								{elseif $row["status"]==0 /}
+									<span style="color:#000000;">失败</span>'
+								{else /}
+									<span style="color:#0000FF;">系统审核中</span>
+								{/if}
+								</td>
+
+							</tr>
+							{/foreach}
+
+
+ 						</table>
+						<div class="panel-footer">  	
+					  		<ul class="pagination">
+					  			<li class="active"><a href="#">1</a></li>
+					  			<li><a href="#">1/1/1</a></li> 
+					  			<li><a href="javascript:;">本页存款成功总金额：<font color="#D7524E"><?=sprintf("%.2f",$sum)?></font> RMB </a></li>
+					  		</ul>
+					 	</div>
+						</div>
+				    </div>
+				  </div>
+
+				</div>
+			  </div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="block_60"></div>
+<script>
+$(function(){
+	//点击底部固定导航条切换
+	$(".nav500_bottom_a").click(function(){
+		var navThis = $(this);
+		navThis.css("color","#d9901e")
+		navThis.parent().siblings("span").find("a").css("color","#999999")
+		navThis.find("i").addClass("nav500_b_active");
+		navThis.parent().siblings("span").find("i").removeClass("nav500_b_active");
+		navThis.addClass("nav500_bottom_active").parent().siblings("span").find("a").removeClass("nav500_bottom_active")
+	});
+});
+
+//子页面传递高度给顶层iframe  
+function changeFrameHeight(){
+    bodyClientH = document.body.clientHeight;
+    bodyClientW = document.body.clientWidth;
+    var iframeId = $(window.parent.document).find("#iframeid")
+    iframeId.css("height",bodyClientH + 300)
+}   
+changeFrameHeight()	
+</script>
+<script type="text/javascript" language="javascript" src="/js/left_mouse.js"></script>
+</body>
+</html>

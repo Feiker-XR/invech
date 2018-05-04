@@ -1,0 +1,79 @@
+{extend name="public/user_head"/}
+{block name="body"}
+<style type="text/css">
+    section.security.margin{
+       background: none;
+    }
+</style>
+<div class="container">
+    <header class="header">
+        <i class='left' onclick="javascript:history.back(-1);">返回</i>
+        <h1>绑定银行卡</h1>
+    </header>
+    <main class="inner_body">
+        <section class="charge_user ol_box security">
+            <ol>
+                <li>
+                    <span>真实姓名</span>
+                    <input type="text" id="bank_username" class="disabled" value="{$user.bank_username|default=''}" placeholder="请输入您的姓名"/>
+                </li>
+                <li>
+                    <span>银行卡号</span>
+                    <input type="text" id="bank_account" class="disabled" value="{$user.bank_account|default=''}" placeholder="请输入您的卡号"/>
+                </li>
+                <li>
+                    <span>开户银行</span>
+					<select id="bank_name" class="disabled">
+						<option value="">请选择</option>
+						{volist name="banklist" id="vo"}
+							{if($vo == $user.bank_name)}
+								<option value="{$vo}" selected>{$vo}</option>
+							{else}
+								<option value="{$vo}">{$vo}</option>
+							{/if}
+						{/volist}
+					</select>
+				</li>
+                <li>
+                    <span>开户地址</span>
+                    <input type="text" id="bank_address" class="disabled" value="{$user.bank_address|default=''}"  placeholder="请填写开户地址"/>
+                </li>
+            </ol>
+        </section>
+
+        <section class="charge_user ol_box security margin">
+           <p>温馨提示:银行卡信息一经提交如需修改请联系24小时在线客服！</p>
+        </section>
+
+        <section class="charge_pay sub">
+            <button>立即绑定</button>
+        </section>
+    </main>
+</div>
+<script type="text/javascript">
+      // 提交数据
+    $('.sub').click(function () {
+
+        //$(this).attr('disabled','disabled');
+        var obj = {
+            bank_username:'',
+          	bank_account:'',
+            bank_name:'',
+            bank_address:''
+        }
+        obj.bank_username 	= $('#bank_username').val();      
+        obj.bank_account 	= $('#bank_account').val();   
+        obj.bank_name 		= $('#bank_name').val(); 
+        obj.bank_address 	= $('#bank_address').val();   
+        $.ajax({
+        	url: "/user/bank",
+        	data:obj,
+            dataType:'json',//服务器返回json格式数据
+            type:'POST',//HTTP请求类型
+            success:function(data){
+             	mui.toast(data.msg,{ duration:'short', type:'div' }) 
+            },
+        });
+    })
+</script>
+{/block}

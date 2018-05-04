@@ -1,0 +1,189 @@
+<?php
+namespace bong\service;
+
+class UserAgent{
+
+    protected static $browsers = [
+        'Chrome'          => '\bCrMo\b|CriOS|Android.*Chrome/[.0-9]* (Mobile)?',
+        'Dolfin'          => '\bDolfin\b',
+        'Opera'           => 'Opera.*Mini|Opera.*Mobi|Android.*Opera|Mobile.*OPR/[0-9.]+|Coast/[0-9.]+',
+        'Skyfire'         => 'Skyfire',
+        'Edge'             => 'Mobile Safari/[.0-9]* Edge',
+        'IE'              => 'IEMobile|MSIEMobile', // |Trident/[.0-9]+
+        'Firefox'         => 'fennec|firefox.*maemo|(Mobile|Tablet).*Firefox|Firefox.*Mobile|FxiOS',
+        'Bolt'            => 'bolt',
+        'TeaShark'        => 'teashark',
+        'Blazer'          => 'Blazer',
+        'Safari'          => 'Version.*Mobile.*Safari|Safari.*Mobile|MobileSafari',
+        'UCBrowser'       => 'UC.*Browser|UCWEB',
+        'baiduboxapp'     => 'baiduboxapp',
+        'baidubrowser'    => 'baidubrowser',
+        'DiigoBrowser'    => 'DiigoBrowser',
+        'Puffin'            => 'Puffin',
+        'Mercury'          => '\bMercury\b',
+        'ObigoBrowser' => 'Obigo',
+        'NetFront' => 'NF-Browser',
+        'GenericBrowser'  => 'NokiaBrowser|OviBrowser|OneBrowser|TwonkyBeamBrowser|SEMC.*Browser|FlyFlow|Minimo|NetFront|Novarra-Vision|MQQBrowser|MicroMessenger',
+        'PaleMoon'        => 'Android.*PaleMoon|Mobile.*PaleMoon',
+    ];
+
+    protected static $additionalBrowsers = [
+        'Opera' => 'Opera|OPR',
+        'Edge' => 'Edge',
+        'UCBrowser' => 'UCBrowser',
+        'Vivaldi' => 'Vivaldi',
+        'Chrome' => 'Chrome',
+        'Firefox' => 'Firefox',
+        'Safari' => 'Safari',
+        'IE' => 'MSIE|IEMobile|MSIEMobile|Trident/[.0-9]+',
+        'Netscape' => 'Netscape',
+        'Mozilla' => 'Mozilla',
+    ];
+
+    protected static $allBrowsers = [
+        "Opera" => "Opera|OPR|Opera.*Mini|Opera.*Mobi|Android.*Opera|Mobile.*OPR/[0-9.]+|Coast/[0-9.]+",
+        "Edge" => "Edge|Mobile Safari/[.0-9]* Edge",
+        "UCBrowser" => "UCBrowser|UC.*Browser|UCWEB",
+        "Vivaldi" => "Vivaldi",
+        "Chrome" => "Chrome|\bCrMo\b|CriOS|Android.*Chrome/[.0-9]* (Mobile)?",
+        "Firefox" => "Firefox|fennec|firefox.*maemo|(Mobile|Tablet).*Firefox|Firefox.*Mobile|FxiOS",
+        "Safari" => "Safari|Version.*Mobile.*Safari|Safari.*Mobile|MobileSafari",
+        "IE" => "MSIE|IEMobile|MSIEMobile|Trident/[.0-9]+|IEMobile|MSIEMobile",
+        "Netscape" => "Netscape",
+        "Mozilla" => "Mozilla",
+        "Dolfin" => "\bDolfin\b",
+        "Skyfire" => "Skyfire",
+        "Bolt" => "bolt",
+        "TeaShark" => "teashark",
+        "Blazer" => "Blazer",
+        "baiduboxapp" => "baiduboxapp",
+        "baidubrowser" => "baidubrowser",
+        "DiigoBrowser" => "DiigoBrowser",
+        "Puffin" => "Puffin",
+        "Mercury" => "\bMercury\b",
+        "ObigoBrowser" => "Obigo",
+        "NetFront" => "NF-Browser",
+        "GenericBrowser" => "NokiaBrowser|OviBrowser|OneBrowser|TwonkyBeamBrowser|SEMC.*Browser|FlyFlow|Minimo|NetFront|Novarra-Vision|MQQBrowser|MicroMessenger",
+        "PaleMoon" => "Android.*PaleMoon|Mobile.*PaleMoon",
+    ];
+
+    //获取浏览器标志
+    public static function browsers($userAgent){
+        //self::findDetectionRulesAgainstUA(self::mergeRules(self::$browsers,self::$additionalBrowsers),$userAgent);
+        return self::findDetectionRulesAgainstUA(self::$allBrowsers,$userAgent);
+    }
+
+    protected static function mergeRules()
+    {
+        $merged = [];
+
+        foreach (func_get_args() as $rules) {
+            foreach ($rules as $key => $value) {
+                if (empty($merged[$key])) {
+                    $merged[$key] = $value;
+                } else {
+                    if (is_array($merged[$key])) {
+                        $merged[$key][] = $value;
+                    } else {
+                        $merged[$key] .= '|'.$value;
+                    }
+                }
+            }
+        }
+
+        return $merged;
+    }
+
+    protected static function findDetectionRulesAgainstUA(array $rules, $userAgent = null)
+    {
+        // Loop given rules
+        foreach ($rules as $key => $regex) {
+            if (empty($regex)) {
+                continue;
+            }
+
+            // Check match
+            if (self::match($regex, $userAgent)) {
+                return $key;
+            }
+        }
+
+        return false;
+    }
+
+    protected static $rules = [
+        'ios'       =>  '\biPhone.*Mobile|\biPod|\biPad|\bIOS',
+        'android'   =>  'Android',
+        'iphone'    =>  '\biPhone\b|\biPod\b',
+    ];
+
+    public static function is($key, $userAgent = null)
+    {
+        return self::matchUAAgainstKey($key,$userAgent);
+    }
+
+    //isios
+    public static function __callStatic($name, $arguments)
+    {
+        // Make sure the name starts with 'is', otherwise
+        if (substr($name, 0, 2) != 'is') {
+            throw new \Exception("No such method exists: $name");
+        }
+
+        $key = substr($name, 2);
+
+        return self::matchUAAgainstKey($key,$arguments[0]);
+    }
+
+    protected static function matchUAAgainstKey($key,$userAgent)
+    {
+        $key = strtolower($key);
+        return self::match(self::$rules[$key],$userAgent);
+    }
+
+    protected static function match($regex,$userAgent)
+    {
+        $match = (bool) preg_match(sprintf('#%s#is', $regex), $userAgent, $matches);
+        return $match;
+    }
+
+    public static function isMobile()
+    {
+        if (isset($_SERVER['HTTP_VIA']) && stristr($_SERVER['HTTP_VIA'], "wap")) {
+            return true;
+        } elseif (isset($_SERVER['HTTP_ACCEPT']) && strpos(strtoupper($_SERVER['HTTP_ACCEPT']), "VND.WAP.WML")) {
+            return true;
+        } elseif (isset($_SERVER['HTTP_X_WAP_PROFILE']) || isset($_SERVER['HTTP_PROFILE'])) {
+            return true;
+        } elseif (isset($_SERVER['HTTP_USER_AGENT']) && preg_match('/(blackberry|configuration\/cldc|hp |hp-|htc |htc_|htc-|iemobile|kindle|midp|mmp|motorola|mobile|nokia|opera mini|opera |Googlebot-Mobile|YahooSeeker\/M1A1-R2D2|android|iphone|ipod|mobi|palm|palmos|pocket|portalmmm|ppc;|smartphone|sonyericsson|sqh|spv|symbian|treo|up.browser|up.link|vodafone|windows ce|xda |xda_)/i', $_SERVER['HTTP_USER_AGENT'])) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    //客户端类型 做 数字常亮, 可以在全局文件中定义, 也可以 放入伪模型中定义;
+    public static function client(){
+        $request = request();        
+        $userAgent = $request->header('User-Agent');
+
+        if(self::browsers($userAgent)){
+            if(self::isMobile($userAgent)){
+                return 'wap';
+            }else{
+                return 'pc';
+            }
+        }else{
+            if(self::isIOS($userAgent)){
+                return 'ios';
+            }else{
+                return 'android';
+            }
+        }
+    }
+
+    public static function isPc(){
+        $client = self::client();
+        return 'pc' == $client;
+    }
+}

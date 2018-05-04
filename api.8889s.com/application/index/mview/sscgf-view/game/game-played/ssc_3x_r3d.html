@@ -1,0 +1,19 @@
+<input type="hidden" name="playedGroup" value="<?=$groupId?>" />
+<input type="hidden" name="playedId" value="<?=$playedId?>" />
+<input type="hidden" name="type" value="<?=$type?>" />
+<div class="pp" action="tzSscWeiInput" length="3" random="sscRandom">
+	<div id="wei-shu" length="3">
+		<label><input type="checkbox" value="16" />万</label>
+		<label><input type="checkbox" value="8" />千</label>
+		<label><input type="checkbox" value="4" />百</label>
+		<label><input type="checkbox" value="2" />十</label>
+		<label><input type="checkbox" value="1" />个</label>
+	</div><br/>
+	<textarea id="textarea-code"></textarea>
+</div>
+<?php //$maxPl=$getPl($type, $playedId); ?>
+<script type="text/javascript">
+$(function(){
+	gameSetPl(<?=json_encode($maxPl)?>);
+})
+</script>

@@ -1,0 +1,135 @@
+<div class='pp' action='pick_dw' length="1" data-line="5"></div>
+<input type="hidden" name="playedGroup" value="<?=$groupId?>"/>
+<input type="hidden" name="playedId" value="<?=$playedId?>"/>
+<input type="hidden" name="type" value="<?=$type?>"/>
+<input type="hidden" name="playedName" value="<?=$played['name']?>"/>
+<!-- mobile 福彩3d_和数 -->
+<div id="sscContent">
+    <div class="lot-content clearfix">
+        <div class="fl main-left">
+            <div class="fr">
+                <div class="T-tab clearfix">
+                    <a href="javascript:void(0)" onclick="changeTab(this)">百十和数</a>
+                    <a href="javascript:void(0)" onclick="changeTab(this)">百个和数</a>
+                    <a href="javascript:void(0)" onclick="changeTab(this)">十个和数</a>
+                    <a href="javascript:void(0)" onclick="changeTab(this)">百十个和数</a>
+                </div>
+            </div>
+            <br/>
+            <div class="table-common" id="table-common">
+            </div>
+            <div class="hd clearfix rehd" id="toptouzhu">
+                <div class="fl refl">
+                    快捷金额：<input type="text" class="txt" id="inputMoney">
+                </div>
+                <div class="kjanniu">
+                    <a href="javascript:void(0)" class="img-50" data-num="50"></a>
+                    <a href="javascript:void(0)" class="img-100" data-num="100"></a>
+                    <a href="javascript:void(0)" class="img-500" data-num="500"></a>
+                    <a href="javascript:void(0)" class="img-1000" data-num="1000"></a>
+                    <a href="javascript:void(0)" class="img-5000" data-num="5000"></a>
+                    <a href="javascript:void(0)" class="img-10000" data-num="10000"></a>
+                </div>
+            </div>
+        </div>
+
+        <script type="text/html" id="fc3d_hs">
+            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                <thead>
+                <tr>
+                    <th colspan="6">{{plg[0].name}}</th>
+                </tr>
+                <tr>
+                    <th>号码</th>
+                    <th>赔率</th>
+                    <th>金额</th>
+                    <th>号码</th>
+                    <th>赔率</th>
+                    <th>金额</th>
+                </tr>
+                </thead>
+                <tbody>
+                {{each plg[0].lines line index1}}
+                <tr>
+                    {{each line pl index2}}
+                    <td onclick="setQuickPick(this,true)"><strong>{{pl.value}}</strong></td>
+                    <td onclick="setQuickPick(this,true)"><strong
+                            class="color-red pl">{{pl.pl}}</strong></td>
+                    <td><input type="text" onclick="checkAmount()" class="table-txt" data-name="{{plg[0].name}}-{{pl.value}}"
+                               data-plid="{{pl.id}}"
+                               data-pl="{{pl.pl}}"></td>
+                    {{/each}}
+                </tr>
+                {{/each}}
+                </tbody>
+            </table>
+            <br/>
+            <br/>
+            <table width="100%" border="0" cellpadding="0" cellspacing="0">
+                <thead>
+                <tr>
+                    <th colspan="6">{{plg[1].name}}</th>
+                </tr>
+                <tr>
+                    <th>号码</th>
+                    <th>赔率</th>
+                    <th>金额</th>
+                    <th>号码</th>
+                    <th>赔率</th>
+                    <th>金额</th>
+                </tr>
+                </thead>
+                <tbody>
+                {{each plg[1].lines line index1}}
+                <tr>
+                    {{each line pl index2}}
+                    <td onclick="setQuickPick(this,true)"><strong>{{pl.value}}</strong></td>
+                    <td onclick="setQuickPick(this,true)"><strong
+                            class="color-red pl">{{pl.pl}}</strong></td>
+                    <td><input type="text" oninput="checkAmount()" class="table-txt" data-name="{{plg[1].name}}-{{pl.value}}"
+                               data-plid="{{pl.id}}"
+                               data-pl="{{pl.pl}}"></td>
+                    {{/each}}
+                </tr>
+                {{/each}}
+                </tbody>
+            </table>
+            <br/>
+        </script>
+    </div>
+</div>
+<script>
+    //var pls;//玩法的所有赔率
+    //var plg;//当前赔率组
+    function changeTab(self) {
+        $(self).siblings().removeClass('active');
+        $(self).addClass('active');
+        var $tabs = $(self).parent().children();
+
+        var index = $tabs.index(self);
+        var index0 = 2 * index;
+        var index1 = 2 * index + 1;
+        var plg = [];
+        plg[0] = pls[index0];
+        plg[1] = pls[index1];
+
+        var len = $('.pp').data('line');
+        plg[0].lines = group(plg[0].pls, len);
+        plg[1].lines = group(plg[1].pls, len);
+
+        var html = template("fc3d_hs", {plg: plg});
+        $('.table-common').html(html);
+
+        $('.pp :checkbox').live('click', gameMsgAutoTip);
+    }
+
+    $(function () {
+        //循环表格放到table-common
+        var playedId = "<?=$playedId?>";
+        $.getJSON("/game/pl/playedId/" + playedId, function (data) {
+            pls = data;
+            console.log(data);
+            $('.T-tab.clearfix').children().eq(0).click();
+        });
+    });
+</script>

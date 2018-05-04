@@ -1,0 +1,261 @@
+<?php
+// +----------------------------------------------------------------------
+// | FileName: Activity.php
+// +----------------------------------------------------------------------
+// | CreateDate: 2017年10月6日
+// +----------------------------------------------------------------------
+// | Author: xiaoluo
+// +----------------------------------------------------------------------
+namespace app\index\controller;
+use app\index\Login;
+use think\Db;
+
+class activity extends Login{
+
+    public final function index()
+    {
+        $activitys = db('score_goods')->where(array(
+            'enable' => 1,
+            'startTime' => array(
+                'elt',
+                time()
+            )
+        ))->select();
+        
+        $this->recordList($activitys, 3);
+        return $this->fetch();
+    }
+
+    /**
+     * 兑换页
+     */
+    public final function swap()
+    {
+        $good = db('score_goods')->where(array(
+            'id' => input('id'),
+            'enable' => 1
+        ))->find();
+        $this->assign('good', $good);
+        // $good=$this->getRow("select * from {$this->prename}score_goods where id=?", $goodId);
+        //$this->display('Activity/swap');
+        return $this->fetch();
+    }
+
+    /**
+     * 兑换
+     */
+    public final function swapGood()
+    {
+        $id = intval(input('goodId'));
+        $getcount = intval(input('getcount'));
+        
+        $good = db('score_goods')->where(array(
+            'id' => $id,
+            'enable' => 1
+        ))->find();
+        
+        $para['swapTime'] = $this->time;
+        $para['swapIp'] = $this->ip(true) ? $this->ip(true) : 0;
+        $para['uid'] = $this->user['uid'];
+        $para['score'] = $good['score'];
+        if ($good['price'] > 0) { // 积分直接兑奖
+            $para['state'] = 0;
+        }
+        $para['number'] = $getcount;
+        $para['goodId'] = $id;
+        
+        if (! $good)
+            $this->error('兑换商品不存在');
+        if ($good['stopTime'] > 0 && $good['stopTime'] < $this->time)
+            $this->error('这活动已经过期了');
+        if ($good['sum'] > 0 && $good['surplus'] == $good['sum'])
+            $this->error('这礼品已经兑换完了');
+        
+        $this->user = db('members')->find($this->user['uid']);
+        if ($good['score'] * $para['number'] > $this->user['score'])
+            $this->error('你拥有积分不足，不能兑换这礼品');
+        if (think_ucenter_md5(input('coinpwd'), UC_AUTH_KEY) != $this->user['coinPassword'])
+            $this->error('出款密码不正确');
+        
+        db()->startTrans();
+        //
+        if ($lastid = db('score_swap')->add($para)) {
+            $score_plus = $good['score'] * $para['number'];
+            if (db('members')->where(array(
+                'uid' => $this->user['uid']
+            ))->setDec('score', $score_plus)) {
+                $return1 = db('score_goods')->where(array(
+                    'id' => $id
+                ))->setInc('surplus', $getcount);
+                $return2 = db('score_goods')->where(array(
+                    'id' => $id
+                ))->setInc('persons', 1);
+                
+                $return3 = true;
+                if ($good['price'] > 0) { // 积分直接兑奖
+                    $rechargeAmount = $good['price'] * $para['number']; // 元
+                    
+                    $return3 = $this->addCoin(array(
+                        'uid' => $this->user['uid'],
+                        'coin' => $rechargeAmount,
+                        'liqType' => 1,
+                        'extfield0' => 0,
+                        'extfield1' => 0,
+                        'info' => '积分兑换'
+                    ));
+                } // 兑换积分结束
+                
+                if ($return1 && $return2 && $return3) {
+                    Db::commit(); // 成功则提交
+                    $this->success('兑换礼品成功');
+                }
+            }
+        }
+        
+        db()->rollback(); // 不成功，则回滚
+        $this->error('兑换礼品出错');
+    }
+
+    public final function activity()
+    {
+        $where = array();
+        $where['uid'] = $this->user['uid'];
+        $where['isDelete'] = 0;
+        $where['lotteryNo'] = array(
+            'neq',
+            ''
+        );
+        $where['actionTime'] = array(
+            'between',
+            array(
+                strtotime('03:00'),
+                strtotime('03:00') + 24 * 60 * 60
+            )
+        );
+        $myxf = db('bets')->where($where)
+            ->field('sum(mode*beiShu*actionNum) as xiaofei')
+            ->find();
+
+        $this->assign('myxf', $myxf);
+        return $this->fetch();
+    }
+
+    /**
+     *  优惠活动
+     * @return mixed
+     */
+    public final function xiaofei()
+    {
+        $xiaofei = db('activity')->where(array())
+            ->order('id')
+            ->select();
+        $this->assign('xiaofei', $xiaofei);
+        
+        $where = array();
+        $where['uid'] = $this->user['uid'];
+        $where['liqType'] = array('in',array('101','102','103','7'));
+        $time = strtotime('03:00');
+        if (time() < $time)
+            $time = $time - 24 * 3600;
+        $where['actionTime'] = array('between',array($time,$time + 24 * 3600));
+        $myxf = db('coin_log')->where($where)->field('-sum(coin) as xiaofei')->find();
+        $this->assign('myxf', $myxf);
+
+        $coin = db('coin_log')->where(array('uid' => $this->user['uid'],'liqType' => 53,'actionTime' => array('between',array($time,$time + 24 * 3600))))->select() ;
+
+        if (count($coin)) {
+            $this->assign('have', true);
+        } else {
+            $this->assign('have', false);
+        }
+        return $this->fetch();
+    }
+
+    public final function onxiaofei()
+    {
+        $time = time();
+//        if ($time < strtotime($this->settings['activity_first_time']) || $time > strtotime($this->settings['activity_end_time']))
+//            $this->error('活动不在有效期');
+        $where = array();
+        $where['uid'] = $this->user['uid'];
+        $where['liqType'] = array('in',array('101','102','103','7'));
+        $time = strtotime('03:00');
+        if (time() < $time)
+            $time = $time - 24 * 3600;
+        $where['actionTime'] = array(
+            'between',
+            array(
+                $time,
+                $time + 24 * 3600
+            )
+        );
+
+        $myxf = db('coin_log')->where($where)
+            ->field('-sum(coin) as xiaofei')
+            ->find();
+        
+        $xiaofei = db('activity')
+            ->where(array('id' => input('id')))
+            ->order('id')
+            ->find();
+        
+        if (! $xiaofei) $this->error('该活动id不存在');
+        if ($myxf['xiaofei'] < $xiaofei['all']) $this->error('您的消费不足' . $xiaofei['all'] . '元');
+
+        $coin  = db('coin_log')->where(array(
+            'uid' => $this->user['uid'],
+            'liqType' => 53,
+            'actionTime' => array(
+                'between',
+                array(
+                    $time,
+                    $time + 24 * 3600
+                )
+            )
+        ))->select() ;
+
+        //判断是否领取
+        if (count($coin)) {
+            $this->error('您今日已经领取，请明日再来');
+        }
+
+        $return3 = $this->addCoin(array(
+            'uid' => $this->user['uid'],
+            'coin' => $xiaofei['amount'],
+            'liqType' => 53,
+            'extfield0' => 0,
+            'extfield1' => 0,
+            'info' => '消费活动'
+        ));
+        $this->success('领取成功，请查收');
+    }
+
+    public final function qiandao()
+    {
+        $user = db('members')->find($this->user['uid']);
+        if ($user['coin'] < $this->settings['qiandao_base'])
+            $this->error('您的本金不足' . $this->settings['qiandao_base'] . '元，不能签到');
+        
+        if ($coin = db('coin_log')->where(array(
+            'uid' => $this->user['uid'],
+            'liqType' => 50,
+            'actionTime' => array(
+                'gt',
+                strtotime('03:00')
+            )
+        ))->select())
+            $this->error('您今日已经签到，请明日再来');
+        
+        $amount   =  $this->settings['qiandao_base'] * $this->settings['qiandao_lv'] / 100;
+        $return3  =  $this->addCoin(array(
+            'uid' => $this->user['uid'],
+            'coin' => $amount,
+            'liqType' => 50,
+            'extfield0' => 0,
+            'extfield1' => 0,
+            'info' => '签到活动'
+        ));
+        
+        $this->success('签到成功，请查收');
+    }
+}

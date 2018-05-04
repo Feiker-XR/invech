@@ -1,0 +1,44 @@
+<extend name="Public/base"/>
+
+<block name="body">
+    <div class="main-title">
+        <h2>新增充值银行</h2>
+    </div>
+    <form action="__SELF__" method="post" class="form-horizontal">
+		<div class="form-item">
+            <label class="item-label">银行名称<span class="check-tips"></span></label>
+            <div class="controls">
+				<select name="bankId">
+					<volist name="bankList" id="vo">
+						<option value="{$vo.id}">{$vo.name}</option>
+					</volist>
+				</select>
+            </div>
+        </div>
+        <div class="form-item">
+            <label class="item-label">账号<span class="check-tips"></span></label>
+            <div class="controls">
+                <input type="text" class="text input-large" name="account" value="">
+            </div>
+        </div>
+        <div class="form-item">
+            <label class="item-label">持卡人<span class="check-tips"></span></label>
+            <div class="controls">
+                <input type="text" class="text input-large" name="username" value="">
+            </div>
+        </div>
+        
+        <div class="form-item">
+            <input type="hidden" name="id" value="{$info.id|default=''}">
+            <button class="btn submit-btn ajax-post" id="submit" type="submit" target-form="form-horizontal">确 定</button>
+            <button class="btn btn-return" onclick="javascript:history.back(-1);return false;">返 回</button>
+        </div>
+    </form>
+</block>
+
+<block name="script">
+    <script type="text/javascript">
+        //导航高亮
+        $('.side-sub-menu').find('a[href="{:Url('Config/addBank')}"]').closest('li').addClass('current');
+    </script>
+</block>

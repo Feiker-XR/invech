@@ -1,0 +1,141 @@
+{layout name="layout" /}
+
+<div class="row">
+  <div class="col-xs-12">
+    <div class="box">
+      <div class="box-header">
+		<button class="btn btn-default pull-left add_member">新增</button>
+
+		<form>
+		      <div class="has-feedback pull-right">
+		        <button type="submit" class="btn btn-block btn-default btn-sm filter">查询</button>
+		      </div>
+				
+		      <div class="pull-right" style="margin-left:15px;">
+		      	<input class="form-control input-sm search" value="{$Think.get.keywords}"  name="keywords" id="keywords"  placeholder="用户名、会员昵称" type="text"  style="width: 250px;">
+		      </div> 
+		       <div class="pull-right">
+                    <input type="text" name="endtime" value="{$Think.get.endtime}" placeholder="结束时间" class="form-control input-sm" id="datepicker2">
+               </div>  
+				<div class="pull-right" style="margin-left:20px;">
+                   <input type="text" name="starttime" value="{$Think.get.starttime}" placeholder="开始时间" class="form-control input-sm" id="datepicker1">
+                </div>
+                <div class="pull-right">
+	              
+	                <span class="btn btn-danger btn-sm filter">会员类型</span>
+	             	<select class="form-control input-sm" name="type" aria-hidden="true">
+	             	   <option value="0" >全部</option>
+                   	  <option value="1" {if($Think.get.type=='1')} selected="selected"{/if}>会员</option>
+		              <option value="2" {if($Think.get.type=='2')} selected="selected"{/if}>代理</option>
+		         	</select>
+             	 </div>
+		 </form>
+
+      </div>
+      <!-- /.box-header -->
+      <div class="box-body table-responsive no-padding">
+        <table class="table table-hover">
+         	<tr>
+				  <th>#</th>
+				  <th>用户名</th>
+				  <th>性别</th>
+				  <th>会员昵称</th>
+				  <th>真实姓名</th>
+				  <th>会员类型</th>
+				  <th>会员积分</th>
+				  <th>累计积分</th>
+				  <th>会员资产</th>
+				  <th>冻结资产</th>
+				  <th>等级</th>
+				  <th>收款银行</th>
+				  <th>收款账号</th>
+				  <th>开户地址</th>
+				  <th>注册时间</th>
+				  <th>操作</th>
+				</tr>
+				{foreach $list as $v}
+				 <tr>
+					<td>{$v.uid}</td>
+					<td>{$v.username}</td>
+					<td>{$v.sex}</td>
+					<td>{$v.nickname}</font></td>
+					<td>{$v.name}</font></td>
+					<td>
+						{eq name="$v.type" value="1"}<font color=blue>会员</font>{/eq}
+						{eq name="$v.type" value="2"}<font color=green>代理</font>{/eq}							  
+					</td>
+					<td>{$v.score}</td>
+					<td>{$v.scoreTotal}</td>
+					<td>{$v.coin}</td>
+					<td>{$v.fcoin}</td>
+					<td>{$v.grade}</td>
+					 <th>收款银行</th>
+				  	<th>收款账号</th>
+				  	<th>开户地址</th>
+					<td>{$v.regTime|date="y-m-d H:i:s",###}</td>
+
+					<td >
+						<i  data-uid="{$v.uid}" class="edit fa fa-pencil"></i>&nbsp;&nbsp;
+						<i  data-uid="{$v.uid}" class="del fa fa-trash"></i>
+              		</td>
+				</tr>
+				{/foreach}
+        </table>
+        {$list->render();}
+      </div>
+      <!-- /.box-body -->
+    </div>
+    <!-- /.box -->
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){
+	$("#datepicker1").datepicker();
+	$("#datepicker2").datepicker();
+	$(".add_member").click(function(){
+		$.get('/member/form.html',{},function(data){
+			layer.open({
+				type: 1,
+				title: '新增会员',
+				maxmin: true, //开启最大化最小化按钮
+				area: ['900px', '600px'],
+				content: data
+			});
+		},'html');
+	});
+	
+	$(".edit").click(function(){
+		var uid = $(this).attr('data-uid');
+		$.get('/member/form.html',{uid:uid},function(data){
+			layer.open({
+				type: 1,
+				title: '修改会员',
+				maxmin: true, //开启最大化最小化按钮
+				area: ['900px', '600px'],
+				content: data
+			});
+		},'html');
+	});
+	$(".del").click(function(){
+		var uid = $(this).attr('data-uid');
+		layer.confirm('确定删除?', {
+		  btn: ['确定','取消'] //按钮
+		}, function(){
+			$.get('/member/member_del',{uid:uid},function(data){
+				layer.alert(data.msg, {
+		          time: 20000,
+		          skin: 'layui-layer-molv', //该皮肤由layer.seaning.com友情扩展。关于皮肤的扩展规则，去这里查阅
+		          closeBtn: 0,
+		          anim: 4
+		        }, function(){
+		           window.location.href = document.URL;
+		        } )
+
+			},'json');
+		}, function(){
+		
+		});
+	});
+});
+
+</script>

@@ -1,0 +1,316 @@
+{include file="pay:base"}
+
+<!-- page start -->
+<script src="/lib/jquery.wallform.js"></script>
+
+<div class="content">
+	<div class="header">
+		<h1 class="page-title">通道分组</h1>
+	</div>
+	<ul class="breadcrumb">
+		<li><a href="{:url('index')}">主页</a> <span class="divider">/</span></li>
+		<li><a href="{:url('set')}">设置通道分组 </a><span class="divider">/</span></li>
+		<li class="active"><?php echo $scname['name']?>配置</li>
+	</ul>
+	<?php if($setconfig){?>
+	<script src="/layer/layer.js"></script>
+	<div class="btn-toolbar">
+		<button class="add-third btn">添加</button>			
+		<form action="{:url('setconfig',['id'=>$id])}" method="post" class="form-search pull-right">
+		  <input type="text" name="keywords" id="keywords" value="{$Think.post.keywords}" placeholder="名称、文件夹名称" class="search-query">
+		  <button type="submit" class="btn">搜索</button>
+		</form>
+	</div>
+	<div class="container-fluid">
+		<table border="1" width="100%" style="border:1px solid #ccc;margin:10px auto" >
+			<tr align="center">
+				<th>#</th>
+				<th>通道分组</th>
+				<th>通道名称</th>
+				<th>通道代码</th>
+				<th>通道logo</th>
+				<th>添加时间</th>
+				<th>更新时间</th>
+				<th>第三方</th>
+				<th>编辑</th>
+				<th>删除</th>
+			</tr>	
+			<?php foreach ($setconfig as $value){?>
+			<tr align="center">				
+				<td><?php echo $value['id'];?></td>
+				<td><?php echo $set['name'];?></td>
+				<td><?php echo $value['name'];?></td>
+				<td><span style="color:#0088cc;"><?php echo $value['code'];?></span></td>
+				<td><img src="<?php echo $value['img'];?>"></td>
+				<td><?php echo date('Y-m-d H:i:s',$value['add_time']);?></td>
+				<td><?php if($value['update_time']!=0 || $value['update_time']!=null){echo date('Y-m-d H:i:s',$value['update_time']);}?></td>
+				<td><a href="{:url('scthird')}?scid=<?php echo $value['id']?>">查看</a></td>
+				<td>				
+				<input type="hidden" class="configid" value="<?php echo $value['id']?>">
+				<input type="hidden" class="name" value="<?php echo $value['name']?>">
+				<input type="hidden" class="code" value="<?php echo $value['code']?>">
+				<input type="hidden" class="img" value="<?php echo $value['img']?>">
+				<a class="paytype-see" configid="<?php echo $value['id']?>">编辑</a></td> 	
+				<td><a href="javascript:;" configid="<?php echo $value['id']?>" class="paytype-del">删除</a></td>
+			</tr>
+			<?php }?>
+		</table>
+	</div>		
+	<div style="width:100%;margin-left:20px;">
+		{$setconfig->render()}
+	</div>
+	<?php }?>
+
+	<div id="add_sethtml" class="container-fluid container_fluid_news" <?php if($setconfig){ echo "style=display:none";}?>>
+		<div class="row-fluid" style="padding-top: 20px;">
+			<div class="form-horizontal">
+				<div class="control-group">
+					<label class="control-label" for="name">所在分组</label>
+					<div class="controls">
+						<div style="color: #0088cc;"><?php echo $set['name'];?></div>
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label" for="name">通道名称</label>
+					<div class="controls">
+						<input type="text" id="name" value="">
+						<?php if($set['type']=='diankapay'){ echo "&nbsp;&nbsp;【例:10元充值卡】";}else{ echo "&nbsp;&nbsp;【例:支付宝扫码】";}?>
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label">通道代码</label>
+					<div class="controls">
+						<?php if($set['type']=='diankapay'){?>
+						<input type="text" id="code" onkeyup="value=this.value.replace(/\D+/g,'')" value="">
+						<?php }else {?>
+						<input type="text" id="code" value="">
+						<?php }?>
+						<?php if($set['type']=='diankapay'){ echo "&nbsp;&nbsp;【例：10】";}else{ echo "&nbsp;&nbsp;【例：alipay】";}?>
+					</div>
+				</div>
+				<input type="hidden" id="set_id" value="<?php echo $set['id']?>">
+				<div class="control-group" id="add_setimg">
+					<label class="control-label">通道logo</label>
+					<div class="controls up_files">
+				        <form id="imageform" method="post" enctype="multipart/form-data" action="{:url('upload')}">
+							<div id="up_status" style="display:none"><img src="/images/base_loading_bar.gif" alt="uploading"/></div>
+							<div id="up_btn" class="btn">
+								<input id="photoimg" type="file" name="photoimg">				
+							</div>
+							<p class="photoimg_p">最大100KB，支持jpg，gif，png格式。</p>
+						</form>
+						<div id="preview"></div>
+					</div>
+				</div>
+				<div class="control-group">
+					<div class="controls" style="margin-left: 106px;">
+						<button id="btnSave" class="btn btn-success">添加保存</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<hr>
+	<footer>
+		<p class="pull-right">
+			<a href="javascript:;">
+					<?php echo $appSet[ 'app_name'];?>
+				</a>
+		</p>
+		<p>&copy;
+				<?php echo $appSet[ 'company_year'];?>
+				<a href="<?php echo $appSet['company_url'];?>"
+				title="<?php echo $appSet['company'];?>" target="_blank">
+					<?php echo $appSet[ 'company'];?>
+				</a>
+		</p>
+	</footer>
+</div>
+
+<style>
+	#up_btn{width:46px;overflow: hidden;height:20px;border:none;display: inline-block;float: left;}
+	#up_btn input{margin-left:-13px;margin-top:-3px;}
+	.photoimg_p{display: inline-block;padding-top: 5px;padding-left: 15px;}
+	#imageform{width:380px;float:left}
+	#preview{margin-top: -12px;}
+	.container_fluid_news{clear:both;border-top:1px solid #ddd;}
+	.row_fluid_news{width:300px;float:left;height:270px;}
+	.form-horizontal .control-group .controls span{margin-top:3px;}
+	.form-horizontal .controls{padding-top:4px;}
+	.contentinput{margin-left: 165px;margin-top: 20px;}
+	.contentinput img{margin-left:20px;}
+	.container-fluid th,.container-fluid td{padding:8px;text-align:center;}
+	.add-third{width: 100px;float: left;color: black;margin-left: 20px;}
+	.btn-toolbar{font-size: 14px;}
+	.form-search{margin-right: 20px;}
+</style>
+
+<script type="text/javascript">
+	$(function(){
+		$(document).on("click","#btnSave",function(){
+			<?php if($setconfig){?>
+			var set_id = $("#set_id").val();
+			var name = $("#layui-layer1").find("#name").val();
+			var code = $("#layui-layer1").find("#code").val();
+			var pic = $("#layui-layer1").find(".preview").attr("src");
+			<?php }else{?>
+			var set_id = $("#set_id").val();
+			var name = $("#name").val();
+			var code = $("#code").val();
+			var pic = $("#add_setimg").find(".preview").attr("src");		
+			<?php }?>
+			if(name == ""){
+				alert("通道名称不能为空");
+				return false;
+			}
+			if(code == ""){
+				alert("通道名称不能为空");
+				return false;
+			}
+ 			if(pic == null){
+				alert("图片不能为空");
+				return false;
+			}
+ 			$.post("{:url('setconfig_add')}",{			
+				set_id:set_id,
+				name:name,
+				pic:pic,
+				code:code,
+			},function(obj){
+				if(obj.stat == 0){
+					alert('添加成功!');
+					window.location.href = document.URL;
+				}else if(obj.stat == 1){
+					alert(obj.msg);
+				}else{
+					alert('添加失败!');
+				}
+
+			},"json");
+			
+		})
+	})
+</script>
+
+<?php if($setconfig){?>
+<script type="text/javascript">
+
+	$(function(){
+		$(".add-third").click(function(){
+			var html = $("#add_sethtml").html();
+			layer.open({
+				  type: 1,
+				  title:'添加通道信息',
+				  skin: 'layui-layer-rim', //加上边框
+				  area: ['700px', '500px'], //宽高
+				  content: html
+			});
+			$("#add_setimg").remove();
+		})
+	})
+
+	$(".paytype-see").click(function(){
+		$("#add_setimg").remove();
+		var configid = $(this).attr('configid');
+		$.post("{:url('setconfig_img')}",{		
+			configid:configid,
+		},function(obj){
+			if(obj.stat == 0){
+				PayType_Text = obj.html;
+				layer.open({
+					  type: 1,
+					  title:'修改通道配置',
+					  skin: 'layui-layer-rim', //加上边框
+					  area: ['680px', '380px'], //宽高
+					  content: PayType_Text
+				});
+			}else if(obj.stat == 1){
+				alert(obj.msg);
+			}else{
+				alert('请求失败!');
+			}
+		},"json");
+	})
+
+	$(".paytype-del").click(function(){
+		if (confirm('确定要删除这条通道信息吗?')){
+			var configid = $(this).attr('configid');
+			$.post("{:url('setconfig_del')}",{			
+				configid:configid,
+			},function(obj){
+				if(obj.stat == 0){
+					alert('删除成功!');
+					window.location.href = document.URL;
+				}else if(obj.stat == 1){
+					alert(obj.msg);
+				}else{
+					alert('删除失败!');
+				}
+			},"json");
+		}		
+	})
+	
+	$(document).on("click","#EditSave",function(){
+		var configid = $(this).attr('configid');
+		var onname = $("#onname").val();
+		var onename =$("#onename").val();
+		var onsort = $("#onsort").val();
+		var onpic = $("#contentimg").attr("src");
+		var onnewpic = $(".preview").attr("src");
+		$.post("{:url('setconfig_edit')}",{		
+			configid:configid,
+			onname:onname,
+			onename:onename,
+			onsort:onsort,
+			onpic:onpic,
+			onnewpic:onnewpic,
+		},function(obj){
+			if(obj.stat == 0){
+				alert('修改成功!');
+				window.location.href = document.URL;
+			}else if(obj.stat == 1){
+				alert(obj.msg);
+			}else{
+				alert('修改失败!');
+			}
+		},"json");
+	})
+	$(document).on("click",".layui-layer-close1",function(){
+		window.location.href = document.URL;
+	})		
+	$(document).on("click","#layui-layer-shade1",function(){
+		window.location.href = document.URL;
+	})			
+</script>
+<?php }?>
+
+<script type="text/javascript">
+$(function(){
+	$("#pay-menu").addClass('in');
+})
+</script>
+
+<script type="text/javascript">
+$(function(){
+	$('#photoimg').die('click').live('change', function(){
+		var status = $("#up_status");
+		var btn = $("#up_btn");
+		$("#imageform").ajaxForm({
+			target: '#preview', 
+			beforeSubmit:function(){
+				status.show();
+				btn.hide();
+			}, 
+			success:function(){
+				status.hide();
+				btn.show();
+			}, 
+			error:function(){
+				status.hide();
+				btn.show();
+		} }).submit();
+	});
+});
+</script>
+
+{include file="pay:foot"}

@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>快速充值中心</title>
+    <link rel="stylesheet" type="text/css" href="/skin/css/style.css"/>
+</head>
+<script type="text/javascript">
+
+    function getNowFormatDate() {
+        var date = new Date();
+        var seperator1 = "-";
+        var seperator2 = ":";
+        var year = date.getFullYear();
+        var month = date.getMonth() + 1;
+        var strDate = date.getDate();
+        if (month >= 1 && month <= 9) {
+            month = "0" + month;
+        }
+        if (strDate >= 0 && strDate <= 9) {
+            strDate = "0" + strDate;
+        }
+        var currentdate = year + seperator1 + month + seperator1 + strDate
+            + " " + date.getHours() + seperator2 + date.getMinutes()
+            + seperator2 + date.getSeconds();
+        return currentdate;
+    }
+
+    function browserRedirect() {
+        var sUserAgent = navigator.userAgent.toLowerCase();
+        var bIsIpad = sUserAgent.match(/ipad/i) == "ipad";
+        var bIsIphoneOs = sUserAgent.match(/iphone os/i) == "iphone os";
+        var bIsMidp = sUserAgent.match(/midp/i) == "midp";
+        var bIsUc7 = sUserAgent.match(/rv:1.2.3.4/i) == "rv:1.2.3.4";
+        var bIsUc = sUserAgent.match(/ucweb/i) == "ucweb";
+        var bIsAndroid = sUserAgent.match(/android/i) == "android";
+        var bIsCE = sUserAgent.match(/windows ce/i) == "windows ce";
+        var bIsWM = sUserAgent.match(/windows mobile/i) == "windows mobile";
+        if (!(bIsIpad || bIsIphoneOs || bIsMidp || bIsUc7 || bIsUc || bIsAndroid || bIsCE || bIsWM)) {
+
+        } else {
+            window.location.href = 'wap/index.html';
+        }
+    }
+
+    browserRedirect();
+</script>
+<body style="background: #f8f3f0">
+<div class="quick_pay_logo" style="height:0; margin:10px auto;overflow: hidden;">
+    <img src="/skin/images/logo.png"/>
+</div>
+<div class="block_0"></div>
+<div class="quick_pay_contain">
+    <div class="quick_pay_all">
+        <h3 class="quick_pay_left_h3">账户充值1：</h3>
+        <div class="quick_pay_left_all">
+            <h1></h1>
+            <div class="block_0"></div>
+            <div class="quick_pay_left">
+            </div>
+        </div>
+        <!--<form method="post" id="pay" action="{:url('pay/pay')}">-->
+        <div class="quick_pay_right" style="display: block;">
+            {empty name="Think.session.username"}
+            <div class="quick_pay_right_1 mt20">
+                <span class="f16">会员账号：</span>
+                <span><input type="text" name="username" id="username" onpaste="return false"
+                             onKeyUp="value=value.replace(/[^\w\.\/]/ig,'')" value=""/></span>
+                <span class="f12 ml15">@590  <span class="color_red">输入会员账号 </span>（无需+@590）</span>
+            </div>
+            <div class="quick_pay_right_2 mt10">
+                <span class="f16">确认账号：</span>
+                <span><input type="text" name="rusername" id="rusername" onpaste="return false"
+                             onkeyup="value=value.replace(/[^\w\.\/]/ig,'')" value=""/></span>
+                <span class="f12 ml15">@590  <span class="color_red">请确认会员账号是否正确，否则无法正常充值</span></span>
+            </div>
+            {else/}
+            <input type="hidden" name="username" id="username" value="{$username}"/>
+            <input type="hidden" name="rusername" id="rusername" value="{$username}"/>
+            {/empty}
+
+            <div id="set_form">
+
+            </div>
+            <div class="block_0"></div>
+            <div class="quick_pay_right_6 mt10">
+                <span>充值金额：</span>
+                <span class="quick_pay_right_6_img"><input type="text" name="coin" id="coin"
+                                                           onkeyup="value=this.value.replace(/\D+/g,'')"
+                                                           value=""/></span>
+                <span class="quick_pay_right_6_name ml10">充值额度为 10~5000 元</span>
+            </div>
+            <div class="block_0"></div>
+            <div class="quick_pay_right_7 mt30">
+                <input type="hidden" name="money" id="money" value="">
+                <input type="hidden" name="thirdid" id="thirdid" value="">
+                <input type="hidden" name="thirdtype" id="thirdtype" value="">
+                <input type="hidden" name="tcode" id="tcode" value="">
+                <input type="hidden" name="scid" id="scid" value="">
+                <input type="hidden" name="sccode" id="sccode" value="">
+                <input type="hidden" name="cashier" id="cashier" value="">
+                <button id="paybtn" onClick="return btnOK_zf_onclick();">确认支付</button>
+            </div>
+            <div id="qrcode" style="margin-top: 10px;padding-left: 80px;display: none;">
+            </div>
+        </div>
+        <!--</form>-->
+        <div class="block_0"></div>
+        <div class="quick_pay_two mt15">
+            <div class="quick_pay_tip">
+                <ul>
+                    <li>温馨提示：支持 <span class="color_yellow ml10 mr10">（手机端、电脑端）</span> <span class="color_green mr10">微信扫码</span>
+                        <span class="color_blue">支付宝（扫码支付/登陆账户支付）</span>付款成功自动到账！
+                    </li>
+                    <li><span>支付流程：</span><span class="color_yellow">1.</span>输入并确认正确的会员账户 <span
+                            class="color_yellow">2.</span>输入存款金额 <span class="color_yellow">3.</span> 点击确认支付 <span
+                            class="color_yellow">4.</span>付款成功<span class="color_yellow">（1-10秒自动到账）</span></li>
+                    <li>存款金额：存款金额范围为<span class="color_red">（50~5000元）</span>需要大额存款客户可分多次存入或使用其他方式入款。</li>
+                    <li>支付安全：客户如果担心支付安全，可先测试50元小额支付，或联系<a class="color_red" href="#">[在线客服]</a>进行确认。</li>
+                </ul>
+            </div>
+            <div class="quick_pay_foot">
+                <ul>
+                    <li>温馨提示：为了避免掉单情况发生，请您在支付完成后，等待“支付成功”页面跳转出来再关闭此页面，以免掉单！</li>
+                    <li>支付成功后，若三分钟内未能及时到达您的会员账户请联系<a class="color_red" href="#">[在线客服]</a>咨询。</li>
+                    <li>祝您游戏愉快，盈利多多(*^__^*)</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+<script type="text/javascript" src="/skin/js/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="/skin/js/main.js"></script>
+<script type="text/javascript" src="/skin/js/jquery.qrcode.js"></script>
+<script type="text/javascript" src="/skin/js/utf.js"></script>
+<script type="text/javascript">
+    var payData = null;
+    $(function () {
+        $.ajax({
+            url: '/pay/code',
+            dataType: 'json',
+            type: 'GET',
+            success: function (obj, set) {
+                console.log(obj);
+                var temp = [];
+                if(obj.code == 1){
+                    payData = obj.data;
+                    for(var i=0; i< obj.data.length;i++){
+                        var _obj = {};
+                        /*_obj.add_time = '0';*/
+                        _obj.id = obj.data[i].id;
+                        _obj.name = obj.data[i].name;
+                        _obj.pic = obj.data[i].img;
+                       /* obj.setclass = 0;
+                        _obj.sort = 0;
+                        _obj.status = 0;*/
+                        _obj.type = obj.data[i].type;
+                        /*_obj.update_time = 0;*/
+                        temp.push(_obj);
+                    }
+
+                }
+                //var num = obj.num;
+                obj.set = temp;
+                var num = obj.data.length;
+                str = "";
+                for (var i = 0; i < num; i++) {
+                    str += "<div class='quick_pay_left_1'>" + "</div>";
+                }
+                $(".quick_pay_left").html(str);
+                for (i = 0; i < obj.set.length; i++) {
+                    var objId = obj.set[i].id,
+                        objPic = obj.set[i].pic,
+                        objName = obj.set[i].name
+                    var htmlAll = "<ul class='set_list' sid='" + objId + "'>"
+                        + "<li class='quick_pay_left_img pl15'><img src='" + objPic + "' /></li>"
+                        + "<li class='quick_pay_left_name f18 color_666 pl10'>" + objName + "</li>"
+                        + "<li class='quick_pay_left_arrow pl10 f18'>></li></ul>";
+                    $(".quick_pay_left").find(".quick_pay_left_1").eq(i).html(htmlAll);
+                    if (i == 0) {
+                        $('.quick_pay_left_1').eq(0).addClass("quick_pay_left_active");
+                        var html = "<div class='quick_pay_right_3 mt10'><span>充值方式：</span>"
+                            + "<span class='quick_pay_right_3_img' sid='" + objId + "'><img src='" + objPic + "' /></span>"
+                            + "<span class='quick_pay_right_3_name ml10'>" + objName + "</span></div>"
+                            + "<div class='block_0'></div>"
+                            + "<div class='set_bank'>"
+                            + "<div class='quick_pay_right_4' mt10>"
+                            + "<span class='quick_pay_right_4_h1'>选择银行：</span>"
+                            + "<div class='quick_pay_right_4_bank'></div>"
+                            + "</div></div>"
+                            + "<div class='block_0'></div>"
+                            + "<div class='third_bank'>"
+                            + "<div class='quick_pay_right_5'>"
+                            + "<span class='quick_pay_right_5_h1'>线路选择：</span>"
+                            + "<div class='quick_pay_right_5_bank'></div>"
+                            + "</div></div>";
+                        $("#set_form").html(html);
+                        $(".quick_pay_right_3_img").trigger("click");
+                    }
+                }
+            }
+        })
+    })
+    $(function () {
+//页面进入初始化	
+        init(0)
+//高度一致
+        var quickRightHeight = $(".quick_pay_right").height();
+        $(".quick_pay_left").height(quickRightHeight);
+
+        $(".quick_pay_left_1").eq(0).css("border-top", "1px solid #dcdcdc");
+        // 点击左侧的列
+        $(document).on("click", ".quick_pay_left_1", function () {
+            var setid = $(this).find(".set_list").attr("sid");
+            var obj = {
+                stat: 1,
+                value: []
+            };
+            $.each(payData,function(index,value){
+                if(value.id == setid){
+                    obj.stat = 0;
+                    obj.value = value;
+                    return;
+                }
+            })
+console.log(obj);
+         /*   $.post("{:url('pay/get_set')}", {
+                setid: setid,
+            }, function (obj) {*/
+                if (obj.stat == 0) {
+                    var value = obj.value;
+                    var html = "<div class='quick_pay_right_3 mt10'><span>充值方式：</span>"
+                        + "<span class='quick_pay_right_3_img' sid='" + value.id + "'><img src='" + value.img + "' /></span>"
+                        + "<span class='quick_pay_right_3_name ml10'>" + value.name + "</span></div>"
+                        + "<div class='block_0'></div>"
+                        + "<div class='set_bank'>"
+                        + "<div class='quick_pay_right_4' mt10>"
+                        + "<span class='quick_pay_right_4_h1'>选择银行：</span>"
+                        + "<div class='quick_pay_right_4_bank'></div>"
+                        + "</div></div>"
+                        + "<div class='block_0'></div>"
+                        + "<div class='third_bank'>"
+                        + "<div class='quick_pay_right_5'>"
+                        + "<span class='quick_pay_right_5_h1'>线路选择：</span>"
+                        + "<div class='quick_pay_right_5_bank'></div>"
+                        + "</div></div>";
+                    $("#set_form").html(html);
+                    $(".quick_pay_right_3_img").trigger("click");
+                } else if (obj.stat == 1) {
+                    alert(obj.msg);
+                } else {
+                    alert(obj.msg);
+                }
+            /*}, "json");*/
+
+            var payIndex = $(this).index();
+            $(this).addClass("quick_pay_left_active").siblings(".quick_pay_left_1").removeClass("quick_pay_left_active");
+            $(".quick_pay_right").eq(payIndex).show().siblings(".quick_pay_right").hide();
+            init(payIndex);
+        })
+
+        $(document).on("click", ".quick_pay_right_3_img", function () {
+            var setid = $(this).attr("sid");
+            var obj = {
+                num: 0,
+                scnum: 0,
+                stat: 1,
+                value:[]
+            };
+            $.each(payData,function (index,value) {
+                if(value.id == setid){
+                    obj.stat = 0;
+                    obj.value = value.pay_ways[0].pay_channels;
+                }
+            })
+           /* $.post("{:url('pay/code')}", {
+                setid: setid,
+            }, function (obj) {*/
+                if (obj.stat == 0) {
+                    var num = obj.num;
+                    var scnum = obj.scnum;
+                    str = "";
+                    for (var i = 0; i < num; i++) {
+                        str += "<ul class='new_li_list'>" + "</ul>";
+                    }
+                    if (scnum > 1) {
+                        $(".quick_pay_right_4_bank").html(str);
+                    } else {
+                        $(".set_bank").hide();
+                        $(".quick_pay_right_5_bank").html(str);
+                    }
+                    for (i = 0; i < obj.value.length; i++) {
+                        var objSetConfigid = obj.value[i].set_configid,
+                            objThirdid = obj.value[i].thirdid,
+                            objName = obj.value[i].name,
+                            objType = obj.value[i].type,
+                            objcode = obj.value[i].code,
+                            objMin = obj.value[i].min,
+                            objMax = obj.value[i].max,
+                            objSetConfigcode = obj.value[i].setconfigcode,
+                            objImg = obj.value[i].img
+                        objCashier = obj.value[i].cashier;
+                        var tmpid = 'td-' + objThirdid;
+                        if (objImg) {
+                            if (i == 0) {
+                                html = "<li class='quick_pay_right_4_li' id='" + tmpid + "' tid='" + objThirdid + "' tcode='" + objcode + "' min='" + objMin + "' max='" + objMax + "' ttype='" + objType + "' sccode='" + objSetConfigcode + "' setconfigid='" + objSetConfigid + "' cashier='" + objCashier + "'><img src='" + objImg + "'/><img src='/skin/images/arrow.png' class='quick_pay_right_4_li_arrow'/></li>";
+                                $("#set_form").find('.quick_pay_right_4').find(".quick_pay_right_4_bank").find(".new_li_list").eq(i).html(html);
+                            } else {
+                                html = "<li class='quick_pay_right_4_li' tid='" + objThirdid + "' tcode='" + objcode + "' min='" + objMin + "' max='" + objMax + "' ttype='" + objType + "' sccode='" + objSetConfigcode + "' setconfigid='" + objSetConfigid + "' cashier='" + objCashier + "'><img src='" + objImg + "'/><img src='/skin/images/arrow.png' class='quick_pay_right_4_li_arrow'/></li>";
+                                $("#set_form").find(".quick_pay_right_4").find(".quick_pay_right_4_bank").find(".new_li_list").eq(i).html(html);
+                            }
+                            if (i == 0) {
+                                $("#" + tmpid).trigger("click");
+                            }
+                        } else {
+                            if (i == 0) {
+                                html = "<li class='quick_pay_right_5_li' id='" + tmpid + "' tid='" + objThirdid + "' tcode='" + objcode + "' min='" + objMin + "' max='" + objMax + "' ttype='" + objType + "' sccode='" + objSetConfigcode + "' setconfigid='" + objSetConfigid + "' cashier='" + objCashier + "'><i>" + objName + "</i><img src='/skin/images/arrow.png' class='quick_pay_right_4_li_arrow'/></li>";
+                                $("#set_form").find(".quick_pay_right_5").find(".quick_pay_right_5_bank").find(".new_li_list").eq(i).html(html);
+                            } else {
+                                html = "<li class='quick_pay_right_5_li' tid='" + objThirdid + "' tcode='" + objcode + "' min='" + objMin + "' max='" + objMax + "' ttype='" + objType + "' sccode='" + objSetConfigcode + "' setconfigid='" + objSetConfigid + "' cashier='" + objCashier + "'><i>" + objName + "</i><img src='/skin/images/arrow.png' class='quick_pay_right_4_li_arrow'/></li>";
+                                $("#set_form").find(".quick_pay_right_5").find(".quick_pay_right_5_bank").find(".new_li_list").eq(i).html(html);
+                            }
+                            if (i == 0) {
+                                $("#" + tmpid).trigger("click");
+                            }
+                        }
+                    }
+                } else if (obj.stat == 1) {
+                    alert(obj.msg);
+                } else {
+                    alert(obj.msg);
+                }
+         /*   }, "json");*/
+        })
+
+        $(function () {
+            $(document).on("click", ".quick_pay_right_4_li", function () {
+                var setconfigid = $(this).attr("setconfigid");
+                $.post("{:url('pay/code_all')}", {
+                    setconfigid: setconfigid,
+                }, function (obj) {
+                    if (obj.stat == 0) {
+                        var num = obj.num;
+                        str = "";
+                        for (var i = 0; i < num; i++) {
+                            str += "<ul class='new_all_list'>" + "</ul>";
+                        }
+                        $(".quick_pay_right_5_bank").html(str);
+                        for (i = 0; i < obj.value.length; i++) {
+                            var objSetConfigid = obj.value[i].set_configid,
+                                objThirdid = obj.value[i].thirdid,
+                                objName = obj.value[i].name,
+                                objType = obj.value[i].type,
+                                objcode = obj.value[i].code,
+                                objMin = obj.value[i].min,
+                                objMax = obj.value[i].max,
+                                objSetConfigcode = obj.value[i].setconfigcode,
+                                objImg = obj.value[i].img
+                            objCashier = obj.value[i].cashier;
+                            var tmpid = 'trird-' + objThirdid;
+                            if (i == 0) {
+                                html = "<li class='quick_pay_right_6_li' id='" + tmpid + "' tid='" + objThirdid + "' tcode='" + objcode + "' min='" + objMin + "' max='" + objMax + "' ttype='" + objType + "' sccode='" + objSetConfigcode + "' setconfigid='" + objSetConfigid + "' cashier='" + objCashier + "'><i>" + objName + "</i><img src='/skin/images/arrow.png' class='quick_pay_right_4_li_arrow'/></li>";
+                                $("#set_form").find(".quick_pay_right_5").find(".quick_pay_right_5_bank").find(".new_all_list").eq(i).html(html);
+                            } else {
+                                html = "<li class='quick_pay_right_6_li' tid='" + objThirdid + "' tcode='" + objcode + "' min='" + objMin + "' max='" + objMax + "' ttype='" + objType + "' sccode='" + objSetConfigcode + "' setconfigid='" + objSetConfigid + "' cashier='" + objCashier + "'><i>" + objName + "</i><img src='/skin/images/arrow.png' class='quick_pay_right_4_li_arrow'/></li>";
+                                $("#set_form").find(".quick_pay_right_5").find(".quick_pay_right_5_bank").find(".new_all_list").eq(i).html(html);
+                            }
+                            if (i == 0) {
+                                $("#" + tmpid).trigger("click");
+                            }
+                        }
+                    } else if (obj.stat == 1) {
+                        alert(obj.msg);
+                    } else {
+                        alert(obj.msg);
+                    }
+                }, "json");
+            })
+        })
+
+        $(function () {
+            $(document).on("click", ".quick_pay_right_5_li,.quick_pay_right_6_li", function () {
+                var min = $(this).attr("min");
+                var max = $(this).attr("max");
+                if (min || max) {
+                    var MShow = "充值额度为" + min + "~" + max + "元";
+                    $(".quick_pay_right_6_name").text(MShow);
+                } else {
+                    var MShow = "充值额度为" + 10 + "~" + 5000 + "元";
+                    $(".quick_pay_right_6_name").text(MShow);
+                }
+                var type = $(this).attr("ttype");
+                var thirdid = $(this).attr("tid");
+                var tcode = $(this).attr("tcode");
+                var scid = $(this).attr("setconfigid");
+                var sccode = $(this).attr("sccode");
+                var cashier = $(this).attr("cashier");
+                if (sccode) {
+                    var str = sccode.substring(2, 0);
+                    if (str == 'DK') {
+                        var coin = sccode.replace(str, "");
+                        $("#coin").val(coin).attr("disabled", true);
+                        $("#money").val(coin);
+                        var Show = "充值额度为" + coin + "元";
+                        $(".quick_pay_right_6_name").text(Show);
+                    } else {
+                        $("#coin").val("").attr("disabled", false);
+                    }
+                }
+                $("#thirdid").val(thirdid);
+                $("#tcode").val(tcode);
+                $("#thirdtype").val(type);
+                $("#scid").val(scid);
+                $("#sccode").val(sccode);
+                $("#cashier").val(cashier);
+            })
+        })
+
+//点击选择银行变色
+        $(document).on("click", ".quick_pay_right_4_li", function () {
+            $(this).addClass("quick_pay_right_4_li_active").find(".quick_pay_right_4_li_arrow").css("right", "0px")
+            $(this).parent().siblings(".new_li_list").find(".quick_pay_right_4_li").removeClass("quick_pay_right_4_li_active").find(".quick_pay_right_4_li_arrow").css("right", "-17px")
+        })
+//点击选择线路变色
+        $(document).on("click", ".quick_pay_right_5_li", function () {
+            $(this).addClass("quick_pay_right_5_li_active").find(".quick_pay_right_4_li_arrow").css("right", "0px")
+            $(this).parent().siblings(".new_li_list").find(".quick_pay_right_5_li").removeClass("quick_pay_right_5_li_active").find(".quick_pay_right_4_li_arrow").css("right", "-17px")
+        })
+
+//点击选择线路变色all
+        $(document).on("click", ".quick_pay_right_6_li", function () {
+            $(this).addClass("quick_pay_right_6_li_active").find(".quick_pay_right_4_li_arrow").css("right", "0px")
+            $(this).parent().siblings(".new_all_list").find(".quick_pay_right_6_li").removeClass("quick_pay_right_6_li_active").find(".quick_pay_right_4_li_arrow").css("right", "-17px")
+        })
+
+    })
+
+    function init(e) {
+        $(".quick_pay_right").eq(e).find(".quick_pay_right_4_li").eq(0).addClass("quick_pay_right_4_li_active").find(".quick_pay_right_4_li_arrow").css("right", "0px")
+        $(".quick_pay_right").eq(e).find(".quick_pay_right_5_li").eq(0).addClass("quick_pay_right_5_li_active").find(".quick_pay_right_4_li_arrow").css("right", "0px")
+    }
+
+    var orderid = '';
+
+    function return_url() {
+        $.get('/pay/orderPayed', {orderid: orderid}, function (json) {
+            if (1 == json.status) {
+                location.href = window.location.reload;
+            } else if (-1 == json.status) {
+                alert(json.msg);
+            } else {
+                setTimeout(return_url, 5000);
+            }
+        }, 'json');
+    }
+
+    function btnOK_zf_onclick() {
+        var attrs = $('.quick_pay_right_5_li.quick_pay_right_5_li_active');
+        var username = $("#username").val();
+        var usern = /^[a-zA-Z0-9]{1,}$/;
+        if (!usern.test(username)) {
+            alert('会员帐号只能由数字、大小写字母组成!');
+            return false;
+        }
+        var coin = $("#coin").val();
+        var rusername = $("#rusername").val();
+        if (isNaN(coin)) {
+            alert("[提示]存款额度非有效数字！");
+            return false;
+        }else if(coin < parseInt(attrs.attr('min'))){
+            alert('[提示]存款不能低于'+ attrs.attr('min'))
+            return;
+        }else if(coin > parseInt(attrs.attr('max'))){
+            alert('[提示]存款不能大于'+ attrs.attr('max'));
+            return;
+        }
+
+        if (username == null || username == "") {
+            alert("[提示]用户名不能为空！");
+            return false;
+        }
+        if (rusername == null || rusername == "" || rusername != username) {
+            alert("[提示]2次用户输入不一致！");
+            return false;
+        }
+        var data = {
+            "username": username,
+            "reusername": rusername,
+            "coin": coin,
+            "thirdid": attrs.attr('tid'),
+            "thirdtype": attrs.attr('ttype'),
+            "tcode": attrs.attr('tcode'),
+            "scid": attrs.attr('setconfigid'),
+            "sccode": attrs.attr('sccode'),
+            "cashier": attrs.attr('cashier')
+        };
+
+        $.post('/pay/pay', data, function (json) {
+            console.log(json);
+            if(json.status == 0){   // 成功
+                if(json.data.mode == 'html'){
+                    ///setTimeout(return_url,5000)
+                    window.location.href = json.data.content;
+                }else if(json.data.mode == 'qrcode'){
+                    $('#qrcode').qrcode({width: 200, height: 200, text: json.data.content}).show();
+                    $('#paybtn').attr('disabled', "true").hide();
+                }else{
+                    alert('[提示]非法类型');
+                }
+            }else{
+                alert('[提示]'+json.msg);
+            }
+        }, 'json');
+    }
+
+
+    $(function () {
+        setPageWidth();
+        $(window).on('resize',setPageWidth);
+    })
+    // 当切换充值方式时,隐藏二维码,显示按钮
+    $('.set_list').live('click',function(){
+        $('#qrcode').hide();
+        $('#paybtn').removeAttr('disabled').show();
+    });
+    // 初始化页面宽度
+    function setPageWidth(){
+        $('.quick_pay_contain').css('margin','0 30px');     // 设置容器居中
+        var _width = window.innerWidth - 80;               // 220是左边的宽度
+        $('.quick_pay_all').css('width',_width+'px');
+        $('.quick_pay_all').css('minWidth','1080px');
+        $('.quick_pay_right').css('width',_width - 370 + 'px');
+        $('.quick_pay_right').css('minWidth','710px');
+    }
+</script>
+</html>

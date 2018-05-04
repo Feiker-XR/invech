@@ -1,0 +1,164 @@
+<link rel="stylesheet" type="text/css" href="/__CSS__/user/reset.css?v=20170715">
+<link rel="stylesheet" type="text/css" href="/__CSS__/user/hpn-common.css">
+<link rel="stylesheet" type="text/css" href="/__CSS__/user/index.css?v=20171117">
+<link rel="stylesheet" type="text/css" href="/__CSS__/user/global.css">
+<link rel="stylesheet" type="text/css" href="/__CSS__/user/info.css">
+<script type="text/javascript" src="/__JS__/user/jquery.min.js?v=2017"></script><!--jQuery库-->
+<script type="text/javascript" src="/__JS__/user/jquery.validate.min.js"></script>
+<script type="text/javascript" src="/__JS__/user/validate.js"></script>
+<script src="/__JS__/user/global.js"></script>
+<script type="text/javascript" src="/__JS__/user/jquery.form.min.js"></script>
+<script type="text/javascript" src="/__JS__/layer/layer.js"></script>
+<div class="eveb_content">
+	<div class="eveb_sub_nav">
+		<ul class="eveb_sub_nav_type fl">
+			<li class="{if(!isset($status))} on {/if}"><a href="/user/inbox">全部 <em id="totalNum">{$list['count']}</em></a></li>
+			<li class="{if(isset($status) && $status==1)} on {/if}"><a href="/user/inbox/status/1">已读<em id="hasReadNum">{$list['yidu']}</em></a></li>
+			<li class="{if(isset($status) && $status==0)} on {/if}"><a href="/user/inbox/status/0">未读 <em id="unReadNum">{$list['weidu']}</em></a></li>
+		</ul>
+		
+	</div>
+
+    {if(!$list['list']->isEmpty())}
+    	<ul class="eveb_letter_list" >
+            {foreach $list['list'] as $v}
+                <li>
+                    <div class="eveb_letter_title num_1">
+                        <span class="fl">
+                            <input type="checkbox" name="ids[]" value="{$v->id}">
+                            <a href="javascript:void(0)">{$v->message->title}</a>
+                           
+                            <em>新</em>
+                         </span>
+
+                        <span class="fr">{$v->created_at}</span>
+                    </div>
+                    <div class="detail">
+                        <p>{$v->message->text}</p>
+                        <div class="eveb_letter_control">
+                            <a href="javascript:void(0)" class="button_small button_3 delete_confirm" onclick="del('{$v->id}')">删除</a>
+                             <a href="javascript:void(0)" class="button_small button_3 readed_confirm" onclick="read('{$v->id}')">标记为已读</a>
+               
+                        </div>
+                    </div>
+                </li>
+            {/foreach}
+    	</ul>
+    	<div class="eveb_list_footer">
+    		<div class="eveb_list_select fl">
+    			<label><input type="checkbox" id="eveb_select_all"> 全选</label>
+    			<a href="javascript:void(0)" class="button_small button_3 delete_confirm" onclick="delSelect()">删除</a>
+    			<a href="javascript:void(0)" class="button_small button_3 readed_confirm" onclick="readSelect()">标记为已读</a>
+    		</div>
+    		<div class="eveb_page fr">{$list['list']->render();}</div>
+    	</div>
+    {else}
+        <div id="loading" style="">
+            <p style="text-align:center;padding:15px 0">暂无数据</p>
+        </div>
+    {/if}
+</div>
+<script type="text/javascript">
+
+
+    //站内信
+    function eveb_letter_list(){
+        $('.eveb_letter_list li .eveb_letter_title').click(function(){
+            $(this).parent('li').css('background','#F5F5F5').siblings().css('background','#FFF');
+            if(!$(this).siblings('.detail').is(':visible')){
+                $(this).siblings('.detail').slideDown().parent('li').siblings().children('.detail').slideUp();
+            }else{
+                $(this).siblings('.detail').slideUp();
+                $(this).parent('li').css('background','#FFF');
+            }
+        });
+        $('.eveb_letter_list li:last').css('border-bottom',0);
+    }
+
+    //全选
+    function eveb_select_all(){
+        $("#eveb_select_all").click(function(){
+            $("input[name='ids[]']").attr("checked", this.checked).prop("checked", this.checked);
+        });
+    }
+
+    function delSelect() {
+        var ids = [];
+        $("input[name='ids[]']").each(function() {
+            if ($(this).is(":checked")) {
+                ids.push($(this).val());
+            }
+        });
+
+        if (ids.length == 0) {
+            alert("请选择");
+            return;
+        }
+        delList(ids);
+    }
+    function del(id) {
+        var ids = [];
+        ids.push(id);
+        delList(ids);
+    }
+    function delList(ids) {
+        layer.confirm('确定删除?', {
+            btn: ['确定','取消'] //按钮
+        }, function(){
+          $.post('/user/inbox_del',{ids:ids},function(data){
+            layer.alert(data.msg, {
+                time: 20000,
+                skin: 'layui-layer-molv', //该皮肤由layer.seaning.com友情扩展。关于皮肤的扩展规则，去这里查阅
+                closeBtn: 0,
+                anim: 4
+            }, function(){
+                {if(isset($status))}
+                    window.location.href ="/user/inbox/status/{$status}";
+                {else}
+                    window.location.href ="/user/inbox";
+                {/if}
+            })
+
+          },'json');
+        })
+    }
+
+    function readSelect() {
+        var ids = [];
+        $("input[name='ids[]']").each(function() {
+            if ($(this).is(":checked")) {
+                ids.push($(this).val());
+            }
+        });
+
+        if (ids.length == 0) {
+            layer.alert("请选择");
+            return;
+        }
+        readList(ids);
+    }
+
+    function read(id) {
+        var ids = [];
+        ids.push(id);
+        readList(ids);
+    }
+
+    function readList(ids) {
+        $.post('/user/inbox_edit.html',{ids:ids},function(data){
+            layer.alert(data.msg, {
+              time: 20000,
+              skin: 'layui-layer-molv', //该皮肤由layer.seaning.com友情扩展。关于皮肤的扩展规则，去这里查阅
+              closeBtn: 0,
+              anim: 4
+            }, function(){
+                {if(isset($status))}
+                    window.location.href ="/user/inbox/status/{$status}";
+                {else}
+                    window.location.href ="/user/inbox";
+                {/if}
+            })
+        },'json');
+    }
+
+</script>

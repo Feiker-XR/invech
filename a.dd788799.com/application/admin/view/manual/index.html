@@ -1,0 +1,109 @@
+{layout name="layout" /}
+
+<div class="row">
+  <div class="col-xs-12">
+    <div class="box">
+      <div class="box-header">
+       <i class="fa fa-plus-square pull-right do_money"></i>
+       <form>
+          <div class="pull-left">
+             <input class="form-control input-sm search" value="{$Think.get.username}" placeholder="请输入用户昵称" type="text" name="username" > 
+          </div> 
+          <div class="pull-left" style="margin-left:20px;">
+              <input type="text" name="startTime"  value="{$Think.get.startTime}" placeholder="开始时间" class="form-control input-sm" id="datepicker1">
+          </div>
+
+          <div class="pull-left">
+                ~
+          </div> 
+
+          <div class="pull-left">
+            <input type="text" name="endTime"  value="{$Think.get.endTime}" placeholder="结束时间" class="form-control input-sm" id="datepicker2">
+          </div> 
+
+          <div class="pull-left" style="margin-left:20px;">
+             <select class="form-control input-sm filterStatus" name="bonus_id">
+                  <option value="">全部类型</option>
+                  <option value="-1" {if(is_numeric($Think.get.bonus_id)&&$Think.get.bonus_id==-1)}selected{/if}>手动扣款</option>
+                  <option value="0" {if(is_numeric($Think.get.bonus_id)&&$Think.get.bonus_id==0)}selected{/if}>手动存款</option>
+                  {foreach $bonuses as $bonus}
+                    <option value="{$bonus->id}" {if(is_numeric($Think.get.bonus_id)&&$Think.get.bonus_id==$bonus->id)}selected{/if}>{$bonus->name}</option>
+                  {/foreach}
+              </select>
+          </div>
+          <div class="has-feedback pull-left" style="margin-left:20px;">
+              <button type="submit" class="btn btn-block btn-default btn-sm filter">查询</button>
+          </div>
+     </form>
+
+      </div>
+      <!-- /.box-header -->
+      <div class="box-body table-responsive no-padding">
+        <table class="table table-hover">
+          <tr>
+            <th>#</th>
+            <th >用户ID</th>
+            <th >用户名称</th>
+            <th >存扣金额</th>                       
+            <th >存扣款类型</th>
+            <th >操作人</th>
+            <th >备注</th>
+            <th >操作时间</th>
+          </tr>
+          {foreach($list as $item)}
+          <tr>
+            <td>{$item->id}</td>
+            <td>{$item->uid}</td>
+            <td>{$item->user->username}</td>
+            <td>
+              {if($item->bonus_id==-1)}  
+                <span class="btn-success">
+              {else/}
+                <span class="btn-danger">
+              {/if}
+              {$item->amount}</span>
+            </td>
+            <td>{$item->amount_type}</td>
+            <td>{$item->admin->username}</td>
+            <td>{$item->remark}</td>
+            <td>{$item->created_at}</td>
+          </tr>
+          {/foreach}
+     
+        </table>
+        {$list->render();}
+      </div>
+      <!-- /.box-body -->
+    </div>
+    <!-- /.box -->
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){
+  var obj = {
+                autoclose: true,
+                todayHighlight: true,
+                language:"zh-CN", 
+                format:"yyyy-mm-dd" 
+           };
+  $("#datepicker1").datepicker(obj)
+  $("#datepicker2").datepicker(obj);
+});
+
+  $(".do_money").click(function(){
+    $.get('/manual/money.html',{},function(data){
+      layer.open({
+        type: 1,
+        title: '手动存款扣款',
+        maxmin: true, //开启最大化最小化按钮
+        area: ['900px', '600px'],
+        content: data
+      });
+    },'html');
+  });
+</script>
+
+
+
+  
+

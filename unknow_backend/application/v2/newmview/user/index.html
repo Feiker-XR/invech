@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>亚太娱乐</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="format-detection" content="telephone=no">
+<meta name="format-detection" content="email=no">
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+<link rel="stylesheet" href="/css/font-awesome.min.css">
+<link rel="stylesheet" href="/css/ui-dialog.css">
+<link rel="stylesheet" href="/styles/ezweb.css">
+<link rel="stylesheet" type="text/css" href="/fonts-new/iconfont.css">	
+<link rel="stylesheet" href="/css/500f_new_wap.css">
+	
+<script src="/js/jquery-2.2.0.min.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/scripts/slider.js"></script>
+<script src="/js/common.js"></script>
+<script src="/js/dialog-min.js"></script>
+<script type="text/javascript" src="/js/top.js"></script>
+<script src="/js/zhuce.js"></script>
+<script src="/js/left_mouse.js"></script>
+</head>
+<body>
+	
+
+<div class="ucenter">
+	<div class="container_user" style="margin-top: 60px;">
+		<!--用户中心页面-->
+		<div class="wap_500f_user">
+			<div class="wap_500f_user_pic">
+				<i><img src="/img/wap_500f_user_pic.png"></i>
+				<p>{$user.username}</p>
+			</div>
+			<a href="/index/logout" data-slide="#J_p2" data-iframe="J_SportsIFrame" data-url="/index/logout" data-target="1">
+				<div class="wap_500f_user_1">
+					<i>
+						<img src="/img/wap_500f_user_22.png">
+					</i>
+					<p class="color_blue">退出登录</p>
+				</div>
+			</a>
+			<a href="/user/profile">
+				<div class="wap_500f_user_2">
+					<i>
+						<img src="/img/wap_500f_user_11.png">
+					</i>
+					<p class="color_blue">修改资料</p>
+				</div>
+			</a>
+		</div>
+		<div class="block_10"></div>
+		<div class="wap_500f_user_list">
+			<a target="mem_index" href="{:url('pay/member')}">
+				<i class="fa fa-lg fa-cny"></i>
+				<p>在线存款</p>
+			</a>
+			<a target="mem_index" href="{:url('user/get_money')}">
+				<i class="fa fa-lg fa-credit-card"></i>
+				<p>极速取款</p>
+			</a>
+			<a target="mem_index" href="/user/userinfo.html">
+				<i class="fa fa-lg fa-ylc"></i>
+				<p>额度转换</p>
+			</a>
+			<a target="mem_index" href="/user/data_money">
+				<i class="fa fa-lg fa-xm"></i>
+				<p>财务明细</p>
+			</a>
+			<a target="mem_index" href="/user/record_ds.html">
+				<i class="fa fa-lg fa-cart-arrow-down"></i>
+				<p>未结注单</p>
+			</a>
+			<a target="mem_index" href="/user/report">
+				<i class="fa fa-lg fa-cubes"></i>
+				<p>历史报表</p>
+			</a>
+			<a target="mem_index" href="/user/agent">
+				<i class="fa fa-lg fa-user-plus"></i>
+				<p>代理申请</p>
+			</a>
+			<a target="mem_index" href="/user/sms">
+				<i class="fa fa-lg fa-envelope-o"></i>
+				<p>未读消息</p>
+			</a>
+		</div>
+
+	</div>
+</div>
+<script src="/scripts/base.js"></script>
+<script src="/scripts/carousel.js"></script>
+<script src="/scripts/carousel2.js"></script>
+<script src="/scripts/page-slide.js"></script>
+<script src="/scripts/nav.js"></script>
+<script src="/scripts/common.js"></script>
+<script src="/scripts/iframe-menu.js"></script>	
+<script type="text/javascript">
+	function refresh_money(){
+	$.ajax({
+		cache: false,
+		url: "/index/home.html",
+		method:'post',
+		data:{ajax:1,get_money:1},
+		success:function(data){
+			if(data==""){
+			}else{
+			$data_arr=data.split("||");
+			 $("#user_money").html($data_arr[0]);
+			  $("#user_jifen").html($data_arr[1]);
+			}
+		}
+	}); 
+	window.setTimeout("refresh_money();", 15000); 
+	}
+	refresh_money();
+</script>
+	<!--<script type="text/javascript" language="javascript" src="/js/left_mouse.js"></script>-->
+<script type="text/javascript">$(window).load(function(){	changeFrameHeight()	})function changeFrameHeight(){    var bodyClientH = screen.height;   	var bodyClientW = screen.width; 	var iframeId = $(window.top.document).find("#iframeid")	iframeId.height(bodyClientH + 200)	iframeId.width(bodyClientW)	iframeId.show()}	</script>
+
+</body>
+</html>

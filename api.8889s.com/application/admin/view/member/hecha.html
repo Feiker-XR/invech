@@ -1,0 +1,77 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>系统设置</title>
+<link href="../css/base.css" rel="stylesheet" type="text/css" />
+<link href="../css/admin.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="../js/jquery.js"></script>
+<script type="text/javascript" src="../js/jquery.tools.js"></script>
+<script type="text/javascript" src="../js/base.js"></script>
+<style type="text/css">
+.bigred {
+	color:red;
+	font-weight:bold;
+}
+.list .listTable td{
+	line-height:26px;
+}
+.inputTable .tabContent th{
+	
+}
+</style>
+</head>
+<body class="list">
+	
+
+<div class="body">
+{empty name='username'}
+	<div>
+
+        <ul id="tab" class="tab">
+                    <li>
+                        <input type="button" value="审查会员" class="current" hidefocus />
+                    </li>
+      </ul>
+    <table class="inputTable tabContent">
+    <form method="get" action="{:url('member/hecha')}">
+        <tr>
+            <th align="center" style="font-weight:normal;font-size:14px;padding-left:10px;padding-right:15px;">会员账号:</th>
+            <td align="left">
+            	<input name="username" type="text" size="20" maxlength="20" value="{$username}" class="formText"/>&nbsp;&nbsp;
+            	<input name="find" type="submit" id="find" value="开始核查" class="formButton"/>
+            </td>
+          </tr>
+    </form>
+    </table>
+    
+    </div>
+{/empty}
+{notempty name='username' }
+{if $user_exists eq 1}
+<table id="listTable" class="listTable">
+    
+    <tr>
+    	<th style="background:#eee"></th>
+    	<th></th>
+        <th>存款</th>
+        <th>说明</th>
+        <th>提款成功</th>
+    </tr>
+    {volist name='finalArr' id='value'}
+    <tr>
+    	<td style="background:#eee" align="right" width="15%"><?php echo $value['hecha']['keyname'] ?? '';?></td>
+        <td align="left" width="25%"><?php echo $value['hecha']['keyvalue'] ?? '';?></td>
+        <td align="center" width="25%"><?php echo $value['detail']['cunkuan'] ?? '';?></td>
+        <td align="center" width="15%"><?php echo $value['detail']['shuoming'] ?? '';?></td>
+        <td align="center" width="20%"><?php echo $value['detail']['tikuan'] ?? '';?></td>
+    </tr>
+    {/volist}
+</table>
+      
+    <div class="pagerBar"><?php echo $pageStr;?></div>
+{/if}
+{/notempty}
+	</div>
+</body>
+</html>

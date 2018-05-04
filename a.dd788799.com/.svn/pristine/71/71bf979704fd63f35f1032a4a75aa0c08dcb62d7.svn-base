@@ -1,0 +1,104 @@
+<link rel="stylesheet" type="text/css" href="/__CSS__/user/reset.css?v=20170715">
+<link rel="stylesheet" type="text/css" href="/__CSS__/user/hpn-common.css">
+<link rel="stylesheet" type="text/css" href="/__CSS__/user/index.css?v=20171117">
+<link rel="stylesheet" type="text/css" href="/__CSS__/user/global.css">
+<link rel="stylesheet" type="text/css" href="/__CSS__/user/info.css">
+<link rel="stylesheet" href="/__JS__/datepicker/datepicker3.css">
+<script src="/__JS__/jquery.min.js"></script>
+<script src="/__JS__/datepicker/bootstrap-datepicker.js"></script>
+<script src="/__JS__/datepicker/bootstrap-datepicker.zh-CN.js"></script>
+<div class="help_r_main">
+    <div class="eveb_content">
+        <div class="eveb_nav_sub">
+            <ul class="clearfix">
+                <li ><a href="/user/recharge_record">充值记录</a></li>
+                <li><a href="/user/withdraw_record">提现记录</a></li>
+                <li class="on"><a href="/user/money_record">资金流水</a></li>
+                <li><a href="/user/bet_record">投注记录</a></li>
+                <li><a href="/user/backwater_record">返水记录</a></li>
+            </ul>
+        </div>
+        <h2>
+            <div class="eveb_search eveb_search_h2">
+                <form>
+                    <lable>类型：</lable>
+                    <select name="type">
+                      <option value="">全部类型</option>
+                      <option value="recharge" {if($Think.get.type == 'recharge')} selected {/if} >充值</option>
+                      <option value="withdraw" {if($Think.get.type == 'withdraw')} selected {/if} >取款</option>
+                      <option value="bet" {if($Think.get.type == 'bet')} selected {/if} >投注</option>
+                      <option value="backwater" {if($Think.get.type == 'backwater')} selected {/if} >反水</option>
+                      <option value="bonus" {if($Think.get.type == 'bonus')} selected {/if} >红利</option>
+                    </select>
+                    <lable style="margin-left:10px">状态：</lable>
+                    <select  name="direct">
+                      <option value="">全部状态</option>
+                      <option value="0" {if($Think.get.direct == '0')} selected {/if} >收入</option>
+                      <option value="1" {if($Think.get.direct == '1')} selected {/if} >支出</option>
+                    </select>
+                    <label style="margin-left:10px">起止时间：</label>
+                    <input name="startTime" id="datepicker1"   value="{$Think.get.startTime}" placeholder="开始时间" type="text"> -
+                    <input name="endTime"   id="datepicker2"   value="{$Think.get.endTime}" placeholder="结束时间" type="text">
+                    <input type="submit" class="button_small button_1" value="筛选">
+                </form>
+            </div>
+        </h2>
+        <table class="eveb_box eveb_table" id="dataTable">
+            <thead>
+                <tr>
+                    <th>序号</th>
+                    <th>类型</th>
+                    <th>金额</th>
+                    <th>之前金额</th>
+                    <th>之后余额</th>
+                    <th>收支类型</th>
+                    <th>备注</th>
+                    <th>时间</th>
+                </tr>
+            </thead>
+            <tbody>
+                {if(!$list->isEmpty())}
+                    {foreach $list as $v}
+                        <tr>
+                            <td>{$v->id}</td>
+                            <td>
+                                {eq name="$v->type" value="recharge"}> 充值 {/eq}
+                                {eq name="$v->type" value="withdraw"} 提现 {/eq}
+                                {eq name="$v->type" value="bet"} 投注 {/eq}
+                                {eq name="$v->type" value="backwater"} 返水 {/eq}
+                                {eq name="$v->type" value="bonus"} 红利 {/eq}
+                            </td>
+                            <td>{$v->amount}</td>
+                            <td>{$v->f_balance}</td>
+                            <td>{$v->t_balance}</td>
+                            <td>
+                                {eq name="$v->direct" value="0"}<span style="color:green">收入</span>{/eq}
+                                {eq name="$v->direct" value="1"}<span style="color:red">支出</span>{/eq}
+                            </td>
+                            <td>{$v->remark}</td>
+                            <td>{$v->created_at}</td>
+                        </tr>
+                    {/foreach}
+                {else}
+                    <tr><td colspan="7" styl="text-align:center;">暂无数据</td></tr>
+                {/if}
+            </tbody>
+         </table>
+        <div class="eveb_page fr"> {$list->render();}</div>
+    </div>
+</div>
+<script type="text/javascript">
+$(function(){
+        var obj = {
+                autoclose: true,
+                todayHighlight: true,
+                language:"zh-CN", 
+                format:"yyyy-mm-dd" 
+           };
+    $("#datepicker1").datepicker(obj)
+    $("#datepicker2").datepicker(obj);
+});
+
+</script>
+
+

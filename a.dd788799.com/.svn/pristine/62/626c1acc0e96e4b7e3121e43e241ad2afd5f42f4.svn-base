@@ -1,0 +1,313 @@
+<link rel="stylesheet" type="text/css" href="/__CSS__/user/reset.css?v=20170715">
+<link rel="stylesheet" type="text/css" href="/__CSS__/user/hpn-common.css">
+<link rel="stylesheet" type="text/css" href="/__CSS__/user/index.css?v=20171117">
+<link rel="stylesheet" type="text/css" href="/__CSS__/user/global.css">
+<style>
+
+	.reResulttBg{background: #f42023;}
+	.process .layout .monty ul li,.process .layout .list_tems .date:after,.list ul li .slide p.acti,.headmemberbg{background: #f42023;}
+	.process .layout .list_tems .date span, .process .layout .list_tems .date h3,.eveb_amount span,.color-e77c3c,.eveb_setting_table a,.xieyiCss，.gcdtgd{color: #f42023!important;}
+	.eveb_sub_nav_type a:hover, .eveb_sub_nav_type li.on a:link, .eveb_sub_nav_type li.on a:visited{color: #f42023!important;font-weight: 700;border-bottom-color: #e1e1e1;background: #f8f8f8;}
+	.list ul li .slide p:hover,.letterbtn-bg{background: #f42023!important;color: white;}
+	.list h3 a{background: #f42023;border-bottom: 3px solid #a92309; height: 47px; line-height: 47px;}
+	.help_l_menu li .t.sli{border-left: 5px solid #f42023;}
+	.withdraw-bg-input{border: 2px solid #f42023!important;}
+	.clearBet_template .l span i{background: #f42023 url(/static/theme/memberTheme/theme1/img/tm-mdl-icon.png) no-repeat!important; border-radius: 50%;background-position: 0 41%!important;}
+
+	.eveb_nav_sub .on,.button_1, .button_1:link, .button_1:visited,.alert_col h5,.onlineService,.layui-layer-popup .layui-layer-title,.xzqd,.xzqdlskj,.game_name .box2_stage p span i.acti,.Betting,.Single,.list_ject ul li .Result p a.acti,.list_ject ul li .Result p a.acti:hover,.top{background:#f42023!important}
+	.eveb_nav_sub .on a,.bankInfo .name,.help_l_menu .title p .sum,.help_r_main .light,.game_name .box2_stage p span i,.game_name .box1_name  p i,.Account p a.red{color:#f42023!important}
+	.eveb_nav_sub .on,.game_name .box2_stage p span{border:1px solid #f42023!important;}
+	.eveb_nav_sub .on,.game_name .box2_stage p span i.acti{color:#fff!important;}
+	.eveb_nav_sub .on a{border-top:1px #f42023 solid!important;}
+	.eveb_nav_sub ul{border-bottom:1px #f42023 solid!important;}
+	#apptop{background: #f42023}
+	.alert_col div::-webkit-scrollbar-thumb {background-color: #f42023!important;}
+	.head div h5,.Betting .tabs ul li,.top .nav h1{background:#d51910!important}
+	.jf_box .url a,.eveb_form label.error,.eveb_transfer_box .center_wallet .money,.eveb_transfer_box .wallet_list li p{color:#d51910!important}
+	.Betting .tabs ul li.acti{background:#fff!important}
+	.button_1, .button_1:link, .button_1:visited{border:1px solid #d51910!important;}
+</style>
+
+<link type="text/css" rel="stylesheet" href="/__CSS__/user/laydate.css">
+<link rel="stylesheet" href="/__CSS__/user/layer.css?v=3.0.11110">
+<div class="eveb_content">
+	<div class="eveb_sub_nav">
+		<ul class="eveb_sub_nav_type fl">
+			<li class=""><a href="javascript:void(0)" onclick="changeStatus(this, null)">全部 <em id="totalNum">0</em></a></li>
+			<li class=""><a href="javascript:void(0)" onclick="changeStatus(this, true)">已读<em id="hasReadNum">0</em></a></li>
+			<li class="on"><a href="javascript:void(0)" onclick="changeStatus(this, false)">未读 <em id="unReadNum">0</em></a></li>
+		</ul>
+		<div class="eveb_search">
+			<input type="hidden" name="pageIndex" value="1">
+			<input type="hidden" name="hasRead" value="false">
+			起止时间：
+			<input name="starttime" id="starttime" type="text" size="11" class="suminp" onclick="laydate({istime: true, format: 'YYYY-MM-DD hh:mm'})" value=""> - <input name="endtime" id="endtime" type="text" size="11" class="suminp" onclick="laydate({istime: true, format: 'YYYY-MM-DD hh:mm'})" value="">
+
+			<a onclick="shaixuan()" href="javascript:void(0)" class="button_small button_1">筛选</a>
+			<a href="javascript:void(0)" class="button_small button_4" onclick="searchday(1)">今日</a>
+			<a href="javascript:void(0)" class="button_small button_4" onclick="searchday(3)">3天</a>
+			<a href="javascript:void(0)" class="button_small button_4" onclick="searchday(7)">本周</a>
+		</div>
+	</div>
+	<div id="loading" style="">
+		<p style="text-align:center;padding:15px 0">暂无数据</p></div>
+	<ul class="eveb_letter_list" style="display: none;">
+		<li>消息标题</li>
+		<li>发送人</li>
+		<li>接收人</li>
+		<li>时间</li>
+		<li>状态</li>
+		<li>操作</li>
+		<!--<table class="eveb_box eveb_table" id="dataTable">
+			<thead>
+			<tr>
+				<th>序号</th>
+				<th>类型</th>
+				<th>金额</th>
+				<th>余额</th>
+				<th>备注</th>
+				<th>时间</th>
+			</tr>
+			</thead>
+			<tbody><tr><td colspan="8" styl="text-align:center;"><img src="/static/theme/memberTheme/theme1/img/base_loading.gif"></td></tr></tbody>
+		</table>-->
+	</ul>
+	<div class="eveb_list_footer" style="display: none;">
+		<div class="eveb_list_select fl">
+			<label><input type="checkbox" id="eveb_select_all"> 全选</label>
+			<a href="javascript:void(0)" class="button_small button_3 delete_confirm" onclick="delSelect()">删除</a>
+			<a href="javascript:void(0)" class="button_small button_3 readed_confirm" onclick="readSelect()">标记为已读</a>
+		</div>
+		<div class="eveb_page fr">
+
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+
+    $(function() {
+        getData();
+
+    });
+    function goPage(pageIndex) {
+        $("input[name='pageIndex']").val(pageIndex);
+        getData();
+    }
+    function shaixuan() {
+        $("input[name='pageIndex']").val(1);
+        getData();
+    }
+
+    //获取地址栏参数
+    function GetQueryString(name)
+    {
+        var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+        var r = window.location.search.substr(1).match(reg);
+        if(r!=null)return  unescape(r[2]); return null;
+    }
+
+    function changeStatus(obj, hasRead) {
+        $(".eveb_sub_nav_type .on").removeClass("on");
+        $(obj).parent().addClass("on");
+        if (null == hasRead) {
+            $("input[name='hasRead']").val('');
+        } else {
+            $("input[name='hasRead']").val(hasRead);
+        }
+        $("input[name='pageIndex']").val(1);
+        getData();
+    }
+    function showLoading() {
+        var height = $(window).height() - Tools.parseInt($(".eveb_content").css("padding-top")) - $(".eveb_sub_nav").height();
+        $("#loading").html('<img style="display:block;text-align:center;margin:auto;margin-top:' + (height / 2) + 'px" src="/static/theme/memberTheme/theme1/img/base_loading.gif"/>');
+        $(".eveb_letter_list").hide();
+        $(".eveb_list_footer").hide();
+        $("#loading").show();
+    }
+    function hideLoading() {
+        $("#loading").hide();
+        $(".eveb_letter_list").show();
+        $(".eveb_list_footer").show();
+        $("input[type='checkbox']").removeAttr("checked");
+    }
+    function getData() {
+        ajaxRequest({
+            url: "/member/ajaxGetLetter.json",
+            data: {
+                pageIndex: $("input[name='pageIndex']").val(),
+                hasRead: $("input[name='hasRead']").val(),
+                startTime: $("input[name='starttime']").val(),
+                endTime: $("input[name='endtime']").val()
+            },
+            beforeSend: function() {
+                showLoading();
+            },
+            success: function(json) {
+                if (json.result != 1) {
+                    return;
+                }
+
+                $("#totalNum").html(json.totalNum);
+                $("#hasReadNum").html(json.totalHasReadNum);
+                $("#unReadNum").html(json.totalUnReadNum);
+                if (json.userInboxList.length == 0) {
+                    $("#loading").html('<p style="text-align:center;padding:15px 0">暂无数据</p>');
+                    return;
+                }
+                $("input[name='pageIndex']").val(json.pageNum);
+
+                // 数据
+                var str = '';
+                $.each(json.userInboxList, function(index, value) {
+                    str += '<li>';
+                    str += '<div class="eveb_letter_title num_'+ value.id +'">';
+                    str += '<span class="fl">';
+                    str += '<input type="checkbox" name="ids[]" value="' + value.id + '">';
+                    str += '<a href="javascript:void(0)" '+(value.hasRead ? '' : 'class="new"')+'>' + value.content.substr(0, 20) + '...</a>';
+                    str += value.hasRead ? '' : '<em>新</em>';
+                    str += '</span>';
+                    str += '<span class="fr">' + Tools.formatDate(value.createTime) + '</span>';
+                    str += '</div>';
+                    str += '<div class="detail">';
+                    str += '<p>' + value.content + '</p>';
+                    str += '<div class="eveb_letter_control">';
+                    str += '<a href="javascript:void(0)" class="button_small button_3 delete_confirm" onclick="del(' + value.id + ')">删除</a>';
+                    if (!value.hasRead) {
+                        str += '<a href="javascript:void(0)" class="button_small button_3 readed_confirm" onclick="read(' + value.id + ')">标记为已读</a>';
+                    }
+                    str += '</div>';
+                    str += '</div>';
+                    str += '</li>';
+                });
+                $(".eveb_letter_list").html(str);
+                // 分页
+                str = '';
+                str += '<span style="margin:0 3px;float:left;width:auto;padding:0 5px;height:25px;line-height:25px;">总共' + (Math.ceil(json.total / json.pageSize)) + '页，' + json.total + '条，当前第' + json.pageNum + '页</span>';
+                if (json.hasPreviousPage) {
+                    str += '<a href="javascript:void(0)" onclick="goPage(' + (json.prePage) + ')" style="margin:0 3px;float:left;width:auto;padding:0 5px;">上一页</a>';
+                } else {
+                    str += '<a href="javascript:void(0)" style="margin:0 3px;float:left;width:auto;padding:0 5px;">上一页</a>';
+                }
+                str += '<span style="margin:0 3px;float:left;width:auto;padding:0 5px;height:25px;line-height:25px;">跳转到</span>';
+                str += '<input type="text" id="pageNum" style="margin:0 3px;float:left;border:1px solid #eee;width:30px;line-height:25px;height:25px;" value="' + json.pageNum + '" />';
+                str += '<button class="letterbtn-bg" onclick="goPage(document.getElementById(\'pageNum\').value)" type="text" style="margin:0 3px;float:left;border:1px solid #eee;width:30px;line-height:25px;height:25px;background:#fa6200;padding:0 5px;width:auto;color:#fff;font-size:14px;" value="0">确定</button>';
+                if (json.hasNextPage) {
+                    str += '<a href="javascript:void(0)" onclick="goPage(' + (json.nextPage) + ')" style="margin:0 3px;float:left;width:auto;padding:0 5px;">下一页</a>';
+                } else {
+                    str += '<a href="javascript:void(0)" style="margin:0 3px;float:left;width:auto;padding:0 5px;">下一页</a>';
+                }
+                $(".eveb_page").html(str);
+                eveb_letter_list();
+                eveb_select_all();
+                hideLoading();
+
+                //跳转展开相对应的信件内容
+                var paramStr = GetQueryString('cs');
+                if(typeof paramStr != 'undefined'){
+                    var urlStr = ".eveb_letter_list li .num_"+ paramStr;
+                    $(urlStr).trigger('click');
+                }
+
+            }
+        });
+    }
+    //站内信
+    function eveb_letter_list(){
+        $('.eveb_letter_list li .eveb_letter_title').click(function(){
+            $(this).parent('li').css('background','#F5F5F5').siblings().css('background','#FFF');
+            if(!$(this).siblings('.detail').is(':visible')){
+                $(this).siblings('.detail').slideDown().parent('li').siblings().children('.detail').slideUp();
+            }else{
+                $(this).siblings('.detail').slideUp();
+                $(this).parent('li').css('background','#FFF');
+            }
+        });
+        $('.eveb_letter_list li:last').css('border-bottom',0);
+    }
+
+    //全选
+    function eveb_select_all(){
+        $("#eveb_select_all").click(function(){
+            $("input[name='ids[]']").attr("checked", this.checked).prop("checked", this.checked);
+        });
+    }
+
+    function delSelect() {
+        var ids = [];
+        $("input[name='ids[]']").each(function() {
+            if ($(this).is(":checked")) {
+                ids.push($(this).val());
+            }
+        });
+
+        if (ids.length == 0) {
+            alert("请选择");
+            return;
+        }
+        delList(ids);
+    }
+    function del(id) {
+        var ids = [];
+        ids.push(id);
+        delList(ids);
+    }
+    function delList(ids) {
+        if (!confirm("确认要删除吗？")) {
+            return;
+        }
+
+        ajaxRequest({
+            url: "/member/ajaxDelZnx.json",
+            data: {
+                ids: ids
+            },
+            beforeSend: function() {
+                showLoading();
+            },
+            success: function(json) {
+                if (json.result == 1) {
+
+                }
+                getData();
+            }
+        });
+    }
+
+    function readSelect() {
+        var ids = [];
+        $("input[name='ids[]']").each(function() {
+            if ($(this).is(":checked")) {
+                ids.push($(this).val());
+            }
+        });
+
+        if (ids.length == 0) {
+            alert("请选择");
+            return;
+        }
+        readList(ids);
+    }
+    function read(id) {
+        var ids = [];
+        ids.push(id);
+        readList(ids);
+    }
+    function readList(ids) {
+        ajaxRequest({
+            url: "/member/ajaxReadZnx.json",
+            data: {
+                ids: ids
+            },
+            beforeSend: function() {
+                showLoading();
+            },
+            success: function(json) {
+                if (json.result == 1) {
+
+                }
+                getData();
+            }
+        });
+    }
+
+</script>

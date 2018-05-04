@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html style="height: auto;"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    
+    <title>Bong网站代理系统-用户登录</title>
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <!-- Bootstrap 3.3.6 -->
+   <link rel="stylesheet" href="/bower_components/AdminLTE/bootstrap/css/bootstrap.css">
+    <!-- Theme style -->
+     <link rel="stylesheet" href="/bower_components/AdminLTE/dist/css/AdminLTE.min.css">
+   
+    <link rel="stylesheet" href="/css/onebase.css">
+  	<script src="/bower_components/AdminLTE/plugins/jQuery/jquery-2.2.3.min.js"></script>
+  	<script src="/layer/layer.js"></script>
+  	<script src="/js/login_background.js"></script>
+  	<script src="/js/jquery.form.js"></script> 
+	<body class="login-page admin-login-body-background" style="height: auto;">
+    
+		<canvas width="1920" height="974"></canvas>
+		<div class="admin-login-box">
+		  <div class="login-logo">
+		      <a href="" class="login-logo-a"><b>BONG代理中心</b></a>
+		  </div>
+			<div class="login-box-body">
+		    	<p class="login-box-msg">请输入您的登录信息</p>
+				<form method="post" id="login_form" enctype="multipart/form-data" class="admin-login-form">
+			      <div class="form-group has-feedback">
+			          <input type="text" name="username" value="" class="form-control" placeholder="请输入您的用户名">
+			           <span class="glyphicon glyphicon-user form-control-feedback"></span>
+			      </div>
+			      <div class="form-group has-feedback">
+			           <input type="password" name="password" value="" class="form-control" placeholder="请输入您的密码">
+			           <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+			      </div>
+			      <div class="row">
+			        <div class="col-xs-8"></div>
+			        <!-- /.col -->
+			        <div class="col-xs-4"><input  type="checkbox" name="remember" class="" value="1"/>记住账户</div>
+			        <!-- /.col -->
+			      </div>
+			      <div class="social-auth-links text-center">
+			            
+			          <button id="login" class="btn btn-block btn-facebook ladda-button login-submit-button" data-style="slide-up">
+			              <span class="ladda-label">登 录</span>
+			          </button>
+			            
+			          <button type="reset" class="btn btn-block btn-google btn-flat">重置</button>
+			        </div>
+			    </form>
+
+
+		  </div>
+		</div>
+	<script type="text/javascript">
+		$(function(){
+		 
+		  $("#login").click(function () {
+		  
+		    var options = {
+		      url: "{:url('login')}",
+		      type : 'POST',
+		      dataType : 'json',
+		      success : function(data) {
+		     	 layer.alert(data.msg, {
+		          time: 20000,
+		          skin: 'layui-layer-molv', //该皮肤由layer.seaning.com友情扩展。关于皮肤的扩展规则，去这里查阅
+		          closeBtn: 0,
+		          anim: 4
+		        }, function(){
+		           window.location.href = data.url;
+		        })
+		      },
+		  	};
+		      $("#login_form").ajaxForm(options);
+		   })
+
+		});
+
+		</script>
+	</body>
+</html>

@@ -1,0 +1,98 @@
+<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:81:"/mnt/wwwroot/www.dd788799.com/houtai/../application/admin/view/money/huikuan.html";i:1511179118;}*/ ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>系统设置</title>
+<link href="/css/base.css" rel="stylesheet" type="text/css" />
+<link href="/css/admin.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="/js/jquery.js"></script>
+<script type="text/javascript" src="/js/jquery.tools.js"></script>
+<script type="text/javascript" src="/js/base.js"></script>
+<script type="text/javascript" src="/js/calendar.js"></script>
+</head>
+<body class="list">
+	<div class="bar">会员汇款记录</div>
+	<div class="body">
+		<form name="form1" method="GET" action="">
+			<div class="listBar">
+				<select name="status" id="status">
+					<option value="0" <?php if($status == '0'): ?>selected<?php endif; ?> style="color: #FF9900;">未处理</option>
+					<option value="2" <?php if($status == '2'): ?>selected<?php endif; ?> style="color: #FF0000;">汇款失败</option>
+					<option value="1" <?php if($status == '1'): ?>selected<?php endif; ?> style="color: #006600;">汇款成功</option>
+					<option value="3" <?php if($status == '3'): ?>selected<?php endif; ?>>全部汇款</option>
+				</select>&nbsp;&nbsp; 
+				<select name="order" id="order">
+					<option value="id"    <?php if($order == 'id'): ?>selected<?php endif; ?>>默认排序</option>
+					<option value="money" <?php if($order == 'money'): ?>selected<?php endif; ?>>汇款金额</option>
+					<option value="zsjr"  <?php if($order == 'zsjr'): ?>selected<?php endif; ?>>赠送金额</option>
+				</select>&nbsp;&nbsp;
+				日期: 
+				<input name="stime" type="text" id="stime" value="<?php echo $stime; ?>" onClick="new Calendar(2008,2020).show(this);" size="10" maxlength="10" readonly="readonly" /> ~ 
+				<input name="etime"	type="text" id="etime" value="<?php echo $etime; ?>" onClick="new Calendar(2008,2020).show(this);" size="10" maxlength="10" readonly="readonly" /> 
+					&nbsp;&nbsp;
+				会员名称：
+				<input name="username" type="text" id="username" 	value="<?php echo $username; ?>" size="15" maxlength="20" />&nbsp;&nbsp;
+				<input name="find" type="submit" id="find" value="查找" class="formButton" />
+				</td>
+
+			</div>
+		</form>
+
+		<table id="listTable" class="listTable">
+			<tr>
+				<th align="center">编号</th>
+				<th align="center">订单号</th>
+				<th align="center">存款金额</th>
+				<th align="center">赠送金额</th>
+				<th align="center">申请时间</th>
+				<th align="center">汇款银行</th>
+				<th align="center">汇款方式/汇款地址</th>
+				<th align="center">汇款会员</th>
+				<th align="center">汇款状态</th>
+			</tr>
+			<?php if(is_array($list) || $list instanceof \think\Collection || $list instanceof \think\Paginator): $i = 0; $__LIST__ = $list;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$rows): $mod = ($i % 2 );++$i;?>
+				
+			<tr>
+				<td align="center"><?php echo $rows['id']; ?></td>
+				<td align="center"><a href="<?php echo url('money/huikuan_ok'); ?>?id=<?php echo $rows['id']; ?>"><?php echo $rows['lsh']; ?></a></td>
+				<td align="center"><?php echo $rows['money']; ?></td>
+				<td align="center"><?php echo $rows['zsjr']; ?></td>
+				<td align="center"><?php echo $rows['adddate']; ?></td>
+				<td align="center"><?php echo $rows['bank']; ?></td>
+				<td align="center" style="line-height: 22px;"><?php echo $rows['manner']; ?><br/><?php echo $rows['address']; ?></td>
+				<td align="center"><?php echo $rows['username']; ?></td>
+				<td align="center">
+					<?php if($rows['status'] == 1): ?>
+						<span style="color:#006600;">汇款成功</span>
+					<?php elseif($rows['status'] == 2): ?>
+						<span style="color:#FF0000;">汇款失败</span>
+					<?php else: ?>
+						<span style="color:#FF9900;">审核中</span>
+					<?php endif; ?>
+				</td>
+				<?php $currentsum = $currentsum + $rows['money'];$currentzsjrsum = $currentzsjrsum + $rows['zsjr']; ?>
+			</tr>
+			
+				
+			<?php endforeach; endif; else: echo "" ;endif; ?>
+			<tr>
+				<td colspan="2" align="right">小计:</td>
+				<td align="center"><?php echo $currentsum; ?>|<font color="red"><?php echo $currentsum-$currentzsjrsum; ?></font></td>
+				<td align="center"><?php echo $currentzsjrsum; ?></td>
+				<td colspan="6"></td>
+			</tr>
+			<tr>
+				<td colspan="2" align="right">总计:</td>
+				<td align="center"><?php echo $sum; ?>|<font color="red"><?php echo $sum-$sumzsjr; ?></font></td>
+				<td align="center"><?php echo $sumzsjr; ?></td>
+				<td colspan="6"></td>
+			</tr>
+
+		</table>
+		<!-- page -->
+		<?php if(!(empty($list) || (($list instanceof \think\Collection || $list instanceof \think\Paginator ) && $list->isEmpty()))): ?><?php echo $list->render(); endif; ?>
+		<!-- page end-->
+	</div>
+</body>
+</html>

@@ -1,0 +1,91 @@
+    <div class="container-fluid">
+        <div class="row-fluid">
+		
+			<form class="form-horizontal" onsubmit="return false;">
+			  <div class="control-group">
+				<label class="control-label"  for="order_id">订单编号</label>
+				<div class="controls">
+				  <input type="text" id="order_id" readonly value="<?php echo $info['order_id'];?>">
+				</div>
+			  </div>
+			  <div class="control-group">
+				<label class="control-label"  for="user_name">会员帐号</label>
+				<div class="controls">
+				  <input type="text" id="user_name" readonly value="<?php echo $info['user_name'];?>">
+				</div>
+			  </div>
+			  <div class="control-group">
+				<label class="control-label"  for="order_money">订单金额</label>
+				<div class="controls">
+				  <input type="text" id="order_money" readonly value="<?php echo $info['order_money'];?>">
+				</div>
+			  </div>
+			  <div class="control-group">
+				<label class="control-label" readonly for="order_state">订单状态</label>
+				<div class="controls">
+				<?php if($info['order_state']=='0'){?>
+					<select name="ipt_order_state" id="ipt_order_state" class="order_state_span" style="width:220px;">
+						<option value='0' <?php if($info['order_state']=='0'){ echo "selected";}?>>未支付</option>
+						<option value='1' <?php if($info['order_state']=='1'){ echo "selected";}?>>支付成功</option>
+					</select>
+					<?php }else {?>
+					<span><?php if($info['order_state']==1){echo '<font color=green>支付成功</font>';};?></span>
+					<?php }?>
+				</div>
+			  </div>
+			  <div class="control-group">
+				<label class="control-label" readonly for="ipt_state">处理状态</label>
+				<div class="controls">
+				    <select name="ipt_state" id="ipt_state" class="span" style="width:220px;">
+				    	<option value='0' <?php if($info['state']=='0'){ echo "selected";}?>>待处理</option>		 	
+				    	<option value='1' <?php if($info['state']=='1'){ echo "selected";}?>>已确认</option>
+				    	<option value='3' <?php if($info['state']=='3'){ echo "selected";}?>>待确认</option>
+						<option value='2' <?php if($info['state']=='2'){ echo "selected";}?>>已取消</option>
+					</select>
+				</div>
+			  </div>
+			  <div class="control-group">
+				<label class="control-label" readonly for="order_desc">备注说明</label>
+				<div class="controls">
+				  <input type="text" id="order_desc" name="order_desc" value="">
+				</div>
+			  </div>
+			  <div class="control-group">
+				<div class="controls">
+				  <input type="hidden" id="hid_id" name="hid_id" value="<?php echo $info['id'];?>" />
+				  <button type="submit" id="btnSave" class="btn btn-success">提交修改</button>
+				</div>
+			  </div>
+			</form>
+			
+        </div>
+    </div>
+
+
+<script type="text/javascript">
+
+	$(function(){
+		$("#btnSave").click(function(){
+			var id = $("#hid_id").val();
+			var order_desc = $('#order_desc').val();
+			var state = $('#ipt_state').val();
+			var order_state = $('#ipt_order_state').val();
+			$.post("{:url('order_edit')}?act=edit",{
+					id:id,
+					order_desc:order_desc,
+					state:state,
+					order_state:order_state
+				},function(obj){
+					if(obj.stat == 0){
+						alert(obj.msg);
+						window.location.href = document.URL;
+					}else if(obj.stat == 1){
+						alert(obj.msg);
+					}else{
+						alert(obj.msg);
+					}
+			},"json");
+			
+		})
+	})
+</script>

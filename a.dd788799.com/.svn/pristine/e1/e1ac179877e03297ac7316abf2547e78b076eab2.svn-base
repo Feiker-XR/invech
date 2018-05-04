@@ -1,0 +1,83 @@
+<link rel="stylesheet" href="/400w-public/css/cabel-v1.css"/>
+<link rel="stylesheet" href="/400w-public/css/style.css"/>
+<link rel="stylesheet" href="/400w-public/css/animate.min.css"/>
+<link rel="stylesheet" href="/400w-public/css/lottery.css"/>
+<link rel="stylesheet" href="/400w-public/css/liMarquee.css"/>
+<link rel="stylesheet" href="/400w-public/css/jquery.range.css"/>
+<link rel="stylesheet" href="/400w-public/css/global.css"/>
+<link rel="stylesheet" href="/400w-public/css/other.css"/>
+<link rel="stylesheet" href="/400w-public/css/gfwf.css"/>
+<link rel="stylesheet" href="/400w-public/css/layer.css"/>
+
+<input type="hidden" name="playedGroup" value="<?=$groupId?>"/>
+<input type="hidden" name="playedId" value="<?=$playedId?>"/>
+<input type="hidden" name="type" value="<?=$type?>"/>
+<input type="hidden" name="playedName" value="<?=$played['name']?>"/>
+
+<div id="sscContent">
+    <div class="lot-content clearfix">
+        <div class="fl main-left">
+            <div class="hd clearfix rehd tzgz" id="toptouzhu">
+                <div class="fl refl">
+                    快捷金额：
+                    <input type="text" class="txt" id="inputMoney">
+                </div>
+                <div class="kjanniu">
+                    <a href="javascript:void(0)" class="img-50" data-num="50"></a>
+                    <a href="javascript:void(0)" class="img-100" data-num="100"></a>
+                    <a href="javascript:void(0)" class="img-500" data-num="500"></a>
+                    <a href="javascript:void(0)" class="img-1000" data-num="1000"></a>
+                    <a href="javascript:void(0)" class="img-5000" data-num="5000"></a>
+                    <a href="javascript:void(0)" class="img-10000" data-num="10000"></a>
+                </div>
+            </div>
+            <div class="table-common">
+                <script type="text/html" id="k3_tx">
+                <table width="100%" border="1" class="pp" action="pick_dw">
+                    <thead>
+                    <tr>
+                        <th colspan="9">通选</th>
+                    </tr>
+                    <tr>
+                        <th width="47">号码</th>
+                        <th width="56">赔率</th>
+                        <th>金额</th>
+                        <th width="47">号码</th>
+                        <th width="56">赔率</th>
+                        <th>金额</th>
+                        <th width="47">号码</th>
+                        <th width="56">赔率</th>
+                        <th>金额</th>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+                    {{each pls[0].pls value index}}
+                    {{if index%3==0}}
+                    <tr>
+                    {{/if}}
+                        <td style="cursor: pointer;" onclick="setQuickPick(this)"><strong>{{value.value}}</strong></td>
+                        <td style="cursor: pointer;" onclick="setQuickPick(this)"><strong class="color-red pl" data-plid="{{value.id}}">{{value.pl}}</strong></td>
+                        <td><input type="text" class="table-txt" data-name="{{pls[0].name}}-{{value.value}}" data-plid="{{value.id}}" data-pl="{{value.pl}}"></td>
+                    {{/each}}
+                    </tbody>
+                </table>
+                </script>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+
+    $(function () {
+        //循环表格放到table-common
+        var playedId = "<?=$playedId?>";
+        $.getJSON("/game/pl/playedId/" + playedId, function (data) {
+            pls = data;
+            debug(pls)
+            var html = template("k3_tx", {pls: pls});
+            $('.table-common').html(html);
+        });
+    });
+</script>

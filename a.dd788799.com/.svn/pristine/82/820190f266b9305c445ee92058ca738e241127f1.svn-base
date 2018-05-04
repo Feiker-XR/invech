@@ -1,0 +1,18 @@
+<?php
+namespace app\behavior;
+
+class InitCommon 
+{
+
+
+    public function initConst(){
+        define('COMPANY'                , 'bong');
+        define('JWT_KEY'                , config('auth.guards.jwt.jwt_key')??COMPANY);        
+    }
+
+	public function run(&$dispatch)
+	{		
+        $this->initConst();   
+	}
+
+}

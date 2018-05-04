@@ -1,0 +1,134 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>系统设置</title>
+<link rel="stylesheet" type="text/css" href="/tooltipster/dist/css/tooltipster.bundle.min.css" />
+<link href="/css/base.css" rel="stylesheet" type="text/css" />
+<link href="/css/admin.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="/js/jquery.js"></script>
+<script type="text/javascript" src="/js/jquery.tools.js"></script>
+<script type="text/javascript" src="/js/base.js"></script>
+<script language="JavaScript" src="/js/calendar.js"></script>
+<script type="text/javascript" src="/tooltipster/dist/js/tooltipster.bundle.min.js"></script>
+<style type="text/css">
+.panel{
+	background:#000;
+}
+.table-bordered {border:1px solid #aaa;}
+.table{text-align:center;}
+.table th{background:#000; border-right:2px solid #FFF;padding:3px;}
+.table td{background:#FFF; border-right:2px solid #AAA;padding:3px;}
+</style>
+</head>
+<body class="list">
+	<div class="bar">真人数据查看</div>
+	<div class="body">
+		<form name="form1" method="get" action="">
+			<div class="listBar">
+				会员账号： <input name="username" type="text" id="username" value="{$username}" size="15" /> &nbsp;&nbsp;
+				日期范围： <input name="s" type="text" id="s_time" value="{$s}" onClick="new Calendar(2008,2020).show(this);" 
+				size="10" maxlength="10" readonly="readonly" /> ~ 
+				<input name="e" type="text"	id="e_time" value="{$e}" onClick="new Calendar(2008,2020).show(this);"
+				size="10" maxlength="10" readonly="readonly" /> &nbsp;&nbsp;
+				<input name="find" type="submit" id="find" value="查看" class="formButton" />
+			</div>
+		</form>
+		<ul id="tab" class="tab">
+			<li><input type="button" value="真人投注详单" hidefocus class="current" /></li>
+		</ul>
+		<table id="listTable" class="listTable">
+			<tr>
+				<th>用户名</th>
+				<th>注单号</th>
+				<th>下注日期</th>
+				<th>玩家下注金额</th>
+				<th>有效投注金额</th>
+				<th>派奖金额</th>
+				<th>游戏名称</th>
+				<th>玩法</th>
+				<th>结果</th>
+				<th>局号</th>
+				<th>场次</th>
+				<th>桌号</th>
+				<th>结算状态</th>
+			</tr>
+			{foreach name='list' item='rows' key='k'}
+            <tr>
+                <td align="center"><?=$rows['username']?></td>
+                <td align="center"><?=$rows['WagersID']?></td><!-- 注单号 -->
+                <td align="center"><?=$rows['WagersDate']?></td><!-- 下注时间 -->
+                <td align="center"><?=$rows['BetAmount']?></td><!-- 玩家下注金额 -->
+                <td align="center"><?=$rows['Commissionable']?></td><!--有效投注额  -->
+                <td align="center"><?=$rows['Payoff']?></td> <!-- 派彩额度 -->
+                <td align="center"><?=@$gamename[$rows['GameType']]?></td><!-- 游戏名称 -->
+                <td align="center">{$extral[$k]['info']}</td><!-- 玩法 -->
+                {notempty name="extral[$k]['zxinfo']"}
+				<td align="center" class="tooltip" data-tooltip-content="<div class='panel panel-default'>
+<table class='table table-hover table-bordered'>
+<thead>
+	<tr><th class='text-center'>庄 ( {$extral[$k]['zxinfo']['tmpz']})</th><th class='text-center'>闲 ( {$extral[$k]['zxinfo']['tmpx']} )</th></tr>
+</thead>
+<tbody>
+<tr>
+	<td class='text-center'>{$extral[$k]['zxinfo']['tmpimg'][0]}</td>
+    <td class='text-center'>{$extral[$k]['zxinfo']['tmpimg'][1]}</td>
+</tr>
+</tbody>
+</table>
+</div>">庄 ( {$extral[$k]['zxinfo']['tmpz']} ) 闲( {$extral[$k]['zxinfo']['tmpx']} )
+					
+				</td>
+				{else}
+				<td align="center">
+				<?=@$extral[$k]['resultType']?>
+				</td>
+				{/notempty}
+                <td align="center"><?=$rows['SerialID']?></td>
+                <td align="center"><?=$rows['RoundNo']?></td>
+                <td align="center"><?=$rows['GameCode']?></td>
+                <td align="center">
+				<?php
+                    if($rows['ResultType'] ==='0'){
+                        echo '未结算';
+                    }elseif($rows['ResultType'] === '-1'){
+                        echo '注销';
+                    }else{
+                        echo '已结算';
+                    }
+                ?>
+				</td>   <!-- 结算状态 -->
+            </tr>
+            <?php
+				$result_xj['xjbet1'] += $rows['BetAmount'];
+				$result_xj['xjbet'] += floatval($rows['Commissionable']);
+				$result_xj['xjwin'] += $rows['Payoff'];
+			?>
+            {/foreach}
+        <tr>
+            <td colspan="2"></td>
+            <td  align="center">小计:</td>
+            <td align="center"><?=$result_xj['xjbet1']?></td>
+            <td align="center"><?=$result_xj['xjbet']?></td>
+            <td align="center"><?=$result_xj['xjwin']?></td>
+            <td colspan="7"></td>
+        </tr>
+        <tr>
+            <td colspan="2" ></td>
+            <td align="center">总计:</td>
+            <td align="center"><?=$result_sum['bet1']?></td>
+            <td align="center"><?=$result_sum['bet']?></td>
+            <td align="center"><?=$result_sum['win']?></td>
+            <td colspan="7"></td>
+        </tr>
+</table>
+<div class="pagerBar">{$list->render()}</div>
+	</div>
+
+<script>
+$(document).ready(function() {
+            $('.tooltip').tooltipster();
+        });
+</script>
+</body>
+</html>

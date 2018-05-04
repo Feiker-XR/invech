@@ -1,0 +1,86 @@
+<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:76:"/mnt/wwwroot/www.dd788799.com/houtai/../application/admin/view/data/tyb.html";i:1505452684;}*/ ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html;" charset=utf-8" />
+<title>系统设置</title>
+<link href="/css/base.css" rel="stylesheet" type="text/css" />
+<link href="/css/admin.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="/js/jquery.js"></script>
+<script type="text/javascript" src="/js/jquery.tools.js"></script>
+<script type="text/javascript" src="/js/base.js"></script>
+<script language="javascript">
+function check_submit(){
+	if($("#date_s").val()==""){
+		alert("请选择开始日期");
+		$("#date_s").focus();
+		return false;
+	}
+	if($("#date_e").val()==""){
+		alert("请选择结束日期");
+		$("#date_e").focus();
+		return false;
+	}
+	return true;
+}
+$(document).ready(function(){
+	$('.fanshui').click(function(){
+		var uid = $(this).attr('data');
+		var stime = '<?php echo \think\Request::instance()->get('date_s'); ?>';
+		var etime = '<?php echo \think\Request::instance()->get('date_e'); ?>';
+		$.post('<?php echo url('tyb_fs'); ?>',{uid:uid,date_s:stime,date_e:etime},function(json){
+			if(0 == json.status){
+				window.location.reload();
+			}else{
+				alert(json.msg);
+			}
+		},'json');
+	});
+});
+</script>
+
+<script language="JavaScript" src="/js/calendar.js"></script>
+</head>
+<body class="list">
+	<div class="bar">
+		会员体育(赢一半)反水计算
+	</div>
+	
+<form name="form1" method="get" action="" >
+<div class="listBar">
+  <input name="date_s" type="text" id="date_s" value="<?php echo \think\Request::instance()->get('date_s'); ?>" onClick="new Calendar(2008,2020).show(this);" size="10" maxlength="10" readonly="readonly" />
+          ~
+          <input name="date_e" type="text" id="date_e" value="<?php echo \think\Request::instance()->get('date_e'); ?>" onClick="new Calendar(2008,2020).show(this);" size="10" maxlength="10" readonly="readonly" />
+          &nbsp;&nbsp;<input type="submit" id="find" value="反水计算" class="formButton"/></td>
+
+  </div>
+</form>
+	<div class="body">
+<form action="fs_ok.php" method="post" name="checkboxform" id="checkboxform">
+<table id="listTable" class="listTable">
+				<tr>
+					<th>会员账号</th>
+					<th>体育投注</th>
+					<th>反水比例</th>
+					<th>反水金额</th>
+					<th>操作</th>
+				</tr>
+<?php if(is_array($data) || $data instanceof \think\Collection || $data instanceof \think\Paginator): $i = 0; $__LIST__ = $data;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$row): $mod = ($i % 2 );++$i;?>
+      <tr>        
+        <td align="center"><?php echo $row['username']; ?></td>
+        <td align="center"><?php echo $row['tz']; ?></td>
+        <td align="center"><?php echo $row['bl']; ?></td>
+        <td align="center"><?php echo $row['je']; ?></td>
+        <td align="center">
+        <?php if($row['je']>0): ?>
+        	<a class="fanshui" href="javascript:void(0);" data='<?php echo $row['uid']; ?>'>立即反水</a>
+        <?php endif; ?>
+        </td>
+      </tr>
+<?php endforeach; endif; else: echo "" ;endif; ?>
+  </table>
+</form>
+<?php echo $page; ?>
+	</div>
+</body>
+</html>

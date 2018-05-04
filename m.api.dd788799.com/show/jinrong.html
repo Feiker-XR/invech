@@ -1,0 +1,49 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>home</title>
+<meta http-equiv="Cache-Control" content="max-age=864000" />
+<link href="../css/right.css" rel="stylesheet" type="text/css" />
+<link href="../css/jquery_dialog.css" rel="stylesheet" type="text/css" />
+<script language="javascript" src="/js/jquery.js"></script>
+<script language="javascript" src="/js/jquery_dialog.js"></script>
+<script language="javascript" src="/js/common.js"></script>
+<script language="javascript" src="jinrong.js"></script>
+<script language="javascript" src="/js/jinrong.js"></script>
+<style>
+html{overflow-x:no;}
+</style>
+</head>
+
+<body onload="loaded(document.getElementById('league').value,0);" class="right_body">
+<div id="right_1">
+<div id="shuaxin">
+    <div id="r_t_2">金融指数</div>
+	<div id="shuzi">
+	  <div id="top" style="vertical-align:top; cursor:pointer"></div>
+	</div>
+	<div class="shuaxin2">
+      	<a href="javascript:void(0)" onclick="javascript:shuaxin(document.getElementById('league').value);" title="点击刷新" id="sx_f5"></a><input type="hidden" name="top_f5" id="top_f5" value="0"  />
+        <div style="display:none" id="aaaaa">0</div>
+	</div>
+	<div class="xzls"><input type="hidden" name="league" id="league" value=""  /><input type="button" id="xzls" class="subcla1" /></div>
+  </div>
+</div>
+<div id="right_2">
+  <div id="lantiao">
+    <div class="bai_x zu_11">时间</div>
+	<div class="bai_x lan_danshi_2">项目</div>
+	<div class="bai_x gzu_4">队伍(球员)</div>
+	<div class="bai_z gzu_5">赔率</div>
+  </div>
+<table cellpadding="0" cellspacing="0" border="0" width="100%">
+  <tr>
+		<td id="datashow" colspan="4" height="30" align="center">数据读取中...</td>
+  </tr>
+</table>
+</div>
+</body>
+<script language="javascript" src="/js/times.js"></script>
+<script language="javascript" src="/js/mouse.js"></script>
+</html>

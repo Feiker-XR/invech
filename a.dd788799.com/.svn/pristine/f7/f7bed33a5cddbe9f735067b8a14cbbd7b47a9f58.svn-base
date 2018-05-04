@@ -1,0 +1,174 @@
+
+{layout name="layout" /}
+
+<div class="row">
+  <div class="col-xs-12">
+    <div class="box">
+       <div class="box-header">
+      
+        <label style="height:30px;line-height:30px;display: inline-block;vertical-align: middle;margin-left: 20px;float:left;" >筛选分组：</label> 
+          <form action="{:url('channel')}" method="get" style="float: left;">
+           <input type="hidden" name="id" value="{$thirdid}">
+            <select name="setid" id="setid" class="search-query" style="width:120px;margin-right:10px;">
+              <option value='all'>全部</option>
+                {foreach $set as $v}
+               <option value='{$v.id}' {if $v.id==$setid} selected='selected' {/if}> {$v.name}</option>
+              {/foreach}
+          </select> 
+          <input type="submit" class="btn" value="确定" style="margin-top:-8px;"/>
+        </form>
+      </div>
+      <!-- /.box-header -->
+      <div class="box-body table-responsive no-padding">
+ 
+        <table class="table table-hover">
+          <tbody>
+            <tr align="center" style="font-size:14px;">
+                <th>#</th>
+                <th>分组名称</th>
+                <th>通道名称</th>
+                <th>第三方名称</th>
+                <th>通道代码</th>
+                <th>最低充值金额</th>
+                <th>最高充值金额</th>
+                <th>报警时间(单位:分)</th>
+                <th>风控开关</th>   
+                <th>状态</th>       
+                <th>操作</th>
+            </tr> 
+            {foreach $channel as $vo}
+              <tr align="center"> 
+                <input type="hidden" class="setid" value="{$vo.setid}">   
+                <input type="hidden" class="setconfigid" value="{$vo.set_configid}">
+                <input type="hidden" class="thirdid" value="{$vo.thirdid}">  
+                <input type="hidden" class="stat" value="{$vo.status}">  
+                <input type="hidden" class="status" value=""> 
+                <input type="hidden" class="decimal" value="{$vo.money_decimal}">  
+                <td>{$vo.id}</td>
+                <td width="10%">{$vo.pname}</td>
+                <td width="10%">{$vo.pwname}</td>
+                <td width="10%">{$vo.ptname}</td>
+                <td width="10%"><input type="text" class="code" value="{$vo.code}" style="width:150px;"></td>
+                <td width="10%"><input type="text" class="min"  value="{$vo.min}" style="width:150px;"></td>
+                <td width="10%"><input type="text" class="max"  value="{$vo.max}" style="width:150px;"></td>
+                <td width="10%"><input type="text" class="warntime" value="{$vo.warntime}" style="width:150px"></td>
+                <td width="10%">
+                  <label>
+                    <input type='radio' {if $vo.money_decimal=='1'} checked='checked' {/if} name='decimal_{$vo.id}' class='radio_decimal' value='1'>
+                    <span class='new_show_span_2'>开启</span>
+                  </label>        
+                  <label>
+                    <input type='radio' {if $vo.money_decimal=='0'} checked='checked' {/if} name='decimal_{$vo.id}' class='radio_decimal' value='0'>
+                    <span class='new_show_span_2'>关闭</span>
+                  </label>
+                </td>       
+                <td width="10%">
+                  <label>
+                    <input type='radio' {if $vo.status=='0'} checked='checked' {/if} name='third_open_{$vo.id}' class='radio_oon' value='0'>
+                    <span class='new_show_span_2'>开启</span>
+                  </label>        
+                  <label>
+                    <input type='radio' {if $vo.status=='1'} checked='checked' {/if} name='third_open_{$vo.id}' class='radio_oon' value='1'>
+                    <span class='new_show_span_2'>关闭</span>
+                  </label>
+                </td>
+                <td><a href="javascript:;" class="EditSave btn">保存</a></td>
+              </tr>
+            {/foreach}
+          </tbody>
+        </table>
+        
+      </div>
+       <div style="width:100%;margin-left:20px;">
+        {$channel->render();}
+      </div>
+    </div>
+    <!-- /.box -->
+  </div>
+</div>
+<style>
+  #up_btn{width:46px;overflow: hidden;height:20px;border:none;display: inline-block;float: left;}
+  #up_btn input{margin-left:-13px;margin-top:-3px;}
+  .photoimg_p{display: inline-block;padding-top: 5px;padding-left: 15px;}
+  #imageform{width:380px;float:left}
+  #preview{margin-top: -12px;}
+  .container_fluid_news{clear:both;border-top:1px solid #ddd;}
+  .row_fluid_news{width:300px;float:left;height:215px;}
+  .form-horizontal .control-group .controls span{margin-top:3px;}
+  .form-horizontal .controls{padding-top:4px;}
+  .contentinput{margin-left: 165px;margin-top: 20px;}
+  .contentinput img{margin-left:15px;}
+  .controls_set_01 label{display:inline-block;width:100px;margin-left:15px;margin-top:5px;}
+  .controls_set_01 label input{margin-top:-3px;}
+  .container-fluid th,.container-fluid td{padding:5px;text-align:center;}
+  .add-third{width: 100px;float: left;color: black;margin-left: 20px;}
+  .btn-toolbar{font-size: 14px;}
+  .form-search{margin-right: 20px;}
+  .container-fluid label{display:inline-block;margin:0px 10px;}
+</style>
+<script type="text/javascript">
+  $(function(){
+    $(".radio_oon").click(function(){
+      var status = $(this).val();
+      $(this).parents().parents().siblings(".status").val(status);
+    })
+  })
+  $(function(){
+    $(".radio_decimal").click(function(){
+      var decimal = $(this).val();
+      $(this).parents().parents().siblings(".decimal").val(decimal);
+    })
+  })  
+  $(function(){
+    $(".EditSave").click(function(){
+      var status = $(this).parents().siblings(".status").val();
+      if(status==''){
+        Stat = $(this).parents().siblings(".stat").val();
+      }else{
+        Stat = status;
+      }     
+      
+      var setid = $(this).parents().siblings(".setid").val();
+      var setconfigid = $(this).parents().siblings(".setconfigid").val();
+      var thirdid = $(this).parents().siblings(".thirdid").val();
+      var code = $(this).parent().siblings("td").find(".code").val();
+      var min = $(this).parent().siblings("td").find(".min").val();
+      var max = $(this).parent().siblings("td").find(".max").val();
+      var warntime = $(this).parent().siblings("td").find(".warntime").val();
+      if(code==''){
+         alert("第三方通道代码不能为空");
+         return false;
+      }
+      if(Stat==''){
+         alert("请选择是否开启");
+         return false;
+      }
+      if(Number(warntime)<0){
+         alert("请输入非负整数");
+         return false;        
+      }   
+      var decimal = $(this).parents().siblings(".decimal").val();
+      $.post("{:url('channel_edit')}?id={$thirdid}",{      
+        status:Stat,
+        setid:setid,
+        setconfigid:setconfigid,
+        thirdid:thirdid,
+        code:code,
+        min:min,
+        max:max,
+        warntime:warntime,
+        decimal:decimal
+      },function(obj){
+        if(obj.stat == 0){
+          alert(obj.msg);
+          window.location.href = document.URL;
+        }else if(obj.stat == 1){
+          alert(obj.msg);
+        }else{
+          alert(obj.msg);
+        }
+
+      },"json");
+    })
+  })
+</script>

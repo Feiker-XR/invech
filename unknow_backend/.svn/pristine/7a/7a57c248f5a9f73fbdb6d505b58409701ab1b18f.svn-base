@@ -1,0 +1,109 @@
+{include file='/six/header' /}
+<body>
+<div class="content">
+<form name="orders" action="{:Url('lotterybet/six')}?type=0&class=12" method="post" target="OrderFrame">
+
+<table width="800" border="0" align="center" cellpadding="0" cellspacing="0" class="numberinfo">
+  <tr>
+    <td>
+    		<div class="top">&nbsp;&nbsp;合肖 => 合肖</div>
+ 		</td>
+  	<td align="center">
+  			<div id="openNumber">开奖号码载入中...</div>
+  	</td>
+    <td>
+    	<div class="time-item-all">
+    			<div class="time-item-num">&nbsp;&nbsp;第 <span id="open_qihao">0000000</span> 距离封盘：</div>
+    			<div class="time-item"><span id="hour_show">0 时</span>：<span id="minute_show">0 分</span>：<span id="second_show">0 秒</span></div>
+    	</div>
+    </td>
+  </tr>
+</table>
+<table border="0" align="center" cellpadding="0" cellspacing="1" class="bian" style="margin-top:10px;">
+  <tr>
+    <th>生肖</th>
+    <th>所属号码</th>
+    <th>选择</th>
+    <th>生肖</th>
+    <th>所属号码</th>
+    <th>选择</th>
+    <th>生肖</th>
+    <th>所属号码</th>
+    <th>选择</th>
+    </tr>
+  <tr>
+    <td class="ball_txt">鼠</td>
+    <td class="bian_td_no">{$sx_01}</td>
+    <td class="bian_td_no"><input name="ball[]" type="checkbox" value="1" /></td>
+    <td class="ball_txt">牛</td>
+    <td class="bian_td_no">{$sx_02}</td>
+    <td class="bian_td_no"><input name="ball[]" type="checkbox" value="2" /></td>
+    <td class="ball_txt">虎</td>
+    <td class="bian_td_no">{$sx_03}</td>
+    <td class="bian_td_no"><input name="ball[]" type="checkbox" value="3" /></td>
+    </tr>
+  <tr>
+    <td class="ball_txt">兔</td>
+    <td class="bian_td_no">{$sx_04}</td>
+    <td class="bian_td_no"><input name="ball[]" type="checkbox" value="4" /></td>
+    <td class="ball_txt">龙</td>
+    <td class="bian_td_no">{$sx_05}</td>
+    <td class="bian_td_no"><input name="ball[]" type="checkbox" value="5" /></td>
+    <td class="ball_txt">蛇</td>
+    <td class="bian_td_no">{$sx_06}</td>
+    <td class="bian_td_no"><input name="ball[]" type="checkbox" value="6" /></td>
+    </tr>
+  <tr>
+    <td class="ball_txt">马</td>
+    <td class="bian_td_no">{$sx_07}</td>
+    <td class="bian_td_no"><input name="ball[]" type="checkbox" value="7" /></td>
+    <td class="ball_txt">羊</td>
+    <td class="bian_td_no">{$sx_08}</td>
+    <td class="bian_td_no"><input name="ball[]" type="checkbox" value="8" /></td>
+    <td class="ball_txt">猴</td>
+    <td class="bian_td_no">{$sx_09}</td>
+    <td class="bian_td_no"><input name="ball[]" type="checkbox" value="9" /></td>
+    </tr>
+  <tr>
+    <td class="ball_txt">鸡</td>
+    <td class="bian_td_no">{$sx_10}</td>
+    <td class="bian_td_no"><input name="ball[]" type="checkbox" value="10" /></td>
+    <td class="ball_txt">狗</td>
+    <td class="bian_td_no">{$sx_11}</td>
+    <td class="bian_td_no"><input name="ball[]" type="checkbox" value="11" /></td>
+    <td class="ball_txt">猪</td>
+    <td class="bian_td_no">{$sx_12}</td>
+    <td class="bian_td_no"><input name="ball[]" type="checkbox" value="12" /></td>
+    </tr>
+  <tr>
+   <!-- <td colspan="9" class="bian_td_gg"><table width="0" border="0" align="center" cellpadding="0" cellspacing="0">
+  <tr>
+    <td align="center">赔率：&nbsp;</td>
+    <td align="center" id="odds" class="h_odds">-</td>
+    <td align="center">&nbsp;&nbsp;金额：</td>
+    <td align="center" id="inp" class="h_inp">&nbsp;</td>
+  </tr>-->
+</table></td>
+  </tr>
+</table>
+<div class="button_body">
+		<div style="margin: 0 auto;width: 370px;">
+				<table class="" style="float: left;margin-top: 5px;height: 37px;">
+					  <tr>
+						    <td align="center">赔率：&nbsp;</td>
+						    <td align="center" id="odds" class="h_odds">-</td>
+						    <td align="center">&nbsp;&nbsp;金额：</td>
+						    <td align="center" id="inp" class="h_inp">&nbsp;</td>
+				  	</tr>
+				</table>
+				<a class="button submit fl" onclick="order();">下注</a>
+				<a onclick="reset()" class="button again fl">重填</a>
+		</div>
+</div>
+</form>
+</div>
+<script src="/dd788799view/js/six/class_12.js" type="text/javascript"></script>
+<script type="text/javascript">$(function(){loadInfo();});</script>
+<IFRAME id="OrderFrame" name="OrderFrame" style="display:none"></IFRAME>
+</body>
+</html>

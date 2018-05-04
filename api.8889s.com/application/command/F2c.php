@@ -1,0 +1,251 @@
+<?php
+namespace app\command;
+
+use think\console\Command;
+use think\console\Input;
+use think\console\Output;
+use app\logic\qishu;
+
+class F2c extends Command
+{
+	static protected $lottery = '2分时时彩';
+	//使用中间表,追号如何处理? //中间表和备份表有同样问题, 都需要union;
+	//分表,插入一个分表,查询所有的表; 问题是只支持myisam引擎;
+	//将多个表的操作 放入 一个 model中;
+
+	//1.随机一个开奖结果;
+	//2.结算统计
+	//3.比较条件,满足则提交,不满足则回滚;
+
+    protected function configure()
+    {
+        $this->setName('f2c')->setDescription('结算'.self::$lottery)->addArgument('qishu');
+    }
+
+    protected function execute(Input $input, Output $output)
+    {
+        include_once ROOT_PATH . 'caiji' . DS .'kaijiang' . DS . 'parse-calc-count.php';
+	    $args = $input->getArguments();
+	    if(!$args['qishu']){
+	    	$qishu = \app\logic\qishu::f2ssc();	
+	    }else{
+	    	$qishu = $args['qishu'];
+	    }
+		
+        if($qishu==-1){
+        	$output->writeln("已封盘!");
+        	exit();
+        }
+        //$qishu = '20180123676';
+        $bet_table = 'c_bet_ffc';
+        $auto_table = 'c_auto_2fc';
+
+        $funs = [];
+		$playeds = db('gfwf_played')->field('id,ruleFun')->select();
+		foreach ($playeds as $played) {
+			$funs[$played['id']] = $played['ruleFun'];
+		}
+
+	    $lottery = db('gfwf_lottery')->where('id',4)->find();	    
+	    $where = ['type'=>self::$lottery,'js'=>0,'qishu'=>$qishu,];
+    	$bets = db($bet_table)->where($where)->select();
+    	if(!$bets){
+    		$output->writeln("本期无注单!");exit();
+    	}
+
+    	//最多尝试ffc_try_times次,得到预期的开奖结果
+        $hit = 0;$try = 0;
+        $try_times = config('ffc_try_times')??100;
+
+        while((!$hit)&&($try<=$try_times)){
+
+        	$start_microtime = microtime(true);
+
+	        $kjData = [];
+	        for($i=0;$i<5;$i++){
+	        	$kjData[] = mt_rand(0,9);
+	        }
+
+	        $betCount=0; //总注数
+	        $zjCount=0;  //总中奖注数
+	        $betAmount = 0;
+	        $zjAmount = 0;
+
+		    foreach ($bets as $bet) {
+		    	//if(!$bet['gfwf']){//error}
+		    	$ids[] = $bet['id'];
+		    	$output->writeln("注单".$bet['id']."开始结算!");
+		    	if(62==$bet['id']){
+		    		$a = 1;
+		    	}
+
+		    	$betCount += $bet['actionNum'];
+		    	$betAmount += $bet['actionNum']*$bet['beiShu']*$bet['mode'];
+
+		    	$fun = $funs[$bet['playedId']];
+                $weiShu = $bet['weiShu'];
+                if($weiShu){
+                    $count = $fun($bet['mingxi_2'],implode(",",$kjData),$weiShu) ;    
+                }else{
+                    $count = $fun($bet['mingxi_2'],implode(",",$kjData)) ;    
+                }
+
+		    	if($count){
+		    		$win = $count*$bet['odds']*$bet['beiShu']*$bet['mode']/2;
+					$zjCount += $count;
+					$zjAmount += $win;
+		    	}
+		    }
+		    $try++;
+
+		    $rumtime = runtime($start_microtime);
+		    $output->writeln("第".$try."次尝试结算使用".$rumtime."秒!");
+
+	        $win_rate = floatval($zjCount)/$betCount*100;
+	        if($lottery['win_rate']&&$win_rate>$lottery['win_rate']){	        	
+	        	continue;
+	        }
+
+	        if($betAmount<$zjAmount){
+	        	continue;
+	        }
+	        
+	        $profit_rate = ($betAmount-$zjAmount)/$betAmount*100;
+	        if($lottery['profit_rate'] && $profit_rate < $lottery['profit_rate']){
+	        	continue;
+	        }
+			$hit = 1;
+        }
+
+        if(!$hit){
+	    	$rumtime = runtime(THINK_START_TIME);
+	    	$output->writeln("尝试开奖".$try."次后仍然没有命中杀率,共使用".$rumtime."秒!");
+        	exit();
+        }
+
+        //使用预期的开奖结果进行结算;
+        $betCount=0; //总注数
+        $zjCount=0;  //总中奖注数
+        $betAmount = 0;
+        $zjAmount = 0;        
+        $ids = [];
+        db()->startTrans();
+        foreach ($bets as $bet) {
+        	$ids[] = $bet['id'];
+
+		    $betCount += $bet['actionNum'];
+		    $betAmount += $bet['actionNum']*$bet['beiShu']*$bet['mode'];
+
+	    	$fun = $funs[$bet['playedId']];
+            $weiShu = $bet['weiShu'];
+            if($weiShu){
+                $count = $fun($bet['mingxi_2'],implode(",",$kjData),$weiShu); 
+            }else{
+                $count = $fun($bet['mingxi_2'],implode(",",$kjData));
+            }
+
+	    	if($count){
+	    		$win = $count*$bet['odds']*$bet['beiShu']*$bet['mode']/2;
+				
+				$zjCount += $count;
+				$zjAmount += $win;
+
+		        $user = db('k_user')->where('uid',$bet['uid'])->find();
+		        if(!$user){
+	        		$output->writeln("注单".$bet['id']."的用户".$bet['uid']."不存在!");
+		        	db()->rollback();exit();
+		        }
+                $m_value = $win;
+                $m_order = $bet['did'];
+                $uid = $bet['uid'];
+                $q_qian = $user['money'];
+                $h_qian = $user['money'] + $win;
+                $status = 1;
+                $m_make_time = date('Y-m-d H:i:s');
+                $about = self::$lottery.'派奖,订单号:'.$bet['did'].',金额:'.$win;
+                $type  = 400;
+
+                $data = [
+                	'm_order'=>$m_order,
+                	'uid'=>$uid,
+                	'm_value'=>$m_value,
+                	'q_qian'=>$q_qian,
+                	'h_qian'=>$h_qian,
+                	'status'=>$status,
+                	'm_make_time'=>$m_make_time,
+                	'about'=>$about,
+                	'type'=>$type
+                ];
+                $ret = db('k_money')->insert($data);
+				if(!$ret){
+					$output->writeln("资金表写入失败!");
+		        	db()->rollback();exit();
+				}
+                $ret = db('k_user')->where('uid',$bet['uid'])->inc('money',$win);
+				if(!$ret){
+					$output->writeln("修改用户".$bet['uid']."余额失败!");
+		        	db()->rollback();exit();
+				}
+	    		$ret = db($bet_table)->where('id',$bet['id'])->update(['js'=>1,'win'=>$win,'zjCount'=>(int)$count,]);
+				if(!$ret){
+					$output->writeln("修改注单".$bet['did']."失败!");
+		        	db()->rollback();exit();
+				}	    		
+	    	}else{
+	    		$ret = db($bet_table)->where('id',$bet['id'])->update(['win'=>0,'js'=>1]);
+				if(!$ret){
+					$output->writeln("修改注单".$bet['did']."失败!");
+		        	db()->rollback();exit();
+				}		
+	    	}            
+        }
+
+	    $win_rate2 = floatval($zjCount)/$betCount*100;  
+	    $profit_rate2 = ($betAmount-$zjAmount)/$betAmount*100;
+	    if($win_rate2!=$win_rate){
+			$output->writeln("中奖率计算有误!");
+        	db()->rollback();exit();
+	    }
+	    if($profit_rate2!=$profit_rate){
+			$output->writeln("盈利计算有误!");
+        	db()->rollback();exit();	    	
+	    }
+
+        $bets = db($bet_table)->where('id','in',$ids)->select();
+        foreach($bets as $bet){
+        	unset($bet['id']);
+        	$ret = db('c_bet')->insert($bet);
+        	if(!$ret){
+        		$output->writeln("复制表记录失败!");
+	        	db()->rollback();exit();        		
+        	}
+        }
+        $ret = db($bet_table)->where('id','in',$ids)->delete();
+    	if(!$ret){
+    		$output->writeln("删除表记录失败!");
+        	db()->rollback();exit();        		
+    	}        
+
+        $auto_data = [	'qishu'    => $qishu,
+        				'datetime' => date('Y-m-d H:i:s'),
+        				'ok'	   => 1,
+        				'ball_1'   => $kjData[0],
+        				'ball_2'   => $kjData[1],
+        				'ball_3'   => $kjData[2],
+        				'ball_4'   => $kjData[3],
+        				'ball_5'   => $kjData[4],
+        			];
+	    $id = db($auto_table)->insert($auto_data);
+    	if(!$id){
+        	db()->rollback();
+        	$output->writeln("添加开奖记录失败!");
+        	exit();        		
+    	}	    
+	    db()->commit();
+	    $rumtime = runtime(THINK_START_TIME);
+	    $output->writeln(self::$lottery.$qishu."期，共尝试".$try."次,共使用".$rumtime."秒,开奖结果为".implode(",",$kjData));
+	    $output->writeln('预期中奖率小于'.$lottery['win_rate'].'%,预期利润率大于'.$lottery['profit_rate'].'%');
+	    $output->writeln('本期中奖率为'.number_format($win_rate,2).'%,本期利润率为'.number_format($profit_rate,2).'%');
+	    $output->writeln('本期总利润为'.number_format($betAmount-$zjAmount,2));	    
+    }
+}

@@ -1,0 +1,85 @@
+<input type="hidden" name="playedGroup" value="<?=$groupId?>"/>
+<input type="hidden" name="playedId" value="<?=$playedId?>"/>
+<input type="hidden" name="type" value="<?=$type?>"/>
+<input type="hidden" name="playedName" value="<?=$played['name']?>"/>
+<!-- mobile 广东快乐十分_数字 -->
+<div id="sscContent">
+<div class="lot-content clearfix">
+    <div class="fl main-left">
+        <div class="hd clearfix rehd tzgz" id="toptouzhu">
+            <div class="fl refl">
+                快捷金额：
+                <input type="text" class="txt" id="inputMoney">
+            </div>
+            <div class="kjanniu">
+                <a href="javascript:void(0)" class="img-50" data-num="50"></a>
+                <a href="javascript:void(0)" class="img-100" data-num="100"></a>
+                <a href="javascript:void(0)" class="img-500" data-num="500"></a>
+                <a href="javascript:void(0)" class="img-1000" data-num="1000"></a>
+                <a href="javascript:void(0)" class="img-5000" data-num="5000"></a>
+                <a href="javascript:void(0)" class="img-10000" data-num="10000"></a>
+            </div>
+        </div>
+        <div class="fr">
+            <div class="T-tab clearfix">
+                <a href="javascript:void(0)" onclick="changeTab(this)">第一球</a>
+                <a href="javascript:void(0)" onclick="changeTab(this)">第二球</a>
+                <a href="javascript:void(0)" onclick="changeTab(this)">第三球</a>
+                <a href="javascript:void(0)" onclick="changeTab(this)">第四球</a>
+                <a href="javascript:void(0)" onclick="changeTab(this)">第五球</a>
+                <a href="javascript:void(0)" onclick="changeTab(this)">第六球</a>
+                <a href="javascript:void(0)" onclick="changeTab(this)">第七球</a>
+                <a href="javascript:void(0)" onclick="changeTab(this)">第八球</a>
+            </div>
+        </div>
+        <div class="table-common" id="table-common">
+            <script type="text/html" id="klsf_sz">
+            <table width="100%" border="0" cellpadding="0" cellspacing="0" class="pp" action="klsf_sz" length="1">
+                <thead>
+                <tr>
+                    <th>号码</th>
+                    <th>赔率</th>
+                    <th>金额</th>
+                    <th>号码</th>
+                    <th>赔率</th>
+                    <th>金额</th>
+                </tr>
+                </thead>
+                <tbody>
+                {{each plg.pls value index}}
+                {{if index%2==0}}
+                <tr>
+                {{/if}}
+                    <td onclick="setQuickPick(this,true)">{{value.value}}</td>
+                    <td onclick="setQuickPick(this,true)"><strong class="color-red pl" data-plid="{{value.id}}">{{value.pl}}</strong></td>
+                    <td><input type="text" oninput="checkAmount()" class="table-txt" data-name="{{plg.name}}-{{value.value}}" data-plid="{{value.id}}" data-pl="{{value.pl}}"></td>
+                {{/each}}
+                </tbody>
+            </table>
+            </script>
+        </div>
+        <br/>
+    </div>
+</div>
+</div>
+<script>
+    //var pls;//玩法的所有赔率
+    //var plg;//当前赔率组
+    function changeTab(self) {
+        $(self).siblings().removeClass('active');
+        $(self).addClass('active');
+        var $tabs = $(self).parent().children();
+        var index = $tabs.index(self);
+        plg = pls[index];
+        var html = template("klsf_sz", {plg: plg});
+        $('.table-common').html(html);
+    }
+    $(function () {
+        var playedId = "<?=$playedId?>";
+        $.getJSON("/game/pl/playedId/" + playedId, function (data) {
+            pls = data;
+            console.log(data);
+            $('.T-tab.clearfix').children().eq(0).click();
+        });
+    });
+</script>

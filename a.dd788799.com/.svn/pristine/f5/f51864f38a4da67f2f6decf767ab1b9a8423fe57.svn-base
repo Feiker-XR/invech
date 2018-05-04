@@ -1,0 +1,178 @@
+<?php
+namespace app\common\model\member;
+
+use app\common\model\Bet;
+use app\common\model\Config;
+
+trait AgentTrait
+{
+    //代理登录,auth服务
+    public function scopeAgent($query){
+        return $query->where('is_agent',1);
+    }
+
+    public function agent(){
+        return $this->belongsTo('Member','agent_id','uid');
+    }
+
+    //下线,parentId,parents,admin三个字段丢弃,改用agent_id
+    public function subMembers(){
+        return $this->hasMany('Member','agent_id','uid');
+    }
+
+    public function isAgent(){
+        return $this->is_agent;
+    }
+
+    //代理策略
+    public function isAgentOf($member){
+        return $this->isAgent() && $this->uid == $member->agent_id;
+    }
+
+    //获取所有上层代理-递归
+    public function getAgents(){
+        if(!$this->agent){
+            return collection([]);
+        }
+
+        $collection = collection([$this->agent]);
+
+        $agents = $collection->merge($this->agent->getAgents());
+        
+        return $agents;
+    }
+
+    //获取所有下层会员-递归
+    public function getSubMembers($include_root = false){
+        if($include_root){            
+            $collection = collection([$this]);
+        }else{
+            $collection = collection([]);
+        }                
+        $subs = $this->sub_members->reduce(function ($carry, $sub_member){
+            if(!$sub_member->isAgent()){
+                return $carry->merge(collection([$sub_member]));
+            }else{
+                return $carry->merge($sub_member->getSubMembers());    
+            }            
+        }, $collection);  
+        return $subs;
+    }
+
+    //---------------------代理后台---------------------
+
+    public function scopeMembers($query){
+        return $query->where('agent_id',$this->uid);
+    }
+
+    //暂定为投注过的为有效会员
+    public function scopeAvailMembers($query){
+        //return $query->where('agent_id',$this->uid)->join();
+        return $query->where('agent_id',$this->uid)->where('uid','in',function($query){ 
+            //$query->table((new Bet)->getTable())->column('uid');
+            //query执行查询后option和table等信息置空;
+            //tp只需要设置查询选项,再通过buildSql构造完整的where子句;
+            $query->table((new Bet)->getTable())->distinct(true)->field('uid');
+        });
+    }
+
+
+    public function getMembers($request){
+        
+        $query = $this->members()->getBuild($request);
+       
+        $data = $query->paginate(10);
+     
+        return $data;
+    }     
+
+    public function getAvailMembers($request){
+        
+        $query = $this->availMembers()->getAvailMemberBuild($request);
+       
+        $data = $query->paginate(10);
+     
+        return $data;
+    }    
+
+    public function getAvailMemberBuild($request){
+        
+        $query = $this->db(true,false);
+
+        $query->order('uid');
+
+        $params = $request->param();
+        if($params['keywords']??''){
+             $query->where('username|nickname', 'like','%'.trim($params['keywords']).'%');
+         }
+
+        return $query; 
+    }
+
+    public function getMemberBetStat($date){
+
+        //$date_s = date("Y-m-1", strtotime("-1 months", strtotime($date)));
+        //$date_e = date("Y-m-t", strtotime("-1 months", strtotime($date)));
+        $date_s = date("Y-m-1", strtotime($date));
+        $date_e = date("Y-m-t", strtotime($date));
+
+        $time_s = strtotime($date_s.' 00:00:00');
+        $time_e = strtotime($time_e.' 23:59:59');
+
+        $perPage = 100;
+        $bet_money=0;
+        $bet_bonus=0;
+
+        $this->members->chunk($perPage, function($members) use ($bet_money,$bet_bonus){
+            $ids = $members->column('uid');
+            //$sum = Bet::where('uid','in',$ids)->where('bonus',0)->sum('xxx');
+            Bet::where('uid','in',$ids)
+            ->where('kjTime','between',[$time_s,$time_e])
+            //->where('bonus',0)
+            //->where('lotteryNo','not null')
+            ->where('lotteryNo','!=','')
+            ->chunk($perPage, function($bets) use ($bet_money,$bet_bonus){
+                foreach ($bets as $bet) {
+                    $bet_money += $bet->bet_money;
+                    $bet_bonus += $bet->bonus;
+                }
+            });
+        });
+        return [$bet_money,$bet_bonus,];
+    }
+
+    public function commission($date=null){
+
+        //将日期转为第一天,数据库中1日0时0分0秒的时间戳表示某个月;
+        $date = is_null($date)?date('Y-m-1'):date("Y-m-1", strtotime($date));
+
+        list($bet_money,$bet_bonus) = $this->getMemberBetStat($date);
+
+        if($this->agent_mode == self::AGENT_MODE_FLOW){
+            $agent_rate = Config::getByName('CommissionRate1');
+            $commission = $bet_money *  $agent_rate/ 100;
+
+        }else{
+            $agent_rate = Config::getByName('CommissionRate2');
+            $amount = ($bet_money - $bet_bonus);
+            if($amount<0){
+                $amount = 0;
+            }
+            $commission = $amount *  $agent_rate/ 100;
+        }
+        $commission = round($commission,2);
+
+        $com = Commission::create([
+            'uid'   =>  $this->uid,
+            'month' =>  strtotime($date),
+            'amount' => $commission,
+            'agent_mode' => $this->agent_mode,
+            'agent_rate' => $agent_rate,
+            'bet_money' => $bet_money,
+            'bet_bonus' => $bet_bonus,
+        ]);
+
+        $bet->user->incBalance($commission,'commission',$com->id,'代理佣金月结');  
+    }
+
+}

@@ -1,0 +1,189 @@
+<link rel="stylesheet" type="text/css" href="/__CSS__/user/reset.css?v=20170715">
+<link rel="stylesheet" type="text/css" href="/__CSS__/user/hpn-common.css">
+<link rel="stylesheet" type="text/css" href="/__CSS__/user/index.css?v=20171117">
+<link rel="stylesheet" type="text/css" href="/__CSS__/user/global.css">
+<script src="/js/jquery.min.js"></script>
+<script type="text/javascript" src="/__JS__/user/validate.js"></script>
+<script type="text/javascript" src="/__JS__/user/jquery.validate.min.js"></script>
+<script type="text/javascript" src="/__JS__/layer/layer.js"></script>
+<style>
+
+	.reResulttBg{background: #f42023;}
+	.process .layout .monty ul li,.process .layout .list_tems .date:after,.list ul li .slide p.acti,.headmemberbg{background: #f42023;}
+	.process .layout .list_tems .date span, .process .layout .list_tems .date h3,.eveb_amount span,.color-e77c3c,.eveb_setting_table a,.xieyiCss，.gcdtgd{color: #f42023!important;}
+	.eveb_sub_nav_type a:hover, .eveb_sub_nav_type li.on a:link, .eveb_sub_nav_type li.on a:visited{color: #f42023!important;font-weight: 700;border-bottom-color: #e1e1e1;background: #f8f8f8;}
+	.list ul li .slide p:hover,.letterbtn-bg{background: #f42023!important;color: white;}
+	.list h3 a{background: #f42023;border-bottom: 3px solid #a92309; height: 47px; line-height: 47px;}
+	.help_l_menu li .t.sli{border-left: 5px solid #f42023;}
+	.withdraw-bg-input{border: 2px solid #f42023!important;}
+	.clearBet_template .l span i{background: #f42023 url(/static/theme/memberTheme/theme1/img/tm-mdl-icon.png) no-repeat!important; border-radius: 50%;background-position: 0 41%!important;}
+
+	.eveb_nav_sub .on,.button_1, .button_1:link, .button_1:visited,.alert_col h5,.onlineService,.layui-layer-popup .layui-layer-title,.xzqd,.xzqdlskj,.game_name .box2_stage p span i.acti,.Betting,.Single,.list_ject ul li .Result p a.acti,.list_ject ul li .Result p a.acti:hover,.top{background:#f42023!important}
+	.eveb_nav_sub .on a,.bankInfo .name,.help_l_menu .title p .sum,.help_r_main .light,.game_name .box2_stage p span i,.game_name .box1_name  p i,.Account p a.red{color:#f42023!important}
+	.eveb_nav_sub .on,.game_name .box2_stage p span{border:1px solid #f42023!important;}
+	.eveb_nav_sub .on,.game_name .box2_stage p span i.acti{color:#fff!important;}
+	.eveb_nav_sub .on a{border-top:1px #f42023 solid!important;}
+	.eveb_nav_sub ul{border-bottom:1px #f42023 solid!important;}
+	#apptop{background: #f42023}
+	.alert_col div::-webkit-scrollbar-thumb {background-color: #f42023!important;}
+	.head div h5,.Betting .tabs ul li,.top .nav h1{background:#d51910!important}
+	.jf_box .url a,.eveb_form label.error,.eveb_transfer_box .center_wallet .money,.eveb_transfer_box .wallet_list li p{color:#d51910!important}
+	.Betting .tabs ul li.acti{background:#fff!important}
+	.button_1, .button_1:link, .button_1:visited{border:1px solid #d51910!important;}
+	table._table{
+		width:100%;
+		border:1px solid #e9e9e9;
+	}
+	table._table tr{
+		border: 1px solid #e9e9e9;
+	}
+	table._table tr td{
+		height: 46px;
+		line-height: 46px;
+		color:#666;
+		text-align: center;
+		font-size:12px;
+	}
+	table._table tr td:first-child{
+		width: 60%;
+		border-right: 1px solid #e9e9e9;
+		background: #FCFCFC;
+	}
+</style>
+
+<link type="text/css" rel="stylesheet" href="/__CSS__/user/laydate.css">
+<link rel="stylesheet" href="/__CSS__/user/layer.css?v=3.0.11110">
+<div class="help_r_main">
+	<div class="eveb_content">
+		<div class="eveb_transfer_box mb20 clearfix" style="overflow: visible;">
+			<div class="center_wallet fl rel">
+				<span>账户总余额</span>
+				<p class="money"><strong id="wallet" class="money">{$user->coin}</strong>元</p>
+				<div class="abs Res" id="refreshMoney"><i class="icon resIcon"></i></div>
+			</div>
+			<ul class="wallet_list wallet_list2 fl">
+				<li><span>待审核总额</span>
+					<p id="wallet_1" class="money">{$user->fcoin}元</p></li>
+				<!--<li class="rel">
+                    <a href="javascript:void(0)" class="color-df3c31">资金归集</a>
+                    <p><i class="icon tipIcon"></i></p>
+                    <div class="tipBox abs">
+                        <span class="caret abs"></span>
+                        可将各个平台零钱全部转入中心钱包，方便取款
+                    </div>
+                </li>-->
+			</ul>
+		</div>
+		<form name="withdrawForm" onsubmit="return false;">
+			
+			{if($user->bank->empty())}		
+					<ul class="eveb_form management_bank">
+						<div class="mb10 color-888"><font color="#999999">您还未绑定银行卡 请绑定银行卡，</font><a href="/user/bank" style="color:#ff7800">点击前往&gt;&gt;</a></div>
+					</ul>
+			{else/}			
+			<ul class="eveb_form management_bank">
+				<div class="mb10 color-888">转到银行卡：<label for="id" class="error" style="display: none;"></label></div>
+				<li>
+					<div class="item w106"><input type="radio" name="id" checked="checked" value="103268" class="valid"></div>
+					<div class="item w125 color-e77c3c" style="width:30px">默认</div>
+					<div id='bank_name' class="item w105">{$user->bank_name}</div>
+					<div id='bank_username' class="item w105">{$user->bank_username}</div>
+					<div id='bank_account' class="item w205 accountSubStr" data-bank="6227545758686589">
+						{$user->bank_account}
+					</div>
+					<div id='bank_address' class="item w230">{$user->bank_address}</div>
+					<!--
+					<div class="item">
+						<a href="javascript:void(0)" class="mr10 color-c4463c" onclick="setDefault(103268)">设为默认</a>
+						<a href="javascript:void(0)" class="icon deleteIcon2" onclick="ajaxDel(103268)"></a>
+					</div>
+					-->
+				</li>
+			</ul>
+			{/if}
+			<ul class="eveb_form eveb_withdraw">
+				<li>
+					<span>提款金额：</span>
+					<input id="money" class="withdraw-bg-input error" name="money" type="text" placeholder="请输入转账金额" style="border: 2px solid #f49c42;background: #faf9f9;height: 28px; padding-left:5px">
+					<label for="money" class="error">* 请输入金额</label>
+				</li>
+
+			</ul>
+			<div class="eveb_form_submit">
+				<input type="submit" id="btnSubmit" value="提交" class="button_medium button_1">
+			</div>
+		</form>
+	</div>
+</div>
+<script>
+	$(function () {
+		oldMoney =  parseFloat($("#wallet").html());
+	    //提交余额申请
+        $("form[name='withdrawForm']").validate({
+            rules: {
+                money: {required: true,max: oldMoney }
+            },
+            messages: {
+                money: {
+                    required: '* 请输入转账金额',
+                    max: '* 最大金额不能超过余额'
+                }
+            },
+			submitHandler: function (form) {
+                getWithdraw();
+            }
+        });
+
+	    //获取最新余额数据
+		$("#refreshMoney").click(function () {
+			var url = '/user/ajaxGetMoney';
+			var data = {};
+			$.get(url,data,function (res) {
+			    if (res == oldMoney){
+					alert('数据是最新数据')
+				}else{
+                    $("#wallet").html(res);
+				}
+			})
+        })
+    })
+	function getWithdraw() {
+		var amount = $("#money").val();
+	    $.get('/user/get_withdraw_info',{amount:amount},function (json) {
+console.log(json);
+			var html = '<table class="_table"><tbody>' +
+						'<tr><td>所需打码量</td><td>' + json.data.audit_remain + '</td></tr>' +
+						'<tr><td>提款金额</td><td>' + json.data.amount + '</td></tr>' +
+						'<tr></tr></r><td>实际到账</td><td>' + json.data.real_amount + '</td></tr>' +
+						'<tr><td>提款扣款</td><td>' + json.data.debit_amount + '</td></tr>' +
+						'</tbody></table>';
+			$("#money").data('check',json.data);
+			layer.confirm(html, {
+			  btn: ['继续','取消'] //按钮
+			}, function(){				
+				//layer.msg('的确很重要', {icon: 1});		        
+		        var data = {};
+		        var amount = $("#money").val();
+		        data.amount = amount;
+		        var bank = {$user->bank->toJson();};
+		        var check = $("#money").data('check');
+		        Object.assign(data,bank,check);
+
+		        var url = '/user/withdraw';
+		        $.post(url,data,function (res) {
+
+		            console.log(res);
+		            if (res.code){
+		                $("#wallet").html(res.data.coin);
+		                $("#wallet_1").html(res.data.fcoin);
+		            }else{
+		                alert(res.msg);
+					}
+		        },'json')			  
+			});	
+	    },'json');
+
+	
+
+    }
+</script>

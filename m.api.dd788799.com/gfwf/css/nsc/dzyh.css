@@ -1,0 +1,254 @@
+@charset "utf-8";
+
+h1,h2,h3,h4,h5,ul,p { margin:0; padding:0;}
+li { list-style:none;}
+a{ text-decoration:none;/* color: #212f78; */}
+table{ font-size: 14px;}
+table input{ vertical-align: middle;position: relative;      border: 1px solid #bbb;      background: #fff;      width: 100px;      /* height: 18px; */      /* padding: 0 2px 0 5px; */      /* line-height: 24px; */      -moz-box-shadow: 2px 2px 2px #eee inset;      /* -webkit-box-shadow: 2px 2px 2px #eee inset; */      /* box-shadow: 2px 2px 2px #eee inset; */      -moz-border-radius: 3px;      -webkit-border-radius: 3px;      border-radius: 3px;      color: #666;      font-family: 'Microsoft Yahei';}
+select { padding:0 0 0 5px; border:1px solid #bbb; height:32px; line-height:32px; font-size:14px; color:#666; font-family: Microsoft Yahei;}
+a:hover {color:#a96b94;}
+.clearfix:after { content:"."; display:block; height:0; clear:both; visibility:hidden;}
+
+.redtit{ color: red; font-size: 12px; display: block; text-align: center;}
+.red-world,.red{ color: #ff0000;}
+.red-world,.green { color: #5bc92e;}
+
+.boxline{ text-align: center;}
+input[type='submit'],.formZjbd,.formZjbd_sjh { width:90px; height:33px; line-height: 33px; font-size: 16px!important; color: #fff; padding: 0!important; font-family: Microsoft Yahei; margin:0 10px; background:url("/images/nsc/btn-modification_bg.png") no-repeat; border:0!important; cursor:pointer; letter-spacing:3px;}
+input[type='reset'],.formReset,.formBack,.bt_cedan,.bt_cancel,.a-back_list{ font-size: 16px; width: 90px; height: 33px; line-height: 33px; color:#353434; margin:0 10px; padding: 0!important; background: url("/images/nsc/btn-reset_bg.png") no-repeat; border:0!important; font-family: Microsoft Yahei; cursor:pointer; letter-spacing:3px;}
+.list_btn_box .formZjbd { letter-spacing:1px!important;}
+
+/*错误页面*/
+
+/*显示下级*/
+.memberEevnt { color:#f96905; cursor:pointer; }
+.memberList { position:absolute; border:1px solid #f96905; font-size:16px; color:#f96905; text-align:left; padding:30px 35px; background:#fff5ee; line-height:22px; display:none; margin:21px 0 0 1px;}
+.memberClose { cursor:pointer; position:absolute; top:7px; right:10px; right:5px; text-indent:-9999px; width:13px; height:13px; background:url(/images/nsc/skin/blue_skin/list/close.gif) no-repeat; }
+.memberTip { background:url(/images/nsc/skin/blue_skin/list/mem_tip.gif) no-repeat; width:13px; height:9px; position:absolute; top:-9px; }
+
+#userlistDL strong a { color:#f96905;}
+
+.formTable {}
+.formTable tr th{}
+.formTable tr td {}
+
+.tdz_left,.txtLeft { width: 40%; padding-right: 10px!important; text-align: right!important;}
+.tdz_left2 { width: 48%; padding-right: 10px!important; text-align: right!important;}
+.tdz_right,.txtRight { text-align: left!important; padding-left: 10px!important;}
+.u_add_zl { width: 21%; text-align: right!important; padding-right: 10px!important; background: #f8f5f5;}
+.u_add_zr { text-align: left!important; padding-left: 20px!important; position:relative;}
+.u_add_zr p { display:inline; }
+.u_add_zr label { margin-right:10px; font-size:15px; font-weight:bold; color:#444; cursor:pointer;}
+.text_hint { color:#c3c3c3; padding-left: 10px; font-size:12px;}
+.hint_p { font-size:12px; margin-left:10px;}
+.hint_p .hint_correct { color:#5bc92e; padding:5px 8px; background:#ddf4d3; border:1px solid #acdc99; border-radius:3px;}
+.hint_p .hint_error { color:#FF0000; padding:5px 8px; background:#ffd9d9; border:1px solid #f3a4a4; border-radius:3px;}
+
+.no-records { padding: 30px 0!important; text-align:center;}
+.l_message { line-height:30px; height:30px; color:#ff0000; margin-top:10px; }
+.font_red { color:#ff0000; }
+
+.list_page { line-height: 30px; margin-top: 10px; color: #888;}
+.page { float: right;}
+#contentBox {}
+.set_list { background: #f8f8f8; padding: 13px 0 13px 20px; margin-bottom: 15px;}
+.set_list label { font-size: 15px; color:#444; font-weight:bold;}
+.set_list input[type='submit'] { letter-spacing:0!important;}
+.set_list input:disabled{background:#B5B3B3;color:#FAF6F6;cursor:default;border-radius: 5px;-webkit-border-radius: 5px;-moz-border-radius: 5px;}
+.list_btn_box { text-align: center; padding: 15px 0 0 0;}
+.floatLeft {float: left;}
+.floatRight {float: right;}
+.wr200 {width: 200px; text-align: right!important;}
+.generalize_footer { text-align: left; color: #666; line-height: 28px; padding: 20px 0 0 20px; font-size:14px;}
+.generalize_footer #fe_text { border:1px solid #ddd!important; width:500px; color:#000;}
+.tuiguang_td { text-align: left!important; padding: 0 0 0 50px!important;}
+.tuiguang_td input { margin-right: 5px; text-align:center; border-radius:4px; -moz-border-radius:3px; -webkit-border-radius:3px; border-radius:3px; -moz-box-shadow:2px 2px 2px #eee inset; -webkit-box-shadow:2px 2px 2px #eee inset; box-shadow:2px 2px 2px #eee inset;}
+.tuiguang_td-width input { width:88px; margin-right:5px;}
+.z_list_record { margin-bottom: 15px;}
+.z_list_record td { padding: 20px 0;}
+.z_list_record .z_zh { font-size: 24px; color: #444; background-color: #f6f6f6; width: 50%; text-align: center; border-top: 2px solid #d6d6d6;}
+.z_list_record .z_money { font-size: 24px; color: #816F9A; background-color:#f2eff5; width: 50%; text-align: center; border-top: 2px solid #dad0e3;}
+.gr-td_choose {display: inline-table; padding-top: 10px;}
+.formSame,.z_copy_btn { width: 62px; height: 35px; line-height: 32px; padding: 0!important; border: 0!important; color: #333; font-size: 14px; cursor: pointer; background:url(/images/nsc/skin/blue_skin/list/form_smallBtn.png) no-repeat;}
+.formSubmit { width: 62px; height: 35px; line-height: 32px; padding: 0!important; border: 0!important; color: #fff; font-size: 14px; cursor: pointer; background:url(/images/nsc/skin/blue_skin/list/form_smallBtn.png) no-repeat 0 -45px;}
+.z_copy_btn { margin: 0 0 0 10px;}
+.z_red_color {}
+.underway_text { color: #5bc92e;}
+.cancel_text { color: #f96c0a;}
+.accomplish_text { color: #ff2d2d;}
+#lotteriesform table td select { border: 1px solid #bbb; border-radius:4px; -moz-border-radius:3px; -webkit-border-radius:3px; border-radius:3px; -moz-box-shadow:2px 2px 2px #eee inset; -webkit-box-shadow:2px 2px 2px #eee inset; box-shadow:2px 2px 2px #eee inset;}
+.xk_tr td { background-color: #fafafa;}
+.tdbg { background-color: #fbfbfb;}
+
+.list-div { overflow: hidden; zoom:1;}
+.jilu_box_l { width: 60%; float: left; margin-right: 10px;}
+.jilu_box_r { width: 38%; float: left;}
+
+
+/*提款*/
+.z_red_color,.font_red_font { color: #ff6600; font-size: 16px; font-weight: bold;}
+
+/*公共输入提款密码*/
+.commonality_drawings_password { padding:88px 0 150px;}
+.commonality_drawings_password .pd_left { width: 420px; margin: 0 auto;}
+.commonality_drawings_password h5 { font-size: 24px; color:#5c646a; font-weight: normal; margin: 0 0 12px 0;}
+.commonality_drawings_password_input { margin-bottom:20px;}
+.commonality_drawings_password_input .password { font-size: 18px; color: #333; padding:13px 8px; width: 350px; border: 1px solid #bbb; border-radius:4px; -moz-border-radius:3px; -webkit-border-radius:3px; border-radius:3px; -moz-box-shadow:2px 2px 2px #eee inset; -webkit-box-shadow:2px 2px 2px #eee inset; box-shadow:2px 2px 2px #eee inset; font-family:'Microsoft Yahei';}
+
+/*密保设定*/
+.list_mb_input1 { width: 220px;}
+
+/*绑定邮箱*/
+.yes_email_t { font-size: 24px; color: #fc7c23; background-color: #ffeadc; border-top: 2px solid #ffc297; padding: 20px 0; text-align: center;}
+.yes_email_input { background: none!important; border: 0!important; font-size: 24px; color: #fc7c23;}
+.yes_email_b { font-size: 14px; color: #333; padding: 30px 0 0; text-align: center;}
+
+/*绑定卡号*/
+.bttt {}
+.bttt ul li { padding: 15px 0; border-bottom: 1px dotted #ddd; font-size: 14px; color: #333;}
+.bttt .ttt1 { display: inline-table; width: 20%; padding-right: 10px!important; text-align: right!important; color: #888;}
+.bttt .ttt2 { display: inline-table; text-align: left!important; padding-left: 10px!important; font-size: 16px;}
+.ttt4 { text-align: center; display: block;}
+
+#point { color: #888; line-height: 24px;}
+
+/*注册管理*/
+#registerBox { background:#f4f4f4; margin:20px 30px 0px 30px; }
+.userBox { margin-bottom:10px; }
+.userBox table { background:#dbdddf; color:#888888; }
+.userBox table tr { height:50px; line-height:50px; }
+.userBox table tr td { background:#f4f4f4; padding-left:10px; }
+.userBox table tr td.title { text-align:right; background:#ebebeb; padding-left:0px; color:#333; }
+.userBox table tr td input { vertical-align:middle; }
+.userBox table tr td input.input150 { height:36px; line-height:36px; width:200px; border:1px solid #ccc; margin-right:5px; }
+
+.peieBox { margin-bottom:15px; }
+.peieBox h3 { margin:15px 0 10px;  height:24px; line-height:24px; color:#fc7c23; font-size:18px; border-left: 5px solid #fc7c23; padding-left:10px; font-weight:normal; text-align: left;}
+.peieBox table { background:#dbdddf; color:#333; text-align:center; font-size:14px; }
+.peieBox table tr { height:42px; line-height:42px; }
+.peieBox table tr td { background:#f4f4f4; }
+
+.fandianBox { overflow: hidden; }
+.fandianBox h3 { margin:15px 0;  height:24px; line-height:24px; color:#694d85; font-size:18px; border-left: 5px solid #694d85; padding-left:10px; font-weight:normal; text-align: left;}
+.fandianBox .fandian { border:1px solid #dbdddf; border-top:0px; padding:14px; }
+.fandianBox .fandian p { font-size:14px; color:#333; vertical-align:bottom; padding-bottom:10px; }
+.fandianBox .fandian p.msg { font-size:12px; color:#888; }
+.fandianBox .fandian p select { vertical-align:bottom; margin:0px 10px; }
+.fandianBox .fandian p .formWord{ background:url(/images/nsc/skin/blue_skin/list/saveBtn.png) no-repeat; width:140px; height:44px; text-indent:-9999px; border:0px; cursor:pointer; }
+.dotTitle { margin:15px 0;  height:24px; line-height:24px; color:#694d85; font-size:18px; border-left: 5px solid #694d85; padding-left:10px; font-weight:normal; text-align: left;}
+
+.lotteryBox { margin-bottom:10px; }
+.lotteryBox table { background:#dbdddf; color:#888888; text-align:center; font-size:14px; }
+.lotteryBox table tr { height:42px; line-height:42px; }
+.lotteryBox table tr th { background:#ebebeb; color:#000; font-weight:normal; }
+.lotteryBox table tr td { background:#f4f4f4; color:#333; }
+.lotteryBox table tr td input.input100 { width:100px; height:30px; line-height:30px; border:1px solid #ccc; margin-right:10px; }
+
+/*在线充值*/
+.maintain_ico { background:url(/images/nsc/skin/blue_skin/list/bank/sc_recharge_maintain_ico.png) no-repeat; width:202px; height:70px; display:block; position:absolute; top:-1px; left:-1px; cursor:default;}
+.step { padding:0 20px;}
+.step .item { overflow: hidden; zoom:1; padding: 15px 0; border-bottom: 1px dashed #ddd;}
+.step .item .item_l { width:150px; float: left; font-size: 16px; line-height: 36px; color: #333; padding-right: 10px; text-align:right;}
+.step .item .item_r { float: left;}
+.step .item .item_r select {}
+.step .item .cz_input1 { font-family: Microsoft Yahei; height: 52px; line-height: 52px; font-size: 22px; color: #333; border: 1px solid #bbb; padding: 0 8px; color: #333; border-radius:4px; margin-right:8px;}
+.step .item .money_hanggao { line-height: 52px!important;}
+.step .item .tips { color: #888; padding: 10px 0 0 0; font-size: 14px;}
+.step .item .tips b { color: #fc7c23;}
+.step .item .yuan { font-size: 28px; color:#333; vertical-align: -3px;}
+.step .item #msg_money { color:red; padding-left: 38px; font-size: 14px;}
+.step .item .money { font-size: 20px; color: #fc7c23; line-height: 36px;}
+.step .z_font1 { font-size: 20px; color: #888; line-height: 36px;}
+
+
+#choosedBank span { float:left; display:inline; margin-top:25px; }
+#choosedBank .icon { margin-left:12px; width:25px; height:25px; }
+#choosedBank .bankName { font-size:18px; margin-top:1px; }
+#choosedBank .bankName img { vertical-align:middle;}
+#choosedBank .up { width:11px; height:6px; background:url(/images/nsc/skin/blue_skin/list/bank/up.gif) no-repeat; margin-left:10px; margin-top:35px; }
+#choosedBank .down { width:11px; height:6px; background:url(/images/nsc/skin/blue_skin/list/bank/down.gif) no-repeat; margin-left:10px; margin-top:35px; }
+.zhi .icon { background:url(/images/nsc/skin/blue_skin/list/bank/zhi25.png) no-repeat; }
+.gong .icon { background:url(/images/nsc/skin/blue_skin/list/bank/gong25.png) no-repeat; }
+.jian .icon { background:url(/images/nsc/skin/blue_skin/list/bank/jian25.png) no-repeat; }
+.zhao .icon { background:url(/images/nsc/skin/blue_skin/list/bank/zhao25.png) no-repeat; }
+.nong .icon { background:url(/images/nsc/skin/blue_skin/list/bank/nong25.png) no-repeat; }
+.bankBox { width:140px; height:38px; border:1px solid #c9c9c9; padding:5px 10px 0; background:#fff; float:left; display:inline; margin-right:20px; margin-bottom:10px; position:relative; cursor:pointer; overflow:hidden; }
+.bankBox img { vertical-align:middle;}
+.bankBox b { font-size:22px; color:#333; font-weight:normal; margin-left:10px;  }
+.bankBox p { font-size:12px; color:#888; }
+.bankBox span { display:none; }
+.zhiBox { background:url(/images/nsc/skin/blue_skin/list/bank/zhi.png) no-repeat 25px 10px; }
+.gongBox { background:url(/images/nsc/skin/blue_skin/list/bank/gong.png) no-repeat 25px 10px; }
+.nongBox { background:url(/images/nsc/skin/blue_skin/list/bank/nong.png) no-repeat 25px 10px; }
+.zhaoBox { background:url(/images/nsc/skin/blue_skin/list/bank/zhao.png) no-repeat 25px 10px; }
+.jianBox { background:url(/images/nsc/skin/blue_skin/list/bank/jian.png) no-repeat 25px 10px; }
+#banklist { padding: 0 0 0 160px; width:auto;}
+#banklist .hover { border:1px solid #fc7c23; }
+#banklist .hover span { position:absolute; right:0px; bottom:0px; background:url(/images/nsc/skin/blue_skin/list/bank/choose.png) no-repeat; width:21px; height:19px; display:block; }
+.cz_btn_box { text-align:center; padding: 25px 0 50px 0;}
+.cz_btn_box p { padding: 0 0 15px 0; color: #888;}
+.cz_btn_box a.next { font-weight:bold; font-family: Microsoft Yahei; background:url(/images/nsc/skin/blue_skin/list/saveBtn2.png) no-repeat; width:201px; height:56px; font-size: 22px; line-height: 54px; color: #fff; display:inline-block; }
+.cz_btn_box a.next:hover { background:url(/images/nsc/skin/blue_skin/list/saveBtn2.png) no-repeat 0 -66px;}
+#bind { font-family: Microsoft Yahei; background:#fc7c23; cursor: pointer; border:0; padding:0 15px; height:32px; font-size: 14px; line-height: 32px; color: #fff; display:inline-block; margin: 0 15px; border-radius:3px;}
+
+.jixuan{padding-left:10px;width:100px;}
+.jixuan .jx_button_90x26{width:90px; height: 26px; margin-bottom:5px; border:1px solid #D8D8D8; background: #fff;border-radius:3px}
+
+/*充值第二步*/
+.gocz_btn_box { text-align: center; font-size: 16px; padding: 30px 0 35px 0;}
+.gocz_btn_box p { padding: 10px 0;}
+.gocz_btn_box p.ylj { color: #fc7c23; font-size: 20px;}
+.gocz_btn { font-family: Microsoft Yahei; background:url(/images/nsc/skin/blue_skin/list/saveBtn2.png) no-repeat; border: 0; cursor: pointer; width:201px; height:56px; font-size: 22px; line-height: 54px; color: #fff; display:inline-block; margin: 0 15px;}
+.cz_title { color: #000; font-size: 22px; font-weight: bold; float: left; margin: 5px 0 0 0;}
+.back { float: right; background: url(/images/nsc/skin/blue_skin/list/bank/back_bg.png) no-repeat; padding-left: 32px; width: 100px; height: 34px; line-height: 34px; color: #888; font-size: 14px; display: block;}
+.cz_sum { text-align: center; font-size: 24px; color: #333;}
+.cz_sum b { color: #f00000; font-size: 30px;}
+.cz_help { padding: 30px 0 20px; color: #aaa; font-size: 14px;}
+.cz_help_t { color: #666; font-size: 18px; margin-bottom: 5px;}
+.cz_help p { margin-bottom: 15px;}
+.cz_help .safe1 { width: 480px; height: 234px; display: inline-block; background: url(/images/nsc/skin/blue_skin/list/bank/safe1.jpg) no-repeat; margin-right: 20px;}
+.cz_help .safe2 { width: 413px; height: 234px; display: inline-block; background: url(/images/nsc/skin/blue_skin/list/bank/safe2.jpg) no-repeat;}
+
+.time_tit { background: #fafafa;}
+.time_tit_l { font-size: 20px; color: #000; font-weight: bold; margin: 0 50px 0 0;}
+.time_tit_r {}
+.time_tit_r b { color: #fc7c23; font-size: 20px; font-weight: bold;}
+.cz_popup_hint { width:100%; position: absolute; top:50px;}
+#popupad { width: 550px; background: #fafafa; border:2px solid #fc7c23; margin: 0 auto; position: relative; padding: 15px; font-size: 14px; line-height: 22px; color: #666;}
+.p_closed { position:absolute; top: 10px; right: 10px; text-indent: -9999px; width: 20px; height: 20px; display: block; background: url(/images/nsc/login/msg_close.png) no-repeat 0px 0px; cursor:pointer;}
+#popupad p .blue { color: #fc7c23;}
+#popupad p.p2 { font-size: 16px; font-weight: bold; color: #333; margin: 5px 0 10px;}
+#arrowleft { font-size: 16px; color:red;}
+#arrowleft img { vertical-align: -15px; margin: 0 5px 0 10px;}
+.even .button { padding: 0; width:68px; height:18px; z-index:1888;}
+.zysx_tit { font-size: 16px; font-weight: bold; color: #fc7c23;}
+.zysx_text { line-height: 22px!important;}
+.zysx_text .red { color: #fc7c23;}
+
+
+
+/*table*/
+.public_table { font-family:'Microsoft Yahei'; border-top:1px solid #dbdddf; border-left:1px solid #dbdddf; color:#666;}
+.public_table thead { background-color:#f6f6f6;}
+.public_table thead th { border-right:1px solid #dbdddf; border-bottom:1px solid #dbdddf; font-weight: bold;background:#f6f6f6; color:#3e3e3e; text-align:center; padding: 12px 0; font-size: 15px;}
+.public_table tbody td { padding:10px 0; line-height:20px; font-size:14px; text-align:center; border-bottom:1px solid #dbdddf; border-right:1px solid #dbdddf;}
+.public_table tbody td a { text-decoration:underline;}
+
+.grayTable { background:#fff; border-top:1px solid #dbdddf; border-left:1px solid #dbdddf; border-collapse:collapse;}
+.grayTable tr{ background: #fff;}
+.grayTable tr th{ border-right:1px solid #dbdddf; border-bottom:1px solid #dbdddf; font-weight: bold;background:#f6f6f6; color:#3e3e3e; text-align:center; padding: 12px 0; font-size: 15px;}
+.grayTable tr td { border-right:1px solid #dbdddf; border-bottom:1px solid #dbdddf; text-align:center; line-height:24px; color: #666; padding: 10px 0; }
+.grayTable tr td a { color: #666;}
+.grayTable tr td a:hover { color:#f96905;}
+.grayTable tr td .noCheck{ color:#ff0000;}
+.grayTable tr td .Check{ color:#bbb;font-size: 12px;background-color: #f3f3f3;position: absolute; width:50px; right: 10px;}
+.grayTable tr td .fandianinput { text-align:right; vertical-align:1px; color:#ff0000;}
+.grayTable tr:hover{}
+.grayTable tr:nth-child(2n){}
+.grayTable input { /* vertical-align:middle; */ /* padding:8px 3px; */ /* border:1px solid #bbb; */ /* font-size:14px; */height: 30px;line-height: 25px;}
+.grayTable .red {color: #e2420a;}
+.grayTable .green { color: #2fab12;}
+.grayTable .blue { color: #0b7bc3;}
+.grayTable .orange { color: #ff6600;}
+.fandianinput_tit{ padding: 0 5px; height: 32px; text-align: center; line-height: 32px; border-radius: 4px; font-size: 18px; color:red; border: 1px solid #bbb; margin-right:5px;}
+.fandianinput{ border:0!important;}

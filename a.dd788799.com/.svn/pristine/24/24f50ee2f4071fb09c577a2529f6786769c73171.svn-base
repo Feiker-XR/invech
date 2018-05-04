@@ -1,0 +1,195 @@
+<?php
+namespace app\common\model\member;
+use app\common\model\Bet;
+use app\common\model\Apply;
+use app\common\model\Config;
+use app\common\validate\Member;
+use bong\foundation\Str;
+use think\Loader;
+
+trait BasicTrait
+{
+    //----------------前台------------------
+
+ 
+    public function register(){
+
+        $params = request()->param();
+
+        $agent = null;
+
+        try{
+            if(!empty($params['agent_id'])){
+                $agent_id = dehashid($params['agent_id']);
+                //'推荐人无效';
+                if($agent_id){
+                    $agent = self::get($agent_id);    
+                }                
+            }
+
+            //多段事务的外层必须有异常处理; 多段事务内部用异常传递错误信息;
+            //user.register事件有多个监听器,event的返回值是多个监听器的返回值数组;
+            transaction(function() use ($params,$agent){
+                //默认save验证失败返回false,这里改为抛出异常;
+                $this->failException = true;
+                $this->validate('Member.register')->save($params);
+                event('user.register',[$this,$agent]);
+            });
+
+            return true;
+
+        }catch(\Exception $e){
+            $this->error = $e->getMessage();
+            return false;
+        }
+    }
+
+    public function edit(){
+        $ret = $this->validate('Member.webedit')->save(request()->param());
+        return $ret !== false;
+    }
+
+    public function password(){
+
+        $params = request()->param();
+
+        if (!$this->validate('Member.save_password')->validateData($params)) {
+            return false;
+        }
+        if (!bcrypt_verify($params['oldPassword'],$this->password)){
+            $this->error = '原密码错误,请重新输入';
+            return false;
+        }
+
+        $this->password = $params['newPassword'];
+        $ret = $this->save();      
+        return $ret !== false;              
+    }
+
+    public function bank(){
+
+        $params = request()->param();
+        if (!$this->validate('Member.bank')->validateData($params)) {
+            return false;
+        }
+
+        $this->bank->bank_name        =   $params['bank_name'];
+        $this->bank->bank_username    =   $params['bank_username'];
+        $this->bank->bank_account     =   $params['bank_account'];
+        $this->bank->bank_address     =   $params['bank_address'];
+        $ret = $this->save();
+        return $ret !== false;
+    }
+
+    private function getUnAuditApply($business = 'withdraw'){
+        //return Apply::$business()->UnAuditScope() error
+        return (new Apply)->$business()->UnAuditScope()
+        ->where('uid',$this->uid)
+        ->order('id desc')->find();        
+    }
+
+    public function apply($business='agent'){
+        try{
+            if(!in_array($business,Apply::BUSINESS_ARRAY)){
+                throw new \Exception('业务场景不存在!');
+            }
+
+            $param = request()->param();
+            $validate = validate('Apply');
+            if(!$validate->scene($business)->check($param)){
+                throw new \Exception($validate->getError());
+            }
+
+            $unapply = $this->getUnAuditApply($business);
+            $b_method = 'beforeApply' . ucfirst($business);
+            if(method_exists($this, $b_method)) {
+                call_user_func_array([$this, $b_method], [$unapply,]);
+            }
+
+            $apply = Apply::create([
+                'uid'   =>  $this->uid,
+                'business'  =>  $business,
+                'params'    =>  json_encode($param),
+            ]);
+
+            $a_method = 'afterApply' . ucfirst($business);
+            if(method_exists($this, $a_method)) {
+                call_user_func_array([$this, $a_method], [$apply]);
+            }
+            
+            return $this;
+        }catch(\Exception $e){
+            $this->error = $e->getMessage();
+            return false;
+        }            
+    }
+
+    private function beforeApplyAgent($unapply=null){
+        if($unapply){
+            throw new \Exception('您已经申请过代理,请联系管理员处理!');
+        }
+        if($this->isAgent()){
+            throw new \Exception('您已经是代理,不能申请代理!');
+        }
+    }
+
+    private function withdrawApplyCountToday(){
+        return Apply::withdraw()->where('uid',$this->uid)
+        ->whereTime('created_at', 'today')->count();
+    }
+
+    private function withdrawApplyLatest(){
+        return Apply::withdraw()->where('uid',$this->uid)
+        ->order('id desc')->find();
+    }
+
+    private function checkWithdraw(){
+        $amount = input('amount')??0;
+        $cashMin = Config::getByName('cashMin');
+        if($amount < $cashMin){
+            throw new \Exception('提款金额不得少于'.$cashMin.'元');
+        }
+        $cashMax = Config::getByName('cashMax');
+        if($amount > $cashMax){
+            throw new \Exception('提款金额不得大于'.$cashMax.'元');
+        }        
+
+        $cashCountDay = Config::getByName('cashCountDay');
+        if($cashCountDay > 0 && $this->withdrawApplyCountToday() > $cashCountDay){
+            throw new \Exception('每天提款申请次数不得大于'.$cashCountDay.'次');
+        }
+
+        $cashIntervalMinite = Config::getByName('cashIntervalMinite');
+        if($cashIntervalMinite > 0){
+            $latest = $this->withdrawApplyLatest();
+            if($latest->created_at??null){
+               if(time() - strtotime($latest->created_at) < $cashIntervalMinite * 60){
+                    throw new \Exception('提款申请间隔不得小于'.$cashIntervalMinite.'分钟');
+               }
+            }
+        }
+    }
+
+    //提款创建之前,需要检查数据合法性
+    private function beforeApplyWithdraw($unapply=null){
+        $this->checkWithdraw();
+        $info = $this->get_withdraw_info();
+        $check =  input('amount') == $info['amount']
+            && input('audit_remain') == $info['audit_remain']
+            && input('real_amount') == $info['real_amount']
+            && input('debit_amount') == $info['debit_amount'] ;
+        if(!$check){
+            throw new \Exception('提款申请数据有误!');
+        } 
+    }
+
+    //提款申请提交后,需要扣除用户余额,增加冻结金额;
+    private function afterApplyWithdraw(Apply $apply){
+        return transaction(function() use ($apply){
+            $this->decBalance($apply->amount,'withdraw',$apply->id,'提现申请预扣'.$apply->amount);
+            $this->incFrozenBalance($apply->amount);
+            return $this;
+        });
+    }
+
+}

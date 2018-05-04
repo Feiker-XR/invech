@@ -1,0 +1,111 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+<meta content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=0" name="viewport">
+<meta name="format-detection" content="telphone=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<title>登录</title>
+<link rel="apple-touch-icon-precomposed" sizes="57x57" href="uploadimg/wapicon/icon-57.png">
+<link rel="apple-touch-icon-precomposed" sizes="72x72" href="uploadimg/wapicon/icon-72.png">
+<link rel="apple-touch-icon-precomposed" sizes="114x114" href="uploadimg/wapicon/icon-114.png">
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="uploadimg/wapicon/icon-144.png">
+
+<link rel="stylesheet" href="/gfwf/assets/statics/css/style.css" type="text/css">
+<link rel="stylesheet" href="/gfwf/assets/statics/css/global.css" type="text/css">
+<link rel="stylesheet" href="/gfwf/iconfont/iconfont.css" type="text/css">
+<!--<link rel="stylesheet" href="/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="/styles/ezweb.css">-->
+<script type="text/javascript" charset="utf-8" src="/js/jquery.1.9.1.min.js"></script>
+</head>
+<body class="login-bg">
+<div class="header">
+    <div class="headerTop">
+        <div class="ui-toolbar-left">
+            <a href="javascript:history.back(-1);"><i class="iconfont icon-zuojiantou"></i></a>
+        </div>
+        <h1 class="ui-toolbar-title">登录</h1>
+    </div>
+</div>
+
+<form class="form-vertical" method="post">
+	<input type="hidden" name="action" value="login">
+	<div class="login">
+		<ul>
+			<li>
+				<span class="login-peo"></span><input type="text" id="username" placeholder="请输入用户账号" value="" name="username">
+			</li>
+			<li>
+				<span class="login-pass"></span><input type="password" id="password" placeholder="请输入密码" name="password">
+			</li>
+		</ul>
+		
+		{if $sysConfig['loginYzm'] eq 1}
+		<div class="form-group field-loginuser-username required">
+			<!--<label class="control-label" for="loginuser-username">验证码</label>-->
+			<div class="input-group">
+				<span class="wap_login_1">
+					<i><img src="/img/500f_login_4.png"></i>
+				</span>
+				<div class="row">
+					<div class="col-xs-9">
+						<input type="text" id="vlcodes" class="form-control" name="vlcodes" placeholder="验证码" onblur="login_blur(this)" onfocus="login_focus(this)">
+					</div>
+					<div class="col-xs-3">
+						<img id="vPic" src="{:captcha_src()}" alt="(点选此处产生新验证码 )" title="点选此处产生新验证码 " onclick="this.src='{:captcha_src()}?d='+Math.random();" height="34">
+					</div>
+				</div>
+			</div>
+			<div class="help-block"></div>
+		</div>
+		{/if}
+	
+		<div class="login-p">
+			<a class="fl" href="http://api1.pop800.com/chat/322051" target="_blank"><i class="icon-4"></i>在线客服</a>
+			<a class="fr" href="javascript:void(0)" id="forgetPwd" onclick="javascript:Go_forget_pwd();">忘记密码</a>
+		</div>
+		<button class="login-btn" id="login_btn" name="login-button" onclick="Login();">登录</button>
+		<button class="reg-btn" id="##" onclick="location.href='/index/reg';return false;">立即注册</button>
+		<!-- <button class="reg-btn" id="login_demo1" onclick="location.href = '/index.php/index/mfsw'">免费试玩</button> -->
+	</div>
+</form>
+
+<script type="text/javascript">
+function Login() {
+	var un = $('#username').val();
+	var pw = $('#password').val();
+	if(un == "" || un == "账号") {
+		alert("登录账号不能为空！");
+		$("#username").focus();
+		return false;
+	}
+	if(pw == "" || pw == "密码") {
+		alert("登录密码不能为空！");
+		$("#password").focus();
+		return false;
+	}
+	$.ajax({
+		type: "post",
+		url: "/index/login",
+		data: {
+			'username': un,
+			'password': pw
+		},
+		dataType: 'json',
+		async: 'false',
+		success: function(data) {
+			if(data.status == 'y') {
+				alert(data.info);
+				window.location.href = "/";
+			} else if(data.status == 'ns') {
+				alert(data.info);
+				window.location.href = document.URL;
+			} else {
+				alert(data.info);
+			}
+		}
+	});
+}
+</script>
+</body>
+
+</html>

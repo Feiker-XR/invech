@@ -1,0 +1,19 @@
+{extend name="public/user_head"/}
+{block name="body"}
+<div class="container">
+    <header class="header">
+        <i class='left' onclick="javascript:history.back(-1);">返回</i>
+        <h1>消息详情</h1>
+    </header>
+    <main class="inner_body">
+        <section class="msg_detail">
+        <h1>{$info->message->title}</h1>
+        <div>
+            {$info->message->text}
+        </div>
+        <p>发件人 {$info->message->sender->username}</p>
+        <p>发件时间 {$info->created_at}</p>
+        </section>
+    </main>
+</div>
+{/block}

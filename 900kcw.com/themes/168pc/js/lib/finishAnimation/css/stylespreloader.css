@@ -1,0 +1,27 @@
+@charset "utf-8";
+body {
+	overflow: hidden;
+}
+
+/* Preloader */
+#preloader {
+	position: fixed;
+	top:0;
+	left:0;
+	right:0;
+	bottom:0;
+	background-color:#000; /* change if the mask should be a color other than white */
+	z-index:99; /* makes sure it stays on top */
+}
+
+#status {
+	width:309px;
+	height:59px;
+	position:absolute;
+	left:50%; /* centers the loading animation horizontally on the screen */
+	top:500px; /* centers the loading animation vertically on the screen */
+	background-image:url(../images/logo.png); /* path to your loading animation */
+	background-repeat:no-repeat;
+	background-position:center;
+	margin:-154px 0 0 -154px; /* is width and height divided by two */
+}

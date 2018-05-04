@@ -1,0 +1,86 @@
+{layout name="layout" /}
+
+<div class="row">
+  <div class="col-xs-12">
+    <div class="box">
+      <div class="box-header">
+      	 	<i class="fa fa-plus-square pull-right add_member"></i>
+		</div>
+      <!-- /.box-header -->
+      <div class="box-body table-responsive no-padding">
+        <table class="table table-hover">
+         	<tr>
+              <th>#</th>
+              <th>名称</th>
+              <th>编码</th>
+              <th>排序</th>
+              <th>图片</th>
+              <th>WAP站</th>
+              <th>状态</th>
+              <th>添加时间</th>
+              <th>更新时间</th>
+              <th>配置</th>
+              <th>操作</th>
+            </tr>
+			 {foreach $list as $vo} 
+	           <tr>        
+	              	<td>{$vo->id}</td>
+	              	<td>{$vo->name}</td>
+	              	<td>{$vo->type}</td>        
+	              	<td>{$vo->sort}</td>    
+	              	<td><img src="{$vo->img}"></td>
+	             	<td>{$vo->is_wap}</td>
+	              	<td>
+		              	{eq name="$vo->status" value="0"}开启{/eq}
+						{eq name="$vo->status" value="1"}关闭{/eq}	
+					</td>	
+	              	<td>{$vo->created_at}</td>
+	              	<td>{$vo->updated_at}</td>
+	             	<td><a href="/pay/way/set_id/{$vo->id}"><i class=" fa fa-gear"></i> </a></td>
+	           		<td >
+						<i  data-id="{$vo->id}" class="edit fa fa-pencil"></i>&nbsp;&nbsp;
+					</td>
+	            </tr>
+          	 {/foreach}
+        	</table>
+        {$list->render();}
+      </div>
+      <!-- /.box-body -->
+    </div>
+    <!-- /.box -->
+  </div>
+</div>
+
+<!-- AdminLTE App -->
+<script type="text/javascript">
+$(function(){
+	$("#datepicker1").datepicker();
+	$("#datepicker2").datepicker();
+	$(".add_member").click(function(){
+		$.get('/pay/set_edit.html',{},function(data){
+			layer.open({
+				type: 1,
+				title: '新增支付类别',
+				maxmin: true, //开启最大化最小化按钮
+				area: ['900px', '600px'],
+				content: data
+			});
+		},'html');
+	});
+	
+	$(".edit").click(function(){
+		var id = $(this).attr('data-id');
+		$.get('/pay/set_edit.html',{id:id},function(data){
+			layer.open({
+				type: 1,
+				title: '修改会员',
+				maxmin: true, //开启最大化最小化按钮
+				area: ['900px', '600px'],
+				content: data
+			});
+		},'html');
+	});
+
+});
+
+</script>

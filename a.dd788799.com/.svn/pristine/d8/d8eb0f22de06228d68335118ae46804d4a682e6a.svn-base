@@ -1,0 +1,25 @@
+<?php
+namespace app\common\model;
+use think\Model;
+
+use app\common\model\attach\MoneyRecordTrait;
+
+class Commission extends Base{
+
+    protected $table = 'gygy_commission';
+    protected $createTime = 'created_at';
+    protected $updateTime = '';
+    protected $autoWriteTimestamp = 'datetime';
+
+    use MoneyRecordTrait;
+        
+    public function money()
+    {
+        return $this->morphMany('Money',['type','item_id'],'commission');
+    }
+
+    public function user(){
+        return $this->belongsTo('Member','uid','uid');
+    }
+
+}

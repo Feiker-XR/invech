@@ -1,0 +1,60 @@
+<?php
+namespace app\admin\controller;
+use app\admin\Login;
+use app\common\model\Slide as SlideModel;
+use app\common\model\ActionLog as LogModel;
+class Slide extends Login{
+
+    public function _initialize(){
+        parent::_initialize();
+        $menu_group   =   "system";
+        $this->assign('menu_group',$menu_group);
+    }
+
+    public function index(){
+        $this->view->page_header = '轮播图列表';
+        $request    =   request();
+        $list       =   SlideModel::getList($request);
+        $this->assign('list',$list);
+        return $this->fetch();
+    }
+
+    public function edit(){
+        $request    =   request();
+        $params     =   $request->param();
+        if(request()->isGet()){
+           if(!empty($params['id'])){
+                $info   =   SlideModel::get(['id'=>$params['id']]);
+                $this->assign('info',$info);  
+            } 
+            return view();      
+        }else{
+            $id     =   !empty($params['id'])? $params['id']:'';
+            if($id){
+                $slide  =   SlideModel::get(intval($id));
+            }else{
+                $slide  =   new SlideModel();
+            }
+            $list   =   $slide->validate('slide.index')->save($params);
+            if($list){
+                LogModel::log(LogModel::BUSINESS_TYPE_EDIT,$slide,LogModel::BUSINESS_TYPES[LogModel::BUSINESS_TYPE_EDIT]);
+                return $this->success('操作成功');
+            }else{
+                return $this->error($slide->getError());
+            }
+        }
+    }
+
+    public function del(){
+        $request    =   request();
+        $params     =   $request->param();
+        $slide      =   SlideModel::get(intval($params['id']));
+        $list       =   $slide->delete();
+        if($list){
+            LogModel::log(LogModel::BUSINESS_TYPE_DELE,$slide,LogModel::BUSINESS_TYPES[LogModel::BUSINESS_TYPE_DELE]);
+            return $this->success('操作成功');
+        }else{
+            return $this->error($slide->getError());
+        }
+    }
+}

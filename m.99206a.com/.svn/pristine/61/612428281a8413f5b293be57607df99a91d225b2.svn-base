@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>皇冠娱乐城</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/css/font-awesome.min.css">
+  <link href="../css/jquery_dialog.css" rel="stylesheet" type="text/css" />
+  <link rel="stylesheet" type="text/css" href="/fonts-new/iconfont.css">
+  <link rel="stylesheet" href="/styles/ucenter.css">
+    <link rel="stylesheet" href="/styles/ezweb.css">
+  <script src="/assets/jquery.js"></script>
+  <script src="/js/bootstrap.min.js"></script>
+</head>
+<body>
+<!--头部-->
+<div class="nav500">
+    <div class="nav500_logo">
+        <a href="/index.php"><img src="/img/logo.png"/></a>
+    </div>
+    <div class="nav500_right_had">
+        <a href="javascript:void(0)" class="cl_fff f14 blue_focus" onclick="javascript:history.back(-1);">
+            <img src="/img/narrow-leftwap2.png"></a>
+    </div>
+</div>
+
+<!--底部-->
+<div class="nav500_bottom" style="z-index: 10000;">
+  <span>
+      <a href="/index.php" class="nav500_bottom_a nav500_bottom_active" target="_self">
+          <i class="iconfont icon-zhuye"></i>首页
+      </a>
+  </span>
+    <span>
+      <a class="nav500_bottom_a" href="/promotions/index.html"  target="_self">
+          <i class="iconfont icon-zhuanxianglibao" style="font-size: 25px;"></i>优惠
+      </a>
+  </span>
+    <span>
+      <a href="/index.php/pay/member.html" class="nav500_bottom_a"  target="_self">
+          <i class="iconfont icon-tubiao207"></i>存款
+      </a>
+  </span>
+    <span>
+      <a href="https://messenger.providesupport.com/messenger/0nye75kga3q931e9lwrn16k4q0.html" class="nav500_bottom_a" target="_self">
+          <i class="iconfont icon-kefu"></i>客服
+      </a>
+  </span>
+    <span>
+      <a href="/user/index.html" class="nav500_bottom_a">
+          <i class="iconfont icon-iconfontcolor19-copy"></i>个人
+      </a>
+  </span>
+</div>
+
+<div class="panel panel-default" style="margin:60px 0;">
+  <!--<div class="panel-heading">
+    <h3>排球结果 >></h3>
+  </div>-->
+  <div class="panel-body">
+    <ul class="pagination"><?php
+for($i=0;$i<7;$i++){
+  $d  = date('Y-m-d',time()-$i*86400);
+  $dd = date('m-d',time()-$i*86400);
+  if($d==$date ){
+?>
+      <li class="active"><a href="#"><?=$dd?></a></li>
+      <?php }else{ ?>
+      <li><a href="?ymd=<?=$d?>"><?=$dd?></a></li>
+      <?php } ?>
+<?php } ?></ul>
+    <div class="table-responsive">
+      <table class="table table-bordered table-hover"><tr class="success">
+    <th width="100">开赛时间</th>
+    <th>主场/客场</th>
+    <th width="80">完赛（局）</th>
+    <th width="80">完赛（盘）</th>
+  </tr>
+
+      {if empty($rows)}
+      <tr><td height='100' colspan='4' align='center' bgcolor='#FFFFFF'>暂无任何赛果</td></tr> 
+      {/if}
+
+      {foreach $rows as $row}
+      <tr>
+        <td colspan='4' align="center" class='liansai'>
+        <strong>{$row.match_name}</strong></td>
+      </tr>
+      <tr>
+        <td class='zhong line'>{$row.Match_Date}<br />{$row.Match_Time}</td>
+        <td class='line'>{$row.match_master}<br /><font color="#990000">{$row.match_guest}</font></td>
+        <td class='zhong line red'>{if ($row.MB_Inball<0)}
+          无效<br />无效
+        {else /}
+          {$row.MB_Inball}<br />{$row.TG_Inball}
+        {/if}</td>
+        <td class='zhong line red'>{if ($row.MB_Inball<0)}
+          无效<br />无效
+        {else /}
+          {$row.MB_Inball}<br />{$row.TG_Inball}
+        {/if}</td>
+      </tr>
+      {/foreach}
+
+    </table>
+    </div>
+  </div>
+</div>
+<script language="javascript" src="/js/mouse.js"></script>
+<script language="javascript" src="/js/ifsports.js"></script>
+</body>
+</html>

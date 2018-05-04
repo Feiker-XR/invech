@@ -1,0 +1,65 @@
+<?php
+namespace app\admin\controller;
+use app\admin\Login;
+use app\common\model\Withdraw as WithdrawModel;
+use app\common\model\ActionLog as LogModel;
+class Withdraw extends Login{
+    
+    public function index(){
+        $this->view->page_header = '提款申请';
+
+        $request = request();
+
+        $list = WithdrawModel::getList($request);
+        $list->appends($request->param());
+        $this->assign('list',$list);
+        $statuses = WithdrawModel::STATUSES;
+        $this->assign('statuses',$statuses);
+        $get_status = input('status');
+        if(!is_numeric($get_status)){
+            $get_status = -1;
+        }
+        $this->assign('get_status',$get_status);
+        //null == 0 //true
+        return $this->fetch();
+    }
+
+     public function form(){
+        
+         $request = request();
+         $params = $request->param(); 
+         if(!empty($params['id'])){
+             $info =  WithdrawModel::get(['id'=>$params['id']]);
+              $this->assign('info',$info);  
+         }
+       $statuses = WithdrawModel::STATUSES;
+        $this->assign('statuses',$statuses);
+          return view();
+    }
+
+      public function withdraw_save(){
+        $request = request();
+        $params = $request->param();
+        $id =  !empty($params['id'])? $params['id']:'';
+         $status =  !empty($params['status'])? $params['status']:'';
+        $reason =  !empty($params['reason'])? $params['reason']:'';
+        $data = [
+            'status'    => $status,
+            'reason'       => $reason,
+            'handled_at'=> date("Y-m-d: H:i:s",time())
+        ];
+         $res = [];
+         $Withd = WithdrawModel::get(intval($id));
+         $list = $Withd->save($data);
+        if($list){
+            LogModel::log(LogModel::BUSINESS_TYPE_EDIT,$Withd,LogModel::BUSINESS_TYPES[LogModel::BUSINESS_TYPE_EDIT]);
+            $res['msg'] = "操作成功";
+         }else{
+            $res['msg']= $Withd->getError();
+         }
+         echo json_encode($res);
+        
+    }
+
+
+}

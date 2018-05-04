@@ -1,0 +1,99 @@
+<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:86:"/mnt/wwwroot/www.dd788799.com/houtai/../application/admin/view/lottery/my_search2.html";i:1514785037;}*/ ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>余额查询-table2</title>
+<link href="/css/base.css" rel="stylesheet" type="text/css" />
+<link href="/css/admin.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="/js/jquery.js"></script>
+<script type="text/javascript" src="/js/jquery.tools.js"></script>
+<script type="text/javascript" src="/js/base.js"></script>
+<script language="JavaScript" src="/js/datePicker/calendar.js"></script>
+<style type="text/css">
+.btn{
+	display:block;
+	height:28px;
+	cursor:pointer;
+	text-align:center;
+	line-height:28px;
+}
+.btn:hover{
+	color:#F00;
+}
+.listTables{
+	text-align:center;
+}
+</style>
+</head>
+<body class="list">
+	<div class="bar">
+		ZR真人查看
+	</div>
+
+<div class="body">
+<form name="form1" method="get" action="">
+<div class="listBar">
+          会员账号：
+          <input name="username" type="text" id="username" value="<?php echo (\think\Request::instance()->get('username')) ? \think\Request::instance()->get('username') : ''; ?>" size="15">
+            &nbsp;&nbsp;<input name="find" type="submit" id="find" value="查看报表" class="formButton"/>
+
+	</div>
+</form>
+<ul id="tab" class="tab">
+                <li><input type="button" value="ZR真人" hidefocus class="current"/></li>
+			</ul>
+<table id="listTables" class="listTables">
+
+				<tr>
+					<th>用户</th>
+					<th>AG余额</th>
+					<th>BB余额</th>
+					<th>MG余额</th>
+					<th>OG余额</th>
+					<th>PT余额</th>
+					<th>申博余额</th>
+				</tr>
+				<tr>
+				    <td></td>
+				    <td><span id="agmoney" for="ag" class="btn">点击刷新</span></td>
+				    <td><span id="bbmoney" for="bb" class="btn">点击刷新</span></td>
+				    <td><span id="mgmoney" for="mg" class="btn">点击刷新</span></td>
+				    <td><span id="ogmoney" for="og" class="btn">点击刷新</span></td>
+				    <td><span id="ptmoney" for="pt" class="btn">点击刷新</span></td>
+				    <td><span id="sbmoney" for="sb" class="btn">点击刷新</span></td>
+				    <td></td>
+				</tr>
+				<script type="text/javascript">
+					$(".btn").click(function(){
+						var $type = $(this).attr("for");
+						var $url = "./getbalance.php";
+						var $username = $("#username").val();
+						if(!$username){
+							alert("请输入要查询的用户名！");
+							return false;
+						}
+						var $data = '';
+						$.ajax({
+							url:"",
+							method:'post',
+							data:{username:$username,type:$type},
+							dataType:'json',
+							success:function(data){
+								if(data.error){
+									alert(data.msg);
+								}else{
+									$("#"+$type+"money").text(data.msg);
+								}
+							},
+							error:function(XMLHttpRequest, textStatus, errorThrown){
+								alert(textStatus);
+							}
+							
+						})
+					})
+                </script>
+</table>
+</div>
+</body>
+</html>

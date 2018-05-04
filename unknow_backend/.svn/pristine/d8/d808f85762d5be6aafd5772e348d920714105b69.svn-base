@@ -1,0 +1,173 @@
+<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:85:"/mnt/wwwroot/www.dd788799.com/houtai/../application/admin/view/config/mg_addgame.html";i:1505452684;}*/ ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>游戏设置</title>
+<link href="/css/base.css" rel="stylesheet" type="text/css" />
+<link href="/css/admin.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="/js/jquery.js"></script>
+<script type="text/javascript" src="/js/jquery.tools.js"></script>
+<script type="text/javascript" src="/js/base.js"></script>
+<script charset="utf-8" src="/edits/kindeditor-min.js"></script>
+<script charset="utf-8" src="/edits/lang/zh_CN.js"></script>
+
+</head>
+<body class="input">
+	<div class="bar">
+		游戏添加
+	</div>
+	
+	<script type="text/javascript">
+		$(function(){
+			$("#addgamebtn").click(function(){
+				 $("#addform").show();
+				 $("#tablist").hide();
+			});
+			$("#gamelist").click(function(){
+				 $("#addform").hide();
+				 $("#tablist").show();
+			})
+		})
+	</script>
+	
+	<div class="body">
+		<form name="form1" method="GET" action="">
+			<div class="listBar" style="text-align: center;background-color: #e9f0f4;">查询关键字：
+			  <input type="text" name="likevalue" value="">
+				&nbsp;&nbsp;查询类型：
+				<select name="selecttype" id="selecttype">
+					<option value="platform" <?php if(@$_GET['selecttype']=='platform') {?> selected <?php }?>>平台</option>
+					<option value="gamename" <?php if(@$_GET['selecttype']=='gamename') {?> selected <?php }?>>游戏名称</option>
+					<option value="gametype" <?php if(@$_GET['selecttype']=='gametype') {?> selected <?php }?>>游戏类型</option>
+				</select>&nbsp;&nbsp;<input name="find" type="submit" id="find" value="查找" class="formButton">
+			</div>
+		</form>
+		<ul id="tab" class="tab">
+				<li>
+					<input type="button" value="游戏列表" id="gamelist" hidefocus class="current"/>
+					<input type="button" value="游戏添加" id="addgamebtn" hidefocus class="current"/>
+				</li>
+		</ul>
+		<form name="form1" method="post" action="?id=<?php echo $id; ?>&action=<?php if($id>0){ echo 'edit';}else{ echo 'add';}?>&page=<?php echo $page; ?>" id="addform" style="display:none">
+			<table class="inputTable tabContent">
+			
+				<tr>
+					<th>
+						平台名称: 
+					</th>
+					<td>
+						<input type="radio" value="ag" name="platform" id="agtitle" class="formName" />AG
+						<input type="radio" value="bb" name="platform" id="bbtitle" class="formName" />BB
+						<input type="radio" value="mg" name="platform" id="mgtitle" class="formName" />MG
+						<input type="radio" value="pt" name="platform" id="pttitle" class="formName" />PT
+					</td>
+				</tr>
+				
+				<style>
+					.formName{margin-left:20px;margin-top:-3px;}
+				</style>
+				
+				<tr>
+					<th>
+						游戏名称: 
+					</th>
+					<td>
+						<input type="text" value="" name="gamename" id="title" class="formText" /></td>
+				</tr>
+				
+				<tr>
+					<th>
+						Item ID: 
+					</th>
+					<td>
+						<input type="text" value="" name="gameid" id="title" class="formText" /></td>
+				</tr>
+				
+				<tr>
+					<th>
+						App ID: 
+					</th>
+					<td>
+						<input type="text" value="" name="gameid2" id="title" class="formText" /></td>
+				</tr>
+
+				<tr>
+				  <th>是否首页显示:</th>
+				  <td>
+					<input type="radio" value="1" name="ishot" id="ishot_1" class="formName" />显示
+					<input type="radio" value="0" name="ishot" id="ishot_0" class="formName" />隐藏
+				</td>
+				</tr>
+				
+				<tr>
+					<th>
+						游戏类型: 
+					</th>
+					<td>
+						<input type="text" value="" name="gametype" id="title" class="formText" /></td>
+				</tr>
+				
+				<tr>
+					<th>
+						图片地址: 
+					</th>
+					<td>
+						<input type="text" value="" name="imageurl" id="title" class="formText" style="width:400px;" /></td>
+				</tr>
+				
+				<tr>
+				  <th>是否新游戏:</th>
+				  <td>
+					<input type="radio" value="1" name="isnew" id="isnew_1" class="formName" />是
+					<input type="radio" value="0" name="isnew" id="isnew_0" class="formName" />否
+				</td>
+				</tr>
+	
+			</table>
+			<div class="buttonArea">
+				<input type="submit" class="formButton" value="确  定" hidefocus />&nbsp;&nbsp;
+				<input type="button" class="formButton" onClick="window.location.href='<?php echo Url('main/info'); ?>'" value="返  回" hidefocus />
+			</div>
+		</form>
+
+<table class="inputTable tabContent" id="tablist">  
+    <tr>
+		<td width="5%" align="center">ID</td>
+        <td width="5%" height="25" align="center" bgcolor="#EEF4F9">平台</td>
+        <td width="15%" height="25" align="center" bgcolor="#EEF4F9">游戏名称</td>
+        <td height="5%" align="center" bgcolor="#EEF4F9">Item ID</td>
+        <td width="5%" height="25" align="center" bgcolor="#EEF4F9">App ID</td>
+		<td width="15%" height="25" align="center" bgcolor="#EEF4F9">游戏类型</td>
+		<td width="15%" height="25" align="center" bgcolor="#EEF4F9">图片地址</td>
+		<td width="10%" height="25" align="center" bgcolor="#EEF4F9">是否首页显示</td>
+		<td width="5%" height="25" align="center" bgcolor="#EEF4F9">是否新游戏</td>
+        <td width="10%" height="25" align="center" bgcolor="#EEF4F9">编辑</td>
+        <td width="10%" align="center" bgcolor="#EEF4F9">删除</td>
+    </tr>
+	<?php foreach ($game as $v){?>
+ 	 <tr>
+		<td width="5%" height="30" align="center"><?=$v['id']?></td>
+        <td width="5%" height="30" align="center" valign="middle"><?=$v['platform']?></td>
+        <td width="15%" align="center" valign="middle"><?=$v['gamename']?></td>
+        <td width="10%" align="center"><?=$v['gameid']?></td>
+		<td width="5%" align="center"><?=$v['gameid2']?></td>
+		<td width="15%" align="center"><?=$v['gametype']?></td>
+		<td width="15%" align="center"><?=$v['imageurl']?></td>
+        <td width="10%" align="center"><?php if($v['ishot']==1){ echo '<span class="hong">显示</span>';}else{ echo '<span class="lan">隐藏</span>';}?></td>
+		<td width="5%" align="center"><?php if($v['isnew']==1){ echo '<span class="hong">是</span>';}else{ echo '<span class="lan">否</span>';}?></td>
+        <td width="10%" align="center"><a href="/index.php/config/mg_edit?id=<?=$v['id']?>&page=<?php echo $page; ?>">编辑</a></td>
+        <td width="10%" align="center"><a href="?action=del&id=<?=$v['id']?>">删除</a></td>
+      </tr>
+	<?php }?>
+	<tr style="background-color:#FFFFFF;">
+        <td colspan="11" align="center" valign="middle">
+        <!-- page -->
+        <?php echo $pages; ?>
+        <!-- page end-->
+        </td>
+    </tr>
+    </table>
+	</div>
+</body>
+</html>

@@ -1,0 +1,95 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="description" content="1元夺宝，就是指只需1元就有机会获得一件商品，是基于网易邮箱平台孵化的新项目，好玩有趣，不容错过。">
+	<meta name="keywords" content="1元,一元,1元夺宝,1元购,1元购物,1元云购,一元夺宝,一元购,一元购物,一元云购,夺宝奇兵">
+	<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, width=device-width">
+
+	{block name="title"}<title>{$settings.webName}</title>{/block}
+	<link type="text/css" rel="stylesheet" href="/__CSS__/jquery-ui-1.8.21.custom.css" />
+	<link rel="stylesheet" type="text/css" href="/__CSS__/common.css" />
+
+	<script type="text/javascript" src="/__JS__/jquery-1.8.0.min.js"></script>
+	<script type="text/javascript" src="/__JS__/comm.js?v=wj5.0"></script>
+	<script type="text/javascript" src="/__JS__/jquery-ui-1.8.23.custom.min.js"></script>
+	<script type="text/javascript" src="/__JS__/jquery.simplemodal.src.js"></script>
+
+	<!-- IE浏览器时需要以下js支持 -->
+	<!-- 页面header钩子，一般用于加载插件CSS文件和代码 -->
+	{:hook('pageHeader')}
+
+	{block name="style"}{/block}
+	{block name="script"}{/block}
+	<style type="text/css">
+		.g-header{
+			width: 100%;
+			position: fixed;
+		}
+		.m-header-logo{
+			width: 100%;
+			position: absolute;
+			text-align: center;
+		}
+		.m-header-toolbar-btn{
+			font-size:15px;
+			padding-top: 8px;
+			color:#fff;
+			font-weight: normal;
+		}
+	</style>
+</head>
+<body>
+	<!-- 头部 -->
+	{block name="header"}
+	<div class="g-header">
+		<div class="m-header">
+			<div class="g-wrap">
+				<h1 class="m-header-logo">购彩大厅</h1>
+				<div class="m-header-toolbar">
+					<a class="m-header-toolbar-btn searchBtn" title="搜索">简约版</a>
+				</div>
+			</div>
+		</div>
+		<!-- 导航栏 -->
+		<div class="m-nav">
+			<div class="g-wrap">
+				<ul class="m-nav-list">
+					<li class="selected"><a href="javascript:void(0);"><span>热门彩</span></a></li>
+					<li><a href="javascript:void(0);"><span>高频彩</span></a></li>
+					<li><a href="javascript:void(0);"><span>快乐彩</span></a></li>
+					<li><a href="javascript:void(0);"><span>全国彩</span></a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	{/block}
+	<!-- 头部 -->
+	
+	<!-- 主体 -->
+	{block name="body"}{/block}
+	<!-- /主体 -->
+
+	<!-- 底部 -->
+	{block name="footer"}
+	<div class="g-footer">
+		<div class="g-wrap">
+			<ul class="m-state f-clear">
+				<li><i class="ico ico-state ico-state-1"></i>公平公正公开</li>
+				<li><i class="ico ico-state ico-state-2"></i>正品保证</li>
+				<li class="last"><i class="ico ico-state ico-state-3"></i>权益保障</li>
+			</ul>
+			<p class="m-copyright">
+				ICP证浙B2-20140185 <span>{$settings.webName} © 2014-2016</span>
+			</p>
+		</div>
+	</div>
+	{php}$count = count(session('cart'));{/php}
+	<button id="pro-view-0" class="w-button w-button-round w-button-backToTop" style="display:none">返回顶部</button>
+	{/block}
+	<!-- /底部 -->
+	<div id="wanjinDialog"></div>
+</body>
+</html>

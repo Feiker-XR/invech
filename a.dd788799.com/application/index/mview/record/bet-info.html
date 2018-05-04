@@ -1,0 +1,76 @@
+{php}
+	if(!$bet) throw new Exception('单号不存在');
+	
+	$modeName=array('2.00'=>'元', '0.20'=>'角', '0.02'=>'分');
+	$weiShu=$bet['weiShu'];
+	if($weiShu){
+		$w=array(16=>'万', 8=>'千', 4=>'百', 2=>'十',1=>'个');
+		foreach($w as $p=>$v){
+			if($weiShu & $p) $wei.=$v;
+		}
+		$wei.=':';
+	}
+	$betCont=$bet['mode'] * $bet['beiShu'] * $bet['actionNum'] * ($bet['fpEnable']+1);
+	$vo=$bet;
+{/php}
+<div class="w-goods-info">
+	<p>
+		彩种：{$types[$vo['type']]['title']}
+	</p>
+	<p>
+		用户名：{php} echo $this->iff($vo['username']==$vo['username'], $vo['username'], preg_replace('/^(\w).*(\w{2})$/', '\1***\2', $vo['username'])) {/php}
+	</p>
+	<p>
+		单号：{$vo.wjorderId} 
+	</p>
+	<p>
+		期号：{$vo.actionNo}
+	</p>
+	<p>
+		玩法：{$playeds[$vo['playedId']]['name']}
+	</p>
+	<p>
+		倍数模式：{$vo['beiShu']}倍，{$vo['mode']}元
+	</p>
+	<p>
+		返点：{php} echo $vo['bonusProp']{/php}－{:number_format($vo['fanDian'],1)}%
+	</p>
+	<p>
+		注数：{$vo['actionNum']}
+	</p>
+	<p>
+		返水：{php} echo $this->iff($vo['lotteryNo'], number_format(($vo['fanDian']/100)*$betCont, 4). '元', '－') {/php}
+	</p>
+	<p>
+		总金额：{$vo['mode']*$vo['beiShu']*$vo['actionNum']}元
+	</p>
+	<p>
+		奖金：{$this->iff($vo['lotteryNo'], $vo['bonus'], '---')}元
+	</p>
+	<p>
+		状态：
+			{php}
+				if($vo['isDelete']==1){
+					echo '<font color="#999999">已撤单</font>';
+				}elseif(!$vo['lotteryNo']){
+					echo '<font color="#009900">未开奖</font>';
+				}elseif($vo['zjCount']){
+					echo '<font color="red">已派奖</font>';
+				}else{
+					echo '<font color="#00CC00">未中奖</font>';
+				}
+			{/php}
+	</p>
+	<p>
+		开奖号码：{php} echo $this->ifs($bet['lotteryNo'], '---') {/php}
+	</p>
+	<p>
+		投注时间：{:date('m-d H:i:s',$vo['actionTime'])}
+	</p>
+	<p>
+		<textarea cols="10" name="TextArea1" rows="8" readonly="true" style="width:90%"> {:isset($wei)?$wei.$vo['actionData']:''} </textarea>
+	</p>
+	{php} if(!$bet['lotteryNo'] && $bet['uid']==$user['uid']){ {/php}
+	<input type="button" value="&nbsp;撤&nbsp;单&nbsp;" class="che-dan" id="cancelproject" data-id="{$vo.id}">
+	{php} } {/php}
+</div>

@@ -1,0 +1,161 @@
+<?php
+namespace app\common\model;
+use think\Model;
+use app\common\traits\model\Extra as ExtraTrait;
+//use app\common\model\attach\MoneyRecordTrait;
+use app\common\traits\model\UserFlow;
+
+class Apply extends Base{
+
+    use ExtraTrait;
+    use UserFlow;
+
+    protected $extra = 'params';
+
+    protected $table = 'gygy_apply';
+    protected $createTime = 'created_at';
+    protected $updateTime = '';
+    protected $autoWriteTimestamp = 'datetime';
+
+    CONST STATUS_UNAUDIT = 0;
+    CONST STATUS_AGREE = 1;
+    CONST STATUS_DENY = -1;
+
+    CONST BUSINESS_AGENT = 'agent';//审核代理申请提案;
+    CONST BUSINESS_WITHDRAW = 'withdraw';
+    CONST BUSINESS_ARRAY = [self::BUSINESS_AGENT,self::BUSINESS_WITHDRAW];
+
+    public function admin()
+    {
+        return $this->belongsTo('Admin','audit_uid','id');
+    }
+    
+    public function scopeAgent($query){
+        return $query->where('business',self::BUSINESS_AGENT);
+    }
+
+    public function scopeWithdraw($query){
+        return $query->where('business',self::BUSINESS_WITHDRAW);
+    }
+
+    public function scopeUnAuditScope($query){
+        return $query->where('status',self::BUSINESS_AGENT);
+    }
+    
+    public function scopeAuditScope($query){
+        return $query->where('status','in',[self::STATUS_AGREE,self::STATUS_DENY,]);
+    }
+
+    public function agree($remark,...$extra){
+        return $this->audit(self::STATUS_AGREE,$remark,...$extra);
+    }
+
+    public function deny($remark,...$extra){
+        return $this->audit(self::STATUS_DENY,$remark,...$extra);
+    }
+
+    private function audit($status,$remark,...$extra){
+
+        $null = transaction(function() use ($status,$remark,$extra){
+            
+            list($admin) = $extra;
+            
+            $this->status = $status;
+            $this->remark = $remark;
+            $this->audit_at = date('Y-m-d H:i:s');
+            $this->audit_uid = $admin->id;
+            $this->save();
+
+            if(self::STATUS_AGREE == $status){
+                //event('audit.'.$this->business,[$this]);
+                $method = 'agree'.ucfirst($this->business);
+            }else{
+                $method = 'deny'.ucfirst($this->business);
+            }   
+            $this->$method();  
+        });
+        
+        return $this;        
+    }
+
+    public function agreeAgent(){
+      
+        $model = transaction(function(){            
+            $this->user->is_agent = 1;
+            $this->user->save();
+            return $this->user;
+        });
+        
+        return $model;      
+    }
+    public function denyAgent(){
+        return $this->user;
+    }
+
+    /*
+    提现记录 从提案申请中单独拿出来;money的withdraw不再关联apply模型,关联withdraw模型;
+    主要是apply表无法统计extra字段中的amount属性;
+    return $apply->user->decBalance($apply->amount,'withdraw',$apply->id,'审核提现!');
+    问题又来了: 如果withdraw只保存提款成功数据，那么预提款怎么统计;
+    所以绕回来,apply添加一个附加字段filed_extra,提款的filed_extra保存金额;
+    mysql 5.7 支持json数据;        
+
+
+    提款扣款是否减少打码量,后台默认配置为true
+    提款100, 实际到账80,扣款20, (存款要求2倍流水可提的话)
+    收了手续费，就不应该 再要求这200的打码量了
+    */
+
+    public function agreeWithdraw(){
+
+        $model = transaction(function(){
+
+            if($this->debit_amount > 0 && Config::getByName('auditCashDebit')){
+                $betFlowRate = Config::getByName('betFlowRate') ?? 1;
+                $audit_amount = $this->amount * $betFlowRate;
+                $this->user->decAuditFlow($audit_amount);
+            }
+          
+            return Withdraw::create([
+                'uid' => $this->uid,                
+                'amount' => $this->amount,
+                'audit_remain'  => $this->audit_remain, //所需打码量
+                'real_amount'   => $this->real_amount,  //到账金额
+                'debit_amount'  => $this->debit_amount, //扣款金额
+                'audit_uid' => $this->audit_uid,
+                'remark' => $this->remark,
+            ]);
+
+        });
+        
+        return $model;
+    }
+
+    public function denyWithdraw(){
+
+        $model = transaction(function(){
+
+            $this->incBalance($this->amount,'withdraw_refuse',$this->id,'提现拒绝返还'.$this->amount);
+            $this->decFrozenBalance($this->amount);
+
+        });
+        
+        return $model;
+    }
+
+    //后台
+    public static function attachToSelfRequest(&$query,$params=[]){
+
+        $params = request()->param();
+
+        if(isset($params['status']) && is_numeric($params['status'])){
+            $query->where('x.status', $params['status']);
+        }
+        if($params['business']??''){
+            $query->where('x.business', $params['business']);
+        }
+        
+    }    
+
+
+}

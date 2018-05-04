@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>在线充值</title>
+<meta http-equiv="Cache-Control" content="max-age=864000" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+	<link rel="stylesheet" href="/css/bootstrap.min.css">
+	<link rel="stylesheet" href="/css/font-awesome.min.css">
+	<link rel="stylesheet" href="/styles/ucenter.css">
+	<link rel="stylesheet" type="text/css" href="/fonts-new/iconfont.css">	
+	<link rel="stylesheet" href="/styles/ezweb.css">
+	<link rel="stylesheet" href="/css/500f_new_wap.css">	
+	<script src="/assets/jquery.js"></script>
+	<script src="/js/bootstrap.min.js"></script>
+</head>
+<body>
+	
+	{include file='common/nav'}
+	{include file='common/header'}	
+	
+<!--<div class="wap_500f_user_count">
+	<i class="fl"></i>
+	<span class="fl ml20 f16">账户余额</span>
+	<span class="fr mr10 f16 color_red">8686.00</span>
+</div>	-->
+<div class="block_0"></div>
+<div class="wap_500f_user_choose">
+	选择充值方式
+</div>
+<div class="block_0"></div>
+<div class="ucenter">
+	<!--存款页面-->	
+	<div class="wap_500f_pay">
+		<a href="http://pay77158.com" target="_blank">
+			<div class="wap_500f_pay_wenchat">
+				<i></i>
+				<span>
+					WAP微信充值
+				</span>
+				<p class="fa fa-lg fa-chevron-right"></p>
+			</div>
+		</a>
+		<div class="block_10"></div>
+		<a href="http://pay77158.com" target="_blank">
+			<div class="wap_500f_pay_alipay">
+				<i></i>
+				<span>
+					WAP支付宝充值
+				</span>
+				<p class="fa fa-lg fa-chevron-right"></p>
+			</div>
+		</a>
+		<div class="block_10"></div>
+		<a href="./huikuan.php">
+			<div class="wap_500f_pay_unionpay">
+				<i></i>
+				<span>
+					公司银行卡入账
+				</span>
+				<p class="fa fa-lg fa-chevron-right"></p>
+			</div>
+		</a>
+	</div>
+</div>
+
+
+<script>
+$(function(){
+	//点击底部固定导航条切换
+$(".nav500_bottom_a").click(function(){
+	var navThis = $(this);
+	navThis.css("color","#d9901e")
+	navThis.parent().siblings("span").find("a").css("color","#999999")
+	navThis.find("i").addClass("nav500_b_active");
+	navThis.parent().siblings("span").find("i").removeClass("nav500_b_active");
+	navThis.addClass("nav500_bottom_active").parent().siblings("span").find("a").removeClass("nav500_bottom_active")
+	});
+	
+})
+</script>
+</body>
+</html>

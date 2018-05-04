@@ -1,0 +1,89 @@
+<?php 
+namespace app\api\controller;
+
+use app\api\Base;
+use app\api\error\CodeBase;
+
+class User extends Base {
+    
+    //------------用户中心------------
+    public function info(){
+        if(IS_POST){
+            $ret = $this->user->edit();
+            return $this->bool_return($ret);                  
+        }else{
+            return $this->apiReturn([],$this->user); 
+        }
+    }
+
+    public function save_password(){
+        $ret = $this->user->password();
+        return $this->bool_return($ret);     
+    }
+
+    public function bank(){
+        $ret = $this->user->bank();
+        return $this->bool_return($ret);       
+    }
+
+    //--------------站内信--------------
+    public function inbox(){
+        $list = $this->user->getMessQList();
+        return $this->apiReturn([],$list);
+    }
+
+    public function inbox_del(){
+        $params = request()->param(); 
+        $ret = $this->user->getMessDel($params['ids']);
+        return $this->bool_return($ret);      
+    }
+    public function inbox_edit(){
+        $params = request()->param(); 
+        $ret = $this->user->getMessEdit($params['ids']);
+        return $this->bool_return($ret); 
+    }    
+
+    //--------------提案--------------
+    public function agent(){
+        $ret = $this->user->apply('agent');
+        return $this->bool_return($ret);    
+    }
+
+    public function get_withdraw_info(){
+        $data = $this->user->get_withdraw_info();
+        return $this->apiReturn([],$data);
+    }
+
+    public function withdraw(){
+        $ret = $this->user->apply('withdraw');
+        return $this->bool_return($ret);
+    }
+
+    //----------------用户流水记录-------------
+    public function money_record(){
+        $list = $this->user->money_record();
+        return $this->apiReturn([],$list);
+    }
+
+    public function recharge_record(){
+        $list = $this->user->recharge_record();
+        return $this->apiReturn([],$list);        
+    }
+
+    public function bet_record(){
+        $list = $this->user->bet_record();
+        return $this->apiReturn([],$list);        
+    }
+
+    public function withdraw_record(){
+        $list = $this->user->withdraw_record();
+        return $this->apiReturn([],$list);  
+    }
+
+    public function backwater_record(){
+        $list = $this->user->backwater_record();
+        return $this->apiReturn([],$list);        
+    }
+
+}
+

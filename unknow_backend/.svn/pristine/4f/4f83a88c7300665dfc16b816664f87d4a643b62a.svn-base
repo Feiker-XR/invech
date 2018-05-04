@@ -1,0 +1,132 @@
+<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:82:"/mnt/wwwroot/www.dd788799.com/houtai/../application/admin/view/config/noticle.html";i:1505452684;}*/ ?>
+<!DOCTYPE>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>系统设置</title>
+<link href="/css/base.css" rel="stylesheet" type="text/css" />
+<link href="/css/admin.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="/js/jquery.js"></script>
+<script type="text/javascript" src="/js/jquery.tools.js"></script>
+<script type="text/javascript" src="/js/base.js"></script>
+</head>
+<body class="input">
+	<!--<div class="bar">
+		公告管理
+	</div>-->
+
+	<div class="body">
+	  <ul id="tab" class="tab">
+				<li>
+					<input type="button" value="首页公告" <?php if($type==0){ echo "class='current'";}?> onClick="window.location.href='/index.php/config/noticle/type/0'" />
+				</li>
+                <li>
+					<input type="button" value="体育公告" <?php if($type==1){ echo "class='current'";}?> onClick="window.location.href='/index.php/config/noticle/type/1'" />
+				</li>
+                <li>
+					<input type="button" value="彩票公告" <?php if($type==2){ echo "class='current'";}?> onClick="window.location.href='/index.php/config/noticle/type/2'" />
+				</li>
+                <li>
+					<input type="button" value="真人公告" <?php if($type==3){ echo "class='current'";}?> onClick="window.location.href='/index.php/config/noticle/type/3'" />
+				</li>
+                <li>
+					<input type="button" value="代理公告" <?php if($type==888){ echo "class='current'";}?> onClick="window.location.href='/index.php/config/noticle/type/888'" />
+				</li>
+			</ul>
+			<form name="form1" onSubmit="return check_submit();" method="post" action="?nid=<?=$nid?>&action=<?=$nid>0 ? 'edit' : 'add'?>&page=<?=$page?>">
+			<table class="inputTable tabContent">
+				<tr>
+				  <th>
+						公告内容: 
+					</th>
+					<td><textarea name="msg" id="msg" class="formTextarea"><?=$rs["msg"]?></textarea></td>
+				</tr>
+				<tr>
+					<th>
+						有效时间: 
+					</th>
+					<td>
+					<input type="text" value="<?=isset($rs['end_time']) ? $rs['end_time'] : date("Y-m-d H:i:s",strtotime("+1 week"))?>" name="end_time" id="end_time" class="formText" /></td>
+				</tr>
+				<tr>
+				  <th>是否显示: </th>
+				  <td><select name="is_show" id="is_show">
+				        <option value="1" <?php if($rs['is_show']==1){ echo 'selected';}else{ echo '';}?>>显示</option>
+				        <option value="0" <?php if($rs['is_show']==0){ echo 'selected';}else{ echo '';}?>>隐藏</option>
+     				  </select>
+     			  </td>
+			  </tr>
+				<tr>
+				  <th>公告分类:</th>
+				  <td>
+				  	<select name="is_class" id="is_class">
+				        <option value="0" <?php if($rs['is_class']==0){ echo 'selected';}?>>首页公告</option>
+				        <option value="1" <?php if($rs['is_class']==1){ echo 'selected';}?>>体育公告</option>
+				        <option value="2" <?php if($rs['is_class']==2){ echo 'selected';}?>>彩票公告</option>
+				        <option value="3" <?php if($rs['is_class']==3){ echo 'selected';}?>>真人公告</option>
+				        <option value="888" <?php if($rs['is_class']==888){ echo 'selected';}?>>代理公告</option>
+				    </select>
+				  </td>
+			  </tr>
+				<tr>
+				  <th>排序:</th>
+				  <td><input type="text" value="<?=isset($rs['sort']) ? $rs['sort'] : '1'?>" name="sort" id="sort" class="formText" />
+				  <label class="requireField"> 数字越大排序越靠前</label></td>
+			  </tr>
+			</table>
+			<div class="buttonArea">
+				<input type="submit" class="formButton" value="确  定" hidefocus />&nbsp;&nbsp;
+				<input type="button" class="formButton" onClick="window.location.href='<?php echo Url('main/info'); ?>'" value="返  回" hidefocus />
+	  </div>
+</form>
+<table class="inputTable tabContent">
+	<tr>
+	  <td width="86" align="center" bgcolor="#758fb9" style="color:#FFF; font-size:14px;">发布时间</td>
+	  <td width="86" align="center" bgcolor="#758fb9" style="color:#FFF; font-size:14px;">过期时间</td>
+	  <td width="60" align="center" bgcolor="#758fb9" style="color:#FFF; font-size:14px;">公告类别</td>
+	  <td align="center" bgcolor="#758fb9" style="color:#FFF; font-size:14px;">公告内容</td>
+	  <td width="46" align="center" bgcolor="#758fb9" style="color:#FFF; font-size:14px;">状态</td>
+	  <td width="146" align="center" bgcolor="#758fb9" style="color:#FFF; font-size:14px;">编辑</td>
+ 	</tr>
+ 	<?php if($noticle){foreach ($noticle as $v){
+ 		$time	=	time();
+ 		$endtime = strtotime($v['end_time']);
+ 	?>
+	<tr>
+		<td align="center"><?php echo date("m-d H:i",strtotime($v["add_time"]))?></td>
+		<td align="center"><?php echo date("m-d H:i",strtotime($v["end_time"]))?></td>
+		<td align="center">
+		<?php if($v['is_class']==0){
+				 	echo '首页公告'; 
+				}else if($v['is_class']==1){
+					echo '体育公告';
+				}else if($v['is_class']==2){
+					echo '彩票公告';
+				}else if($v['is_class']==3){ 
+					echo '真人';
+				}else if($v['is_class']==888){
+					echo '代理公告';
+				}
+		?>
+		</td>
+		<td align="left"><?php echo $v["msg"]?></td>
+		<td align="center">
+		<?=$v['is_show']==0 ? '<span class="hong">不显示</span>' : $time>$endtime ? '<span class="red">不显示</span>' : '<span class="blue">显示</span>'?>
+		</td>
+		<td align="center">
+            <a href="?type=<?=$type?>&nid=<?=$v['nid']?>&page=<?php echo $page?>">编辑</a>&nbsp;&nbsp;<span>|</span>
+            <a href="?type=<?=$type?>&nid=<?=$v['nid']?>&action=delete">删除</a>
+        </td>
+	</tr>
+	<?php }}?>
+	<tr>
+    </tr>
+		</table>
+	<!-- page -->
+	<?php echo $pages; ?>
+	<!-- page end-->
+	</div>	
+</body>
+
+</html>
+

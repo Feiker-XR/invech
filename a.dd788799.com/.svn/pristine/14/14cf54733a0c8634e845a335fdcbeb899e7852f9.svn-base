@@ -1,0 +1,25 @@
+<?php
+namespace app\common\model;
+use think\Model;
+
+class Notice extends Base{
+
+    protected $table = 'gygy_content';
+	protected $createTime = 'created_at';
+    protected $updateTime = '';
+    protected $autoWriteTimestamp = 'datetime';
+    public static function getList(){
+        $params = request()->param();
+        $query  = self::order('id desc');
+        if($params['keywords']??0){
+            $query->where('title','like','%'.trim($params['keywords']).'%');
+        }
+        $query->where('enable',1);
+        return $query->paginate();
+    }
+    //前端获取最近一条记录
+    public static function getFirst(){
+        $query  = self::order('id desc');
+        return $query->find();
+    }
+}

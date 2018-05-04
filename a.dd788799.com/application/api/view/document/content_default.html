@@ -1,0 +1,43 @@
+<div id="project">
+  <div class="pull-left">
+    <h2>ALAFEI API文档</h2>
+  </div>
+  <div class="clearfix"></div>
+</div>
+    <div id="header">
+        <p>
+        
+        
+        <hr/>
+        
+        <div id="project">
+          <div class="pull-left">
+            <h2>错误码规范</h2>
+            code 第1位（错误提示级别）,第2-3位（错误模块）,第4-7位（错误代码）<br/><br/>
+          </div>
+          <div class="clearfix"></div>
+        </div>
+         
+        <table>
+            <thead>
+            <tr>
+              <th>class</th>
+              <th>property</th>
+              <th>code</th>
+              <th>msg</th>
+            </tr>
+            </thead>
+            <tbody>
+                {foreach($errors as $error)}
+                <tr>
+                  <td>{$error.class}</td>
+                  <td>{$error.property}</td>
+                  <td>{$error.code}</td>
+                  <td>{$error.msg}</td>
+                </tr>
+                {/foreach}
+            </tbody>
+        </table>
+            
+        </p>
+</div>

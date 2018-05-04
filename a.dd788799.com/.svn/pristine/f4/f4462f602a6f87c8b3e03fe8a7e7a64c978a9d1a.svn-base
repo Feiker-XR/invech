@@ -1,0 +1,56 @@
+{layout name="layout" /}
+<div class="row">
+  <div class="col-xs-12">
+    <div class="box">
+		<div class="box-header">
+			<form>
+				<div class="pull-left" >
+					<input class="form-control input-sm search" value="{$Think.get.username}"  name="username" id="username"  placeholder="用户名" type="text" >
+				</div> 
+			    <div class="has-feedback pull-left" style="margin-left:15px;">
+			        <button type="submit" class="btn btn-block btn-default btn-sm filter">查询</button>
+			    </div>
+			</form>
+		</div>
+      <!-- /.box-header -->
+		<div class="box-body table-responsive no-padding">
+			<table class="table table-hover">
+					<tr>
+					<th>#</th>
+					<th>订单ID</th>
+					<th>用户名称</th>
+					<th>玩法名称</th>
+					<th>投注期号</th>
+					<th>投注时间</th>
+					<th>投注手机</th>
+					<th>投注注数</th>
+					<th>投注号码</th>
+					<th>开奖号码</th>
+					<th>中奖注数</th>
+					<th>中奖金额</th>
+					
+				</tr>
+				{foreach $list as $v}
+				 <tr>
+					<td>{$v.id}</td>
+					<td>{$v.orderId}</td>
+					<td>{$v.user.username}</td>
+					<td>{$v.playedName}</td>
+					<td>{$v.actionNo}</td>
+					<td>{$v.actionTime|date="y-m-d H:i:s",###}</td>
+					<td>{$v.actionIP}</td>
+					<td>{$v.actionNum}</td>
+					<td>{$v.actionData}</td>
+					<td>{$v.lotteryNo}</td>
+					<td>{$v.zjCount}</td>
+					<td>{$v.bonus}</td>
+				</tr>
+				{/foreach}
+			</table>
+			{$list->render();}
+		</div>
+      <!-- /.box-body -->
+    </div>
+    <!-- /.box -->
+  </div>
+</div>

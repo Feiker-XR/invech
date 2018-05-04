@@ -1,0 +1,145 @@
+<extend name="Public/base" />
+
+<block name="body">
+	<!-- 标题栏 -->
+	<div class="main-title">
+		<h2>操作日志</h2>
+	</div>
+	<php> 
+	
+		$mname=array(
+			'2.00'=>'元',
+			'0.20'=>'角',
+			'0.02'=>'分'
+		);
+		
+		$liqTypeName=array(
+		1=>'充值',
+		2=>'返点',
+		//3=>'返点',//分红
+		//4=>'抽水金额',
+		5=>'停止追号',
+		6=>'中奖金额',
+		7=>'撤单',
+		8=>'提现失败返回冻结金额',
+		9=>'管理员充值',
+		10=>'解除抢庄冻结金额',
+		//11=>'收单金额',
+		
+		50=>'签到赠送',
+		51=>'首次绑定工行卡赠送',
+		52=>'充值佣金',
+		53=>'消费佣金',
+		
+		100=>'抢庄冻结金额',
+		101=>'投注冻结金额',
+		102=>'追号投注',
+		103=>'抢庄返点金额',
+		//104=>'抢庄抽水金额',
+		105=>'抢庄赔付金额',
+		106=>'提现冻结',
+		107=>'提现成功扣除冻结金额',
+		108=>'开奖扣除冻结金额'
+	);</php>
+	<!-- 高级搜索 -->
+	<form action="{:Url('adminlog')}" method="post">
+		<div class="search-form fr cf">
+			<div class="sleft">
+				管理员：<input style="width:100px" type="text" name="username" class="search-input" value="{:I('username')}" placeholder="用户名">
+			</div>
+			<div class="sleft">
+				<select style="width:120px;" name="type">
+					<option value="">所有操作类型</option>
+					<volist name="adminLogType" id="value" key="key">
+						<option value="{$key-1}" title="{$value}">{$value}</option>
+					</volist>
+					
+				</select>		
+			</div>
+			<div class="sleft">
+				时间从：<input style="width:80px" type="text" name="fromTime" id="first" class="search-input" value="<?=$this->iff(I('fromTime'),I('fromTime'),date('Y-m-d',time())) ?>" placeholder="开始时间">
+			</div>
+			<div class="sleft">
+				到：<input style="width:80px" type="text" name="toTime" id="end" class="search-input" value="<?=$this->iff(I('toTime'),I('toTime'),date('Y-m-d',time())) ?>" placeholder="结束时间">			
+			</div>
+			<div class="sbtn">
+				<button type="submit" class="btn" id="search">查 找</button>
+			</div>	
+		</div>
+	</form>
+
+	
+    <!-- 数据列表 -->
+    <div class="data-table table-striped" id="data-table">
+	<table class="">
+    <thead>
+        <tr>
+			<th>时间</th>
+			<th>管理员</th>
+			<th>操作类型</th>
+			<th>登录IP</th>
+			<th>操作描述</th>
+			<th>对应ID</th>
+			<th>操作对象</th>
+		</tr>
+    </thead>
+    <tbody>
+		<if condition="$_list">
+		<volist name="_list" id="var">
+		<php>$bet=M('bets')->where(array('id'=>$var['extfield0']))->find();</php>
+		<tr>
+			<td><?=date('m-d H:i:s', $var['actionTime'])?></td>
+			<td><?=$var['username']?></td>
+			<td><?=$adminLogType[$var['type']]?></td>
+			<td><?=long2ip($var['actionIP'])?></td>
+			<td><?=$this->ifs($var['action'], '--')?></td>
+			<td><?=$this->ifs($var['extfield0'], '--')?></td>			
+			<td><?=$this->ifs($var['extfield1'], '--')?></td>		
+		</tr>
+		</volist>
+		<else />
+			<tr>
+				<td colspan="7" align="center">暂时没有记录。</td>
+			</tr>
+		</if>
+	</tbody>
+    </table> 
+	</div>
+    <div class="page">
+        {$_page}
+    </div>
+</block>
+
+<block name="script">
+    <link href="__STATIC__/datetimepicker/css/datetimepicker.css" rel="stylesheet" type="text/css">
+	<link href="__STATIC__/datetimepicker/css/datetimepicker_blue.css" rel="stylesheet" type="text/css">
+	<link href="__STATIC__/datetimepicker/css/dropdown.css" rel="stylesheet" type="text/css">
+	<script type="text/javascript" src="__STATIC__/datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
+	<script type="text/javascript" src="__STATIC__/datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js" charset="UTF-8"></script>
+
+	<script>
+	$(function(){
+		$('#first,#end').datetimepicker({
+			format: 'yyyy-mm-dd',
+			language:"zh-CN",
+			minView:2,
+			autoclose:true
+		});
+		//showTab();
+	});
+	</script>
+	<script type="text/javascript">
+		//回车搜索
+		$("body").keyup(function(e){
+			if(e.keyCode === 13){
+				$("#search").click();
+				return false;
+			}
+		});
+		$('.side-sub-menu').find('a[href="{:Url('Action/adminlog')}"]').closest('li').addClass('current');
+	</script>
+</block>
+
+<block name="style">
+
+</block>

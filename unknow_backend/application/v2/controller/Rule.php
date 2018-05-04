@@ -1,0 +1,43 @@
+<?php
+namespace app\v2\controller;
+
+use app\v2\Base;
+
+class Rule extends Base{
+    
+    public function cqssc(){
+        return $this->fetch();
+    }
+    
+    public function xyft(){
+        return $this->fetch();
+    }
+    
+    public function xjssc(){
+        return $this->fetch();
+    }
+
+    public function cqklsf(){
+        return $this->fetch();
+    }
+    
+    public function gdklsf(){
+        return $this->fetch();
+    }
+    
+    public function bjpk10(){
+        return $this->fetch();
+    }
+    
+    public function gxklsf(){
+        return $this->fetch();
+    }
+    
+    public function jsk3(){
+        return $this->fetch();
+    }
+    
+    public function six(){
+        return $this->fetch();
+    }
+}

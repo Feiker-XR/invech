@@ -1,0 +1,220 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>系统设置</title>
+<link href="../css/base.css" rel="stylesheet" type="text/css" />
+<link href="../css/admin.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="../js/jquery.js"></script>
+<script type="text/javascript" src="../js/jquery.tools.js"></script>
+<script type="text/javascript" src="../js/base.js"></script>
+<script language="javascript">
+function gopage(url){
+	location.href = url;
+}
+
+function check(){
+    var len = document.form1.elements.length;
+	var num = false;
+    for(var i=0;i<len;i++){
+		var e = document.form1.elements[i];
+        if(e.checked && e.name=='mid[]'){
+			num = true;
+			break;
+		}
+    }
+	if(num){
+		var action = $("#s_action").val();
+		if(action=="0"){
+			alert("请您选择要执行的相关操作！");
+			return false;
+		}else{
+			{eq name="js" value="0"}
+			if(action=="2") document.form1.action="{:url('sports/jiesuan_list')}";
+			if(action=="1") document.form1.action="{:url('sports/jiesuan_sb_list')}";
+			if(action=="3") document.form1.action="{:url('sports/re_jiesuan_sb_list')}";
+			if(action=="4") document.form1.action="{:url('sports/nullity_list')}";
+			{else /}
+			if(action=="2") document.form1.action="{:url('sports/jiesuan_list')}";
+			if(action=="1") document.form1.action="{:url('sports/re_jiesuan_list')}";
+			if(action=="3") document.form1.action="{:url('sports/zuqiu_score')}";
+			{/eq}			
+		}
+	}else{
+        alert("您未选中任何复选框");
+        return false;
+    }
+}
+
+function ckall(){
+    for (var i=0;i<document.form1.elements.length;i++){
+	    var e = document.form1.elements[i];
+		if (e.name != 'checkall') e.checked = document.form1.checkall.checked;
+	}
+}
+
+function zqlrbf(zqmid,fid){
+	var md = "{$page_date}";
+	var a = "mi"+zqmid;
+	var b = "ti"+zqmid;
+	var c = "mih"+zqmid;
+	var d = "tih"+zqmid;
+	var m = $("#"+a).val();
+	var t = $("#"+b).val();
+	var l = $("#"+c).val();
+	var n = $("#"+d).val();
+	
+	if(l.length>0 && n.length>0){
+		if(m.length>0 && t.length>0){
+			$.post(
+				'{:url('danshi/zqlr')}',
+				{r:Math.random(),value:m+"|||"+t+"|||"+md+"|||"+zqmid+"|||qc"},
+				function(date){
+					 if(date==3){
+						alert("系统没有查找到您要结算的赛事！")
+					}else if(date==1){
+						ftbf(m,t,1,fid);
+					}
+				}
+			);
+		}
+	}else{
+		alert("请输入上半场比分！");
+		$("#"+a).val("");
+		$("#"+b).val("");
+	}
+}
+
+function zqlrbf_sb(zqmid,fid){
+	var md = "{$page_date}";
+	var c = "mih"+zqmid;
+	var d = "tih"+zqmid;
+	var l = $("#"+c).val();
+	var n = $("#"+d).val();
+	//alert(c+'-'+d+'-'+l+'-'+n);
+	if(l.length>0 && n.length>0){
+		$.post(
+			'{:url('danshi/zqlr')}',
+			{r:Math.random(),value:l+"|||"+n+"|||"+md+"|||"+zqmid+"|||sb"},
+			function(date){
+				if(date==3){
+					alert("系统没有查找到您要结算的赛事！")
+				}else if(date==2){
+					ftbf(l,n,2,fid);
+				}
+			}
+		);
+	}
+}
+
+function ftbf(m,t,p,d){
+	if(p == 1){     //////全场
+		var mid = document.getElementsByName("mi"+d)
+		var tid = document.getElementsByName("ti"+d)
+	}else{
+		var mid = document.getElementsByName("mh"+d)
+		var tid = document.getElementsByName("th"+d)
+	}
+	for(var i=0; i<mid.length; i++){
+		mid[i].value = m;
+		tid[i].value = t;
+	}
+}
+</script>
+</head>
+<body class="list">
+	<div class="bar">
+		体育比分管理
+	</div>
+	
+
+	<div class="body">
+<form id="form1" name="form1" method="post" action="" onSubmit="return check();">
+<div class="listBar">选择日期：
+            <select id="DropDownList1" onChange="javascript:gopage(this.value)" name="DropDownList1"><?php
+for ($i=0;$i<=15;$i++){
+	$s		=	strtotime("-$i day");
+	$date	=	date("m-d",$s);
+?>
+        <option value="{:url('sports/zuqiu')}?js={$js}&date={$date}" {if $page_date eq $date }selected{/if} >{$date}</option>
+<?php
+}
+?>
+      </select></div>
+<ul id="tab" class="tab">
+<div style="float:right; margin-right:5px;"><span class="STYLE4">相关操作：</span>
+   <select name="s_action" id="s_action">
+        <option value="0" selected="selected">选择确认</option>
+        {eq name="js" value="0"}
+        <option value="2">结算全场</option>
+        <option value="1">结算上半场</option>
+        <option value="3">重新结算上半场</option>
+        <option value="4" style="color:#FF0000;">设为无效</option>
+		{else /}
+        <option value="3">录入比分</option>
+        <option value="1">重新结算</option>
+        <option value="2">查看未结算注单</option>		
+		{/eq}
+      </select>
+      <input type="submit" name="Submit2" value="执行" class="formButton"/>
+
+	{eq name="js" value="0"}
+      <input type="button" name="Submit2" style="color:#F00" value="进入已结算" class="formButton" onClick="window.location.href='{:url('sports/zuqiu')}?js=1&date=<?=$page_date?>'"/>
+	{else /}
+      <input type="button" name="Submit2" style="color:#F00" value="进入未结算" class="formButton" onClick="window.location.href='{:url('sports/zuqiu')}?date=<?=$page_date?>'"/>    
+    {/eq}
+
+      </div>
+
+<ul id="tab" class="tab">
+                <li><input type="button" value="足球比分" hidefocus class="current" onClick="window.location.href='{:url('sports/zuqiu')}?date=<?=$page_date?>'" /></li>
+                <li><input type="button" value="篮球比分" hidefocus onClick="window.location.href='{:url('sports/lanqiu')}?date=<?=$page_date?>'" /></li>
+                <li><input type="button" value="网球比分" hidefocus onClick="window.location.href='{:url('sports/tennis')}?date=<?=$page_date?>'" /></li>
+                <li><input type="button" value="排球比分" hidefocus onClick="window.location.href='{:url('sports/volleyball')}?date=<?=$page_date?>'" /></li>
+                <li><input type="button" value="棒球比分" hidefocus onClick="window.location.href='{:url('sports/baseball')}?date=<?=$page_date?>'" /></li>
+                <li><input type="button" value="冠军比分" hidefocus onClick="window.location.href='{:url('sports/guanjun')}?date=<?=$page_date?>'" /></li>
+			</ul>
+
+<table id="listTables" class="listTables">
+
+				<tr>
+
+					<th>比赛时间</th>
+					<th><?=$page_date?></th>
+
+					<th>主场队伍</th>
+
+					<th>客场队伍</th>
+					<th>上半场比分</th>
+					<th>全场比分</th>
+				  <th><input name="checkall" type="checkbox" id="checkall" onClick="return ckall();"/></th>
+
+			    </tr>
+	{volist name='match_info' id='v'}
+	{if $v['couarr'] <= 1}
+	 <tr>
+      	<td align="center">{$v['Match_Time']}</td>
+        <td align="center">{$v['Match_Name']}</td>
+        <td align="center">{$v['Match_Master']}</td>
+        <td align="center">{$v['Match_Guest']}</td>
+         <td align="center">
+        <input name="mh{$v['ftid']}" type="text" class="zqinput" id="mih{$v['Match_ID']}" onChange="zqlrbf_sb({$v['Match_ID']},{$v['ftid']})" 
+        value="{$v['MB_Inball_HR']}"  style="width:30px; text-align:center; background-color:{$v['bgcolor']};" maxlength="3" />&nbsp;&nbsp;
+        <input name="th{$v['ftid']}" type="text" class="zqinput" id="tih{$v['Match_ID']}" onChange="zqlrbf_sb({$v['Match_ID']},{$v['ftid']})" 
+        value="{$v['TG_Inball_HR']}" style="width:30px; text-align:center; background-color:{$v['bgcolor']};" maxlength="3" /></td>
+        <td align="center">
+        <input name="mi{$v['ftid']}" type="text" class="zqinput" id="mi{$v['Match_ID']}" 
+        onChange="zqlrbf({$v['Match_ID']},{$v['ftid']})" value="{$v['MB_Inball']}" style="width:30px; text-align:center;" maxlength="3" />
+      &nbsp;&nbsp;
+      <input name="ti{$v['ftid']}" type="text"class="zqinput"  id="ti{$v['Match_ID']}" onChange="zqlrbf({$v['Match_ID']},{$v['ftid']})" 
+      value="{$v['TG_Inball']}" style="width:30px; text-align:center;" maxlength="3" /></td>
+        <td align="center"><input name="mid[]" type="checkbox" id="mid[]" value="{$v['Match_ID']}" /></td>
+      </tr>
+    {/if}
+    {/volist}
+  </table>
+</form>
+	{$list->render()}
+	</div>
+</body>
+</html>

@@ -1,0 +1,125 @@
+<div id='main-users-resizer' class='ui-widget-content ui-corner-all'>
+    <div class='ui-widget-header'>
+        <button id='min-main-chat' class='ui-button ui-state-default ui-corner-all ui-button-icon-only minimize-main'
+                title='Minimizar'>
+            <a href='#'>
+                <span class="mini-window" ></span>
+                <span class='ui-button-text' style='float: right; padding: 2px;'>.</span>
+            </a>
+        </button>
+        <div id='chat-title'>
+        </div>
+    </div>
+
+    <div class='ui-widget'>
+        <input id='text-status' type='text' style="display: none;"/>
+        <input id='refresh-btn' type="button" value="刷新" style="float: right; margin-top: 4px; margin-right: 10px;"/>
+    </div>
+
+    <div style=" background-color:#2b2b2b;">
+        <div>
+         <!--
+            <button id='rerun'><img id='rerun-img'></button>
+            <button id='rerun-select'>.</button>
+         -->
+            <i id='rerun'><i class="icon icon-circle" id='rerun-img'></i></i>
+            <i id='rerun-select' class="icon icon-triangle transform-icon"></i>
+
+            <a href="#" id="tool_promo" class="promo" target="pageframe" title='推广地址' ></a>
+            <i class="icon icon-add-group" id="tool_addgroup" title='增加分组' style='cursor:pointer' ></i>
+            <i class="icon icon-dele-group" id="tool_delgroup" title='删除分组' style='cursor:pointer' ></i>
+            <i class="icon icon-group-info user" id="groupmsg" title='群发消息' style='cursor:pointer' ></i>
+            <i class="icon icon-refresh-fa icon-spin" id="refresh-li"></i>
+        </div>
+
+        <ul id='user-status'>
+            <li id='user-status-online' class='user-status'>
+                <a class='online'
+                   href='#'></a></li>
+            <li id='user-status-busy' class='user-status'>
+                <a class='busy'
+                   href='#'></a></li>
+        </ul>
+
+    </div>
+
+    <div>
+        <div class='chat-search-main'>
+            <button id="magnifier-icon" class="icon icon-search"></button>
+            <input type='text' id='chat-search-text' class='chat-search-text-st'/>
+            <button id="chat-icon-close" class="icon icon-close"></button>
+        </div>
+    </div>
+
+    <!--  这里是客服上级 -->
+    <div class="cus-top " id="users-window-chat-2">
+        <a class="row-cus haft-width user" id="cs" stat="online" >
+            <div class="row-cos-icon ">
+                <i class="icon icon-customer _icon-2x"></i>
+            </div>
+            <div class="row-cos-a row-a">
+                <h2 id="h2_cs">客服</h2>
+                <h3>在线</h3>
+            </div>
+        </a>
+        <a  class="row-top haft-width user" id="userup" stat="offline" userid="none" >
+            <div class="row-top-iocn">
+                <i class="icon icon-superiors _icon-2x"></i>
+            </div>
+            <div class="row-top-a row-a">
+                <h2 id="h2_up">上级</h2>
+                <h3>离线</h3>
+            </div>
+        </a>
+    </div>
+    <!--
+    <div id='slider'></div>
+    -->
+
+    <div id='users'>
+
+        <!--
+        <h3>
+          <span id='users-header'></span>
+           (<span id='users-header-num'></span>)
+        </h3>
+        <div id='users-window-chat' class='slider_container'>
+          <div id='main-sort-chat' class='main-chat-window'>
+          </div>
+        </div>
+         -->
+        <!--
+                 <h3>
+                     <span id='users-header-cs'>在线客服</span>
+                     (<span id='users-header-num-cs'>1</span>)
+                 </h3>
+
+
+                 <div id='users-window-chat-cs' class='slider_container'>
+                     <div id='main-sort-chat-cs' class='main-chat-window'>
+                     </div>
+                 </div>
+
+          -->
+
+                 <h3 id='info-stranger'>
+                     <span id='users-header-4'>陌生人</span>
+                     (<span class="users-header-num" id='users-header-num-4'>0/0</span>)
+                     <span id='group-info-4'></span>
+                 </h3>
+
+
+
+                 <div id='users-window-chat-4' class='slider_container'>
+                     <div id='main-sort-chat-4' class='main-chat-window'>
+                     </div>
+                 </div>
+
+            </div>
+
+        </div>
+        <audio id='audio-popup' controls style='display: none;'>
+            <source src='/nitalk/sounds/popup.mp3' type='audio/mpeg'>
+            <source src='/nitalk/sounds/popup.ogg' type='audio/ogg'>
+            <embed src='/nitalk/sounds/popup.mp3'>
+        </audio>

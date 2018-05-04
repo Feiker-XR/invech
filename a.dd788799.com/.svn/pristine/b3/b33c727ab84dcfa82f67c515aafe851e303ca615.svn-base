@@ -1,0 +1,97 @@
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Bong网站管理系统-用户登录</title>
+<style type="text/css">
+*{margin:0px; padding:0px; font-family:"微软雅黑"}
+#header {
+	background:url(/images/login_header_bg.png) center no-repeat;
+	width:100%;
+	height:340px;
+}
+#login{
+	margin:0px auto;
+	margin-top:60px;
+	text-align:center;
+}
+#login ul li{
+	list-style:none;
+	margin:auto;
+	width:470px;
+	margin-bottom:20px;
+	
+}
+#lb_username{
+	display:inline-block;
+	width:60px; height:60px;
+	background: url(/images/login_username.png) no-repeat top left;
+	float:left;
+}
+#lb_pwd{
+	display:inline-block;
+	width:60px;
+	height:60px;
+	background:url(/images/login_pwd.png) no-repeat bottom left;
+	float:left;
+}
+.login_input {
+	display:inline-block;
+	height:60px;
+	border:2px solid #dcdcdc;
+	border-left:0px;
+	width:406px;
+	font-size:16px;
+	line-height:60px;
+}
+.login_btn{
+	width:220px;
+	height:40px;
+	border:1px #d3d3d4 solid;
+	border-radius:3px;
+	font-size:16px;
+	display:inline-block;
+}
+.bg_blue {
+	background:#3d6098;
+}
+.font_white{
+	color:#FFF;
+}
+.aleft{text-align:left;}
+.m25{margin-left:25px;}
+.aright{text-align:right;}
+.clear{clear:both;}
+.fright{float:right;}
+.fleft{float:left;}
+.h20{height:20px;}
+.gray{ color:#999; font-size:15px; line-height:15px;}
+.lb{color:#3f3f3f;}
+.my-placeholder{color:#999999;}
+</style>
+<script type="text/javascript" src="/js/jquery.js"></script>
+<script src="/js/jquery.placeholder.js"></script>
+<script type="text/javascript" src="/js/base.js"></script>
+</head>
+<body class="login">
+	
+    <div id="header">
+    </div>
+    
+    <form id="loginForm" action="" method="post">
+    	<div id="login">
+    	<ul>
+    	<li><label for="LoginName" id="lb_username"></label><input id="LoginName" type="text" name="LoginName" placeholder="请输入用户名" class="login_input" /></li>
+        <li><label for="LoginPassword" id="lb_pwd"></label><input id="LoginPassword" type="password" name="LoginPassword" placeholder="请输入密码"  class="login_input"/></li>
+        <li class="clear h20"><label for="rember" class="aright fright gray"><input id="isRememberUsername" type="checkbox" name="rember" />记住账户</label></li>
+		<!--
+		<img title="点击更换"  style="cursor:pointer;margin-left:10px;" src="{:url('Mycaptcha/admin_login')}" onclick="this.src='{:url('Mycaptcha/admin_login')}?r='+Math.random()" />
+        <input name="dlyzm" type="input" class="formText" id="code" value="1234" />
+    	-->
+        <li><input type="submit" value="提交" class="login_btn bg_blue font_white fleft" /><input type="reset" class="login_btn fright lb" value="重置"/></li>
+
+        </ul>
+        </div>
+    </form>
+</body>
+</html>

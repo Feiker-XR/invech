@@ -1,0 +1,153 @@
+<?php
+// +----------------------------------------------------------------------
+// | ThinkPHP [ WE CAN DO IT JUST THINK ]
+// +----------------------------------------------------------------------
+// | Copyright (c) 2006~2016 http://thinkphp.cn All rights reserved.
+// +----------------------------------------------------------------------
+// | Licensed ( http://www.apache.org/licenses/LICENSE-2.0 )
+// +----------------------------------------------------------------------
+// | Author: liu21st <liu21st@gmail.com>
+// +----------------------------------------------------------------------
+
+return [
+    'menu_list' => [
+        
+        [
+            'name' => '权限管理',
+            'group' => 'perms',
+            'sub_menu' => [
+                [
+                    'name'=>'管理员列表',
+                    'link'=>'',
+                ],
+                [
+                    'name'=>'角色列表',
+                    'link'=>'',
+                ],  
+                [
+                    'name'=>'权限列表',
+                    'link'=>'',
+                ],                                
+            ],        
+        ],
+
+        [
+            'name' => '会员管理',
+            'group' => 'member',
+            'sub_menu' => [
+                [
+                    'name'=>'会员列表',
+                    'link'=>'/member/index',
+                ],  
+                [
+                    'name'=>'会员等级',
+                    'link'=>'/member/level',
+                ],                                   
+            ],        
+        ],
+        
+        [
+            'name' => '支付管理',
+            'group' => 'pay',
+            'sub_menu' => [
+                [
+                    'name'=>'支付类别',
+                    'link'=>'/pay/set',
+                ],
+                [
+                    'name'=>'支付方式',
+                    'link'=>'/pay/way',
+                ],
+                [
+                    'name'=>'第三方支付',
+                    'link'=>'/pay/third',
+                ],
+                [
+                    'name'=>'支付渠道',
+                    'link'=>'/pay/channel',
+                ],                                  
+            ],
+        
+        ],
+
+        [
+            'name' => '订单管理',
+            'group' => 'order',
+            'sub_menu' => [
+                [
+                    'name'=>'订单列表',
+                    'link'=>'/order/index',
+                ],
+            ],        
+        ],
+
+        [
+            'name' => '注单管理',
+            'group' => 'bet',
+            'sub_menu' => [
+                [
+                    'name'=>'订单列表',
+                    'link'=>'/bet/index',
+                ],
+            ],        
+        ],  
+        [
+            'name' => '红利管理',
+            'group' => 'bonus',
+            'sub_menu' => [
+                [
+                    'name'=>'红利列表',
+                    'link'=>'/bonus/index',
+                ],
+                [
+                    'name'=>'红利配置',
+                    'link'=>'/bonus/config',
+                ],
+                [
+                    'name'=>'红利流水',
+                    'link'=>'/bonus/flow',
+                ],                                
+            ],        
+        ],          
+        [
+            'name' => '资金管理',
+            'group' => 'money',
+            'sub_menu' => [
+                [
+                    'name'=>'资金列表',
+                    'link'=>'/money/index',
+                ],
+            ],        
+        ],
+
+        [
+            'name' => '报表管理',
+            'group' => 'report',
+            'sub_menu' => [
+                [
+                    'name'=>'日投注报表',
+                    'link'=>'/report/bet',
+                ],
+                [
+                    'name'=>'月收支报表',
+                    'link'=>'/report/money',
+                ],                
+            ],        
+        ],
+
+        [
+            'name' => '系统管理',
+            'group' => 'system',
+            'sub_menu' => [
+                [
+                    'name'=>'基本配置',
+                    'link'=>'/system/config',
+                ],
+                [
+                    'name'=>'网站公告',
+                    'link'=>'/system/notice',
+                ],                
+            ],        
+        ],
+    ],
+];

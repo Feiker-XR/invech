@@ -1,0 +1,39 @@
+<?php
+namespace app\common\model;
+use think\Model;
+
+/**
+ *  玩法赔率模型
+ * @author mack
+ */
+class PlayedPl extends Base {
+	protected $table = 'gygy_played_pl';
+
+	public function played()
+	{
+		return $this->belongsTo('Played','playedId')->where('enable',1);
+	}
+
+	//public function pl_group() //不支持_
+	public function plgroup()
+	{
+		return $this->belongsTo('PlayedPlGroup','pl_group_id');
+	}
+    //----------------后台------------------
+    public static function getList($request){
+        $params = request()->param();
+        $query  = self::order('playedId desc');
+        if($params['name']??null){
+            if(is_numeric($params['name'])){
+                $query->alias('pl')->join('gygy_played p','p.id = pl.playedId')
+                ->join('gygy_played_pl_group plg','plg.id = pl.pl_group_id')
+                ->where('p.id|plg.id',$params['name'])->field('pl.*');
+            }else{
+                $query->alias('pl')->join('gygy_played p','p.id = pl.playedId')
+                ->join('gygy_played_pl_group plg','plg.id = pl.pl_group_id')
+                ->where('p.name|plg.name','like', '%'.trim($params['name']).'%')->field('pl.*');
+            }    
+        }
+        return $query->paginate();
+    }	
+}

@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset='utf-8'>
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+    <title>充值记录</title>
+    <link type="text/css" rel="stylesheet" href="./css/personal.css">
+    <style type="text/css">
+        ul.condition li:last-child span{
+            float: left;
+        }
+    </style>
+</head>
+<body>
+<header class="header">
+    <i class='left'>返回</i>
+    <h1>充值记录</h1>
+</header>
+<main class="inner_body">
+    <section class="fund_detail">
+        <ul class="condition">
+            <li>
+                <span>充值方式：</span>
+                <select id="_type" class="left">
+                    <option>所有方式</option>
+                    <option value="0">微信</option>
+                    <option value="1">支付宝</option>
+                    <option value="2">QQ钱包</option>
+                    <option value="3">京东支付</option>
+                </select>
+
+            </li>
+            <li><span>日期选择：</span><input type="date" value="" id="_date"/></li>
+        </ul>
+    </section>
+    <section class="table">
+        <!--如果thead 要fix 则另外一个thead需要hidden, add class hide-->
+        <!--<table class="fix">
+            <thead>
+            <tr>
+                <th>日期</th>
+                <th>资金类别</th>
+                <th>变更金额</th>
+                <th>之前金额</th>
+                <th>之后金额</th>
+            </tr>
+            </thead>
+        </table>-->
+        <table>
+            <thead class="">
+            <tr>
+                <th>充值方式</th>
+                <th>日期时间</th>
+                <th>金额</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>支付宝</td>
+                <td>2018.04.02  18:35:45</td>
+                <td>300</td>
+            </tr>
+            <tr>
+                <td>微信</td>
+                <td>2018.04.02  18:35:45</td>
+                <td>300</td>
+            </tr>
+            <tr>
+                <td>支付宝</td>
+                <td>2018.04.02  18:35:45</td>
+                <td>300</td>
+            </tr>
+            <tr>
+                <td>微信</td>
+                <td>2018.04.02  18:35:45</td>
+                <td>300</td>
+            </tr>
+            <tr>
+                <td>支付宝</td>
+                <td>2018.04.02  18:35:45</td>
+                <td>300</td>
+            </tr>
+            <tr>
+                <td>微信</td>
+                <td>2018.04.02  18:35:45</td>
+                <td>300</td>
+            </tr>
+            </tbody>
+        </table>
+    </section>
+
+</main>
+<script type="text/javascript" src="./js/jquery.1.9.1.min.js"></script>
+<script type="text/javascript" src="./js/show.js"></script>
+<script type="text/javascript">
+    $(function () {
+        //给时间选择器赋默认值
+        var _date = new Date();
+        var _y = _date.getFullYear();
+        var _m = _date.getMonth()+1;
+        _m = _m < 10 ? '0'+ _m : _m;
+        var _d = _date.getDate();
+        _d = _d < 10 ? '0'+ _d : _d;
+        _date = _y + '-' + _m  + '-' + _d;
+        $('ul.condition li input[type=date]').val(_date)
+    });
+    // 时间改变
+    $('#_date').change(function () {
+        console.log($(this).val());
+    });
+    // 充值方式改变
+    $('#_type').change(function () {
+        console.log($(this).val());
+    });
+</script>
+</body>
+</html>

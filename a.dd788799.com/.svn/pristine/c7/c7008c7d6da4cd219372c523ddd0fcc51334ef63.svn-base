@@ -1,0 +1,104 @@
+{layout name="layout" /}
+
+<div class="row">
+  <div class="col-xs-12">
+    <div class="box">
+      <div class="box-header">
+       <form>
+          <div class="pull-left">
+             <input class="form-control input-sm search" value="{$Think.get.nickname}" placeholder="请输入用户昵称" type="text" name="nickname" > 
+          </div> 
+          <div class="pull-left" style="margin-left:20px;">
+              <input type="text" name="sdate"  value="{$Think.get.sdate}" placeholder="开始时间" class="form-control input-sm" id="datepicker1">
+          </div>
+
+          <div class="pull-left">
+                ~
+          </div> 
+
+          <div class="pull-left">
+            <input type="text" name="edate"  value="{$Think.get.edate}" placeholder="结束时间" class="form-control input-sm" id="datepicker2">
+          </div> 
+          <div class="pull-left" style="margin-left:20px;">
+            <select class="form-control input-sm filterStatus" name="direct">
+              <option value="">全部状态</option>
+              <option value="0" {if($Think.get.direct === '0')} selected {/if} >收入</option>
+              <option value="1" {if($Think.get.direct === '1')} selected {/if} >支出</option>
+            </select>
+          </div>
+          <div class="pull-left" style="margin-left:20px;">
+             <select class="form-control input-sm filterStatus" name="type">
+                  <option value="">全部类型</option>
+                  <option value="recharge" {if($Think.get.type === 'recharge')} selected {/if} >充值</option>
+                  <option value="withdraw" {if($Think.get.type === 'withdraw')} selected {/if} >取款</option>
+                  <option value="bet" {if($Think.get.type === 'bet')} selected {/if} >投注</option>
+                  <option value="backwater" {if($Think.get.type === 'backwater')} selected {/if} >反水</option>
+                  <option value="bonus" {if($Think.get.type === 'bonus')} selected {/if} >红利</option>
+              </select>
+          </div>
+          <div class="has-feedback pull-left" style="margin-left:20px;">
+              <button type="submit" class="btn btn-block btn-default btn-sm filter">查询</button>
+          </div>
+     </form>
+
+      </div>
+      <!-- /.box-header -->
+      <div class="box-body table-responsive no-padding">
+        <table class="table table-hover">
+          <tr>
+             <th>#</th>
+            <th >用户ID</th>
+            <th >用户昵称</th>
+            <th >流水金额</th>            
+            <th >之前金额</th>
+            <th >之后金额</th>
+            <th >收支类型</th>
+            <th >资金类型</th>
+            <th >备注</th>
+            <th >创建时间</th>
+          </tr>
+          {foreach($list as $item)}
+          <tr>
+             <td>{$item->id}</td>
+            <td>{$item->uid}</td>
+            <td>{$item->user['nickname']}</td>
+            <td>{$item->amount}</td>
+            <td>{$item->f_balance}</td>
+            <td>{$item->t_balance}</td>
+            <td>
+              {eq name="$item->direct" value="0"}  <span class="btn-success">收入</span>{/eq}
+              {eq name="$item->direct" value="1"} <span class="btn-danger">支出</span>{/eq}       
+            </td>
+            <td>
+              {eq name="$item->type" value="recharge"} <a href='{:url('order/index',['id'=>$item->item_id])}'>充值</a> {/eq}
+              {eq name="$item->type" value="withdraw"}   <a href='{:url('withdraw/index',['id'=>$item->item_id])}'>提现</a> {/eq}
+              {eq name="$item->type" value="bet"}  <a href='{:url('bet/index',['id'=>$item->item_id])}'>投注</a>{/eq}
+              {eq name="$item->type" value="backwater"}  <a href='{:url('backwater/index',['id'=>$item->item_id])}'>返水</a> {/eq}
+              {eq name="$item->type" value="bonus"}  <a href='{:url('bonus/index',['id'=>$item->item_id])}'>红利</a> {/eq}
+            </td>
+            <td>{$item->remark}</td>
+            <td>{$item->created_at}</td>
+          </tr>
+          {/foreach}
+     
+        </table>
+        {$list->render();}
+      </div>
+      <!-- /.box-body -->
+    </div>
+    <!-- /.box -->
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){
+  var obj = {
+                autoclose: true,
+                todayHighlight: true,
+                language:"zh-CN", 
+                format:"yyyy-mm-dd" 
+           };
+  $("#datepicker1").datepicker(obj)
+  $("#datepicker2").datepicker(obj);
+});
+
+</script>

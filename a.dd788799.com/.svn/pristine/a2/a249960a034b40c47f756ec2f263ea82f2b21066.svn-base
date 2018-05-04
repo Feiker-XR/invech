@@ -1,0 +1,36 @@
+<table class="tbl" id="tbproject">
+<tbody>
+<tr>
+	<th>
+		编号
+	</th>
+	<th>
+		期号
+	</th>
+	<th>
+		状态
+	</th>
+</tr>
+<?php foreach($order_list as $var){ ?>
+<tr>
+	<td>
+		<a href="javascript:" title="查看投注详情" rel="projectinfo" action="{:Url('record/betInfo2?id='.$var['id'])}" data-value="{$var['id']}">{$var.wjorderId}</a>
+	</td>
+	<td>
+		{$var.actionNo}
+	</td>
+	<td>
+		<?php
+			if(!$var['lotteryNo']){
+				echo '<label class="gray">未开奖</label>';
+			}elseif($var['zjCount']){
+				echo '<label class="red">已中奖</label>';
+			}else{
+				echo '<label class="red">未中奖</label>';
+			}
+		?>
+	</td>
+</tr>
+<?php } ?>
+</tbody>
+</table>

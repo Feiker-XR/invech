@@ -1,0 +1,27 @@
+
+{php}
+$para = request()->param();
+{/php}
+<div>
+<form action="{:Url('data/add')}" target="ajax" method="post">
+	<input type="hidden" name="type" value="{$para['type']?$para['type']:''}"/>
+	<table class="popupModal">
+		<tr>
+			<td class="title" width="180">期号：</td>
+			<td><input type="text" name="number" value="{php} echo $para['actionNo'] {/php}"/></td>
+		</tr>
+		<tr>
+			<td class="title">开奖时间：</td>
+			<td><input type="text" name="time" value="{php} echo $para['actionTime'] {/php}"/></td>
+		</tr>
+		<tr>
+			<td class="title">开奖号码：</td>
+			<td><input type="text" name="data" value="{$data['data']? $data['data'] : ''}"/></td>
+		</tr>
+		<tr>
+			<td colspan=2><font color="red">请确认【期号】和【开奖号码】正确，输入后不可更改！号码格式如: 1,2,3,4,5</font></td>
+		</tr>
+	</table>
+
+</form>
+</div>

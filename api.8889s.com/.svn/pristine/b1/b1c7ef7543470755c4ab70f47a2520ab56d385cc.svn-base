@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Welcome</title>
+<link rel="stylesheet" type="text/css" href="/css/general.css" />
+<script src='/js/jquery-1.8.0.min.js'></script>
+<script type="text/javascript" src="/Scripts/member.js"></script>
+</head>
+<body>
+	<div class="ui-moneyBox">
+		<div class="clear"></div>
+		<ul>
+			<table width="100%" border="0" cellspacing="0" cellpadding="5">
+				<tr>
+					<th colspan="2">您的推广网址</th>
+				</tr>
+				<tr>
+					<th colspan="2"><input type="text"
+						value="{$url}"
+						style="height:30px; line-height:30px; font-size:30px;
+						font-weight:bold; width:600px; text-align:center;"/></th>
+				</tr>
+			</table>
+		</ul>
+	</div>
+</body>
+</html>

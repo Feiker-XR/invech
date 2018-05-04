@@ -1,0 +1,28 @@
+<?php
+
+namespace app\api\exceptions;
+
+use Exception;
+use think\exception\Handle as ExceptionHandler;
+use app\api\error\CodeBase;
+
+class Handler extends ExceptionHandler
+{
+    
+    public function report(Exception $exception)
+    {
+        parent::report($exception);
+    }
+
+    public function render(Exception $e)
+    {
+        if ($e instanceof HttpException) {
+            return $this->renderHttpException($e);
+        } else {
+            $error = CodeBase::$error;
+            $error[API_MSG_NAME] = $e->getMessage();
+            return json($error);
+        }
+    }
+
+}

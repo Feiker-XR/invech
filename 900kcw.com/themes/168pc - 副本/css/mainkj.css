@@ -1,0 +1,689 @@
+* {
+	margin: 0;
+	padding: 0
+}
+
+body {
+	min-width: 1200px
+}
+
+a {
+	text-decoration: none
+}
+
+li {
+	list-style: none
+}
+
+#noBgIframe body {
+	background: #f0f0f0
+}
+
+.active {
+	border-bottom: 2px solid #e8af00
+}
+
+.ahover,.deflibg {
+	background-color: #fff!important;
+	border: 1px solid #e0e0e0!important;
+	border-bottom-color: #fff!important
+}
+
+.onli {
+	color: #e6a200!important;
+	border-color: #f7db59!important;
+	background: url("../img/libg.png?v=20171281535") no-repeat;
+	background-position-x: 96px;
+	background-position-y: 12px
+}
+
+.disabled {
+	border: #e0e0e0;
+	color: #999;
+	opacity: .8
+}
+
+.bodyBox {
+	background: #f5f5f5
+}
+
+.bodyBox .head {
+	width: 100%;
+	height: auto
+}
+
+.bodyBox .head .logo {
+	width: 100%;
+	height: 70px;
+	background: #c00
+}
+
+.bodyBox .head .logo .label {
+	width: 1200px;
+	height: 70px;
+	margin: 0 auto;
+	font-size: 16px;
+	color: #e0e0e0
+}
+
+.bodyBox .head .logo .label .left {
+	height: 100%;
+	float: left
+}
+
+.bodyBox .head .logo .label .left img {
+	margin-top: 10px
+}
+
+.bodyBox .head .logo .label .left div {
+	width: auto;
+	height: 70px;
+	margin-left: 130px;
+	margin-top: -61px;
+	line-height: 70px
+}
+
+.bodyBox .head .logo .label .left div .line {
+	display: inline-block;
+	width: 1px;
+	height: 12px;
+	background: #e0e0e0;
+	margin-left: 20px;
+	margin-right: 20px
+}
+
+.bodyBox .head .logo .label .right {
+	float: right;
+	height: 100%
+}
+
+.bodyBox .head .logo .label .right span {
+	height: 70px;
+	line-height: 70px
+}
+
+.bodyBox .head .logo .label .right span a {
+	color: #e0e0e0;
+	cursor: pointer
+}
+
+.bodyBox .head .logo .label .right .cooper {
+	margin-left: 20px
+}
+
+.bodyBox .head .title {
+	width: 100%;
+	height: 160px;
+	background: url("../img/title.png?v=20171281535") no-repeat 50%;
+	background-size: a
+}
+
+.bodyBox .head .lib {
+	width: 100%;
+	height: 60px;
+	background: #fff;
+	box-shadow: 0 0 10px rgba(19,30,61,.25)
+}
+
+.bodyBox .head .lib ul {
+	width: 1200px;
+	height: 100%;
+	margin: 0 auto
+}
+
+.bodyBox .head .lib ul li {
+	width: auto;
+	height: 60px;
+	float: left;
+	margin-right: 45px
+}
+
+.bodyBox .head .lib ul li a {
+	display: block;
+	width: auto;
+	height: 60px;
+	line-height: 60px;
+	font-size: 16px;
+	color: #e0e0e0
+}
+
+.bodyBox .content {
+	width: 100%;
+	height: auto;
+	background: #f5f5f5;
+	padding-bottom: 40px;
+	margin-top: 20px
+}
+
+.bodyBox .content .listedTitle,.bodyBox .content .styleTitle {
+	font-size: 20px;
+	color: #e0e0e0
+}
+
+.bodyBox .content .listedTitle span,.bodyBox .content .styleTitle span {
+	display: inline-block;
+	width: 4px;
+	height: 15px;
+	margin-top: 5px;
+	margin-right: 5px;
+	background: #f5de0e0e0
+}
+
+.bodyBox .content form {
+	margin-top: 35px
+}
+
+.bodyBox .content form fieldset {
+	border: 1px solid #e6e7eb;
+	padding: 10px 15px
+}
+
+.bodyBox .content form .bgFieldset {
+	padding-bottom: 10px!important
+}
+
+.bodyBox .content form legend {
+	font-size: 14px;
+	color: red;
+	padding-left: 10px;
+	padding-right: 5px
+}
+
+.bodyBox .content form #Iframe1,.bodyBox .content form #Iframe2 {
+	float: left;
+	width: 90%
+}
+
+.bodyBox .content form .style1div,.bodyBox .content form .style2div {
+	width: 10%;
+	height: 46px;
+	float: right;
+	cursor: pointer
+}
+
+.bodyBox .content form .style1div .startVideo,.bodyBox .content form .style2div .startVideo {
+	display: block;
+	width: 100%;
+	height: 30px;
+	font-size: 14px;
+	color: #e0e0e0;
+	text-align: center;
+	line-height: 30px;
+	margin-top: 8px;
+	background: #c00;
+	cursor: pointer
+}
+
+.bodyBox .content form .style1div .startVideo:hover,.bodyBox .content form .style2div .startVideo:hover {
+	background: #d2af00
+}
+
+.bodyBox .content .listedBox {
+	width: 1160px;
+	height: 100%;
+	margin: 0 auto;
+	padding: 20px;
+	background: #fff;
+	margin-bottom: 20px
+}
+
+.bodyBox .content .listedBox .listed {
+	width: 1160px;
+	height: auto;
+	background: #fff
+}
+
+.bodyBox .content .listedBox .tzStyle {
+	margin-top: 10px
+}
+
+.bodyBox .content .listedBox .tzStyle p {
+	font-size: 14px;
+	color: #e0e0e0;
+	line-height: 25px
+}
+
+.bodyBox .content .styleBox {
+	width: 1160px;
+	height: 100%;
+	margin: 0 auto;
+	padding: 20px;
+	background: #fff
+}
+
+.bodyBox .content .styleBox .styleType {
+	width: 1120px;
+	height: auto;
+	margin-top: 20px;
+	background: #f2f2f2;
+	padding: 20px;
+	padding-top: 10px
+}
+
+.bodyBox .content .styleBox .styleType .selectTypes {
+	width: 100%;
+	height: 35px
+}
+
+.bodyBox .content .styleBox .styleType .selectTypes ul {
+	width: 100%;
+	height: auto
+}
+
+.bodyBox .content .styleBox .styleType .selectTypes ul li {
+	float: left;
+	line-height: 35px;
+	font-size: 14px
+}
+
+.bodyBox .content .styleBox .styleType .selectTypes ul li input {
+	margin-right: 5px
+}
+
+.bodyBox .content .styleBox .styleType .selectTypes ul li .singleselect {
+	margin-left: 20px
+}
+
+.bodyBox .content .styleBox .styleType .selectTypes ul .more {
+	margin-left: 10px
+}
+
+.bodyBox .content .styleBox .styleType .showTypes {
+	width: 1120px;
+	height: 37px
+}
+
+.bodyBox .content .styleBox .styleType .showTypes ul {
+	position: absolute;
+	width: 1200px;
+	height: auto;
+	z-index: 999
+}
+
+.bodyBox .content .styleBox .styleType .showTypes li {
+	float: left;
+	width: 70px;
+	height: 35px;
+	line-height: 35px;
+	font-size: 14px;
+	color: #e0e0e0;
+	border: 1px solid transparent
+}
+
+.bodyBox .content .styleBox .styleType .showTypes .cailist {
+	padding-left: 10px;
+	background: url("../img/down.png?v=20171281535") no-repeat;
+	background-position-x: 60px;
+	background-position-y: 15px
+}
+
+.bodyBox .content .styleBox .styleType .showTypes .cailist:hover {
+	background-color: #fff;
+	border-color: #e0e0e0;
+	border-bottom-color: #fff
+}
+
+.bodyBox .content .styleBox .styleType .showTypes .firstli {
+	width: auto;
+	margin-right: 10px
+}
+
+.bodyBox .content .styleBox .styleType .kindslist {
+	position: relative;
+	width: 1118px;
+	height: auto;
+	overflow: auto;
+	zoom: 1;
+	background: #fff;
+	padding-top: 20px;
+	padding-bottom: 10px;
+	margin-top: -1px;
+	border: 1px solid #e0e0e0
+}
+
+.bodyBox .content .styleBox .styleType .kindslist .loading {
+	width: 100%;
+	min-height: 46px;
+	line-height: 46px;
+	background: #fff;
+	text-align: center
+}
+
+.bodyBox .content .styleBox .styleType .kindslist ul {
+	width: 1080px;
+	height: auto;
+	background: #add8e6;
+	margin-left: 20px
+}
+
+.bodyBox .content .styleBox .styleType .kindslist ul li {
+	float: left;
+	width: 109px;
+	height: 25px;
+	line-height: 25px;
+	font-size: 14px;
+	border: 1px solid #d7d8db;
+	border-radius: 4px;
+	text-align: center;
+	margin-right: 10px;
+	margin-bottom: 10px;
+	cursor: pointer
+}
+
+.bodyBox .content .styleBox .styleType .kindslist ul em {
+	display: none
+}
+
+.bodyBox .content .styleBox .styleType .kindslist ul .noright {
+	margin-right: 0
+}
+
+.bodyBox .content .styleBox .styleType .kindslist ul li:hover {
+	color: #e6a200;
+	border-color: #f7db59
+}
+
+.bodyBox .content .styleBox .styleType .defaultTypes {
+	width: 1120px;
+	height: 35px;
+	line-height: 35px;
+	font-size: 14px;
+	color: #e0e0e0;
+	margin-top: 20px
+}
+
+.bodyBox .content .styleBox .styleType .defaultTypes ul>li {
+	float: left
+}
+
+.bodyBox .content .styleBox .styleType .defaultTypes ul>li select {
+	width: 120px;
+	height: 30px;
+	outline: none;
+	padding-left: 10px
+}
+
+.bodyBox .content .styleBox .haveBg span,.bodyBox .content .styleBox .ownBg span {
+	display: block;
+	width: 200px;
+	height: 40px;
+	margin-top: 20px;
+	margin-left: 480px;
+	line-height: 40px;
+	text-align: center;
+	font-size: 14px;
+	color: #e0e0e0;
+	background: #c00;
+	cursor: pointer
+}
+
+.bodyBox .content .styleBox .haveBg span:hover,.bodyBox .content .styleBox .ownBg span:hover {
+	background: #d2af00
+}
+
+.bodyBox .content .styleBox .ownBg .selectColor {
+	width: 100%;
+	height: 35px
+}
+
+.bodyBox .content .styleBox .ownBg .selectColor div {
+	display: inline-block;
+	width: 200px;
+	height: auto
+}
+
+.bodyBox .content .styleBox .ownBg .selectColor .title {
+	display: inline-block;
+	width: 100px;
+	height: 40px;
+	margin: 0;
+	line-height: 40px;
+	text-align: center;
+	background: none
+}
+
+.bodyBox .content .styleBox .ownBg .selectColor input {
+	width: 60px;
+	height: 23px;
+	outline: none;
+	border: none;
+	text-align: center;
+	background: #d3d3d3;
+	border-radius: 2px
+}
+
+.bodyBox .content .styleBox .ownBg .selectColor #colorBtn {
+	vertical-align: middle;
+	width: 22px;
+	height: 22px;
+	border: none;
+	background: url("../img/icon/colorBtn.png?v=20171281535") no-repeat!important;
+	background-size: 100%
+}
+
+.bodyBox .content .styleBox .selectColor {
+	color: #e0e0e0!important;
+	margin-top: 10px;
+	font-size: 14px!important;
+	padding-left: 9px
+}
+
+.bodyBox .content .explainBox {
+	width: 1160px;
+	height: 300px;
+	margin: 0 auto;
+	padding: 20px;
+	background: #fff;
+	margin-top: 20px
+}
+
+.bodyBox .content .explainBox .listedTitle {
+	font-size: 20px;
+	color: #e0e0e0002;
+	margin-bottom: 20px
+}
+
+.bodyBox .content .explainBox p {
+	line-height: 30px
+}
+
+.bodyBox .content .explainBox .sum {
+	color: #e0e0e0
+}
+
+.bodyBox .content .explainBox .answer {
+	color: #bcbcbc;
+	margin-bottom: 20px;
+	margin-left: 25px
+}
+
+.bodyBox .footer {
+	width: 100%;
+	height: auto;
+	background: #fff;
+	position: relative;
+	overflow: hidden
+}
+
+.bodyBox .footer .footContent {
+	width: 1200px;
+	height: 100%;
+	margin: 0 auto
+}
+
+.bodyBox .footer .leftdiv {
+	width: 100px;
+	height: 180px;
+	float: left
+}
+
+.bodyBox .footer .leftdiv .footlogo {
+	display: block;
+	width: 100px;
+	height: 100%;
+	margin-top: 60px;
+	background: url("../img/footerlogo.png?v=20171281535") no-repeat
+}
+
+.bodyBox .footer .abouts {
+	float: left;
+	width: 910px;
+	height: auto;
+	margin-top: 60px;
+	text-align: left;
+	padding-left: 40px
+}
+
+.bodyBox .footer .abouts ul {
+	width: 100%;
+	height: 30px;
+	font-size: 16px;
+	margin-bottom: 10px
+}
+
+.bodyBox .footer .abouts ul li {
+	float: left;
+	margin-right: 30px
+}
+
+.bodyBox .footer .abouts ul li a {
+	color: #e0e0e0
+}
+
+.bodyBox .footer .abouts ul li a:hover {
+	color: #f56817
+}
+
+.bodyBox .footer .abouts p {
+	font-size: 12px;
+	color: #666;
+	line-height: 25px
+}
+
+.bodyBox .footer .abouts span {
+	display: block;
+	width: 130px;
+	height: 30px;
+	margin-top: 10px;
+	background: url("../img/tools.png?v=20171281535") no-repeat
+}
+
+.bodyBox .footer .fightdiv {
+	float: right;
+	width: 150px;
+	height: 100%
+}
+
+.bodyBox .footer .fightdiv span {
+	display: block;
+	width: 150px;
+	height: 150px;
+	margin-top: 45px;
+	background: url("../img/erweima.png?v=20171281535") no-repeat
+}
+
+#videobox {
+	position: fixed;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	z-index: -1;
+	background: rgba(0,0,0,.5)
+}
+
+#videobox .contentb {
+	width: 880px;
+	height: 200px;
+	margin-bottom: -100px;
+	margin-right: -440px;
+	box-shadow: 0 18px 30px rgba(0,0,0,.18);
+	bottom: -50%;
+	position: fixed;
+	right: 50%;
+	z-index: 2e0e0e0;
+	background-color: #202020;
+	outline: none;
+	display: block;
+	overflow: hidden;
+	border-radius: 2px;
+	-moz-border-radius: 2px;
+	-webkit-border-radius: 2px
+}
+
+#videobox .contentb .head {
+	height: 60px;
+	line-height: 60px;
+	width: 100%;
+	background: #fff;
+	padding: 0 10px;
+	box-sizing: border-box;
+	position: relative
+}
+
+#videobox .contentb .head .btn {
+	width: 200px;
+	position: absolute;
+	top: 50%;
+	right: 0;
+	height: 100%;
+	margin-top: -15px;
+	margin-right: 10px
+}
+
+#videobox .contentb .head .btn ul {
+	width: 100%;
+	height: auto
+}
+
+#videobox .contentb .head .btn ul li {
+	display: inline-block;
+	float: right;
+	height: 30px;
+	cursor: pointer;
+	line-height: 30px;
+	border-radius: 4px;
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
+	margin-left: 10px
+}
+
+#videobox .contentb .head .btn ul .closevideo {
+	width: 30px;
+	height: 30px;
+	border-radius: 50%;
+	-moz-border-radius: 50%;
+	-webkit-border-radius: 50%
+}
+
+#videobox .contentb .head .btn ul .closevideo i {
+	height: 30px;
+	width: 30px;
+	display: inline-block;
+	background: url("../img/icon/bjpknum.png?v=20171281535") no-repeat -390px -150px
+}
+
+#videobox .contentb .head .btn ul .closevideo i:hover {
+	background: url("../img/icon/bjpknum.png?v=20171281535") no-repeat -351px -150px
+}
+
+#videobox .contentb .animate {
+	width: 100%;
+	height: 200px;
+	overflow: auto
+}
+
+#videobox .contentb .animate .loading {
+	width: 100%;
+	height: auto;
+	position: absolute;
+	word-break: break-all;
+	left: 0;
+	top: 50%;
+	padding: 10px;
+	box-sizing: border-box;
+	margin-top: -30px;
+	color: #fff;
+	background-repeat: no-repeat;
+	background-position: 50%
+}

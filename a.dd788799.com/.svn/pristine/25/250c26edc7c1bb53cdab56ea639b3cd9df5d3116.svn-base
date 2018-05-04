@@ -1,0 +1,19 @@
+/**
+ * 添加投注--随机一注
+ */
+function gameActionAddCode_random() {
+    // test wx
+    var arr = getRandomArr(5);
+    for(var i =0; i<arr.length; i++){
+        $('.pp').eq(i).find('input[value='+arr[i]+']').click();
+    }
+}
+
+
+function getRandomArr(count){
+    var arr = [];
+    for(var i=0;i<count;i++){
+        arr.push(Math.floor(Math.random()*10));
+    }
+    return arr;
+}

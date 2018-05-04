@@ -1,0 +1,702 @@
+<?php if (!defined('THINK_PATH')) exit(); /*a:3:{s:81:"/mnt/wwwroot/www.dd788799.com/public/../application/index/newview/pay/member.html";i:1512908031;s:81:"/mnt/wwwroot/www.dd788799.com/public/../application/index/newview/common/nav.html";i:1517730945;s:84:"/mnt/wwwroot/www.dd788799.com/public/../application/index/newview/common/footer.html";i:1516698466;}*/ ?>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>快速充值中心</title>
+<link rel="stylesheet" type="text/css" href="/css/general.css"/>
+<link rel="stylesheet" type="text/css" href="/newview/css/theme/style.css" />
+<link rel="stylesheet" type="text/css" href="/newview/css/style.css" />
+<script src='/js/js/jquery-1.8.0.min.js'></script>
+<script type="text/javascript" src="/Scripts/member.js"></script>
+<script type="text/javascript" src="/js/main.js"></script>
+<script type="text/javascript" src="/newview/js/main.js"></script>
+<link rel="stylesheet" type="text/css" href="/skin/css/style.css"/>
+</head>
+<script type="text/javascript">
+
+function getNowFormatDate() {
+    var date = new Date();
+    var seperator1 = "-";
+    var seperator2 = ":";
+    var year = date.getFullYear();
+    var month = date.getMonth() + 1;
+    var strDate = date.getDate();
+    if (month >= 1 && month <= 9) {
+        month = "0" + month;
+    }
+    if (strDate >= 0 && strDate <= 9) {
+        strDate = "0" + strDate;
+    }
+    var currentdate = year + seperator1 + month + seperator1 + strDate
+            + " " + date.getHours() + seperator2 + date.getMinutes()
+            + seperator2 + date.getSeconds();
+    return currentdate;
+}
+
+function browserRedirect() {
+  var sUserAgent = navigator.userAgent.toLowerCase();
+  var bIsIpad = sUserAgent.match(/ipad/i) == "ipad";
+  var bIsIphoneOs = sUserAgent.match(/iphone os/i) == "iphone os";
+  var bIsMidp = sUserAgent.match(/midp/i) == "midp";
+  var bIsUc7 = sUserAgent.match(/rv:1.2.3.4/i) == "rv:1.2.3.4";
+  var bIsUc = sUserAgent.match(/ucweb/i) == "ucweb";
+  var bIsAndroid = sUserAgent.match(/android/i) == "android";
+  var bIsCE = sUserAgent.match(/windows ce/i) == "windows ce";
+  var bIsWM = sUserAgent.match(/windows mobile/i) == "windows mobile";
+  if (!(bIsIpad || bIsIphoneOs || bIsMidp || bIsUc7 || bIsUc || bIsAndroid || bIsCE || bIsWM) ){
+   
+  }else{
+	window.location.href='wap/index.html';
+  }
+}
+browserRedirect();
+</script>
+<body style="background:#F5F5F5;">
+<div class="head">
+	<!--欢迎-->
+	<div class="header_contain">
+	<div class="header_all">
+		<div class="header">
+			<div class="logo">
+				<a href="<?php echo Url('index/index'); ?>"><img src="/newview/img/logo.png" /></a>
+			</div>
+			<div class="header_right_language fr">
+				<span>简体中文</span>
+			</div>		
+			<div class="header_right_1 fr">
+				<ul>
+					<li><a href="http://www.hb99206.com" target="_blank" data-color="#FF2D2D|#D9D836" class="js-article-color" >注册抢亿元红包</a></li>
+					<li><a href="http://www.app99206.com" target="_blank"><span class="color_green2">下载手机APP享18888元</span></a></li>
+					<li><a href="<?php echo Url('promotions/index'); ?>"><span class="color_newGray">首存即送2888元</span></a></li>
+					<li><a href="<?php echo Url('vipcheck/index'); ?>" target="_blank" class="color_yellow">VIP等级查询</a></li>
+					<li><a href="http://pay99206.com" class="color_green" target="_blank">快速充值</a></li>
+					<li><a href="<?php echo Url('linecheck/index'); ?>" target="_blank" class="color_blue">线路检测</a></li>
+				</ul>
+			</div>
+			<!--登陆前-->
+			<?php if(\think\Session::get('uid') == ''): ?>
+			<div class="header_login" >
+				<form action="<?php echo url('index/login'); ?>">
+				<ul>
+					<li><input type="text" class="header_login_name" id="username" /></li>
+					<li><input type="password" id="password" /></li>
+					<?php if($sysConfig['loginYzm'] == "1"): ?>
+					<li><input type="text" placeholder="验证码" name='dlyzm' id="dlyzm" class="header_login_yz"/></li>
+					<li><img src="/captcha.html" class="header_login_yzpic"  onclick="this.src='/captcha.html?d='+Math.random();" style="cursor:pointer;" /></li>
+					<?php else: ?>
+					<input type="hidden" id="dlyzm" name="dlyzm" />
+					<?php endif; ?>
+					<li><a href="javascript:;" onclick="alert('请联系在线客服找回密码!')" class="color_999">忘记密码？</a></li>
+					<li><a href="JavaScript:;" onclick="Login()" class="header_login_a">登录</a></li>
+					<li><a href="/index/reg" class="header_login_open">开户</a></li>
+				</ul>
+				</form>
+			</div>
+			
+			<!--登陆后-->
+			<?php else: ?>
+			<div class="header_login_had" >
+				<ul class="login_vip">
+					<li><img src="/newview/img/vip-diamond.png" /></li>
+					<li class="color_yellow">VIP会员中心</li>
+					<li class="login_vip_1 ml15">账户：<span class="color_yellow"><?php echo \think\Session::get('username'); ?></span></li>
+					<li class="login_vip_2">余额：<span class="color_yellow" id="money">获取中...</span></li>
+					<li class="login_vip_3 ml10"><a href="<?php echo url('user/get_money'); ?>">提款</a></li>
+					<li class="login_vip_4 ml10"><a href="<?php echo url('index/logout'); ?>">退出</a></li>
+				</ul>
+				<ul class="login_list">
+					<li><a href="<?php echo url('user/userinfo'); ?>">会员资料</a></li>
+					<li><a href="<?php echo url('user/report'); ?>">账户历史</a></li>
+					<li><a href="<?php echo url('user/record_ds'); ?>">交易记录</a></li>
+					<li><a href="<?php echo url('user/set_money'); ?>">财务中心</a></li>
+					<li><a href="<?php echo url('user/agent'); ?>">代理中心</a></li>
+					<li><a href="<?php echo url('user/set_money'); ?>">会员存款</a></li>
+					<li><a href="<?php echo url('user/userinfo'); ?>">额度转换</a></li>
+				</ul>
+			</div>
+			
+			<div class="header_login_fixed" style="display: none;">
+				<ul class="login_vip">
+					<li><img src="/newview/img/vip-diamond.png" /></li>
+					<li class="color_yellow">VIP会员中心</li>
+					<li class="login_vip_1 ml15">账户：<span class="color_yellow"><?php echo \think\Session::get('username'); ?></span></li>
+					<li class="login_vip_2">余额：<span class="color_yellow" id="money_2">获取中...</span></li>
+					<li class="mr20"><a href="<?php echo url('user/userinfo'); ?>">会员资料</a></li>
+					<li class="mr20"><a href="<?php echo url('user/report'); ?>">账户历史</a></li>
+					<li class="mr20"><a href="<?php echo url('user/record_ds'); ?>">交易记录</a></li>
+					<li class="mr20"><a href="<?php echo url('user/set_money'); ?>">财务中心</a></li>
+					<li class="mr20"><a href="<?php echo url('user/agent'); ?>">代理中心</a></li>
+					<li class="mr20"><a href="<?php echo url('user/set_money'); ?>">会员存款</a></li>
+					<li><a href="<?php echo url('user/userinfo'); ?>">额度转换</a></li>					
+					<li class="login_vip_3 ml10 mt3"><a href="<?php echo url('user/get_money'); ?>">提款</a></li>
+					<li class="login_vip_4 ml10 mt3"><a href="<?php echo url('index/logout'); ?>">退出</a></li>
+				</ul>
+			</div>			
+			
+			<?php endif; ?>
+			
+		</div>
+	</div>	
+	<!--导航-->	
+	<div class="nav_all">
+		<div class="nav">
+			<span>
+				<a href="<?php echo Url('index/index'); ?>" class="nav_a f14 <?php if(\think\Request::instance()->controller() == 'Index'): ?>nav_active<?php endif; ?>">首 页
+					<p class="f12">home</p>
+				</a>
+			</span>
+			<a class="nav_line"></a>
+			<span>
+				<a href="<?php echo Url('sport/index'); ?>" class="nav_a f14 <?php if(\think\Request::instance()->controller() == 'Sport'): ?>nav_active<?php endif; ?>">皇冠体育
+					<p class="f12">sports</p>
+					<img src="/newview/img/hots.gif" />
+				</a>
+				<div class="nav_show">
+					<a href="<?php echo Url('sport/index'); ?>">皇冠体育</a>
+					<a href="/live/bbin/">BBIN体育</a>
+				</div>			
+			</span>
+			<a class="nav_line"></a>
+			<span>
+				<a href="<?php echo Url('/lottery/index/type/csc'); ?>" class="nav_a f14 <?php if(\think\Request::instance()->controller() == 'Lottery'): ?>nav_active<?php endif; ?>">彩票游戏
+					<p class="f12">lottery</p>
+					<img src="/newview/img/hots.gif"/>
+				</a>
+				<div class="nav_show">
+					<a href="/six/index.html">六合彩49倍</a>
+					<a href="/lottery/index/type/csc">重庆时时彩</a>
+					<a href="/lottery/index/type/pk10">北京PK拾</a>
+					<a href="/lottery/index/type/xyft">幸运飞艇</a>
+					<a href="/lottery/index/type/gsf">广东快乐十分</a>
+					<a href="/lottery/index/type/csf">重庆快乐十分</a>
+				</div>
+			</span>	
+			<a class="nav_line"></a>
+			<span>	
+				<a href="<?php echo Url('live/index'); ?>" class="nav_a f14 <?php if(\think\Request::instance()->controller() == 'Live'): ?>nav_active<?php endif; ?>">真人视讯
+					<p class="f12">lives</p>
+				</a>
+				<div class="nav_show">
+					<a href="/live/ag/" target="_BLANK">AG视讯 </a>
+					<a href="/live/bbin/" target="_BLANK">BB视讯 </a>
+					<a href="/live/og/" target="_BLANK">OG视讯</a>
+					<a href="/live/sunbet/" target="_BLANK">申博视讯</a>
+				</div>			
+			</span>
+			<a class="nav_line"></a>
+			<span>	
+				<a href="<?php echo Url('game/index'); ?>" class="nav_a f14 <?php if(\think\Request::instance()->controller() == 'Game'): ?>nav_active<?php endif; ?>">电子游艺
+					<p class="f12">game</p>
+				</a>
+				<div class="nav_show">
+					<a href="<?php echo Url('game/index','type=ag'); ?>">AG电子</a>
+					<a href="<?php echo Url('game/index','type=bbin'); ?>">BBIN电子</a>
+					<a href="<?php echo Url('game/index','type=mg'); ?>">MG电子</a>
+					<a href="<?php echo Url('game/index','type=pt'); ?>">PT电子</a>
+				</div>		
+			</span>	
+			<a class="nav_line"></a>
+			<span>	
+				<a href="<?php echo Url('betting/index'); ?>" target="_blank" class="nav_a f14 <?php if(\think\Request::instance()->controller() == 'Betting'): ?>nav_active<?php endif; ?>">手机投注
+					<p class="f12">moblies</p>
+				</a>			
+			</span>	
+			<a class="nav_line"></a>
+			<span>
+				<a href="<?php echo Url('promotions/index'); ?>" class="nav_a f14 <?php if(\think\Request::instance()->controller() == 'Promotions'): ?>nav_active<?php endif; ?>">优惠活动
+					<p class="f12">promotions</p>
+					<img src="/newview/img/hots.gif"/>
+				</a>
+			</span>	
+			<a class="nav_line"></a>
+			<span>	
+				<a href="<?php echo Url('/about/index/id/8'); ?>"  class="nav_a f14 <?php if(\think\Request::instance()->controller() == 'About'): ?>nav_active<?php endif; ?>">加盟代理
+					<p class="f12">add us</p>
+				</a>
+			</span>	
+			<a class="nav_line"></a>
+			<span>	
+				<a href="https://messenger.providesupport.com/messenger/0nye75kga3q931e9lwrn16k4q0.html" class="nav_a f14" target="_blank">在线客服
+					<p class="f12">service</p>
+				</a>
+			</span>
+		</div>
+	</div>	
+</div>
+</div>
+<div class="block_0"></div>
+<div class="moneyBox_contain">	
+	<div class="quick_pay_contain">
+		<div class="quick_pay_all" style="width:960px;">
+			<div class="quick_pay_left_all">
+				<h1></h1>
+				<div class="block_0"></div>
+				<div class="quick_pay_left" style="height: 420px;">
+				</div>
+			</div>
+			<form method="post" id="pay" action="<?php echo url('pay/pay'); ?>">
+				<div class="quick_pay_right" style="display: block;padding-left:20px; width:670px; height:480px;">
+				
+					<input type="hidden" name="username" id="username" value="<?php echo $username; ?>" />
+					<input type="hidden" name="rusername" id="rusername" value="<?php echo $username; ?>" />
+					<div id="set_form">
+					
+					</div>
+					<div class="block_0"></div>
+					<div class="quick_pay_right_6 mt10">
+						<span>充值金额：</span>
+						<span class="quick_pay_right_6_img"><input type="text" name="coin" id="coin" onkeyup="value=this.value.replace(/\D+/g,'')" value="" /></span>
+						<span class="quick_pay_right_6_name ml10">充值额度为 10~5000 元</span>
+					</div>	
+					<div class="block_0"></div>
+					<div class="quick_pay_right_7 mt30">
+						<input type="hidden" name="money" id="money" value=""> 
+						<input type="hidden" name="thirdid" id="thirdid" value=""> 
+					    <input type="hidden" name="thirdtype" id="thirdtype" value=""> 
+					    <input type="hidden" name="tcode" id="tcode" value=""> 
+					    <input type="hidden" name="scid" id="scid" value=""> 
+					    <input type="hidden" name="sccode" id="sccode" value=""> 
+					    <input type="hidden" name="cashier" id="cashier" value=""> 				    
+						<button id="paybtn" onClick="return btnOK_zf_onclick();">确认支付</button>
+					</div>	
+					<div id="qrcode" style="margin-top: 10px;padding-left: 80px;display: none;">					
+					</div>						
+				</div>
+			</form>
+			<div class="block_0"></div>
+		</div>
+	</div>
+</div>
+<div class="footer_all">
+	<div class="footer">
+		<div class="footer_1">
+			<h2>合作伙伴</h2>
+			<a><img src="/newview/img/foot-logo.png" /></a>
+		</div>
+		<div class="footer_2">
+			<h2>用户服务</h2>
+			<ul>
+				<li><a href="/about/index/id/3.html">隐私问题</a></li>
+				<li><a href="/about/index/id/5.html">常见问题</a></li>
+				<li><a href="/about/index/id/1.html">联系我们</a></li>
+				<li><a href="/about/index/id/1.html">关于我们</a></li>
+			</ul>
+		</div>	
+		<div class="footer_1">
+			<h2>合作平台</h2>
+			<img src="/newview/img/foot-logo-02.png" />
+		</div>
+		<div class="footer_3">
+			<h2>推荐浏览器</h2>
+			<ul>
+				<li><i class="footer_3_1"></i><a href="#" class="f14">谷歌浏览器</a></li>
+				<li><i class="footer_3_2"></i><a href="#" class="f14">IE浏览器</a></li>
+				<li><i class="footer_3_3"></i><a href="#" class="f14">火狐浏览器</a></li>
+			</ul>
+		</div>
+		<div class="footer_4">
+			<h2>联系我们</h2>
+			<ul>
+				<li><i class="footer_4_1"></i><a href="#" class="f14">198198119</a></li>
+				<li><i class="footer_4_2"></i><a href="#" class="f14">99206com@gmail.com</a></li>
+			</ul>
+		</div>		
+		<div class="footer_5">
+			<h2>手机投注</h2>
+			<img src="/img/foot-logo-08.png" style="width: 120px;height: 120px;"/>
+		</div>		
+	</div>
+</div>
+<!--  -->
+<script type="text/javascript">
+$(function(){
+	setInterval(function() {
+		$.ajax({
+			type: "post",
+			url: "<?php echo Url('index/home'); ?>",
+			data:{'ajax':1,'get_money':'1'},
+			success:function(data) {
+				if (/^[\d\.]+$/.test(data)) {
+					$('#money').text(data);
+					$('#money_2').text(data);
+				}
+			}
+		});
+	},5000);
+})
+</script>
+ 
+</body>
+<script type="text/javascript" src="/skin/js/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="/skin/js/main.js"></script>
+<script type="text/javascript" src="/skin/js/jquery.qrcode.js"></script>
+<script type="text/javascript" src="/skin/js/utf.js"></script>
+<script type="text/javascript">
+$(function(){
+	$.ajax({
+		url:'<?php echo url('pay/open'); ?>',
+		dataType:'json',
+		type: 'GET',
+		success:function(obj,set){	
+			var num = obj.num;
+			str = "";
+			for(var i=0;i<num;i++){
+			  	str+="<div class='quick_pay_left_1'>" + "</div>";
+			}		
+			$(".quick_pay_left").html(str);
+			for (i=0;i<obj.set.length;i++){					
+				var objId = obj.set[i].id,
+					objPic = obj.set[i].pic,
+					objName = obj.set[i].name
+				var htmlAll = "<ul class='set_list' sid='" + objId + "'>"
+			    + "<li class='quick_pay_left_img pl15'><img src='" + objPic + "' /></li>"
+			    + "<li class='quick_pay_left_name f18 color_666 pl10'>"+ objName + "</li>"
+			    + "<li class='quick_pay_left_arrow pl10 f18'>></li></ul>";
+				$(".quick_pay_left").find(".quick_pay_left_1").eq(i).html(htmlAll);
+				if(i==0){
+					$('.quick_pay_left_1').eq(0).addClass("quick_pay_left_active");
+					var html = "<div class='quick_pay_right_3 mt10'><span>充值方式：</span>"
+						+ "<span class='quick_pay_right_3_img' sid='"+objId+"'><img src='"+objPic+"' /></span>"
+						+ "<span class='quick_pay_right_3_name ml10'>"+objName+"</span></div>"
+						+ "<div class='block_0'></div>"
+						+ "<div class='set_bank'>"
+					    + "<div class='quick_pay_right_4' mt10>"
+						+ "<span class='quick_pay_right_4_h1'>选择银行：</span>"
+						+ "<div class='quick_pay_right_4_bank'></div>"
+						+ "</div></div>"
+						+ "<div class='block_0'></div>"	
+						+ "<div class='third_bank'>"
+						+ "<div class='quick_pay_right_5'>"
+						+ "<span class='quick_pay_right_5_h1'>线路选择：</span>"
+						+ "<div class='quick_pay_right_5_bank'></div>"
+						+ "</div></div>";
+					$("#set_form").html(html);
+					$(".quick_pay_right_3_img").trigger("click");
+				}
+			}	
+		}
+	})
+})
+$(function(){
+//页面进入初始化	
+init(0)	
+//高度一致
+var quickRightHeight = $(".quick_pay_right").height();
+//$(".quick_pay_left").height(quickRightHeight);
+
+$(".quick_pay_left_1").eq(0).css("border-top","1px solid #dcdcdc");
+
+$(document).on("click",".quick_pay_left_1",function(){	
+	var setid = $(this).find(".set_list").attr("sid");
+	$.post("<?php echo url('pay/get_set'); ?>",{
+		setid:setid,
+	},function(obj){
+		if(obj.stat == 0){
+			var value = obj.value;
+			var html = "<div class='quick_pay_right_3 mt10'><span>充值方式：</span>"
+				+ "<span class='quick_pay_right_3_img' sid='"+value.id+"'><img src='"+value.pic+"' /></span>"
+				+ "<span class='quick_pay_right_3_name ml10'>"+value.name+"</span></div>"
+				+ "<div class='block_0'></div>"
+				+ "<div class='set_bank'>"
+			    + "<div class='quick_pay_right_4' mt10>"
+				+ "<span class='quick_pay_right_4_h1'>选择银行：</span>"
+				+ "<div class='quick_pay_right_4_bank'></div>"
+				+ "</div></div>"
+				+ "<div class='block_0'></div>"	
+				+ "<div class='third_bank'>"
+				+ "<div class='quick_pay_right_5'>"
+				+ "<span class='quick_pay_right_5_h1'>线路选择：</span>"
+				+ "<div class='quick_pay_right_5_bank'></div>"
+				+ "</div></div>";
+				$("#set_form").html(html);
+				$(".quick_pay_right_3_img").trigger("click");
+		}else if(obj.stat == 1){
+			alert(obj.msg);
+		}else{
+			alert(obj.msg);
+		}
+	},"json");
+	
+	var payIndex = $(this).index();
+	$(this).addClass("quick_pay_left_active").siblings(".quick_pay_left_1").removeClass("quick_pay_left_active");
+	$(".quick_pay_right").eq(payIndex).show().siblings(".quick_pay_right").hide();	
+	init(payIndex);	
+})
+
+$(document).on("click",".quick_pay_right_3_img",function(){
+	var setid = $(this).attr("sid");	
+	$.post("<?php echo url('pay/code'); ?>",{
+		setid:setid,
+	},function(obj){
+		if(obj.stat == 0){
+			var num = obj.num;
+			var scnum = obj.scnum;
+			str = "";
+			for(var i=0;i<num;i++){
+			  	str+="<ul class='new_li_list'>" + "</ul>";
+			}	
+			if(scnum>1){
+				$(".quick_pay_right_4_bank").html(str);
+			}else{
+				$(".set_bank").hide();
+				$(".quick_pay_right_5_bank").html(str);
+			}
+			for (i=0;i<obj.value.length;i++){	
+				var objSetConfigid = obj.value[i].set_configid,					
+					objThirdid = obj.value[i].thirdid,
+					objName = obj.value[i].name,
+					objType = obj.value[i].type,
+					objcode = obj.value[i].code,
+					objMin = obj.value[i].min,
+					objMax = obj.value[i].max,
+					objSetConfigcode = obj.value[i].setconfigcode,
+					objImg = obj.value[i].img
+					objCashier = obj.value[i].cashier;
+				var tmpid = 'td-'+objThirdid;
+	 			if(objImg){
+	 				if(i == 0){
+	 					html = "<li class='quick_pay_right_4_li' id='"+tmpid+"' tid='"+objThirdid+"' tcode='"+objcode+"' min='"+objMin+"' max='"+objMax+"' ttype='"+objType+"' sccode='"+objSetConfigcode+"' setconfigid='"+objSetConfigid+"' cashier='"+objCashier+"'><img src='"+objImg+"'/><img src='/skin/images/arrow.png' class='quick_pay_right_4_li_arrow'/></li>";
+						$("#set_form").find('.quick_pay_right_4').find(".quick_pay_right_4_bank").find(".new_li_list").eq(i).html(html);
+					}else{
+						html = "<li class='quick_pay_right_4_li' tid='"+objThirdid+"' tcode='"+objcode+"' min='"+objMin+"' max='"+objMax+"' ttype='"+objType+"' sccode='"+objSetConfigcode+"' setconfigid='"+objSetConfigid+"' cashier='"+objCashier+"'><img src='"+objImg+"'/><img src='/skin/images/arrow.png' class='quick_pay_right_4_li_arrow'/></li>";
+						$("#set_form").find(".quick_pay_right_4").find(".quick_pay_right_4_bank").find(".new_li_list").eq(i).html(html);	
+					}
+	 				if(i == 0){
+						$("#"+tmpid).trigger("click");
+					}
+				}else{
+					if(i == 0){
+						html = "<li class='quick_pay_right_5_li' id='"+tmpid+"' tid='"+objThirdid+"' tcode='"+objcode+"' min='"+objMin+"' max='"+objMax+"' ttype='"+objType+"' sccode='"+objSetConfigcode+"' setconfigid='"+objSetConfigid+"' cashier='"+objCashier+"'><i>"+objName+"</i><img src='/skin/images/arrow.png' class='quick_pay_right_4_li_arrow'/></li>";
+						$("#set_form").find(".quick_pay_right_5").find(".quick_pay_right_5_bank").find(".new_li_list").eq(i).html(html);
+					}else{
+						html = "<li class='quick_pay_right_5_li' tid='"+objThirdid+"' tcode='"+objcode+"' min='"+objMin+"' max='"+objMax+"' ttype='"+objType+"' sccode='"+objSetConfigcode+"' setconfigid='"+objSetConfigid+"' cashier='"+objCashier+"'><i>"+objName+"</i><img src='/skin/images/arrow.png' class='quick_pay_right_4_li_arrow'/></li>";
+						$("#set_form").find(".quick_pay_right_5").find(".quick_pay_right_5_bank").find(".new_li_list").eq(i).html(html);	
+					}
+					if(i == 0){
+						$("#"+tmpid).trigger("click");
+					}
+				} 
+			}
+		}else if(obj.stat == 1){
+			alert(obj.msg);
+		}else{
+			alert(obj.msg);
+		}
+	},"json");
+})
+
+$(function(){
+	 $(document).on("click",".quick_pay_right_4_li",function(){
+		var setconfigid = $(this).attr("setconfigid"); 		
+		$.post("<?php echo url('pay/code_all'); ?>",{
+			setconfigid:setconfigid,
+		},function(obj){
+			if(obj.stat == 0){
+				var num = obj.num;
+				str = "";
+				for(var i=0;i<num;i++){
+				  	str+="<ul class='new_all_list'>" + "</ul>";
+				}	
+				$(".quick_pay_right_5_bank").html(str);
+				for (i=0;i<obj.value.length;i++){	
+					var objSetConfigid = obj.value[i].set_configid,					
+						objThirdid = obj.value[i].thirdid,
+						objName = obj.value[i].name,
+						objType = obj.value[i].type,
+						objcode = obj.value[i].code,
+						objMin = obj.value[i].min,
+						objMax = obj.value[i].max,
+						objSetConfigcode = obj.value[i].setconfigcode,
+						objImg = obj.value[i].img
+						objCashier = obj.value[i].cashier;
+					var tmpid = 'trird-'+objThirdid;
+					if(i == 0){
+						html = "<li class='quick_pay_right_6_li' id='"+tmpid+"' tid='"+objThirdid+"' tcode='"+objcode+"' min='"+objMin+"' max='"+objMax+"' ttype='"+objType+"' sccode='"+objSetConfigcode+"' setconfigid='"+objSetConfigid+"' cashier='"+objCashier+"'><i>"+objName+"</i><img src='/skin/images/arrow.png' class='quick_pay_right_4_li_arrow'/></li>";
+						$("#set_form").find(".quick_pay_right_5").find(".quick_pay_right_5_bank").find(".new_all_list").eq(i).html(html);
+					}else{
+						html = "<li class='quick_pay_right_6_li' tid='"+objThirdid+"' tcode='"+objcode+"' min='"+objMin+"' max='"+objMax+"' ttype='"+objType+"' sccode='"+objSetConfigcode+"' setconfigid='"+objSetConfigid+"' cashier='"+objCashier+"'><i>"+objName+"</i><img src='/skin/images/arrow.png' class='quick_pay_right_4_li_arrow'/></li>";
+						$("#set_form").find(".quick_pay_right_5").find(".quick_pay_right_5_bank").find(".new_all_list").eq(i).html(html);	
+					}
+					if(i == 0){
+						$("#"+tmpid).trigger("click");
+					}
+				}
+			}else if(obj.stat == 1){
+				alert(obj.msg);
+			}else{
+				alert(obj.msg);
+			}
+		},"json");
+	 })
+})
+
+$(function(){
+	 $(document).on("click",".quick_pay_right_5_li,.quick_pay_right_6_li",function(){
+		 $("#qrcode").empty();
+		 $("#paybtn").removeAttr('disabled').show();
+	      var min = $(this).attr("min");
+		  var max = $(this).attr("max");
+		  if(min || max){
+			var MShow = "充值额度为" + min + "~" + max + "元";
+			$(".quick_pay_right_6_name").text(MShow);
+		  }else{
+			var MShow = "充值额度为" + 10 + "~" + 5000 + "元";
+			$(".quick_pay_right_6_name").text(MShow);
+		  }		  
+		  var type = $(this).attr("ttype");
+		  var thirdid = $(this).attr("tid");
+		  var tcode = $(this).attr("tcode");
+		  var scid = $(this).attr("setconfigid");
+		  var sccode = $(this).attr("sccode");
+		  var cashier = $(this).attr("cashier");
+		  if(sccode){
+			  var str = sccode.substring(2,0);
+			  if(str=='DK'){
+				var coin = sccode.replace(str,"");  
+				$("#coin").val(coin).attr("disabled",true); 
+				$("#money").val(coin);
+				var Show = "充值额度为" + coin + "元";
+				$(".quick_pay_right_6_name").text(Show);
+			  }else{ 
+				$("#coin").val("").attr("disabled",false); 
+			  }
+		  }
+		  $("#thirdid").val(thirdid);
+		  $("#tcode").val(tcode);
+		  $("#thirdtype").val(type);
+		  $("#scid").val(scid);
+		  $("#sccode").val(sccode);
+		  $("#cashier").val(cashier);
+	 })
+})
+
+//点击选择银行变色
+$(document).on("click",".quick_pay_right_4_li",function(){
+	$(this).addClass("quick_pay_right_4_li_active").find(".quick_pay_right_4_li_arrow").css("right","0px")
+	$(this).parent().siblings(".new_li_list").find(".quick_pay_right_4_li").removeClass("quick_pay_right_4_li_active").find(".quick_pay_right_4_li_arrow").css("right","-17px")
+})
+//点击选择线路变色
+$(document).on("click",".quick_pay_right_5_li",function(){
+	$(this).addClass("quick_pay_right_5_li_active").find(".quick_pay_right_4_li_arrow").css("right","0px")
+	$(this).parent().siblings(".new_li_list").find(".quick_pay_right_5_li").removeClass("quick_pay_right_5_li_active").find(".quick_pay_right_4_li_arrow").css("right","-17px")
+})
+
+//点击选择线路变色all
+$(document).on("click",".quick_pay_right_6_li",function(){
+	$(this).addClass("quick_pay_right_6_li_active").find(".quick_pay_right_4_li_arrow").css("right","0px")
+	$(this).parent().siblings(".new_all_list").find(".quick_pay_right_6_li").removeClass("quick_pay_right_6_li_active").find(".quick_pay_right_4_li_arrow").css("right","-17px")
+})
+
+})
+function init(e){
+	$(".quick_pay_right").eq(e).find(".quick_pay_right_4_li").eq(0).addClass("quick_pay_right_4_li_active").find(".quick_pay_right_4_li_arrow").css("right","0px")
+	$(".quick_pay_right").eq(e).find(".quick_pay_right_5_li").eq(0).addClass("quick_pay_right_5_li_active").find(".quick_pay_right_4_li_arrow").css("right","0px")
+}
+
+var orderid = '';
+function return_url(){
+    $.get('/pay/orderPayed',{orderid:orderid},function(json){
+        if(1 == json.status){
+            location.href = window.location.reload;
+        }else if(-1 == json.status){
+        	alert(json.msg);
+        }else{
+        	setTimeout(return_url,5000);
+        }
+    },'json'); 
+}
+
+function btnOK_zf_onclick(){
+	  var username = $("#username").val();
+	  var usern = /^[a-zA-Z0-9]{1,}$/;
+	  if(!usern.test(username)){
+		alert('会员帐号只能由数字、大小写字母组成!'); 
+		return false;
+	  }
+	  var coin = $("#coin").val();
+	  var rusername = $("#rusername").val();
+	  if(isNaN(coin)){
+	   		alert("[提示]存款额度非有效数字！");
+	   		return false;
+	   	}
+	   	/*
+	   	if(coin<10){
+		   alert("[提示]10元以上或者10元才能存款！");
+	   	   return false;
+	   	}
+	   	if(coin>5000){
+		   alert("[提示]存款金额不能超过5000！");
+	   	   return false;
+	   	}
+	   	*/
+	    if(username==null ||username==""){
+		   alert("[提示]用户名不能为空！");
+	   	   return false;
+	   	}
+		if(rusername==null ||rusername=="" || rusername!=username ){
+		   alert("[提示]2次用户输入不一致！");
+	   	   return false;
+	   	}
+	   	var cashier = $("#cashier").val();
+	   	if(1 == cashier){
+	   		$("#pay").submit();
+	   	}else{
+	   		var data = $('#pay').serialize();
+	   		$.get('pay/pay.html',data,function(json){
+	   			if(json.status == 'success'){
+	   				console.log(json);
+		   			$('#qrcode').qrcode({width: 200,height: 200,text: json.data}).show();
+		   			$('#paybtn').attr('disabled',"true").hide();
+		   			orderid = json.orderid;
+	                setTimeout(return_url,5000)
+	   			}else{
+	   				alert(json.msg);
+	   			}	
+	   		},'json');
+	   		return false;
+	   	}
+}
+</script>
+<style>
+.quick_pay_all {
+    width: 1080px;
+    background: #ffffff;
+    float: left;
+    height: auto;
+    padding: 40px 0px;
+    border-radius: 5px;
+    margin: 0 auto;
+    margin-bottom: 0px;
+}
+.quick_pay_left_all {
+    float: left;
+    width: 208px;
+    height: auto;
+    margin-left: 30px;
+}
+.quick_pay_left{
+	width: 206px;
+    min-height: 420px;
+    float: left;
+    background: #f6f6f6;
+    height: auto;
+    border: 1px solid #DCDCDC;
+    padding-bottom: 4px;
+}
+.quick_pay_right {
+    float: left;
+    width: 710px;
+    min-height: 480px;
+    padding-bottom: 0px;
+    padding-left: 80px;
+    display: none;
+    border-top: 1px solid rgb(220, 220, 220);
+    border-right: 1px solid rgb(220, 220, 220);
+    border-bottom: 1px solid rgb(220, 220, 220);
+}
+.moneyBox_contain{
+	margin-top:40px;
+}
+</style>
+</html>

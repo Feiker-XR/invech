@@ -1,0 +1,58 @@
+<?php
+namespace app\common\model;
+use think\Model;
+
+class PaySet extends Base{
+
+    protected $table = 'gygy_pay_set';
+    protected $createTime = 'created_at';
+    protected $updateTime = 'updated_at';
+    protected $autoWriteTimestamp = 'datetime';
+
+   CONST PAY_SET_TYPE = [
+        'wechat' ,
+        'tenpay',
+        'bank' ,
+        'qqpay',
+        'diankapay' ,
+        'jdpay',
+        'app',
+        'baipay' ,
+    ];
+    //----------------后台------------------
+
+    public static function getList($request){
+    
+        $params = $request->param();
+        $query = self::order('id');
+        if($params['username']??''){
+            $query->where('name|type','like','%'.trim($params['username']).'%');
+		}
+     	$data = $query->paginate(10);
+        return $data;
+    }	
+
+     public static function getAll(){
+        $query = self::order('id');
+        $data = $query->select();
+        $list =[];
+        foreach($data as $k=>$v){
+            $list[$v['id']] = $v;
+
+        }
+        return $list;
+    }   
+
+    //------------------API-------------------------
+    public static function appSet(){
+        return self::with('payWays.payChannels')->where('setclass',1)->where('status',0)->find();
+        //return self::where('setclass',1)->where('status',0)->find();
+    }
+
+
+    //------------------关联-------------------
+    public function payWays()
+    {
+        return $this->hasMany('PayWay','set_id');
+    }        
+}

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>系统设置</title>
+
+<link rel="stylesheet" type="text/css" href="/css/page.css" />
+<link href="/css/base.css" rel="stylesheet" type="text/css" />
+<link href="/css/admin.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="/js/jquery.js"></script>
+<style type="text/css">
+table {
+	text-align:center;
+}
+
+td {
+	text-align:center;
+}
+
+iframe {
+	width:100%;
+	border:none;
+	height:600px;
+}
+</style>
+</head>
+
+<body class="input">
+	<div class="bar">
+		网址设置
+	</div>
+	
+
+	<div class="body">
+		<form method="post">
+			<table class="inputTable tabContent">
+                <?php foreach ($setArr as $key => $value) {?>
+				<tr>
+					<td>
+                    	<input type="hidden" name="id_<?php echo $value['id'];?>" value="<?php echo $value['id'];?>" />
+                    	采集体育的网址<input type="text" name="wangzhi_<?php echo $value['id'];?>" value="<?php echo $value['wangzhi'];?>" />
+                        
+                        采集网址的账号<input type="text" name="zhanghao_<?php echo $value['id'];?>" value="<?php echo $value['zhanghao'];?>" />
+                        
+                        采集网址的密码<input type="text" name="mima_<?php echo $value['id'];?>" value="<?php echo $value['mima'];?>" />
+                        
+                        <input type="submit" name="set_submit" class="formButton" value="确  定" hidefocus />&nbsp;&nbsp;
+                    </td>
+				</tr>
+
+                <?php }?>
+			</table>
+		</form>
+	</div>
+    
+    <div style=" margin:0 auto;margin-top:40px; width:70%;">
+    	<iframe src="http://47.89.27.190/ty.txt"></iframe>
+    </div>
+</body>
+</html>

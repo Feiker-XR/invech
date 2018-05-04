@@ -1,0 +1,257 @@
+<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:77:"/mnt/wwwroot/www.dd788799.com/houtai/../application/admin/view/six/order.html";i:1512729169;}*/ ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>系统设置</title>
+<link href="/css/base.css" rel="stylesheet" type="text/css" />
+<link href="/css/admin.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="/js/jquery.js"></script>
+<script type="text/javascript" src="/js/jquery.tools.js"></script>
+<script type="text/javascript" src="/js/base.js"></script>
+<script language="JavaScript" src="/js/calendar.js"></script>
+</head>
+<body class="list">
+	<div class="bar">
+		六合彩注单查看
+	</div>
+
+<div class="body">
+<form name="form1" method="get" action="<?php echo url('six/order'); ?>" onSubmit="return check();">
+<div class="listBar">
+      <select name="js" id="js">
+            <option value="0" style="color:#FF9900;" <?php if($js == '0'): ?>selected<?php endif; ?>>未结算注单</option>
+            <option value="1" style="color:#FF0000;" <?php if($js == '1'): ?>selected<?php endif; ?>>已结算注单</option>
+            <option value="" <?php if($js == ''): ?>selected<?php endif; ?>>全部注单</option>
+      </select>
+  &nbsp;&nbsp;
+          会员账号：
+          <input name="username" type="text" id="username" value="<?php if(!(empty($username) || (($username instanceof \think\Collection || $username instanceof \think\Paginator ) && $username->isEmpty()))): ?><?php echo $username; endif; ?>" size="15">
+            &nbsp;&nbsp;日期范围：
+            <input name="s_time" type="text" id="s_time" value="<?php if(!(empty($s_time) || (($s_time instanceof \think\Collection || $s_time instanceof \think\Paginator ) && $s_time->isEmpty()))): ?><?php echo $s_time; endif; ?>" 
+            onClick="new Calendar(2008,2020).show(this);" size="10" maxlength="10" readonly="readonly" />
+            ~
+            <input name="e_time" type="text" id="e_time" value="<?php if(!(empty($e_time) || (($e_time instanceof \think\Collection || $e_time instanceof \think\Paginator ) && $e_time->isEmpty()))): ?><?php echo $e_time; endif; ?>" 
+            onClick="new Calendar(2008,2020).show(this);" size="10" maxlength="10" readonly="readonly" />&nbsp;&nbsp;注单号：
+            <input name="tf_id" type="text" id="tf_id" value="<?php if(!(empty($tf_id) || (($tf_id instanceof \think\Collection || $tf_id instanceof \think\Paginator ) && $tf_id->isEmpty()))): ?><?php echo $tf_id; endif; ?>" size="22">
+            &nbsp;&nbsp;<input name="find" type="submit" id="find" value="查看报表" class="formButton"/></td>
+	</div>
+</form>
+<ul id="tab" class="tab">
+                <li><input type="button" value="六合彩注单" hidefocus class="current"/></li>
+			</ul>
+<table id="listTables" class="listTables">
+	<tr>
+		<th>所属彩种</th>
+		<th>注单号码</th>
+		<th>投注期号</th>
+		<th>投注玩法</th>
+		<th>投注内容</th>
+		<th>投注金额</th>
+		<th>赔率</th>
+		<th>输赢结果</th>
+		<th>投注时间</th>
+		<th>投注账号</th>
+		<th>状态</th>
+	</tr>
+	<?php if(!(empty($list) || (($list instanceof \think\Collection || $list instanceof \think\Paginator ) && $list->isEmpty()))): if(is_array($list) || $list instanceof \think\Collection || $list instanceof \think\Paginator): $i = 0; $__LIST__ = $list;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$rows): $mod = ($i % 2 );++$i;?>
+	<tr>
+        <td height="30" align="center" valign="middle"><?php echo $rows['type']; ?></td>
+        <td align="center" valign="middle"><?php echo $rows['id']; ?></td>
+        <td align="center" valign="middle">第 <?php echo $rows['qishu']; ?> 期</td>
+        <td align="center" valign="middle" 
+        onclick="order_edit_layer(this,'<?php echo $rows['id']; ?>','<?php echo $rows['type']; ?>','<?php echo $rows['mingxi_1']; ?>','<?php echo $rows['mingxi_2']; ?>')">
+        	<?php echo $rows['mingxi_1']; ?>
+        </td>
+        <td align="center" valign="middle">
+        	<?php echo $rows['mingxi_2']; ?>
+        </td>
+        <td align="center" valign="middle">
+        	<?php echo $rows['money']; ?>
+        </td>
+        <td align="center" valign="middle">
+        	<?php echo $rows['odds']; ?>
+        </td>
+        <td align="center" valign="middle">
+        	<?php if($rows['js'] == 0): ?>
+        	<font color="#0000FF">未结算</font>
+			<?php else: 
+				echo round($rows['win'],2);
+			endif; ?>
+		</td>
+        <td align="center" valign="middle">
+        	<?php echo $rows['addtime']; ?>
+		</td>
+        <td align="center" valign="middle">
+        	<?php echo $rows['username']; ?>
+        </td>
+        <td align="center" valign="middle">
+        	<?php if($rows['js'] == 0): ?>
+          	<a href="Six_Auto.php"><font color="#0000FF"><a href="<?php echo url('six/jsdz',"bid=".$rows['id']); ?>">点击结算</a></font></a>
+          	<?php else: ?>
+          		<font color="#FF0000"><a href='<?php echo url("six/dzcs","bid=".$rows["id"]); ?>'>已结算</a></font>
+          	<?php endif; ?>
+      </tr>
+      <?php endforeach; endif; else: echo "" ;endif; endif; ?>
+      <tr>
+    	<td colspan="11" style="text-align:center; color:red;"><?php echo '投注总计:'.round($all_money,2).', 中奖总计(含本金):'.round($all_win,2);?></td>
+    </tr>
+    
+    </table>
+  <div class="pagerBar"><?php echo $list->render(); ?></div>
+  </div>
+    
+    
+    
+    <style>
+    #order_edit_layer{position:fixed; width:0px; height:0px; left:0; top:0; overflow:hidden; z-index:999; font-size: 12px;}
+    #order_edit_layer .centerdot{position:absolute; left:50%; top:50%; width:0; height:0;}
+    #order_edit_layer .centerdot #p-layer{position:absolute; width:280px; height:180px; padding:10px; background:#999; left:-150px; top:-100px; border-radius:3px;}
+    #order_edit_layer .centerdot #s-layer{width:280px; height:180px; background:#fff;}
+    #order_edit_layer .centerdot #s-layer .opt_{height: 30px; padding: 5px; line-height: 30px;}
+    #order_edit_layer .centerdot #s-layer select{border:1px solid #ccc; width: 180px;}
+  </style>
+  <div id="order_edit_layer">
+    <div class="centerdot">
+    <div id="p-layer">
+    <div id="s-layer">
+        <div class="opt_" id="oel_type"></div>
+      <div class="opt_">投注玩法<select onchange="oel_wanfa_cg()" name="oel_wanfa"></select></div>
+    <div class="opt_">投注内容<select name="oel_neirong"></select></div>
+        <div class="opt_"><input type="button" onclick="submit_oel()" value="确定修改">&nbsp;&nbsp;&nbsp;<input type="button" onclick="cancel_oel()" value="取消修改"></div>
+    </div>
+    </div>
+    </div>
+  </div>
+  <script>
+    var oel = {obj:null,id:0,type:0,mingxi1:'',mingxi2:''};
+      function order_edit_layer(obj,id,type,mingxi1,mingxi2){
+          
+          if(mingxi1 != "特码" && mingxi1 != "尾数" && mingxi1 != "一肖" ) return;
+          var width = $(window).width();
+          var height = $(window).height();
+          type = getoeltypeid(type);
+          oel.obj = obj;
+          oel.id = id;
+          oel.type = type;
+          oel.mingxi1 = mingxi1;
+          oel.mingxi2 = mingxi2;
+
+          var oeltype = getoeltype(type);
+          $("#oel_type").html(oeltype);
+
+          var mx1list = getmingxi(oel.type);
+
+          $("select[name=oel_wanfa]").html("");
+          $(mx1list).each(function(k,item){
+
+              var selected = '';
+              if(item == mingxi1)  selected = ' selected ';
+              var opt = '<option value="'+item+'"'+selected+'>'+item+'</option>';
+              $("select[name=oel_wanfa]").append(opt);
+
+          });
+
+          var mx2list = getmingxi2(oel.type,mingxi1);
+          $("select[name=oel_neirong]").html("");
+          $(mx2list).each(function(k,item){
+
+              var selected = '';
+              if(item == mingxi2)  selected = ' selected ';
+              var opt = '<option value="'+item+'"'+selected+'>'+item+'</option>';
+              $("select[name=oel_neirong]").append(opt);
+
+          });
+
+          $("#order_edit_layer").css({width:width,height:height});
+      
+        }
+
+        function oel_wanfa_cg(){
+
+          var mingxi1 = $("select[name=oel_wanfa]").val();
+          oel.mingxi1 = mingxi1;
+          var mx2list = getmingxi2(oel.type,mingxi1);
+          $("select[name=oel_neirong]").html("");
+          $(mx2list).each(function(k,item){
+
+              var selected = '';
+              if(item == oel.mingxi2)  selected = ' selected ';
+              var opt = '<option value="'+item+'"'+selected+'>'+item+'</option>';
+              $("select[name=oel_neirong]").append(opt);
+
+          });
+
+
+        }
+
+       function submit_oel(){
+
+          var id = oel.id;
+          var type = oel.type;
+          var mingxi1 = $("select[name=oel_wanfa]").val();
+          var mingxi2 = $("select[name=oel_neirong]").val();
+
+          $.post("six_order_edit.php", {id:id,type:type,mingxi1:mingxi1,mingxi2:mingxi2}, function(data)
+          {
+              if($.trim(data) == "修改成功"){
+                $(oel.obj).html(mingxi1);
+                $(oel.obj).next("td").html(mingxi2);
+              }
+              
+              alert($.trim(data));
+              
+                cancel_oel();
+
+          });
+      }
+
+        function cancel_oel(){
+          $("select[name=oel_wanfa]").html("");
+          $("select[name=oel_neirong]").html("");
+          $("#order_edit_layer").css({width:0,height:0});
+        }
+
+        
+        function getoeltypeid($type){
+
+          if($type=="香港六合彩"){
+            return 1;
+          } 
+        }
+      
+        function getoeltype(type){
+
+          if(type==1){
+            return '香港六合彩注单修改';
+          }
+ 
+        }
+
+        function getmingxi($type){
+          if($type==1){
+            return ["特码","一肖","尾数"];
+          }
+        }
+
+        function getmingxi2($type,$mingxi1){
+            if($type == 1){
+              if($mingxi1 == "特码"){
+                return [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,"鼠","牛","虎","兔","龙","蛇","马","羊","猴","鸡","狗","猪","红波","绿波","蓝波"];
+              }
+              
+              if($mingxi1 == "一肖"){
+                  return ["鼠","牛","虎","兔","龙","蛇","马","羊","猴","鸡","狗","猪"];
+                }
+
+              if($mingxi1 == "尾数"){
+                  return ["0尾","1尾","2尾","3尾","4尾","5尾","6尾","7尾","8尾","9尾"];
+                }
+            }
+ 
+        }
+  </script>
+  </script>
+</body>
+</html>
+	

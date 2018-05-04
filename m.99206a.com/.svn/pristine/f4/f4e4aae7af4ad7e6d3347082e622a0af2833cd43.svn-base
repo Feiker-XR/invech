@@ -1,0 +1,58 @@
+<div class="footer_all">
+	<div class="footer">
+		<div class="footer_1">
+			<h2>合作伙伴</h2>
+			<a><img src="/newview/img/foot-logo.png" /></a>
+		</div>
+		<div class="footer_2">
+			<h2>用户服务</h2>
+			<ul>
+				<li><a href="/about/index/id/3.html">隐私问题</a></li>
+				<li><a href="/about/index/id/5.html">常见问题</a></li>
+				<li><a href="/about/index/id/1.html">联系我们</a></li>
+				<li><a href="/about/index/id/1.html">关于我们</a></li>
+			</ul>
+		</div>
+		<div class="footer_1">
+			<h2>合作平台</h2>
+			<img src="/newview/img/foot-logo-02.png" />
+		</div>
+		<div class="footer_3">
+			<h2>推荐浏览器</h2>
+			<ul>
+				<li><i class="footer_3_1"></i><a href="https://www.google.cn/chrome/" class="f14" target="_blank">谷歌浏览器</a></li>
+				<li><i class="footer_3_2"></i><a href="https://support.microsoft.com/zh-cn/help/17621/internet-explorer-downloads" class="f14" target="_blank">IE浏览器</a></li>
+				<li><i class="footer_3_3"></i><a href="http://www.firefox.com.cn/download/" class="f14" target="_blank">火狐浏览器</a></li>
+			</ul>
+		</div>
+		<div class="footer_4">
+			<h2>联系我们</h2>
+			<ul>
+				<li><i class="footer_4_1"></i><a href="#" class="f14">198198119</a></li>
+				<li><i class="footer_4_2"></i><a href="#" class="f14">99206com@gmail.com</a></li>
+			</ul>
+		</div>
+		<div class="footer_5">
+			<h2>手机投注</h2>
+			<img src="/img/foot-logo-08.png" style="width: 120px;height: 120px;"/>
+		</div>
+	</div>
+</div>
+<!--  -->
+<script type="text/javascript">
+$(function(){
+	setInterval(function() {
+		$.ajax({
+			type: "post",
+			url: "{:Url('index/home')}",
+			data:{'ajax':1,'get_money':'1'},
+			success:function(data) {
+				if (/^[\d\.]+$/.test(data)) {
+					$('#money').text(data);
+					$('#money_2').text(data);
+				}
+			}
+		});
+	},5000);
+})
+</script>

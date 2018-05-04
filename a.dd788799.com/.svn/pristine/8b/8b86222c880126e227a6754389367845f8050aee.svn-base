@@ -1,0 +1,167 @@
+<?php
+
+namespace app\listeners;
+
+use app\common\model\Bet;
+use app\common\model\Played;
+use app\common\model\Config;
+
+use bong\service\queue\Contracts\ShouldQueue;
+
+class LotteryListener //implements ShouldQueue
+{
+
+    public $queue = 'lottery';
+    private $played;
+
+    private $lottery;//Data模型对象
+
+    public function onAction($event){
+        
+        $this->lottery = $event->obj;
+
+    	$this->init();
+
+        $this->runLottery();
+        
+    }
+
+    private function init()
+    {
+		date_default_timezone_set('PRC') ;
+
+		$this->played = Played::getAll();
+		$configs = Config::getAll();
+		$this->fanDianMax = $configs['fanDianMax'];
+
+        require_once(ROOT_PATH.'swoole/parse-calc-count.php');
+        require_once(ROOT_PATH.'swoole/kqwf_algo.php');		
+	}
+
+    private function runLottery()
+    {
+    	$perPage = config('command_per_page')??100;
+ 
+    	$query = Bet::where('type',$this->lottery->type)
+    			->where('actionNo',$this->lottery->number)
+				->where('lotteryNo','');
+		$query->chunk($perPage, [$this,'runPageLottery']);        
+    }
+
+    public function runPageLottery($bets){
+        foreach ($bets as $row) {           
+            $played = $this->played[$row['playedId']];
+            $func = $played['ruleFun'];    
+
+            $id         = $row['id'];
+            $actionData = $row['actionData'] ;   //投注号码
+            $kjData     = $this->lottery->data ; 	//开奖号码
+            $weiShu     = $row['weiShu'] ;       //位数
+
+            $fanDian    = $row['fanDian'] ;     //根据返点和计算 赔率;
+            $beiShu     = $row['beiShu'] ;
+            $mode       = $row['mode'] ;
+
+            $is_mix     = $played['is_mix'] ; 
+            $mix_ids    = $played['mix_ids'] ; 
+            $mix_pls    = [];//混合玩法的赔率表
+            
+            $is_kqwf    = $played['is_kqwf'];
+            //$money      = $row['money'];//快钱玩法的投注金额
+            $money      = $beiShu*$mode;    //每注本金
+            $odd        = $row['bonusProp'];//快钱赔率
+
+            $zjAmount = 0;        
+
+            if($weiShu){
+                $zjcount    = $func($actionData,$kjData,$weiShu) ;    
+            }else{
+                $zjcount    = $func($actionData,$kjData) ;    
+            }
+            //$zjcount = (int)$zjcount;
+
+            //混合玩法返回各相关玩法的中奖次数;
+            if($is_mix){
+
+                $mix_result = Played::where('id','in',$mix_ids)->select();
+
+                /*
+                if($fanDian != 0){
+
+                	$fanDianMax = $this->fanDianMax;
+
+                    foreach($mix_result as $mix_row){
+                        $prop = $mix_row['bonusProp'];
+                        $base = $mix_row['bonusPropBase'];
+                        //$pl = (($prop-$base)/$fanDianMax*$fanDian + $base);
+
+                        $mix_pls[] = round($pl,2);
+                    }
+
+                }else{//最低赔率;
+                    foreach($mix_result as $mix_row){
+                        //$mix_pls[] = $mix_row['bonusPropBase'];
+                        $mix_pls[] = $mix_row['bonusProp'];
+                    }
+                }
+                */
+                $fanDianMax = $this->fanDianMax;
+                foreach($mix_result as $mix_row){
+                    $prop = $mix_row['bonusProp'];
+                    $base = $mix_row['bonusPropBase'];
+                    $convertBlMoney = ($prop - $base) / $fanDianMax;
+                    $pl = ($prop - $fanDian * $convertBlMoney);
+                    $mix_pls[] = round($pl,2);
+                }
+
+                $count_sum = 0;//总中奖次数
+                foreach ($mix_pls as $key => $pl) {
+                    $count = $zjcount[$key];
+                    $zjAmount += $count*$pl*$beiShu*$mode/2;
+                    $count_sum += $count;
+                }
+                $zjAmount = round($zjAmount,2);
+                $zjcount = $count_sum;
+            }
+
+
+            if($is_kqwf){
+                //目前 混合玩法 的 各子玩法 不支持 和局处理;
+                if(-1 == $zjcount){//快钱玩法 存在 和局, 退还本金
+                    $actionNum = $row['actionNum'] ;
+                    $zjAmount = $actionNum*$money;
+                    //$zjAmount = $actionNum*$beiShu*$mode;                     
+                }
+
+                if($zjcount>0){
+                    $zjAmount = $zjcount*$odd*$money;
+                }                              
+            }   
+
+            $zjcount = (int)$zjcount;
+
+			$bet = $row;
+	        $money_model = transaction(function() use ($bet,$zjcount,$zjAmount){
+				
+				$update_data = [
+					'lotteryNo'	=>	$this->lottery->data,
+					'zjCount'	=>	$zjcount,
+					'bonus'		=>	$zjAmount,					
+				];
+				$bet->save($update_data);
+
+                //即时返水
+				if($is_daily_water=1){
+					event('user.bet.back',[$bet]);
+				}
+                /*月结返佣
+				if($is_daily_commission=0){
+					event('user.bet.commission',[$bet]);
+				}
+                */
+	        });	
+        }
+    }
+}
+
+

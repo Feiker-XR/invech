@@ -1,0 +1,55 @@
+<extend name="Public/base"/>
+
+<block name="body">
+	<div class="main-title">
+		<h2>彩种设置</h2>
+	</div>
+
+	<div class="cf">
+	
+		<!-- 高级搜索 -->
+
+	</div>
+
+	<div class="data-table table-striped">
+		<table>
+			<thead>
+				<tr>
+					<th>ID</th>
+					<th>彩种名称</th>
+					<th>彩种简称</th>
+					<th>停止投注间隔</th>
+					<th>开启/关闭</th>
+					<th>排序</th>
+					<th>操作</th>
+				</tr>
+			</thead>
+			<tbody>
+				<volist name="list" id="config">
+					<tr>
+						<td>{$config.id}</td>
+						<td>{$config.title}</td>
+						<td>{$config.shortName}</td>
+						<td><input name="data_ftime" value="{$config.data_ftime}">
+							<input type="hidden" name="id" value="{$config.id}">
+						</td>
+						<td><input type="checkbox" name="enable" {$this->iff($config['enable'],'checked','')}></td>
+						<td><input name="sort" value="{$config.sort}"></td>
+						<td>
+							<a target="ajax" method="post" href="__SELF__">保存修改</a>
+						</td>
+					</tr>
+				</volist>
+			</tbody>
+		</table>
+		<!-- 分页 -->
+	    <div class="page">
+	        {$_page}
+	    </div>
+	</div>
+</block>
+
+<block name="script">
+<script type="text/javascript">
+
+</block>

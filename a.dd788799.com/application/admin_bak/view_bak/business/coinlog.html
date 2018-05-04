@@ -1,0 +1,195 @@
+{extend name="common/base" /}
+
+{block name="body"}
+	<!-- 标题栏 -->
+	<div class="main-title">
+		<h2>账变记录</h2>
+	</div>
+	{php}
+		$mname=array(
+			'2.00'=>'元',
+			'0.20'=>'角',
+			'0.02'=>'分'
+		);
+		
+		$liqTypeName=array(
+		1=>'充值',
+		2=>'返点',
+		//3=>'返点',//分红
+		//4=>'抽水金额',
+		5=>'停止追号',
+		6=>'中奖金额',
+		7=>'撤单',
+		8=>'提现失败返回冻结金额',
+		9=>'管理员充值',
+		10=>'解除抢庄冻结金额',
+		//11=>'收单金额',
+		
+		50=>'签到赠送',
+		51=>'首次绑定工行卡赠送',
+		52=>'充值佣金',
+		53=>'消费活动',
+		
+		100=>'抢庄冻结金额',
+		101=>'投注冻结金额',
+		102=>'追号投注',
+		103=>'抢庄返点金额',
+		//104=>'抢庄抽水金额',
+		105=>'抢庄赔付金额',
+		106=>'提现冻结',
+		107=>'提现成功扣除冻结金额',
+		108=>'开奖扣除冻结金额'
+	);
+{/php}
+	<!-- 高级搜索 -->
+	<form action="{:Url('coinlog')}" method="post">
+		<div class="search-form fr cf">
+			<div class="sleft">
+				用户名：<input style="width:100px" type="text" name="username" class="search-input" value="{$username}" placeholder="用户名">
+			</div>
+			<div class="sleft">
+				<select style="width:120px;" name="liqType">
+					<option value="">所有账变类型</option>
+					{volist name="liqTypeName" id="value" key="key"}
+						<option value="{$key-1}" title="{$value}">{$value}</option>
+					{/volist}
+				</select>
+			</div>
+			<div class="sleft">
+				时间从：<input style="width:80px" type="text" name="fromTime" id="first" class="search-input" value="{$fromTime}" placeholder="开始时间">
+			</div>
+			<div class="sleft">
+				到：<input style="width:80px" type="text" name="toTime" id="end" class="search-input" value="{$toTime}" placeholder="结束时间">
+			</div>
+			<div class="sbtn">
+				<button type="submit" class="btn" id="search">查 找</button>
+			</div>	
+		</div>
+	</form>
+
+	
+    <!-- 数据列表 -->
+    <div class="data-table table-striped" id="data-table">
+	<table class="">
+    <thead>
+        <tr>
+			<th>时间</th>
+			<th>用户名</th>
+			<th>帐变类型</th>
+			<th>单号</th>
+			<th>游戏</th>
+			<th>玩法</th>
+			<th>期号</th>
+			<th>模式</th>
+			<th>资金</th>
+			<th>余额</th>
+		</tr>
+    </thead>
+    <tbody>
+		{if condition="$_list"}
+		{volist name="_list" id="var"}
+		{php} $bet=model('bets')->where('id',$var['extfield0'])->find(); {/php}
+		<tr>
+			<td>{php} echo date('m-d H:i:s', $var['actionTime']){/php}</td>
+			<td>{php} echo $var['username'] {/php}</td>
+			<td>{php} echo $var['info'] {/php}</td>
+            
+            {php} if($var['extfield0'] && in_array($var['liqType'], array(2,3,4,5,6,7,10,11,100,101,102,103,104,105,108))){ {/php}
+                <td><a target="modal" button="关闭:defaultCloseModal" width="800" title="投注信息" href="{:Url('business/betinfo?id='.$var['extfield0'])}">{php} echo $this->ifs($var['extfield0'], '--') {/php}</a>
+                </td>
+                <td>{php}echo $this->iff($var['type'], $types[$var['type']]['title'], '--') {/php}</td>
+                <td>{php}echo $this->iff($bet['playedId'], $playeds[$bet['playedId']]['name'], '--') {/php}</td>
+                <td>{php}echo $this->ifs($bet['actionNo'], '--'){/php}</td>
+                <td>{php}echo $this->iff($bet['mode'], $mname[$bet['mode']], '--') {/php}</td>
+			{php} }elseif(in_array($var['liqType'], array(1,9,52))){
+					$url = Url('business/rechargeInfo?id='.$var['extfield0']) ;
+			{/php}
+                <td><a href="{$url}" width="500" title="充值信息" button="关闭:defaultCloseModal" target="modal">{php} echo $var['extfield1'] {/php}</a></td>
+                <td>--</td>
+                <td>--</td>
+                <td>--</td>
+                <td>--</td>
+			{php} }elseif(in_array($var['liqType'], array(8,106,107))){
+					$url = Url('business/cashInfo?id='.$var['extfield0']) ;
+			{/php}
+                <td><a href="{$url}" width="500" title="提现信息" button="关闭:defaultCloseModal" target="modal">{php} echo $var['extfield0'] {/php}</a></td>
+                <td>--</td>
+                <td>--</td>
+                <td>--</td>
+                <td>--</td>
+            {php} }else{  {/php}
+                <td>--</td>
+                <td>--</td>
+                <td>--</td>
+                <td>--</td>
+                <td>--</td>
+            {php} } {/php}
+            
+			<td>{php} echo $var['coin'] {/php}</td>
+			<td>{php} echo $var['userCoin']{/php}</td>
+		
+		</tr>
+		{/volist}
+		{else /}
+			<tr>
+				<td colspan="10" align="center">暂时没有账变记录。</td>
+			</tr>
+		{/if}
+	</tbody>
+    </table> 
+	</div>
+    <div class="page">
+        {$_page}
+    </div>
+{/block}
+
+{block name="script"}
+    <link href="__STATIC__/datetimepicker/css/datetimepicker.css" rel="stylesheet" type="text/css">
+	<link href="__STATIC__/datetimepicker/css/datetimepicker_blue.css" rel="stylesheet" type="text/css">
+	<link href="__STATIC__/datetimepicker/css/dropdown.css" rel="stylesheet" type="text/css">
+	<script type="text/javascript" src="__STATIC__/datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
+	<script type="text/javascript" src="__STATIC__/datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js" charset="UTF-8"></script>
+
+	<script>
+	$(function(){
+		$('#first,#end').datetimepicker({
+			format: 'yyyy-mm-dd',
+			language:"zh-CN",
+			minView:2,
+			autoclose:true
+		});
+		//showTab();
+	});
+	</script>
+	<script type="text/javascript">
+		//回车搜索
+		$("body").keyup(function(e){
+			if(e.keyCode === 13){
+				$("#search").click();
+				return false;
+			}
+		});
+		$('.side-sub-menu').find('a[href="{:Url('business/coinlog')}"]').closest('li').addClass('current');
+	</script>
+{/block}
+
+{block name="style"}
+<style>
+.popupModal table tr{
+	border-bottom:#CCCCCC solid 1px;
+}
+
+.popupModal table tr td .tzdata {
+	border: #CCCCCC solid 1px;
+	margin-top: 5px;
+	padding: 5px;
+	word-wrap: break-word;
+	word-break: normal;
+	word-break: break-all;
+	width: 98%;
+	height: 80px;
+	overflow: scroll;
+}
+</style>
+
+{/block}

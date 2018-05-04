@@ -1,0 +1,162 @@
+<?php
+namespace app\home\controller;
+
+/**
+ *  开采网,历史记录数据接口
+ */
+class HistoryController extends DataController
+{
+    /**
+     * 北京赛车pk10
+     */
+    public function pk10()
+    {
+        try{
+            $mem   = $this->create_link() ;
+            $code  = !empty($_REQUEST['code']) ? $_REQUEST['code'] : 10001 ;
+            $url   = 'https://k.leqq.cc/pks/getPksHistoryList.php?lotCode='.$code ;
+            $key   = 'pk10_history' ;
+            $issue = 60 * 5 ;
+            $data  = $mem->get($key) ;
+
+            if (empty($data))
+            {
+                $data = $this->getData($url);
+                $mem->set($key,$data,0,$issue);
+            }
+            echo $data;die;
+
+        } catch (\Exception $e){
+            print_r($e->getMessage()) ; die;
+        }
+    }
+
+    /**
+     *  重庆时时彩
+     */
+    public function cqssc()
+    {
+        try{
+            $mem   = $this->create_link() ;
+            $code  = !empty($_REQUEST['code']) ? $_REQUEST['code'] : 10002 ;
+            $url   = 'https://k.leqq.cc/CQShiCai/getBaseCQShiCaiList.php?lotCode='.$code ;
+            $key   = 'cqssc_history' ;
+            $issue = 60 * 10 ;
+            $data  = $mem->get($key) ;
+
+            if (empty($data))
+            {
+                $data = $this->getData($url);
+                $mem->set($key,$data,0,$issue);
+            }
+            echo $data;die;
+
+        } catch (\Exception $e){
+            print_r($e->getMessage()) ; die;
+        }
+    }
+
+    /**
+     *  天津时时彩
+     */
+    public function tjssc()
+    {
+        try{
+            $mem   = $this->create_link() ;
+            $code  = !empty($_REQUEST['code']) ? $_REQUEST['code'] : 10003 ;
+            $url   = 'https://k.leqq.cc/CQShiCai/getBaseCQShiCaiList.php?lotCode='.$code ;
+            $key   = 'tjssc_history' ;
+            $issue = 60 * 10 ;
+            $data  = $mem->get($key) ;
+
+            if (empty($data))
+            {
+                $data = $this->getData($url);
+                $mem->set($key,$data,0,$issue);
+            }
+            echo $data;die;
+
+        } catch (\Exception $e){
+            print_r($e->getMessage()) ; die;
+        }
+    }
+
+
+    /**
+     *  新疆时时彩
+     */
+    public function xjssc()
+    {
+        try{
+            $mem   = $this->create_link() ;
+            $code  = !empty($_REQUEST['code']) ? $_REQUEST['code'] : 10004 ;
+            $url   = 'https://k.leqq.cc/CQShiCai/getBaseCQShiCaiList.php?lotCode='.$code ;
+            $key   = 'tjssc_history' ;
+            $issue = 60 * 10 ;
+            $data  = $mem->get($key) ;
+
+            if (empty($data))
+            {
+                $data = $this->getData($url);
+                $mem->set($key,$data,0,$issue);
+            }
+            echo $data;die;
+
+        } catch (\Exception $e) {
+            print_r( $e->getMessage() ) ; die;
+        }
+    }
+
+
+    /**
+     *  广东快乐十分
+     */
+    public function gdkl10()
+    {
+        try{
+            $mem   = $this->create_link() ;
+            $code  = !empty($_REQUEST['code']) ? $_REQUEST['code'] : 10005 ;
+            $url   = 'https://k.leqq.cc/klsf/getHistoryLotteryInfo.php?date=&lotCode='.$code ;
+            $key   = 'gdkl10_history' ;
+            $issue = 60 * 10 ;
+            $data  = $mem->get($key) ;
+
+            if (empty($data))
+            {
+                $data = $this->getData($url);
+                $mem->set($key,$data,0,$issue);
+            }
+            echo $data;die;
+
+        } catch (\Exception $e) {
+            print_r( $e->getMessage() ) ; die;
+        }
+    }
+
+    /**
+     *  十一运多金
+     */
+    public function syydj()
+    {
+        try{
+            $mem   = $this->create_link() ;
+            $code  = !empty($_REQUEST['code']) ? $_REQUEST['code'] : 10008 ;
+            $url   = 'https://k.leqq.cc/ElevenFive/getElevenFiveList.php?date=&lotCode='.$code ;
+            $key   = 'syydj_history' ;
+            $issue = 60 * 10 ;
+            $data  = $mem->get($key) ;
+
+            if (empty($data))
+            {
+                $data = $this->getData($url) ;
+                $mem->set($key,$data,0,$issue) ;
+            }
+            echo $data;die;
+
+        } catch (\Exception $e) {
+            print_r( $e->getMessage() ) ; die;
+        }
+    }
+
+
+}

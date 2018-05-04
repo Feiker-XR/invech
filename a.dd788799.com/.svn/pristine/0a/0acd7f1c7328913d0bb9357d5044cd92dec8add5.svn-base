@@ -1,0 +1,117 @@
+{layout name="layout" /}
+
+<div class="row">
+  <div class="col-xs-12">
+    <div class="box">
+      <div class="box-header">
+		<button class="btn btn-default pull-left add_member">新增</button>
+
+		<form>
+		      <div class="has-feedback pull-right">
+		        <button type="submit" class="btn btn-block btn-default btn-sm filter">查询</button>
+		      </div>
+				
+		      <div class="pull-right" style="margin-left:15px;">
+		      	<input class="form-control input-sm search" value="{$Think.get.keywords}"  name="keywords" id="keywords"  placeholder="用户名、会员昵称" type="text"  style="width: 250px;">
+		      </div> 
+		    
+                <div class="pull-right">
+	              <select class="form-control input-sm" name="set_id" aria-hidden="true">
+	             	   <option value="0" >全部通道分组</option>
+	             	   {foreach $setlist as $v}
+                   	  		<option value="{$v.id}" {if($Think.get.set_id==$v.id)} selected="selected"{/if}>{$v.name}</option>
+		           		 {/foreach}
+		         	</select>
+             	 </div>
+		 </form>
+
+      </div>
+      <!-- /.box-header -->
+      <div class="box-body table-responsive no-padding">
+        <table class="table table-hover">
+         	<tr>
+            	 <th>#</th>
+				<th>通道分组</th>
+				<th>通道名称</th>
+				<th>通道代码</th>
+				<th>通道logo</th>
+				<th>添加时间</th>
+				<th>更新时间</th>
+				
+				<th>操作</th>
+				
+            </tr>
+			 {foreach $list as $vo} 
+	           <tr>        
+	              <td>{$vo.id}</td>
+	              <td>{$setlist[$vo['set_id']]['name']}</td>
+	              <td>{$vo.name}</td>        
+	              <td>{$vo.code}</td>    
+	              <td><img src="{$vo.img}"></td>
+	              <td>{$vo.created_at}</td>
+	              <td>{$vo.updated_at}</td>
+	           		<td >
+						<i  data-id="{$vo.id}" class="edit fa fa-pencil"></i>&nbsp;&nbsp;
+						<i  data-id="{$vo.id}" class="del fa fa-trash"></i>
+              		</td>
+	            </tr>
+          	 {/foreach}
+        	</table>
+        {$list->render();}
+      </div>
+      <!-- /.box-body -->
+    </div>
+    <!-- /.box -->
+  </div>
+</div>
+
+<!-- AdminLTE App -->
+<script type="text/javascript">
+$(function(){
+	$(".add_member").click(function(){
+		$.get('/pay/way_form.html',{},function(data){
+			layer.open({
+				type: 1,
+				title: '新增支付方式',
+				maxmin: true, //开启最大化最小化按钮
+				area: ['900px', '600px'],
+				content: data
+			});
+		},'html');
+	});
+	
+	$(".edit").click(function(){
+		var id = $(this).attr('data-id');
+		$.get('/pay/way_form.html',{id:id},function(data){
+			layer.open({
+				type: 1,
+				title: '修改支付方式',
+				maxmin: true, //开启最大化最小化按钮
+				area: ['900px', '600px'],
+				content: data
+			});
+		},'html');
+	});
+	$(".del").click(function(){
+		var id = $(this).attr('data-id');
+		layer.confirm('确定删除?', {
+		  btn: ['确定','取消'] //按钮
+		}, function(){
+			$.get('/pay/way_del',{id:id},function(data){
+				layer.alert(data.msg, {
+		          time: 20000,
+		          skin: 'layui-layer-molv', //该皮肤由layer.seaning.com友情扩展。关于皮肤的扩展规则，去这里查阅
+		          closeBtn: 0,
+		          anim: 4
+		        }, function(){
+		           window.location.href = document.URL;
+		        } )
+
+			},'json');
+		}, function(){
+		
+		});
+	});
+});
+
+</script>

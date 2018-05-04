@@ -1,0 +1,11 @@
+<div class="tz_info" id="game-helptips">
+	<p class="wjhelps">说明：<?= $played["simpleInfo"] ?></p>
+</div>
+
+<div class="ball_list" style="width:100%;">
+	<div class="num-table" id="num-select">
+		<?php 
+		include APP_PATH.'index/mview/'.$tpl.'.html';
+		?>						
+	</div>
+</div>

@@ -1,0 +1,179 @@
+<?php
+
+namespace app\common\model\member;
+
+use app\common\model\Message;
+use app\common\model\UserMessage;
+use app\common\model\Withdraw;
+trait MessageTrait
+{
+    //后台和代理发给'我'的消息;
+    private function buildMessageMemberQuery(){
+        return function($query){
+            $query->where(function($query){
+                $query->where('send_type','admin')
+                ->where('recv_uid',['=',0],['=',$this->uid],'or');
+            })
+            ->whereOr(function($query){//代理发给所有下线会员的消息
+                $query->where('send_type','agent')
+                ->where('recv_uid',$this->uid)
+                ->whereOr(function($query){                    
+                    $ids = $this->getAgents()->column('uid');//结果集的column返回数组
+                    $query->where('recv_uid',0)->where('send_uid','in',$ids);
+                });
+            });
+        };     
+    }
+
+    private function buildMessageUserQuery(){
+        return $this->buildMessageMemberQuery();
+    }
+
+    //后台管理员发给代理的消息; 代理和会员不能发消息给代理;
+    private function buildMessageAgentQuery(){
+        return function($query){
+            $query->where(function($query){
+                $query->where('send_type','admin')
+                ->where('recv_uid',['=',0],['=',$this->uid],'or');
+            });
+        };      
+    }
+
+    private function buildMessageAdminQuery(){
+        return function($query){
+            $query->where(function($query){
+                $query->where('recv_type','admin')->where('recv_uid',1);
+            });
+        };      
+    }    
+
+  
+    private function getMessageBuilder($recv_type){
+        $query_name = 'buildMessage'.ucfirst($recv_type).'Query';
+        $recv_type=='admin' ? $recv_uid = 1 : $recv_uid = $this->id;
+        return Message::where('id','not in',function($query)use($recv_type,$recv_uid){ 
+            $query->table((new UserMessage)->getTable())->where('recv_type',$recv_type)
+            ->where('recv_uid',$recv_uid)->field('message_id');
+        })
+        //->where('recv_type',$recv_type)//必须去掉;
+        ->where($this->{$query_name}());
+    }
+
+    private function buildMessages($recv_type){
+        $recv_type=='admin' ? $recv_uid = 1 : $recv_uid = $this->id;
+        $new_messages = $this->getMessageBuilder($recv_type)->select();
+        foreach ($new_messages as $message) {
+            UserMessage::create([
+                    'recv_type'=>$recv_type,
+                    'recv_uid'=>$recv_uid,
+                    'message_id'=>$message->id,
+                    //'status'=>0,
+                ]);            
+        }
+    }
+
+    public function getInboxBuilder($recv_type='user'){
+        if(!in_array($recv_type,['user',/*'member','agent',*/'admin'])){
+            throw new \Exception('参数不合法!');
+        }
+        //每次进入收件箱时都拉取信件
+        $recv_type=='admin' ? $recv_uid = 1 : $recv_uid = $this->id;
+        $this->buildMessages($recv_type);
+        return UserMessage::where('recv_type',$recv_type)->where('recv_uid',$recv_uid);
+    }
+
+    public function getOutboxBuilder($send_type='user'){
+        if(!in_array($send_type,['user','admin'])){
+            throw new \Exception('参数不合法!');
+        }
+
+        if($send_type=='admin'){
+            $send_types = ['admin',];
+            $send_uid = 1;
+        }else{
+            $send_types = ['member','agent',];
+            $send_uid = $this->id;
+        }
+        
+        return Message::where('send_type','in',$send_types)
+            ->where('send_uid',$send_uid);
+    }
+
+    private function buildSendMessageUserQuery(){
+        return function($query){
+            $query->where(function($query){
+                $query->where('send_type','admin')
+                ->where('recv_uid',['=',0],['=',$this->uid],'or');
+            })
+            ->whereOr(function($query){//代理发给所有下线会员的消息
+                $query->where('send_type','agent')
+                ->where('recv_uid',$this->uid)
+                ->whereOr(function($query){                    
+                    $ids = $this->getAgents()->column('uid');//结果集的column返回数组
+                    $query->where('recv_uid',0)->where('send_uid','in',$ids);
+                });
+            });
+        };     
+    }
+
+    //新版收件箱需求:1>不管是代理还是用户,只要是他的就放在他的收件箱中;
+    //旧版代理身份一个收件箱,会员身份一个收件箱;
+    //发件系统也需要修改,用户不能给用户发邮件;
+    //而且代理后台 也 做进 网站前端;
+    //数据库字段重新的定义:
+    //Message表的recv_type仍然是 member,agent,admin;
+    //但是UserMessage表的recv_type从[member,agent,admin]改为[user,admin]
+
+    //前台
+    public  function getMessQList(){
+       
+        $params = request()->param();
+        $query = $this->getInboxBuilder();
+        if(isset($params['status']) && is_numeric($params['status'])){
+            $query->where('status', $params['status']);
+        }
+
+        $data   = [];
+        $data['list']   =   $query->order('id desc')->paginate();
+        $query = $this->getInboxBuilder();
+        $data['weidu']  =   $query->where('status',0)->count();
+        $query = $this->getInboxBuilder();
+        $data['yidu']   =   $query->where('status',1)->count();
+        $data['count']  =   intval($data['weidu'])+intval($data['yidu']);
+        return $data;
+    }
+
+    //修改站内信状态
+    public  function getMessEdit($ids =[]){
+        if($ids){
+            $ids = implode(',', $ids);
+            $rel = UserMessage::where(['id'=>['in',$ids]])->update(['status'=>1]);
+            return $rel !== false;
+        }else{
+            return false;
+        }
+    }
+
+    public  function getMessDel($ids =[]){
+        if($ids){
+            var_dump($ids);exit;
+            $rel = UserMessage::destroy($ids);
+            return $rel !== false;  
+        }else{
+            return false;
+        }
+    }
+	   //手机端获取未读消息
+    public  function getMessWudu(){
+        $query  =   new UserMessage();
+        $weidu  =   $query->where(['status'=>0,'recv_uid'=>request()->user()->id])->count();
+        return $weidu;
+    }
+
+    //手机端获取提现记录
+    public  function getwithdraw(){
+        $query  =   new Withdraw();
+        $CountAmount    =   $query->where(['uid'=>request()->user()->id])->sum('real_amount'); 
+        return $CountAmount;
+    }
+}

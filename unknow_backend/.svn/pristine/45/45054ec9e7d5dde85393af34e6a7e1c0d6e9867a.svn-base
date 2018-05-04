@@ -1,0 +1,154 @@
+---------------------------------------------------------------
+[ 2018-02-22T03:59:33-04:00 ] 127.0.0.1 127.0.0.1 GET /index.php
+[ info ] localhost:8090/index.php [运行时间：0.980682s][吞吐率：1.02req/s] [内存消耗：1,474.52kb] [文件加载：45]
+[ info ] [ LANG ] D:\phpStudy\WWW\99206\thinkphp\lang\zh-cn.php
+[ info ] [ BIND ] 'index'
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'index',
+    1 => NULL,
+    2 => NULL,
+  ),
+)
+[ info ] [ HEADER ] array (
+  'accept-language' => 'zh-CN,zh;q=0.9,en;q=0.8,zh-TW;q=0.7',
+  'accept-encoding' => 'gzip, deflate, br',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3282.167 Safari/537.36',
+  'upgrade-insecure-requests' => '1',
+  'connection' => 'keep-alive',
+  'host' => 'localhost:8090',
+  'content-length' => '',
+  'content-type' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'front',
+  'type' => 'memcache',
+  'host' => '127.0.0.1',
+  'port' => 11211,
+  'auto_start' => true,
+)
+[ info ] [ LOG ] INIT File
+[ error ] [1]session_start(): Failed to initialize storage module: user (path: D:\phpStudy\tmp\tmp)[D:\phpStudy\WWW\99206\thinkphp\library\think\Session.php:105]
+---------------------------------------------------------------
+[ 2018-02-22T03:59:44-04:00 ] 127.0.0.1 127.0.0.1 GET /index.php/pay/member
+[ info ] localhost:8090/index.php/pay/member [运行时间：0.037096s][吞吐率：26.96req/s] [内存消耗：1,474.47kb] [文件加载：45]
+[ info ] [ LANG ] D:\phpStudy\WWW\99206\thinkphp\lang\zh-cn.php
+[ info ] [ BIND ] 'index'
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'index',
+    1 => 'pay',
+    2 => 'member',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'accept-language' => 'zh-CN,zh;q=0.9,en;q=0.8,zh-TW;q=0.7',
+  'accept-encoding' => 'gzip, deflate, br',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3282.167 Safari/537.36',
+  'upgrade-insecure-requests' => '1',
+  'connection' => 'keep-alive',
+  'host' => 'localhost:8090',
+  'content-length' => '',
+  'content-type' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'front',
+  'type' => 'memcache',
+  'host' => '127.0.0.1',
+  'port' => 11211,
+  'auto_start' => true,
+)
+[ info ] [ LOG ] INIT File
+[ error ] [1]session_start(): Failed to initialize storage module: user (path: D:\phpStudy\tmp\tmp)[D:\phpStudy\WWW\99206\thinkphp\library\think\Session.php:105]
+---------------------------------------------------------------
+[ 2018-02-22T04:02:13-04:00 ] 127.0.0.1 127.0.0.1 GET /index.php/pay/member
+[ info ] localhost:8090/index.php/pay/member [运行时间：0.017861s][吞吐率：55.99req/s] [内存消耗：1,474.52kb] [文件加载：45]
+[ info ] [ LANG ] D:\phpStudy\WWW\99206\thinkphp\lang\zh-cn.php
+[ info ] [ BIND ] 'index'
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'index',
+    1 => 'pay',
+    2 => 'member',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'accept-language' => 'zh-CN,zh;q=0.9,en;q=0.8,zh-TW;q=0.7',
+  'accept-encoding' => 'gzip, deflate, br',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3282.167 Safari/537.36',
+  'upgrade-insecure-requests' => '1',
+  'cache-control' => 'max-age=0',
+  'connection' => 'keep-alive',
+  'host' => 'localhost:8090',
+  'content-length' => '',
+  'content-type' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'front',
+  'type' => 'memcache',
+  'host' => '127.0.0.1',
+  'port' => 11211,
+  'auto_start' => true,
+)
+[ info ] [ LOG ] INIT File
+[ error ] [1]session_start(): Failed to initialize storage module: user (path: D:\phpStudy\tmp\tmp)[D:\phpStudy\WWW\99206\thinkphp\library\think\Session.php:105]
+---------------------------------------------------------------
+[ 2018-02-22T04:03:30-04:00 ] 127.0.0.1 127.0.0.1 GET /index.php/pay/member
+[ info ] localhost:8090/index.php/pay/member [运行时间：0.057759s][吞吐率：17.31req/s] [内存消耗：1,455.13kb] [文件加载：43]
+[ info ] [ LANG ] D:\phpStudy\WWW\99206\thinkphp\lang\zh-cn.php
+[ info ] [ BIND ] 'index'
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'index',
+    1 => 'pay',
+    2 => 'member',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'accept-language' => 'zh-CN,zh;q=0.9,en;q=0.8,zh-TW;q=0.7',
+  'accept-encoding' => 'gzip, deflate, br',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3282.167 Safari/537.36',
+  'upgrade-insecure-requests' => '1',
+  'cache-control' => 'max-age=0',
+  'connection' => 'keep-alive',
+  'host' => 'localhost:8090',
+  'content-length' => '',
+  'content-type' => '',
+)
+[ info ] [ PARAM ] array (
+)
+[ info ] [ SESSION ] INIT array (
+  'id' => '',
+  'var_session_id' => '',
+  'prefix' => 'front',
+  'type' => 'File',
+  'host' => '127.0.0.1',
+  'port' => 11211,
+  'auto_start' => true,
+)
+[ info ] [ LOG ] INIT File
+[ error ] [0]错误的SESSION处理器类:\think\session\driver\File[D:\phpStudy\WWW\99206\thinkphp\library\think\Session.php:101]

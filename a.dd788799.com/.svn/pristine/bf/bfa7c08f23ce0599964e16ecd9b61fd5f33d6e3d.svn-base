@@ -1,0 +1,85 @@
+<?php
+
+namespace app\api\controller;
+use app\api\Base;
+use app\common\model\PaySet as PaySetModel;
+use app\common\model\PayChannel as PayChannelModel;
+use app\common\model\PayThird as PayThirdModel;
+use app\common\model\Order as OrderModel;
+
+use think\Response;
+
+class pay extends Base{
+    
+    public function appcode(){
+        //$user = $this->request->user();
+        $data = PaySetModel::appSet();	
+        return $this->apiReturn([],$data);
+    }
+
+    //coin=100&thirdid=14&thirdtype=lypay&tcode=weixin&scid=2&sccode=WECHAT
+
+    public function pay(){
+        $user = $this->request->user();
+        date_default_timezone_set('PRC');
+        
+        $thirdid    = input('thirdid');
+        $pay_type   = input('thirdtype');
+        $paycode    = input('tcode');        
+        $scid       = input('scid');
+        $local_code = input('sccode');
+        $amount     = input("coin")??0;
+
+        //$pay_third = PayThirdModel::find($thirdid);
+
+        $pay_channel = PayChannelModel::where(['set_configid'=>$scid,'thirdid'=>$thirdid,])->find();
+        if(!$pay_channel){
+            $msg = '支付渠道不存在!';
+            return $this->apiReturn(CodeBase::$error,$msg);
+        }
+
+        if(/*is_int($amount)&&*/1==$pay_channel['money_decimal']){
+            $point = rand(1, 99);
+            $amount += $point/100;
+        }
+        
+        if($amount<$pay_channel['min']){
+            $msg = '参数错误:不能低于最低充值金额:'.$pay_channel['min'].'元';
+            return $this->apiReturn(CodeBase::$error,$msg);      
+        }
+        if($amount>$pay_channel['max']){
+            $msg = '参数错误:不能高于最高充值金额:'.$pay_channel['max'].'元';
+            return $this->apiReturn(CodeBase::$error,$msg); 
+        }
+
+        $pay = pay($pay_type);
+        $orderno = $pay->genOrderno();
+        $order = OrderModel::create([
+                    'uid'       => $user->uid,
+                    'orderno'   => $orderno,
+                    'amount'    => $amount,
+                    'order_time' => date('Y-m-d H:i:s'),
+                    'pay_name'  => $pay->getName(),
+                    'pay_type'  => $pay_type,
+                    'pay_code'  => $paycode,
+                    'local_code' => $local_code,
+                ]);
+        if(!$order){
+            $msg = '创建订单失败!';
+            return $this->apiReturn(CodeBase::$error,$msg);
+        }
+
+        $params = compact('orderno','paycode','amount');
+        $ret = $pay->pay($params);
+
+        return $this->apiReturn([],$ret);
+    }
+
+    public function pay_content($orderno){
+        //$order = OrderModel::find($order_id);        
+        $order = OrderModel::where('orderno',$orderno)->find();
+        $html = $order->pay_content??'';        
+        return Response::create($html, 'html');
+    }
+
+}

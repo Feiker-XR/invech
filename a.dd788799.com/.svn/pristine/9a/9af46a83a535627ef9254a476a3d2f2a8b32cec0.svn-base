@@ -1,0 +1,74 @@
+<input type="hidden" name="playedGroup" value="<?=$groupId?>"/>
+<input type="hidden" name="playedId" value="<?=$playedId?>"/>
+<input type="hidden" name="type" value="<?=$type?>"/>
+<input type="hidden" name="playedName" value="<?=$played['name']?>"/>
+<!-- mobile 六合彩_正码 -->
+<div class='pp' action='six_dw' length="1" data-line="5"></div>
+<div id="sscContent">
+    <div class="lot-content clearfix">
+        <div class="fl main-left">
+            <div class="hd clearfix rehd" id="toptouzhu">
+                <div class="fl refl">
+                    快捷金额：<input type="text" class="txt" id="inputMoney">
+                </div>
+                <div class="kjanniu">
+                    <a href="javascript:void(0)" class="img-50" data-num="50"></a>
+                    <a href="javascript:void(0)" class="img-100" data-num="100"></a>
+                    <a href="javascript:void(0)" class="img-500" data-num="500"></a>
+                    <a href="javascript:void(0)" class="img-1000" data-num="1000"></a>
+                    <a href="javascript:void(0)" class="img-5000" data-num="5000"></a>
+                    <a href="javascript:void(0)" class="img-10000" data-num="10000"></a>
+                </div>
+            </div>
+            <div class="table-common" id="table-common"></div>
+        </div>
+    </div>
+</div>
+
+<script type="text/html" id="six_zm">
+    <table width="100%" border="0" cellpadding="0" cellspacing="0" class="pp" action="six_zm" data-line="5"
+           style="overflow: auto;">
+        <thead>
+        <tr>
+            <th>号码</th>
+            <th>赔率</th>
+            <th>金额</th>
+            <th>号码</th>
+            <th>赔率</th>
+            <th>金额</th>
+        </tr>
+        </thead>
+        <tbody>
+        {{each plg.lines line index1}}
+        <tr>
+            {{each line pl index2}}
+            <td onclick="setQuickPick(this,true)"><span
+                    class="ball-icon ball-{{pl.value | number}}"></span></td>
+            <td data-num="1" onclick="setQuickPick(this,true)"><strong class="color-red pl">{{pl.pl}}</strong>
+            </td>
+            <td><input type="text" oninput="checkAmount()" class="table-txt" data-name="{{plg.name}}-{{pl.value}}" data-plid="{{pl.id}}"
+                       data-pl="{{pl.pl}}"></td>
+            {{/each}}
+        </tr>
+        {{/each}}
+        </tbody>
+    </table>
+</script>
+
+
+<script>
+    //var pls;//玩法的所有赔率
+    //var plg;//当前赔率组
+    $(function () {
+        var playedId = "<?=$playedId?>";
+        $.getJSON("/game/pl/playedId/" + playedId, function (data) {
+            //console.log(data);
+            pls = data;		// 获取赔率相关数据
+            plg = pls[0];
+            //plg.lines = group_six_sz(plg.pls);
+            plg.lines = group(plg.pls,2);
+            var html = template("six_zm", {plg: plg});
+            $('.table-common').html(html);
+        });
+    });
+</script>    

@@ -1,0 +1,100 @@
+{layout name="layout" /}
+
+<div class="row">
+  <div class="col-xs-12">
+    <div class="box">
+      <div class="box-header">
+        <button class="btn btn-default pull-left add_member">新增</button>
+
+        <form>
+            <div class="has-feedback pull-right">
+              <button type="submit" class="btn btn-block btn-default btn-sm filter">查询</button>
+            </div>
+          
+            <div class="pull-right" style="margin-left:15px;">
+              <input class="form-control input-sm search" value="{$Think.get.keywords}"  name="keywords"   placeholder="名称、标题" type="text"  style="width: 250px;">
+            </div> 
+            <div class="pull-right" >
+                <select class="form-control input-sm" name="type" aria-hidden="true">
+                  <option value="" >全部类别</option>
+                    {foreach $types as $k=>$v}
+                      <option value="{$k}" {if($Think.get.type==$k)} selected="selected"{/if}>{$v}</option>
+                    {/foreach}
+                </select>
+            </div>
+         </form>
+    
+
+      </div>
+      <!-- /.box-header -->
+      <div class="box-body table-responsive no-padding">
+        <table class="table table-hover">
+          <tr>
+            <th>#</th>
+            <th >类别</th>
+            <th >状态</th>            
+            <th >名称</th>
+            <th >标题</th>
+            <th >期号处理</th>
+            <th >提前封盘时间</th>
+            <th>操作</th>
+        </tr>
+        {foreach $list as $item}
+         <tr>
+           
+           <td>{$item->id}</td>
+            <td>
+              {$types[$item->type]}
+            </td>
+            <td>
+              {eq name="$item->enable" value="1"} <span class="btn-success">开启</span>{/eq}
+              {eq name="$item->enable" value="2"}  <span class="btn-danger">关闭</span>{/eq}
+            </td>
+            <td>{$item->name}</td>
+            <td>{$item->title}</td>
+            <td>{$item->onGetNoed}</td>
+            <td>{$item->data_ftime}</td>
+            <td >
+              <i  data-id="{$item->id}" class="edit fa fa-pencil"></i>&nbsp;&nbsp;
+              <i  data-id="{$item->id}" class="del fa fa-trash"></i>
+            </td>
+        </tr>
+        {/foreach}
+        </table>
+        {$list->render()}
+      </div>
+      <!-- /.box-body -->
+    </div>
+    <!-- /.box -->
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){
+  $(".add_member").click(function(){
+    $.get('/lottery/form.html',{},function(data){
+      layer.open({
+        type: 1,
+        title: '新增彩种',
+        maxmin: true, //开启最大化最小化按钮
+        area: ['900px', '700px'],
+        content: data
+      });
+    },'html');
+  });
+  
+  $(".edit").click(function(){
+    var id = $(this).attr('data-id');
+    $.get('/lottery/form.html',{id:id},function(data){
+      layer.open({
+        type: 1,
+        title: '修改彩种',
+        maxmin: true, //开启最大化最小化按钮
+        area: ['900px', '700px'],
+        content: data
+      });
+    },'html');
+  });
+
+});
+
+</script>

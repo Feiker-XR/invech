@@ -1,0 +1,123 @@
+{extend name="common/base" /}
+
+{block name="body"}
+	{php} $stateName=array('已到帐','申请中','已取消','已支付','已失败','已删除');{/php}
+	<!-- 标题栏 -->
+	<div class="main-title">
+		<h2>消费活动</h2>
+	</div>
+	<div class="cf">			
+		<a class="btn" href="{:Url('score/addactivity')}">新 增</a>
+	</div>
+	<!-- 高级搜索 -->
+	
+	
+    <!-- 数据列表 -->
+    <div class="data-table table-striped">
+	<table class="">
+    <thead>
+        <tr>		
+			<th>ID</th> 
+			<th>消费总量</th> 
+			<th>赠送金额</th> 
+			<th>操作</th> 
+		</tr>
+    </thead>
+    <tbody>
+		{if condition="$_list"}
+		{volist name="_list" id="var"}
+			<tr>
+				<td>{$var['id']? $var['id'] : ''}</td><input type="hidden" name="id" value="{$var['id']? $var['id'] : ''}" />
+				<td><input type="text" name="all" value="{$var['all']? $var['all'] : ''}"/></td>
+				<td><input type="text" name="amount" value="{$var['amount'] ? $var['amount'] : ''}"/></td>
+				<td>
+					<a  href="#" url="{:Url('Score/editactivity')}" aid="{$var['id']}" class="edit">修改</a> |
+					<a  href="#" url="{:Url('Score/delactivity')}" aid="{$var['id']}" class="del">删</a>
+				</td>
+			</tr> 
+		{/volist}
+		{else /}
+			<tr>
+				<td colspan="9" align="center">暂时没有消费活动项目。</td>
+			</tr>
+		{/if}
+	</tbody>
+    </table> 
+	</div>
+    <div class="page">
+        {$_page}
+    </div>
+{/block}
+
+{block name="script"}
+	<link href="__STATIC__/datetimepicker/css/datetimepicker.css" rel="stylesheet" type="text/css">
+	<link href="__STATIC__/datetimepicker/css/datetimepicker_blue.css" rel="stylesheet" type="text/css">
+	<link href="__STATIC__/datetimepicker/css/dropdown.css" rel="stylesheet" type="text/css">
+	<script type="text/javascript" src="__STATIC__/datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
+	<script type="text/javascript" src="__STATIC__/datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js" charset="UTF-8"></script>
+	<script>
+	$(function(){
+		$('#first,#end').datetimepicker({
+			format: 'yyyy-mm-dd',
+			language:"zh-CN",
+			minView:2,
+			autoclose:true
+		});
+
+		//异步修改
+		$('.edit').click(function (){
+		    var aid   = $(this).attr('aid') ;
+		    var url   = $(this).attr('url') ;
+		    var amount = $(this).parent('td').prev().find('input').val();
+		    var all  = $(this).parent('td').prev().prev().find('input').val();
+			$.post(url,{id:aid,amount:amount,all:all},function (res){
+			    	if (res.code) {
+                        alert(res.msg);
+					} else {
+                        alert(res.msg);
+					}
+			})
+		}) ;
+
+		//异步删除
+        $('.del').click(function (){
+            var aid   = $(this).attr('aid') ;
+            var url   = $(this).attr('url') ;
+
+            $.post(url,{id:aid},function (res){
+                if (res.code) {
+                    alert(res.msg);
+                    if (res.url) {
+                        window.location.href=res.url ;
+					}
+                } else {
+                    alert(res.msg);
+                }
+            })
+        }) ;
+
+		//showTab();
+	});
+	</script>
+	
+	<script type="text/javascript">
+
+		//回车搜索
+		$("body").keyup(function(e){
+			if(e.keyCode === 13){
+				$("#search").click();
+				return false;
+			}
+		});
+
+		function cashFalse(){
+			$('.cashFalseSM').css('display','block');
+		}
+		function cashTrue(){
+			$('.cashFalseSM').css('display','none');
+			$('.cashFalseSM').val()=false;
+		}
+		$('.side-sub-menu').find('a[href="{:Url('business/cash')}"]').closest('li').addClass('current');
+	
+	</script>
+{/block}

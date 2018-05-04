@@ -1,0 +1,58 @@
+{extend name="common/base"/}
+
+{block name="body"}
+	<div class="main-title">
+		<h2>{$info['id']?'编辑':'新增'}配置</h2>
+	</div>
+{php}
+if (isset($isEdit)) {
+	$url = Url('config/edit') ;
+} else {
+	$url = Url('config/add') ;
+}
+
+{/php}
+	<form action="{$url}" method="post" class="form-horizontal">
+		<div class="form-item">
+			<label class="item-label">配置标识<span class="check-tips">（不可修改）</span></label>
+			<div class="controls">
+				<input type="text" class="text input-large"
+				   {if condition="isset($isEdit)"} readonly
+				   {else /} ''
+					{/if}
+					name="name" value="{$info.name|default=''}">
+			</div>
+		</div>
+		<div class="form-item">
+			<label class="item-label">配置标题<span class="check-tips">（用于后台显示的配置标题）</span></label>
+			<div class="controls">
+				<input type="text" class="text input-large" name="title" value="{$info.title|default=''}">
+			</div>
+		</div>
+	
+
+		<div class="form-item">
+			<label class="item-label">配置值<span class="check-tips">（配置值）</span></label>
+			<div class="controls">
+				<label class="textarea input-large">
+					<textarea name="value">{$info.value|default=''}</textarea>
+				</label>
+			</div>
+		</div>
+
+		<div class="form-item">
+			<input type="hidden" name="id" value="{$info.id|default=''}">
+			<button class="btn submit-btn " id="submit" type="submit" target-form="form-horizontal">确 定</button>
+			<button class="btn btn-return" onclick="javascript:history.back(-1);return false;">返 回</button>
+		</div>
+	</form>
+{/block}
+
+{block name="script"}
+	<script type="text/javascript">
+		Think.setValue("type", {$info.type|default=0});
+		Think.setValue("group", {$info.group|default=0});
+		//导航高亮
+		$('.side-sub-menu').find('a[href="{:Url('Config/index')}"]').closest('li').addClass('current');
+	</script>
+{/block}

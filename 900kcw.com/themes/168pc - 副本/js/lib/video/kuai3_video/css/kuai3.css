@@ -1,0 +1,337 @@
+* {
+  list-style: none;
+}
+body {
+  margin: 0px !important;
+}
+.k3v01 {
+  background: url("../img/num/k3v.png") no-repeat 0 0;
+}
+.k3v02 {
+  background: url("../img/num/k3v.png") no-repeat 0 -100px;
+}
+.k3v03 {
+  background: url("../img/num/k3v.png") no-repeat 0 -200px;
+}
+.k3v04 {
+  background: url("../img/num/k3v.png") no-repeat 0 -300px;
+}
+.k3v05 {
+  background: url("../img/num/k3v.png") no-repeat 0 -400px;
+}
+.k3v06 {
+  background: url("../img/num/k3v.png") no-repeat 0 -500px;
+}
+.k3v07 {
+  background: url("../img/num/k3v.png") no-repeat 0 -600px;
+}
+.k3v08 {
+  background: url("../img/num/k3v.png") no-repeat 0 -700px;
+}
+.k3v1 {
+  background: url("../img/num/k3v.png") -140px 0 no-repeat;
+}
+.k3v2 {
+  background: url("../img/num/k3v.png") -140px -100px no-repeat;
+}
+.k3v3 {
+  background: url("../img/num/k3v.png") -140px -200px no-repeat;
+}
+.k3v4 {
+  background: url("../img/num/k3v.png") -140px -300px no-repeat;
+}
+.k3v5 {
+  background: url("../img/num/k3v.png") -140px -400px no-repeat;
+}
+.k3v6 {
+  background: url("../img/num/k3v.png") -140px -500px no-repeat;
+}
+.content {
+  width: 1125px;
+  height: 780px;
+  margin: 0 auto;
+  transform: scale(0.782);
+  transform-origin: left top;
+}
+.content .dispnode {
+  display: none;
+}
+.content .kuai3Animate {
+  width: 100%;
+  height: auto;
+  position: relative;
+  background: #000000;
+}
+.content .kuai3Animate .bodybg {
+  width: 100%;
+  height: auto;
+  background: url("../img/bj_2.jpg") no-repeat;
+}
+.content .kuai3Animate .bodybg img {
+  vertical-align: top;
+  width: 100%;
+  height: 100%;
+}
+.content .kuai3Animate .loading {
+  background: #000000;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 999;
+  width: 100%;
+  height: 100%;
+  color: #FFFFFF;
+}
+.content .kuai3Animate .loading .loadtxt {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  margin-left: -43px;
+  margin-top: -10px;
+}
+.content .kuai3Animate .animate_content {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+}
+.content .kuai3Animate .animate_content .nameLogo {
+  position: absolute;
+  top: 22px;
+  left: 30px;
+  max-width: 100%;
+}
+.content .kuai3Animate .position {
+  position: absolute;
+  top: 18px;
+  left: 317px;
+  width: 490px;
+  height: 64px;
+  color: #fff;
+}
+.content .kuai3Animate .position .middle_div {
+  position: relative;
+  height: 48px;
+  margin-top: 16px;
+}
+.content .kuai3Animate .position .middle_div .benqi {
+  position: absolute;
+  display: inline-block;
+  height: 20px;
+  line-height: 20px;
+  top: -28px;
+  left: 210px;
+  color: #fff;
+  font-size: 16px;
+}
+.content .kuai3Animate .position .middle_div .benqi .nowDraw {
+  height: 100%;
+}
+.content .kuai3Animate .position .middle_div ul {
+  width: 380px;
+  height: 39px;
+  line-height: 39px;
+}
+.content .kuai3Animate .position .middle_div ul li {
+  float: left;
+  font-size: 36px;
+  font-weight: 800;
+  color: #fff000;
+}
+.content .kuai3Animate .position .middle_div ul .hmlist {
+  margin-right: 75px;
+}
+.content .kuai3Animate .position .middle_div ul .noright {
+  margin-right: 0px;
+}
+.content .kuai3Animate .position .middle_div ul .bigOsmall {
+  position: absolute;
+  margin-left: 385px;
+}
+.content .kuai3Animate .position .middle_div .addIcon1,
+.content .kuai3Animate .position .middle_div .addIcon2,
+.content .kuai3Animate .position .middle_div .equalIcon {
+  display: inline-block;
+  position: absolute;
+  width: 24px;
+}
+.content .kuai3Animate .position .middle_div .addIcon1,
+.content .kuai3Animate .position .middle_div .addIcon2 {
+  height: 24px;
+  top: 8px;
+  background: url("../img/num/k3v.png") no-repeat -178px -639px;
+}
+.content .kuai3Animate .position .middle_div .addIcon1 {
+  left: 87px;
+}
+.content .kuai3Animate .position .middle_div .addIcon2 {
+  left: 185px;
+}
+.content .kuai3Animate .position .middle_div .equalIcon {
+  height: 16px;
+  top: 14px;
+  left: 283px;
+  background: url("../img/num/k3v.png") no-repeat -178px -692px;
+}
+.content .kuai3Animate .currentDraw {
+  position: absolute;
+  left: 835px;
+  top: 10px;
+  white-space: nowrap;
+  width: 265px;
+  height: 65px;
+}
+.content .kuai3Animate .currentDraw .dl {
+  width: 150px;
+  float: left;
+  margin-top: 11px;
+  color: #fff;
+  font-size: 16px;
+}
+.content .kuai3Animate .currentDraw .dl .nextDraw {
+  display: block;
+  width: 150px;
+  margin-bottom: 5px;
+}
+.content .kuai3Animate .currentDraw .dl .kai {
+  width: 150px;
+}
+.content .kuai3Animate .currentDraw .dl .dot {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 5px;
+  background: #38a3d7;
+  margin-right: 5px;
+}
+.content .kuai3Animate .currentDraw .dr {
+  float: right;
+  width: 50px;
+  height: 100%;
+}
+.content .kuai3Animate .currentDraw .dr .sounds {
+  display: inline-block;
+  height: 50px;
+  width: 50px;
+  cursor: pointer;
+  background: url("../img/num/k3v.png") no-repeat -23px -998px;
+  margin-top: 10px;
+}
+.content .kuai3Animate .currentDraw .dr .sounds2 {
+  display: inline-block;
+  height: 50px;
+  width: 50px;
+  cursor: pointer;
+  background: url("../img/num/k3v.png") no-repeat -92px -998px;
+  margin-top: 10px;
+}
+.content .kuai3Animate .timeBox {
+  position: absolute;
+  top: 250px;
+  left: 395px;
+  width: 30%;
+  text-align: center;
+}
+.content .kuai3Animate .timeBox .linetime {
+  display: block;
+  text-align: center;
+  width: 100px;
+  color: #fff;
+  height: 45px;
+  line-height: 45px;
+  font-size: 24px;
+  margin-left: 83px;
+  margin: 0 auto;
+  margin-bottom: 10px;
+}
+.content .kuai3Animate .timeBox div {
+  font-family: 'DS-Digital';
+  font-size: 58px;
+  color: #e51d22;
+}
+.content .kuai3Animate .timeBox .linelist {
+  width: 74px;
+  height: 15px;
+  margin-top: 20px;
+  margin-left: 95px;
+  text-align: center;
+}
+.content .kuai3Animate .timeBox .linelist li {
+  float: left;
+  width: 2px;
+  height: 15px;
+  margin-right: 6px;
+  background: #ff0713;
+}
+.content .kuai3Animate .timeBox .linelist .redli {
+  background: #33080a;
+}
+.content .kuai3Animate .timeBox .linelist li:last-child {
+  margin-right: 0px;
+}
+.content .kuai3Animate .timeBox .opening {
+  display: none;
+  font-size: 44px;
+}
+.content .kuai3Animate .bones {
+  position: absolute;
+  top: 520px;
+  left: 316px;
+  width: 490px;
+  height: 100px;
+}
+.content .kuai3Animate .bones ul {
+  width: 100%;
+  height: 100px;
+  margin: 0px;
+  padding: 0;
+}
+.content .kuai3Animate .bones ul li {
+  float: left;
+  width: 100px;
+  height: 100px;
+}
+.content .kuai3Animate .bones ul li img {
+  width: 100%;
+}
+.content .kuai3Animate .bones ul li:nth-child(1) {
+  margin-left: 28px;
+}
+.content .kuai3Animate .bones ul li:nth-child(2) {
+  margin-left: 68px;
+}
+.content .kuai3Animate .bones ul li:nth-child(3) {
+  margin-left: 66px;
+}
+.content .kuai3Animate .bones ul li:last-child {
+  margin-right: 0px;
+}
+.content .kuai3Animate .kaimodule {
+  position: absolute;
+  top: 652px;
+  left: 440px;
+  width: 249px;
+  height: 71px;
+  background: url("../img/num/k3v.png") no-repeat -5px -818px;
+}
+.content .kuai3Animate .kaimodule .noinfor {
+  display: inline-block;
+  width: 160px;
+  background: rgba(0, 0, 0, 0.4);
+  margin: 0 auto;
+  position: relative;
+  left: 50%;
+  margin-left: -66px;
+  top: -30px;
+  font-size: 12px;
+  text-align: center;
+  padding: 10px 10px;
+  color: #FFFFFF;
+  box-sizing: border-box;
+  border-radius: 5px;
+  display: none;
+}
+.content .kuai3Animate .kaimodule:hover {
+  background: url("../img/num/k3v.png") no-repeat -3px -915px;
+}

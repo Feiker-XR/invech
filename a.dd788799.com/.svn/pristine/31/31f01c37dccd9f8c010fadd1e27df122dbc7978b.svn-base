@@ -1,0 +1,47 @@
+<ul class="w-goodsList w-goodsList-l m-user-goodsList" data-pro="list">
+	{php} foreach($data as $vo){ {/php}
+	<li id="pro-view-8" class="w-goodsList-item">
+	<div class="w-goods w-goods-l w-goods-ing m-user-goods">
+		<div class="w-goods-info">
+			<p>
+				{$types[$vo['type']]['title']}
+			</p>
+			<p>
+				用户名：{$vo.username} 
+			</p>
+			<p>
+				单号：{$vo.wjorderId} 
+			</p>
+			<p>
+				期号：{$vo.actionNo}
+			</p>
+			<p>
+				状态：
+					{php}
+						if($vo['isDelete']==1){
+							echo '<font color="#999999">已撤单</font>';
+						}elseif(!$vo['lotteryNo']){
+							echo '<font color="#009900">未开奖</font>';
+						}elseif($vo['zjCount']){
+							echo '<font color="red">已派奖</font>';
+						}else{
+							echo '<font color="#00CC00">未中奖</font>';
+						}
+					{/php}
+			</p>
+			<p>
+				投注时间：{:date('m-d H:i:s',$vo['actionTime'])}
+			</p>
+			<div class="m-user-goods-my">
+				<a class="link" href="javascript:void(0);" data-pro="mycode" data-data="{$vo.actionData}" url="{:Url('record/betInfo?id='.$vo['id'])}">查看详情</a>
+			</div>
+		</div>
+	</div>
+	</li>
+	{php} } if(!$data) {  {/php}
+	<div style="text-align:center">当前条件下没有记录，请更改条件后搜索</div>
+		{php} } {/php}
+</ul>
+<div class="page">
+	{$_page}
+</div>

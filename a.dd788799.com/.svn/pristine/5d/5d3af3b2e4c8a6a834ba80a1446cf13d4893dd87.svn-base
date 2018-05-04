@@ -1,0 +1,111 @@
+<?php
+namespace app\common\model\member;
+
+use app\common\model\Money;
+use app\events\UserMoneyEvent;
+
+trait MoneyTrait
+{
+    public function incBalance($amount,$type,$item_id,$remark){
+        
+        $money_model = transaction(function() use ($amount,$type,$item_id,$remark){
+
+            if(!in_array($type, Money::TYPE_ARRAY)){
+                throw new \Exception('资金类型不合法!');
+            }
+
+            $old_balance = $this->coin;
+            $this->coin += $amount;
+            //$this->fcoin -= $amount;
+            $this->save();
+            $data = [
+                'uid'       =>  $this->id,
+                'amount'    =>  $amount,
+                'f_balance' =>  $old_balance,
+                't_balance' =>  $this->coin,
+                'direct'    =>  Money::DIRECT_IN,
+                'type'  =>  $type,
+                'item_id'   =>  $item_id,
+                'remark'    =>  $remark,
+            ];                        
+            $ret = Money::create($data);
+            return $ret;
+        });
+
+        event(new UserMoneyEvent($this));
+
+        return $this;
+    }
+
+    public function decBalance($amount,$type,$item_id,$remark){
+        
+        $money_model = transaction(function() use ($amount,$type,$item_id,$remark){
+
+            if(!in_array($type, Money::TYPE_ARRAY)){
+                throw new \Exception('资金类型不合法!');
+            }
+            if($amount>$this->coin){
+                throw new \Exception('资金不足,请先充值!');
+            }
+
+            $old_balance = $this->coin;
+
+            $this->coin -= $amount;
+            //$this->fcoin += $amount;
+            $this->save();//$this->update(); update不起作用;
+
+            $data = [
+                'uid'       =>  $this->id,
+                'amount'    =>  $amount,
+                'f_balance' =>  $old_balance,
+                't_balance' =>  $this->coin,
+                'direct'    =>  Money::DIRECT_OUT,
+                'type'  =>  $type,
+                'item_id'   =>  $item_id,
+                'remark'    =>  $remark,
+            ];
+            
+            
+            $ret = Money::create($data);                     
+            return $ret;
+        });
+
+        event(new UserMoneyEvent($this));
+
+        return $this;
+    }
+
+
+    public function incFrozenBalance($amount){
+        $this->fcoin += $amount;
+        return $this->save();
+    }
+
+    public function decFrozenBalance($amount){
+        $this->fcoin -= $amount;
+        if($this->fcoin < 0){
+            $this->fcoin = 0; 
+        }
+        $this->save();        
+    }
+
+    public function incAuditFlow($amount){
+        //setInc要求必须带一个option
+        $this->where('uid',$this->uid)
+        ->setInc('audit_flow',$amount);
+    }
+
+    public function decAuditFlow($amount){
+        $this->audit_flow -= $amount;
+        if($this->audit_flow < 0){
+            $this->audit_flow = 0; 
+        }
+        $this->save();
+    }
+
+    public function resetAuditFlow(){
+        $this->audit_flow = 0; 
+        $this->save();
+    }
+
+}

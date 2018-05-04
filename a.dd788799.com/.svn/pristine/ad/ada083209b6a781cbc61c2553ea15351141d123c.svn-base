@@ -1,0 +1,37 @@
+{extend name="base/common"/}
+
+{block name="title"}<title>用户注册－{$Think.session.WEB_NAME}</title>{/block}
+{block name="style"}
+<link rel="stylesheet" type="text/css" href="__CSS__/login.css">
+{/block}
+{block name="script"}
+{/block}
+
+{block name="header"}{/block}
+{block name="body"}
+<div class="m-simpleHeader" id="dvHeader">
+    <a href="javascript:history.back(-1);" data-pro="back" data-back="true" class="m-simpleHeader-back"><i class="ico ico-back"></i></a>
+    <h1>用户注册</h1>
+</div>
+
+<div class="m-login">
+	<input type="hidden" name="lid"  value="{$lid}">
+	<input type="hidden" name="uid"   value="{$uid}">
+    <div class="m-login-tips" id="tips"></div>
+    <div class="m-login-form w-form">
+        <div class="w-form-item m-login-form-account w-inputBar w-bar" id="dvAccount">    <div class="w-bar-label">帐号：</div><a data-pro="clear" href="javascript:void(0);" class="w-bar-input-clear">×</a><div class="w-bar-control"><input placeholder="请输入帐号" autocapitalize="off" data-pro="input" class="w-bar-input" name="username" type="text"></div></div>
+        <div class="w-form-item m-login-form-account w-inputBar w-bar" id="dvPassword">   <div class="w-bar-label">密码：</div><a data-pro="clear" href="javascript:void(0);" class="w-bar-input-clear">×</a><div class="w-bar-control"><input placeholder="请输入密码" autocapitalize="off" data-pro="input" class="w-bar-input" name="password" value="" type="password"></div></div>
+		<div class="w-form-item m-login-form-password w-inputBar w-bar" id="dvPassword2"> <div class="w-bar-label">密码：</div><a data-pro="clear" href="javascript:void(0);" class="w-bar-input-clear">×</a><div class="w-bar-control"><input placeholder="请再次输入密码" autocapitalize="off" data-pro="input" class="w-bar-input" name="repassword" value="" type="password"></div></div>
+        <div class="m-login-menu" id="autoCmpl" style="display:none;"></div>
+    </div>
+    <div class="m-login-tips-bottom" id="tipsBottom"></div>
+    <div class="m-login-submit"><button class="w-button w-button-main"  data-action="{:Url('user/register')}" id="btnLogin" onclick="postdata()">注 册</button></div>
+</div>
+
+{/block}
+{block name="script"}
+{/block}
+{block name="footer"}{/block}
+
+<script>
+</script>

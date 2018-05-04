@@ -1,0 +1,112 @@
+<link rel="stylesheet" href="/400w-public/css/global.css" />
+<link rel="stylesheet" href="/400w-public/css/other.css" />
+<link rel="stylesheet" href="/400w-public/css/style.css" />
+<link rel="stylesheet" href="/400w-public/css/lottery.css" />
+<script type="text/javascript" src="/400w-public/js/global.js"></script>
+
+
+<div class='pp' action='pick_dw' length="1" data-line="5"></div>
+<input type="hidden" name="playedGroup" value="<?=$groupId?>" />
+<input type="hidden" name="playedId" value="<?=$playedId?>" />
+<input type="hidden" name="type" value="<?=$type?>" />
+<input type="hidden" name="playedName" value="<?=$played['name']?>" />
+
+<div class="fl main-left">
+    <div class="hd clearfix rehd tzgz" id="toptouzhu">
+        <div class="fl refl">
+            快捷金额：
+            <input type="text" class="txt">
+        </div>
+        <div class="kjanniu">
+            <a href="javascript:void(0)" class="img-50" data-num="50"></a>
+            <a href="javascript:void(0)" class="img-100" data-num="100"></a>
+            <a href="javascript:void(0)" class="img-500" data-num="500"></a>
+            <a href="javascript:void(0)" class="img-1000" data-num="1000"></a>
+            <a href="javascript:void(0)" class="img-5000" data-num="5000"></a>
+            <a href="javascript:void(0)" class="img-10000" data-num="10000"></a>
+        </div>
+    </div>
+    <div class="table-common">  </div>
+</div>
+<script type="text/html" id="ssc_kq_2zhs">
+     {{each plg line index1}}
+       <table width="100%" border="1">
+            <thead>
+                <tr>
+
+                    <th width="33">&nbsp;</th>
+                     {{each line val index2}}
+                        <th colspan="2">{{val.name}}</th>
+                     {{/each}}  
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td style="cursor: pointer;"><strong>单</strong></td>
+                    {{each line val index2}}
+                        <td style="cursor: pointer;"><span class="color-red pl" >{{val['pls']['0']['pl']}}</span></td>
+                       <td><input type="text" class="table-txt" data-name="{{val.name}}-{{val['pls']['0']['value']}}" data-plid="{{val['pls']['0']['id']}}" data-pl="{{val['pls']['0']['pl']}}"></td>
+                     {{/each}}  
+                </tr>
+                 <tr>
+                    <td style="cursor: pointer;"><strong>双</strong></td>
+                    {{each line val index2}}
+                        <td style="cursor: pointer;"><span class="color-red pl" >{{val['pls']['1']['pl']}}</span></td>
+                       <td><input type="text" class="table-txt" data-name="{{val.name}}-{{val['pls']['1']['value']}}" data-plid="{{val['pls']['1']['id']}}" data-pl="{{val['pls']['1']['pl']}}"></td>
+                     {{/each}}  
+                </tr>
+               
+            </tbody>
+        
+        </table>
+     {{/each}}       
+</script>
+<script>
+   $(function(){
+         var playedId = "<?=$playedId?>";
+        $.getJSON("/game/pl/playedId/"+playedId,function(data){
+          
+            var len = $('.pp').data('line');
+       
+            var index = 0;
+            var newArray = [];
+             while(index < data.length) {
+                newArray.push(data.slice(index, index += len));
+             }
+           
+           var html = template("ssc_kq_2zhs",{plg:newArray});    
+            $('.table-common').html(html);
+        });
+
+    //点击选中
+        $(document).on('click','.kq_sm_1,.kq_sm_2',function(){
+            var num = $('#kj_input').val(),
+                smThis = $(this);
+                
+                if(smThis.is('.on')){
+                    smThis.removeClass('on');
+                    smThis.siblings('li').not('.kq_sm_3').removeClass('on');
+                    
+                }else{
+                    smThis.addClass('on');
+                    smThis.siblings('li').not('.kq_sm_3').addClass('on');
+                }
+            
+            smThis.siblings('.kq_sm_3').find('input').val(num);
+            if(!smThis.hasClass('on')){
+                smThis.siblings('.kq_sm_3').find('input').val('');
+            }
+        });
+
+        //快捷金额input
+        $("#toptouzhu .kjanniu a").click(function () {
+            var num =parseInt($(this).data('num'));
+            $('#toptouzhu input').val(num);
+        });
+
+        // 只能输入整数
+        $(document).on('keyup','input.table-txt',function(){
+            digitOnly($(this));
+        });
+     });
+</script>

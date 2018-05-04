@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>500F彩票wap-优惠活动页面</title>
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+<link rel="stylesheet" href="/css/font-awesome.min.css">
+<link rel="stylesheet" href="/css/ui-dialog.css">
+<link rel="stylesheet" href="/styles/ezweb.css">
+<link rel="stylesheet" type="text/css" href="/fonts-new/iconfont.css">	
+<link rel="stylesheet" href="/css/500f_new_wap.css">
+
+<script src="/assets/jquery.js"></script>
+<script src="/js/common.js"></script>
+<style type="text/css">
+.flex-control-paging li a {width: 10px;height: 10px;border-radius: 50%;}
+.slides {overflow:hidden;}
+.slides li {float:left;display:none;}
+.slides li:nth-child(1) {display:block;}
+/*从此处开始添加*/
+/* Margin & Padding */
+.m5 { margin: 5px }.m10 { margin: 10px }.m15 { margin: 15px }.m20 { margin: 20px }.m25 { margin: 25px }.m30 { margin: 30px }.m50 { margin: 50px }.mt5 { margin-top: 5px }.mt10 { margin-top: 10px }.mt15 { margin-top: 15px }.mt20 { margin-top: 20px }.mt25 { margin-top: 25px }
+.mt30 { margin-top: 30px }.mt40 { margin-top: 40px }.mt50 { margin-top: 50px }.mr4{margin-right: 4px}.mr5 { margin-right: 5px }.mr10 { margin-right: 10px }.mr15 { margin-right: 15px }.mr20 { margin-right: 20px }.mr25 { margin-right: 25px }.mr30 { margin-right: 30px }.mr50 { margin-right: 50px }.mb5 { margin-bottom: 5px }.mb10 { margin-bottom: 10px }.mb15 { margin-bottom: 15px }.mb20 { margin-bottom: 20px }.mb25 { margin-bottom: 25px }.mb30 { margin-bottom: 30px }.mb50 { margin-bottom: 50px }.ml0{margin-left: 0px;}.ml5 { margin-left: 5px }.ml7{margin-left: 7px;}.ml10 { margin-left: 10px }.ml15 { margin-left: 15px }.ml20 { margin-left: 20px }.ml35{margin-left:35px}
+.ml25 { margin-left: 25px }.ml30 { margin-left: 30px }.ml50 { margin-left: 50px }.p5 { padding: 5px }.p10 { padding: 10px }.p15 { padding: 15px }.p20 { padding: 20px }.p25 { padding: 25px }.p30 { padding: 30px }.p50 { padding: 50px }.pt5 { padding-top: 5px }.pt7 { padding-top: 7px }.pt10 { padding-top: 10px }.pt15 { padding-top: 15px }.pt20 { padding-top: 20px }.pt25 { padding-top: 25px }.pt30 { padding-top: 30px }.pt50 { padding-top: 50px }.pr5 { padding-right: 5px }.pr10 { padding-right: 10px }.pr15 { padding-right: 15px }.pr20 { padding-right: 20px }.pr25 { padding-right: 25px }.pr30 { padding-right: 30px }.pr50 { padding-right: 50px }.pb5 { padding-bottom: 5px }.pb10 { padding-bottom: 10px }.pb15 { padding-bottom: 15px }.pb20 { padding-bottom: 20px }.pb25 { padding-bottom: 25px }.pb30 { padding-bottom: 30px }.pb50 { padding-bottom: 50px }.pl75{padding-left:0.75rem;}.pr75{padding-right:0.75rem;}.pl5 { padding-left: 5px }.pl10 { padding-left: 10px }.pl15 { padding-left: 15px }.pl20 { padding-left: 20px }.pl25 { padding-left: 25px }.pl30 { padding-left: 30px }.pl50 { padding-left: 50px }
+.fl{float:left;}
+.fr{float:right;}
+.dsblock{display: block;}
+img{border: none;}
+a{text-decoration: none;}
+body img, html img{max-width: 100%;}
+/* 字体自定义 */
+.f12{font-size: 12px;}.f14{font-size: 14px;}.f16{font-size: 16px;}.f18{font-size: 18px;}
+/***占位清除浮动***/
+.block_0{width:100%;clear:both;height:0px;overflow:hidden;*zoom:1;}
+.block_5{width:100%;clear:both;height:5px;overflow:hidden;*zoom:1;}
+.block_10{width:100%;clear:both;height:10px;overflow:hidden;*zoom:1;}
+.block_15{width:100%;clear:both;height:15px;overflow:hidden;*zoom:1;}
+.block_20{width:100%;clear:both;height:20px;overflow:hidden;*zoom:1;}
+.block_30{width:100%;clear:both;height:30px;overflow:hidden;*zoom:1;}
+.block_40{width:100%;clear:both;height:44px;overflow:hidden;*zoom:1;}
+.block_45{width:100%;clear:both;height:45px;overflow:hidden;*zoom:1;}
+.block_50{width:100%;clear:both;height:50px;overflow:hidden;*zoom:1;}
+.block_55{width:100%;clear:both;height:55px;overflow:hidden;*zoom:1;}
+.block_60{width:100%;clear:both;height:60px;overflow:hidden;*zoom:1;}
+
+/*500F彩票首页WAP*/
+.wap_500f_h1{float: left;width: 100%;height: 40px;background: #f1f1f1;border-bottom: 1px solid #bfbfbf;color: #333333;line-height: 40px;}
+.wap_500f_h1 h2{margin: 0;margin-left: 10px;display: block;padding: 0px 10px;border-left: 2px solid red;height: 21px;font-size: 16px;line-height: 20px;margin-top: 10px;color: #333333;}
+.wap_500f_game{width: 100%;background: white;display: table;border-bottom: 1px solid #BFBFBF;}
+.wap_500f_game div{text-align: center;display: block;float: left;width: 25%;font-size: 15px;padding: 15px 0;}
+.wap_500f_game div i{display: inline-block;width: 55%;}
+.wap_500f_game a{color: #333333;}
+
+.wap_500f_game_a{border-bottom: 3px solid #ff7702;margin-bottom: -1px;}
+.wap_500f_game_b{border-bottom: 3px solid #ea3500;margin-bottom: -1px;}
+.wap_500f_game_c{border-bottom: 3px solid #1891e8;margin-bottom: -1px;}
+.wap_500f_game_d{border-bottom: 3px solid #6659a4;margin-bottom: -1px;}
+/*热门彩票*/
+.wap_500f_lottery{width: 100%;height: auto;background: white;font-size: 0;}
+.wap_500f_lottery_1{width: 33.1%;height: 140px;display: inline-block;font-size: 16px;text-align: center;border-left: 1px solid #e5e5e5;border-bottom: 1px solid #E5E5E5;}
+.wap_500f_lottery a:nth-child(1) div,.wap_500f_lottery a:nth-child(4) div,.wap_500f_lottery a:nth-child(7) div{border-left: none;}
+.wap_500f_lottery a:nth-child(7) div.wap_500f_lottery_1{border-right: 1px solid #E5E5E5;}
+.wap_500f_lottery_1 div{width: 60%;margin: 0 auto;margin-top: 20px;}
+.wap_500f_lottery a{color: #333333;}
+
+/*真人视讯*/
+.wap_500f_live{width: 100%;height: auto;background: white;font-size: 0;border-top: 1px solid #E5E5E5;border-bottom: 1px solid #E5E5E5;}
+.wap_500f_live_1{width: 49.8%;height: 170px;display: inline-block;font-size: 16px;text-align: center;border-left: 1px solid #e5e5e5;border-bottom: 1px solid #E5E5E5;}
+.wap_500f_live_1 div{width: 90%;margin: 0 auto;margin-top: 10px;}
+.wap_500f_live a:nth-child(1) div,.wap_500f_live a:nth-child(3) div{border-left: none;}
+/*体育赛事*/
+.wap_500f_sport{width: 100%;height: auto;background: white;float: left;padding-bottom: 10px;}
+.wap_500f_sport_1{width: 100%;height:auto;float: left;}
+.wap_500f_sport_1 img{display: block;width: 100%;}
+
+.wap_500f_sport_2{width: 100%;height:auto;float: left;}
+.wap_500f_sport_2 img{display: block;width: 100%;}
+
+/*电子游艺*/
+.wap_500f_electric{width: 100%;height: auto;background: white;font-size: 0;}
+.wap_500f_electric_1{width: 33.1%;height: 140px;display: inline-block;font-size: 16px;text-align: center;border-left: 1px solid #e5e5e5;border-bottom: 1px solid #E5E5E5;}
+.wap_500f_electric a:nth-child(1) div,.wap_500f_electric a:nth-child(4) div,.wap_500f_electric a:nth-child(7) div{border-left: none;}
+.wap_500f_electric a:nth-child(5) div.wap_500f_electric_1{border-right: 1px solid #E5E5E5;}
+.wap_500f_electric_1 div{width: 80%;margin: 0 auto;margin-top: 10px;}
+.wap_500f_electric a{color: #333333;}
+
+/*尺寸600PX到1199PX*/
+@media screen and (min-width: 600px) and (max-width: 1199px) {
+.wap_500f_lottery_1{font-size: 18px;height: 180px;}
+.wap_500f_lottery_1 div{margin-top: 12px;}
+.wap_500f_live_1{height: 290px;}
+.wap_500f_electric_1{height: 240px;}
+}
+
+/*尺寸宽度小过350PX  ipone5尺寸*/
+@media screen and (max-width: 350px) {
+.wap_500f_lottery_1{font-size: 14px;height: 110px;}
+.wap_500f_lottery_1 div{margin-top: 10px;}
+.wap_500f_live_1{height: 140px;}
+.wap_500f_electric_1{height: 120px;}
+}
+	</style>
+</head>
+<body>
+<!--<iframe id="topFrame" name="topFrame" frameborder="0" scrolling="no" width="0" height="0" src="top.php" style="display:none"></iframe>
+    
+ 	
+	<!--<div class="header">
+		<div class="blackbar">
+			<div class="container">
+				<p class="pull-right" style="margin-top:5px;">
+					<a href="#" data-modal="#J_loginModal" class="btn btn-green">登录</a>
+					<a href="#" data-modal="#J_regModal" class="btn btn-green">注册</a>
+				</p>
+				<p>
+					<a id="tlogo" href="index.html" data-slide="#J_p1" class="brand active"><img src="/images/logo.png"></a>
+					<!-- <a id="tback" href="/index.php"><i class="fa fa-chevron-left"></i> 返回首页</a> 
+				</p>
+			</div>
+		</div>		
+	</div>-->
+	
+	{include file='common/nav'}
+	{include file='common/header'}
+
+
+<script>
+var YDB = new YDBOBJ();
+$(function(){
+	//点击底部固定导航条切换
+	$(".nav500_bottom_a").click(function(){
+		var navThis = $(this);
+		navThis.css("color","#d9901e")
+		navThis.parent().siblings("span").find("a").css("color","#999999")
+		navThis.find("i").addClass("nav500_b_active");
+		navThis.parent().siblings("span").find("i").removeClass("nav500_b_active");
+		navThis.addClass("nav500_bottom_active").parent().siblings("span").find("a").removeClass("nav500_bottom_active")
+	});
+	
+	$(".nav500_left").click(function(){
+ 		YDB.ShowTopRightMenu();
+	});
+})
+</script>
+	
+	<div class="page-slide" style="margin: 33px 0px 60px;">
+		<div id="J_p1" class="page active index-page">	
+		<div class="banner">	
+			<div id="show" class="flexslider">
+		        <ul class="slides">
+		        <li><div class="img"><a href="#"><img src="/images/flash/f5.jpg" data-src="/images/flash/f1.jpg" alt="娱乐城" /></a></div></li>
+                <li><div class="img"><a href="#"><img src="/images/flash/f2.jpg" data-src="/images/flash/f2.jpg" alt="娱乐城" /></a></div></li>
+                <li><div class="img"><a href="#"><img src="/images/flash/f3.jpg" data-src="/images/flash/f3.jpg" alt="娱乐城" /></a></div></li>
+		        </ul>
+		    </div>	
+		</div>	
+		<div class="clearfix"></div>
+		<script type="text/javascript">
+		$(document).ready(function(e) {
+			// var wb = $('.banner').find('img:first').height();
+			// if(wb>0){$('.banner').height(wb);}
+			$('#show').flexslider({
+				animation: "slide",
+				direction:"horizontal",
+				easing:"swing",
+				slideshowSpeed: 5000
+			});
+		});
+		</script>  
+				<div class="notice">
+		  	<!--<div class="container">-->
+			  	<!--<div class="col-sm-12">-->
+					<div class="broadcast"><i><img src="/img/notice-index.png" data-src="/img/notice-index.png"/></i></div>
+					<div id="J_broadcast" class="broadcast-content"><a title="足球赛事:06月23日球会友谊赛(伊斯洛奇明斯克VS卢兹恩吉亚)因进球不予计算导致滚球比分错误,所有投注在02:53:11至02:53:22被标记为(进球取消)的注单一律取消.">足球赛事:06月23日球会友谊赛(伊斯洛奇明斯克VS卢兹恩吉亚)因进球不予计算导致滚球比分错误,所有投注在02:53:11至02:53:22被标记为(进球取消)的注单一律取消.</a><a title="足球赛事:06月22日,[巴西隆登耐恩斯甲组联赛](皇家阿里克米斯ROVS怔鲁斯RO),(科尔迪诺MAVS森柏欧MA)因赛果未能确定,账目已移至06月23日计算.如有不便之处,敬请见谅.">足球赛事:06月22日,[巴西隆登耐恩斯甲组联赛](皇家阿里克米斯ROVS怔鲁斯RO),(科尔迪诺MAVS森柏欧MA)因赛果未能确定,账目已移至06月23日计算.如有不便之处,敬请见谅.</a><a title="足球赛事:06月22日巴西甲组联赛(法林明高RJVS乔沛高恩斯SC)因进球不予计算导致滚球比分错误,所有投注在21:45:50至21:45:53被标记为(进球取消)的注单一律取消.">足球赛事:06月22日巴西甲组联赛(法林明高RJVS乔沛高恩斯SC)因进球不予计算导致滚球比分错误,所有投注在21:45:50至21:45:53被标记为(进球取消)的注单一律取消.</a><a title="电子竞技:06月22日,[ESEA(反恐精英)(1场1胜)](PRIDECSVSSkitLite),(PENTASportsVSWySix),(PENTASportsVSTRICKED)因赛果未能确定,账目已移至06月23日计算.如有不便之处,敬请见谅.">电子竞技:06月22日,[ESEA(反恐精英)(1场1胜)](PRIDECSVSSkitLite),(PENTASportsVSWySix),(PENTASportsVSTRICKED)因赛果未能确定,账目已移至06月23日计算.如有不便之处,敬请见谅.</a><a title="足球赛事:06月22日巴西甲组联赛(甘美奥RSVS哥里迪巴PR)因进球不予计算导致滚球比分错误,所有投注在20:17:11至20:17:50被标记为(进球取消)的注单一律取消.">足球赛事:06月22日巴西甲组联赛(甘美奥RSVS哥里迪巴PR)因进球不予计算导致滚球比分错误,所有投注在20:17:11至20:17:50被标记为(进球取消)的注单一律取消.</a></div>
+				<!--</div>-->
+			<!--</div>-->
+		</div>
+			<div class="main" style="background:#FFF;">
+<!--优惠活动页面-->
+<div class="sideMenu">
+	<h3 class="on">
+		<img data-src="/img/sport-game-4.png" src="/img/sport-game-4.png">
+	</h3>
+	<ul>
+		<li>这里是内容图片这里是内容图片这里是内容图片这里是内容图片这里是内容图片这里是内容图片这里是内容图片这里是内容图片这里是内容图片这里是内容图片这里是内容图片这里是内容图片这里是内容图片这里是内容图片这里是内容图片这里是内容图片这里是内容图片这里是内容图片这里是内容图片这里是内容图片这里是内容图片这里是内容图片这里是内容图片这里是内容图片这里是内容图片这里是内容图片这里是内容图片这里是内容图片这里是内容图片这里是内容图片这里是内容图片这里是内容图片这里是内容图片这里是内容图片这里是内容图片这里是内容图片</li>
+	</ul>
+	
+	<h3><img data-src="/img/sport-game-3.png" src="/img/sport-game-3.png"></h3>
+	<ul>
+		<li>这里是内容图片这里是内容图片这里是内容图片这里是内容图片这里是内容图片这里是内容图片这里是内容图片这里是内容图片这里是内容图片这里是内容图片这里是内容图片这里是内容图片这里是内容图片这里是内容图片这里是内容图片这里是内容图片这里是内容图片这里是内容图片这里是内容图片这里是内容图片这里是内容图片这里是内容图片这里是内容图片这里是内容图片这里是内容图片这里是内容图片这里是内容图片这里是内容图片这里是内容图片这里是内容图片这里是内容图片这里是内容图片这里是内容图片这里是内容图片这里是内容图片这里是内容图片</li>
+	</ul>
+	
+	<h3><img data-src="/img/sport-game-4.png" src="/img/sport-game-4.png"></h3>
+	<ul>
+		<li>这里是内容图片这里是内容图片这里是内容图片这里是内容图片这里是内容图片这里是内容图片这里是内容图片这里是内容图片这里是内容图片这里是内容图片这里是内容图片这里是内容图片这里是内容图片这里是内容图片这里是内容图片这里是内容图片这里是内容图片这里是内容图片这里是内容图片这里是内容图片这里是内容图片这里是内容图片这里是内容图片这里是内容图片这里是内容图片这里是内容图片这里是内容图片这里是内容图片这里是内容图片这里是内容图片这里是内容图片这里是内容图片这里是内容图片这里是内容图片这里是内容图片这里是内容图片</li>
+	</ul>
+
+</div>
+</div>
+</div>
+
+	<!--<div class="footer">		
+		<div class="nav-links">
+			<div class="container">
+				©2017 500F娱乐 Casino 版权所有 <a href="http://www.77158.com/home.php" target="_blank"><font color="#F6CC88">切换电脑版</font></a>
+			</div>
+		</div>
+	</div>-->	
+
+<div id="J_loginModal" class="login-modal modal">
+		<div class="inner">
+			
+			<div class="close" data-target="#J_loginModal"><i class="fa fa-close"></i></div>
+			<div class="wap_login_bg">
+				<img src="/img/logo.png">
+			</div>
+			
+			<form class="form-vertical" action="/logincheck2.php" method="post" >
+			<input type="hidden" name="action" value="login">
+			<div class="form-group field-loginuser-username required">
+			<!--<label class="control-label" for="loginuser-username">用户名</label>-->
+			<div class="input-group">
+				<span class="wap_login_1">
+					<i><img src="/img/500f_login_2.png"></i>
+				</span>
+				<input type="text" id="username" class="form-control" name="username" placeholder="请输入会员账号">
+			</div>
+			<div class="help-block"></div>
+			</div>
+
+			<div class="form-group field-loginuser-password required">
+			<!--<label class="control-label" for="loginuser-password">密码</label>-->
+			<div class="input-group">
+				<span class="wap_login_1">
+					<i><img src="/img/500f_login_3.png"></i>
+				</span>
+				<input type="password" id="password" class="form-control" name="password" placeholder="******">
+			</div>
+			<div class="help-block"></div>
+			</div>
+
+			<div class="form-group field-loginuser-username required">
+				<!--<label class="control-label" for="loginuser-username">验证码</label>-->
+				<div class="input-group">
+					<span class="wap_login_1">
+						<i><img src="/img/500f_login_4.png"></i>
+					</span>
+					<div class="row">
+						<div class="col-xs-9">
+							<input type="text" id="vlcodes" class="form-control" name="vlcodes" placeholder="验证码"  onblur="login_blur(this)" onfocus="login_focus(this)">
+						</div>
+						<div class="col-xs-3">
+							<img id="vPic" src="/yzm.php" alt="(点选此处产生新验证码 )" title="( 点选此处产生新验证码 )" onclick="getKey();" height="34">
+						</div>
+					</div>
+				</div>
+				<div class="help-block"></div>
+			</div>
+
+			<div class="form-group wap_500_login_now">
+            <button type="submit" class="btn btn-green btn-lg btn-block" name="login-button">立即登录</button>
+            </div>
+            <div class="wap_500_forget_psw">
+				<a href="javascript:void(0)" onclick="javascript:Go_forget_pwd();">忘记密码？</a>
+				<!--<input type="checkbox"> 下次自动登录-->
+			</div>
+			</form>
+		</div>
+	</div>	
+	<div id="J_regModal" class="reg-modal modal">
+		<div class="inner container container_500F" style="padding-bottom:100px;padding: 0px 8px;">
+			<div class="close" data-target="#J_regModal">&times;</div>
+			<h1 class="container_500F_h1">————— 注册 —————</h1>
+			<p class="container_500F_p">——— REGISTER ———</p>
+			<form action="" id="register_form" class="form-horizontal">
+				<h2 class="register_form_bg_1">
+					会员登陆信息
+				</h2>
+				<div class="form-group">
+					<label for="" class="col-sm-2 control-label">登录账号：</label>
+					<div class="control-label-1">
+					<input type="text" name="zcname" id="zcusername" maxlength="9" class="form-control">
+					</div>
+					<div class="control-label-2">
+					<strong>*</strong><span>您在网站的登录账户，5-9个英文数字</span>
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="" class="col-sm-2 control-label">登录密码：</label>
+					<div class="control-label-1">
+					<input type="password" name="zcpwd1" id="zcpwd1" maxlength="12" onblur="pwStrength(this.value,0);"  class="form-control">
+					</div>
+					<div class="control-label-2">
+					<strong>*</strong><span>由6-12位任意字符组成</span>
+					</div>
+				</div>
+				<div class="form-group password-degree">
+					<label for="" class="col-sm-2 control-label">密码强度：</label>
+					<div class="control-label-1 mb10">
+						<div class="btn-group">
+						  <button id="strength_L0" type="button" class="btn btn-default">弱</button>
+						   <button id="strength_M0" type="button" class="btn btn-default">中</button>
+						   <button id="strength_H0" type="button" class="btn btn-default">强</button>
+						</div>
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="" class="col-sm-2 control-label">确认密码：</label>
+					<div class="control-label-1">
+					<input type="password" name="zcpwd2" id="zcpwd2" maxlength="12" class="form-control">
+					</div>
+					<div class="control-label-2">
+					<strong>*</strong><span>由6-12位任意字符组成</span>
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="" class="col-sm-2 control-label">使用货币：</label>
+					<div class="control-label-1">
+					<select name="currency" class="form-control"><option value="1">RMB</option></select>
+					</div>
+					<div class="control-label-2">
+					<strong>*</strong><span>由6-12位任意字符组成</span>
+					</div>
+				</div>
+				<h2 class="register_form_bg_2">会员个人信息</h2>
+				<div class="form-group">
+					<label for="" class="col-sm-2 control-label">真实姓名：</label>
+					<div class="control-label-1">
+					<input type="text" name="zcturename" id="zcturename" class="form-control"></div>
+					<div class="control-label-2">
+					<strong>*</strong><span>名字必须与您用于提款及存款的银行户口所用名字相同</span>
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="" class="col-sm-2 control-label">提款密码：</label>
+					<div class="control-label-1">
+					<input type="password" name="qkpwd1" id="qkpwd1" maxlength="12" onblur="pwStrength(this.value,1);" class="form-control">
+					</div>
+					<div class="control-label-2">
+					<strong>*</strong><span>由6-12位任意字符组成</span>
+					</div>
+				</div>
+				<div class="form-group password-degree">
+					<label for="" class="col-sm-2 control-label">密码强度：</label>
+					<div class="control-label-1 mb10">
+					<div class="btn-group">
+						  <button id="strength_L1" type="button" class="btn btn-default">弱</button>
+						   <button id="strength_M1" type="button" class="btn btn-default">中</button>
+						   <button id="strength_H1" type="button" class="btn btn-default">强</button>
+						</div>
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="" class="col-sm-2 control-label">确认密码：</label>
+					<div class="control-label-1">
+					<input type="password" name="qkpwd2" id="qkpwd2" maxlength="12" class="form-control">
+					</div>
+					<div class="control-label-2">
+					<strong>*</strong><span>由6-20位任意字符组成</span>
+					</div>
+				</div>
+				<h2 class="register_form_bg_3">会员密保信息</h2>
+				<div class="form-group">
+					<label for="" class="col-sm-2 control-label">密保问题：</label>
+					<div class="control-label-1">
+						<select name="zcquestion" id="zcquestion" class="form-control">
+						<option value="您的车牌号码是多少？">您的车牌号码是多少？</option>
+                        <option value="您初中同桌的名字？">您初中同桌的名字？</option>
+                        <option value="您就读的第一所学校的名称？">您就读的第一所学校的名称？</option>
+                        <option value="您第一次亲吻的对象是谁？">您第一次亲吻的对象是谁？</option>
+                        <option value="少年时代心目中的英雄是谁？">少年时代心目中的英雄是谁？</option>
+                        <option value="您最喜欢的休闲运动是什么？">您最喜欢的休闲运动是什么？</option>
+                        <option value="您最喜欢哪支运动队？">您最喜欢哪支运动队？</option>
+                        <option value="您最喜欢的运动员是谁？">您最喜欢的运动员是谁？</option>
+                        <option value="您的第一辆车是什么牌子？">您的第一辆车是什么牌子？</option>
+						</select>
+					</div>
+					<div class="control-label-2">
+					<strong>*</strong><span>请选择密保问题</span>
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="" class="col-sm-2 control-label">密保答案：</label>
+					<div class="control-label-1">
+					<input type="text" name="zcanswer" id="zcanswer" class="form-control">
+					</div>
+					<div class="control-label-2">
+					<strong>*</strong><span>请填写您的密保答案</span>
+					</div>
+				</div>
+				
+				<div class="form-group captcha-row">
+					<label for="" class="col-sm-2 control-label">验 证 码 ：</label>
+					<div class="control-label-1 control-label-a">
+						<div class="input-group">
+						<input type="text" name="zcyzm" id="zcyzm" class="form-control" style="height:36px;" maxlength="4">
+						<span class="input-group-addon" style="width:30%;">
+						<img src="yzm.php" alt="点击刷新" name="zc_img" id="zc_img" style="cursor:pointer;" onclick="change_zc_yzm('zc_img')" width="80" height="30" />
+						</span>
+						</div>
+					</div>
+					<!--<div class="control-label-2">
+					<strong>*</strong><span>请填写验证码</span>
+					</div>-->
+				</div>
+				<div class="form-group">
+					<label class="col-sm-4 col-sm-offset-2 mt20">
+					<input type="checkbox" name="zccheck" id="zccheck" value="1"> 我已届满合法博彩年龄﹐且同意各项开户条约。<a href="#" id="AGREEMENT" class="red">"开户协议"</a>
+					</label>
+				</div>
+				<div class="form-group form-action">
+					<div class="mt20 mb20">
+					<button id="register">提交开户</button>
+					</div>
+					<!-- <div class="col-sm-5">
+					<input type="reset" value="重填" class="btn btn-danger" id="cancel_register" />
+					</div> -->
+				</div>
+				<div class="h10"></div>
+			</form>
+		</div>
+	</div>	
+<script src="/scripts/base.js"></script>
+<!-- <script src="/scripts/carousel.js"></script> -->
+<!-- <script src="/scripts/carousel2.js"></script> -->
+<script src="/scripts/page-slide.js"></script>
+<script src="/scripts/nav.js"></script>
+<script src="/scripts/common.js"></script>
+<script src="/scripts/iframe-menu.js"></script>
+<script type="text/javascript">
+// document.addEventListener("touchmove",function(e){
+// 	e.preventDefault();
+// 	e.stopPropagation();
+// },false);
+$(document).ready(function() {
+	$('.page-discount .col-sm-12').click(function(event) {
+		event.preventDefault();
+		var ec = $('#J_p6carousel ul li').eq($('.page-discount .col-sm-12').index(this));
+		console.log(ec.html().replace(/[\r\n]/g,""));
+		var d = dialog({
+	    	title: '优惠活动',
+	    	content: ec.html(),
+	    	id:'sdialog'
+		});
+		d.showModal();
+	});
+	setInterval(function(){			
+		$.ajax({url:"/timeout.php",success:function(data){if(data=='1'){window.location.href='/user/logout.php';}}});
+		//console.log($('.page.active').height());
+		//$('.page.active').height(2000);
+	},60000);
+	//$("html").niceScroll();
+	//$('.page.active').height(200);
+	//alert($(window).height());
+});
+</script>		
+</body>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/dialog-min.js"></script>
+<script type="text/javascript" src="/js/top.js"></script>
+<script src="/js/zhuce.js"></script>
+<script src="/scripts/slider.js"></script>
+<script type="text/javascript" src="/js/jquery.SuperSlide.2.1.1.js"></script>
+<!--<script src="http://static.ydbimg.com/API/YdbOnline.js"></script>-->
+<script>
+var YDB = new YDBOBJ();		
+$(function(){
+	$(".sideMenu").slide({
+		titCell:"h3", //鼠标触发对象
+		targetCell:"ul", //与titCell一一对应，第n个titCell控制第n个targetCell的显示隐藏
+		effect:"slideDown", //targetCell下拉效果
+		trigger:"click",
+		delayTime:300 , //效果时间
+		triggerTime:150, //鼠标延迟触发时间（默认150）
+		defaultPlay:true,//默认是否执行效果（默认true）
+		returnDefault:true //鼠标从.sideMen移走后返回默认状态（默认false）
+	});
+	
+	//点击底部固定导航条切换
+	$(".nav500_bottom_a").click(function(){
+		var navThis = $(this);
+		navThis.find("i").addClass("nav500_b_active");
+		navThis.parent().siblings("span").find("i").removeClass("nav500_b_active");
+		navThis.addClass("nav500_bottom_active").parent().siblings("span").find("a").removeClass("nav500_bottom_active")
+	});
+
+	$(".nav500_left").click(function(){
+ 		YDB.ShowTopRightMenu();
+//		alert("ni hao")
+	});
+})
+	
+	
+</script>
+</html>

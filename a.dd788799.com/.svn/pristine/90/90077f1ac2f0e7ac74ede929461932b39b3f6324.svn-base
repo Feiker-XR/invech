@@ -1,0 +1,102 @@
+<div class='pp' action='pick_dw' length="1" data-line="2"></div>
+<input type="hidden" name="playedGroup" value="<?=$groupId?>" />
+<input type="hidden" name="playedId" value="<?=$playedId?>" />
+<input type="hidden" name="type" value="<?=$type?>" />
+<input type="hidden" name="playedName" value="<?=$played['name']?>" />
+<style type="text/css">
+	/** overwrite */
+	.table-common table tr th{
+		width: 15%;
+	}
+	.table-common table tr th:nth-child(3),.table-common table tr th:nth-child(6){
+		width:20%;
+	}
+</style>
+<div class="fl main-left">
+	<div class="hd clearfix rehd" id="toptouzhu">
+		<div class="fl refl">
+			快捷金额：<input type="text" class="txt" id="inputMoney">
+		</div>
+		<div class="kjanniu">
+			<a href="javascript:void(0)" class="img-50" data-num="50"></a>
+			<a href="javascript:void(0)" class="img-100" data-num="100"></a>
+			<a href="javascript:void(0)" class="img-500" data-num="500"></a>
+			<a href="javascript:void(0)" class="img-1000" data-num="1000"></a>
+			<a href="javascript:void(0)" class="img-5000" data-num="5000"></a>
+			<a href="javascript:void(0)" class="img-10000" data-num="10000"></a>
+		</div>
+		<div class="fr">
+			<div class="T-tab clearfix" style="margin-top: 4.4px; ">
+				<a href="javascript:void(0)" onclick="changeTab(this)">万定位</a>
+				<a href="javascript:void(0)" onclick="changeTab(this)">千定位</a>
+				<a href="javascript:void(0)" onclick="changeTab(this)" class="active">百定位</a>
+				<a href="javascript:void(0)" onclick="changeTab(this)">十定位</a>
+				<a href="javascript:void(0)" onclick="changeTab(this)">个定位</a>
+			</div>
+		</div>
+	</div>
+
+	<div class="table-common"></div>
+
+</div>
+
+
+<script type="text/html" id="ssc_kq_1zdw">
+	
+		<table width="100%" border="0" cellspacing="0" cellpadding="0">
+			<thead>
+				<tr>
+					<th>号码</th>
+					<th>赔率</th>
+					<th>金额</th>
+					<th>号码</th>
+					<th>赔率</th>
+					<th>金额</th>
+				</tr>
+			</thead>
+			<tbody>
+				{{each plg.lines line index1}}
+					<tr>
+				    {{each line pl index2}}
+				    
+					<td style="cursor: pointer;" onclick="setQuickPick(this)"><strong>{{pl.value}}</strong></td>
+					<td style="cursor: pointer;" onclick="setQuickPick(this)"><strong class="color-red pl">{{pl.pl}}</strong></td>
+					<td><input type="text" class="table-txt" data-name="{{plg.name}}-{{pl.value}}" data-plid="{{pl.id}}" data-pl="{{pl.pl}}"></td>
+				    
+				    {{/each}}
+				    </tr>
+				{{/each}}				
+			</tbody>
+		</table>
+	
+</script>
+
+
+<script>
+
+//var pls;//玩法的所有赔率
+//var plg;//当前赔率组
+
+function changeTab(self){
+	$(self).siblings().removeClass('active');
+	$(self).addClass('active');
+	var $tabs = $(self).parent().children();
+
+	var index = $tabs.index(self);
+	plg = pls[index];
+	var len = $('.pp').data('line');
+	plg.lines = group(plg.pls,len);
+	var html = template("ssc_kq_1zdw",{plg:plg});	
+	$('.table-common').html(html);
+}
+
+$(function(){
+	//循环表格放到table-common	
+	var playedId = "<?=$playedId?>";
+	$.getJSON("/game/pl/playedId/"+playedId,function(data){
+		console.log(data);
+		pls = data;
+		$('.T-tab.clearfix').children().eq(0).click();
+	});
+});
+</script>		

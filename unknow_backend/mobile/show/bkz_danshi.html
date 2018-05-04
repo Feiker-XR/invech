@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>万丰国际</title>
+<meta http-equiv="Cache-Control" content="max-age=864000" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+	<link rel="stylesheet" href="/css/bootstrap.min.css">
+	<link rel="stylesheet" href="/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/css/footable.core.min.css">
+	<link href="../css/jquery_dialog.css" rel="stylesheet" type="text/css" />
+	<link rel="stylesheet" href="/styles/ucenter.css">
+<link rel="stylesheet" href="../styles/ezweb.css">
+<style type="text/css">
+  .panel-body{padding: 5px;}
+</style>
+</head>
+<body onload="loaded(document.getElementById('league').value,0);">
+<div class="btn-group pull-right ft_danshi_contain" role="group">
+<input type="button" value="< 返回" class="ft_danshi_default ft_danshi_contain_yellow" onclick="$('#J_SportsIFrame',parent.document).attr('src','/index.php/index/left.html?touzhutype='+getUrlParam('touzhutype'));">
+	<input type="button" id="xzls" value="选择联赛" class="ft_danshi_default ft_danshi_contain_blue" />
+  <input type="button" value="刷新" class="ft_danshi_default" id="sx_f5" onclick="javascript:shuaxin(document.getElementById('league').value);"/>
+<input type="hidden" name="top_f5" id="top_f5" value="0" />
+<input type="hidden" name="league" id="league" value="" />
+<div style="display:none" id="aaaaa">0</div>
+</div>
+<div class="h10 cleafix"></div>
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">篮球（早餐 - 单式） ></h3>
+  </div>
+  <div class="panel-body">
+    <ul id="top" class="pagination"></ul>
+    <p>说明：点击+号图标展开；投注时请选择对应按钮，主队(<span class="zhu">绿色</span>)客队(<span class="ke">蓝色</span>)和(<span class="he">黄色</span>),赔率水位变化时背景变<span class="hong">红色</span>。</p>
+    <div id="datashow">
+    	<table class="table table-bordered table-hover">
+      <thead><tr class="success">
+      <th data-toggle="true">赛程<br>点击每行展开</th>
+      <th>时间<br>主队 / 客队</th>
+  <th data-hide="phone,tablet">让分</th>
+  <th data-hide="phone,tablet">大小</th>
+  <th data-hide="phone,tablet">单双</th></tr></thead><tbody>
+  <tr>
+    <td height="100" colspan="5" align="center" bgcolor="#FFFFFF" style="line-height:25px;"><img src="/images/loading.gif" border="0" /><br />
+      赛事数据正在加载中......</td>
+    </tr></tbody>
+</table>
+    </div>
+  </div>
+</div>
+</body>
+<script src="/assets/jquery.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/footable.min.js"></script>
+<script language="javascript" src="/js/jquery_dialog.js"></script>
+<script language="javascript" src="/js/common.js"></script>
+<script language="javascript" src="bkz_danshi.js"></script>
+<script language="javascript" src="/js/lq_match.js"></script>
+<script language="javascript" src="/js/times.js"></script>
+<script language="javascript" src="/js/mouse.js"></script>
+<script language="javascript" src="/js/ifsports.js"></script>
+<script type="text/javascript">
+  $(function () {
+    $('.table').footable();
+  });
+
+	 //子页面传递高度给顶层iframe	
+	changeFrameHeight()	
+</script>
+</html>

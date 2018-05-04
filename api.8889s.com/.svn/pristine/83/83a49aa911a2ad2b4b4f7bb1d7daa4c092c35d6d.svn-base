@@ -1,0 +1,13 @@
+<input type="hidden" name="playedGroup" value="<?=$groupId?>" />
+<input type="hidden" name="playedId" value="<?=$playedId?>" />
+<input type="hidden" name="type" value="<?=$type?>" />
+<?php 	 ?>
+<div maxlen="<?=$codeNum?>" class="pp" action="tz11x5Input" length="2" >
+	<textarea id="textarea-code"></textarea>
+</div>
+<?php //$maxPl=$getPl($type, $playedId); ?>
+<script type="text/javascript">
+$(function(){
+	gameSetPl(<?=json_encode($maxPl)?>);
+})
+</script>

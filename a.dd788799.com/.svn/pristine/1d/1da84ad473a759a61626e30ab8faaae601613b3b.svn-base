@@ -1,0 +1,33 @@
+
+<div class="recharge-modal popupModal">
+	<table width="100%" cellpadding="2" cellspacing="2">
+		<tr>
+			<td class="title">用户</td>
+			<td>{php}$rechargeInfo['username']{/php}</td>
+		</tr>
+		<tr>
+			<td class="title">充值金额</td>
+			<td>{php}$rechargeInfo['amount']{/php}元</td>
+		</tr>
+		<tr>
+			<td class="title">充值前资金</td>
+			<td>{php}number_format($rechargeInfo['coin'],2){/php}元</td>
+		</tr>
+		<tr>
+			<td class="title">充值银行</td>
+			<td>{php}$this->ifs($bankList[$bankInfo['bankId']]['name'], '--'){/php}</td>
+		</tr>
+		<tr>
+			<td class="title">银行账号</td>
+			<td>{php}$this->ifs($bankInfo['account'], '--'){/php}</td>
+		</tr>
+		<tr>
+			<td class="title">开户名</td>
+			<td>{php}$this->ifs($bankInfo['username'], '--'){/php}</td>
+		</tr>
+        <tr>
+			<td class="title">充值时间</td>
+			<td>{php}date("Y-m-d H:i:s",$rechargeInfo['rechargeTime']){/php}</td>
+		</tr>
+	</table>
+</div>

@@ -1,0 +1,367 @@
+﻿<html><!DOCTYPE html>
+<html>
+ 
+	<head>
+		<meta charset="utf-8" />
+		<meta name="format-detection" content="telephone=no" />
+		<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE11" />
+		<title>【{$categoryInfo.name}开奖结果】{$categoryInfo.name}开奖查询_{$categoryInfo.name}开奖号码-{$sys.site_title}</title>
+		<meta name="keywords" content="{$categoryInfo.keywords}" />
+		<meta name="distribution" content="{$categoryInfo.description}" />
+		<link rel="stylesheet" href="css/headorfood.css" />
+		<link rel="stylesheet" href="css/shishicai.css" />
+		<!-- <link rel="shortcut icon" href="img/icon/168favicon.ico/v=2017981058.html"> -->
+		<link rel="stylesheet" href="css/user_adv.css" />
+		<link rel="stylesheet" href="css/idangerous.swiper.css" />
+		<script src="js/lib/bootstrap-3.3.0/js/tests/vendor/jquery.min.js"></script>
+		<script src="js/lib/bootstrap-3.3.0/dist/js/bootstrap.min.js"></script>
+		<script type="text/javascript" src="js/lib/jquery-1.7.2.min.js"></script>
+		<script type="text/javascript" src="js/lib/jscolor-2.0.4/jscolor.js"></script>
+	</head>
+
+	<body>
+		<div class="bodybox">
+<!--#include file="head.html"-->
+		<div class="haomabox">
+				<div class="waring" id="waringbox">
+					<div class="flash"><i></i></div>
+					温馨提示：因网络问题，开奖结果会有延迟，所以您需要去喝杯咖啡等一会儿！
+				</div>
+				<div class="haomaqu" id="cqSsc">
+					<div class="haomaqul">
+						<div class="haomaline">
+							<div class="haomaimg">
+								<img src="{$categoryInfo.image}" />
+							</div>
+							<div class="numberqu">
+								<div class="nuberqutit">
+									<span class="ssc">{$categoryInfo.name}</span>第
+									<span class="preDrawIssue"></span> 期开奖号码
+									<input type="hidden" id="drawTime" />
+									<input type="hidden" id="sumNum" />
+									<input type="hidden" id="sumSingleDouble" />
+									<input type="hidden" id="sumBigSmall" />
+									<input type="hidden" id="dragonTiger" />
+								</div>
+								<div class="kajianhao">
+									<ul>
+										<li class="numblueHead">1</li>
+										<li class="numblueHead">3</li>
+										<li class="numblueHead">2</li>
+										<li class="numblueHead">4</li>
+										<li class="numblueHead">6</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+						<div class="haomaline homaline2">
+							<div class="haomaimg">
+								<p class="kaijianname">{$categoryInfo.name}</p>
+							</div>
+							<div class="margt30">
+								<ul class="zoushimap">
+								<li class="list lihead no_left">走势图表：</li>
+									<!--list{app="DuxCms" label="categoryList" parent_id=36  limit=4}-->
+									<li class="list">
+										<a href="{$list.curl}">{$list.name}</a>
+									</li>
+                                 <!--{/list}-->
+									<li class="list morelist" id="morelist">
+										<a href="javascript:void(0)" class="more">更多<img class="graypre" src="img/graypre.png" alt="" /><img class="yellowpre" src="img/yellowpre.png" alt="" /></a>
+										<div class="sub_morelist" style="display: none;">
+											<ul class="leftUl">
+												<!--list{app="DuxCms" label="categoryList" parent_id=36 class_id='42,43,44,45,46,47,48,49,50,51,52'}-->
+												<li class="list">
+													<a href="{$list.curl}">{$list.name}</a>
+												</li>
+                                              <!--{/list}-->
+											
+											
+										</div>
+									</li>
+								</ul>
+
+							</div>
+							<div class="newtuijian ">
+								<ul class="zoushimap">
+									<li class="list lihead no_left">新手推荐：</li>
+									<li class="list no_left">
+										<a href="../wanfaguize/CQssc_wanfaguize.html">玩法规则</a>
+									</li>
+								</ul>
+							</div>
+						</div>
+
+					</div>
+					<div class="haomaqur">
+						<div class="haomaqur_l">
+							<div class="line linetit">距<span class="nextIssue"></span>期开奖仅有</div>
+							<div class="line linetime" id="timebox">
+								<div class="opening opentyle">开奖中...</div>
+								<span class="bgtime hour">...</span>
+								<span class="hourtxt">时</span>
+								<span class="bgtime minute">...</span>
+								<span>分</span>
+								<span class="bgtime second">...</span>
+								<span>秒</span>
+							</div>
+							<div class="line linetit height40">已开<span class="drawCount"></span>期，还有<span class="sdrawCount"></span>期</div>
+							<div class="line soundId">
+								<div class="soundline soundSet" id="soundSet">
+								</div>
+							</div>
+						</div>
+						<div class="line margt20 guangimg" id="startVideo">
+							<img src="img/video/cq_sscvideo.jpg" />
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="kaijiangjl margt20">
+				<div class="head">
+					<ul class="zoushimap" id="kaijiangjl">
+						<li class="kaijiltit">开奖记录</li>
+						<li id="jrsmtj">
+							<a href="javascript:">今日双面/号码统计</a>
+							<i></i>
+						</li>
+						<li id="cltx">
+							<a href="javascript:"> 长龙提醒</a>
+							<i></i>
+						</li>
+						<li id="hmfb">
+							<a href="javascript:">号码分析</a>
+							<i></i>
+						</li>
+						
+					</ul>
+					<div id="kjls">
+					 <!--list{app="DuxCms" label="categoryList" class_id=53  limit=1}-->
+						<a href="{$list.curl}">{$list.name}</a>
+                        <!--{/list}-->
+					</div>
+					<div id="selectcolor">
+						<em>护眼模式</em>
+						<span class="select">&nbsp;</span>
+						<span>&nbsp;</span>
+						<span>&nbsp;</span>
+						<span><button id="colorBtn"  class="jscolor{valueElement:'chosen-value', onFineChange:'setTextColor(this)'}">&nbsp;</button></span>
+						<input id="chosen-value" value="#f0f0f0" type="hidden" />
+					</div>
+				</div>
+				<div class="listcontent">
+					<div class="jrsmtj">
+						<div class="headtxt">
+							今日双面统计
+						</div>
+						<table cellpadding="1" cellspacing="1" border="0">
+							<tr>
+								<th width="176">号码</th>
+								<th>0</th>
+								<th>1</th>
+								<th>2</th>
+								<th>3</th>
+								<th>4</th>
+								<th>5</th>
+								<th>6</th>
+								<th>7</th>
+								<th>8</th>
+								<th>9</th>
+							</tr>
+							<tr id="shuanmiandata">
+								<td>出现次数</td>
+								<td class="cs0">0</td>
+								<td class="cs1">0</td>
+								<td class="cs2">0</td>
+								<td class="cs3">0</td>
+								<td class="cs4">0</td>
+								<td class="cs5">0</td>
+								<td class="cs6">0</td>
+								<td class="cs7">0</td>
+								<td class="cs8">0</td>
+								<td class="cs9">0</td>
+							</tr>
+						</table>
+						<table class="secondtb" cellpadding="1" cellspacing="1" border="0">
+							<tr>
+								<th rowspan="2" width="176">球次</th>
+								<th colspan="4">总和</th>
+								<th colspan="4">第一球</th>
+								<th colspan="4">第二球</th>
+								<th colspan="4">第三球</th>
+								<th colspan="4">第四球</th>
+								<th colspan="4">第五球</th>
+							</tr>
+							<tr class="sub_tr">
+								<th>单</th>
+								<th>双</th>
+								<th>大</th>
+								<th>小</th>
+								<th>单</th>
+								<th>双</th>
+								<th>大</th>
+								<th>小</th>
+								<th>单</th>
+								<th>双</th>
+								<th>大</th>
+								<th>小</th>
+								<th>单</th>
+								<th>双</th>
+								<th>大</th>
+								<th>小</th>
+								<th>单</th>
+								<th>双</th>
+								<th>大</th>
+								<th>小</th>
+								<th>单</th>
+								<th>双</th>
+								<th>大</th>
+								<th>小</th>
+							</tr>
+							<tr id="gylhcs">
+								<td>出现次数</td>
+								<td class="tt1">0</td>
+								<td class="tt2">0</td>
+								<td class="tt3">0</td>
+								<td class="tt4">0</td>
+								<td class="one1">0</td>
+								<td class="one2">0</td>
+								<td class="one3">0</td>
+								<td class="one4">0</td>
+								<td class="two1">0</td>
+								<td class="two2">0</td>
+								<td class="two3">0</td>
+								<td class="two4">0</td>
+								<td class="three1">0</td>
+								<td class="three2">0</td>
+								<td class="three3">0</td>
+								<td class="three4">0</td>
+								<td class="four1">0</td>
+								<td class="four2">0</td>
+								<td class="four3">0</td>
+								<td class="four4">0</td>
+								<td class="five1">0</td>
+								<td class="five2">0</td>
+								<td class="five3">0</td>
+								<td class="five4">0</td>
+							</tr>
+						</table>
+					</div>
+					<div class="cltx">
+						<div class="headtxt">
+							长龙连开提醒
+						</div>
+						<div class="cltxul">
+							<ul id="cltxul">
+							</ul>
+						</div>
+					</div>
+					<div class="hmfb">
+						<div class="head">
+							<ul class="zoushimap" id="chakanchfb">
+								<li class="kaijiltit">查看球号分布：</li>
+								<li class="0">
+									<a href="javascript:">号码0</a>
+									<i></i>
+								</li>
+								<li class="1">
+									<a href="javascript:">号码1</a>
+									<i></i>
+								</li>
+								<li class="2">
+									<a href="javascript:">号码2</a>
+									<i></i>
+								</li>
+								<li class="3">
+									<a href="javascript:">号码3</a>
+									<i></i>
+								</li>
+								<li class="4">
+									<a href="javascript:">号码4</a>
+									<i></i>
+								</li>
+								<li class="5">
+									<a href="javascript:">号码5</a>
+									<i></i>
+								</li>
+								<li class="6">
+									<a href="javascript:">号码6</a>
+									<i></i>
+								</li>
+								<li class="7">
+									<a href="javascript:">号码7</a>
+									<i></i>
+								</li>
+								<li class="8">
+									<a href="javascript:">号码8</a>
+									<i></i>
+								</li>
+								<li class="9">
+									<a href="javascript:">号码9</a>
+									<i></i>
+								</li>
+							</ul>
+						</div>
+						<div class="head head2">
+							<ul class="zoushimap" id="daxiaodsfb">
+								<li class="kaijiltit">大小单双分布：</li>
+								<li id="dannum">
+									<a href="javascript:">单</a>
+									<i></i>
+								</li>
+								<li id="shuangnum">
+									<a href="javascript:">双</a>
+									<i></i>
+								</li>
+								<li id="danum">
+									<a href="javascript:">大</a>
+									<i></i>
+								</li>
+								<li id="xiaonum">
+									<a href="javascript:">小</a>
+									<i></i>
+								</li>
+								<li id="duizinum">
+									<a href="javascript:">对子号</a>
+									<i></i>
+								</li>
+								<li class="reset">
+									还原
+								</li>
+							</ul>
+						</div>
+					</div>
+					<div class="jrsmhmtj" id="jrsmhmtj">
+						<table id="jrsmhmtjTab" cellpadding="1" cellspacing="1" border="0">
+						</table>
+					</div>
+				</div>
+			</div>
+			
+			<!--#include file="foot.html"-->
+	</body>
+	<script type="text/javascript" src="js/lib/config.js"></script>
+	<script type="text/javascript" src="js/lib/GA.js"></script>
+	<script type="text/javascript" src="js/loacal/shishicai_cq/ssc_kaijiang_qxc.js"></script>
+	<script type="text/javascript" src="js/loacal/shishicai_cq/ssc_index.js"></script>
+	<script type="text/javascript" src="js/loacal/animate/animate.js"></script>
+	<script src="js/lib/idangerous.swiper.min.js"></script>
+	<div id="videobox">
+		<div class="content">
+			<div class="head">
+				{$categoryInfo.name}开奖视频
+				<div class="btn">
+					<ul>
+						<li class="closevideo"><i class="iconfont"></i></li>
+						<li class="small">小屏</li>
+						<li class="big">中屏</li>
+					</ul>
+				</div>
+			</div>
+			<div class="animate">
+				<iframe style="height:100%;width:100%;border: none;" scrolling="no" src="js/lib/video/SSC/index.html"></iframe>
+			</div>
+		</div>
+	</div>
+		<div style="display: none;"><script language='javascript' src='http://count9.51yes.com/click.aspx?id=90847134&logo=1' charset='gb2312'></script></div>	
+</html>

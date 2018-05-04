@@ -1,0 +1,89 @@
+<?php
+namespace app\index\model;
+use think\Model;
+
+/**
+ *  玩法模型
+ * @author mack
+ */
+class Played extends Model {
+	//protected $table = 'gygy_played';
+	//protected $pk = 'id';
+    //protected $auto = ['name', 'ip'];		//save
+    //protected $insert = ['status' => 1];  //insert
+    //protected $update = [];  				//update
+
+
+	public function playedgroup()
+	{
+		return $this->belongsTo('PlayedGroup','groupId')->where('enable',1);
+	}
+
+	public function plgroups()
+	{
+		return $this->hasMany('PlayedPlGroup','playedId');
+	}
+
+    static public function kqwfPls($id=''){
+    	$pls = cache('gygy_pls');
+    	if(!$pls){
+    		
+    		$playeds = self::with('plgroups.pls')
+    		->where(['enable'=>1,'is_kqwf'=>1])
+    		->select()->toArray();
+
+    		$playeds_map = [];
+    		foreach ($playeds as $played) {
+    			$playeds_map[$played['id']] = $played;
+    		}
+
+    		$pls = $playeds_map;
+    		cache('gygy_pls',$pls);
+    	}
+
+    	if($id){
+    		return $pls[$id]['plgroups']??null;
+    	}else{
+    		return $pls;	
+    	}    	
+    }
+
+
+
+    static public function kqwfPls_bak($id=''){
+    	$pls = cache('gygy_pls_bak');
+    	if(!$pls){
+    		
+    		$playeds = self::all(['enable'=>1,'is_kqwf'=>1]);
+
+    		$playeds_map = [];
+    		foreach ($playeds as $played) {
+
+    			$groups_map = [];
+    			foreach ($played->plgroups as $group) {
+    				
+    				$pls_map = [];
+    				foreach ($group->pls as $pl) {
+    					$pls_map[$pl->id] = $pl->toArray();
+    				}
+
+    				$groups_map[$group->id] = $group->toArray();
+    				$groups_map[$group->id]['pls'] = $pls_map;
+    			}
+
+    			$playeds_map[$played->id] = $played->toArray();
+    			$playeds_map[$played->id]['plgroups'] = $groups_map;
+
+    		}
+
+    		$pls = $playeds_map;
+    		cache('gygy_pls_bak',$pls);
+    	}
+
+    	if($id){
+    		return $pls[$id]['plgroups']??null;
+    	}else{
+    		return $pls;	
+    	}    	
+    }
+}

@@ -1,0 +1,73 @@
+<link rel="stylesheet" type="text/css" href="/__CSS__/user/reset.css?v=20170715">
+<link rel="stylesheet" type="text/css" href="/__CSS__/user/hpn-common.css">
+<link rel="stylesheet" type="text/css" href="/__CSS__/user/index.css?v=20171117">
+<link rel="stylesheet" type="text/css" href="/__CSS__/user/global.css">
+<link rel="stylesheet" type="text/css" href="/__CSS__/user/info.css">
+<link rel="stylesheet" href="/__JS__/datepicker/datepicker3.css">
+<script src="/__JS__/jquery.min.js"></script>
+<script src="/__JS__/datepicker/bootstrap-datepicker.js"></script>
+<script src="/__JS__/datepicker/bootstrap-datepicker.zh-CN.js"></script>
+<div class="help_r_main">
+    <div class="eveb_content">
+        <div class="eveb_nav_sub">
+            <ul class="clearfix">
+                <li ><a href="/user/recharge_record">充值记录</a></li>
+                <li ><a href="/user/withdraw_record">提现记录</a></li>
+                <li><a href="/user/money_record">资金流水</a></li>
+                <li><a href="/user/bet_record">投注记录</a></li>
+                <li class="on"><a href="/user/backwater_record">返水记录</a></li>
+            </ul>
+        </div>
+        <h2>
+            <div class="eveb_search eveb_search_h2">
+                <form>
+                   起止时间：
+                    <input name="starttime" id="datepicker1"   value="{$Think.get.starttime}" placeholder="开始时间" type="text"> -
+                    <input name="endtime"   id="datepicker2"   value="{$Think.get.endtime}" placeholder="结束时间" type="text">
+                    <input type="submit" class="button_small button_1" value="筛选">
+                </form>
+            </div>
+        </h2>
+        <table class="eveb_box eveb_table" id="dataTable">
+            <thead>
+                <tr>
+                    <th>序号</th>
+                    <th>申请时间</th>
+                    <th>取款金额</th>
+                    <th>备注</th>
+                  
+                </tr>
+            </thead>
+            <tbody>
+                {if(!$list['list']->isEmpty())}
+                    {foreach $list['list'] as $v}
+                        <tr>
+                            <td>{$v->id}</td>
+                            <td>{$v->created_at}</td>
+                            <td>{$v->amount}</td>
+                            <td>{$v->remark}</td>
+
+                        </tr>
+                    {/foreach}
+                {else}
+                    <tr><td colspan="7" styl="text-align:center;">暂无数据</td></tr>
+                {/if}
+            </tbody>
+         </table>
+        <div class="eveb_amount fl">当前小计<span id="pageMoney">{$list['PageAmount']}</span>元，总计<span id="totalMoney">{$list['CountAmount']}</span>元</div>
+        <div class="eveb_page fr"> {$list['list']->render();}</div>
+    </div>
+</div>
+<script type="text/javascript">
+$(function(){
+        var obj = {
+                autoclose: true,
+                todayHighlight: true,
+                language:"zh-CN", 
+                format:"yyyy-mm-dd" 
+           };
+    $("#datepicker1").datepicker(obj)
+    $("#datepicker2").datepicker(obj);
+});
+
+</script>

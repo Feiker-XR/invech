@@ -1,0 +1,35 @@
+{extend name="common/base"/}
+
+{block name="body"}
+    <div class="main-title">
+        <h2>新增消费活动</h2>
+    </div>
+    <form action="{:Url('score/addactivity')}" method="post" class="form-horizontal">
+        <div class="form-item">
+            <label class="item-label">消费总量<span class="check-tips">（达到多少消费总量赠送）</span></label>
+            <div class="controls">
+                <input type="text" class="text input-large" name="all" value="">
+            </div>
+        </div>
+        <div class="form-item">
+            <label class="item-label">赠送金额<span class="check-tips"></span></label>
+            <div class="controls">
+                <input type="text" class="text input-large" name="amount" value="">
+            </div>
+        </div>
+        <div class="form-item">
+            <button class="btn submit-btn ajax-post" id="submit" type="submit" target-form="form-horizontal">确 定</button>
+            <button class="btn btn-return" onclick="javascript:history.back(-1);return false;">返 回</button>
+        </div>
+    </form>
+{/block}
+
+{block name="script"}
+    <script type="text/javascript">
+        Think.setValue("pid", {$info.pid|default = 0});
+        Think.setValue("hide", {$info.hide|default = 0});
+        Think.setValue("is_dev", {$info.is_dev|default = 0});
+        //导航高亮
+        $('.side-sub-menu').find('a[href="{:Url('score/activity')}"]').closest('li').addClass('current');
+    </script>
+{/block}

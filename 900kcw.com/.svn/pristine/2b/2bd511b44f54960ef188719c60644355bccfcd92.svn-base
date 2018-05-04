@@ -1,0 +1,78 @@
+<link rel="stylesheet" type="text/css" href="css/densigner_contest.css">
+<div class="c_meau">
+  <div class="fl">
+ <!--list{app="DuxCms" label="formList" table="kefu" limit=10 }-->
+    <h4>关注&amp;咨询<br>
+     {$list.mc}</h4>
+    <div class="fl_o">
+      <dl class="fl_o_o">
+        <dt> <a href="http://wpa.qq.com/msgrd?v=3&uin={$list.qq}&site=qq&menu=yes" target="_blank"> <img src="images/c_meau_1.png"></a></dt>
+        <dd>QQ咨询</dd>
+      </dl>
+      <dl class="fl_o_o">
+        <dt><img src="{$list.ewm}" style="width:92px;height:92px;" ></dt>
+        <dd>扫一扫有惊喜</dd>
+      </dl>
+      <dl class="fl_o_o">
+        <dt><a href="{$list.dz}" target="_blank"><img src="images/c_meau_7.gif"></a></dt>
+        <dd>试玩投注</dd>
+      </dl>
+    </div>
+    <img src="images/c_meau_7.png"> </div>
+  <div class="fr">
+    <div class="fr_o"><img src="images/c_meau_5.png"></div>
+    <div class="fr_t"><img src="images/c_meau_6.png"></div>
+  </div>
+   <!--{/list}-->
+  <div class="clear"></div>
+</div>
+<script type="text/javascript">
+    $(window).scroll(function () {
+        if ($(this).scrollTop() > 100) {
+            $(".c_meau").stop().show().animate({ bottom: '100px' }, 300);
+        }
+        else {
+            $(".c_meau").stop().animate({ bottom: '-430px' }, 300);
+        }
+    });
+    $('.c_meau .fr_t').click(function () {
+        $('body,html').animate({ scrollTop: 0 }, 500);
+        $(".c_meau").animate({ bottom: '-380px', opacity: '0' }, 500);
+        return false;
+    });
+</script>
+<div class="footer">
+
+	<div class="footer1">
+		<div class="foo">
+			<ul>
+				<li>
+					<span class="circle"><img src="themes/168pc/img/public_hf/footer_one.png" alt="" /></span>
+					<span>专业的数据分析网站</span>
+				</li>
+				<li>
+					<span class="circle"><img src="themes/168pc/img/public_hf/footer_two.png" alt="" /></span>
+					<span>品质保证</span>
+				</li>
+				<li>
+					<span class="circle"><img src="themes/168pc/img/public_hf/footer_three.png" alt="" /></span>
+					<span>全方面的数据资料</span>
+				</li>
+				<li>
+					<span class="circle"><img src="themes/168pc/img/public_hf/footer_four.png" alt="" /></span>
+					<span>最新数据及时更新</span>
+				</li>
+			</ul>
+			<div class="erwm">
+				<div class="lodown_pic"><img src="themes/168pc/img/public_hf/erwm.png" alt="" /></div>
+				<!--<span class="lodown">扫描下载手机版</span>-->
+			</div>
+		</div>
+
+	</div>
+	<div class="footer2">
+		<p class="ptop">免责声明：本站内容仅作参考及交流，不进行任何现金交易行为。</p>
+		<p style="display: inline">本网不承担由于内容的合法性所引起的一切争议和法律责任。</p>
+		
+	</div>
+</div>                                                                                            

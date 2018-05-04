@@ -1,0 +1,73 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>系统设置</title>
+<link href="/css/base.css" rel="stylesheet" type="text/css" />
+<link href="/css/admin.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="/js/jquery.js"></script>
+<script type="text/javascript" src="/js/jquery.tools.js"></script>
+<script type="text/javascript" src="/js/base.js"></script>
+<script type="text/javascript">
+function del(v){
+    v=v.split('|')
+	if(v[0]>0){
+	    alert("该会员组下有会员，请先将该会员组下的会员转移，再来删除该会员组！");
+		return false;
+	}else{
+	    return confirm('您确定要删除：'+v[1]+" 吗？") ? true : false;
+	}
+}
+</script>
+</head>
+<body class="list">
+	<!--<div class="bar">
+		会员等级设置
+	</div>-->
+	
+
+<div class="body">
+<ul>
+	<li>
+		<a href="{:Url('game/index','gid='.$gameinfo.id)}">游戏列表</a> >> 
+		<a href="{:Url('opentime/index','gid='.$gameinfo.id)}">{$gameinfo['name']}时间列表</a> >> 
+		<!-- <a href="{:Url('opentime/add','gid='.$gameinfo.id)}">玩法配置</a> -->
+	</li>
+</ul>
+	<ul id="tab" class="tab">
+		<li>
+			<input type="button" value="时间列表{$gameinfo['name']}" hidefocus class="current" 
+			onClick="window.location.href='{:Url('opentime/index','gid='.$gameinfo.id)}'" />
+		</li>
+		<li>
+			<input type="button" value="添加时间" hidefocus  
+			onClick="window.location.href='{:Url('opentime/add','gid='.$gameinfo.id)}'" />
+		</li>
+	</ul>
+	<div>玩法列表</div>
+	<table id="listTable" class="listTable">
+		<tr>
+			<th>选择</th>
+			<th>期号</th>
+			<th>开盘</th>
+			<th>封盘</th>
+			<th>开奖</th>
+			<th>操作</th>
+		</tr>
+		{volist id="list" name="opentimes"}
+		<tr>
+			<td align="center"><input type="checkbox" name="ids[]" value="{$list.id}" /></td>
+			<td align="center">{$list.qishu}</td>
+			<td align="center">{$list.kaipan}</td>
+			<td align="center">{$list.fengpan}</td>
+			<td align="center">{$list.kaijiang}</td>
+			<td align="center">
+				<a href="{:Url('opentime/edit','gid='.$gameinfo['id'].'&tid='.$list.id)}" >修改</a> | 
+				<a href="{:Url('opentime/delete','gid='.$gameinfo['id'].'&tid='.$list.id)}" >删除</a> 
+			</td>
+		</tr>
+		{/volist}
+	</table>
+</div>
+</body>
+</html>

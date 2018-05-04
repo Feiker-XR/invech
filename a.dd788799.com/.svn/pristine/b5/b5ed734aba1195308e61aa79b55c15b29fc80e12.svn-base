@@ -1,0 +1,100 @@
+<input type="hidden" name="playedGroup" value="<?=$groupId?>"/>
+<input type="hidden" name="playedId" value="<?=$playedId?>"/>
+<input type="hidden" name="type" value="<?=$type?>"/>
+<input type="hidden" name="playedName" value="<?=$played['name']?>"/>
+<div class='pp' action='six_qbz' length="1" data-line="5"></div>
+<!-- mobile 六合彩_全不中 -->
+<div id="sscContent">
+    <div class="lot-content clearfix">
+        <div class="fl main-left">
+            <div class="hd clearfix">
+                <div class="fr">
+                    <div class="T-tab clearfix f-tab f-bottom">
+                        <a href="javascript:void(0)" onclick="changeTab(this)">五不中</a>
+                        <a href="javascript:void(0)" onclick="changeTab(this)">六不中</a>
+                        <a href="javascript:void(0)" onclick="changeTab(this)">七不中</a>
+                        <a href="javascript:void(0)" onclick="changeTab(this)">八不中</a>
+                        <a href="javascript:void(0)" onclick="changeTab(this)">九不中</a>
+                        <a href="javascript:void(0)" onclick="changeTab(this)">十不中</a>
+                        <a href="javascript:void(0)" onclick="changeTab(this)">十一不中</a>
+                        <a href="javascript:void(0)" onclick="changeTab(this)">十二不中</a>
+                    </div>
+                </div>
+            </div>
+            <div class="table-common" id="table-common">
+            </div>
+            <div class="hd clearfix rehd tzgz" id="toptouzhu">
+                <div class="fl refl xzje">
+                    下注金额：<input type="text" class="txt" id="inputMoney">
+                </div>
+                <div class="kjanniu">
+                    <a href="javascript:void(0)" class="img-50" data-num="50"></a>
+                    <a href="javascript:void(0)" class="img-100" data-num="100"></a>
+                    <a href="javascript:void(0)" class="img-500" data-num="500"></a>
+                    <a href="javascript:void(0)" class="img-1000" data-num="1000"></a>
+                    <a href="javascript:void(0)" class="img-5000" data-num="5000"></a>
+                    <a href="javascript:void(0)" class="img-10000" data-num="10000"></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/html" id="six_qbz">
+    <table width="100%" border="0" cellspacing="0" cellpadding="0" class="pp" action="six_qbz" data-line="5"
+           style="overflow: auto;">
+        <thead>
+        <tr>
+            <th>号码</th>
+            <th>赔率</th>
+            <th>勾选</th>
+            <th>号码</th>
+            <th>赔率</th>
+            <th>勾选</th>
+        </tr>
+        </thead>
+        <tbody>
+        {{each plg.sz.lines value index}}
+        <tr>
+            {{each lines _value _index}}
+            <td><span class="ball-icon ball-{{_value<10?'0'+_value:_value}}"></span></td>
+            <td><strong class="color-red pl">{{plg.pls[0].pl}}</strong></td>
+            <td><input type="checkbox" value="{{_value}}"></td>
+            {{/each}}
+        </tr>
+        {{/each}}
+        </tbody>
+    </table>
+</script>
+<script>
+    //var pls;//玩法的所有赔率
+    //var plg;//当前赔率组
+    function changeTab(self) {
+        $(self).siblings().removeClass('active');
+        $(self).addClass('active');
+        var $tabs = $(self).parent().children();
+        var index = $tabs.index(self);
+        plg = pls[index];
+        //plg.sz = plg.pls.slice(0, 49);
+        //plg.sm = plg.pls.slice(49);
+        //var len = $('.pp').data('line');
+        //plg.sz.lines = group(plg.sz, 2);
+        //plg.sm.lines = group(plg.sm, 2);
+        var arr = [];
+        for (var i = 1; i <= 49; i++) {
+            arr.push(i);
+        }
+        plg.sz.lines = group(arr, 2);
+        console.log(plg);
+        var html = template("six_qbz", {plg: plg});
+        $('.table-common').html(html);
+    }
+
+    $(function () {
+        var playedId = "<?=$playedId?>";
+        $.getJSON("/game/pl/playedId/" + playedId, function (data) {
+            console.log(data);
+            pls = data;
+            $('.T-tab.clearfix').children().eq(0).click();
+        });
+    });
+</script>  

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Welcome</title>
+<link rel="stylesheet" type="text/css" href="/css/general.css" />
+<link rel="stylesheet" type="text/css" href="/newview/css/theme/style.css?version=2.0.0" />
+<link rel="stylesheet" type="text/css" href="/newview/css/style.css" />
+<link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
+<script src='/js/jquery-1.8.0.min.js'></script>
+<script type="text/javascript" src="/js/main.js"></script>
+<script type="text/javascript" src="/Scripts/member.js"></script>
+<script type="text/javascript" src="/newview/js/main.js"></script>
+
+<link rel="stylesheet" type="text/css"  href="/css/newstyle/public.css">
+<link rel="stylesheet" type="text/css"  href="/css/newstyle/res_pages_1.css">
+<style type="text/css">
+body{background: white;}
+</style>
+</head>
+<body>
+<div class="head">
+	<!--欢迎-->
+	{include file='common/nav'}
+</div>
+<div class="block_0"></div>
+
+<div class="moneyBox_contain modify_wp">
+    <div class="ui-headerBox">
+        <div class="modify_header">
+            <a href="/user/userinfo.html" class="nav_1">首页</a>
+            <a href="/pay/member.html" class="nav_2">财务管理</a>
+            <a href="/user/record_ds.html" class="nav_3">游戏记录</a>
+            <a href="/user/report.html" class="nav_4">历史记录</a>
+            <a href="/user/sms.html" class="nav_5">短信记录</a>
+            <a href="/user/agent.html" class="nav_6 active">代理中心</a>
+        </div>
+    </div>
+
+	<div class="ui-body">
+		<div class="ui-search" id="subjsshow5" style="display: block;">
+        	<span><i class="fas fa-user-circle" style="font-size: 30px"></i>代理中心</span>
+			<ul>
+        		<li class="ui-hover"><a href="/user/agent.html"><i class="fas fa-shopping-cart" style="background-color: #F59A2F"></i>推广网址</a></li>
+                <li><a href="/user/ag_user.html"><i class="fas fa-anchor" style="background-color: #F5b52F"></i>下级列表</a></li>
+                <li><a href="/user/ag_data.html"><i class="fas fa-archive" style="background-color: #5D9A2F"></i>报表统计</a></li>
+            </ul>
+        </div>
+	</div>
+
+	<div class="ui-moneyBox">
+		<div class="clear"></div>
+		<ul>
+			<table width="100%" border="0" cellspacing="0" cellpadding="5">
+				<tr>
+					<th colspan="2">您的推广网址</th>
+				</tr>
+				<tr>
+					<th colspan="2"><input type="text" value="{$url}" style="height:30px; line-height:30px; font-size:30px;font-weight:bold; width:800px; text-align:center;"/></th>
+				</tr>
+			</table>
+		</ul>
+	</div>
+</div>
+
+{include file='common/footer'}
+</body>
+<script type="text/javascript">
+setInterval(function() {
+	$.ajax({
+		type: "post",
+		url: "{:Url('index/home')}",
+		data:{'ajax':1,'get_money':'1'},
+		success:function(data) {
+			if (/^[\d\.]+$/.test(data)) {
+				$('#money,#money_2').text(data);
+			}
+		}
+	});
+},2000);
+</script>
+</html>

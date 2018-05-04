@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Member</title>
+<link rel="stylesheet" type="text/css" href="/css/general.css"/>
+<link rel="stylesheet" type="text/css" href="/Scripts/jquery-ui.css" />
+<script src='/js/js/jquery-1.8.0.min.js'></script>
+<script type="text/javascript" src="/Scripts/member.js"></script>
+</head>
+<body>
+  <div class="ui-moneyBox">
+    <ul>
+      <table width="100%" border="0" cellspacing="0" cellpadding="5" id="thetable">
+	     <tr>
+	       <th width="80">状态</th>
+	       <th width="350">短信标题</th><th width="100">发布时间  </th>    
+	       <th width="60">操作</th>
+	     </tr>
+	     {notempty name='usermsg'}
+	     	{volist name='usermsg' id='vo'}
+	     		<tr bgcolor="#FFFFFF" align="center" onMouseOver="this.style.backgroundColor='#FFFFCC'" onMouseOut="this.style.backgroundColor='#FFFFFF'" >
+	     			<td align="center">
+	     				{if $vo.islook eq 0}
+	     					<font color="#006600">未读</font>
+	     				{else}
+	     					<font color="#FF0000">已读</font>
+	     				{/if}
+	     			</td>
+	     			<td align="left">
+	     				<a href="javascript:void(0);" onclick="Go('{:url('user/smsshow','id='.$vo.msg_id)}');return false">
+					  		<?php echo strlen(trim($vo["msg_title"])) ? $vo["msg_title"] : '无标题信息' ?>
+					  	</a>
+	     			</td>
+	     			<td align="center"><?php echo date("Y-m-d",strtotime($vo["msg_time"]))?></td>
+	     			<td align="center">
+	     				<a href="javascript:void(0);" onclick="Go('{:url('user/smsdel','id='.$vo.msg_id)}');return false" style="color:#00F">
+	     				点击删除
+	     				</a>
+	     			</td>
+	     		</tr>
+	     	{/volist}
+	     {/notempty}
+	  <tr>
+	  </tr>
+    </table>
+    </ul>
+  </div>
+   	<!-- page -->
+ 	<div class="page_list">
+  	<?php echo $page?>
+	</div>
+	<!-- page end -->
+<script language="javascript">bianse("thetable","#F5F5F5","#FFFFFF","#FFFFCC","#FFFFCC");</script> 
+</body>
+</html>

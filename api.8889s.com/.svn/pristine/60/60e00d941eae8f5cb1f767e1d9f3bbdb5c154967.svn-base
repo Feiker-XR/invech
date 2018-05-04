@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>系统设置</title>
+
+<link rel="stylesheet" type="text/css" href="/css/page.css" />
+<link href="/css/base.css" rel="stylesheet" type="text/css" />
+<link href="/css/admin.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="/js/jquery.js"></script>
+<script type="text/javascript" src="/js/jquery.tools.js"></script>
+<script type="text/javascript" src="/js/base.js"></script>
+<script type="text/javascript">
+$().ready(function() {
+	var $tab = $("#tab");
+
+	// Tab效果
+	$tab.tabs(".tabContent", {
+		tabs: "input"
+	});
+})
+</script>
+</head>
+<body class="input">
+	<!--<div class="bar">
+		系统设置
+	</div>-->
+	<div class="body">
+		<form method="post" name="editForm" id="editForm" >
+			<ul id="tab" class="tab">
+				<li>
+					<input type="button" value="基本设置" hidefocus />
+				</li>
+			</ul>
+			<table class="inputTable tabContent">
+				<tr>
+					<th>
+						网站名称: 
+					</th>
+					<td>
+
+						<input type="text" value="<?php echo $base['web_name']?>" name="web_name" id="web_name" class="formText"/>
+					</td>
+				</tr>
+				<tr>
+				  <th>图片域名:</th>
+				  <td><input type="text" value="<?php echo $base['pic_url']?>" name="pic_url" id="pic_url" class="formText"/></td>
+			  </tr>
+				<tr>
+					<th>
+						注册消息标题: 
+					</th>
+					<td>
+
+						<input type="text" value="<?php echo $base['reg_msg_title']?>" name="reg_msg_title" id="reg_msg_title" class="formText" /></td>
+				</tr>
+				<tr>
+				  <th>注册消息内容: </th>
+				  <td><textarea name="reg_msg_info" id="reg_msg_info" class="formTextarea"><?php echo $base['reg_msg_info']?></textarea></td>
+			  </tr>
+				<tr>
+					<th>
+						注册消息发布者: 
+					</th>
+					<td><input name="reg_msg_from" id="reg_msg_from"  type="text" class="formText"value="<?php echo $base['reg_msg_from']?>" /></td>
+				</tr>
+				<tr>
+				  <td colspan="2" bgcolor="#758fb9" style="color:#FFF;">新会员注册设置</tr>
+				<tr>
+					<th>
+						新会员默认代理: 
+					</th>
+					<td>
+						<input type="text" value="<?php echo $base['agents']?>" name="agents" id="agents" class="formText"/>
+					</td>
+				</tr>
+				<tr>
+					<th>
+						<span class="red">说明:</span> 
+					</th>
+					<td>
+						<span class="blue">当会员注册时没有输入推荐人或者输入的推荐人错误时，将自动归到后台设置的默认代理名下！</span> 
+					</td>
+				</tr>
+				<tr>
+					<th>
+						同一IP多次注册: 
+				  </th>
+					<td><input type="radio" class="toggleRadio runRadio" value="0" <?php if($base['reg_ip']==0){?>checked="checked" <?php }?>id="reg_ip" name="reg_ip" />
+                        <input type="radio" class="toggleRadio closeRadio" value="1" <?php if($base['reg_ip']==1){?>checked="checked" <?php }?>id="reg_ip" name="reg_ip" />
+                     </td>
+				</tr>
+				<tr>
+					<th>
+						同一姓名多次注册: 
+				  </th>
+					<td><input type="radio" class="toggleRadio runRadio" value="0" <?php if($base['reg_name']==0){?>checked="checked" <?php }?>id="reg_name" name="reg_name" />
+                    	<input type="radio" class="toggleRadio closeRadio"  value="1" <?php if($base['reg_name']==1){?>checked="checked" <?php }?>id="reg_name" name="reg_name" />
+                    </td>
+				</tr>
+				<tr>
+					<th>
+						同一电话多次注册: 
+				  </th>
+					<td><input type="radio" class="toggleRadio runRadio" value="0" <?php if($base['reg_tel']==0){?>checked="checked" <?php }?>id="reg_tel" name="reg_tel" />
+                    	<input type="radio" class="toggleRadio closeRadio"  value="1" <?php if($base['reg_tel']==1){?>checked="checked" <?php }?>id="reg_tel" name="reg_tel" />
+                    </td>
+				</tr>
+								<tr>
+					<th>
+						同一邮箱多次注册: 
+					</th>
+					<td><input type="radio" class="toggleRadio runRadio" value="0" <?php if($base['reg_mail']==0){?>checked="checked" <?php }?>id="reg_mail" name="reg_mail" />
+                    	<input type="radio" class="toggleRadio closeRadio"  value="1" <?php if($base['reg_mail']==1){?>checked="checked" <?php }?>id="reg_mail" name="reg_mail" />
+                    </td>
+				</tr>
+                
+                <tr style="display:none">
+				                  <td colspan="2" bgcolor="#EEF4F9">体育盘口水位设置</td>
+              </tr>
+                <tr style="display:none">
+					<th>
+						上盘水位: 
+					</th>
+					<td><input type="text" onKeyDown="return check(event)" onKeyUp="if(isNaN(this.value)||this.value<0||this.value>59) this.value='0'" value="<?php echo $base['ds_sp']?>" name="ds_sp" id="ds_sp" class="formText"/></td>
+				</tr>
+				<tr style="display:none">
+					<th>
+						下盘水位: 
+					</th>
+					<td><input type="text" onKeyDown="return check(event)" onKeyUp="if(isNaN(this.value)||this.value<0||this.value>59) this.value='0'" value="<?php echo $base['ds_xp']?>" name="ds_xp" id="ds_xp" class="formText"/></td>
+				</tr>
+				<tr style="display:none">
+					<th>
+						大球水位: 
+					</th>
+					<td><input type="text" onKeyDown="return check(event)" onKeyUp="if(isNaN(this.value)||this.value<0||this.value>59) this.value='0'" value="<?php echo $base['dx_sp']?>" name="dx_sp" id="dx_sp" class="formText"/></td>
+				</tr>
+				<tr style="display:none">
+					<th>
+						小球水位: 
+					</th>
+					<td><input type="text" onKeyDown="return check(event)" onKeyUp="if(isNaN(this.value)||this.value<0||this.value>59) this.value='0'" value="<?php echo $base['dx_xp']?>" name="dx_xp" id="dx_xp" class="formText"/></td>
+				</tr>
+				<tr style="display:none">
+				  <th><span class="red">说明:</span></th>
+				  <td><span class="blue">本系统默认水位最高<span class="red">1.90</span>，本功能可以在<span class="red">1.90</span>的水位上增加相应的水位！</span></td>
+			  </tr>
+				<tr style="display:none">
+				  <th><span class="red">例如:</span></th>
+				  <td><span class="blue">阿森纳(<span class="red">0.90 水位</span>) 0/0.5 曼城(<span class="red">1.00 水位</span>)，<span class="red">上下盘各加 0.01 之后 </span>就变成 阿森纳(<span class="red">0.91 水位</span>) 0/0.5 曼城(<span class="red">1.01 水位</span>)</span></td>
+			  </tr>
+                <tr style="display:none">
+				                  <td colspan="2" bgcolor="#EEF4F9">真人娱乐维护设置</td>
+              </tr>
+				<tr style="display:none">
+					<th>
+						AG旗舰厅: 
+					</th>
+
+					<td><input type="radio" value="0" <?php if($base['zrclose']==0){?>checked="checked" <?php }?>id="zrclose" name="zrclose" />开放中
+                        <input type="radio" value="1" <?php if($base['zrclose']==1){?>checked="checked" <?php }?>id="zrclose" name="zrclose" />维护中
+                     </td>
+				</tr>
+				<tr style="display:none">
+					<th>
+						HG娱乐厅: 
+					</th>
+
+					<td><input type="radio" value="0" <?php if($base['hgclose']==0){?>checked="checked" <?php }?>id="hgclose" name="hgclose" />开放中
+                        <input type="radio" value="1" <?php if($base['hgclose']==1){?>checked="checked" <?php }?>id="hgclose" name="hgclose" />维护中
+                     </td>
+				</tr>
+                <tr style="display:none">
+					<th>
+						BB娱乐厅: 
+					</th>
+
+					<td><input type="radio" value="0" <?php if($base['bbclose']==0){?>checked="checked" <?php }?>id="bbclose" name="bbclose" />开放中
+                        <input type="radio" value="1" <?php if($base['bbclose']==1){?>checked="checked" <?php }?>id="bbclose" name="bbclose" />维护中
+                     </td>
+				</tr>
+                <tr style="display:none">
+					<th>
+						XTD娱乐厅: 
+					</th>
+
+					<td><input type="radio" value="0" <?php if($base['xtdclose']==0){?>checked="checked" <?php }?>id="xtdclose" name="xtdclose" />开放中
+                        <input type="radio" value="1" <?php if($base['xtdclose']==1){?>checked="checked" <?php }?>id="xtdclose" name="xtdclose" />维护中
+                     </td>
+				</tr>
+                <tr style="display:none">
+					<th>
+						VIP国际厅: 
+					</th>
+
+					<td><input type="radio" value="0" <?php if($base['vipclose']==0){?>checked="checked" <?php }?>id="vipclose" name="vipclose" />开放中
+                        <input type="radio" value="1" <?php if($base['vipclose']==1){?>checked="checked" <?php }?>id="vipclose" name="vipclose" />维护中
+                     </td>
+				</tr>
+                <tr style="display:none">
+				                  <td colspan="2" bgcolor="#EEF4F9">飞信通知设置（<font color="#0000FF">开启该功能后，您的手机可以收到会员存款，取款的短信通知！</font>）</td>
+              </tr>
+				<tr style="display:none">
+				  <th>开通飞信:</th>
+				  <td><a href="http://feixin.10086.cn/account/register/" target="_blank" style="color:#F00">点击此处开通移动飞信功能</a></td>
+			  </tr>
+				<tr style="display:none">
+				  <th>通知开关:</th>
+				  <td><input type="radio" value="0" <?php if($base['feixin']==0){?>checked="checked" <?php }?>id="feixin" name="feixin" />开启通知
+                      <input type="radio" value="1" <?php if($base['feixin']==1){?>checked="checked" <?php }?>id="feixin" name="feixin" />关闭通知
+                     </td>
+			  </tr>
+				<tr style="display:none">
+					<th>
+						手机号码: 
+					</th>
+
+					<td><input type="text" value="<?php echo $base['mobile']?>" name="mobile" id="mobile" class="formText"/></td>
+				</tr>
+				<tr style="display:none">
+					<th>
+						飞信密码: 
+					</th>
+
+					<td><input type="text" value="<?php echo $base['fxpass']?>" name="fxpass" id="fxpass" class="formText"/></td>
+				</tr>
+                <tr style="display:none">
+                  <th>短信测试:</th>
+                  <td><a href="FeiXin.php" style="color:#F00">点击发送一条测试短信</a></td>
+                </tr>
+                
+                <tr>
+				 	<td colspan="2" bgcolor="#758fb9" style="color:#FFF;">网站前台维护设置</td>
+              	</tr>
+				<tr>
+					<th>
+						关闭网站: 
+					</th>
+
+					<td><input type="radio" class="toggleRadio runRadio" value="0" <?php if($base['close']==0){?>checked="checked" <?php }?>id="close" name="close" />
+                        <input type="radio" class="toggleRadio closeRadio"  value="1" <?php if($base['close']==1){?>checked="checked" <?php }?>id="close" name="close" />
+                     </td>
+				</tr>
+				<tr>
+					<th>
+						关闭原因: 
+					</th>
+
+					<td><textarea name="why" id="why" class="formTextarea"><?php echo $base['why']?></textarea><div style="display:none"><input name="bs" id="bs" value="<?php echo $base['bs']?>" size="10" maxlength="10"></div></td>
+				</tr>
+			</table>
+			<div class="buttonArea">
+      			<input type="submit" class="formButton" name="set_submit" value="确  定" hidefocus />&nbsp;&nbsp;
+				<input type="button" class="formButton" onClick="window.location.href='/index.php/main/info'" value="返  回" hidefocus />
+		  </div>
+		</form>
+	</div>
+    <style type="text/css">
+	.toggleBtn{
+		border:none;
+		width:48px;
+		height:24px;
+		background:none;
+		font-size:14px;
+		line-height:24px;
+		font-family:'微软雅黑';
+		padding:0px;
+		margin:0px;
+		outline:0px;
+	}
+	.runBtn{
+		margin-left:30px;
+	}
+	.closeBtn{
+		margin-left:10px;
+	}
+	
+	.toggleBtn:focus{
+		outline: 0;
+	}
+	input[type='button'].normal{
+		color:#666666;
+		background:url(/images/radio_normal.png) top left no-repeat;
+	}
+	input[type='button'].run{
+		color:#f2f2f2;
+		background:url(/images/radio_on.png) top left no-repeat;
+	}
+	input[type='button'].closed{
+		color:#f2f2f2;
+		background:url(/images/radio_close.png) top left no-repeat;
+	}
+
+	</style>
+    <script type="text/javascript">
+	$(function(){
+		$(".toggleRadio").each(function(){
+			$(this).hide();
+			if($(this).attr("checked") != 'checked'){
+				$isrun = false;
+			}else{
+				$isrun = true;
+			}
+			if($(this).val() == 1 ){
+				$runflag = $isrun ? 'runBtn normal' : 'runBtn run';
+				$val = '是';
+			}else{
+				$runflag = $isrun ? 'closeBtn normal' : 'closeBtn closed' ;
+				$val = '否';
+			}
+			
+			var html = "<input type='button' class='toggleBtn "+$runflag+" ' value='"+$val+"' />";
+			$(this).parent().prepend(html);
+		})
+		$(".runBtn").click(function(){
+			$close = $(this).parent().find('.closeBtn');
+			$radio = $(this).parent().find('input[value=0]');
+			if($(this).hasClass('normal')){
+				$(this).addClass('run');
+				$(this).removeClass('normal');
+				$close.addClass('normal');
+				$close.removeClass('closed');
+				$radio.click();
+				
+			}
+		})
+		$(".closeBtn").click(function(){
+			$run = $(this).parent().find('.runBtn');
+			$radio = $(this).parent().find('input[value=1]');
+			if($(this).hasClass('normal')){
+				$(this).addClass('closed');
+				$(this).removeClass('normal');
+				$run.addClass('normal');
+				$run.removeClass('run');
+				$radio.click();
+			}
+		})
+	})
+	</script>
+</body>
+</html>

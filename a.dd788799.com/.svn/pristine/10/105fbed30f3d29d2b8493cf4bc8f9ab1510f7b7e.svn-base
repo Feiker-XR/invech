@@ -1,0 +1,49 @@
+<div class="cash-modal">
+<form action="{:Url('business/disposeCash')}" method="post" class="form-horizontal" target="ajax">
+	<ul>
+		<li> 银行类型：{$Request.param.bankName}&nbsp;&nbsp;<a href="{$Request.param.home? 'http://'.$Request.param.home : ''}" target="_blank" style="color:#836FFF;">进入银行>></a></li>
+		<li>开户姓名：{$Request.param.username} <input name="id" id="id" type="hidden" value="{$Request.param.id}" />
+        		<div style="float:right;">
+                <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" codebase="http://fpdownload.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=8,0,0,0" width="62" height="23" id="copy-username" align="top">
+                <param name="allowScriptAccess" value="always" />
+                <param name="movie" value="/skin/js/copy.swf?movieID=copy-username&inputID=username" />
+                <param name="quality" value="high" />
+                <param name="bgcolor" value="#ffffff" />
+                <param name="scale" value="noscale" /><!-- FLASH原始像素显示-->
+                <embed src="/skin/js/copy.swf?movieID=copy-username&inputID=username" width="62" height="23" name="copy-username" align="top" allowScriptAccess="sameDomain" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer" />
+                </object>
+               </div>
+           </li>
+           <li>银行帐号：{$Request.param.account}
+        		<div style="float:right;">
+                <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" codebase="http://fpdownload.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=8,0,0,0" width="62" height="23" id="copy-account" align="top">
+                <param name="allowScriptAccess" value="always" />
+                <param name="movie" value="/skin/js/copy.swf?movieID=copy-username&inputID=account" />
+                <param name="quality" value="high" />
+                <param name="bgcolor" value="#ffffff" />
+                <param name="scale" value="noscale" /><!-- FLASH原始像素显示-->
+                <embed src="/skin/js/copy.swf?movieID=copy-account&inputID=account" width="62" height="23" name="copy-account" align="top" allowScriptAccess="sameDomain" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer" />
+                </object>
+               </div>
+           </li>
+           <li>提取金额：{$Request.param.amount}
+        		<div style="float:right;">
+                <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" codebase="http://fpdownload.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=8,0,0,0" width="62" height="23" id="copy-amount" align="top">
+                <param name="allowScriptAccess" value="always" />
+                <param name="movie" value="/skin/js/copy.swf?movieID=copy-amount&inputID=amount" />
+                <param name="quality" value="high" />
+                <param name="bgcolor" value="#ffffff" />
+                <param name="scale" value="noscale" /><!-- FLASH原始像素显示-->
+                <embed src="/skin/js/copy.swf?movieID=copy-amount&inputID=amount" width="62" height="23" name="copy-amount" align="top" allowScriptAccess="sameDomain" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer" />
+                </object>
+               </div>
+           </li>
+	</ul>
+	<p>
+		<label><input type="radio" name="state" value="0" checked onclick="cashTrue()"/>提现成功（扣除冻结款）</label>
+		<label><input type="radio" name="state" value="4" onclick="cashFalse()"/>提现失败（返还冻结款）</label>
+        <input type="text" class="cashFalseSM" name="info" style="display:none; overflow-y:auto; width:100%;"  value=""/>
+	</p>
+    <input type="submit" />
+</form>
+</div>

@@ -1,0 +1,55 @@
+{extend name="common/base"/}
+
+{block name="body"}
+	<script type="text/javascript" src="__STATIC__/uploadify/jquery.uploadify.min.js"></script>
+	<div class="main-title">
+		<h2>消费佣金</h2>
+	</div>
+  <article class="module width_full">
+	<form action="{:Url('group')}" method="post" class="form-horizontal">
+		<div class="data-table table-striped">
+			<table>
+				<tbody>
+
+					<tr>
+						<td>消费佣金活动</td>
+						<td><p>
+							每天消费达<input class="textWid1" type="text" value="{$settings['conCommissionBase']|isset ? $settings['conCommissionBase'] : ''}" name="conCommissionBase"/>元时，上家送<input  class="textWid1"type="text" value="{$settings['conCommissionParentAmount']|isset ? $settings['conCommissionParentAmount'] : ''}" name="conCommissionParentAmount"/>元佣金，上上家送<input  class="textWid1"type="text" value="{$settings['conCommissionParentAmount2']|isset ? $settings['conCommissionParentAmount2'] : ''}" name="conCommissionParentAmount2"/>元佣金，如果为0则关闭活动</p>
+						</p></td>
+					</tr>
+
+				</tbody>
+			</table>
+		</div>
+		<footer>
+			<div class="form-item">
+				<label class="item-label"></label>
+				<div class="controls">
+					<button type="submit" class="btn submit-btn " target-form="form-horizontal">确 定</button>
+					<button class="btn btn-return" onclick="javascript:history.back(-1);return false;">返 回</button>
+				</div>
+			</div>
+		</footer>
+	</form>
+</article>
+{/block}
+
+{block name="script"}
+<link href="__STATIC__/datetimepicker/css/datetimepicker.css" rel="stylesheet" type="text/css">
+<link href="__STATIC__/datetimepicker/css/datetimepicker_blue.css" rel="stylesheet" type="text/css">
+<link href="__STATIC__/datetimepicker/css/dropdown.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="__STATIC__/datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
+<script type="text/javascript" src="__STATIC__/datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js" charset="UTF-8"></script>
+
+<script>
+$(function(){
+	$('.time').datetimepicker({
+        format: 'yyyy-mm-dd',
+        language:"zh-CN",
+        minView:2,
+        autoclose:true
+    });
+    showTab();
+});
+</script>
+{/block}

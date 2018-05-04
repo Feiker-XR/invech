@@ -1,0 +1,67 @@
+<?php
+namespace app\common\model;
+use think\Model;
+
+class Base extends Model{
+
+    //请求的分页参数list_rows支持
+    public static function __callStatic($method, $args)
+    {
+        if('paginate' == $method){
+
+            $args['list_rows'] = input('list_rows')??null;
+        }
+        return parent::__callStatic($method, $args);
+    }
+
+    public function __call($method, $args)
+    {
+    	if($listRows = input('list_rows')??null){
+    		config('paginate.list_rows',$listRows);
+    	}
+      
+    	return parent::__call($method, $args);
+    }
+
+    //通用hashid
+    public function getHashidAttr($value)
+    {
+        return hashid($this->id);
+    }
+
+    public function setPasswordAttr($value,$data)
+    {
+        return $this->data['password'] = bcrypt($value);
+    }    
+
+    //失败的子事务处理,暂时无用;
+    public function transaction($callback)
+    {
+        db()->startTrans();
+
+        $trans_times = db()->getConnection()->getTransTimes();
+        $sub_trans = false;
+        if(1 != $trans_times){
+            $sub_trans = true;
+        }
+
+        try {
+            $result = null;
+            if (is_callable($callback)) {
+                $result = call_user_func_array($callback, [$this]);
+            }
+            db()->commit();
+            return $result;
+        } catch (\Exception $e) {
+            db()->rollback();
+            if($sub_trans){
+                throw $e;    
+            }            
+        } catch (\Throwable $e) {
+            db()->rollback();
+            if($sub_trans){
+                throw $e;
+            }
+        }
+    }
+}

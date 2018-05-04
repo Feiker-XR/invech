@@ -1,0 +1,114 @@
+﻿@charset "utf-8";
+/*基本框架CSS*/
+body, div, h1, h2, h3, h4, h5, h5, p, ul, ol, li, dl, dt, dd, button{ margin: 0; padding: 0;-webkit-text-size-adjust: 100%; }
+ul, ol { list-style-type: none; }
+html{font-size:62.5%!important}
+*{margin:0;padding:0;text-shadow:none;-moz-box-sizing:border-box;-webkit-box-sizing:border-box;box-sizing:border-box;}
+body{background-color:#fff;font:14px/1.5 Microsoft Yahei,tahoma,Srial,helvetica,sans-serif;overflow:hidden;max-width:640px;margin:0 auto;}
+a,a:link,a:visited,a:hover,a:active {text-decoration: none;}
+a,button,input {-webkit-tap-highlight-color: rgba(0, 0, 0, 0);-webkit-tap-highlight-color: transparent;}
+input {resize: none;-webkit-appearance: none;}
+p{font-size:100%;}
+img{border:0;max-width: 100%;display: inline-block;vertical-align: middle;}
+body, html { height: 100%;}
+#zj-main,#xxcy-main,#tjcg-main{display:none;}
+
+
+/*******首页********/
+.main { height: 100%; max-width: 640px; margin: 0 auto;background:#9FF;/* background: url(../images/index.jpg) center;*/ background-size: 100% 100%;position:relative;overflow:hidden;*zoom:1; }
+.main .hide { display: none; }
+.main .one{ width:28%;height:auto; bottom: 7%; left: 15%; position: absolute;}
+.main .two{width:28%;bottom:7%;right:15%;position: absolute;}
+.main a{display:block;width:100%;height:auto;}
+.zoom { -webkit-animation: Zoom 0.5s ease-in-out }
+@-webkit-keyframes Zoom {
+	0% { -webkit-transform: scale(0.01) }
+	60% { -webkit-transform: scale(1.05) }
+	80% { -webkit-transform: scale(1.00) }
+	100% { -webkit-transform: scale(1.00) }
+}
+
+.text-wrap { position: fixed; top: 0; left: 0; right: 0; bottom: 0; margin: auto; z-index: 100; width: 100%; height: 100%; background-size:100% 100%;background: rgba(0, 0, 0, .7); display: -webkit-box; -webkit-box-pack: center; -webkit-box-align: center; -webkit-box-orient: vertical; line-height:150%;}
+.text-wrap .wrap-content .hd_rules{width:90%;height:auto;left:5%;top:15%;position:absolute;color:#232323;background: rgba(255, 255, 255, .7);padding:3%;-webkit-border-radius:10px;-moz-border-radius:10px;border-radius:10px;}
+.text-wrap .wrap-content .hd_rules h2{width:40%;height:auto;font-size:16px;font-weight:bold;margin:1% auto;color:#232323;text-align:center;}
+.text-wrap .wrap-content .hd_rules h3{width:100%;height:auto;font-size:14px;font-weight:bold;color:#232323;}
+.text-wrap .wrap-content .hd_rules p{width:100%;height:auto;font-size:12px;margin:2% auto 0 auto;color:#232323;}
+.text-wrap .close { z-index:9999;display: block; width: 23px; height: 23px; background-image:url(../images/close_1.png);/*border-radius: 50%;*/ overflow: hidden; right: 3%; top: 14%; position: absolute; background-size: 23px;background-position: center center; background-repeat: no-repeat; }
+
+/*****抽奖页面****/
+.ml-main { width:100%;height: 100%; max-width: 640px; margin: 0 auto;background:url('../images/lun_bg.jpg') repeat; /*background: url(../images/cj_bg_2.jpg) center ; background-size: 100% 100%;*/position:absolute;overflow:hidden;*zoom:1; z-index:1;left:center;top:0;}
+.ml-main .keTitle{width:45%;height:auto;margin:0 auto;}
+.ml-main .keTitle .title{width:100%;height:auto;margin:15% auto;}
+.ml-main .keTitle .xian{width:100%;height:auto;}
+.ml-main .kePublic{width:80%;height:auto;position:absolute;top:20px;left:10%;}
+/* 大转盘样式 */
+.banner{display:block;width:95%;margin-left:auto;margin-right:auto;}
+.banner .turnplate{display:block;width:100%;position:relative;}
+.banner .turnplate canvas.item{width:100%;}
+.banner .turnplate #tupBtn{position:absolute;width:27.5%;height:33.5%;left:36%;top:30.5%;border:0;background:none;}
+.banner .turnplate img{width:100%;height:auto;}
+/*.banner .turnplate img.pointer{position:absolute;width:31.5%;height:42.5%;left:34.6%;top:23%;}*/
+
+
+/*******中奖页面*******/
+.zj-main { width:100%;height: 100%; max-width: 640px; margin: 0 auto; background-color: rgba(0,0,0,0.7) ; background-size: 100% 100%;position:absolute;overflow:hidden;*zoom:1;z-index:10;left:center;top:0; }
+.zj-main .txzl{width:90%;height:auto;position:absolute;top:28%;left:5%;background: url(../images/zj_1.png) center ; background-size: 100% 100%;}
+.txzl h3{font-size:3.2rem;font-weight:bold;width:100%;height:auto;margin:0 auto;color:#e32d2c;line-height:140%;text-align:center;margin-top:5%;}
+.txzl h2{font-size:3.0rem;font-weight:bold;width:100%;height:auto;margin:0 auto;color:#e32d2c;line-height:140%;text-align:center;}
+.txzl p{font-size:2.6rem;width:90%;height:auto;margin:1% auto 0 auto;color:#232323;line-height:150%;text-align:center;}
+.txzl label{width:90%;height:auto;margin:3% auto 0 auto;font-size:2.6rem;color:#232323;display:block;text-align:center;}
+.txzl label input{height:auto;font-size:2.6rem;border:none;line-height:180%;}
+.txzl h4{font-size:2.6rem;font-weight:bold;width:100%;height:auto;margin:3% auto 0 auto;color:#e32d2c;line-height:140%;text-align:center;}
+.txzl .info_tj{width:50%;height:auto;font-size:3rem;line-height:180%;color:#ffffff;text-align:center;background:#ad0004;-webkit-border-radius:10px;-moz-border-radius:10px;border-radius:10px;margin:4% auto 6% auto}
+.zj-main .close_zj{width:31px;height:31px;position:absolute;top:27%;right:3.5%;}
+
+/*******谢谢参与页面*******/
+.xxcy-main { width:100%;height: 100%; max-width: 640px; margin: 0 auto; background-color: rgba(0,0,0,0.7) ; background-size: 100% 100%;position:absolute;overflow:hidden;*zoom:1;z-index:10;left:center;top:0;}
+.xxcy-main .xxcy{width:90%;height:auto;position:absolute;top:30%;left:5%;background: url(../images/zj_1.png) center ; background-size: 100% 100%;}
+.xxcy h3{font-size:3.2rem;font-weight:bold;width:100%;height:auto;margin:0 auto;color:#e32d2c;line-height:140%;text-align:center;margin-top:5%;}
+.xxcy p{font-size:2.8rem;width:90%;height:auto;margin:2% auto 5% auto;color:#232323;line-height:150%;text-align:center;}
+.xxcy .code{width:40%;height:auto;margin:0% auto 3% auto;}
+.xxcy-main .close_xxcy{width:31px;height:31px;position:absolute;top:28%;right:2.5%;}
+
+/*******自由弹窗*******/
+#xxcy-bad .xxcy{width:90%;height:auto;position:absolute;top:40%;left:5%;background: url(../images/xxcy.png) center ; background-size: 100% 100%;}
+#xxcy-bad .xxcy h3{font-size:3.2rem;font-weight:bold;width:100%;height:auto;margin:0 auto;color:#e32d2c;line-height:140%;text-align:center;margin-top:5%;}
+#xxcy-bad .xxcy p{font-size:2.8rem;width:90%;height:auto;margin:2% auto 5% auto;color:#232323;line-height:150%;text-align:center;}
+#xxcy-bad .close_xxcy{width:31px;height:31px;position:absolute;top:38%;right:2.5%;}
+
+/*******提交成功页面*******/
+.tjcg-main { width:100%;height: 100%; max-width: 640px; margin: 0 auto; background-color: rgba(0,0,0,0.7) ; background-size: 100% 100%;position:absolute;overflow:hidden;*zoom:1;z-index:10;left:center;top:0; }
+.tjcg-main .tjcg{width:90%;height:auto;position:absolute;top:25%;left:5%;background: url(../images/zj_1.png) center ; background-size: 100% 100%;}
+.tjcg h3{font-size:3.2rem;font-weight:bold;width:100%;height:auto;margin:0 auto;color:#e32d2c;line-height:140%;text-align:center;margin-top:5%;}
+.tjcg p{font-size:2.8rem;width:90%;height:auto;margin:1% auto 0 auto;color:#232323;line-height:150%;text-align:center;}
+.tjcg .code{width:40%;height:auto;margin:3% auto;}
+.tjcg .zixun{width:50%;height:auto;font-size:3rem;line-height:180%;color:#ffffff;text-align:center;background:#ad0004;-webkit-border-radius:10px;-moz-border-radius:10px;border-radius:10px;margin:3% auto 5% auto}
+.tjcg .zixun a{color:#ffffff;display:block;width:100%;height:auto;}
+.tjcg-main .close_tjcg{width:31px;height:31px;position:absolute;top:24%;right:3.5%;}
+
+
+/*******奖品背包页面*******/
+.bb-main { height: 100%; max-width: 640px; margin: 0 auto; background: url(../images/beib_bg.jpg) center; background-size: 100% 100%;position:relative;overflow:hidden;*zoom:1;display: -webkit-box; -webkit-box-pack: center; -webkit-box-align: center; -webkit-box-orient: vertical; }
+.bb-main .jp_content{width:60%;height:auto;/*position:absolute;top:28%;left:20%;*/margin:28% auto 0 auto;}
+.jp_content p{font-size:2.6rem;line-height:130%;color:#232323;margin-top:3%;}
+.jp_content p span{font-size:2.2rem;}
+
+
+
+@media (min-width:320px) and  (max-width:359px){
+	html{font-size:31% !important}
+	.wrap { width:100%; }
+	
+}
+@media (min-width:360px) and  (max-width:399px){
+	html{font-size:36% !important}
+	.wrap { width:100%; }
+}
+@media (min-width:400px) and  (max-width:479px){
+	html{font-size:40% !important}
+	.wrap { width:100%; }
+}
+@media (min-width:480px) and  (max-width:639px){
+	html{font-size:49% !important}
+	.wrap { width:100%; }
+}

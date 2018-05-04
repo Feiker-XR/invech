@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>澳门博彩公司</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<script src='/js/jquery-1.7.2.min.js'></script>
+<link rel="stylesheet" type="text/css" href="/css/style.css"/>
+<script src='/js/js/jquery-1.8.0.min.js'></script>
+<script src='/js/jquery-1.8.0.min.js'></script>
+<script type="text/javascript" src="/js/js/jquery.jslides.js"></script>
+<script type="text/javascript" src="/js/js/jquery.SuperSlide.2.1.1.js"></script>
+<script src="/Scripts/swfobject_modified.js" type="text/javascript"></script>
+<!--Self-->
+<script type="text/javascript" language="JavaScript" src="/js/main.js"></script>
+<script type="text/javascript" language="JavaScript" src="/js/main.new.js"></script>
+<script type="text/javascript" language="JavaScript" src="/js/layer.js"></script>
+<!--Self-->
+
+</head>
+<body>
+<div class="head">
+		<!--欢迎-->
+		<div class="head_welcome">
+			<div class="head_w_center">
+				<span class="fl">欢迎来到澳门金沙官方网站！ www.77158.com</span>
+				<ul class="fr">
+					<li><a href="http://www.77158.com/vip/" target="_blank">VIP等级查询</a></li>
+					<li><i></i></li>
+					<li><a href="http://www.77158.am/" target="_blank">网址检测</a></li>
+					<li><i></i></li>				
+					<li><a href="http://pay77158.com" target="_blank">快速充值</a></li>
+					<li><i></i></li>				
+					<li><a href="javascript:;" onclick="AddFavorite(window.location,document.title)">加入收藏</a></li>
+					<li><i></i></li>				
+					<li><a href="javascript:void(0)" onclick="SetHome(window.location)">设为首页</a></li>				
+				</ul>
+			</div>
+		</div>
+		<!--导航-->
+		<div class="nav">
+			<div class="nav_center">
+				<a href="javascript:;"><img src="/img/logo.png" class="logo"></a>
+				<div class="fl nav_right">
+					<div class="nav_right_div">
+						<a href="{:Url('index/index')}" target="index" class="nav_a nav_right_active">
+							<span class="dsblock">首页<br>Home</span>
+						</a>
+					</div>
+					<div class="nav_right_div">
+						<a href="{:Url('sport/index')}" target="index" target="index" class="nav_a " >
+							<span class="dsblock">体育赛事<br/>Sports</span>
+						</a>
+						<ul style="display: none;">
+							<li><a href="{:Url('sport/index')}" target="index">皇冠体育</a></li>
+							<li><a href="/bbGame/" target="_BLANK">BBIN体育</a></li>
+							<!--<li><a href="/zhibo.php" target="_BLANK">赛事直播</a></li>-->
+						</ul>						
+					</div>
+					<div class="nav_right_div">
+						<a href="{:Url('live/index')}" target="index" class="nav_a ">
+							<span class="dsblock">真人视讯<br/>Live Casino</span>
+						</a>
+						<ul style="display: none;"> 
+							<li><a href="/aggame/index.php" target="_BLANK">AG视讯 </a></li>
+							<li><a href="/bbin/index.php" target="_BLANK">BB视讯 </a></li>
+							<li><a href="/oggame/index.php" target="_BLANK">OG视讯</a></li>
+							<li><a href="/sunbet/index.php" target="_BLANK">申博视讯</a></li>
+						</ul>
+						
+					</div>
+					<div class="nav_right_div">
+						<a href="{:Url('lottery/index')}" target="index"  class="nav_a">
+							<span class="dsblock">彩票游戏<br/>Lottery</span>
+						</a>
+						<ul style="display: none;">
+							<li><a href="/lottery/index/type/csc" target="index">重庆时时彩</a></li>
+							<li><a href="/lottery/pk10.php" target="index">北京PK拾</a></li>
+							<li><a href="/lottery/xyft.php" target="index">幸运飞艇 </a></li>
+							<li><a href="/lottery/gsf.php" target="index">广东快乐十分</a></li>
+							<li><a href="/lottery/csf.php" target="index">重庆快乐十分</a></li>
+						</ul>	
+						<img src="/img/hots.gif" />
+					</div>
+					<div class="nav_right_div">
+						<a href="/Six/" target="index"  class=" nav_a">
+							<span class="dsblock">六合彩<br/>Mark Six</span>
+						</a>	
+						<ul style="display: none;">
+							<li><a href="/Six/" data-color="RED|YELLOW">特码49倍</a></li>
+					   </ul>				
+					</div>
+					<div class="nav_right_div">
+						<a href="/electric-game.php" target="index" class="nav_a " >
+							<span class="dsblock">电子游艺<br/>Game</span>
+						</a>
+						<ul style="display: none;">
+							<li><a href="/aggame/index.php" target="_BLANK">AG电子</a></li>
+							<li><a href="/bbin/index.php" target="_BLANK">BBIN电子</a></li>
+							<li><a href="/electric-game.php?type=mg" target="index">MG电子</a></li>
+							<li><a href="/electric-game.php?type=pt" target="index" >PT电子</a></li>
+						</ul>						
+					</div>
+					<div class="nav_right_div">
+						<a href="{:Url('promotions/index')}" target="index"class="nav_a ">
+							<span class="dsblock">优惠活动<br/>Promotions</span>
+						</a>
+						<img src="/img/hots.gif" />
+					</div>
+					<div class="nav_right_div">
+						<a href="http://messenger.providesupport.com/messenger/1x5b67gp1rcy50kqxa0qpsa0jx.html" target="_blank" class="nav_a">
+							<span class="dsblock">在线客服<br/>service</span>
+						</a>
+					</div>
+				</div>
+			</div>
+		</div>
+</div>
+
+<div class="block_0"></div>
+	<div class="game_s_center">
+	<div class="game_l_login">
+		<div class="game_l_login_nav game_hadlogin" style="display: block;">
+	<h3>Vip会员登录</h3>
+	<span class="ml15 fl">账户：<i class="head_w_hadlogin_name">{$user['username']}</i></span>
+	<span class="ml15 fl">余额：<i class="head_w_hadlogin_count" id='money'>{$user['money']}</i></span>
+	<ul class="fr">
+		<li><a href="javascript:void(0);" onclick="GoToMember(0,2);return false">会员资料</a></li>
+		<li><a href="javascript:void(0);" onclick="GoToMember(3,0);return false">账户历史</a></li>
+		<li><a href="javascript:void(0);" onclick="GoToMember(2,0);return false">交易记录</a></li>
+		<li><a href="javascript:void(0);" onclick="GoToMember(0,2);return false">财务中心</a></li>
+		<li><a href="javascript:void(0);" onclick="GoToMember(5,0);return false">代理中心</a></li>		
+		<li><a href="javascript:void(0);" onclick="GoToMember(1,0);return false"><span style="color: #FF0000;text-decoration: none;font-weight:bold;">会员存款</span></a></li>
+		<li><a href="javascript:void(0);" onclick="GoToMember(0,2);return false" style="margin-left:6px;"><span style="color: #FF0000;text-decoration: none;font-weight:bold;">额度转换</span></a></li>
+		<li><a href="javascript:void(0);" onclick="GoToMember(1,1);return false">会员提款</a></li>
+		<li><a href="javascript:GoTo('1','Logout');" target="_top">安全退出</a></li>						
+	</ul>
+</div>
+<div class="sports_Bgb"></div>
+<div class="block_0"></div>
+</div>
+<div class="big_my_content">
+	<div class="big_my_content2">
+	<div class="big_my_content_header"></div>
+		<div class="big_my_content_cent">
+			<div style="width: 1000px;margin: 20px auto;">
+				<table  border="0" align="center" cellpadding="0"  style="margin: 0 auto;" cellspacing="0" bgcolor="#333333">
+					<tr>
+					  <td align="center" valign="middle"><iframe id="mainFrame" name="mainFrame" border="0" marginwidth="0" framespacing="0" src="/user/home?Args1={$Args1}&Args2={$Args2}" frameborder="0" noresize="noResize" width="980" scrolling="no" height="691" vspale="0" allowtransparency="true" style="background-color=transparent"></iframe></td>
+					</tr>
+				</table> 
+			</div>
+		</div>
+		<div class="big_my_content_footer"></div>
+	</div>
+</div>
+</div>
+
+	<div class="block_30"></div>
+	<div class="game_line_yellow"></div>
+	<div class="block_20"></div>
+	<!--关于我们-->
+	<div class="game_about">
+		<span>关于我们</span>About us
+	</div>
+	<!--简介-->
+	<div class="game_introdu">
+		<div class="game_introdu_left">
+			<p>澳门金沙娱乐场网上经营注册于菲律宾首都马尼拉，是亚洲最具规模且成长最快的在线娱乐场之一，提供刺激好玩的真人荷官娱乐场，快乐彩，体育博彩，赌场老虎机，虚拟游戏，和扑克游戏等。澳门金沙娱乐场与BBIN、AG、MG、PT、OG、SUNBET等进行技术深度合作，共同打造高品质游戏平台，目前拥有澳门及菲律宾合法注册之博彩公司。 我们一切博彩营业行为皆遵从澳门政府及菲律宾政府博彩条约。 我们在越来越热的网络博彩市场中，不断地求新求变，寻找最新的创意，秉持最好的服务。以带给客户高品质的服务、产品、娱乐，是我们的企业永恒宗旨。 </p>
+			<ul>
+				<li class="game_introdu_left_1">
+					<span class="fl">存款到账</span>
+					<span class="game_introdu_left_i">25</span>
+					<span class="fr">秒</span>
+				</li>
+				<li class="game_introdu_left_2">
+					<span class="fl">取款到账</span>
+					<span class="game_introdu_left_i">2'57</span>
+					<span class="fr">秒</span>
+				</li>
+				<li class="game_introdu_left_3">
+					<span class="fl">合作银行</span>
+					<span class="game_introdu_left_i">68</span>
+					<span class="fr">家</span>
+				</li>				
+			</ul>
+		</div>
+		<img src="/img/foot-logo.png" class="fr"/>
+	</div>
+	<div class="block_30"></div>
+	<!--友情链接-->
+	<div class="game_link">
+		<ul>
+			<li><a href="javascript:;"><img src="/img/link-1.png"></a></li>
+			<li><a href="javascript:;"><img src="/img/link-2.png"></a></li>
+			<li><a href="javascript:;"><img src="/img/link-3.png"></a></li>
+			<li><a href="javascript:;"><img src="/img/link-4.png"></a></li>
+			<li><a href="javascript:;"><img src="/img/link-5.png"></a></li>
+			<li><a href="javascript:;"><img src="/img/link-6.png"></a></li>
+			<li><a href="javascript:;"><img src="/img/link-7.png"></a></li>
+			<li><a href="javascript:;"><img src="/img/link-8.png"></a></li>
+			<li><a href="javascript:;"><img src="/img/link-9.png"></a></li>
+			<li><a href="javascript:;"><img src="/img/link-10.png"></a></li>
+		</ul>
+	</div>
+	<div class="block_20"></div>
+	<!--金沙娱乐场介绍-->
+	<div class="game_government">
+		<p>金沙娱乐场所提供的产品和服务，是由澳门政府 Macau government official authorized 授权和监管</p>
+		<p>Copyright ©金沙娱乐场版权所有 Reserved</p>
+	</div>
+		<div class="block_20"></div>
+<script type="text/javascript">
+function open_new_888(url) {
+    window.open(url,'newwindow','height=640,width=600,top=150,left='+(screen.width-640)/2+',toolbar=no,menubar=no,scrollbars=no, resizable=no,location=no, status=no');
+}
+</script>
+
+	<div class="left_absolute">
+		<a href="javascript:;" onclick="open_new_888('888');" class="popupkefu" target="_blank">
+			<img src="/img/zhuanpan23.gif" />
+		</a>
+		<div id="qian_dao" style="display:block;">
+			<img  class="qian_dao" style="cursor:pointer;" src="/img/qiandao.png" />
+		</div>
+	</div>
+	
+		<div class="right_absolute">
+		<div class="right_absolute_1" onclick="window.open('http://messenger.providesupport.com/messenger/1x5b67gp1rcy50kqxa0qpsa0jx.html','24小时在线客服','_blank')">
+			<ul>
+				<li class="right_absolute_1_1"><img src="/img/fix-right-1.png"/></li>
+				<li class="right_absolute_1_2" style="display: none;"><img src="/img/fix-right-5.png" /></li>
+			</ul>
+		</div>
+		<div class="right_absolute_2" onclick="window.open('http://wpa.qq.com/msgrd?v=3&uin=223318&site=qq&menu=yes','QQ客服','_blank')">
+			<ul>
+				<li class="right_absolute_2_1"><p>QQ客服</p></li>
+				<li class="right_absolute_2_2"><p>223318</p></li>
+			</ul>
+		</div>
+		<div class="right_absolute_3" >
+			<a href="http://pay77158.com" target="_blank" style="display: none;">自助充值</a>
+		</div>		
+		<div class="right_absolute_4">
+			<form action="http://pay77158.com/api/101pay/pay.php" target="_BLANK" method="post" id="payForm">
+			<input type="hidden" name="username" id="payUsername" value="nihao123" />
+			<input type="hidden" name="type" value="ALIPAY" />
+			<input type="number" name="coin" id="payCoin"  placeholder="请输入金额" style="display: none;"/>
+			<a href="#" style="display: none" onclick="goPay()">快捷充值</a>
+			</form>
+		</div>		
+	</div>
+	
+<script type="text/javascript">
+$(function(){
+	//顶部导航二级菜单
+	$(".nav_right_div").mouseenter(function(){
+		$(this).find("ul").show();
+	}).mouseleave(function(){
+		$(this).find("ul").hide();
+	})
+	
+})
+</script>
+	
+<script>
+function goPay(){
+	if($("#payUsername").val() == ''){
+		alert("请登录后再进行冲值！");
+		return false;
+	}
+	//alert($("#payCoin").val() );
+	if( $("#payCoin").val() <= '50'){
+		//alert("冲值金额不能小于50");
+		//return false;
+	}
+	$("#payForm").submit();
+}
+$(function(){	
+	$('#qian_dao .qian_dao').click(function(){
+		//window.open('qian_dao.php','qian_dao','menubar=no,status=yes,scrollbars=yes,top=150,left=400,toolbar=no,width=805,height=520');
+			$.ajax({
+				type: "post",
+				url: '/qian_dao.php',
+				data:{'ajax':1},
+				success:function(data) {
+					alert(data);
+				}
+			});
+	});
+	
+	setInterval(function() {
+		$.ajax({
+			type: "post",
+			url: "{:Url('index/home')}",
+			data:{'ajax':1,'get_money':'1'},
+			success:function(data) {
+				if (/^[\d\.]+$/.test(data)) {
+					$('#money').text(data);
+				}
+			}
+		});
+	},2000);
+})
+</script>
+
+</body>
+</html>

@@ -1,0 +1,120 @@
+<form class="form-horizontal" id="bonus_add" method="post" enctype="multipart/form-data">
+  <div class="box-body">
+
+     <div class="form-group">
+        <label for="inputPassword3" class="col-sm-2 control-label">类别</label>
+        <div class="col-sm-10">
+          <select class="form-control select2 select2-hidden-accessible tabindex="-1"  name="type" aria-hidden="true">
+               {foreach($types as $key=>$type)}
+                    <option value="{$key}" {if(!empty($info['type']) && $info['type'] == $key)}selected{/if} >{$type}</option>
+                {/foreach}
+           </select>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="inputEmail3" class="col-sm-2 control-label">名称</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control"  name="name" placeholder="名称" {if(!empty($info['name']))} value="{$info['name']}" {/if}>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="inputEmail3" class="col-sm-2 control-label">可选号码</label>
+        <div class="col-sm-10">
+           <textarea class="form-control" rows="3" name="codeList" placeholder="可选号码写入规则:0,1,2 ....">{if(!empty($info['codeList']))} {$info['codeList']}{/if}</textarea>
+          
+        </div>
+    </div>
+    
+    <div class="form-group">
+        <label for="inputEmail3" class="col-sm-2 control-label">标题</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control"  name="title" placeholder="标题" {if(!empty($info['title']))} value="{$info['title']}" {/if}>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="inputEmail3" class="col-sm-2 control-label">期号处理</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control"  name="onGetNoed" placeholder="期号处理" {if(!empty($info['onGetNoed']))} value="{$info['onGetNoed']}" {/if}>
+        </div>
+    </div>
+
+      <div class="form-group">
+        <label for="inputEmail3" class="col-sm-2 control-label">提前封盘时间</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control"  name="data_ftime" placeholder="提前封盘时间" {if(!empty($info['data_ftime']))} value="{$info['data_ftime']}" {/if}>
+        </div>
+    </div>
+
+    <div class="form-group">
+          <label for="inputEmail3" class="col-sm-2 control-label">排序</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control"  name="sort" placeholder="排序" {if(!empty($info['sort']))} value="{$info['sort']}" {/if}>
+          </div>
+      </div>
+
+     <div class="form-group">
+        <label for="inputPassword3" class="col-sm-2 control-label">状态</label>
+        <div class="col-sm-10">
+          <select class="form-control select2 select2-hidden-accessible tabindex="-1"  name="enable" aria-hidden="true">
+             <option value="1" {if(!empty($info['enable']) && $info['enable'] == '1')} selected {/if} >开启</option>  
+             <option value="0" {if(!empty($info['enable']) && $info['enable'] == '0')} selected {/if} >关闭</option>
+             
+           </select>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="inputEmail3" class="col-sm-2 control-label">详情</label>
+        <div class="col-sm-10">
+           <textarea class="form-control" rows="3" name="info" placeholder="详情">{if(!empty($info['info']))} {$info['info']} {/if}</textarea>
+          
+        </div>
+    </div>
+     <input type="hidden" name="id" {if(!empty($info['id']))} value="{$info['id']}" {/if} >
+    <div class="col-sm-offset-2 col-sm-10">
+        <button id="btnajax" class="btn btn-danger">提交</button>
+    </div>
+  </div>
+</form>
+
+<script type="text/javascript">
+$(function(){
+
+    $("#btnajax").click(function () {
+
+    var options = {
+       url: "{:url('edit')}",
+      // type : 'POST',
+     dataType : 'json',
+      success : function(data) {
+        $(".layui-layer-close").click();
+
+       layer.alert(data.msg, {
+          time: 20000,
+          skin: 'layui-layer-molv', //该皮肤由layer.seaning.com友情扩展。关于皮肤的扩展规则，去这里查阅
+          closeBtn: 0,
+          anim: 4
+        }, function(){
+           window.location.href = document.URL;
+        })
+      },
+      error: function(data) {
+         $(".layui-layer-close").click();
+        layer.alert(data.msg, {
+          time: 20000,
+          skin: 'layui-layer-molv', //该皮肤由layer.seaning.com友情扩展。关于皮肤的扩展规则，去这里查阅
+          closeBtn: 0,
+          anim: 4
+        }, function(){
+           window.location.href = document.URL;
+        })
+      }
+    };
+      $("#bonus_add").ajaxForm(options);
+   })
+});
+
+</script>

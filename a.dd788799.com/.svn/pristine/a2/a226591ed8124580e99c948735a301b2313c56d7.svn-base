@@ -1,0 +1,10 @@
+<?php
+
+namespace app\broadcast\Contracts;
+
+use app\broadcast\Contracts\ShouldBroadcast;
+
+interface ShouldBroadcastNow extends ShouldBroadcast
+{
+    //
+}

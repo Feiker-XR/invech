@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset='utf-8'>
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+    <title>我的消息</title>
+    <link type="text/css" rel="stylesheet" href="./css/personal.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <i class='left'>返回</i>
+            <h1>我的消息</h1>
+        </header>
+        <main class="inner_body">
+            <section class="msg_list">
+                <ul>
+                    <li data-url="msg_detail.html">
+                        <h2 class="read">{{ message }}</h2>
+                        <p>2018.04.02   18:36:59</p>
+                        <button _index="0">删除</button>
+                    </li>
+                    <li>
+                        <h2 class="read">彩金大赠送活动已开启...</h2>
+                        <p>2018.04.02   18:36:59</p>
+                        <button  _index="1">删除</button>
+                    </li>
+                    <li>
+                        <h2>彩金大赠送活动已开启...</h2>
+                        <p>2018.04.02   18:36:59</p>
+                        <button>删除</button>
+                    </li>
+                    <li>
+                        <h2>彩金大赠送活动已开启...</h2>
+                        <p>2018.04.02   18:36:59</p>
+                        <button>删除</button>
+                    </li>
+                    <li>
+                        <h2>彩金大赠送活动已开启...</h2>
+                        <p>2018.04.02   18:36:59</p>
+                        <button>删除</button>
+                    </li><li>
+                    <h2>彩金大赠送活动已开启...</h2>
+                    <p>2018.04.02   18:36:59</p>
+                    <button>删除</button>
+                </li>
+                    <li>
+                        <h2>彩金大赠送活动已开启...</h2>
+                        <p>2018.04.02   18:36:59</p>
+                        <button>删除</button>
+                    </li>
+                    <li>
+                        <h2>彩金大赠送活动已开启...</h2>
+                        <p>2018.04.02   18:36:59</p>
+                        <button>删除</button>
+                    </li>
+                    <li>
+                        <h2>彩金大赠送活动已开启...</h2>
+                        <p>2018.04.02   18:36:59</p>
+                        <button>删除</button>
+                    </li>
+                    <li>
+                        <h2>彩金大赠送活动已开启...</h2>
+                        <p>2018.04.02   18:36:59</p>
+                        <button>删除</button>
+                    </li>
+                    
+
+                </ul>
+            </section>
+            <section class="charge_pay">
+                <button class="smaller">写邮件</button>
+            </section>
+        </main>
+    </div>
+<script type="text/javascript" src="./js/jquery.1.9.1.min.js"></script>
+<script type="text/javascript" src="./js/show.js"></script>
+<script src="./js/vue.js"></script>
+<script type="text/javascript">
+    // 划入或划出删除按钮
+    var _touchstart = null;
+    $('.msg_list ul li').on('touchstart',function(e){
+        _touchstart = e.originalEvent.touches[0].clientX;
+    });
+    $('.msg_list ul li').on('touchend',function(e){
+        var _touchend = e.originalEvent.changedTouches[0].clientX;
+        var _flag = $(this).find('button').css('right');
+        if(_touchend - _touchstart <= -60){
+            _flag = 0;
+        }else if(_touchend - _touchstart >= 60){
+            _flag = '-1.88rem';
+        }
+        $(this).find('button').animate({
+            right: _flag
+        },300)
+        _touchstart = null;
+    });
+    // 删除
+    $('.msg_list ul li button').click(function(e){
+        e.stopPropagation();
+        var _this = $(this);
+        var _index = _this.attr('_index');    // 删除哪条
+       /* $.ajax({
+            url:xxxx,
+        })*/
+
+       _this.parent('li').animate({
+           height:0
+       },300,function () {
+           $(this).remove()
+       });
+    });
+
+    // 调到具体的消息页面
+    $('.msg_list ul li').click(function () {
+        var _url = $(this).attr('data-url');
+        location.href = _url;
+    })
+    // 写邮件
+    $('.charge_pay button').click(function(){
+        location.href = 'msg_send.html';
+    })
+
+    // vue js生成页面
+   /* var app = new Vue({
+        el: '.msg_list',
+        data: function() {
+            return {
+                message: 'Hello Vue!'
+            }
+        }
+    });*/
+</script>
+</body>
+</html>

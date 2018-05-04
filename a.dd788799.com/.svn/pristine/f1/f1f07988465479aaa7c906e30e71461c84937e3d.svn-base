@@ -1,0 +1,173 @@
+<?php
+// +----------------------------------------------------------------------
+// | FileName: record.php
+// +----------------------------------------------------------------------
+// | CreateDate: 2017年10月5日
+// +----------------------------------------------------------------------
+// | Author: xiaoluo
+// +----------------------------------------------------------------------
+namespace app\index\controller;
+
+use app\index\Login;
+
+class record extends Login{
+    
+    public function search(){
+        $this->getTypes();
+        $this->getPlayeds();
+        
+        $this->assign('types',$this->types);
+        $this->searchFun();
+        return $this->fetch();
+    }
+    
+
+    public final function searchFun(){
+        $para=input('get.');
+        
+        $this->getTypes();
+        $this->getPlayeds();
+        $this->assign('types',$this->types);
+        $this->assign('playeds',$this->playeds);
+        
+        $where = array();
+        // 用户名限制
+        $where['uid'] = $this->user['uid'];
+        
+        $userList = db('members')->where($where)->select();
+        
+        $where = array();
+        // 彩种限制
+        if($para['type']){
+            $where['type'] = $para['type'];
+        }
+        
+        // 时间限制
+        if($para['fromTime'] && $para['toTime']){
+            $map['actionTime'] = array('between',array(strtotime($para['fromTime']),strtotime($para['toTime'])));
+        }elseif($para['fromTime']){
+            $where['actionTime'] = array('egt',strtotime($para['fromTime']));
+        }elseif($para['toTime']){
+            $where['actionTime'] = array('elt',strtotime($para['toTime']));
+        }else{
+            if($GLOBALS['fromTime'] && $GLOBALS['toTime']){
+                $map['actionTime'] = array('between',array($GLOBALS['fromTime'],$GLOBALS['toTime']));
+            }
+        }
+        
+        // 投注状态限制
+        if($para['state']){
+            switch($para['state']){
+                case 1:
+                    // 已派奖
+                    $where['zjCount'] = array('gt',0);
+                    break;
+                case 2:
+                    // 未中奖
+                    $where['zjCount']=0;
+                    $where['lotteryNo']=array('neq','');
+                    $where['isDelete']=0;
+                    
+                    break;
+                case 3:
+                    // 未开奖
+                    $where['lotteryNo']=array('eq','');
+                    break;
+                case 4:
+                    // 追号
+                    $where['zhuiHao']=1;
+                    break;
+                case 5:
+                    // 撤单
+                    $where['isDelete']=1;
+                    break;
+            }
+        }
+        
+        
+        //单号
+        if($para['betId'] && $para['betId']!='输入单号') $where['wjorderId']=$para['betId'];
+        
+        $betList = db('bets')->where($where)->order('id desc,actionTime desc')->select();
+        
+        $i=0;
+        foreach($betList as $bet)
+        {
+            $isIn = false;
+            foreach($userList as $user)
+            {
+                if($bet['uid']==$user['uid'])
+                {
+                    $isIn=true;
+                    break;
+                }
+            }
+            if($isIn)
+            {
+                $data[$i] = $bet;
+                $i++;
+            }
+        }
+        
+        //dump($data);
+        $this->recordList($data);
+    }
+    
+    public final function searchGameRecord(){
+        if($this->request->isGet())
+        {
+            $this->searchFun();
+            
+            $modeName=array('2.00'=>'元', '0.20'=>'角', '0.02'=>'分');
+            $this->assign('modeName',$modeName);
+            
+            return $this->fetch('search-list');
+        }
+    }
+    
+    public final function betInfo(){
+        $this->getTypes();
+        $this->getPlayeds();
+        $bet=db('bets')->where(array('id'=>input('id')))->find();
+        $user=db('members')->where(array('uid'=>$bet['uid']))->field('parents')->find();
+        
+        if($bet['uid']!=$this->user['uid'] && strstr($user['parents'],','.$this->user['uid'].',')===false) $this->error('这单子不是您或您的下级的，您不能查看。');
+        
+        $this->assign('types',$this->types);
+        $this->assign('playeds',$this->playeds);
+        $this->assign('bet',$bet);
+        $this->assign('user',$this->user);
+        echo $this->fetch('bet-info');
+        exit();
+    }
+    public final function betInfo2(){
+        $this->getTypes();
+        $this->getPlayeds();
+        $bet=db('bets')->where(array('id'=>input('id')))->find();
+        $user=db('members')->where(array('uid'=>$bet['uid']))->field('parents')->find();
+        
+        if($bet['uid']!=$this->user['uid'] && strstr($user['parents'],','.$this->user['uid'].',')===false) $this->error('这单子不是您或您的下级的，您不能查看。');
+        
+        $this->assign('types',$this->types);
+        $this->assign('playeds',$this->playeds);
+        $this->assign('bet',$bet);
+        $this->assign('user',$this->user);
+        echo $this->fetch('bet-info2');
+        exit();
+    }
+    
+    public final function hemaiInfo(){
+        $this->getTypes();
+        $this->getPlayeds();
+        $hemai=db('bets_hemai')->where(array('id'=>input('hmid')))->find();
+        $bets=db('bets')->where(array('hmId'=>$hemai['id']))->order('id')->select();
+        
+        $this->assign('types',$this->types);
+        $this->assign('playeds',$this->playeds);
+        $this->assign('hemai',$hemai);
+        $this->assign('bets',$bets);
+        $this->assign('user',$this->user);
+        return $this->fetch('team/hemai_detail');
+    }
+    
+}

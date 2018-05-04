@@ -1,0 +1,137 @@
+<?php
+// +----------------------------------------------------------------------
+// | FileName: index.php
+// +----------------------------------------------------------------------
+// | CreateDate: 2017年10月2日
+// +----------------------------------------------------------------------
+// | Author: xiaoluo
+// +----------------------------------------------------------------------
+namespace app\index\controller;
+use think\Validate;
+use app\index\Base;
+use app\classes\iplocation;
+use app\common\model\Type;
+use app\common\model\Member as UserModel;
+use app\auth\traits\ThrottlesLogins;
+
+class Index extends Base{
+
+    use ThrottlesLogins;
+
+    public function index()
+    {
+        return $this->fetch('index');
+    }
+
+    public function login(){
+        
+        if(request()->isGet()){        
+            return $this->fetch("login");   
+        }else{
+            $remember = false;
+            if($uid = $this->doLogin($this->request,$remember)){
+                $url = config('auth.redirect.auth_ok.'.MODULE);             
+                return $this->success('成功',$url);
+            }else{
+                $url = config('auth.redirect.auth_fail.'.MODULE); 
+                return $this->error('错误',$url);    
+            }                
+        }
+    }
+
+
+
+    public final function getLastKjData()
+    {
+        $types = model('type')->allTypes();
+        $type = input('type');
+        if(!$type){
+            echo json_encode('');return;
+        }
+        $lottery = $types[$type]??null;
+        if(!$lottery){
+            echo json_encode('');return;
+        }
+  
+        //上期开奖结果
+        //$lastNo = $this->getGameLastNo($type);
+        $lastNo = Type::getLastGamePhase($type);
+        if(!$lastNo) $this->error('查找最后开奖期号出错');
+        //格式化开奖期号
+        $lastNo['actionNo'] = $this->formatActionNo($lastNo['actionNo'],$type) ; 
+        $data = db('data')->where(array('type'=>$type, 'number'=>$lastNo['actionNo']))->field('data')->find() ;
+        if(!$data){echo json_encode('');return;}
+        $lastNo['data'] = $data['data'];
+
+        //本期期号以及倒计时
+        //$thisNo = $this->getGameNo($type);
+        $thisNo = Type::getGamePhase($type);
+        $lastNo['actionName'] = $lottery['title'];
+        $lastNo['thisNo']     = $thisNo['actionNo'];
+        $lastNo['diffTime']   = strtotime($thisNo['actionTime'])-$this->time;
+        //$lastNo['kjdTime']    = $this->getTypeFtime($type);
+        $lastNo['kjdTime']    = Type::getFtime($type);
+        echo json_encode($lastNo);exit();
+    }
+
+    private  function  formatActionNo($actionNo,$type)
+    {
+       if ($actionNo && $type) {
+            if ($type == 12) {
+                //新疆时时彩处理, 期号类似这样2017-60
+                //而数据库中的期号是2017060 这样子, 所以要把期号格式化一致,方便下一步准确找到数据
+                $tmp      = explode('-',$actionNo) ;
+                $tmp[1]   = (strlen($tmp[1])==2) ? '0'.$tmp[1] : $tmp[1] ;
+                $actionNo = $tmp[0].$tmp[1] ;
+            } else {
+                //普通处理
+                $actionNo = str_replace('-','',$actionNo) ;
+            }
+       }
+       return $actionNo ;
+    }
+
+    public final function getQiHao()
+    {
+        //$thisNo=$this->getGameNo($this);
+        $type   = input('type','','intval') ;
+        //$thisNo = $this->getGameNo($type) ; //下一期的期号数据
+        $data   = array(
+            //'lastNo'    => $this->getGameLastNo($type),
+            //'thisNo'    => $this->getGameNo($type),
+            'lastNo'    => Type::getLastGamePhase($type),
+            'thisNo'    => Type::getGamePhase($type),
+            'diffTime'  => strtotime($thisNo['actionTime'])-$this->time,
+            'validTime' => $thisNo['actionTime'],
+            //'kjdTime'   => $this->getTypeFtime($type)
+            'kjdTime'   => Type::getFtime($type)
+        );
+        //dump($data);
+        echo json_encode($data);
+        exit();
+        //return $data;
+    }
+
+    public final function getHistoryData()
+    {
+        $this->type=input('type','','intval');
+        $history = db('data')->where(array('type'=>$this->type))->order('number desc,time desc')->limit(10)->field('time,number,data')->select();
+        $this->assign('type',$this->type) ;
+        $this->assign('history',$history) ;
+        echo  $this->fetch('/game/inc_game_history') ; exit();
+    }
+
+
+    public  function register(){
+        $request            = request();
+        $params             = $request->param();
+       $member = new UserModel($data);
+        $list = $member->validate('Member.register')->save($data);
+        if($list){
+           return  $this->success("操作成功");
+        }else{
+          return  $this->error($member->getError());
+        }
+       
+    }
+}

@@ -1,0 +1,28 @@
+<div class="tz_info" id="game-helptips">
+	<p class="wjhelps">说明：<?= $played["simpleInfo"] ?></p>
+</div>
+
+<div class="ball_list" style="width:100%;">
+	<div class="num-table" id="num-select">
+		<?php 
+		include APP_PATH.'index/mview/'.$tpl.'.html';
+		?>						
+	</div>
+</div>
+<div class="current_play_btn_tip">
+	<i class="iconfont icon-guanbi"></i>
+	<h2>玩法提示</h2>
+	<ul>
+		<li>
+			<span>当前玩法：</span><span>{$played["tag"]}</span>
+		</li>
+		<li>
+			<span>选好规则：</span><span>{$played["info"]}</span>
+		</li>
+		<li>
+			<span>中奖说明：</span><span>{$played["example"]}</span>
+		</li>						
+	</ul>
+	<div class="block_0"></div>
+	<a href="javascript:;">我知道了</a>
+</div>

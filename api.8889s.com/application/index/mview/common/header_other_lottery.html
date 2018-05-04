@@ -1,0 +1,29 @@
+	<?php if(Session('uid') && Session('username')){?>
+	<!--登陆后-->
+
+		<header class="header wjkjData">
+		<!-- javascript:window.history.back(); -->
+			<a class="m-history-home" onclick="javascript:history.back(-1);"><i class="iconfont icon-zuojiantou"></i></a>
+			<div class="header_other_name">
+				{$title}
+			</div>
+		</header>
+
+
+	<?php }else{?>
+	<!--登陆前-->
+
+		<header class="header wjkjData">
+		<!-- javascript:window.history.back(); -->
+			<a class="m-history-home" onclick="javascript:history.back(-1);"><i class="iconfont icon-zuojiantou"></i></a>
+			<div class="header_other_name">
+				{$title}
+			</div>
+
+		</header>
+
+
+
+
+
+	<?php }?>

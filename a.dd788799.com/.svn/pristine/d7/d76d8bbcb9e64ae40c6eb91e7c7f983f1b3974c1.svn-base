@@ -1,0 +1,18 @@
+<input type="hidden" name="playedGroup" value="<?=$groupId?>" />
+<input type="hidden" name="type" value="<?=$type?>" />
+<input type="hidden" name="playedName" value="<?=$playedName?>" />
+<div class="pp" action="tzSscHhzxInput" played="任选" length="3">
+	<div id="wei-shu" length="3">
+		<label><input type="checkbox" value="16" />万</label>
+		<label><input type="checkbox" value="8" />千</label>
+		<label><input type="checkbox" value="4" />百</label>
+		<label><input type="checkbox" value="2" />十</label>
+		<label><input type="checkbox" value="1" />个</label>
+	</div><br/>
+	<textarea id="textarea-code"></textarea>
+</div>
+<script type="text/javascript">
+$(function(){
+	gameSetPl(<?=json_encode($maxPl)?>);
+})
+</script>

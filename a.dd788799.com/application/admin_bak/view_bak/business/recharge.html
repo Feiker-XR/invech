@@ -1,0 +1,133 @@
+{extend name="common/base" /}
+
+{block name="body"}
+	<!-- 标题栏 -->
+	<div class="main-title">
+		<h2>充值记录</h2>
+	</div>
+	<form action="{:Url('recharge')}" method="post">
+		<div class="cf">
+			<a class="btn" target="modal" width="470" title="新增充值" modal="true" href="{:Url('Business/addRecharge')}" button="确定:dataAddCode|取消:defaultCloseModal" >新增充值</a>
+			<!-- 高级搜索 -->
+			<div class="search-form fr cf">
+				<div class="sleft">
+					用户名：<input style="width:100px" type="text" name="username" class="search-input" value="{$username}" placeholder="用户名" >
+				</div>
+				<div class="sleft">
+					充值编号：<input style="width:70px" type="text" name="rechargeId" class="search-input" value="{$rechargeId}" placeholder="充值编号">
+				</div>
+				<div class="sleft">
+					<select style="width:100px" name="type">
+						<option value="">状态查询</option>
+						<option value="0"  {php} echo ($type==0 && $type!=='')?  '' :  'selected' ; {/php}  >正在充值</option>
+						<option value="1" {php} echo ($type)?  'selected' :  '' ; {/php}>充值成功</option>
+						<!--<option value="2">自动到账</option>-->
+						<!--<option value="9">管理员充值</option>-->
+					</select>
+				</div>
+				<div class="sleft">
+					时间从：<input type="text" name="fromTime" id="first" class="search-input" value="{$fromTime}" placeholder="请输入开始时间">
+				</div>
+				<div class="sleft">
+					到：<input type="text" name="toTime" id="end" class="search-input" value="{$toTime}" placeholder="请输入结束时间">
+					<!-- <a class="sch-btn" href="javascript:;" id="search" url="{:Url('cash')}"><i class="btn-search"></i></a> -->
+				</div>
+				<div class="sbtn">
+					<button type="submit" class="btn" id="search">查 找</button>
+				</div>	
+			</div>		
+		</div>
+	</form>
+
+    <!-- 数据列表 -->
+    <div class="data-table table-striped">
+	<table class="">
+    <thead>
+        <tr>
+		<th>UserID</th>
+        <th>用户名</th>
+        <th>上级关系</th>
+        <th>充值金额</th>
+        <th>实际到账</th>
+        <th>充值前资金</th>       
+        <th>充值编号</th>
+        <th>充值银行</th>        
+        <th>状态</th>
+        <th>备注</th>
+        <th>时间</th>
+        <th>操作</th>
+		</tr>
+    </thead>
+    <tbody>
+		{if condition="$_list"}
+		{volist name="_list" id="vo"}
+		<tr>
+			<td>{$vo.uid} </td>
+			<td><a href="{:Url('recharge?username='.$vo['username'])}">{$vo.username}</a></td>
+			<td>
+				{php}
+					$path = explode(',' , $vo['parents']);
+					foreach($path as $p){
+						$tmpMembers_list = isset($members_list[$p]) ? $members_list[$p] : '';
+						echo $tmpMembers_list.'>';
+					}
+				{/php}
+			</td>
+			<td>{$vo.amount}</td>
+			<td>{$vo.rechargeAmount}</td>
+			<td>{$vo.coin}</td>
+			<td>{$vo.rechargeId}</td>
+			<td><a href="<?='http://'.$vo['home']?>" target="_blank">{$vo.name}</a></td>
+			<td>{php} echo $this->iff($vo['state'], '充值成功', '正在充值') {/php}</td>
+			<td>{$vo.info}</td>
+			<td>{:date('Y-m-d H:i:s',$vo['actionTime'])}</td>
+			<td>
+				{php}if(!$vo['state']){ {/php}
+				<a target="modal" width="360" title="到帐处理" modal="true" button="确定:dataAddCode|取消:defaultCloseModal" href="{:Url('Business/disposeRecharge'.'?id='.$vo['id'].'&username='.$vo['username'].'&amount='.$vo['amount'])}">到帐处理</a>
+				{php} } {/php}
+				<a href="{:Url('business/delRecharge?id='.$vo['id'])}" class="confirm ajax-get">删除</a>
+            </td>
+		</tr>
+		{/volist}
+		{else/}
+			<tr>
+				<td colspan="11" align="center">暂时没有充值记录。</td>
+			</tr>
+		{/if}
+	</tbody>
+    </table> 
+	</div>
+    <div class="page">
+		{$page}
+    </div>
+{/block}
+
+{block name="script"}
+    <link href="__STATIC__/datetimepicker/css/datetimepicker.css" rel="stylesheet" type="text/css">
+	<link href="__STATIC__/datetimepicker/css/datetimepicker_blue.css" rel="stylesheet" type="text/css">
+	<link href="__STATIC__/datetimepicker/css/dropdown.css" rel="stylesheet" type="text/css">
+	<script type="text/javascript" src="__STATIC__/datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
+	<script type="text/javascript" src="__STATIC__/datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js" charset="UTF-8"></script>
+
+	<script>
+	$(function(){
+		$('#first,#end').datetimepicker({
+			format: 'yyyy-mm-dd',
+			language:"zh-CN",
+			minView:2,
+			autoclose:true
+		});
+		//showTab();
+	});
+	</script>
+	<script type="text/javascript">
+		//回车搜索
+		$("body").keyup(function(e){
+			if(e.keyCode === 13){
+				$("#search").click();
+				return false;
+			}
+		});
+		$('.side-sub-menu').find('a[href="{:Url('business/recharge')}"]').closest('li').addClass('current');
+	</script>
+{/block}

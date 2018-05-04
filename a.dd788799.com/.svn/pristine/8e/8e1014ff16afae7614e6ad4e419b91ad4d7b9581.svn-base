@@ -1,0 +1,85 @@
+<div class='pp' action='pick_dw' length="1" data-line="5"></div>
+<input type="hidden" name="playedGroup" value="<?=$groupId?>"/>
+<input type="hidden" name="playedId" value="<?=$playedId?>"/>
+<input type="hidden" name="type" value="<?=$type?>"/>
+<input type="hidden" name="playedName" value="<?=$played['name']?>"/>
+<!-- mobile 时时彩_快钱_跨度 -->
+<div class="fl main-left">
+    <div class="hd clearfix rehd" id="toptouzhu">
+        <div class="fl refl">
+            快捷金额：<input type="text" class="txt" id="inputMoney">
+        </div>
+        <div class="kjanniu">
+            <a href="javascript:void(0)" class="img-50" data-num="50"></a>
+            <a href="javascript:void(0)" class="img-100" data-num="100"></a>
+            <a href="javascript:void(0)" class="img-500" data-num="500"></a>
+            <a href="javascript:void(0)" class="img-1000" data-num="1000"></a>
+            <a href="javascript:void(0)" class="img-5000" data-num="5000"></a>
+            <a href="javascript:void(0)" class="img-10000" data-num="10000"></a>
+        </div>
+        <div class="fr">
+            <div class="T-tab clearfix">
+                <a href="javascript:void(0)" onclick="changeTab(this)">前三跨度</a>
+                <a href="javascript:void(0)" onclick="changeTab(this)">中三跨度</a>
+                <a href="javascript:void(0)" onclick="changeTab(this)">后三跨度</a>
+            </div>
+        </div>
+    </div>
+    <div class="table-common" id="table-common"></div>
+</div>
+<script type="text/html" id="table-common">
+    <table width="100%" border="1">
+        <thead>
+        <tr>
+            <th>号码</th>
+            <th>赔率</th>
+            <th>金额</th>
+            <th>号码</th>
+            <th>赔率</th>
+            <th>金额</th>
+        </tr>
+        </thead>
+        <tbody>
+        {{each plg.lines line index1}}
+        <tr>
+            {{each line pl index2}}
+            <td style="cursor: pointer;" onclick="setQuickPick(this)"><strong>{{pl.value}}</strong></td>
+            <td style="cursor: pointer;" onclick="setQuickPick(this)"><strong class="color-red pl">{{pl.pl}}</strong></td>
+            <td><input type="text" class="table-txt" data-name="{{plg.name}}-{{pl.value}}" data-plid="{{pl.id}}"
+                       data-pl="{{pl.pl}}"></td>
+            {{/each}}
+        </tr>
+        {{/each}}
+        </tbody>
+    </table>
+</script>
+<script>
+    $(function () {
+        //快速选中
+        kqQuick();
+        // 只能输入整数
+        $(document).on('keyup', 'input.table-txt', function () {
+            digitOnly($(this));
+        });
+    });
+    var pls;
+    function changeTab(self) {
+        $(self).siblings().removeClass('active');
+        $(self).addClass('active');
+        var $tabs = $(self).parent().children();
+        var index = $tabs.index(self);
+        var plg = pls[index];
+        //var len = $('.pp').data('line');
+        plg.lines = group(plg.pls, 2);
+        var html = template("table-common", {plg: plg});
+        $('.table-common').html(html);
+    }
+    $(function () {
+        var playedId = "<?=$playedId?>";
+        $.getJSON("/game/pl/playedId/" + playedId, function (data) {
+            console.log(data);
+            pls = data;
+            $('.T-tab.clearfix').children().eq(0).click();
+        });
+    });
+</script>   

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset='utf-8'>
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+    <title>充值</title>
+    <link type="text/css" rel="stylesheet" href="./css/personal.css">
+</head>
+<body>
+
+    <div class="container">
+        <header class="header">
+            <i class='left'>返回</i>
+            <h1>充值</h1>
+        </header>
+        <main class="inner_body">
+            <section class="charge_marquee">
+                <marquee>性能暴增！余承东称华为将有重大技术突破，网友：要有新系统了？</marquee>
+            </section>
+
+            <section class="charge_user">
+                <p>当前用户：<span>铁观音</span></p>
+                <p>当前余额：<span>0</span>元</p>
+            </section>
+
+            <section class="charge_amount">
+                <p>请输入充值金额:</p>
+                <p><input type="text" placeholder="每次充值不少于50元"></p>
+                <ul>
+                    <li>50元</li>
+                    <li>100元</li>
+                    <li>300元</li>
+                    <li>500元</li>
+                    <li>800元</li>
+                    <li>1000元</li>
+                </ul>
+            </section>
+            <section class="charge_payWay">
+                <p>支付方式</p>
+                <ul>
+                    <li><div><img src="images/charge/wechat.png" alt="wechat"/><strong>微信支付</strong><i way='wechat' class="checked"></i></div></li>
+                    <li><div><img src="images/charge/qq.png" alt="qq"/><strong>QQ钱包</strong><i way='qq'></i></div></li>
+                    <li><div><img src="images/charge/cft.png" alt="cft"/><strong>财付通</strong><i way='cft'></i></div></li>
+                    <li><div><img src="images/charge/union.png" alt="union"/><strong>网银</strong><i way='union'></i></div></li>
+                    <li><div><img src="images/charge/jd.png" alt="jd"/><strong>京东钱包</strong><i way='jd'></i></div></li>
+                    <li><div><img src="images/charge/dk.png" alt="dk"/><strong>点卡支付</strong><i way='dk'></i></div></li>
+                </ul>
+            </section>
+            <section class="charge_pay">
+                <button>立即支付</button>
+            </section>
+        </main>
+    </div>
+
+    <script type="text/javascript" src="./js/jquery.1.9.1.min.js"></script>
+    <script type="text/javascript" src="./js/show.js"></script>
+    <script type="text/javascript">
+        // 快捷金额
+       $('.charge_amount ul li').click(function(){
+           $(this).addClass('active').siblings().removeClass('active');
+           var _amount = parseInt($(this).text().replace(/元/,''));
+           $('.charge_amount input').val(_amount);
+       });
+       //选择支付方式
+        $('.charge_payWay ul li').click(function(){
+            var current = $(this).find('i');
+            if(current.hasClass('checked')){
+                return;
+            }else{
+                $('.charge_payWay ul li i').removeClass('checked');
+                current.addClass('checked');
+            }
+        });
+        // 提交数据
+        $('.charge_pay button').click(function () {
+            //$(this).attr('disabled','disabled');
+            var _amount = $('.charge_amount input').val();      // 金额
+            var pay_way = $('.charge_payWay ul li i.checked').attr('way');  // 方式
+            console.log(_amount,pay_way)
+        })
+    </script>
+</body>
+</html>

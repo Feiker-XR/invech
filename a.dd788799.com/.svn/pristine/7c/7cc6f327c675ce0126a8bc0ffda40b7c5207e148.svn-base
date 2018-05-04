@@ -1,0 +1,134 @@
+{php}
+	$modeName=array('2.00'=>'元', '0.20'=>'角', '0.02'=>'分');
+	$weiShu=$bet['weiShu'];
+	$wei = '';
+	if($weiShu){
+		$w=array(16=>'万', 8=>'千', 4=>'百', 2=>'十',1=>'个');
+		foreach($w as $p=>$v){
+			if($weiShu & $p) $wei.=$v;
+		}
+		$wei.=':';
+	}
+	
+	$betCont=$bet['mode'] * $bet['beiShu'] * $bet['actionNum'] * ($bet['fpEnable']+1);
+{/php}
+<div>
+<form action="{:Url('business/updateBet')}" target="ajax" method="post">
+	<input type="hidden" name="id" value="{php} echo $bet['id']{/php}"/>
+	<input type="hidden" name="wjorderId" value="{php} echo $bet['wjorderId']{/php}"/>
+	<input type="hidden" name="mode" value="{php} echo $bet['mode']{/php}"/>
+	<input type="hidden" name="beiShu" value="{php} echo $bet['beiShu']{/php}"/>
+	<input type="hidden" name="actionNum" value="{php} echo $bet['actionNum']{/php}"/>
+	<input type="hidden" name="beiShu" value="{php} echo $bet['beiShu']{/php}"/>
+    <input type="hidden" name="uid" value="{php} echo $bet['uid']{/php}"/>
+    <input type="hidden" name="username" value="{php} echo $bet['username']{/php}"/>
+   
+<div class="bet-info popupModal">
+	<table cellpadding="1" cellspacing="1" width="480">
+		<tr>
+			<td align="right">号码：</td>
+			<td colspan="3">{$wei}<textarea cols="45" name="actionData" rows="5">{php} echo $bet['actionData']{/php}</textarea></td>
+		</tr>
+		<tr>
+			<td width="80" align="right">单号：</td>
+			<td width="160">{php} echo $bet['wjorderId']{/php}</td>
+			<td width="80" align="right">投注数量：</td>
+			<td width="160">{php} echo $bet['actionNum']{/php}</td>
+		</tr>
+		<tr>
+			<td align="right">发起人：</td>
+			<td>{php} echo $bet['username']{/php}</td>
+			<td align="right">模式：</td>
+			<td>{php} echo $modeName[$bet['mode']]{/php}</td>
+		</tr>
+		<tr>
+			<td align="right">倍数：</td>
+			<td>{php} echo $bet['beiShu']{/php}</td>
+			<td align="right">中奖注数：</td>
+			<td>{php} echo $this->iff($bet['lotteryNo'], $bet['zjCount'], '－'){/php}</td>
+		</tr>
+		<tr>
+			<td align="right">彩种：</td>
+			<td>{php} echo $types[$bet['type']]['title']{/php}</td>
+			<td align="right">奖金－返点：</td>
+			<td>{php} echo number_format($bet['bonusProp'], 2){/php}－{php} echo number_format($bet['fanDian'],1){/php}%</td>
+		</tr>
+		<tr>
+			<td align="right">期号：</td>
+			<td>{php} echo $bet['actionNo']{/php}</td>
+			<td align="right">玩法：</td>
+			<td>{$playeds[$bet['playedId']]['name']}</td>
+		</tr>
+		<tr>
+			<td align="right">开奖号：</td>
+			<td>{php} echo $this->ifs($bet['lotteryNo'], '－'){/php}</td>
+			<td align="right">投注时间：</td>
+			<td>{php} echo date('m-d H:i:s',$bet['actionTime']){/php}</td>
+		</tr>
+		<tr>
+			<td align="right">订单状态：</td>
+			<td>
+			{php}
+				if($bet['isDelete']==1){
+					echo '<font color="#999999">已撤单</font>';
+				}elseif(!$bet['lotteryNo']){
+					echo '<font color="#009900">未开奖</font>';
+				}elseif($bet['zjCount']){
+					echo '<font color="red">已派奖</font>';
+				}else{
+					echo '未中奖';
+				}
+			{/php}
+			</td>
+            <td align="right">&nbsp;<!--发起庄内庄：--></td>
+			<td>&nbsp;{php} //$this->iff($bet['qzEnable'], '是', '否'){/php}</td>
+        </tr>
+		<tr>
+			<td align="right">抢庄状态：</td>
+			<td>{php} echo $this->iff($bet['qz_uid'], '抢庄', '未抢'){/php}</td>
+			<td align="right">抢庄人：</td>
+			<td>{php} echo $this->ifs($bet['qz_username'], '－'){/php}</td>
+		</tr>
+		
+		<!-- 抢庄开始　-->
+		{php} if($bet['qz_uid']){ {/php}
+		<tr>
+			<td align="right">抢庄投注：</td>
+			<td>{php} echo number_format($bet['beiShu'] * $bet['mode'] * $bet['actionNum'] * ($bet['fpEnable']+1),2){/php}</td>
+			<td align="right">抢庄返点：</td>
+			<td>{php} echo number_format(-$bet['fanDianAmount'], 2){/php}</td>
+		</tr>
+		<tr>
+			<td align="right">抢庄赔付：</td>
+			<td>{php} echo number_format(- $bet['bonus'] - $bet['fanDianAmount'] - $bet['qz_chouShui'], 2){/php}</td>
+			<td align="right">抢庄盈亏：</td>
+			<td>{php} echo number_format($bet['beiShu'] * $bet['mode'] * $bet['actionNum'] * ($bet['fpEnable']+1) - $bet['bonus'] - $bet['fanDianAmount'] - $bet['qz_chouShui'], 2){/php}</td>
+		</tr>
+		{php} } {/php}
+		<!-- 抢庄结束 -->
+		
+		
+		<!-- 投注开始 -->
+		<tr>
+			<td align="right">投注：</td>
+			<td>{php} echo number_format($betCont, 2){/php}元</td>
+			<td align="right">中奖：</td>
+			<td>{php} echo $this->iff($bet['lotteryNo'], number_format($bet['bonus'], 2) .'元', '－'){/php}</td>
+		</tr>
+		<tr>
+			<td align="right">返点：</td>
+			<td>{php} echo $this->iff($bet['lotteryNo'], number_format($bet['fanDianAmount'], 2). '元', '－'){/php}</td>
+			<td align="right">个人盈亏：</td>
+			<td>{php} echo $this->iff($bet['lotteryNo'], number_format($bet['bonus'] - $betCont + $bet['fanDianAmount'], 2) . '元', '－'){/php}</td>
+		</tr>
+		<!-- 投注结束 -->
+        
+        <tr>
+        	<td align="right">来源：</td>
+            <td colspan="3">{php} if($bet['betType']==0){echo 'web';}else if($bet['betType']==1){echo '手机';}else{echo '--';}{/php}</td>{php} if($bet['betType']==0){echo 'web端';}else if($bet['betType']==1){echo '手机端';}else if($bet['betType']==2){echo '客户端';}{/php}
+        </tr>
+	</table>
+</div>
+
+   </form>
+</div>

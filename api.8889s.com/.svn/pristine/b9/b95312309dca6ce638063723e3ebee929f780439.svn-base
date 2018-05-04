@@ -1,0 +1,195 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>系统设置</title>
+<link href="/css/base.css" rel="stylesheet" type="text/css" />
+<link href="/css/admin.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="/js/jquery.js"></script>
+<script type="text/javascript" src="/js/jquery.tools.js"></script>
+<script type="text/javascript" src="/js/base.js"></script>
+<script type="text/javascript">
+//读取当前期数盘口赔率与投注总额
+function loadinfo(){
+	$.get("{:url('lottery/getodds')}", {type : 'xjssc',playtype:'{$type}'}, function(data)
+		{
+			for(var key in data.oddslist){
+			odds = data.oddslist[key];
+			$("#Num_"+key).val(odds);
+			}
+		}, "json");
+}
+</script>
+</head>
+<body class="list">
+	<!--<div class="bar">
+		新疆时时彩赔率修改
+	</div>-->
+
+<div class="body">
+<ul id="tab" class="tab">
+	<li><input type="button" value="重庆时时彩" hidefocus  onClick="window.location.href='{:url('lottery/odds','type=cqssc')}'" /></li>
+	<li><input type="button" value="新疆时时彩" hidefocus class="current" onClick="window.location.href='{:url('lottery/odds','type=xjssc')}'" /></li>
+	<li><input type="button" value="重庆快乐十分" hidefocus onClick="window.location.href='{:url('lottery/odds','type=cqklsf')}'" /></li>
+	<li><input type="button" value="广东快乐十分" hidefocus onClick="window.location.href='{:url('lottery/odds','type=gdklsf')}'" /></li>
+	<li><input type="button" value="北京PK拾" hidefocus onClick="window.location.href='{:url('lottery/odds','type=bjpk10')}'" /></li>
+	<li><input type="button" value="广西快乐十分" hidefocus onClick="window.location.href='{:url('lottery/odds','type=gxklsf')}'" /></li>
+	<li><input type="button" value="江苏快3" hidefocus onClick="window.location.href='{:url('lottery/odds','type=jsk3')}'" /></li>
+	<li><input type="button" value="幸运飞艇" hidefocus onClick="window.location.href='{:url('lottery/odds','type=xyft')}'" /></li>
+</ul>
+<table id="listTables" class="listTables" style="margin-bottom:5px;">
+	<form name="form1" method="post" action="{:url('lottery/oddsave','type=xjssc&playtype='.$type)}">
+		<tr>
+			<td height="40" align="center"bgcolor="#F2F4F6">
+				<input type="button"  class="{if $type eq 1}int_1{else}int_2{/if}" value="第一球" onClick="window.location.href='{:url('lottery/odds','type=xjssc&playtype=1')}'"/>
+				<input type="button"  class="{if $type eq 2}int_1{else}int_2{/if}" value="第二球" onClick="window.location.href='{:url('lottery/odds','type=xjssc&playtype=2')}'"/>
+				<input type="button"  class="{if $type eq 3}int_1{else}int_2{/if}" value="第三球" onClick="window.location.href='{:url('lottery/odds','type=xjssc&playtype=3')}'"/>
+				<input type="button"  class="{if $type eq 4}int_1{else}int_2{/if}" value="第四球" onClick="window.location.href='{:url('lottery/odds','type=xjssc&playtype=4')}'"/>
+				<input type="button"  class="{if $type eq 5}int_1{else}int_2{/if}" value="第五球" onClick="window.location.href='{:url('lottery/odds','type=xjssc&playtype=5')}'"/>
+				<input type="button"  class="{if $type eq 6}int_1{else}int_2{/if}" value="总和、龙虎和" onClick="window.location.href='{:url('lottery/odds','type=xjssc&playtype=6')}'"/>
+				<input type="button"  class="{if $type eq 7}int_1{else}int_2{/if}" value="前三" onClick="window.location.href='{:url('lottery/odds','type=xjssc&playtype=7')}'"/>
+				<input type="button"  class="{if $type eq 8}int_1{else}int_2{/if}" value="中三" onClick="window.location.href='{:url('lottery/odds','type=xjssc&playtype=8')}'"/>
+				<input type="button"  class="{if $type eq 9}int_1{else}int_2{/if}" value="后三" onClick="window.location.href='{:url('lottery/odds','type=xjssc&playtype=9')}'"/>
+			</td>
+		</tr>
+	</form>
+</table>
+{if $type <6}
+<table id="listTables" class="listTables">
+      <form name="form1" method="post" action="{:url('lottery/oddsave','type=xjssc&playtype='.$type)}">
+          <tr>
+            <th width="50" height="22" align="center">号码</th>
+            <th align="center">当前赔率</th>
+            <th width="50" align="center">号码</th>
+            <th align="center">当前赔率</th>
+            <th width="50" align="center">号码</th>
+            <th align="center">当前赔率</th>
+            <th width="50" align="center">号码</th>
+            <th align="center">当前赔率</th>
+            <th width="50" align="center">号码</th>
+            <th align="center">当前赔率</th>
+          </tr>
+          <tr>
+            <td height="28" align="center"bgcolor="#FFFFFF"><img src="/lottery/images/ball_2/0.png" /></td>
+            <td align="center"bgcolor="#FFFFFF"><input class="formOdds captcha" maxlength="6" size="4" value="0" name="Num_1" id="Num_1" /></td>
+            <td align="center"bgcolor="#FFFFFF"><img src="/lottery/images/ball_2/1.png" /></td>
+            <td align="center"bgcolor="#FFFFFF"><input class="formOdds captcha" maxlength="6" size="4" value="0" name="Num_2" id="Num_2" /></td>
+            <td align="center"bgcolor="#FFFFFF"><img src="/lottery/images/ball_2/2.png" /></td>
+            <td align="center"bgcolor="#FFFFFF"><input class="formOdds captcha" maxlength="6" size="4" value="0" name="Num_3" id="Num_3" /></td>
+            <td align="center"bgcolor="#FFFFFF"><img src="/lottery/images/ball_2/3.png" /></td>
+            <td align="center"bgcolor="#FFFFFF"><input class="formOdds captcha" maxlength="6" size="4" value="0" name="Num_4" id="Num_4" /></td>
+            <td align="center"bgcolor="#FFFFFF"><img src="/lottery/images/ball_2/4.png" /></td>
+            <td align="center"bgcolor="#FFFFFF"><input class="formOdds captcha" maxlength="6" size="4" value="0" name="Num_5" id="Num_5" /></td>
+          </tr>
+          <tr>
+            <td height="28" align="center"bgcolor="#FFFFFF"><img src="/lottery/images/ball_2/5.png" /></td>
+            <td align="center"bgcolor="#FFFFFF"><input class="formOdds captcha" maxlength="6" size="4" value="0" name="Num_6" id="Num_6" /></td>
+            <td align="center"bgcolor="#FFFFFF"><img src="/lottery/images/ball_2/6.png" /></td>
+            <td align="center"bgcolor="#FFFFFF"><input class="formOdds captcha" maxlength="6" size="4" value="0" name="Num_7" id="Num_7" /></td>
+            <td align="center"bgcolor="#FFFFFF"><img src="/lottery/images/ball_2/7.png" /></td>
+            <td align="center"bgcolor="#FFFFFF"><input class="formOdds captcha" maxlength="6" size="4" value="0" name="Num_8" id="Num_8" /></td>
+            <td align="center"bgcolor="#FFFFFF"><img src="/lottery/images/ball_2/8.png" /></td>
+            <td align="center"bgcolor="#FFFFFF"><input class="formOdds captcha" maxlength="6" size="4" value="0" name="Num_9" id="Num_9" /></td>
+            <td align="center"bgcolor="#FFFFFF"><img src="/lottery/images/ball_2/9.png" /></td>
+            <td align="center"bgcolor="#FFFFFF"><input class="formOdds captcha" maxlength="6" size="4" value="0" name="Num_10" id="Num_10" /></td>
+          </tr>
+          <tr>
+            <td height="28" align="center"bgcolor="#FFFFFF">大</td>
+            <td align="center"bgcolor="#FFFFFF"><input class="formOdds captcha" maxlength="6" size="4" value="0" name="Num_11" id="Num_11" /></td>
+            <td align="center"bgcolor="#FFFFFF">小</td>
+            <td align="center"bgcolor="#FFFFFF"><input class="formOdds captcha" maxlength="6" size="4" value="0" name="Num_12" id="Num_12" /></td>
+            <td align="center"bgcolor="#FFFFFF">单</td>
+            <td align="center"bgcolor="#FFFFFF"><input class="formOdds captcha" maxlength="6" size="4" value="0" name="Num_13" id="Num_13" /></td>
+            <td align="center"bgcolor="#FFFFFF">双</td>
+            <td align="center"bgcolor="#FFFFFF"><input class="formOdds captcha" maxlength="6" size="4" value="0" name="Num_14" id="Num_14" /></td>
+            <td align="center"bgcolor="#FFFFFF">&nbsp;</td>
+            <td align="center"bgcolor="#FFFFFF">&nbsp;</td>
+          </tr>
+          <tr>
+            <td height="40" colspan="10" align="center"bgcolor="#F2F4F6"><input type="submit"  class="formButton" name="Submit" value="确认修改" /></td>
+          </tr></form>
+</table>
+{elseif $type ==6}
+<table id="listTables" class="listTables">
+    <form name="form1" method="post" action="{:url('lottery/oddsave','type=xjssc&playtype='.$type)}">
+        <tr>
+          <th width="50" height="22" align="center">号码</th>
+          <th align="center">当前赔率</th>
+          <th width="50" align="center">号码</th>
+          <th align="center">当前赔率</th>
+          <th width="50" align="center">号码</th>
+          <th align="center">当前赔率</th>
+          <th width="50" align="center">号码</th>
+          <th align="center">当前赔率</th>
+        </tr>
+        <tr>
+          <td height="28" align="center"bgcolor="#FFFFFF">总和大</td>
+          <td align="center"bgcolor="#FFFFFF"><input class="formOdds captcha" maxlength="6" size="4" value="0" name="Num_1" id="Num_1" /></td>
+          <td align="center"bgcolor="#FFFFFF">总和小</td>
+          <td align="center"bgcolor="#FFFFFF"><input class="formOdds captcha" maxlength="6" size="4" value="0" name="Num_2" id="Num_2" /></td>
+          <td align="center"bgcolor="#FFFFFF">总和单</td>
+          <td align="center"bgcolor="#FFFFFF"><input class="formOdds captcha" maxlength="6" size="4" value="0" name="Num_3" id="Num_3" /></td>
+          <td align="center"bgcolor="#FFFFFF">总和双</td>
+          <td align="center"bgcolor="#FFFFFF"><input class="formOdds captcha" maxlength="6" size="4" value="0" name="Num_4" id="Num_4" /></td>
+        </tr>
+        <tr>
+          <td height="28" align="center"bgcolor="#FFFFFF">龙</td>
+          <td align="center"bgcolor="#FFFFFF"><input class="formOdds captcha" maxlength="6" size="4" value="0" name="Num_5" id="Num_5" /></td>
+          <td align="center"bgcolor="#FFFFFF">虎</td>
+          <td align="center"bgcolor="#FFFFFF"><input class="formOdds captcha" maxlength="6" size="4" value="0" name="Num_6" id="Num_6" /></td>
+          <td align="center"bgcolor="#FFFFFF">和</td>
+          <td align="center"bgcolor="#FFFFFF"><input class="formOdds captcha" maxlength="6" size="4" value="0" name="Num_7" id="Num_7" /></td>
+          <td colspan="2" align="center"bgcolor="#FFFFFF">&nbsp;</td>
+        </tr>
+        <tr>
+          <td height="40" colspan="8" align="center"bgcolor="#F2F4F6"><input type="submit"  class="formButton" name="Submit" value="确认修改" /></td>
+        </tr>
+    </form>
+</table>
+{elseif $type >6}
+<table id="listTables" class="listTables">
+    <form name="form1" method="post" action="{:url('lottery/oddsave','type=xjssc&playtype='.$type)}">
+        <tr>
+          <th width="50" height="22" align="center">号码</th>
+          <th align="center">当前赔率</th>
+          <th width="50" align="center">号码</th>
+          <th align="center">当前赔率</th>
+          <th width="50" align="center">号码</th>
+          <th align="center">当前赔率</th>
+          <th width="50" align="center">号码</th>
+          <th align="center">当前赔率</th>
+          <th width="50" align="center">号码</th>
+          <th align="center">当前赔率</th>
+        </tr>
+        <tr>
+          <td height="28" align="center"bgcolor="#FFFFFF">豹子</td>
+          <td align="center"bgcolor="#FFFFFF"><input class="formOdds captcha" maxlength="6" size="4" value="0" name="Num_1" id="Num_1" /></td>
+          <td align="center"bgcolor="#FFFFFF">顺子</td>
+          <td align="center"bgcolor="#FFFFFF"><input class="formOdds captcha" maxlength="6" size="4" value="0" name="Num_2" id="Num_2" /></td>
+          <td align="center"bgcolor="#FFFFFF">对子</td>
+          <td align="center"bgcolor="#FFFFFF"><input class="formOdds captcha" maxlength="6" size="4" value="0" name="Num_3" id="Num_3" /></td>
+          <td align="center"bgcolor="#FFFFFF">半顺</td>
+          <td align="center"bgcolor="#FFFFFF"><input class="formOdds captcha" maxlength="6" size="4" value="0" name="Num_4" id="Num_4" /></td>
+          <td align="center"bgcolor="#FFFFFF">杂六</td>
+          <td align="center"bgcolor="#FFFFFF"><input class="formOdds captcha" maxlength="6" size="4" value="0" name="Num_5" id="Num_5" /></td>
+        </tr>
+        <tr>
+
+          <td align="center"bgcolor="#FFFFFF">单</td>
+          <td align="center"bgcolor="#FFFFFF"><input class="formOdds captcha" maxlength="6" size="4" value="0" name="Num_6" id="Num_6" /></td>
+          <td align="center"bgcolor="#FFFFFF">双</td>
+          <td align="center"bgcolor="#FFFFFF"><input class="formOdds captcha" maxlength="6" size="4" value="0" name="Num_7" id="Num_7" /></td>
+          <td align="center"bgcolor="#FFFFFF">大</td>
+          <td align="center"bgcolor="#FFFFFF"><input class="formOdds captcha" maxlength="6" size="4" value="0" name="Num_8" id="Num_8" /></td>
+          <td align="center"bgcolor="#FFFFFF">小</td>
+          <td align="center"bgcolor="#FFFFFF"><input class="formOdds captcha" maxlength="6" size="4" value="0" name="Num_9" id="Num_9" /></td>
+        </tr>
+        <tr>
+          <td height="40" colspan="10" align="center"bgcolor="#F2F4F6"><input type="submit"  class="formButton" name="Submit" value="确认修改" /></td>
+        </tr></form>
+</table>
+{/if}
+</div>
+<script type="text/javascript">loadinfo();</script>
+</body>
+</html>

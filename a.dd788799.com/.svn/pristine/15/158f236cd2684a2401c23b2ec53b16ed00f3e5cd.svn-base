@@ -1,0 +1,72 @@
+<?php
+namespace app\behavior;
+
+//初始化服务容器;
+
+use app\service\EventDispatcher;
+use app\queue\QueueManager;
+use app\broadcast\BroadcastManager;
+use app\auth\AuthManager;
+
+use think\Request;
+
+class Container 
+{
+
+    protected $events = [
+        'app\events\Test' => [
+            'app\listeners\TestListener@onAction',
+            //'app\listeners\Test2Listener',
+        ],
+    ];    
+
+    public function initEvents(){
+        $dispatcher = new EventDispatcher();
+        foreach($this->events as $event => $listeners){
+            foreach($listeners as $listener){
+                $dispatcher->listen($event,$listener);
+            }
+        }
+        container('events',$dispatcher);
+    }
+
+    private function initQueue(){
+        // 容器内的'queue' 从某个queue驱动 升级为 queue缓存
+        $manager = new QueueManager();
+        container('queue',$manager);
+    }
+
+    private function initBroadcast(){
+        $manager = new BroadcastManager();
+        container('broadcast',$manager);
+        $this->initChannels();
+    }
+
+	public function run(&$dispatch)
+	{		
+        $this->initEvents();
+        $this->initQueue();
+        $this->initBroadcast();
+        $this->initAuth();
+	}
+
+    private function initChannels(){
+        
+	   require_once(APP_PATH.'required/channels.php');
+       
+    }
+
+    private function initAuth(){
+        $manager = new AuthManager();
+        container('auth',$manager);
+
+        $callback = function (Request $request,$name = null) {
+            //$name = $name??config('auth.default');
+            //return container('auth')->guard($name)->user();
+	    return container('auth')->user();
+        }; 
+        //$request = request(); $request->user = $callback;
+        Request::hook('user',$callback);              
+    }
+
+}

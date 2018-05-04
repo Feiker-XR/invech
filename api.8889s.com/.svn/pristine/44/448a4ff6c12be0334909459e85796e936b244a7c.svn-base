@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>游戏设置</title>
+<link href="/css/base.css" rel="stylesheet" type="text/css" />
+<link href="/css/admin.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="/js/jquery.js"></script>
+<script type="text/javascript" src="/js/jquery.tools.js"></script>
+<script type="text/javascript" src="/js/base.js"></script>
+<script charset="utf-8" src="/edits/kindeditor-min.js"></script>
+<script charset="utf-8" src="/edits/lang/zh_CN.js"></script>
+
+</head>
+<body class="input">
+	<div class="bar">
+		游戏添加
+	</div>
+	
+	<script type="text/javascript">
+		$(function(){
+			$("#addgamebtn").click(function(){
+				 $("#addform").show();
+				 $("#tablist").hide();
+			});
+			$("#gamelist").click(function(){
+				window.location.href = "/index.php/config/mg_addgame";
+			})
+		})
+	</script>
+	
+	<div class="body">
+	  <ul id="tab" class="tab">
+				<li>
+					<input type="button" value="游戏列表" id="gamelist" hidefocus class="current"/>
+					<input type="button" value="游戏编辑" id="gameedit" hidefocus class="current"/>
+				</li>
+			</ul>
+
+			<form name="form1" method="post" action="?id={$id}&action=<?php if($id>0){ echo 'edit';}else{ echo 'add';}?>&page={$page}" id="addform">
+				<table class="inputTable tabContent">			
+				<tr>
+					<th>
+						平台名称: 
+					</th>
+					<td>
+						<input type="radio" value="ag" <?php if($game['platform'] == 'ag') {?>checked=checked<?php }?> name="platform" id="agtitle" class="formName" />AG
+						<input type="radio" value="bb" <?php if($game['platform'] == 'bb') {?>checked=checked<?php }?> name="platform" id="bbtitle" class="formName" />BB
+						<input type="radio" value="mg" <?php if($game['platform'] == 'mg') {?>checked=checked<?php }?> name="platform" id="mgtitle" class="formName" />MG
+						<input type="radio" value="pt" <?php if($game['platform'] == 'pt') {?>checked=checked<?php }?> name="platform" id="pttitle" class="formName" />PT
+					</td>
+				</tr>
+				
+				<style>
+					.formName{margin-left:20px;margin-top:-3px;}
+				</style>
+				
+				<tr>
+					<th>
+						游戏名称: 
+					</th>
+					<td>
+						<input type="text" value="<?php echo $game['gamename']?>" name="gamename" id="title" class="formText" /></td>
+				</tr>
+				
+				<tr>
+					<th>
+						Item ID: 
+					</th>
+					<td>
+						<input type="text" value="<?php echo $game['gameid']?>" name="gameid" id="title" class="formText" /></td>
+				</tr>
+				
+				<tr>
+					<th>
+						App ID: 
+					</th>
+					<td>
+						<input type="text" value="<?php echo $game['gameid2']?>" name="gameid2" id="title" class="formText" /></td>
+				</tr>
+
+				<tr>
+				  <th>是否首页显示:</th>
+				  <td>
+					<input type="radio" value="1" <?php if($game['ishot'] == '1') {?>checked=checked<?php }?> name="ishot" id="ishot_1" class="formName" />显示
+					<input type="radio" value="0" <?php if($game['ishot'] == '0') {?>checked=checked<?php }?> name="ishot" id="ishot_0" class="formName" />隐藏
+				</td>
+				</tr>
+				
+				<tr>
+					<th>
+						游戏类型: 
+					</th>
+					<td>
+						<input type="text" value="<?php echo $game['gametype']?>" name="gametype" id="title" class="formText" /></td>
+				</tr>
+				
+				<tr>
+					<th>
+						图片地址: 
+					</th>
+					<td>
+						<input type="text" value="<?php echo $game['imageurl']?>" name="imageurl" id="title" class="formText" style="width:400px;" /></td>
+				</tr>
+				
+				<tr>
+				  <th>是否新游戏:</th>
+				  <td>
+					<input type="radio" value="1" <?php if($game['isnew'] == '1') {?>checked=checked<?php }?> name="isnew" id="isnew_1" class="formName" />是
+					<input type="radio" value="0" <?php if($game['isnew'] == '0') {?>checked=checked<?php }?> name="isnew" id="isnew_0" class="formName" />否
+				</td>
+				</tr>
+	
+			</table>
+			<div class="buttonArea">
+			<input type="submit" class="formButton" value="确  定" hidefocus />&nbsp;&nbsp;
+			<input type="button" class="formButton" onClick="window.location.href='{:Url('main/info')}'" value="返  回" hidefocus />
+	  </div>
+</form>
+	</div>
+</body>
+</html>

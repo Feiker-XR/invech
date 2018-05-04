@@ -1,0 +1,109 @@
+{extend name="common/base" /}
+
+{block name="body"}
+	<!-- 标题栏 -->
+	<div class="main-title">
+		<h2>用户列表</h2>
+	</div>
+	<form action="{:Url('index')}" method="post">
+		<div class="cf">			
+			<a class="btn" href="{:Url('User/addUser')}">新 增</a>
+			<button style="display:none"></button><!-- 屏蔽回车时，默认点击form内部的第一个按钮 -->
+			<!--<button class="btn ajax-post" url="{:Url('user/changeStatus',array('method'=>'resumeUser'))}" target-form="ids">启 用</button>-->
+			<!--<button class="btn ajax-post" url="{:Url('user/changeStatus',array('method'=>'forbidUser'))}" target-form="ids">禁 用</button>-->
+			<!--<button class="btn ajax-post confirm" url="{:Url('user/changeStatus',array('method'=>'deleteUser'))}" target-form="ids">删 除</button>-->
+			<!-- 高级搜索 -->		
+			<div class="search-form fr cf">
+				<div class="sleft">
+					用户名：<input type="text" name="username" class="search-input" value="{$Request.param.username?$Request.param.username : ''}" placeholder="请输入用户名">
+					<!-- <a class="sch-btn" href="javascript:;" id="search" url="{:Url('index')}"><i class="btn-search"></i></a> -->
+				</div>
+				<div class="sbtn">
+					<button type="submit" class="btn" id="search">查 找</button>
+				</div>	
+			</div>
+		</div>
+	</form>
+    <!-- 数据列表 -->
+    <div class="data-table table-striped">
+	<table class="">
+    <thead>
+        <tr>
+		<!--<th class="row-selected row-selected"><input class="check-all" type="checkbox"/></th>-->
+		<th class="">用户UID</th>
+		<th class="">昵称</th>
+		<th class="">类型</th>
+		<th class="">来源</th>
+		<th class="">可用|冻结</th>
+		<th class="">积分|等级</th>
+		<th class="">返点|不定点</th>
+		<th class="">最后登录</th>
+		<th class="">状态</th>
+		<th class="">操作</th>
+		</tr>
+    </thead>
+    <tbody>
+		{volist name="_list" id="vo"}
+		<tr>
+            <!--<td><input class="ids" type="checkbox" name="id[]" value="{$vo.uid}" /></td>-->
+			<td>{$vo.uid} </td>
+			<td><a href="{:Url('User/edit?id='.$vo['uid'])}">{$vo.username}</a></td>
+			<td>
+				{if condition="$vo.type eq 1"} 代理
+				{else /} 会员
+				{/if}
+			</td>
+			<td>{php} if($vo['regPath']) echo '<a href="'.$vo['regPath'].'" target="_blank">链接</a>'; {/php}</td>
+			<td>{:number_format($vo['coin'],2)}|{:number_format($vo['fcoin'],2)}</td>
+			<td>{$vo.score}|{$vo.grade}</td>
+			<td>{$vo.fanDian}|{$vo.fanDianBdw}</td>
+			<td><span>{$vo['loginIP'] ? long2ip($vo['loginIP']) : '' }</span></td>
+			<td>{php}
+
+			if( $vo['loginIP']>0 && $vo['accessTime']>0 && (time()-$vo['accessTime'])<config('SESSION_TIME') ){
+					echo '<font color="#FF0000">在线</font>';
+				} else {
+					echo '离线';
+				}
+				{/php}
+			</td>
+			<td>
+				<a href="{:Url('User/index?parentId='.$vo['uid'])}">下级</a>
+				<a href="{:Url('User/edit?id='.$vo['uid'])}">编辑</a>
+				{eq name="vo.enable" value="1"}
+				<a href="{:Url('User/changeStatus?method=forbidUser&id='.$vo['uid'])}" class="ajax-get">禁用</a>
+				{else/}
+					<a href="{:Url('User/changeStatus?method=resumeUser&id='.$vo['uid'])}" class="ajax-get">启用</a>
+			     {/eq}
+
+				{eq name="vo.isDelete" value="0"}
+					<a href="{:Url('User/changeStatus?method=deleteuser&id='.$vo['uid'])}" class="confirm ajax-get">删除</a>
+				{else/}
+					<a href="{:Url('User/changeStatus?method=undeleteuser&id='.$vo['uid'])}" class="confirm ajax-get">恢复</a>
+				{/eq}
+          </td>
+		</tr>
+		{/volist}
+	</tbody>
+    </table> 
+	</div>
+    <div class="page">
+        {$_page}
+    </div>
+{/block}
+
+{block name="script"}
+	<script src="__STATIC__/thinkbox/jquery.thinkbox.js"></script>
+
+	<script type="text/javascript">
+	//回车搜索
+	$("body").keyup(function(e){
+		if(e.keyCode === 13){
+			$("#search").click();
+			return false;
+		}
+	});
+    //导航高亮
+    $('.side-sub-menu').find('a[href="{:Url('User/index')}"]').closest('li').addClass('current');
+	</script>
+{/block}

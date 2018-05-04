@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset='utf-8'>
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+    <title>绑定银行卡</title>
+    <link type="text/css" rel="stylesheet" href="./css/personal.css">
+    <style type="text/css">
+        section.security.margin{
+           background: none;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header class="header">
+        <i class='left'>返回</i>
+        <h1>绑定银行卡</h1>
+    </header>
+    <main class="inner_body">
+        <section class="charge_user ol_box security">
+            <ol>
+                <li>
+                    <span>真实姓名</span><input type="text" id="name" class="disabled" value="" placeholder="请输入您的姓名"/>
+                </li>
+                <li>
+                    <span>银行卡号</span><input type="text" id="card" class="disabled" value="" placeholder="请输入您的卡号"/>
+                </li>
+                <li>
+                    <span>开户银行</span><input type="text" id="bank" class="disabled" value="" placeholder="请填写开户银行"/>
+                </li>
+                <li>
+                    <span>开户地址</span><input type="text" id="address" class="disabled" value=""  placeholder="请填写开户地址"/>
+                </li>
+            </ol>
+        </section>
+
+        <section class="charge_user ol_box security margin">
+           <p>温馨提示:银行卡信息一经提交如需修改请联系24小时在线客服！</p>
+        </section>
+
+        <section class="charge_pay sub">
+            <button>立即绑定</button>
+        </section>
+    </main>
+</div>
+
+<script type="text/javascript" src="./js/jquery.1.9.1.min.js"></script>
+<script type="text/javascript" src="./js/show.js"></script>
+<script type="text/javascript">
+    // 提交数据
+    $('.sub button').click(function () {
+        //$(this).attr('disabled','disabled');
+        var obj = {
+            name:'',
+            card:'',
+            bank:'',
+            address:''
+        }
+        obj.name = $('#name').val();      // 姓名
+        obj.card = $('#card').val();      // 卡号
+        obj.bank = $('#bank').val();      // 银行
+        obj.address = $('#address').val();// 开户行地址
+
+        console.log(obj)
+    })
+</script>
+</body>
+</html>

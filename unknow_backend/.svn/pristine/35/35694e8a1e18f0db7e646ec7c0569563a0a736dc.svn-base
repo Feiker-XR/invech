@@ -1,0 +1,169 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>系统设置</title>
+<link href="/css/base.css" rel="stylesheet" type="text/css" />
+<link href="/css/admin.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="/js/jquery.js"></script>
+<script type="text/javascript" src="/js/jquery.tools.js"></script>
+<script type="text/javascript" src="/js/base.js"></script>
+<script language="javascript">
+function gopage(url){
+	location.href = url;
+}
+function winopen(bid,status){
+	window.open("{:url('danshi/setscore')}?bid="+bid+"&status="+status,"list","width=440,height=180,left=50,top=100,scrollbars=no"); 
+}
+
+function windowopen(url){
+	window.open(url,"wx","width=600,height=500,left=50,top=100,scrollbars=no"); 
+}
+
+function go(value){
+	if(value != "") location.href=value;
+	else return false;
+}
+
+function check(){
+	if($("#tf_id").val().length > 5){
+		$("#status").val("8,0,1,2,3,4,5,6,7");
+	}
+	return true;
+}
+</script>
+</head>
+<body class="list">
+	<div class="bar">
+		比赛<font color="red"><?=$match_info['Match_Name']?></font>注单列表
+	</div>
+	<div class="body">
+	    <div class="listBar">
+	        <ul  style="text-align: left;font-size:15px;">
+	             <li>比赛名称:<?=$match_info['Match_Name']?></li>
+	             <li>比赛时间:<?=$match_info['Match_CoverDate']?></li>
+	             <li>主场:<?=$match_info['Match_Master']?></li>
+	             <li>客场:<?=$match_info['Match_Guest']?></li>
+	             <li>上半场比分:
+	             	<?php if($match_info['MB_Inball_HR']!== NULL){?>
+	             		<?php echo $match_info['MB_Inball_HR'];?>:
+	             		<?php echo $match_info['TG_Inball_HR'];?>
+	             	<?php }else{?>
+	             		暂无比分信息
+	             	<?php }?>
+	             </li>
+	             <li>全场比分:
+	             	<?php if($match_info['MB_Inball']!=''){?>
+	             		<?php echo $match_info['MB_Inball'];?>:
+	             		<?php echo $match_info['TG_Inball'];?>
+	             	<?php }else{?>
+	             		暂无比分信息
+	             	<?php }?>
+	             </li>
+	        </ul>
+	    </div>
+	    <table id="listTables" class="listTables">
+	         <tbody>
+	             <tr>
+	               <th>用户ID</th>
+	               <th>用户名</th>
+	               <th>注单号</th>
+	               <th>投注信息</th>
+	               <th>投注金额</th>
+	               <th>可赢金额</th>
+	               <th>投注时间</th>
+	               <th>结算状态</th>
+	               <th>操作</th>
+	             </tr>
+	             {volist name='list' id='rows'}
+	             <tr>
+	                 <td  align="center"><?=$rows["uid"]?></td>
+	                 <td  align="center"> <?=$rows["username"]?></td>
+	                 <td  align="center"><?=$rows["number"]?></td>
+	                 <td align="center">
+	                     <font color="<?php if ($rows["ball_sort"]=="足球滚球"){echo "#0066FF";}else{echo "#336600";}?>"><b><?=$rows["ball_sort"]?></b></font><br/>
+	                     <?=$rows["match_time"]?>
+	                     <font style="color:#FF0033">
+	                     	<?php 
+								if($rows["point_column"]==="match_jr" || $rows["point_column"]==="match_gj") 
+									echo $rows["bet_info"];
+								else 
+									echo str_replace("-","<br>",$rows["bet_info"]);
+							?>
+						</font>
+						<?php 
+								if($rows["status"]!=0 && $rows["status"]!=3)
+									if($rows["MB_Inball"]!=''){?>
+	                     				[<?=$rows["MB_Inball"]?>:<?=$rows["TG_Inball"]?>]
+	                     			<?php } ?>
+	                 </td>
+	                 <td align="center"><?=$rows["bet_money"]?></td>
+	                 <td align="center"><?=$rows["bet_win"]?></td>
+	                 <td align="center"><?=date("m-d H:i:s",strtotime($rows["bet_time"]))?></td>
+	                 <td align="center"><?php
+            			  	if($rows["status"]==0){
+            			  		echo '未结算';
+            			  	}elseif($rows["status"]==1){
+            					echo '<span style="color:#FF0000;">赢</span>';
+            				}elseif($rows["status"]==2){
+            					echo '<span style="color:#00CC00;">输</span>';
+            				}elseif($rows["status"]==8){
+            					echo '和局';
+            				}elseif($rows["status"]==3){
+                          		echo '注单无效';
+            			  	}elseif($rows["status"]==4){
+            					echo '<span style="color:#FF0000;">赢一半</span>';
+            			  	}elseif($rows["status"]==5){
+            					echo '<span style="color:#00CC00;">输一半</span>';
+            			  	}elseif($rows["status"]==6){
+            					echo '进球无效';
+            			 	}elseif($rows["status"]==7){
+            					echo '红卡取消';
+            				}
+            				?>
+            	    </td>
+	                 <td align="center"><?php if ($rows["status"]==0){
+			  	 if($rows["point_column"]==="match_jr" || $rows["point_column"]==="match_gj"){?>
+				 	<a href="javascript:windowopen('{:url('danshi/jrgjjs')}?match_id=<?=$rows["match_id"]?>&bid=<?=$rows["bid"]?>')">结算</a>
+			  <?php
+			  	 }else{
+			  ?>
+			 <a href="javascript:winopen(<?=$rows["bid"]?>,2);">输</a> <a href="javascript:winopen(<?=$rows["bid"]?>,1);">赢</a> <a href="javascript:winopen(<?=$rows["bid"]?>,8);">和</a> 
+			   <?php if($rows["ben_add"]==1){?>
+			  <br/>
+			 <a href="javascript:winopen(<?=$rows["bid"]?>,5)">输一半</a>
+		      <br/>
+			  <a href="javascript:winopen(<?=$rows["bid"]?>,4)">赢一半</a> 
+			  <?php }
+			  	}
+			  ?>
+			  <br/>
+			  <a href="javascript:windowopen('{:url('danshi/setbet3')}?bid=<?=$rows["bid"]?>&new=1')">无效</A>
+			  <?php }else if($rows["status"]==3){?>
+              <?php echo $rows['sys_about'];?>
+			  <?php }else if($rows["status"]==4){?>
+              赢一半
+			  <?php }else if($rows["status"]==5){?>
+              输一半
+			  <?php }else if($rows["status"]==6){?>
+              进球无效
+			  <?php }else if($rows["status"]==7){?>
+              红卡取消
+			  <?php }else if($rows["status"]==1){?>
+			  赢
+			  <?php }else if($rows["status"]==2){?>
+			  输
+			  <?php }else if($rows["status"]==8){?>
+			  和局
+			  <?php } ?>
+			  <?php if($rows["status"]!=0){?>
+			 <br/>
+			  <a onClick="return confirm('确定重新审核？')" href="javascript:windowopen('{:url('danshi/qxbet')}?bid=<?=$rows["bid"]?>&status=<?=$rows["status"]?>')">重新审核</a>
+			  <?php }?></td>
+	             </tr>
+	             {/volist}
+	         </tbody>
+	    </table>
+	</div>
+</body>
+</html>

@@ -1,0 +1,55 @@
+<div class="help_r_main">
+    <div class="eveb_content">
+        <div class="eveb_nav_sub">
+            <ul class="clearfix">
+                <li class="on"><a href="/user/recharge_record">充值记录</a></li>
+                <li><a href="/user/withdraw_record">提现记录</a></li>
+                <li><a href="/user/money_record">资金流水</a></li>
+                <li><a href="/user/bet_record">投注记录</a></li>
+            </ul>
+        </div><h2>
+        <div class="eveb_search eveb_search_h2">
+            <input type="hidden" name="pageIndex">
+            类型：
+            <select name="type">
+                <option value="">所有</option>
+                <option value="1">银行转账</option>
+                <option value="2">支付宝转账</option>
+                <option value="3">微信转账</option>
+                <option value="4">财付通转账</option>
+                <option value="5">在线支付</option>
+            </select>
+            状态：
+            <select name="status" id="status">
+                <option value="">所有</option>
+                <option value="0">未处理</option>
+                <option value="1">已通过</option>
+                <option value="2">已拒绝</option>
+            </select>
+            　起止时间：
+            <input name="starttime" id="starttime" type="text" size="11" class="suminp" onclick="laydate({istime: true, format: 'YYYY-MM-DD hh:mm'})" value="2018-04-02 00:00"> -
+            <input name="endtime" id="endtime" type="text" size="11" class="suminp" onclick="laydate({istime: true, format: 'YYYY-MM-DD hh:mm'})" value="2018-04-03 00:00">
+            <a href="javascript:void(0)" class="button_small button_1" onclick="shaixuan()">筛选</a>
+            <a href="javascript:void(0)" class="button_small button_4" onclick="searchday(1)">今日</a>
+            <a href="javascript:void(0)" class="button_small button_4" onclick="searchday(3)">3天</a>
+            <a href="javascript:void(0)" class="button_small button_4" onclick="searchday(7)">本周</a>
+        </div>
+    </h2>
+        <table class="eveb_box eveb_table" id="dataTable">
+            <thead>
+            <tr>
+                <th>序号</th>
+                <th>单号</th>
+                <th>申请时间</th>
+                <th>存款方式</th>
+                <th>存款金额</th>
+                <th>备注</th>
+                <th>状态</th>
+            </tr>
+            </thead>
+            <tbody><tr><td colspan="7" styl="text-align:center;">暂无数据</td></tr></tbody>
+        </table>
+        <div class="eveb_amount fl">当前小计<span id="pageMoney">0</span>元，总计<span id="totalMoney">0</span>元</div>
+        <div class="eveb_page fr"></div>
+    </div>
+</div>

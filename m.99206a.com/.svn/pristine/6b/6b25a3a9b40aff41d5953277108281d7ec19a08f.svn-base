@@ -1,0 +1,500 @@
+<?php if (!defined('THINK_PATH')) exit(); /*a:3:{s:84:"/mnt/wwwroot/www.dd788799.com/public/../application/index/newview/user/hk_money.html";i:1517662157;s:81:"/mnt/wwwroot/www.dd788799.com/public/../application/index/newview/common/nav.html";i:1517730945;s:84:"/mnt/wwwroot/www.dd788799.com/public/../application/index/newview/common/footer.html";i:1516698466;}*/ ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Welcome</title>
+<link rel="stylesheet" type="text/css" href="/css/general.css"/>
+<link rel="stylesheet" type="text/css" href="/css/jquery-ui.css" />
+<link rel="stylesheet" type="text/css" href="/newview/css/theme/style.css" />
+<link rel="stylesheet" type="text/css" href="/newview/css/style.css" />
+<script type="text/javascript" src="/Scripts/jquery.js"></script>
+<script type="text/javascript" src="/Scripts/member.js"></script>
+<script type="text/javascript" src="/Scripts/jquery-ui-datepicker.js"></script>
+<script type="text/javascript" src="/newview/js/main.js"></script>
+<script language="javascript" type="text/javascript">
+$(function(){
+	$("#cn_date").datepicker({
+		minDate: -7,
+		maxDate: 0
+	});
+	
+setInterval(function() {
+	$.ajax({
+		type: "post",
+		url: "<?php echo Url('index/home'); ?>",
+		data:{'ajax':1,'get_money':'1'},
+		success:function(data) {
+			if (/^[\d\.]+$/.test(data)) {
+				$('#money,#money_2').text(data);
+			}
+		}
+	});
+},2000);	
+});
+</script>
+<style type="text/css">
+body{background: white;}
+</style>
+</head>
+<body> 
+<div class="head">
+	<!--欢迎-->
+	<div class="header_contain">
+	<div class="header_all">
+		<div class="header">
+			<div class="logo">
+				<a href="<?php echo Url('index/index'); ?>"><img src="/newview/img/logo.png" /></a>
+			</div>
+			<div class="header_right_language fr">
+				<span>简体中文</span>
+			</div>		
+			<div class="header_right_1 fr">
+				<ul>
+					<li><a href="http://www.hb99206.com" target="_blank" data-color="#FF2D2D|#D9D836" class="js-article-color" >注册抢亿元红包</a></li>
+					<li><a href="http://www.app99206.com" target="_blank"><span class="color_green2">下载手机APP享18888元</span></a></li>
+					<li><a href="<?php echo Url('promotions/index'); ?>"><span class="color_newGray">首存即送2888元</span></a></li>
+					<li><a href="<?php echo Url('vipcheck/index'); ?>" target="_blank" class="color_yellow">VIP等级查询</a></li>
+					<li><a href="http://pay99206.com" class="color_green" target="_blank">快速充值</a></li>
+					<li><a href="<?php echo Url('linecheck/index'); ?>" target="_blank" class="color_blue">线路检测</a></li>
+				</ul>
+			</div>
+			<!--登陆前-->
+			<?php if(\think\Session::get('uid') == ''): ?>
+			<div class="header_login" >
+				<form action="<?php echo url('index/login'); ?>">
+				<ul>
+					<li><input type="text" class="header_login_name" id="username" /></li>
+					<li><input type="password" id="password" /></li>
+					<?php if($sysConfig['loginYzm'] == "1"): ?>
+					<li><input type="text" placeholder="验证码" name='dlyzm' id="dlyzm" class="header_login_yz"/></li>
+					<li><img src="/captcha.html" class="header_login_yzpic"  onclick="this.src='/captcha.html?d='+Math.random();" style="cursor:pointer;" /></li>
+					<?php else: ?>
+					<input type="hidden" id="dlyzm" name="dlyzm" />
+					<?php endif; ?>
+					<li><a href="javascript:;" onclick="alert('请联系在线客服找回密码!')" class="color_999">忘记密码？</a></li>
+					<li><a href="JavaScript:;" onclick="Login()" class="header_login_a">登录</a></li>
+					<li><a href="/index/reg" class="header_login_open">开户</a></li>
+				</ul>
+				</form>
+			</div>
+			
+			<!--登陆后-->
+			<?php else: ?>
+			<div class="header_login_had" >
+				<ul class="login_vip">
+					<li><img src="/newview/img/vip-diamond.png" /></li>
+					<li class="color_yellow">VIP会员中心</li>
+					<li class="login_vip_1 ml15">账户：<span class="color_yellow"><?php echo \think\Session::get('username'); ?></span></li>
+					<li class="login_vip_2">余额：<span class="color_yellow" id="money">获取中...</span></li>
+					<li class="login_vip_3 ml10"><a href="<?php echo url('user/get_money'); ?>">提款</a></li>
+					<li class="login_vip_4 ml10"><a href="<?php echo url('index/logout'); ?>">退出</a></li>
+				</ul>
+				<ul class="login_list">
+					<li><a href="<?php echo url('user/userinfo'); ?>">会员资料</a></li>
+					<li><a href="<?php echo url('user/report'); ?>">账户历史</a></li>
+					<li><a href="<?php echo url('user/record_ds'); ?>">交易记录</a></li>
+					<li><a href="<?php echo url('user/set_money'); ?>">财务中心</a></li>
+					<li><a href="<?php echo url('user/agent'); ?>">代理中心</a></li>
+					<li><a href="<?php echo url('user/set_money'); ?>">会员存款</a></li>
+					<li><a href="<?php echo url('user/userinfo'); ?>">额度转换</a></li>
+				</ul>
+			</div>
+			
+			<div class="header_login_fixed" style="display: none;">
+				<ul class="login_vip">
+					<li><img src="/newview/img/vip-diamond.png" /></li>
+					<li class="color_yellow">VIP会员中心</li>
+					<li class="login_vip_1 ml15">账户：<span class="color_yellow"><?php echo \think\Session::get('username'); ?></span></li>
+					<li class="login_vip_2">余额：<span class="color_yellow" id="money_2">获取中...</span></li>
+					<li class="mr20"><a href="<?php echo url('user/userinfo'); ?>">会员资料</a></li>
+					<li class="mr20"><a href="<?php echo url('user/report'); ?>">账户历史</a></li>
+					<li class="mr20"><a href="<?php echo url('user/record_ds'); ?>">交易记录</a></li>
+					<li class="mr20"><a href="<?php echo url('user/set_money'); ?>">财务中心</a></li>
+					<li class="mr20"><a href="<?php echo url('user/agent'); ?>">代理中心</a></li>
+					<li class="mr20"><a href="<?php echo url('user/set_money'); ?>">会员存款</a></li>
+					<li><a href="<?php echo url('user/userinfo'); ?>">额度转换</a></li>					
+					<li class="login_vip_3 ml10 mt3"><a href="<?php echo url('user/get_money'); ?>">提款</a></li>
+					<li class="login_vip_4 ml10 mt3"><a href="<?php echo url('index/logout'); ?>">退出</a></li>
+				</ul>
+			</div>			
+			
+			<?php endif; ?>
+			
+		</div>
+	</div>	
+	<!--导航-->	
+	<div class="nav_all">
+		<div class="nav">
+			<span>
+				<a href="<?php echo Url('index/index'); ?>" class="nav_a f14 <?php if(\think\Request::instance()->controller() == 'Index'): ?>nav_active<?php endif; ?>">首 页
+					<p class="f12">home</p>
+				</a>
+			</span>
+			<a class="nav_line"></a>
+			<span>
+				<a href="<?php echo Url('sport/index'); ?>" class="nav_a f14 <?php if(\think\Request::instance()->controller() == 'Sport'): ?>nav_active<?php endif; ?>">皇冠体育
+					<p class="f12">sports</p>
+					<img src="/newview/img/hots.gif" />
+				</a>
+				<div class="nav_show">
+					<a href="<?php echo Url('sport/index'); ?>">皇冠体育</a>
+					<a href="/live/bbin/">BBIN体育</a>
+				</div>			
+			</span>
+			<a class="nav_line"></a>
+			<span>
+				<a href="<?php echo Url('/lottery/index/type/csc'); ?>" class="nav_a f14 <?php if(\think\Request::instance()->controller() == 'Lottery'): ?>nav_active<?php endif; ?>">彩票游戏
+					<p class="f12">lottery</p>
+					<img src="/newview/img/hots.gif"/>
+				</a>
+				<div class="nav_show">
+					<a href="/six/index.html">六合彩49倍</a>
+					<a href="/lottery/index/type/csc">重庆时时彩</a>
+					<a href="/lottery/index/type/pk10">北京PK拾</a>
+					<a href="/lottery/index/type/xyft">幸运飞艇</a>
+					<a href="/lottery/index/type/gsf">广东快乐十分</a>
+					<a href="/lottery/index/type/csf">重庆快乐十分</a>
+				</div>
+			</span>	
+			<a class="nav_line"></a>
+			<span>	
+				<a href="<?php echo Url('live/index'); ?>" class="nav_a f14 <?php if(\think\Request::instance()->controller() == 'Live'): ?>nav_active<?php endif; ?>">真人视讯
+					<p class="f12">lives</p>
+				</a>
+				<div class="nav_show">
+					<a href="/live/ag/" target="_BLANK">AG视讯 </a>
+					<a href="/live/bbin/" target="_BLANK">BB视讯 </a>
+					<a href="/live/og/" target="_BLANK">OG视讯</a>
+					<a href="/live/sunbet/" target="_BLANK">申博视讯</a>
+				</div>			
+			</span>
+			<a class="nav_line"></a>
+			<span>	
+				<a href="<?php echo Url('game/index'); ?>" class="nav_a f14 <?php if(\think\Request::instance()->controller() == 'Game'): ?>nav_active<?php endif; ?>">电子游艺
+					<p class="f12">game</p>
+				</a>
+				<div class="nav_show">
+					<a href="<?php echo Url('game/index','type=ag'); ?>">AG电子</a>
+					<a href="<?php echo Url('game/index','type=bbin'); ?>">BBIN电子</a>
+					<a href="<?php echo Url('game/index','type=mg'); ?>">MG电子</a>
+					<a href="<?php echo Url('game/index','type=pt'); ?>">PT电子</a>
+				</div>		
+			</span>	
+			<a class="nav_line"></a>
+			<span>	
+				<a href="<?php echo Url('betting/index'); ?>" target="_blank" class="nav_a f14 <?php if(\think\Request::instance()->controller() == 'Betting'): ?>nav_active<?php endif; ?>">手机投注
+					<p class="f12">moblies</p>
+				</a>			
+			</span>	
+			<a class="nav_line"></a>
+			<span>
+				<a href="<?php echo Url('promotions/index'); ?>" class="nav_a f14 <?php if(\think\Request::instance()->controller() == 'Promotions'): ?>nav_active<?php endif; ?>">优惠活动
+					<p class="f12">promotions</p>
+					<img src="/newview/img/hots.gif"/>
+				</a>
+			</span>	
+			<a class="nav_line"></a>
+			<span>	
+				<a href="<?php echo Url('/about/index/id/8'); ?>"  class="nav_a f14 <?php if(\think\Request::instance()->controller() == 'About'): ?>nav_active<?php endif; ?>">加盟代理
+					<p class="f12">add us</p>
+				</a>
+			</span>	
+			<a class="nav_line"></a>
+			<span>	
+				<a href="https://messenger.providesupport.com/messenger/0nye75kga3q931e9lwrn16k4q0.html" class="nav_a f14" target="_blank">在线客服
+					<p class="f12">service</p>
+				</a>
+			</span>
+		</div>
+	</div>	
+</div>
+</div>
+<div class="block_0"></div>	
+	
+<div class="moneyBox_contain">		
+	<div class="ui-moneyBox">
+		<ul>
+			<table width="100%" border="0" cellspacing="0" cellpadding="5" id="thetable">
+				<tr>
+					<td colspan="6" align="center" bgcolor="#333333" style="font-size:14px; color:#FF0">请选择下列公司账号进行转账汇款</td>
+				</tr>
+				<?php
+					foreach($bank as $k=>$arr){
+				
+						if(!$arr['card_qrcode']){
+				?>
+					<tr>
+						<td width="200" height="24" align="right">
+							<?=$arr['card_bankName']?>：</td>
+						<td width="200" style="font-size:14px;color:#F00;">
+							<?=$arr['card_ID']?>
+						</td>
+						<td width="60" align="right">开户名：</td>
+						<td width="100" align="center" style="font-size:14px;color:#F00;">
+							<?=$arr['card_userName']?>
+						</td>
+						<td width="60" align="right">开户行：</td>
+						<td style="font-size:14px;color:#F00;">
+							<?=$arr['card_address']?>
+						</td>
+					</tr>
+				<?php
+					}else{
+				?>
+					<tr>
+						<td width="200" height="24" align="right">
+							<?=$arr['card_bankName']?>：</td>
+						<td width="200" style="font-size:14px;color:#F00;" colspan="5">
+							<a href="<?=$arr['card_qrcode']?>" style="color:red;" target="blank">点击查看二维码转账</a>
+						</td>
+						
+					</tr>
+				<?php
+					}
+				}
+				?>
+					<tr>
+						<td height="24" colspan="6">
+							<p><strong>温馨提示：</strong><br/>
+							</p>
+							<p>一、请在金额转出之后务必填写该页下方的汇款信息表格，以便财务系统能够及时的为您确认添加金额到您的会员帐户中。<br/>
+							</p>
+							<p>二、本公司最低存款金额为100元RMB，公司财务系统将对银行存款的会员以存款金额大小，实行返利派送。</p>
+							<p>三、跨行转帐请您使用跨行快汇。</p>
+						</td>
+					</tr>
+			</table>
+		</ul>
+		<ul style="margin-top:10px;">
+			<table width="100%" border="0" cellspacing="0" cellpadding="5">
+				<form id="form1" name="form1" action="<?php echo Url('user/hk_money_set'); ?>?into=true" method="post">
+					<tr>
+						<td colspan="2" align="center" bgcolor="#333333" style="font-size:14px; color:#FF0">请认真填写下列表单</td>
+					</tr>
+					<tr>
+						<td width="150" align="right">用户名：</td>
+						<td>
+							<font color="#0000FF">
+								<?=Session('username');?>
+							</font>
+						</td>
+					</tr>
+					<tr>
+						<td align="right">存款金额：</td>
+						<td><input type="text" id="v_amount" name="v_amount" class="Input_100" onkeyup="clearNoNum(this);" /></td>
+					</tr>
+					<tr>
+						<td align="right">汇入银行：</td>
+						<td>
+							<select id="IntoBank" name="IntoBank" style="height:26px;border:1px solid #d7d7d7;">
+								<option value="" selected="selected">请选择转入银行</option>
+								<?php
+	foreach($bank  as $k=>$arr){
+	?>
+									<option value="<?=$arr['card_bankName']?>">
+										<?=$arr['card_bankName']?>
+									</option>
+									<?php
+	}
+	?>
+							</select>
+						</td>
+					</tr>
+					<tr>
+						<td align="right">汇入时间：</td>
+						<td><input name="cn_date" type="text" class="Input_100" id="cn_date" value="<?=date(" Y-m-d ",time())?>" size="10" maxlength="10" readonly="readonly" /> 时间：
+							<select name="s_h" id="s_h" style="height:26px;border:1px solid #d7d7d7;">
+								<option value="00">00</option>
+								<option value="01">01</option>
+								<option value="02">02</option>
+								<option value="03">03</option>
+								<option value="04">04</option>
+								<option value="05">05</option>
+								<option value="06">06</option>
+								<option value="07">07</option>
+								<option value="08">08</option>
+								<option value="09">09</option>
+								<option value="10">10</option>
+								<option value="11">11</option>
+								<option value="12">12</option>
+								<option value="13">13</option>
+								<option value="14">14</option>
+								<option value="15">15</option>
+								<option value="16">16</option>
+								<option value="17">17</option>
+								<option value="18">18</option>
+								<option value="19">19</option>
+								<option value="20">20</option>
+								<option value="21">21</option>
+								<option value="22">22</option>
+								<option value="23">23</option>
+							</select>
+							时
+							<select name="s_i" id="s_i" style="height:26px;border:1px solid #d7d7d7;">
+								<option value="00">00</option>
+								<option value="01">01</option>
+								<option value="02">02</option>
+								<option value="03">03</option>
+								<option value="04">04</option>
+								<option value="05">05</option>
+								<option value="06">06</option>
+								<option value="07">07</option>
+								<option value="08">08</option>
+								<option value="09">09</option>
+								<option value="10">10</option>
+								<option value="11">11</option>
+								<option value="12">12</option>
+								<option value="13">13</option>
+								<option value="14">14</option>
+								<option value="15">15</option>
+								<option value="16">16</option>
+								<option value="17">17</option>
+								<option value="18">18</option>
+								<option value="19">19</option>
+								<option value="20">20</option>
+								<option value="21">21</option>
+								<option value="22">22</option>
+								<option value="23">23</option>
+								<option value="24">24</option>
+								<option value="25">25</option>
+								<option value="26">26</option>
+								<option value="27">27</option>
+								<option value="28">28</option>
+								<option value="29">29</option>
+								<option value="30">30</option>
+								<option value="31">31</option>
+								<option value="32">32</option>
+								<option value="33">33</option>
+								<option value="34">34</option>
+								<option value="35">35</option>
+								<option value="36">36</option>
+								<option value="37">37</option>
+								<option value="38">38</option>
+								<option value="39">39</option>
+								<option value="40">40</option>
+								<option value="41">41</option>
+								<option value="42">42</option>
+								<option value="43">43</option>
+								<option value="44">44</option>
+								<option value="45">45</option>
+								<option value="46">46</option>
+								<option value="47">47</option>
+								<option value="48">48</option>
+								<option value="49">49</option>
+								<option value="50">50</option>
+								<option value="51">51</option>
+								<option value="52">52</option>
+								<option value="53">53</option>
+								<option value="54">54</option>
+								<option value="55">55</option>
+								<option value="56">56</option>
+								<option value="57">57</option>
+								<option value="58">58</option>
+								<option value="59">59</option>
+							</select>
+							分</td>
+					</tr>
+					<tr>
+						<td align="right">汇入方式：</td>
+						<td>
+							<select id="InType" name="InType" style="height:26px;border:1px solid #d7d7d7;">
+								<option value="">请选择汇款方式 </option>
+								<option value="支付宝转账">支付宝转账</option>
+								<option value="银行柜台">银行柜台</option>
+								<option value="ATM现金">ATM现金</option>
+								<option value="网银转账">网银转账</option>
+							</select>
+						</td>
+					</tr>
+					<tr>
+						<td align="right">汇款人姓名：</td>
+						<td><input name="v_Name" type="text" class="Input_100" id="v_Name" onfocus="javascript:this.select();" size="34" /></td>
+					</tr>
+					<tr>
+						<td align="right">汇款地点：</td>
+						<td><input name="v_site" type="text" class="Input_200" id="v_site" size="34" /></td>
+					</tr>
+					<tr>
+						<td colspan="2" align="left">
+							<p><strong>汇款信息提交说明：</strong><br/>
+							</p>
+							<p>一、请您按表格提示填写准确的汇款转帐信息，确认提交后财务系统将会及时的为您核查入款情况！<br/>
+							</p>
+							<p>二、请您在转帐时金额后面多加个尾数（例如：存款金额 1000.66 或 1000.88）等。<br/>
+							</p>
+							<p>三、如有任何疑问,您可以联系在线客服,我们为您提供365天×24小时不间断的友善和专业客户咨询服务！</p>
+						</td>
+					</tr>
+					<tr>
+						<td colspan="2" align="center" ><input type="button" name="button" id="button" value="确认提交" class="m_btn" onclick="SubInfo();" /></td>
+					</tr>
+				</form>
+			</table>
+		</ul>
+	</div>
+</div>
+
+<div class="footer_all">
+	<div class="footer">
+		<div class="footer_1">
+			<h2>合作伙伴</h2>
+			<a><img src="/newview/img/foot-logo.png" /></a>
+		</div>
+		<div class="footer_2">
+			<h2>用户服务</h2>
+			<ul>
+				<li><a href="/about/index/id/3.html">隐私问题</a></li>
+				<li><a href="/about/index/id/5.html">常见问题</a></li>
+				<li><a href="/about/index/id/1.html">联系我们</a></li>
+				<li><a href="/about/index/id/1.html">关于我们</a></li>
+			</ul>
+		</div>	
+		<div class="footer_1">
+			<h2>合作平台</h2>
+			<img src="/newview/img/foot-logo-02.png" />
+		</div>
+		<div class="footer_3">
+			<h2>推荐浏览器</h2>
+			<ul>
+				<li><i class="footer_3_1"></i><a href="#" class="f14">谷歌浏览器</a></li>
+				<li><i class="footer_3_2"></i><a href="#" class="f14">IE浏览器</a></li>
+				<li><i class="footer_3_3"></i><a href="#" class="f14">火狐浏览器</a></li>
+			</ul>
+		</div>
+		<div class="footer_4">
+			<h2>联系我们</h2>
+			<ul>
+				<li><i class="footer_4_1"></i><a href="#" class="f14">198198119</a></li>
+				<li><i class="footer_4_2"></i><a href="#" class="f14">99206com@gmail.com</a></li>
+			</ul>
+		</div>		
+		<div class="footer_5">
+			<h2>手机投注</h2>
+			<img src="/img/foot-logo-08.png" style="width: 120px;height: 120px;"/>
+		</div>		
+	</div>
+</div>
+<!--  -->
+<script type="text/javascript">
+$(function(){
+	setInterval(function() {
+		$.ajax({
+			type: "post",
+			url: "<?php echo Url('index/home'); ?>",
+			data:{'ajax':1,'get_money':'1'},
+			success:function(data) {
+				if (/^[\d\.]+$/.test(data)) {
+					$('#money').text(data);
+					$('#money_2').text(data);
+				}
+			}
+		});
+	},5000);
+})
+</script>
+ 
+<script language="javascript">bianse("thetable","#F5F5F5","#FFFFFF","#FFFFCC","#FFFFCC");</script> 
+
+</body>
+</html>

@@ -1,0 +1,185 @@
+
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8" />
+		<meta name="format-detection" content="telephone=no" />
+		<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE11" />
+		<title>【{$categoryInfo.name}开奖结果】{$categoryInfo.name}开奖查询_{$categoryInfo.name}开奖号码-{$sys.site_title}</title>
+		<meta name="keywords" content="{$categoryInfo.keywords}" />
+		<meta name="distribution" content="{$categoryInfo.description}" />
+		<link rel="stylesheet" href="css/headorfood.css" />
+		<link rel="stylesheet" href="css/PC_egxy28.css" />
+		<!-- <link rel="shortcut icon" href="img/icon/168favicon.ico"> -->
+		<link rel="stylesheet" href="css/user_adv.css" />
+		<link rel="stylesheet" href="css/idangerous.swiper.css" />
+		<script src="js/lib/bootstrap-3.3.0/js/tests/vendor/jquery.min.js"></script>
+		<script src="js/lib/bootstrap-3.3.0/dist/js/bootstrap.min.js"></script>
+
+		<script type="text/javascript" src="js/lib/jquery-1.7.2.min.js"></script>
+	</head>
+
+	<body>
+		<div class="bodybox">
+<!--#include file="head.html"-->
+			<div class="haomabox">
+				<div class="waring" id="waringbox">
+					<div class="flash"><i></i></div>
+					温馨提示：因网络问题，开奖结果会有延迟，所以您需要去喝杯咖啡等一会儿！
+				</div>
+				<div class="haomaqu" id="egxy">
+					<div class="haomaqul">
+						<div class="haomaline">
+							<div class="haomaimg">
+                         <img src="{$categoryInfo.image}" />
+							</div>
+							<div class="numberqu">
+								<div class="nuberqutit">
+									<span class="klsf">{$categoryInfo.name}</span>第
+									<span class="preDrawIssue"></span> 期开奖号码
+									<input type="hidden" id="drawTime">
+								</div>
+								<div class="kajianhao">
+									<ul>
+										<li class="numblueHead">1</li>
+										<li class="numblueHead">2</li>
+										<li class="numblueHead">3</li>
+										<li class="numblueHead">4</li>
+									</ul>
+									<span class="addF1"></span>
+									<span class="addF2"></span>
+									<span class="equalF"></span>
+								</div>
+							</div>
+						</div>
+						<div class="haomaline homaline2">
+							<div class="haomaimg">
+								<p class="kaijianname">{$categoryInfo.name}</p>
+							</div>
+							<div class="margt30">
+								<ul class="zoushimap">
+									<li class="list lihead no_left">走势图表：</li>
+									<!--list{app="DuxCms" label="categoryList" parent_id=166  limit=1}-->
+									<li class="list">
+										<a href="{$list.curl}">{$list.name}</a>
+									</li>
+                                 <!--{/list}-->
+								</ul>
+							</div>
+							<div class="newtuijian">
+								<ul class="zoushimap">
+									<li class="list lihead no_left">新手推荐：</li>
+									<li class="list no_left">
+										<a href="/PCdandanxingyun2848514857.html">玩法规则</a>
+									</li>
+									
+								</ul>
+							</div>
+						</div>
+					</div>
+					<div class="haomaqur">
+						<div class="haomaqur_l">
+							<div class="line linetit">距<span class="nextIssue"></span>期开奖仅有</div>
+							<div class="line linetime" id="timebox">
+								<div class="opening opentyle">开奖中...</div>
+								<span class="bgtime hour">...</span>
+								<span class="hourtxt">时</span>
+								<span class="bgtime minute">...</span>
+								<span>分</span>
+								<span class="bgtime second">...</span>
+								<span>秒</span>
+							</div>
+							<div class="line linetit height40">已开<span class="drawCount"></span>期，还有<span class="sdrawCount"></span>期</div>
+							<div class="line soundId">
+								<div class="soundline soundSet" id="soundSet">
+									<div class="soundbtn"><i>铃声设置</i>
+										<div class="soundicon stopsound">
+											<audio src="themes/168pc/media/RING_01.wav" controls="controls" id="audioid">
+												Your browser does not support the audio tag.
+											</audio>
+										</div>
+										<div class="soundpanel">
+											<div class="close"></div>
+											<div class="soundlist">
+												<ul>
+													<li><label><input type="radio" name="sound" value="none" checked="checked">&nbsp;不提示(默认)</label></li>
+													<li><label><input type="radio" name="sound" value="RING_01">&nbsp;声音一(闹钟铃)</label></li>
+													<li><label><input type="radio" name="sound" value="RING_02">&nbsp;声音二(上课铃)</label></li>
+													<li><label><input type="radio" name="sound" value="RING_03">&nbsp;声音三(打锣声)</label></li>
+													<li><label><input type="radio" name="sound" value="RING_04">&nbsp;声音四(打鼓声)</label></li>
+													<li><label><input type="radio" name="sound" value="RING_05">&nbsp;声音五(点滴声)</label></li>
+													<li>
+														提示时间：
+														<select>
+															<option value="5">开奖前5秒</option>
+															<option value="10" selected="selected">开奖前10秒</option>
+															<option value="20">开奖前20秒</option>
+															<option value="30">开奖前30秒</option>
+															<option value="40">开奖前40秒</option>
+															<option value="50">开奖前50秒</option>
+															<option value="60">开奖前60秒</option>
+														</select>
+													</li>
+												</ul>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						
+						<div class="line margt20 guangimg" id="startVideo">
+							<img src="img/pcEgg.jpg"/>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="kaijiangjl margt20">
+				<div class="head">
+					<ul class="zoushimap index_kjls klsfindex_kjls" id="kaijiangjl">
+						<li class="kaijiltit">开奖记录</li>
+					</ul>
+					<div id="kjls">
+					<!--list{app="DuxCms" label="categoryList" parent_id=166  limit=1}-->
+						<a href="{$list.curl}">{$list.name}</a>
+						<!--{/list}-->
+					</div>
+				</div>
+				<div class="listcontent">
+					<div class="jrsmhmtj" id="jrsmhmtj">
+						<table id="jrsmhmtjTab" cellpadding="1" cellspacing="1" border="0">
+						</table>
+
+					</div>
+				</div>
+			</div>
+<!--#include file="foot.html"-->
+
+
+	</body>
+	<script type="text/javascript" src="js/lib/config.js"></script>
+	<script type="text/javascript" src="js/lib/GA.js"></script>
+	<script type="text/javascript" src="js/loacal/PC_egxy28/PC_egxy28kai.js"></script>
+	<script type="text/javascript" src="js/loacal/PC_egxy28/PC_egxy28index.js"></script>
+	<script type="text/javascript" src="js/loacal/animate/animate.js"></script>
+	<script src="js/lib/idangerous.swiper.min.js"></script>
+	<div id="videobox">
+		<div class="content">
+			<div class="head">
+				PC蛋蛋幸运28开奖视频
+				<div class="btn">
+					<ul>
+						<li class="closevideo"><i class="iconfont"></i></li>
+						<li class="small">小屏</li>
+						<li class="big">中屏</li>
+					</ul>
+				</div>
+			</div>
+			<div class="animate">
+				<iframe style="height:100%;width:100%;border: none;" id="iframe" scrolling="no" src="js/lib/video/pcEgg_video/index.html"></iframe>
+			</div>
+		</div>
+	</div>
+		<div style="display: none;"><script language='javascript' src='http://count9.51yes.com/click.aspx?id=90847134&logo=1' charset='gb2312'></script></div>
+</html>

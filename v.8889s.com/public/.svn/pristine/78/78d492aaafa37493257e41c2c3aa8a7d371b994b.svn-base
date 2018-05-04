@@ -1,0 +1,11 @@
+<div id='upload' class='no-display' style="height: 50px; overflow: hidden;">
+	<input type="hidden" id='uploaduid' />
+  <form name="up" id="up" method="post" target="if" enctype="multipart/form-data" action="">
+	<div>
+		<input type="file" id="file" name="file" />
+		<input type='hidden' id="sendfiletype" value="pic" />
+		<div id="send-file-warning"></div>
+	</div>
+  </form>
+  <IFRAME id="if" name="if" src="about:blank" frameborder='0' style="display: none;"></IFRAME>
+</div>

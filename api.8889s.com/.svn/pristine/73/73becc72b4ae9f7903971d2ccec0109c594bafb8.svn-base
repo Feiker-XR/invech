@@ -1,0 +1,196 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+<meta charset="UTF-8">
+<title>关于我们 - 页面</title>
+<link rel="stylesheet" type="text/css" href="/css/style.css?12"/>
+<style>
+	a.aaaa{color: #F5A423;}
+</style>
+</head>
+<body>
+	{include file='common/nav'}
+		<!--导航-->
+		<div class="nav">
+			<div class="nav_center">
+				<a href="javascript:;"><img src="/img/logo.png" class="logo"></a>
+				<div class="fl nav_right">
+					<div class="nav_right_div">
+						<a href="/home.php" target="index" class="nav_a nav_right_active">
+							<span class="dsblock">首页<br>Home</span>
+						</a>
+					</div>
+					<div class="nav_right_div">
+						<a href="/sports.php" target="index" target="index" class="nav_a " >
+							<span class="dsblock">体育赛事<br/>Sports</span>
+						</a>
+						<ul style="display: none;">
+							<li><a href="/sports.php" target="index">皇冠体育</a></li>
+							<li><a href="/bbGame/" target="_BLANK">BBIN体育</a></li>
+							<!--<li><a href="/zhibo.php" target="_BLANK">赛事直播</a></li>-->
+						</ul>						
+					</div>
+					<div class="nav_right_div">
+						<a href="/live.php" target="index" class="nav_a ">
+							<span class="dsblock">真人视讯<br/>Live Casino</span>
+						</a>
+						<ul style="display: none;"> 
+							<li><a href="/aggame/index.php" target="_BLANK">AG视讯 </a></li>
+							<li><a href="/bbin/index.php" target="_BLANK">BB视讯 </a></li>
+							<li><a href="/oggame/index.php" target="_BLANK">OG视讯</a></li>
+							<li><a href="/sunbet/index.php" target="_BLANK">申博视讯</a></li>
+						</ul>
+						
+					</div>
+					<div class="nav_right_div">
+						<a href="/lottery.php" target="index"  class=" nav_a">
+							<span class="dsblock">彩票游戏<br/>Lottery</span>
+						</a>
+						<ul style="display: none;">
+							<li><a href="/lottery/csc.php" target="index">重庆时时彩</a></li>
+							<li><a href="/lottery/pk10.php" target="index">北京PK拾</a></li>
+							<li><a href="/lottery/xyft.php" target="index">幸运飞艇 </a></li>
+							<li><a href="/lottery/gsf.php" target="index">广东快乐十分</a></li>
+							<li><a href="/lottery/csf.php" target="index">重庆快乐十分</a></li>
+						</ul>	
+						<img src="/img/hots.gif" />
+					</div>
+					<div class="nav_right_div">
+						<a href="/Six/" target="index"  class=" nav_a">
+							<span class="dsblock">六合彩<br/>Mark Six</span>
+						</a>	
+						<ul style="display: none;">
+							<li><a href="/Six/" data-color="RED|YELLOW">特码49倍</a></li>
+					   </ul>				
+					</div>
+					<div class="nav_right_div">
+						<a href="/electric-game.php" target="index" class="nav_a " >
+							<span class="dsblock">电子游艺<br/>Game</span>
+						</a>
+						<ul style="display: none;">
+							<li><a href="/aggame/index.php" target="_BLANK">AG电子</a></li>
+							<li><a href="/bbin/index.php" target="_BLANK">BBIN电子</a></li>
+							<li><a href="javascript:;" onclick="alert('即将开启，敬请期待')" target="index">MG电子</a></li>
+							<li><a href="javascript:;" onclick="alert('即将开启，敬请期待')">PT电子</a></li>
+						</ul>
+					</div>
+					<div class="nav_right_div">
+						<a href="/hot.php" target="index"class="nav_a ">
+							<span class="dsblock">优惠活动<br/>Promotions</span>
+						</a>
+						<img src="/img/hots.gif" />
+					</div>
+					<div class="nav_right_div">
+						<a href="http://messenger.providesupport.com/messenger/1x5b67gp1rcy50kqxa0qpsa0jx.html" target="_blank" class="nav_a">
+							<span class="dsblock">在线客服<br/>service</span>
+						</a>
+					</div>
+				</div>
+			</div>
+		</div>			
+	
+	<div class="block_0"></div>
+	<!--关于我们-->
+	<div class="game_r_center">
+		<div class="game_l_login">
+		<div class="game_l_login_nav">
+			<h3>Vip会员登录</h3>
+			<form method="post">
+				<ul>
+					<li class="game_l_login_nav_1"><input type="text" name="username" id="username" placeholder="输入用户名"></li>
+					<li class="game_l_login_nav_2"><input type="password" id="password"  name="password" placeholder="输入密码"></li>
+					<li class="game_l_login_nav_3"><a href="javascript:;" onclick="alert('请联系在线客服!');return false;">忘记密码？</a></li>
+					<li class="game_l_login_nav_4"><button onclick="Login()">登录</button></li>
+					<li class="game_l_login_nav_5"><a class="button" href="/reg.php">立即开户</a></li>
+				</ul>
+			</form>
+		</div>
+			<div class="block_0"></div>
+			<div class="game_p_login_all" style="">
+				<div class="focusBox" style="margin:0 auto">
+					<ul class="pic">
+						<li><a href="#" target="_blank"><img src="/img/game-slider-bg.png"/></a></li>
+						<li><a href="#" target="_blank"><img src="/img/game-slider-bg.png"/></a></li>
+						<li><a href="#" target="_blank"><img src="/img/game-slider-bg.png"/></a></li>
+						<li><a href="#" target="_blank"><img src="/img/game-slider-bg.png"/></a></li>
+					</ul>
+					<a class="prev" href="javascript:void(0)"></a>
+					<a class="next" href="javascript:void(0)"></a>
+					<ul class="hd">
+						<li></li>
+						<li></li>
+						<li></li>
+						<li></li>
+					</ul>
+				</div>	
+				<div class="block_30"></div>
+				<div class="banner_notice txtMarquee-left">
+					<div class="bd">
+						<img src="/img/notice.png" class="fl"/>
+						<ul class="fl f14 ">
+							<li></li>
+						</ul>
+					</div>
+				</div>				
+				<div class="block_0"></div>
+				<div class="register_all">
+					<div class="register_title">
+						<h1 class="f16">w</h1>
+						<span>
+							<h2>欢迎您加入澳门金沙娱樂場</h2>
+							<h3>elcome to join Macau Sands Casino</h3>
+						</span>
+					</div>
+
+					<div class="register_nav">
+						<ul>
+							{volist id="vo" name="menu"}
+							<li>
+								<a href="{:Url('about/index','id='.$vo.id)}" class="{if $current eq $vo.id}aaaa{/if} " >
+								<h3>{$vo.title}</h3>About Us
+								<i class="register_nav_i {if $current eq $vo.id}register_nav_i_active{/if} " ></i>
+								</a>
+							</li>
+							{/volist}
+						</ul>
+					</div>
+					<!--关于我们-->
+					<div class="about_us">
+					{$info['content']|html_entity_decode}					
+					</div>
+				</div>
+
+
+			</div>
+		</div>
+	</div>
+	{include file="common/footer"}
+</body>
+<!-- <script src="https://cdn.bootcss.com/jquery/1.9.0/jquery.min.js"></script> -->
+<script type="text/javascript" src="/js/jquery1.9.0.min.js"></script>
+<script type="text/javascript" src="/js/"></script>
+<script type="text/javascript" src="/js/jquery.SuperSlide.2.1.1.js"></script>
+<script type="text/javascript" src="/js/main.new.js"></script>
+<script type="text/javascript">
+$(function() {
+	//点击常见问题
+	$(".about_pro_nav_li").click(function(){
+		var aboutIndex = $(this).index();
+		$(this).addClass("about_pro_nav_active").siblings("span").removeClass("about_pro_nav_active");
+		$(".about_pro_list span").eq(aboutIndex).show().siblings("span").hide();
+	})
+	//点击常见问题2
+	$(".about_pro_nav2_li").click(function(){
+		var aboutIndex = $(this).index();
+		$(this).addClass("about_pro_nav2_active").siblings("span").removeClass("about_pro_nav2_active");
+		$(".about_pro_list2 span").eq(aboutIndex).show().siblings("span").hide();
+	})	
+	//点击关于我们
+	$(".register_nav li").click(function(){
+		var regiIndex = $(this).index();
+		$(".about_us li").eq(regiIndex).show().siblings("li").hide();
+	})
+	
+});	
+</script>
+</html>

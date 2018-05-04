@@ -1,0 +1,45 @@
+<?php
+
+namespace bong\service\auth\traits;
+
+use bong\service\auth\AuthenticationException;
+
+trait GuardHelpers
+{
+
+    protected $user;
+
+    public function authenticate()
+    {
+        if (! is_null($user = $this->user())) {
+            return $user;
+        }
+
+        throw new AuthenticationException('auth fail');
+    }
+
+    public function check()
+    {
+        return ! is_null($this->user());
+    }
+
+    public function guest()
+    {
+        return ! $this->check();
+    }
+
+    public function id()
+    {
+        if ($user = $this->user()) {
+            return $user->getAuthIdentifier();
+        }
+    }
+
+    public function setUser($user)
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+}

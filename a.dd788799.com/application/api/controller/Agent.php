@@ -1,0 +1,40 @@
+<?php 
+namespace app\api\controller;
+
+use app\api\Base;
+use app\api\error\CodeBase;
+
+class Agent extends Base {
+    
+    //------------用户中心------------
+    public function bet_record(){
+        $list = $this->user->getBetList();
+        return $this->apiReturn([],$list);
+    }
+
+    public function bet_day_record(){
+        $list = $this->user->getBetDailyAllBuild()->paginate();
+        return $this->apiReturn([],$list);
+    }
+
+    public function recharge_record(){
+        $list = $this->user->getDepositList();
+        return $this->apiReturn([],$list);
+    }
+
+    public function recharge_day_record(){
+        $list = $this->user->getDepositDailyAllBuild()->paginate();
+        return $this->apiReturn([],$list);
+    }
+
+    public function withdraw_record(){
+        $list = $this->user->getWithdrawList();
+        return $this->apiReturn([],$list);
+    }
+
+    public function withdraw_day_record(){
+        $list = $this->user->getWithdrawDailyAllBuild()->paginate();
+        return $this->apiReturn([],$list);
+    }
+}
+

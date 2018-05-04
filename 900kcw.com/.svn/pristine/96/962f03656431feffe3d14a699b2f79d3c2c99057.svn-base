@@ -1,0 +1,22 @@
+
+
+
+			
+
+
+<div class="header">
+	<a style="float:left" href="../index.html"><img src="themes/168pc/img/public_hf/logo.png" alt="" /></a>
+	<ul>
+<li>
+			<a class="xy" href="__ROOT__/xianggangcai.html">首页</a>
+		</li>
+
+		<!--list{app="DuxCms" label="categoryList" parent_id=564 limit=20}-->
+  <!--if{$list['class_id']==$categoryInfo['class_id']}-->
+    <li class="kj" ><a href="{$list.curl}" title="{$list.name}">{$list.name}</a></li>
+  <!--{else}--> 
+    <li><a href="{$list.curl}" title="{$list.name}">{$list.name}</a></li>
+  <!--{/if}-->
+<!--{/list}-->
+	</ul>
+</div>

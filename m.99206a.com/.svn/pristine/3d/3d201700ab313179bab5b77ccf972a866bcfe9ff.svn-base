@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Member</title>
+<link rel="stylesheet" type="text/css" href="/css/general.css" />
+<link rel="stylesheet" type="text/css" href="/Scripts/jquery-ui.css" />
+<link rel="stylesheet" type="text/css" href="/newview/css/theme/style.css?version=2.0.0" />
+<link rel="stylesheet" type="text/css" href="/newview/css/style.css" />
+<link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
+
+<link rel="stylesheet" href="/css/newstyle/public.css">
+<link rel="stylesheet" href="/css/newstyle/laydate.css">
+<link rel="stylesheet" href="/css/newstyle/page_2.css">
+
+<script src="/js/js/jquery-1.8.0.min.js"></script>
+<script type="text/javascript" src="/js/main.js"></script>
+<script type="text/javascript" src="/Scripts/member.js"></script>
+<script type="text/javascript" src="/newview/js/main.js"></script>
+<style type="text/css">
+body{background: white;}
+.next_btn{
+clear: none;padding-top: 0;
+}
+</style>
+</head>
+<body>
+<div class="head">
+	<!--欢迎-->
+	{include file='common/nav'}
+</div>
+<div class="block_0"></div>
+
+<div class="moneyBox_contain modify_wp">
+	<div class="modify_header">
+		<a href="/user/userinfo.html" class="nav_1">首页</a>
+		<a href="/pay/member.html" class="nav_2">财务管理</a>
+		<a href="/user/record_ds.html" class="nav_3 active">游戏记录</a>
+		<a href="/user/report.html" class="nav_4">历史记录</a>
+		<a href="/user/sms.html" class="nav_5">短信记录</a>
+		<a href="/user/agent.html" class="nav_6">代理中心</a>
+	</div>
+	<div class="modify_main_btn">
+		<a href="/user/record_cp.html">彩票游戏</a>
+		<a href="javascript:;" class="click_A">皇冠体育单式</a>
+		<a href="/user/record_cg.html">皇冠体育串关</a>
+	</div>
+	<div class="list_table_wp">
+		<div class="list_table_title">
+			<span>投注时间</span>
+			<span>注单号</span>
+			<span>投注详细信息</span>
+			<span>下注金额</span>
+			<span>最高可赢</span>
+			<span>可返水</span>
+		</div>
+		<ul class="list_Tbody_wp">
+		{foreach $list as $row}
+			<li>
+                  <span>
+                      <em>{$row['bet_time']}</em>
+                  </span>
+				<span>
+                      <em>{$row['bid']}</em>
+                  </span>
+				<span>
+                      <em>{$row['bet_info']}</em>
+                  </span>
+				<span>
+                      <em>{$row['bet_money']}</em>
+                  </span>
+                <span>
+                <em>{$row['bet_win']}</em>
+                  </span>
+				<span>
+				 <em>{$row['commission']}</em>
+                  </span>
+			</li>
+			{/foreach}
+		</ul>
+	</div>
+	<div class="paging_wp">
+		<div class="paging">
+			<div class="prve-pages prev_btn">
+				<img src="/css/img/prve_btn.png" alt="">
+			</div>
+			<div class="paging_cont_page">
+				{$list->render()}
+			</div>
+			<div class="prve-pages next_btn">
+				<img src="/css/img/next_btn.png" alt="">
+			</div>
+		</div>
+		<div class="show-page">
+			当前在第 <span>{$list->currentPage()}</span> 页，每页显示 <span>{$list->count()}</span> 条，共 <span>{$list->total()}</span> 条记录。
+		</div>
+	</div>
+
+</div>
+{include file='common/footer'}
+<script src="/js/jquery1.9.0.min.js"></script>
+<script src="/js/laydate.js"></script>
+<script type="text/javascript">
+    $(function(){
+        $(".modify_main_btn").find("a").click(function () {
+            $(this).addClass("click_A").siblings().removeClass("click_A");
+            var _index=$(this).index();
+            $(".modify_main_cont").find($(".modify_main_cont_font")).eq(_index).show().siblings().hide();
+        })
+    })
+    /**
+     *  日期选择
+     */
+    laydate.render({
+        elem: '.start_time'
+        ,value: '2018-01-01'
+    });
+    laydate.render({
+        elem: '.end_time'
+        ,value: '2018-01-01'
+    });
+    /**
+     * 时间选择
+     */
+    $(".search_time_btn").click(function () {
+        var start_time=$(".start_time").val();
+        var start=new Date(start_time.replace("-", "/").replace("-", "/"));
+        var end_time=$(".end_time").val();
+        var end=new Date(end_time.replace("-", "/").replace("-", "/"));
+        if(start_time!="" && end_time.length!=""){
+            if(end<start){
+                alert("选择开始日期不能大于结束日期哟");
+                return false
+            }else{
+                // $.ajax({
+                //     url:  "",
+                //     type: "post",
+                //     data: data,
+                //     success: function(data) {
+                //执行数据请求
+                var res_data={
+                    status:1,
+                    result:{
+                        time_data:"提交成功",
+                    }
+                }
+                if(res_data.status==1){
+                    alert(res_data.result.time_data)
+                }
+                //     },
+                //     error: function(data) {
+                //         alert("提交失败，请稍后再试！")
+                //     }
+                // });
+            }
+        }else{
+            alert("日期选择不能空哟！")
+        }
+    })
+
+
+    $(".list_Tbody_wp li:odd").css("background","#f8f8f6");
+    $(".list_Tbody_wp li:even").attr("bg","#fff");
+    $(".list_Tbody_wp li:odd").attr("bg","#f8f8f6");
+    $(".list_Tbody_wp li").mouseover(function(){
+        $(this).css({"background":"#fffcdf"});
+        $(this).addClass("li_add_border_d");
+        $(this).next().addClass("li_add_border_top");
+        $(this).find($(".list_Tbody_totle")).addClass("list_Tbody_totle_right");
+        $(this).find('span').css({'border-right':'1px solid transparent','width':16.55+'%'});
+        $(this).find($(".list_Tbody_totle")).css("border-right","1px dashed #ff7433");
+    })
+    $(".list_Tbody_wp li").mouseout(function(){
+        var bgc = $(this).attr("bg");
+        $(this).css("background",bgc);
+        $(this).removeClass("li_add_border_d");
+        $(this).next().removeClass("li_add_border_top");
+        $(this).find($(".list_Tbody_totle")).removeClass("list_Tbody_totle_right");
+        $(this).find('span').css('border-right','1px solid #dbdbdb');
+        $(this).find($(".list_Tbody_totle")).css("border-right","1px solid #dbdbdb");
+    })
+    $(".list_Tbody_wp li:last").css({'border-bottom':'1px solid #dbdbdb'});
+    $(".list_Tbody_wp li:last").mouseover(function(){
+        $(this).css({"background":"#fffcdf",'border-bottom':'1px dashed #ff7433'});
+        $(this).addClass("li_add_border_d");
+        $(this).find($(".list_Tbody_totle")).addClass("list_Tbody_totle_right")
+    })
+    $(".list_Tbody_wp li:last").mouseout(function(){
+        var bgc = $(this).attr("bg");
+        $(this).css({"background":bgc,'border-bottom':'1px solid #dbdbdb'});
+        $(this).removeClass("li_add_border_d");
+        $(this).find($(".list_Tbody_totle")).removeClass("list_Tbody_totle_right")
+    })
+
+
+    $(".paging_cont_page a").click(function () {
+        $(this).addClass("add_background_a").siblings().removeClass("add_background_a");
+    })
+
+    $(".today-time span").click(function(){
+        $(this).addClass("today-time-bg").siblings().removeClass("today-time-bg");
+    })
+</script>
+</body>
+
+<script type="text/javascript">
+setInterval(function() {
+	$.ajax({
+		type: "post",
+		url: "{:Url('index/home')}",
+		data:{'ajax':1,'get_money':'1'},
+		success:function(data) {
+			if (/^[\d\.]+$/.test(data)) {
+				$('#money,#money_2').text(data);
+			}
+		}
+	});
+},2000);	
+</script>
+
+</html>

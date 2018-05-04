@@ -1,0 +1,76 @@
+{extend name="common/base"/}
+
+{block name="body"}
+	<div class="main-title">
+		<h2>时间管理</h2>
+	</div>
+
+	<ul class="tab-nav nav">
+		{php} foreach($types as $data){ {/php}
+			<li {php} echo $this->iff($type==$data['id'], 'class="current"','') {/php} ><a href="{:Url('time/index?type='.$data['id'])}">{php} echo $data['shortName'] {/php}</a></li>
+		{php} } {/php}
+	</ul>
+	<div class="data-table table-striped">
+		<table>
+			<thead>
+				<tr>
+					<!--<th class="row-selected">-->
+						<!--<input class="checkbox check-all" type="checkbox">-->
+					<!--</th>-->
+					<th>ID</th>
+					<th>彩种</th>
+					<th>期数</th>
+					<th>开奖时间</th>
+					<th>操作</th>
+				</tr>
+			</thead>
+			<tbody>
+				{volist name="_list" id="config"}
+					<tr>
+						<!--<td><input class="ids row-selected" type="checkbox" name="id[]" value="{$config.id? $config.id : '' }"></td>-->
+						<td>{$config.id}</td>
+						<td>{$config.title}</td>
+						<td>{$config.actionNo}</td>
+						<td><input type="text" name="actionTime" value="{$config.actionTime}"><input type="hidden" name="id" value="{$config.id}"></td>
+						<td>
+							<!--target="ajax"-->
+							<a title="保存"   src="{:Url('update')}" cid="{$config.id}" method="post" class="send">保存</a>
+						</td>
+					</tr>
+				{/volist}
+			</tbody>
+		</table>
+		<!-- 分页 -->
+	    <div class="page">
+	        {$_page}
+	    </div>
+	</div>
+{/block}
+
+{block name="script"}
+<script type="text/javascript">
+$(function(){
+	//导航高亮
+	$('.side-sub-menu').find('a[href="{:Url('Time/index')}"]').closest('li').addClass('current');
+
+	//异步修改开奖时间
+	$('.send').click(function (){
+		var obj = $(this) ;
+		var url = obj.attr('src') ;
+		var cid = obj.attr('cid');
+		var actionTime =  obj.parent('td').prev().children(':text').val();
+		$.post(url,{cid:cid , actionTime:actionTime},function(data){
+            res =eval("("+data+")");
+			if (!res.status) {
+                alert('更新失败');
+			}else if(res.status == 2) {
+			    alert('缺少更新数据,请联系开发人员处理');
+			} else if(res.status == 1){
+                alert('开奖数据更新成功');
+			}
+        });
+	});
+
+});
+</script>
+{/block}

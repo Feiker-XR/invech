@@ -1,0 +1,43 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>系统设置</title>
+<link href="/css/base.css" rel="stylesheet" type="text/css" />
+<link href="/css/admin.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="/js/jquery.js"></script>
+<script type="text/javascript" src="/js/jquery.tools.js"></script>
+<script type="text/javascript" src="/js/base.js"></script>
+
+</head>
+<body class="list">
+
+<div class="body">
+	<ul id="tab" class="tab">
+      {foreach($lotterys as $lottery)}
+	    <li><input type="button" value="{$lottery.title}" hidefocus 
+        {if($lottery.id==$type)}
+        class="current" 
+        {/if}
+        onClick="window.location.href='{:url('lottery/odds',['type'=>$lottery['name']])}'" /></li>
+      {/foreach}
+	</ul>
+
+    <table id="listTables" class="listTables">
+        <form name="form1" method="post" action="{:url('lottery/slew','type='.$type)}">
+                        <tr>
+                          <th align="center">当前中奖率</th>
+                          <th align="center">当前杀率</th>
+                        </tr>
+                        <tr>
+                          <td align="center"bgcolor="#FFFFFF"><input class="formOdds captcha" maxlength="2" size="2" value="{$lottery.win_rate}" name="win_rate" id="win_rate" /></td>                          
+                          <td align="center"bgcolor="#FFFFFF"><input class="formOdds captcha" maxlength="2" size="2" value="{$lottery.profit_rate}" name="profit_rate" id="profit_rate" /></td>
+                        </tr>
+                       
+                        <tr>
+                          <td height="40" colspan="10" align="center"bgcolor="#F2F4F6"><input type="submit"  class="formButton" name="Submit" value="确认修改" /></td>
+                        </tr></form>
+              </table>
+		</div>
+</body>
+</html>

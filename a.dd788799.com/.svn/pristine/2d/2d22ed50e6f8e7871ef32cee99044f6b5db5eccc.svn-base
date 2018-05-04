@@ -1,0 +1,21 @@
+<link rel="stylesheet" type="text/css" href="http://47.89.0.14:8801/css/newbee/style.css?modidate=20160317002" />
+<script language="javascript" type="text/javascript" src="http://47.89.0.14:8801/js/common/jquery-1.11.2.min.js?modidate=20160317003"></script>
+
+<link id='theme' rel='stylesheet' />
+<script language="javascript" type="text/javascript" src="/nitalk/js/fonts.js?modidate=20160317003"></script>
+<script language="javascript" type="text/javascript" src="/nitalk/js/bundle.js?modidate=20160317003"></script>
+<script language="javascript" type="text/javascript">
+  if(! /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+	nitalk();
+	// 用户昵称 密码 登录地址 平台别名 平台名称 推广地址
+	if (window.location.hash.length > 0) {
+		var username = window.location.hash.substr(1);
+	} else {
+		var username = 'admin';
+	}
+	configtalk(username, '57f06c091fa7e7c2039bd36536772019', 'http://t_4.com/nitalk/', 'newbee', '新蜂娱乐' , 'http://119.9.71.180/', '');
+	$(document).ready(function(){
+	  inittalk(); 
+	});
+  }
+</script>

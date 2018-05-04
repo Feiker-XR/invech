@@ -1,0 +1,219 @@
+<link rel="stylesheet" type="text/css" href="/__CSS__/user/reset.css?v=20170715">
+<link rel="stylesheet" type="text/css" href="/__CSS__/user/hpn-common.css">
+<link rel="stylesheet" type="text/css" href="/__CSS__/user/index.css?v=20171117">
+<link rel="stylesheet" type="text/css" href="/__CSS__/user/global.css">
+<link rel="stylesheet" type="text/css" href="/__CSS__/user/info.css">
+<script type="text/javascript" src="/__JS__/user/jquery.min.js?v=2017"></script><!--jQuery库-->
+<script type="text/javascript" src="/__JS__/user/jquery.validate.min.js"></script>
+<script type="text/javascript" src="/__JS__/user/validate.js"></script>
+<script type="text/javascript" src="/__JS__/user/jquery.form.min.js"></script>
+<script type="text/javascript" src="/__JS__/layer/layer.js"></script>
+<div class="help_r_main">
+	<div class="eveb_content">
+		<div class="eveb_nav_sub">
+			<ul class="clearfix">
+				<li class="on"><a href="/user/info.html">个人资料</a></li>
+				<li><a href="/user/save_password.html">登录密码</a></li>
+				<li><a href="/user/bank.html">银行卡管理</a></li>
+				<!--<li><a href="javascript:void(0)" onclick="parent.goSubUrl('/member/zhsz.html?module=aqxx')">安全信息</a></li>-->
+			</ul>
+		</div>
+		<table class="eveb_setting_table">
+            <tbody>
+	            <tr>
+	                <td class="tit">会员名</td>
+	                <td class="wid">{$userData->username}</td>
+	                <td class="tit">手机号码</td>
+	                <td class="wid">
+	                	{if(!empty($userData->mobile))}
+		                    <span class="ff">{$userData->mobile}</span>
+		                    <span class="green"><i class="icon_mini icon_ok"></i>已绑定</span>
+		                {else}
+							<a href="javascript:void(0)" onclick="eveb_popup_show(&#39;#eveb_setting_edit&#39;)">立即绑定</a>
+		                {/if}
+	                </td>
+	            </tr>
+	            <tr>
+	                <td class="tit">真实姓名</td>
+	                <td class="wid">{$userData->username}</td>
+	                <td class="tit">电子邮箱</td>
+	                <td colspan="2" class="wid">
+	                	{if(!empty($userData->mobile))}
+		                    <span class="ff">{$userData->email}</span>
+	                   		<span class="green"><i class="icon_mini icon_ok"></i>已绑定</span>
+		                {else}
+							<a href="javascript:void(0)" onclick="eveb_popup_show(&#39;#eveb_setting_edit&#39;)">立即绑定</a>
+		                {/if}
+	                </td>
+	            </tr>
+	            <tr>
+	                <td class="tit">昵称</td>
+	                <td class="ff wid">{$userData->nickname}<a href="javascript:void(0)" onclick="eveb_popup_show(&#39;#eveb_setting_edit&#39;)"> 编辑</a>
+	                </td>
+	                <td class="tit">QQ</td>
+	                <td class="ff wid">{$userData->qq}<a href="javascript:void(0)" onclick="eveb_popup_show(&#39;#eveb_setting_edit&#39;)"> 编辑</a></td>
+	            </tr>
+	            <tr>
+	                <td class="tit">生日</td>
+	                <td class="ff wid">{$userData->birthday}<a href="javascript:void(0)" onclick="eveb_popup_show(&#39;#eveb_setting_edit&#39;)"> 编辑</a></td>
+	                <td class="tit">性别</td>
+	                <td class="ff wid">
+	                    {$userData->sex}<a href="javascript:void(0)" onclick="eveb_popup_show(&#39;#eveb_setting_edit&#39;)"> 编辑</a>
+	                </td>
+	            </tr>
+            </tbody>
+        </table>
+		<div class="eveb_tip light" id="edit">
+			完善资料
+		</div>
+	</div>
+	<div class="eveb_popup_wrap" style="display: none;"></div>
+	<div class="eveb_popup" id="eveb_setting_edit" style="display: none;">
+	    <div class="eveb_popup_hd">
+	        <h4 class="fl">编辑个人资料</h4>
+	        <a href="javascript:void(0)" onclick="eveb_popup_hide()" class="icon_mini icon_close fr" title="关闭"></a>
+	    </div>
+	    <div class="eveb_popup_bd">
+	        <form name="editUserInfoForm" novalidate="novalidate" onsubmit="return false;">
+	            <ul class="eveb_form">
+	                <li>
+	                    <span>会员名：</span>{$userData.username}
+	                </li>
+	                <li>
+	                    <span>昵称：</span>
+	                    <input type="text" style="width:140px;" class="_border" value="{$userData.nickname}" name="nickname" id="nickname">
+	                    <label class="error" for="nickname"></label>
+	                </li>
+	                <li>
+	                    <span>生日：</span>
+	                    <input onclick="laydate({istime: true, format: &#39;YYYY-MM-DD&#39;})" name="birthday" id="birthday" type="text" size="16" class="_border" style="width:140px;" value="{$userData.birthday}" {if(!empty($userData.birthday))} readonly="" {/if}>
+	                    <label class="error" for="birthday"></label>
+	                </li>
+	                <li>
+	                    <span>QQ：</span>
+	                    <input type="text" style="width:140px;" maxlength="11" class="_border" value="{$userData.qq}" name="qq" id="qq" onkeyup="this.value=this.value.replace(/\D/g,&#39;&#39;)" onafterpaste="this.value=this.value.replace(/\D/g,&#39;&#39;)">
+	                    <label class="error" for="qq"></label>
+	                </li>
+	                <li>
+	                    <span>性别：</span>
+	                    <select name="sex" id="sex">
+	                    	<option value="男" {if($userData.sex=='男')} selected {/if}>男</option>
+							<option value="女" 	{if($userData.sex=='女')} selected {/if}>女</option>
+							<option value="保密" {if($userData.sex=='保密')} selected {/if}>保密</option>
+	                    </select>
+	                </li>
+	                <li>
+	                    <span>手机号码：</span>
+	                    <input name="mobile" type="text" size="20" class="_border" value="{$userData.mobile}" id="mobile" {if(!empty($userData.mobile))} readonly="" {/if}>
+	                        <label class="error" for="mobile"></label>
+	                </li>
+	                <li>
+	                    <span>电子邮箱：</span>
+	                    <input name="email" type="text" size="20" class="_border" value="{$userData.email}" id="email" {if(!empty($userData.mobile))} readonly="" {/if}>
+	                    <label class="error" for="email"></label>
+	                </li>
+
+	            </ul>
+	            <div class="eveb_popup_btn">
+	                <input type="submit" class="button_medium button_1" value="确认">
+	                <a href="javascript:void(0)" class="button_medium button_3" onclick="eveb_popup_hide()">取消</a>
+	            </div>
+	        </form>
+	    </div>
+	</div>
+</div>
+<script>
+ function eveb_popup_position(_target){
+    var popupW = $(_target).width() / 2;
+    var popupH = $(_target).height() / 2;
+    $(_target).css('margin-left',-popupW).css('margin-top',-popupH);
+}
+    //弹窗 显示
+function eveb_popup_show(_target){
+    scrollHeight = $(document).height();
+    $('.eveb_popup_wrap').height(scrollHeight);
+    eveb_popup_position(_target);
+    $('.eveb_popup').fadeOut('fast');
+    $('.eveb_popup_wrap').fadeIn('fast');
+    $(_target).fadeIn('fast');
+    $('.eveb_popup_wrap').click(function(){
+        eveb_popup_hide();
+    })
+    $("form[name='editUserInfoForm']").valid();
+}
+    //弹窗 关闭
+function eveb_popup_hide(){
+    $('.eveb_popup_wrap').fadeOut('fast');
+    $('.eveb_popup').fadeOut('fast');
+}
+$(function () {
+    $("form[name='editUserInfoForm']").validate({
+        rules: {
+            nickname: {
+                required: true
+            },
+            birthday: {
+                required: true
+            },
+            qq: {
+                required: true,
+                minlength: 5,
+                maxlength: 11
+            },
+            mobile: {
+                required: true,
+                minlength: 11,
+                maxlength: 11
+            },
+            email: {
+                required: true,
+                email: true
+            }
+        },
+        messages: {
+            nickname: {
+                required: "* 昵称必填！"
+            },
+            birthday: {
+                required: "* 格式：yyyy-MM-dd"
+            },
+            qq: {
+                required: "* 请输入QQ号",
+                minlength: "* 请输入正确格式的QQ号",
+                maxlength: "* 请输入正确格式的QQ号"
+            },
+            mobile: {
+                required: "* 一经确认不能修改",
+                minlength: "* 请输入11位手机号码",
+                maxlength: "* 请输入11位手机号码"
+            },
+            email: {
+                required: "* 一经确认不能修改",
+                email: "* 请输入正确格式的电子邮件"
+            }
+        }, 
+        submitHandler: function (form) {
+            var options = {
+                url: "/user/info",
+                success: showResponse,      //提交后的回调函数
+                type: 'post',               //默认是form的method（get or post），如果申明，则会覆盖
+                dataType: 'json',           //html(默认), xml, script, json...接受服务端返回的类型
+                timeout: 3000               //限制请求的时间，当请求大于3秒后，跳出请求
+            }
+            $(form).ajaxSubmit(options);
+        }
+    });
+    function showResponse(json) {
+    	$(".icon_close").trigger("click");
+        layer.alert(json.msg, {
+          time: 20000,
+          skin: 'layui-layer-molv', //该皮肤由layer.seaning.com友情扩展。关于皮肤的扩展规则，去这里查阅
+          closeBtn: 0,
+          anim: 4
+        }, function(){
+
+           window.location.href = document.URL;
+        })
+    }
+});
+</script>

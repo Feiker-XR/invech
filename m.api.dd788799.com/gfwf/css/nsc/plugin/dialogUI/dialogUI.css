@@ -1,0 +1,54 @@
+@charset "utf-8";
+/* CSS Document */
+.blockOverlay,.blockOverlayBox{border:none;position: absolute;z-index: 999;filter:alpha(opacity=70);opacity:0.7;margin:0;padding:0;width:100%;height:100%;top:0;left:0;background-color:#000;cursor:default;}
+#JS_blockPage{ margin-left: -240px;}
+.blockMsg{padding:0;position: absolute;text-align:left;box-shadow:0px 0px 18px #666;background:#fff url("/images/nsc/blockMsg-title_bg.png") repeat-x;}
+.blockMsg *{padding:0; margin:0;}
+
+#block_ajaxUploadArea { /*padding-bottom:10px; margin-bottom:15px; border-bottom:1px solid #eee;*/}
+#block_ajaxUploadArea input { width:140px; margin:8px auto; color:#666; padding:5px 6px; border:1px solid #ddd; cursor:pointer; background-color:#f4f4f4; font-family:"Microsoft Yahei";}
+#block_ajaxUploading { display:none; color:red; font-size: 18px;}
+.blockMsg .title { height:42px; line-height:42px; border:1px solid #c8c8c8; font-family:Microsoft YaHei; font-size:20px; text-align:center; color:#262626;margin:0 auto;}
+.blockMsg .title span { display:inline-block; width:28px; height:26px; background:url("/images/nsc/blockMsg-title_icon.png") no-repeat; margin-right:10px; vertical-align:-5px;}
+.blockMsg .close{width:25px; height: 25px; position: absolute; top: -5px; right: -5px}
+.blockMsg .close a{ background:url(/js/scgold/dialogUI/prompt-box_close.png) no-repeat;cursor: pointer; display: block}
+.blockMsg .content {text-align:center;background:#fff;width:480px;line-height:30px;font-size:15px; color:#262626;}
+.blockMsg .content .detail { padding:28px 10px 20px; font-family:Microsoft YaHei; max-height:300px; overflow-y:auto; font-size:18px;}
+.blockMsg .content .detail .title { font-size:18px; color:#ed0000; border:0;}
+.blockMsg .bottom { background:#fff; height:50px; padding-top:25px; border-top:1px solid #eee; font-family:Microsoft YaHei; font-size:14px; text-align:center;}
+.blockMsg .submit { width:90px; height:33px; line-height: 33px; font-size: 16px; color: #fff; padding: 0!important; font-family: Microsoft Yahei; margin:0 10px; background:url("/images/nsc/btn-modification_bg.png") no-repeat; border:0!important; cursor:pointer;}
+#block_ajaxConfirm { width:90px; height:33px; line-height: 33px; font-size: 16px; color: #fff; padding: 0!important; font-family: Microsoft Yahei; margin:0 10px; background:url("/images/nsc/btn-modification_bg.png") no-repeat; border:0!important; cursor:pointer; letter-spacing:1px;}
+.blockMsg .cancel,#block_close { font-size: 16px; width: 90px; height: 33px; line-height: 33px; color:#353434; margin:0 10px; padding: 0!important; background: url("/images/nsc/btn-reset_bg.png") no-repeat; border:0!important; font-family: Microsoft Yahei; cursor:pointer;}
+
+.floatarea { overflow:auto;overflow-x:hidden;line-height:22px;padding:10px 20px; font-size:16px; color:#747474;}
+.floatarea p { margin:5px 0;}
+.floatarea p b { font-weight:normal;}
+.floatarea p span { display:inline-block; color:#666!important; margin-right:8px; background-color:#eee; border:1px solid #e2e2e2; width:24px; height:24px; line-height:24px; border-radius:24px; font-size:15px; font-weight:normal!important;}
+.totleNum { color:#e20909; font-weight:bold; font-size:18px; margin-left:5px;}
+.totleNum .numlabel { color:#666; font-weight:normal; font-size:16px;}
+
+/*the common window css*/
+.block_box, .block_alert, .block_confirm, .block_ajaxUpload{border:0px;}
+.block_title{width:100%;height:22px;background-color:#0066CC;font-size:14px;font-weight:bold;color:#FFFFFF;text-align:left;padding-left:10px;}
+.block_title_close{width:40px;margin-right:3px;text-decoration:none;color:#FFFFFF;text-align:right;}
+.block_title_close img{border:0;}
+.block_content_box{background-color:#F2F2F2;text-align:left;color: #FFFFFF;}
+.block_content_box .block_content{margin:5px 5px;background-color:#F2F2F2;padding:3px;color: #FFFFFF;}
+.block_bottom{height:25px;background-color:#F2F2F2;text-align:center;vertical-align:top;}
+
+/*Alert layer CSS*/
+.block_alert{width:450px;}
+/*Confirm layer CSS*/
+.block_confirm{width:350px;}
+/*Ajax Upload CSS*/
+.block_ajaxUpload{width:400px;}
+.block_ajaxUpload #block_ajaxUploading{text-align:center;display:none;}
+.block_ajaxUpload #block_ajaxUploadError{color:#FF0000;display:none;}
+/*****************************************************/
+.table_top_left {background-image: url(/js/scgold/dialogUI/notic_09.png);background-repeat: no-repeat;}
+.table_top_right {background-image: url(/js/scgold/dialogUI/notic_09.png);background-position: -12px 0px;}
+.table_buttom_left {background-image: url(/js/scgold/dialogUI/notic_09.png);background-position: 0px -51px;height: 11px;width: 11px;overflow:hidden;}
+.table_buttom_right {background-image: url(/js/scgold/dialogUI/notic_09.png);background-position: -12px -51px;height: 11px;width: 11px;overflow:hidden;}
+.table_buttom_center {background-image: url(/js/scgold/dialogUI/notic_09.png);background-repeat: repeat-x;background-position: 0px -114px;overflow:hidden;}
+
+form{margin:0; padding:0;}

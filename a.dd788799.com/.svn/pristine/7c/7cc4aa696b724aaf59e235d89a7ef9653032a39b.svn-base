@@ -1,0 +1,196 @@
+<?php
+namespace app\admin\controller;
+use app\admin\Login;
+
+use app\common\model\DailyReport;
+use app\common\model\DailyBet;
+use app\common\model\DailyDeposit;
+use app\common\model\DailyWithdraw;
+use app\common\model\DailyBonus;
+use app\common\model\Bonus;
+
+class Report extends Login{
+
+	use EchartTrait;
+
+	//日报表 取 各个日报表中 关键数据; 主要展示 每日 收支;
+	public function daily(){
+		
+		//$this->checkDailyDate();
+
+		$list = DailyBet::getDailyAllReport();
+		$this->assign('list',$list);
+		$this->view->page_header = '日综合报表';
+
+		$meta = ['date'=>'日期',
+					'win_amount'=>'输赢金额',
+					'deposit_amount'=>'存款金额',
+					'withdraw_amount'=>'取款金额',
+					'bonus_amount'=>'红利金额',
+				];
+		$this->makeEcharts($list,$meta);
+	
+      	return $this->fetch();
+	}
+
+	public function daily_bet(){	
+
+		//$this->checkDailyDate();
+
+		$query = DailyBet::getDailyReportBuild();
+		$list = $query->paginate();
+		$this->assign('list',$list);
+		$this->view->page_header = '日投注报表';
+
+		$meta = ['date'=>'日期',
+					'bet_amount'=>'投注金额',
+					'bonus_amount'=>'派奖金额',
+					'win_amount'=>'输赢值',
+					'backwater_amount'=>'返水金额',
+				];
+		$this->makeEcharts($list,$meta);
+		
+      	return $this->fetch();
+	}
+
+	public function daily_deposit(){
+
+		//$this->checkDailyDate();
+
+		$query = DailyDeposit::getDailyReportBuild();
+		$list = $query->paginate();
+		$this->assign('list',$list);
+		$this->view->page_header = '日存款报表';
+
+		$meta = ['date'=>'日期',
+					'pre_amount'=>'预存款金额',
+					'suc_amount'=>'实际存款金额',
+				];
+		$this->makeEcharts($list,$meta);				  		
+      	return $this->fetch();
+	}
+
+	public function daily_withdraw(){
+
+		//$this->checkDailyDate();
+
+		$query = DailyWithdraw::getDailyReportBuild();
+		$list = $query->paginate();
+		$this->assign('list',$list);
+		$this->view->page_header = '日提款报表';
+
+		$meta = ['date'=>'日期',
+					'suc_amount'=>'提款金额',
+				];
+		$this->makeEcharts($list,$meta);					  		
+      	return $this->fetch();
+	}
+
+	public function daily_bonus(){
+
+		//$this->checkDailyDate();
+
+		$query = DailyBonus::getDailyReportBuild();
+		if($bonus_id = input('bonus_id')??0){
+			$query->where('bonus_id',$bonus_id);
+		}
+		$list = $query->paginate();
+		$this->assign('list',$list);
+		$bonuses = Bonus::all();
+		$this->assign('bonuses',$bonuses);
+		$this->view->page_header = '日红利报表';
+      	return $this->fetch();
+	}
+
+
+	//
+	public function month(){
+		$list = DailyBet::getMonthAllReport();
+		$this->assign('list',$list);
+		$this->view->page_header = '月综合报表';
+
+		$meta = ['month'=>'日期',
+					'win_amount'=>'输赢金额',
+					'deposit_amount'=>'存款金额',
+					'withdraw_amount'=>'取款金额',
+					'bonus_amount'=>'红利金额',
+				];
+		$this->makeEcharts($list,$meta);	
+							
+      	return $this->fetch();		
+	}
+
+	public function month_bet(){
+
+		//$this->checkMonthDate();
+
+		$query = DailyBet::getMonthReportOutterBuild();
+		$list = $query->paginate();
+		$this->assign('list',$list);
+		$this->view->page_header = '月投注报表';
+
+
+		$meta = ['month'=>'日期',
+					'bet_amount'=>'投注金额',
+					'bonus_amount'=>'派奖金额',
+					'win_amount'=>'输赢值',
+					'backwater_amount'=>'返水金额',
+				];
+		$this->makeEcharts($list,$meta);
+
+      	return $this->fetch();
+	}
+
+	public function month_deposit(){
+
+		//$this->checkMonthDate();
+
+		$query = DailyDeposit::getMonthReportOutterBuild();
+		$list = $query->paginate();
+		$this->assign('list',$list);
+		$this->view->page_header = '月存款报表';
+
+		$meta = ['month'=>'日期',
+					'pre_amount'=>'预存款金额',
+					'suc_amount'=>'实际存款金额',
+				];
+		$this->makeEcharts($list,$meta);		
+      	return $this->fetch();
+	}
+
+	public function month_withdraw(){
+		
+		//$this->checkMonthDate();
+
+		$query = DailyWithdraw::getMonthReportOutterBuild();
+		$list = $query->paginate();
+		$this->assign('list',$list);
+		$this->view->page_header = '月提款报表';
+
+		$meta = ['month'=>'日期',
+					'suc_amount'=>'提款金额',
+				];
+		$this->makeEcharts($list,$meta);		
+      	return $this->fetch();
+	}
+
+	public function month_bonus(){
+
+		//$this->checkMonthDate();
+
+		$where = [];
+		if($bonus_id = input('bonus_id')??0){
+			$where = ['bonus_id' => $bonus_id];
+			$bonus = Bonus::get($bonus_id);
+			$this->assign('bonus',$bonus);
+		}
+		$query = DailyBonus::getMonthReportOutterBuild($where);
+		$list = $query->paginate();
+		$this->assign('list',$list);
+		$bonuses = Bonus::all();
+		$this->assign('bonuses',$bonuses);
+		$this->view->page_header = '月红利报表';
+      	return $this->fetch();
+	}			
+}
+ 

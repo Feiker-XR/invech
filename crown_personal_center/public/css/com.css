@@ -1,0 +1,265 @@
+
+.com-wp{
+	width: 999px;
+	margin: 10px auto;;
+}
+
+
+/*header*/
+.com-header{
+	width: 100%;
+	height: 87px;
+	background: #181919;
+	position: relative;
+}
+.logo-wp{
+	position: absolute;
+	width: 260px;
+	height: 62px;
+	left: 68px;
+	top: 50%;
+	margin-top: -31px;
+}
+.logo-wp{
+	width: 100%;
+	height: 100%;
+	display: block;
+}
+.logo-title-wp{
+	width:165px;
+	height: 65px;
+	margin:0 auto;
+	padding-top: 10px;
+}
+.logo-title-wp img{
+	display: block;
+	width: 100%;
+	height: 100%;
+}
+.hours-right{
+	position: absolute;
+	right: 70px;
+	width: 244px;
+	height: 85px;
+	bottom: 0px;
+}
+.hours-right img{
+	display: block;
+	width: 100%;
+	height: 100%;
+}
+
+
+/*main*/
+.main-wp{
+	width: 947px;
+	height: 585px;
+	margin: 25px auto;
+	overflow: auto;
+}
+/*com-left*/
+.com-left{
+	width: 246px;
+	float: left;
+}
+.com-left-title{
+	width: 100%;
+	height: 56px;
+	background: #333333;
+	position: relative;
+}
+.com-left-title img{
+	display: block;
+	margin-left: 15px;
+	position: absolute;
+	left: 45px;
+	top: 17px;
+}
+.com-left-title span{
+	display: block;
+	text-align: center;
+	color: #ffffff;
+	line-height: 56px;
+	font-size: 18px;
+	padding-left: 15px;
+}
+.com-left-nav{
+	width: 244px;
+	float: left;
+	border: 1px dashed #dbdbdb;
+	border-top: none;
+}
+.com-left-nav ul{
+	width: 192px;
+	margin: 0 auto;
+	margin-top: 20px;
+	margin-bottom: 8px;
+	border: 1px solid #eeeeee;
+	border-bottom: none;
+}
+.com-left-nav ul li{
+	background: #fff;
+	height: 52px;
+	color: #333333;
+	border-bottom: 1px solid #EEEEEE;
+}
+.com-left-nav ul li.nav-bg{
+	background: #333333;
+}
+.com-left-nav ul li i{
+	display: block;
+	float: left;
+	width: 30px;
+	height: 28px;
+	margin-left: 10px;
+	margin-top: 16px;
+}
+.com-left-nav ul li i.nav-i{
+	display: block;
+}
+.com-left-nav ul li i.nav-bg-i{
+	display: none;
+}
+.com-left-nav ul li i img{
+	display: block;
+	margin: 1px auto;
+}
+.com-left-nav ul li a{
+	display: block;
+	float: left;
+	line-height: 52px;
+	font-size: 13px;
+	margin-left: 24px;
+	color: #333333;
+	width: 100px;
+}
+.com-left-nav ul li a.nav-cr{
+	color: #FFFFFF;
+}
+.com-left-nav ul li span{
+	display: block;
+	float: right;
+	color: #FFFFFF;
+	font-size: 24px;
+	padding-top: 6px;
+	margin-right: 10px;
+	width: 6px;
+	height: 12px;
+	background: url(../images/nav-go.png) no-repeat;
+	display: none;
+	margin-top: 19px;
+}
+
+/*com right*/
+.com-right{
+	width:666px;
+	float: right;
+}
+.com-right-top-wp{
+	width: 100%;
+	height:140px;
+	border-bottom: 1px dashed #dbdbdb;
+}
+.com-right-top-left{
+	width: 440px;
+	float: left;
+}
+.com-right-top-left-img{
+	width: 94px;
+	height: 94px;
+	float: left;
+}
+.com-right-top-left-img img{
+	width: 100%;
+	height: 100%;
+}
+.com-right-top-left-cont{
+	width: 300px;
+	float: left;
+	margin-left: 22px;
+	margin-right: 22px;
+}
+.com-right-top-left-cont .title{
+	width: 100%;
+	padding-top: 6px;
+}
+.com-right-top-left-cont .title b{
+	font-size: 16px;
+	color: #000000;
+	font-weight: normal;
+}
+.com-right-top-left-cont .title span{
+	font-size: 14px;
+	color: #666666;
+}
+.com-right-top-left-cont .title button{
+	float: right;
+	display: block;
+	width: 45px;
+	height: 20px;
+	background: #ff0000;
+	color: #fff;
+	outline: none;
+	border: none;
+	cursor: pointer;
+	line-height: 20px;
+}
+.com-right-top-left-cont .last-time{
+	padding-top: 12px;
+}
+.com-right-top-left-cont .last-time p{
+	font-size: 12px;
+	color: #000000;
+}
+.com-right-top-left-cont .line-wp{
+	width: 100%;
+	padding-top: 12px;
+}
+.com-right-top-left-cont .line-wp .line{
+	width: 100%;
+	height: 7px;
+	background:#f5f5f5;
+	border-radius: 4px;
+}
+.com-right-top-left-cont .line-wp .line span{
+	width: 90%;
+	height: 7px;
+	background:#000;
+	border-radius: 4px;
+	display: block;
+}
+.com-right-top-left-cont .line-wp p{
+	font-size: 13px;
+	color: #666666;
+	padding-top: 3px;
+}
+.com-right-top-left-cont .line-wp p i{
+	font-size: 13px;
+	color: #00ff0c;
+}
+.com-right-top-right{
+	width:216px ;
+	float: right;
+}
+.com-right-top-right-cont{
+	border-left: 1px solid #dbdbdb;
+	height: 78px;
+	margin-top: 15px;
+}
+.com-right-top-right-cont h4{
+	text-align: center;
+	padding-top: 14px;
+	font-size: 16px;
+	color: #666666;
+}
+.com-right-top-right-cont p{
+	text-align: center;
+}
+.com-right-top-right-cont p span{
+	color: #0099ff;
+	font-size: 36px; 
+}
+.com-right-top-right-cont p img{
+	margin-left: 5px;
+	cursor: pointer;
+}

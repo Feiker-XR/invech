@@ -1,0 +1,166 @@
+<?php
+namespace app\admin\controller;
+use app\admin\Login;
+use think\Cache;
+
+use app\common\model\Member as UserModel;
+use app\common\model\MemberLevel as LevelModel;
+use app\common\model\MemberBank as BankModel;
+use app\service\JsonExtra;
+use app\common\model\ActionLog as LogModel;
+class Member extends Login{
+    
+    public function index(){
+        $this->view->page_header = '会员列表';
+        $request = request();
+        $list = UserModel::getList($request);
+        $this->assign('list',$list);
+        return $this->fetch();
+    }
+    public function member_save(){
+        $request = request();
+        $params = $request->param();
+        $uid =  !empty($params['uid'])? $params['uid']:'';
+        $username =  !empty($params['username'])? $params['username']:'';
+        $nickname =  !empty($params['nickname'])? $params['nickname']:'';
+        $name =  !empty($params['name'])? $params['name']:'';
+        $password =  !empty($params['password'])? MD5($params['password']):'';
+        $sex =  !empty($params['sex'])? $params['sex']:'';
+        $type =  !empty($params['type'])? $params['type']:'';
+        $data = [
+            'username'  => $username,
+            'nickname'  => $nickname,
+            'name'      => $name,
+            'password'  => $password,
+            'sex'       => $sex,
+            'type'      => $type,
+            'regTime'   => time()
+            //'json_extra'=>  $json_extra,
+        ];
+         $res = [];
+        if($uid){
+            $member = UserModel::get(intval($uid));
+            $list = $member->validate('Member.edit')->save($data);
+            if($list){
+                LogModel::log(LogModel::BUSINESS_TYPE_EDIT,$member,LogModel::BUSINESS_TYPES[LogModel::BUSINESS_TYPE_EDIT]);
+               $res['msg'] = "操作成功";
+            }else{
+                $res['msg']= $member->getError();
+            }
+             echo json_encode($res);
+        }else{
+            
+            $member = new UserModel();
+            $list = $member->validate('Member.admin')->save($data);
+            if($list){
+               LogModel::log(LogModel::BUSINESS_TYPE_ADD,$member,LogModel::BUSINESS_TYPES[LogModel::BUSINESS_TYPE_ADD]);
+                $res['msg'] = "操作成功";
+            }else{
+                $res['msg']= $member->getError();
+             }
+             echo json_encode($res);
+        }
+    }
+    public function member_del(){
+        $request = request();
+        $params = $request->param();
+        $member =  UserModel::get(intval($params['uid']));
+
+        $list = $member->delete();
+        $res = [];
+        if($list){
+           LogModel::log(LogModel::BUSINESS_TYPE_DELE,$member,LogModel::BUSINESS_TYPES[LogModel::BUSINESS_TYPE_DELE]);
+           $res['msg'] = "操作成功";
+        }else{
+            $res['msg']= $member->getError();
+        }
+        echo json_encode($res);
+    }
+    
+    public function member_level(){
+      
+        $request = request();
+        $member_level = LevelModel::getList($request);
+        $this->assign('member_level',$member_level);
+        $this->view->page_header = '会员等级';
+        return $this->fetch();
+    }
+  
+    public function member_level_save(){
+        $request = request();
+        $params = $request->param();
+        $id =  !empty($params['id'])? $params['id']:'';
+        $level =  !empty($params['level'])? $params['level']:'';
+        $levelName =  !empty($params['levelName'])? $params['levelName']:'';
+        $minScore =  !empty($params['minScore'])? $params['minScore']:'';
+       
+        $data = [
+            'level'  => $level,
+            'levelName'  => $levelName,
+            'minScore'      => $minScore,
+            //'json_extra'=>  $json_extra,
+        ];
+         $res = [];
+        if($id){
+            $member_level = LevelModel::get(intval($id));
+            $list = $member_level->validate('Member.level')->save($data);
+            if($list){
+               LogModel::log(LogModel::BUSINESS_TYPE_EDIT,$member_level,LogModel::BUSINESS_TYPES[LogModel::BUSINESS_TYPE_EDIT]);
+               $res['msg'] = "操作成功";
+            }else{
+                $res['msg']= $member_level->getError();
+            }
+             echo json_encode($res);
+        }else{
+            
+            $member_level = new LevelModel();
+            $list = $member_level->validate('Member.level')->save($data);
+            if($list){
+               LogModel::log(LogModel::BUSINESS_TYPE_ADD,$member_level,LogModel::BUSINESS_TYPES[LogModel::BUSINESS_TYPE_ADD]);
+                $res['msg'] = "操作成功";
+            }else{
+                $res['msg']= $member_level->getError();
+             }
+             echo json_encode($res);
+        }
+     }
+    public function member_level_del(){
+        $request = request();
+        $params = $request->param();
+        $member_level =  LevelModel::get(intval($params['id']));
+
+        $list = $member_level->delete();
+        $res = [];
+        if($list){
+          LogModel::log(LogModel::BUSINESS_TYPE_DELE,$member_level,LogModel::BUSINESS_TYPES[LogModel::BUSINESS_TYPE_DELE]);
+           $res['msg'] = "操作成功";
+        }else{
+            $res['msg']= $member_level->getError();
+        }
+        echo json_encode($res);
+    }
+    
+
+     function form(){  
+         $request = request();
+         $params = $request->param(); 
+         if(!empty($params['uid'])){
+             $info =  UserModel::get(['uid'=>$params['uid']]);
+              $this->assign('info',$info);  
+         }
+          
+        return view();
+    }
+
+    function member_level_form(){  
+         $request = request();
+         $params = $request->param(); 
+         if(!empty($params['id'])){
+             $info =  LevelModel::get(['id'=>$params['id']]);
+              $this->assign('info',$info);  
+         }
+          
+        return view();
+    }
+  
+}

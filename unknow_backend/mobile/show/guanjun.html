@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>万丰国际</title>
+<meta http-equiv="Cache-Control" content="max-age=864000" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+	<link rel="stylesheet" href="/css/bootstrap.min.css">
+	<link rel="stylesheet" href="/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/css/footable.core.min.css">
+	<link href="../css/jquery_dialog.css" rel="stylesheet" type="text/css" />
+	<link rel="stylesheet" href="/styles/ucenter.css">
+	<script src="/assets/jquery.js"></script>
+	<script src="/js/bootstrap.min.js"></script>
+  <script src="/js/footable.min.js"></script>
+<script language="javascript" src="/js/jquery_dialog.js"></script>
+<script language="javascript" src="/js/common.js"></script>
+<script language="javascript" src="guanjun.js"></script>
+<script language="javascript" src="/js/guanjun.js"></script>
+<style type="text/css">
+  .panel-body{padding: 5px;}
+</style>
+</head>
+
+<body onload="loaded(document.getElementById('league').value,0);">
+<div class="btn-group pull-right" role="group">
+<input type="button" value="<<返回" class="btn btn-warning" onclick="$('#J_SportsIFrame',parent.document).attr('src','/index.php/index/left.html?touzhutype='+getUrlParam('touzhutype'));">
+  <input type="button" value="刷新" class="btn btn-default" id="sx_f5" onclick="javascript:shuaxin(document.getElementById('league').value);"/>
+<input type="hidden" name="top_f5" id="top_f5" value="0" />
+<input type="hidden" name="league" id="league" value="" />
+<input type="button" id="xzls" value="选择联赛" class="btn btn-default" />
+<div style="display:none" id="aaaaa">0</div>
+</div>
+<div class="h10 cleafix"></div>
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">冠军赛事 >></h3>
+  </div>
+  <div class="panel-body">
+    <ul id="top" class="pagination"></ul>
+<p>说明：点击+号图标展开；投注时请选择对应按钮，主队(<span class="zhu">绿色</span>)客队(<span class="ke">蓝色</span>)和(<span class="he">黄色</span>),赔率水位变化时背景变<span class="hong">红色</span>。</p>
+    <div id="datashow">
+    	<table class="table table-bordered table-hover">
+      <thead><tr class="success">
+    <td height="100" align="center" bgcolor="#FFFFFF" style="line-height:25px;"><img src="/images/loading.gif" border="0" /><br />
+      赛事数据正在加载中......</td>
+  </tr></thead>
+</table>
+    </div>
+  </div>
+</div>
+</body>
+<script language="javascript" src="/js/times.js"></script>
+<script language="javascript" src="/js/mouse.js"></script>
+<script language="javascript" src="/js/ifsports.js"></script>
+<script type="text/javascript">
+  $(function () {
+    $('.table').footable();
+  });
+</script>
+</html>

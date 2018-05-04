@@ -1,0 +1,78 @@
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,input,p,blockquote
+{margin:0;padding:0;}
+h1,h2,h3,h4,h5,h6
+{font-size:100%}
+ol,ul
+{list-style:none;}
+address,caption,cite,code,dfn,em,strong,th,var
+{font-style:normal; font-weight:normal;}
+fieldset,img
+{border:0;}
+.lottery_clear{ clear:both; height:0; width:0;}
+/*左侧菜单CSS*/
+.left{ width:100%; margin:0 auto; font-size:12px;}
+.left ul#menu, ul#menu ul {list-style-type:none;margin: 0;padding: 0; width: 100%;}
+.left ul#menu a {display: block;text-decoration: none;	}
+.left ul#menu li {margin-top: 1px;}
+.left ul#menu li a {background: #333;color: #fff;	padding: 0.5em;border-left: 5px  #900 solid;}
+.left ul#menu li a:hover,#menu li.current{background: #000;}
+.left ul#menu li a .hover {background: #000;border-left: 5px  #900 solid;}
+.left ul#menu li ul li a {background: #ccc;color: #000;padding-left: 20px;}
+.left ul#menu li ul li a:hover {background: #aaa;border-left: 5px #000 solid;padding-left: 15px;}
+/*投注页面CSS*/
+.content2{ width:100%; margin:-2px 0px 0px 0px;}
+.content2 .top{background:url(/six/images/lotto_right_06.png) repeat-x;font-size:12px; color:#FFF; margin-bottom:1px; line-height:35px;}
+.content{ width:100%; margin:-2px 0px 0px 0px;}
+.content .top{background:url(/six/images/lotto_right_06.png) repeat-x;font-size:12px; color:#FFF; margin-bottom:10px; line-height:35px;}
+.content .top a{background: #d1502b; color: #fff;	padding: 0.5em;border-left: 5px  #e5b418 solid;}
+.content .top a:hover{background: #a32bcd; color: #fff;	padding: 0.5em;border-left: 5px  #e5b418 solid;}
+.content .top a.selected{background: #a32bcd; color: #fff;	padding: 0.5em;border-left: 5px  #e5b418 solid;}
+.content .left{ float:left; width:580px;}
+.content .right{ float:right; width:188px; margin-top:5px; border:1px solid #77421d; height:410px; background-color:#ffffff;}
+.content .right .title{width:188px;color:#FFF; background-color:#4D4D50; height:24px; line-height:24px; background-image:url(/six/images/lotto_btl02.gif); text-align:center; font-size:12px; border-bottom:1px solid #77421d}
+.content .right #zuhe{width:170px; height:368px;color:#000; background-color:#fff; line-height:22px; text-align:left; font-size:14px; border:1px solid #77421d; margin:2px auto 0 auto;overflow-y: scroll; padding:5px;}
+.content .right #zuhe span{ color: #F90; font-weight:bold; display:block;}
+.content .right #zuhe strong{ color:#F00}
+.content .bian{width:100%;background-color:#77421d; font-size:12px; color:#FFF; text-align:center}
+.content .bian th{color:#FFF; background-color:#ffffff; height:24px; line-height:24px; background-image:url(/six/images/lotto_btl02.gif);}
+.content .bian .ball_txt{height:32px; width:34px; color:#000; background-color:#ffffff}
+.content .bian .bian_td_odds{line-height: 32px;text-align:center; color:#990000; font-family:Verdana, Geneva, sans-serif; font-size:14px; font-weight:bold; width:50px;background-color:#ffffff}
+.content .bian .bian_td_odds_15{line-height: 32px;text-align:center; color:#990000; font-family:Verdana, Geneva, sans-serif; font-size:14px; font-weight:bold; background-color:#ffffff}
+.content .bian .bian_td_inp{line-height: 32px;text-align:center;color: #000; background-color:#ffffff;}
+.content .bian .bian_td_no{line-height: 32px;text-align:center;color: #000; background-color:#ffffff;}
+.content .bian .bian_td_no_15{line-height: 32px;text-align:center;color: #000; background-color:#ffffff; width:60px;}
+.content .bian .bian_td_gg{line-height: 50px;text-align:center;color: #000; background-color:#ffffff; height:50px; font-size:14px;}
+.content .bian .inp1, .inp1m{border:1px solid #77421d;height:22px;padding-top:1px;padding-left:1px!important;padding-left:2px;color:#000;text-align:center;}
+.content .bian .inp1{color:#78787f; width:45px;height:15px;text-align:center; background-color:#ffffff;}
+.content .bian .inp1m{width:45px;height:15px;border:1px solid #000;color:#F00;background:#FFF;}
+.content .bian .inp1s, .inp1ms{border:1px solid #77421d;height:22px;padding-top:1px;padding-left:1px!important;padding-left:2px;color:#000;text-align:center; line-height:22px; font-size:14px}
+.content .bian .inp1s{color:#000; width:100px;height:22px;text-align:center; background-color:#ffffff;}
+.content .bian .inp1ms{width:100px;height:22px;border:1px solid #000;color:#F00;background:#FFF;}
+.content .bian .h_odds{line-height: 32px;text-align:center; color:#990000; font-family:Verdana, Geneva, sans-serif; font-size:14px; font-weight:bold; background-color:#ffffff;}
+.content .bian .h_inp{}
+.content .bian #ball_01,#ball_02,#ball_07,#ball_08,#ball_12,#ball_13,#ball_18,#ball_19,#ball_23,#ball_24,#ball_29,#ball_30,#ball_34,#ball_35,#ball_40,#ball_45,#ball_46{background-image:url(/six/images/BallBg_3.png); background-position: 1px 0px;color:#000;font-family:Verdana, Geneva, sans-serif; font-weight:bold; height:27px; width:29px;background-color:#ffffff; overflow:hidden;}
+.content .bian #ball_03,#ball_04,#ball_09,#ball_10,#ball_14,#ball_15,#ball_20,#ball_25,#ball_26,#ball_31,#ball_36,#ball_37,#ball_41,#ball_42,#ball_47,#ball_48{background-image:url(/six/images/BallBg_3.png); background-position: 1px 64px;color:#000;font-family:Verdana, Geneva, sans-serif; font-weight:bold; height:27px; width:29px;background-color:#ffffff}
+.content .bian #ball_05,#ball_06,#ball_11,#ball_16,#ball_17,#ball_21,#ball_22,#ball_27,#ball_28,#ball_32,#ball_33,#ball_38,#ball_39,#ball_43,#ball_44,#ball_49{background-image:url(/six/images/BallBg_3.png); background-position: 1px 32px;color:#000;font-family:Verdana, Geneva, sans-serif; font-weight:bold; height:27px; width:29px;background-color:#ffffff}
+.content .bian .ball_01,.ball_02,.ball_07,.ball_08,.ball_12,.ball_13,.ball_18,.ball_19,.ball_23,.ball_24,.ball_29,.ball_30,.ball_34,.ball_35,.ball_40,.ball_45,.ball_46{background-image:url(/six/images/BallBg_3.png); background-position: 1px 0px;color:#000;font-family:Verdana, Geneva, sans-serif; font-weight:bold; height:27px; width:27px;background-color:#ffffff; float:left;}
+.content .bian .ball_03,.ball_04,.ball_09,.ball_10,.ball_14,.ball_15,.ball_20,.ball_25,.ball_26,.ball_31,.ball_36,.ball_37,.ball_41,.ball_42,.ball_47,.ball_48{background-image:url(/six/images/BallBg_3.png); background-position: 1px 64px;color:#000;font-family:Verdana, Geneva, sans-serif; font-weight:bold; height:27px; width:27px;background-color:#ffffff; float:left;}
+.content .bian .ball_05,.ball_06,.ball_11,.ball_16,.ball_17,.ball_21,.ball_22,.ball_27,.ball_28,.ball_32,.ball_33,.ball_38,.ball_39,.ball_43,.ball_44,.ball_49{background-image:url(/six/images/BallBg_3.png); background-position: 1px 32px;color:#000;font-family:Verdana, Geneva, sans-serif; font-weight:bold; height:27px; width:27px;background-color:#ffffff; float:left;}
+.content .bian .ball_00{color:#000;font-family:Verdana, Geneva, sans-serif; font-weight:bold; height:32px; width:32px;background-color:#ffffff; float:left;}
+.content .bian .ball_c_01,.ball_c_02,.ball_c_07,.ball_c_08,.ball_c_12,.ball_c_13,.ball_c_18,.ball_c_19,.ball_c_23,.ball_c_24,.ball_c_29,.ball_c_30,.ball_c_34,.ball_c_35,.ball_c_40,.ball_c_45,.ball_c_46{background-image:url(/six/images/BallBg_3.png); background-position: 1px 0px;color:#000;font-family:Verdana, Geneva, sans-serif; font-weight:bold; height:27px; width:27px;background-color:#ffffff; margin:0 auto;}
+.content .bian .ball_c_03,.ball_c_04,.ball_c_09,.ball_c_10,.ball_c_14,.ball_c_15,.ball_c_20,.ball_c_25,.ball_c_26,.ball_c_31,.ball_c_36,.ball_c_37,.ball_c_41,.ball_c_42,.ball_c_47,.ball_c_48{background-image:url(/six/images/BallBg_3.png); background-position: 1px 64px;color:#000;font-family:Verdana, Geneva, sans-serif; font-weight:bold; height:27px; width:27px;background-color:#ffffff; margin:0 auto;}
+.content .bian .ball_c_05,.ball_c_06,.ball_c_11,.ball_c_16,.ball_c_17,.ball_c_21,.ball_c_22,.ball_c_27,.ball_c_28,.ball_c_32,.ball_c_33,.ball_c_38,.ball_c_39,.ball_c_43,.ball_c_44,.ball_c_49{background-image:url(/six/images/BallBg_3.png); background-position: 1px 32px;color:#000;font-family:Verdana, Geneva, sans-serif; font-weight:bold; height:27px; width:27px;background-color:#ffffff; margin:0 auto;}
+.content .button_body { width:100%; text-align:center; margin-top:20px; height:37px;}
+.content .button_body a.submit {background-position: 0 -37px;}
+.content .button {}
+.content .numberinfo{width:100%;margin:-10px 0px 0px 0px; background-color:#000000; font-size:11px; height:40px;  color:#FFF; text-align:left}
+.content .numberinfo #open_00,#open_01,#open_02,#open_07,#open_08,#open_12,#open_13,#open_18,#open_19,#open_23,#open_24,#open_29,#open_30,#open_34,#open_35,#open_40,#open_45,#open_46{background-image:url(/six/images/BallBg_3.png); background-position: 1px -1px;color:#000;font-family:Verdana, Geneva, sans-serif; font-weight:bold; height:27px; width:27px;}
+.content .numberinfo #open_00,#open_03,#open_04,#open_09,#open_10,#open_14,#open_15,#open_20,#open_25,#open_26,#open_31,#open_36,#open_37,#open_41,#open_42,#open_47,#open_48{background-image:url(/six/images/BallBg_3.png); background-position: 1px 53px;color:#000;font-family:Verdana, Geneva, sans-serif; font-weight:bold; height:27px; width:27px;}
+.content .numberinfo #open_00,#open_05,#open_06,#open_11,#open_16,#open_17,#open_21,#open_22,#open_27,#open_28,#open_32,#open_33,#open_38,#open_39,#open_43,#open_44,#open_49{background-image:url(/six/images/BallBg_3.png); background-position: 1px 26px;color:#000;font-family:Verdana, Geneva, sans-serif; font-weight:bold; height:27px; width:29px;}
+.content .numberinfo .time-item span{background: #900;color:#fff;font-size:14px;font-family:Arial; font-weight:bold;padding:0 5px;margin-right:5px;}
+.content .numberinfo #open_qihao{background: #900;color:#fff;font-size:14px;font-family:Arial; font-weight:bold;padding:0 5px;margin-right:5px;}
+.content .numberinfo #openNumber{ padding-right:5px;}
+.content .numberinfo #openNumber font {color: #f7ef0b;}
+/*投注页面CSS*/
+.order_div{ width:100%; margin:0 auto;max-height:230px;_height:expression((document.documentElement.clientHeight||document.body.clientHeight)<312?"312px":""); overflow:hidden; padding:1px 0; overflow-y:auto;}
+.order_list{ width:100%; font-size:12px; background-color:#77421d}
+.order_list th{color:#FFF; background-color:#77421d; height:30px; line-height:30px; text-align:center; background-image:url(/six/images/ssc_zdlb01.jpg);border:solid #086705; border-width:0px 1px 1px 1px;}
+.order_list td{color:#000; background-color:#FFF; height:25px; line-height:22px; text-align:center;border:solid #086705; border-width:0px 1px 1px 1px;}

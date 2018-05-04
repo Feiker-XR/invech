@@ -1,0 +1,12 @@
+<?php
+return [
+        'app\events\Test' => [
+            'app\listeners\TestListener@onAction',
+        ],
+        'app\events\LotteryEvent' => [
+            'app\listeners\LotteryListener@onAction',
+        ],
+        
+    ];
+
+

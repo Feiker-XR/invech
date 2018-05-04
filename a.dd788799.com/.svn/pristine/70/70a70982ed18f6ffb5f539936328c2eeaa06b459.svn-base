@@ -1,0 +1,102 @@
+<?php
+
+namespace app\auth\traits;
+
+use think\Request;
+use think\Validate;
+use app\service\Str;
+use app\service\RateLimiter;
+
+trait ThrottlesLogins // 建议被控制器使用
+{
+
+    protected function limiter()
+    {
+        return container(RateLimiter::class);
+    }
+
+    protected function username()
+    {
+        return 'username';
+    }    
+
+    public function doLogin(Request $request, $remember = false)
+    {
+        $this->validateLogin($request);
+       
+        if ($this->hasTooManyLoginAttempts($request)) {
+            $seconds = $this->limiter()->availableIn(
+                $this->throttleKey($request)
+            );
+            throw new \Exception($seconds . '秒后才能登陆!');
+            //return json(['']);
+        }
+
+        if ($ret = $this->attemptLogin($request, $remember)) {
+            $this->clearLoginAttempts($request);
+            return $ret;
+        }
+
+        $this->incrementLoginAttempts($request);
+
+        return $ret;
+    }
+
+    protected function validateLogin(Request $request){
+        $rules = [  $this->username()??'username' => 'require',
+                    'password' => 'require',];
+        $validate = new Validate($rules);
+        $data = $this->credentials($request);
+        if(!$validate->check($data)){
+            throw new \Exception($validate->getError());
+        }
+    }
+
+    protected function attemptLogin(Request $request,$remember = false)
+    {
+        return container('auth')->attempt(
+            $this->credentials($request), $remember
+        );
+    }
+
+    protected function hasTooManyLoginAttempts(Request $request)
+    {
+        return $this->limiter()->tooManyAttempts(
+            $this->throttleKey($request), $this->maxAttempts(), $this->decayMinutes()
+        );
+    }
+
+    protected function incrementLoginAttempts(Request $request)
+    {
+        $this->limiter()->hit(
+            $this->throttleKey($request), $this->decayMinutes()
+        );
+    }
+
+    protected function clearLoginAttempts(Request $request)
+    {
+        $this->limiter()->clear($this->throttleKey($request));
+    }
+
+    protected function throttleKey(Request $request)
+    {
+        return Str::lower(input($this->username())).'|'.$request->ip();
+    }
+
+    public function maxAttempts()
+    {
+        return config('auth.login.max_attempts')??5;
+    }
+
+    public function decayMinutes()
+    {
+        return config('auth.login.decay_minutes')??1;
+    }
+    
+    private function credentials(Request $request){
+        return [
+            'username'  =>  trim($request->param('username')),
+            'password'  =>  trim($request->param('password')),
+        ];
+    }
+}

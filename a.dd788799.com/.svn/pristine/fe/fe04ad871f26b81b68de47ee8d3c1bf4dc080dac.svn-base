@@ -1,0 +1,68 @@
+<?php
+namespace app\common\model;
+use think\Model;
+
+/**
+ *  玩法组表表模型
+ * @author mack
+ */
+class PlayedGroup extends Base {
+	protected $table = 'gygy_played_group';
+	//protected $pk = 'id';
+
+	//自动完成
+    //protected $auto = ['name', 'ip'];		//save
+    //protected $insert = ['status' => 1];  //insert
+    //protected $update = [];  				//update
+
+	//动态属性
+	/*
+	public function getStatusAttr($value)
+	{
+		$status = [-1=>'删除',0=>'禁用',1=>'正常',2=>'待审核'];
+		return $status[$value];
+	}
+	public function setNameAttr($value,$data)
+	{
+		return serialize($data);
+	}
+	*/
+	
+    public function playeds()
+    {
+    	return $this->hasMany('Played','groupId')->where('enable',1);
+    }
+
+    static public function getAll(){
+        $groups = cache('gygy_all_played_group');
+        if(!$groups){
+            $groups = self::where('enable',1)->order('sort,id')->select();
+            $groups_map = [];
+            foreach ($groups as $group) {                
+                $groups_map[$group->id] = $group;//$group->toArray();
+            }
+            $groups = $groups_map;
+            cache('gygy_all_played_group',$groups);
+        }
+        return $groups;        
+    }
+
+    //----------------后台------------------
+    public static function  getList($request){
+        $params = request()->param();
+        $query  = self::order('type')->order('id desc');
+        if($params['keywords']??''){
+            $query->where('groupName','like','%'.trim($params['keywords']).'%');
+        }
+        if($params['type']??''){
+            $query->where('type',$params['type']);
+        }
+        if(isset($params['enable']) && is_numeric($params['enable'])){
+            $query->where('enable',$params['enable']);
+        }
+        if(isset($params['is_kqwf']) && is_numeric($params['is_kqwf'])){
+            $query->where('is_kqwf',$params['is_kqwf']);
+        }
+        return $query->paginate();
+    }
+}

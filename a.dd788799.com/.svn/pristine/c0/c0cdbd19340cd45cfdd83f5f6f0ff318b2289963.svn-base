@@ -1,0 +1,137 @@
+<extend name="Base/common"/>
+
+<block name="title"><title>在线充值－{:S('WEB_NAME')}</title></block>
+<block name="style">
+<link rel="stylesheet" type="text/css" href="__CSS__/user.css">
+</block>
+<block name="script">
+<script>
+$(function(){
+	$("a[data-pro='ok']").click(function(event){
+		var url = $(this).attr('data-action');
+		var childs = $('#pro-view-info').find('input');
+		
+		var i=0;
+		var data=[];
+		for(i=0;i<childs.length;i++)
+		{
+			data.push({name:childs[i].name,value:childs[i].value});
+		}
+		
+		data.push({name:'bankcode', value:$('#bankcode').val()});
+		
+		$.ajax(url,data,function(re){
+			var status = re.status;
+			if(status==1)
+			{
+				showDialog(re.info);
+				
+				setTimeout(function(){
+					if(re.url)
+						window.location.href=re.url;
+				},1500);			
+			}
+			else
+			{
+				showDialog(re.info);
+			}
+		},'json');
+		return false;
+	});
+});
+</script>
+</block>
+<block name="header"></block>
+<block name="body">
+<?php
+/* *
+ * 功能：一般支付调试入口页面
+ * 版本：1.0
+ * 日期：2015-03-26
+ * 说明：
+ * 以下代码只是为了方便商户测试而提供的样例代码。
+ */
+ 	require_once("./mb/Mobaopay.Config.php");
+	$time		= time();
+	$orderNo	= date("YmdHis",$time);
+	$tradeDate	= date("Ymd",$time); 
+?>
+<div id="pro-view-24" class="m-user">
+	<div id="pro-view-36" class="m-simpleHeader" data-pro="dvHeader">
+		<a href="javascript:history.back(-1);" data-pro="cancel" class="m-simpleHeader-back2">取消</a>
+		<a href="javascript:void(0);" data-pro="ok" data-action="http://p.jxlzu.org/mb/pay.php" class="m-simpleHeader-ok2">充值</a>
+		<h1>在线充值</h1>
+	</div>
+	<div class="m-user-addrAdd">
+		<form id="recharge" role="form" action="__SELF__" method="post"  target="_blank">
+			
+			<div class="m-user-bar" data-pro="entry" id="pro-view-info">
+				<div id="pro-view-6" class="w-inputBar w-bar">
+					<div class="w-bar-label">
+						充值金额
+					</div>
+					<a style="display: none;" data-pro="clear" href="javascript:void(0);" class="w-bar-input-clear">×</a>
+					<div class="w-bar-control">
+						<input data-pro="input" class="w-bar-input" name="amt" id="amt" value="100" type="number">
+					</div>
+				</div>
+				<div id="pro-view-7" class="w-inputBar w-bar">
+					<div class="w-bar-label">
+						充值方式
+					</div>
+					<a data-pro="clear" href="javascript:void(0);" class="w-bar-input-clear">×</a>
+					<div class="w-bar-control">
+						<select  class="w-bar-input" id="bankcode" name="bankcode" style="width: 300px; height: 42px;" autocomplete="off" onchange="change(this)">
+								<option>在线充值</option>
+								<!--<option>微信充值</option>-->
+						</select>
+					</div>
+				</div>
+				<input size="50" type="hidden" name="orderNo" id="orderNo" value='<?php echo $orderNo; ?>' />
+				<input size="50" type="hidden" name="tradeDate" id="tradeDate" value='<?php echo $tradeDate; ?>' />
+				<input size="50" type="hidden" name="merchParam" id="merchParam" value="{$user.uid}" />
+				<input size="50" type="hidden" name="tradeSummary" id="tradeSummary" value="{$user.username}" />
+			</div>
+			<input type="submit" value="提交" class="btn" onclick="return fukuan(this);">
+		</form>
+	</div>
+</div>
+<div style="display:none">
+<form method="post" id="MerOrder" action="/tfk3/paySubmit.php" href="#" target="_blank">
+		<input name="p2_Order" id="p2_Order" value="" type="hidden">
+		<input name="p3_Amt" id="p3_Amt" value="" type="hidden">
+		<input name="pa_MP" id="pa_MP" value="a15909835" type="hidden">
+		<p><input type="submit" id="postbtn" name="submit" value="智付在线支付"/></p>
+</form>
+</div>
+<script type="text/javascript">
+function change(me){
+	if(me.value=='在线充值')
+		$('#MerOrder').attr('action', '/tfk3/paySubmit.php');
+	else
+		$('#MerOrder').attr('action', '/tfk3/paySubmit.php');
+}
+
+function fukuan(me){
+	
+	var min = {$settings.rechargeMin1};
+	var max = {$settings.rechargeMax1};
+	var amount = parseFloat($('#amt').val());
+	if(isNaN(amount) || amount<min || amount>max){
+		showDialog('充值金额必须在' + min + '元和' + max + '元之间');
+		return false;
+	}
+	
+	var url='__SELF__';
+	$.post(url,{amount:$('#amt').val()},function(result){
+		
+		$('#p2_Order').val(result.rechargeId);
+		$('#p3_Amt').val(amount);
+		//$('#MerOrder').submit();
+		$('#postbtn').click();
+	});
+	return false;
+}
+</script>
+</block>		
+<block name="footer"></block>

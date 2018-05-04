@@ -1,0 +1,17 @@
+#!/usr/bin/env php
+<?php
+
+date_default_timezone_set('Asia/Shanghai');
+define('SWOOLE_JOBS_ROOT_PATH', __DIR__);
+
+define('APP_PATH', __DIR__ . '/../application/');
+define('RUNTIME_PATH', __DIR__ . '/../runtime/');
+
+require SWOOLE_JOBS_ROOT_PATH . '/../thinkphp/base.php';
+\think\App::initCommon();
+
+//require SWOOLE_JOBS_ROOT_PATH . '/../vendor/autoload.php';
+$config = require_once SWOOLE_JOBS_ROOT_PATH . '/swoole-jobs.php';
+
+$console = new \Kcloze\Jobs\Console($config);
+$console->run();

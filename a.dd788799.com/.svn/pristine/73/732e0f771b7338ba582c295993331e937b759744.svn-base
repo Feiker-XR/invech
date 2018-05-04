@@ -1,0 +1,470 @@
+{layout name="layout" /}
+
+<form action="{:url()}" method="post" class="form_single" onsubmit='return false;'>
+    <div class="box">
+      <div class="box-body">
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label>名称</label>
+              <span>（API接口名称）</span>
+              <input class="form-control" name="name" placeholder="请输入API接口名称" value="{$api->name | default = ''}" type="text">
+            </div>
+          </div>
+            
+          <div class="col-md-6">
+            <div class="form-group">
+              <label>排序</label>
+              <span>（API接口排序值）</span>
+              <input class="form-control" name="sort" placeholder="请输入API接口排序值" value="{$api->sort | default='0'}" type="text">
+            </div>
+          </div>
+            
+            
+          <div class="col-md-6">
+            <div class="form-group">
+              <label>请求地址</label>
+              <span>（控制器/方法名）</span>
+              <input class="form-control" name="api_url" placeholder="请输入请求地址" value="{$api->api_url | default=''}" type="text">
+            </div>
+          </div>
+            
+          <div class="col-md-6">
+            <div class="form-group">
+              <label>请求类型</label>
+              <span>（POST | GET）</span>
+                <select name="request_type" class="form-control">
+                    <option value="0" {if($api->request_type==0)}selected{/if}>POST</option>
+                    <option value="1" {if($api->request_type==1)}selected{/if}>GET</option>
+                </select>
+            </div>
+          </div>
+            
+            
+        <div class="col-md-6">
+          <div class="form-group">
+            <label>是否为分页接口</label>
+            <span>（若为分页接口则需传递分页相关参数）</span>
+              <div>
+                  <label class="margin-r-5">
+                    <input type="radio" name="is_page"  value="0"
+                    {if($api->is_page==0)}checked="checked"{/if}> 否
+                  </label>
+                  <label>
+                    <input type="radio" name="is_page" value="1"
+                    {if($api->is_page==1)}checked="checked"{/if}> 是
+                  </label>
+              </div>
+          </div>
+        </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label>研发者</label>
+                <select name="developer" class="form-control">
+                    {foreach($developer as $item)}
+                      <option value="{$item}" {if($api->developer == $item)}selected{/if}>
+                      {$item}</option>
+                    {/foreach}
+                </select>
+            </div>
+          </div>
+
+            
+          <div class="col-md-6">
+            <div class="form-group">
+              <label>请求数据</label>
+              <span>（若为否则无需添加请求字段）</span>
+                <div>
+                    <label class="margin-r-5">
+                      <input type="radio" name="is_request_data" value="0" 
+                      {if($api->is_request_data == 0)}checked="checked"{/if}> 
+                    否</label>
+                    <label>
+                      <input type="radio" name="is_request_data" value="1"
+                      {if($api->is_request_data == 1)}checked="checked"{/if}>
+                     是</label>
+                </div>
+              <table id="request_data_table" style="display : none;"></table>
+            </div>
+          </div>
+            
+          <div class="col-md-6">
+              
+            <div class="form-group">
+              <label>响应数据</label>
+              <span>（若为否则无需添加响应字段）</span>
+                <div>
+                    <label class="margin-r-5">
+                      <input type="radio" name="is_response_data"  value="0"
+                      {if($api->is_response_data == 0)}checked="checked"{/if}>
+                       否</label>
+                    <label>
+                      <input type="radio" name="is_response_data" value="1"
+                      {if($api->is_response_data == 1)}checked="checked"{/if}>
+                       是</label>
+                </div>
+              <table id="response_data_table" style="display : none;"></table>
+            </div>
+          </div>
+        </div>
+          <div class="row">
+
+              
+          <div class="col-md-6">
+            <div class="form-group">
+              <label>分组</label>
+                <select name="group_id" class="form-control">
+                    {foreach($groups as $group)}                    
+                        <option value="{$group->id}"
+                        {if($group->id == $api->group_id)}selected{/if}>
+                          {$group->name}</option>
+                    {/foreach}
+                </select>
+            </div>
+          </div>
+              
+            
+          <div class="col-md-6">
+            <div class="form-group">
+              <label>接口状态</label>
+                <select name="api_status" class="form-control">
+                    {foreach($api_status as $key=>$val)}                    
+                        <option value="{$key}"
+                        {if($key == $api->api_status)}selected{/if}>
+                          {$val}</option>
+                    {/foreach}
+                </select>
+            </div>
+          </div>
+              
+          <div class="col-md-6">
+            <div class="form-group">
+                <label>接口响应示例</label>
+                <textarea class="form-control" name="response_examples" rows="3" placeholder="请输入接口响应示例">{$api->response_examples|default=''}</textarea>
+            </div>
+          </div>
+              
+          <div class="col-md-6">
+            <div class="form-group">
+                <label>接口简介</label>
+                <textarea class="form-control" name="describe" rows="3" placeholder="请输入接口简介">{$api->describe|default=''}</textarea>
+            </div>
+          </div>
+
+              
+              
+              
+<!--              
+            <div class="col-md-6">
+
+              <div class="form-group">
+                <label>是否验证用户令牌：user_token</label>
+                <span>（若为否则为无需验证身份的接口，若为是则需要登录后获取 user_token）</span>
+                  <div>
+                      <label class="margin-r-5">
+                        <input type="radio" name="is_user_token"  value="0"
+                        {if($api->is_user_token==0)}checked{/if}> 
+                      否</label>
+                      <label>
+                        <input type="radio" name="is_user_token" value="1"
+                        {if($api->is_user_token==1)}checked{/if}>
+                        是</label>
+                  </div>
+              </div>
+            </div>
+
+            <div class="col-md-6">
+
+              <div class="form-group">
+                <label>是否响应数据签名：data_sign</label>
+                <span>（若为否则无需验证数据签名，若为是则会返回 data_sign 用于验证数据是否安全）</span>
+                  <div>
+                      <label  class="margin-r-5">
+                        <input type="radio" name="is_response_sign" value="0"
+                        {if($api->is_response_sign==0)}checked{/if}>
+                        否</label>
+                      <label>
+                        <input type="radio" name="is_response_sign" value="1"
+                        {if($api->is_response_sign==1)}checked{/if}>
+                        是</label>
+                  </div>
+              </div>
+            </div>
+              
+
+            <div class="col-md-6">
+
+              <div class="form-group">
+                <label>是否验证请求数据签名：data_sign</label>
+                <span>（若为否则无需验证数据签名，若为是则需要请求中带 data_sign 字段 用于验证数据安全）</span>
+                  <div>
+                      <label  class="margin-r-5">
+                        <input type="radio" name="is_request_sign" value="0"
+                        {if($api->is_request_sign==0)}checked{/if}>
+                        否</label>
+                      <label>
+                        <input type="radio" name="is_request_sign" value="1"
+                        {if($api->is_request_sign==1)}checked{/if}>
+                        是</label>
+                  </div>
+              </div>
+            </div>
+-->              
+              
+          <div class="col-md-12">
+            <div class="form-group">
+                <label>接口文本描述</label>
+                <!--<textarea class="form-control textarea_editor" name="describe_text" placeholder="请输入接口文本描述">{$api->describe_text|default=''}</textarea>-->
+                <script id="describe_text" name="describe_text" type="text/plain">
+                    {$api->describe_text|default=''}
+                </script>                
+            </div>
+          </div>
+              
+              
+        </div>
+          
+        </div>
+        
+        
+        
+        
+      <div class="box-footer">
+          
+        <input type="hidden" name="id" value="{$api->id|default='0'}"/>
+        
+        <button type="submit" class="skin-blue btn ladda-button ajax-post" data-style="slide-up" target-form="form_single">
+            <span class="ladda-label">确 定</span>
+        </button>
+
+        <a class="skin-blue btn" onclick="javascript:history.back(-1);return false;"> 返 回</a>
+
+      </div>        
+      </div>
+</form>
+
+<script src="/js/init.js"></script>
+
+<script src="/js/toastr/toastr.min.js"></script>
+<link rel="stylesheet" href="/js/toastr/toastr.min.css">
+
+<script src="/js/edittable/jquery.edittable.js"></script>
+<link rel="stylesheet" href="/js/edittable/jquery.edittable.css">
+
+<!-- 配置文件 -->
+<script type="text/javascript" src="/js/ueditor/ueditor.config.js"></script>
+<!-- 编辑器源码文件 -->
+<script type="text/javascript" src="/js/ueditor/ueditor.all.js"></script>
+
+<!-- 实例化编辑器 -->
+<script type="text/javascript">
+    $(function() {
+        var ue = UE.getEditor('describe_text');
+        /*
+        ue.ready(function() {
+            this.execCommand('insertHtml', '<link rel="stylesheet" href="/css/style400.css">',true);//第三个参数表示忽略标签过滤规则
+        })
+        */
+    });
+</script>  
+
+<script type="text/javascript">
+
+    ob.setValue("request_type", {$api['request_type']|default=0});
+    ob.setValue("is_page", {$api['is_page']|default=0});
+    ob.setValue("developer", {$api['developer']|default=0});
+    ob.setValue("is_request_data", {$api['is_request_data']|default=0});
+    ob.setValue("is_response_data", {$api['is_response_data']|default=0});
+    ob.setValue("is_user_token", {$api['is_user_token']|default=0});
+    ob.setValue("is_response_sign", {$api['is_response_sign']|default=0});
+    ob.setValue("is_request_sign", {$api['is_request_sign']|default=0});
+    ob.setValue("group_id", {$api['group_id']|default=0});
+    ob.setValue("api_status", {$api['api_status']|default=0});
+    ob.setValue("request_type", {$api['request_type']|default=0});
+
+    showOrHideFieldData({$api['is_request_data']|default=0}, 'request_data_table'); 
+    showOrHideFieldData({$api['is_response_data']|default=0}, 'response_data_table'); 
+
+    $(function(){
+
+        $("input[name=is_request_data]").click(function(){ showOrHideFieldData($(this).val(), 'request_data_table'); });
+        $("input[name=is_response_data]").click(function(){ showOrHideFieldData($(this).val(), 'response_data_table'); });
+    });
+
+
+    function showOrHideFieldData(handle, mark)
+    {
+        if (1 == handle) { $('#' + mark).show(); } else { $('#' + mark).hide(); }
+    }
+    
+    var default_text_name = 'request_data[field_name][]';
+    var api_data_type_option = "{$data_type}";
+    
+</script>
+
+<script type="text/javascript">
+
+var request_data_table = $('#request_data_table').editTable({
+    field_templates: {
+        'request_data_field_describe' : {
+            html: "<textarea name='request_data[field_describe][]'/>",
+            getValue: function (input) {
+                return $(input).val();
+            },
+            setValue: function (input, value) {
+                return $(input).text(value);
+            }
+        },
+        'request_data_is_require' : {
+            html: "<select name='request_data[is_require][]' style='margin: 5px;'><option value='1'>是</option><option  value='0'>否</option></select>",
+            getValue: function (input) {
+                return $(input).val();
+            },
+            setValue: function (input, value) {
+                var select = $(input);
+                select.find('option').filter(function() {
+                    return $(this).val() == value; 
+                }).attr('selected', true);
+                return select;
+            }
+        },
+        'request_data_type' : {
+            html: "<select name='request_data[data_type][]' style='margin: 5px;'>"+api_data_type_option+"</select>",
+            getValue: function (input) {
+                return $(input).val();
+            },
+            setValue: function (input, value) {
+                var select = $(input);
+                select.find('option').filter(function() {
+                    return $(this).val() == value; 
+                }).attr('selected', true);
+                return select;
+            }
+        }
+    },
+    row_template: ['text', 'request_data_type', 'request_data_is_require', 'request_data_field_describe'],
+    headerCols: ['字段名称', '数据类型', '&nbsp;&nbsp;是否必填&nbsp;&nbsp;' , '字段描述'],
+    first_row: false,
+    data: [],
+    tableClass: 'inputtable custom'
+});
+
+request_data_table.loadData({$api->request_data_json});
+
+default_text_name = 'response_data[field_name][]';
+
+var response_data_table = $('#response_data_table').editTable({
+    field_templates: {
+        'response_data_field_describe' : {
+            html: "<textarea name='response_data[field_describe][]'/>",
+            getValue: function (input) {
+                return $(input).val();
+            },
+            setValue: function (input, value) {
+                return $(input).text(value);
+            }
+        },
+        'response_data_type' : {
+            html: "<select name='response_data[data_type][]' style='margin: 5px;'>"+api_data_type_option+"</select>",
+            getValue: function (input) {
+                return $(input).val();
+            },
+            setValue: function (input, value) {
+                var select = $(input);
+                select.find('option').filter(function() {
+                    return $(this).val() == value; 
+                }).attr('selected', true);
+                return select;
+            }
+        }
+    },
+    row_template: ['text', 'response_data_type', 'response_data_field_describe'],
+    headerCols: ['字段名称', '数据类型', '字段描述'],
+    first_row: false,
+    data: [],
+    tableClass: 'inputtable custom'
+});
+
+response_data_table.loadData({$api->response_data_json});
+
+    $(".form_single").submit(function(){
+        alter('abx');
+    });
+
+    $('.form_single').on('submit', function (e) {
+        e.preventDefault()
+        alter('abx');
+    });
+
+    $('.ajax-post').click(function(){
+
+        var target,query,form;
+
+        var target_form = $(this).attr('target-form');
+
+        var that = this;
+
+        var nead_confirm=false;
+
+        if( ($(this).attr('type')=='submit') || (target = $(this).attr('href')) || (target = $(this).attr('url')) ){
+
+            form = $('.'+target_form);
+
+            if ($(this).attr('hide-data') === 'true'){
+                form = $('.hide-data');
+                query = form.serialize();
+            }else if (form.get(0)==undefined){
+                return false;
+            }else if ( form.get(0).nodeName=='FORM' ){
+
+                if ( $(this).hasClass('confirm') ) {
+
+                    if(!confirm('确认要执行该操作吗?')){
+
+                        return false;
+                    }
+                }
+                if($(this).attr('url') !== undefined){
+                        target = $(this).attr('url');
+                }else{
+                        target = form.get(0).action;
+                }
+                query = form.serialize();
+            }else if( form.get(0).nodeName=='INPUT' || form.get(0).nodeName=='SELECT' || form.get(0).nodeName=='TEXTAREA') {
+
+                form.each(function(k,v){
+                    if(v.type=='checkbox' && v.checked==true){
+                        nead_confirm = true;
+                    }
+                })
+
+                if ( nead_confirm && $(this).hasClass('confirm') ) {
+                    if(!confirm('确认要执行该操作吗?')){
+                        return false;
+                    }
+                }
+
+                query = form.serialize();
+            }else{
+
+                if ( $(this).hasClass('confirm') ) {
+                    if(!confirm('确认要执行该操作吗?')){
+                        return false;
+                    }
+                }
+                query = form.find('input,select,textarea').serialize();
+            }
+
+            $.post(target,query).success(function(data){
+
+                data.code ? toast.success(data.msg) : toast.error(data.msg);
+
+                data.url && (location.href = data.url);
+
+                //is_ladda_button ? button.stop('.ladda-button') : $(that).removeClass('disabled').prop('disabled',false);
+            });
+        }
+
+        return false;
+    });
+</script>

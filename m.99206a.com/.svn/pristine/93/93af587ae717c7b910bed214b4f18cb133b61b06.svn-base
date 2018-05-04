@@ -1,0 +1,692 @@
+<?php if (!defined('THINK_PATH')) exit(); /*a:4:{s:82:"/mnt/wwwroot/www.dd788799.com/public/../application/index/newview/index/index.html";i:1517842024;s:81:"/mnt/wwwroot/www.dd788799.com/public/../application/index/newview/common/nav.html";i:1517730945;s:84:"/mnt/wwwroot/www.dd788799.com/public/../application/index/newview/common/footer.html";i:1516698466;s:92:"/mnt/wwwroot/www.dd788799.com/public/../application/index/newview/common/fix-left-right.html";i:1516879463;}*/ ?>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>欢迎光临-皇冠娱乐城88</title>
+<link rel="stylesheet" type="text/css" href="/newview/css/style.css"/>
+<script src="/newview/js/jquery1.9.0.min.js"></script>
+<script src='/newview/js/jquery.cookie.js'></script>
+<script type="text/javascript" src="/newview/js/jquery.SuperSlide.2.1.1.js"></script>
+<script type="text/javascript" src="/newview/js/jquery.easing.1.3.js" ></script>
+<script type="text/javascript" src="/newview/js/slides.jquery.js" ></script>
+<script type="text/javascript" src="/newview/js/main.js?v123"></script>  
+
+</head>
+<body>
+<!--头部登陆-->
+
+<div class="header_contain">
+	<div class="header_all">
+		<div class="header">
+			<div class="logo">
+				<a href="<?php echo Url('index/index'); ?>"><img src="/newview/img/logo.png" /></a>
+			</div>
+			<div class="header_right_language fr">
+				<span>简体中文</span>
+			</div>		
+			<div class="header_right_1 fr">
+				<ul>
+					<li><a href="http://www.hb99206.com" target="_blank" data-color="#FF2D2D|#D9D836" class="js-article-color" >注册抢亿元红包</a></li>
+					<li><a href="http://www.app99206.com" target="_blank"><span class="color_green2">下载手机APP享18888元</span></a></li>
+					<li><a href="<?php echo Url('promotions/index'); ?>"><span class="color_newGray">首存即送2888元</span></a></li>
+					<li><a href="<?php echo Url('vipcheck/index'); ?>" target="_blank" class="color_yellow">VIP等级查询</a></li>
+					<li><a href="http://pay99206.com" class="color_green" target="_blank">快速充值</a></li>
+					<li><a href="<?php echo Url('linecheck/index'); ?>" target="_blank" class="color_blue">线路检测</a></li>
+				</ul>
+			</div>
+			<!--登陆前-->
+			<?php if(\think\Session::get('uid') == ''): ?>
+			<div class="header_login" >
+				<form action="<?php echo url('index/login'); ?>">
+				<ul>
+					<li><input type="text" class="header_login_name" id="username" /></li>
+					<li><input type="password" id="password" /></li>
+					<?php if($sysConfig['loginYzm'] == "1"): ?>
+					<li><input type="text" placeholder="验证码" name='dlyzm' id="dlyzm" class="header_login_yz"/></li>
+					<li><img src="/captcha.html" class="header_login_yzpic"  onclick="this.src='/captcha.html?d='+Math.random();" style="cursor:pointer;" /></li>
+					<?php else: ?>
+					<input type="hidden" id="dlyzm" name="dlyzm" />
+					<?php endif; ?>
+					<li><a href="javascript:;" onclick="alert('请联系在线客服找回密码!')" class="color_999">忘记密码？</a></li>
+					<li><a href="JavaScript:;" onclick="Login()" class="header_login_a">登录</a></li>
+					<li><a href="/index/reg" class="header_login_open">开户</a></li>
+				</ul>
+				</form>
+			</div>
+			
+			<!--登陆后-->
+			<?php else: ?>
+			<div class="header_login_had" >
+				<ul class="login_vip">
+					<li><img src="/newview/img/vip-diamond.png" /></li>
+					<li class="color_yellow">VIP会员中心</li>
+					<li class="login_vip_1 ml15">账户：<span class="color_yellow"><?php echo \think\Session::get('username'); ?></span></li>
+					<li class="login_vip_2">余额：<span class="color_yellow" id="money">获取中...</span></li>
+					<li class="login_vip_3 ml10"><a href="<?php echo url('user/get_money'); ?>">提款</a></li>
+					<li class="login_vip_4 ml10"><a href="<?php echo url('index/logout'); ?>">退出</a></li>
+				</ul>
+				<ul class="login_list">
+					<li><a href="<?php echo url('user/userinfo'); ?>">会员资料</a></li>
+					<li><a href="<?php echo url('user/report'); ?>">账户历史</a></li>
+					<li><a href="<?php echo url('user/record_ds'); ?>">交易记录</a></li>
+					<li><a href="<?php echo url('user/set_money'); ?>">财务中心</a></li>
+					<li><a href="<?php echo url('user/agent'); ?>">代理中心</a></li>
+					<li><a href="<?php echo url('user/set_money'); ?>">会员存款</a></li>
+					<li><a href="<?php echo url('user/userinfo'); ?>">额度转换</a></li>
+				</ul>
+			</div>
+			
+			<div class="header_login_fixed" style="display: none;">
+				<ul class="login_vip">
+					<li><img src="/newview/img/vip-diamond.png" /></li>
+					<li class="color_yellow">VIP会员中心</li>
+					<li class="login_vip_1 ml15">账户：<span class="color_yellow"><?php echo \think\Session::get('username'); ?></span></li>
+					<li class="login_vip_2">余额：<span class="color_yellow" id="money_2">获取中...</span></li>
+					<li class="mr20"><a href="<?php echo url('user/userinfo'); ?>">会员资料</a></li>
+					<li class="mr20"><a href="<?php echo url('user/report'); ?>">账户历史</a></li>
+					<li class="mr20"><a href="<?php echo url('user/record_ds'); ?>">交易记录</a></li>
+					<li class="mr20"><a href="<?php echo url('user/set_money'); ?>">财务中心</a></li>
+					<li class="mr20"><a href="<?php echo url('user/agent'); ?>">代理中心</a></li>
+					<li class="mr20"><a href="<?php echo url('user/set_money'); ?>">会员存款</a></li>
+					<li><a href="<?php echo url('user/userinfo'); ?>">额度转换</a></li>					
+					<li class="login_vip_3 ml10 mt3"><a href="<?php echo url('user/get_money'); ?>">提款</a></li>
+					<li class="login_vip_4 ml10 mt3"><a href="<?php echo url('index/logout'); ?>">退出</a></li>
+				</ul>
+			</div>			
+			
+			<?php endif; ?>
+			
+		</div>
+	</div>	
+	<!--导航-->	
+	<div class="nav_all">
+		<div class="nav">
+			<span>
+				<a href="<?php echo Url('index/index'); ?>" class="nav_a f14 <?php if(\think\Request::instance()->controller() == 'Index'): ?>nav_active<?php endif; ?>">首 页
+					<p class="f12">home</p>
+				</a>
+			</span>
+			<a class="nav_line"></a>
+			<span>
+				<a href="<?php echo Url('sport/index'); ?>" class="nav_a f14 <?php if(\think\Request::instance()->controller() == 'Sport'): ?>nav_active<?php endif; ?>">皇冠体育
+					<p class="f12">sports</p>
+					<img src="/newview/img/hots.gif" />
+				</a>
+				<div class="nav_show">
+					<a href="<?php echo Url('sport/index'); ?>">皇冠体育</a>
+					<a href="/live/bbin/">BBIN体育</a>
+				</div>			
+			</span>
+			<a class="nav_line"></a>
+			<span>
+				<a href="<?php echo Url('/lottery/index/type/csc'); ?>" class="nav_a f14 <?php if(\think\Request::instance()->controller() == 'Lottery'): ?>nav_active<?php endif; ?>">彩票游戏
+					<p class="f12">lottery</p>
+					<img src="/newview/img/hots.gif"/>
+				</a>
+				<div class="nav_show">
+					<a href="/six/index.html">六合彩49倍</a>
+					<a href="/lottery/index/type/csc">重庆时时彩</a>
+					<a href="/lottery/index/type/pk10">北京PK拾</a>
+					<a href="/lottery/index/type/xyft">幸运飞艇</a>
+					<a href="/lottery/index/type/gsf">广东快乐十分</a>
+					<a href="/lottery/index/type/csf">重庆快乐十分</a>
+				</div>
+			</span>	
+			<a class="nav_line"></a>
+			<span>	
+				<a href="<?php echo Url('live/index'); ?>" class="nav_a f14 <?php if(\think\Request::instance()->controller() == 'Live'): ?>nav_active<?php endif; ?>">真人视讯
+					<p class="f12">lives</p>
+				</a>
+				<div class="nav_show">
+					<a href="/live/ag/" target="_BLANK">AG视讯 </a>
+					<a href="/live/bbin/" target="_BLANK">BB视讯 </a>
+					<a href="/live/og/" target="_BLANK">OG视讯</a>
+					<a href="/live/sunbet/" target="_BLANK">申博视讯</a>
+				</div>			
+			</span>
+			<a class="nav_line"></a>
+			<span>	
+				<a href="<?php echo Url('game/index'); ?>" class="nav_a f14 <?php if(\think\Request::instance()->controller() == 'Game'): ?>nav_active<?php endif; ?>">电子游艺
+					<p class="f12">game</p>
+				</a>
+				<div class="nav_show">
+					<a href="<?php echo Url('game/index','type=ag'); ?>">AG电子</a>
+					<a href="<?php echo Url('game/index','type=bbin'); ?>">BBIN电子</a>
+					<a href="<?php echo Url('game/index','type=mg'); ?>">MG电子</a>
+					<a href="<?php echo Url('game/index','type=pt'); ?>">PT电子</a>
+				</div>		
+			</span>	
+			<a class="nav_line"></a>
+			<span>	
+				<a href="<?php echo Url('betting/index'); ?>" target="_blank" class="nav_a f14 <?php if(\think\Request::instance()->controller() == 'Betting'): ?>nav_active<?php endif; ?>">手机投注
+					<p class="f12">moblies</p>
+				</a>			
+			</span>	
+			<a class="nav_line"></a>
+			<span>
+				<a href="<?php echo Url('promotions/index'); ?>" class="nav_a f14 <?php if(\think\Request::instance()->controller() == 'Promotions'): ?>nav_active<?php endif; ?>">优惠活动
+					<p class="f12">promotions</p>
+					<img src="/newview/img/hots.gif"/>
+				</a>
+			</span>	
+			<a class="nav_line"></a>
+			<span>	
+				<a href="<?php echo Url('/about/index/id/8'); ?>"  class="nav_a f14 <?php if(\think\Request::instance()->controller() == 'About'): ?>nav_active<?php endif; ?>">加盟代理
+					<p class="f12">add us</p>
+				</a>
+			</span>	
+			<a class="nav_line"></a>
+			<span>	
+				<a href="https://messenger.providesupport.com/messenger/0nye75kga3q931e9lwrn16k4q0.html" class="nav_a f14" target="_blank">在线客服
+					<p class="f12">service</p>
+				</a>
+			</span>
+		</div>
+	</div>	
+</div>
+
+<!--首页全屏带进度条大轮播图-->
+<div class="index-main-box">
+	<div id="indexslider">
+		<div class="index-img">
+			<img src="/newview/img/banner.png" />
+			<img src="/images/banner/1.jpg" />
+			<img src="/images/banner/2.jpg" />
+			<img src="/images/banner/3.jpg" /><!--
+			<img src="/newview/img/3.jpg" />
+			<img src="/newview/img/4.jpg" />-->
+		</div>
+		<ul class="index-pagination">
+			<li><a><div><span></span></div></a></li>
+			<li><a><div><span></span></div></a></li>
+			<li><a><div><span></span></div></a></li>
+			<li><a><div><span></span></div></a></li>
+		</ul>
+	</div>
+	<!--公告-->
+	<div class="banner_bottom">
+		<div class="banner_notice txtMarquee-left">
+			<div class="bd">
+				<span class="f14 fl mr10">公告：</span>
+				<ul class="fl f14 ">
+					<?php if(is_array($notice) || $notice instanceof \think\Collection || $notice instanceof \think\Paginator): $i = 0; $__LIST__ = $notice;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?>
+						<li class="mt7"><?php echo $vo['msg']; ?></li>
+					<?php endforeach; endif; else: echo "" ;endif; ?>
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="block_0"></div>
+<!--滚动  小轮播-->
+<div class="scrool_all">
+	<div class="ladyScroll">
+		<a class="prev" href="javascript:void(0)"></a>
+		<div class="scrollWrap">
+			<div class="dlList">
+				<dl>
+				  <dt><a href="http://www-99206.com"><img src="/newview/img/slider-01.png"></a></dt>
+				</dl>
+				<dl>
+				  <dt><a href="http://app99206.com"><img src="/newview/img/slider-02.png"></a></dt>
+				</dl>
+				<dl>
+				  <dt><a href="#"><img src="/newview/img/slider-03.png"></a></dt>
+				</dl>
+				<dl>
+				  <dt><a href="https://hg.dd788799.com/vipcheck/index.html"><img src="/newview/img/slider-04.png"></a></dt>
+				</dl>
+				<dl>
+				  <dt><a href="https://hg.dd788799.com/about/index/id/8.html"><img src="/newview/img/slider-05.png"></a></dt>
+				</dl>
+				<dl>
+				  <dt><a href="/about/index/id/1.html"><img src="/newview/img/slider-06.png"></a></dt>
+				</dl>
+			</div>
+		</div>
+		<a class="next" href="javascript:void(0)"></a>
+	</div>
+</div>
+<div class="block_0"></div>
+<div class="tab">
+	<div class="tab_click">
+		<span>真人视讯</span>
+		<span>体育赛事</span>
+		<span>电子游艺</span>
+		<span>彩票游戏</span>
+		<span>优惠活动</span>
+	</div>
+	<div class="tab_arrow">
+      <span><img src="/newview/img/arrow-down.png" /></span>
+		<span><img src="/newview/img/arrow-down.png" /></span>
+		<span><img src="/newview/img/arrow-down.png" /></span>
+		<span><img src="/newview/img/arrow-down.png" /></span>
+		<span><img src="/newview/img/arrow-down.png" /></span>
+	</div>
+	<div class="tab_game">
+		<div class="tab_game_1">
+			<a href="<?php echo Url('live/index'); ?>">
+				<span>
+					<img src="/newview/img/tab-01.png" />
+				</span>
+			</a>
+			<ul>
+				<li>百家乐</li>
+				<li>龙虎斗</li>
+				<li>骰宝</li>
+				<li>轮盘</li>
+				<li>二八杠</li>
+				<li>温州牌九</li>
+				<li>德州扑克</li>
+				<li>色碟</li>
+			</ul>
+		</div>
+		<div class="tab_game_1">
+			<a href="<?php echo Url('sport/index'); ?>">
+				<span>
+					<img src="/newview/img/tab-02.png" />
+				</span>
+			</a>
+			<ul>
+				<li>足球</li>
+				<li>篮球</li>
+				<li>网球</li>
+				<li>排球</li>
+				<li>时时滚球</li>
+				<li>F1赛车</li>
+				<li>各式冠军赛事</li>
+			</ul>
+		</div>
+		<div class="tab_game_1">
+			<a href="<?php echo Url('game/index'); ?>">
+				<span>
+					<img src="/newview/img/tab-03.png" />
+				</span>
+			</a>
+			<ul>
+				<li>3D</li>
+				<li>老虎机</li>
+				<li>电动扑克</li>
+				<li>大型电玩</li>
+				<li>桌上游戏</li>
+				<li>经典老虎机</li>
+			</ul>
+		</div>
+		<div class="tab_game_1">
+			<a href="<?php echo Url('/lottery/index/type/csc'); ?>">
+				<span>
+					<img src="/newview/img/tab-04.png" />
+				</span>
+			</a>
+			<ul>
+				<li>重庆时时彩</li>
+				<li>北京PK拾</li>
+				<li>广东快乐十分</li>
+				<li>幸运飞艇 </li>
+				<li>六合彩</li>
+
+			</ul>
+		</div>
+		<div class="tab_game_1">
+			<a href="<?php echo Url('promotions/index'); ?>">
+				<span>
+					<img src="/newview/img/tab-05.png" />
+				</span>
+			</a>
+			<ul>
+				<li>新用户首存即送2888元 返点2.5无上限</li>
+			</ul>
+		</div>
+
+	</div>
+	<div class="block_50"></div>
+</div>
+<div class="block_0"></div>
+<!--底部footer-->
+<div class="footer_all">
+	<div class="footer">
+		<div class="footer_1">
+			<h2>合作伙伴</h2>
+			<a><img src="/newview/img/foot-logo.png" /></a>
+		</div>
+		<div class="footer_2">
+			<h2>用户服务</h2>
+			<ul>
+				<li><a href="/about/index/id/3.html">隐私问题</a></li>
+				<li><a href="/about/index/id/5.html">常见问题</a></li>
+				<li><a href="/about/index/id/1.html">联系我们</a></li>
+				<li><a href="/about/index/id/1.html">关于我们</a></li>
+			</ul>
+		</div>	
+		<div class="footer_1">
+			<h2>合作平台</h2>
+			<img src="/newview/img/foot-logo-02.png" />
+		</div>
+		<div class="footer_3">
+			<h2>推荐浏览器</h2>
+			<ul>
+				<li><i class="footer_3_1"></i><a href="#" class="f14">谷歌浏览器</a></li>
+				<li><i class="footer_3_2"></i><a href="#" class="f14">IE浏览器</a></li>
+				<li><i class="footer_3_3"></i><a href="#" class="f14">火狐浏览器</a></li>
+			</ul>
+		</div>
+		<div class="footer_4">
+			<h2>联系我们</h2>
+			<ul>
+				<li><i class="footer_4_1"></i><a href="#" class="f14">198198119</a></li>
+				<li><i class="footer_4_2"></i><a href="#" class="f14">99206com@gmail.com</a></li>
+			</ul>
+		</div>		
+		<div class="footer_5">
+			<h2>手机投注</h2>
+			<img src="/img/foot-logo-08.png" style="width: 120px;height: 120px;"/>
+		</div>		
+	</div>
+</div>
+<!--  -->
+<script type="text/javascript">
+$(function(){
+	setInterval(function() {
+		$.ajax({
+			type: "post",
+			url: "<?php echo Url('index/home'); ?>",
+			data:{'ajax':1,'get_money':'1'},
+			success:function(data) {
+				if (/^[\d\.]+$/.test(data)) {
+					$('#money').text(data);
+					$('#money_2').text(data);
+				}
+			}
+		});
+	},5000);
+})
+</script>
+
+
+<!--左右两侧固定悬浮-->
+<div class="left_absolute">
+	<div class="left_absolute_0" style="margin-left: 12px;">
+		<ul>
+			<li></li>
+			<li class="left_absolute_1_1">
+				<img src="/newview/img/replace_left_001.png" style="">
+			</li>
+		</ul>
+	</div>
+	<div class="left_absolute_1" id="qian_dao" style="margin-top: -3px;">
+		<ul>
+			<li></li>
+			<li class="left_absolute_1_1">				
+				<img src="/newview/img/replace_left_002.png" style="">
+			</li>		
+		</ul>	
+	</div>			
+	<div class="left_absolute_2" onclick="window.open('http://pay99205.com','自助充值','_blank')">		
+		<ul>			
+			<li class="left_absolute_2_1">				
+				<img src="/newview/img/replace_left_003.png" style="">
+			</li>		
+		</ul>	
+	</div>
+	<div class="left_absolute_3">		
+		<ul>			
+			<li class="left_absolute_1_1">				
+				<img src="/newview/img/replace_left_004.png" >
+			</li>		
+		</ul>	
+	</div>		
+	<div class="left_absolute_4">	
+	</div>	
+</div>
+<div class="right_absolute">	  
+	<div class="right_absolute_1" onclick="window.open('https://messenger.providesupport.com/messenger/0nye75kga3q931e9lwrn16k4q0.html','24小时在线客服','_blank')">		
+		<ul>			
+			<li class="right_absolute_1_2" style="display: block;"><img src="/newview/img/replace_right_001.png" style=""></li>
+		</ul>	
+	</div>
+	<div class="right_absolute_2">
+		<ul>
+			<li class="right_absolute_2_2" style="display: block;top: 83px;"><img src="/newview/img/replace_right_002.gif" style=""></li>
+		</ul>
+	</div>
+	<div class="right_absolute_2 right_absolute_0" onclick="window.open('http://wpa.qq.com/msgrd?v=3&amp;uin=332268&amp;site=qq&amp;menu=yes','QQ客服','_blank')" style="margin-right: 9px;">
+		<ul>			
+			<li class="right_absolute_2_2_2"><img src="/newview/img/replace_right_003.png?126" style="margin-top: 51px;"></li>
+		</ul>	
+	</div>
+	<div class="right_absolute_3" onclick="window.open('http://pay99205.com','自助充值','_blank')">		
+		<ul>
+			<li class="right_absolute_3_2" style="display: block;top: 199px;"><img src="/newview/img/replace_right_004.png" style="margin-top: 53px"></li>
+		</ul>	
+	</div>	
+	<div class="right_absolute_4">	</div>			
+</div>
+<!--主页弹窗-->
+<?php if($tanchuang['show'] == 1): ?>
+<style type="text/css">
+.game_popup {
+    width: auto;
+    height: auto;
+    position: fixed;
+    /*left: 50%;*/
+    margin:auto;
+    border-radius: 10px;
+    z-index: 9999;
+    padding: 10px;
+	overflow: hidden;
+}
+.game_popup h3 {
+	display: block;
+	width: 100%;
+	height: 30px;
+	background: #e3c370;
+	float: left;
+	border-radius: 5px;
+	line-height: 30px;
+	margin-bottom: 10px;
+	color: #666;
+}
+.game_popup h3 span{
+	margin-left:15px;
+}
+.game_popup_img {
+    height: auto;
+    overflow: hidden;
+    margin: 0 auto;
+    margin-top: 15px;
+    clear: both;
+    padding: 0px 5px;
+}
+.game_popup_c_b{
+	display: block;
+//	width: 55px;
+//	height: 55px;
+//	float: right;
+//        border-radius: 50%;
+	/* margin-top: 3px; */
+	margin-right: 8px;
+	color: transparent;
+	cursor: pointer;
+	/* background: red; */
+	position: absolute;
+	right: 20px;
+	top: 32px;
+//	background: #444;
+}
+.game_popup_c_b img{
+	width: 100%;
+	height: 100%;
+}
+
+.add_containt_wp_four{
+	width: 97%;
+	height: 448px;
+	position: absolute;
+	margin: 0 auto;
+	/* top: 0; */
+	bottom: 18px;
+}
+.add_containt_wp_four p{
+	display: block;
+	float: left;
+	width: 50%;
+	height: 200px;
+}
+.add_containt_wp_four p:nth-child(1){
+	display: block;
+	float: left;
+	width: 49%;
+	height: 200px;
+	margin-top: 4px;
+	margin-left: 1px;
+}
+.add_containt_wp_four p:nth-child(2){
+	display: block;
+	float: left;
+	width: 50%;
+	height: 200px;
+	margin-top: 4px;
+	margin-left: 5px;
+}
+.add_containt_wp_four p:nth-child(3){
+	display: block;
+	float: left;
+	width: 50%;
+	height: 200px;
+	margin-top: 4px;
+	margin-left: 1px;
+}
+.add_containt_wp_four p:nth-child(4){
+	display: block;
+	float: left;
+	width: 50%;
+	height: 200px;
+	margin-top: 4px;
+	margin-left: -2px;
+}
+.add_containt_wp_four_img_one{
+
+}
+.txtMarquee-left .tempWrap{height: 27px;width: 1100px;}
+
+</style>
+<script>
+$(function(){
+	<?php if($tanchuang['show'] == 1): ?>
+	$(".game_popup_img>img").each(function(){
+			$(this).load(function(){
+				console.log('run here!');
+				//主页弹窗
+				var popupWindowHeight = $(window).height();
+				var popupWindowWidth  = $(window).width();
+				$(".game_popup").css({
+					top : (popupWindowHeight - $(".game_popup").height()) / 2,
+					left: (popupWindowWidth - $(".game_popup").width()) /2
+				}).fadeIn(1500);
+				$(".game_popup_c_t,.game_popup_c_b").click(function(){
+					$(".game_popup").hide();
+				});
+				//判断用户是否第一次登陆，不是不弹窗.
+				var gameCookie =  $.cookie("gamepopup_cookie");
+				if (gameCookie == null) {
+				//第一次访问
+			       $(".game_popup").show();
+			       $.cookie("gamepopup_cookie", "1",{expires:1});
+			   }else{
+			       //不是第一次访问
+			       //$(".game_popup").hide();
+			   }
+		})
+	})
+	<?php endif; ?>
+})
+</script>
+<div class="game_popup" style="display:none;">
+	<!--<h3>-->
+		<!--<span>皇冠娱乐城</span>-->
+		<!--<a href="javascript:;" class="game_popup_c_t"></a>-->
+	<!--</h3>-->
+
+
+
+	
+	<!--以前的关闭按钮图	<img src="/newview/img/consle.png" class="game_popup_c_b"/>-->
+			<b>
+				
+		<img src="/newview/img/20180205/consle.png" class="game_popup_c_b"/>
+			</b>
+
+
+
+
+	<div class="game_popup_img">
+		<!--<?php echo html_entity_decode($tanchuang['content']); ?>-->
+	<!--以前的弹窗背景位置 <img src="/newview/img/background_img.png" alt="">-->
+		 <img src="/newview/img/20180205/sytc.png" alt="">	
+	<!--以前的四张小图	<div class="add_containt_wp_four">
+			<p class="add_containt_wp_four_img_one">
+				<img src="/newview/img/add_img_one.png" alt="">
+			</p>
+			<p>
+				<img src="/newview/img/add_img_tow.png" alt="">
+			</p>
+			<p>
+				<img src="/newview/img/add_img_three.png" alt="">
+			</p>
+			<p>
+				<img src="/newview/img/add_img_four.png" alt="">
+			</p>
+		</div>-->
+	</div>
+	<!--<a href="javascript:;" class="game_popup_c_b">关闭</a>-->
+	<!--http://www.99206.com/uploads/20180125/39d21a42cf98a4e584158fa8d517622d.png-->
+</div>
+<?php endif; ?>
+</body>
+
+<script type="text/javascript">
+$(function(){
+
+
+//首页全屏带进度条大轮播图
+$('#indexslider').slides({
+	effect: 'fade, fade',
+	crossfade: true,
+	container:'index-img',
+	paginationClass: 'index-pagination',
+	preloadImage: '',//loading 图片地址
+	play:6000,
+	fadeSpeed: 500,
+	pause:1,
+	generatePagination: false,
+	animationStart: function(current){
+		$('.index-pagination span').stop().animate({width:0}).hide();
+	},
+	animationComplete: function(current){
+		var leftw=(current-1)*34;
+		$('.index-pagination li').eq(current-1).find('span').show().animate({width:50},6000);
+	},
+	slidesLoaded: function(){
+		$('.index-pagination li').eq(0).find('span').animate({width:50},6000);
+	}
+});
+$(".slides_control").css({width : "100%"});
+
+//无缝左滚动
+$(".txtMarquee-left").slide({mainCell:".bd ul",autoPlay:true,effect:"leftMarquee",interTime:50,trigger:"click"});
+
+/* 首页网站    小轮播图 */
+$(".ladyScroll").slide({
+	mainCell:".dlList",
+	effect:"leftLoop",
+	vis:5,
+	autoPlay:false
+});
+
+$('.txtMarquee-left .tempWrap').width(1100);
+$('.txtMarquee-left .tempWrap,.txtMarquee-left .tempWrap ul').height(32);
+
+})
+</script>
+</html>

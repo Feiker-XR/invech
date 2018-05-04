@@ -1,0 +1,189 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+    <title>提现</title>
+   <!-- <link type="text/css" rel="stylesheet" href="/js/mui/mui.min.css">-->
+    <link type="text/css" rel="stylesheet" href="/css/personal.css">
+    <!--<script type="text/javascript" src="/js/mui/mui.min.js"></script>-->
+    <script type="text/javascript" src="/js/jquery-1.8.0.min.js"></script>
+    <script type="text/javascript" src="/js/show.js"></script>
+</head>
+<body>
+<div class="container">
+    <header class="header">
+        <i class='left' onclick="javascript:history.back(-1);">返回</i>
+        <h1>提现</h1>
+    </header>
+    <main class="inner_body">
+        <section class="charge_marquee">
+            <marquee direction="left" scrollamount="5" scrolldelay="50">温馨提示：提现金额最低50元...</marquee>
+        </section>
+        <section class="charge_user ol_box">
+            <ol>
+                <li>
+                    <span>姓名：</span><input type="text" disabled class="disabled" value="{$user.bank_username|default=''}"/>
+                </li>
+                <li>
+                    <span>卡号：</span><input type="text" disabled class="disabled" value="{$user.bank_account|default=''}"/>
+                </li>
+                <li>
+                    <span>银行：</span><input type="text" disabled class="disabled" value="{$user.bank_name|default=''}"/>
+                </li>
+            </ol>
+        </section>
+
+        <section class="charge_amount">
+            <p>请输入提现金额:</p>
+            <p><input type="text" id="money" placeholder="每次提现不少于50元"></p>
+            <ul>
+                <li>50元</li>
+                <li>100元</li>
+                <li>300元</li>
+                <li>500元</li>
+                <li>800元</li>
+                <li>1000元</li>
+            </ul>
+        </section>
+        <section class="charge_amount" style="height: 1.55rem;">
+            <p>取款密码:</p>
+            <p><input type="password" placeholder="******"></p>
+        </section>
+        <section class="withdraw_amount">
+            <p>可提现账户余额<span>{$user->coin}</span>元</p>
+        </section>
+        <section class="charge_pay">
+            <button>确认提现</button>
+        </section>
+        <div class="tip"><span></span></div>
+        <div class="loading"><img src="/images/loading.gif" alt="loading"/> </div>
+        <div class="div_table">
+            <div>
+                <table class="_table" border="1" cellspadding="0" cellspacing="0" width="100%">
+                    <thead></thead>
+                    <tbody>
+                        <tr>
+                            <td>所需打码量</td>
+                            <td>2</td>
+                        </tr>
+                        <tr>
+                            <td>提款金额</td>
+                            <td>100</td>
+                        </tr>
+                        <tr>
+                            <td>实际到账</td>
+                            <td>50</td>
+                        </tr>
+                        <tr>
+                            <td>提款扣款</td>
+                            <td>30</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <p><button>确认</button><button>取消</button></p>
+            </div>
+        </div>
+    </main>
+</div>
+<script type="text/javascript">
+    var _tip = null,_timeout = null;
+    var _amount = null, _pwd = null;
+    $(function () {
+        _tip = $('.tip').remove();
+    });
+
+
+    // 快捷金额
+    $('.charge_amount ul li').click(function(){
+        $(this).addClass('active').siblings().removeClass('active');
+        var _amount = parseInt($(this).text().replace(/元/,''));
+        $('.charge_amount input[type=text]').val(_amount);
+    });
+    // 提交数据
+    $('.charge_pay button').click(function () {
+        $.ajax({ 
+            url: "/user/get_withdraw_password",
+            dataType:'json',
+            type:'GET',
+            success:function (data) {
+               if(data.code==3){
+                    alert("还未绑定取款密码,点击前往绑定");
+                    setTimeout(function () {
+                        window.location.href = "/user/bank";
+                    },250);
+
+                    return false;
+                }
+            }
+        });
+        _amount = $('.charge_amount input[type=text]').val();      // 金额
+        _pwd = $('.charge_amount input[type=password]').val();      // 密码
+        if(!_amount){
+            getErrorMsg('请输入取款金额');
+            return;
+        }
+        if(!_pwd){
+            getErrorMsg('请输入取款密码');
+            return;
+        }
+        $('.loading').show();
+        $.ajax({
+            url: "/user/get_withdraw_info",
+            data: {amount:_amount},
+            dataType:'json',
+            type:'GET',
+            success:function (data) {
+                $('_table tr').eq(0).find('td').eq(1).text(data.data.audit_remain);
+                $('_table tr').eq(1).find('td').eq(1).text(data.data.amount);
+                $('_table tr').eq(2).find('td').eq(1).text(data.data.real_amount);
+                $('_table tr').eq(3).find('td').eq(1).text(data.data.debit_amount);
+                $("#money").data('check',data.data);
+                $('.div_table').fadeIn();
+            },
+            error:function (err) {
+                console.log(err);
+                alert('ajax error');
+            },
+            complete:function () {
+                $('.loading').hide();
+                
+            }
+        });
+    });
+
+    $('.div_table p button:first-child').click(function () {
+        $('.div_table').fadeOut();
+        var data = {};
+        data.amount = _amount;
+        data.coinPassword = _pwd;
+        var bank = {$user->bank->toJson();};
+        var check = $("#money").data('check');
+        Object.assign(data,bank,check);
+        $('.loading').show();
+        $.ajax({
+            url: "/user/withdraw",
+            data: data,
+            dataType:'json',
+            type:'POST',
+            success:function (data) {
+                getErrorMsg(data.msg);
+                
+            },
+            error:function(err){
+                console.log(err);
+                alert('ajax error');
+            },
+            complete:function(){
+                $('.loading').hide();
+                _amount = null;
+                _pwd = null;
+            }
+        });
+    });
+    $('.div_table p button:last-child').click(function () {
+        $('.div_table').fadeOut();
+    });
+</script>
+</body>
+</html>

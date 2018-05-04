@@ -1,0 +1,51 @@
+{include file='/six/header' /}
+<body>
+<div class="content">
+<form name="orders" action="{:Url('lotterybet/six')}?type=0" method="post" target="OrderFrame">
+<div class="top">&nbsp;&nbsp;总和 =>  两面</div>
+<table width="800" border="0" align="center" cellpadding="0" cellspacing="0" class="numberinfo">
+  <tr>
+    <td>&nbsp;&nbsp;第 <span id="open_qihao">0000000</span> 期
+  </td>
+    <td><div class="time-item">距离封盘：<span id="hour_show">0 时</span><span id="minute_show">0 分</span><span id="second_show">0 秒</span></div></td>
+    <td align="right"><div id="openNumber">开奖号码载入中...</div></td>
+  </tr>
+</table>
+<table border="0" align="center" cellpadding="0" cellspacing="1" class="bian" style="margin-top:10px;">
+  <tr>
+    <th>总和</th>
+    <th>赔率</th>
+    <th>金额</th>
+    <th>总和</th>
+    <th>赔率</th>
+    <th>金额</th>
+    <th>总和</th>
+    <th>赔率</th>
+    <th>金额</th>
+    <th>总和</th>
+    <th>赔率</th>
+    <th>金额</th>
+    </tr>
+  <tr>
+    <td class="ball_txt">大</td>
+    <td class="bian_td_odds" id="ball_9_o1">-</td>
+    <td class="bian_td_inp" id="ball_9_m1">&nbsp;</td>
+    <td class="ball_txt">小</td>
+    <td class="bian_td_odds" id="ball_9_o2">-</td>
+    <td class="bian_td_inp" id="ball_9_m2">&nbsp;</td>
+    <td class="ball_txt">单</td>
+    <td class="bian_td_odds" id="ball_9_o3">-</td>
+    <td class="bian_td_inp" id="ball_9_m3">&nbsp;</td>
+    <td class="ball_txt">双</td>
+    <td class="bian_td_odds" id="ball_9_o4">-</td>
+    <td class="bian_td_inp" id="ball_9_m4">&nbsp;</td>
+    </tr>
+  </table>
+<div class="button_body"><a onclick="reset()" class="button again" title="重填"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="button submit" onclick="order();" title="下注"></a></div>
+</form>
+</div>
+<script src="/js/six/class_1.js" type="text/javascript"></script>
+<script type="text/javascript">$(function(){loadInfo(9);});</script>
+<IFRAME id="OrderFrame" name="OrderFrame" style="display:none"></IFRAME>
+</body>
+</html>

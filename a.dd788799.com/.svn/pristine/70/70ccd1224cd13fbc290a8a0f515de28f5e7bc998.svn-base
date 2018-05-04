@@ -1,0 +1,320 @@
+{extend name="Base/common"/}
+
+{block name="title"}<title>在线充值－{$settings.webName}</title>{/block}
+{block name="style"}
+<link href="__CSS__/chongzhi.css" rel="stylesheet">
+{/block}
+{block name="body"}
+<?php
+/* *
+ * 功能：一般支付调试入口页面
+ * 版本：1.0
+ * 日期：2015-03-26
+ * 说明：
+ * 以下代码只是为了方便商户测试而提供的样例代码。
+ */
+ 	
+	$args[0]=$para; 
+?>
+<div class="effect mainnav-lg mainnav-fixed navbar-fixed footer-fixed" id="container">
+	<div id="page-content">
+		
+			<div class="panel">
+				<div class="panel-heading">
+					<h3 class="panel-title"><img alt="" src="__IMG__/main/cz.png">充值信息</h3>
+				</div>
+				<div class="panel-body chongzhibox">
+					<?php if($memberBank['bankId']==12 || $memberBank['bankId']==31) { ?>
+					<form action="/kdpay/getway.php" method="post" name="a" target="_blank" >
+    <input name="p2_Order" type="hidden" value="<?=$args[0]['rechargeId']?>" />
+    <input name="p3_Amt" type="hidden" value="<?=$args[0]['amount']?>" />
+    <input name="pa_MP" type="hidden" value="<?=$this->user['username']?>" />
+    <input name="channelId" value="1" type="hidden" />
+    <table width="100%" border="0" cellspacing="1" cellpadding="4" class="table_b">
+        <tr class="table_b_th">
+            <td align="left" style="font-weight:bold;padding-left:10px;" colspan=2>充值信息</td> 
+        </tr>
+        <!--tr class="table_b_tr_b">
+            <td width="16%" height="47" align="right" class="copyss">--充值银行：</td>
+            <td width="84%" align="left" ><img id="bank-type-icon" class="bankimg" src="/<?=$memberBank['bankLogo']?>" title="<?=$memberBank['bankName']?>" /></td> 
+        </tr-->
+	    <tr class="table_b_tr_b">
+            <td align="right" class="copyss">--选择银行：</td>
+            <td align="left">
+                 <table width="100%" border="0" align="center"  cellpadding="2" cellspacing="0" id="banklist" >
+	      <tr>
+	        <td valign="middle"><span class="banklogo">
+	          <input name="pd_FrpId" type="radio" value="10001" checked style="height:15px; width:15px"/>
+	        </span></td>
+	        <td width="72" height="40" valign="middle">
+	          <div class="banklogo"><img src="/kdpay/images/gongshang.gif" title="工商银行" alt="工商银行"  border="0" style="border:1px solid #CCCCCC;" />										</div>									</td>
+	        <td valign="middle"><span class="banklogo">
+	          <input name="pd_FrpId" type="radio" value="10002" style="height:15px; width:15px"/>
+	        </span></td>
+			  <td width="72" height="40" valign="middle">
+			    <div class="banklogo"><img src="/kdpay/images/nongye.gif" title="中国农业银行"  alt="中国农业银行"  border="0" style="border:1px solid #CCCCCC;" /></div>									  </td>
+			  <td valign="middle"><span class="banklogo">
+			    <input name="pd_FrpId" type="radio" value="10005" style="height:15px; width:15px"/>
+			  </span></td>
+              <td width="72" height="40" valign="middle">
+                 <div class="banklogo"><img src="/kdpay/images/jianshe.gif" title="建设银行" alt="建设银行"  border="0" style="border:1px solid #CCCCCC;" />										</div>									</td>
+              <td valign="middle"><span class="banklogo">
+                <input name="pd_FrpId" type="radio" value="10013" style="height:15px; width:15px"/>
+              </span></td>
+                      <td valign="middle"><div class="banklogo"><img src="/kdpay/images/beijing.gif" title="北京银行" alt="北京银行"  border="0" style="border:1px solid #CCCCCC;" /> </div></td>
+	      </tr>
+	      <tr>
+	        <td><span class="banklogo">
+	          <input name="pd_FrpId" type="radio" value="10004" style="height:15px; width:15px"/>
+	        </span></td>								     
+	        <td height="40">
+	          <div class="banklogo"><img src="/kdpay/images/zhongguo.gif" title="中国银行" alt="中国银行"  border="0" style="border:1px solid #CCCCCC;" />										 </div>									</td>
+	        <td><span class="banklogo">
+	          <input name="pd_FrpId" type="radio" value="10008" style="height:15px; width:15px"/>
+	        </span></td>
+            <td>
+                <div class="banklogo"><img src="/kdpay/images/jiaotong.gif" title="交通银行" alt="交通银行"  border="0" style="border:1px solid #CCCCCC;" />										 </div>									</td>
+            <td><span class="banklogo">
+              <input name="pd_FrpId" type="radio" value="10010" style="height:15px; width:15px"/>
+            </span></td>
+            <td>
+            <div class="banklogo"><img src="/kdpay/images/guangda.gif" title="光大银行" alt="光大银行"  border="0" style="border:1px solid #CCCCCC;" />										 </div>									</td>
+            <td><span class="banklogo">
+              <input name="pd_FrpId" type="radio" value="10012" style="height:15px; width:15px"/>
+            </span></td>
+            <td><div class="banklogo"><img src="/kdpay/images/youzheng.gif" title="中国邮政" alt="中国邮政"  border="0" style="border:1px solid #CCCCCC;" /> </div></td>
+	      </tr>
+	      <tr>
+	        <td><span class="banklogo">
+	          <input name="pd_FrpId" type="radio" value="10003"  style="height:15px; width:15px"/>
+	        </span></td>
+	        <td height="40">  <div class="banklogo"><img src="/kdpay/images/zhaohang.gif" title="招商银行" alt="招商银行"  border="0" style="border:1px solid #CCCCCC;" /> </div></td>
+	        <td><span class="banklogo">
+	          <input name="pd_FrpId" type="radio" value="10006" style="height:15px; width:15px"/>
+	        </span></td>
+	        <td><div class="banklogo"><img src="/kdpay/images/minsheng.gif" title="中国民生银行" alt="中国民生银行"  border="0" style="border:1px solid #CCCCCC;" /></div></td>
+	        <td><span class="banklogo">
+	          <input name="pd_FrpId" type="radio" value="10016" style="height:15px; width:15px"/>
+	        </span></td>
+	        <td><div class="banklogo"><img src="/kdpay/images/guangfa.gif" title="广发银行" alt="广发银行"  border="0" style="border:1px solid #CCCCCC;" /> </div></td>
+	        <td><span class="banklogo">
+	          <input name="pd_FrpId" type="radio" value="10020" style="height:15px; width:15px"/>
+	        </span></td>
+			        <td><div class="banklogo"><img src="/kdpay/images/nongcunshangye.gif" title="北京农村商业银行" alt="北京农村商业银行"  border="0" style="border:1px solid #CCCCCC;" /> </div></td>
+	      </tr>
+	      <tr>
+	        <td><span class="banklogo">
+	          <input name="pd_FrpId" type="radio" value="10021" style="height:15px; width:15px"/>
+	        </span></td>
+	        <td height="40"><div class="banklogo"><img src="/kdpay/images/nanjing.gif" title="南京银行" alt="南京银行"  border="0" style="border:1px solid #CCCCCC;" /></div></td>
+	        <td><span class="banklogo">
+	          <input name="pd_FrpId" type="radio" value="10019" style="height:15px; width:15px"/>
+	        </span></td>
+	        <td><div class="banklogo"><img src="/kdpay/images/ningbo.gif" title="宁波银行" alt="宁波银行"  border="0" style="border:1px solid #CCCCCC;" /></div></td>
+	        <td><span class="banklogo">
+	          <input name="pd_FrpId" type="radio" value="10014" style="height:15px; width:15px"/>
+	        </span></td>
+	        <td><div class="banklogo"><img src="/kdpay/images/pingan.gif" title="平安银行" alt="平安银行"  border="0" style="border:1px solid #CCCCCC;" /></div></td>
+	        <td><span class="banklogo">
+	          <input name="pd_FrpId" type="radio" value="10018"style="height:15px; width:15px" />
+	        </span></td>
+			          <td><div class="banklogo"><img src="/kdpay/images/dongya.gif" title="东亚银行" alt="东亚银行"  border="0" style="border:1px solid #CCCCCC;" /> </div></td>
+	      </tr>
+	      <tr>
+	        <td><span class="banklogo">
+	          <input name="pd_FrpId" type="radio" value="10015" style="height:15px; width:15px"/>
+	        </span></td>
+	        <td height="40">
+	          <div class="banklogo"><img src="/kdpay/images/shangpufa.gif"  title="上海浦东发展银行" alt="上海浦东发展银行"  border="0" style="border:1px solid #CCCCCC;" />										</div>									 </td>
+	        <td><span class="banklogo">
+	          <input name="pd_FrpId" type="radio" value="10009" style="height:15px; width:15px"/>
+	        </span></td>
+            <td>
+                <div class="banklogo"><img src="/kdpay/images/xingye.gif" title="兴业银行" alt="兴业银行"  border="0" style="border:1px solid #CCCCCC;" />									     </div>									 </td>
+            <td><span class="banklogo">
+              <input name="pd_FrpId" type="radio" value="10011" style="height:15px; width:15px"/>
+            </span></td>
+		    <td>
+		        <div class="banklogo"><img src="/kdpay/images/shenfa.gif" title="深圳发展银行" alt="深圳发展银行"  border="0" style="border:1px solid #CCCCCC;" />									     </div>									 </td>
+		    <td><span class="banklogo">
+		      <input name="pd_FrpId" type="radio" value="10023" style="height:15px; width:15px"/>
+		    </span></td>
+							       <td><div class="banklogo"><img src="/kdpay/images/shanghaibank.gif"  title="上海银行" alt="上海银行"  border="0" style="border:1px solid #CCCCCC;" /> </div></td>
+	      </tr>
+	      <tr>
+	        <td><span class="banklogo">
+	          <input name="pd_FrpId" type="radio" value="10007" style="height:15px; width:15px"/>
+	        </span></td>
+	        <td height="40">
+	          <div class="banklogo"><img src="/kdpay/images/zhongxin.gif" title="中信银行" alt="中信银行"  border="0" style="border:1px solid #CCCCCC;" />										</div>									 </td>
+	        <td><span class="banklogo">
+	          <input name="pd_FrpId" type="radio" value="10025" style="height:15px; width:15px"/>
+	        </span></td>
+            <td>
+                <div class="banklogo"><img src="/kdpay/images/huaxia.gif" title="华夏银行" alt="华夏银行"  border="0" style="border:1px solid #CCCCCC;" />									     </div>									 </td>
+            <td><span class="banklogo">
+              <input name="pd_FrpId" type="radio" value="10021" style="height:15px; width:15px"/>
+            </span></td>
+		    <td>
+		        <div class="banklogo"><img src="/kdpay/images/nanjing.gif" title="南京银行" alt="南京银行"  border="0" style="border:1px solid #CCCCCC;" />									     </div>									 </td>
+		    <td><span class="banklogo">
+		      <input name="pd_FrpId" type="radio" value="10022" style="height:15px; width:15px"/>
+		    </span></td>
+							       <td><div class="banklogo"><img src="/kdpay/images/zheshang.gif" alt="浙商银行" width="154" height="33"  border="0" style="border:1px solid #CCCCCC;" title="浙商银行" /> </div></td>
+	      </tr>
+	      <tr>
+	        <td height="40"><span class="banklogo1">
+	          <input name="pd_FrpId" type="radio" value="21" style="height:15px; width:15px"/>
+	        </span></td>
+	        <td height="40"><span class="banklogo1"><img src="/kdpay/images/wx.png" title="微信" alt="微信"  border="0" style="border:1px solid #CCCCCC;" /></span></td>
+	        <td height="40"><span class="banklogo1">
+	          <input name="pd_FrpId" type="radio" value="2" style="height:15px; width:15px"/>
+	        </span></td>
+	        <td height="40"><span class="banklogo1"><img src="/kdpay/images/zfb.png" title="支付宝" alt="支付宝"  border="0" style="border:1px solid #CCCCCC;" /></span></td>
+	        <td height="40" align="center">&nbsp;</td>
+	        <td height="40" align="center">&nbsp;</td>
+	        <td height="40" align="center">&nbsp;</td>
+	        <td height="40" align="center">&nbsp;</td>
+	        </tr>
+	      </table>            </td>
+        </tr>
+        <tr class="table_b_tr_b">
+            <td align="right"></td>
+            <td align="center">
+              <b>  <input name="submit2" type='submit' style="width:180px; height:46px;" value="确认支付" />  </b>          </td> 
+        </tr>
+    </table>
+</form>
+					<?php }else { ?>
+					<?php if($memberBank['bankId']==2) { ?>
+					<div style="position: absolute;margin-left: 340px">												
+						<img src="__IMG__/zhifubao.jpg"> </img>						 					
+					</div>
+					<?php } ?>
+					<div class="czrow">
+						<div class="czlabel">
+													银行类型：
+						</div>
+						<div class="cztxt">
+							<div class="jinebox">							
+								<a id="bank-link" target="_blank" href="http://<?=$memberBank['home']?>"><?=$memberBank['name'] ?>>></a>						 
+							</div>						
+						</div>
+					</div>
+					<div class="czrow">
+						<div class="czlabel">
+													银行户名：
+						</div>
+						<div class="cztxt">
+							<div class="jinebox">
+								
+								<input name="amount" id="amount" style="width:250px;" readonly value="<?=$memberBank["username"] ?>" type="text" placeholder="请输入充值金额" value="" data-val-required="RechargeMoney 字段是必需的。" data-val-number="The field RechargeMoney must be a number." data-val="true"> 
+							</div>								
+						</div>
+					</div>
+					<div class="czrow">
+						<div class="czlabel">
+													银行卡号：
+						</div>
+						<div class="cztxt">
+							<div class="jinebox">
+								
+								<input name="amount" id="amount" style="width:250px;" readonly value="<?=$memberBank["account"] ?>" type="text" placeholder="请输入充值金额" value="" data-val-required="RechargeMoney 字段是必需的。" data-val-number="The field RechargeMoney must be a number." data-val="true"> 
+							</div>								
+						</div>
+					</div>
+					<div class="czrow">
+						<div class="czlabel">
+													充值金额：
+						</div>
+						<div class="cztxt">
+							<div class="jinebox">
+								
+								<input name="amount" id="amount" style="width:250px;" readonly value="<?=$args[0]['amount']?>" type="text" placeholder="请输入充值金额" value="" data-val-required="RechargeMoney 字段是必需的。" data-val-number="The field RechargeMoney must be a number." data-val="true"> 
+							</div>								
+						</div>
+					</div>
+					<div class="czrow">						
+						<div class="czlabel">
+													充值编号：
+						</div>
+						<div class="cztxt">
+							<div class="jinebox">
+								
+								<input name="bianhao" id="bianhao" style="width:250px;" readonly type="text" placeholder="请输入充值金额" value="<?=$args[0]['rechargeId']?>" data-val-required="RechargeMoney 字段是必需的。" data-val-number="The field RechargeMoney must be a number." data-val="true"> 
+							</div>								
+						</div>
+					</div>
+					<hr>
+					<div class="czrow">						
+						
+							<dl>
+								<dt>充值说明：</dt>
+								<dd>1.每次"充值编号"均不相同,务必将"充值编号"正确复制填写到引号汇款页面的"附言"栏目中;</dd>
+								<dd>2.帐号不固定，转帐前请仔细核对该帐号;</dd>
+								<dd>3.充值金额与网友转账金额不符，充值将无法到账;</dd>
+								<dd>4.转账后如10分钟未到账，请联系客服，告知您的充值编号和您的充值金额及你的银行用户姓名。</dd>
+							</dl>
+						
+					</div>
+					<?php } ?>
+				</div>
+			</div>
+			<input size="50" type="hidden" name="orderNo" id="orderNo" value='<?php echo $orderNo; ?>' />
+			<input size="50" type="hidden" name="tradeDate" id="tradeDate" value='<?php echo $tradeDate; ?>' />
+			<input size="50" type="hidden" name="merchParam" id="merchParam" value="{$user.uid}" />
+			<input size="50" type="hidden" name="tradeSummary" id="tradeSummary" value="{$user.username}" />
+		
+	</div>
+</div>
+<div style="display:none">
+<form class="form-signin" style="display:none" name="MerOrder" id="MerOrder" method="post" action="https://newpay.ips.com.cn/psfp-entry/gateway/payment.do">
+		<input type="hidden" name="pGateWayReq" id="pGateWayReq" value="" />
+	</form>
+</div>
+{/block}
+{block name="script"}
+<script src="__JS__/bootbox.min.js"></script>
+<script type="text/javascript">
+function fukuan(me){
+	
+	$(me).attr('disabled',true);
+	$(me).text('正在转接。。');
+	
+	var url='{:Url("Recharge/index")}';
+	$.post(url,{amount: $('#amount').val(), rechargeId: $('#rechargeId').val()},function(result){
+		var head='<Ips><GateWayReq><head><Version>v1.0.0</Version><MerCode>' + result.MerCode + '</MerCode><MerName>嘉实网络</MerName><Account>'+result.account +'</Account><MsgId></MsgId><ReqDate>20160510000000</ReqDate><Signature>'
+		+ result.md5 + '</Signature></head>';
+		var html = head + result.body + '</GateWayReq></Ips>';
+		$('#pGateWayReq').val(html);
+		$('#MerOrder').submit();
+		$(me).attr('disabled',false);
+		$(me).text('开始付款');
+		//$.ajax('https://newpay.ips.com.cn/psfp-entry/gateway/payment.do',{pGateWayReq:html},function(){});
+	});
+	return false;
+}
+$(document).ready(function () {
+	$("#j-query").on("click", function () {
+		var me=this;
+		$(me).attr('disabled',true);
+		$.ajax({
+			type: "POST",
+			url: '{:Url("cash/cash")}',
+			data: { amount: $('#TikuanMoney').val(), coinpwd: $('#FundsPass').val(), id: $('#UserBankId').val()},
+			dataType: "json",
+			global: false,
+			success: function (result) {
+				$(me).removeAttr('disabled');
+				bootbox.alert(result.info);
+			}, error: function (err) {
+				var t=err;				
+			}
+		});
+		//$("#teambetrecord").submit();
+	});
+	
+});
+
+</script>
+{/block}

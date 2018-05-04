@@ -1,0 +1,11 @@
+<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:86:"/mnt/wwwroot/www.dd788799.com/mobile/../application/index/mview/lotterybet/result.html";i:1505452696;}*/ ?>
+<table border="0" cellspacing="1" cellpadding="0" class="order_info"><tr><th>期号</th><th>玩法</th><th>内容</th><th>金额</th><th>赔率</th><th>可赢</th></tr>
+<?php foreach($betinfo as $vo): ?>
+<tr>
+<td class="qihao"><?php echo $vo['qishu']; ?></td>
+<td class="wanfa"><?php echo $vo['mingxi_1']; ?></td>
+<td class="neirong"><?php echo $vo['mingxi_2']; ?></td>
+<td class="jine"><?php echo $vo['money']; ?></td>
+<td class="peilv"><?php echo $vo['odds']; ?></td>
+<td class="keying"><?php echo $vo['money']*$vo['odds']; ?></td></tr>
+<?php endforeach; ?>

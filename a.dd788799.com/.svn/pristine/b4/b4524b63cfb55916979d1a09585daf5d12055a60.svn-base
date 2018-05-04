@@ -1,0 +1,400 @@
+{layout name="layout" /}
+<script src="/js/jquery.wallform.js"></script>
+<div class="row">
+  <div class="col-xs-12">
+    <div class="box">
+	     <div class="box-header">
+			<button class="add-third pull-left btn">添加</button>
+
+			<form>
+			     
+			 	<div class="has-feedback pull-right">
+	           	 	<button type="submit" class="btn btn-block btn-default btn-sm filter">查询</button>                  
+	         	</div>  
+		        <div class=" pull-right" style="margin-left:15px;">
+		          	<input class="form-control input-sm search" value="" placeholder="名称、文件夹名称" type="text" name="keywords" style="width: 250px;">
+		         </div> 
+			</form>
+
+	    </div>
+      <!-- /.box-header -->
+      <div class="box-body table-responsive no-padding">
+ 
+        <table class="table table-hover">
+	        <tbody>
+		       	<tr align="center">
+					<th>#</th>
+					<th>名称</th>
+					<th>文件夹名称</th>
+					<th>商户ID</th>
+					<th>商户密钥</th>
+					<th>添加时间</th>
+					<th>更新时间</th>
+					<th>公钥</th>
+					<th>私钥</th>
+					<th>配置</th>
+					<th>编辑</th>
+					<th>删除</th>
+				</tr>	
+				{foreach  $third as $vo}
+				<tr align="center">				
+					<td>{$vo.id}</td>
+					<td>{$vo.name}</td>
+					<td>{$vo.type}</td>
+					<td width="15%" style="word-break:break-all;">{$vo.pid}</td>
+					<td width="25%" style="word-break:break-all;">{$vo.pkey}</td>
+					<td>{$vo.add_time|date="y-m-d H:i:s",###}</td>
+					<td>{$vo.update_time|date="y-m-d H:i:s",###}</td>
+					<td width="10%" id="pubkey-{$vo.id}" >		
+						{if !empty($vo.pubkey)}	
+							<button value="view"   onclick="view({$vo.id},'pubkey')">查看</button>
+						{/if}
+						<button value="update" onclick="upload({$vo.id},'pubkey')">编辑</button>
+					</td>
+					<td width="10%" id="prikey-{$vo.id}">					
+						{if !empty($vo.prikey)}		
+							<button value="view"   onclick="view({$vo.id},'prikey')">查看</button>
+						{/if}
+						<button value="update" onclick="upload({$vo.id},'prikey')">编辑</button>				
+					</td>
+					<td>
+					<a href="{:url('third_set')}?id={$vo.id}">配置</a>
+					</td>
+					<td>
+					<a href="javascript:gethtml({$vo.id});">编辑</a>
+					</td>
+					<td>
+					<a href="javascript:del({$vo.id});">删除</a>
+					</td>
+					
+				</tr>
+				{/foreach}
+	        </tbody>
+	       
+        </table>
+        <div style="width:100%;margin-left:20px;">
+			{$third->render();}
+		</div>
+      </div>
+      <!-- /.box-body -->
+    </div>
+    <!-- /.box -->
+  </div>
+</div>
+<div id="add_thirdhtml" class="container-fluid container_fluid_news control_pay_3" {if $third} style="display:none;"{/if} >
+	<div class="row-fluid" style="padding-top: 20px;">
+		<div class="form-horizontal">
+			<div class="control-group">
+				<label class="control-label">第三方名称</label>
+				<div class="controls">
+					<input id="Tname" class="typename" placeholder="例:优易付支付" value="">
+				</div>
+			</div>
+			<div class="control-group">
+				<label class="control-label">文件夹名称</label>
+				<div class="controls">
+					<input id="FolderName" class="typename" placeholder="例:yyfpay" value="">
+				</div>
+			</div>
+			<div class="control-group">
+				<label class="control-label">商户 ID</label>
+				<div class="controls">
+					<input id="Tid" class="typename" placeholder="例:1000000421" value="">
+				</div>
+			</div>
+			<div class="control-group">
+				<label class="control-label">商户密钥</label>
+				<div class="controls">
+					<input id="Tkey" class="typename" placeholder="例:ac270510-99d7-4e94-813e-088b0851f08e" value="">
+				</div>
+			</div>
+			<div class="control-group">
+				<label class="control-label">网关地址</label>
+				<div class="controls">
+					<input id="Turl" class="typename" placeholder="例:https://payment.uyepay.com/scan/entrance.do" value="">
+				</div>
+			</div>
+			<div class="control-group">
+				<label class="control-label">同步回调地址</label>
+				<div class="controls">
+					<input id="Threfbackurl" class="typename" placeholder="例:https://www.pay.cn/api/yyfpay/hrefbackurl.php" value="">
+				</div>
+			</div>
+			<div class="control-group">
+				<label class="control-label">异步回调地址</label>
+				<div class="controls">
+					<input id="Tcallbackurl" class="typename" placeholder="例:https://www.pay.cn/api/yyfpay/callbackurl.php" value="">
+				</div>
+			</div>
+			<div class="control-group">
+				<label class="control-label">查询订单地址</label>
+				<div class="controls">
+					<input id="Tqueryurl" class="typename" placeholder="例:https://payment.uyepay.com/ebank/queryOrder.do" value="">
+				</div>
+			</div>
+			<div class="controls" style="margin-left: 106px;">					
+				<button id="AddPaySave" class="btn btn-success">添加保存</button>
+			</div>
+		</div>
+	</div>
+</div>
+<style>
+	#up_btn{width: 44px; overflow: hidden;height: 18px;border:none;float:left;margin-right:20px;margin-top:20px}
+	#up_btn input{ margin-left: -14px;margin-top: -5px;}
+	.photoimg_p{display:block;padding-top:25px;}
+	.typename{padding:5px;}
+	#AddPaySave{margin-left:320px;}
+	.typename{width:320px;}
+	.control_3_list{margin-left: 100px; margin-top: 57px;float:left;}
+	.control_3_list .control-label{float:left;width:100px;}
+	.control_3_list .look_list_pay p{display:block;float:left;margin-right:15px;}
+	#look_listpaytype .look_list_pay p{}
+	#look_listpaytype .look_list_pay a{float: left; margin-right: 20px;margin-left: -10px;}
+	#up_btn{width:46px;overflow: hidden;height:20px;border:none;display: inline-block;float: left;}
+	#up_btn input{margin-left:-13px;margin-top:-3px;}
+	.photoimg_p{display: inline-block;padding-top: 5px;padding-left: 15px;}
+	#imageform{width:380px;float:left}
+	#preview{margin-top: -12px;}
+	.container_fluid_news{clear:both;border-top:1px solid #ddd;}
+	.control-news .paytype-see{margin-left: 15px;padding-top: 5px;display: inline-block;}
+	.row_fluid_news{width:300px;float:left;height:150px;}
+	.form-horizontal .control-group .controls span{margin-top:3px;}
+	.form-horizontal .controls{padding-top:4px;}
+	.bth-third{margin: 10px 5px 0px 20px;}
+	.container-fluid th,.container-fluid td{padding:8px;text-align:center;}
+	.add-third{width: 100px;float: left;color: black;margin-left: 20px;}
+	.btn-toolbar{font-size: 14px;}
+	.form-search{margin-right: 20px;}
+</style>
+{if $third}
+<script type="text/javascript">
+	function gethtml(id){
+		$.post("{:url('third_gethtml')}",{
+			id:id,
+		},function(obj){
+			if(obj.stat == 0){
+				PayType_Text = obj.html;
+				layer.open({
+					  type: 1,
+					  title:'编辑第三方信息',
+					  skin: 'layui-layer-rim', //加上边框
+					  area: ['700px', '500px'], //宽高
+					  content: PayType_Text
+				});
+			}else if(obj.stat == 1){
+				alert(obj.msg);
+			}else{
+				alert('请求失败!');
+			}
+		},"json");
+	}
+	
+	$(function(){
+		$(".add-third").click(function(){
+			var html = $("#add_thirdhtml").html();
+			layer.open({
+				  type: 1,
+				  title:'添加第三方信息',
+				  skin: 'layui-layer-rim', //加上边框
+				  area: ['600px', '600px'], //宽高
+				  content: html
+			});
+		})
+	})
+
+	$(document).on("click","#EditSave",function(){
+		var thirdid = $(this).attr('thirdid');
+		var name = $("#name").val();
+		var type = $("#type").val();
+		var pid = $("#pid").val();
+		var pkey = $("#pkey").val();
+		var purl = $("#purl").val();
+		var hrefbackurl = $("#hrefbackurl").val();
+		var callbackurl = $("#callbackurl").val();
+		var queryurl = $("#queryurl").val();
+		$.post("{:url('third_edit')}",{		
+			thirdid:thirdid,
+			name:name,
+			type:type,
+			pid:pid,
+			pkey:pkey,
+			purl:purl,
+			hrefbackurl:hrefbackurl,
+			callbackurl:callbackurl,
+			queryurl:queryurl,
+		},function(obj){
+			if(obj.stat == 0){
+				alert("修改成功");
+				window.location.href = document.URL;
+			}else if(obj.stat == 1){
+				alert(obj.msg);
+			}else{
+				alert("修改失败");
+			}
+
+		},"json");
+	})
+	
+	function del(id){
+		if (confirm('确定要删除这条第三方信息吗?')){
+			$.post("{:url('third_del')}",{			
+				id:id,
+			},function(obj){
+				if(obj.stat == 0){
+					alert("删除成功");
+					window.location.href = document.URL;
+				}else if(obj.stat == 1){
+					alert(obj.msg);
+				}else{
+					alert("删除失败");
+				}
+	
+			},"json");
+		}		
+	}
+	$(document).on("click",".layui-layer-close1",function(){
+		window.location.href = document.URL;
+	})		
+	$(document).on("click","#layui-layer-shade1",function(){
+		window.location.href = document.URL;
+	})		
+</script>
+{/if}
+
+<script type="text/javascript">
+	$(function(){
+		$(document).on("click","#AddPaySave",function(){
+			{if $third}
+				var Tname = $("#layui-layer1").find("#Tname").val();
+				var FolderName = $("#layui-layer1").find("#FolderName").val();
+				var Tid =  $("#layui-layer1").find("#Tid").val();
+				var Tkey = $("#layui-layer1").find("#Tkey").val(); 
+				var Turl = $("#layui-layer1").find("#Turl").val();
+				var Threfbackurl = $("#layui-layer1").find("#Threfbackurl").val();
+				var Tcallbackurl = $("#layui-layer1").find("#Tcallbackurl").val();
+				var Tqueryurl = $("#layui-layer1").find("#Tqueryurl").val();
+			{else}
+				var Tname = $("#Tname").val();
+				var FolderName = $("#FolderName").val();
+				var Tid =  $("#Tid").val();
+				var Tkey = $("#Tkey").val(); 
+				var Turl = $("#Turl").val();
+				var Threfbackurl = $("#Threfbackurl").val();
+				var Tcallbackurl = $("#Tcallbackurl").val();
+				var Tqueryurl = $("#Tqueryurl").val();
+			{/if}
+			if(Tname == ""){
+				alert("第三方名称不能为空");
+				return false;
+			}
+			if(FolderName == ""){
+				alert("文件夹名称不能为空");
+				return false;
+			}
+			if(Tid == ""){
+				alert("商户ID不能为空");
+				return false;
+			}
+			if(Turl == ""){
+				alert("网关地址不能为空");
+				return false;
+			}
+			if(Threfbackurl == ""){
+				alert("同步回调地址不能为空");
+				return false;
+			}
+			if(Tcallbackurl == ""){
+				alert("异步回调地址不能为空");
+				return false;
+			}
+			$.post("{:url('third_add')}",{			
+				Tname:Tname,
+				FolderName:FolderName,
+				Tid:Tid,
+				Tkey:Tkey,
+				Turl:Turl,
+				Threfbackurl:Threfbackurl,
+				Tcallbackurl:Tcallbackurl,
+				Tqueryurl:Tqueryurl,
+			},function(obj){
+				if(obj.stat == 0){
+					alert(obj.msg);
+					window.location.href = document.URL;
+				}else if(obj.stat == 1){
+					alert(obj.msg);
+				}else{
+					alert(obj.msg);
+				}
+	
+			},"json");
+			
+		})
+	})
+</script>
+
+<script type="text/javascript">
+$(function(){
+	$("#pay-menu").addClass('in');
+})
+</script>
+
+<form id="uploadform" method="post" enctype="multipart/form-data" action="{:url('upload')}" style="display:none;">                        
+            <input id="photoimg" type="file" name="photoimg">
+            <input id="itemid" type="hidden" name="itemid">
+            <input id="itemtype" type="hidden" name="itemtype">
+            <div id="preview"></div>
+</form> 
+
+<script type="text/javascript">
+function view(id,type){
+	$.post("{:url('third_key_view')}",{
+		id:id,
+		type:type,
+	},function(obj){
+		if(obj.stat == 0){
+			PayType_Text = obj.html;
+			var key = ('pubkey'==type)?'公钥':'私钥';
+			var title = '查看' + key;
+			
+			layer.open({
+				  type: 1,
+				  title:title,
+				  skin: 'layui-layer-rim', //加上边框
+				  area: ['700px', '500px'], //宽高
+				  content: PayType_Text
+			});
+		}else if(obj.stat == 1){
+			alert(obj.msg);
+		}else{
+			alert('请求失败!');
+		}
+	},"json");
+}	
+
+function upload(id,type){	
+	$('#uploadform').find('#itemid').val(id);
+	$('#uploadform').find('#itemtype').val(type);
+	$('#photoimg').click();
+}
+
+$('#photoimg').die('click').live('change', function(){
+	var itemid = $('#uploadform').find('#itemid').val();
+	var itemtype = $('#uploadform').find('#itemtype').val();
+	var selector = '#' + itemtype + '-' + itemid;
+	var key = ('pubkey'==itemtype)?'公钥':'私钥';
+	var text = '确定要上传新的' + key + '?';
+	if (confirm(text)){
+		$("#uploadform").ajaxForm({
+			//target: selector, 
+			beforeSubmit:function(){
+				//$(selector).empty();
+			}, 
+			success:function(){	
+
+				alert('更新成功');
+			}, 
+			error:function(){
+		} }).submit();
+	}
+});
+</script>

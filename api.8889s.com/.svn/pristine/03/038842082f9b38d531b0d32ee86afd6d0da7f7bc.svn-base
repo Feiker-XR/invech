@@ -1,0 +1,218 @@
+<?php
+namespace app\admin\controller;
+use think\Db;
+use app\admin\Login;
+use app\model\user;
+use app\model\money;
+use app\model\hk;
+use app\model\kbet;
+use app\model\betcg;
+use app\model\cbet;
+use app\model\ag;
+class report extends Login{
+    
+    public function quanju(){
+        date_default_timezone_set('PRC');
+        $param = $this->request->param();
+        $date_s = $param['date_s'] ?? date('Y-m-d');
+        $date_e = $param['date_e'] ?? date('Y-m-d');
+        $user = new user();
+        $user->where('reg_date','>=',$date_s.' 00:00:00');
+        $user->where('reg_date','<=',$date_e.' 23:59:59');
+        $reg_user = $user->count('uid');
+
+        $money = new money();
+        $money->where('m_make_time','>=',$date_s)->where('m_make_time','<=',$date_e);
+        $field = [
+            'sum(case when type=1 then m_value else 0 end) as ck',
+            'sum(case when type=2 then m_value else 0 end) as zs',
+            'sum(case when type=3 then m_value else 0 end) as fs',
+            'sum(case when type=4 then m_value else 0 end) as qt',
+            'sum(case when type=11 then m_value else 0 end) as qk',
+            'sum(case when type=12 then m_value else 0 end) as kk',            
+        ];
+        $moneyinfo = $money->field($field)->find()->getData();
+        //$query_ck		=	$mysqli->query($sql_ck);
+        //$rs_ck 			=	$query_ck->fetch_array();
+        //$sql_hk			=	"select sum(money) as hk from huikuan where adddate>='".$date_s." 00:00:00' and 
+        //adddate<='".$date_e." 23:59:59' and status=1";
+        //$query_hk		=	$mysqli->query($sql_hk);
+        //$rs_hk			=	$query_hk->fetch_array();
+        $hk =new hk();
+        $hk->where('adddate','>=',$date_s.' 00:00:00')->where('adddate','<=',$date_e.' 23:59:59' )->where('status','eq',1);
+        $hkmoney = $hk->sum('money');
+        
+        $kbet = new kbet();
+        $kbet->where('bet_time','>=',$date_s.' 00:00:00') -> where('bet_time','<=',$date_e.' 23:59:59') -> where('status','in',[1,2,4,5]);
+        $kbetmoney = $kbet->sum('bet_money');
+        
+        //"select sum(bet_money) as money,sum(win) as win from k_bet_cg_group where match_coverdate>='".$date_s." 00:00:00' 
+        //and match_coverdate<='".$date_e." 23:59:59' and status in(1,2)";
+        $kbetcg = new betcg();
+        $cginfo = $kbetcg->where('match_coverdate','>=',$date_s.' 00:00:00')->where('match_coverdate','<=',$date_e.' 23:59:59')
+        ->where('status','in',[1,2])->field(['sum(bet_money) as money','sum(win) as win'])->find();
+        $cbet = new cbet();
+        $cbetinfo = $cbet->where('addtime','>=',$date_s.' 00:00:00')->where('addtime','<=',' 23:59:59')->where('js','eq',1)
+        ->field(['sum(money) as money','sum(win) as win '])->find();
+        $this->assign('date_s',$date_s);
+        $this->assign('date_e',$date_e);
+        $this->assign('reg_user',$reg_user);
+        $this->assign('rs_ck',$moneyinfo);
+        $this->assign('hkmoney',$hkmoney);
+        return $this->fetch();
+    }
+    
+    public function money(){
+        //读取某个日期范围内所有存款、汇款、取款的会员id，并且存入数组
+        //date_default_timezone_set('PRC');
+        $param = $this->request->param(); 
+        $date_s = $param['date_s'] ?? date('Y-m-d',strtotime('-1 days'));
+        $date_e = $param['date_e'] ?? date('Y-m-d',strtotime('-1 days'));
+        $kmoney = new money();
+        $hk = new hk();
+        $uid_p1 = $kmoney->where('m_make_time','>=',$date_s.' 00:00:00')->where('m_make_time','<=',$date_e.' 23:59:59')->where('status','eq','1')->group('uid')->column('uid');
+        //var_dump($uid_p1);
+        $uid_p2 = $hk->where('adddate','>=',$date_s.' 00:00:00') ->where('adddate','<=',$date_e.' 23:59:59')
+        ->where('status','eq',1)->column('uid');
+        $uid_all = array_merge($uid_p1,$uid_p2);
+        $user = new user();
+        $names = $user->where('uid','in',$uid_all)->field(['uid','username'])->select();
+        $info = [];
+        foreach($names as $k=>$v){
+            $sql_m		=	"select sum(case when type=1 and about not like '%管理员结算%' then m_value else 0 end) as ck,sum(case when about like '%管理员结算%' then m_value else 0 end) as zs,sum(case when type=3 then m_value else 0 end) as fs,sum(case when type=4 then m_value else 0 end) as qt,sum(case when type=11 then m_value else 0 end) as qk,sum(case when type=12 then m_value else 0 end) as kk from k_money where m_make_time>='".$date_s." 00:00:00' and m_make_time<='".$date_e." 23:59:59' and uid=".$v['uid']." and status=1";
+            $rs_m = Db::query($sql_m)[0];
+            $info[$k]['uid'] = $v['uid'];
+            $info[$k]['username'] = $v['username'];
+            $info[$k]['rs_m'] = $rs_m;
+            $sql_h		=	"select sum(money-zsjr) as hk,sum(zsjr) zs2 from huikuan where adddate>='".$date_s." 00:00:00' and adddate<='".$date_e." 23:59:59' and uid=".$v['uid']." and status=1";
+            $rs_h = Db::query($sql_h)[0];
+            $info[$k]['rs_h'] = $rs_h;
+            $info[$k]['zs'] = $rs_m['zs'] + $rs_h['zs2'];
+        }
+        $this->assign('info',$info);
+        $this->assign('date_s',$date_s);
+        $this->assign('date_e',$date_e);
+        $this -> assign('ck_z',0);
+        $this -> assign('hk_z',0);
+        $this -> assign('zs_z',0);
+        $this -> assign('fs_z',0);
+        $this -> assign('qk_z',0);
+        return $this->fetch();
+    }
+    
+    public function sport(){
+        $param = $this->request->param();
+        $date_s = $param['date_s'] ?? date('Y-m-d',strtotime('-1 days'));
+        $date_e = $param['date_e'] ?? date('Y-m-d',strtotime('-1 days'));
+        $kbet = new kbet();
+        $cg = new betcg();
+        
+        $uid_bet = $kbet->where('bet_time','>=',$date_s.' 00:00:00')->where('bet_time','<=',$date_e." 23:59:59")->where('status','in',[1,2,4,5])
+        ->column('uid');
+        $uid_cg = $cg -> where('match_coverdate','>=',$date_s.' 00:00:00')->where('match_coverdate','<=',$date_e.' 23:59:59')
+        ->where('status','in',[1,2])->column('uid');
+        $uids = array_merge($uid_bet,$uid_cg);
+
+        $arr_uid = array_unique($uids);
+        sort($arr_uid);
+        $user = new user();
+        $userinfos = $user->where('uid','in',$arr_uid)->field(['uid','username'])->select();
+        $info = [];
+        foreach($userinfos as $k => $v){
+            $info[$k]['username'] = $v['username'];
+            $sql_ty		=	"select uid,count(bid) as num,sum(bet_money) as money,sum(win) as win from k_bet where bet_time>='".$date_s." 00:00:00' and bet_time<='".$date_e." 23:59:59' and status in(1,2,4,5) and uid=".$v['uid']."";
+            $rs_ty = Db::query($sql_ty)[0];
+            $info[$k]['rs_ty'] = $rs_ty;
+            $sql_cg		=	"select uid,count(gid) as num,sum(bet_money) as money,sum(win) as win from k_bet_cg_group where bet_time>='".$date_s." 00:00:00' and bet_time<='".$date_e." 23:59:59' and status in(1,2) and uid=".$v['uid']."";
+            $rs_cg = Db::query($sql_cg)[0];
+            $info[$k]['rs_cg'] = $rs_cg;
+            if(round($rs_ty['win']-$rs_ty['money'],2) < 0){
+                $danshi		=	'<font color="#FF0000">'.round($rs_ty['win']-$rs_ty['money'],2).'</font>';
+            }else{
+                $danshi		=	round($rs_ty['win']-$rs_ty['money'],2);
+            }
+            if(round($rs_cg['win']-$rs_cg['money'],2) < 0){
+                $chuanguan		=	'<font color="#FF0000">'.round($rs_cg['win']-$rs_cg['money'],2).'</font>';
+            }else{
+                $chuanguan		=	round($rs_cg['win']-$rs_cg['money'],2);
+            }
+            if(round(($rs_ty['win']-$rs_ty['money'])+($rs_cg['win']-$rs_cg['money']),2) < 0){
+                $win		=	'<font color="#FF0000">'.round(($rs_ty['win']-$rs_ty['money'])+($rs_cg['win']-$rs_cg['money']),2).'</font>';
+            }else{
+                $win		=	round(($rs_ty['win']-$rs_ty['money'])+($rs_cg['win']-$rs_cg['money']),2);
+            }
+            $info[$k]['danshi'] = $danshi;
+            $info[$k]['chuanguan'] = $chuanguan;
+            $info[$k]['win']    = $win;
+        }
+        $num_z = $num_d = $num_c = $dan = $chuan = $money_z = $dan_sy = $chuan_sy = $win_z = 0;
+        $this->assign('info',$info);
+        $this->assign('num_z',0);
+        $this->assign('num_d',0);
+        $this->assign('num_c',0);
+        $this->assign('dan',0);
+        $this->assign('chuan',0);
+        $this->assign('money_z',0);
+        $this->assign('dan_sy',0);
+        $this->assign('chuan_sy',0);
+        $this->assign('win_z',0);
+        $this->assign('dan_sy',0);
+        $this->assign('date_s',$date_s);
+        $this->assign('date_e',$date_e);
+        return $this->fetch('sports');
+        
+    }
+    
+    public function lottery(){
+        $param = $this->request->param();
+        $date_s = $param['date_s'] ?? date('Y-m-d',strtotime('-1 days'));
+        $date_e = $param['date_e'] ?? date('Y-m-d',strtotime('-1 days'));
+        $cbet = new cbet();
+        $data =$cbet -> where('addtime','>=',$date_s.' 00:00:00')->where('addtime','<=',$date_e.' 23:59:59')->where('js','eq',1)
+        ->field(['username','count(id) as num','sum(money) as money','sum(win) as win'])->group('username')->order('num desc')->select();
+        $ndata = array();
+        foreach ($data as $k=>$d) {
+            if(isset($ndata[$d['username']])){
+                $ndata[$d['username']]['num'] += $d['num'];
+                $ndata[$d['username']]['money'] += $d['money'];
+                $ndata[$d['username']]['win'] += $d['win'];
+            }else{
+                $ndata[$d['username']] = $d;
+            }
+            
+        }
+        
+        
+        $num_z = $money_z = $win_z = 0;
+        $info = [];
+        $win_s = 0;
+        foreach ($ndata as $k => $rs) {
+            $info[$k][] = $rs;
+            if(round($rs['win']-$rs['money'],2)<0){
+                $info[$k]['win'] = '<font color="#FF0000">'.round($rs['win']-$rs['money'],2).'</font>';
+            }else{
+                $info[$k]['win'] = round($rs['win']-$rs['money'],2);
+            }
+            $num_z += $rs['num'];
+            $money_z += round($rs['money'],2);
+            $win_s += round($rs['win']-$rs['money'],2);
+            if($win_s<0){
+                $win_z = '<font color="#FF0000">'.$win_s.'</font>';
+            }else{
+                $win_z = $win_s;
+            }
+        }
+        $this->assign('num_z',$num_z);
+        $this->assign('money_z',$money_z);
+        $this->assign('win_z',$win_z);
+        $this->assign('info',$info);
+        $this->assign('date_s',$date_s);
+        $this->assign('date_e',$date_e);
+        return $this->fetch();
+    }
+    
+    public function newlottery(){
+        
+    }
+    
+}

@@ -1,0 +1,126 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>系统设置</title>
+<link href="/css/base.css" rel="stylesheet" type="text/css" />
+<link href="/css/admin.css" rel="stylesheet" type="text/css" />
+</head>
+<body class="list">
+	<div class="bar">
+		用户名: {$username}
+	</div>
+    
+	<div class="body">
+		<table id="listTable" class="listTable">
+
+				<tr>
+					<th>最近5次在线支付</th>
+					<th>历史在线支付</th>
+
+					<th>最近5次公司入款</th>
+					<th>历史公司入款</th>
+                    
+					<th>最近5次在线提款</th>
+                    <th>历史总提款数</th>
+
+				  	<th>最近5次红利赠送</th>
+                    <th>历史红利赠送</th>
+                </tr>
+                
+                <tr>
+                  <td align="center" valign="top">
+                  		<table class="listTable">
+                        	<tr>
+                            	<th>次数</th>
+                                <th>金额</th>
+                                <th>时间</th>
+                            </tr>
+                            {notempty name="var1"}
+                            	{volist name='var1' id='value'}
+	                            <tr>
+	                            	<td>{$value['index']}</td>
+	                                <td>{$value['value']}</td>
+	                                <td>{$value['time']}</td>
+	                            </tr>
+                            	{/volist}
+                            {else}
+                            <tr>
+                                <td colspan="3" align="center">暂无记录</td>
+                            </tr>
+                            {/notempty}
+                        </table>
+                  </td>
+                  <td align="center"><?php echo round($var5,1);?></td>
+                  <td align="center" valign="top">
+                  		<table class="listTable">
+                        	<tr>
+                            	<th>次数</th>
+                                <th>金额</th>
+                                <th>时间</th>
+                            </tr>
+                            {notempty name='var2'}
+                                {volist name='var2' id='value'}
+                                <tr>
+                                	<td>{$value['index']}</td>
+                                    <td>{$value['value']}</td>
+                                    <td>{$value['time']}</td>
+                                </tr>
+                                {/volist}
+                            {else}
+                                <tr>
+                                    <td colspan="3" align="center">暂无记录</td>
+                                </tr>
+                            {/notempty}
+                        </table>
+                  </td>
+                  <td align="center"><?php echo round($var6,1);?></td>
+                  <td align="center" valign="top">
+                  		<table class="listTable">
+                        	<tr>
+                            	<th>次数</th>
+                                <th>金额</th>
+                                <th>时间</th>
+                            </tr>
+                            {notempty name='var3'}
+	                            {volist name='var3' id='value'}
+	                            <tr>
+	                            	<td>{$value['index']}</td>
+	                                <td>{$value['value']}</td>
+	                                <td>{$value['time']}</td>
+	                            </tr>
+                            	{/volist}
+                            {else}
+	                            <tr>
+	                                <td colspan="3" align="center">暂无记录</td>
+	                            </tr>
+                            {/notempty}
+                        </table>
+                  </td>
+                  <td align="center"><?php echo round($var4,1);?></td>
+                  <td align="center" valign="top">
+                  		<table class="listTable">
+                        	<tr>
+                            	<th>次数</th>
+                                <th>金额</th>
+                                <th>时间</th>
+                            </tr>
+                            {notempty name='var8'}
+                            	{volist name='var8' id='value'}
+                                <tr>
+                                	<td>{$value['index']}</td>
+                                    <td>{$value['value']}</td>
+                                    <td>{$value['time']}</td>
+                                </tr>
+                                {/volist}
+                            {else}
+                            		<tr><td colspan="3" align="center">暂无记录</td></tr>
+                            {/notempty}
+                        </table>
+                  </td>
+                  <td align="center"><?php echo round($var7,1);?></td>
+                </tr>
+  		</table>
+    </div>
+</body>
+</html>

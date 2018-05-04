@@ -1,0 +1,723 @@
+﻿* {
+	font-family: 微软雅黑;
+	font-size: 14px;
+	margin: 0;
+	padding: 0
+}
+
+html {
+	height: 100%;
+	width: 100%
+}
+
+body {
+	background-image: url('../images/login/loginbg==.jpg');
+	background-position: center center;
+	background-size: 100% 100%;
+	height: 100%;
+	width: 100%
+}
+
+a,a:visited {
+	color: #666;
+	text-decoration: none
+}
+
+.loginimg {
+	height: 360px;
+	position: absolute;
+	left: 0;
+	bottom: 0;
+	width: 100%
+}
+
+.loginimg>div {
+	width: 100%;
+	height: 360px;
+	box-sizing: border-box;
+	background-repeat: no-repeat
+}
+
+.loginbox {
+	position: absolute;
+	left: 0;
+	top: 50%;
+	width: 100%;
+	margin-top: -270px;
+	height: 400px
+}
+
+.loginhead {
+	width: 1000px;
+	margin: auto;
+	position: relative
+}
+
+.logo {
+	position: absolute;
+	max-height: 50px;
+	top: 0;
+	left: 60px;
+	display: none
+}
+
+.loginform {
+	background-image: url('images/loginshadow.png');
+	background-position: center bottom;
+	background-repeat: no-repeat;
+	position: absolute;
+	right: 46%;
+	top: 50%;
+	height: 530px;
+	width: 394px;
+	margin-right: -500px;
+	margin-top: -190px
+}
+
+.loginformbox {
+	background-image: url('../images/login/loginformbg.png');
+	background-position: center center;
+	background-size: 100% 100%;
+	height: 494px;
+	width: 394px;
+	position: absolute;
+	left: 0;
+	top: 0
+}
+
+.loginformboxtitle {
+	width: 100%;
+	height: 52px;
+	background-position: center center;
+	background-repeat: no-repeat;
+	color: #fa7045;
+	text-align: center;
+	font-size: 28px;
+	letter-spacing: 1px;
+	line-height: 50px;
+	padding-top: 50px
+}
+
+.loginformboxcontent {
+	text-align: center;
+	padding-top: 5px
+}
+
+.loginformboxcontent>div {
+	margin: auto;
+	width: 320px
+}
+
+.loginformboxcontent>div>input {
+	display: block;
+	height: 50px;
+	font-size: 16px;
+	color: #fff;
+	width: 100%;
+	border-radius: 2px;
+	border: 1px #fa7045 solid!important;
+	background-color: #fa7045;
+	transition: all 1s
+}
+
+.loginformboxcontent>p {
+	width: 320px;
+	margin: auto;
+	height: 45px;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	position: relative;
+	font-size: 14px;
+	color: #ccc
+}
+
+.loginformboxcontent>p>em {
+	font-style: normal;
+	color: #ccc
+}
+
+.loginformboxcontent>p>img {
+	height: 43px;
+	position: absolute;
+	right: 1px;
+	top: 1px;
+	border-radius: 0 5px 5px 0
+}
+
+.loginformboxcontent>p>i {
+	position: absolute;
+	
+	display: inline-block;
+	width: 60px;
+	text-align: center;
+	height: 45px;
+	line-height: 45px;
+	vertical-align: middle;
+	color: #fa7045;
+	font-size: 18px
+}
+
+.loginformboxcontent>p>input {
+	width: 100%;
+	height: 45px;
+	box-sizing: border-box;
+	padding-left: 50px;
+	border: 1px #fff solid!important;
+	border-radius: 2px
+}
+
+.loginformboxcontent>a,.loginformboxcontent>a:visited {
+	display: block;
+	color: #fa7045;
+	font-size: 16px;
+	text-decoration: underline
+}
+
+.loginformboxcontent>a:hover {
+	color: #fff
+}
+
+.loginbottomcontent>a,.loginbottomcontent>a:visited {
+	color: #fa7045;
+	font-size: 16px
+}
+
+.loginbottomcontent>a:hover {
+	color: #fff
+}
+
+.loginfoot {
+	width: 100%;
+	position: absolute;
+	left: 0;
+	height: 130px;
+	bottom: 0;
+	text-align: center;
+	/* background-color: #2b2927 */
+}
+
+.loginfootbox {
+	margin: auto;
+	width: 940px;
+	position: relative
+}
+
+.loginfootboxleft {
+	text-align: center;
+	width: 565px
+}
+
+.loginfootboxright {
+	width: 340px;
+	position: absolute;
+	right: 0;
+	bottom: 0
+}
+
+.loginfootbox div p {
+	display: table;
+	margin: auto
+}
+
+.loginfootbox div div {
+	color: #fa7045;
+	padding-top: 15px;
+	padding-bottom: 10px;
+	font-size: 16px
+}
+
+.loginfootbox div p a {
+	display: table-cell;
+	padding-left: 20px;
+	padding-top: 5px;
+	padding-right: 20px
+}
+
+.loginfootbox div p a span i {
+	line-height: 60px;
+	font-size: 32px
+}
+
+.loginfootbox div p a span {
+	float: left;
+	width: 60px;
+	height: 60px;
+	display: inline-block;
+	border-radius: 50%
+}
+
+span.bg1 {
+	/* background-color: #1d1c1b */
+}
+
+span.bg1 i {
+	color: #69dba4
+}
+
+span.bg2 {
+	/* background-color: #1d1c1b */
+}
+
+span.bg2 i {
+	color: #ed6c44
+}
+
+span.bg3 {
+	/* background-color: #1d1c1b */
+}
+
+span.bg3 i {
+	color: #ffb230
+}
+
+span.bg4 {
+	/* background-color: #1d1c1b */
+}
+
+span.bg4 i {
+	color: #6590bb
+}
+
+span.bg5 {
+	/* background-color: #1d1c1b */
+}
+
+span.bg5 i {
+	color: #6590bb;
+	font-size: 46px!important
+}
+
+.loginfootbox div p a strong {
+	text-align: left;
+	font-weight: normal;
+	font-size: 14px;
+	padding-top: 10px;
+	padding-left: 5px;
+	color: #fff;
+	float: left
+}
+
+.loginfootbox div p a strong em {
+	display: block;
+	font-size: 12px;
+	font-style: normal;
+	color: #999
+}
+
+.loginfootbox div p a:hover span i {
+	-webkit-animation: spinAround 1s linear;
+	-moz-animation: spinAround 1s linear;
+	animation: spinAround 1s linear
+}
+
+@-webkit-keyframes spinAround {
+	from {
+		-webkit-transform: rotate(0deg)
+	}
+
+	to {
+		-webkit-transform: rotate(360deg)
+	}
+}
+
+@-moz-keyframes spinAround {
+	from {
+		-moz-transform: rotate(0deg)
+	}
+
+	to {
+		-moz-transform: rotate(360deg)
+	}
+}
+
+@keyframes spinAround {
+	from {
+		transform: rotate(0deg)
+	}
+
+	to {
+		transform: rotate(360deg)
+	}
+}
+
+.yzb {
+	display: none
+}
+
+.mask {
+	position: fixed;
+	left: 0;
+	top: 0;
+	height: 100%;
+	width: 100%;
+	z-index: 999;
+	background-color: rgba(0,0,0,.5);
+	display: none
+}
+
+.win {
+	position: absolute;
+	background-color: #fff;
+	left: 50%;
+	top: 50%;
+	width: 700px;
+	height: 440px;
+	margin-left: -350px;
+	margin-top: -220px;
+	border-radius: 10px
+}
+
+.wintitle {
+	text-align: center;
+	color: #fff;
+	padding: 25px;
+	font-size: 20px;
+	font-weight: bold;
+	background-image: url('images/alertbg.png');
+	background-position: center bottom;
+	background-repeat: no-repeat;
+	border-radius: 10px
+}
+
+.winbox {
+	text-align: center
+}
+
+.winbox>strong {
+	color: red;
+	display: block;
+	padding-bottom: 15px;
+	padding-top: 15px;
+	font-size: 14px;
+	border-bottom: 1px #ddd dashed
+}
+
+.winbox>strong>i {
+	display: inline-block;
+	margin-right: 10px;
+	background-color: #fa7045;
+	border-radius: 10px;
+	color: #fff;
+	width: 20px;
+	height: 20px;
+	line-height: 20px
+}
+
+.winboxcontent p {
+	font-size: 14px;
+	text-align: left;
+	margin: auto;
+	padding: 12px;
+	padding-left: 100px;
+	padding-right: 100px;
+	background-color: #f7f7f7;
+	border-bottom: 1px #ddd dashed
+}
+
+.winboxcontent p strong {
+	font-size: 14px;
+	color: #666
+}
+
+p.yza,p.yzb {
+	height: 34px;
+	position: relative
+}
+
+p.yza label,p.yzb label {
+	position: relative;
+	display: inline-block;
+	height: 32px;
+	vertical-align: middle;
+	margin-top: -5px
+}
+
+p.yza label i,p.yzb label i {
+	position: absolute;
+	left: 0;
+	top: 0!important;
+	height: 32px!important;
+	padding: 0!important;
+	padding-top: 5px!important;
+	text-align: center!important;
+	display: inline-block;
+	line-height: 32px!important
+}
+
+p.yza label input,p.yzb label input {
+	border: 1px #ddd solid
+}
+
+p.yzb label img {
+	position: absolute;
+	right: 1px;
+	top: 1px;
+	height: 40px
+}
+
+.winboxcontent p label {
+	font-size: 14px
+}
+
+.winboxcontent p label input[type=radio] {
+	margin-right: 4px;
+	vertical-align: middle;
+	margin-top: -2px
+}
+
+.winboxcontent p label input[type=text] {
+	height: 40px;
+	padding-left: 45px;
+	width: 200px
+}
+
+.winboxcontent p label i {
+	height: 40px;
+	line-height: 40px;
+	width: 40px;
+	top: -8px;
+	color: #999
+}
+
+.winbtnbox {
+	display: table;
+	margin: auto;
+	table-layout: fixed;
+	width: 500px;
+	margin-top: 30px
+}
+
+.winbtnbox>p {
+	display: table-cell;
+	text-align: center
+}
+
+.winbtnbox p:last-child a {
+	background-color: #d4cbc8
+}
+
+.winbtnbox p:last-child a:hover {
+	background-color: #aaa
+}
+
+.winbtnbox p:last-child a:active {
+	background-color: #f78b00
+}
+
+.winbtnbox>p>a {
+	display: inline-block;
+	margin: auto;
+	background-color: #fa7045;
+	width: 200px;
+	height: 50px;
+	color: #fff;
+	line-height: 50px;
+	font-size: 16px;
+	border-radius: 5px
+}
+
+.winbtnbox>p>a:hover {
+	background-color: #ff3d00
+}
+
+.winbtnbox>p>a:active {
+	background-color: #076cc3
+}
+
+.winbtnbox>p>a i {
+	margin-right: 5px
+}
+
+@media screen and (max-width:960px) {
+	body {
+		overflow-x: hidden
+	}
+
+	.loginform {
+		position: absolute;
+		left: 50%;
+		top: 50%;
+		height: 480px;
+		width: 351px;
+		margin-left: -170px;
+		margin-top: -175px
+	}
+
+	.loginformbox {
+		position: absolute;
+		right: 0;
+		top: 0;
+		height: 440px;
+		width: 351px;
+		background-image: url('../images/login/loginformbg.png')
+	}
+
+	.loginhead {
+		display: none
+	}
+
+	.loginimg {
+		display: none
+	}
+
+	.loginfoot {
+		display: none
+	}
+}
+
+@media screen and (max-width:1370px) {
+	.logo {
+		position: absolute;
+		max-height: 50px;
+		top: -50px
+	}
+
+	.loginfoot {
+		height: 100px
+	}
+
+	.loginfootbox div div {
+		color: #fa7045;
+		padding-top: 10px;
+		padding-bottom: 5px;
+		font-size: 14px
+	}
+
+	.loginfootbox div p a span {
+		width: 50px;
+		height: 50px
+	}
+
+	.loginfootbox div p a span i {
+		line-height: 50px;
+		font-size: 28px
+	}
+
+	.loginform {
+		position: absolute;
+		right: 46%;
+		top: 50%;
+		height: 480px;
+		width: 351px;
+		margin-right: -500px;
+		margin-top: -200px
+	}
+
+	.loginformbox {
+		position: absolute;
+		right: 0;
+		top: 0;
+		height: 440px;
+		width: 351px;
+		background-image: url('../images/login/loginformbg.png')
+	}
+
+	loginformboxcontent {
+		padding-top: 0;
+		background-color: red;
+		display: none
+	}
+
+	.loginformboxcontent>div {
+		padding-top: 15px;
+		margin: auto;
+		width: 280px
+	}
+
+	.loginformboxcontent>p {
+		width: 280px;
+		margin: auto;
+		height: 45px;
+		margin-top: 20px;
+		margin-bottom: 10px;
+		position: relative;
+		color: #666;
+		text-align: left
+	}
+
+	.loginformboxtitle {
+		font-size: 24px;
+		padding-bottom: 0;
+		padding-top: 30px
+	}
+}
+
+.fa-chrome {
+	position: relative;
+	top:0px;
+	background:url('../images/login/chorme.png') no-repeat;
+	display: inline-block;
+	overflow: hidden;
+	vertical-align: middle;
+	background-size:50px 50px;
+	width: 50px;
+	height: 50px;
+}
+.fa-360 {
+	position: relative;
+	top:0px;
+	background:url('../images/login/360.png') no-repeat;
+	display: inline-block;
+	overflow: hidden;
+	vertical-align: middle;
+	background-size:50px 50px;
+	width: 50px;
+	height: 50px;
+}
+.fa-internet-explorer {
+	position: relative;
+	top:0px;
+	background:url('../images/login/ie.png') no-repeat;
+	display: inline-block;
+	overflow: hidden;
+	vertical-align: middle;
+	background-size:50px 50px;
+	width: 50px;
+	height: 50px;
+}
+.fa-desktop {
+	position: relative;
+	top:0px;
+	background:url('../images/login/pc.png') no-repeat;
+	display: inline-block;
+	overflow: hidden;
+	vertical-align: middle;
+	background-size:50px 50px;
+	width: 50px;
+	height: 50px;
+}
+.fa-mobile {
+	position: relative;
+	top:0px;
+	background:url('../images/login/iphone.png') no-repeat;
+	display: inline-block;
+	overflow: hidden;
+	vertical-align: middle;
+	background-size:50px 50px;
+	width: 50px;
+	height: 50px;
+}
+.fa-user {
+	position: relative;
+	top:10px;
+	left:10px;
+	background:url('../images/login/actar.png') no-repeat;
+	display: inline-block;
+	overflow: hidden;
+	vertical-align: middle;
+	background-size:20px 20px;
+	width: 20px;
+	height: 20px;
+}
+.fa-asterisk {
+	position: relative;
+	top:13px;
+	left:10px;
+	background:url('../images/login/pwd.png') no-repeat;
+	display: inline-block;
+	overflow: hidden;
+	vertical-align: middle;
+	background-size:20px 20px;
+	width: 20px;
+	height: 20px;
+}

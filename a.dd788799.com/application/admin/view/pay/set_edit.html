@@ -1,0 +1,133 @@
+<link rel="stylesheet" href="/plugins/webupdate/webuploader.css">
+<script src="/plugins/webupdate/webuploader.js"></script>
+<form class="form-horizontal" id="pay_set_add" method="post" enctype="multipart/form-data">
+  <div class="box-body">
+    <div class="form-group">
+      <input type="hidden" id="soft-id" value="0">
+      <label for="inputEmail3" class="col-sm-2 control-label">名称</label>
+
+      <div class="col-sm-10">
+        <input type="text" class="form-control" id="name" name="name" placeholder="名称" {if(!empty($info['name']))} value="{$info['name']}" {/if}>
+      </div>
+    </div>
+   <div class="form-group">
+      <label for="inputPassword3" class="col-sm-2 control-label">类型</label>
+       <div class="col-sm-10">
+        <select class="form-control" name="type"  aria-hidden="true">
+            {foreach  $paylist as $v}
+              <option value="{$v}" {if(!empty($info['sex']) && $info['sex'] ==$v)}  selected="selected" {/if} >{$v}</option>
+            {/foreach}
+            
+         </select>
+        </div>
+    </div>
+    <div class="form-group">
+      <label for="inputPassword3" class="col-sm-2 control-label">排序</label>
+
+      <div class="col-sm-10">
+        <input type="text" class="form-control" id="sort" name="sort"  placeholder="排序" {if(!empty($info['sort']))} value="{$info['sort']}" {/if}>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="inputPassword3" class="col-sm-2 control-label">状态</label>
+      <div class="col-sm-10">
+        <select class="form-control"  name="status" id="status" aria-hidden="true">
+              <option value="1" {if(!empty($info['status']) && $info['status'] =="1")}  selected="selected" {/if}>开启</option>
+              <option value="0" {if(!empty($info['status']) && $info['status'] =="0")}  selected="selected" {/if} >关闭</option>
+         </select>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="inputPassword3" class="col-sm-2 control-label">图片</label>
+      <div class="col-sm-10">
+        <div id="filePicker">选择图片</div>
+        <div id="pics">
+            {if(!empty($info['img']))}
+              <input type="hidden" name="img" value="{$info['img']}"/>
+              <img src="{$info['img']}"  class="preview">
+            {/if}
+        </div>
+      </div>
+    </div>
+    <input type="hidden" name="id" {if(!empty($info['id']))} value="{$info['id']}" {/if} >
+    <div class="col-sm-offset-2 col-sm-10">
+        <button id="btnajax" class="btn btn-danger">提交</button>
+    </div>
+  </div>
+</form>
+
+<script type="text/javascript">
+$(function(){
+
+    $("#btnajax").click(function () {
+
+    var options = {
+       url: "{:url('set_edit')}",
+      // type : 'POST',
+     dataType : 'json',
+      success : function(data) {
+        $(".layui-layer-close").click();
+
+       layer.alert(data.msg, {
+          time: 20000,
+          skin: 'layui-layer-molv', //该皮肤由layer.seaning.com友情扩展。关于皮肤的扩展规则，去这里查阅
+          closeBtn: 0,
+          anim: 4
+        }, function(){
+           window.location.href = document.URL;
+        })
+      },
+      error: function(data) {
+         $(".layui-layer-close").click();
+        layer.alert(data.msg, {
+          time: 20000,
+          skin: 'layui-layer-molv', //该皮肤由layer.seaning.com友情扩展。关于皮肤的扩展规则，去这里查阅
+          closeBtn: 0,
+          anim: 4
+        }, function(){
+           window.location.href = document.URL;
+        })
+      }
+    };
+      $("#pay_set_add").ajaxForm(options);
+   })
+
+
+//var $ = jQuery, uploader;
+    var jQuery = $;
+    var uploader = WebUploader.create({
+      auto : true,
+      swf : '/plugins/webupdate/Uploader.swf',
+      server : '/pay/upload',
+      pick : '#filePicker',
+      method: 'POST',
+      accept : {
+        title : 'Images',
+        extensions : 'gif,jpg,jpeg,bmp,png',
+        mimeTypes : 'image/*'
+      },
+    });
+    uploader.on('uploadSuccess', function(file,data) {
+        layer.alert(data.msg, {
+          time: 10000,
+          skin: 'layui-layer-molv', //该皮肤由layer.seaning.com友情扩展。关于皮肤的扩展规则，去这里查阅
+          closeBtn: 0,
+          anim: 4
+        }, function(){
+            layer.closeAll('dialog');
+            if(data.code=='1'){
+                var html ='';
+                html +='<input type="hidden" name="img" value="'+data.data.url+'"/>';
+                html +=data.data.html;
+                $("#pics").html( html);
+            }
+          
+        })
+       
+    });
+
+
+
+});
+
+</script>

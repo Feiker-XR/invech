@@ -1,0 +1,243 @@
+{include file="pay:base"}
+
+<script type="text/javascript" src="/lib/datepicker/WdatePicker.js"></script>
+
+<!-- page start -->
+<div class="content">
+    <div class="header">        
+        <h1 class="page-title">订单管理</h1>
+    </div>
+    <ul class="breadcrumb">
+        <li><a href="{:url('index')}">主页</a>  <span class="divider">/</span>
+        </li>
+        <li class="active">订单管理</li>
+    </ul>
+    <div class="container-fluid">
+        <div class="row-fluid">
+              <div class="btn-toolbar" style="height:30px;">	
+					
+					<form action="{:url('mgr_list')}" method="post" class="form-search pull-right">
+					
+					  <label style="height:30px;line-height:30px;display: inline-block;vertical-align: middle;">时间范围：</label>
+					  <input id="start_time" name="start_time" type="text" class='Wdate' style='width:150px;margin-right:10px;' value="" onFocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',maxDate:'#F{literal}{$dp.$D(\'end_time\')}{/literal}'})"></input>
+					  <label style="height:30px;line-height:30px;display: inline-block;vertical-align: middle;">到：</label>
+					  <input id="end_time" name="end_time" type="text" class='Wdate' style='width:150px;margin-right:10px;' value="" onFocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',minDate:'#F{literal}{$dp.$D(\'start_time\')}{/literal}'})"></input>					  
+					  
+					  <label style="height:30px;line-height:30px;display: inline-block;vertical-align: middle;" >支付方式：</label>
+					
+					  <select name="pay_type" id="pay_type" class="search-query" style="width:120px;margin-right:10px;">
+						<option value='' selected>全部</option>
+						<?php foreach ($setcg as $v){?>
+						<option value='<?php echo $v['code']?>'><?php echo $v['name']?></option>
+						<?php }?>
+					  </select>
+					  
+					  <label style="height:30px;line-height:30px;display: inline-block;vertical-align: middle;" >订单状态：</label>
+					
+					  <select name="order_state" id="order_state" class="search-query" style="width:120px;margin-right:10px;">
+						<option value='all' selected>全部状态</option>
+						<option value='0'>支付处理中</option>
+						<option value='1'>支付成功</option>
+					  </select>
+					  
+					  <label style="height:30px;line-height:30px;display: inline-block;vertical-align: middle;" >处理状态：</label>
+					  
+					  <select name="state" id="state" class="search-query" style="width:120px;margin-right:10px;">
+						<option value='all' selected>全部状态</option>
+						<option value='0'>待处理</option>
+						<option value='5'>已锁定</option>
+						<option value='1'>已确认</option>
+						<option value='2'>已取消</option>
+						<option value='3'>待确认</option>
+					  </select>
+					  
+					  <input type="text" style="width:300px;" name="keywords" id="keywords"  placeholder="用户名、订单编号、操作员、备注" class="search-query">
+					  <button type="submit" class="btn">搜索</button>
+					  
+					  <a href="{:url('export')}?{$export_args}" target='_blank' class="btn btn-primary">导出Excel</a>
+					  
+					  <a href="javascript:;" onclick="delForm('{:url('mgr_list')}?action=del&{$export_args}')" class="btn btn-danger">清空数据</a>
+					 
+					</form>
+				</div>				
+				
+				
+					<table class="table table-hover table-bordered">
+					  <thead>
+						<tr>
+						  <th>#</th>
+						  <th>订单编号</th>
+						  <th>用户名</th>
+						  <th>支付方式</th>
+						  <th>订单金额</th>
+						  <th>订单时间</th>
+						 
+						  <th>订单来源</th>
+						
+						  <th>订单状态</th>
+						  <th>处理状态</th>
+						  <th>备注</th>
+						  <th>操作员</th>
+						  <th>操作</th>
+						</tr>
+					  </thead>
+					  <tbody>
+					  <?php 
+					  foreach($result as $item){						  
+					  ?>
+					  <tr>
+						  <td><?php echo $item['id'];?></td>
+						  <td><?php echo $item['order_id'];?></td>
+						  <td><?php echo $item['user_name'];?></td>
+						  <td><font color='
+{switch name="item.setid" }
+{case value="1"}red{/case}
+{case value="2"}green{/case}
+{case value="3"}blue{/case}
+{default /}
+{/switch}							  
+						  '><?php echo $item['name'];?></font></td>
+						  <td><?php echo $item['order_money'];?></td>
+						  <td><?php echo date('Y-m-d H:i:s',$item['order_time']);?></td>
+						  
+						  <td><?php echo $item['pay_api'];?></td>
+						 
+						  <td>
+{eq name="item.order_state" value="0"}<font color=blue>未支付</font>{/eq}
+{eq name="item.order_state" value="1"}<font color=green>支付成功</font>{/eq}							  
+						  </td>
+						  <td id="father_state<?php echo $item['id'];?>">
+{switch name="item.state" }
+{case value="0"}<font>待处理</font>{/case}
+{case value="1"}<font color=green>已确认</font>{/case}
+{case value="2"}<font color=red>已取消</font>{/case}
+{case value="3"}<font color=brown>待确认</font>{/case}
+{case value="5"}<font color=blue>已锁定({$item.lock_id})</font>{/case}
+{default /}
+{/switch}							  
+						  </td>
+						  <td id="father_desc<?php echo $item['id'];?>"><?php echo $item['order_desc'];?><?php echo $item['order_msg'];?></td>
+						  <td><?php echo $item['lock_id'];?></td>
+						  <td>
+						  <?php 
+						  if($item['state'] == "0"){
+						  ?>
+						  <a title='锁定' onclick="confirmLock('?action=lock&id=<?php echo $item['id'];?>')" href='javascript:;'>锁定</a>&nbsp;|&nbsp;
+						  <?php
+						  }
+						  ?>
+						  
+						  <?php 
+						  if($item['state'] == "5"){
+						  ?>
+						  <a title='解锁' onclick="confirmUnLock('?action=unlock&id=<?php echo $item['id'];?>')" href='javascript:;'>解锁</a>&nbsp;|&nbsp;
+						  <?php
+						  }
+						  ?>
+
+						  
+						  <a title='编辑' data-toggle="modal" data-target="#myModal" href="{:url('order_edit')}?action=edit&id=<?php echo $item['id'];?>">更改状态</a>&nbsp;|&nbsp;
+						 
+						  <a title='删除' onclick="confirmAction('?action=delete&id=<?php echo $item['id'];?>')" href='javascript:;'>删除</a></td>
+					  </tr>
+					  <?php
+					  }
+					  ?>
+						
+						
+					  </tbody>
+					</table>
+{$datas->render()}
+            <footer>
+                <hr>
+                <p class="pull-right">
+                    <a href="javascript:;">
+                        <?php echo $appSet[ 'app_name'];?>
+                    </a>
+                </p>
+                <p>&copy;
+                    <?php echo $appSet[ 'company_year'];?>
+                    <a href="<?php echo $appSet['company_url'];?>" title="<?php echo $appSet['company'];?>" target="_blank">
+                        <?php echo $appSet[ 'company'];?>
+                    </a>
+                </p>
+            </footer>
+        </div>
+    </div>
+</div>
+
+<!-- 弹出model -->
+<div id="myModal" class="modal hide fade in" style="display: none; ">
+<div class="modal-header">
+<a class="close" data-dismiss="modal">×</a>
+<h3>处理订单</h3>
+</div>
+<div class="modal-body"></div>
+</div>
+
+<!-- page end -->
+
+<script type="text/javascript">
+$(function(){
+	
+	<?php 
+        if($state!=""){
+             echo '$("#state option[value=\''.$state.'\']").attr("selected", "selected");';          
+        }
+		if($pay_type!=""){
+             echo '$("#pay_type option[value=\''.$pay_type.'\']").attr("selected", "selected");';          
+        }
+		if($order_state!=""){
+		     echo '$("#order_state option[value=\''.$order_state.'\']").attr("selected", "selected");';  
+	    }
+        if(!empty($keywords)){
+             echo '$("#keywords").val("'.$keywords.'");';
+        }
+		if(!empty($start_time)&&!empty($end_time)){
+             echo '$("#start_time").val("'.$start_time.'");';
+		     echo '$("#end_time").val("'.$end_time.'");';
+        }
+		
+		if($lock_ok){
+			echo "alert('锁定成功！');";
+		}
+		if($unlock_ok){
+			echo "alert('解锁成功！');";
+		}				
+		if($confirm_ok){
+			echo "alert('确认成功！');";
+		}		
+		if($all_lock_ok){			
+			echo "alert('锁定成功，共处理了".$tmp."条订单');";
+		}
+		if($all_unlock_ok){			
+			echo "alert('解锁成功，共处理了".$tmp."条订单');";
+		}
+		if($all_confirm_ok){			
+			echo "alert('确认成功，共处理了".$tmp."条订单');";
+		}			
+    ?>
+	
+	$("#client-menu").addClass('in');
+	
+	$('#myModal').on('hide.bs.modal', function () {
+		//关闭模态框
+		window.location.href = document.URL;
+	})
+	
+})
+
+	function delForm(url){
+		if(confirm('确定要清空搜索数据吗?')){
+			var result = prompt("请输入操作密码：xymf");
+			if(result != 'xymf'){
+				alert('密码错误!');
+				return;
+			}
+			window.location.href = url;
+		}		
+	}
+
+</script>
+
+{include file="pay:foot"}

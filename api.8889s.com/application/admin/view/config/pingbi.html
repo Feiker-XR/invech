@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>系统设置</title>
+<link href="/css/base.css" rel="stylesheet" type="text/css" />
+<link href="/css/admin.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="/js/jquery.js"></script>
+<script type="text/javascript" src="/js/jquery.tools.js"></script>
+<script type="text/javascript" src="/js/base.js"></script>
+<script type="text/javascript">
+$().ready(function() {
+	var $tab = $("#tab");
+
+	// Tab效果
+	$tab.tabs(".tabContent", {
+		tabs: "input"
+	});
+})
+</script>
+<script>
+function check(){
+	var dq = document.getElementById("dq").value;
+	if(dq.length < 1){
+		alert("请您输入要限制的地区！");
+		return false;
+	}
+	return true;
+}
+</script>
+</head>
+<body class="input">
+	<!--<div class="bar">
+		地区屏蔽
+	</div>-->
+	<div class="body">
+	<form id="form1" name="form1" method="post" action="?action=save" onsubmit="return check();">
+		  <ul id="tab" class="tab">
+				<li>
+					<input type="button" value="地区屏蔽" hidefocus />
+				</li>
+			</ul>
+	  <table class="inputTable tabContent">
+  		<tr>
+		    <td colspan="2" bgcolor="#F9FBFD">
+			    <table width="100%" border="0" cellpadding="1" cellspacing="1" bgcolor="#666666">
+				 <?php if($dqxz){?>
+				<?php
+					$i	=	0;
+					foreach($dqxz as $k=>$v){
+						if($i%4 == 0) echo '<tr>';
+						$i++;
+				?>
+			    <td width="25%" onMouseOver="this.style.backgroundColor='#C0E0F8'" onMouseOut="this.style.backgroundColor='#FFFFFF'" style="background-color:#FFFFFF;"><div style="float:left;"><?=$v?></div><div style="float:right; padding-right:10px;"><a href="?action=del&id=<?=$k?>" onclick="return confirm('确定解除地区 <?=$v?> 限制吗？')">解除</a></div></td>
+			  	<?php
+				if($i%4 == 0) echo '</tr>';
+				}
+				while($i%4 != 0){
+				?>
+			    <td width="25%" onMouseOver="this.style.backgroundColor='#C0E0F8'" onMouseOut="this.style.backgroundColor='#FFFFFF'" style="background-color:#FFFFFF;">&nbsp;</td>
+				<?php
+					$i++;
+					if($i%4 == 0) echo '</tr>';
+					}
+				?>
+				<?php }?>
+			  	</table>
+		  	</td>
+  		</tr>
+  	<tr>
+	  <th>请输入要屏蔽的地区:<br />
+	    如：江苏,北京 </th>
+	  <td><textarea name="dq" id="dq" class="formTextarea"></textarea>
+	    多个地区请用英文状态下的 , 区分开；</td>
+	</tr>
+	</table>
+	<div class="buttonArea">
+		<input type="submit" class="formButton" value="确  定" hidefocus />&nbsp;&nbsp;
+		<input type="button" class="formButton" onClick="window.location.href='{:Url('main/info')}'" value="返  回" hidefocus />
+	</div>
+	</form>
+	</div>
+</body>
+</html>

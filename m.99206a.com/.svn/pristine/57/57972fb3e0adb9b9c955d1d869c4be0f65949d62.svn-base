@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>金沙娱乐场 - 体育视讯live Casino</title>
+<link rel="stylesheet" type="text/css" href="/css/style.css"/>
+<script src="/js/jquery1.9.0.min.js"></script>
+<script type="text/javascript" src="/js/jquery.SuperSlide.2.1.1.js"></script>
+<script type="text/javascript" src="/js/main.js"></script>
+<script type="text/javascript" src="/js/main.new.js"></script>
+<script src="/Scripts/swfobject_modified.js" type="text/javascript"></script>
+<script type="text/javascript" src="/js/layer.js"></script>
+
+</head>
+<body>
+<div class="head">
+<!--欢迎-->
+{include file='common/sports-nav'}
+<script type="text/javascript">
+$(function(){
+	//顶部导航二级菜单
+	$(".nav_right_div").mouseenter(function(){
+		$(this).find("ul").show();
+	}).mouseleave(function(){
+		$(this).find("ul").hide();
+	})
+	
+})
+</script>
+</div>
+	<div class="block_0"></div>
+	<!--体育赛事背景-->
+	<div class="game_s_center">
+		<div class="game_l_login">
+			<?php if($user){?>
+			<div class="game_l_login">
+				<div class="game_l_login_nav game_hadlogin">
+					<h3>Vip会员登录</h3>
+					<span class="ml15 fl">账户：<i class="head_w_hadlogin_name">{$user['username']}</i></span>
+					<span class="ml15 fl">余额：<i class="head_w_hadlogin_count" id='money'>{$user['money']}</i></span>
+					<ul class="fr">
+						<li><a href="javascript:void(0);" onclick="GoToMember(0,2);return false">会员资料</a></li>
+						<li><a href="javascript:void(0);" onclick="GoToMember(3,0);return false">账户历史</a></li>
+						<li><a href="javascript:void(0);" onclick="GoToMember(2,0);return false">交易记录</a></li>
+						<li><a href="javascript:void(0);" onclick="GoToMember(0,2);return false">财务中心</a></li>
+						<li><a href="javascript:void(0);" onclick="GoToMember(5,0);return false">代理中心</a></li>
+						<li><a href="javascript:void(0);" onclick="GoToMember(1,0);return false">
+						<span style="color: #FF0000; text-decoration: none; font-weight: bold;">会员存款</span>
+						</a></li>
+						<li><a href="javascript:void(0);" onclick="GoToMember(0,2);return false" style="margin-left: 6px;">
+						<span style="color: #FF0000; text-decoration: none; font-weight: bold;">额度转换</span></a>
+						</li>
+						<li><a href="javascript:void(0);" onclick="GoToMember(1,1);return false">会员提款</a></li>
+						<li><a href="javascript:GoTo('1','Logout');" target="_top">安全退出</a></li>
+					</ul>
+				</div>
+				<!--<div class="sports_Bgb"></div>-->
+				<div class="block_0"></div>
+			</div>
+			<?php }else{?>
+			<div class="game_l_login_nav">
+				<h3>Vip会员登录</h3>
+				<ul>
+					<li class="game_l_login_nav_1"><input type="text" name="username" id="username" placeholder="输入用户名"></li>
+					<li class="game_l_login_nav_2"><input type="password" name="password" id="password" placeholder="输入密码"></li>
+					<li class="game_l_login_nav_3"><a href="javascript:;" onclick="alert('请联系在线客服!');return false;">忘记密码？</a></li>
+					<li class="game_l_login_nav_4"><button onclick="Login()" id="logkey">登录</button></li>
+					<li class="game_l_login_nav_5"><a class="button" href="{:Url('index/reg')}">立即开户</a></li>
+				</ul>
+			</div>
+			<?php }?>
+			<div class="block_0"></div>
+			<div class="game_l_login_all">
+				<div class="focusBox" style="margin:0 auto">
+					<ul class="pic">
+						<li><a href="/electric-game.php" target="index"><img src="/img/electr-slider-bg1.png"/></a></li>
+						<li><a href="/lottery.php" target="index"><img src="/img/game-slider-bg.png"/></a></li>
+						<li><a href="/live.php" target="index"><img src="/img/live-slider-bg.png"/></a></li>
+						<li><a href="/sport.php" target="index"><img src="/img/sport-bg1.png"/></a></li>					
+					</ul>
+					<a class="prev" href="javascript:void(0)"></a>
+					<a class="next" href="javascript:void(0)"></a>
+					<ul class="hd">
+						<li></li>
+						<li></li>
+						<li></li>
+						<li></li>						
+					</ul>
+				</div>	
+				<div class="block_30"></div>
+				<div class="banner_notice txtMarquee-left">
+					<div class="bd">
+						<img src="/img/notice.png" class="fl"/>
+						<ul class="fl f14 ">
+							<li></li>
+						</ul>
+					</div>
+				</div>				
+				<div class="block_20"></div>
+				<div class="sport_l_open">
+					<div class="sport_l_open_hg">
+						<ul>
+							<li class="sport_l_open_bb_1"><h2>皇冠体育</h2></li>
+							<li class="sport_l_open_bb_2">亚洲领先体育赛事投注平台之一，以投注快捷、结算迅速获得业界及玩家认可。提供多元体育赛事投注，包含足球、棒球、篮球及橄榄球等世界主要体育项目，由专业的信息管理团队提供最准确实时的赛事结果与在线投注服务。</li>	
+							<li class="sport_l_open_bb_3"><a href="/Sports.php">立即畅玩</a></li>
+						</ul>
+					</div>
+					<div class="sport_l_open_bb">
+						<ul>
+							<li class="sport_l_open_bb_1"><h2>BBIN体育</h2></li>
+							<li class="sport_l_open_bb_2">BBIN源于1999年，备有亚洲盘、欧洲盘、香港盘、印尼盘及马来盘等赔率盘口供玩家选择。除了赛事项目多样化外，更在各项赛事中设计众多玩法，例如让球和大小、全场半场、波胆、最先进球/最后进球等。</li>	
+							<li class="sport_l_open_bb_3"><a target="index" href="/bbin/sport.php">立即畅玩</a></li>
+						</ul>
+					</div>
+					
+					<div class="sport_l_open_zb">
+						<ul>
+							<li class="sport_l_open_bb_1"><h2>赛事直播</h2></li>
+							<li class="sport_l_open_bb_2">各大洲赛事，第一时间进行直播，无缝接入，犹如身临其境，每一次进球，每一次呐喊，因您而不同！</li>	
+							<li class="sport_l_open_bb_3"><a href="/zhibo.php" target="_blank">立即畅玩</a></li>
+						</ul>
+					</div>
+					
+				</div>
+
+
+
+			</div>
+		</div>
+	</div>
+
+	{include file='common/footer'}
+
+<script type="text/javascript">
+function open_new_888(url) {
+    window.open(url,'newwindow','height=640,width=600,top=150,left='+(screen.width-640)/2+',toolbar=no,menubar=no,scrollbars=no, resizable=no,location=no, status=no');
+}
+</script>
+
+	<div class="left_absolute">
+		<a href="javascript:;" onclick="open_new_888('888');" class="popupkefu" target="_blank">
+			<img src="/img/zhuanpan23.gif" />
+		</a>
+		<div id="qian_dao" style="display:block;">
+			<img  class="qian_dao" style="cursor:pointer;" src="/img/qiandao.png" />
+		</div>
+	</div>
+	
+		<div class="right_absolute">
+		<div class="right_absolute_1" onclick="window.open('http://messenger.providesupport.com/messenger/1x5b67gp1rcy50kqxa0qpsa0jx.html','24小时在线客服','_blank')">
+			<ul>
+				<li class="right_absolute_1_1"><img src="/img/fix-right-1.png"/></li>
+				<li class="right_absolute_1_2" style="display: none;"><img src="/img/fix-right-5.png" /></li>
+			</ul>
+		</div>
+		<div class="right_absolute_2" onclick="window.open('http://wpa.qq.com/msgrd?v=3&uin=223318&site=qq&menu=yes','QQ客服','_blank')">
+			<ul>
+				<li class="right_absolute_2_1"><p>QQ客服</p></li>
+				<li class="right_absolute_2_2"><p>223318</p></li>
+			</ul>
+		</div>
+		<div class="right_absolute_3" >
+			<a href="http://pay77158.com" target="_blank" style="display: none;">自助充值</a>
+		</div>		
+		<div class="right_absolute_4">
+			<form action="http://pay77158.com/api/101pay/pay.php" target="_BLANK" method="POST" id="payForm">
+			<input type="hidden" name="username" id="payUsername" value="" />
+			<input type="hidden" name="type" value="ALIPAY" />
+			<input type="number" name="coin" id="payCoin"  placeholder="请输入金额" style="display: none;"/>
+			<a href="#" style="display: none" onclick="goPay()">快捷充值</a>
+			</form>
+		</div>		
+	</div>
+	
+	
+<script>
+function goPay(){
+	if($("#payUsername").val() == ''){
+		alert("请登录后再进行冲值！");
+		return false;
+	}
+	//alert($("#payCoin").val() );
+	if( $("#payCoin").val() <= '50'){
+		//alert("冲值金额不能小于50");
+		//return false;
+	}
+	$("#payForm").submit();
+}
+$(function(){
+	
+	$('#qian_dao .qian_dao').click(function(){
+		//window.open('qian_dao.php','qian_dao','menubar=no,status=yes,scrollbars=yes,top=150,left=400,toolbar=no,width=805,height=520');
+			$.ajax({
+				type: "post",
+				url: '/qian_dao.php',
+				data:{'ajax':1},
+				success:function(data) {
+					alert(data);
+				}
+			});
+	});
+	
+	setInterval(function() {
+		$.ajax({
+			type: "post",
+			url: "{:Url('index/home')}",
+			data:{'ajax':1,'get_money':'1'},
+			success:function(data) {
+				if (/^[\d\.]+$/.test(data)) {
+					$('#money,#money_2').text(data);
+				}
+			}
+		});
+	},2000);
+	
+})
+
+</script>
+</body>
+</html>

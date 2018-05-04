@@ -1,0 +1,149 @@
+<?php
+namespace app\behavior;
+
+
+use app\model\Bonus as BonusModel;
+use app\model\BonusFlow as BonusFlowModel;
+use app\admin\model\Money as MoneyModel;
+use app\admin\model\Member as UserModel;
+use think\Hook;//Hook::add和Hook::listen可以封装在帮助函数tag和hook中;
+
+class BonusEventSubscriber 
+{
+	//tp的事件处理实现为hook的形式;
+	//红利事件放在bonus表中;
+	//其它事件的事件名和事件处理函数 建议 不要放在bonus表,也不要放在此订阅者中;
+	//app_begin	$dispatch
+	public function run(&$dispatch)
+	{		
+        $bonusEvents = BonusModel::getCachedEvents();
+
+        $classname = get_class($this);
+
+        foreach ($bonusEvents as $event => $businesses) {
+            foreach ($businesses as $business) {
+            	/*
+            	$handle 支持 [$classname, $method]
+            	$handle 可以是$obj,那么方法名就是标签名;
+            	$handle 可以是::fun 全局函数
+            	*/                
+                $handle = [$classname , 'do' . ucfirst($business) ];
+                Hook::add($event,$handle);                
+            }
+        }
+	}
+
+    private function getBusiness(){
+        $bt =debug_backtrace();
+        $parent_function = $bt[2]['function'];//doXxx
+        return lcfirst(substr($parent_function,2)); 
+    }
+
+    private function getBonus(){
+        $business = $this->getBusiness();
+        $bonus = BonusModel::getBonusByBusiness($business);
+        if(!$bonus){ 
+            throw new \Exception('bonus not configed.');
+        }
+        return $bonus;  
+    }
+
+    //事件的数据负载使用 $extra = [$tid,$abc];
+    //外层事务调内层事务;内层事务失败回滚,同时需要抛出异常给上层去回滚
+    public function doRegister(UserModel $user,$extra){
+
+        list($tid) = $extra;
+        
+        $bonus = $this->getBonus();
+        $amount = $bonus->amount;
+
+        db()->startTrans();
+        try{
+            
+	    
+		    $old_balance = $user->coin;
+		    $user->coin += $amount;
+		    
+		    $user->update();
+
+		    //添加一条红利流水
+		    $flow_data = [
+		    	'uid'	=>	$user->uid,
+		    	'bonus_id' => $bonus->id,		    	
+		    	'type'	   => 'money',
+		    	'amount'   => $amount,
+		    	'remark'   => $bonus->remark
+		    ];
+
+		    $flow = BonusFlowModel::create($flow_data);
+
+		    //添加一条资金变更
+		    $money_data = [
+                'uid'       =>  $user->uid,
+                'amount'    =>  $amount,
+                'f_balance' =>  $old_balance,
+                't_balance' =>  $user->coin,
+                'type'  	=>  'bonus',
+                'item_id'   =>  $flow->id,
+                'remark'    =>  $bonus->remark,
+            ];
+	    	
+	    	$money = MoneyModel::create($money_data);
+
+	    	//create抛出异常 不需要判定返回值
+            db()->commit();
+        }catch(\Exception $e){
+            throw new \Exception('doRegister fail with ' . $e->getMessage());
+            db()->rollback();
+        }
+    }
+
+    public function doRecommend(User $user,$tid=0,$extra){
+
+        $bonus = $this->getBonus();
+                
+        //$user->incBalance( 'bonus')
+    }   
+
+    public function doBackWater(BetDaily $daily, $extra){
+
+        $bonus = $this->getBonus();
+        
+        $bet_sum = $daily->live_bet + $daily->egame_bet + $daily->chess_bet + $daily->lottery_bet + $daily->sport_bet + $daily->hunter_bet;
+        //赔率根据会员等级决定;
+
+        if($bet_sum < $bonus->limit){//返水最低投注额要求
+            return;
+        }
+
+        $back_sum = 0;
+        $back_sum += $daily->live_bet * $daily->live_ratio;
+        $back_sum += $daily->egame_bet * $daily->egame_ratio;
+        $back_sum += $daily->chess_bet * $daily->chess_ratio;
+        $back_sum += $daily->lottery_bet * $daily->lottery_ratio;
+        $back_sum += $daily->sport_bet * $daily->sport_ratio;
+        $back_sum += $daily->hunter_bet * $daily->hunter_ratio;
+
+        if($back_sum > $bonus->max){//返水最大值限制
+           $back_sum = $bonus->max;
+        }
+
+        $user = User::find($daily->uid);
+
+        db()->beginTransaction();
+        try{
+
+            $ret = $user->incBalance($back_sum,'bonus',$bonus->id,$bonus->remark);
+            $ret2 = $daily->update(['amount'=>$back_sum,'status'=>1,]);
+
+            if($ret&&$ret2){
+                db()->commit();
+            }else{
+                db()->rollBack();                
+            }
+        }catch(\Exception $e){
+            \Log::error('doBackWater fail with ' . $e->getMessage()); 
+            db()->rollBack();
+        }
+    }    	
+}

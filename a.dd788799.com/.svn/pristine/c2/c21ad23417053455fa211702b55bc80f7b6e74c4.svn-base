@@ -1,0 +1,62 @@
+<?php
+namespace app\common\model;
+use think\Model;
+
+use app\common\model\attach\MoneyRecordTrait;
+
+class ManualMoney extends Base{
+
+    protected $table = 'gygy_manual_money';
+    protected $createTime = 'created_at';
+    protected $updateTime = '';
+    protected $autoWriteTimestamp = 'datetime';
+
+    use MoneyRecordTrait;
+
+    public function user()
+    {
+        return $this->belongsTo('Member','uid','uid');
+    }
+
+    public function admin()
+    {
+        return $this->belongsTo('Admin','opt_uid','id');
+    }
+
+    public function bonus()
+    {
+        return $this->belongsTo('Bonus','bonus_id','id');
+    }
+
+    public function bonusFlow()
+    {
+        return $this->belongsTo('BonusFlow','bonus_flow_id','id');
+    }
+
+    public function getAmountTypeAttr($value)
+    {
+        if($this->data['bonus_id'] == -1){
+            return '动手扣款';
+        }
+        if($this->data['bonus_id'] == 0){
+            return '动手存款';
+        }
+        //return $this->bonus->name;
+        return $this->bonus->getData('name');
+    }
+
+    //后台
+    public static function attachToSelfRequest(&$query){
+
+        $params = request()->param();
+
+        $bonus_id = $params['bonus_id']??'';
+        if(is_numeric($bonus_id)){
+           $query->where('x.bonus_id', $bonus_id);
+        }
+        
+    } 
+
+
+
+}

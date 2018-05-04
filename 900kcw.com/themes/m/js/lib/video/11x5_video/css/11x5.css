@@ -1,0 +1,319 @@
+* {
+  padding: 0px;
+  margin: 0px;
+  list-style: none;
+}
+body {
+  margin: 0px !important;
+}
+.content {
+  width: 1125px;
+  height: 780px;
+  margin: 0 auto;
+}
+.content .dispnode {
+  display: none;
+}
+.content .eleAnimate {
+  width: 100%;
+  height: auto;
+  position: relative;
+  background: #000000;
+}
+.content .eleAnimate .bodybg {
+  width: 100%;
+  height: auto;
+  background: url("../img/11x5_bg.jpg") 0 0 no-repeat;
+}
+.content .eleAnimate .bodybg img {
+  vertical-align: top;
+  width: 100%;
+  height: 100%;
+}
+.content .eleAnimate .loading {
+  background: #000000;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 999;
+  width: 100%;
+  height: 100%;
+  color: #FFFFFF;
+}
+.content .eleAnimate .loading .loadtxt {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  margin-left: -43px;
+  margin-top: -10px;
+}
+.content .eleAnimate .noinfor {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  height: 80px;
+  line-height: 80px;
+  text-align: center;
+  color: #FFFFFF;
+  width: 200px;
+  margin-left: -100px;
+  margin-top: -40px;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 999;
+  border-radius: 10px;
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
+  display: none;
+}
+.content .eleAnimate .animate_content {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+}
+.content .eleAnimate .animate_content .nameLogo {
+  float: left;
+  left: 20px;
+  max-width: 100%;
+}
+.content .eleAnimate .animate_content .codeArr {
+  float: left;
+}
+.content .eleAnimate .animate_content .codeArr ul {
+  width: auto;
+  height: 55px;
+  line-height: 55px;
+  opacity: 0.8;
+  margin-left: 70px;
+  margin-top: 17px;
+}
+.content .eleAnimate .animate_content .codeArr ul li {
+  float: left;
+  width: 60px;
+  height: 100%;
+  text-align: center;
+}
+.content .eleAnimate .animate_content .codeArr ul li:last-child {
+  width: auto;
+  margin-left: 20px;
+}
+.content .eleAnimate .animate_content .codeArr ul li:last-child span {
+  display: inline-block;
+  font-size: 28px;
+  width: 50px;
+  height: inherit;
+  color: #fff;
+  text-align: center;
+}
+.content .eleAnimate .animate_content #nmg_codeArr ul {
+  margin-left: 38px;
+}
+.content .eleAnimate .animate_content .drawInfo {
+  width: 300px;
+  height: 60px;
+  float: right;
+  margin-top: 13px;
+}
+.content .eleAnimate .animate_content .drawInfo .nextDraw {
+  float: left;
+  width: 75%;
+  zoom: 0.1;
+  height: inherit;
+  font-size: 18px;
+  color: #fff;
+}
+.content .eleAnimate .animate_content .drawInfo .nextDraw div {
+  line-height: 20px;
+  white-space: nowrap;
+}
+.content .eleAnimate .animate_content .drawInfo .nextDraw div span {
+  display: inline-block;
+  margin: 0 10px;
+}
+.content .eleAnimate .animate_content .drawInfo .nextDraw .next {
+  margin-top: 170px;
+  margin-bottom: 350px;
+}
+.content .eleAnimate .animate_content .drawInfo .soundsOn,
+.content .eleAnimate .animate_content .drawInfo .soundsOff {
+  float: left;
+  width: 25%;
+  height: 60px;
+}
+.content .eleAnimate .animate_content .drawInfo .soundsOn {
+  background: url("../img/pic1.png") -160px -779px no-repeat;
+}
+.content .eleAnimate .animate_content .drawInfo .soundsOff {
+  background: url("../img/pic1.png") -237px -779px no-repeat;
+}
+.content .eleAnimate .codeNum {
+  position: absolute;
+  width: 100%;
+  height: auto;
+  top: 255px;
+}
+.content .eleAnimate .codeNum ul {
+  width: 804px;
+  margin: 2px auto;
+  height: 150px;
+}
+.content .eleAnimate .codeNum ul li {
+  float: left;
+  width: 160px;
+  height: 150px;
+  line-height: 100px;
+  text-align: center;
+  font-size: 60px;
+  font-family: "arial";
+  color: #f21e07;
+  font-weight: 600;
+}
+.content .eleAnimate .codeNum ul li:nth-child(1) {
+  margin-left: 5px;
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+}
+.content .eleAnimate .codeNum ul li:last-child {
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+  width: 156px !important;
+}
+.content .eleAnimate .cuttime {
+  position: absolute;
+  top: 479px;
+  left: 425px;
+  width: 282px;
+  height: 60px;
+  line-height: 60px;
+  font-size: 35px;
+  color: #fffc00;
+  text-align: right;
+  /* background: #1b3359; */
+  padding-right: 2px !important;
+  box-sizing: border-box;
+  letter-spacing: 1px;
+  font-weight: bolder;
+}
+.content .eleAnimate .manPic {
+  position: absolute;
+  width: 100%;
+  height: auto;
+  top: 447px;
+  z-index: 1;
+}
+.content .eleAnimate .manPic span {
+  display: inline-block;
+  width: 200px;
+  height: 230px;
+}
+.content .eleAnimate .manPic .manll {
+  background: url("../img/man_ll.png") no-repeat;
+  margin-left: 158px;
+}
+.content .eleAnimate .manPic .manlr {
+  background: url("../img/man_lr.png") no-repeat;
+  margin-left: 158px;
+}
+.content .eleAnimate .manPic .manrl {
+  float: right;
+  margin-right: 120px;
+  background: url("../img/man_rr.png") no-repeat;
+}
+.content .eleAnimate .manPic .manrr {
+  float: right;
+  margin-right: 120px;
+  background: url("../img/man_rl.png") no-repeat;
+}
+.content .eleAnimate #mnKai {
+  position: absolute;
+  display: block;
+  width: 266px;
+  height: 69px;
+  margin-left: 430px;
+  cursor: pointer;
+  margin-top: -130px;
+  z-index: 2;
+  background: url("../img/pic1.png") -172px -878px no-repeat;
+}
+.content .eleAnimate .mnKaiD {
+  background: url("../img/pic1.png") -172px -963px no-repeat !important;
+}
+.content .eleAnimate #opening,
+.content .eleAnimate #hourtxt {
+  height: 100%;
+  width: 100%;
+}
+.content .eleAnimate #opening {
+  display: none;
+  text-align: center;
+  background: #193157;
+}
+.code1 {
+  background: url(../img/pic1.png) -177px -17px no-repeat;
+}
+.code2 {
+  background: url(../img/pic1.png) -177px -86px no-repeat;
+}
+.code3 {
+  background: url("../img/pic1.png") -177px -156px no-repeat;
+}
+.code4 {
+  background: url("../img/pic1.png") -177px -224px no-repeat;
+}
+.code5 {
+  background: url("../img/pic1.png") -177px -295px no-repeat;
+}
+.code6 {
+  background: url("../img/pic1.png") -177px -364px no-repeat;
+}
+.code7 {
+  background: url("../img/pic1.png") -177px -433px no-repeat;
+}
+.code8 {
+  background: url("../img/pic1.png") -177px -503px no-repeat;
+}
+.code9 {
+  background: url("../img/pic1.png") -177px -572px no-repeat;
+}
+.code10 {
+  background: url("../img/pic1.png") -177px -642px no-repeat;
+}
+.code11 {
+  background: url("../img/pic1.png") -177px -710px no-repeat;
+}
+.num6 {
+  background: url("../img/pic1.png") 0 -2px no-repeat;
+}
+.num2 {
+  background: url("../img/pic1.png") 0 -154px no-repeat;
+}
+.num7 {
+  background: url("../img/pic1.png") 0 -306px no-repeat;
+}
+.num8 {
+  background: url("../img/pic1.png") 0 -458px no-repeat;
+}
+.num10 {
+  background: url("../img/pic1.png") 0 -610px no-repeat;
+}
+.num4 {
+  background: url("../img/pic1.png") 0 -762px no-repeat;
+}
+.num9 {
+  background: url("../img/pic1.png") 0 -914px no-repeat;
+}
+.num11 {
+  background: url("../img/pic1.png") 0 -1066px no-repeat;
+}
+.num3 {
+  background: url("../img/pic1.png") 0 -1218px no-repeat;
+}
+.num5 {
+  background: url("../img/pic1.png") 0 -1370px no-repeat;
+}
+.num1 {
+  background: url("../img/pic1.png") 0 -1522px no-repeat;
+}
+#hidNum {
+  display: none;
+}

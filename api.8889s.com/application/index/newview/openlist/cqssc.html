@@ -1,0 +1,82 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>重庆宿舍开奖结果</title>
+<link type="text/css" rel="stylesheet" href="/css/lottery/ssc.css"/>
+<link rel="stylesheet" type="text/css" href="/newview/css/style.css"/>
+<script src="/newview/js/jquery1.9.0.min.js"></script>
+<script type="text/javascript" src="/newview/js/main.js"></script>
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
+<style>
+body{
+	margin:0px;
+	padding:0px;
+	font-family: "宋体", Arial;
+	color:#383838;
+    position: relative;
+	font-size:12px;
+	/* 样式修改 */
+	background:#CCCCCA;
+}
+    a:link, a:visited, a:active, a:hover { color: #F9E101; }
+</style>
+</head>
+<body>
+	
+{include file='common/nav'}	
+<div class="block_0"></div>	
+<div class="lottery_main" style="margin: 0px auto;margin-top: 10px;margin-bottom: 10px;">
+<div class="ssc_left" style="float: none;">
+    <div class="touzhu" style="margin: 0px auto;">
+        <table class="bian" border="0" cellpadding="0" cellspacing="1">
+            <tr class="bian_tr_title">
+                <td colspan="12">重庆时时彩分开奖结果</td>
+            </tr>
+            <tr class="bian_tr_txt">
+                <td colspan="12">选择日期查看：
+                    <a href="{:url('openlist/cqssc','t=1')}"><?=date("Y-m-d",time());?></a>&nbsp;&nbsp;
+                    <a href="{:url('openlist/cqssc','t=2')}"><?=date("Y-m-d",time()-1*24*3600);?></a>&nbsp;&nbsp;
+                    <a href="{:url('openlist/cqssc','t=3')}"><?=date("Y-m-d",time()-2*24*3600);?></a>&nbsp;&nbsp;
+                    <a href="{:url('openlist/cqssc','t=4')}"><?=date("Y-m-d",time()-3*24*3600);?></a>&nbsp;&nbsp;
+                    <a href="{:url('openlist/cqssc','t=5')}"><?=date("Y-m-d",time()-4*24*3600);?></a>&nbsp;&nbsp;
+                    <a href="{:url('openlist/cqssc','t=6')}"><?=date("Y-m-d",time()-5*24*3600);?></a>&nbsp;&nbsp;
+                    <a href="{:url('openlist/cqssc','t=7')}"><?=date("Y-m-d",time()-6*24*3600);?></a>
+                </td>
+            </tr>
+            <tr class="bian_tr_title">
+                <td width="17%">开奖时间</td>
+                <td width="12%">彩票期号</td>
+                <td width="6%">一</td>
+                <td width="6%">二</td>
+                <td width="6%">三</td>
+                <td width="6%">四</td>
+                <td width="6%">五</td>
+                <td width="20%">总和</td>
+                <td width="5%">龙虎</td>
+                <td width="22%">前三/中三/后三</td>
+            </tr>
+            {volist name='data' id='rows'}
+            <tr class="bian_tr_txt">
+                <td><?=$rows['datetime']?></td>
+                <td><?=$rows['qishu']?></td>
+                <td><img src="/images/lottery/ball_2/{$rows['hm']['ball_1']}.png"></td>
+                <td><img src="/images/lottery/ball_2/{$rows['hm']['ball_2']}.png"></td>
+                <td><img src="/images/lottery/ball_2/{$rows['hm']['ball_3']}.png"></td>
+                <td><img src="/images/lottery/ball_2/{$rows['hm']['ball_4']}.png"></td>
+                <td><img src="/images/lottery/ball_2/{$rows['hm']['ball_5']}.png"></td>
+                <td>{$rows['auto']['1']} / {$rows['auto']['2']} / {$rows['auto']['3']}</td>
+                <td>{$rows['auto']['4']}</td>
+                <td>{$rows['auto']['5']} / {$rows['auto']['6']} / {$rows['auto']['7']}</td>
+            </tr>
+            {/volist}
+      </table>
+    </div>
+</div>
+</div>
+
+<div class="block_0"></div>	
+{include file='common/footer'}
+
+</body>
+</html>

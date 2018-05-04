@@ -1,0 +1,213 @@
+<?php exit;?>00155056454386317bb59583ece02c078ebbbbabffc4s:7853:"a:2:{s:8:"template";s:7789:"<html><!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8" /><meta name="format-detection" content="telephone=no" />
+		<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE11" />
+		<title>【<?php echo $parentCategoryInfo["name"];?>开奖历史】<?php echo $parentCategoryInfo["name"];?>开奖号码-<?php echo $parentCategoryInfo["name"];?>开奖结果查询-<?php echo $sys["site_title"];?></title>
+		<meta name="keywords" content="<?php echo $categoryInfo["keywords"];?>" />
+		<meta name="distribution" content="<?php echo $categoryInfo["description"];?>" />
+		<link rel="stylesheet" href="/themes/168pc/css/headorfood.css" />
+		<link rel="stylesheet" href="/themes/168pc/css/pk10kai.css" />
+		<link rel="stylesheet" href="/themes/168pc/css/calendar.css" />
+		<link rel="shortcut icon" href="/themes/168pc/img/icon/168favicon.ico/v=2017981058.html">
+		<link rel="stylesheet" href="/themes/168pc/css/user_adv.css" />
+		<script src="/themes/168pc/js/lib/bootstrap-3.3.0/js/tests/vendor/jquery.min.js"></script>
+		<script src="/themes/168pc/js/lib/bootstrap-3.3.0/dist/js/bootstrap.min.js"></script>
+		
+	</head>
+
+	<body>
+		<div class="bodybox pk10lzzhfxymbox zsbox">
+				<?php $__Template->display("themes/168pc/head"); ?>
+			<div class="haomabox">
+				<div class="waring" id="waringbox">
+					<div class="flash"><i></i></div>
+					温馨提示：因网络问题，开奖结果会有延迟，所以您需要去喝杯咖啡等一会儿！
+				</div>
+				<div class="haomaqu haomaquh"  id="pk10">
+					<div class="haomaqubox">
+						<div class="haomaqul">
+							<div class="haomaline">
+								<div class="haomaimg">
+									<a href="/<?php echo $parentCategoryInfo["urlname"];?>.html"><img src="<?php echo $parentCategoryInfo["image"];?>"></a>
+								</div>
+								<div class="numberqu">
+									<div class="nuberqutit">
+										<div class="divl">
+											<a href="/<?php echo $parentCategoryInfo["urlname"];?>.html"><span class="pk10tit">北京PK拾</span></a>第<span class="redfont preDrawIssue">587914</span>期&nbsp;开奖
+										</div>
+										<div class="divr">
+											全天<span class="totalCount">...</span>期，当前<span class="drawCount">...</span>期,剩<span class="sdrawCount">...</span>期
+										</div>
+									</div>
+									<div class="kajianhao">
+										<ul id="jnumber" class="numberbox">
+											<li class="nub09"><i style="font-size:10px">09</i></li>
+											<li class="nub08"><i style="font-size:10px">08</i></li>
+											<li class="nub06"><i style="font-size:10px">06</i></li>
+											<li class="nub04"><i style="font-size:10px">04</i></li>
+											<li class="nub02"><i style="font-size:10px">02</i></li>
+											<li class="nub07"><i style="font-size:10px">07</i></li>
+											<li class="nub10"><i style="font-size:10px">10</i></li>
+											<li class="nub03"><i style="font-size:10px">03</i></li>
+											<li class="nub01"><i style="font-size:10px">01</i></li>
+											<li class="nub05"><i style="font-size:10px">05</i></li>
+										</ul>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="haomaqur">
+							<div class="line linetime" id="timebox">
+								<div class="opening opentyle">开奖中...</div>
+								<div class="clock cuttime">
+									距&nbsp;&nbsp;<span class="nextIssue"></span>&nbsp;&nbsp;期开奖仅有
+									<span class="bgtime hour">0</span>
+									<span class="hourtxt">时</span>
+									<span class="bgtime minute">0</span>
+									<span>分</span>
+									<span class="bgtime second">0</span>
+									<span>秒</span>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="zhlzbox margt20 nopadding">
+				<div class="listhead">
+					<div class="listheadl">
+						<span class="lmms"><i>3</i>开奖记录</span>
+					</div>
+					<div class="listheadr">
+						<div class="listheadrr">
+							<div class="rightime">
+								<div id="dateframe">
+									<input type="text" class="date" placeholder="">
+									<div id="datebox"></div>
+									<i class="dropicond"></i>
+								</div>
+							</div>
+							<div>选择日期&nbsp;</div>
+						</div>
+						<div class="listheadrl">
+							<span id="today" class="checked">今天</span>
+							<span id="yesterday">昨天</span>
+							<span id="qianday">前天</span>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="kaijiangjl zhlzbox margt0">
+				<div class="listdiv">
+					<div class="hmfb displayblock botborder">
+						<div class="head">
+							<ul class="zoushimap" id="chakanchfb">
+								<li class="kaijiltit">查看车号分布：</li>
+								<li class="01">
+									<a href="javascript:">号码1</a>
+									<i></i>
+								</li>
+								<li class="02">
+									<a href="javascript:">号码2</a>
+									<i></i>
+								</li>
+								<li class="03">
+									<a href="javascript:">号码3</a>
+									<i></i>
+								</li>
+								<li class="04">
+									<a href="javascript:">号码4</a>
+									<i></i>
+								</li>
+								<li class="05">
+									<a href="javascript:">号码5</a>
+									<i></i>
+								</li>
+								<li class="06">
+									<a href="javascript:">号码6</a>
+									<i></i>
+								</li>
+								<li class="07">
+									<a href="javascript:">号码7</a>
+									<i></i>
+								</li>
+								<li class="08">
+									<a href="javascript:">号码8</a>
+									<i></i>
+								</li>
+								<li class="09">
+									<a href="javascript:">号码9</a>
+									<i></i>
+								</li>
+								<li class="10">
+									<a href="javascript:">号码10</a>
+									<i></i>
+								</li>
+								<!--<li class="reset">
+									还原
+								</li>-->
+							</ul>
+						</div>
+						<div class="head head2">
+							<ul class="zoushimap" id="daxiaodsfb">
+								<li class="kaijiltit">大小单双分布：</li>
+								<li id="dannum">
+									<a href="javascript:">单</a>
+									<i></i>
+								</li>
+								<li id="shuangnum">
+									<a href="javascript:">双</a>
+									<i></i>
+								</li>
+								<li id="danum">
+									<a href="javascript:">大</a>
+									<i></i>
+								</li>
+								<li id="xiaonum">
+									<a href="javascript:">小</a>
+									<i></i>
+								</li>
+								<li id="duizinum">
+									<a href="javascript:">对子号</a>
+									<i></i>
+								</li>
+								<li class="reset">
+									还原
+								</li>
+							</ul>
+						</div>
+					</div>
+					<div class="jrsmhmtj" id="jrsmhmtj">
+						<table cellpadding="1" cellspacing="1" border="0">
+							<tr>
+								<th>时间</th>
+								<th>期数</th>
+								<th id="numberbtn" class="numberbtn">
+									<span id="xshm" class="spanselect">显示号码</span>
+									<span id="xsdx">显示大小</span>
+									<span id="xsds">显示单双</span>
+								</th>
+								<th colspan="3">冠亚和</th>
+								<th colspan="5">1-5龙虎</th>
+							</tr>
+						</table>
+
+					</div>
+				</div>
+			</div>
+			
+			
+							<?php $__Template->display("themes/168pc/foot"); ?>
+
+	</body>
+	<script type="text/javascript" src="/themes/168pc/js/lib/jquery-1.7.2.min.js"></script>
+	<script type="text/javascript" src="/themes/168pc/js/lib/config.js"></script>
+	<script type="text/javascript" src="/themes/168pc/js/loacal/animate/animate.js"></script>
+	<script type="text/javascript" src="/themes/168pc/js/lib/GA.js"></script>
+	<script type="text/javascript" src="/themes/168pc/js/lib/calendar.js"></script>
+	<script type="text/javascript" src="/themes/168pc/js/loacal/pk10/pk10kai_history.js"></script>
+	<script type="text/javascript" src="/themes/168pc/js/loacal/pk10/pk10_kai.js"></script>
+
+</html>";s:12:"compile_time";i:1519028543;}";

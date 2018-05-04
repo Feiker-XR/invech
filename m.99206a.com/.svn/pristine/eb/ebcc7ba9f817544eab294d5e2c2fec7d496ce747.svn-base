@@ -1,0 +1,471 @@
+<?php if (!defined('THINK_PATH')) exit(); /*a:3:{s:80:"/mnt/wwwroot/www.dd788799.com/public/../application/index/mview/index/index.html";i:1507205736;s:79:"/mnt/wwwroot/www.dd788799.com/public/../application/index/mview/common/nav.html";i:1507205657;s:82:"/mnt/wwwroot/www.dd788799.com/public/../application/index/mview/common/header.html";i:1505452692;}*/ ?>
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="keywords" content="娱乐"/>
+<meta name="description" content="娱乐"/>
+<title>皇冠娱乐城----皇冠娱乐城官方网址打造东方最具公信力的第一线上娱乐城</title>
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black">	
+<link rel="shortcuticon" href="/favicon.ico" /><link rel="stylesheet" href="/css/bootstrap.min.css"><link rel="stylesheet" href="/css/font-awesome.min.css">	<link rel="stylesheet" type="text/css" href="/fonts-new/iconfont.css">	<link rel="stylesheet" href="/styles/ezweb.css"><link rel="stylesheet" href="/css/500f_new_wap.css"><script src="/js/jquery-2.2.0.min.js"></script><script src="/js/zhuce.js"></script><script src="/js/trend_listen_scrllo.js"></script><script src="/js/common.js"></script><script src="/js/bet_match.js"></script>	
+<script type="text/javascript">
+if (self != top){
+    top.location.href = self.location;href;
+}
+</script><style>body{margin:0; padding:0;}body, html{height: 100%;}.swiper-wrapper .swiper-container-horizontal>.swiper-pagination{bottom: 60px;left: 0;width: 100%;}</style>
+</head>
+<!--<frameset rows="*" frameborder="NO" border="0" framespacing="0" width="100%">
+
+<frame name="mem_index" src="<?php echo Url("Index/home"); ?>" style="background: #f2f2f2;"><noframes> -->
+<body bgcolor="#FFFFFF" text="#000000" style="height: 100%;">		<?php if(Session('uid')!= '' && Session('username') != '') {?>
+	<!--登陆后-->
+		<!--底部nav固定-->
+		<div class="nav500_bottom">
+			<span>
+				<a href="/index.php" class="nav500_bottom_a nav500_bottom_active">
+					<i class="iconfont icon-zhuye"></i>首页
+				</a>
+			</span>
+			<span>
+				<a target="mem_index" class="nav500_bottom_a" href="/promotions/index.html">
+					<i class="iconfont icon-zhuanxianglibao" style="font-size: 25px;"></i>优惠
+				</a>
+			</span>
+			<span>
+				<a target="mem_index" href="/index.php/pay/index.html" class="nav500_bottom_a">
+					<i class="iconfont icon-tubiao207"></i>存款
+				</a>
+			</span>
+			<span>
+				<a href="https://messenger.providesupport.com/messenger/0nye75kga3q931e9lwrn16k4q0.html" class="nav500_bottom_a" target="_blank">
+					<i class="iconfont icon-kefu"></i>客服
+				</a>
+			</span>
+			<span>
+				<a target="mem_index" href="<?php echo Url('user/index'); ?>" class="nav500_bottom_a">
+					<!--<a href="<?php echo Url('user/index'); ?>" class="nav500_bottom_a">-->
+					<i class="iconfont icon-iconfontcolor19-copy"></i>个人
+				</a>
+			</span>
+		</div>
+		<!--<script src="http://static.ydbimg.com/API/YdbOnline.js"></script>-->
+		<script>
+//		var YDB = new YDBOBJ();
+		$(function());
+			$("#nav500_bottom_reg").click(function(){
+				$("#zc_img").trigger("click")
+			})
+			
+			$("#reg_user_show").click(function(){
+				$(".login-modal").hide();
+				$(".reg-modal").show();
+				$("#zc_img").trigger("click")
+			})
+			
+
+			$("#nav500_bottom_a").click(function(){
+				var x = $("#J_loginModal")
+				x.show();
+				getKey()
+			})
+			$("#nav500_bottom_reg").click(function(){
+				var y = $("#J_regModal")
+				y.show();
+				getKey()
+			})	
+			$("#J_loginModal .close").click(function(){
+				$("#J_loginModal").hide()
+			})
+			$("#J_regModal .close").click(function(){
+				$("#J_regModal").hide()
+			})
+			$("#reg_user_show").click(function(){
+				$(".login-modal").hide();
+				$(".reg-modal").show();
+				$("#zc_img").trigger("click")
+			})
+		})
+		
+		</script>	
+
+	<?php }else{?>
+	<!--登陆前-->
+		<!--底部nav固定-->
+		<div class="nav500_bottom">
+			<span>
+				<a href="/index.php" class="nav500_bottom_a nav500_bottom_active">
+					<i class="iconfont icon-zhuye"></i>首页
+				</a>
+			</span>
+			<span>
+				<a target="mem_index" href="<?php echo Url('promotions/index'); ?>" class="nav500_bottom_a">
+					<i class="iconfont icon-zhuanxianglibao" style="font-size: 25px;"></i>优惠
+				</a>
+			</span>
+			<span>
+				<a target="mem_index" href="/index.php/pay/index.html" class="nav500_bottom_a">
+					<i class="iconfont icon-tubiao207"></i>存款
+				</a>
+			</span>
+			<span>
+				<a href="https://messenger.providesupport.com/messenger/0nye75kga3q931e9lwrn16k4q0.html" class="nav500_bottom_a" target="_blank">
+					<i class="iconfont icon-kefu"></i>客服
+				</a>
+			</span>
+			<span>
+				<a href="#" class="nav500_bottom_a" data-modal="#J_loginModal" id="nav500_bottom_a">
+					<i class="iconfont icon-iconfontcolor19-copy"></i>登录
+				</a>
+			</span>
+		</div>
+		
+		
+		<div id="J_loginModal" class="login-modal modal">
+			<div class="inner">
+				<div class="close" data-target="#J_loginModal"><i class="fa fa-close"></i></div>
+				<div class="wap_login_bg">
+					<img src="/img/logo.png" data-src="/img/logo.png">
+				</div>
+				
+				<form class="form-vertical" action="/index.php/index/login.html" method="post">
+				<input type="hidden" name="action" value="login">
+				<div class="form-group field-loginuser-username required">
+					<!--<label class="control-label" for="loginuser-username">用户名</label>-->
+					<div class="input-group">
+						<span class="wap_login_1">
+							<i><img src="/img/500f_login_2.png"></i>
+						</span>
+						<input type="text" id="username" class="form-control" name="username" placeholder="请输入会员账号">
+					</div>
+					<div class="help-block"></div>
+				</div>
+	
+				<div class="form-group field-loginuser-password required">
+				<!--<label class="control-label" for="loginuser-password">密码</label>-->
+				<div class="input-group">
+					<span class="wap_login_1">
+						<i><img src="/img/500f_login_3.png"></i>
+					</span>
+					<input type="password" id="password" class="form-control" name="password" placeholder="******">
+				</div>
+				<div class="help-block"></div>
+				</div>
+				<div class="form-group field-loginuser-username required">
+					<!--<label class="control-label" for="loginuser-username">验证码</label>-->
+					<?php if($sysConfig['loginYzm'] == '1'){ ?>
+					<div class="input-group">
+						<span class="wap_login_1">
+							<i><img src="/img/500f_login_4.png"></i>
+						</span>
+						
+						
+							<div class="row">
+								<div class="col-xs-9">
+									<input type="text" id="vlcodes" class="form-control" name="dlyzm" placeholder="验证码" >
+								</div>
+								<div class="col-xs-3">
+									<img id="vPic" alt="(点选此处产生新验证码 )" title="( 点选此处产生新验证码 )" src="<?php echo url('Mycaptcha/mobile_login'); ?>" onclick="this.src='<?php echo url('Mycaptcha/mobile_login'); ?>?r='+Math.random()" height="34">
+								</div>
+							</div>
+					
+							
+					</div>
+					<?php } ?>
+					<div class="help-block"></div>
+				</div>				
+				
+				<div class="form-group wap_500_login_now">
+	            	<a class="btn btn-green btn-lg btn-block" name="login-button" style="color: white;">立即登录</a>
+	            </div>
+	            <div class="wap_500_forget_psw">
+					<a href="javascript:void(0)" onclick="javascript:Go_forget_pwd();">忘记密码？</a>
+					<!--<input type="checkbox"> 下次自动登录-->
+				</div>
+				</form>
+			</div>
+		</div>		
+		
+		<div id="J_regModal" class="reg-modal modal">
+				<div class="inner container container_500F" style="padding-bottom:100px;padding: 0px 8px;">
+					<div class="close" data-target="#J_regModal">×</div>
+					<h1 class="container_500F_h1">————— 注册 —————</h1>
+					<p class="container_500F_p">——— REGISTER ———</p>
+					<form action="" id="register_form" class="form-horizontal">
+						<h2 class="register_form_bg_1">
+							会员登陆信息
+						</h2>
+						<div class="form-group">
+							<label for="" class="col-sm-2 control-label">登录账号：</label>
+							<div class="control-label-1">
+								<input type="text" name="zcname" id="zcusername" maxlength="9" class="form-control">
+							</div>
+							<div class="control-label-2">
+								<strong>*</strong>
+								<span>您在网站的登录账户，5-9个英文数字</span>
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="" class="col-sm-2 control-label">登录密码：</label>
+							<div class="control-label-1">
+								<input type="password" name="zcpwd1" id="zcpwd1" maxlength="12" onblur="pwStrength(this.value,0);" class="form-control">
+							</div>
+							<div class="control-label-2">
+								<strong>*</strong>
+								<span>由6-12位任意字符组成</span>
+							</div>
+						</div>
+						<div class="form-group password-degree">
+							<label for="" class="col-sm-2 control-label">密码强度：</label>
+							<div class="control-label-1 mb10">
+								<div class="btn-group">
+								  <button id="strength_L0" type="button" class="btn btn-default">弱</button>
+								   <button id="strength_M0" type="button" class="btn btn-default">中</button>
+								   <button id="strength_H0" type="button" class="btn btn-default">强</button>
+								</div>
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="" class="col-sm-2 control-label">确认密码：</label>
+							<div class="control-label-1">
+								<input type="password" name="zcpwd2" id="zcpwd2" maxlength="12" class="form-control">
+							</div>
+							<div class="control-label-2">
+								<strong>*</strong>
+								<span>由6-12位任意字符组成</span>
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="" class="col-sm-2 control-label">使用货币：</label>
+							<div class="control-label-1">
+								<select name="currency" class="form-control"><option value="1">RMB</option></select>
+							</div>
+							<div class="control-label-2">
+								<strong>*</strong>
+								<span>由6-12位任意字符组成</span>
+							</div>
+						</div>
+						<h2 class="register_form_bg_2">会员个人信息</h2>
+						<div class="form-group">
+							<label for="" class="col-sm-2 control-label">真实姓名：</label>
+							<div class="control-label-1">
+								<input type="text" name="zcturename" id="zcturename" class="form-control"></div>
+							<div class="control-label-2">
+								<strong>*</strong>
+								<span>名字必须与您用于提款及存款的银行户口所用名字相同</span>
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="" class="col-sm-2 control-label">提款密码：</label>
+							<div class="control-label-1">
+								<input type="password" name="qkpwd1" id="qkpwd1" maxlength="12" onblur="pwStrength(this.value,1);" class="form-control">
+							</div>
+							<div class="control-label-2">
+								<strong>*</strong>
+								<span>由6-12位任意字符组成</span>
+							</div>
+						</div>
+						<div class="form-group password-degree">
+							<label for="" class="col-sm-2 control-label">密码强度：</label>
+							<div class="control-label-1 mb10">
+								<div class="btn-group">
+								    <button id="strength_L1" type="button" class="btn btn-default">弱</button>
+								    <button id="strength_M1" type="button" class="btn btn-default">中</button>
+								    <button id="strength_H1" type="button" class="btn btn-default">强</button>
+								</div>
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="" class="col-sm-2 control-label">确认密码：</label>
+							<div class="control-label-1">
+								<input type="password" name="qkpwd2" id="qkpwd2" maxlength="12" class="form-control">
+							</div>
+							<div class="control-label-2">
+								<strong>*</strong>
+								<span>由6-20位任意字符组成</span>
+							</div>
+						</div>
+						<h2 class="register_form_bg_3">会员密保信息</h2>
+						<div class="form-group">
+							<label for="" class="col-sm-2 control-label">密保问题：</label>
+							<div class="control-label-1">
+								<select name="zcquestion" id="zcquestion" class="form-control">
+									<option value="您的车牌号码是多少？">您的车牌号码是多少？</option>
+			                        <option value="您初中同桌的名字？">您初中同桌的名字？</option>
+			                        <option value="您就读的第一所学校的名称？">您就读的第一所学校的名称？</option>
+			                        <option value="您第一次亲吻的对象是谁？">您第一次亲吻的对象是谁？</option>
+			                        <option value="少年时代心目中的英雄是谁？">少年时代心目中的英雄是谁？</option>
+			                        <option value="您最喜欢的休闲运动是什么？">您最喜欢的休闲运动是什么？</option>
+			                        <option value="您最喜欢哪支运动队？">您最喜欢哪支运动队？</option>
+			                        <option value="您最喜欢的运动员是谁？">您最喜欢的运动员是谁？</option>
+			                        <option value="您的第一辆车是什么牌子？">您的第一辆车是什么牌子？</option>
+								</select>
+							</div>
+							<div class="control-label-2">
+								<strong>*</strong>
+								<span>请选择密保问题</span>
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="" class="col-sm-2 control-label">密保答案：</label>
+							<div class="control-label-1">
+								<input type="text" name="zcanswer" id="zcanswer" class="form-control">
+							</div>
+							<div class="control-label-2">
+								<strong>*</strong>
+								<span>请填写您的密保答案</span>
+							</div>
+						</div>
+						<div class="form-group captcha-row">
+							<label for="" class="col-sm-2 control-label">验 证 码 ：</label>
+							
+
+							<div class="control-label-1 control-label-a">
+								<div class="input-group">
+								<input type="text" name="zcyzm" id="zcyzm" class="form-control" style="height:36px;" maxlength="4">
+								<span class="input-group-addon" style="width:30%;padding: 0;">
+								<img src="<?php echo url('Mycaptcha/mobile_reg'); ?>" onclick="this.src='<?php echo url('Mycaptcha/mobile_reg'); ?>?r='+Math.random()" alt="点击刷新" name="zc_img" id="zc_img" style="cursor:pointer;" width="80" height="30">
+								</span>
+								</div>
+							</div>
+
+							
+							<!--<div class="control-label-2">
+							<strong>*</strong><span>请填写验证码</span>
+							</div>-->
+						</div>			
+			
+						<div class="form-group">
+							<label class="col-sm-4 col-sm-offset-2 mt20">
+							<input type="checkbox" name="zccheck" id="zccheck" value="1"> 我已届满合法博彩年龄﹐且同意各项开户条约。<a href="#" id="AGREEMENT" class="red">"开户协议"</a>
+							</label>
+						</div>
+						<div class="form-group form-action">
+							<div class="mt20 mb20">
+								<button id="register">提交开户</button>
+							</div>
+						</div>
+						<div class="h10"></div>
+					</form>
+				</div>
+			</div>		
+		
+		
+		
+		<script>
+		$(function(){			$('[name="login-button"]').click(function(){				var data ={username:$('#username').val(), password:$('#password').val(),dlyzm:$('#vlcodes').val()};				$('[name="login-button"]').attr('disabled',true).css('background-color','grey');				$.post('<?php echo url('index/login'); ?>',data,function(json){					if('y'==json.status){						window.location.reload()					}else if('n'==json.status){						alert(json.info);						$('[name="login-button"]').attr('disabled',false).css('background-color','#e53f50');									}else{}									},'json');				return false;			});
+			//点击底部固定导航条切换
+			$(".nav500_bottom_a").click(function(){
+				var navThis = $(this);
+				navThis.css("color","#d9901e")
+				navThis.parent().siblings("span").find("a").css("color","#999999")
+				navThis.find("i").addClass("nav500_b_active");
+				navThis.parent().siblings("span").find("i").removeClass("nav500_b_active");
+				navThis.addClass("nav500_bottom_active").parent().siblings("span").find("a").removeClass("nav500_bottom_active")
+				
+			});
+			
+			$("#nav500_bottom_reg").click(function(){
+				$("#zc_img").trigger("click")
+			})
+			
+			$("#reg_user_show").click(function(){
+				$(".login-modal").hide();
+				$(".reg-modal").show();
+				$("#zc_img").trigger("click")
+			})
+			
+			
+			$("#nav500_bottom_a").click(function(){
+				var x = $("#J_loginModal")
+				x.show();
+				getKey()
+				$("#vPic").trigger("click")
+			})
+			$("#nav500_bottom_reg").click(function(){
+				var y = $("#J_regModal")
+				y.show();
+				getKey()
+			})	
+			$("#J_loginModal .close").click(function(){
+				$("#J_loginModal").hide()
+			})
+			$("#J_regModal .close").click(function(){
+				$("#J_regModal").hide()
+			})
+			$("#reg_user_show").click(function(){
+				$(".login-modal").hide();
+				$(".reg-modal").show();
+				$("#zc_img").trigger("click")
+			})				
+			
+			
+		})
+		
+		</script>
+
+	<?php }if(Session('uid') && Session('username')){?>
+	<!--登陆后-->
+		<!--顶部固定nav-->
+		<div class="nav500">
+			<div class="nav500_logo">
+				<a href="/index.php"><img src="/img/logo.png"/></a>
+			</div>
+			<!--<div class="nav500_left">
+				<i class="iconfont icon-caidan"></i>
+				<a href="/cunkuan.php" class="cl_fff f14 blue_focus">￥:<span id="user_money"><?=Session('money')?></span></a>
+			</div>-->
+			<div class="nav500_right_had">
+				<a href="javascript:void(0)" class="cl_fff f14 blue_focus" onclick="javascript:history.back(-1);"><img src="/img/narrow-leftwap2.png"></a>
+			</div>
+		</div>
+		<script language="javascript">	
+			function refresh_money(){
+			$.ajax({
+			    cache: false,
+			    url: "/index/home.html",
+				method:'post',
+				data:{ajax:1,get_money:1},
+			    success:function(data){
+			        if(data==""){
+			        }else{
+			         $data_arr=data.split("||");
+					 $("#user_money").html($data_arr[0]);
+					 // $("#user_jifen").html($data_arr[1]);
+			        }
+			    }
+			}); 
+			window.setTimeout("refresh_money();", 5000); 
+			}
+			refresh_money();
+		</script>
+
+	<?php }else{?>
+	<!--登陆前-->
+		<!--顶部固定nav-->
+		<div class="nav500">
+			<div class="nav500_logo">
+				<a href="/index.php"><img src="/img/logo.png" data-src="/img/logo.png"/></a>
+			</div>
+			<!--<div class="nav500_right_had">
+				<a href="javascript:void(0)" class="cl_fff f14 blue_focus" data-modal="#J_regModal" id="nav500_bottom_reg"><img src="/img/nav-right.png"></a>
+			</div>-->
+		</div>
+
+	<?php }?><iframe name="mem_index" src="/index/home.html" scrolling="no" frameborder="0"  id="iframeid"  style="display: none;"></iframe>
+</body>
+<!--</noframes> -->
+
+<script type="text/javascript">$(function(){	//  var ifm= $("#iframeid");
+//  
+//  ifm.css("height",$(window).height());
+//  ifm.css("width",$(window).width());
+////	alert(ifm.width)
+//  $(".hide_gif").hide();
+//  $("#iframeid").show();		$(window).resize(function(){
+
+	    var ifm= $("#iframeid");	    var bodyClientH = screen.height;	   	var bodyClientW = screen.width;	    
+	    ifm.width(bodyClientW);		    ifm.height(bodyClientH);	
+	    $(".hide_gif").hide();
+	    $("#iframeid").show();//	    	parent.location.reload();
+	})//传值监听走势图//var iframeId_out = $(window.frames["mem_index"].document).find(".wap_500_style")//iframeId_out.css()	//$(window).scroll(function());//  iframeId_middle.css()//})//var iframeId_style = $(window.frames["mem_index"].document).find(".wap_500_style");//var trendHeight = $(window.frames["mem_index"].document).height() - 90////iframeId_style.css();$(window).bind('scrollstart', function(){    var iframeId_style = $(window.frames["mem_index"].document).find(".wap_500_style");    iframeId_style.hide(); 	var trendHeightS = $(document).scrollTop() + $(window).height() - 90;    iframeId_style.css({   		"top" : trendHeightS    });});$(window).bind('scrollstop', function(e));    iframeId_middle.css({    	"top" : trendHeightP - 350    })        iframeId_style.show()});	$(window).scroll(function(){		windowTopAll = $(window).scrollTop();		childTopAll = $(window.frames["mem_index"].document).find("#s_betiframe")		childTopSport = $(window.frames["mem_index"].document).find("#J_SportsIFrame")		//		childTopSport.document.find("#bbbbbbbbbb")//		//		//		//		$("#bbbbbbbbbb").val(windowTopAll + 60)//		childTopAll.css()			})})</script>
+</html>

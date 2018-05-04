@@ -1,0 +1,244 @@
+{include file='/six/header'/}
+<body>
+<div class="content">
+<form name="orders" action="{:Url('lotterybet/six')}?type=0" method="post" target="OrderFrame">
+
+<table width="800" border="0" align="center" cellpadding="0" cellspacing="0" class="numberinfo">
+  <tr>
+  	<td>
+  			<div class="top">特别号=>波色 &生肖 &尾数</div>
+  	</td>
+  	<td align="center">
+  			<div id="openNumber">开奖号码载入中...</div>
+  	</td>
+    <td>
+    	<div class="time-item-all">
+    		<div class="time-item-num">&nbsp;&nbsp;第 <span id="open_qihao">0000000</span> 距离封盘：</div>
+    		<div class="time-item"><span id="hour_show">0 时</span>：<span id="minute_show">0 分</span>：<span id="second_show">0 秒</span></div>
+    	</div>
+    </td>
+  </tr>
+</table>
+<table border="0" align="center" cellpadding="0" cellspacing="1" class="bian" style="margin-top:10px;">
+  <tr>
+    <th>波色</th>
+    <th>赔率</th>
+    <th>所属号码</th>
+    <th>下注金额</th>
+    </tr>
+  <tr>
+    <td class="ball_txt">红波</td>
+    <td class="bian_td_odds" id="ball_7_o62">-</td>
+    <td class="bian_td_no">
+        <div class="ball_01">01</div>
+        <div class="ball_02">02</div>
+        <div class="ball_07">07</div>
+        <div class="ball_08">08</div>
+        <div class="ball_12">12</div>
+        <div class="ball_13">13</div>
+        <div class="ball_18">18</div>
+        <div class="ball_19">19</div>
+        <div class="ball_23">23</div>
+        <div class="ball_24">24</div>
+        <div class="ball_29">29</div>
+        <div class="ball_30">30</div>
+        <div class="ball_34">34</div>
+        <div class="ball_35">35</div>
+        <div class="ball_40">40</div>
+        <div class="ball_45">45</div>
+        <div class="ball_46">46</div>
+    </td>
+    <td class="bian_td_inp" id="ball_7_m62">&nbsp;</td>
+    </tr>
+  <tr>
+    <td class="ball_txt">蓝波</td>
+    <td class="bian_td_odds" id="ball_7_o63">-</td>
+    <td class="bian_td_no">
+        <div class="ball_03">03</div>
+        <div class="ball_04">04</div>
+        <div class="ball_09">09</div>
+        <div class="ball_10">10</div>
+        <div class="ball_14">14</div>
+        <div class="ball_15">15</div>
+        <div class="ball_20">20</div>
+        <div class="ball_25">25</div>
+        <div class="ball_26">26</div>
+        <div class="ball_31">31</div>
+        <div class="ball_36">36</div>
+        <div class="ball_37">37</div>
+        <div class="ball_41">41</div>
+        <div class="ball_42">42</div>
+        <div class="ball_47">47</div>
+        <div class="ball_48">48</div>
+     </td>
+    <td class="bian_td_inp" id="ball_7_m63">&nbsp;</td>
+    </tr>
+  <tr>
+    <td class="ball_txt">绿波</td>
+    <td class="bian_td_odds" id="ball_7_o64">-</td>
+    <td class="bian_td_no">
+        <div class="ball_05">05</div>
+        <div class="ball_06">06</div>
+        <div class="ball_11">11</div>
+        <div class="ball_16">16</div>
+        <div class="ball_17">17</div>
+        <div class="ball_21">21</div>
+        <div class="ball_22">22</div>
+        <div class="ball_27">27</div>
+        <div class="ball_28">28</div>
+        <div class="ball_32">32</div>
+        <div class="ball_33">33</div>
+        <div class="ball_38">38</div>
+        <div class="ball_38">39</div>
+        <div class="ball_43">43</div>
+        <div class="ball_44">44</div>
+        <div class="ball_49">49</div>
+    </td>
+    <td class="bian_td_inp" id="ball_7_m64">&nbsp;</td>
+  </tr>
+  </table>
+<table border="0" align="center" cellpadding="0" cellspacing="1" class="bian" style="margin-top:10px;">
+  <tr>
+    <th>生肖</th>
+    <th>赔率</th>
+    <th>所属号码</th>
+    <th>下注金额</th>
+    <th>生肖</th>
+    <th>赔率</th>
+    <th>所属号码</th>
+    <th>下注金额</th>
+  </tr>
+  <tr>
+    <td class="ball_txt">鼠</td>
+    <td class="bian_td_odds" id="ball_7_o65">-</td>
+    <td class="bian_td_no">{$sx_01}</td>
+    <td class="bian_td_inp" id="ball_7_m65">&nbsp;</td>
+    <td class="ball_txt">牛</td>
+    <td class="bian_td_odds" id="ball_7_o66">-</td>
+    <td class="bian_td_no">{$sx_02}</td>
+    <td class="bian_td_inp" id="ball_7_m66">&nbsp;</td>
+  </tr>
+  <tr>
+    <td class="ball_txt">虎</td>
+    <td class="bian_td_odds" id="ball_7_o67">-</td>
+    <td class="bian_td_no">{$sx_03}</td>
+    <td class="bian_td_inp" id="ball_7_m67">&nbsp;</td>
+    <td class="ball_txt">兔</td>
+    <td class="bian_td_odds" id="ball_7_o68">-</td>
+    <td class="bian_td_no">{$sx_04}</td>
+    <td class="bian_td_inp" id="ball_7_m68">&nbsp;</td>
+  </tr>
+  <tr>
+    <td class="ball_txt">龙</td>
+    <td class="bian_td_odds" id="ball_7_o69">-</td>
+    <td class="bian_td_no">{$sx_05}</td>
+    <td class="bian_td_inp" id="ball_7_m69">&nbsp;</td>
+    <td class="ball_txt">蛇</td>
+    <td class="bian_td_odds" id="ball_7_o70">-</td>
+    <td class="bian_td_no">{$sx_06}</td>
+    <td class="bian_td_inp" id="ball_7_m70">&nbsp;</td>
+  </tr>
+  <tr>
+    <td class="ball_txt">马</td>
+    <td class="bian_td_odds" id="ball_7_o71">-</td>
+    <td class="bian_td_no">{$sx_07}</td>
+    <td class="bian_td_inp" id="ball_7_m71">&nbsp;</td>
+    <td class="ball_txt">羊</td>
+    <td class="bian_td_odds" id="ball_7_o72">-</td>
+    <td class="bian_td_no">{$sx_08}</td>
+    <td class="bian_td_inp" id="ball_7_m72">&nbsp;</td>
+  </tr>
+  <tr>
+    <td class="ball_txt">猴</td>
+    <td class="bian_td_odds" id="ball_7_o73">-</td>
+    <td class="bian_td_no">{$sx_09}</td>
+    <td class="bian_td_inp" id="ball_7_m73">&nbsp;</td>
+    <td class="ball_txt">鸡</td>
+    <td class="bian_td_odds" id="ball_7_o74">-</td>
+    <td class="bian_td_no">{$sx_10}</td>
+    <td class="bian_td_inp" id="ball_7_m74">&nbsp;</td>
+  </tr>
+  <tr>
+    <td class="ball_txt">狗</td>
+    <td class="bian_td_odds" id="ball_7_o75">-</td>
+    <td class="bian_td_no">{$sx_11}</td>
+    <td class="bian_td_inp" id="ball_7_m75">&nbsp;</td>
+    <td class="ball_txt">猪</td>
+    <td class="bian_td_odds" id="ball_7_o76">-</td>
+    <td class="bian_td_no">{$sx_12}</td>
+    <td class="bian_td_inp" id="ball_7_m76">&nbsp;</td>
+  </tr>
+</table>
+<table border="0" align="center" cellpadding="0" cellspacing="1" class="bian" style="margin-top:10px;">
+  <tr>
+    <th>尾数</th>
+    <th>赔率</th>
+    <th>所属号码</th>
+    <th>下注金额</th>
+    <th>尾数</th>
+    <th>赔率</th>
+    <th>所属号码</th>
+    <th>下注金额</th>
+  </tr>
+  <tr>
+    <td class="ball_txt">0尾</td>
+    <td class="bian_td_odds" id="ball_10_o13">-</td>
+    <td class="bian_td_no"><div class="ball_10">10</div><div class="ball_20">20</div><div class="ball_30">30</div><div class="ball_40">40</div></td>
+    <td class="bian_td_inp" id="ball_10_m13">&nbsp;</td>
+    <td class="ball_txt">1尾</td>
+    <td class="bian_td_odds" id="ball_10_o14">-</td>
+    <td class="bian_td_no"><div class="ball_01">01</div><div class="ball_11">11</div><div class="ball_21">21</div><div class="ball_31">31</div><div class="ball_41">41</div></td>
+    <td class="bian_td_inp" id="ball_10_m14">&nbsp;</td>
+  </tr>
+  <tr>
+    <td class="ball_txt">2尾</td>
+    <td class="bian_td_odds" id="ball_10_o15">-</td>
+    <td class="bian_td_no"><div class="ball_02">02</div><div class="ball_12">12</div><div class="ball_22">22</div><div class="ball_32">32</div><div class="ball_42">42</div></td>
+    <td class="bian_td_inp" id="ball_10_m15">&nbsp;</td>
+    <td class="ball_txt">3尾</td>
+    <td class="bian_td_odds" id="ball_10_o16">-</td>
+    <td class="bian_td_no"><div class="ball_03">03</div><div class="ball_13">13</div><div class="ball_23">23</div><div class="ball_33">33</div><div class="ball_43">43</div></td>
+    <td class="bian_td_inp" id="ball_10_m16">&nbsp;</td>
+  </tr>
+  <tr>
+    <td class="ball_txt">4尾</td>
+    <td class="bian_td_odds" id="ball_10_o17">-</td>
+    <td class="bian_td_no"><div class="ball_04">04</div><div class="ball_14">14</div><div class="ball_24">24</div><div class="ball_34">34</div><div class="ball_44">44</div></td>
+    <td class="bian_td_inp" id="ball_10_m17">&nbsp;</td>
+    <td class="ball_txt">5尾</td>
+    <td class="bian_td_odds" id="ball_10_o18">-</td>
+    <td class="bian_td_no"><div class="ball_05">05</div><div class="ball_15">15</div><div class="ball_25">25</div><div class="ball_35">35</div><div class="ball_45">45</div></td>
+    <td class="bian_td_inp" id="ball_10_m18">&nbsp;</td>
+  </tr>
+  <tr>
+    <td class="ball_txt">6尾</td>
+    <td class="bian_td_odds" id="ball_10_o19">-</td>
+    <td class="bian_td_no"><div class="ball_06">06</div><div class="ball_16">16</div><div class="ball_26">26</div><div class="ball_36">36</div><div class="ball_46">46</div></td>
+    <td class="bian_td_inp" id="ball_10_m19">&nbsp;</td>
+    <td class="ball_txt">7尾</td>
+    <td class="bian_td_odds" id="ball_10_o20">-</td>
+    <td class="bian_td_no"><div class="ball_07">07</div><div class="ball_17">17</div><div class="ball_27">27</div><div class="ball_37">37</div><div class="ball_47">47</div></td>
+    <td class="bian_td_inp" id="ball_10_m20">&nbsp;</td>
+  </tr>
+  <tr>
+    <td class="ball_txt">8尾</td>
+    <td class="bian_td_odds" id="ball_10_o21">-</td>
+    <td class="bian_td_no"><div class="ball_08">08</div><div class="ball_18">18</div><div class="ball_28">28</div><div class="ball_38">38</div><div class="ball_48">48</div></td>
+    <td class="bian_td_inp" id="ball_10_m21">&nbsp;</td>
+    <td class="ball_txt">9尾</td>
+    <td class="bian_td_odds" id="ball_10_o22">-</td>
+    <td class="bian_td_no"><div class="ball_09">09</div><div class="ball_19">19</div><div class="ball_29">29</div><div class="ball_39">39</div><div class="ball_49">49</div></td>
+    <td class="bian_td_inp" id="ball_10_m22">&nbsp;</td>
+  </tr>
+  </table>
+<div class="button_body">
+		<a class="button submit" onclick="order();">下注</a>	
+		<a onclick="reset()" class="button again">重填</a>
+</div>
+</form>
+</div>
+<script src="/dd788799view/js/six/class_1.js?123" type="text/javascript"></script>
+<script type="text/javascript">$(function(){loadInfo(7);});</script>
+<IFRAME id="OrderFrame" name="OrderFrame" style="display:none"></IFRAME>
+</body>
+</html>

@@ -1,0 +1,267 @@
+<style>
+    .bg {
+        display: block;
+        width: 22px;
+        height: 22px;
+        margin: auto;
+        line-height: 22px;
+        color: white;
+        border-radius: 50%;
+    }
+
+    .grey {
+        background: grey;
+    }
+
+    .green {
+        background: green;
+    }
+
+    .red {
+        background: red;
+    }
+
+    .blue {
+        background: blue;
+    }
+
+    .biger {
+        width: auto;
+        border-radius: 45%;
+    }
+</style>
+
+<input type="hidden" name="playedGroup" value="<?=$groupId?>"/>
+<input type="hidden" name="playedId" value="<?=$playedId?>"/>
+<input type="hidden" name="type" value="<?=$type?>"/>
+<input type="hidden" name="playedName" value="<?=$played['name']?>"/>
+<!-- mobile 福彩3d_幸运28 -->
+<div id="sscContent">
+    <div class="lot-content clearfix">
+        <div class="fl main-left">
+            <div class="hd clearfix rehd retoptz" id="toptouzhu">
+                <div class="fl refl">
+                    快捷金额：<input type="text" class="txt" id="inputMoney">
+                </div>
+                <div class="kjanniu">
+                    <a href="javascript:void(0)" class="img-50" data-num="50"></a>
+                    <a href="javascript:void(0)" class="img-100" data-num="100"></a>
+                    <a href="javascript:void(0)" class="img-500" data-num="500"></a>
+                    <a href="javascript:void(0)" class="img-1000" data-num="1000"></a>
+                    <a href="javascript:void(0)" class="img-5000" data-num="5000"></a>
+                    <a href="javascript:void(0)" class="img-10000" data-num="10000"></a>
+                </div>
+            </div>
+            <div class="table-common clearfix reclearfix">
+                <script type="text/html" id="xy28_dw">
+                    <table width="100%" border="0" cellpadding="0" cellspacing="0" class="pp" action="xy28_dw" style="margin-top:10px;">
+                        <thead>
+                        <tr>
+                            <th>特码</th>
+                            <th>赔率</th>
+                            <th>金额</th>
+                            <th>特码</th>
+                            <th>赔率</th>
+                            <th>金额</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {{each pls[0].pls[0] value index}}
+                        <tr>
+                            {{each pls[0].pls _value _index}}
+                            <td onclick="setQuickPick(this,true)"><strong
+                                    class="bg {{_value[index].bg}}">{{_value[index].value}}</strong></td>
+                            <td onclick="setQuickPick(this,true)"><strong class="color-red pl"
+                                                                                              data-plid="{{_value[index].id}}">{{_value[index].pl}}</strong>
+                            </td>
+                            <td><input type="text" oninput="checkAmount()" class="table-txt" data-name="{{pls[0].name}}-{{_value[index].value}}"
+                                       data-plid="{{_value[index].id}}" data-pl="{{_value[index].pl}}"></td>
+                            {{/each}}
+                        </tr>
+                        {{/each}}
+                        </tbody>
+                    </table>
+                    <br/><br/>
+
+                    <table width="100%" border="0" cellspacing="0" cellpadding="0" class="pp" action="xy28_dw">
+                        <thead>
+                        <tr>
+                            <th>选项</th>
+                            <th>赔率</th>
+                            <th>金额</th>
+                            <th>选项</th>
+                            <th>赔率</th>
+                            <th>金额</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {{each pls[1].pls value index}}
+                        <tr>
+                            {{each value _value _index}}
+                            <td onclick="setQuickPick(this,true)"><strong
+                                    class="bg {{_value.bg}} {{_value.eclass}}">{{_value.value}}</strong></td>
+                            <td onclick="setQuickPick(this,true)"><strong class="color-red pl"
+                                                                                              data-plid="{{_value.id}}">{{_value.pl}}</strong>
+                            </td>
+                            <td><input type="text" oninput="checkAmount()" class="table-txt" data-name="{{pls[1].name}}-{{_value.value}}"
+                                       data-plid="{{_value.id}}" data-pl="{{_value.pl}}"></td>
+                            {{/each}}
+                        </tr>
+                        {{/each}}
+                        </tbody>
+                    </table>
+                    <br/><br/>
+                    <table cellspacing="1" cellpadding="0" border="0" style="width: 100%;">
+                        <tbody>
+                        <tr>
+                            <td>
+                                <div class="bg biger red" style="width:55px;">{{pls[2].name}}</div>
+                            </td>
+                            <td><a href="javascript:void(0);" title="按此下注" style="color:red;">{{pls[2].pls[0].pl}}</a>
+                            </td>
+                            {{each pls value index}}
+                            <td style="text-align: left;">
+                                <select id="tm3y1_{{index+1}}" onchange="get3data()" class="select_data table-txt">
+                                    {{each options _value _index}}
+                                    <option value="{{_value}}">{{_value}}</option>
+                                    {{/each}}
+                                </select>
+                            </td>
+                            {{/each}}
+
+                            <td style="text-align: left">
+                                <span>下注金额：</span>
+                                <span>
+                                    <input id="ball_5_1"
+                                           class="inp1 table-txt"
+                                           type="text"
+                                           maxlength="7"
+                                           data-name="{{pls[2].name+'-0,0,0'}}"
+                                           data-plid="{{pls[2].pls[0].id}}"
+                                           data-pl="{{pls[2].pls[0].pl}}"
+                                           oninput="get3data()">
+                                </span>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </script>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $(function () {
+        //循环表格放到table-common
+        var playedId = "<?=$playedId?>";
+        $.getJSON("/game/pl/playedId/" + playedId, function (data) {
+            pls = data;
+            console.log(data);
+            // 特码
+            var temp = [];
+            for (var j = 0, _pls = pls[0].pls; j < _pls.length; j += 7) {
+                var t = [];
+                for (var r = j; r < 7 + j; r++) {
+                    switch (parseInt(_pls[r].value)) {
+                        case 1:
+                        case 4:
+                        case 7:
+                        case 10:
+                        case 16:
+                        case 19:
+                        case 22:
+                        case 25:
+                            _pls[r].bg = 'green';
+                            break;
+                        case 2:
+                        case 5:
+                        case 8:
+                        case 11:
+                        case 17:
+                        case 20:
+                        case 23:
+                        case 26:
+                            _pls[r].bg = 'blue';
+                            break;
+                        case 3:
+                        case 6:
+                        case 9:
+                        case 12:
+                        case 15:
+                        case 18:
+                        case 21:
+                        case 24:
+                            _pls[r].bg = 'red';
+                            break;
+                        default:
+                            _pls[r].bg = 'grey';
+                    }
+                    t.push(_pls[r])
+                }
+                temp.push(t);
+            }
+            pls[0].pls = temp;
+            // 双面
+            var arr = ['大', '小', '红波', '豹子', '单', '双', '绿波', '大单', '小单', '蓝波', '大双', '小双', '极大', '极小'];
+            pls[1].pls.sort(function (a, b) {
+                return arr.indexOf(a.value) - arr.indexOf(b.value);
+            });
+            arr = [];
+            for (var i = 0, _pls = pls[1].pls, len = 4; i < _pls.length; i += len) {
+                temp = [];
+                if (i == 4) {
+                    len = 3
+                } else if (i > 9) {
+                    len = 2
+                }
+                for (var j = i; j < i + len; j++) {
+                    switch (_pls[j].value) {
+                        case '大':
+                        case '小':
+                        case '单':
+                        case '双':
+                        case '红波':
+                        case '极大':
+                        case '极小':
+                            _pls[j].bg = 'red';
+                            break;
+                        case '绿波':
+                        case '小':
+                        case '豹子':
+                            _pls[j].bg = 'green';
+                            break;
+                        default:
+                            _pls[j].bg = 'blue';
+                            break;
+                    }
+                    if (_pls[j].value.length == 2) {
+                        _pls[j].eclass = 'biger';
+                    } else {
+                        _pls[j].eclass = ''
+                    }
+                    temp.push(_pls[j]);
+                }
+                arr.push(temp);
+            }
+            pls[1].pls = arr;
+            //  checkbox
+            var options = [];
+            for (var i = 0; i < 28; i++) {
+                options.push(i);
+            }
+            var html = template("xy28_dw", {pls: pls, options: options});
+            $('.table-common').html(html);
+        });
+    });
+
+    function get3data() {
+        if ($('#ball_5_1').val() != '') {
+            var arr = [];
+            $('.select_data').each(function (index, value) {
+                arr.push($(value).val());
+            });
+            var _dataName = $('#ball_5_1').attr('data-name').split('-')[0];
+            $('#ball_5_1').attr('data-name', _dataName + '-' + arr.join(','));
+        }
+    }
+</script>

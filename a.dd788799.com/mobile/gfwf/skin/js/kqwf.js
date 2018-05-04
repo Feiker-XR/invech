@@ -1,0 +1,602 @@
+//官方玩法返回 {actionData:'12,34,56', actionNum:8}; 混合玩法返回数组(后台已经处理混合,这里不需要了);
+//快钱玩法返回 [{actionData:'万位-大',actionNum:1,mode:10,plid:1,bonusProp:1.98}]
+var pls;//玩法的所有赔率
+var plg;//当前赔率组
+
+template.defaults.imports.dateFormat = function(date, format){/*[code..]*/};
+template.defaults.imports.timestamp = function(value){return value * 1000};
+template.defaults.imports.number = function(value){
+	if(/^[1-9][0-9]?$/.test(value) && value<10){
+		return '0' + value;
+	}else{
+		return value;
+	}
+};
+
+function my_debug(){
+	var a = 1;
+	b = a + 1;
+}
+
+//一个玩法下有多种子玩法(或者说是赔率组),
+
+//一个号码=一注,每个号码有自己的赔率; 
+//UI每注一个input
+function pick_dw(){
+	var codes = [];
+	$(".table-common input").each(function() {
+        if ($(this).val().length > 0) {
+        	var code = {
+        		actionData:$(this).data('name'),
+        		actionNum:1,
+        		mode:$(this).val(),
+        		plid:$(this).data('plid'),
+        		bonusProp:$(this).data('pl')
+        	};
+        	codes.push(code);
+        }	
+	});
+	
+	return codes;	
+}
+
+//N个(固定)数字为一注,注单赔率固定
+//UI每注一组复选框和一个input
+function pick_combin_ds(){
+	var code=[], 
+		len=1,
+		codeLen=parseInt(this.attr('length')), 
+		delimiter=this.attr('delimiter')||"";
+	// console.log(this);
+	if(this.has('input:checkbox:checked').length!=codeLen) throw('请选'+codeLen+'位数字');
+	
+	var inputMoney = $('#inputMoney').val();
+	if (typeof inputMoney == 'undefined' || inputMoney == '') {
+		throw('请输入投注金额');
+	}
+
+	this.each(function(i){
+		var $code=$('input:checkbox:checked', this);
+		if($code.length==0){
+			//throw('选择号码不正确');
+			code[i]='-';
+			console.log(code)
+		}else{
+			//len*=$code.length;
+			code[i]=[];
+			$code.each(function(){
+				code[i].push(this.value);
+			});
+			//code[i]=code[i].join(delimiter);			
+		}
+	});
+
+	var descar = DescartesAlgorithm.apply(null, code)
+	// 过滤掉对子和豹子的号码
+	.filter(function(v){ return (!isRepeat(v)) });
+
+	var codes = [];	
+	var plid = plg.pls[0].id;
+	var bonusProp = plg.pls[0].pl;	
+	var actionData;
+	$.each( descar, function(i,v){
+		actionData = plg.name + '-' + v.join(',');
+		codes.push({actionData:actionData, actionNum:1,mode:inputMoney,plid:plid,bonusProp:bonusProp});
+	});
+
+	return codes;
+}
+
+//于前三、中三、后三0~9任选2个号进行投注，当开奖结果任二数与所选的号码相同时，即为中奖。
+// 投注者购买后三二字组合，选择2个相同号码如为11，当期开奖结果如为xx11x、xx1x1、xxx11、皆视为中奖。
+//排列-不去重-单式 与400w保持一致
+function ssc_kq_2zzh(){ //与pick_combin_ds相比不去重
+	var code=[], 
+		len=1,
+		codeLen=parseInt(this.attr('length')), 
+		delimiter=this.attr('delimiter')||"";
+	// console.log(this);
+	if(this.has('input:checkbox:checked').length!=codeLen) throw('请选'+codeLen+'位数字');
+	
+	var inputMoney = $('#inputMoney').val();
+	if (typeof inputMoney == 'undefined' || inputMoney == '') {
+		throw('请输入投注金额');
+	}
+
+	this.each(function(i){
+		var $code=$('input:checkbox:checked', this);
+		if($code.length==0){
+			//throw('选择号码不正确');
+			code[i]='-';
+			console.log(code)
+		}else{
+			//len*=$code.length;
+			code[i]=[];
+			$code.each(function(){
+				code[i].push(this.value);
+			});
+			//code[i]=code[i].join(delimiter);			
+		}
+	});
+
+	var descar = DescartesAlgorithm.apply(null, code);
+
+	var codes = [];	
+	var plid = plg.pls[0].id;
+	var bonusProp = plg.pls[0].pl;	
+	var actionData;
+	$.each( descar, function(i,v){
+		actionData = plg.name + '-' + v.join(',');
+		codes.push({actionData:actionData, actionNum:1,mode:inputMoney,plid:plid,bonusProp:bonusProp});
+	});
+
+	return codes;
+}
+
+//固定长度
+function pick_combin_fs(){
+	var code=[], 
+		len=1,
+		codeLen=parseInt(this.attr('length')), 
+		delimiter=this.attr('delimiter')||"";
+	if(this.has('input:checkbox:checked').length!=codeLen) throw('请选'+codeLen+'位数字');
+	
+	var inputMoney = $('#inputMoney').val();
+	if (typeof inputMoney == 'undefined' || inputMoney == '') {
+		throw('请输入投注金额');
+	}
+	this.each(function(i){
+		var $code=$('input:checkbox:checked', this);
+		if($code.length==0){
+			code[i]='-';
+		}else{
+			len*=$code.length;
+			code[i]=[];
+			$code.each(function(){
+				code[i].push(this.value);
+			});
+			code[i]=code[i].join(delimiter);
+		}
+	});
+	
+	//var pl = $('#pl');
+	//var plid = pl.data('plid');
+	//var bonusProp = $('#pl').text();
+	var plid = plg.pls[0].id;
+	var bonusProp = plg.pls[0].pl;
+	var actionData = plg.name + '-' + code.join(',');
+	return {actionData:actionData, actionNum:len,mode:inputMoney,plid:plid,bonusProp:bonusProp};
+}
+
+//pick_combine_fs是直选复式,pick_combine是组合
+function pick_combine(){
+	var code=[];
+	var inputMoney = $('#inputMoney').val();
+	if (typeof inputMoney == 'undefined' || inputMoney == '') {
+		throw('请输入投注金额');
+	}
+
+	var pl = plg.pls[0]
+	var $code = $('input:checkbox:checked', this);
+	if($code.length < pl.value){
+		throw('请至少选'+ pl.value +'位数字');
+	}
+
+	$code.each(function(){
+		code.push(this.value);
+	});
+	
+	var len = combine(code, pl.value).length;
+	var plid = pl.id;
+	var bonusProp = pl.pl;
+	var actionData = plg.name + '-' + code.join(',');
+
+	return {actionData:actionData, actionNum:len,mode:inputMoney,plid:plid,bonusProp:bonusProp};
+}
+
+//X个数字为一组=一注,赔率随所选数字个数变化;
+//UI每注一组复选框和一个input
+function pick_combin_one(){
+
+}
+
+function ssc_kq_z3(){
+	
+	var code=[],codeLen=parseInt(this.attr('min-len'));
+
+	var $code=$('input:checkbox:checked', this);
+	if($code.length<codeLen){
+		throw('请至少选'+codeLen+'位数字');
+	}
+
+	$code.each(function(){
+		code.push(this.value);
+	});
+	
+	var index = code.length - 5;
+
+	var plid = plg.pls[index].id;
+	var bonusProp = plg.pls[index].pl;
+	var actionData = plg.name + '-' + code.join(',');
+
+	$('#pl').text(bonusProp);
+
+	var inputMoney = $('#inputMoney').val();
+	if (typeof inputMoney == 'undefined' || inputMoney == '') {
+		throw('请输入投注金额');
+	}
+
+	return {actionData:actionData, actionNum:1,mode:inputMoney,plid:plid,bonusProp:bonusProp};
+}
+
+function ssc_kq_z6(){
+	
+	var code=[];
+	var min_len = parseInt(this.attr('min-len'));
+	var max_len = parseInt(this.attr('max-len'));
+
+	var $code=$('input:checkbox:checked', this);
+	if($code.length<min_len || $code.length>max_len){
+		throw('请选'+min_len+'-'+max_len+'位数字');
+	}
+
+	$code.each(function(){
+		code.push(this.value);
+	});
+	
+	var index = code.length - 4;
+
+	var plid = plg.pls[index].id;
+	var bonusProp = plg.pls[index].pl;
+	var actionData = plg.name + '-' + code.join(',');
+
+	$('#pl').text(bonusProp);
+
+	var inputMoney = $('#inputMoney').val();
+	if (typeof inputMoney == 'undefined' || inputMoney == '') {
+		throw('请输入投注金额');
+	}
+
+	return {actionData:actionData, actionNum:1,mode:inputMoney,plid:plid,bonusProp:bonusProp};
+}
+
+
+var six_nums = [
+					[1,11,21,31,41],
+					[2,12,22,32,42],
+					[3,13,23,33,43],
+					[4,14,24,34,44],
+					[5,15,25,35,45],
+					[6,16,26,36,46],
+					[7,17,27,37,47],
+					[8,18,28,38,48],
+					[9,19,29,39,49],
+					[10,20,30,40]
+				];
+
+// 定位
+function six_dw(){
+	return pick_dw.call(this);
+}
+// 正码
+function six_zm(){
+	return pick_dw.call(this);
+}
+// 连码
+function six_lm(){
+	return pick_combine.call(this);
+}
+// 生肖连
+function six_wsl(){
+	return pick_combine.call(this);
+}
+// 合肖
+function six_hx(){
+	return pick_combine.call(this);
+}
+// 生肖连
+function six_sxl(){
+	return pick_combine.call(this)
+}
+// 全不中
+function six_qbz(){
+    return pick_combine.call(this);
+}
+// 肖尾
+function six_xw() {
+	return pick_dw.call(this);
+}
+
+//pk10
+function pk10_dw(){
+	return pick_dw.call(this);
+}
+
+// 福彩3d
+// -- 定位
+function fc3d_dw(){
+	return pick_dw.call(this);
+}
+// 复选框定位
+function fc3d_checkbox_dw(){
+    return pick_combin_fs.call(this);
+}
+// -- 组合
+function fc3d_zx() {
+	return pick_dw.call(this);
+}
+// 复选组合  只能选一注
+function fc3d_checkbox_zx() {
+    var code = [];
+    $('.table-common table').each(function(index,value){
+        if($(value).find('input:checked').length > 1 || $(value).find('input:checked').length == 0){
+            throw('仅且只能选择一组号码');
+        }else{
+            code.push($(value).find('input:checked').val());
+        }
+    })
+
+    var inputMoney = $('#inputMoney').val();
+    if (typeof inputMoney == 'undefined' || inputMoney == '') {
+        throw('请输入投注金额');
+    }
+
+    var plid = $('.pl.red').attr('data-plid');
+    var bonusProp = $('.pl.red').text();
+    var actionData = plg.name + '-' + code.join(',');
+    return {actionData:actionData, actionNum:1,mode:inputMoney,plid:plid,bonusProp:bonusProp};
+}
+
+// 广东快乐十分
+function klsf_sm(){
+    return pick_dw.call(this);
+}
+
+// 数字
+function klsf_sz() {
+    return pick_dw.call(this);
+}
+// 龙虎
+function klsf_lh() {
+    return pick_dw.call(this);
+}
+
+// pk10 双面
+function pk10_sm() {
+    return pick_dw.call(this);
+}
+// 数字
+function pk10_sz() {
+    return pick_dw.call(this);
+}
+// 冠亚和
+function pk10_gyh() {
+    return pick_dw.call(this);
+}
+
+// 幸运28
+function xy28_dw() {
+    return pick_dw.call(this);
+}
+
+// 江苏快三 和值
+function k3_hz() {
+    return pick_dw.call(this);
+}
+// 三不同
+function k3_sbt(len){
+    var code=[],codeLen=parseInt(this.attr('min-len'));
+
+    var $code=$('input:checkbox:checked', this);
+    if($code.length<codeLen){
+        throw('请至少选'+codeLen+'位数字');
+    }
+    $code.each(function(){
+        code.push(this.value);
+    });
+    var plid = pls[0].pls[0].id;
+    var bonusProp = pls[0].pls[0].pl;
+    var actionData = pls[0].name + '-' + code.join(',');
+
+    $('#pl').text(bonusProp);
+
+    var inputMoney = $('#inputMoney').val();
+    if (typeof inputMoney == 'undefined' || inputMoney == '') {
+        throw('请输入投注金额');
+    }
+
+    return {actionData:actionData, actionNum:C(code.length,len ? len : 3),mode:inputMoney,plid:plid,bonusProp:bonusProp};
+}
+// 二同号单选
+function k3_2dx() {
+    $('.tr_check').each(function(index,value){
+        // 判断长度是不是够
+        if($(value).find('input:checked').length < 1){
+            throw('每位至少选一位组成一组');
+            return;
+        }
+    });
+
+    var $code = $('input:checked',this),code = [];
+    $code.each(function(){
+        code.push(this.value);
+    });
+    var plid = pls[0].pls[0].id;
+    var bonusProp = pls[0].pls[0].pl;
+
+    var arr1 = [],arr2 = [];
+    for(var i=0; i<code.length; i++){
+        if(code[i] > 10){
+            arr1.push(code[i]);
+        }else{
+            arr2.push(code[i]);
+        }
+    }
+    var actionData = pls[0].name + '-' + arr1.join(' ') +',' +arr2.join(' ');
+    var inputMoney = $('#inputMoney').val();
+    if (typeof inputMoney == 'undefined' || inputMoney == '') {
+        throw('请输入投注金额');
+    }
+    return {actionData:actionData, actionNum:arr1.length*arr2.length,mode:inputMoney,plid:plid,bonusProp:bonusProp};
+}
+
+// 二不同
+function k3_2bt() {
+    return k3_sbt.call(this,2);
+}
+
+//400w中 合肖 当年生肖和其他生肖赔率一致;
+//       连肖 当年生肖和其他生肖赔率不一致; 
+//       实现做成赔率一致;生肖表示的号码(和数量)不确定,生肖的赔率也不确定;
+//       若实现为 一个玩法组 比如 二肖 对应 两个赔率, 一个是当年生肖赔率,一个是非当年生肖赔率, 只是写死了;
+
+//将一组赔率根据指定长度分行,一行一个数组
+//数组每N个分为一小组
+function group(array,sub_len){
+
+    var index = 0;
+    var newArray = [];
+
+    while(index < array.length) {
+        newArray.push(array.slice(index, index += sub_len));
+    }
+
+    return newArray;
+}
+
+function group2(array,sub_len){
+		
+    var index = 0;
+    var newArray = [];
+
+    while(index < array.length) {
+        newArray.push(array.slice(index, index += sub_len));
+        sub_len--;
+    }
+
+    return newArray;
+}
+
+// 对数字盘进行分组展示
+function group_six_sz(array){
+    var newArray = [[],[],[],[],[],[],[],[],[],[]];
+    for(var i=0;i<array.length;i++){
+    	var ys = (i+1)%10;
+    	if(0==ys){
+    		ys = 10;
+    	}
+    	newArray[ys-1].push(array[i]);
+    }
+    return newArray;
+}
+
+function group_six_sm(array){
+    var newArray = [[],[],[]];
+    for(var i=0;i<10;i++){
+    	if(i%2 == 0){
+    		newArray[0].push(array[i]);
+    	}else{
+    		newArray[1].push(array[i]);
+    	}
+    }
+    for(var i=10;i<array.length;i++){
+    	newArray[2].push(array[i]);
+    }    
+    return newArray;
+}
+
+function group_six_sm(array){
+    var newArray = [[],[],[]];
+    for(var i=0;i<10;i++){
+    	if(i%2 == 0){
+    		newArray[0].push(array[i]);
+    	}else{
+    		newArray[1].push(array[i]);
+    	}
+    }
+    for(var i=10;i<array.length;i++){
+    	newArray[2].push(array[i]);
+    }    
+    return newArray;
+}
+
+function get_sx(){
+	var lunar = chineseLunar.solarToLunar(new Date());
+	var sx = chineseLunar.format(lunar, 'A');
+
+	var sx_array = ['猪','狗','鸡','猴','羊','马','蛇','龙','兔','虎','牛','鼠','猪','狗','鸡','猴','羊','马','蛇','龙','兔','虎','牛'];
+	var index = sx_array.indexOf(sx);
+	var sx_subarray = sx_array.slice(index,index+12);
+
+
+	var nums = [[1,13,25,37,49],[2,14,26,38],[3,15,27,39],[4,16,28,40],
+				[5,17,29,41],[6,18,30,42],[7,19,31,43],[8,20,32,44],
+				[9,21,33,45],[10,22,34,46],[11,23,35,47],[12,24,36,48]
+			   ];
+	var sx_obj = {};
+	for(i=0;i<12;i++){
+		Object.defineProperty(sx_obj, sx_subarray[i], {
+			value: nums[i],
+		 	writable: false,
+            enumerable: true
+		});
+	}
+	return sx_obj;
+}
+
+// 获取生肖最终的号码和赔率 @pls 赔率接口
+function get_final_sx(pls){
+    var result = get_sx();
+    var _key;
+    var animals = ['鼠','牛','虎','兔','龙','蛇','马','羊','猴','鸡','狗','猪'];    // 生肖顺序
+    // 寻找当前生肖年份
+    for(var key in result){
+        if(result[key].length == 5){
+            _key = key;
+            break;
+        }
+    }
+    // 排序获取赔率
+    var _index = animals.indexOf(_key);
+    // 重新排序
+    animals = animals.slice(_index).concat(animals.slice(0,_index));
+
+    var arr = [];
+    for(var i = 0; i < animals.length; i++){
+        var obj = {
+            name: animals[i],
+            pl: pls ? pls[0].pls[i].pl : undefined,
+            nums: [],
+            plid: pls ? pls[0].pls[i].id : undefined
+        };
+        for(var p in result){
+            if(p == animals[i]){
+                obj.nums = result[p];
+            }
+        }
+        // 小于10的拼装呈两位
+        for(var t = 0; t < obj.nums.length; t++){
+            if(obj.nums[t]<10){
+                obj.nums[t] = '0'+ obj.nums[t];
+            }else{
+                obj.nums[t] += '';
+            }
+        }
+        arr.push(obj);
+    }
+
+    // 最终再组合回去
+    arr = arr.slice(arr.length-_index).concat(arr.slice(0,arr.length-_index));
+
+    //格式化
+    var new_arr = [];
+    for(var i = 0; i < arr.length; i+=2){
+        var _arr = [];
+        _arr.push(arr[i]);
+        _arr.push(arr[i+1]);
+        new_arr.push(_arr);
+    }
+    arr = new_arr;
+
+    return arr;
+}

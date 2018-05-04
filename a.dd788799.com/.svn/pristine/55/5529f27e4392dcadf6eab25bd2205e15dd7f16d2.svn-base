@@ -1,0 +1,29 @@
+<?php
+namespace app\common\model;
+use think\Model;
+
+class UserMessage extends Base{
+
+    protected $table = 'gygy_user_message';
+    
+    protected $createTime = 'created_at';
+    protected $updateTime = 'updated_at';
+    protected $autoWriteTimestamp = 'datetime';
+
+
+    use \traits\model\SoftDelete;
+    protected $deleteTime = 'deleted_at';
+    //deleted_at字段必须是可空,软删除模型的基本查询作用域默认是deleted_at IS NULL 
+
+    public function receiver(){
+        return $this->morphTo(['recv_type','recv_uid'],[
+            'member'    =>  \app\common\model\Member::class,
+            'agent'     =>  \app\common\model\Member::class,
+            'admin'     =>  \app\common\model\Admin::class,
+        ]);              
+    }
+
+    public function message(){
+        return $this->belongsTo('Message','message_id','id');
+    }
+}

@@ -1,0 +1,308 @@
+<?php
+namespace app\admin\controller;
+use app\admin\Login;
+
+use app\common\model\Config as ConfigModel;
+use app\common\model\Notice as NoticeModel;
+
+use think\Hook;
+use app\common\model\Member as UserModel;
+use app\common\model\Money as MoneyModel;
+use app\common\model\ActionLog as LogModel;
+use app\service\UserAgent;
+use app\service\JsonExtra;
+use app\service\Sms;
+use app\service\CacheStorage;
+
+use Closure;
+use app\service\Pipeline;
+
+class System extends Login{
+    
+    public function config(){
+
+        $this->view->page_header = '参数列表';
+
+        $request = request();
+        $list = ConfigModel::getList($request);
+        $list->appends($request->param());
+        $this->assign('list',$list);
+
+        return $this->fetch();
+    }
+     public function config_form(){
+        $request = request();
+         $params = $request->param(); 
+         if(!empty($params['id'])){
+             $info =  ConfigModel::get(['id'=>$params['id']]);
+              $this->assign('info',$info);  
+         }
+          return view();
+    }
+     public function config_save(){
+        $request = request();
+        $params = $request->param();
+        $id =  !empty($params['id'])? $params['id']:'';
+        $name =  !empty($params['name'])? $params['name']:'';
+        $title =  !empty($params['title'])? $params['title']:'';
+        $value =  !empty($params['value'])? $params['value']:'';
+       
+        $data = [
+           
+            'name'      => $name,
+            'title'      => $title,
+            'value'      => $value,
+            
+        ];
+         $res = [];
+        if($id){
+           
+            $config = ConfigModel::get(intval($id));
+            $list = $config->validate('System.config')->save($data);
+            if($list){
+                LogModel::log(LogModel::BUSINESS_TYPE_EDIT,$config,LogModel::BUSINESS_TYPES[LogModel::BUSINESS_TYPE_EDIT]);
+               $res['msg'] = "操作成功";
+            }else{
+                $res['msg']= $config->getError();
+            }
+             echo json_encode($res);
+        }else{
+            
+            $config = new ConfigModel($data);
+            $list = $config->validate('System.config')->save($data);
+            if($list){
+               LogModel::log(LogModel::BUSINESS_TYPE_ADD,$config,LogModel::BUSINESS_TYPES[LogModel::BUSINESS_TYPE_ADD]);
+                $res['msg'] = "操作成功";
+            }else{
+                $res['msg']= $config->getError();
+             }
+             echo json_encode($res);
+        }
+    }
+
+    public function config_del(){
+        $request = request();
+        $params = $request->param();
+        $config = ConfigModel::get(intval($params['id']));
+
+        $list = $config->delete();
+        $res = [];
+        if($list){
+           LogModel::log(LogModel::BUSINESS_TYPE_DELE,$config,LogModel::BUSINESS_TYPES[LogModel::BUSINESS_TYPE_DELE]);
+           $res['msg'] = "操作成功";
+        }else{
+            $res['msg']= $config->getError();
+        }
+        echo json_encode($res);
+    }
+
+
+    public function notice(){
+        cache('a',1);
+        $a = cache('a');
+         $this->view->page_header = '公告列表';
+         $request = request();
+        $list = NoticeModel::getList($request);
+        $list->appends($request->param());
+        $this->assign('list',$list);
+
+        return $this->fetch();
+    }
+     public function notice_form(){
+        $request = request();
+         $params = $request->param(); 
+         if(!empty($params['id'])){
+             $info =  NoticeModel::get(['id'=>$params['id']]);
+              $this->assign('info',$info);  
+         }
+          return view();
+    }
+     public function notice_save(){
+        $request = request();
+        $params = $request->param();
+        $id =  !empty($params['id'])? $params['id']:'';
+        $content =  !empty($params['content'])? $params['content']:'';
+        $title =  !empty($params['title'])? $params['title']:'';
+        $enable =  !empty($params['enable'])? $params['enable']:'';
+       
+        $data = [
+           
+            'title'      => $title,
+            'content'    => $content,
+            'enable'     => $enable,
+            'addTime'    => time(),
+            
+        ];
+         $res = [];
+        if($id){
+           unset( $data['addTime']);
+            $notice = NoticeModel::get(intval($id));
+            $list = $notice->validate('System.notice')->save($data);
+            if($list){
+                LogModel::log(LogModel::BUSINESS_TYPE_EDIT,$notice,LogModel::BUSINESS_TYPES[LogModel::BUSINESS_TYPE_EDIT]);
+               $res['msg'] = "操作成功";
+            }else{
+                $res['msg']= $notice->getError();
+            }
+             echo json_encode($res);
+        }else{
+            
+            $notice = new NoticeModel($data);
+            $list = $notice->validate('System.notice')->save($data);
+            if($list){
+               LogModel::log(LogModel::BUSINESS_TYPE_ADD,$notice,LogModel::BUSINESS_TYPES[LogModel::BUSINESS_TYPE_ADD]);
+                $res['msg'] = "操作成功";
+            }else{
+                $res['msg']= $notice->getError();
+             }
+             echo json_encode($res);
+        }
+    }
+
+    public function notice_del(){
+        $request = request();
+        $params = $request->param();
+        $notice = NoticeModel::get(intval($params['id']));
+
+        $list = $notice->delete();
+        $res = [];
+        if($list){
+           LogModel::log(LogModel::BUSINESS_TYPE_DELE,$notice,LogModel::BUSINESS_TYPES[LogModel::BUSINESS_TYPE_DELE]);
+           $res['msg'] = "操作成功";
+        }else{
+            $res['msg']= $notice->getError();
+        }
+        echo json_encode($res);
+    }
+    public function action_log(){
+
+        $request = request();
+        $list = LogModel::getList($request);
+        $list->appends($request->param());
+        $this->assign('list',$list);
+
+        $businesses = LogModel::BUSINESS_TYPES;
+        $this->assign('businesses',$businesses);
+        
+        $this->view->page_header = '操作日志';
+        return $this->fetch();
+    }
+
+    //access_token可以用client_ip+time
+    //发送 system/sms_send?access_token=access_token&mobile=15912345678
+    //验证 system/sms_verify?access_token=access_token&code=32026
+    public function sms_send(){        
+        $sms = new Sms();
+        $res = $sms->validateSendable();
+        if (!$res['success']) {
+            return json($res);
+        }
+	
+	/*
+        $res = $sms->validateFields();
+        if (!$res['success']) {
+            return json($res);
+        }
+	*/
+
+        $res = $sms->requestVerifySms();
+
+        return json($res);
+    }   
+
+    public function sms_verify($code=''){
+        $sms = new Sms();
+        $state_code = $sms->retrieveState('code');
+        
+        $ret = $code === $state_code;
+
+        if($ret){               
+            $sms->forgetState();   
+            echo "验证成功!";  
+        }else{
+            echo "验证失败!";    
+        }        
+    }    
+
+    //授权用broadcast控制器/auth
+    public function pusher(){
+        $this->view->pusher_app_key = env('broadcast.pusher_app_key');
+        $this->view->pusher_cluster = env('broadcast.pusher_cluster');        
+        return $this->fetch();             
+    }
+    public function pusher_send(){        
+        /*
+	$user = new \StdClass();
+        $user->uid = 1;
+        $user->name ="xxxx";
+        $event = new \app\events\BroadEvent($user);
+        $b = $event instanceof \app\broadcast\Contracts\ShouldBroadcast;
+        event($event);        
+        */
+        $user = UserModel::get(312);
+        $event = new \app\events\UserMoneyEvent($user);
+        event($event);
+        
+    }
+
+    function middleware(){
+        return '<html>middleware</html>'; 
+    }
+
+
+    function bcrypt(){ 
+        $newword = bcrypt('newword');
+        
+        $hasher = container('hasher');
+        $a = $hasher->make('fdfd');
+        $b = $hasher->check('fdfd',$a);
+        
+        $encrypter = container('encrypter');
+        $en = $encrypter->encrypt('ffff');
+        $de = $encrypter->decrypt($en);
+
+        $hid = hashid(1);
+        $id = dehashid($hid);
+
+    }
+
+    function web(){        
+        $user = $this->request->user();
+        return "<html>web_guard:{$user->id}</html>";
+    }        
+    function api(){      
+        // 配置auth.default.api=api, 即api模块登录会用api对应的TokenGuard
+        // /pub/login?username=xxxx&password=xxxx 
+        // /system/api?api_token=xxxx 
+        $user = $this->request->user();
+        return json(['web_guard'=>$user->id]);
+    }  
+    function jwt(){       
+        // 配置auth.default.api=jwt, 即api模块登录会用jwt对应的JwtRefreshTokenGuard
+        // /pub/login?&username=xxxx&password=xxxx 
+        // /system/api?api_token=xxxx      
+        $user = $this->request->user();
+        return json(['jwt_guard'=>$user->id]);
+    }     
+
+    function throttle(){        
+        return "<html>throttle</html>";
+    }
+
+    public function event(){
+        $user = new \StdClass();
+        $user->uid = 1;
+        $user->name ="xxxx";          
+        event(new \app\events\Test($user));
+    }
+
+    function hook(){
+        $user = UserModel::get(312);
+        $tid = 312;
+        //Hook::listen('user.register',$user,[$tid]);
+        
+        $a=1;$b=2;
+        $payload = [$user,$tid,$a,$b,];
+        event('user.register',$payload);        
+    }
+}

@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:esun="" class="has-js">
+
+	<head>
+		<meta charset="utf-8" /><meta name="format-detection" content="telephone=no" />
+		<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE11" />
+		<title>【{$parentCategoryInfo.name}{$categoryInfo.name}】{$parentCategoryInfo.name}号码 开奖结果查询 - {$sys.site_title}</title>
+		<meta name="keywords" content="{$categoryInfo.keywords}" />
+		<meta name="distribution" content="{$categoryInfo.description}" />
+		<link rel="stylesheet" href="css/headorfood.css" />
+		<link rel="stylesheet" href="css/pk10kai.css" />
+		<link rel="stylesheet" href="css/calendar.css" />
+		<link rel="shortcut icon" href="img/icon/168favicon.ico/v=2017981058.html">
+		<link rel="stylesheet" href="css/user_adv.css" />
+		<script src="js/lib/bootstrap-3.3.0/js/tests/vendor/jquery.min.js"></script>
+		<script src="js/lib/bootstrap-3.3.0/dist/js/bootstrap.min.js"></script>
+		
+	</head>
+
+	<body>
+		<div class="bodybox pk10lzzhfxymbox daxiaodsbox zsbox">
+			<!--#include file="head.html"-->
+<!--#include file="html/aozxy10/kj.html"-->
+			<div class="zhlzbox margt20">
+				<div class="listhead">
+					<div class="listheadl">
+						<span class="lmms"><i>3</i>号码规律统计</span>
+					</div>
+					<div class="listheadr">
+						
+						<div class="listheadrl">
+							<span id="today">今天</span>
+							<span id="yesterday">昨天</span>
+							<span id="qianday">前天</span>
+							<span id="thirty" class="checked">最近30期</span>
+							<span id="sixty">最近60期</span>
+							<span id="ninety">最近90期</span>
+						</div>
+					</div>
+				</div>
+				<div class="listbox">
+					<div class="checkbox">
+						<div id="biaozxz" class="checkbtnzh checkbtnmc">
+							<ul class="xuanzhemc">
+								<li class="mctitle">选择号码：</li>
+								<li class="sinli selected"><span>1</span>
+									<a href="javascript:void(0)">号码1</a>
+								</li>
+								<li class="sinli"><span>2</span>
+									<a href="javascript:void(0)">号码2</a>
+								</li>
+								<li class="sinli"><span>3</span>
+									<a href="javascript:void(0)">号码3</a>
+								</li>
+								<li class="sinli"><span>4</span>
+									<a href="javascript:void(0)">号码4</a>
+								</li>
+								<li class="sinli"><span>5</span>
+									<a href="javascript:void(0)">号码5</a>
+								</li>
+								<li class="sinli"><span>6</span>
+									<a href="javascript:void(0)">号码6</a>
+								</li>
+								<li class="sinli"><span>7</span>
+									<a href="javascript:void(0)">号码7</a>
+								</li>
+								<li class="sinli"><span>8</span>
+									<a href="javascript:void(0)">号码8</a>
+								</li>
+								<li class="sinli"><span>9</span>
+									<a href="javascript:void(0)">号码9</a>
+								</li>
+								<li class="sinli"><span>10</span>
+									<a href="javascript:void(0)">号码10</a>
+								</li>
+							</ul>
+							
+						</div>
+					</div>
+					<div class="listcontent">
+						<div class="box">
+							<div class="qushitu">
+								<div id="qushit"></div>
+							</div>
+							<div id="waitBox" class="bastren w1200">
+								<div id="chartLinediv" style="position:relative;*position:static;">
+									<table id="table_weizhi" width="100%" border="0" cellpadding="0" cellspacing="0" style="display: table;">
+										<thead>
+											<tr>
+												<th rowspan="2" width="180" height="38" class="">期号&nbsp;&nbsp;时间</th>
+												<th rowspan="2" colspan="12" width="433" class="showhamafb">
+														<span class="title">同位开奖号码分布：</span>
+														<span id="showt" class="sinli"><i></i>
+															显示同位号码
+														</span>
+												</th>
+												<th rowspan="2" width="140">升平降</th>
+												<th colspan="2" width="192">单双</th>
+												<th colspan="2" width="192">大小</th>
+											</tr>
+											<tr>
+												<th width="96">单</th>
+												<th width="96">双</th>
+												<th width="96">大</th>
+												<th width="96">小</th>
+											</tr>
+										</thead>
+										<tbody>
+											 
+										</tbody>
+									</table>
+								</div>
+								<div id="chartbottom" style="display: none;">
+								</div>
+							</div>
+						</div>
+						<div class="infortxt">
+							<p>1、【号码规律统计】提供号码开出位置的历史同位号码统计。例如第1期开出号码1后，在第1期开出号码1的相同位置，第2期开出号码为2，则把号码2标示</p>
+							<p>2、柱形图表为历史同位开出号码的次数分布，用于查看已开出号码的分布及趋势，亦可作为参考辅助杀号。</p>
+						</div>
+
+					</div>
+				</div>
+			</div>
+<!--#include file="foot.html"-->
+
+			
+	</body>
+	<script type="text/javascript" src="js/lib/jquery-1.7.2.min.js"></script>
+	<script type="text/javascript" charset="utf-8" src="js/lib/drawLines.js"></script>
+	<script type="text/javascript" charset="utf-8" src="js/lib/jquery.async.js"></script>
+	<script type="text/javascript" charset="utf-8" src="js/lib/pk10BaseTrend.js"></script>
+	<script type="text/javascript" src="js/lib/calendar.js"></script>
+	<script type="text/javascript" src="js/lib/config.js"></script>
+	<script type="text/javascript" src="js/loacal/animate/animate.js"></script>
+	<script type="text/javascript" src="js/lib/GA.js"></script>
+	<script type="text/javascript" src="js/loacal/pk10/pk10_haomagltj.js"></script>
+	<script type="text/javascript" src="js/lib/echarts.min.js"></script>
+	<script type="text/javascript" src="js/loacal/aozxy10/aozxy10_kai.js"></script>
+</html>

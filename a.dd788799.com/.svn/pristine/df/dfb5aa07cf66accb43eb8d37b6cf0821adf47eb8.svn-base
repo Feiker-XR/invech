@@ -1,0 +1,254 @@
+<link rel="stylesheet" href="/400w-public/css/global.css" />
+<link rel="stylesheet" href="/400w-public/css/other.css" />
+<link rel="stylesheet" href="/400w-public/css/style.css" />
+<link rel="stylesheet" href="/400w-public/css/lottery.css" />
+<script type="text/javascript" src="/400w-public/js/global.js"></script>
+
+<div class='pp' action='ssc_dw' length="1"></div>
+<input type="hidden" name="playedGroup" value="<?=$groupId?>" />
+<input type="hidden" name="playedId" value="<?=$playedId?>" />
+<input type="hidden" name="type" value="<?=$type?>" />
+<input type="hidden" name="playedName" value="<?=$played['name']?>" />
+
+<div class="fl main-left">
+    <div class="hd clearfix rehd tzgz" id="toptouzhu">
+        <div class="fl refl">
+            快捷金额：
+            <input type="text" class="txt">
+        </div>
+        <div class="kjanniu">
+            <a href="javascript:void(0)" class="img-50" data-num="50"></a>
+            <a href="javascript:void(0)" class="img-100" data-num="100"></a>
+            <a href="javascript:void(0)" class="img-500" data-num="500"></a>
+            <a href="javascript:void(0)" class="img-1000" data-num="1000"></a>
+            <a href="javascript:void(0)" class="img-5000" data-num="5000"></a>
+            <a href="javascript:void(0)" class="img-10000" data-num="10000"></a>
+        </div>
+    </div>
+    <div class="table-common clearfix">
+        <table width="180" border="1" class="item">
+            <tbody>
+            <tr>
+                <td style="cursor: pointer;">龙1</td>
+                <td style="cursor: pointer;">和局</td>
+                <td style="cursor: pointer;">虎2</td>
+            </tr>
+
+            <tr>
+                <td style="cursor: pointer;"><span class="color-red pl" data-plid="7781">1.98</span></td>
+                <td style="cursor: pointer;"><span class="color-red pl" data-plid="7782">2.07</span></td>
+                <td style="cursor: pointer;"><span class="color-red pl" data-plid="7783">1.98</span></td>
+            </tr>
+
+            <tr>
+                <td><input type="text" class="table-txt" data-name="龙1vs虎2-龙" data-plid="7781"></td>
+                <td><input type="text" class="table-txt" data-name="龙1vs虎2-和" data-plid="7782"></td>
+                <td><input type="text" class="table-txt" data-name="龙1vs虎2-虎" data-plid="7783"></td>
+            </tr>
+            </tbody>
+        </table>
+
+        <table width="180" border="1" class="item">
+            <tbody>
+            <tr>
+                <td style="cursor: pointer;">龙1</td>
+                <td style="cursor: pointer;">和局</td>
+                <td style="cursor: pointer;">虎3</td>
+            </tr>
+
+            <tr>
+                <td style="cursor: pointer;"><span class="color-red pl" data-plid="7784">1.98</span></td>
+                <td style="cursor: pointer;"><span class="color-red pl" data-plid="7785">2.07</span></td>
+                <td style="cursor: pointer;"><span class="color-red pl" data-plid="7786">1.98</span></td>
+            </tr>
+
+            <tr>
+                <td><input type="text" class="table-txt" data-name="龙1vs虎3-龙" data-plid="7784"></td>
+                <td><input type="text" class="table-txt" data-name="龙1vs虎3-和" data-plid="7785"></td>
+                <td><input type="text" class="table-txt" data-name="龙1vs虎3-虎" data-plid="7786"></td>
+            </tr>
+            </tbody>
+        </table>
+
+        <table width="180" border="1" class="item">
+            <tbody>
+            <tr>
+                <td style="cursor: pointer;">龙1</td>
+                <td style="cursor: pointer;">和局</td>
+                <td style="cursor: pointer;">虎4</td>
+            </tr>
+
+            <tr>
+                <td style="cursor: pointer;"><span class="color-red pl" data-plid="7787">1.98</span></td>
+                <td style="cursor: pointer;"><span class="color-red pl" data-plid="7788">2.07</span></td>
+                <td style="cursor: pointer;"><span class="color-red pl" data-plid="7789">1.98</span></td>
+            </tr>
+
+            <tr>
+                <td><input type="text" class="table-txt" data-name="龙1vs虎4-龙" data-plid="7787"></td>
+                <td><input type="text" class="table-txt" data-name="龙1vs虎4-和" data-plid="7788"></td>
+                <td><input type="text" class="table-txt" data-name="龙1vs虎4-虎" data-plid="7789"></td>
+            </tr>
+            </tbody>
+        </table>
+
+        <table width="180" border="1" class="item">
+            <tbody>
+            <tr>
+                <td style="cursor: pointer;">龙1</td>
+                <td style="cursor: pointer;">和局</td>
+                <td style="cursor: pointer;">虎5</td>
+            </tr>
+
+            <tr>
+                <td style="cursor: pointer;"><span class="color-red pl" data-plid="7790">1.98</span></td>
+                <td style="cursor: pointer;"><span class="color-red pl" data-plid="7791">2.07</span></td>
+                <td style="cursor: pointer;"><span class="color-red pl" data-plid="7792">1.98</span></td>
+            </tr>
+
+            <tr>
+                <td><input type="text" class="table-txt" data-name="龙1vs虎5-龙" data-plid="7790"></td>
+                <td><input type="text" class="table-txt" data-name="龙1vs虎5-和" data-plid="7791"></td>
+                <td><input type="text" class="table-txt" data-name="龙1vs虎5-虎" data-plid="7792"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="table-common clearfix">
+        <table width="180" border="1" class="item">
+            <tbody>
+            <tr>
+                <td style="cursor: pointer;">龙2</td>
+                <td style="cursor: pointer;">和局</td>
+                <td style="cursor: pointer;">虎3</td>
+            </tr>
+
+            <tr>
+                <td style="cursor: pointer;"><span class="color-red pl" data-plid="7793">1.98</span></td>
+                <td style="cursor: pointer;"><span class="color-red pl" data-plid="7794">2.07</span></td>
+                <td style="cursor: pointer;"><span class="color-red pl" data-plid="7795">1.98</span></td>
+            </tr>
+
+            <tr>
+                <td><input type="text" class="table-txt" data-name="龙2vs虎3-龙" data-plid="7793"></td>
+                <td><input type="text" class="table-txt" data-name="龙2vs虎3-和" data-plid="7794"></td>
+                <td><input type="text" class="table-txt" data-name="龙2vs虎3-虎" data-plid="7795"></td>
+            </tr>
+            </tbody>
+        </table>
+
+        <table width="180" border="1" class="item">
+            <tbody>
+            <tr>
+                <td style="cursor: pointer;">龙2</td>
+                <td style="cursor: pointer;">和局</td>
+                <td style="cursor: pointer;">虎4</td>
+            </tr>
+
+            <tr>
+                <td style="cursor: pointer;"><span class="color-red pl" data-plid="7796">1.98</span></td>
+                <td style="cursor: pointer;"><span class="color-red pl" data-plid="7797">2.07</span></td>
+                <td style="cursor: pointer;"><span class="color-red pl" data-plid="7798">1.98</span></td>
+            </tr>
+
+            <tr>
+                <td><input type="text" class="table-txt" data-name="龙2vs虎4-龙" data-plid="7796"></td>
+                <td><input type="text" class="table-txt" data-name="龙2vs虎4-和" data-plid="7797"></td>
+                <td><input type="text" class="table-txt" data-name="龙2vs虎4-虎" data-plid="7798"></td>
+            </tr>
+            </tbody>
+        </table>
+
+        <table width="180" border="1" class="item">
+            <tbody>
+            <tr>
+                <td style="cursor: pointer;">龙2</td>
+                <td style="cursor: pointer;">和局</td>
+                <td style="cursor: pointer;">虎5</td>
+            </tr>
+
+            <tr>
+                <td style="cursor: pointer;"><span class="color-red pl" data-plid="7799">1.98</span></td>
+                <td style="cursor: pointer;"><span class="color-red pl" data-plid="7800">2.07</span></td>
+                <td style="cursor: pointer;"><span class="color-red pl" data-plid="7801">1.98</span></td>
+            </tr>
+
+            <tr>
+                <td><input type="text" class="table-txt" data-name="龙2vs虎5-龙" data-plid="7799"></td>
+                <td><input type="text" class="table-txt" data-name="龙2vs虎5-和" data-plid="7800"></td>
+                <td><input type="text" class="table-txt" data-name="龙2vs虎5-虎" data-plid="7801"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="table-common clearfix">
+        <table width="180" border="1" class="item">
+            <tbody>
+            <tr>
+                <td style="cursor: pointer;">龙3</td>
+                <td style="cursor: pointer;">和局</td>
+                <td style="cursor: pointer;">虎4</td>
+            </tr>
+
+            <tr>
+                <td style="cursor: pointer;"><span class="color-red pl" data-plid="7802">1.98</span></td>
+                <td style="cursor: pointer;"><span class="color-red pl" data-plid="7803">2.07</span></td>
+                <td style="cursor: pointer;"><span class="color-red pl" data-plid="7804">1.98</span></td>
+            </tr>
+
+            <tr>
+                <td><input type="text" class="table-txt" data-name="龙3vs虎4-龙" data-plid="7802"></td>
+                <td><input type="text" class="table-txt" data-name="龙3vs虎4-和" data-plid="7803"></td>
+                <td><input type="text" class="table-txt" data-name="龙3vs虎4-虎" data-plid="7804"></td>
+            </tr>
+            </tbody>
+        </table>
+
+        <table width="180" border="1" class="item">
+            <tbody>
+            <tr>
+                <td style="cursor: pointer;">龙3</td>
+                <td style="cursor: pointer;">和局</td>
+                <td style="cursor: pointer;">虎5</td>
+            </tr>
+
+            <tr>
+                <td style="cursor: pointer;"><span class="color-red pl" data-plid="7805">1.98</span></td>
+                <td style="cursor: pointer;"><span class="color-red pl" data-plid="7806">2.07</span></td>
+                <td style="cursor: pointer;"><span class="color-red pl" data-plid="7807">1.98</span></td>
+            </tr>
+
+            <tr>
+                <td><input type="text" class="table-txt" data-name="龙3vs虎5-龙" data-plid="7805"></td>
+                <td><input type="text" class="table-txt" data-name="龙3vs虎5-和" data-plid="7806"></td>
+                <td><input type="text" class="table-txt" data-name="龙3vs虎5-虎" data-plid="7807"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="table-common clearfix">
+        <table width="180" border="1" class="item">
+            <tbody>
+            <tr>
+                <td style="cursor: pointer;">龙4</td>
+                <td style="cursor: pointer;">和局</td>
+                <td style="cursor: pointer;">虎5</td>
+            </tr>
+
+            <tr>
+                <td style="cursor: pointer;"><span class="color-red pl" data-plid="7808">1.98</span></td>
+                <td style="cursor: pointer;"><span class="color-red pl" data-plid="7809">2.07</span></td>
+                <td style="cursor: pointer;"><span class="color-red pl" data-plid="7810">1.98</span></td>
+            </tr>
+
+            <tr>
+                <td><input type="text" class="table-txt" data-name="龙4vs虎5-龙" data-plid="7808"></td>
+                <td><input type="text" class="table-txt" data-name="龙4vs虎5-和" data-plid="7809"></td>
+                <td><input type="text" class="table-txt" data-name="龙4vs虎5-虎" data-plid="7810"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+
+</div>

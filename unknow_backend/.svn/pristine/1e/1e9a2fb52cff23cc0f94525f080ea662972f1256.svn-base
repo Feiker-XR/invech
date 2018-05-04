@@ -1,0 +1,187 @@
+<style type="text/css">
+    @-webkit-keyframes twinkling{ /*透明度由0到1*/
+        0%{
+            color: #FF2D2D; /*透明度为0*/
+        }
+        100%{
+            color: #D9D836; /*透明度为1*/
+        }
+    }
+    @-webkit-keyframes twinkling_2{ /*透明度由0到1*/
+            0%{
+                color: #7fc7b1; /*透明度为0*/
+            }
+            100%{
+                color: #ffd401; /*透明度为1*/
+            }
+    }
+</style>
+<div class="header_contain">
+	<div class="header_all">
+		<div class="header">
+			<div class="logo">
+				<a href="{:Url('index/index')}"><img src="/newview/img/logo.png" /></a>
+			</div>
+			<div class="header_right_language fr">
+				<span>简体中文</span>
+			</div>		
+			<div class="header_right_1 fr">
+				<ul>
+					<li><a href="http://www.hb99206.com" target="_blank" style="-webkit-animation: twinkling_2 0.4s infinite ease-in-out; ">注册抢亿元红包</a></li>
+					<li><a href="http://www.app99206.com" target="_blank"><span class="color_green2">下载手机APP享18888元</span></a></li>
+					<li><a href="http://qq99206.com" target="_blank" style="-webkit-animation: twinkling 0.4s infinite ease-in-out; ">个人QQ转账</a></li>
+					<li><a href="{:Url('vipcheck/index')}" target="_blank" class="color_yellow">VIP等级查询</a></li>
+					<li><a href="http://pay99206.com" class="color_green" target="_blank">快速充值</a></li>
+					<li><a href="{:Url('linecheck/index')}" target="_blank" class="color_blue">线路检测</a></li>
+				</ul>
+			</div>
+			<!--登陆前-->
+			{if $Think.session.uid eq ''}
+			<div class="header_login" >
+				<form action="{:url('index/login')}">
+				<ul>
+					<li><input type="text" class="header_login_name" id="username" /></li>
+					<li><input type="password" id="password" /></li>
+					{if $sysConfig.loginYzm eq "1"}
+					<li><input type="text" placeholder="验证码" name='dlyzm' id="dlyzm" class="header_login_yz"/></li>
+					<li><img src="/captcha.html" class="header_login_yzpic"  onclick="this.src='/captcha.html?d='+Math.random();" style="cursor:pointer;" /></li>
+					{else}
+					<input type="hidden" id="dlyzm" name="dlyzm" />
+					{/if}
+					<li><a href="javascript:;" onclick="alert('请联系在线客服找回密码!')" class="color_999">忘记密码？</a></li>
+					<li><a href="JavaScript:;" onclick="Login()" class="header_login_a">登录</a></li>
+					<li><a href="/index/reg" class="header_login_open">开户</a></li>
+				</ul>
+				</form>
+			</div>
+			
+			<!--登陆后-->
+			{else}
+			<div class="header_login_had" >
+				<ul class="login_vip">
+					<li><img src="/newview/img/vip-diamond.png" /></li>
+					<li class="color_yellow">VIP会员中心</li>
+					<li class="login_vip_1 ml15">账户：<span class="color_yellow">{$Think.session.username}</span></li>
+					<li class="login_vip_2">余额：<span class="color_yellow" id="money">获取中...</span></li>
+					<li class="login_vip_3 ml10"><a href="{:url('user/get_money')}">提款</a></li>
+					<li class="login_vip_4 ml10"><a href="{:url('index/logout')}">退出</a></li>
+				</ul>
+				<ul class="login_list">
+					<li><a href="{:url('user/userinfo')}">会员资料</a></li>
+					<li><a href="{:url('user/report')}">账户历史</a></li>
+					<li><a href="{:url('user/record_ds')}">交易记录</a></li>
+					<li><a href="{:url('pay/member')}">财务中心</a></li>
+					<li><a href="{:url('user/agent')}">代理中心</a></li>
+					<li><a href="{:url('pay/member')}">会员存款</a></li>
+					<li><a href="{:url('user/userinfo')}">额度转换</a></li>
+				</ul>
+			</div>
+			
+			<div class="header_login_fixed" style="display: none;">
+				<ul class="login_vip">
+					<li><img src="/newview/img/vip-diamond.png" /></li>
+					<li class="color_yellow">VIP会员中心</li>
+					<li class="login_vip_1 ml15">账户：<span class="color_yellow">{$Think.session.username}</span></li>
+					<li class="login_vip_2">余额：<span class="color_yellow" id="money_2">获取中...</span></li>
+					<li class="mr20"><a href="{:url('user/userinfo')}">会员资料</a></li>
+					<li class="mr20"><a href="{:url('user/report')}">账户历史</a></li>
+					<li class="mr20"><a href="{:url('user/record_ds')}">交易记录</a></li>
+					<li class="mr20"><a href="{:url('pay/member')}">财务中心</a></li>
+					<li class="mr20"><a href="{:url('user/agent')}">代理中心</a></li>
+					<li class="mr20"><a href="{:url('pay/member')}">会员存款</a></li>
+					<li><a href="{:url('user/userinfo')}">额度转换</a></li>					
+					<li class="login_vip_3 ml10 mt3"><a href="{:url('user/get_money')}">提款</a></li>
+					<li class="login_vip_4 ml10 mt3"><a href="{:url('index/logout')}">退出</a></li>
+				</ul>
+			</div>			
+			
+			{/if}
+			
+		</div>
+	</div>	
+	<!--导航-->	
+	<div class="nav_all">
+		<div class="nav">
+			<span>
+				<a href="{:Url('index/index')}" class="nav_a f14 {if $Request.controller eq 'Index'}nav_active{/if}">首 页
+					<p class="f12">home</p>
+				</a>
+			</span>
+			<a class="nav_line"></a>
+			<span>
+				<a href="{:Url('sport/index')}" class="nav_a f14 {if $Request.controller eq 'Sport'}nav_active{/if}">皇冠体育
+					<p class="f12">sports</p>
+					<img src="/newview/img/hots.gif" />
+				</a>
+				<div class="nav_show">
+					<a href="{:Url('sport/index')}">皇冠体育</a>
+					<a href="/live/bbin/">BBIN体育</a>
+				</div>			
+			</span>
+			<a class="nav_line"></a>
+			<span>
+				<a href="{:Url('/lottery/index/type/csc')}" class="nav_a f14 {if $Request.controller eq 'Lottery'}nav_active{/if}">彩票游戏
+					<p class="f12">lottery</p>
+					<img src="/newview/img/hots.gif"/>
+				</a>
+				<div class="nav_show">
+					<a href="/six/index.html">六合彩49倍</a>
+					<a href="/lottery/index/type/csc">重庆时时彩</a>
+					<a href="/lottery/index/type/pk10">北京PK拾</a>
+					<a href="/lottery/index/type/xyft">幸运飞艇</a>
+					<a href="/lottery/index/type/gsf">广东快乐十分</a>
+					<a href="/lottery/index/type/csf">重庆快乐十分</a>
+				</div>
+			</span>	
+			<a class="nav_line"></a>
+			<span>	
+				<a href="{:Url('live/index')}" class="nav_a f14 {if $Request.controller eq 'Live'}nav_active{/if}">真人视讯
+					<p class="f12">lives</p>
+				</a>
+				<div class="nav_show">
+					<a href="/live/ag/" target="_BLANK">AG视讯 </a>
+					<a href="/live/bbin/" target="_BLANK">BB视讯 </a>
+					<a href="/live/og/" target="_BLANK">OG视讯</a>
+					<a href="/live/sunbet/" target="_BLANK">申博视讯</a>
+				</div>			
+			</span>
+			<a class="nav_line"></a>
+			<span>	
+				<a href="{:Url('game/index')}" class="nav_a f14 {if $Request.controller eq 'Game'}nav_active{/if}">电子游艺
+					<p class="f12">game</p>
+				</a>
+				<div class="nav_show">
+					<a href="{:Url('game/index','type=ag')}">AG电子</a>
+					<a href="{:Url('game/index','type=bbin')}">BBIN电子</a>
+					<a href="{:Url('game/index','type=mg')}">MG电子</a>
+					<a href="{:Url('game/index','type=pt')}">PT电子</a>
+				</div>		
+			</span>	
+			<a class="nav_line"></a>
+			<span>	
+				<a href="{:Url('betting/index')}" target="_blank" class="nav_a f14 {if $Request.controller eq 'Betting'}nav_active{/if}">手机投注
+					<p class="f12">moblies</p>
+				</a>			
+			</span>	
+			<a class="nav_line"></a>
+			<span>
+				<a href="{:Url('promotions/index')}" class="nav_a f14 {if $Request.controller eq 'Promotions'}nav_active{/if}">优惠活动
+					<p class="f12">promotions</p>
+					<img src="/newview/img/hots.gif"/>
+				</a>
+			</span>	
+			<a class="nav_line"></a>
+			<span>	
+				<a href="{:Url('/about/index/id/8')}"  class="nav_a f14 {if $Request.controller eq 'About'}nav_active{/if}">加盟代理
+					<p class="f12">add us</p>
+				</a>
+			</span>	
+			<a class="nav_line"></a>
+			<span>	
+				<a href="https://messenger.providesupport.com/messenger/0nye75kga3q931e9lwrn16k4q0.html" class="nav_a f14" target="_blank">在线客服
+					<p class="f12">service</p>
+				</a>
+			</span>
+		</div>
+	</div>	
+</div>

@@ -1,0 +1,99 @@
+* {
+	margin: 0px; padding: 0px; font-family: Î¢ÈíÑÅºÚ; font-size: 14px;
+}
+body {
+	text-align: center; -ms-overflow-x: hidden; background-color: rgb(194, 63, 22);
+}
+.hdmain {
+	margin: auto; width: 1076px; text-align: left; padding-top: 20px; padding-bottom: 50px;
+}
+.hdheader {
+	background-position: bottom; height: 270px; background-image: url("img/hd-head.jpg"); background-repeat: no-repeat;
+}
+.hdtitle {
+	background-position: right bottom; height: 50px; color: rgb(193, 70, 17); line-height: 50px; font-size: 18px; vertical-align: middle; background-image: url("img/hd-titlebg.png"); background-repeat: no-repeat; background-color: rgb(254, 191, 21);
+}
+.hdtitle > label {
+	width: 50px; height: 50px; text-align: center; color: rgb(253, 224, 187); line-height: 50px; font-family: Arial, Helvetica, sans-serif; font-size: 28px; margin-top: -4px; margin-right: 10px; vertical-align: middle; display: inline-block; background-color: rgb(255, 165, 22);
+}
+.hdbox {
+	margin-bottom: 30px; position: relative; box-sizing: border-box; background-color: rgb(255, 246, 223);
+}
+img.hb1 {
+	left: -40px; bottom: 60px; position: absolute;
+}
+img.hb2 {
+	right: -40px; bottom: -30px; position: absolute;
+}
+#hdpm {
+	background-position: center; padding: 20px; width: 1078px; height: 403px; margin-bottom: 30px; box-sizing: border-box; background-image: url("img/hd-box.png"); background-repeat: no-repeat;
+}
+ul.hdpmlist {
+	columns: 5 auto; vertical-align: top; column-gap: 0px; -moz-columns: 5; -webkit-columns: 5; -moz-column-gap: 0px; -webkit-column-gap: 0px;
+}
+ul.hdpmlist li {
+	list-style: none; height: 50px; text-align: left; color: rgb(93, 65, 44); line-height: 50px; padding-left: 10px; font-size: 12px; margin-bottom: 0px; vertical-align: top; white-space: nowrap; position: relative; box-sizing: border-box;
+}
+ul.hdpmlist li label {
+	width: 21px; height: 21px; text-align: center; color: rgb(255, 255, 255); line-height: 21px; font-size: 12px; margin-right: 5px; vertical-align: middle; display: inline-block; background-image: url("img/hd-icon4.png");
+}
+ul.hdpmlist li:nth-child(1) label {
+	background-image: url("img/hd-icon1.png") !important;
+}
+ul.hdpmlist li:nth-child(2) label {
+	background-image: url("img/hd-icon2.png") !important;
+}
+ul.hdpmlist li:nth-child(3) label {
+	background-image: url("img/hd-icon3.png") !important;
+}
+#hdpm ul li span {
+	top: 0px; right: 5px; color: red; padding-left: 10px; font-size: 12px; display: inline-block; white-space: nowrap; position: absolute;
+}
+ul.hdpmlist li {
+	background-color: rgb(255, 238, 195);
+}
+ul.hdpmlist li:nth-child(2n) {
+	background-color: rgb(255, 232, 173);
+}
+#hdpm p {
+	text-align: center; margin-bottom: 25px;
+}
+#hdpm p span {
+	margin: auto; width: 128px; height: 25px; color: rgb(255, 255, 255); line-height: 25px; border-right-color: rgb(255, 246, 223); border-left-color: rgb(255, 246, 223); border-right-width: 20px; border-left-width: 20px; border-right-style: solid; border-left-style: solid; display: inline-block; background-image: url("img/hd-label.png");
+}
+#hdgz {
+	background-position: bottom; padding-bottom: 200px; position: relative; background-image: url("img/hd-footer.png"); background-repeat: no-repeat;
+}
+#hdgz > div.hdboxtxt {
+	padding-top: 60px;
+}
+#hdgz > div.hdboxtxt div {
+	padding: 40px 20px 30px; border: 1px dashed rgb(255, 150, 9); border-image: none; text-align: center; margin-bottom: 20px; position: relative; background-color: rgb(255, 239, 206);
+}
+#hdgz > div.hdboxtxt div p {
+	padding: 20px; border-radius: 5px; text-align: left; color: rgb(123, 66, 19); background-color: rgb(255, 229, 182);
+}
+#hdgz > div.hdboxtxt div strong {
+	margin: auto auto auto -90px; left: 50%; top: -20px; width: 180px; height: 40px; color: rgb(255, 255, 255); line-height: 40px; display: inline-block; position: absolute; background-image: url("img/hd-label.png"); background-size: 100% 100%;
+}
+#hdgz > div.hdboxtxt div p em {
+	text-align: right; font-style: normal; font-weight: bold; display: block;
+}
+.hdboxtxt {
+	padding: 10px 20px;
+}
+.hdboxtxt ul {
+	margin: 5px auto 10px; overflow: hidden;
+}
+.hdboxtxt ul li {
+	list-style: none; width: 30%; color: rgb(123, 66, 19); padding-left: 10px; margin-top: 10px; margin-bottom: 10px; border-left-color: rgb(123, 66, 19); border-left-width: 3px; border-left-style: solid; float: left; box-sizing: border-box;
+}
+.hdboxtxt ul li strong {
+	font-size: 16px; display: inline-block;
+}
+.hdboxtxt ul li:nth-child(1) {
+	width: 40%;
+}
+.hdboxtxt ul li:nth-child(4) {
+	width: 40%;
+}

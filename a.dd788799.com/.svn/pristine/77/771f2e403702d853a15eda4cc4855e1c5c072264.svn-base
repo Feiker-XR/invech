@@ -1,0 +1,57 @@
+<?php
+namespace app\common\model;
+
+use app\common\traits\model\Bank as BankTrait;
+use app\common\traits\model\ApiToken;
+use bong\service\auth\traits\Authenticatable;
+use bong\service\auth\access\Authorizable;
+
+use app\common\model\member\BasicTrait;
+use app\common\model\member\BetTrait;
+use app\common\model\member\MoneyTrait;
+use app\common\model\member\AgentTrait;
+use app\common\model\member\MessageTrait;
+
+class Member extends Base{
+
+    use ApiToken,Authenticatable,Authorizable;
+    use BankTrait;
+    use BasicTrait,MoneyTrait,BetTrait,MessageTrait,AgentTrait;
+
+    protected $table = 'gygy_members';
+    protected $pk = 'uid';
+    protected $createTime = 'created_at';
+    protected $updateTime = 'updated_at';
+    protected $autoWriteTimestamp = 'datetime';
+    /*
+    protected $field = [
+        'uid','isDelete','enable','parentId','parents','admin','username','password',
+        'coinPassword','type','subCount','sex' ,'nickname','name', 
+        'regIP','created_at','updated_at','province' ,'city','address' ,'qq' ,
+        'msn','mobile','email','idCard','grade' ,'score' ,'scoreTotal','coin',
+        'fcoin','fanDian','fanDianBdw' ,'safepwd','safeEmail','regPath',
+        'bank','withdraw_remain_amount','api_token','remember_token',
+    ];
+    */
+    protected $insert = ['coin' => 0];
+
+    //当status字段值是1的时候,获取器返回1对应的'正常';
+    //先取字段值再调用获取器
+	/*public function getStatusAttr($value)
+    {
+        $status = [-1=>'删除',0=>'禁用',1=>'正常',2=>'待审核'];
+        return $status[$value];
+    }*/
+
+    public function setIdAttr($value){
+        return $this->data['uid'] = $value;
+    }
+
+    public function getIdAttr($value)
+    {
+        return $this->data['uid'];
+    }
+
+
+
+}

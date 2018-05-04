@@ -1,0 +1,19 @@
+<script type="text/javascript">
+var text = '<table border="0" cellspacing="1" cellpadding="0" class="order_info"><tr><th>彩票种类</th><th>下注期号</th><th>彩票玩法</th><th>下注内容</th><th>下注金额</th><th>赔率</th><th>可赢金额</th></tr>';
+text += '{volist name="betinfo" id="vo"}<tr><td class="caizhong">{$ballname }</td>';
+text += '<td class="qihao">{$vo['qishu']}</td><td class="wanfa">{$vo['mingxi_1']}</td>';
+text += '<td class="neirong">{$vo['mingxi_2']}</td><td class="jine">{$vo['money']}</td>';
+text += '<td class="peilv">{$vo['odds']}</td><td class="keying">{$vo['money']*$vo['odds']}</td></tr>{/volist}</table>';
+parent.layer.open({
+    type: 1,
+	title: ['以下为您刚刚下注成功的注单', 'background-color:#4C4C4C;color:#fff;'],
+    skin: 'layui-layer-cp', //样式类名
+    closeBtn: false, //不显示关闭按钮
+	btn: ['确定'], //按钮
+    shift: 2,
+    shadeClose: true, //开启遮罩关闭
+	area:['500px', 'auto'],
+    content: text
+});
+//parent.layer.jBox(text, {title: ' 以下为您刚刚下注成功的注单', buttons: { '关闭': true }});
+</script> 

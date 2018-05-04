@@ -1,0 +1,194 @@
+<?php
+namespace app\admin\controller;
+use app\admin\Login;
+use think\Cache;
+
+use app\common\model\Bonus as BonusModel;
+use app\common\model\BonusConfig as BonusConfigModel;
+use app\common\model\BonusFlow as BonusFlowModel;
+use app\common\model\ActionLog as LogModel;
+class Bonus extends Login{
+    
+    public function index(){
+        $this->view->page_header = '红利列表';
+
+        $request = request();
+        $list = BonusModel::getList($request);
+        $enable = BonusModel::ENABLE;
+        //$list = BonusModel::getList($request);
+        $this->assign('enable',$enable);
+        $this->assign('list',$list);
+
+        return $this->fetch();
+    }
+    public function save(){
+        $request = request();
+        $params = $request->param();
+        $id =  !empty($params['id'])? $params['id']:'';
+        $name =  !empty($params['name'])? $params['name']:'';
+        $desc =  !empty($params['desc'])? $params['desc']:'';
+        $event =  !empty($params['event'])? $params['event']:'';
+        $business =  !empty($params['business'])? $params['business']:'';
+        $extra =  !empty($params['extra'])? $params['extra']:'';
+        $enable =  !empty($params['enable'])? $params['enable']:'';
+        $data = [
+            'name'      => $name,
+            'desc'      => $desc,
+            'event'     => $event,
+            'business'  => $business,
+            'extra'     => $extra,
+            'enable'    => $enable,
+        ];
+
+         $res = [];
+        if($id){
+            $bonus = BonusModel::get(intval($id));
+            $list = $bonus->validate('Bonus.index')->save($data);
+            if($list){
+                LogModel::log(LogModel::BUSINESS_TYPE_EDIT,$bonus,LogModel::BUSINESS_TYPES[LogModel::BUSINESS_TYPE_EDIT]);
+               $res['msg'] = "操作成功";
+            }else{
+                $res['msg']= $bonus->getError();
+            }
+             echo json_encode($res);
+        }else{
+            $bonus = new BonusModel($data);
+           $list = $bonus->validate('Bonus.index')->save($data);
+            if($list){
+               LogModel::log(LogModel::BUSINESS_TYPE_ADD,$bonus,LogModel::BUSINESS_TYPES[LogModel::BUSINESS_TYPE_ADD]);
+                $res['msg'] = "操作成功";
+            }else{
+                $res['msg']= $bonus->getError();
+             }
+             echo json_encode($res);
+        }
+    }
+    public function del(){
+        $request = request();
+        $params = $request->param();
+        $bonus =  BonusModel::get(intval($params['id']));
+
+        $list = $bonus->delete();
+        $res = [];
+        if($list){
+           LogModel::log(LogModel::BUSINESS_TYPE_DELE,$bonus,LogModel::BUSINESS_TYPES[LogModel::BUSINESS_TYPE_DELE]);
+           $res['msg'] = "操作成功";
+        }else{
+            $res['msg']= $bonus->getError();
+        }
+        echo json_encode($res);
+    }
+    function form(){  
+         $request = request();
+         $params = $request->param(); 
+         if(!empty($params['id'])){
+             $info =  BonusModel::get(['id'=>$params['id']]);
+              $this->assign('info',$info);  
+         }
+        $enable = BonusModel::ENABLE;
+        $this->assign('enable',$enable);
+        return view();
+    }
+
+    public function config(){
+        $this->view->page_header = '红利配置';
+
+        $request = request();
+        $list = model('bonus_config')->getList($request);
+        //$list = BonusConfigModel::getList($request);
+        $list->appends($request->param());
+        $this->assign('list',$list);
+
+        return $this->fetch();        
+    }
+     public function config_save(){
+        $request = request();
+        $params = $request->param();
+        $id =  !empty($params['id'])? $params['id']:'';
+        $bonus_id = !empty($params['bonus_id'])? $params['bonus_id']:'';
+        $name =  !empty($params['name'])? $params['name']:'';
+        $desc =  !empty($params['desc'])? $params['desc']:'';
+        $code =  !empty($params['code'])? $params['code']:'';
+        $limit =  !empty($params['limit'])? $params['limit']:'';
+        $amount =  !empty($params['amount'])? $params['amount']:'';
+        $radio =  !empty($params['radio'])? $params['radio']:'';
+        $max =  !empty($params['max'])? $params['max']:'';
+        $sort =  !empty($params['sort'])? $params['sort']:'';
+        $data = [
+            'name'      => $name,
+            'desc'      => $desc,
+            'bonus_id'  => $bonus_id,
+            'code'      => $code,
+            'limit'     => $limit,
+            'amount'    => $amount,
+            'radio'     => $radio,
+            'max'       => $max,
+            'sort'      => $sort,
+        ];
+
+         $res = [];
+        if($id){
+            $bonusconfig = BonusConfigModel::get(intval($id));
+            $list = $bonusconfig->validate('Bonus.index')->save($data);
+            if($list){
+                LogModel::log(LogModel::BUSINESS_TYPE_EDIT,$bonusconfig,LogModel::BUSINESS_TYPES[LogModel::BUSINESS_TYPE_EDIT]);
+               $res['msg'] = "操作成功";
+            }else{
+                $res['msg']= $bonusconfig->getError();
+            }
+             echo json_encode($res);
+        }else{
+            $bonusconfig = new BonusConfigModel($data);
+           $list = $bonusconfig->validate('Bonus.index')->save($data);
+            if($list){
+               LogModel::log(LogModel::BUSINESS_TYPE_ADD,$bonusconfig,LogModel::BUSINESS_TYPES[LogModel::BUSINESS_TYPE_ADD]);
+                $res['msg'] = "操作成功";
+            }else{
+                $res['msg']= $bonusconfig->getError();
+             }
+             echo json_encode($res);
+        }
+    }
+    public function config_del(){
+        $request = request();
+        $params = $request->param();
+        $bonusconfig =  BonusConfigModel::get(intval($params['id']));
+
+        $list = $bonusconfig->delete();
+        $res = [];
+        if($list){
+           LogModel::log(LogModel::BUSINESS_TYPE_DELE,$bonusconfig,LogModel::BUSINESS_TYPES[LogModel::BUSINESS_TYPE_DELE]);
+           $res['msg'] = "操作成功";
+        }else{
+            $res['msg']= $bonusconfig->getError();
+        }
+        echo json_encode($res);
+    }
+    function config_form(){  
+         $request = request();
+         $params = $request->param(); 
+         if(!empty($params['id'])){
+             $info =  BonusConfigModel::get(['id'=>$params['id']]);
+              $this->assign('info',$info);  
+         }
+        $enable = BonusConfigModel::ENABLE;
+        $this->assign('enable',$enable);
+         return view();
+    }
+    public function flow(){
+        $this->view->page_header = '红利流水';
+
+        $request = request();
+        $list =BonusFlowModel::getList($request);
+        $this->assign('list',$list);
+        $bonuses = BonusModel::all(['enable'=>1,]);
+        $this->assign('bonuses',$bonuses);
+        
+        return $this->fetch();          
+    }
+    public function logout(){
+        session(null);
+        cookie(null,config('cookie.prefix'));
+       	$this->redirect('/index/login');
+    }    
+}

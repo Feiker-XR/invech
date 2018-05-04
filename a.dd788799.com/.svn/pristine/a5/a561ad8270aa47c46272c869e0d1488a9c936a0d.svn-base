@@ -1,0 +1,30 @@
+<?php
+namespace app\common\model;
+use think\Model;
+
+class HelpCat extends Model{
+
+    protected $table = 'gygy_help_cat';
+    //protected $createTime = 'created_at';
+    //protected $updateTime = 'updated_at';
+    //protected $autoWriteTimestamp = 'datetime';
+
+    public static function getList($request){
+
+        $query = self::order('id');
+
+        if($params['type']??null){
+           $query->where('tag', 'like', '%'.$params['type'].'%');
+        }
+
+        $data = $query->paginate(10);
+        
+        return $data;
+    }
+
+    public function helps()
+    {
+        return $this->hasMany('Help','cat_id')->where('enable',1);
+    }    
+
+}

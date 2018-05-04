@@ -1,0 +1,453 @@
+body,
+html {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  min-height: 8rem;
+}
+@media screen and (max-width: 984px) {
+  body,
+  html {
+    font-size: calc(8vw);
+  }
+}
+.animat {
+  background: #fff url("../img/bg.fw.png") 0 0 no-repeat;
+  background-size: 100%;
+}
+.min {
+  width: 100%;
+  max-width: 984px;
+  height: 100%;
+  max-height: 8rem;
+  margin: 0 auto;
+  position: relative;
+}
+.min .animat {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+.min .animat .animate_min {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+.min .animat .animate_min .btn_box {
+  position: absolute;
+  top: 1.16rem;
+  right: 0.27rem;
+}
+.min .animat .animate_min .btn_box ul {
+  text-align: center;
+  text-align: -webkit-center;
+  text-align: -moz-center;
+  padding: 0;
+}
+.min .animat .animate_min .btn_box ul li {
+  list-style: none;
+  margin-bottom: 0.385rem;
+  height: 0.457rem;
+  border-radius: 0.12rem;
+  width: 1.25rem;
+}
+.min .animat .animate_min .btn_box ul li a {
+  display: block;
+  height: 100%;
+  width: 100%;
+}
+.min .animat .animate_min .btn_box ul li:first-child {
+  margin-bottom: 0.5rem;
+  width: 2.03rem;
+  height: 0.66rem;
+  border-radius: 30px;
+  position: relative;
+}
+.min .animat .animate_min .btn_box ul #sound {
+  position: absolute;
+  border-radius: 50%;
+  top: 0.35rem;
+  left: 38%;
+  width: 0.5rem;
+  height: 0.5rem;
+}
+.min .animat .animate_min .btn_box ul .on {
+  background: url(../img/sheny0.png) 0 0 no-repeat;
+  background-size: 100%;
+}
+.min .animat .animate_min .btn_box ul .off {
+  background: url(../img/sheny1.png) 0 0 no-repeat;
+  background-size: 100%;
+}
+.min .animate_date {
+  font-size: 0.2rem;
+  top: 6.31rem;
+  left: 2rem;
+  color: #fff;
+  width: 5.1rem;
+  height: 0.6rem;
+  position: absolute;
+  line-height: 0.6rem;
+  border-radius: 30px;
+  white-space: nowrap;
+}
+.min .animate_date span {
+  white-space: nowrap;
+}
+.min .animate_date b {
+  font-size: 0.22rem;
+  display: inline-block;
+  text-align: center;
+  white-space: nowrap;
+}
+.min .animate_date #data_b {
+  width: 58%;
+}
+.min .animate_date #issue_b {
+  width: 17%;
+}
+.min .view_box {
+  border: 5px solid #fff;
+  background-image: url(../img/0001.png);
+  background-position: 2.46rem 1px;
+  background-size: 2.63rem;
+  background-repeat: no-repeat;
+  height: 4.56rem;
+  width: 8.1rem;
+  position: absolute;
+  top: 1.345rem;
+  left: 0.65rem;
+  border-radius: 5px;
+  box-shadow: 0px -1px 33px 5px rgba(0, 0, 0, 0.7);
+}
+.min .view_box .crust {
+  width: 100%;
+  height: 100%;
+  background: url(../img/bj222.png) 0 0 no-repeat;
+  background-size: 100%;
+}
+.min .view_box .crust .number_box {
+  height: 100%;
+  width: 100%;
+  position: relative;
+}
+.min .view_box .crust .number_box .number {
+  position: absolute;
+  top: 79.5%;
+  left: 10%;
+  width: 6.6rem;
+  height: 0.785rem;
+  background: url(../img/222.png) 0 0 no-repeat;
+  background-size: 100%;
+  border-radius: 50px;
+}
+.min .view_box .crust .number_box .number ul {
+  padding: 0;
+  margin: 0;
+  height: 100%;
+  overflow: hidden;
+  line-height: 0.57rem;
+  padding-left: 0.25rem;
+}
+.min .view_box .crust .number_box .number ul .red {
+  background: url(../img/liuhe_v0.png);
+  background-size: 100%;
+}
+.min .view_box .crust .number_box .number ul .green {
+  background: url(../img/liuhe_v2.png);
+  background-size: 100%;
+}
+.min .view_box .crust .number_box .number ul .blue {
+  background: url(../img/liuhe_v1.png);
+  background-size: 100%;
+}
+.min .view_box .crust .number_box .number ul li {
+  padding: 0;
+  margin: 0;
+  display: inline-block;
+  list-style: none;
+  width: 0.55rem;
+  height: 0.55rem;
+  border-radius: 50%;
+  font-size: 0.23rem;
+  text-align: center;
+  vertical-align: middle;
+  font-weight: bold;
+  float: left;
+  margin-top: 0.12rem;
+  margin-right: 0.3rem;
+}
+.min .view_box .crust .number_box .number ul .lastLi {
+  margin-left: 0.23rem;
+}
+.min .view_box .ball {
+  width: 3.03rem;
+  height: 3.06rem;
+  margin-left: 2.34rem;
+  position: absolute;
+}
+.min .view_box .ball span {
+  display: inline-block;
+  width: 0.23rem;
+  height: 0.23rem;
+  border-radius: 50%;
+  background: url(../img/ball_red.png);
+  background-size: 100%;
+  position: absolute;
+  top: 2.6rem;
+  left: 1.45rem;
+  display: none;
+}
+.min .view_box .ball .top_left {
+  top: 2.6rem !important;
+  left: 1.45rem !important;
+  display: none !important;
+}
+.min .view_box .ball .rotate {
+  transform: rotate(0deg);
+  transform-origin: -0.03rem 1.39rem;
+  -ms-transform: rotate(0deg);
+  /* IE 9 */
+  -ms-transform-origin: -0.03rem 1.39rem;
+  /* IE 9 */
+  -webkit-transform: rotate(0deg);
+  /* Safari 和 Chrome */
+  -webkit-transform-origin: -0.03rem 1.39rem;
+  /* Safari 和 Chrome */
+  -moz-transform: rotate(0deg);
+  /* Firefox */
+  -moz-transform-origin: -0.03rem 1.39rem;
+  /* Firefox */
+  -o-transform: rotate(0deg);
+  /* Opera */
+  -o-transform-origin: -0.03rem 1.39rem;
+  transition: transform 0.7s linear;
+  -moz-transition: transform 0.7s linear;
+  /* Firefox 4 */
+  -webkit-transition: transform 0.7s linear;
+  /* Safari 和 Chrome */
+  -o-transition: transform 0.7s linear;
+}
+.min .view_box .ball .red,.loadcolor>.red {
+  background: url(../img/ball_red.png);
+  background-size: 100%;
+}
+.loadcolor{
+	display: none;
+}
+.min .view_box .ball .green,.loadcolor>.green{
+  background: url(../img/ball_green.png);
+  background-size: 100%;
+}
+.min .view_box .ball .blue,.loadcolor>.blue{
+  background: url(../img/ball_blue.png);
+  background-size: 100%;
+}
+.min .view_box .ball .one_ball {
+  top: 2.68rem;
+  left: 0.92rem;
+}
+.min .view_box .ball .two_ball {
+  top: 2.63rem;
+  left: 0.77rem;
+}
+.min .view_box .ball .three_ball {
+  top: 2.56rem;
+  left: 0.62rem;
+}
+.min .view_box .ball .four_ball {
+  top: 2.47rem;
+  left: 0.48rem;
+}
+.min .view_box .ball .five_ball {
+  top: 2.36rem;
+  left: 0.345rem;
+}
+.min .view_box .ball .six_ball {
+  top: 2.24rem;
+  left: 0.25rem;
+}
+.min .view_box .ball .seven_ball {
+  top: 2.66rem;
+  left: 1.7rem;
+}
+.min .view_box .ball .vall {
+  top: 0.2rem;
+  left: 1.45rem;
+}
+.status {
+  background-image: url(../img/status.gif) !important;
+  box-shadow: initial !important;
+}
+.each {
+  background-image: url(../img/each.gif) !important;
+  box-shadow: initial !important;
+}
+#nextTime {
+  padding: 0;
+  margin: 0;
+  position: absolute;
+  color: #fff;
+  top: 7.2rem;
+  left: 2.9rem;
+  font-size: 0.18rem;
+}
+@media screen and (min-width: 985px) {
+  .min {
+    max-height: 628px;
+    position: relative;
+  }
+  .min .animat .animate_min > .btn_box {
+    top: 155px;
+    right: 22px;
+  }
+  .min .animat .animate_min > .btn_box ul li {
+    margin-bottom: 29px;
+    border-radius: 11px;
+    width: 98px;
+    height: 37px;
+  }
+  .min .animat .animate_min > .btn_box ul li:first-child {
+    width: 158px;
+    height: 51px;
+    margin-bottom: 39px;
+  }
+  .min .animat .animate_min > .btn_box ul #sound {
+    top: -40px;
+    left: 38%;
+    width: 39px;
+    height: 39px;
+  }
+  .min .animat .animate_date {
+    font-size: 16px;
+    top: 498px;
+    left: 159px;
+    color: #fff;
+    width: 400px;
+    height: 45px;
+    position: absolute;
+    line-height: 50px;
+    border-radius: 30px;
+  }
+  .min .animat .animate_date b {
+    font-size: 18px;
+  }
+  .min .animat .view_box {
+    height: 361px;
+    width: 641px;
+    top: 105px;
+    left: 50px;
+    background-position: 201px 0;
+    background-size: 12.3rem;
+  }
+  .min .animat .view_box .crust .number_box .number {
+    width: 520px;
+    height: 62px;
+  }
+  .min .animat .view_box .crust .number_box .number ul {
+    line-height: 43px;
+    padding-left: 26px;
+  }
+  .min .animat .view_box .crust .number_box .number ul li {
+    width: 43px;
+    height: 43px;
+    margin-top: 10px;
+    margin-right: 22px;
+    font-size: 18px;
+    vertical-align: text-top;
+  }
+  .min .animat .view_box .crust .number_box .number ul .lastLi {
+    margin-left: 23px;
+  }
+  .min .animat .view_box .ball {
+    width: 240px;
+    height: 241px;
+    margin-left: 184px;
+  }
+  .min .animat .view_box .ball span {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    top: 199px;
+    left: 114px;
+    display: none;
+  }
+  .min .animat .view_box .ball .top_left {
+    top: 199px !important;
+    left: 114px !important;
+    display: none !important;
+  }
+  .min .animat .view_box .ball .rotate {
+    transform: rotate(0deg);
+    transform-origin: 0 110px;
+    -ms-transform: rotate(0deg);
+    /* IE 9 */
+    -ms-transform-origin: 0 110px;
+    /* IE 9 */
+    -webkit-transform: rotate(0deg);
+    /* Safari 和 Chrome */
+    -webkit-transform-origin: 0 110px;
+    /* Safari 和 Chrome */
+    -moz-transform: rotate(0deg);
+    /* Firefox */
+    -moz-transform-origin: 0 110px;
+    /* Firefox */
+    -o-transform: rotate(0deg);
+    /* Opera */
+    -o-transform-origin: 0 110px;
+    transition: transform .7s linear;
+    -moz-transition: transform .7s linear;
+    /* Firefox 4 */
+    -webkit-transition: transform .7s linear;
+    /* Safari 和 Chrome */
+    -o-transition: transform .7s linear;
+  }
+  .min .animat .view_box .ball .one_ball {
+    top: 210px;
+    left: 75px;
+  }
+  .min .animat .view_box .ball .two_ball {
+    top: 207px;
+    left: 62px;
+  }
+  .min .animat .view_box .ball .three_ball {
+    top: 201px;
+    left: 50px;
+  }
+  .min .animat .view_box .ball .four_ball {
+    top: 195px;
+    left: 39px;
+  }
+  .min .animat .view_box .ball .five_ball {
+    top: 186px;
+    left: 29px;
+  }
+  .min .animat .view_box .ball .six_ball {
+    top: 175px;
+    left: 20px;
+  }
+  .min .animat .view_box .ball .seven_ball {
+    top: 210px;
+    left: 136px;
+  }
+  .min #nextTime {
+    top: 565px;
+    left: 210px;
+    font-size: 14px;
+  }
+}
+.loading {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: #000000;
+  width: 100%;
+  height: 100%;
+  z-index: 999;
+  text-align: center;
+  box-sizing: border-box;
+  padding-top: 25%;
+  font-size: 23px;
+  color: #fff;
+}

@@ -1,0 +1,99 @@
+  <h1 class="text-center">
+    <span style="color:pink;margin-bottom: 10px;">{$group->group_name}</span>
+  </h1>
+ <form class="form-horizontal" id="admin_group_rule_add">
+      <div class="box-body">
+        <table class="table table-striped table-bordered table-hover table-condensed ">
+              {foreach name="list" id="v"}
+                  {empty name="v['_data']"}
+                      <tr class="b-group">
+                          <th width="10%">
+                              <label>
+                                  {$v['name']}
+                                  <input type="checkbox" name="rule_ids[]" value="{$v['id']}" {if condition="in_array($v['id'],$infos)"}    checked="checked"{/if}  onclick="checkAll(this)" >
+                              </label>
+                          </th>
+                          <td></td>
+                      </tr>
+                  {else /}
+                      <tr class="b-group">
+                          <th width="10%">
+                              <label>
+                                  {$v['name']} <input type="checkbox" name="rule_ids[]" value="{$v['id']}" {if condition="in_array($v['id'],$infos)"}    checked="checked" {/if} onclick="checkAll(this)">
+                              </label>
+                          </th>
+                          <td class="b-child">
+                              {foreach name="v['_data']" id="n"}
+                                  <table class="table table-striped table-bordered table-hover table-condensed">
+                                      <tr class="b-group">
+                                          <th width="10%">
+                                              <label>
+                                                  {$n['name']} <input type="checkbox" name="rule_ids[]" value="{$n['id']}" {if condition="in_array($n['id'],$infos)"}    checked="checked"{/if} onclick="checkAll(this)">
+                                              </label>
+                                          </th>
+                                          <td>
+                                              {notempty name="n['_data']"}
+                                                  {volist name="n['_data']" id="c"}
+                                                      <label>
+                                                          &emsp;{$c['name']} <input type="checkbox" name="rule_ids[]" {if condition="in_array($c['id'],$infos)"}    checked="checked"{/if} value="{$c['id']}" >
+                                                      </label>
+                                                  {/volist}                           
+                                              {/notempty}
+                                          </td>
+                                      </tr>
+                                  </table>
+                              {/foreach}
+                          </td>
+                      </tr>
+                  {/empty}
+              {/foreach}
+            </table>
+            <input type="hidden" name="id" {if(!empty($id))} value="{$id}" {/if} >
+       <div class="col-sm-offset-2 col-sm-10" style="margin-top:10px">
+            <button id="btnajax" class="btn btn-danger">提交</button>
+        </div>
+    </div>
+  </form>
+
+<script type="text/javascript">
+ function checkAll(obj){
+    $(obj).parents('.b-group').eq(0).find("input[type='checkbox']").prop('checked', $(obj).prop('checked'));
+  }
+$(function(){
+ 
+  $("#btnajax").click(function () {
+  
+    var options = {
+       url: "{:url('group_add_rule')}",
+       type : 'POST',
+      dataType : 'json',
+      success : function(data) {
+        $(".layui-layer-close").click();
+
+       layer.alert(data.msg, {
+          time: 20000,
+          skin: 'layui-layer-molv', //该皮肤由layer.seaning.com友情扩展。关于皮肤的扩展规则，去这里查阅
+          closeBtn: 0,
+          anim: 4
+        }, function(){
+           window.location.href = document.URL;
+        })
+      },
+      error: function(data) {
+         $(".layui-layer-close").click();
+        layer.alert(data.msg, {
+          time: 20000,
+          skin: 'layui-layer-molv', //该皮肤由layer.seaning.com友情扩展。关于皮肤的扩展规则，去这里查阅
+          closeBtn: 0,
+          anim: 4
+        }, function(){
+           window.location.href = document.URL;
+        })
+      }
+    };
+      $("#admin_group_rule_add").ajaxForm(options);
+   })
+
+});
+
+</script>

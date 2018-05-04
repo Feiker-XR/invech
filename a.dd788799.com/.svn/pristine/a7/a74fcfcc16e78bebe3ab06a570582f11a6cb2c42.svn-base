@@ -1,0 +1,82 @@
+<link rel="stylesheet" href="/plugins/webupdate/webuploader.css">
+<script src="/plugins/webupdate/webuploader.js"></script>
+<form class="form-horizontal" id="data_add" method="post" enctype="multipart/form-data">
+  <div class="box-body">
+
+     <div class="form-group">
+        <label for="inputPassword3" class="col-sm-2 control-label">类别</label>
+        <div class="col-sm-10">
+          <select class="form-control select2 select2-hidden-accessible tabindex="-1"   name="type" aria-hidden="true">
+                {foreach($types as $key=>$type)}
+                  <option value="{$key}" {if(!empty($info['type']) && $info['type'] == $key)} selected {/if} >{$type.title}</option>
+                 {/foreach}
+           </select>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="inputEmail3" class="col-sm-2 control-label">开奖时间</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control"  name="time" placeholder="开奖时间" {if(!empty($info['time']))} value="{$info['time']|date='Y-m-d H:i:s',###}" {/if}>
+        </div>
+    </div>
+
+     <div class="form-group">
+        <label for="inputEmail3" class="col-sm-2 control-label">期号(场次)</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control"  name="number" placeholder="期号(场次)" {if(!empty($info['number']))} value="{$info['number']}" {/if}>
+        </div>
+    </div>
+    
+    <div class="form-group">
+        <label for="inputEmail3" class="col-sm-2 control-label">开奖号码</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control"  name="data" placeholder="开奖号码,半角逗号分开" {if(!empty($info['data']))} value="{$info['data']}" {/if}>
+        </div>
+    </div>
+
+     <input type="hidden" name="id" {if(!empty($info['id']))} value="{$info['id']}" {/if} >
+    <div class="col-sm-offset-2 col-sm-10">
+        <button id="btnajax" class="btn btn-danger">提交</button>
+    </div>
+  </div>
+</form>
+
+<script type="text/javascript">
+$(function(){
+
+    $("#btnajax").click(function () {
+
+    var options = {
+       url: "{:url('data_save')}",
+      // type : 'POST',
+     dataType : 'json',
+      success : function(data) {
+        $(".layui-layer-close").click();
+
+       layer.alert(data.msg, {
+          time: 20000,
+          skin: 'layui-layer-molv', //该皮肤由layer.seaning.com友情扩展。关于皮肤的扩展规则，去这里查阅
+          closeBtn: 0,
+          anim: 4
+        }, function(){
+           window.location.href = document.URL;
+        })
+      },
+      error: function(data) {
+         $(".layui-layer-close").click();
+        layer.alert(data.msg, {
+          time: 20000,
+          skin: 'layui-layer-molv', //该皮肤由layer.seaning.com友情扩展。关于皮肤的扩展规则，去这里查阅
+          closeBtn: 0,
+          anim: 4
+        }, function(){
+           window.location.href = document.URL;
+        })
+      }
+    };
+      $("#data_add").ajaxForm(options);
+   })
+});
+
+</script>

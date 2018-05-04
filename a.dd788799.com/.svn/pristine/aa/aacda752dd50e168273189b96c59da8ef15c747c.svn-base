@@ -1,0 +1,78 @@
+<?php
+namespace app\common\model;
+use think\Model;
+use app\common\traits\model\Bank as BankTrait;
+
+class Withdraw extends Model{
+
+	use BankTrait;
+
+    protected $table = 'gygy_withdraw';
+    protected $createTime = 'created_at';
+    protected $updateTime = 'updated_at';
+    protected $autoWriteTimestamp = 'datetime';    
+
+    CONST STATUS_WAIT = 0;
+    CONST STATUS_OK = 1;
+    CONST STATUS_REFUSE = 2;
+
+    CONST STATUSES = [self::STATUS_WAIT=>'待处理',
+        self::STATUS_OK=>'已通过',
+        self::STATUS_REFUSE=>'已拒绝',
+    ]; 
+
+    public function money()
+    {
+        return $this->morphMany('Money',['type','item_id']);
+    }
+
+    public function user()
+    {
+        return $this->belongsTo('Member','uid','uid');
+    }
+
+    //--------------------后台--------------------
+    public static function getList($request){
+    	
+        $params = $request->param();
+
+        $query = self::alias('w')->field('w.*')->order('id desc');
+
+        if($params['nickname']??0){
+            $query->join('gygy_members u','u.uid = w.uid')
+            ->where('nickname|username','like','%'.trim($params['nickname']).'%');
+        }
+
+        $status = $params['status']??'';
+        if(is_numeric($status)){
+            $query->where('status',$status);
+        }
+
+        if($params['sdate']??0){            
+            $query->where('w.created_at', '>=', $params['sdate']);
+            if($params['edate']??0){
+                if(strtotime($params['edate']) < strtotime($params['sdate'])){
+                    $params['edate'] = null;
+                }
+           }
+        }
+
+        if($params['edate']??0){
+            $query->where('w.created_at', '<=', $params['edate']);
+        }
+
+        $data = $query->paginate(10);
+        
+        return $data;
+        
+		/*
+        $query = self::order('id desc');
+        $query->with(['user'=>function($query){
+        	$query->field('uid,username,nickname,withdraw_remain_amount');
+        },]);
+        $data = $query->paginate(10);
+        return $data;
+        */
+    }
+
+}

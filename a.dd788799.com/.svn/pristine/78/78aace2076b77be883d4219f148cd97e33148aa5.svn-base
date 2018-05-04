@@ -1,0 +1,47 @@
+.g-content {
+    width: 100%;
+    background: #fbe3cc;
+    height: auto;
+    font-family: "微软雅黑", "microsoft yahei";
+}
+.g-content .g-lottery-case {
+    width: 500px;
+    margin: 0 auto;
+    overflow: hidden;
+}
+.g-content .g-lottery-case .g-left h2 {
+    font-size: 20px;
+    line-height: 32px;
+    font-weight: normal;
+    margin-left: 20px;
+}
+
+.g-content .g-lottery-case .g-left {
+    width: 450px;
+    float: left;
+}
+.g-lottery-box {
+    width: 400px;
+    height: 400px;
+    margin-left: 30px;
+    position: relative;
+    background: url(images/ly-plate-c.gif) no-repeat;
+}
+.g-lottery-box .g-lottery-img {
+    width: 340px;
+    height: 340px;
+    position: relative;
+    background: url(images/bg-lottery.png) no-repeat;
+    left: 30px;
+    top: 30px;
+}
+.g-lottery-box .playbtn {
+    width: 186px;
+    height: 186px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-left: -94px;
+    margin-top: -94px;
+    background: url(images/playbtn.png) no-repeat;
+}

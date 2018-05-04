@@ -1,0 +1,113 @@
+{extend name="base/common"/}
+{block name="title"}<title>充值记录－{$settings.webName}</title>{/block}
+{block name="style"}
+<link rel="stylesheet" type="text/css" href="__CSS__/user.css">
+<link href="__CSS__/bootstrap.min.css" rel="stylesheet">
+<link href="__CSS__/bootstrap-datetimepicker.min.css" rel="stylesheet">
+{/block}
+{block name="header"}{/block}
+{block name="body"}
+<div class="m-user">
+	<div class="m-simpleHeader" id="dvHeader">
+		<a href="javascript:history.back(-1);" data-pro="back" data-back="true" class="m-simpleHeader-back"><i class="ico ico-back"></i></a>
+		<a href="#" data-pro="ok" class="m-simpleHeader-ok queryMask" id="aHome"><i class="ico ico-search"></i></a>
+		<h1 style="margin-top:12px;">充值记录</h1>		
+	</div>
+	<div class="mask" id="queryMask" style="bottom: 0px; display: none;">
+		<div class="maskbox">
+			<div class="win">
+				<div class="winhead">
+					查    询
+				</div>
+				<div class="winmain">
+					<ul class="writebox">
+						<li>
+							<div>
+								人物
+							</div>
+							<p>
+								<select name="utype" class="form-control" id="utype">
+									<option selected="selected" value="0">所有人</option>
+									<option value="1">自己</option>
+									<option value="2">直属下级</option>
+									<option value="3">所有下级</option>
+								</select>
+							</p>
+						</li>
+						<li>
+							<div>
+								用户名
+							</div>
+							<p>
+								<input name="username" class="form-control" id="username" type="text" placeholder="用户名" value="">
+							</p>
+						</li>
+						<li>
+							<div>
+								起始日期
+							</div>
+							<p>
+								<input name="fromTime" class="form_datetime" id="fromTime" type="text" placeholder="起始日期" value="{:date('Y-m-d H:i',$GLOBALS['fromTime'])}" data-date-format="yyyy-mm-dd hh:ii">
+							</p>
+						</li>
+						<li>
+							<div>
+								截止日期
+							</div>
+							<p>
+								<input name="toTime" class="form_datetime" id="toTime" type="text" placeholder="截止日期" value="{:date('Y-m-d H:i',$GLOBALS['toTime'])}" data-date-format="yyyy-mm-dd hh:ii">
+							</p>
+						</li>
+					</ul>
+				</div>
+				<div class="winfoot">
+					<p>
+						<input class="btn btnblock" type="submit" data-pro="search" data-action="{:Url('team/searchrechargeRecord')}" value="提交">
+					</p>
+					<p>
+						<input class="btn btnblock btnblue" onclick="$('#queryMask').css('display', 'none');" type="button" value="取消">
+					</p>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="m-user-duobaoRecord" id="duobaoRcd_dvWrapper">
+		
+		<div id="pro-view-6">
+			<div data-pro="loading">
+			</div>
+			<span id="record-span">
+				{include file="team/recharge-list"/}
+			</span>
+		</div>
+	</div>
+</div>
+<button id="pro-view-0" class="w-button w-button-round w-button-backToTop" style="bottom: 55px; display: none;">返回顶部</button>
+<script src="__JS__/bootstrap-datetimepicker.min.js"></script>
+<script src="__JS__/bootstrap-datetimepicker.zh-CN.min.js"></script>
+<script>
+	$(document).ready(function () {		
+		$('.form_datetime').datetimepicker({
+			autoclose: 1,
+			todayBtn: 0,
+			minView: 2,
+			language: 'zh-CN',
+			format: 'yyyy-mm-dd hh:ii'
+		});
+		$('.form_datetime').focus(function () {
+			this.blur();
+		});
+	});
+</script>
+{/block}
+{block name="script"}
+<script type="text/javascript">
+var lid=0;
+$(function(){
+	$('.queryMask').on('click', function () {
+		$('#queryMask').css('display', 'block');
+	});
+});
+</script>
+{/block}
+{block name="footer"}{/block}

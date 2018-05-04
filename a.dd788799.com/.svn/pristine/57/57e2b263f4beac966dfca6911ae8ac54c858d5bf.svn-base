@@ -1,0 +1,271 @@
+<?php
+
+namespace bong\service;
+
+use think\Db;
+
+class Database{
+
+    private $fp;
+
+    private $date;//文件日期
+    private $part;//卷号
+    private $where = [];
+    private $struct;
+    private $delete;
+    private $ids = [];
+
+    private $size = 0;
+    
+    CONST BACKUP_RECORD_NUM = 20;
+
+    private $config;
+
+    public function __construct(){
+        //$this->date = date('Ymd', time());
+        $config = [
+            'path'     => config('backup.path')??ROOT_PATH.'backup'.DS,
+            'part'     => config('backup.data_backup_part_size')??52428800,//单位B字节
+            'compress' => config('backup.data_backup_compress')??1,//默认启用压缩
+            'level'    => config('backup.data_backup_compress_level')??9,//9最高压缩级
+        ];        
+        $this->config = $config;
+    }
+
+    
+    //打开一个卷，用于写入数据
+    private function open($size){
+        if($this->fp){
+            $this->size += $size;
+            if($this->size > $this->config['part']){
+                //$this->config['compress'] ? @gzclose($this->fp) : @fclose($this->fp);
+                //$this->fp = null;
+                $this->close();
+                $this->part++;                
+                $this->create();
+            }
+        } else {
+            $backuppath = $this->config['path'];
+
+            $where = md5(serialize($this->where));
+            $filename   = "{$backuppath}{$this->date}-{$this->table}-{$where}-{$this->part}.sql";
+            
+            //如果已经备份,重写而非追加
+            if($this->config['compress']){
+                $filename = "{$filename}.gz";
+                //$this->fp = @gzopen($filename, "a{$this->config['level']}");
+                $this->fp = @gzopen($filename, "w{$this->config['level']}");
+            } else {
+                //$this->fp = @fopen($filename, 'a');
+                $this->fp = @fopen($filename, 'w');
+            }
+            $this->size = filesize($filename) + $size;
+        }
+    }
+
+
+    //写入初始数据
+    public function create(){
+        $sql  = "-- -----------------------------\n";
+        $sql .= "-- Think MySQL Data Transfer \n";
+        $sql .= "-- \n";
+        $sql .= "-- Host     : " . config('database.hostname') . "\n";
+        $sql .= "-- Port     : " . config('database.hostport') . "\n";
+        $sql .= "-- Database : " . config('database.database') . "\n";
+        $sql .= "-- \n";
+        $sql .= "-- Part : #{$this->part}\n";
+        $sql .= "-- Date : " . date("Y-m-d H:i:s") . "\n";
+        $sql .= "-- -----------------------------\n\n";
+        $sql .= "SET FOREIGN_KEY_CHECKS = 0;\n\n";
+        return $this->write($sql);
+    }
+
+    private function write($sql){
+        $size = strlen($sql);
+        
+        //由于压缩原因，无法计算出压缩后的长度，这里假设压缩率为50%，
+        //一般情况压缩率都会高于50%；
+        $size = $this->config['compress'] ? $size / 2 : $size;
+        
+        $this->open($size); 
+        return $this->config['compress'] ? @gzwrite($this->fp, $sql) : @fwrite($this->fp, $sql);
+    }
+
+    public function backup($date,$table,$where = [],$struct = false, $delete = true){
+        $this->date = $date;
+        $this->table = $table;
+        $this->where = $where;
+        $this->struct = $struct;
+        $this->delete = $delete;
+        $this->ids = [];
+        
+        $this->part = 1;
+
+        $this->backup_struct();
+
+        $start = 0;        
+        while($start = $this->backup_data($start)){
+
+        }
+
+        $this->delete();
+
+        return $this->close();
+    }
+
+    private function backup_struct(){
+        $table = $this->table;
+        if($this->struct){
+            $result = Db::query("SHOW CREATE TABLE `{$table}`");
+            $result = array_map('array_change_key_case', $result);
+
+            $sql  = "\n";
+            $sql .= "-- -----------------------------\n";
+            $sql .= "-- Table structure for `{$table}`\n";
+            $sql .= "-- -----------------------------\n";
+            $sql .= "DROP TABLE IF EXISTS `{$table}`;\n";
+            $sql .= trim($result[0]['create table']) . ";\n\n";
+            if(false === $this->write($sql)){
+                throw new \Exception('读写文件失败!');
+            }
+        }
+    }
+
+    private function backup_data($start = 0){
+
+        $table = $this->table;
+        $where = $this->where;
+        //$this->ids = [];
+
+        // 数据总数
+        $result = Db::query("SELECT COUNT(*) AS count FROM `{$table}`");
+        $count  = $result['0']['count'];
+
+        //备份表数据
+        if($count){
+            // 写入数据注释
+            if(0 == $start){
+                $sql  = "-- -----------------------------\n";
+                $sql .= "-- Records of `{$table}`\n";
+                $sql .= "-- -----------------------------\n";
+                $this->write($sql);
+            }
+
+            // 备份数据记录
+            //$sql = "SELECT * FROM `{$table}` LIMIT {$start}, ".self::BACKUP_RECORD_NUM;
+            //$result = Db::query($sql);
+            $query = db()->setTable($table);//db($table)这个添加默认前缀
+            if(!empty($where)){
+                $query->where($where);
+            }
+            $result = $query->limit($start,self::BACKUP_RECORD_NUM)->select();
+
+            //$ids = [];
+            foreach ($result as $row) {
+                //$ids[] = $row['id'];
+                $this->ids[] = $row['id'];
+                $row = array_map('addslashes', $row);
+                $sql = "INSERT INTO `{$table}` VALUES ('" . str_replace(array("\r","\n"),array('\r','\n'),implode("', '", $row)) . "');\n";
+                if(false === $this->write($sql)){
+                    throw new \Exception('读写文件失败!');
+                }
+            }
+            //可优化:$this->ids[] = $ids; 这样就不需要array_chunk
+
+            //$this->ids = array_merge($this->ids,$ids);
+            /*此时不能删除,影响limit
+            if($this->delete && !empty($ids)){
+                $query->where('id','in',$ids)->delete();
+            }
+            */
+            
+            //还有更多数据
+            if($count > $start + self::BACKUP_RECORD_NUM){
+                return $start + self::BACKUP_RECORD_NUM;
+            }
+        }
+
+        // 备份下一表
+        return 0;
+    }
+
+    private function delete(){
+
+        $table = $this->table;
+        $query = db()->setTable($table);
+
+        if($this->delete && !empty($this->ids)){
+            $idss = array_chunk($this->ids,self::BACKUP_RECORD_NUM);
+            foreach ($idss as $ids) {
+                $query->where('id','in',$ids)->delete();
+            }            
+        }
+        $this->ids = [];
+    }
+
+    public function import($table,$date=null){
+        //$this->date = $date;
+        //$this->table = $table;
+        if(!$date){
+            $date = $this->date;
+        }
+        $path = realpath($this->config['path']).DS."{$date}-{$table}-*.sql*";
+
+        $files  = glob($path);
+        foreach ($files as $file) {
+            $start = 0;
+            while($start = $this->import_in($file,$start)){
+
+            }
+        }
+        return $this->close();
+    }
+
+    //导入数据
+    private function import_in($file,$start = 0){
+        if($this->config['compress']){
+            $gz   = gzopen($file, 'r');
+            $size = 0;
+        } else {
+            $size = filesize($file);
+            $gz   = fopen($file, 'r');
+        }
+
+        $sql  = '';
+        if($start){
+            $this->config['compress'] ? gzseek($gz, $start) : fseek($gz, $start);
+        }
+
+        for($i = 0; $i < self::BACKUP_RECORD_NUM; $i++){
+            //$sql .= $this->config['compress'] ? gzgets($gz) : fgets($gz);
+            if($this->config['compress']){
+                $sql .= gzgets($gz);
+            }else{
+                $sql .= fgets($gz);
+            }
+            if(preg_match('/.*;$/', trim($sql))){
+                if(false !== Db::execute($sql)){
+                    $start += strlen($sql);
+                } else {
+                    throw new \Exception('执行SQL有误!');
+                }
+                $sql = '';
+            } elseif ($this->config['compress'] ? gzeof($gz) : feof($gz)) {
+                return 0;
+            }
+        }
+
+        return $start;
+    }
+
+    public function close(){        
+        $this->config['compress'] ? @gzclose($this->fp) : @fclose($this->fp);
+        $this->fp = null;
+        $this->size = 0;
+        $this->where = [];
+    }
+
+    public function __destruct(){
+        $this->config['compress'] ? @gzclose($this->fp) : @fclose($this->fp);
+    }
+}

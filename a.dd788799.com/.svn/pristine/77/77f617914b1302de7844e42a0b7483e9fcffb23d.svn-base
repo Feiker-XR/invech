@@ -1,0 +1,46 @@
+{php}
+	$stateName = array('已到帐', '正在办理', '已取消', '已支付', '失败');
+{/php}
+<ul class="w-goodsList w-goodsList-l m-user-goodsList" data-pro="list">
+	{php} foreach ($_list as $vo) {
+	{/php}
+	<li id="pro-view-8" class="w-goodsList-item">
+	<div class="w-goods w-goods-l w-goods-ing m-user-goods">
+		<div class="w-goods-info">
+			<p>
+				用户名：{$vo.username?$vo.username:''}
+			</p>
+			<p>
+				提现金额：{$vo.amount?$vo.amount:''}
+			</p>
+			<p>
+				申请时间：{$vo['actionTime']?date('m-d H:i:s', $vo['actionTime']):''}
+			</p>
+			<p>
+				提款银行：{php} echo $bankData[$vo['bankId']]['name'] {/php}
+			</p>
+			<p>
+				银行尾号：{php} echo '***'.preg_replace('/^.*(.{4})$/', '\1', $vo['account']) {/php}
+			</p>
+			<p>
+				状态：{php}
+						if ( $vo['state']==3 && $vo['uid']==$user['uid'] ) {
+							echo '<div class="sure" id="', $vo['id'], '"></div>' ;
+						} else {
+							echo $stateName[$vo['state']] ;
+						}
+					{/php}
+			</p>
+			
+		</div>
+	</div>
+	</li>
+	{php} }
+	    if(!$_list) {
+	{/php}
+		<div style="text-align:center">当前条件下没有记录，请更改条件后搜索</div>
+	{php} } {/php}
+</ul>
+<div class="page">
+	{$_page}
+</div>

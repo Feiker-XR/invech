@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Welcome</title>
+<link rel="stylesheet" type="text/css" href="/css/general.css"/>
+<script src='/js/js/jquery-1.8.0.min.js'></script>
+<script type="text/javascript" src="/Scripts/member.js"></script>
+<script type="text/javascript" src="/Scripts/City.js"></script>
+</head>
+  <div class="ui-moneyBox">
+    <ul>
+        <table width="100%" border="0" cellspacing="0" cellpadding="5">
+        <form id="MyForm" action="/user/set_card" method="post">
+          <tr>
+            <td align="right">会员账号：</td>
+            <td>{$user['username']}</td>
+          </tr>
+          <tr>
+            <td width="150" align="right">收款人姓名：</td>
+            <td><font style="font-size:14px;color:#F00; font-weight:bold">{$user['pay_name']}</font></td>
+          </tr>
+          <tr>
+            <td colspan="2" align="left" bgcolor="#384967" style="font-size:14px; color:#FF0">以下为您的收款信息，一旦录入将无法修改，请认真填写！</td>
+          </tr>
+          <tr>
+            <td align="right">收款银行：</td>
+            <td><input type="text" id="pay_card" name="pay_card" class="Input_250"/>
+           </td>
+          </tr>
+          <tr>
+            <td align="right">银行账号：</td>
+            <td><input type="text" id="pay_num" name="pay_num" class="Input_250"/></td>
+          </tr>
+          <tr>
+            <td align="right">开户行地址：</td>
+            <td><select id="Address_1" name="Address_1" runat="server" onChange="selectCity();" style="height:26px;border:1px solid #d7d7d7;margin-top:2px;"><option value="" selected="true">省/直辖市</option></select>
+            <select id="Address_2" name="Address_2" runat="server" onChange="selectcounty()" style="height:26px;border:1px solid #d7d7d7;margin-top:2px;"><option value="" selected="true">请选择</option></select>
+            <select id="Address_3" name="Address_3" runat="server" style="height:26px;border:1px solid #d7d7d7; margin-top:2px;"><option value="" selected="true">请选择</option></select>
+            <input name="Address_4" type="text" class="Input_250" id="Address_4" value="XX街XX支行" onFocus="this.value=''" onBlur="if(!value){value=defaultValue;}"/></td>
+          </tr>
+          <tr>
+            <td align="right">请输入您的资金密码：</td>
+            <td><input type="password" id="MoneyPass" name="MoneyPass" class="Input_100"/></td>
+          </tr>
+          <tr>
+            <td colspan="2" align="left" style="padding-left:160px;"><input type="submit" name="button" id="button" value="确认录入" class="m_btn"/></td>
+          </tr>
+          </form>
+        </table>
+    </ul>
+  </div>
+<script type="text/javascript">
+  Init('','','')
+</script>
+</body>
+</html>

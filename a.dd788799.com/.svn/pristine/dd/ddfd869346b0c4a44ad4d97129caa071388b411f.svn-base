@@ -1,0 +1,124 @@
+<?php
+namespace app\admin\controller;
+use app\admin\Login;
+use app\common\model\Config as ConfigModel;
+use app\common\model\Notice as NoticeModel;
+use think\Hook;
+use app\common\model\Member as UserModel;
+use app\common\model\Money as MoneyModel;
+use app\common\model\ActionLog as LogModel;
+use app\service\UserAgent;
+use app\service\JsonExtra;
+use app\service\Sms;
+use app\service\CacheStorage;
+use Closure;
+use app\service\Pipeline;
+
+class System extends Login{
+
+    public function _initialize(){
+        parent::_initialize();
+        $menu_group   =   "system";
+        $this->assign('menu_group',$menu_group);
+    }
+
+    public function config(){
+        $this->view->page_header = '参数列表';
+        $request = request();
+        $list = ConfigModel::getList($request);
+        $this->assign('list',$list);
+        $groups = ConfigModel::GROUP_ARRAY;
+        $this->assign('groups',$groups);
+        return $this->fetch();
+    }
+
+    public function config_edit(){
+        $request = request();
+        $params = $request->param(); 
+        if(request()->isGet()){
+            if(!empty($params['id'])){
+                $info =  ConfigModel::get(['id'=>$params['id']]);
+                $this->assign('info',$info);  
+            }
+            return view();
+        }else{
+            $id   =  !empty($params['id'])? $params['id']:'';
+            if($id){
+                $config = ConfigModel::get(intval($id));
+            }else{
+                $config = new ConfigModel($data);
+            }
+            $list = $config->validate('System.config')->save($data);
+            if($list){
+                LogModel::log(LogModel::BUSINESS_TYPE_EDIT,$config,LogModel::BUSINESS_TYPES[LogModel::BUSINESS_TYPE_EDIT]);
+                return $this->success('操作成功');
+            }else{
+                return $this->error($config->getError());
+            }
+        }
+    }
+
+    public function config_del(){
+        $request = request();
+        $params = $request->param();
+        $config = ConfigModel::get(intval($params['id']));
+        $list = $config->delete();
+        if($list){
+            LogModel::log(LogModel::BUSINESS_TYPE_DELE,$config,LogModel::BUSINESS_TYPES[LogModel::BUSINESS_TYPE_DELE]);
+            return $this->success('操作成功');
+        }else{
+            return $this->error($config->getError());
+        }
+    }
+
+
+    public function notice(){
+        $this->view->page_header = '公告列表';
+        $request = request();
+        $list = NoticeModel::getList($request);
+        $this->assign('list',$list);
+        return $this->fetch();
+    }
+
+    public function notice_edit(){
+        $request = request();
+        $params = $request->param();
+        if(request()->isGet()){
+            if(!empty($params['id'])){
+                $info =  NoticeModel::get(['id'=>$params['id']]);
+                $this->assign('info',$info);  
+            }
+            return view();
+        }else{
+            $id  =  !empty($params['id'])? $params['id']:''; 
+            if($id){
+                $notice = NoticeModel::get(intval($id));
+            }else{
+                $notice = new NoticeModel($data);     
+            }
+            $list = $notice->validate('System.notice')->save($data);
+            if($list){
+                LogModel::log(LogModel::BUSINESS_TYPE_EDIT,$notice,LogModel::BUSINESS_TYPES[LogModel::BUSINESS_TYPE_EDIT]);
+                return $this->success('操作成功');
+            }else{
+                return $this->error($notice->getError());
+            }
+        }
+    }
+
+    public function notice_del(){
+        $request = request();
+        $params = $request->param();
+        $notice = NoticeModel::get(intval($params['id']));
+        $list = $notice->delete();
+        if($list){
+            LogModel::log(LogModel::BUSINESS_TYPE_DELE,$notice,LogModel::BUSINESS_TYPES[LogModel::BUSINESS_TYPE_DELE]);
+            return $this->success('操作成功');
+        }else{
+            return $this->error($notice->getError());
+        }
+    }
+    
+}
+
+

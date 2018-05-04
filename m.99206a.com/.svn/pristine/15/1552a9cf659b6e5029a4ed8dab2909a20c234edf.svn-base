@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>老虎机大厅--皇冠娱乐城</title>
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">	
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+<link rel="stylesheet" href="/styles/ezweb.css">
+<link rel="stylesheet" type="text/css" href="/fonts-new/iconfont.css">		
+<link rel="stylesheet" href="/css/500f_new_wap.css">
+
+<link rel="stylesheet" href="/css/tiger.css" />
+
+</head>
+<body>
+	
+	{include file='common/nav'}
+	{include file='common/header'}
+	
+<div class="block_60"></div>	
+<div class="search_all">
+	<div class="search_tit">
+		<span><a href="#" class="{if $type == 'ag'}on{/if}">AG电子</a></span>
+		<span><a href="#" class="{if $type == 'pt'}on{/if}">PT电子</a></span>
+		<span><a href="#" class="{if $type == 'mg'}on{/if}">MG电子</a></span>
+		<span><a href="#" class="{if $type == 'sb'}on{/if}">太阳城</a></span>
+	</div>
+	<div class="block_20"></div>
+	<div class="search_btn">
+		<input type="text" placeholder="热门游戏搜索" id="search_check"/>
+		<button>搜索</button>
+	</div>
+	<div class="block_30"></div>
+	<div class="search_tab">
+		<div class="search_list" style="{if $type == 'ag'}display: block;{else /}display: none;{/if}">			
+			{foreach $dzyx['ag'] as $v}
+			<a href="/live/ag/type/{$v.gameid2}">
+				<div class="search_img">
+					<img src="/images/agimg/<?=$v['imageurl']?>" />
+				</div>
+				<span class="search_text" data-num="0"><?=$v['gamename']?></span>
+			</a>
+			{/foreach}
+
+			<div style="clear:both;"></div>
+		</div>
+		<div class="search_list" style="{if $type == 'pt'}display: block;{else /}display: none;{/if}">		
+		{foreach $dzyx['pt'] as $v}		
+		<a href="/live/pt/item_id/{$v.gameid}" >
+			<div class="search_img">
+				<img  src="/images/ptimg/<?=$v['gameid']?>.png"/>
+			</div>
+			<span class="search_text" data-num='1'><?=$v['gamename']?></span>
+		</a>		
+		{/foreach}
+
+			<div style="clear:both;"></div>
+		</div>		
+		<div class="search_list" style="{if $type == 'mg'}display: block;{else /}display: none;{/if}">
+			{foreach $dzyx['mg'] as $v}			
+			<a href="/live/mg/item_id/{$v.gameid}/app_id/{$v.gameid2}" >
+				<div class="search_img">
+					<img  src="/images/mgimg/<?=$v['imageurl']?>" />
+				</div>
+				<span class="search_text" data-num='2'><?=$v['gamename']?></span>
+			</a>
+			{/foreach}
+
+			<div style="clear:both;"></div>
+		</div>	
+
+		<div class="search_list" style="{if $type == 'sb'}display: block;{else /}display: none;{/if}">
+			{foreach $dzyx['sb'] as $v}			
+			<a href="/live/sunbet" >
+				<div class="search_img">
+					<img  src="/images/sbimg/<?=$v['imageurl']?>" />
+				</div>
+				<span class="search_text" data-num='2'><?=$v['gamename']?></span>
+			</a>
+			{/foreach}
+
+			<div style="clear:both;"></div>
+		</div>			
+
+	</div>
+	
+</div>
+
+</body>
+<script type="text/javascript" src="/js/jquery-2.2.0.min.js"></script>
+<script>
+$(function(){
+//子页面传递高度给顶层iframe	
+function changeFrameHeight(){
+    bodyClientH = $(document).height();
+   	bodyClientW = $(document).width();
+	var iframeId = $(window.parent.document).find("#iframeid")
+	iframeId.css("height",bodyClientH + 400)
+//	alert(iframeId)
+}	
+changeFrameHeight()		
+	
+$(function(){
+var searchIndex = 0;
+$(".search_tit span").click(function(){
+		searchThis = $(this),
+		searchIndex = searchThis.index()
+		
+	searchThis.addClass("on").find("a").addClass("on");
+	searchThis.siblings("span").removeClass("on").find("a").removeClass("on")
+	$(".search_tab").find(".search_list").eq(searchIndex).show().siblings(".search_list").hide();
+	$(".search_tab").find(".search_list").eq(searchIndex).find("a").show()
+	$(".search_ontime").hide()
+	
+	changeFrameHeight()		
+})
+	
+//$('#search_check').on('input propertychange', function(){
+//	hideText()
+//	searchProductClassbyName(searchIndex);
+//	
+//});
+//
+//showText()
+//			
+//
+
+$("#search_check").keypress(function() {
+	showText()
+//	$(".search_ontime").text("dddddd.....")
+	
+}).keyup(function() {
+	hideText()
+	searchProductClassbyName(searchIndex);
+	$(".search_ontime").text("正在搜索中.....")
+});
+
+showText()
+
+
+})
+
+function showText(e){
+	$(".search_list").find("a").show()
+}
+//
+function hideText(){
+	$(".search_list").find("a").hide()
+	$(".search_ontime").show()
+//	$(".search_ontime").text("正在搜索中.....")
+	
+}
+
+function searchProductClassbyName(e){
+	var checkVal = $("#search_check").val(),
+		gameName = ["AG电子","PT电子","MG电子","OG电子","太阳城"],
+		arrText = [],
+		arrEveryText = []
+		
+	$(".search_text").each(function(index){
+    	arrText.push($(this).text());
+	})
+//		console.log(arrText)
+		
+	for(i=0;i<arrText.length;i++){
+//			var xxxxx = arrText[i].length;
+//		for(j=0;j<arrText[i].length;j++){
+//				console.log(arrText[i].charAt(j))
+//			console.log(arrText[i])
+			
+			if (arrText[i].indexOf(checkVal) !== -1) {
+				
+				var textDataNum = $(".search_text").eq(i).attr("data-num")
+				var textTitle = "<div class='search_lanmu'>[" + gameName[textDataNum] + "]</div>"
+				if(!$(".search_text").eq(i).next().hasClass("search_lanmu")){
+					$(".search_text").eq(i).after(textTitle)
+				}
+				
+				$(".search_list").show()
+				$(".search_text").eq(i).parent().show()
+				$(".search_ontime").hide()
+//				$(".search_ontime").text("正在搜索中.....")
+//				console.log(textDataNum)
+				
+			}
+			
+			if(checkVal == ""){
+				$(".search_ontime").hide()
+//				$(".search_ontime").text("正在搜索中.....")
+				$(".search_list").hide()
+				$(".search_list").eq(e).show()
+				$(".search_list").eq(e).find("a").show()
+				$(".search_lanmu").remove();
+			}	
+			
+//			if (arrText[i].indexOf(checkVal) == -1){
+//				$(".search_ontime").text("栏目无此游戏.....")
+//				
+//			}
+			
+//		}
+	}
+
+
+
+
+}
+	
+})
+$(function(){
+	var clichW = $(window).width();
+	var clichH = $(window).height();
+	$(window.parent.document).find("#iframeid").css("height",clichH);
+})
+$(function(){
+	$(document).resize(function(){
+		console.log('window size changed');
+	});
+})
+</script>
+</html>

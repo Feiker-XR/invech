@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>首页</title>
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <link rel="icon" href="/images/856" type="image/x-icon">
+    <link rel="shortcut icon" href="/images/856" mce_href="/images/856" type="image/x-icon">
+    <style>html{height:100%;width:100%;}iframe{width:100%;height:100%;overflow-x:hidden;overflow-y:hidden;padding:0;margin:0;}body{margin:0;padding:0;height:100%;overflow:hidden;}</style>
+    <script>
+        <!--
+        // 屏蔽JS错误
+        //    window.onerror = function(){return true;}
+        // -->
+    </script>
+    <script>
+        var CONFIG = {
+            BASEURL: "/",    // 根路径
+            RESURL: "/static/theme/mainTheme/400w/"         // 资源路径
+        };
+    </script>
+    <script src="/static/theme/mainTheme/400w/js/mobile-detect.min.js"></script><script type="text/javascript">
+
+    // 检查浏览器
+    var md = new MobileDetect(window.navigator.userAgent);
+    if (md.mobile()) {
+        window.location.href = "http://m.400w.am" + "";
+    }
+
+    // 检查兼容
+    var browser=navigator.appName
+    var b_version=navigator.appVersion
+    var version=b_version.split(";");
+    var trim_Version=version[1].replace(/[ ]/g,"");
+    if(browser == "Microsoft Internet Explorer" && trim_Version == "MSIE6.0") {
+        window.location.href = "/error/incompatible.html"
+    } else if(browser=="Microsoft Internet Explorer" && trim_Version=="MSIE7.0") {
+        window.location.href = "/error/incompatible.html"
+    } else if(browser=="Microsoft Internet Explorer" && trim_Version=="MSIE8.0") {
+        window.location.href = "/error/incompatible.html"
+    } else if(browser=="Microsoft Internet Explorer" && trim_Version=="MSIE9.0") {
+    }
+</script>
+</head>
+<body>
+<iframe src ="/main.html" frameborder="0" marginheight="0" marginwidth="0" frameborder="0" scrolling="auto" id="ifm" name="ifm"  width="100%"></iframe>
+<script type="text/javascript" src="/__JS__/jquery.min.js"></script><!--jQuery库-->
+<script type="text/javascript" src="/static/theme/mainTheme/400w/js/scrollanim.min.js?v=2017"></script> <!--"动画库"-->
+<script src="/static/theme/mainTheme/400w/js/type.js?v=2017"></script><!--自定义封装函数-->
+<script src="/static/theme/mainTheme/400w/js/global.js?v=20170505"></script><!--自定义封装函数-->
+<script src="/static/theme/mainTheme/400w/js/jquery.cookie.js?v=2017"></script><!--自定义封装函数-->
+<script src="/__JS__/md5.js?v=2017"></script><!--自定义封装函数-->
+<script src="/static/theme/mainTheme/400w/layer/layer.js?v=2017"></script>
+<script src="/static/theme/mainTheme/400w/js/jquery.nicescroll.js?v=2017"></script>
+<script src="/static/theme/mainTheme/400w/js/dateFormat.js?v=2017"></script>
+<script src="/static/theme/mainTheme/400w/js/template.js?v=2017"></script>
+<script src="/static/theme/mainTheme/400w/js/swfobject/swfobject.js?v=2017"></script>
+<script src="/static/theme/mainTheme/400w/js/jquery.liMarquee.js?v=2017"></script>
+<script src="/static/theme/mainTheme/400w/js/placeholders.jquery.min.js?v=2017"></script>
+<script src="/static/theme/mainTheme/400w/js/flexslider/jquery.flexslider-min.js?v=20170707"></script><!--轮播插件封装函数-->
+
+<script>
+    // 闪烁
+    var blinkColorArr = "#fa6200|#0f3f94".split("|");
+    $(".blink").each(function() {
+        var obj = $(this);
+        setInterval(function() {
+            var tmpColor = blinkColorArr[parseInt(Math.random() * blinkColorArr.length)];
+            $(obj).css("color", tmpColor);
+        },200);
+    });
+
+
+
+    $(function() {
+        // 底部信息调用
+        function ajaxGetDbxx() {
+            ajaxRequest({
+                url: CONFIG.BASEURL + "ajaxGetWebInfo.json",
+                success: function (json) {
+                    if (json.result != 1) {
+                        return;
+                    }
+                    $(".webDbxx").html(json.webDbxx);
+                }
+            });
+        }
+
+        if ($(".webDbxx").length > 0) {
+            ajaxGetDbxx();
+        }
+    });
+
+
+</script><script>
+    $(document).ready(function() {
+        var p = Tools.parseInt('');
+        if (!isNaN(p)) {
+            $.cookie("agentId", p, {path: "/"});
+        }
+//            else {
+//                $.cookie("agentId", '', {path: "/", expires: -1});
+//            }
+    });
+</script>
+
+<script>
+    $(function() {
+        var checkOnlineFlag = true;
+        setInterval(function() {
+            var uid = $.cookie("uid");
+            var token = $.cookie("token");
+            if (!checkOnlineFlag || typeof uid == 'undefined' || typeof token == 'token' || !uid || !token) {
+                return;
+            }
+
+            ajaxRequest({
+                url: "/member/checkOnline.json",
+                beforeSend: function() {
+                    checkOnlineFlag = false;
+                },
+                success: function(json) {
+                    if (json.result == 1) {
+                        checkOnlineFlag = true;
+                        return;
+                    }
+                    $.cookie("uid", '', {path: "/", expires: -1});
+                    $.cookie("token", '', {path: "/", expires: -1});
+
+                    if (json.result == 108) {
+                        alert("登录超时，请重新登录");
+                        window.location.href = "/";
+                        return;
+                    }
+
+                    if (json.result == 109) {
+                        alert("你的账号已在其它设备登录，请重新登录");
+                        window.location.href = "/";
+                        return;
+                    }
+
+                    alert("登录超时，请重新登录");
+                    window.location.href = "/";
+                    return;
+                }
+            });
+        }, 10000);
+    });
+</script></body>
+</html>

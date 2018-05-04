@@ -1,0 +1,65 @@
+
+{layout name="layout" /}
+<script type="text/javascript" src="/js/datePicker/WdatePicker.js"></script>
+<div class="row">
+  <div class="col-xs-12">
+    <div class="box">
+       <div class="box-header">
+ 				
+			<form action="{:url('index')}" method="post" class="form-search pull-left">
+				<input type="text" style="width:300px;" name="keywords" id="keywords"  placeholder="用户名、订单编号、操作员、备注" class="search-query">
+				<button type="submit" class="btn">搜索</button>
+			 
+			</form>
+			
+      </div>
+      <!-- /.box-header -->
+      <div class="box-body table-responsive no-padding">
+		<table class="table table-hover">
+	          <tbody>
+	          	<tr>
+				  <th>#</th>
+				  <th>用户名</th>
+				  <th>性别</th>
+				  <th>会员昵称</th>
+				  <th>真实姓名</th>
+				  <th>会员类型</th>
+				  <th>会员积分</th>
+				  <th>会员金额</th>
+				  <th>注册时间</th>
+				  <th>修改时间</th>
+				 
+				</tr>
+				{foreach $members as $v}
+				 <tr>
+					<td>{$v.uid}</td>
+					<td>{$v.username}</td>
+					<td>{$v.sex}</td>
+					<td>{$v.nickname}</font></td>
+					<td>{$v.name}</font></td>
+					<td>
+						{eq name="$v.type" value="0"}<font color=blue>会员</font>{/eq}
+						{eq name="$v.type" value="1"}<font color=green>代理</font>{/eq}							  
+					</td>
+					<td>{$v.score}</td>
+					<td>{$v.coin}</td>
+					<td>{$v.regTime|date="y-m-d H:i:s",###}</td>
+					<td>{$v.updateTime}</td>
+				</tr>
+				{/foreach}
+			</tbody>
+		</table>
+			   
+      </div>
+      	<div style="width:100%;margin-left:20px;">
+			{$members->render();}
+		</div>
+      <!-- /.box-body -->
+    </div>
+    <!-- /.box -->
+  </div>
+</div>
+
+
+
+

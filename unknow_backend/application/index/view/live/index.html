@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>真人视讯live Casino</title>
+		<link rel="stylesheet" type="text/css" href="/css/style.css" />
+		<!-- <script src="https://cdn.bootcss.com/jquery/1.9.0/jquery.min.js"></script>-->
+		<script type="text/javascript" src="/js/jquery1.9.0.min.js"></script>
+		<script type="text/javascript" src="/js/jquery.SuperSlide.2.1.1.js"></script>
+		<script type="text/javascript" src="/js/main.js"></script>
+		<script type="text/javascript" src="/js/main.new.js?123"></script>
+		<script src="/Scripts/swfobject_modified.js" type="text/javascript"></script>
+		<script type="text/javascript" src="/js/layer.js"></script>
+	</head>
+	<body>
+		<div class="head">
+			
+		{include file='common/live-nav'}
+
+			<script type="text/javascript">
+				$(function() {
+					//顶部导航二级菜单
+					$(".nav_right_div").mouseenter(function() {
+						$(this).find("ul").show();
+					}).mouseleave(function() {
+						$(this).find("ul").hide();
+					})
+
+				})
+			</script>
+
+		</div>
+		<div class="block_0"></div>
+		<!--真人视讯背景-->
+		<div class="game_l_center">
+			<div class="game_l_login ">
+				<?php if($user){?>
+				<div class="game_l_login_nav game_hadlogin">
+					<h3>Vip会员登录</h3>
+					<span class="ml15 fl">账户：<i class="head_w_hadlogin_name">{$user['username']}</i></span>
+					<span class="ml15 fl">余额：<i class="head_w_hadlogin_count" id='money'>{$user['money']}</i></span>
+					<ul class="fr">
+						<li>
+							<a href="javascript:void(0);" onclick="GoToMember(0,2);return false">会员资料</a>
+						</li>
+						<li>
+							<a href="javascript:void(0);" onclick="GoToMember(3,0);return false">账户历史</a>
+						</li>
+						<li>
+							<a href="javascript:void(0);" onclick="GoToMember(2,0);return false">交易记录</a>
+						</li>
+						<li>
+							<a href="javascript:void(0);" onclick="GoToMember(0,2);return false">财务中心</a>
+						</li>
+						<li>
+							<a href="javascript:void(0);" onclick="GoToMember(5,0);return false">代理中心</a>
+						</li>
+						<li>
+							<a href="javascript:void(0);" onclick="GoToMember(1,0);return false"><span style="color: #FF0000;text-decoration: none;font-weight:bold;">会员存款</span></a>
+						</li>
+						<li>
+							<a href="javascript:void(0);" onclick="GoToMember(0,2);return false" style="margin-left:6px;"><span style="color: #FF0000;text-decoration: none;font-weight:bold;">额度转换</span></a>
+						</li>
+						<li>
+							<a href="javascript:void(0);" onclick="GoToMember(1,1);return false">会员提款</a>
+						</li>
+						<li>
+							<a href="javascript:GoTo('1','Logout');" target="_top">安全退出</a>
+						</li>
+					</ul>
+				</div> 
+				<?php }else{?>
+				<div class="game_l_login_nav">
+				<h3>Vip会员登录</h3>
+					<ul>
+						<li class="game_l_login_nav_1"><input type="text" name="username" id="username" placeholder="输入用户名"></li>
+						<li class="game_l_login_nav_2"><input type="password" name="password" id="password" placeholder="输入密码"></li>
+						<li class="game_l_login_nav_3"><a href="javascript:;" onclick="alert('请联系在线客服!');return false;">忘记密码？</a></li>
+						<li class="game_l_login_nav_4"><button onclick="Login()" id="logkey">登录</button></li>
+						<li class="game_l_login_nav_5"><a class="button" href="{:Url('index/reg')}">立即开户</a></li>
+					</ul>
+				</div>
+				<?php }?>
+				<div class="block_0"></div>
+				<div class="game_l_login_all" style="height:848px;">
+					<div class="focusBox" style="margin:0 auto">
+						<ul class="pic">
+							<li>
+								<a href="{:Url('game/index')}" target="index"><img src="/img/electr-slider-bg1.png" /></a>
+							</li>
+							<li>
+								<a href="{:Url('lottery/home')}" target="index"><img src="/img/game-slider-bg.png" /></a>
+							</li>
+							<li>
+								<a href="{:Url('live/index')}" target="index"><img src="/img/live-slider-bg.png" /></a>
+							</li>
+							<li>
+								<a href="{:Url('sport/index')}" target="index"><img src="/img/sport-bg1.png" /></a>
+							</li>
+						</ul>
+						<a class="prev" href="javascript:void(0)"></a>
+						<a class="next" href="javascript:void(0)"></a>
+						<ul class="hd">
+							<li></li>
+							<li></li>
+							<li></li>
+							<li></li>
+						</ul>
+					</div>
+					<div class="block_30"></div>
+					<div class="banner_notice txtMarquee-left">
+						<div class="bd">
+							<img src="/img/notice.png" class="fl" />
+							<ul class="fl f14 ">
+								<li></li>
+							</ul>
+						</div>
+					</div>
+					<div class="block_30"></div>
+					<div class="game_l_login_show">
+						<div class="game_l_login_show_1 fl">
+							<h1 class="game_l_login_show_1_h1">
+							<i>1</i>
+							<img src="/img/link-1.png" />
+						</h1>
+							<span class="game_l_login_show_span"><img src="/img/game-l-1.png"></span>
+							<div class="game_l_login_show_mask">
+								<a href="/live/ag/" target="_blank">进入游戏</a>
+							</div>
+						</div>
+						<div class="game_l_login_show_2 fl">
+							<h1 class="game_l_login_show_2_h1">
+							<i>2</i>
+							<img src="/img/bbin-logo2.png" />
+						</h1>
+							<span class="game_l_login_show_span"><img src="/img/game-l-2.png"></span>
+							<div class="game_l_login_show_mask">
+								<a href="/live/bbin/" target="_blank">进入游戏</a>
+							</div>
+						</div>
+						<div class="game_l_login_show_3 fl">
+							<h1 class="game_l_login_show_3_h1">
+							<i>3</i>
+							<img src="/img/OG-logo.png" />
+						</h1>
+							<span class="game_l_login_show_span"><img src="/img/game-l-3.png"></span>
+							<div class="game_l_login_show_mask">
+								<a href="/live/og/" target="_blank">进入游戏</a>
+							</div>
+						</div>
+						<div class="game_l_login_show_4 fl">
+							<h1 class="game_l_login_show_4_h1">
+							<i>4</i>
+							<img src="/img/link-3.png" />
+						</h1>
+							<span class="game_l_login_show_span"><img src="/img/game-l-4.png"></span>
+							<div class="game_l_login_show_mask">
+								<a href="/live/sunbe/" target="_blank">进入游戏</a>
+							</div>
+						</div>
+
+					</div>
+
+				</div>
+
+			</div>
+
+		</div>
+
+		{include file='common/footer'}
+		
+		<script type="text/javascript">
+			function open_new_888(url) {
+				window.open(url, 'newwindow', 'height=640,width=600,top=150,left=' + (screen.width - 640) / 2 + ',toolbar=no,menubar=no,scrollbars=no, resizable=no,location=no, status=no');
+			}
+		</script>
+
+		{include file='common/fix-left-right'}
+
+		<script>
+			function goPay() {
+				if($("#payUsername").val() == '') {
+					alert("请登录后再进行冲值！");
+					return false;
+				}
+				//alert($("#payCoin").val() );
+				if($("#payCoin").val() <= '50') {
+					//alert("冲值金额不能小于50");
+					//return false;
+				}
+				$("#payForm").submit();
+			}
+			$(function() {
+
+				$('#qian_dao .qian_dao').click(function() {
+					//window.open('qian_dao.php','qian_dao','menubar=no,status=yes,scrollbars=yes,top=150,left=400,toolbar=no,width=805,height=520');
+					$.ajax({
+						type: "post",
+						url: '/qian_dao.php',
+						data: {
+							'ajax': 1
+						},
+						success: function(data) {
+							alert(data);
+						}
+					});
+				});
+
+				setInterval(function() {
+					$.ajax({
+						type: "post",
+						url: "{:Url('index/home')}",
+						data: {
+							'ajax': 1,
+							'get_money': '1'
+						},
+						success: function(data) {
+							if(/^[\d\.]+$/.test(data)) {
+								$('#money').text(data);
+							}
+						}
+					});
+				}, 2000);
+			})
+		</script>
+	</body>
+
+</html>

@@ -1,0 +1,440 @@
+<?php
+namespace app\logic;
+use think\Db;
+use think\Cache;
+class odds
+{
+    private $lottery_time = '';
+    public function __construct(){
+        date_default_timezone_set("PRC");
+        $this->lottery_time = time();
+    }
+    
+    public function cqssc()
+    {
+        date_default_timezone_set("PRC");
+        //开始读取赔率
+        $list = Cache::get('cqsscodds');
+        if(!$list){
+            $tb = Db::table('c_odds_2')->order('id asc')->select();
+            
+            //svar_dump($tb);
+            $list 		= array();
+            $s 			= 1;
+            foreach($tb as $odds){
+                for($i = 1; $i<15; $i++){
+                    $list['ball'][$s][$i] = $odds['h'.$i];
+                }
+                $s++;
+            }
+            Cache::set('cqsscodds', $list);
+        }
+        
+        //开始读取期数
+        $ctime = date("H:i:s",$this->lottery_time);
+        if($ctime >= '23:59:30' || $ctime <= '00:04:30'){
+            //$sql	= "select * from c_opentime_2 where qishu=1 order by id asc limit 1";
+            $qs = Db::table('c_opentime_2')->where('qishu' ,'=',1)->find();
+        }else{
+            $qs = Db::table('c_opentime_2')->where('kaipan','<=',$ctime)->where('kaijiang','>=',$ctime)->order('id asc') -> find();
+        }
+        if($qs){
+            if($ctime >= '23:59:30'){
+                $qishu		= date("Ymd",$this->lottery_time+86400).$this->BuLings($qs['qishu']);
+                $fengpan	= strtotime(date("Y-m-d",$this->lottery_time+86400).' '.$qs['fengpan'])-$this->lottery_time;
+                $kaijiang	= strtotime(date("Y-m-d",$this->lottery_time+86400).' '.$qs['kaijiang'])-$this->lottery_time;
+            }else {
+                $qishu = date("Ymd", $this->lottery_time) . $this->BuLings($qs['qishu']);
+                $fengpan = strtotime(date("Y-m-d", $this->lottery_time) . ' ' . $qs['fengpan']) - $this->lottery_time;
+                $kaijiang = strtotime(date("Y-m-d", $this->lottery_time) . ' ' . $qs['kaijiang']) - $this->lottery_time;
+            }
+        }else{
+            $qishu		= -1;
+            $fengpan	= -1;
+            $kaijiang	= -1;
+        }
+        $arr = array(
+            'number' => $qishu,
+            'endtime' => $fengpan,
+            'opentime' => $kaijiang,
+            'oddslist' => $list,
+        );
+        $json_string = json_encode($arr);
+        return $json_string;
+    }
+    
+    public function xyft()
+    {
+        date_default_timezone_set("PRC");
+        //开始读取赔率
+        $list = Cache::get('xyftodds');
+        if(!$list){
+            $tb = Db::table('c_odds_9')->order('id asc')->select();
+        
+            //svar_dump($tb);
+            $list 		= array();
+            $s 			= 1;
+            foreach($tb as $odds){
+                for($i = 1; $i<22; $i++){
+                    $list['ball'][$s][$i] = isset($odds['h'.$i]) ? $odds['h'.$i] : null;
+                }
+                $s++;
+            }
+            Cache::set('xyftodds', $list);
+        }
+        $lottery_time = $this->lottery_time;
+        //开始读取期数
+        $last = strtotime(date("Y-m-d").' 23:59:00' ) ;
+        $first = strtotime (date("Y-m-d").' 00:04:00') ;
+        if($this->lottery_time >= $last || $this->lottery_time <= $first){
+            $qs = Db::name('c_opentime_9')->where('qishu','=',132)->find();
+        }else{
+            $qs = Db::name('c_opentime_9')->where('kaipan','<=',date('H:i:s',$this->lottery_time))
+            ->where('kaijiang','>=',date("H:i:s",$this->lottery_time))->order('id asc')->find();
+        }
+        
+        if($qs){
+        	if($qs['qishu'] >= 132) {
+        		$qishu		= date("Ymd",$this->lottery_time-60*60*5).$this->BuLings($qs['qishu']);
+        		if($this->lottery_time >= $last){
+        		    $fengpan	= strtotime(date("Y-m-d",$lottery_time+24*60*60).' '.$qs['fengpan'])-$lottery_time;
+        		    $kaijiang	= strtotime(date("Y-m-d",$lottery_time+24*60*60).' '.$qs['kaijiang'])-$lottery_time;
+        		}else{
+        		    $fengpan	= strtotime(date("Y-m-d",$lottery_time).' '.$qs['fengpan'])-$lottery_time;
+        		    $kaijiang	= strtotime(date("Y-m-d",$lottery_time).' '.$qs['kaijiang'])-$lottery_time;
+        		}
+        		
+        	}else{
+        		$qishu		= date("Ymd",$lottery_time).$this->BuLings($qs['qishu']);
+        		$fengpan	= strtotime(date("Y-m-d",$lottery_time).' '.$qs['fengpan'])-$lottery_time;
+        		$kaijiang	= strtotime(date("Y-m-d",$lottery_time).' '.$qs['kaijiang'])-$lottery_time;
+        	}
+        	
+        }else{
+        	$qishu		= -1;
+        	$fengpan	= -1;
+        	$kaijiang	= -1;
+        }
+        $arr = array(
+            'number' => $qishu,
+            'endtime' => $fengpan,
+            'opentime' => $kaijiang,
+            'oddslist' => $list,
+        );
+        $json_string = json_encode($arr);
+        return $json_string;
+    }
+    
+    public function csf()
+    {
+        date_default_timezone_set("PRC");
+        //开始读取赔率
+        $list = Cache::get('csfodds');
+        if(!$list){
+            $tb = Db::table('c_odds_4')->order('id asc')->select();
+        
+            //svar_dump($tb);
+            $list 		= array();
+            $s 			= 1;
+            foreach($tb as $odds){
+                for($i = 1; $i<36; $i++){
+                    $list['ball'][$s][$i] = $odds['h'.$i];
+                }
+                $s++;
+            }
+            Cache::set('csfodds', $list);
+        }
+        //开始读取期数
+        $lottery_time = time();
+        $last = strtotime(date("Y-m-d",$lottery_time)." 23:53:00");
+        $first = strtotime(date("Y-m-d",$lottery_time)." 00:03:00");
+        $ctime = date("H:i:s",$lottery_time);
+        if($lottery_time >= $last || $lottery_time <=  $first){
+            $qs = Db::table('c_opentime_4')->where('qishu' ,'=',1)->find();
+        }else{
+            $qs = Db::table('c_opentime_4')->where('kaipan','<=',$ctime)->where('kaijiang','>=',$ctime)->order('id asc') -> find();
+        }
+        if($qs){
+            if($qs['qishu'] == '1') {
+                $qishu		= date("Ymd",$lottery_time+60*60*5).$this->BuLing($qs['qishu']);
+                if($lottery_time >= $last){
+                    $fengpan	= strtotime(date("Y-m-d",$lottery_time+24*60*60).' '.$qs['fengpan'])-$lottery_time;
+                    $kaijiang	= strtotime(date("Y-m-d",$lottery_time+24*60*60).' '.$qs['kaijiang'])-$lottery_time;
+                }else{
+                    $fengpan	= strtotime(date("Y-m-d",$lottery_time).' '.$qs['fengpan'])-$lottery_time;
+                    $kaijiang	= strtotime(date("Y-m-d",$lottery_time).' '.$qs['kaijiang'])-$lottery_time;
+                }
+        
+            }else{
+                $qishu		= date("Ymd",$lottery_time).$this->BuLings($qs['qishu']);
+                $fengpan	= strtotime(date("Y-m-d",$lottery_time).' '.$qs['fengpan'])-$lottery_time;
+                $kaijiang	= strtotime(date("Y-m-d",$lottery_time).' '.$qs['kaijiang'])-$lottery_time;
+            }
+        
+        }else{
+            $qishu		= -1;
+            $fengpan	= -1;
+            $kaijiang	= -1;
+        }
+        $arr = array(
+            'number' => $qishu,
+            'endtime' => $fengpan,
+            'opentime' => $kaijiang,
+            'oddslist' => $list,
+        );
+        $json_string = json_encode($arr);
+        return $json_string;
+    }
+    
+    public function gsf()
+    {
+        date_default_timezone_set("PRC");
+        //开始读取赔率
+        $list = Cache::get('gsfodds');
+        if(!$list){
+            $tb = Db::table('c_odds_1')->order('id asc')->select();
+        
+            //svar_dump($tb);
+            $list 		= array();
+            $s 			= 1;
+            foreach($tb as $odds){
+                for($i = 1; $i<36; $i++){
+                    $list['ball'][$s][$i] = $odds['h'.$i];
+                }
+                $s++;
+            }
+            Cache::set('gsfodds', $list);
+        }
+        //开始读取期数
+        $ctime = date("H:i:s",$this->lottery_time);
+        $qs = Db::table('c_opentime_1')->where('kaipan','<=',$ctime)->where('kaijiang','>=',$ctime)->order('id asc') -> find();
+        $lottery_time = $this->lottery_time;
+        if($qs){
+        	$qishu		= date("Ymd",$lottery_time).$this->BuLings($qs['qishu']);
+        	$fengpan	= strtotime(date("Y-m-d",$lottery_time).' '.$qs['fengpan'])-$lottery_time;
+        	$kaijiang	= strtotime(date("Y-m-d",$lottery_time).' '.$qs['kaijiang'])-$lottery_time;
+        }else{
+        	$qishu		= -1;
+        	$fengpan	= -1;
+        	$kaijiang	= -1;
+        }
+        $arr = array(   
+            'number' => $qishu, 
+        	'endtime' => $fengpan,
+        	'opentime' => $kaijiang,
+        	'oddslist' => $list,    
+        );  
+        $json_string = json_encode($arr);   
+        echo $json_string;
+    }
+    
+    public function xsc()
+    {
+        date_default_timezone_set("PRC");
+        //开始读取赔率
+        $list = Cache::get('xscodds');
+        if(!$list){
+            $tb = Db::table('c_odds_7')->order('id asc')->select();
+    
+            //svar_dump($tb);
+            $list 		= array();
+            $s 			= 1;
+            foreach($tb as $odds){
+                for($i = 1; $i<15; $i++){
+                    $list['ball'][$s][$i] = $odds['h'.$i];
+                }
+                $s++;
+            }
+            Cache::set('xscodds', $list);
+        }
+        //开始读取期数
+        $ctime = date("H:i:s",$this->lottery_time);
+        if($ctime >= '23:59:30' || $ctime <= '00:04:30'){
+            //$sql	= "select * from c_opentime_2 where qishu=1 order by id asc limit 1";
+            $qs = Db::table('c_opentime_7')->where('qishu' ,'=',1)->find();
+        }else{
+            $qs = Db::table('c_opentime_7')->where('kaipan','<=',$ctime)->where('kaijiang','>=',$ctime)->order('id asc') -> find();
+        }
+        if($qs){
+            if($ctime >= '23:59:30'){
+                $qishu		= date("Ymd",$this->lottery_time+86400).$this->BuLings($qs['qishu']);
+                $fengpan	= strtotime(date("Y-m-d",$this->lottery_time+86400).' '.$qs['fengpan'])-$this->lottery_time;
+                $kaijiang	= strtotime(date("Y-m-d",$this->lottery_time+86400).' '.$qs['kaijiang'])-$this->lottery_time;
+            }else {
+                $qishu = date("Ymd", $this->lottery_time) . $this->BuLings($qs['qishu']);
+                $fengpan = strtotime(date("Y-m-d", $this->lottery_time) . ' ' . $qs['fengpan']) - $this->lottery_time;
+                $kaijiang = strtotime(date("Y-m-d", $this->lottery_time) . ' ' . $qs['kaijiang']) - $this->lottery_time;
+            }
+        }else{
+            $qishu		= -1;
+            $fengpan	= -1;
+            $kaijiang	= -1;
+        }
+        $arr = array(
+            'number' => $qishu,
+            'endtime' => $fengpan,
+            'opentime' => $kaijiang,
+            'oddslist' => $list,
+        );
+        $json_string = json_encode($arr);
+        return $json_string;
+    }
+    
+    public function pk10()
+    {
+        date_default_timezone_set("PRC");
+        //开始读取赔率
+        $list = Cache::get('pk10odds');
+        if(!$list){
+            $tb = Db::table('c_odds_3')->order('id asc')->select();
+            $list 		= array();
+            $s 			= 1;
+            foreach($tb as $odds){
+                for($i = 1; $i<22; $i++){
+                    $list['ball'][$s][$i] = $odds['h'.$i];
+                }
+                $s++;
+            }
+            Cache::set('pk10odds', $list);
+        }
+        //开始读取期数
+        $ctime = date("H:i:s",$this->lottery_time);
+        $lottery_time = $this->lottery_time;
+        $qs = Db::table('c_opentime_3')->where('kaipan','<=',$ctime)->where('kaijiang','>=',$ctime)->order('id asc') -> find();
+        
+        if($qs){
+            $l_date=date("Y-m-d",$lottery_time);
+        	//echo $l_date;
+        	$pk10_date = '2016-06-09';
+        	$pk10_qi = 558287;
+        	$pk10_t = intval((strtotime($l_date)-strtotime($pk10_date))/86400)+1-14;
+        	$pk10_t = $pk10_t == 0 ? 1 : $pk10_t ;
+        
+        	$qishu		= ($pk10_t-1)*179+$qs['qishu']+$pk10_qi -20;
+        	$fengpan	= strtotime(date("Y-m-d",$lottery_time).' '.$qs['fengpan'])-$lottery_time;
+        	$kaijiang	= strtotime(date("Y-m-d",$lottery_time).' '.$qs['kaijiang'])-$lottery_time;
+        }else{
+            $qishu		= -1;
+            $fengpan	= -1;
+            $kaijiang	= -1;
+        }
+        $arr = array(
+            'number' => $qishu,
+            'endtime' => $fengpan,
+            'opentime' => $kaijiang,
+            'oddslist' => $list,
+        );
+        $json_string = json_encode($arr);
+        return $json_string;
+    }
+    
+    public function jsk3()
+    {
+        date_default_timezone_set("PRC");
+        //开始读取赔率
+        $list = Cache::get('jsk3odds');
+        if(!$list){
+            $tb = Db::table('c_odds_6')->order('id asc')->select();
+            $list 		= array();
+            $s 			= 1;
+            foreach($tb as $odds){
+                for($i = 1; $i<36; $i++){
+                    $list['ball'][$s][$i] = $odds['h'.$i];
+                }
+                $s++;
+            }
+            Cache::set('jsk3odds', $list);
+        }
+        //开始读取期数
+        $ctime = date("H:i:s");
+        $qs = Db::table('c_opentime_6')->where('kaipan','<=',$ctime)->where('kaijiang','>=',$ctime)->order('id asc') -> find();
+        $lottery_time = time();
+        if($qs){
+            $qishu		= substr(date("Ymd",$lottery_time), 2,6).$this->BuLings($qs['qishu']);
+        	$fengpan	= strtotime(date("Y-m-d",$lottery_time).' '.$qs['fengpan'])-$lottery_time;
+        	$kaijiang	= strtotime(date("Y-m-d",$lottery_time).' '.$qs['kaijiang'])-$lottery_time;
+        }else{
+            $qishu		= -1;
+            $fengpan	= -1;
+            $kaijiang	= -1;
+        }
+        $arr = array(
+            'number' => $qishu,
+            'endtime' => $fengpan,
+            'opentime' => $kaijiang,
+            'oddslist' => $list,
+        );
+        $json_string = json_encode($arr);
+        return $json_string;
+    }
+    
+    
+    public function gxsf(){
+        date_default_timezone_set("PRC");
+        //开始读取赔率
+        $list = Cache::get('gxsfodds');
+        if(!$list){
+            $tb = Db::table('c_odds_5')->order('id asc')->select();
+            $list 		= array();
+            $s 			= 1;
+            foreach($tb as $odds){
+                for($i = 1; $i<36; $i++){
+                    $list['ball'][$s][$i] = isset($odds['h'.$i]) ? $odds['h'.$i] : 0;
+                }
+                $s++;
+            }
+            Cache::set('gxsfodds', $list);
+        }
+        //开始读取期数
+        $ctime = date("H:i:s",$this->lottery_time);
+        $lottery_time = $this->lottery_time;
+        $last = strtotime(date("Y-m-d",$lottery_time).' 23:59:00' ) ;
+        $first = strtotime (date("Y-m-d",$lottery_time).' 00:04:00') ;
+        
+        $qs = Db::name('c_opentime_5')->where('kaipan','<=',$ctime)->where('kaijiang','>=',$ctime)->order('id asc') -> find();
+        
+        if($qs){
+            $qishu		= date("Y",$lottery_time).($this->BuLings(date("z",$lottery_time+86400))).$this->BuLing($qs['qishu']);
+        	$fengpan	= strtotime(date("Y-m-d",$lottery_time).' '.$qs['fengpan'])-$lottery_time;
+        	$kaijiang	= strtotime(date("Y-m-d",$lottery_time).' '.$qs['kaijiang'])-$lottery_time;
+        }else{
+            $qishu		= -1;
+            $fengpan	= -1;
+            $kaijiang	= -1;
+        }
+        $arr = array(
+            'number' => $qishu,
+            'endtime' => $fengpan,
+            'opentime' => $kaijiang,
+            'oddslist' => $list,
+        );
+        $json_string = json_encode($arr);
+        return $json_string;
+    }
+    
+    
+    /*
+     * 数字补0函数，当数字小于10的时候在前面自动补0
+     */
+    private function BuLing($num)
+    {
+        if ($num < 10) {
+            $num = '0' . $num;
+        }
+        return $num;
+    }
+
+    /*
+     * 数字补0函数2，当数字小于10的时候在前面自动补00，当数字大于10小于100的时候在前面自动补0
+     */
+    private function BuLings($num)
+    {
+        if ($num < 10) {
+            $num = '00' . $num;
+        }
+        if ($num > 10 && $num < 100) {
+            $num = '0' . $num;
+        }
+        return $num;
+    }
+}

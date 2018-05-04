@@ -1,0 +1,208 @@
+body { margin:0; padding:0; font-size:14px; line-height:20px; font-family:'Microsoft Yahei';}
+h1,h2,h3,h4,h5,h6,ul,ol,dl,dt,dd,p { margin:0; padding:0;}
+li { list-style:none;}
+img { border:0;}
+
+.clearfix:after { content:"."; display:block; height:0; clear:both; visibility:hidden;}
+
+.main-inner { background:url(/images/nsc/login/nsc_login_banner_800.jpg) no-repeat center top; height:680px; overflow:hidden;}
+.main-inner .box_layer { width:280px; float:right;}
+.main-inner .logo { background:url(/images/nsc/login/nsc_login_logo.png) no-repeat; height:95px;}
+
+.warp980 { width:980px; margin:0 auto;}
+.login_main { padding:20px 0 25px 0;}
+.air_box { width:318px; float:left;}
+.air_box_t { height:140px;}
+.airflash { width:220px; height:140px; float:left; background:url(/images/nsc/login/nsc_login_air-flashBg.png) no-repeat;}
+.download-line { width:88px; float:right;}
+.download-line dt { font-size:12px; color:#888; height:45px; line-height:34px;}
+.download-line dd { height:30px;}
+.download-line dd a { display:block; height:20px; background:url(/images/nsc/login/nsc_login_line-icon.png) no-repeat; font-size:13px; color:#694d85; padding:0 0 0 30px;}
+.download-line dd a:hover { text-decoration:underline;}
+.adobe_download { display:block; height:20px; background:url(/images/nsc/login/nsc_login_adobeAir-icon.png) no-repeat; font-size:13px; color:#694d85; text-decoration:underline; padding:0 0 0 30px; margin-left:6px;}
+.adobe_download:hover { text-decoration:none;}
+.line_hint { float:right; font-size:12px; color:#888; margin-right:25px;}
+.line_hint a { color:#694d85; text-decoration:underline; margin-left:6px;}
+.line_hint a:hover { text-decoration:none;}
+
+.phone_box { float:left; margin:3px 0 0 20px;}
+.pt_box { float:right; margin:3px 0 0 0;}
+.same_box { width:255px; height:151px; background:url(/images/nsc/login/nsc_login_box-line.png) no-repeat left center; padding:0 0 0 45px;}
+.same_box .left { float:left; width:120px;}
+.same_box .left h3 { font-size:18px; color:#444; font-weight:100; line-height:30px;}
+.same_box .left p { font-size:12px; color:#888; margin:8px 0 15px;}
+.same_box .left a { margin-bottom:13px;}
+.same_box .icon-Android { display:block; width:100px; height:25px; background:url(/images/nsc/login/nsc_login_download_icon.png) no-repeat; text-indent:-9999px;}
+.same_box .icon-Android:hover { background-position:-101px 0;}
+.same_box .icon-iPhone { display:block; width:100px; height:25px; background:url(/images/nsc/login/nsc_login_download_icon.png) no-repeat 0 -26px; text-indent:-9999px;}
+.same_box .icon-iPhone:hover { background-position:-101px -26px;}
+.same_box .icon-PC { display:block; width:100px; height:25px; background:url(/images/nsc/login/nsc_login_download_icon.png) no-repeat 0 -52px; text-indent:-9999px;}
+.same_box .icon-PC:hover { background-position:-101px -52px;}
+.same_box .img { float:right; margin:7px 0 0 0;}
+.same_box .img img { background:#fff; border:2px solid #e0e0e0; padding:9px; width:109px; height:109px;}
+
+/*LOGIN底部*/
+.login_footer { width:100%; background:url(/images/nsc/login/nsc_login_footer-bg.jpg) ; height:125px; padding-top:35px; overflow:hidden; color:#666; font-size:12px; line-height:22px;}
+.login_footer .img { height:37px; margin-bottom:20px;}
+.t-left { float:left; text-align:left;}
+.t-right { float:right; text-align:right;}
+.copyright { width:100%; height:25px; line-height:25px; color:#454444; text-align:center; font-style:italic; margin-top:30px;}
+/*LOGIN*/
+.main-inner .login { background:url(/images/nsc/login/nsc_login_register-bg.png) no-repeat; height:400px; padding:65px 0 0 32px; overflow:hidden; position:relative;}
+.main-inner .login h2 { height:22px; color:#fff; text-align:center; font-size:22px; font-weight:normal; margin:0 0 40px -32px;}
+.main-inner .login .inputbox { width:216px; border-bottom:1px solid #e4dfe3; height:28px; margin-bottom:40px; position:relative;}
+.main-inner .login .inputbox label,.main-inner .login .yzmbox label { color:#fff!important;}
+.main-inner .login .inputbox img.keypad-trigger { /*display:none;*/ top:-5px; right:-5px; }
+.main-inner .login .yzmbox { width:120px; border-bottom:1px solid #e4dfe3; height:28px; margin:45px 0 0; position:relative;}
+.main-inner .login .inputbox .placeholder { position: absolute; width: 216px; height: 28px; line-height: 28px; top: 0px; left: 0px; text-indent: 40px; color: #fff; }
+.main-inner .login .yzmbox .placeholder { width: 120px; }
+
+.icon-img1,.icon-img2,.icon-img3 { display:block; background:url(/images/nsc/login/nsc_login-icon.png) no-repeat; width:22px; height:21px; position:absolute; top:2px; left:0;}
+.icon-img1 { background-position:0 0;}
+.icon-img2 { background-position:0 -41px;}
+.icon-img3 { background-position:0 -81px;}
+.main-inner .login .input-username,.main-inner .login .input-password { background:none; border:0; font-size:14px; color:#fff; width:172px; height:26px; line-height: 26px; overflow: hidden; margin-left:38px; outline:none; font-family:'Microsoft Yahei';}
+.main-inner .login .input-code { background:none; border:0; font-size:14px; color:#fff; width:82px; height:26px; line-height: 26px; overflow: hidden; margin-left:38px; outline:none; font-family:'Microsoft Yahei';}
+input::-webkit-input-placeholder, textarea::-webkit-input-placeholder {color: #fff;}
+input:-moz-placeholder, textarea:-moz-placeholder {color:#fff;}
+input::-moz-placeholder, textarea::-moz-placeholder {color:#fff;}
+input:-ms-input-placeholder, textarea:-ms-input-placeholder {color:#fff;}
+
+.login .yzmbox .validate { width:80px; height:25px; position:absolute; top:3px; right:-98px; -webkit-filter: grayscale(1);/* Webkit */ filter:gray;/* IE6-9 */ filter: grayscale(1);/* W3C */}
+.main-inner .login .inputbox .input-password {}
+.main-inner .login .inputbox .input-code {}
+.forgotpasswd { position:absolute; right:30px; top:230px; font-size:12px;}
+.forgotpasswd a { color:#ddd;}
+.forgotpasswd a:hover { color:#fff; text-decoration:underline;}
+.refresh_text { font-size:12px; width:216px; text-align:right; color:#ddd;}
+.refresh_text span { display:block; padding-top:10px; float:right;}
+.refresh_text span:hover { color:#fff; text-decoration:underline;}
+.main-inner .login .submitbox { background:url(/images/nsc/login/nsc_login-btn.png) no-repeat; width:184px; height:61px; position:absolute; top:370px; left:60px;}
+.main-inner .login .submitbox .submit-login { background:url(/images/nsc/login/nsc_login-btn.png) no-repeat 0 -61px; width:162px; height:40px; border:0; text-indent:-9999px; cursor:pointer;}
+.main-inner .login .submitbox .submit-login:hover { background:url(/images/nsc/login/nsc_login-btn.png) no-repeat 0 -111px;}
+.main-inner .login .submitbox .submit-btn { background:url(/images/nsc/login/nsc_login-btn.png) no-repeat 0 -161px; width:162px; height:40px; border:0; text-indent:-9999px; cursor:pointer;}
+.main-inner .login .submitbox .submit-btn:hover { background:url(/images/nsc/login/nsc_login-btn.png) no-repeat 0 -211px;}
+.main-inner .servicebox { position:absolute; right:10px; bottom:10px; font-size:12px; color:#ddd;}
+.main-inner .servicebox a { color:#fff; margin-left:5px; text-decoration:underline;}
+.main-inner .servicebox a:hover { text-decoration:none;}
+.main-inner .black-login { position:absolute; left:10px; bottom:10px; font-size:12px; color:#fff;}
+.main-inner .black-login:hover { text-decoration:underline;}
+.back_old-version { height:21px; line-height:22px; position:absolute; top:30px; right:30px; background:url(/images/nsc/icon_switchTo.png) no-repeat; padding-left:25px; font-size:15px; color:#ffebaf;}
+.back_old-version:hover { color:#fff; background:url(/images/nsc/icon_switchTo.png) no-repeat 0 -31px;}
+
+/*手机端二维码*/
+.sj_web_box { position: absolute; top: 20px; left: 0; z-index: 99;}
+.sj_web_ewm1 { display: block; width: 114px; height: 56px; background: url(/images/nsc/login/login_sj-web_ewm1.png) no-repeat;}
+.sj_web_ewm2 { display: none; width: 121px; height: 137px; text-align: center; color: #fff; padding: 3px 0 0 0; background: url(/images/nsc/login/login_sj-web_ewm2.png) no-repeat;}
+.sj_web_ewm2 img { border: 3px solid #fff; width: 109px; height: 109px;}
+.sj_web_ewm2 p { font-size: 14px; color: #fff; line-height: 22px!important;}
+
+/*蓝色版本*/
+
+/*验证码*/
+.loginCon p .validate{ position: absolute; right: 10px; top: 9px; -webkit-filter: grayscale(1);/* Webkit */ filter:gray;/* IE6-9 */ filter: grayscale(1);/* W3C */}
+
+/*键盘图标*/
+.keypad-trigger { position:absolute; right:0px; top:4px; }
+#keypad-div { z-index:1000; margin-left: 135px; }
+
+/*浏览器图标*/
+.browser_box { position:absolute; top:695px; right:0px; width:53px; height: 180px; z-index: 999;}
+.browser_box div{ height:44px; width: 0px; overflow: hidden; line-height:44px; padding:0 0 0 53px; cursor: pointer; position: absolute; }
+.browser_box div .text{ display: none;}
+
+.browser_box .gg { background:url(/images/nsc/login/login_browser_icon.png) no-repeat; top:0px; }
+.browser_box .hf { background:url(/images/nsc/login/login_browser_icon.png) no-repeat 0 -88px; top:120px;}
+.browser_box .ie { background:url(/images/nsc/login/login_browser_icon.png) no-repeat 0 -44px; top:60px;}
+.browser_box .gg_curr { background:url(/images/nsc/login/login_browser_icon.png) no-repeat 0 -142px;}
+.browser_box .hf_curr { background:url(/images/nsc/login/login_browser_icon.png) no-repeat 0 -230px;}
+.browser_box .ie_curr { background:url(/images/nsc/login/login_browser_icon.png) no-repeat 0 -186px;}
+.browser_box .text a {font-size:14px;color:#fff; display:block;}
+
+/*注册*/
+.zc_top{ width:100%; height:95px; background:url('/images/nsc/register/bg_zctop.jpg') center top no-repeat;}
+/*.zc_cont{ width:100%; height:auto; background:#fff5de url('/images/nsc/register/bg_zccont.jpg') left bottom repeat-x; padding:70px 0;}*/
+.zc_content{width:980px; background-color:#fff; border:#C4BFB2 solid 1px; box-shadow:0 0 10px 1px #C4BFB2; margin:0 auto; position:relative;}
+.zc_content .zc_title{ width:100%; height:60px; background:url('/images/nsc/register/bg_zctitle.jpg') left top no-repeat;}
+/*.zc_content .zc_xing{ position:absolute; right:-50px; top:-70px; background:url('/images/nsc/register/img_zcxing.png') no-repeat; width:170px; height:153px;}*/
+
+.zc_list{ width:380px; height:470px; margin:20px auto 0;}
+.zc_list li{ float:left; width:100%; margin-top:10px; position:relative;}
+.zc_list .zc_label{ float:left; width:80px; margin-top:9px; text-align: right; font:normal 16px/20px 'Microsoft YaHei';}
+.zc_list .zc_input{ float:left; width:270px; position:relative; margin-left:10px }
+.zc_list .zc_input i{ position:absolute; left:5px; top:8px;}
+.zc_list .zc_input input[type=text]{ float:left; width:240px; height:35px; line-height:35px; background-color:#D2D2D2; border:0; margin-bottom:5px; padding-left:30px; transition:background-color 0.3s; }
+.zc_list .zc_input input[type=password]{ float:left; width:240px; height:35px; line-height:35px; background-color:#D2D2D2; border:0; margin-bottom:5px; padding-left:30px; transition:background-color 0.3s; }
+.zc_list .zc_input input[type=text]:focus{ background-color:#bdbdbd }
+.zc_list .zc_input .zc_code{ float:left; width:80px; height:35px; margin-left: 5px; cursor:pointer;}
+.zc_list .zc_input p{ float:left; width:100%; height:32px; line-height:16px; color:#544060}
+.zc_list .zc_input .zc_btn{ width:270px; height:40px; color:#fff; font-size:18px; font-family:'Microsoft YaHei'; cursor:pointer; background-color:#544060; border:0; margin-top:20px; margin-bottom: 15px; transition:background-color 0.3s;}
+.zc_list .zc_input .zc_btn:hover{ background-color:#321e3e}
+.zc_list .zc_input a{ font-size:16px; color:#544060; font-family:'Microsoft YaHei'; }
+.zc_list .zc_input a:hover{ text-decoration: underline;}
+.zc_content .zc_lxkf{ text-align: right; color:#888; margin:0 10px 0 0; padding-bottom:10px;}
+.zc_content .zc_lxkf a{ color:#544060; text-decoration: underline; }
+
+.zc_list ul li .tip{position:absolute;display:block;left:300px;display:none;}
+.zc_list ul li .success-tip{width:24px;height:24px;top:6px;background:url(/images/nsc/register/reg_ico.png) no-repeat;}
+.zc_list ul li .error-tip{ padding-left:30px;width:150px;}
+.zc_list ul li .error-tip em{display:inline-block;float:left;width:24px;height:24px;position:absolute;left:0;top:6px;background:url(/images/nsc/register/reg_ico.png) 0 -24px no-repeat;}
+.zc_list ul li .error-tip p{color:#EA1515;font-size:14px; line-height:36px;}
+
+/*注册页icon*/
+i[class^="iczc-"], i[class*="iczc-"]{ background-image: url('/images/nsc/register/icon_zc.png'); }
+.iczc-number { width: 20px; height: 18px; background-position: 0 0; }
+.iczc-username { width: 20px; height: 19px; background-position: 0 -20px; }
+.iczc-password { width: 20px; height: 21px; background-position: 0 -42px; }
+.iczc-warning { width: 20px; height: 18px; background-position: 0 -64px; }
+.iczc-phone { width: 20px; height: 20px; background-position: 0 -82px; }
+
+.footer_lxfs { text-align: center; color: #666; padding: 30px 0 0 0; line-height: 30px;}
+.footer_lxfs p { margin-bottom: 6px;}
+.footer_lxfs p span { margin-right: 15px;}
+.footer_lxfs p a { display: inline-block; color: #666; margin-right: 15px; }
+.qq_btn { padding-top: 10px;}
+.qq_btn a { width: 82px; height: 26px; text-indent: -9999px; background: url("/images/nsc/register/agency1/btn_qq.png") no-repeat;}
+
+/*800*600宽度*/
+.warp760 { width:760px; margin:0 auto;}
+.warp760 .air_box { width:300px!important;}
+.warp760 .download-line { width:80px!important;}
+.warp760 .same_box { padding:0 0 0 0!important; width:215px!important; background:none!important;}
+.warp760 .phone_box { margin:0 0 0 8px!important;}
+.warp760 .same_box .left { width:100px!important;}
+.warp760 .same_box .img img { width:90px!important; height:90px!important;}
+.warp760 .same_box .left p { margin:0 0 5px!important;}
+.login_footer .warp760 .img img { width:760px!important; height:29px!important;}
+
+/*880*宽度*/
+.warp880 { width:900px; margin:0 auto;}
+.warp880 .same_box { padding:0 0 0 0!important; width:245px!important; background:none!important;}
+.warp880 .pt_box { float:left!important; margin:3px 0 0 40px!important;}
+.warp880 .same_box .left { width:100px!important;}
+.login_footer .warp880 .img img { width:880px!important; height:34px!important;}
+
+/*测试网站入口样式#3404*/
+.checklink {}
+.checklink a{ width:280px; height:50px; margin-top:20px; background: url("/images/nsc/login/sc_login_line-switching.png") no-repeat; display: block; text-indent: -9999px;}
+.checklink a:hover { background: url("/images/nsc/login/sc_login_line-switching.png") no-repeat 0 -60px;}
+
+
+@media screen and (max-width:800px){
+	.zc_content .zc_xing{display:none;}
+	.zc_cont{padding:0;}
+	.zc_content{width:100%;border:none;height:auto;box-shadow:none;}
+	.zc_list{width:100%;}
+	.zc_list .zc_label{display:none;}
+	.login_footer{display:none;}
+	.zc_content .zc_lxkf{display:none;}
+	.zc_list li{float:none;margin:0 auto;clear:both;}
+	.zc_list .zc_input input[type=text],.zc_list .zc_input input[type=password]{width:100%;padding-left:0;text-indent:30px;}
+	.zc_list .zc_input input::-webkit-input-placeholder{color:#666;}
+	.zc_list .zc_input{float:none;margin:0 auto;width:80%;}
+	.zc_list ul li .tip{left:0px;width:100%;}
+	.zc_list ul li .success-tip{left:auto;right:5px;width:27px;}
+	.zc_list ul li .error-tip em{display:none;}
+	.zc_list .zc_input .zc_btn{width:100%;}
+	.zc_list .zc_input p{margin-bottom:10px;height:auto;}
+}

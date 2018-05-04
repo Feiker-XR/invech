@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Welcome</title>
+<link rel="stylesheet" type="text/css" href="/css/general.css"/>
+<link rel="stylesheet" type="text/css" href="/newview/css/theme/style.css?version=2.0.0?version=2.0.0" />
+<link rel="stylesheet" type="text/css" href="/newview/css/style.css" />
+<link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
+
+
+<link rel="stylesheet" href="/css/newstyle/public.css">
+<link rel="stylesheet" href="/css/newstyle/style.css">
+
+<style>
+.modify_main_wp{
+	height: 600px;
+}
+.modify_main_title{width: 979px;height: 40px;color: black;font-size: 14px;line-height: 40px;text-indent: 20px;border-bottom: 1px solid #dbdbdb ;}
+.modify_main_label{color: black;font-size: 14px;margin-top: 30px;width: 450px;float: left;margin-top: 50px;border: 1px solid #ccc;border-left: none;height: 446px;border-bottom-right-radius: 20px;border-top-right-radius: 20px;}
+.modify_input{width: 232px;height: 18px;color: #0079d7;font-size: 16px;text-indent: 10px;outline: none;border: none;}
+
+.modify_main_label li{margin: 10px 0px;width: 350px;border: 1px solid #ccc;padding-left: 10px;margin-left: 40px;}
+.modify_textarea{width: 332px;height:150px;text-indent: 10px;font-size: 16px;padding-top: 10px;}
+.modify_main_li{text-align: center;margin-top: 29px;}
+.modify_main_li a{display: block;width: 180px;height: 30px;background: #ff6c00;border-radius: 30px;color: white;text-align: center;line-height: 30px;font-size: 16px;margin-left: 86px;margin-top: 0px;}
+.modify_main_label li span{display: inline-block;width: 70px;text-align: right;border-right: 1px solid #ccc;padding-right: 15px;color: #666;}
+.modify_main_label li i{display: block;float: left;margin-top: 4px;width: 22px;}
+.table_left{float: left;margin-left: 145px;margin-top: 50px;}
+.modify_main_li input.del{display: block;width: 120px;height: 40px;background: #cdcdcd;border-radius: 40px;color: white;text-align: center;line-height: 40px;font-size: 16px;float: left;margin-left: 86px;}
+.modify_main_li a.sumbit{
+	display: block;
+	width: 120px;height: 40px;
+	background: #00b7ee;
+	border-radius: 40px;
+	color: white;
+	text-align: center;
+	line-height: 40px;
+	font-size: 16px;
+	float: left;
+	margin-left: 135px;
+	margin-left: 67px;
+}
+
+</style>
+
+<script src='/js/js/jquery-1.8.0.min.js'></script>
+<script type="text/javascript" src="/js/main.js"></script>
+<script type="text/javascript" src="/Scripts/member.js"></script>
+<script type="text/javascript" src="/Scripts/City.js"></script>
+<script type="text/javascript" src="/newview/js/main.js"></script>
+<style type="text/css">
+body{background: white;}
+</style>
+</head>
+<div class="head">
+	<!--欢迎-->
+	{include file='common/nav'}
+</div>
+<div class="block_0"></div>
+
+<div class="moneyBox_contain modify_wp">
+	<div class="">
+		<div class="ui-headerBox">
+			<!-- logo -->
+			<a class="ui-icon-logo ui-logo" id="Logo"></a>
+			<div class="modify_header">
+				<a href="/user/userinfo.html" class="nav_1">首页</a>
+				<a href="/pay/member.html" class="nav_2">财务管理</a>
+				<a href="/user/record_ds.html" class="nav_3">游戏记录</a>
+				<a href="/user/report.html" class="nav_4">历史记录</a>
+				<a href="/user/sms.html" class="nav_5">短信记录</a>
+				<a href="/user/agent.html" class="nav_6">代理中心</a>
+			</div>
+			<ul class="ui-function">
+			</ul>
+		</div>
+	</div>
+
+	<div class="ui-body">
+    		<div class="ui-search" id="subjsshow1" style="display: block;">
+    		<span><i class="fas fa-user-circle" style="font-size: 30px"></i>财务中心</span>
+                <ul>
+            <li><a href="/pay/member.html"><i class="fas fa-shopping-cart" style="background-color: #F59A2F"></i>账户充值</a></li>
+            <li class="ui-hover"><a href="/user/get_money.html"><i class="fas fa-yen-sign" style="background-color: #F16346"></i>申请提款</a></li>
+            <li><a href="/user/userinfo.html"><i class="fas fa-exchange-alt" style="background-color: #F59A2F"></i>额度转换</a></li>
+            <li><a href="/user/data_money.html"><i class="fas fa-bars" style="background-color: #A95BEF"></i>充值记录</a></li>
+            <li><a href="/user/data_h_money.html"><i class="fas fa-list-alt" style="background-color: #2C7FE3"></i>汇款记录</a></li>
+            <li><a href="/user/data_t_money.html"><i class="fas fa-list" style="background-color: #F16346"></i>提现记录</a></li>
+            <li class="ui-hover"><a href="/user/zr_data_money.html"><i class="fas fa-th-list" style="background-color: #24C987"></i>转换记录</a></li>
+                </ul>
+    		</div>
+    	</div>
+
+  <div class="ui-moneyBox">
+    <ul>
+				<div class="modify_main_wp">
+					<div class="block_0"></div>
+					<div class="table_left">
+						<img src="/css/img/tikuan_1.png" />
+					</div>
+					<div class="modify_main_label">
+						<div class="block_10"></div>
+							<form id="MyForm" action="/user/get_money" method="post">
+                                <ul>
+                                    <!--<li>
+                                        <i><img src="/css/img/tikuan_3.png" /></i>
+                                        <span>会员账号</span>
+                                        <input type="text" class="modify_input" placeholder="会员账号" value='{$user['username']}'/>
+                                    </li>-->
+                                    <li>
+                                        <i><img src="/css/img/tikuan_4.png" /></i>
+                                        <span>真实姓名</span>
+                                        <input type="text" class="modify_input" name="pay_name" placeholder="真实姓名" value='{$user['pay_name']}' disabled/>
+                                    </li>
+                                    <!--  账户额度没有-->
+                                    <!-- <li>
+                                        <i><img src="/css/img/tikuan_5.png" /></i>
+                                        <span>账户额度</span>
+                                        <input type="text" class="modify_input" placeholder="账户额度"/>
+                                    </li> -->
+                                    <li>
+                                        <i><img src="/css/img/tikuan_6.png" /></i>
+                                        <span>收款银行</span>
+                                        {if $user['pay_card']}
+                                         <input type="text" id="pay_num" name="pay_card" class="modify_input" placeholder="收款银行" value="{$user['pay_card']}" disabled/>
+                                        {else}
+                                        <input  type="text" id="pay_card" name="pay_card" class="modify_input" placeholder="收款银行"/>
+                                        {/if}
+                                    </li>
+                                    <li>
+                                        <i><img src="/css/img/tikuan_7.png" /></i>
+                                        <span>银行账号</span>
+                                        {if $user['pay_num']}
+                                        <input type="text" id="pay_num" name="pay_num" class="modify_input" placeholder="银行账号" value="{$user['pay_num']}" disabled/>
+                                        {else}
+                                        <input type="text" id="pay_num" name="pay_num" class="modify_input" placeholder="银行账号"/>
+                                        {/if}
+                                    </li>
+                                    <!-- 输入框 -->
+                                    <li>
+                                        <i style="width:20px"> <img src="/css/img/tikuan_8.png" /></i>
+                                        <span style="width:75px;display:block;float:left">开户地址</span>
+                                        <!-- <input type="text" class="modify_input" placeholder="开户行地址"/> -->
+                                        <div>
+                                        {if $user['pay_address']}
+                                        <input type="text" name="pay_address" class="modify_input" value="{$user['pay_address']}" disabled/>
+                                        {else}
+                                        <select id="Address_1" name="Address_1" runat="server" onChange="selectCity();" style="width:76px;;display:block;float:left;    margin-top: 6px;border: none;">
+                                            <option value="" selected="true">省/直辖市</option>
+                                        </select>
+                                            <select id="Address_2" name="Address_2" runat="server" onChange="selectcounty()"  style="width:76px;display:block;float:left; margin-top: 6px;border: none;">
+                                            <option value="" selected="true">请选择</option>
+                                        </select>
+                                            <select id="Address_3" name="Address_3" runat="server" style="width:76px;;display:block;float:left; margin-top: 6px;border: none;">
+                                            <option value="" selected="true">请选择</option>
+                                        </select>
+                                        {/if}
+                                        </div>
+                                    </li>
+                                     <li>
+                                        <i><img src="/css/img/tikuan_9.png" /></i>
+                                        <span>取款金额</span>
+                                        <input type="text" class="modify_input" name="pay_value" placeholder="取款金额" autocomplete="new-password"/>
+                                    </li>
+                                    <li>
+                                        <i><img src="/css/img/tikuan_10.png" /></i>
+                                        <span>资金密码</span>
+                                        <input type="password" id="MoneyPass" name="qk_pwd" class="modify_input" placeholder="资金密码" autocomplete="new-password"/>
+                                    </li>
+                                </ul>
+                                </form>
+						<div class="modify_main_li">
+							<input type="reset" class="del" value='取消'>
+							<a href="javascript:document.getElementById('MyForm').submit();" class="sumbit" type="submit" name="button" id="button">立即提款</a>
+						</div>
+					</div>
+			   </div>
+    </ul>
+  </div>
+</div>
+
+{include file='common/footer'}
+
+<script type="text/javascript">
+  Init('','','')
+
+setInterval(function() {
+	$.ajax({
+		type: "post",
+		url: "{:Url('index/home')}",
+		data:{'ajax':1,'get_money':'1'},
+		success:function(data) {
+			if (/^[\d\.]+$/.test(data)) {
+				$('#money,#money_2').text(data);
+			}
+		}
+	});
+},2000);
+</script>
+</body>
+</html>

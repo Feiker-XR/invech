@@ -1,0 +1,102 @@
+<?php
+	$modeName=array('2.00'=>'元', '0.20'=>'角', '0.02'=>'分');
+?>
+<table width="100%" class="table table-striped" id="my-datatable" cellspacing="0">
+	<thead>
+	<tr>
+		<th class="min-tablet text-center">
+			方案
+		</th>
+		<th class="min-tablet text-center">
+			会员名
+		</th>
+		<th class="min-tablet text-center">
+			彩种
+		</th>
+		<th class="min-tablet text-center">
+			玩法
+		</th>
+		<th class="min-tablet text-center">
+			期号
+		</th>
+		<th class="min-desktop text-center">
+			时间
+		</th>
+		<th class="min-desktop text-center">
+			倍数模式
+		</th>
+		<th class="min-desktop text-center">
+			投注金额
+		</th>
+		<th class="min-desktop text-center">
+			中奖号码
+		</th>
+		<th class="min-desktop text-center">
+			中奖金额
+		</th>
+		<th class="min-desktop text-center">
+			状态
+		</th>
+	</tr>
+	</thead>
+	<tbody>
+	<?php if($data){
+	foreach($data as $var){ ?>
+		<tr class="odd" role="row">
+			<td class="text-center">
+				<a action="<?=url('record/betInfo?id='.$var['id']) ?>" class="text-primary showDetails" href="#" data-toggle="modal" data-value="{$var['id']}" 
+      data-target="#details-modal"><?=$var['wjorderId']?></a>
+			</td>
+            <td class="text-center">
+			<?php
+            if($var['username']){echo  $var['username'];}else{echo '--';};
+            ?>
+            </td>
+			<td class="text-center"><?=$this->ifs($types[$var['type']]['shortName'],$types[$var['type']]['title'])?></td>
+			<td class="text-center"><?=$playeds[$var['playedId']]['name']?></td>		
+			<td class="text-center"><?=$var['actionNo']?></td>
+			<td class="text-center"><?=date('m-d H:i:s', $var['actionTime'])?></td>			
+			<td class="text-center"><?=$var['beiShu'].'倍,'?> <?=$modeName[$var['mode']]?></td>
+			<td class="text-center"><?=$var['mode']*$var['beiShu']*$var['actionNum']*($var['fpEnable']+1)?>元</td>
+			<td class="text-center"><?=$this->ifs($var['lotteryNo'], '--')?></td>
+			<td class="text-center"><?=$this->iff($var['lotteryNo'], number_format($var['bonus'], 2), '0.00')?></td>
+			<td class="text-center">
+			<?php
+				if($var['isDelete']==1){
+					echo '<label class="graylab">已撤单</label>';
+				}elseif(!$var['lotteryNo']){
+					echo '<label class="graylab">未开奖</label>';
+				}elseif($var['zjCount']){
+					echo '<label class="redlab">已中奖</label>';
+				}else{
+					echo '<label class="redlab">未中奖</label>';
+				}
+			?>
+			</td>
+		</tr>
+	<?php } }else{ ?>
+    <tr><td colspan="12" width="910px">当前没有查询到任何数据。</td></tr>
+    <?php } ?>
+	</tbody>
+</table>
+<div class="page">
+    {$_page}
+</div>
+<script src="/js/jquery.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function () {
+	$('.showDetails').bind('click', showBet);
+	//解决分页问题
+	$('.page a').bind('click', function(){
+		if(this.tagName == 'A'){
+			var parent = this.parentNode.parentNode;
+			var value = $(parent).attr('target');
+			if(value=='_blank')	
+				return true;
+			var url = $(this).attr('href');
+			$('#record-span').load(url);
+			return false;
+		}
+	});
+});
+</script>

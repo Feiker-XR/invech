@@ -1,0 +1,136 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+    <title>注册</title>
+    <link type="text/css" rel="stylesheet" href="/css/auth.css">
+</head>
+<body>
+    <div class="container">
+        <main>
+            <img src="../images/auth/logo.jpg" alt="logo"/>
+            <ul class="login">
+                <li><img src="../images/auth/uname.png" alt="uname"><input type="text" id="uname" placeholder="用户名由6-8位数字或字母组合" minlength="6" maxlength="8"> </li>
+                <li><img src="../images/auth/pwd.png" alt="pwd"><input type="password" id="pwd" placeholder="登录密码(6-20位)" minlength="6" maxlength="20"> </li>
+                <li><img src="../images/auth/pwd.png" alt="pwd"><input type="password" id="pwd1" placeholder="确认登录密码"> </li>
+                <li><img src="../images/auth/yzm.png" alt="yzm"><input type="text" id="yzm" placeholder="输入验证码" maxlength="4"><a href="javascript:void(0)"><img id="captcha" src="{:url('indexcaptcha/get_captcha?id=register')}"></a></li>
+            </ul>
+            <button id="submit">注册</button>
+            <p>我已阅读并同意《<a href="#" style="float: none">拉菲彩票用户协议</a>》</p>
+            <div class="tip" style="top:11.2rem;"><span></span></div>
+            <div class="loading"><img src="/images/loading.gif" alt="loading"/> </div>
+        </main>
+        <div class="curtion" style="display:none">
+            <div class="box">
+                <img src="../images/auth/tip_top.png" alt="tip_top">
+                <div>恭喜您,注册成功!</div>
+                <p>立即绑定个人信息</p>
+                <button>前往绑定</button>
+                <a href="#">稍候绑定</a>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript" src="/js/jquery-1.8.0.min.js"></script>
+    <script type="text/javascript" src="/js/show.js"></script>
+    <script type="text/javascript">
+        var _timeout = null,_tip = null;
+        $(function () {
+            _tip = $('.tip').remove();     //保存提示信息
+
+        });
+        // 更新验证码
+        $("#captcha").click(function(){
+            $(this).attr('src',"{:url('indexcaptcha/get_captcha?id=register')}");
+        });
+        // 提交数据
+        $('#submit').click(function(){
+            var _this = $(this);
+            var _user = {
+                username:'',
+                password:'',
+                password_confirm:'',
+                code:'',
+                agent_id:''
+            };
+            _user.username  = $('#uname').val();
+            _user.password   = $('#pwd').val();
+            _user.password_confirm   = $('#pwd1').val();
+            _user.code  = $('#yzm').val();
+            var _url = location.href.split('?');
+            if(_url[1]){
+                _user.agent_id  = _url[1].split('=')[1];
+            }
+            if(_user.username == ''){
+                getErrorMsg('用户名不为空');
+                return;
+            }else if(_user.username.length < 6 || _user.username.length >8){
+                getErrorMsg('用户名必须为6-8位');
+                return;
+            }else if(_user.password == ''){
+                getErrorMsg('密码不为空');
+                return;
+            }else if(_user.password.length < 6 || _user.password.length > 20){
+                getErrorMsg('密码必须为6-20位');
+                return;
+            }else if(_user.password_confirm == ''){
+                getErrorMsg('确认密码不为空');
+                return;
+            }else if(_user.password != _user.password_confirm){
+                getErrorMsg('两次密码不一致');
+                return;
+            } else if(_user.code == ''){
+                getErrorMsg('验证码不为空');
+                return;
+            }else if(_user.code.length != 4){
+                getErrorMsg('验证码必须为4位');
+                return;
+            }else{
+                _this.attr('disabled','disabled');
+                _this.addClass('disabled');
+                $('.loading').show();
+            }
+            $.ajax({
+                url: "/index/register",
+                data:_user,
+                dataType:'json',
+                type:'POST',
+                success:function(data){
+                    if(data.code == 1){
+                        $('.curtion').show();
+                    }else{
+                        getErrorMsg(data.msg);
+                        $("#captcha").trigger('click');
+                    }
+                },
+                error:function (err) {
+                    alert('ajax出错了！');
+                    $("#captcha").trigger('click');
+                },
+                complete:function () {
+                    _this.removeAttr('disabled');
+                    _this.removeClass('disabled');
+                    $('.loading').hide();
+                }
+            });
+        });
+        // 弹出错误信息
+        function getErrorMsg(msg) {
+            $('main').append(_tip);
+            _tip.find('span').text(msg);
+            _tip.fadeIn();
+            if(_timeout){
+                clearTimeout(_timeout);
+            }
+            _timeout = setTimeout(function () {
+                _tip = $('.tip').fadeOut().remove();
+            },1000);
+        }
+
+        // 绑定个人信息
+        $('.curtion .box button').click(function () {
+            console.log('asdsdsdf');
+        })
+    </script>
+</body>
+</html>

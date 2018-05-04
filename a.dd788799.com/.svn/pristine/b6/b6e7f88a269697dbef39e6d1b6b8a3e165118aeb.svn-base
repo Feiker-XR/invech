@@ -1,0 +1,128 @@
+<link rel="stylesheet" type="text/css" href="/__CSS__/user/reset.css?v=20170715">
+<link rel="stylesheet" type="text/css" href="/__CSS__/user/hpn-common.css">
+<link rel="stylesheet" type="text/css" href="/__CSS__/user/index.css?v=20171117">
+<link rel="stylesheet" type="text/css" href="/__CSS__/user/global.css">
+<style>
+
+    .reResulttBg{background: #f42023;}
+    .process .layout .monty ul li,.process .layout .list_tems .date:after,.list ul li .slide p.acti,.headmemberbg{background: #f42023;}
+    .process .layout .list_tems .date span, .process .layout .list_tems .date h3,.eveb_amount span,.color-e77c3c,.eveb_setting_table a,.xieyiCss，.gcdtgd{color: #f42023!important;}
+    .eveb_sub_nav_type a:hover, .eveb_sub_nav_type li.on a:link, .eveb_sub_nav_type li.on a:visited{color: #f42023!important;font-weight: 700;border-bottom-color: #e1e1e1;background: #f8f8f8;}
+    .list ul li .slide p:hover,.letterbtn-bg{background: #f42023!important;color: white;}
+    .list h3 a{background: #f42023;border-bottom: 3px solid #a92309; height: 47px; line-height: 47px;}
+    .help_l_menu li .t.sli{border-left: 5px solid #f42023;}
+    .withdraw-bg-input{border: 2px solid #f42023!important;}
+    .clearBet_template .l span i{background: #f42023 url(/static/theme/memberTheme/theme1/img/tm-mdl-icon.png) no-repeat!important; border-radius: 50%;background-position: 0 41%!important;}
+
+    .eveb_nav_sub .on,.button_1, .button_1:link, .button_1:visited,.alert_col h5,.onlineService,.layui-layer-popup .layui-layer-title,.xzqd,.xzqdlskj,.game_name .box2_stage p span i.acti,.Betting,.Single,.list_ject ul li .Result p a.acti,.list_ject ul li .Result p a.acti:hover,.top{background:#f42023!important}
+    .eveb_nav_sub .on a,.bankInfo .name,.help_l_menu .title p .sum,.help_r_main .light,.game_name .box2_stage p span i,.game_name .box1_name  p i,.Account p a.red{color:#f42023!important}
+    .eveb_nav_sub .on,.game_name .box2_stage p span{border:1px solid #f42023!important;}
+    .eveb_nav_sub .on,.game_name .box2_stage p span i.acti{color:#fff!important;}
+    .eveb_nav_sub .on a{border-top:1px #f42023 solid!important;}
+    .eveb_nav_sub ul{border-bottom:1px #f42023 solid!important;}
+    #apptop{background: #f42023}
+    .alert_col div::-webkit-scrollbar-thumb {background-color: #f42023!important;}
+    .head div h5,.Betting .tabs ul li,.top .nav h1{background:#d51910!important}
+    .jf_box .url a,.eveb_form label.error,.eveb_transfer_box .center_wallet .money,.eveb_transfer_box .wallet_list li p{color:#d51910!important}
+    .Betting .tabs ul li.acti{background:#fff!important}
+    .button_1, .button_1:link, .button_1:visited{border:1px solid #d51910!important;}
+</style>
+
+<link type="text/css" rel="stylesheet" href="/__CSS__/user/laydate.css">
+<link rel="stylesheet" href="/__CSS__/user/layer.css?v=3.0.11110">
+
+<div class="eveb_content">
+    <div class="eveb_nav_sub">
+        <ul class="clearfix">
+            <li><a href="javascript:void(0)" onclick="parent.goSubUrl('/member/zhsz.html?module=grzl')">个人资料</a></li>
+            <li class="on"><a href="javascript:void(0)" onclick="parent.goSubUrl('/member/zhsz.html?module=dlmm')">登录密码</a></li>
+            <li><a href="javascript:void(0)" onclick="parent.goSubUrl('/member/zhsz.html?module=yhkgl')">银行卡管理</a></li>
+            <!--<li><a href="javascript:void(0)" onclick="parent.goSubUrl('/member/zhsz.html?module=aqxx')">安全信息</a></li>-->
+        </ul>
+    </div><form name="resetPasswordForm" novalidate="novalidate" onsubmit="return false;">
+    <ul class="eveb_form eveb_setting_form">
+        <li>
+            <span>原密码：</span>
+            <input name="oldPassword" id="oldPassword" type="password" size="20" class="passwinp">
+            <label class="error" for="oldPassword">* 请填写您的原始登录密码</label>
+        </li>
+        <li>
+            <span>新密码：</span>
+            <input name="newPassword" id="newpassword" type="password" size="20" class="passwinp">
+            <label class="error" for="newpassword">* 6~12位字母数字组合</label>
+        </li>
+        <li>
+            <span>确认密码：</span>
+            <input name="confirmPassword" id="confirmPassword" type="password" size="20" class="passwinp">
+            <label class="error" for="confirmPassword">* 为了您的账号安全，请输入6-12位、区分大小写的字母和数字组合密码。</label>
+        </li>
+    </ul>
+    <div class="eveb_form_submit">
+        <input type="submit" value="确认修改" class="button_medium button_1">
+        <input type="reset" value="重置" class="ml_10 button_medium button_3">
+    </div>
+</form>
+</div>
+</div>
+<script type="text/javascript" src="/__JS__/user/jquery.min.js?v=2017"></script><!--jQuery库-->
+<script src="/__JS__/index2/global.js?v=20170505"></script><!--自定义封装函数-->
+<script src="/__JS__/index2/jquery.cookie.js?v=2017"></script><!--自定义封装函数-->
+<script src="/__JS__/index2/jquery.md5.js?v=2017"></script><!--自定义封装函数-->
+<script src="/__JS__/index2/layer.js?v=2017"></script>
+<script src="/__JS__/index2/jquery.nicescroll.js?v=2017"></script>
+<script src="/__JS__/index2/dateFormat.js?v=2017"></script>
+<script src="/__JS__/index2/template.js?v=2017"></script>
+<script type="text/javascript" src="/__JS__/user/jquery.validate.min.js"></script>
+<script type="text/javascript" src="/__JS__/user/laydate.js"></script>
+<script type="text/javascript" src="/__JS__/user/validate.js"></script>
+<script type="text/javascript" src="/__JS__/user/jquery.form.min.js"></script>
+<script type="text/javascript" src="/__JS__/user/clipboard.min.js"></script>
+<script>
+    $("form[name='resetPasswordForm']").validate({
+        rules:{
+            oldPassword:{required:true}
+            ,newPassword:{
+                required:true,
+                minlength: 5
+            }
+            ,confirmPassword:{
+                required:true,
+                minlength: 5,
+                equalTo: "#newpassword"
+            }
+        }
+        ,messages:{
+            oldPassword:{required:"* 请填写您的原始登录密码"}
+            ,newPassword:{
+                required:"* 6~18位字母数字组合",
+                minlength: "密码长度不能小于 5 个字母"
+            }
+            ,confirmPassword:{
+                required:"* 请再次填写新密码",
+                minlength: "密码长度不能小于 5 个字母",
+                equalTo: "两次密码输入不一致"
+            }
+        }
+        ,submitHandler:function(form){
+            var options = {
+                url: "/member/zhsz/ajaxResetPassword.json",
+                success: showResponse,      //提交后的回调函数
+                clearForm: true,            //成功提交后，清除所有表单元素的值
+                type: 'post',               //默认是form的method（get or post），如果申明，则会覆盖
+                dataType: 'json',           //html(默认), xml, script, json...接受服务端返回的类型
+                timeout: 3000               //限制请求的时间，当请求大于3秒后，跳出请求
+            }
+            $("input[name='oldPassword']").val($.md5($("input[name='oldPassword']").val()));
+            $("input[name='newPassword']").val($.md5($("input[name='newPassword']").val()));
+            $("input[name='confirmPassword']").val($.md5($("input[name='confirmPassword']").val()));
+            $(form).ajaxSubmit(options);
+        }
+    })
+    function showResponse(json, statusText){
+        if (json.result == 1) {
+            alert("修改成功");
+        } else {
+            alert("修改失败：" + json.description);
+        }
+    };
+</script>

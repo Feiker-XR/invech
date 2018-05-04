@@ -1,0 +1,156 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>在线支付存款页面 3</title>
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">	
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+<link rel="stylesheet" href="/css/font-awesome.min.css">	
+<link rel="stylesheet" href="/styles/ezweb.css">
+<link rel="stylesheet" type="text/css" href="/fonts-new/iconfont.css">	
+<link rel="stylesheet" href="/css/500f_new_wap.css">
+	
+<link rel="stylesheet" href="/css/pay-500F.css" />
+<script type="text/javascript" src="/js/jquery-2.2.0.min.js"></script>
+<script type="text/javascript" src="/js/pay-500F.js"></script>
+<style type="text/css">
+.pay_style h2{font-size: 1.5rem;}	
+</style>
+</head>
+<body>
+	
+	
+<div class="block_60"></div>	
+<!--在线支付-->	
+<div class="block_0"></div>	
+<div class="pay_online">
+	<a href="./index.html" class="pay_online_1">在线支付</a>
+	<a href="./huikuan_new.html" class="pay_online_2">公司入款</a>
+</div>	
+<div class="block_0"></div>
+<form action="/xpay/index.php" method="post" id="payform" target="_PARENT">
+<div class="pay_name">
+	<h2>请填写存款信息</h2>
+	<div class="block_20"></div>
+	<div class="pay_input">
+		<ul class="pay_inputul_1 fl">
+			<li>会员名称：</li>
+			<li><input type="text" placeholder="nihao123" disabled="disabled"/></li>
+		</ul>
+		<ul class="pay_inputul_1 fl mt20" style="margin-top: 1em;">
+			<li>账户余额：</li>
+			<li><input type="text" placeholder="888888" disabled="disabled"/></li>
+		</ul>		
+		<ul class="pay_inputul_2 fl mt20" style="margin-top: 1em;">
+			<li>存款金额：</li>
+			<li><input type="number" name="pay_amt" id="pay_amt" pattern="[0-9]*" placeholder="请输入金额" onkeyup="clearNoNum(this);" /></li>
+		</ul>
+	</div>
+</div>	
+<div class="block_20"></div>	
+<div class="pay_style">
+	<h2>请选择充值方式</h2>
+	<div class="block_10"></div>
+	<div class="pay_style_choose">
+		<div class="pay_style_choose_1 on" data-url="/xpay/index.php" data-type="alipay" data="ALIPAYWAP" data-target="_PARENT">
+			<img src="/img/pay-1.png" />
+			<span>支付宝</span>
+		</div>
+		<div class="pay_style_choose_2"  data-url="/xpay/index.php" data-type="wxpay" data="wxpaywap" data-target="">
+			<img src="/img/pay-2.png" />
+			<span>微信支付</span>			
+		</div>
+		<!--
+		<div class="pay_style_choose_1"  data-url="/xpay/index.php" data-type="jdpay" data="">
+			<img src="img/pay-3.png" />
+			<span>京东钱包</span>
+		</div>
+		<div class="pay_style_choose_2"  data-url="/xpay/index.php" data-type="bdpay" data="">
+			<img src="img/pay-4.png" />
+			<span>百度钱包</span>			
+		</div>
+		-->
+		<div class="pay_style_choose_1"  data-url="/xpay/index.php" data-type="qqpay" data="QQPAYWAP" data-target="_PARENT">
+			<img src="/img/pay-5.png" />
+			<span>QQ钱包</span>
+		</div>
+		<div class="block_20"></div>
+	</div>	
+</div>	
+<div class="block_20"></div>	
+<div class="pay_btn">
+	<input type="hidden" id="paytype" value="ALIPAYWAP" name="paytype" />
+	<input type="submit" value="确认充值" />
+</div>	
+</form>	
+	
+<div class="block_60"></div>	
+<div class="block_60"></div>
+<div class="block_60"></div>
+
+
+<script>
+$(function(){
+	//点击底部固定导航条切换
+	$(".nav500_bottom_a").click(function(){
+		var navThis = $(this);
+		navThis.css("color","#d9901e")
+		navThis.parent().siblings("span").find("a").css("color","#999999")
+		navThis.find("i").addClass("nav500_b_active");
+		navThis.parent().siblings("span").find("i").removeClass("nav500_b_active");
+		navThis.addClass("nav500_bottom_active").parent().siblings("span").find("a").removeClass("nav500_bottom_active")
+	});
+})
+
+</script>	
+	
+</body>
+
+<script type="text/javascript">
+$(function(){
+	$(".nav500_bottom_a").click(function(){
+	var navThis = $(this);
+	navThis.css("color","#d9901e")
+	navThis.parent().siblings("span").find("a").css("color","#999999")
+	navThis.find("i").addClass("nav500_b_active");
+	navThis.parent().siblings("span").find("i").removeClass("nav500_b_active");
+	navThis.addClass("nav500_bottom_active").parent().siblings("span").find("a").removeClass("nav500_bottom_active")
+	});
+	function referurl() {
+		var ref = $("#hd_referrer").val();
+		if (ref != "" && ref != "undefined") {
+		  location.href = ref;
+		}
+		else {
+		  location.href = history.back(-1); 
+		}
+	}
+
+	$(function(){
+		//点击底部固定导航条切换
+		$(".nav500_bottom_a").click(function(){
+			var navThis = $(this);
+			navThis.css("color","#d9901e")
+			navThis.parent().siblings("span").find("a").css("color","#999999")
+			navThis.find("i").addClass("nav500_b_active");
+			navThis.parent().siblings("span").find("i").removeClass("nav500_b_active");
+			navThis.addClass("nav500_bottom_active").parent().siblings("span").find("a").removeClass("nav500_bottom_active")
+		});
+
+		$("#hd_referrer").val(document.referrer);
+		
+	})
+	
+	//子页面传递高度给顶层iframe	
+	function changeFrameHeight(){
+		bodyClientH = document.body.clientHeight;
+		bodyClientW = document.body.clientWidth;
+		var iframeId = $(window.parent.document).find("#iframeid")
+		iframeId.css("height",bodyClientH + 50)
+	}	
+	changeFrameHeight()		
+})
+</script>
+</html>

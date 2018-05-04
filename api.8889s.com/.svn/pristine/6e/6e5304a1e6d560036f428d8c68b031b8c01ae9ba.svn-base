@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>注册页面</title>
+<link rel="stylesheet" type="text/css" href="/newview/css/select2.min.css"/>
+<link rel="stylesheet" type="text/css" href="/newview/css/style.css"/>
+<style>
+body{background: #f1f1f1;}	
+.Validform_right{color: red;}
+.Validform_wrong{color: red;}
+.reg_sumbit_1{border: none;}
+</style>
+</head>
+<body>
+{include file='common/nav'}
+<div class="block_20"></div>	
+<!--注册页面-->	
+<div class="reg_all">
+	<div class="reg_l">
+		<ul>
+			<li><a href="javascript:;" class="on">关于我们<i class="on"></i></a></li>
+			<li><a href="/about/index/id/3.html">隐私政策<i></i></a></li>
+			<li><a href="javascript:;">合作伙伴<i></i></a></li>
+			<li><a href="javascript:;">规则条款<i></i></a></li>
+			<li><a href="javascript:;">存款帮助<i></i></a></li>
+			<li><a href="javascript:;">取款帮助<i></i></a></li>
+			<li><a href="javascript:;">常见问题<i></i></a></li>
+			<li><a href="javascript:;">责任博彩<i></i></a></li>
+		</ul>
+	</div>
+	<div class="reg_r">
+		
+		<!--注册账号表单step1-->
+        <form class="registerform" method="post" action="{:Url('index/create')}">
+        	<div class="register_step1">
+	            <table width="100%" style="table-layout:fixed;">
+	            	<input type="hidden" name="jsr" id="jsr" readonly="readonly" value="{$topUserName}" class="reg-input-text"/>									
+					<input type="hidden" name="topuid" id="topuid" readonly="readonly" value="{$topUid}" class="reg-input-text"/>
+	                <tr>
+	                    <td style="width:140px;text-align: right;padding-right: 10px;height: 35px;font-size: 16px;">账号：</td>
+	                    <td style="width:258px;"><input type="text" value="" name="zcname" class="inputxt" datatype="s6-18" ajaxurl="{:url('index/check')}" nullmsg="请设置您的登录账号！" errormsg="请输入6-10位字母和数字组合的字符!" /><i class="need">*</i></td>
+	                    <td><div class="Validform_checktip f14 ml10">昵称为6~18个字符</div></td>
+	                </tr>
+	                <tr>
+	                    <td style="width:140px;text-align: right;padding-right: 10px;height: 35px;font-size: 16px;">密码：</td>
+	                    <td><input type="password" value="" name="zcpwd1" class="inputxt" datatype="*6-16" nullmsg="请设置密码！" errormsg="密码范围在6~16位之间！" /><i class="need">*</i></td>
+	                    <td><div class="Validform_checktip f14 ml10">密码范围在6~16位之间</div></td>
+	                </tr>
+	                <tr>
+	                    <td style="text-align: right;padding-right: 10px;height: 35px;font-size: 16px;">确认密码：</td>
+	                    <td><input type="password" value="" name="zcpwd2" class="inputxt" datatype="*" recheck="zcpwd1" nullmsg="请再输入一次密码！" errormsg="您两次输入的账号密码不一致！" /><i class="need">*</i></td>
+	                    <td><div class="Validform_checktip f14 ml10">两次输入密码需一致</div></td>
+	                </tr>
+	                <tr>
+	                    <td style="text-align: right;padding-right: 10px;height: 35px;font-size: 16px;">使用货币：</td>
+	                    <td>
+							<select  name="currency"  class="js-example-basic-single">
+							    <option value="1">人民币</option>
+							</select>				                    	
+	                    </td>
+						<td>
+						</td>
+	                </tr>	                
+	            </table>
+            </div>
+            <!--注册账号step2-->
+        	<div class="register_step2">
+	            <table width="100%" style="table-layout:fixed;">
+	                <tr>
+	                    <td style="width:140px;text-align: right;padding-right: 10px;height: 35px;font-size: 16px;">真实姓名：</td>
+	                    <td style="width:258px;"><input type="text" value="" datatype="*"  name="zcturename" class="inputxt" datatype="s6-18" ajaxurl="{:url('index/truename')}" errormsg="必须与您的银行账户名称相同，否则不能出款！" /><i class="need">*</i></td>
+	                    <td><div class="Validform_checktip f14 ml10">必须与您的银行账户名称相同</div></td>
+	                </tr>
+	                <tr>
+	                    <td style="width:140px;text-align: right;padding-right: 10px;height: 35px;font-size: 16px;">提款密码：</td>
+	                    <td><input type="password" value="" name="qkpwd1" class="inputxt" datatype="*6-16" nullmsg="请设置密码！" errormsg="密码范围在6~16位之间！" /><i class="need">*</i></td>
+	                    <td><div class="Validform_checktip f14 ml10">提款认证必须，请勿忘记！</div></td>
+	                </tr>
+	                <tr>
+	                    <td style="width:140px;text-align: right;padding-right: 10px;height: 35px;font-size: 16px;">确认提款密码：</td>				                	
+	                    <td><input type="password" value="" name="qkpwd2" class="inputxt" datatype="*" recheck="qkpwd1" nullmsg="请再输入一次密码！" errormsg="您两次输入的账号密码不一致！" /><i class="need">*</i></td>
+	                    <td><div class="Validform_checktip f14 ml10">请再次输入您的提款密码！</div></td>
+	                </tr>
+	                <tr>
+	                    <td style="text-align: right;padding-right: 10px;height: 35px;font-size: 16px;width: 151px;">密码提示问题：</td>
+	                    <td>
+							<select name="zcquestion" id="zcquestion"  class="js-example-basic-single2" datatype="*" nullmsg="请选择密码提示问题！" errormsg="密码提示问题必须选择！">
+							    <option value="">请选择密码提示问题</option>
+								<option value="您的车牌号码是多少？">您的车牌号码是多少？</option>
+								<option value="您初中同桌的名字？">您初中同桌的名字？</option>
+								<option value="您就读的第一所学校的名称？">您就读的第一所学校的名称？</option>
+								<option value="您第一次亲吻的对象是谁？">您第一次亲吻的对象是谁？</option>
+								<option value="少年时代心目中的英雄是谁？">少年时代心目中的英雄是谁？</option>
+								<option value="您最喜欢的休闲运动是什么？">您最喜欢的休闲运动是什么？</option>
+								<option value="您最喜欢哪支运动队？">您最喜欢哪支运动队？</option>
+								<option value="您最喜欢的运动员是谁？">您最喜欢的运动员是谁？</option>
+								<option value="您的第一辆车是什么牌子？">您的第一辆车是什么牌子？</option>
+							</select>	
+							
+							<i class="need">*</i>
+	                    </td>
+	                    <td></td>
+	                </tr>				
+	                <tr>
+	                    <td style="width:140px;text-align: right;padding-right: 10px;height: 35px;font-size: 16px;">密码提示答案：</td>
+	                    <td><input type="text" value=""  datatype="*1-10" id="zcanswer" name="zcanswer" class="inputxt"  errormsg="密码提示答案不能为空！"  /><i class="need">*</i></td>
+	                    <td></td>
+	                </tr>                
+	                {if $regYzm eq '1'}
+	                <tr>
+	                    <td style="width:140px;text-align: right;padding-right: 10px;height: 35px;font-size: 16px;vertical-align: top;">验证码：</td>
+	                    <td>
+	                    	<input type="text" value=""  datatype="*1-10" id="zcyzm" name="zcyzm" class="inputxt"  errormsg="验证码不能为空！"  />
+	                    	<img id="captcha_img" onclick="this.src='{:captcha_src()}?d='+Math.random();" alt="点击更换" title="点击更换" src="{:captcha_src()}" class="m">
+	                    </td>
+	                    <td style="vertical-align: top;">
+	                    	<div class="Validform_checktip f14 ml10"></div>
+	                    </td>	
+	                </tr>
+	                {/if}
+	            </table>
+            </div>
+			<div class="block_120"></div>
+			<div class="reg_sumbit">
+				<!--<a href="javascript:;" class="reg_sumbit_1 mr10 register_step3_button"></a>-->
+				<button type="submit" value='' class="reg_sumbit_1 mr10 register_step3_button" ></button>
+				<a href="#" class="reg_sumbit_2"></a>
+			</div>
+
+        </form>		
+		
+		
+		
+	</div>
+	
+</div>
+
+<div class="block_20"></div>
+<!--底部footer-->
+{include file='common/footer'}
+</body>
+<script src="/newview/js/jquery1.9.0.min.js"></script>
+<script type="text/javascript" src="/newview/js/jquery.SuperSlide.2.1.1.js"></script>
+<script type="text/javascript" src="/newview/js/jquery.easing.1.3.js" ></script>
+<script type="text/javascript" src="/newview/js/slides.jquery.js" ></script>
+<script type="text/javascript" src="/newview/js/select2.full.min.js" ></script>
+<script type="text/javascript" src="/newview/js/Validform_v5.3.2_min.js" ></script>
+<script type="text/javascript" src="/newview/js/main.js"></script>
+<script type="text/javascript">
+$(function(){
+//首页全屏带进度条大轮播图
+$('#indexslider').slides({
+	effect: 'fade, fade',
+	crossfade: true,
+	container:'index-img',
+	paginationClass: 'index-pagination',
+	preloadImage: '',//loading 图片地址
+	play:3000,
+	fadeSpeed: 500,
+	pause:1,
+	generatePagination: false,
+	animationStart: function(current){
+		$('.index-pagination span').stop().animate({width:0}).hide();
+	},
+	animationComplete: function(current){
+		var leftw=(current-1)*34;
+		$('.index-pagination li').eq(current-1).find('span').show().animate({width:50},3000);
+	},
+	slidesLoaded: function(){
+		$('.index-pagination li').eq(0).find('span').animate({width:50},3000);
+	}
+});
+$(".slides_control").css({width : "100%"});
+
+//validform表单验证初始化
+$(".registerform").Validform({
+	tiptype:2
+});	
+
+//select2下拉框初始化
+$(".js-example-basic-single").select2();
+$(".js-example-basic-single2").select2();
+
+$(document).on("click",".reg_l li",function(){
+	$(this).find("a,i").addClass("on");
+	$(this).siblings("li").find("a,i").removeClass("on");	
+})
+
+
+
+})
+</script>
+</html>

@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>99206 首页</title>
+<link rel="stylesheet" type="text/css" href="/newview/css/style.css"/>
+</head>
+<body>
+<!--头部登陆-->	
+
+{include file='common/vipchecknav'}
+
+<div class="block_0"></div>
+<!--VIP查询banner-->
+<div class="vip_banner">
+	<div class="vip_check">
+		<ul>
+			<li><input type="text" id="input_val"/></li>
+			<li><button id="vip_level_btn">查询</button></li>
+		</ul>
+	</div>
+	<!--公告-->
+	<div class="banner_bottom">
+		<div class="banner_notice txtMarquee-left">
+			<div class="bd">
+				<span class="f14 fl mr10">公告：</span>
+				<ul class="fl f14 ">
+				{volist id="vo" name="notice"}
+					<li class="mt7">{$vo.msg}</li>
+				{/volist}
+				</ul>
+			</div>
+		</div>	
+	</div>
+</div>
+<div class="block_0"></div>
+<!--活动详情-->	
+<div class="vip_activity">
+	<div class="vip_activity_contain">
+		<ul class="mt30">
+			<li><img src="/newview/img/vip-06.png" /></li>
+			<li class="f18 mt10">从2016年9月1号(美东)开始, 您在澳门皇冠娱乐城的<span class="color_red">每一笔投注都会永久累积。</span></li>
+			<li class="f18">当累积到一定标准, 即可自动升级为<span class="color_red">更高级别的VIP。</span></li>
+			<li class="f18"><span class="color_red">VIP等级越高</span>, 能参与更多的优惠活动和收获更多的彩金。</li>
+			<li class="f18">我们将不断推出更多的优惠活动<span class="color_red">回馈新老会员。</span></li>
+			<li><img src="/newview/img/vip-10.png" /></li>
+			<li class="f16 color_green2">注: 如会员已累积20万有效投注，升级为VIP2；再产生80万有效投注，总累积为100万有效投注，升级为VIP3。</li>
+			<li class="f16 color_red">活动时间：2016年9月1日(美东)起，投注1元起，自动加入VIP，您的每一笔投注，都将永久累计，自动升级为更高级别的VIP!</li>
+		</ul>
+	</div>
+</div>
+<div class="block_0"></div>
+<!--申请方式-->	
+<div class="application">
+	<div class="application_contain">
+		<ul class="mt30">
+			<li class="application_contain_1"><img src="/newview/img/vip-07.png" /></li>
+			<li class="f18"><span class="color_red">人人都是VIP</span>，无需申请加入，有效投注1元起，自动加入VIP晋级系统 ，<span class="color_red">越晋升越优越。</span></li>
+			<li class="f18"><span class="color_red">晋级礼金、好运金每月1号无需申请,自动派送到会员账号！</span></li>
+			<li class="f18">VIP会员自助查询系统专用网址：<span class="color_red">www.99206.com </span>请告知您身边的朋友，谢谢！</li>
+		</ul>
+	</div>
+</div>	
+<div class="block_0"></div>
+<!--申请方式-->		
+<div class="rule">
+	<div class="rule_contain">
+		<ul class="mt30">
+			<li><img src="/newview/img/vip-08.png" /></li>
+			<li class="rule_h2">1、如何查询VIP等级?</li>
+			<li>VIP等级将根据您的投注流水30分钟内更新,请登入www.99206.com会员账号，即可在会员信息栏查看自己的VIP等级了。</li>
+			<li class="rule_h2">2、如何申请晋级礼金?</li>
+			<li>晋级彩金无需申请, 将在您晋升时系统自动发放,并会及时到账,请留意您的站内信。</li>
+			<li>注：晋级彩金只需一倍流水即可提现。</li>
+			<li class="rule_h2">3、什么是每月1号好运金?</li>
+			<li>我们会在每月1号派发特别好运金，为您送来好彩头。</li>
+			<li class="rule_h2">3.1、好运金如何计算?</li>
+			<li>以您VIP等级自动换算好运金比例详情如下：</li>
+			<li>(为了便于统计和更及时的发放彩金, 好运金不再以输赢计算, 一倍流水即可提现)</li>
+			<li class="rule_img"><img src="/newview/img/vip-11.png" /></li>
+			<li class="rule_h2">3.2、如何申请好运金?</li>
+			<li>好运彩金无需申请，我们会在每月1号12:00后开始发放，每个会员都会及时到账!</li>
+			<li>好运金只需一倍流水即可提现。</li>
+			<li class="rule_h2">4、什么是存取款加速通道?</li>
+			<li>我们奉行1分钟存款到账/3分钟提款到账的服务原则,VIP等级越高,处理效率越优先。</li>
+			<li class="rule_h2">5、什么是单笔提千万?</li>
+			<li>例：VIP5以及以上会员可以随时进行单笔提款千万的操作!</li>
+			<li>（2分钟到账，大额无忧）。</li>
+			<li class="rule_h2">6、关于皇冠服务</li>
+			<li>我们为您7x24小时不间断的客服服务、在线存取款及游戏投注,如需帮助,请随时咨询在线客服。</li>
+			
+		</ul>
+	</div>
+</div>	
+<div class="block_0"></div>	
+<!--活动规则与条款-->	
+<div class="clause">
+	<div class="clause_contain">
+		<ul class="mt30">
+			<li><img src="/newview/img/vip-09.png" /></li>
+			<li class="rule_h2 f18 mt10">1、所有优惠<span class="color_red">以人民币(CNY)为结算金额</span>，以美东时间(EDT)为计时区间。</li>
+			<li class="rule_h2">2、每位玩家﹑每户﹑每一住址 、每一电子邮箱地址﹑每一电话号码﹑相同支付方式(相同借记卡/信用卡/银行账户) 及IP地址 </li>
+			<li>只能享有一次优惠；若会员有重复申请账号行为，公司保留取消或收回会员优惠彩金的权利。</li>
+			<li class="rule_h2">3、<span class="color_red">澳门皇冠娱乐城</span>的所有优惠特为玩家而设，如发现任何团体或个人，以不诚实方式套取红利或任何威胁、滥用公司优惠等</li>
+			<li>行为，公司保留冻结、取消该团体或个人账户及账户结余的权利。</li>
+			<li class="rule_h2">4、若会员对活动有争议时，为确保双方利益，杜绝身份盗用行为，<span class="color_red">澳门皇冠娱乐城有权要求会员向我们提供充足有效的文件 </span></li>
+			<li>，用以确认是否享有该优惠的资质。</li>
+			<li class="rule_h2">5、当参与优惠会员未能完全遵守、或违反、或滥用任何有关公司优惠或推广的条款，又或我们有任何证据有任何团队或个人</li>
+			<li>投下 一连串的关联赌注，籍以造成 无论赛果怎样都可以确保可以从该存款红利或其他推广活动提供的优惠获利，<span class="color_red">澳门皇冠娱</span></li>
+			<li><span class="color_red">乐城保留权利向此 团队或个人停止、取消优惠或索回已支付的全部优惠红利</span>。此外，公司亦保留权利向这些客户扣取相当于优</li>
+			<li>惠红利价值的行政费用，以补偿我们的行政成本。</li>
+			<li class="rule_h2">6、澳门皇冠娱乐城保留对活动的最终解释权；以及在无通知的情况下修改、终止活动的权利；适用于所有优惠。</li>
+			<li class="rule_h2">7、参与VIP积分系统,即表示您同意《一般优惠规则与条款》,澳门皇冠娱乐城保留对活动的最终解释权。</li>
+		</ul>		
+	</div>
+</div>	
+<div class="block_0"></div>	
+<!--底部-->	
+<div class="vip_footer">
+	<div class="vip_footer_contain">
+		Copyright © 澳门皇冠娱乐场 Reserved
+	</div>
+</div>	
+
+
+<!--查询等级弹出层-->
+<div class="vip_mask"></div>
+<div class="vip_level_tip">
+	<h1><img src="/newview/img/vip-h1.png" /></h1>
+	<div class="vip_level_contain">
+		<h2 class="vip_level_num">1</h2>
+	</div>
+	<img src="/newview/img/vip_levev_close.png" class="vip_levev_close"/>
+</div>
+<div class="vip_level_no">
+	<span class="vip_level_no_close"><img src="/newview/img/vip_levev_closebig.png" /></span>
+	<a href="/index/reg">立即注册</a>
+</div>	
+
+</body>
+<script src="/newview/js/jquery1.9.0.min.js"></script>
+<script type="text/javascript" src="/newview/js/jquery.SuperSlide.2.1.1.js"></script>
+<script type="text/javascript" src="/newview/js/jquery.easing.1.3.js" ></script>
+<script type="text/javascript" src="/newview/js/slides.jquery.js" ></script>
+<script type="text/javascript" src="/newview/js/main_other.js"></script>
+<script type="text/javascript">
+$(function(){
+//无缝左滚动
+$(".txtMarquee-left").slide({mainCell:".bd ul",autoPlay:true,effect:"leftMarquee",interTime:50,trigger:"click"});
+$(".tempWrap").css("width","1080px")
+
+
+
+$('#vip_level_btn').click(function(){
+	
+	var windowWidth = $(window).width(),
+		windowHeight = $(window).height(),
+		srcllTop = $(window).scrollTop();
+	//	alert(srcllTop)
+	$('.vip_level_tip').css({
+		left : windowWidth/2 - 400,
+		top :  (windowHeight/2 - 200) + srcllTop
+	})
+	$('.vip_level_no').css({
+		left : windowWidth/2 - 400,
+		top :  (windowHeight/2 - 196) + srcllTop
+	})	
+
+	var inputVal = $("#input_val").val()
+	if(inputVal == ""){
+		alert("请输入用户名")
+		return false
+	}
+	
+	$.ajax({
+		type:"post",
+		data : "username="+inputVal,
+		dataType:"json",
+		traditional: true,
+		url:"{:url('vipcheck/check')}",
+		success:function(data){
+			//var data = {"status":"0","levelNum":"3"}
+			if(data.status == 0){
+				$('.vip_level_tip').show()
+				$('.vip_mask').show()
+				$('.vip_level_num').text(data.levelNum)	
+			}else if(data.status == 1){
+				$('.vip_level_tip').hide()
+				$('.vip_level_no').show()
+				$('.vip_mask').show()
+				$('.vip_level_no').css({
+					left : windowWidth/2 - 400,
+					top :  (windowHeight/2 - 196) + srcllTop
+				})		
+				
+			}else{
+				
+			}
+		}
+	})
+	
+})
+
+
+$(document).on('keydown','#input_val',function(){
+ 	if(event.keyCode == "13") {
+        $('#vip_level_btn').trigger("click")
+    }	
+	
+})
+
+$('.vip_levev_close').click(function(){
+	$('.vip_level_tip').hide();
+	$('.vip_mask').hide();
+})
+$('.vip_level_no_close').click(function(){
+	$('.vip_level_no').hide();
+	$('.vip_mask').hide();
+})
+
+})
+</script>
+</html>

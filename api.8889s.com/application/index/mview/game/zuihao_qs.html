@@ -1,0 +1,18 @@
+{foreach $list as $val}
+<tr>
+	<td><input type="checkbox" />
+	<td>{$val['lastactionNum']}</td>
+	<td><input type="text" class="beishu" value="{$val['beishu']}" style="
+    width: 2.5rem;
+    height: 1.8rem;
+    line-height: 1.8rem;
+    text-align: center;
+    border: 1px solid #dddddd;
+    border-radius: 0.2rem;
+    background: #f5f5f5;
+    margin-right: 0.3rem;
+"/></td>
+	<td><span class="amount">{$val['price']}</span>元</td>
+	<td>{$val['kjtime']}</td>
+</tr>
+{/foreach}

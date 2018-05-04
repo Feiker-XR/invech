@@ -1,0 +1,28 @@
+<?php
+namespace bong\service;
+use think\captcha\Captcha;
+class Mycaptcha 
+{
+    public function mobile_get_captcha($id='')
+    {
+        $config = [
+            'codeSet'  => '1234567890',
+            'fontSize'=>16,
+            //vendor\topthink\think-captcha\assets\ttfs下1.ttf--6.ttf(默认)
+            //没办法调整字体间距
+            'fontttf'=>'6.ttf',
+            'length'=> 4,
+            'useNoise'=>0,
+            'useCurve'=>0,
+        ];
+
+        $captcha = new Captcha($config);        
+        return $captcha->entry($id);
+    }
+
+   public  function check_verify($code, $id = ''){
+        $captcha = new Captcha();
+
+        return $captcha->check($code, $id);
+    }
+}

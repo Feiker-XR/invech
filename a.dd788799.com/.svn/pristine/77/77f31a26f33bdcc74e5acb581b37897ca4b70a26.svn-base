@@ -1,0 +1,51 @@
+<?php
+namespace app\common\validate;
+
+use think\Validate;
+
+class Apply extends Validate
+{
+    protected $rule = [
+        'username'         => 'require|unique:members',
+        'password'         => 'confirm:confirm_password',
+        'confirm_password' => 'confirm:password',
+        'mobile'           => 'number|length:11',
+        'email'            => 'email',
+        'bank_name'        => 'require',
+        'bank_username'    => 'require',
+        'bank_account'     => 'require',
+        'bank_address'     => 'require',
+        'level'            => 'require',
+        'levelName'        => 'require',
+        'minScore'         => 'require',
+    ];
+
+    protected $message = [
+        'username.require'         => '请输入用户名',
+        'username.unique'          => '用户名已存在',
+        'password.confirm'         => '两次输入密码不一致',
+        'confirm_password.confirm' => '两次输入密码不一致',
+        'mobile.number'            => '手机号格式错误',
+        'mobile.length'            => '手机号长度错误',
+        'email.email'              => '邮箱格式错误',
+        'bank_name.require'        => '请输入银行名称',
+        'bank_username.require'    => '请输入开户人名称',
+        'bank_account.require'     => '请输入开户行账户',
+        'bank_address.require'     => '请输入开户行地址',
+        'level.require'            => '请输入等级',
+        'levelName.require'        => '请输入等级名称',
+        'minScore.require'         => '请输入最低分数',
+    ];
+
+    protected $scene = [
+        'agent'  =>  ['username'=>'require',],
+        /*
+        'edit'  =>    ['username'=>'require|unique:members,username=username',],
+        'test'  =>   ['username','password','confirm_password',],
+        'bank'  =>   ['bank_name','bank_account','bank_address',],
+        'level' =>   ['level','levelName','minScore'],
+        */
+    ];
+
+
+}

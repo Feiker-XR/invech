@@ -1,0 +1,30 @@
+<?php
+namespace app\agent\controller;
+use app\agent\Login;
+use think\Cache;
+
+use app\common\model\Member as UserModel;
+use app\common\model\MemberLevel as LevelModel;
+use bong\service\JsonExtra;
+use app\common\model\ActionLog as LogModel;
+
+class Member extends Login{
+
+    public function index(){
+        $this->view->page_header = '会员列表';
+        $agent = request()->user();
+        //$list = $agent->subMembers()->paginate();
+        $list = $agent->getMembers(request());
+        $this->assign('list',$list);
+        return $this->fetch();
+    }
+
+    public function avail(){
+        $this->view->page_header = '有效会员列表';
+        $agent = request()->user();
+        $list = $agent->getAvailMembers(request());
+        $this->assign('list',$list);
+        return $this->fetch();
+    }
+  
+}

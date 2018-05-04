@@ -1,0 +1,517 @@
+/*玩法界面iframe外层样式*/
+.warpBg{min-width:980px;background:url(/images/nsc/warp/navBg.jpg) no-repeat top center;position:relative;}
+
+/*侧边栏*/
+.sidebarNav{position:absolute;top:69px;left:0px;z-index:300;}
+.sidebar_header{width:184px;padding-top:141px;height:28px;background:url(/images/nsc/warp/new.png) no-repeat;}
+.sidebar_header .sidebar_header_title{height:28px;margin-left:10px;width:162px;text-align:center;font-size:16px;color:#fff9e7;background:url(/images/nsc/warp/new.png) no-repeat center bottom;}
+.sidebar_con{height:527px;}
+.sidebar_gamebox{ /*height: 158px;*/ overflow:hidden;padding-left:10px;width:162px;}
+.sidebar_gamebox ul li{height:32px;line-height:30px;overflow:hidden;font-size:12px;color:#fff;position:relative;background:url(/images/nsc/warp/lottery_list.jpg) no-repeat 0 top;}
+.sidebar_gamebox ul li .icon_new{background:url(/images/nsc/warp/lottery_sidebar_new.gif) no-repeat;width:40px;height:16px;display:block;position:absolute;top:7px;right:25px;border-radius:2px;}
+.sidebar_gamebox ul li a{color:#fff;}
+.sidebar_gamebox ul li a:hover{color:#E2A3D9;}
+.lname{display:inline;float:left;margin-left:20px;}
+.ltime{display:inline;float:right;margin-right:20px;}
+.ltime.bet-tip{color:#FFDC7C;}
+.sidebar_lotteries{height:29px;line-height:29px;overflow:hidden;background:url(/images/nsc/warp/lottery_list.jpg) no-repeat 10px -92px;}
+.sidebar_lotteries a{display:block;text-align:center;font-size:14px;color:#fff;background:url(/images/nsc/warp/more_hover.png) no-repeat 125px center;}
+.sidebar_lotteries a:hover{color:#fff;}
+.sidebar_lotteries a.hover,.sidebar_lotteries a.hover:hover{background:url(/images/nsc/warp/more.png) no-repeat 125px center;}
+.sidebar_allgames{height:376px;overflow:hidden;padding-left:10px;background:url(/images/nsc/warp/lottery_list_new.jpg) no-repeat 10px -121px;}
+.sidebar_allgames dl{overflow:hidden;width:147px;padding-left:15px;background:url(/images/nsc/warp/side_lottery_line.png) no-repeat center bottom;padding-bottom:6px;}
+.sidebar_allgames dl dt{display:inline;float:left;width:162px;height:25px;line-height:30px;font-size:14px;color:#CABDC8;font-weight:bold;}
+.sidebar_allgames dl dd{display:inline;float:left;height:25px;line-height:25px;}
+.sidebar_allgames dl dd a{font-size:12px;color:#fff;width:72px;display:block;}
+.sidebar_allgames dl dd a:hover{color:#E2A3D9;}
+.sidebar_allgames dl dd.hover a{color:#ffdc7c;font-weight:bold;font-size:13px;}
+.sidebar_allgames .gp{}
+.sidebar_allgames .lt{}
+.sidebar_allgames .dp{}
+.sidebar_allgames .jn{background:none;}
+.sidebar_othergames{height:30px;line-height:30px;background:url(/images/nsc/warp/lottery_list.jpg) no-repeat 10px -497px;}
+.sidebar_othergames .sidebar_header_title{margin-left:10px;height:30px;line-height:30px;width:162px;text-align:center;font-size:16px;color:#fff9e7;}
+.sidebar_othergames .sidebar_header_title a,.sidebar_othergames .sidebar_header_title a:hover{color:#fff9e7;}
+.sidebar_hide{padding-top:5px;margin-left:10px;text-indent:35px;color:#6d6b6b;font-size:14px;display:block;height:24px;width:164px;background:#fff url(/images/nsc/warp/sidebar_hide.png) no-repeat 10px center;}
+.sidebar_show{position:absolute;top:320px;left:0px;z-index:300;display:none;}
+.sidebar_show a,.sidebar_show a:hover{color:#fff;font-size:14px;width:20px;height:106px;padding:10px 6px 0px;background:url(/images/nsc/warp/sidebar_show.png) no-repeat;overflow:hidden;display:block;}
+
+/*头部导航相关样式*/
+.top{line-height:64px;color:#fff;margin-bottom:10px;background:none;padding:0px;}
+.top:after{display:block;content:"clear";height:0;clear:both;overflow:hidden;visibility:hidden;}
+.navList{margin-top:10px;margin-left:20px;}
+.logo{width:110px;height:64px;background:url(/images/nsc/warp/logo.png) no-repeat;text-indent:-9999px;}
+.logo a{display:block;width:110px;height:64px;}
+.navbar{width:100%;height:40px;background:url('/images/nsc/home/bg_nav.jpg') center top no-repeat;}
+.nav{float:left;}
+.nav li{float:left;height:40px;line-height:40px;font-size:16px;font-weight:bold;font-family:'Microsoft YaHei';text-align:center;position:relative;}
+.nav li a{display:block;color:#fff;padding:0 15px;}
+.nav li a i{display:inline-block;width:13px;height:13px;margin-left:5px;vertical-align:-3px;}
+.nav li a i.hot{background:url(/images/nsc/home/ico-hot.png) no-repeat;}
+.nav li a i.new{background:url(/images/nsc/home/ico-new.png) no-repeat;}
+.nav li .nav_child{display:block;width:520px;height:0;position:absolute;left:0;top:40px;text-align:left;background-color:#000;opacity:0.8;filter:alpha(opacity=80);z-index:500;overflow:hidden;}
+.nav li .nav_child dl{float:left;width:240px;height:auto;line-height:25px;font-size:14px;margin:10px 0 0 20px}
+.nav li .nav_child dl dd{font-size:13px;font-weight:normal;}
+.nav li .nav_child dl dt{color:#bea7dd}
+.nav li .nav_child dl dd{float:left;width:49%;}
+.nav li .nav_child a{padding:0;}
+.nav li .nav_child a:hover{text-decoration:underline;}
+.nav li .nav_child2{width:100%;height:0;padding-bottom:0}
+.nav li .nav_child2 a{float:none;width:100%;font-size:14px;text-align:center;font-weight:normal;padding:0;}
+.nav li .nav_child2 a:hover{background-color:#111}
+.nav li.active{background-color:#1D1626;}
+.nav li.active .nav_child{height:235px;}
+.nav li.active .nav_child2{height:auto;}
+.nav .cpyx .nopb{width:482px;margin-top:0;}
+.nav .xcyl .nopb{width:482px;margin-top:8px;border-top:1px dashed #787878;margin-right:20px;padding-top:5px;}
+.nav li .nav_child .nopb dd{width:20%;}
+.nav li .nav_child .nopb .allgame{float:right;margin-right:0;}
+.lot_info{font-size:13px;}
+.welcome{overflow:hidden;width:140px;}
+.welcome_msg{width:60px;overflow:hidden;text-align:right;color:#e4e4e4}
+.username{width:6em;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.top_msg{width:40px;height:64px;line-height:64px;margin-left:5px;}
+.msg_icon{display:inline-block;background:url(/images/nsc/warp/msg.png) no-repeat center center;width:19px;height:13px;position:absolute;top:26px;}
+.msg_num{display:inline-block;padding:0px;font-size:12px;color:#fff;background:#b00;text-align:center;-moz-border-radius:10px;-webkit-border-radius:10px;border-radius:10px;width:16px;height:16px;line-height:16px;position:absolute;top:17px;left:12px;}
+.msg_num a{color:#FFFFFF;}
+.msg_num a:hover{color:#FFFFFF;}
+.logout{}
+.logout a{font-weight:bold;font-style:italic;color:#E8D6E6;text-decoration:underline;}
+.logout a:hover{color:#fff;}
+.obligate{color:#e4e4e4;}
+.obligate .edit{display:inline-block;width:16px;height:16px;background:url(/images/nsc/home/icon.png) no-repeat -1px -117px;vertical-align:-3px;margin-left:1px;}
+.top_skin{width:30px;height:64px;line-height:64px;}
+.top_skin .ic-skin{cursor:pointer;background:url('/images/nsc/icon_pifu.png') no-repeat 0 -25px;width:21px;height:16px;display:inline-block;position:absolute;top:25px;}
+
+/*彩种倒计时显示及余额容器*/
+.lottery_head{/*height: 6.5rem;*/overflow:hidden;background-color:#f3f3f3;/* margin-top: -17px; */}
+.lottery_head:after{display:block;content:"clear";height:0;clear:both;overflow:hidden;visibility:hidden;}
+
+/*彩种倒计时容器*/
+.lottery_show{}
+.lottery_nav{overflow:hidden;}
+.lottery_nav li{cursor:pointer;padding-left:20px;overflow:hidden;position:relative;float:left;display:inline;width:158px;height:36px;padding-top:12px;background:url(/images/nsc/warp/cz.png) no-repeat left 12px;margin-right:1px;}
+.lottery_nav li.hover{background:url(/images/nsc/warp/cz_hover.png) no-repeat left top;width:163px;height:48px;line-height:48px;padding-top:0px;}
+.lottery_nav li span{font-size:16px;color:#fff;overflow:hidden;}
+.lottery_name{width:90px;float:left;display:inline;line-height:36px;}
+.lottery_time{width:50px;float:left;display:inline;line-height:36px;}
+.lottery_nav_close{width:10px;height:10px;position:absolute;right:5px;top:17px;}
+.lottery_nav li.hover .lottery_name{line-height:48px;}
+.lottery_nav li.hover .lottery_time{line-height:48px;}
+.lottery_nav li.hover .lottery_nav_close{right:7px;top:6px;}
+
+/*彩种信息相关内容部分*/
+.lottery_con{padding:0.2rem 0.5rem;overflow:hidden;}
+
+.lottery_type .icon_jssm {
+    background-image: url(/images/nsc/lottery/jssm/logo.png);
+    background-position: center;
+    background-repeat: no-repeat;
+    width: 8.0rem;
+    height: 5.7rem;
+}
+
+/*彩种图标容器*/
+.lottery_type{width:25%;}
+.lottery_type div{width:7.2rem;height:5.2rem;margin:0px auto;background-size:contain;}
+.lottery_type .icon_xc_mmc{background:url(/mmc/images/mmc_images/mmc_lottery-logo.png) no-repeat;width:6.714286rem;height:4.142857rem;margin:0.571429rem auto 0;}
+.lottery_type .icon_bj_pk10{background:url(/images/nsc_m/warp/icon/bj_pk10.png) no-repeat;background-size:100%;width:8.0rem;height:4.0rem;margin-top:0.785714rem;}
+.lottery_type .icon_am_pk10{background:url(/images/nsc_m/warp/icon/am_pk10.png) no-repeat;background-size:100%;width:8.0rem;height:4.0rem;margin-top:0.785714rem;}
+.lottery_type .icon_tw_pk10{background:url(/images/nsc_m/warp/icon/tw_pk10.png) no-repeat;background-size:100%;width:8.0rem;height:4.0rem;margin-top:0.785714rem;}
+
+.icon_cq_11x5{background:url(/images/nsc_m/warp/icon/cq_11x5.png) no-repeat;}
+.icon_jx_11x5{background:url(/images/nsc_m/warp/icon/jx_11x5.png) no-repeat;}
+.icon_sd_11x5{background:url(/images/nsc_m/warp/icon/sd_11x5.png) no-repeat;}
+.icon_gd_11x5{background:url(/images/nsc_m/warp/icon/gd_11x5.png) no-repeat;}
+.icon_sh_11x5{background:url(/images/nsc_m/warp/icon/sh_11x5.png) no-repeat;}
+.icon_am_11x5{background:url(/images/nsc_m/warp/icon/am_11x5.png) no-repeat;}
+.icon_tw_11x5{background:url(/images/nsc_m/warp/icon/tw_11x5.png) no-repeat;}
+
+.icon_cq_ssc{background:url(/images/nsc_m/warp/icon/cq_ssc.png) no-repeat;}
+.icon_jx_ssc{background:url(/images/nsc_m/warp/icon/jx_ssc.png) no-repeat;}
+.icon_tj_ssc{background:url(/images/nsc_m/warp/icon/tj_ssc.png) no-repeat;}
+.icon_xj_ssc{background:url(/images/nsc_m/warp/icon/xj_ssc.png) no-repeat;}
+.icon_am_ssc{background:url(/images/nsc_m/warp/icon/am_ssc.png) no-repeat;}
+.icon_tw_ssc{background:url(/images/nsc_m/warp/icon/tw_ssc.png) no-repeat;}
+
+.icon_xglhc{background:url(/images/nsc_m/warp/icon/xglhc.png) no-repeat;}
+.icon_pl3{background:url(/images/nsc_m/warp/icon/pl3.png) no-repeat;}
+
+.icon_fc_3d{background:url(/images/nsc_m/warp/icon/3dfc.png) no-repeat;}
+.icon_am_3d{background:url(/images/nsc_m/warp/icon/am3d.png) no-repeat;}
+.icon_tw_3d{background:url(/images/nsc_m/warp/icon/tw3d.png) no-repeat;}
+.icon_bjkl8{background:url(/images/nsc_m/warp/icon/bjkl8.png) no-repeat;}
+.icon_hgkl8{background:url(/images/nsc_m/warp/icon/hgkl8.png) no-repeat;}
+.icon_amkl8{background:url(/images/nsc_m/warp/icon/amkl8.png) no-repeat;}
+
+
+.icon_js_k3{background:url(/images/nsc_m/warp/icon/jsk3.png) no-repeat;}
+.icon_am_k3{background:url(/images/nsc_m/warp/icon/amk3.png) no-repeat;}
+.icon_tw_k3{background:url(/images/nsc_m/warp/icon/twk3.png) no-repeat;}
+
+.icon_hn_1fc{background:url(/images/nsc_m/warp/icon/hn_1fc.png) no-repeat;}
+.icon_hn_2fc{background:url(/images/nsc_m/warp/icon/hn_2fc.png) no-repeat;}
+.icon_hn_5fc{background:url(/images/nsc_m/warp/icon/hn_5fc.png) no-repeat;}
+
+.icon_bx_ssc{background:url(/images/nsc_m/warp/icon/bx_ssc.png) no-repeat;}
+.icon_bx_klc{background:url(/images/nsc_m/warp/icon/bx_klc.png) no-repeat;}
+
+.icon_bj_28{background:url(/images/nsc_m/warp/icon/bj_28.png) no-repeat;}
+.icon_ssc_3f{background:url(/images/nsc_m/warp/icon/3f_ssc.png) no-repeat;}
+
+/*彩种倒计时容器*/
+.lottery_timer{width:345px;height:77px;overflow:hidden;}
+.lottery_issue{width:130px;padding-left:10px;padding-top:15px;position:relative;}
+.lottery_issue p{line-height:23px;font-size:12px;color:#959595;}
+.lottery_issue .soundBtn{cursor:pointer;position:absolute;width:20px;height:20px;right:15px;top:39px;}
+.lottery_issue .soundon{background:url(/images/nsc/warp/sound_on.png) no-repeat;}
+.lottery_issue .soundoff{background:url(/images/nsc/warp/sound_off.png) no-repeat;}
+
+/*彩种倒计时数字相关*/
+.lottery_timeBox{width:205px;height:60px;overflow:hidden;padding-top:17px;}
+.timeBox{position:relative;width:40px;height:36px;display:inline;float:left;border:4px solid #ddd;-moz-border-radius:3px;-webkit-border-radius:3px;border-radius:3px;background:#5c5c5c;}
+.num_left,.num_right{width:20px;height:36px;line-height:36px;float:left;display:inline;position:relative;}
+.num{font-size:18px;color:#fff;text-align:center;}
+.recentCon  .num{color: #000}
+.num div{background:#5c5c5c;}
+.num_left .num{text-align:right;}
+.num_right .num{text-align:left;}
+.num_t,.num_b,.num_next_b{z-index:100;}
+.time_line{position:absolute;z-index:101;background:url(/images/nsc/warp/time_line.png) no-repeat center center;width:40px;height:9px;top:14px;}
+.num_next_t{z-index:50;z-index:200\9;}
+.num_next_b div{-moz-transform:rotateX(-90deg);-webkit-transform:rotateX(-90deg);transform:rotateX(-90deg);}
+.num_t,.num_next_t{width:20px;height:18px;overflow:hidden;position:absolute;left:0px;top:0px;height:36px\9;}
+.num_b,.num_next_b{width:20px;height:18px;overflow:hidden;position:absolute;left:0px;top:18px;}
+.num_b div,.num_next_b div{position:absolute;top:-18px;width:20px;}
+.num_next .num_t div{display:none\9;-moz-transform:rotateX(-90deg);-webkit-transform:rotateX(-90deg);transform:rotateX(-90deg);-moz-transition-duration:.3s;-webkit-transition-duration:.3s;transition-duration:.3s;-moz-animation:changeColor .3s;-webkit-animation:changeColor .3s;animation:changeColor .3s;-moz-transition-delay:0s;-webkit-transition-delay:0s;transition-delay:0s;}
+.num_next .num_next_b div{display:none\9;-moz-transform:rotateX(0deg);-webkit-transform:rotateX(0deg);transform:rotateX(0deg);-moz-transition-duration:.3s;-webkit-transition-duration:.3s;transition-duration:.3s;-moz-animation:changeColor .3s;-webkit-animation:changeColor .3s;animation:changeColor .3s;-moz-transition-delay:.3s;-webkit-transition-delay:.3s;transition-delay:.3s;}
+@keyframes changeColor{
+	from{color:#fff;}
+	to{color:#5c5c5c;}
+}
+.dianBox{width:18px;height:44px;display:inline;float:left;background:url(/images/nsc/warp/t.png) no-repeat 5px center;}
+
+/*彩种号码容器*/
+.lottery_num{width:75%;padding-left:0.71rem;}
+.lottery_history_issue{font-size:0.857143rem;color:#959595;float:left;margin-left:1.5rem;}
+.lottery_num_box{float:right;overflow:hidden;margin-top: 0.2rem;}
+.lottery_num_box ul{overflow:hidden;float:right;}
+.lottery_num_box ul.lhc{width:100%;margin-top:7px;}
+.lottery_num_box ul li{border:1px solid;border-radius: 50%;position:relative;color:#8c5a8e;font-size:1.8rem;font-weight:bold;overflow:hidden;margin-left: 0.5rem;float:left;display:inline;width:2.8rem;height:2.8rem;line-height:2.6rem;text-align:center;}
+.lottery_num_box ul li span{display:inline-block;width:100%;height:auto;position:relative;font-weight:bold;}
+.lottery_num_box ul.lhc li{width:2.0rem;height:2.0rem;line-height:1.928571rem;font-size:1.0rem;margin:0px;margin-right:4px;color:#fff;font-weight:normal;background-size:100%;background-repeat:no-repeat;background-position:center}
+.lottery_num_box ul.lhc li:nth-child(8n){margin-right:0px;}
+.lottery_num_box ul.lhc li.red{background-image:url(/images/nsc_m/lott/m_vico_lhc1.png)}
+.lottery_num_box ul.lhc li.green{background-image:url(/images/nsc_m/lott/m_vico_lhc2.png)}
+.lottery_num_box ul.lhc li.blue{background-image:url(/images/nsc_m/lott/m_vico_lhc3.png)}
+.lottery_num_box ul.lhc li.empty{background:url(/images/nsc/warp/rgb_empty.png) no-repeat center;}
+.lottery_num_box ul.lhc li.and{background:url(/images/nsc_m/lott/rgb_and.png) no-repeat center;border:0;}
+.lottery_num_box ul.lhc li.and span{text-indent:-9999px;}
+.lottery_num_box ul.k8{width:97%;float:right;    /*height: 53px !important;*/padding-top:4px;}
+.lottery_num_box ul.k8 li{width:1.357143rem;height:1.357143rem;line-height:1.3rem;font-size:0.857143rem;margin-left:0.428571rem;margin-bottom:2px;color:#8c5a8e;font-weight:normal;left bottom no-repeat;}
+.lottery_num_box ul.k3 li{width:47px;height:47px;line-height:3.214286rem;margin:0px;background:none;border:0;border-radius:0}
+.lottery_num_box ul.k3 li span{width:45px;height:45px;display:block;overflow:hidden;margin:0 auto}
+.lottery_num_box ul.k3 li span.empty{background:url(/images/nsc/warp/shaizi_empty.jpg) no-repeat;background-size:92%;}
+.lottery_num_box ul.k3 li span.num_1{background:url(/images/nsc_m/lott/m1.png) no-repeat center center;}
+.lottery_num_box ul.k3 li span.num_2{background:url(/images/nsc_m/lott/m2.png) no-repeat center center;}
+.lottery_num_box ul.k3 li span.num_3{background:url(/images/nsc_m/lott/m3.png) no-repeat center center;}
+.lottery_num_box ul.k3 li span.num_4{background:url(/images/nsc_m/lott/m4.png) no-repeat center center;}
+.lottery_num_box ul.k3 li span.num_5{background:url(/images/nsc_m/lott/m5.png) no-repeat center center;}
+.lottery_num_box ul.k3 li span.num_6{background:url(/images/nsc_m/lott/m6.png) no-repeat center center;}
+.lottery_num_box ul.k3 li span.num_r0{margin:0px;background:url(/images/nsc/warp/sz0.gif) no-repeat right bottom;}
+.lottery_num_box ul.k3 li span.num_r1{margin:0px;background:url(/images/nsc/warp/sz1.gif) no-repeat right bottom;}
+.lottery_num_box ul.k3 li span.num_r2{margin:0px;background:url(/images/nsc/warp/sz2.gif) no-repeat right bottom;}
+.lottery_num_box ul.pk10_ul ,.lottery_num_box ul.horse_ul{width:17.0rem!important;float:right;margin-left:1.6rem;height:3.8rem!important;}
+.lottery_num_box .pk10_ul li ,.lottery_num_box ul.horse_ul li{width:2.9rem;height:1.7rem;margin:0 0.6rem 0.2rem 0;border:0;border-radius:0;background-size:100%;background-repeat:no-repeat;float:left;}
+.lottery_num_box ul.horse_ul li{background-size: 80%;background-position: center;}
+.lottery_num_box .pk10_ul li:nth-child(5n) ,.lottery_num_box .horse_ul li:nth-child(5n){margin-right:0}
+.pk10_ul li.car00{background-image:url("/images/nsc_m/lott/m_c_00.png");}
+.pk10_ul li.car01{background-image:url("/images/nsc_m/lott/m_c_01.png");}
+.pk10_ul li.car02{background-image:url("/images/nsc_m/lott/m_c_02.png");}
+.pk10_ul li.car03{background-image:url("/images/nsc_m/lott/m_c_03.png");}
+.pk10_ul li.car04{background-image:url("/images/nsc_m/lott/m_c_04.png");}
+.pk10_ul li.car05{background-image:url("/images/nsc_m/lott/m_c_05.png");}
+.pk10_ul li.car06{background-image:url("/images/nsc_m/lott/m_c_06.png");}
+.pk10_ul li.car07{background-image:url("/images/nsc_m/lott/m_c_07.png");}
+.pk10_ul li.car08{background-image:url("/images/nsc_m/lott/m_c_08.png");}
+.pk10_ul li.car09{background-image:url("/images/nsc_m/lott/m_c_09.png");}
+.pk10_ul li.car10{background-image:url("/images/nsc_m/lott/m_c_10.png");}
+
+/*充值、提款、投注记录*/
+.tools{width:210px;height:90px;}
+.yu_e{margin:10px 0 0 10px;padding-bottom:10px;font-size:13px;color:#fff;border-bottom:1px solid #9d8197;position:relative;height:19px;line-height:19px;}
+.yu_e .ic-unlook{background-position:-103px -117px;}
+.yu_e .ic-unlook.hide{background-position:-23px -116px;}
+.yu_e .ic-refresh{background-position:-48px -119px;display:none;}
+.toggle-money{float:left;margin-right:5px;}
+.hide-money{display:none;}
+.money{color:#ffdc7c;font-size:14px;display:inline-block;overflow:hidden;vertical-align:middle;}
+.money b{margin:0 3px;}
+.show-money .money{margin:-5px 3px 0 0;}
+.balance{cursor:pointer;position:absolute;top:0px;right:5px;background:url(/images/nsc/warp/update_money.png) no-repeat;width:17px;height:14px;}
+.toolslist{overflow:hidden;}
+.toolslist li{float:left;display:inline;}
+.toolslist li a{display:block;color:#fff;text-align:center;overflow:hidden;}
+.toolslist li a:hover{color:#ffdc7c;}
+.toolslist .ctqc{float:left;width:120px;font-size:14px;}
+.toolslist .ctqc .recharge{background:url(/images/nsc/warp/info.png) no-repeat;width:44px;height:22px;color:#ffdc7c;padding-top:22px;margin:5px 0 0 20px;}
+.toolslist .ctqc .drawings{background:url(/images/nsc/warp/info.png) no-repeat 0 -45px;width:44px;height:22px;padding-top:22px;margin:5px;}
+.toolslist .ctqc .drawings:hover{background:url(/images/nsc/warp/info.png) no-repeat 0 -90px;}
+.toolslist .twbb{float:right;width:89px;font-size:12px;}
+.toolslist .twbb .touzhu{background:url(/images/nsc/warp/info.png) no-repeat -46px 2px;margin:4px;padding-left:15px}
+.toolslist .twbb .touzhu:hover{background:url(/images/nsc/warp/info.png) no-repeat -46px -42px;}
+.toolslist .twbb .wanfa{background:url(/images/nsc/warp/info.png) no-repeat -46px -20px;margin:4px;padding-left:15px}
+.toolslist .twbb .wanfa:hover{background:url(/images/nsc/warp/info.png) no-repeat -46px -64px;}
+
+/*投注记录查看区域*/
+.lotteryHistory{-moz-box-shadow:0px 0px 5px #ddd;-webkit-box-shadow:0px 0px 5px #ddd;box-shadow:0px 0px 5px #ddd;}
+.lotteryHistory table{}
+.lotteryHistory table th{height:37px;text-align:center;font-size:14px;color:#232323;background:#fff;border-bottom:1px solid #d3d2d2;padding:0px 12px;font-weight:bold;}
+.lotteryHistory table td{height:34px;text-align:center;font-size:14px;color:#646361;background:#fff;}
+.lotteryHistory .blue{color:#044291;cursor:pointer;}
+.lotteryHistory .green{color:green;}
+.lotteryHistory .orange{color:#f26634!important;}
+.lotteryHistoryBody{min-height:0px;max-height:242px;overflow:hidden;}
+.lotteryHistoryBody a{color:#91317b;}
+.lotteryHistoryBody a:hover{color:#ff632c;}
+.getMore{height:42px;background:#fff;text-align:center;border-top:1px solid #d3d2d2;margin-top:-1px;position:relative;z-index:1;}
+.getMore a{display:inline-block;border-bottom:1px solid #ff632c;font-size:16px;color:#ff632c;line-height:18px;height:18px;margin-top:10px;}
+.getMore a:hover{color:#646361;text-decoration:none;border:0;}
+
+/*iframe区域*/
+.lottery_iframe{width:980px;margin-bottom:10px;}
+.lottery_iframe iframe{width:980px;}
+
+/*投注记录中的详情*/
+.task_div{right:auto!important;font-family:"Microsoft Yahei";background-color:#a96b94;border:1px solid #a96b94;color:#FFF;position:absolute;width:290px!important;line-height:24px;z-index:9;}
+.task_div a,.task_div a:hover{color:#fff!important;margin-left:10px;}
+.task_div textarea{width:99%;font-size:14px;text-align:center;font-weight:700;color:#a96b94;border:0!important;padding:1px;min-height:100px;resize:vertical;white-space:normal;}
+.no-open_award{width:100%;height:26rem;padding-top:9.285714rem;margin-bottom:0.857143rem;text-align:center;font-size:1.714286rem;color:#3f3e3e;font-weight:bold;background:#fff url(/images/nsc/icon_no-open_award.png) no-repeat center 4.571429rem;}
+
+/* 优化V1.4 期号调整颜色 */
+#current_issue{}
+.lottery_history_issue span{color:#ff632c;}
+
+/* 推送二期优化*/
+.push_issue span{width:115px;display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;text-align:center;margin:0 auto;}
+.lotteryHistory table .push_issue span.active{position:absolute;width:202px;white-space:normal;text-align:center;top:2px;background:#a96b94;padding:5px 15px;border-radius:8px;-webkit-border-radius:8px;-moz-border-radius:8px;z-index:88;color:#FFFFFF;}
+#num{width:auto;}
+
+.lottery_num_box ul.klsf li {
+    /* width: 25px; */
+    /* height: 25px; */
+    /* line-height: 25px; */
+    width: 1.757143rem;
+    height: 1.757143rem;
+    line-height: 1.7rem;
+    font-size: 0.857143rem;
+    margin-left: 0.428571rem;
+    margin-bottom: 2px;
+    color: #8c5a8e;
+    font-weight: normal;
+    /* font-size: 16px; */
+    /* margin-right: 0px; */
+    /* margin-bottom: 39px; */
+    /* color: #8c5a8e; */
+    /* font-weight: normal; */
+    /* background: url(/images/nsc/warp/klsf.png) left bottom no-repeat; */
+}
+
+
+
+
+/*3017/08/23*/
+
+.header{
+	text-align: center;
+}
+.lottery_show .lottery_type{
+	display: none;
+}
+.lottery_num{
+	width: 50% !important;
+	text-align: center;
+	box-sizing: border-box;
+}
+.lottery_history_issue{
+	margin-left: 0;
+	text-align: center;
+}
+.lottery_con{
+	padding: 0 !important;
+}
+.lottery_head{
+	background-color: #fff;
+	min-height: 60px;
+	
+}
+.lottery_num{
+	padding: 0;
+}
+.lottery_history_issue{
+	float: none ;
+}
+.lottery_num_box{
+	float: none;
+	text-align: center;
+}
+.lottery_num_box ul{
+	float: none !important;
+	height: auto !important;
+	min-height: 1.5em;
+}
+.lottery_num_box ul li{
+	width: auto;
+	/*width: auto !important;*/
+	height: auto !important;
+	display: inline-block;
+	font-size: 1rem;
+	border: none;
+	line-height: 1.5em;
+	min-height: 1.5em;
+	color: #F13031;
+	font-weight: 400;
+	float: none;
+	display: inline-block;
+}
+.lottery_num_box ul.pk10_ul{
+	padding-left: 2rem;
+}
+.lottery_num_box ul.pk10_ul, .lottery_num_box ul.horse_ul{
+	width: 100% !important;
+	margin: 0 !important;
+	height: auto !important;
+  	min-height: 1.5em;
+}
+.m-n-data{
+	display: block;
+	width: 100%;
+	font-size: 14px;
+	text-align: center;
+	line-height:30px;
+}
+.m-n-countdown{
+	display: block;
+	width: 121px;
+	margin: 2px auto;
+	text-align: center;
+	height: 25px;
+	background: url(/images/nsc_m/lott/shijian_bg.png) no-repeat center;
+	background-size: auto 100%;
+	color: #F13031;
+	font-size: 18px;
+	line-height: 25px;
+
+letter-spacing: 3px;
+}
+.m-n-countdown i{
+	font-style: normal;
+	float: left;
+	width: 17px;
+	overflow: hidden;
+	height: 25px;
+	text-align: center;
+	text-indent: 3px;
+	margin-right: 3px;
+}
+.m-n-countdown i.tt2{
+	text-indent: -16px;
+	margin-right: 6px;
+}
+.m-n-countdown i.tm{
+	margin-right: 0;
+}
+.m-n-countdown i:last-child{
+	margin-left: 1px;
+	text-indent: -10px;
+}
+._current{
+	float: right;
+	width: 50%;
+	border-left: 1px solid #e8e8e8;
+	box-sizing: border-box;
+}
+
+
+.tz-type{
+	color: #fff;
+	display: inline-block;
+	height: 2rem;
+	line-height: 2rem;
+	padding: 0 15px;
+	border:1px solid #fff;
+	border-radius: 5px;
+	margin-top: 0.5rem;
+	float: right;
+	margin-right: 10px;
+
+}
+.m-return, .m-return-home{
+	float: left;
+}
+
+.m-lott-methodBox .nfdprize_text {
+    display: inline-block;
+    padding: 0rem 0.785714rem 0.3rem;
+    color: #fff;
+    border-radius: 3px;
+    font-size: 0.86rem;
+    background-color: transparent !important;
+    position: fixed;
+    top: 0.5rem;
+    z-index: 10;
+    height: 2rem;
+    top: 0.5rem;
+    right: -35px;
+    transform: translate3d(-50%,0,0);
+    border: 1px solid #fff;
+    color: #fff;
+    border-radius: 5px;
+    line-height: 2rem;
+}
+._lottery_menu{
+	position: fixed;
+	top: 3rem;
+	z-index: 50;
+	left: 0;
+	width: 100%;
+}
+._lottery_menu .m-lott-methodBox-list{
+	background-color: #f7f7f7 !important;
+	border-bottom: 1px solid #F13031;
+}
+._lottery_menu .m-lott-methodBox-list .lotteryGroup{
+	height: auto !important;
+	width: 100% !important;
+}
+._lottery_menu .m-lott-methodBox-list .lotteryGroup ul{
+	width: 100% !important;
+	height: auto !important;
+	text-align: center;
+	padding: 10px 0;
+}
+._lottery_menu .m-lott-methodBox-list .lotteryGroup ul li{
+	float: left;
+	width: 33.3333%;
+	padding: 0;
+}
+._lottery_menu .m-lott-methodBox-list .lotteryGroup ul li a{
+	display: inline-block;
+	width: 80%;
+	background-color: #fff;
+	border-radius: 3px;
+	line-height: 2em;
+	margin-top: 5px;
+	border: 1px solid #ddd;
+	color: #333;
+}
+.m-lott-methodBox-list:before{
+	display: none;
+}
+.lotteryGroup ul li a.took{
+	color: #F13031 !important;
+	font-weight: 400 !important;
+	border-color: transparent !important;
+	background: url(/gfwf/images/nsc_m/lott/touzhu_nav_01.png) no-repeat center;
+	background-size: 100% 100%;
+}

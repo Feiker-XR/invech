@@ -1,0 +1,128 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>系统设置</title>
+<link href="/css/base.css" rel="stylesheet" type="text/css" />
+<link href="/css/admin.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="/js/jquery.js"></script>
+<script type="text/javascript" src="/js/jquery.tools.js"></script>
+<script type="text/javascript" src="/js/base.js"></script>
+<script language="javascript">
+function check_submit(){
+	if($("#qishu").val()==""){
+		alert("请填写开奖期数");
+		$("#qishu").focus();
+		return false;
+	}
+	if($("#opentime").val()==""){
+		alert("请填写开盘时间");
+		$("#opentime").focus();
+		return false;
+	}
+	if($("#endtime").val()==""){
+		alert("请填写封盘时间");
+		$("#endtime").focus();
+		return false;
+	}
+	if($("#datetime").val()==""){
+		alert("请填写开奖时间");
+		$("#datetime").focus();
+		return false;
+	}
+	return true;
+}
+</script>
+</head>
+<body class="list">
+	<!--<div class="bar">
+		六合彩开奖管理
+	</div>-->
+<div class="body">
+<ul id="tab" class="tab">
+	<li><input type="button" value="六合彩开奖" hidefocus class="current"/></li>
+</ul>
+<form name="form1" onSubmit="return check_submit();" method="post" action="{:url('six/save')}">
+<table id="listTables" class="listTables" style="margin-bottom:5px;">
+  <tr>
+    <td width="110" height="40"  align="right" bgcolor="#F2F4F6">开奖期号：</td>
+    <td  align="left" bgcolor="#FFFFFF" style="padding-left:5px;">
+    <input name="qishu" type="text" id="qishu" value="<?=@$rs['qishu']?>" size="20" maxlength="7" class="formText"/></td>
+  </tr>
+  <tr>
+    <td height="40" align="right" bgcolor="#F2F4F6">开盘时间：</td>
+    <td align="left" bgcolor="#FFFFFF" style="padding-left:5px;">
+    	<input name="opentime" type="text" id="opentime" value="<?=@$rs['opentime']?>" size="20" maxlength="19" class="formText"/>
+   	</td>
+  </tr>
+  <tr>
+    <td height="40" align="right" bgcolor="#F2F4F6">封盘时间：</td>
+    <td align="left" bgcolor="#FFFFFF" style="padding-left:5px;">
+    	<input name="endtime" type="text" id="endtime" value="<?=@$rs['endtime']?>" size="20" maxlength="19" class="formText"/>
+    </td>
+  </tr>
+  <tr>
+    <td height="40" align="right" bgcolor="#F2F4F6">开奖时间：</td>
+    <td align="left" bgcolor="#FFFFFF" style="padding-left:5px;">
+    	{notempty name='rs'}
+    		<input type="hidden" name='id' value='{$rs.id}' />
+    	{/notempty}
+    	<input name="datetime" type="text" id="datetime" value="<?=@$rs['datetime']?>" size="20" maxlength="19" class="formText"/>
+    </td>
+  </tr>
+  <tr>
+    <td height="40" align="right" bgcolor="#F2F4F6">开奖号码：</td>
+    <td align="left" bgcolor="#FFFFFF" style="padding-left:5px;">
+    	<select name="ball_1" {empty name='rs.ball_1'}selected='selected'{/empty} id="ball_1">
+    		<option value="" >正一</option>
+    		{for start="1" end="49" step="1" name="b1"}
+    			<option vaoue="{$b1}" {notempty name='rs.ball_1'}{if $b1 eq $rs.ball_1}selected="selected"{/if}{/notempty}>{$b1}</option>
+    		{/for}
+    	</select>
+    	<select name="ball_2" id="ball_2">
+    		<option value=""  {empty name='rs.ball_2'}selected='selected'{/empty}  >正二</option>
+    		{for start="1" end="49" step="1" name="b2"}
+    			<option vaoue="{$b2}" {notempty name='rs.ball_2'}{if $b2 eq $rs.ball_2}selected="selected"{/if}{/notempty}>{$b2}</option>
+    		{/for}
+    	</select>
+    	<select name="ball_3" id="ball_3">
+    		<option value=""  {empty name='rs.ball_3'}selected='selected'{/empty}  >正三</option>
+    		{for start="1" end="49" step="1" name="b3"}
+    			<option vaoue="{$b3}" {notempty name='rs.ball_3'}{if $b3 eq $rs.ball_3}selected="selected"{/if}{/notempty}>{$b3}</option>
+    		{/for}
+    	</select>
+    	<select name="ball_4" id="ball_4">
+    		<option value=""  {empty name='rs.ball_4'}selected='selected'{/empty}  >正四</option>
+    		{for start="1" end="49" step="1" name="b4"}
+    			<option vaoue="{$b4}" {notempty name='rs.ball_4'}{if $b4 eq $rs.ball_4}selected="selected"{/if}{/notempty}>{$b4}</option>
+    		{/for}    	
+    	</select>
+    	<select name="ball_5" id="ball_5">
+    		<option value=""  {empty name='rs.ball_5'}selected='selected'{/empty}  >正五</option>
+    		{for start="1" end="49" step="1" name="b5"}
+    			<option vaoue="{$b5}" {notempty name='rs.ball_5'}{if $b5 eq $rs.ball_5}selected="selected"{/if}{/notempty}>{$b5}</option>
+    		{/for}
+    	</select>
+    	<select name="ball_6" id="ball_6">
+    		<option value=""  {empty name='rs.ball_6'}selected='selected'{/empty}  >正六</option>
+    		{for start="1" end="49" step="1" name="b6"}
+    			<option vaoue="{$b6}" {notempty name='rs.ball_6'}{if $b6 eq $rs.ball_6}selected="selected"{/if}{/notempty}>{$b6}</option>
+    		{/for}
+    	</select>
+    	<select name="ball_7" id="ball_7">
+    		<option value=""  {empty name='rs.ball_7'}selected='selected'{/empty}  >特码</option>
+    	    {for start="1" end="49" step="1" name="b7"}
+    			<option vaoue="{$b7}" {notempty name='rs.ball_7'}{if $b7 eq $rs.ball_7}selected="selected"{/if}{/notempty}>{$b7}</option>
+    		{/for}
+    	</select>
+    </td>
+    </tr>
+    <tr>
+    <td height="40" colspan="2" align="left" bgcolor="#F2F4F6">
+    	<input name="submit" type="submit" class="formButton" style="margin-left:110px;" value="确认发布"/>
+    </td>
+    </tr>
+</table>
+</form>
+</div>
+</body>
+</html>

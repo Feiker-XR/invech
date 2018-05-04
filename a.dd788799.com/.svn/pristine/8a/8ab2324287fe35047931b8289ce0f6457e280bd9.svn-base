@@ -1,0 +1,164 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+    <title>拉菲彩票</title>
+    <link type="text/css" rel="stylesheet" href="/css/swiper.min.css">
+    <link type="text/css" rel="stylesheet" href="/css/index_main.css">
+</head>
+<body>
+<div class="container">
+    <header class="header">
+        <i class='left'>注册</i>
+        <h1>拉菲彩票</h1>
+        <i class="right wider">登录</i>
+    </header>
+    <main class="_main">
+        <section class="banner">
+            <div class="swiper-container">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide"><img src="/__IMG__/main/b1.jpg"></div>
+                    <div class="swiper-slide"><img src="/__IMG__/main/b2.jpg"></div>
+                    <div class="swiper-slide"><img src="/__IMG__/main/b3.jpg"></div>
+                    <div class="swiper-slide"><img src="/__IMG__/main/b3.jpg"></div>
+                </div>
+                <div class="swiper-pagination"></div>
+            </div>
+        </section>
+
+        <section class="lotteries">
+            <div class="swiper-container1">
+                <div class="swiper-wrapper">
+                    {foreach $list as $val}
+                        <div class="swiper-slide">
+                            <ul> 
+                                {foreach $val as $v}   
+                                    <li data-url="/game/game/type/{$v.id}">
+                                        <div><img src="/__IMG__/lottery/{$v.id}.png" alt=""/> </div>
+                                        <span>{$v.title}</span>
+                                    </li>
+                                {/foreach}
+                            </ul>
+                        </div>
+                    {/foreach}
+                </div>
+                <div class="swiper-pagination" style="bottom: .14rem;"></div>
+            </div>
+        </section>
+
+        <section class="lottery">
+            <div>
+                <h2>
+                    <img src="/__IMG__/main/cup.png" alt="">
+                    幸运号码-重庆时时彩
+                    <img src="/__IMG__/main/zhuihao.png" alt="" class="right">
+                </h2>
+
+                <div class="ball_list">
+                    <ul>
+                        <li>3</li>
+                        <li>6</li>
+                        <li>7</li>
+                        <li>9</li>
+                        <li>5</li>
+                    </ul>
+                    <button><img src="/__IMG__/main/refresh.png" alt=""/></button>
+                </div>
+
+                <p>
+                    <span>第<strong>20180326175</strong>期  <strong>20:30</strong>开奖</span>
+                    <button>投注10元</button>
+                </p>
+            </div>
+        </section>
+
+        <section class="news">
+            <h2>
+                <img src="/__IMG__/main/book.png" alt="">
+                {$notice.title}<small>{$notice.created_at}</small>
+                <span>更多 ></span>
+            </h2>
+            <p>{$notice.content}</p>
+        </section>
+    </main>
+    <footer>
+        <div class="g-footer">
+            <div class="g-wrap">
+                <ul class="m-state f-clear">
+                    <li class="active"><a href="/index/main"><img src="/__IMG__/icon_home_active.png" alt="home"/> </i>首页</a></li>
+                    <li><a href="/index"><img src="/__IMG__/icon_hall.png" alt="hall"/>购彩大厅</a></li>
+                    <li><a href="/bonus/index"><img src="/__IMG__/icon_discount.png" alt="discount"/>最新优惠</a></li>
+                    <li><a href="#"><img src="/__IMG__/icon_contact.png" alt="contact"/>联系客服</a></li>
+                    <li class="last"><a href="/user/main"><img src="/__IMG__/icon_profile.png" alt="profile"/>个人</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+</div>
+<script type="text/javascript" src="/js/jquery-1.8.0.min.js"></script>
+<script type="text/javascript" src="/js/swiper.min.js"></script>
+<script type="text/javascript" src="/js/show.js"></script>
+<script type="text/javascript">
+    var obj = {
+
+    }
+    $.get('/game/getNo/type/1',function (data) {
+        console.log(data)
+    })
+   $(function () {
+       var mySwiper = new Swiper ('.swiper-container', {
+           direction: 'horizontal',
+           loop: true,
+           autoplay:true,
+           pagination: {
+               el: '.swiper-pagination'
+           }
+       });
+       var mySwiper1 = new Swiper ('.swiper-container1', {
+           direction: 'horizontal',
+           pagination: {
+               el: '.swiper-pagination'
+           }
+       });
+       // 随机号码
+       $('.ball_list button').trigger('click');
+   });
+   // 登录和注册,彩种跳转链接
+    $('.header i,.swiper-container1 ul li').click(function () {
+        var _this = $(this),_url;
+        if(_this.hasClass('right')){    // 登录
+            _url = '/index/login.html';
+        }else if(_this.hasClass('left')){  // 注册
+            _url = '/index/register';
+        }else{
+            _url = _this.attr('data-url');
+            console.log(_url);
+        }
+        setTimeout(function () {
+            location.href = _url;
+        },250)
+    });
+    // 我要追号
+    $('.lottery h2 img.right').click(function () {
+        alert('老子看你哪门追..');
+    });
+    //刷新号码
+    $('.ball_list button').click(function () {
+        var _lis = $('.ball_list ul li');
+        for(var i=0; i<5; i++){
+            var _rdm = Math.floor(Math.random()*10);
+            _lis.eq(i).text(_rdm);
+        }
+    });
+    // 投注10元
+    $('.lottery p button').click(function () {
+        alert('老子看你哪门投注！');
+    });
+    //更多
+    $('.news h2 span').click(function () {
+        alert('更多在哪里也？')
+    })
+</script>
+</body>
+</html>

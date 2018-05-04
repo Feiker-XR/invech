@@ -1,0 +1,347 @@
+<?php
+namespace app\common\model;
+use think\Model;
+use app\common\model\LhcTime;
+use app\common\model\DataTime;
+use app\classes\qishu;
+
+class  Type  extends Base
+{
+    CONST TYPE_SSC = 1;
+    CONST TYPE_11X5 = 2;
+    CONST TYPE_3D = 3;
+    CONST TYPE_KLSF = 4;
+    CONST TYPE_GXKLSF = 5;
+    CONST TYPE_XYFT = 6;
+    CONST TYPE_K8 = 8;
+    CONST TYPE_K3 = 9;
+    CONST TYPE_XY28 = 10;
+    CONST TYPE_GDKLSF = 43;
+    CONST TYPE_6HC = 100;
+
+    CONST TYPE_ARRAY = [
+        self::TYPE_SSC => '时时彩',
+        self::TYPE_11X5 => '十一选五',
+        self::TYPE_3D => '3D/P3/时时乐',
+        self::TYPE_KLSF => '快乐十分',
+      //  self::TYPE_GXKLSF => '广西快乐十分',
+        self::TYPE_XYFT => '幸运飞艇',
+        self::TYPE_K8 => '快8',
+        self::TYPE_K3 => '快3',
+        self::TYPE_XY28 => '幸运28',
+        self::TYPE_GDKLSF => '广东快乐十分',
+        self::TYPE_6HC => '香港六合彩',
+    ];
+
+    public function groups()
+    {
+    	return $this->hasMany('PlayedGroup','type','type')
+    	->where('enable',1)->order('sort,id');
+    }
+
+    public function gfwfgroups()
+    {
+    	return $this->hasMany('PlayedGroup','type','type')
+    	->where('enable',1)->where('is_kqwf',0)->order('sort,id');
+    }
+
+    public function qkwfgroups()
+    {
+    	return $this->hasMany('PlayedGroup','type','type')
+    	->where('enable',1)->where('is_kqwf',1)->order('sort,id');
+    }
+
+    /*
+    static public function getTypes(){
+    	return self::with('groups.playeds')->select()->toArray();
+    }
+    */
+    static public function getAll(){
+        $types = cache('gygy_all_types');
+        if(!$types){
+            $types = self::where('enable',1)->order('sort')->select();
+            $types_map = [];
+            foreach ($types as $type) {                
+                $types_map[$type->id] = $type;//$type->toArray();
+            }
+            $types = $types_map;
+            cache('gygy_all_types',$types);
+        }
+        return $types;        
+    }
+
+    static public function allTypes($id=''){
+    	$types = cache('gygy_types');
+    	if(!$types){
+    		
+    		//$types = self::where('enable',1)->all();
+    		$types = self::all(['enable'=>1]);
+
+    		$types_map = [];
+    		foreach ($types as $type) {
+
+    			$groups_map = [];
+    			foreach ($type->groups as $group) {
+    				
+    				$playeds_map = [];
+    				foreach ($group->playeds as $played) {
+    					$playeds_map[$played->id] = $played->toArray();
+                        if($played->tag){
+                            $playeds_map['tags'][$played->tag][$played->id] = $played->toArray();
+                        }
+    				}
+
+    				$groups_map[$group->id] = $group->toArray();
+    				$groups_map[$group->id]['playeds'] = $playeds_map;
+    			}
+
+    			$types_map[$type->id] = $type->toArray();
+    			$types_map[$type->id]['groups'] = $groups_map;
+
+    		}
+
+    		$types = $types_map;
+    		cache('gygy_types',$types);
+    	}
+
+    	if($id){
+    		return $types[$id]['groups']??null;
+    	}else{
+    		return $types;	
+    	}    	
+    }
+
+    static public function allTypesId($typeid='',$groupId='',$playedId=''){
+        $typesId = cache('gygy_types_id');
+        if(!$typesId){
+            $typesId = self::all(['enable'=>1]);
+
+            $types_map = [];
+            foreach ($typesId as $type) {
+
+                $groups_map = [];
+                foreach ($type->groups as $group) {
+                    $playeds_map = [];
+                    foreach ($group->playeds as $played) {
+                        $plgroups_map = [];
+                        foreach ($played->plgroups as $plgroup) {
+                            $plgrouplist = $played->toArray();
+                            $plgroups_map[$plgroup->id]['id'] =  $plgrouplist['id'];
+                            $plgroups_map[$plgroup->id]['name'] =  $plgrouplist['name'];
+                        }
+                        $playedslist = $played->toArray();
+                        $playeds_map[$played->id]['id'] =  $playedslist['id'];
+                        $playeds_map[$played->id]['name'] =  $playedslist['name'];
+                        $playeds_map[$played->id]['plgroup'] =  $plgroups_map;
+
+                    }
+
+                    $grouplist = $group->toArray();
+                    $groups_map[$group->id]['id'] =  $grouplist['id'];
+                    $groups_map[$group->id]['groupName'] =  $grouplist['groupName'];
+                    $groups_map[$group->id]['played'] =  $playeds_map;
+                   
+                }
+                $typelist =  $type->toArray();
+                $types_map[$typelist['type']]['groups'] = $groups_map;
+
+            }
+
+            $typesId = $types_map;
+
+            cache('gygy_types_id',$typesId);
+        }
+
+        if($typeid){
+            if($groupId){
+                if($playedId){
+                    return $typesId[$typeid]['groups'][$groupId]['played'][$playedId]['plgroup']??null;           
+                }
+               return $typesId[$typeid]['groups'][$groupId]['played']??null;
+            }
+            return $typesId[$typeid]['groups']??null;
+        }else{
+            return null;  
+        }       
+    }
+
+
+    static public function gfwfTypes($id=''){
+    	$types = cache('gfwf_types');
+    	if(!$types){
+    		
+    		//$types = self::where('enable',1)->all();
+    		$types = self::all(['enable'=>1]);
+
+    		$types_map = [];
+    		foreach ($types as $type) {
+
+    			$groups_map = [];
+    			foreach ($type->gfwfgroups as $group) {
+    				
+    				$playeds_map = [];
+    				foreach ($group->playeds as $played) {
+    					$playeds_map[$played->id] = $played->toArray();
+                        if($played->tag){
+                            $playeds_map['tags'][$played->tag][$played->id] = $played->toArray();
+                        }                        
+    				}
+
+    				$groups_map[$group->id] = $group->toArray();
+    				$groups_map[$group->id]['playeds'] = $playeds_map;
+    			}
+
+    			$types_map[$type->id] = $type->toArray();
+    			$types_map[$type->id]['groups'] = $groups_map;
+
+    		}
+
+    		$types = $types_map;
+    		cache('gfwf_types',$types);
+    	}
+
+    	if($id){
+    		return $types[$id]['groups']??null;
+    	}else{
+    		return $types;	
+    	}    	
+    }
+
+    static public function kqwfTypes($id=''){
+    	$types = cache('kqwf_types');
+    	if(!$types){
+    		
+    		//$types = self::where('enable',1)->all();
+    		$types = self::all(['enable'=>1]);
+
+    		$types_map = [];
+    		foreach ($types as $type) {
+
+    			$groups_map = [];
+    			foreach ($type->qkwfgroups as $group) {
+    				
+    				$playeds_map = [];
+    				foreach ($group->playeds as $played) {
+    					$playeds_map[$played->id] = $played->toArray();
+                        if($played->tag){
+                            $playeds_map['tags'][$played->tag][$played->id] = $played->toArray();
+                        }                        
+    				}
+
+    				$groups_map[$group->id] = $group->toArray();
+    				$groups_map[$group->id]['playeds'] = $playeds_map;
+    			}
+
+    			$types_map[$type->id] = $type->toArray();
+    			$types_map[$type->id]['groups'] = $groups_map;
+
+    		}
+
+    		$types = $types_map;
+    		cache('kqwf_types',$types);
+    	}
+
+    	if($id){
+    		return $types[$id]['groups']??null;
+    	}else{
+    		return $types;	
+    	}
+    	
+    }
+
+    //-----------------api---------------------
+
+    public static function getLastGamePhase($id){
+        $time = time();
+        $types = self::allTypes();
+        $lottery = $types[$id];//self::get($id);
+
+        if($id==43){
+            $atime = date('Y-m-d H:i:s', $time);
+            //$query = LhcTime::getQuery();
+            $query = (new LhcTime())->getQuery();
+        }else{
+            $atime  = date('H:i:s', $time + $lottery['data_ftime']) ; 
+            //$query = DataTime::getQuery();
+            $query = (new DataTime())->getQuery();
+        }
+        $time_model = $query->where('type',$id)->where('actionTime','<=',$atime)->order('actionTime desc')->find();
+
+        if(!$time_model){
+            $time_model = $query->where('type',$id)->order('actionNo desc')->find() ;
+            $time   = $time-24*3600 ;            
+        }
+
+        $actionNo = $time_model->actionNo;
+        $actionTime = $time_model->actionTime;
+
+        $qishuFun = $lottery['onGetNoed'];
+        if($qishuFun){
+            $actionNo = qishu::$qishuFun($actionNo,$time);        
+        }
+        $actionTime = date('Y-m-d ', $time).$actionTime;
+
+        return ['actionNo'=>$actionNo,'actionTime'=>$actionTime];
+    }
+
+    public static function getGamePhase($id){
+        $time = time();
+        $types = self::allTypes();
+        $lottery = $types[$id];//self::get($id);
+
+        if($id==43){
+            $atime = date('Y-m-d H:i:s', $time);
+            //$query = LhcTime::getQuery();
+            $query = (new LhcTime())->getQuery();
+        }else{
+            $atime  = date('H:i:s', $time + $lottery['data_ftime']) ; 
+            //$query = DataTime::getQuery();
+            $query = (new DataTime())->getQuery();
+        }
+        $time_model = $query->where('type',$id)->where('actionTime','>',$atime)->order('actionTime')->find();
+
+        if(!$time_model){
+            $time_model = $query->where('type',$id)->order('actionTime')->find() ;
+            $time   = $time + 24*3600 ;            
+        }
+
+        $actionNo = $time_model->actionNo;
+        $actionTime = $time_model->actionTime;
+
+        $qishuFun = $lottery['onGetNoed'];
+        if($qishuFun){
+            $actionNo = qishu::$qishuFun($actionNo,$time);        
+        }
+        $actionTime = date('Y-m-d ', $time).$actionTime;
+
+        return ['actionNo'=>$actionNo,'actionTime'=>$actionTime];
+    }
+
+    public static function getFtime($id){
+        $types = self::allTypes();
+        $lottery = $types[$id];//self::get($id);
+        return intval($lottery['data_ftime']);
+    }
+
+
+    //----------------后台------------------
+
+    public static function getList($request){
+    
+        $params = $request->param();
+
+        $query = self::order('type')->order('id desc');
+
+        if($params['type']??''){
+           $query->where('type', $params['type']);
+        }
+        if($params['keywords']??''){
+             $query->where('title|shortName', 'like','%'.trim($params['keywords']).'%');
+         }
+        $data = $query->paginate(10);
+        
+        return $data;
+    }
+
+
+}

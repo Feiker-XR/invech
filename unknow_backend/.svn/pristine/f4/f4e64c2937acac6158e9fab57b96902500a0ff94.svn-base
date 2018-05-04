@@ -1,0 +1,64 @@
+<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:83:"/mnt/wwwroot/www.dd788799.com/public/../application/index/newview/sport/dialog.html";i:1505452700;}*/ ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>选择联赛</title>
+<style type="text/css">
+<!--
+body{font-size:12px;margin:0px;padding:0px; }
+.cb_div{width:190px;height:30px;padding-left:10px;float:left; color:#000}
+-->
+</style>
+</head>
+
+<body >
+<script type="text/javascript">
+<!--
+//注：每个嵌入页必须定义该方法，供父窗口调用，并且返回true或false来告之父窗口是否关闭
+function Ok(){
+	var lsm='';
+	var checkboxs=document.getElementsByName("liangsai");
+	for(var i=0;i<checkboxs.length;i++) {
+		if(checkboxs[i].checked){
+			lsm += checkboxs[i].value+"$";
+		}
+	}
+	if(lsm == '') return false;
+	
+	window.parent.document.getElementById("league").value	=	lsm;
+	parent.loaded(lsm);
+	return true;//返回true模态窗口关闭；返回false模态窗口不关闭；
+}
+
+function fx(){ //反选
+	var checkboxs=document.getElementsByName("liangsai");
+	for(var i=0;i<checkboxs.length;i++) {
+		checkboxs[i].checked = !checkboxs[i].checked;
+	}
+}
+
+function cx(){ //重选
+	var checkboxs=document.getElementsByName("liangsai");
+	for(var i=0;i<checkboxs.length;i++) {
+		checkboxs[i].checked = false;
+	}
+}
+//-->
+</script>
+<table width="600" border="0" cellpadding="0" cellspacing="0">
+  <tr>
+    <td height="5" align="left" valign="middle" bgcolor="FFFFFF"></td>
+  </tr>
+  <tr>
+    <td align="left" valign="middle" bgcolor="FFFFFF">
+<?php if($bool == true): foreach($rs as $vo): ?>
+		<div class="cb_div"><input type="checkbox" name="liangsai" id="liangsai" value="<?php echo $vo['match_name']; ?>" /><?php echo $vo['match_name']; ?></div>
+	<?php endforeach; else: foreach($arr as $v): ?>
+		<div class="cb_div"><input type="checkbox" name="liangsai" id="liangsai" value="<?php echo $v; ?>" /><?php echo $v; ?></div>
+	<?php endforeach; endif; ?>
+	</td>
+  </tr>
+</table>
+</body>
+</html>

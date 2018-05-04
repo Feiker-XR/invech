@@ -1,0 +1,39 @@
+<?php
+namespace app\index\controller;
+use app\index\Base;
+use think\Db;
+use think\Session;
+use think\cache\driver\Memcache;
+class Promotions extends Base
+{
+	public function _initialize(){    
+		  parent::_initialize();    
+	      $title = '优惠活动';
+	      $this->assign('title',$title);
+    }
+
+  
+	public function index()
+	{
+		$uid = Session::get('uid'); 
+		$user = Db::table('k_user')->where(array('uid'=>$uid))->find();
+		
+		//$memcache = new Memcache;
+		//$hot = $memcache->has('syshot');
+		$hot = cache('syshot');
+		if($hot==false){
+			$end = date("Y-m-d H:i:s");
+			$where = " overdate >= '$end' and ok = 1";
+			$webhot = Db::table('web_hot')->where($where)->order('sort desc')->select();
+			//$memcache->set('syshot',$webhot);
+			cache('syshot',$webhot);
+			$result = $webhot;
+		}else {
+			//$result = $memcache->get('syshot');
+			$result = $hot;
+		}
+		$this->assign('result',$result);
+		$this->assign('user',$user);
+		return $this->fetch('index');
+	}
+}

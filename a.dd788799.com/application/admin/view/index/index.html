@@ -1,0 +1,113 @@
+{layout name="layout" /}
+<script src="/js/echarts/echarts.min.js"></script>
+<div id="main" 	style="width: 1000px;height:450px; float:left"></div>
+<div id="main2" style="width: 800px;height:450px; float:right"></div>
+
+
+<script type="text/javascript">
+    // 基于准备好的dom，初始化echarts实例
+    var myChart 	=	echarts.init(document.getElementById('main'));
+    var myChart2 	=	echarts.init(document.getElementById('main2'));
+    
+     $(function(){
+    	$.get('/index/getMoneyData').done(function (data) {
+    		var serieData 	=	[];
+    		var xAxisData 	=	[];
+    		var metaDate 	=	[];
+    		var bet 		=	[];
+    		var betshu 		=	[];
+    		var order 		=	[];
+    		var withdraw 	=	[];
+    		$.each(data.data, function(key, val) {  
+    			xAxisData.push(key);
+		     	bet.push(val.bet);
+		     	betshu.push(val.beiShu);
+		     	order.push(val.order);
+		     	withdraw.push(val.withdraw);
+		     	
+		  	});
+			metaDate.push(bet);
+		  	metaDate.push(betshu);
+		  	metaDate.push(order);
+		  	metaDate.push(withdraw);
+		 	var legendData= ['投注','盈利','充值','提款'];
+			var title 	= "一周资金流向折线图";
+			for(var v=0; v < legendData.length ; v++){
+			    var serie = {
+			        name:legendData[v],
+			        type: 'line',
+			        symbol:"circle",
+			        symbolSize:9,
+			        data: metaDate[v]
+			    };
+		   		serieData.push(serie)
+			}
+			var colors = ["#036BC8","#4A95FF","#5EBEFC","#2EF7F3","#FFFFFF"];
+			var option = {
+			    backgroundColor: '#0f375f',
+			    title : {text: title,textAlign:'left',textStyle:{color:"#fff",fontSize:"16",fontWeight:"normal"}},
+			    legend: {
+			    	show:true,left:"right",data:legendData,y:"5%",
+			        itemWidth:18,itemHeight:12,textStyle:{color:"#fff",fontSize:14},
+			    },
+			    color:colors,
+			    grid: {left: '2%',top:"12%",bottom: "5%",right:"5%",containLabel: true},
+			    tooltip : { trigger: 'axis',axisPointer : { type : 'shadow'}},
+			    xAxis: [
+			        {   
+			            type: 'category',
+			            axisLine: { show: true,lineStyle:{ color:'#6173A3' }},
+			            axisLabel:{interval:0,textStyle:{color:'#9ea7c4',fontSize:14} },
+			            axisTick : {show: false},
+			            data:xAxisData,
+			        },
+			    ],
+			    yAxis: [
+			        {   
+			            axisTick : {show: false},
+			            splitLine: {show:false},
+			            axisLabel:{textStyle:{color:'#9ea7c4',fontSize:14} },
+			            axisLine: { show: true,lineStyle:{ color:'#6173A3'}},
+			        },
+			    ],
+		    	series:serieData
+			};
+		    myChart.setOption(option);
+
+    	});
+    	$.get('/index/getBetData').done(function (data) {
+    			var title  =[];
+    			$.each(data.data, function(key, val) {  
+	    			title.push(val.name);
+			    });
+    			var options = setoptions(data.data,title,"一周注单分析扇形图",'注单来源');
+    			myChart2.setOption(options);
+    	});
+    
+    });
+     function setoptions(echart,title,opname,pname){
+     	var option2 = {
+	     	backgroundColor: '#77dcdc',
+			title : {text: opname,textAlign:'left',textStyle:{color:"#fff",fontSize:"16",fontWeight:"normal"}},
+		    tooltip: {
+		        trigger: 'item',
+		        formatter: "{a} <br/>{b}: {c} ({d}%)"
+		    },
+		    legend: {
+		        orient: 'vertical',
+		        x: 'right',
+		        data:title,
+
+		    },
+		    series: [
+		 		{
+		            name:pname,
+		            type:'pie',
+		          	data:echart
+		        }
+		    ]
+		};
+		return option2;
+     }
+
+</script>

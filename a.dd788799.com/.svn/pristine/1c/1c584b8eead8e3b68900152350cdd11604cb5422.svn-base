@@ -1,0 +1,44 @@
+{if ($gfwf_groups)}
+	{if ($kqwf_groups)}
+		<div id="tabCon" style="display: inline-block; margin-top:{$group['is_kqwf']?'50px':'80px'}">
+	{else /}
+		<div id="tabCon" style="display: inline-block; margin-top:40px;">
+	{/if}
+{else /}
+<div id="tabCon" style="display: inline-block; margin-top:10px">
+{/if}
+	<div class="tabcon_n">									
+		<ul id="tabbar-div-s3">
+				{if(empty($playeds))}
+					<div style="height:150px;margin-top:50px;text-align:center;color:#f00">暂无玩法</div>
+				{else /}
+					{if(isset($playeds['tags']))}						
+						{foreach($playeds['tags'] as $tag => $plays)}
+							<li class="tz_li">
+							<span class="tz_title">{$tag}</span>
+							{foreach($plays as $play)}
+								<div class="<?php if($play['id']==$playedId) echo 'act';else echo 'back';?>" data="{:Url('game/played?type='.$type.'&playedId='.$play['id'])}" data-id="{$play['id']}" onclick="selectPlayed(this)">
+									<span class="method-tab-front" id="smalllabel_0_0">{$play['name']}</span>
+								</div>
+							{/foreach}
+							</li>
+						{/foreach}
+					{else /}
+					<li class="tz_li">
+						{if(!$group['is_kqwf'])}
+						{foreach($playeds as $play)}
+							<div class="<?php if($play['id']==$playedId) echo 'act';else echo 'back';?>" data="{:Url('game/played?type='.$type.'&playedId='.$play['id'])}" data-id="{$play['id']}" onclick="selectPlayed(this)">
+								<span class="method-tab-front" id="smalllabel_0_0">{$play['name']}</span>
+							</div>
+						{/foreach}
+						{/if}
+					{/if}
+					</li>
+				{/if}								
+		</ul>
+	</div>
+</div>
+<span id="played-content" style="display: block;">
+	{include file="game/inc_game_content" /}
+	{//include file="game/inc_game_content_thomas" /}	
+</span>

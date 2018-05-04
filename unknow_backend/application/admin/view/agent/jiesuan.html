@@ -1,0 +1,79 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>系统设置</title>
+<link href="/css/base.css" rel="stylesheet" type="text/css" />
+<link href="/css/admin.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="/js/jquery.js"></script>
+<script type="text/javascript" src="/js/jquery.tools.js"></script>
+<script type="text/javascript" src="/js/base.js"></script>
+<script language="JavaScript" src="/js/calendar.js"></script>
+</head>
+<body class="list">
+	<div class="bar">
+		代理佣金计算
+	</div>
+	<div class="body">
+    <form name="form1" method="GET" action="" >
+    <div class="listBar">
+    <input name="nian" type="text" id="nian" value="{$nian}" size="4" maxlength="4" />&nbsp;年&nbsp;<input name="yue" type="text" id="yue" value="{$yue}" size="4" maxlength="2" />&nbsp;月&nbsp;<input name="find" type="submit" id="find" value="佣金计算" class="formButton"/></td>
+
+	</div>
+</form>
+<ul id="tab" class="tab">
+	<li>
+		<input type="button" value="代理佣金计算" hidefocus class="current" onClick="window.location.href='{:url('agent/jiesuan')}'" />
+	</li>
+</ul>
+<table id="listTable" class="listTable">
+<tr>
+	<th>代理账号</th>
+	<th>有效会员</th>
+	<th>体育投注</th>
+	<th>体育输赢</th>
+	<th>彩票投注</th>
+	<th>彩票输赢</th>
+	<th>新彩票投注</th>
+	<th>新彩票输赢</th>
+	<th>真人流水</th>
+	<th>真人输赢</th>
+    <th>输赢总计</th>
+	<th>佣金比例</th>
+	<th>会员存款</th>
+	<th>会员提款</th>
+	<th>会员反水</th>
+	<th>手续费</th>
+	<th>其他费用</th>
+	<th>应得佣金</th>
+</tr>
+
+{volist name='info' id='vo'}
+<tr>
+	<td align="center">{$vo.username}</td>
+	<td align="center">{$vo.yxhy} 人</td>
+	<td align="center">{$vo.tytz|round="2"}</td>
+	<td align="center">{$vo.tysy|round="2"}</td>
+	<td align="center">{$vo.cptz|round="2"}</td>
+	<td align="center">{$vo.cpsy|round="2"}</td>
+	<td align="center">{$vo.cptz1|round="2"}</td>
+	<td align="center">{$vo.cpsy1|round="2"}</td>
+	<td align="center">{/*$vo.zhenren_all_input|round="2"*/}</td>
+	<td align="center">{/*$vo.zhenren_all_getout|round="2"*/}</td> 
+	<td align="center">{$vo.syzj}</td>
+	<td align="center">{$vo.yjbl}</td>
+	<td align="center">{$vo.hyck|round="2"}</td>
+	<td align="center">{$vo.hyqk|round="2"}</td>
+	<td align="center">{$vo.hyfs|round="2"}</td>
+	<td align="center">{$vo.sxf|round="2"}</td>
+	<td align="center">{$vo.qtfy|round="2"}</td>
+	<td align="center">{$vo.ydyj}</td>
+</tr>
+{/volist}
+<tr>
+	<td colspan="18" align="center" bgcolor="#E9F0F4"><strong>佣金计算方式：（体育投注-体育输赢 ）+ （彩票投注-彩票投注） + （真人输赢） X 真人分成比例  = 代理最终应得佣金</strong></td>
+</tr>
+  </table>
+	</div>
+</body>
+</html>

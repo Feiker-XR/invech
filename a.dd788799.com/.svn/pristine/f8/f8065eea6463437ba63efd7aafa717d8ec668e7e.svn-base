@@ -1,0 +1,13 @@
+<?php
+namespace app\admin\controller;
+use app\admin\Login;
+use think\Cache;
+class Money extends Login{
+    
+    public function index(){
+
+        $this->view->page_header = '资金列表';
+        return $this->fetch();
+    }
+
+}

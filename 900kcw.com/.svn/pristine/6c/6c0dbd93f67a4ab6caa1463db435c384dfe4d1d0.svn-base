@@ -1,0 +1,58 @@
+
+<!--模态框-->
+		<!-- 模态框（Modal） -->
+		<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog" style="margin: 30px auto;margin-top: 130px;">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true"><img src="../../img/index_r/close.png" alt="" /></button>
+						<h4 class="modal-title" id="myModalLabel">在线反馈</h4>
+					</div>
+					<div class="modal-body">
+						<div class="info" id="info1" style="display: block;">
+							<div class="div_top">欢迎对开奖网提出宝贵的建议或意见</div>
+							<div class="div_middle">
+								<div class="middle_l">
+									<div class="l_div">称呼</div>
+									<div class="r_div"><input type="" placeholder="" class="input_l"  id="nickName"/></div>
+								</div>
+								<div class="middle_r">
+									<select name="" class="middle_select" id="linkType">
+										<option value="1">电话</option>
+										<option value="2">邮箱</option>
+										<option value="3">QQ</option>
+										<option value="4">微信</option>
+									</select>
+									<input type="text" class="input_r" id="linkNumber"/>
+								</div>
+							</div>
+							<div class="div_down">
+								<textarea name="" rows="" cols="" id="advice" placeholder="请写下您宝贵的意见..."></textarea>
+							</div>
+							<div>
+								<button type="button" class="btn btn_submit" id="btn_submit">提交</button>
+								<button type="button" class="btn btn_submiting" id="btn_submiting">正在提交...</button> 
+							</div>
+						</div><!--info1-->
+						<div class="info" id="info2" style="display: none;">
+							<div class="success_div">
+								<div class="pic"><img src="../../img/tishi.png" alt=""/></div>
+								<div class="success_h">
+									<h1>提交成功</h1>
+									<p>感谢您反馈，我们将尽快做出相应的调整！</p>
+								</div>
+							</div>
+						</div><!--info2-->
+						<div class="info" id="info3" style="display: none;">
+							<div class="success_div">
+								<div class="pic"><img src="../../img/fankuidh.gif" alt=""/></div>
+								<div class="success_h">
+									<h1>您已提交</h1>
+									<p>请您稍适休息，喝杯咖啡，谢谢您的支持！</p>
+								</div>
+							</div>
+						</div><!--info2-->
+					</div> 					
+				</div>
+			</div>
+		</div>

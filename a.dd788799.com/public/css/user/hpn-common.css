@@ -1,0 +1,74 @@
+/* 帮助中心 css */
+.helpCont { margin: 0px auto;border: 1px solid #e9e9e9;background: #fff;overflow: hidden; }
+.help_l_menu { width: 228px;border-right: 1px solid #e9e9e9;border-right-color: #e9e9e9;background: #f1f1f1;text-align: center;padding-bottom: 9999px;margin-bottom: -9999px; }
+.help_l_menu li { background:url("../images/hpn/bj2.png") top center no-repeat;text-align: left;  height: 60px; position:relative;}
+.help_l_menu li .t { height:47px; line-height:47px; font-size: 14px;color: #333; padding-left: 25px;cursor: pointer; display:block; position:absolute; left:0px; top:7px;}
+.help_l_menu li p{height:50px; line-height:50px; margin-top:5px;width:223px;border-left:5px solid #f1f1f1;  }
+.help_l_menu li .t:hover p{ color: #c4463c;background: url("../images/membet_list_bg.jpg") no-repeat; border-left:5px solid #fa6200; float:left; }
+.help_l_menu li .t.sli{ color: #c4463c;background: url("../images/membet_list_bg.jpg") no-repeat; border-left:5px solid #fa6200; position:absolute; left:0px; top:7px; width:199px; z-index:1000;  }
+.help_l_menu li .t.sli span{ margin-left: 35px!important;}
+.switch_icon { display: inline-block;width: 16px;height: 18px;background: url("../images/hpn/open-close.png") no-repeat 0 -18px;vertical-align: middle;margin-right: 12px; }
+.help_l_menu li:hover p{background:#fff;box-shadow:inset 3px 0px 8px #999; border-left:5px solid #fa6200;  }
+.help_l_menu li:hover p a{color:#fa6200;}
+.close_icon { background-position: 0 0; }
+.help_l_menu .menu { display: none;padding-left: 55px;background: #fcfcfc; }
+.help_l_menu .menu.db { display: block; }
+.help_l_menu .menu a { display: block;color: #777;line-height: 30px; }
+.help_l_menu .menu a:hover,.help_l_menu .menu a.on { color: #ae0000; }
+.onlineService { display: inline-block;width: 128px;height: 32px;line-height: 32px;background: #fa6200;border-radius: 5px;font-size: 14px;color: #fff !important;margin: 25px 0; }
+.onlineService:hover { background: #c4463c; }
+.help_r_main { width: 941px;overflow: hidden;padding-bottom: 9999px;margin-bottom: -9999px;margin-left: 30px;padding-right: 30px;box-sizing: border-box; }
+.help_r_main dl { padding: 20px 0;border-top: 1px solid #e9e9e9;margin-top: -1px; }
+.help_r_main dl.on { background: #fcfcfc; }
+.help_r_main dt { height: 26px;line-height: 26px;padding-left: 30px;color: #333;cursor: pointer; }
+.help_r_main .Q,.help_r_main .A { display: inline-block;width: 18px;height: 18px;line-height: 18px;text-align: center;border-radius: 2px;margin-right: 15px; }
+.help_r_main .Q { background: #ae0000;color: #f7e6b2;font-weight: normal; }
+.switch_caret { display: inline-block;margin: 8px 20px 0 0;border-style: solid;border-width: 6px 0 6px 6px;border-color: transparent transparent transparent #ccc; }
+.close_caret { display: inline-block;margin: 8px 20px 0 0;border-style: solid;border-width: 6px 6px 0 6px;border-color: #ae0000 transparent transparent transparent; }
+.help_r_main dd { display: none;padding-left: 65px;color: #8c8c8c;line-height: 26px; }
+.help_r_main dd.db { display: block; }
+.help_r_main .A { margin-left: -35px;background: #cda654;color: #f7e6b2;vertical-align: top;margin-top: 5px; }
+.help_r_main .detail { width: 810px;display: inline-block; }
+
+
+/* 站内公告 css */
+.noticeCont { margin: 30px auto;border-bottom: 1px solid #e9e9e9; }
+.noticeCont h3 { height: 75px;line-height: 75px;border: 1px solid #e9e9e9;background: #fff;text-indent: 35px;font-size: 24px;color: #333;border-bottom: 0; }
+.noticeCont h3 span { font-size: 12px;margin-left: 10px; }
+.noticeCont li { border: 1px solid #e9e9e9;background: #fff;padding: 20px 0;border-bottom: 0; }
+.noticeCont li.on { border: 0;background: #fcfcfc;border-top: 1px solid #e9e9e9; }
+.noticeCont .t { padding-left: 35px;font-size: 14px;color: #333;line-height: 30px;cursor: pointer; }
+.noticeCont .t b { font-size: 12px;font-weight: normal; }
+.noticeCont .time { margin-right: 35px; }
+.notice_icon { display: inline-block;width: 18px;height: 18px;background: url("../images/hpn/notice-icon.png") no-repeat;vertical-align: middle;margin-right: 15px; }
+.noticeCont .detail { display: none;width: 1060px;color: #626262;line-height: 30px;padding-left: 70px; }
+.noticeCont .detail.db { display: block; }
+
+
+/* 优惠活动 css */
+.preferentialCont { margin-top: 50px; } 
+.pre_tab { margin-left: 50px; } 
+.pre_tab a { display: inline-block;width: 44px;height: 44px;line-height: 44px;text-align: center;border: 3px solid #fff;border-radius: 50%;background: #ae0000;color: #f7e6b2;margin-left: 30px; } 
+.pre_tab a.active,.pre_tab a:hover { width: 72px;height: 72px;line-height: 72px;font-size: 16px; } 
+.pre_left { width: 118px;border-right: 2px solid #ae0000;padding-bottom: 9999px;margin-bottom: -9999px; }
+.pre_right { width: 1054px;padding-bottom: 9999px;margin-bottom: -9999px;margin-top: 50px; }
+.pre_right .item { margin-bottom: 65px; }
+.ovh { overflow: hidden; }
+.pre_timeArea { top: 10px;left: -147px;color: #ae0000;font-size: 14px;text-align: right;line-height: 30px; }
+.pre_timeArea strong { font-size: 34px;position: relative; }
+.pre_timeArea strong:after { content: "";position: absolute;top: 15px;right: -35px;display: inline-block;width: 12px;height: 12px;border: 3px solid #fff;background: #ae0000;border-radius: 50%; }
+.preCont { padding-bottom: 41px;background: url("../images/hpn/preBg.png") no-repeat center bottom; }
+.preCont .bd { background: #fff;border: 1px solid #e9e9e9;border-bottom: 0;padding-bottom: 20px; }
+.preCont .l_img { width: 234px;padding-bottom: 9999px;margin-bottom: -9999px; }
+.preCont .pic { display: block;margin: -25px 0 0 25px; }
+.preCont .r_info { width: 710px;padding-bottom: 9999px;margin-bottom: -9999px;padding-right: 70px; }
+.preCont .r_info h4 { font-size: 22px;color: #666;margin: 40px 0 30px; }
+.preCont .r_info h4 span { font-size: 12px;color: #999; }
+.preCont .r_info ul { margin-left: 20px; }
+.preCont .r_info ul li { list-style: decimal;list-style-position: inset;color: #666;line-height: 24px;font-size: 14px; }
+.color-0000ee { color: #0000ee !important; }
+.more_icon { background-position: 0 -40px;margin-right: 5px; }
+.moreBtn { text-align: center;background: #fff;border-right: 1px solid #e9e9e9;border-left: 1px solid #e9e9e9; }
+.moreBtn a { display: inline-block;width: 100px;height: 30px;line-height: 30px;border-radius: 20px;background: #ae0000;color: #f7e6b2;text-align: center; }
+.moreBtn a:hover { background: #bb0404; }
+.moreDetail { font-size: 14px;color: #666;display: none; }

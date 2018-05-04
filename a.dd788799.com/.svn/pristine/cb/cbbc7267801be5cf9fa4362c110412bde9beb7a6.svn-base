@@ -1,0 +1,135 @@
+<?php
+// +----------------------------------------------------------------------
+// | FileName: betQ.php
+// +----------------------------------------------------------------------
+// | CreateDate: 2018年1月30日
+// 获取追号未来期数及开奖时间函数
+// +----------------------------------------------------------------------
+// | Author: sky
+// +----------------------------------------------------------------------
+namespace app\classes;
+use think\Db;
+
+class betQ{
+
+    public static function noHdCQSSC($type,$count,$ftime){
+        date_default_timezone_set("PRC");
+        $time=time();
+         $qs = self::getActionNo($type,$count,$ftime);
+        $num = count($qs);
+        $i=0;
+        $list = [];
+       if($qs){
+            foreach($qs as $k=>$v){
+                $list[$i]['actionNo'] =date('Ymd-', $time).substr(1000+$v['actionNo'],1);
+                $list[$i]['actionTime'] =date('Y-m-d ', $time).$v['actionTime'];
+               
+                $i++;
+            }
+        }
+
+        if($count > $num){
+            $cnum = intval($count)-intval($num);
+            $qsm =  Db("data_time")->field('actionNo,actionTime')->where('actionNo' ,'>=',1)->where('type' ,'=',$type)->limit($cnum)->order('actionNo')->select();
+            foreach($qsm as $k=>$v){
+                $list[$i]['actionNo'] =date('Ymd-', $time+24*3600).substr(1000+$v['actionNo'],1);
+                $list[$i]['actionTime'] =date('Y-m-d ', $time+24*3600).$v['actionTime'];
+                $i++;
+            }
+        }
+        return $list;
+    }
+
+    public static function no0Hd($type,$count,$ftime){
+       return  self::noHdCQSSC($type,$count,$ftime);
+    }
+    public static function noxHd($type,$count,$ftime){
+         return  self::noHdCQSSC($type,$count,$ftime);
+    }
+    public static function BJpk10($type,$count,$ftime){
+        date_default_timezone_set("PRC");
+        $time=time();
+        $qs = self::getActionNo($type,$count,$ftime);
+        $num = count($qs);
+        $i=0;
+        $list = [];
+       if($qs){
+            foreach($qs as $k=>$v){
+                $list[$i]['actionNo'] =179*(strtotime(date('Y-m-d', $time))-strtotime('2007-11-11'))/3600/24+$v['actionNo']-3774-19;
+                $list[$i]['actionTime'] =date('Y-m-d ', $time).$v['actionTime'];
+               
+                $i++;
+            }
+        }
+
+        if($count > $num){
+            $cnum = intval($count)-intval($num);
+            $qsm =  Db("data_time")->field('actionNo,actionTime')->where('actionNo' ,'>=',1)->where('type' ,'=',$type)->limit($cnum)->order('actionNo')->select();
+            foreach($qsm as $k=>$v){
+                $list[$i]['actionNo'] =179*(strtotime(date('Y-m-d', $time+24*3600))-strtotime('2007-11-11'))/3600/24+$v['actionNo']-3774-19;
+                $list[$i]['actionTime'] =date('Y-m-d ', $time+24*3600).$v['actionTime'];
+                $i++;
+            }
+        }
+        return $list;
+    }
+    public static function bjkl8($type,$count,$ftime){
+        date_default_timezone_set("PRC");
+        $time=time();
+        $qs = self::getActionNo($type,$count,$ftime);
+        $num = count($qs);
+        $i=0;
+        $list = [];
+       if($qs){
+            foreach($qs as $k=>$v){
+                $list[$i]['actionNo']  = 179*(strtotime(date('Y-m-d', $time))-strtotime('2004-09-19'))/3600/24+$actionNo-3857;
+                $list[$i]['actionTime'] =date('Y-m-d ', $time).$v['actionTime'];
+               
+                $i++;
+            }
+        }
+
+        if($count > $num){
+            $cnum = intval($count)-intval($num);
+            $qsm =  Db("data_time")->field('actionNo,actionTime')->where('actionNo' ,'>=',1)->where('type' ,'=',$type)->limit($cnum)->order('actionNo')->select();
+            foreach($qsm as $k=>$v){
+                $list[$i]['actionNo'] = 179*(strtotime(date('Y-m-d', $time+24*3600))-strtotime('2004-09-19'))/3600/24+$actionNo-3857;
+                $list[$i]['actionTime'] =date('Y-m-d ', $time+24*3600).$v['actionTime'];
+                $i++;
+            }
+        }
+        return $list;
+    }
+    public static function hgssc($type,$count,$ftime){
+
+
+    }
+
+    public static function noFF0Hd($type,$count,$ftime){
+        return  self::noHdCQSSC($type,$count,$ftime);
+    }
+    public static function onCsf($type,$count,$ftime){
+        return  self::noHdCQSSC($type,$count,$ftime);
+    }
+     public static function onXyft($type,$count,$ftime){
+       
+    }
+    private static function getActionNo($type,$count,$ftime){
+        date_default_timezone_set("PRC");
+        $time=time();
+        if($type=='45'){
+            $type='24';
+        }
+        $atime  = date('H:i:s', $time+$ftime) ; //投注有效時間 = 當前時間 + 停止下注時間
+        $time_table = 'data_time';
+        $return = db($time_table)->where('type',$type)->where('actionTime','>',$atime)->order('actionTime')->limit(1)->find();
+        if($count == 0){
+            $count = Db('data_time')->where('actionNo' ,'>=', $return['actionNo'])->where('type' ,'=',$type)->count();
+        }
+        $qs = Db("data_time")->field('actionNo,actionTime')->where('actionNo' ,'>=', $return['actionNo'])->where('type' ,'=',$type)->limit($count)->order('actionNo')->select();
+        $qs = $qs->toArray();
+        return  $qs;
+     }
+   
+}
+

@@ -1,0 +1,201 @@
+<?php
+// +----------------------------------------------------------------------
+// | FileName: index.php
+// +----------------------------------------------------------------------
+// | CreateDate: 2017年10月2日
+// +----------------------------------------------------------------------
+// | Author: xiaoluo
+// +----------------------------------------------------------------------
+namespace app\index\controller;
+use think\Validate;
+use app\index\Login;
+use app\classes\iplocation;
+class Index extends Login{
+
+    public function index()
+    {
+        $user = session("user");
+        $user = model('members')->find($user['uid']);
+        $this->assign('user',$user);
+        return $this->fetch('index');
+    }
+
+    public function login(){
+        if(request()->isGet()){
+            if($this->isLogin()){
+                $this->redirect('user/info');
+            }
+            return $this->fetch("login");   
+        }else{
+   
+            //if(!captcha_check($_POST['dlyzm'])){}
+            
+            $username = trim($_POST['username']);
+            $password = trim($_POST['password']);
+            $data = array(
+                    'login_name' =>  $username,
+                    'login_pwd'  =>  $password,
+            );
+            
+            $rules = ['login_name'=> 'require|length:4,12|alphaNum',
+                      'login_pwd' => 'require|length:6,32'
+            ];
+            $msg = [
+                'login_name.require'  =>  '用户名必须填写!',
+                'login_name.length'   =>  '用户名长度必须在6~12之间!',
+                'login_name.alphaNum' =>  '用户名必须是数字和字母的组合!',
+                'login_pwd.require'  =>  '密码必须填写!',
+                'login_pwd.length'   =>  '密码长度必须在6~32位之间!',             
+            ];
+            $validate = new Validate($rules,$msg);
+            if(! $validate->check($data))
+            {
+                $error = $validate->getError();
+                return ['status'=>'-1','msg'=>$error,];
+            }
+
+            $rememberme = (bool)(input('rember')??0);
+    
+            if($this->doLogin($data['login_name'],$data['login_pwd'],$rememberme)){
+                return ['status'=>'0','msg'=>'登录成功!','url'=>Url('user/logined')];
+            }else{
+                return ['status'=>'-1','msg'=>'用户名称或密码错误!',];
+            }
+        }
+    }
+
+    public function main()
+    {
+        $where               = array() ;
+        $where['uid']        = $this->user['uid'] ;
+        $where['isDelete']   = 0 ;
+        $where['lotteryNo']  = array('neq','') ;
+        $where['actionTime'] = array('between',array(strtotime('03:00'),strtotime('03:00') + 24*3600)) ;
+        $myxf = db('bets')->where($where)->field('sum(mode*beiShu*actionNum) as xiaofei')->find() ;
+        $myxf['xiaofei'] = (isset($myxf['xiaofei'])  && !empty($myxf['xiaofei'])) ? $myxf['xiaofei'] : 0 ;
+
+        $this->assign('myxf',$myxf) ;
+
+        $notice = db('content') -> where (array('enable' => 1)) -> order('id desc') ->select();
+        $this->assign('notice',$notice);
+        /*
+        $login = db('member_session') -> where(array('uid' => $this->user['uid'])) -> order('id desc')->limit(5)->select()->toArray();
+        */
+        $login = [];
+        $login[0] = ['loginIP'=>2130706433,'loginTime'=>1508920728];
+
+        $ip = new iplocation();
+
+        foreach ($login as $key => $val) {
+            $addr = $ip->getlocation($val['loginIP']);
+            $login[$key]['addr'] = isset($addr['country']) ? $addr['country'] : '' ;
+        }
+
+        $this->assign('login',$login)  ;
+        return $this->fetch('main') ;
+    }
+
+    public final function getLastKjData()
+    {
+        $types = model('type')->allTypes();
+        $type = input('type');
+        if(!$type){
+            echo json_encode('');return;
+        }
+        $lottery = $types[$type]??null;
+        if(!$lottery){
+            echo json_encode('');return;
+        }
+  
+        //上期开奖结果
+        $lastNo = $this->getGameLastNo($this->type);
+        if(!$lastNo) $this->error('查找最后开奖期号出错');
+        //格式化开奖期号
+        $lastNo['actionNo'] = $this->formatActionNo($lastNo['actionNo'],$type) ; 
+        $data = db('data')->where(array('type'=>$this->type, 'number'=>$lastNo['actionNo']))->field('data')->find() ;
+        if(!$data){echo json_encode('');return;}
+        $lastNo['data'] = $data['data'];
+
+        //本期期号以及倒计时
+        $thisNo = $this->getGameNo($this->type);
+        $lastNo['actionName'] = $lottery['title'];
+        $lastNo['thisNo']     = $thisNo['actionNo'];
+        $lastNo['diffTime']   = strtotime($thisNo['actionTime'])-$this->time;
+        $lastNo['kjdTime']    = $this->getTypeFtime($type);
+
+        echo json_encode($lastNo);exit();
+    }
+
+    /**
+     *  格式化开奖期号
+     *  @param $actionNo  期号
+     *  @param $type     彩种类型
+     */
+    private  function  formatActionNo($actionNo,$type)
+    {
+       if ($actionNo && $type) {
+            if ($type == 12) {
+                //新疆时时彩处理, 期号类似这样2017-60
+                //而数据库中的期号是2017060 这样子, 所以要把期号格式化一致,方便下一步准确找到数据
+                $tmp      = explode('-',$actionNo) ;
+                $tmp[1]   = (strlen($tmp[1])==2) ? '0'.$tmp[1] : $tmp[1] ;
+                $actionNo = $tmp[0].$tmp[1] ;
+            } else {
+                //普通处理
+                $actionNo = str_replace('-','',$actionNo) ;
+            }
+       }
+       return $actionNo ;
+    }
+
+    public final function getQiHao()
+    {
+        //$thisNo=$this->getGameNo($this);
+        $type   = input('type','','intval') ;
+        $thisNo = $this->getGameNo($type) ; //下一期的期号数据
+        $data   = array(
+            'lastNo'    => $this->getGameLastNo($type),
+            'thisNo'    => $this->getGameNo($type),
+            'diffTime'  => strtotime($thisNo['actionTime'])-$this->time,
+            'validTime' => $thisNo['actionTime'],
+            'kjdTime'   => $this->getTypeFtime($type)
+        );
+        //dump($data);
+        echo json_encode($data);
+        exit();
+        //return $data;
+    }
+
+    public final function getHistoryData()
+    {
+        $this->type=input('type','','intval');
+        //$sql="select time, number, data from {$this->prename}data where type={$this->type} order by number desc,time desc limit 4";
+        $history = db('data')->where(array('type'=>$this->type))->order('number desc,time desc')->limit(10)->field('time,number,data')->select();
+        $this->assign('type',$this->type) ;
+        $this->assign('history',$history) ;
+        echo  $this->fetch('/game/inc_game_history') ; exit();
+    }
+
+    public final function userInfo()
+    {
+        $Members = db('Members') ;
+        $map     = array();
+        $map['uid'] = $this->user['uid'];
+        $user       = $Members->where($map)->field('username,nickname,enable,coin')->find();
+        echo json_encode($user);
+        exit();
+    }
+
+    /**
+     *  ajax取定单列表
+     */
+    public final function getOrdered($type=null)
+    {
+        if(!$this->type) $this->type = input('type','','intval');
+        $this->fetch('index/inc_game_order_history'); die;
+    }
+
+    /**
+     * 获取期号
+     */
+}

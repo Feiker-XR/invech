@@ -1,0 +1,102 @@
+<div class="form-horizontal">
+  <div class="box-body">
+    <div class="form-group">
+      <label for="inputPassword3" class="col-sm-2 control-label">提案类型</label>
+      <div class="col-sm-10" style="width:400px">
+        <span class="form-control">
+            {eq name="$info->business" value="agent"}代理提案{/eq}
+            {eq name="$info->business" value="withdraw"}提现提案{/eq}
+        </span>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="inputPassword3" class="col-sm-2 control-label">提案金额</label>
+      <div class="col-sm-10" style="width:400px">
+           <span class="form-control">{$info->amount}</span>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="inputPassword3" class="col-sm-2 control-label">银行名称</label>
+      <div class="col-sm-10" style="width:400px">
+           <span class="form-control">{$info->bank_name}</span>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="inputPassword3" class="col-sm-2 control-label">提款人真实姓名</label>
+      <div class="col-sm-10" style="width:400px">
+           <span class="form-control">{$info->bank_username}</span>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="inputPassword3" class="col-sm-2 control-label">银行卡号</label>
+      <div class="col-sm-10" style="width:400px">
+           <span class="form-control">{$info->bank_account}</span>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="inputPassword3" class="col-sm-2 control-label">银行地址</label>
+      <div class="col-sm-10" style="width:400px">
+           <span class="form-control">{$info->bank_address}</span>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="inputPassword3" class="col-sm-2 control-label">所需打码量</label>
+      <div class="col-sm-10" style="width:400px">
+           <span class="form-control">{$info->audit_remain}</span>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="inputPassword3" class="col-sm-2 control-label">到账金额</label>
+      <div class="col-sm-10" style="width:400px">
+           <span class="form-control">{$info->real_amount}</span>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="inputPassword3" class="col-sm-2 control-label">扣款金额</label>
+      <div class="col-sm-10" style="width:400px">
+           <span class="form-control">{$info->debit_amount}</span>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="inputPassword3" class="col-sm-2 control-label">稽核量</label>
+      <div class="col-sm-10" style="width:400px">
+           <span class="form-control">{$info->user->audit_flow}</span>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="inputPassword3" class="col-sm-2 control-label">稽核量阈值</label>
+      <div class="col-sm-10" style="width:400px">
+           <span class="form-control">{$auditLimit} </span>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="inputPassword3" class="col-sm-2 control-label">审核操作</label>
+      <div class="col-sm-10" style="width:400px">
+          <span class="form-control">
+            {eq name="$info->status" value="0"}未审核{/eq}
+            {eq name="$info->status" value="1"}同意{/eq}
+            {eq name="$info->status" value="-1"}拒绝{/eq}
+          </span>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="inputPassword3" class="col-sm-2 control-label">备注</label>
+      <div class="col-sm-10" style="width:400px">
+        <span class="form-control">{$info->remark}</span>
+      </div>
+    </div>
+   
+  </div>
+</div>
+

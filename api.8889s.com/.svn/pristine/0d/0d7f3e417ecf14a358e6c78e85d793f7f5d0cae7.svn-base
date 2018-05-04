@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>www</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+<link rel="stylesheet" href="/css/font-awesome.min.css">
+<link rel="stylesheet" href="/styles/ucenter.css">
+<link rel="stylesheet" type="text/css" href="/fonts-new/iconfont.css">	
+<link rel="stylesheet" href="/styles/ezweb.css">
+<link rel="stylesheet" href="/css/500f_new_wap.css">	
+<link href="/gfwf/iconfont/iconfont.css" rel="stylesheet" type="text/css"/>
+<link rel="stylesheet" href="/gfwf/assets/statics/css/global_header.css" type="text/css">
+
+<script language="javascript" src="/js/jquery.js"></script> 
+<script src="/js/bootstrap.min.js"></script>
+<script language="javascript" src="/js/tikuan.js"></script> 
+<style type="text/css">
+.row{margin: 0px;padding: 5px;}
+</style>	
+</head>
+
+<script language="javascript">
+function check_form(){
+  	var t_about=document.getElementById("about").value;
+  	var t_r_name=document.getElementById("r_name").value;
+	  if(t_r_name.length<2) { 
+		  alert("请填写你的真实姓名");
+		  return false;
+	  }
+	  if(t_about.length<10) { 
+		  alert("请填写申请理由,长度不够");
+		  return false;
+	 }
+  	var yzm=document.getElementById("tf_yzm").value;
+	if(yzm.length < 4){
+		document.getElementById("tf_yzm").select();
+		return false;
+	}
+}
+
+function next_checkNum_img(){
+	document.getElementById("checkNum_img").src = "../yzm.php?"+Math.random();
+	return false;
+}
+</script>
+<body>
+	
+{include file='common/user-nav'}
+{include file='common/header_other_lottery'}	
+	
+<div class="block_50"></div>
+<div class="ucenter">
+	<div class="container" style="margin: 0px 0px;">
+	<div class="row" >
+		<div class="panel panel-default">
+		  <div class="panel-heading">
+		    <h3 class="panel-title">代理申请</h3>
+		  </div>
+		  <div class="panel-body">
+		    <form class="form-horizontal" id="form1"  name="form1" onsubmit="return check_form()" method="post" action="?action=add">
+		    	<div class="form-group">
+				    <label class="col-sm-2 control-label">会员账号：</label>
+				    <div class="col-sm-10">
+				    	<input class="form-control" name="username" id="username" readonly  value="{$user.username}" />
+				    </div>
+				</div>
+				<div class="form-group">
+				    <label class="col-sm-2 control-label">真实姓名：</label>
+				    <div class="col-sm-10">
+				    	<input class="form-control" name="r_name" id="pay_name" type="text" value="吴中平"/>
+				    </div>
+				</div>
+				<div class="form-group">
+				    <label class="col-sm-2 control-label">联系电话：</label>
+				    <div class="col-sm-10">
+				    	<input class="form-control" name="mobile" value=""/>
+				    </div>
+				</div>
+				<div class="form-group">
+				    <label class="col-sm-2 control-label">电子邮箱：</label>
+				    <div class="col-sm-10">
+				    	<input class="form-control" name="email" value=""/>
+				    </div>
+				</div>
+				<div class="form-group">
+				    <label class="col-sm-2 control-label">申请理由：</label>
+				    <div class="col-sm-10">
+				    	<textarea class="form-control" name="about" id="about" cols="50" rows="5" style="width: 360px; height: 90px; margin: 0 0 0 0px; font-size:12px;"></textarea>
+				    </div>
+				</div>
+				<div class="form-group">
+				    <label class="col-sm-2 control-label">验证码：</label>
+				    <div class="col-sm-10">
+				    	<div class="row">
+				    		<div class="col-xs-8"><input class="form-control" name="tf_yzm" id="tf_yzm" maxlength="4" /></div>
+
+				    		<div class="col-xs-4"><img style="cursor:pointer;margin-left:10px;" src="{:url('Mycaptcha/mobile_reg_agent')}" onclick="this.src='{:url('Mycaptcha/mobile_reg_agent')}?r='+Math.random()" name="checkNum_img" id="checkNum_img" /></div>
+				    	</div>
+				    </div>
+				</div>
+				<div class="block_10"></div>
+				<div class="form-group">
+				    <div class="col-sm-10 col-sm-offset-2">
+				    	<input name="submit" type="submit" class="btn btn-green btn-lg btn-block"  id="btn" value="提交"/>
+				    </div>
+				</div>
+		    </form>
+		  </div>
+		</div>
+        
+		</div>
+		</div>
+	</div>
+
+<script type="text/javascript" language="javascript" src="/js/left_mouse.js"></script>
+</body>
+</html>

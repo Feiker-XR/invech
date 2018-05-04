@@ -1,0 +1,117 @@
+body { margin:0; padding:0; font-size:14px; line-height:20px; font-family:'Microsoft Yahei';}
+h1,h2,h3,h4,h5,h6,ul,ol,dl,dt,dd,p { margin:0; padding:0;}
+li { list-style:none;}
+img { border:0;}
+
+.clearfix:after { content:"."; display:block; height:0; clear:both; visibility:hidden;}
+.warp980 { width:980px; margin:0 auto;}
+
+
+/*LOGIN底部*/
+.login_footer { width:100%; background:url(/images/nsc/login/nsc_login_footer-bg.jpg) ; height:125px; padding-top:35px; overflow:hidden; color:#666; font-size:12px; line-height:22px;}
+.login_footer .img { height:37px; margin-bottom:20px;}
+.t-left { float:left; text-align:left;}
+.t-right { float:right; text-align:right;}
+.copyright { width:100%; height:25px; line-height:25px; color:#454444; text-align:center; font-style:italic; margin-top:30px;}
+
+
+/*注册*/
+.zc_top{ width:100%; height:95px; background:url("/images/nsc/register/agency1/head_top_bg.jpg") center top no-repeat;}
+.zc_top .logo { float: left; display: inline-block; width: 165px; height: 70px; margin: 12px 0 0 0; background:url("/images/nsc/register/agency1/head_top_logo.png") no-repeat;}
+.zc_top .zx_service { float: right; display: inline-block; width: 100px; height: 19px; margin: 36px 0 0 0; background:url("/images/nsc/register/agency1/head_top_service.png") no-repeat; text-indent: -9999px;}
+.zc_cont{ width:100%; /* height:auto; */ background:#0f0f0f url("/images/nsc/register/agency1/zc_cpyy_bg.jpg") no-repeat center top; background-size:cover; padding: 50px 0 100px;/* margin-bottom: 20px; */height: 518px;}
+.zc_content{width:800px; padding: 25px 0 50px 0; background: url("/images/nsc/register/agency1/main_black-bg.png") repeat; margin:0 auto; position:relative; color: #fff; /* margin-top: 20px; */border-radius:15px;}
+.zc_content .zc_title{ position: relative; height: 16px; font-size: 16px; font-weight: bold; margin: 20px 28px 0; border-bottom: 1px solid #38353a; padding: 0 0 15px 0;}
+.zc_content .zc_title a { color: #e067fa; margin-left: 5px;}
+.zc_content .zc_title .text_tit1 { position: absolute; right: 0; bottom: 14px; width: 234px; height: 36px; display: block; background:url("/images/nsc/register/agency1/text_tit1.png") no-repeat;}
+
+.zc_list{ width: 700px; margin:20px auto 0;}
+.zc_list li{ width:100%; margin-top:35px; position:relative;}
+.zc_list li:after { content:"."; display:block; height:0; clear:both; visibility:hidden;}
+.zc_list .zc_label{ float:left; width:80px; margin-top:9px; text-align: right; font:normal 16px/20px 'Microsoft YaHei';}
+.zc_list .zc_input{ float:left; width:600px; position:relative; margin-left:10px }
+.zc_list .zc_input i{ display: none; position:absolute; left:5px; top:8px;}
+.zc_list .zc_input input[type=text]{ font-size: 15px; color: #666; float:left; width:310px; height:41px; line-height:41px; background-color:#fff; border:1px solid #666464; border-radius:6px; padding-left:10px; transition:background-color 0.3s; }
+.zc_list .zc_input input[type=password]{ font-size: 15px; color: #666; float:left; width:310px; height:41px; line-height:41px; background-color:#fff; border:1px solid #666464; border-radius:6px; padding-left:10px; transition:background-color 0.3s; }
+.zc_list .zc_input input[type=text]:focus,.zc_list .zc_input input[type=password]:focus { background-color:#f3ebbf;}
+.zc_list .zc_input .zc_code{ float:left; width: 81px; height: 43px; margin: 0px 0 0 20px; cursor:pointer;}
+.zc_list .zc_input p.z1 { float:left; width:250px; line-height:18px; color:#c0bfbf; font-size: 13px; margin: 5px 0 0 15px;}
+.zc_list .zc_input p.z2 { float:left; width:250px; line-height:18px; color:#c0bfbf; font-size: 13px; margin: 12px 0 0 15px;}
+.zc_list .zc_btn_box { text-align: center; }
+.zc_list .zc_btn{ width:250px; height:45px; line-height: 45px; color:#fff; font-size:21px; letter-spacing: 3px; font-family:'Microsoft YaHei'; cursor:pointer; background-color:#aa63b9; border:0; border-radius:6px; transition:background-color 0.3s;}
+.zc_list .zc_btn:hover{ background-color:#8f419f}
+.zc_list .zc_btn:disabled { background: #888; cursor:default;}
+.zc_list .zc_input a{ font-size:16px; color:#544060; font-family:'Microsoft YaHei'; }
+.zc_list .zc_input a:hover{ text-decoration: underline;}
+.zc_content .zc_lxkf{ float:right; width:90%; text-align: right; color:#888; margin:0 10px 0 0; padding-bottom:10px;}
+.zc_content .zc_lxkf a{ color:#544060; text-decoration: underline; }
+.zc_list ul li .tip{ position:absolute; top: 48px; left:10px; display:none;}
+.zc_list ul li .success-tip{width:24px;height:24px;top:48px;background:url(/images/nsc/register/reg_ico.png) no-repeat;}
+.zc_list ul li .error-tip{ padding-left:30px;}
+.zc_list ul li .error-tip em{display:inline-block;float:left;width:24px;height:24px;position:absolute;left:0;top:0;background:url(/images/nsc/register/reg_ico.png) 0 -24px no-repeat;}
+.zc_list ul li .error-tip p{color:#EA1515;font-size:14px; line-height:24px;}
+
+.footer_lxfs { text-align: center; color: #fff; padding: 30px 0 0 0; line-height: 30px;}
+.footer_lxfs p { margin-bottom: 6px;}
+.footer_lxfs p span { margin-right: 15px;}
+.footer_lxfs p a { display: inline-block; color: #fff; margin-right: 15px; }
+.qq_btn { padding-top: 10px;}
+.qq_btn a { width: 82px; height: 26px; text-indent: -9999px; background: url("/images/nsc/register/agency1/btn_qq.png") no-repeat;}
+
+/*注册页icon*/
+i[class^="iczc-"], i[class*="iczc-"]{ background-image: url('/images/nsc/register/icon_zc.png'); }
+.iczc-number { width: 20px; height: 18px; background-position: 0 0; }
+.iczc-username { width: 20px; height: 19px; background-position: 0 -20px; }
+.iczc-password { width: 20px; height: 21px; background-position: 0 -42px; }
+.iczc-warning { width: 20px; height: 18px; background-position: 0 -64px; }
+
+/*800*600宽度*/
+.warp760 { width:760px; margin:0 auto;}
+.warp760 .air_box { width:300px!important;}
+.warp760 .download-line { width:80px!important;}
+.warp760 .same_box { padding:0 0 0 0!important; width:215px!important; background:none!important;}
+.warp760 .phone_box { margin:0 0 0 8px!important;}
+.warp760 .same_box .left { width:100px!important;}
+.warp760 .same_box .img img { width:90px!important; height:90px!important;}
+.warp760 .same_box .left p { margin:0 0 5px!important;}
+.login_footer .warp760 .img img { width:760px!important; height:29px!important;}
+
+/*880*宽度*/
+.warp880 { width:900px; margin:0 auto;}
+.warp880 .same_box { padding:0 0 0 0!important; width:245px!important; background:none!important;}
+.warp880 .pt_box { float:left!important; margin:3px 0 0 40px!important;}
+.warp880 .same_box .left { width:100px!important;}
+.login_footer .warp880 .img img { width:880px!important; height:34px!important;}
+
+/*测试网站入口样式#3404*/
+.checklink {background: url(/images/nsc/login/nsc_login_register-bg.png) 0px -415px no-repeat; text-align:center; height:50px; line-height:50px; margin-top:20px;}
+.checklink a{ font-size:17px; color:#ffebaf; border-bottom:#ffebaf solid 1px;}
+.checklink a:hover { color:#fff; border-bottom:#fff solid 1px;}
+
+
+@media screen and (max-width:800px){
+	.zc_content .zc_xing{display:none;}
+	.zc_cont{padding:0;}
+	.zc_content{width:100%;border:none;height:auto;box-shadow:none;}
+	.zc_list{width:100%;}
+	.zc_list .zc_label{display:none;}
+	.login_footer{display:none;}
+	.zc_content .zc_lxkf{display:none;}
+	.zc_list li{float:none;margin:0 auto;clear:both;}
+	.zc_list .zc_input input[type=text],.zc_list .zc_input input[type=password]{width:100%;padding-left:0;text-indent:30px;}
+	.zc_list .zc_input input::-webkit-input-placeholder{color:#666;}
+	.zc_list .zc_input{float:none;margin:0 auto;width:80%;}
+	.zc_list ul li .tip{left:0px;width:100%;}
+	.zc_list ul li .success-tip{left:auto;right:5px;width:27px;}
+	.zc_list ul li .error-tip em{display:none;}
+	.zc_list .zc_input .zc_btn{width:100%;}
+	.zc_list .zc_input p{margin-bottom:10px;height:auto;}
+}
+
+/*操作错误正确提示*/
+#success h3,#error h3 { text-align: center; font-size: 18px;}
+#error{ background: url("/images/nsc/icon_error-big.png") no-repeat center 100px; padding: 180px 0 100px;}
+#success { background:url("/images/nsc/icon_success-big.png") no-repeat center 100px; padding: 180px 0  100px;}
+.hint_red { color: #fb2323;}
+.hint_green { color: #60a52c;}
+.hint_green p { margin-bottom: 10px;}

@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>交易记录串关</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+<link rel="stylesheet" href="/css/font-awesome.min.css">
+<link rel="stylesheet" href="/styles/ucenter.css">
+<link rel="stylesheet" type="text/css" href="/fonts-new/iconfont.css">	
+<link rel="stylesheet" href="/styles/ezweb.css">
+<link rel="stylesheet" href="/css/500f_new_wap.css">		
+<link href="/gfwf/iconfont/iconfont.css" rel="stylesheet" type="text/css"/>
+<link rel="stylesheet" href="/gfwf/assets/statics/css/global_header.css" type="text/css">
+
+<script src="/assets/jquery.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+{include file='common/user-nav'}
+{include file='common/header_other_lottery'}	
+		
+<div class="block_50"></div>
+<div class="ucenter">
+	<!--chaxun-->
+	<div class="container" style="margin: 0px 0px 0px 5px">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h3 class="panel-title">未结注单 <span class="pull-right" ><a href="/user/report.html">历史报表</a></span></h3>
+			</div>
+
+			<div class="panel-body">
+				<div role="tabpanel">
+					<!-- Nav tabs -->
+					<ul class="nav nav-tabs nav-tile" role="tablist">
+						<li>
+							<a href="/user/record_ds">体育单式</a>
+						</li>
+						<li class="active">
+							<a href="/user/record_cg">体育串关</a>
+						</li>
+						<li>
+							<a href="/user/record_cp">彩票游戏</a>
+						</li>
+					</ul>
+					<!-- Tab panes -->
+					<div class="tab-content">
+						<div role="tabpanel" class="tab-pane active">
+							<div class="table-responsive">
+								<table class="table table-bordered">
+									<tr class="success">
+										<td width="150" class="zd_item_header">投注时间</td>
+										<td width="366" class="zd_item_header">投注详细信息</td>
+										<td width="80" class="zd_item_header">下注</td>
+									</tr>
+
+									{if empty($betcg)}
+									<tr>
+										<td height="30" colspan="5" align="center" bgcolor="#FFFFFF" ><p class="bg-danger">暂无记录</p></td>
+									</tr>
+									{else /}
+					{foreach name="betcg" item="vo" key="k"}
+						{if $current neq $vo.gid}
+						<?php
+							
+			       			$bet_money += $vo['bet_money'];
+							$ky += $vo['bet_win'];
+							if($line_count % 2 == 0) 
+								$bgcolor = '#FFF';
+							else
+								$bgcolor = '#f5f5f5';
+							$line_count ++;
+			       		?>
+					    <tr bgcolor="<?=$bgcolor?>" align="center" onMouseOver="this.style.backgroundColor='#FFFFCC'" onMouseOut="this.style.backgroundColor='<?=$bgcolor?>'" >
+						  <td rowspan="{$vo.cg_count}" align="center"><span style="color:#46AF98"><?=date('Y-m-d',strtotime($vo["bet_time"])).'<br>'.date('H:i:s',strtotime($vo["bet_time"]))?></span><br>
+						  <span style="color:#0DC4FF"><?=$vo["cg_count"]?>串1</span><br>
+						  <span style="color:#F90">HG_<?=$vo['gid']?></span></td>
+			       		{else}
+			       			<tr bgcolor="<?=$bgcolor?>" align="center" style="height:60px;">
+			       			<!--<div style="width:99%; padding:10px;">-->
+			       		{/if}
+			       		<td>		       	
+			       			{switch $vo.point_column}
+			       				{case value='match_ho'}
+			       					让球 <span style="color:#F00">{$vo.match_name}</span>
+			       					<br />
+			       					
+			       					{if ($vo.match_showtype eq 'c') or ($vo.match_showtype eq 'C') }
+			       						<font style="color:#000000">{$vo.guest}</font>
+					    				{$vo.match_rgg}
+					    				<font style="color:#000000">{$vo.master}</font>(主)
+			       					{else}
+			       						<font style="color:#000000">{$vo.master}</font>
+					    				{$vo.match_rgg}
+					    				<font style="color:#000000">{$vo.guest}</font>
+			       					{/if}
+			       					<br/>
+			       					{$vo.master} @ <font color='red'>{$vo.bet_point}</font>
+			       				{/case}
+			       				{case value='match_ao'}
+			       					让球 <span style="color:#F00">{$vo.match_name}</span>
+			       					<br />
+			       					
+			       					{if ($vo.match_showtype eq 'c') or ($vo.match_showtype eq 'C') }
+			       						<font style="color:#000000">{$vo.guest}</font>
+					    				{$vo.match_rgg}
+					    				<font style="color:#000000">{$vo.master}</font>(主)
+			       					{else}
+			       						<font style="color:#000000">{$vo.master}</font>
+					    				{$vo.match_rgg}
+					    				<font style="color:#000000">{$vo.guest}</font>
+			       					{/if}
+			       					<br/>
+			       					{$vo.guest} @ <font color='red'>{$vo.bet_point}</font>
+			       				{/case}
+			       				{case value='match_bho}
+			       					上半场让球 <span style="color:#F00">{$vo.match_name}</span>
+			       					<br />
+			       					
+			       					{if ($vo.match_showtype eq 'c') or ($vo.match_showtype eq 'C') }
+			       						<font style="color:#000000">{$vo.guest}</font>
+					    				{$vo.match_rgg}
+					    				<font style="color:#000000">{$vo.master}</font>(主)
+			       					{else}
+			       						<font style="color:#000000">{$vo.master}</font>
+					    				{$vo.match_rgg}
+					    				<font style="color:#000000">{$vo.guest}</font>
+			       					{/if}
+			       					{$vo.master} @ <font color='red'>{$vo.bet_point}</font>
+			       				{/case}
+			       				{case value='match_bao}
+			       					上半场让球 <span style="color:#F00">{$vo.match_name}</span>
+			       					<br />
+			       					<font style="color:#000000">
+			       					{if ($vo.match_showtype eq 'c') or ($vo.match_showtype eq 'C') }
+			       						<font style="color:#000000">{$vo.guest}</font>
+					    				{$vo.match_rgg}
+					    				<font style="color:#000000">{$vo.master}</font>(主)
+			       					{else}
+			       						<font style="color:#000000">{$vo.master}</font>
+					    				{$vo.match_rgg}
+					    				<font style="color:#000000">{$vo.guest}</font>
+			       					{/if}
+			       					<br/>
+			       					{$vo.guest} @ <font color='red'>{$vo.bet_point}</font>
+			       				{/case}
+			       				{case value='match_dxdpl'}
+			       					大小 <span style="color:#F00">{$vo.match_name}</span>
+			       					<br />
+			       					<font style="color:#000000">{$vo.master}</font> VS. <font style="color:#890209">{$vo.guest}</font>
+			       					<br/>
+			       					O{$vo.match_dxgg} @ <font color="red">{$vo.bet_point}</font>
+			       				{/case}
+			       				{case value='match_dxxpl'}
+			       					大小 <span style="color:#F00">{$vo.match_name}</span>
+			       					<br />
+			       					<font style="color:#000000">{$vo.master}</font> VS. <font style="color:#890209">{$vo.guest}</font>
+			       					U{$vo.match_dxgg} @ <font color="red">{$vo.bet_point}</font>
+			       				{/case}
+			       				{case value='match_bdpl'}
+			       					半场大小 <span style="color:#F00">{$vo.match_name}</span><br />
+			       					<font style="color:#000000">{$vo.master}</font> VS. <font style="color:#890209">{$vo.guest}</font>
+			       					O{$vo.match_dxgg} @ <font color="red">{$vo.bet_point}</font>
+			       				{/case}
+			       				{case value='match_bxpl'}
+			       					半场大小 <span style="color:#F00">{$vo.match_name}</span>
+			       					<br />
+			       					<font style="color:#000000">{$vo.master}</font> VS. <font style="color:#890209">{$vo.guest}</font>
+			       					U{$vo.match_dxgg} @ <font color="red">{$vo.bet_point}</font>
+			       				{/case}
+			       				{case value='match_bzm'}
+			       					独赢 <span style="color:#F00">{$vo.match_name}</span>
+			       					<br />
+			       					<font style="color:#000000">{$vo.master}</font> VS. <font style="color:#890209">{$vo.guest}</font>
+			       					<br/>
+			       					<font style="color:#000000">{$vo.master} @ <font color="red">{$vo.bet_point}</font></font>
+			       				{/case}
+			       				{case value='match_bzg'}
+			       					独赢 <span style="color:#F00">{$vo.match_name}</span>
+			       					<br />
+			       					<font style="color:#000000">{$vo.master}</font> VS. <font style="color:#890209">{$vo.guest}</font>
+			       					<br/>
+			       					<font style="color:#000000">{$vo.guest} @ <font color="red">{$vo.bet_point}</font></font>
+			       				{/case}
+			       				{case value='match_bzh'}
+			       					独赢 <span style="color:#F00">{$vo.match_name}</span>
+			       					<br />
+			       					<font style="color:#000000">{$vo.master}</font> VS. <font style="color:#890209">{$vo.guest}</font>
+			       					<br/>
+			       					<font style="color:#000000">和局 @ <font color="red">{$vo.bet_point}</font></font>
+			       				{/case}
+			       				{case value='match_bmdy'}
+			       					半场独赢 <span style="color:#F00">{$vo.match_name}</span>
+			       					<br />
+			       					<font style="color:#000000">{$vo.master}</font> VS. <font style="color:#890209">{$vo.guest}</font>
+			       					<br/>
+			       					<font style="color:#000000">{$vo.master} @ <font color="red">{$vo.bet_point}</font></font>
+			       				{/case}
+			       				{case value='match_bgdy'}
+			       					半场独赢 <span style="color:#F00">{$vo.match_name}</span>
+			       					<br />
+			       					<font style="color:#000000">{$vo.master}</font> VS. <font style="color:#890209">{$vo.guest}</font>
+			       					<br/>
+			       					<font style="color:#000000">{$vo.guest} @ <font color="red">{$vo.bet_point}</font></font>
+			       				{/case}
+			       				{case value='match_bhdy'}
+			       					半场独赢 <span style="color:#F00">{$vo.match_name}</span>
+			       					<br />
+			       					<font style="color:#000000">{$vo.master}</font> VS. <font style="color:#890209">{$vo.guest}</font>
+			       					<br/>
+			       					<font style="color:#000000">和局 @ <font color="red">{$vo.bet_point}</font></font>
+			       				{/case}
+			       				{case value='match_dsdpl'}
+			       					单双 <span style="color:#F00">{$vo.match_name}</span>
+			       					<br />
+			       					<font style="color:#000000">{$vo.master}</font> VS. <font style="color:#890209">{$vo.guest}</font>
+			       					<br/>
+			       					<font style="color:#000000">单 @ <font color="red">{$vo.bet_point}</font></font>
+			       				{/case}
+			       				{case value='match_dsspl'}
+			       					单双 <span style="color:#F00">{$vo.match_name}</span>
+			       					<br />
+			       					<font style="color:#000000">{$vo.master}</font> VS. <font style="color:#890209">{$vo.guest}</font>
+			       					<br/>
+			       					<font style="color:#000000">双 @ <font color="red">{$vo.bet_point}</font></font>
+			       				{/case}
+			       			{/switch}
+			       		</td>
+			       		{if $current neq $vo.gid}
+						  <td rowspan="{$vo.cg_count}"><span style="color:#46AF98">下注:</span><br><?=$vo["bet_money"]?><br><span style="color:#0DC4FF">可赢:</span><br><?php
+							  echo double_format($vo["bet_win"]+$vo["fs"]);
+						?></td>
+						{/if}
+			       		</tr>
+			       		<?php
+			       		$current = $vo['gid'];
+						?>
+					{/foreach}
+
+									{/if}
+
+									<!--
+									<tr>
+										<td colspan="3" style="padding:0;">
+											<div class="panel-footer">
+												<ul class="pagination">
+													<li class="active">
+														<a href="#">1</a>
+													</li>
+													<li>
+														<a href="#">1/1/1</a>
+													</li>
+													<li>
+														<a href="javascript:;">总投注金额：<span style="color:#FF0000">0</span>，可赢：<span style="color:#FF0000">0</span></a>
+													</li>
+												</ul>
+											</div>
+										</td>
+									</tr>
+									-->
+								</table>
+							</div>
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script>
+$(function(){
+	//点击底部固定导航条切换
+	$(".nav500_bottom_a").click(function(){
+		var navThis = $(this);
+		navThis.css("color","#d9901e")
+		navThis.parent().siblings("span").find("a").css("color","#999999")
+		navThis.find("i").addClass("nav500_b_active");
+		navThis.parent().siblings("span").find("i").removeClass("nav500_b_active");
+		navThis.addClass("nav500_bottom_active").parent().siblings("span").find("a").removeClass("nav500_bottom_active")
+	});
+	
+})
+</script>
+<script type="text/javascript" language="javascript" src="/js/left_mouse.js"></script>
+</body>
+</html>

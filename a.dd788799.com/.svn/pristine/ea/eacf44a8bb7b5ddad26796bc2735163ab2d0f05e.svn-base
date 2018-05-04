@@ -1,0 +1,57 @@
+<?php
+namespace app\common\model;
+use think\Model;
+use app\common\traits\model\Bank as BankTrait;
+use app\common\traits\model\ApiToken;
+use app\auth\traits\Authenticatable;
+
+class Member extends Base{
+
+    use BankTrait,ApiToken,Authenticatable;
+
+    protected $table = 'gygy_members';
+    protected $pk = 'uid';
+
+    //当status字段值是1的时候,获取器返回1对应的'正常';
+    //先取字段值再调用获取器
+	/*public function getStatusAttr($value)
+    {
+        $status = [-1=>'删除',0=>'禁用',1=>'正常',2=>'待审核'];
+        return $status[$value];
+    }*/
+
+    public function setIdAttr($value){
+        return $this->data['uid'] = $value;
+    }
+
+    public function getIdAttr($value)
+    {
+        return $this->data['uid'];
+    }
+
+    //----------------后台------------------
+
+    public static function getList($request){
+    
+        $params = $request->param();
+         $query = self::order('uid');
+         $where = [];
+        if($params['keywords']??''){
+             $where['username|nickname'] = ['like','%'.$params['keywords'].'%'];
+        }
+        if($params['starttime']??''){
+             $where['regTime'] = ['>=',strtotime($params['starttime'])];
+        }
+        if($params['endtime']??''){
+             $where['regTime'] = ['<=',strtotime($params['endtime'])];
+        }
+        if($params['type']??''){
+             $where['type'] = ['=',$params['type']];
+        }
+
+        $data = $query->where($where)->paginate(10);
+     
+        return $data;
+    }	
+    
+}

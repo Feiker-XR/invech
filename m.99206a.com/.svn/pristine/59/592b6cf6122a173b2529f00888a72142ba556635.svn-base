@@ -1,0 +1,35 @@
+{include file='/six/header' /}
+<body>
+<div class="content">
+<!--<div class="top">&nbsp;&nbsp;开奖号码</div>-->
+<table border="0" align="center" cellpadding="0" cellspacing="1" class="bian" style="margin-top:10px;">
+  <tr>
+    <th>开奖期数</th>
+    <th>正一</th>
+    <th>正二</th>
+    <th>正三</th>
+    <th>正四</th>
+    <th>正五</th>
+    <th>正六</th>
+    <th>特码</th>
+    <th>特码属性</th>
+    <th>总和</th>
+    </tr>
+ {volist id="vo" name="list"}
+  <tr>
+    <td class="bian_td_no">第 {$vo['qishu']} 期</td>
+    <td class="bian_td_no"><div class="ball_c_{$vo['ball_1']}">{$vo['ball_1']}</div></td>
+    <td class="bian_td_no"><div class="ball_c_{$vo['ball_2']}">{$vo['ball_2']}</div></td>
+    <td class="bian_td_no"><div class="ball_c_{$vo['ball_3']}">{$vo['ball_3']}</div></td>
+    <td class="bian_td_no"><div class="ball_c_{$vo['ball_4']}">{$vo['ball_4']}</div></td>
+    <td class="bian_td_no"><div class="ball_c_{$vo['ball_5']}">{$vo['ball_5']}</div></td>
+    <td class="bian_td_no"><div class="ball_c_{$vo['ball_6']}">{$vo['ball_6']}</div></td>
+    <td class="bian_td_no"><div class="ball_c_{$vo['ball_7']}">{$vo['ball_7']}</div></td>
+    <td class="bian_td_no">{$vo['dx']}&nbsp;|&nbsp;{$vo['ds']}&nbsp;|&nbsp;{$vo['hsdx']}&nbsp;|&nbsp;{$vo['hsds']}&nbsp;|&nbsp;{$vo['wsdx']}&nbsp;|&nbsp;{$vo['ws']}&nbsp;|&nbsp;{$vo['bs']}&nbsp;|&nbsp;{$vo['sx']}</td>
+    <td class="bian_td_no">{$vo['zhdx']}&nbsp;|&nbsp;{$vo['zhds']}</td>
+    </tr>
+ {/volist}
+  </table>
+</div>
+</body>
+</html>

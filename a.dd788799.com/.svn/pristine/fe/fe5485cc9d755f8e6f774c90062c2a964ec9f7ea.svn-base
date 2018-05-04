@@ -1,0 +1,55 @@
+<?php
+
+namespace app\broadcast;
+
+use app\common\Contracts\Factory as FactoryContract;
+
+use app\broadcast\Contracts\ShouldBroadcastNow;
+use app\broadcast\Contracts\ShouldBroadcast;
+
+use Pusher\Pusher;
+
+use app\broadcast\Driver\LogBroadcaster;
+use app\broadcast\Driver\PusherBroadcaster;
+use app\broadcast\BroadcastEvent;
+
+class BroadcastManager implements FactoryContract
+{
+    protected $drivers = [];
+
+    public function __construct()
+    {
+    }
+
+    public function driver($name = null)
+    {
+        $name = $name??config('broadcast.driver');
+
+        return isset($this->drivers[$name])
+                    ? $this->drivers[$name]
+                    : $this->drivers[$name] = $this->resolve($name);
+    }
+
+    protected function resolve($name)
+    {
+        $configs = config('broadcast.configs');
+        $config = $configs[$name];
+        $driver_name = "app\\broadcast\\Driver\\" . ucfirst($name) . 'Broadcaster';
+        $driver = new $driver_name($config);
+        return $driver;
+    }
+
+    public function __call($method, $parameters)
+    {
+        return $this->driver()->$method(...$parameters);
+    }
+
+    public function queue($event)
+    {
+        $driver = $event instanceof ShouldBroadcastNow ? 'sync' : null;
+        $queue = $event->queue??null;
+        container('queue')->driver($driver)->pushOn(
+            $queue, new BroadcastEvent(clone $event)
+        );
+    }
+}

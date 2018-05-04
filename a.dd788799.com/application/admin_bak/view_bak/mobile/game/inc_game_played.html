@@ -1,0 +1,16 @@
+<div id="game-helptips" style="background:#eee">
+	<div class="showhelp">
+		<h6 id="lt_desc">说明：<?=$simpleInfo?></h6>    
+		<div class="clear"></div>
+	</div>
+</div>
+<div style="background-color:rgb(255, 244, 223);overflow:hidden;min-height:270px" id="num-select">
+	<?php 
+		if(!$played['enable']) 
+		{
+			echo '<div style="height:100px;text-align:center;color:#f00">暂无玩法</div>';
+			return;
+		}
+		require MODULE_PATH.'View/default/Game/game-played/'.$tpl.'.html';
+	?>
+</div>

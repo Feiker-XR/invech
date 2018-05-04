@@ -1,0 +1,105 @@
+<div class='pp' action='pick_dw' length="1" data-line="4"></div>
+<input type="hidden" name="playedGroup" value="<?=$groupId?>"/>
+<input type="hidden" name="playedId" value="<?=$playedId?>"/>
+<input type="hidden" name="type" value="<?=$type?>"/>
+<input type="hidden" name="playedName" value="<?=$played['name']?>"/>
+<!-- mobile 时时彩_快钱_龙虎 -->
+<div class="fl main-left">
+    <div class="hd clearfix rehd tzgz" id="toptouzhu">
+        <div class="fl refl">
+            快捷金额：
+            <input type="text" class="txt" id="inputMoney">
+        </div>
+        <div class="kjanniu">
+            <a href="javascript:void(0)" class="img-50" data-num="50"></a>
+            <a href="javascript:void(0)" class="img-100" data-num="100"></a>
+            <a href="javascript:void(0)" class="img-500" data-num="500"></a>
+            <a href="javascript:void(0)" class="img-1000" data-num="1000"></a>
+            <a href="javascript:void(0)" class="img-5000" data-num="5000"></a>
+            <a href="javascript:void(0)" class="img-10000" data-num="10000"></a>
+        </div>
+    </div>
+    <div class="table-common-list">
+
+    </div>
+</div>
+<script type="text/html" id="ssc_kq_lh">
+    {{each plg line index1}}
+    <div class="table-common clearfix">
+        {{each line val index2}}
+        <table width="100%" border="0" class="item lh" cellpadding="0" cellspacing="0">
+            <tbody>
+            <tr>
+                {{each val.pls v index3}}
+                <td onclick="lhpick(this)">{{v.newvalue}}</td>
+                {{/each}}
+            </tr>
+            <tr>
+                {{each val.pls v index3}}
+                <td onclick="lhpick(this)"><span class="color-red pl">{{v.pl}}</span></td>
+                {{/each}}
+            </tr>
+            <tr>
+                {{each val.pls v index3}}
+                <td><input type="text" class="table-txt" data-name="{{val.name}}-{{v.value}}" data-plid="{{v.id}}"
+                           data-pl="{{v.pl}}"></td>
+                {{/each}}
+            </tr>
+            </tbody>
+        </table>
+        {{/each}}
+    </div>
+    <br/>
+    {{/each}}
+</script>
+<script>
+    $(function () {
+        var playedId = "<?=$playedId?>";
+        $.getJSON("/game/pl/playedId/" + playedId, function (data) {
+            var len = $('.pp').data('line');
+            var i = 0;
+            while (i < data.length) {
+                var str = data[i].name.split('vs');
+                for (var j in data[i].pls) {
+                    if (data[i].pls[j].value == "龙") {
+                        data[i].pls[j].newvalue = str[0];
+                    } else if (data[i].pls[j].value == "虎") {
+                        data[i].pls[j].newvalue = str[1];
+                    } else {
+                        data[i].pls[j].newvalue = "和局";
+                    }
+                }
+                i++;
+            }
+            var index = 0;
+            var newArray = [];
+            while (index < data.length) {
+                newArray.push(data.slice(index, index += len));
+                len--;
+            }
+            var html = template("ssc_kq_lh", {plg: newArray});
+            $('.table-common-list').html(html);
+        });
+        // 只能输入整数
+        $(document).on('keyup', 'input.table-txt', function () {
+            digitOnly($(this));
+        });
+    });
+    // 龙虎快速选择
+    function lhpick(self) {
+        var _isFirst = $(self).closest('tr').next().find('input').length; //false 表示第一个, true 表示第二个
+        var _index = $(self).closest('tr').find('td').index($(self));
+        var _sibling = _isFirst ? $(self).closest('tr').prev().find('td').eq(_index) : $(self).closest('tr').next().find('td').eq(_index);
+        if ($(self).attr('choose') == 'choosed') {
+            $(self).attr('choose', 'unchoosed');
+            $(self).css({'background': 'white'});
+            _sibling.css({'background': 'white'});
+            $(self).closest('table').find('tr').eq(2).find('td').eq(_index).find('input').val('');
+        } else {
+            $(self).attr('choose', 'choosed');
+            $(self).css({'background': 'yellow'});
+            _sibling.css({'background': 'yellow'});
+            $(self).closest('table').find('tr').eq(2).find('td').eq(_index).find('input').val($('#inputMoney').val());
+        }
+    }
+</script>

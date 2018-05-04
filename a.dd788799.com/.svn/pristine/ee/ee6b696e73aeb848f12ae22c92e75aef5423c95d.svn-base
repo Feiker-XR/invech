@@ -1,0 +1,55 @@
+<?php
+namespace app\common\model;
+use think\Model;
+
+class Api extends Base{
+
+    protected $table = 'gygy_api';
+
+    public function getRequestTypeTextAttr($value,$data){
+    	$types = ['POST','GET'];
+        return $types[$data['request_type']]??'';
+    }
+    public function getApiStatusTextAttr($value,$data){
+        $types = ['待研发','研发中','测试中','已完成',];
+        return $types[$data['api_status']]??'';
+    }
+
+    public function getRequestDataAttr()
+    {        
+        if(is_array($this->data['request_data'])){
+            return $this->data['request_data'];
+        }else{
+            return json_decode($this->data['request_data'], true);    
+        }        
+    }
+    public function getResponseDataAttr()
+    {        
+        if(is_array($this->data['response_data'])){
+            return $this->data['response_data'];
+        }else{
+            return json_decode($this->data['response_data'], true);    
+        }        
+    }
+
+    public static function getList(){
+
+        $params = request()->param();
+
+        $query = self::order('id');
+
+        $group = $params['group']??'';
+        if(is_numeric($group)){
+            $query->where('group',$group);
+        }
+
+        $data = $query->paginate(10);
+        
+        return $data;
+    }
+
+    public function group()
+    {
+        return $this->belongsTo('ApiGroup','group_id')->where('enable',1);
+    }        
+}

@@ -1,0 +1,96 @@
+<extend name="Base/common"/>
+<block name="title"><title>下级转账－{:S('WEB_NAME')}</title></block>
+<block name="script">
+<style>
+	.my-select * {
+		margin:0; padding:0;
+	}
+	.my-select input,
+	.my-select select {
+		font-size:100%;
+	}
+	
+	.my-select {
+		position:relative;				
+		font-size:12px;
+	}
+	.my-select-select {
+		position:absolute; left:0; top:0; *top:1px;				
+		clip:rect(0 auto auto 80px);
+	}
+	.my-select-text {
+		*height:16px; *line-height:16px;
+	}
+</style>
+<script>
+	function bb(a){		
+		document.getElementById('my-select-text').value = a;
+	}
+</script>
+<script type="text/javascript">
+function checkRecharge(){
+	if(!this.amount.value) throw('请填写转账金额');
+	
+	if(!this.amount.value.match(/^\d+(\.\d{0,2})?$/)) throw('转账金额必须为整数');
+}
+</script>
+</block>
+<block name="body">
+<div class="pagemain">
+	<div class="display biao-cont">
+		<form action="{:Url('team/turnRecharge')}" method="post" target="ajax" onajax="checkRecharge" call="safeSetCBA">
+			<table width="100%" border="0" cellspacing="1" cellpadding="4" class='table_b'>
+			<tr height="25" class='table_b_th'>
+				<td align="left" style="font-weight:bold;padding-left:10px;" colspan="2">
+					下级转账
+				</td>
+			</tr>
+			<tr height="25" class='table_b_tr_b'>
+				<td align="right" width="25%" style="font-weight:bold;">
+					用户名：
+				</td>
+				<td align="left" width="75%">
+					<div class="my-select">
+						<select class="my-select-select" id="my-select-select" style="width:120px;" onchange="bb(this.value)">
+						<?php
+							$where['parents'] = array('like','%,'.$user['uid'].',%');
+							$users = M('members')->where($where)->select();
+							//dump('22'.M('members')->getLastSql());
+							foreach($users as $user){ 
+						?>
+							<option value="<?=$user['username']?>"><?=$user['username']?></option>
+						<?php } ?>
+						</select>
+						<input autocomplete="off" class="my-select-text" id="my-select-text" name="username" style="width:100px;"/>
+					</div>
+				</td>
+			</tr>
+			<tr height="25" class='table_b_tr_b'>
+				<td align="right" style="font-weight:bold;">
+					转账金额：
+				</td>
+				<td align="left">
+					<input autocomplete="off" type="text" name="amount" style="width:120px;"/>
+				</td>
+			</tr>
+			<tr height="25" class='table_b_tr_b'>
+				<td align="right" style="font-weight:bold;">
+					资金密码：
+				</td>
+				<td align="left">
+					<input type="password" name="coinpwd" class="confirm" style="width:120px;"/>
+				</td>
+			</tr>
+			<tr height="25" class='table_b_tr_b'>
+				<td align="right" style="font-weight:bold;">
+				</td>
+				<td align="left">
+					<input type="button" id='put_button_pass' class="btn" value="确定转账" onclick="$(this).closest('form').submit()">
+					<input type="reset" value="重置" onclick="this.form.reset()" class="btn"/>
+				</td>
+			</tr>
+			</table>
+		</form>
+	</div>
+</div>
+</block>

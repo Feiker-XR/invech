@@ -1,0 +1,119 @@
+<?php
+
+namespace app\common\model\member;
+
+use app\common\model\Message;
+use app\common\model\UserMessage;
+
+trait MessageTrait
+{
+
+    private function buildMessageMemberQuery(){
+        return function($query){
+            $query->where(function($query){
+                $query->where('send_type','admin')
+                ->where('recv_uid',['=',0],['=',$this->uid],'or');
+            })
+            ->whereOr(function($query){
+                $query->where('send_type','agent')
+                ->where('recv_uid',$this->uid)
+                ->whereOr(function($query){                    
+                    $ids = $this->getAgents()->column('uid');//结果集的column返回数组
+                    $query->where('recv_uid',0)->where('send_uid','in',$ids);
+                });
+            });
+        };     
+    }
+
+    private function buildMessageAgentQuery(){
+        return function($query){
+            $query->where(function($query){
+                $query->where('send_type','admin')
+                ->where('recv_uid',['=',0],['=',$this->uid],'or');
+            });
+        };      
+    }
+
+    private function buildMessageAdminQuery(){
+        return function($query){
+            $query->where(function($query){
+                $query->where('recv_type','admin')->where('recv_uid',1);
+            });
+        };      
+    }    
+
+    private function getMessageBuilder($recv_type){
+        $query_name = 'buildMessage'.ucfirst($recv_type).'Query';
+        $recv_type=='admin' ? $recv_uid = 1 : $recv_uid = $this->id;
+        return Message::where('id','not in',function($query)use($recv_type,$recv_uid){ 
+            $query->table((new UserMessage)->getTable())->where('recv_type',$recv_type)
+            ->where('recv_uid',$recv_uid)->field('message_id');
+        })->where('recv_type',$recv_type)
+        ->where($this->{$query_name}());
+    }
+
+    private function buildMessages($recv_type){
+        $recv_type=='admin' ? $recv_uid = 1 : $recv_uid = $this->id;
+        $new_messages = $this->getMessageBuilder($recv_type)->select();
+        foreach ($new_messages as $message) {
+            UserMessage::create([
+                    'recv_type'=>$recv_type,
+                    'recv_uid'=>$recv_uid,
+                    'message_id'=>$message->id,
+                    //'status'=>0,
+                ]);            
+        }
+    }
+
+    public function getInboxBuilder($recv_type='member'){
+        if(!in_array($recv_type,['member','agent','admin'])){
+            return collection([]);
+        }
+        //每次进入收件箱时都拉取信件
+        $recv_type=='admin' ? $recv_uid = 1 : $recv_uid = $this->id;
+        $this->buildMessages($recv_type);
+        return UserMessage::where('recv_type',$recv_type)->where('recv_uid',$recv_uid);
+    }
+
+    //前台
+    public  function getMessQList($request){
+        $query = new UserMessage();
+        $params = $request->param();
+        $data   = [];
+        $query->where('recv_uid', $request->user()->id);
+        if(isset($params['status']) && is_numeric($params['status'])){
+            $query->where('status', $params['status']);
+        }
+        $data['list']   =   $query->order('id desc')->paginate();
+        $data['weidu']  =   $query->where(['status'=>0,'recv_uid'=>$request->user()->id])->count();
+        $data['yidu']   =   $query->where(['status'=>1,'recv_uid'=>$request->user()->id])->count();
+        $data['count']  =   intval($data['weidu'])+intval($data['yidu']);
+        return $data;
+    }
+    //修改站内信状态
+    public  function getMessEdit($ids =[]){
+        if($ids){
+            $ids = implode(',', $ids);
+            $rel = UserMessage::where(['id'=>['in',$ids]])->update(['status'=>1]);
+            if($rel){
+                return $rel;
+            }
+            return false;
+        }else{
+            return false;
+        }
+    }
+
+    public  function getMessDel($ids =[]){
+        if($ids){
+            $rel = UserMessage::destroy($ids);
+            if($rel){
+                return $rel;
+            }
+            return false;
+        }else{
+            return false;
+        }
+    }
+
+}

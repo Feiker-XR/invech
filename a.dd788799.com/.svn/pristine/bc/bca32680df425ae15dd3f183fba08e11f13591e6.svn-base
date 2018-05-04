@@ -1,0 +1,52 @@
+<?php
+return [
+    'menu_list' => [
+        [
+            'name' => '会员管理',
+            'group' => 'member',
+            'sub_menu' => [
+                [
+                    'name'=>'会员列表',
+                    'link'=>'/member/index',
+                ],
+                [
+                    'name'=>'当月有效会员',
+                    'link'=>'/member/avail',
+                ],                
+            ],
+        
+        ],
+        
+        [
+            'name' => '佣金管理',
+            'group' => 'commission',
+            'sub_menu' => [
+                [
+                    'name'=>'佣金总计',
+                    'link'=>'/commission/stat',
+                ],
+                [
+                    'name'=>'会员佣金',
+                    'link'=>'/commission/list',
+                ],
+            ],
+        
+        ],
+
+        [
+            'name' => '站内信',
+            'group' => 'message',
+            'sub_menu' => [
+                [
+                    'name'=>'发件箱',
+                    'link'=>'/message/outbox',
+                ],
+                [
+                    'name'=>'收件箱',
+                    'link'=>'/message/inbox',
+                ],                          
+            ],        
+        ],   
+                
+    ],
+];

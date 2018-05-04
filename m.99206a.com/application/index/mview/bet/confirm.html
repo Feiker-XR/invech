@@ -1,0 +1,60 @@
+<form id="form1" name="form1" method="post" action="bet.php" style="margin:0 0 0 0;" onsubmit="javascript:document.getElementById('submit').disabled=true;">
+<div class="panel panel-danger">
+	<div class="panel-heading">
+	  <h3 class="panel-title">当前<?=$msg?>已改变</h3>
+	</div>
+	<div class="panel-body">
+		<h3>最新<?=$msg?>：<span style="color:#FF0000;"><?=$type?></span></h3>
+		<p class="bg-danger">是否继续交易？</p>
+		<input type="hidden" name="bet_money" value="<?=$_POST["bet_money"]?>" />
+		<input type="hidden" name="touzhutype" value="0" />
+		<input type="hidden" name="ball_sort[]" value="<?=$_POST["ball_sort"][0]?>" />
+		<input type="hidden" name="point_column[]" value="<?=$_POST["point_column"][0]?>" />
+		<input type="hidden" name="match_id[]" value="<?=$_POST["match_id"][0]?>" />
+		<input type="hidden" name="match_name[]" value="<?=$_POST["match_name"][0]?>"  />
+		<input type="hidden" name="match_showtype[]" value="<?=$_POST["match_showtype"][0]?>"  />
+		<input type="hidden" name="match_rgg[]" value="<?=$rgg?>" />
+		<input type="hidden" name="match_dxgg[]" value="<?=$dxgg?>" />
+		<input type="hidden" name="match_nowscore[]"  value="<?=$_POST["match_nowscore"][0]?>"  />
+		<input type="hidden" name="match_type[]"  value="<?=$_POST["match_type"][0]?>"  />
+		<input type="hidden" name="touzhuxiang[]" value="<?=$_POST["touzhuxiang"][0]?>" />
+		<input type="hidden" name="master_guest[]"  value="<?=$_POST["master_guest"][0]?>"/>
+		<input type="hidden" name="bet_info[]" value="<?=$_POST["bet_info"][0]?>"/> 
+		<input type="hidden" name="bet_point[]" value="<?=$pl?>"/>
+		<input type="hidden" name="match_time[]"  value="<?=$_POST["match_time"][0]?>"/>
+		<input type="hidden" name="ben_add[]" value="<?=$_POST["ben_add"][0]?>"/>
+		<input type="hidden" name="match_endtime[]"  value="<?=$_POST["match_endtime"][0]?>"/>
+		<input type="hidden" name="Match_HRedCard[]"  value="<?=$_POST["Match_HRedCard"][0]?>"/>
+		<input type="hidden" name="Match_GRedCard[]"  value="<?=$_POST["Match_GRedCard"][0]?>"/>
+		<input type="hidden" name="is_lose"  value="<?=$_POST["is_lose"][0]?>"/>
+		<input type="hidden" name="tid"  value="<?=$_POST["tid"][0]?>"/>
+	</div>
+	<div class="panel-footer">
+		<div class="col-xs-6"><input type="button" name="Submit2" class="btn btn-warning btn-block" value="取消交易" onclick="gobetiframe();" /></div>
+		<div class="col-xs-6"><input type="submit" name="submit" id="submit" class="btn btn-success btn-block" value="继续交易" /></div>
+	</div>
+</div>
+</form>
+<script language="javascript">
+<!--
+if(self==top){
+	top.location='/index.php';
+}
+$('#s_betiframe',parent.document).height($('body').height());
+function gobetiframe(){
+	$('#s_betiframe',parent.document).height(0);
+	window.location.href="/index/betiframe.html";
+}
+$(document).ready(function() {
+	$('.btn-warning').focus();
+	setTimeout(function(){
+		gobetiframe();
+	},5000);
+});
+
+//window.setInterval("goleft()",5000); //5秒未点击，自动退到left.php页面
+-->
+</script>
+<script type="text/javascript" language="javascript" src="/js/left_mouse.js"></script>
+</body>
+	</html>

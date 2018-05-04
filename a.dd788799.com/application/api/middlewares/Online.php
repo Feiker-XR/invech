@@ -1,0 +1,26 @@
+<?php
+namespace app\api\middlewares;
+use Closure;
+
+class Online 
+{
+
+    public function handle($request, Closure $next)
+    {		
+		$b = config('app_online_stat')??true;//默认统计app在线人数
+		if($b){
+			$jwt_token = $request->jwt_token();
+			$jwt = $request->jwt();
+			if($jwt){				
+		        $ret = db('session')->insert([
+		            'session_id' => $jwt_token,
+		            'session_expire' => $jwt->exp,
+		            //'session_data' => $sessData,
+		            'ip'=>$request->ip(),
+		            'user_agent'=>$request->server('HTTP_USER_AGENT'),                
+		        ],true);				
+			}
+		}
+		return $response = $next($request);
+	}
+}

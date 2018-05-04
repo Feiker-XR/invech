@@ -1,0 +1,205 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>系统设置</title>
+<link href="/css/base.css" rel="stylesheet" type="text/css" />
+<link href="/css/admin.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="/js/jquery.js"></script>
+<script type="text/javascript" src="/js/jquery.tools.js"></script>
+<script type="text/javascript" src="/js/base.js"></script>
+<script language="javascript">
+function gopage(url){
+	location.href = url;
+}
+
+function check(){
+    var len = document.form1.elements.length;
+	var num = false;
+    for(var i=0;i<len;i++){
+		var e = document.form1.elements[i];
+        if(e.checked && e.name=='mid[]'){
+			num = true;
+			break;
+		}
+    }
+	if(num){
+		var action = $("#s_action").val();
+		if(action=="0"){
+			alert("请您选择要执行的相关操作！");
+			return false;
+		}else{
+			if(action=="2") document.form1.action="{:url('sports/jiesuan_list')}?type=bet_match&php=ZuQiu";
+			if(action=="1") document.form1.action="{:url('sports/jiesuan_sb_list')}";
+			if(action=="3") document.form1.action="{:url('sports/re_jiesuan_sb_list')}";
+			if(action=="4") document.form1.action="ZuQiu_Nullity.php?type=bet_match&php=ZuQiu";
+		}
+	}else{
+        alert("您未选中任何复选框");
+        return false;
+    }
+}
+
+function ckall(){
+    for (var i=0;i<document.form1.elements.length;i++){
+	    var e = document.form1.elements[i];
+		if (e.name != 'checkall') e.checked = document.form1.checkall.checked;
+	}
+}
+
+function zqlrbf(zqmid,fid){
+	var md = "<?=$page_date?>";
+	var a = "mi"+zqmid;
+	var b = "ti"+zqmid;
+	var c = "mih"+zqmid;
+	var d = "tih"+zqmid;
+	var m = $("#"+a).val();
+	var t = $("#"+b).val();
+	var l = $("#"+c).val();
+	var n = $("#"+d).val();
+	
+	if(l.length>0 && n.length>0){
+		if(m.length>0 && t.length>0){
+			$.post(
+				"{:url('danshi/zqlr')}",
+				{r:Math.random(),value:m+"|||"+t+"|||"+md+"|||"+zqmid+"|||qc"},
+				function(date){
+					 if(date==3){
+						alert("系统没有查找到您要结算的赛事！")
+					}else if(date==1){
+						ftbf(m,t,1,fid);
+					}
+				}
+			);
+		}
+	}else{
+		alert("请输入上半场比分！");
+		$("#"+a).val("");
+		$("#"+b).val("");
+	}
+}
+
+function zqlrbf_sb(zqmid,fid){
+	var md = "<?=$page_date?>";
+	var c = "mih"+zqmid;
+	var d = "tih"+zqmid;
+	var l = $("#"+c).val();
+	var n = $("#"+d).val();
+	//alert(c+'-'+d+'-'+l+'-'+n);
+	if(l.length>0 && n.length>0){
+		$.post(
+			"{:url('danshi/zqlr')}",
+			{r:Math.random(),value:l+"|||"+n+"|||"+md+"|||"+zqmid+"|||sb"},
+			function(date){
+				if(date==3){
+					alert("系统没有查找到您要结算的赛事！")
+				}else if(date==2){
+					ftbf(l,n,2,fid);
+				}
+			}
+		);
+	}
+}
+
+function ftbf(m,t,p,d){
+	if(p == 1){     //////全场
+		var mid = document.getElementsByName("mi"+d)
+		var tid = document.getElementsByName("ti"+d)
+	}else{
+		var mid = document.getElementsByName("mh"+d)
+		var tid = document.getElementsByName("th"+d)
+	}
+	for(var i=0; i<mid.length; i++){
+		mid[i].value = m;
+		tid[i].value = t;
+	}
+}
+</script>
+</head>
+<body class="list">
+	<div class="bar">
+		体育比分管理
+	</div>
+	
+
+	<div class="body">
+<form id="form1" name="form1" method="post" action="{:url('havebet/zuqiu')}" onSubmit="return check();">
+<div class="listBar">选择日期：
+            <select id="DropDownList1" onChange="javascript:gopage(this.value)" name="DropDownList1"><?php
+for ($i=0;$i<=15;$i++){
+	$s		=	strtotime("-$i day");
+	$date	=	date("m-d",$s);
+?>
+        <option value="{:url('havebet/ft_yes')}?date=<?=$date?>" <?=$page_date==$date ? 'selected' : ''?>><?=$date?></option>
+<?php
+}
+?>
+      </select></div>
+<ul id="tab" class="tab">
+<div style="float:right; margin-right:5px;"><span class="STYLE4">相关操作：</span>
+   <select name="s_action" id="s_action">
+        <option value="0" selected="selected">选择确认</option>
+        <option value="2">结算全场</option>
+        <option value="1">结算上半场</option>
+        <option value="3">重新结算上半场</option>
+        <option value="4" style="color:#FF0000;">设为无效</option>
+      </select>
+      <input type="submit" name="Submit2" value="执行" class="formButton"/>
+      <input type="button" name="Submit2" style="color:#F00" value="进入未结算" class="formButton" onClick="window.location.href='{:url('havebet/zuqiu')}'"/></div>
+                <li><input type="button" value="足球比分" hidefocus class="current" onClick="window.location.href='{:url('havebet/ft_yes')}'" /></li>
+
+			</ul>
+
+<table id="listTables" class="listTables">
+
+				<tr>
+
+					<th>比赛时间</th>
+					<th><?=$page_date?></th>
+
+					<th>主场队伍</th>
+
+					<th>客场队伍</th>
+					<th>上半场比分</th>
+					<th>全场比分</th>
+					<th>查看注单</th>
+				  <th><input name="checkall" type="checkbox" id="checkall" onClick="return ckall();"/></th>
+
+			    </tr>
+
+	{volist name='list' id='rows'}
+	<?PHP
+	$Match_Master = trim($rows['Match_Master']);
+		$Match_Guest = trim($rows['Match_Guest']);
+		$master_guest = $Match_Master.'VS'.$Match_Guest;
+		$master_guest1 = $Match_Master.'VS.'.$Match_Guest;
+		
+		
+		if($rows["Match_SBJS"]>0) $bgcolor="#FF9999";
+		else $bgcolor="#ffffff";
+		
+		$rows["Match_Name"]		=	trim($rows["Match_Name"]);
+		$rows["Match_Master"]	=	trim($rows["Match_Master"]);
+		$rows["Match_Guest"]	=	trim($rows["Match_Guest"]);
+?>
+      <tr>
+      	<td align="center"><?=$rows["Match_Time"]?></td>
+        <td align="center"><?=$rows["Match_Name"]?></td>
+        <td align="center"><?=$rows["Match_Master"]?></td>
+        <td align="center"><?=$rows["Match_Guest"]?></td>
+        <td align="center"><input name="<?="mh".$rows["Match_ID"];?>" type="text" class="zqinput" id="mih<?=$rows["Match_ID"]?>" onChange="zqlrbf_sb(<?=$rows["Match_ID"]?>,<?=$rows["Match_ID"]?>)" value="<?=$rows["MB_Inball_HR"]?>"  style="width:30px; text-align:center; background-color:<?=$bgcolor?>;" maxlength="3" />&nbsp;&nbsp;
+        <input name="<?="th".$rows["Match_ID"];?>" type="text" class="zqinput" id="tih<?=$rows["Match_ID"]?>" onChange="zqlrbf_sb(<?=$rows["Match_ID"]?>,<?=$rows["Match_ID"]?>)" value="<?=$rows["TG_Inball_HR"]?>" style="width:30px; text-align:center; background-color:<?=$bgcolor?>;" maxlength="3" /></td>
+        <td align="center"><input name="<?="mi".$rows["Match_ID"];?>" type="text" class="zqinput" id="mi<?=$rows["Match_ID"]?>" onChange="zqlrbf(<?=$rows["Match_ID"]?>,<?=$rows["Match_ID"]?>)" value="<?=$rows["MB_Inball"]?>" style="width:30px; text-align:center;" maxlength="3" />
+      &nbsp;&nbsp;
+      <input name="<?="ti".$rows["Match_ID"];?>" type="text"class="zqinput"  id="ti<?=$rows["Match_ID"]?>" onChange="zqlrbf(<?=$rows["Match_ID"]?>,<?=$rows["Match_ID"]?>)" value="<?=$rows["TG_Inball"]?>" style="width:30px; text-align:center;" maxlength="3" /></td>
+      <td align="center"><a href="{:url('havebet/matchlist','matchid='.$rows["Match_ID"])}">查看注单</a></td>
+        <td align="center"><input name="mid[]" type="checkbox" id="mid[]" value="<?=$rows["Match_ID"]?>" /></td>
+      </tr>
+	{/volist}
+  </table>
+</form>
+	</div>
+	<div>
+	</div>
+</body>
+</html>

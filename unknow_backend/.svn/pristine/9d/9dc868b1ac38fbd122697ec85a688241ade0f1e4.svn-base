@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>乐博国际</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+<link rel="stylesheet" href="/css/font-awesome.min.css">
+<link rel="stylesheet" href="/styles/ucenter.css">
+<link rel="stylesheet" type="text/css" href="/fonts-new/iconfont.css">	
+<link rel="stylesheet" href="/styles/ezweb.css">
+<link rel="stylesheet" href="/css/500f_new_wap.css">	
+
+<script language="javascript" src="/js/jquery.js"></script> 
+<script src="/js/bootstrap.min.js"></script>
+</head>
+<script>
+	var $my = function(id){
+		return document.getElementById(id);
+	}
+	//数字验证 过滤非法字符
+	function clearNoNum(obj){
+	    obj.value = obj.value.replace(/[^\d.]/g,""); //先把非数字的都替换掉，除了数字和.
+	    obj.value = obj.value.replace(/^\./g,""); //必须保证第一个为数字而不是.
+	    obj.value = obj.value.replace(/\.{2,}/g,"."); //保证只有出现一个.而没有多个.
+	    obj.value = obj.value.replace(".","$#$").replace(/\./g,"").replace("$#$","."); //保证.只出现一次，而不能出现两次以上
+	    if(obj.value != ''){
+			var re=/^\d+\.{0,1}\d{0,2}$/;
+			if(!re.test(obj.value))   
+			{   
+				obj.value = obj.value.substring(0,obj.value.length-1);
+				return false;
+			} 
+	    }
+	}
+	function SubInfo(){
+		var hk=$my('zz_money').value;
+		if(hk==''){
+			alert('请输入转账金额');
+			$my('zz_money').focus();
+			return false;
+		}else{
+			hk = hk*1;
+			if(hk<1){
+				alert('转账金额最低为：1元');
+				$my('zz_money').select();
+				return false;
+			}
+		}
+		$my('SubTran').value = "转账处理中";
+		$my('SubTran').disabled = "disabled";
+		$my('form1').submit();
+	}
+</script>
+<script language="javascript">
+function reflivemoney() {
+	$("#SubTran").val('请稍后...')
+	$("#SubTran").attr('disabled',true);
+	$("#live_money_span").html('请稍后...');
+	$.getJSON("ajax_money.php?callback=?",function(json){
+				$("#live_money_span").html(json.user_livemoney);
+				$("#SubTran").val('确认转账')
+				$("#SubTran").attr('disabled',false);
+		  }
+	);
+}
+reflivemoney();
+</script>
+<body>
+	
+	{include file='common/user-nav'}
+	{include file='common/header'}	
+	
+<div class="h10"></div>
+<div class="ucenter">
+	<div class="container" style="margin-left: 17px;margin-top: 60px;margin-bottom: 60px;">
+	<div class="row">
+
+		<div class="panel panel-default">
+		  <div class="panel-heading">
+		    <h3 class="panel-title">娱乐场转账</h3>
+		  </div>
+		  <div class="panel-body">
+		   <form id="form1" name="form1" class="form-horizontal" action="../live/ed_mobile.php?save=ok" method="post">
+				<div class="form-group">
+				    <label class="col-sm-2 control-label">转账类型：</label>
+				    <div class="col-sm-10">
+				    	<select name="zz_type" id="zz_type" class="form-control">
+							<option value="12">系统余额 → AG真人账户</option>
+							<option value="22">AG真人账户 → 系统余额</option>
+						</select>
+				    </div>
+				</div>
+		    	<div class="form-group">
+				    <label class="col-sm-2 control-label">转账金额：</label>
+				    <div class="col-sm-10">
+				    	<input class="form-control" name="zz_money" type="text" id="zz_money" maxlength="30" />
+				    </div>
+				</div>
+		    	<div class="form-group">
+				    <div class="col-sm-10 col-sm-offset-2">
+				    	<input name="SubTran" type="submit" class="btn btn-green btn-lg btn-block"  id="SubTran" onclick="SubInfo();" value="请稍后..." disabled="disabled"/>
+				    </div>
+				</div>
+		    </form>
+		  </div>
+		</div>
+		<div class="panel panel-default">
+			<div class="panel-heading">
+			    <h3 class="panel-title">会员信息</h3>
+			  </div>
+			  <div class="panel-body">
+			     <p>会员账户：admin222</p>
+			    <p>体育/彩票额度：<span id="hyye" style="color:red">0.00</span></p>
+			    <p>真人额度：<span id="live_money_span" style="color:red">0</span></p>
+			  </div>
+		  </div>
+
+		  
+		</div>
+	</div>
+</div>
+
+<script>
+$(function(){
+	//点击底部固定导航条切换
+$(".nav500_bottom_a").click(function(){
+	var navThis = $(this);
+	navThis.css("color","#d9901e")
+	navThis.parent().siblings("span").find("a").css("color","#999999")
+	navThis.find("i").addClass("nav500_b_active");
+	navThis.parent().siblings("span").find("i").removeClass("nav500_b_active");
+	navThis.addClass("nav500_bottom_active").parent().siblings("span").find("a").removeClass("nav500_bottom_active")
+	});
+	
+})
+</script>
+<script type="text/javascript" language="javascript" src="/js/left_mouse.js"></script>
+</body>
+</html>

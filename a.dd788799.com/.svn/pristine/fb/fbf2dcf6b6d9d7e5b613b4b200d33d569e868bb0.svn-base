@@ -1,0 +1,29 @@
+<?php
+
+namespace app\model;
+use think\Model;
+
+class BonusFlow extends Model
+{
+    protected $createTime = 'created_at';
+    protected $updateTime = 'updated_at';
+    protected $autoWriteTimestamp = 'datetime';
+
+    protected $table = 'gygy_bonus_flow';
+
+
+    public static function getList($request){
+    
+        $params = $request->param();
+
+        $query = self::order('id desc');
+
+        if($params['xx']??null){
+           //$query->where('pay_type', $request->pay_type);
+        }
+
+        $data = $query->select();
+        
+        return $data;
+    }
+}

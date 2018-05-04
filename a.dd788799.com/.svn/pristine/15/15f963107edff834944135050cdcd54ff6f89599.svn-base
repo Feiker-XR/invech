@@ -1,0 +1,27 @@
+<?php
+
+namespace app\index\controller;
+
+use app\index\Base;
+use app\common\model\Help as HelpModel;
+
+class Help extends Base
+{    
+    public  function show($id=0){
+        $help = HelpModel::get($id);
+        if(!$help){
+            $this->error('文档不存在');            
+        }
+        $this->assign('help',$help);
+        return $this->fetch();
+    }
+
+    public  function show2($id=0){
+        $help = HelpModel::get($id);
+        if(!$help){
+            $this->error('文档不存在');            
+        }
+        $this->assign('help',$help);
+        return $this->fetch();
+    }    
+}

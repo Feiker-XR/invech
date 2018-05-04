@@ -1,0 +1,24 @@
+<div class="box box-primary">
+  <div class="box-body no-padding">
+    <div class="mailbox-read-info">
+      <h3>{$info->message->title}</h3>
+      <h5 style="margin-top:10px">来至: {$info->message->sender->username}
+        <span class="mailbox-read-time pull-right">{$info->message->created_at}</span></h5>
+    </div>
+    <!-- /.mailbox-controls -->
+    <div class="mailbox-read-message">
+      <p>你好 {$info->receiver->username},</p>
+
+      <p style="margin-left:20px;">{$info->message->text}</p>
+      <p>谢谢!<br>{$info->receiver->username}</p>
+    </div>
+   
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){
+  $(".layui-layer-close").click(function(){
+     window.location.href = document.URL;
+  })
+});
+</script>

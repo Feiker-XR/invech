@@ -1,0 +1,126 @@
+<link rel="stylesheet" href="/400w-public/css/global.css" />
+<link rel="stylesheet" href="/400w-public/css/other.css" />
+<link rel="stylesheet" href="/400w-public/css/style.css" />
+<link rel="stylesheet" href="/400w-public/css/lottery.css" />
+<script type="text/javascript" src="/400w-public/js/global.js"></script>
+<script type="text/javascript" src="/400w-public/js/ssc.js"></script>
+
+<div class="fl main-left">
+	<div class="hd clearfix rehd" id="toptouzhu">
+		<div class="fl refl">
+			快捷金额：<input type="text" class="txt">
+		</div>
+		<div class="kjanniu">
+			<a href="javascript:void(0)" class="img-50" data-num="50"></a>
+			<a href="javascript:void(0)" class="img-100" data-num="100"></a>
+			<a href="javascript:void(0)" class="img-500" data-num="500"></a>
+			<a href="javascript:void(0)" class="img-1000" data-num="1000"></a>
+			<a href="javascript:void(0)" class="img-5000" data-num="5000"></a>
+			<a href="javascript:void(0)" class="img-10000" data-num="10000"></a>
+		</div>
+		<div class="fr">
+			<div class="T-tab clearfix" style="margin-top: 4.4px; ">
+				<a href="javascript:void(0)" onclick="getSscSubPage('cqssc-yzdw_wdw')">万定位</a>
+				<a href="javascript:void(0)" onclick="getSscSubPage('cqssc-yzdw_qdw')">千定位</a>
+				<a href="javascript:void(0)" onclick="getSscSubPage('cqssc-yzdw_bdw')">百定位</a>
+				<a href="javascript:void(0)" onclick="getSscSubPage('cqssc-yzdw_sdw')">十定位</a>
+				<a href="javascript:void(0)" onclick="getSscSubPage('cqssc-yzdw_gdw')" class="active">个定位</a>
+			</div>
+		</div>
+	</div>
+	<div class="table-common">
+		<table width="100%" border="1">
+			<thead>
+				<tr>
+					<th width="47">号码</th>
+					<th width="56">赔率</th>
+					<th>金额</th>
+					<th width="47">号码</th>
+					<th width="56">赔率</th>
+					<th>金额</th>
+					<th width="47">号码</th>
+					<th width="56">赔率</th>
+					<th>金额</th>
+					<th width="47">号码</th>
+					<th width="56">赔率</th>
+					<th>金额</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td style="cursor: pointer;"><strong>0</strong></td>
+					<td style="cursor: pointer;"><strong class="color-red pl" data-plid="7077">9.85</strong></td>
+					<td><input type="text" class="table-txt" data-name="个定位-0" data-plid="7077"></td>
+
+					<td style="cursor: pointer;"><strong>1</strong></td>
+					<td style="cursor: pointer;"><strong class="color-red pl" data-plid="7092">9.85</strong></td>
+					<td><input type="text" class="table-txt" data-name="个定位-1" data-plid="7092"></td>
+
+					<td style="cursor: pointer;"><strong>2</strong></td>
+					<td style="cursor: pointer;"><strong class="color-red pl" data-plid="7107">9.85</strong></td>
+					<td><input type="text" class="table-txt" data-name="个定位-2" data-plid="7107"></td>
+
+					<td style="cursor: pointer;"><strong>3</strong></td>
+					<td style="cursor: pointer;"><strong class="color-red pl" data-plid="7122">9.85</strong></td>
+					<td><input type="text" class="table-txt" data-name="个定位-3" data-plid="7122"></td>
+				</tr>
+
+				<tr>
+					<td style="cursor: pointer;"><strong>4</strong></td>
+					<td style="cursor: pointer;"><strong class="color-red pl" data-plid="7137">9.85</strong></td>
+					<td><input type="text" class="table-txt" data-name="个定位-4" data-plid="7137"></td>
+
+					<td style="cursor: pointer;"><strong>5</strong></td>
+					<td style="cursor: pointer;"><strong class="color-red pl" data-plid="7152">9.85</strong></td>
+					<td><input type="text" class="table-txt" data-name="个定位-5" data-plid="7152"></td>
+
+					<td style="cursor: pointer;"><strong>6</strong></td>
+					<td style="cursor: pointer;"><strong class="color-red pl" data-plid="7167">9.85</strong></td>
+					<td><input type="text" class="table-txt" data-name="个定位-6" data-plid="7167"></td>
+
+					<td style="cursor: pointer;"><strong>7</strong></td>
+					<td style="cursor: pointer;"><strong class="color-red pl" data-plid="7182">9.85</strong></td>
+					<td><input type="text" class="table-txt" data-name="个定位-7" data-plid="7182"></td>
+				</tr>
+				<tr>
+					<td style="cursor: pointer;"><strong>8</strong></td>
+					<td style="cursor: pointer;"><strong class="color-red pl" data-plid="7197">9.85</strong></td>
+					<td><input type="text" class="table-txt" data-name="个定位-8" data-plid="7197"></td>
+
+					<td style="cursor: pointer;"><strong>9</strong></td>
+					<td style="cursor: pointer;"><strong class="color-red pl" data-plid="7212">9.85</strong></td>
+					<td><input type="text" class="table-txt" data-name="个定位-9" data-plid="7212"></td>
+
+					<td style="cursor: pointer;"><strong>大</strong></td>
+					<td style="cursor: pointer;"><strong class="color-red pl" data-plid="7227">1.985</strong></td>
+					<td><input type="text" class="table-txt" data-name="个定位-大" data-plid="7227"></td>
+
+					<td style="cursor: pointer;"><strong>小</strong></td>
+					<td style="cursor: pointer;"><strong class="color-red pl" data-plid="7242">1.985</strong></td>
+					<td><input type="text" class="table-txt" data-name="个定位-小" data-plid="7242"></td>
+				</tr>
+				<tr>
+					<td style="cursor: pointer;"><strong>单</strong></td>
+					<td style="cursor: pointer;"><strong class="color-red pl" data-plid="7257">1.985</strong></td>
+					<td><input type="text" class="table-txt" data-name="个定位-单" data-plid="7257"></td>
+
+					<td style="cursor: pointer;"><strong>双</strong></td>
+					<td style="cursor: pointer;"><strong class="color-red pl" data-plid="7272">1.985</strong></td>
+					<td><input type="text" class="table-txt" data-name="个定位-双" data-plid="7272"></td>
+
+					<td style="cursor: pointer;"><strong>质</strong></td>
+					<td style="cursor: pointer;"><strong class="color-red pl" data-plid="7287">1.985</strong></td>
+					<td><input type="text" class="table-txt" data-name="个定位-质" data-plid="7287"></td>
+
+					<td style="cursor: pointer;"><strong>合</strong></td>
+					<td style="cursor: pointer;"><strong class="color-red pl" data-plid="7302">1.985</strong></td>
+					<td><input type="text" class="table-txt" data-name="个定位-合" data-plid="7302"></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<div class="btns">
+		<button type="submit" class="btn btn-1">提交</button>
+		<button class="btn btn-2">重设</button>
+	</div>
+</div>

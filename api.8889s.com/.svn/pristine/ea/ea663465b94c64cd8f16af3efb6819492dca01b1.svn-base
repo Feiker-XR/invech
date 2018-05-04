@@ -1,0 +1,99 @@
+<style>
+	.yxlist table tr td{
+		color: #666666;
+	}
+	.yxlist table tr td {
+		background: #ede7e4;
+		border-bottom: 1px solid #d7cfc9;
+	}
+	.yxlist table tr td:nth-child(3){
+		/*color: #d7373d;*/
+	}
+	.yxlist table tr td:nth-child(3) input{
+		color: #d7373d;
+	}
+	.yxlist table tr td input{
+		display: block;
+		width: 1.2em;
+		height: 1.2em;
+		margin: 0 auto;
+		margin-left: 10px;
+	}
+	.yxlist table .tr-cont tr td:nth-child(3) input{
+		width: 2.5rem;
+		height: 1.8rem;
+		line-height: 1.8rem;
+		text-align: center;
+		border: 1px solid #dddddd;
+		border-radius: 0.2rem;
+		background: #f5f5f5;
+		margin-right: 0.3rem;
+		background: #e5dcd9;
+		font-size: 1rem;
+	}
+	.yxlist table .tr-cont tr td:nth-child(1) input{
+		margin-top: 2px;
+	}
+	/*.yxlist table tr td input::before {*/
+		/*content: "\a0";  !*不换行空格*!*/
+		/*display: inline-block;*/
+		/*vertical-align: .2em;*/
+		/*width: 1.8em;*/
+		/*height: 1.8em;*/
+		/*margin-right: .2em;*/
+		/*border-radius: .2em;*/
+		/*text-indent: .15em;*/
+		/*line-height: .65;  !*行高不加单位，子元素将继承数字乘以自身字体尺寸而非父元素行高*!*/
+		/*background: #e5dcd9;*/
+	/*}*/
+
+</style>
+<div src="/index.php/index/zhuiHaoQs/" rel="2.000" style="display: block; width: auto; min-height: 0px; height: 230px;">
+<div  style="position: relative;
+    font-weight: bold;
+    border-top: 1px solid #e6e6e6;
+    /* border-bottom: 1px solid #e6e6e6; */
+    border-right: 1px solid #e6e6e6;
+    border-left: 1px solid #e6e6e6;
+    line-height: 25px;
+    text-align: center;
+    font-size: 13px;
+    overflow: hidden;
+    background: #fff;
+    width: 100%;
+    margin: 0 auto;
+    padding: 1rem 0 0.8rem 1rem;
+    border-bottom: 1px solid #e6e6e6;">
+<select name="qh" style="    width: 8.2rem;
+    height: 1.8rem;
+    line-height: 1.8rem;
+    text-align: center;
+    border: 1px solid #dddddd;
+    border-radius: 0.2rem;
+    background: #f5f5f5;
+    margin-right: 0.3rem;">
+<option value="10">最近10期</option>
+<option value="20">最近20期</option>
+<option value="30">最近30期</option>
+<option value="40">最近40期</option>
+<option value="50">最近50期</option>
+<option value="0">今天全部</option>
+</select>
+<label><input style="margin-left: 30px;" type="checkbox" checked name="zhuiHaoMode" value="1"/>中奖后停止追号</label>
+</div>
+<div class="yxlist" >
+<table border="0" cellpadding="0" cellspacing="0" style="width:100%;">
+	<thead class="tr-top">
+		<tr>
+			<td><input type="checkbox"/></td>
+			<td>期号</td>
+			<td>倍数</td>
+			<td>金额</td>
+			<td>开奖时间</td>
+		</tr>
+	</thead>
+	<tbody class="tr-cont">
+
+	</tbody>
+</table>
+</div>

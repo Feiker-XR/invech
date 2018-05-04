@@ -1,0 +1,805 @@
+
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8" /><meta name="format-detection" content="telephone=no" />
+		<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE11" />
+		<title>【{$parentCategoryInfo.name}{$categoryInfo.name}】{$parentCategoryInfo.name}号码开奖结果查询 - {$sys.site_title}</title>
+		<meta name="keywords" content="{$categoryInfo.keywords}" />
+		<meta name="distribution" content="{$categoryInfo.description}" />
+		<link rel="stylesheet" href="css/headorfood.css" />
+		<link rel="stylesheet" href="css/klsf.css" />
+		<link rel="stylesheet" href="css/calendar.css" />
+		<link rel="shortcut icon" href="img/icon/168favicon.ico">
+		<link rel="stylesheet" href="css/user_adv.css" />
+		<script src="js/lib/bootstrap-3.3.0/js/tests/vendor/jquery.min.js"></script>
+		<script src="js/lib/bootstrap-3.3.0/dist/js/bootstrap.min.js"></script>
+
+		<script type="text/javascript" src="js/lib/jquery-1.7.2.min.js"></script>
+	</head>
+
+	<body>
+		<div class="bodybox pk10lzzhfxymbox daxiaodsbox">
+			<!--#include file="head.html"-->
+<!--#include file="html/aozxy8/kj.html"-->
+		<div class="zhlzbox margt20">
+			<div class="listhead">
+				<div class="listheadl">
+					<span class="lmms"><i>3</i>号码路珠</span>
+				</div>
+				<div class="listheadr">
+					<div class="listheadrl">
+						<span id="today" class="checked">今天</span>
+						<span id="yesterday">昨天</span>
+						<span id="qianday">前天</span>
+					</div>
+					<div class="listheadrr">
+						<div class="rightime">
+							<div id="dateframe">
+								<input type="text" id="date" class="date" placeholder="">
+								<div id="datebox"></div>
+								<i class="dropicond"></i>
+							</div>
+						</div>
+						<div>选择日期&nbsp;</div>
+					</div>
+				</div>
+			</div>
+			<div class="listbox">
+				<div class="checkbox">
+					<div id="lmms" class="checkbtnzh checkbtnmc ">
+						<ul>
+							<li class="title">筛选名次：</li>
+							<li class="sinli"><i>1</i>
+								<a href="javascript:void(0)">号码1</a>
+							</li>
+							<li class="sinli"><i>2</i>
+								<a href="javascript:void(0)">号码2</a>
+							</li>
+							<li class="sinli"><i>3</i>
+								<a href="javascript:void(0)">号码3</a>
+							</li>
+							<li class="sinli"><i>4</i>
+								<a href="javascript:void(0)">号码4</a>
+							</li>
+							<li class="sinli"><i>5</i>
+								<a href="javascript:void(0)">号码5</a>
+							</li>
+							<li class="sinli"><i>6</i>
+								<a href="javascript:void(0)">号码6</a>
+							</li>
+							<li class="sinli"><i>7</i>
+								<a href="javascript:void(0)">号码7</a>
+							</li>
+							<li class="sinli"><i>8</i>
+								<a href="javascript:void(0)">号码8</a>
+							</li>
+							<li class="sinli"><i>9</i>
+								<a href="javascript:void(0)">号码9</a>
+							</li>
+							<li class="sinli"><i>10</i>
+								<a href="javascript:void(0)">号码10</a>
+							</li>
+							<li class="sinli"><i>11</i>
+								<a href="javascript:void(0)">号码11</a>
+							</li>
+							<li class="sinli"><i>12</i>
+								<a href="javascript:void(0)">号码12</a>
+							</li>
+							<li class="sinli klsf_lirap"><i>13</i>
+								<a href="javascript:void(0)">号码13</a>
+							</li>
+							<li class="sinli"><i>14</i>
+								<a href="javascript:void(0)">号码14</a>
+							</li>
+							<li class="sinli"><i>15</i>
+								<a href="javascript:void(0)">号码15</a>
+							</li>
+							<li class="sinli"><i>16</i>
+								<a href="javascript:void(0)">号码16</a>
+							</li>
+							<li class="sinli"><i>17</i>
+								<a href="javascript:void(0)">号码17</a>
+							</li>
+							<li class="sinli"><i>18</i>
+								<a href="javascript:void(0)">号码18</a>
+							</li>
+							<li class="sinli"><i>19</i>
+								<a href="javascript:void(0)">号码19</a>
+							</li>
+							<li class="sinli"><i>20</i>
+								<a href="javascript:void(0)">号码20</a>
+							</li>
+							<li class="zhcheckall">全选</li>
+							<li class="zhclear">清空</li>
+						</ul>
+					</div>
+				</div>
+				<div class="listcontent">
+					<div class="box">
+						<div id="box11" class="item item_1   ball_1 ">
+							<div class="dsLZ">
+								<table class="lz_table_head  g_w1000">
+									<tbody>
+										<tr>
+											<td>连续出现&nbsp;<input class="txtNum" value="1" type="number">&nbsp;次以上&nbsp;
+												<select class="secType">
+													<option value="1">总来</option>
+													<option value="0">没来</option>
+												</select>
+												<input type="button" class="btnCheck" onclick="doCheck('ZhongHeMol',1)" value="确定">出现的次数为: <span class="sec_count">0</span>
+											</td>
+											<td></td>
+											<td class="righttd">
+												<span class="now_l"></span><span class="jinri">今天</span>&nbsp;累计总来(<span class="count left_count" data="大">0</span>)&nbsp;&nbsp;没来(<span class="count right_count" data="后">0</span>)
+												<span class="important"><span class="ifgj"></span>&nbsp;<span class="ifds"></span>&nbsp;&nbsp;&nbsp;最新</span>
+											</td>
+											<td class="tobottom"></td>
+										</tr>
+									</tbody>
+								</table>
+								<div class="item_con" dir="rtl">
+									<table class="lz_table_con" border="0" cellpadding="1" cellspacing="1">
+										<tbody>
+											<tr class="tablebox">
+
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+						<div id="box21" class="item item_1   ball_1 ">
+							<div class="dsLZ">
+								<table class="lz_table_head  g_w1000">
+									<tbody>
+										<tr>
+											<td>连续出现&nbsp;<input class="txtNum" value="1" type="number">&nbsp;次以上&nbsp;
+												<select class="secType">
+													<option value="1">总来</option>
+													<option value="0">没来</option>
+												</select>
+												<input type="button" class="btnCheck" onclick="doCheck('ZhongHeMol',1)" value="确定">出现的次数为: <span class="sec_count">0</span>
+											</td>
+											<td></td>
+											<td class="righttd">
+												<span class="now_l"></span><span class="jinri">今天</span>&nbsp;累计总来(<span class="count left_count" data="">0</span>)&nbsp;&nbsp;没来(<span class="count right_count" data="">0</span>)
+												<span class="important"><span class="ifgj"></span>&nbsp;<span class="ifds"></span>&nbsp;&nbsp;&nbsp;最新</span>
+											</td>
+											<td class="tobottom"></td>
+										</tr>
+									</tbody>
+								</table>
+								<div class="item_con" dir="rtl">
+									<table class="lz_table_con" border="0" cellpadding="1" cellspacing="1">
+										<tbody>
+											<tr class="tablebox">
+
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+						<div id="box31" class="item item_1   ball_1 ">
+							<div class="dsLZ">
+								<table class="lz_table_head  g_w1000">
+									<tbody>
+										<tr>
+											<td>连续出现&nbsp;<input class="txtNum" value="1" type="number">&nbsp;次以上&nbsp;
+												<select class="secType">
+													<option value="1">总来</option>
+													<option value="0">没来</option>
+												</select>
+												<input type="button" class="btnCheck" onclick="doCheck('ZhongHeMol',1)" value="确定">出现的次数为: <span class="sec_count">0</span>
+											</td>
+											<td></td>
+											<td class="righttd">
+												<span class="now_l"></span><span class="jinri">今天</span>&nbsp;累计总来(<span class="count left_count" data="龙">0</span>)&nbsp;&nbsp;没来(<span class="count right_count" data="单">0</span>)
+												<span class="important"><span class="ifgj"></span>&nbsp;<span class="ifds"></span>&nbsp;&nbsp;&nbsp;最新</span>
+											</td>
+											<td class="tobottom"></td>
+										</tr>
+									</tbody>
+								</table>
+								<div class="item_con" dir="rtl">
+									<table class="lz_table_con" border="0" cellpadding="1" cellspacing="1">
+										<tbody>
+											<tr class="tablebox">
+
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+						<div id="box41" class="item item_1   ball_1 ">
+							<div class="dsLZ">
+								<table class="lz_table_head  g_w1000">
+									<tbody>
+										<tr>
+											<td>连续出现&nbsp;<input class="txtNum" value="1" type="number">&nbsp;次以上&nbsp;
+												<select class="secType">
+													<option value="1">总来</option>
+													<option value="0">没来</option>
+												</select>
+												<input type="button" class="btnCheck" onclick="doCheck('ZhongHeMol',1)" value="确定">出现的次数为: <span class="sec_count">0</span>
+											</td>
+											<td></td>
+											<td class="righttd">
+												<span class="now_l"></span><span class="jinri">今天</span>&nbsp;累计总来(<span class="count left_count" data="">0</span>)&nbsp;&nbsp;没来(<span class="count right_count" data="">0</span>)
+												<span class="important"><span class="ifgj"></span>&nbsp;<span class="ifds"></span>&nbsp;&nbsp;&nbsp;最新</span>
+											</td>
+											<td class="tobottom"></td>
+										</tr>
+									</tbody>
+								</table>
+								<div class="item_con" dir="rtl">
+									<table class="lz_table_con" border="0" cellpadding="1" cellspacing="1">
+										<tbody>
+											<tr class="tablebox">
+
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+						<div id="box51" class="item item_1   ball_1 ">
+							<div class="dsLZ">
+								<table class="lz_table_head  g_w1000">
+									<tbody>
+										<tr>
+											<td>连续出现&nbsp;<input class="txtNum" value="1" type="number">&nbsp;次以上&nbsp;
+												<select class="secType">
+													<option value="1">总来</option>
+													<option value="0">没来</option>
+												</select>
+												<input type="button" class="btnCheck" onclick="doCheck('ZhongHeMol',1)" value="确定">出现的次数为: <span class="sec_count">0</span>
+											</td>
+											<td></td>
+											<td class="righttd">
+												<span class="now_l"></span><span class="jinri">今天</span>&nbsp;累计总来(<span class="count left_count" data="">0</span>)&nbsp;&nbsp;没来(<span class="count right_count" data="">0</span>)
+												<span class="important"><span class="ifgj"></span>&nbsp;<span class="ifds"></span>&nbsp;&nbsp;&nbsp;最新</span>
+											</td>
+											<td class="tobottom"></td>
+										</tr>
+									</tbody>
+								</table>
+								<div class="item_con" dir="rtl">
+									<table class="lz_table_con" border="0" cellpadding="1" cellspacing="1">
+										<tbody>
+											<tr class="tablebox">
+
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+						<div id="box61" class="item item_1   ball_1 ">
+							<div class="dsLZ">
+								<table class="lz_table_head  g_w1000">
+									<tbody>
+										<tr>
+											<td>连续出现&nbsp;<input class="txtNum" value="1" type="number">&nbsp;次以上&nbsp;
+												<select class="secType">
+													<option value="1">总来</option>
+													<option value="0">没来</option>
+												</select>
+												<input type="button" class="btnCheck" onclick="doCheck('ZhongHeMol',1)" value="确定">出现的次数为: <span class="sec_count">0</span>
+											</td>
+											<td></td>
+											<td class="righttd">
+												<span class="now_l"></span><span class="jinri">今天</span>&nbsp;累计总来(<span class="count left_count" data="">0</span>)&nbsp;&nbsp;没来(<span class="count right_count" data="">0</span>)
+												<span class="important"><span class="ifgj"></span>&nbsp;<span class="ifds"></span>&nbsp;&nbsp;&nbsp;最新</span>
+											</td>
+											<td class="tobottom"></td>
+										</tr>
+									</tbody>
+								</table>
+								<div class="item_con" dir="rtl">
+									<table class="lz_table_con" border="0" cellpadding="1" cellspacing="1">
+										<tbody>
+											<tr class="tablebox">
+
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+						<div id="box71" class="item item_1   ball_1 ">
+							<div class="dsLZ">
+								<table class="lz_table_head  g_w1000">
+									<tbody>
+										<tr>
+											<td>连续出现&nbsp;<input class="txtNum" value="1" type="number">&nbsp;次以上&nbsp;
+												<select class="secType">
+													<option value="1">总来</option>
+													<option value="0">没来</option>
+												</select>
+												<input type="button" class="btnCheck" onclick="doCheck('ZhongHeMol',1)" value="确定">出现的次数为: <span class="sec_count">0</span>
+											</td>
+											<td></td>
+											<td class="righttd">
+												<span class="now_l"></span><span class="jinri">今天</span>&nbsp;累计总来(<span class="count left_count" data="">0</span>)&nbsp;&nbsp;没来(<span class="count right_count" data="单">0</span>)
+												<span class="important"><span class="ifgj"></span>&nbsp;<span class="ifds"></span>&nbsp;&nbsp;&nbsp;最新</span>
+											</td>
+											<td class="tobottom"></td>
+										</tr>
+									</tbody>
+								</table>
+								<div class="item_con" dir="rtl">
+									<table class="lz_table_con" border="0" cellpadding="1" cellspacing="1">
+										<tbody>
+											<tr class="tablebox">
+
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+						<div id="box81" class="item item_1   ball_1 ">
+							<div class="dsLZ">
+								<table class="lz_table_head  g_w1000">
+									<tbody>
+										<tr>
+											<td>连续出现&nbsp;<input class="txtNum" value="1" type="number">&nbsp;次以上&nbsp;
+												<select class="secType">
+													<option value="1">总来</option>
+													<option value="0">没来</option>
+												</select>
+												<input type="button" class="btnCheck" onclick="doCheck('ZhongHeMol',1)" value="确定">出现的次数为: <span class="sec_count">0</span>
+											</td>
+											<td></td>
+											<td class="righttd">
+												<span class="now_l"></span><span class="jinri">今天</span>&nbsp;累计总来(<span class="count left_count" data="">0</span>)&nbsp;&nbsp;没来(<span class="count right_count" data="">0</span>)
+												<span class="important"><span class="ifgj"></span>&nbsp;<span class="ifds"></span>&nbsp;&nbsp;&nbsp;最新</span>
+											</td>
+											<td class="tobottom"></td>
+										</tr>
+									</tbody>
+								</table>
+								<div class="item_con" dir="rtl">
+									<table class="lz_table_con" border="0" cellpadding="1" cellspacing="1">
+										<tbody>
+											<tr class="tablebox">
+
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+						<div id="box91" class="item item_1   ball_1 ">
+							<div class="dsLZ">
+								<table class="lz_table_head  g_w1000">
+									<tbody>
+										<tr>
+											<td>连续出现&nbsp;<input class="txtNum" value="1" type="number">&nbsp;次以上&nbsp;
+												<select class="secType">
+													<option value="1">总来</option>
+													<option value="0">没来</option>
+												</select>
+												<input type="button" class="btnCheck" onclick="doCheck('ZhongHeMol',1)" value="确定">出现的次数为: <span class="sec_count">0</span>
+											</td>
+											<td></td>
+											<td class="righttd">
+												<span class="now_l"></span><span class="jinri">今天</span>&nbsp;累计总来(<span class="count left_count" data="龙">0</span>)&nbsp;&nbsp;没来(<span class="count right_count" data="单">0</span>)
+												<span class="important"><span class="ifgj"></span>&nbsp;<span class="ifds"></span>&nbsp;&nbsp;&nbsp;最新</span>
+											</td>
+											<td class="tobottom"></td>
+										</tr>
+									</tbody>
+								</table>
+								<div class="item_con" dir="rtl">
+									<table class="lz_table_con" border="0" cellpadding="1" cellspacing="1">
+										<tbody>
+											<tr class="tablebox">
+
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+						
+						<div id="box101" class="item item_1   ball_1 ">
+							<div class="dsLZ">
+								<table class="lz_table_head  g_w1000">
+									<tbody>
+										<tr>
+											<td>连续出现&nbsp;<input class="txtNum" value="1" type="number">&nbsp;次以上&nbsp;
+												<select class="secType">
+													<option value="1">总来</option>
+													<option value="0">没来</option>
+												</select>
+												<input type="button" class="btnCheck" onclick="doCheck('ZhongHeMol',1)" value="确定">出现的次数为: <span class="sec_count">0</span>
+											</td>
+											<td></td>
+											<td class="righttd">
+												<span class="now_l"></span><span class="jinri">今天</span>&nbsp;累计总来(<span class="count left_count" data="大">0</span>)&nbsp;&nbsp;没来(<span class="count right_count" data="后">0</span>)
+												<span class="important"><span class="ifgj"></span>&nbsp;<span class="ifds"></span>&nbsp;&nbsp;&nbsp;最新</span>
+											</td>
+											<td class="tobottom"></td>
+										</tr>
+									</tbody>
+								</table>
+								<div class="item_con" dir="rtl">
+									<table class="lz_table_con" border="0" cellpadding="1" cellspacing="1">
+										<tbody>
+											<tr class="tablebox">
+
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+						<div id="box111" class="item item_1   ball_1 ">
+							<div class="dsLZ">
+								<table class="lz_table_head  g_w1000">
+									<tbody>
+										<tr>
+											<td>连续出现&nbsp;<input class="txtNum" value="1" type="number">&nbsp;次以上&nbsp;
+												<select class="secType">
+													<option value="1">总来</option>
+													<option value="0">没来</option>
+												</select>
+												<input type="button" class="btnCheck" onclick="doCheck('ZhongHeMol',1)" value="确定">出现的次数为: <span class="sec_count">0</span>
+											</td>
+											<td></td>
+											<td class="righttd">
+												<span class="now_l"></span><span class="jinri">今天</span>&nbsp;累计总来(<span class="count left_count" data="大">0</span>)&nbsp;&nbsp;没来(<span class="count right_count" data="后">0</span>)
+												<span class="important"><span class="ifgj"></span>&nbsp;<span class="ifds"></span>&nbsp;&nbsp;&nbsp;最新</span>
+											</td>
+											<td class="tobottom"></td>
+										</tr>
+									</tbody>
+								</table>
+								<div class="item_con" dir="rtl">
+									<table class="lz_table_con" border="0" cellpadding="1" cellspacing="1">
+										<tbody>
+											<tr class="tablebox">
+
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+						<div id="box121" class="item item_1   ball_1 ">
+							<div class="dsLZ">
+								<table class="lz_table_head  g_w1000">
+									<tbody>
+										<tr>
+											<td>连续出现&nbsp;<input class="txtNum" value="1" type="number">&nbsp;次以上&nbsp;
+												<select class="secType">
+													<option value="1">总来</option>
+													<option value="0">没来</option>
+												</select>
+												<input type="button" class="btnCheck" onclick="doCheck('ZhongHeMol',1)" value="确定">出现的次数为: <span class="sec_count">0</span>
+											</td>
+											<td></td>
+											<td class="righttd">
+												<span class="now_l"></span><span class="jinri">今天</span>&nbsp;累计总来(<span class="count left_count" data="">0</span>)&nbsp;&nbsp;没来(<span class="count right_count" data="">0</span>)
+												<span class="important"><span class="ifgj"></span>&nbsp;<span class="ifds"></span>&nbsp;&nbsp;&nbsp;最新</span>
+											</td>
+											<td class="tobottom"></td>
+										</tr>
+									</tbody>
+								</table>
+								<div class="item_con" dir="rtl">
+									<table class="lz_table_con" border="0" cellpadding="1" cellspacing="1">
+										<tbody>
+											<tr class="tablebox">
+
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+						<div id="box131" class="item item_1   ball_1 ">
+							<div class="dsLZ">
+								<table class="lz_table_head  g_w1000">
+									<tbody>
+										<tr>
+											<td>连续出现&nbsp;<input class="txtNum" value="1" type="number">&nbsp;次以上&nbsp;
+												<select class="secType">
+													<option value="1">总来</option>
+													<option value="0">没来</option>
+												</select>
+												<input type="button" class="btnCheck" onclick="doCheck('ZhongHeMol',1)" value="确定">出现的次数为: <span class="sec_count">0</span>
+											</td>
+											<td></td>
+											<td class="righttd">
+												<span class="now_l"></span><span class="jinri">今天</span>&nbsp;累计总来(<span class="count left_count" data="龙">0</span>)&nbsp;&nbsp;没来(<span class="count right_count" data="单">0</span>)
+												<span class="important"><span class="ifgj"></span>&nbsp;<span class="ifds"></span>&nbsp;&nbsp;&nbsp;最新</span>
+											</td>
+											<td class="tobottom"></td>
+										</tr>
+									</tbody>
+								</table>
+								<div class="item_con" dir="rtl">
+									<table class="lz_table_con" border="0" cellpadding="1" cellspacing="1">
+										<tbody>
+											<tr class="tablebox">
+
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+						<div id="box141" class="item item_1   ball_1 ">
+							<div class="dsLZ">
+								<table class="lz_table_head  g_w1000">
+									<tbody>
+										<tr>
+											<td>连续出现&nbsp;<input class="txtNum" value="1" type="number">&nbsp;次以上&nbsp;
+												<select class="secType">
+													<option value="1">总来</option>
+													<option value="0">没来</option>
+												</select>
+												<input type="button" class="btnCheck" onclick="doCheck('ZhongHeMol',1)" value="确定">出现的次数为: <span class="sec_count">0</span>
+											</td>
+											<td></td>
+											<td class="righttd">
+												<span class="now_l"></span><span class="jinri">今天</span>&nbsp;累计总来(<span class="count left_count" data="">0</span>)&nbsp;&nbsp;没来(<span class="count right_count" data="">0</span>)
+												<span class="important"><span class="ifgj"></span>&nbsp;<span class="ifds"></span>&nbsp;&nbsp;&nbsp;最新</span>
+											</td>
+											<td class="tobottom"></td>
+										</tr>
+									</tbody>
+								</table>
+								<div class="item_con" dir="rtl">
+									<table class="lz_table_con" border="0" cellpadding="1" cellspacing="1">
+										<tbody>
+											<tr class="tablebox">
+
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+						<div id="box151" class="item item_1   ball_1 ">
+							<div class="dsLZ">
+								<table class="lz_table_head  g_w1000">
+									<tbody>
+										<tr>
+											<td>连续出现&nbsp;<input class="txtNum" value="1" type="number">&nbsp;次以上&nbsp;
+												<select class="secType">
+													<option value="1">总来</option>
+													<option value="0">没来</option>
+												</select>
+												<input type="button" class="btnCheck" onclick="doCheck('ZhongHeMol',1)" value="确定">出现的次数为: <span class="sec_count">0</span>
+											</td>
+											<td></td>
+											<td class="righttd">
+												<span class="now_l"></span><span class="jinri">今天</span>&nbsp;累计总来(<span class="count left_count" data="">0</span>)&nbsp;&nbsp;没来(<span class="count right_count" data="">0</span>)
+												<span class="important"><span class="ifgj"></span>&nbsp;<span class="ifds"></span>&nbsp;&nbsp;&nbsp;最新</span>
+											</td>
+											<td class="tobottom"></td>
+										</tr>
+									</tbody>
+								</table>
+								<div class="item_con" dir="rtl">
+									<table class="lz_table_con" border="0" cellpadding="1" cellspacing="1">
+										<tbody>
+											<tr class="tablebox">
+
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+						<div id="box161" class="item item_1   ball_1 ">
+							<div class="dsLZ">
+								<table class="lz_table_head  g_w1000">
+									<tbody>
+										<tr>
+											<td>连续出现&nbsp;<input class="txtNum" value="1" type="number">&nbsp;次以上&nbsp;
+												<select class="secType">
+													<option value="1">总来</option>
+													<option value="0">没来</option>
+												</select>
+												<input type="button" class="btnCheck" onclick="doCheck('ZhongHeMol',1)" value="确定">出现的次数为: <span class="sec_count">0</span>
+											</td>
+											<td></td>
+											<td class="righttd">
+												<span class="now_l"></span><span class="jinri">今天</span>&nbsp;累计总来(<span class="count left_count" data="">0</span>)&nbsp;&nbsp;没来(<span class="count right_count" data="">0</span>)
+												<span class="important"><span class="ifgj"></span>&nbsp;<span class="ifds"></span>&nbsp;&nbsp;&nbsp;最新</span>
+											</td>
+											<td class="tobottom"></td>
+										</tr>
+									</tbody>
+								</table>
+								<div class="item_con" dir="rtl">
+									<table class="lz_table_con" border="0" cellpadding="1" cellspacing="1">
+										<tbody>
+											<tr class="tablebox">
+
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+						<div id="box171" class="item item_1   ball_1 ">
+							<div class="dsLZ">
+								<table class="lz_table_head  g_w1000">
+									<tbody>
+										<tr>
+											<td>连续出现&nbsp;<input class="txtNum" value="1" type="number">&nbsp;次以上&nbsp;
+												<select class="secType">
+													<option value="1">总来</option>
+													<option value="0">没来</option>
+												</select>
+												<input type="button" class="btnCheck" onclick="doCheck('ZhongHeMol',1)" value="确定">出现的次数为: <span class="sec_count">0</span>
+											</td>
+											<td></td>
+											<td class="righttd">
+												<span class="now_l"></span><span class="jinri">今天</span>&nbsp;累计总来(<span class="count left_count" data="">0</span>)&nbsp;&nbsp;没来(<span class="count right_count" data="单">0</span>)
+												<span class="important"><span class="ifgj"></span>&nbsp;<span class="ifds"></span>&nbsp;&nbsp;&nbsp;最新</span>
+											</td>
+											<td class="tobottom"></td>
+										</tr>
+									</tbody>
+								</table>
+								<div class="item_con" dir="rtl">
+									<table class="lz_table_con" border="0" cellpadding="1" cellspacing="1">
+										<tbody>
+											<tr class="tablebox">
+
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+						<div id="box181" class="item item_1   ball_1 ">
+							<div class="dsLZ">
+								<table class="lz_table_head  g_w1000">
+									<tbody>
+										<tr>
+											<td>连续出现&nbsp;<input class="txtNum" value="1" type="number">&nbsp;次以上&nbsp;
+												<select class="secType">
+													<option value="1">总来</option>
+													<option value="0">没来</option>
+												</select>
+												<input type="button" class="btnCheck" onclick="doCheck('ZhongHeMol',1)" value="确定">出现的次数为: <span class="sec_count">0</span>
+											</td>
+											<td></td>
+											<td class="righttd">
+												<span class="now_l"></span><span class="jinri">今天</span>&nbsp;累计总来(<span class="count left_count" data="">0</span>)&nbsp;&nbsp;没来(<span class="count right_count" data="">0</span>)
+												<span class="important"><span class="ifgj"></span>&nbsp;<span class="ifds"></span>&nbsp;&nbsp;&nbsp;最新</span>
+											</td>
+											<td class="tobottom"></td>
+										</tr>
+									</tbody>
+								</table>
+								<div class="item_con" dir="rtl">
+									<table class="lz_table_con" border="0" cellpadding="1" cellspacing="1">
+										<tbody>
+											<tr class="tablebox">
+
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+						<div id="box191" class="item item_1   ball_1 ">
+							<div class="dsLZ">
+								<table class="lz_table_head  g_w1000">
+									<tbody>
+										<tr>
+											<td>连续出现&nbsp;<input class="txtNum" value="1" type="number">&nbsp;次以上&nbsp;
+												<select class="secType">
+													<option value="1">总来</option>
+													<option value="0">没来</option>
+												</select>
+												<input type="button" class="btnCheck" onclick="doCheck('ZhongHeMol',1)" value="确定">出现的次数为: <span class="sec_count">0</span>
+											</td>
+											<td></td>
+											<td class="righttd">
+												<span class="now_l"></span><span class="jinri">今天</span>&nbsp;累计总来(<span class="count left_count" data="龙">0</span>)&nbsp;&nbsp;没来(<span class="count right_count" data="单">0</span>)
+												<span class="important"><span class="ifgj"></span>&nbsp;<span class="ifds"></span>&nbsp;&nbsp;&nbsp;最新</span>
+											</td>
+											<td class="tobottom"></td>
+										</tr>
+									</tbody>
+								</table>
+								<div class="item_con" dir="rtl">
+									<table class="lz_table_con" border="0" cellpadding="1" cellspacing="1">
+										<tbody>
+											<tr class="tablebox">
+
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+						<div id="box201" class="item item_1   ball_1 ">
+							<div class="dsLZ">
+								<table class="lz_table_head  g_w1000">
+									<tbody>
+										<tr>
+											<td>连续出现&nbsp;<input class="txtNum" value="1" type="number">&nbsp;次以上&nbsp;
+												<select class="secType">
+													<option value="1">总来</option>
+													<option value="0">没来</option>
+												</select>
+												<input type="button" class="btnCheck" onclick="doCheck('ZhongHeMol',1)" value="确定">出现的次数为: <span class="sec_count">0</span>
+											</td>
+											<td></td>
+											<td class="righttd">
+												<span class="now_l"></span><span class="jinri">今天</span>&nbsp;累计总来(<span class="count left_count" data="龙">0</span>)&nbsp;&nbsp;没来(<span class="count right_count" data="单">0</span>)
+												<span class="important"><span class="ifgj"></span>&nbsp;<span class="ifds"></span>&nbsp;&nbsp;&nbsp;最新</span>
+											</td>
+											<td class="tobottom"></td>
+										</tr>
+									</tbody>
+								</table>
+								<div class="item_con" dir="rtl">
+									<table class="lz_table_con" border="0" cellpadding="1" cellspacing="1">
+										<tbody>
+											<tr class="tablebox">
+
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="listboxinfor">
+				<p>“X”表示历史对应的某一期未出现该号码， </p>
+				<p>“√”表示历史对应的某一期出现了该号码。</p>
+			</div>
+		</div>
+
+		<!-- <div id="fooderbox"></div> -->
+		<!--#include file="foot.html"-->
+		</div>
+		<div class="fixedgoBack">
+			<div class="fix1200">
+				<ul>
+					<li>
+						<a class="kefuicon" target="_blank" href="http://crm2.qq.com/page/portalpage/wpa.php?lang=&uin=800057725&cref=http://www.168kai.cc&ref=&pt=168%E5%BC%80%E5%A5%96%E7%BD%91&f=1&ty=1&ap=&as="></a>
+					</li>
+					<li>
+						<!--用户反馈模态框-->
+						<span class="fankuicon fankuicon_a" data-toggle="modal" data-target="#myModal">
+							<span class="fankuicons"></span>
+						</span>
+
+					</li>
+					<li>
+						<a class="topicon" id="gotop" href="javascript:"></a>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<!--模态框-->
+		<!-- 模态框（Modal） -->
+		<div id="user_adv"></div>
+
+		<script type="text/javascript" src="js/lib/calendar.js"></script>
+	</body>
+	<script type="text/javascript" src="js/lib/config.js"></script>
+	<script type="text/javascript" src="js/lib/GA.js"></script>
+	<script type="text/javascript" src="js/loacal/klsf/klsf_haomalz.js"></script>
+	<script type="text/javascript" src="js/loacal/animate/animate.js"></script>
+	<script type="text/javascript" src="js/loacal/aozxy8/aozxy8_kai.js"></script>
+
+</html>

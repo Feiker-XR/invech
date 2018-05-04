@@ -1,0 +1,319 @@
+{extend name="base/common"/}
+
+{block name="title"}<title>用户中心－{$settings.webName}</title>{/block}
+
+{block name="body"}
+<!--<div class="effect mainnav-lg mainnav-fixed navbar-fixed footer-fixed" id="container">
+	<div id="page-content">
+		<div class="panel">
+			<div class="mayhead">
+				<p>
+					<img alt="" src="/__IMG__/fei_game/tx.jpg"><strong>{$user.username}</strong>
+				</p>
+			</div>
+			<div class="myinfo" id="myinfoa">
+				<div class="myinfotitle">
+					<span><img alt="" src="/__IMG__/main/d1.png">我的信息</span>
+				</div>
+				<div class="myinfotxt">
+					<ul>
+						<li>昵称：<strong id="labNick">{$user.nickname?$user.nickname:''}</strong></li>
+						<li>余额：<strong style="color: rgb(237, 108, 68); font-weight: bold;">￥{$user.coin?$user.coin:''}</strong></li>
+						<li>返点：<strong style="color: rgb(237, 108, 68); font-weight: bold;">{$user.fanDian?$user.fanDian:''}</strong></li>
+						<li>注册时间：<strong>{$user['created_at']}</strong></li>
+						<li>最近登录时间：<strong>{:isset($login['loginTime']) ? date('Y/m/d H:i:s',$login['loginTime']):''}</strong></li>
+						<li>最近登录IP：<strong>{:isset($login['loginIP']) ? long2ip($login['loginIP']):''}</strong></li>
+						<li>最近登录地址：<strong>{$login.addr?$login.addr:''}</strong></li>
+						<li>登录问候语：<strong id="labLogGreeting">{$user.safepwd}</strong></li>
+					</ul>
+				</div>
+			</div>
+			<div class="myinfo" id="myinfob">
+				<div class="myinfotitle">
+					<span><img alt="" src="/__IMG__/main/d2.png">团队信息</span>
+				</div>
+				<div class="myinfotxt">
+					<ul>
+						<li>团队人数：<strong>{$childinfo.count}</strong></li>
+						<li>在线人数：<strong style="color: rgb(89, 154, 220); font-weight: bold;">{$childinfo.linecount}</strong></li>
+						<li>团队余额：<strong style="color: rgb(237, 108, 68); font-weight: bold;">￥{$childinfo.coins}</strong></li>
+						<li>当日注册：<strong>{$childinfo.regcount}</strong></li>
+					</ul>
+				</div>
+			</div>
+			<div class="myinfo" id="myinfoc">
+				<div class="myinfotitle">
+					<span><img alt="" src="/__IMG__/main/d3.png">其他信息</span>
+				</div>
+				<div class="myinfotxt">
+					<ul>
+						<li>绑定银行卡数量：<strong>{$this->iff($mybank,'0','1')}</strong></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div class="panel" style="margin-top: 20px;">
+			<ul class="nav nav-tabs">
+				<li class="active"><a aria-expanded="true" href="http://jsl-js.yaoxingdinshen.com/member/membercenter#nick-tab" data-toggle="tab">昵称与登录问候语</a></li>
+			</ul>
+			<div class="tab-content">
+				<div class="tab-pane fade active in" id="nick-tab">
+					<div class="panel-body">
+						<div class="form-group">
+							<label class="col-sm-2 control-label">昵称</label>
+							<div class="col-sm-10">
+								<input class="form-control input-sm" id="nickName" type="text" maxlength="10" placeholder="请输入昵称" value="{$user.nickname}">
+							</div>
+						</div>
+						<br>
+						<br>
+						<div class="form-group">
+							<label class="col-sm-2 control-label">登录问候语</label>
+							<div class="col-sm-10">
+								<input class="form-control input-sm" id="remark" type="text" maxlength="15" placeholder="请输入登录问候语" value="{$user.safepwd}">
+							</div>
+						</div>
+						<br>
+						<br>
+						<div class="form-group">
+							<label class="col-sm-2 control-label">登录密码</label>
+							<div class="col-sm-10">
+								<input class="form-control input-sm" id="loginpass" style="-ms-ime-mode: disabled;" onfocus="$(this).attr('type', 'password')" type="text" maxlength="50" placeholder="请输入登录密码" value="" autocomplete="off">
+							</div>
+						</div>
+						<br>
+						<br>
+						<div class="form-group">
+							<label class="col-sm-2 control-label"></label>
+							<div class="col-sm-10">
+								<div class="btnbox">
+									<button id="updateNick" type="button">更新昵称与登录问候语</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div tabindex="1" class="modal fade" id="business-modal" role="dialog" aria-hidden="true" aria-labelledby="business-modal">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button class="close" type="button" data-dismiss="modal"><span aria-hidden="true">×</span></button>
+						<h4 class="modal-title text-primary" id="TitleStyle"><i class="fa fa-trophy fa-lg"></i>
+						<label id="TitleName">拒绝新的分红签约</label>
+						</h4>
+					</div>
+					<div class="modal-body">
+						<div class="form-group">
+							<div class="input-group">
+								<br>
+								<div class="input-group-addon">
+									<i class="fa fa-asterisk"></i>
+								</div>
+								<input class="form-control" id="PassWord" style="-ms-ime-mode: disabled;" onfocus="$(this).attr('type', 'password')" type="text" maxlength="50" placeholder="请输入资金密码" value="" autocomplete="off">
+							</div>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button class="btn btn-primary btn-labeled fa fa-lg" id="btnSubmit" type="button">拒    绝</button><button class="btn btn-danger btn-labeled fa fa-lg" type="button" data-dismiss="modal">返    回</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<input id="hdOperatType" type="hidden">
+		<input id="hdVC" type="hidden" value="597c53bff9637bf460670abbba0ed68a">
+	</div>
+</div>
+{/block}
+{block name="script"}
+<script>        
+        $('#updateNick').on('click', function () {
+            var vc = $('#hdVC').val();
+            var nick = $('#nickName').val();
+            var remark = $('#remark').val();
+            var loginpass = $('#loginpass').val();
+            if (loginpass == null || loginpass.length <= 0) {
+                $.niftyNoty({ type: 'danger', message: '请输入登录密码！', container: 'floating', closeBtn: true, timer: 3000 });
+                return;
+            }
+            $('#updateNick').attr("disabled", true);
+            $('#updateNick').text('更新中...');
+            
+            $.ajax({
+                type: "POST",
+                url: '{:url('user/info')}',
+                data: { nickname: nick, safepwd: remark, password: loginpass },
+                dataType: "json",
+                global: false,
+                success: function (result) {
+                    if (result.status) {
+                        $('#labNick').html(nick);
+                        $('#labLogGreeting').html(remark);
+                    }
+                    var niftyType = result.status ? 'success' : 'danger';
+                    $.niftyNoty({ type: niftyType, message: result.info, container: 'floating', closeBtn: true, timer: 3000 });
+                    $('#updateNick').removeAttr("disabled");
+                    $('#updateNick').text('更新昵称与登录问候语');
+                    $('#loginpass').val('');
+                }, error: function () {
+                    $('#updateNick').removeAttr("disabled");
+                    $('#updateNick').text('更新昵称与登录问候语');
+                    $('#loginpass').val('');
+                }
+            });
+        });
+        $('#acceptContract').on('click', function () {
+            $('#PassWord').val('');
+            $('#hdOperatType').val(1);
+            $('#btnSubmit').text('接    受');
+            $('#TitleStyle').removeClass('text-danger');
+            $('#TitleStyle').addClass('text-primary');
+            $('#TitleName').text('接受新的分红签约');
+            $('#business-modal').modal('show');
+        });
+        $('#refuseContract').on('click', function () {
+            $('#PassWord').val('');
+            $('#hdOperatType').val(0);
+            $('#btnSubmit').text('拒    绝');
+            $('#TitleStyle').removeClass('text-primary');
+            $('#TitleStyle').addClass('text-danger');
+            $('#TitleName').text('拒绝新的分红签约');
+            $('#business-modal').modal('show');
+        });
+        $('#btnSubmit').on('click', function () {
+            var vc = $('#hdVC').val();
+            var passWord = $('#PassWord').val();
+            var operatType = $('#hdOperatType').val();
+            var url = operatType >= 1 ? '/member/acceptContract' : '/member/refuseContract';
+            $('.btn').attr("disabled", true);
+            $('#btnSubmit').text('处理中...');
+            if (passWord != '') {
+                passWord = $.md5($.md5(passWord + vc));
+            }
+            $.ajax({
+                type: "POST",
+                url: url,
+                data: { pwd: passWord },
+                dataType: "json",
+                global: false,
+                success: function (result) {
+                    if (result.IsSuccess) {
+                        $('#acceptContract').css('display', 'none');
+                        $('#refuseContract').css('display', 'none');
+                    }
+                    showNiftyNoty(result);
+                    $('.btn').removeAttr("disabled");
+                    $('#business-modal').modal('hide');
+                }, error: function () {
+                    $('.btn').removeAttr("disabled");
+                    $('#business-modal').modal('hide');
+                }
+            });
+        });
+    </script>-->
+
+<div class="help_r_main">
+	<div class="eveb_content">
+		<div class="eveb_nav_sub">
+			<ul class="clearfix">
+				<li class="on"><a href="javascript:void(0)" onclick="parent.goSubUrl('/member/zhsz.html?module=grzl')">个人资料</a></li>
+				<li><a href="javascript:void(0)" onclick="parent.goSubUrl('/member/zhsz.html?module=dlmm')">登录密码</a></li>
+				<li><a href="javascript:void(0)" onclick="parent.goSubUrl('/member/zhsz.html?module=yhkgl')">银行卡管理</a></li>
+				<li><a href="javascript:void(0)" onclick="parent.goSubUrl('/member/zhsz.html?module=aqxx')">安全信息</a></li>
+			</ul>
+		</div><table class="eveb_setting_table">
+		<tbody>
+		<tr>
+			<td class="tit">会员名</td>
+			<td class="wid">test129</td>
+			<td class="tit">手机号码</td>
+			<td class="wid">
+				<a href="javascript:void(0)" onclick="eveb_popup_show('#eveb_setting_edit')">立即绑定</a>
+			</td>
+		</tr>
+		<tr>
+			<td class="tit">真实姓名</td>
+			<td class="wid">电风扇</td>
+			<td class="tit">电子邮箱</td>
+			<td colspan="2" class="wid">
+				<a href="javascript:void(0)" onclick="eveb_popup_show('#eveb_setting_edit')">立即绑定</a>
+			</td>
+		</tr>
+		<tr>
+			<td class="tit">昵称</td>
+			<td class="ff wid">test129<a href="javascript:void(0)" onclick="eveb_popup_show('#eveb_setting_edit')"> 编辑</a>
+			</td>
+			<td class="tit">QQ</td>
+			<td class="ff wid"><a href="javascript:void(0)" onclick="eveb_popup_show('#eveb_setting_edit')"> 编辑</a></td>
+		</tr>
+		<tr>
+			<td class="tit">生日</td>
+			<td class="ff wid">2018-03-30<a href="javascript:void(0)" onclick="eveb_popup_show('#eveb_setting_edit')"> 编辑</a></td>
+			<td class="tit">性别</td>
+			<td class="ff wid">
+				男<a href="javascript:void(0)" onclick="eveb_popup_show('#eveb_setting_edit')"> 编辑</a>
+			</td>
+		</tr>
+		</tbody>
+	</table>
+		<div class="eveb_tip light">
+			请完善资料
+		</div>
+	</div>
+	<!-- help content e -->
+	<div class="eveb_popup_wrap" style="display: none;"></div>
+	<div class="eveb_popup" id="eveb_setting_edit" style="display: none;">
+		<div class="eveb_popup_hd">
+			<h4 class="fl">编辑个人资料</h4>
+			<a href="javascript:void(0)" onclick="eveb_popup_hide()" class="icon_mini icon_close fr" title="关闭"></a>
+		</div>
+		<div class="eveb_popup_bd">
+			<form name="editUserInfoForm" novalidate="novalidate" onsubmit="return false;">
+				<ul class="eveb_form">
+					<li>
+						<span>会员名：</span>
+						test129</li>
+					<li>
+						<span>昵称：</span>
+						<input type="text" style="width:140px;" class="_border" value="test129" name="nickname" id="nickname">
+						<label class="error" for="nickname"></label>
+					</li>
+					<li>
+						<span>生日：</span>
+						<input onclick="laydate({istime: true, format: 'YYYY-MM-DD'})" name="birthday" id="birthday" type="text" size="16" class="_border" style="width:140px;" value="2018-03-30" readonly="">
+						<label class="error" for="birthday"></label>
+					</li>
+					<li>
+						<span>QQ：</span>
+						<input type="text" style="width:140px;" maxlength="11" class="_border" value="" name="qq" id="qq" onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')">
+						<label class="error" for="qq"></label>
+					</li>
+					<li>
+						<span>性别：</span>
+						<select name="sex" id="sex">
+							<option value="1" selected="selected">男</option>
+							<option value="2">女</option>
+						</select>
+					</li>
+					<li>
+						<span>手机号码：</span>
+						<input name="telephone" maxlength="11" type="text" size="20" class="_border" id="telephone" onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')">
+						<label class="error" for="telephone"></label>
+					</li>
+					<li>
+						<span>电子邮箱：</span>
+						<input name="email" type="text" size="20" class="_border">
+						<label class="error" for="email"></label>
+					</li>
+
+				</ul>
+				<div class="eveb_popup_btn">
+					<input type="submit" class="button_medium button_1" value="确认">
+					<a href="javascript:void(0)" class="button_medium button_3" onclick="eveb_popup_hide()">取消</a>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+{/block}

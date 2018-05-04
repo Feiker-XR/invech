@@ -1,0 +1,40 @@
+{layout name="layout" /}
+
+<form action="{:url()}" method="post" class="form_single">
+    <div class="box">
+      <div class="box-body">
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label>名称</label>
+              <span>（API分组名称）</span>
+              <input class="form-control" name="name" placeholder="请输入API分组名称" value="{$group['name']|default=''}" type="text">
+            </div>
+          </div>
+            
+          <div class="col-md-6">
+            <div class="form-group">
+              <label>排序</label>
+              <span>（API分组排序值）</span>
+              <input class="form-control" name="sort" placeholder="请输入API分组排序值" value="{$group['sort']|default='0'}" type="text">
+            </div>
+          </div>
+            
+          </div>
+        </div>
+        
+      <div class="box-footer">
+          
+        <input type="hidden" name="id" value="{$group['id']|default='0'}"/>
+        
+        <button type="submit" class="skin-blue btn ladda-button ajax-post" data-style="slide-up" target-form="form_single">
+            <span class="ladda-label">确 定</span>
+        </button>
+
+        <a class="skin-blue btn" onclick="javascript:history.back(-1);return false;"> 返 回</a>
+        
+      </div>
+        
+      </div>
+
+</form>

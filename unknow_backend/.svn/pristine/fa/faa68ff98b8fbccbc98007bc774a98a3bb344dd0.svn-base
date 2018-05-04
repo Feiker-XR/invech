@@ -1,0 +1,326 @@
+<?php if (!defined('THINK_PATH')) exit(); /*a:2:{s:82:"/mnt/wwwroot/www.dd788799.com/mobile/../application/index/newview/six/six_8_2.html";i:1505452700;s:81:"/mnt/wwwroot/www.dd788799.com/mobile/../application/index/newview/six/header.html";i:1506679563;}*/ ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Welcome</title>
+<link type="text/css" rel="stylesheet" href="/dd788799view/css/six/6hc.css"/><link rel="stylesheet" type="text/css" href="/newview/css/style.css"/>
+<script src="/js/jquery1.9.0.min.js"></script>
+<script src="/js/layer/layer.min.js" type="text/javascript"></script><script type="text/javascript" src="/js/main.js"></script>
+</head>
+<body>
+<div class="content">
+<form name="orders" action="<?php echo Url('lotterybet/six','class=8'); ?>" method="post" target="OrderFrame">
+
+<table width="800" border="0" align="center" cellpadding="0" cellspacing="0" class="numberinfo">
+  <tr>
+    <td>
+    		<div class="top">&nbsp;&nbsp;正码 => 过关</div>
+  	</td>
+  	<td align="center">
+  			<div id="openNumber">开奖号码载入中...</div>
+  	</td>
+    <td>
+    	<div class="time-item-all">
+    			<div class="time-item-num">&nbsp;&nbsp;第 <span id="open_qihao">0000000</span> 距离封盘：</div>
+    			<div class="time-item"><span id="hour_show">0 时</span>：<span id="minute_show">0 分</span>：<span id="second_show">0 秒</span></div>
+    	</div>
+    </td>
+  </tr>
+</table>
+<table border="0" align="center" cellpadding="0" cellspacing="1" class="bian" style="margin-top:10px;">
+  <tr>
+    <th>正一</th>
+    <th>选择</th>
+    <th>赔率</th>
+    <th>正二</th>
+    <th>选择</th>
+    <th>赔率</th>
+    <th>正三</th>
+    <th>选择</th>
+    <th>赔率</th>
+    <th>正四</th>
+    <th>选择</th>
+    <th>赔率</th>
+    <th>正五</th>
+    <th>选择</th>
+    <th>赔率</th>
+    <th>正六</th>
+    <th>选择</th>
+    <th>赔率</th>
+    </tr>
+  <tr>
+    <td class="ball_txt" id="ball_1_b50">大码</td>
+    <td class="bian_td_no"><input name='ball_1' type="radio" value='1_50'/></td>
+    <td class="bian_td_odds" id="ball_1_o50">-</td>
+    <td class="ball_txt">大码</td>
+    <td class="bian_td_no"><input name='ball_2' type="radio" value='2_50' /></td>
+    <td class="bian_td_odds" id="ball_2_o50">-</td>
+    <td class="ball_txt">大码</td>
+    <td class="bian_td_no"><input name='ball_3' type="radio" value='3_50' /></td>
+    <td class="bian_td_odds" id="ball_3_o50">-</td>
+    <td class="ball_txt">大码</td>
+    <td class="bian_td_no"><input name='ball_4' type="radio" value='4_50' /></td>
+    <td class="bian_td_odds" id="ball_4_o50">-</td>
+    <td class="ball_txt">大码</td>
+    <td class="bian_td_no"><input name='ball_5' type="radio" value='5_50' /></td>
+    <td class="bian_td_odds" id="ball_5_o50">-</td>
+    <td class="ball_txt">大码</td>
+    <td class="bian_td_no"><input name='ball_6' type="radio" value='6_50' /></td>
+    <td class="bian_td_odds" id="ball_6_o50">-</td>
+    </tr>
+  <tr>
+    <td class="ball_txt">小码</td>
+    <td class="bian_td_no"><input name='ball_1' type="radio" value='1_51'/></td>
+    <td class="bian_td_odds" id="ball_1_o51">-</td>
+    <td class="ball_txt">小码</td>
+    <td class="bian_td_no"><input name='ball_2' type="radio" value='2_51' /></td>
+    <td class="bian_td_odds" id="ball_2_o51">-</td>
+    <td class="ball_txt">小码</td>
+    <td class="bian_td_no"><input name='ball_3' type="radio" value='3_51' /></td>
+    <td class="bian_td_odds" id="ball_3_o51">-</td>
+    <td class="ball_txt">小码</td>
+    <td class="bian_td_no"><input name='ball_4' type="radio" value='4_51' /></td>
+    <td class="bian_td_odds" id="ball_4_o51">-</td>
+    <td class="ball_txt">小码</td>
+    <td class="bian_td_no"><input name='ball_5' type="radio" value='5_51' /></td>
+    <td class="bian_td_odds" id="ball_5_o51">-</td>
+    <td class="ball_txt">小码</td>
+    <td class="bian_td_no"><input name='ball_6' type="radio" value='6_51' /></td>
+    <td class="bian_td_odds" id="ball_6_o51">-</td>
+    </tr>
+  <tr>
+    <td class="ball_txt">单码</td>
+    <td class="bian_td_no"><input name='ball_1' type="radio" value='1_52'/></td>
+    <td class="bian_td_odds" id="ball_1_o52">-</td>
+    <td class="ball_txt">单码</td>
+    <td class="bian_td_no"><input name='ball_2' type="radio" value='2_52' /></td>
+    <td class="bian_td_odds" id="ball_2_o52">-</td>
+    <td class="ball_txt">单码</td>
+    <td class="bian_td_no"><input name='ball_3' type="radio" value='3_52' /></td>
+    <td class="bian_td_odds" id="ball_3_o52">-</td>
+    <td class="ball_txt">单码</td>
+    <td class="bian_td_no"><input name='ball_4' type="radio" value='4_52' /></td>
+    <td class="bian_td_odds" id="ball_4_o52">-</td>
+    <td class="ball_txt">单码</td>
+    <td class="bian_td_no"><input name='ball_5' type="radio" value='5_52' /></td>
+    <td class="bian_td_odds" id="ball_5_o52">-</td>
+    <td class="ball_txt">单码</td>
+    <td class="bian_td_no"><input name='ball_6' type="radio" value='6_52' /></td>
+    <td class="bian_td_odds" id="ball_6_o52">-</td>
+    </tr>
+  <tr>
+    <td class="ball_txt">双码</td>
+    <td class="bian_td_no"><input name='ball_1' type="radio" value='1_53' /></td>
+    <td class="bian_td_odds" id="ball_1_o53">-</td>
+    <td class="ball_txt">双码</td>
+    <td class="bian_td_no"><input name='ball_2' type="radio" value='2_53' /></td>
+    <td class="bian_td_odds" id="ball_2_o53">-</td>
+    <td class="ball_txt">双码</td>
+    <td class="bian_td_no"><input name='ball_3' type="radio" value='3_53' /></td>
+    <td class="bian_td_odds" id="ball_3_o53">-</td>
+    <td class="ball_txt">双码</td>
+    <td class="bian_td_no"><input name='ball_4' type="radio" value='4_53' /></td>
+    <td class="bian_td_odds" id="ball_4_o53">-</td>
+    <td class="ball_txt">双码</td>
+    <td class="bian_td_no"><input name='ball_5' type="radio" value='5_53' /></td>
+    <td class="bian_td_odds" id="ball_5_o53">-</td>
+    <td class="ball_txt">双码</td>
+    <td class="bian_td_no"><input name='ball_6' type="radio" value='6_53' /></td>
+    <td class="bian_td_odds" id="ball_6_o53">-</td>
+    </tr>
+  <tr>
+    <td class="ball_txt">合大</td>
+    <td class="bian_td_no"><input name='ball_1' type="radio" value='1_54' /></td>
+    <td class="bian_td_odds" id="ball_1_o54">-</td>
+    <td class="ball_txt">合大</td>
+    <td class="bian_td_no"><input name='ball_2' type="radio" value='2_54' /></td>
+    <td class="bian_td_odds" id="ball_2_o54">-</td>
+    <td class="ball_txt">合大</td>
+    <td class="bian_td_no"><input name='ball_3' type="radio" value='3_54' /></td>
+    <td class="bian_td_odds" id="ball_3_o54">-</td>
+    <td class="ball_txt">合大</td>
+    <td class="bian_td_no"><input name='ball_4' type="radio" value='4_54' /></td>
+    <td class="bian_td_odds" id="ball_4_o54">-</td>
+    <td class="ball_txt">合大</td>
+    <td class="bian_td_no"><input name='ball_5' type="radio" value='5_54' /></td>
+    <td class="bian_td_odds" id="ball_5_o54">-</td>
+    <td class="ball_txt">合大</td>
+    <td class="bian_td_no"><input name='ball_6' type="radio" value='6_54' /></td>
+    <td class="bian_td_odds" id="ball_6_o54">-</td>
+    </tr>
+  <tr>
+    <td class="ball_txt">合小</td>
+    <td class="bian_td_no"><input name='ball_1' type="radio" value='1_55' /></td>
+    <td class="bian_td_odds" id="ball_1_o55">-</td>
+    <td class="ball_txt">合小</td>
+    <td class="bian_td_no"><input name='ball_2' type="radio" value='2_55' /></td>
+    <td class="bian_td_odds" id="ball_2_o55">-</td>
+    <td class="ball_txt">合小</td>
+    <td class="bian_td_no"><input name='ball_3' type="radio" value='3_55' /></td>
+    <td class="bian_td_odds" id="ball_3_o55">-</td>
+    <td class="ball_txt">合小</td>
+    <td class="bian_td_no"><input name='ball_4' type="radio" value='4_55' /></td>
+    <td class="bian_td_odds" id="ball_4_o55">-</td>
+    <td class="ball_txt">合小</td>
+    <td class="bian_td_no"><input name='ball_5' type="radio" value='5_55' /></td>
+    <td class="bian_td_odds" id="ball_5_o55">-</td>
+    <td class="ball_txt">合小</td>
+    <td class="bian_td_no"><input name='ball_6' type="radio" value='6_55' /></td>
+    <td class="bian_td_odds" id="ball_6_o55">-</td>
+    </tr>
+  <tr>
+    <td class="ball_txt">合单</td>
+    <td class="bian_td_no"><input name='ball_1' type="radio" value='1_56' /></td>
+    <td class="bian_td_odds" id="ball_1_o56">-</td>
+    <td class="ball_txt">合单</td>
+    <td class="bian_td_no"><input name='ball_2' type="radio" value='2_56' /></td>
+    <td class="bian_td_odds" id="ball_2_o56">-</td>
+    <td class="ball_txt">合单</td>
+    <td class="bian_td_no"><input name='ball_3' type="radio" value='3_56' /></td>
+    <td class="bian_td_odds" id="ball_3_o56">-</td>
+    <td class="ball_txt">合单</td>
+    <td class="bian_td_no"><input name='ball_4' type="radio" value='4_56' /></td>
+    <td class="bian_td_odds" id="ball_4_o56">-</td>
+    <td class="ball_txt">合单</td>
+    <td class="bian_td_no"><input name='ball_5' type="radio" value='5_56' /></td>
+    <td class="bian_td_odds" id="ball_5_o56">-</td>
+    <td class="ball_txt">合单</td>
+    <td class="bian_td_no"><input name='ball_6' type="radio" value='6_56' /></td>
+    <td class="bian_td_odds" id="ball_6_o56">-</td>
+    </tr>
+  <tr>
+    <td class="ball_txt">合双</td>
+    <td class="bian_td_no"><input name='ball_1' type="radio" value='1_57' /></td>
+    <td class="bian_td_odds" id="ball_1_o57">-</td>
+    <td class="ball_txt">合双</td>
+    <td class="bian_td_no"><input name='ball_2' type="radio" value='2_57' /></td>
+    <td class="bian_td_odds" id="ball_2_o57">-</td>
+    <td class="ball_txt">合双</td>
+    <td class="bian_td_no"><input name='ball_3' type="radio" value='3_57' /></td>
+    <td class="bian_td_odds" id="ball_3_o57">-</td>
+    <td class="ball_txt">合双</td>
+    <td class="bian_td_no"><input name='ball_4' type="radio" value='4_57' /></td>
+    <td class="bian_td_odds" id="ball_4_o57">-</td>
+    <td class="ball_txt">合双</td>
+    <td class="bian_td_no"><input name='ball_5' type="radio" value='5_57' /></td>
+    <td class="bian_td_odds" id="ball_5_o57">-</td>
+    <td class="ball_txt">合双</td>
+    <td class="bian_td_no"><input name='ball_6' type="radio" value='6_57' /></td>
+    <td class="bian_td_odds" id="ball_6_o57">-</td>
+    </tr>
+  <tr>
+    <td class="ball_txt">尾大</td>
+    <td class="bian_td_no"><input name='ball_1' type="radio" value='1_58' /></td>
+    <td class="bian_td_odds" id="ball_1_o58">-</td>
+    <td class="ball_txt">尾大</td>
+    <td class="bian_td_no"><input name='ball_2' type="radio" value='2_58' /></td>
+    <td class="bian_td_odds" id="ball_2_o58">-</td>
+    <td class="ball_txt">尾大</td>
+    <td class="bian_td_no"><input name='ball_3' type="radio" value='3_58' /></td>
+    <td class="bian_td_odds" id="ball_3_o58">-</td>
+    <td class="ball_txt">尾大</td>
+    <td class="bian_td_no"><input name='ball_4' type="radio" value='4_58' /></td>
+    <td class="bian_td_odds" id="ball_4_o58">-</td>
+    <td class="ball_txt">尾大</td>
+    <td class="bian_td_no"><input name='ball_5' type="radio" value='5_58' /></td>
+    <td class="bian_td_odds" id="ball_5_o58">-</td>
+    <td class="ball_txt">尾大</td>
+    <td class="bian_td_no"><input name='ball_6' type="radio" value='6_58' /></td>
+    <td class="bian_td_odds" id="ball_6_o58">-</td>
+    </tr>
+  <tr>
+    <td class="ball_txt">尾小</td>
+    <td class="bian_td_no"><input name='ball_1' type="radio" value='1_59' /></td>
+    <td class="bian_td_odds" id="ball_1_o59">-</td>
+    <td class="ball_txt">尾小</td>
+    <td class="bian_td_no"><input name='ball_2' type="radio" value='2_59' /></td>
+    <td class="bian_td_odds" id="ball_2_o59">-</td>
+    <td class="ball_txt">尾小</td>
+    <td class="bian_td_no"><input name='ball_3' type="radio" value='3_59' /></td>
+    <td class="bian_td_odds" id="ball_3_o59">-</td>
+    <td class="ball_txt">尾小</td>
+    <td class="bian_td_no"><input name='ball_4' type="radio" value='4_59' /></td>
+    <td class="bian_td_odds" id="ball_4_o59">-</td>
+    <td class="ball_txt">尾小</td>
+    <td class="bian_td_no"><input name='ball_5' type="radio" value='5_59' /></td>
+    <td class="bian_td_odds" id="ball_5_o59">-</td>
+    <td class="ball_txt">尾小</td>
+    <td class="bian_td_no"><input name='ball_6' type="radio" value='6_59' /></td>
+    <td class="bian_td_odds" id="ball_6_o59">-</td>
+    </tr>
+  <tr>
+    <td class="ball_txt">红波</td>
+    <td class="bian_td_no"><input name='ball_1' type="radio" value='1_62' /></td>
+    <td class="bian_td_odds" id="ball_1_o62">-</td>
+    <td class="ball_txt">红波</td>
+    <td class="bian_td_no"><input name='ball_2' type="radio" value='2_62' /></td>
+    <td class="bian_td_odds" id="ball_2_o62">-</td>
+    <td class="ball_txt">红波</td>
+    <td class="bian_td_no"><input name='ball_3' type="radio" value='3_62' /></td>
+    <td class="bian_td_odds" id="ball_3_o62">-</td>
+    <td class="ball_txt">红波</td>
+    <td class="bian_td_no"><input name='ball_4' type="radio" value='4_62' /></td>
+    <td class="bian_td_odds" id="ball_4_o62">-</td>
+    <td class="ball_txt">红波</td>
+    <td class="bian_td_no"><input name='ball_5' type="radio" value='5_62' /></td>
+    <td class="bian_td_odds" id="ball_5_o62">-</td>
+    <td class="ball_txt">红波</td>
+    <td class="bian_td_no"><input name='ball_6' type="radio" value='6_62' /></td>
+    <td class="bian_td_odds" id="ball_6_o62">-</td>
+    </tr>
+  <tr>
+    <td class="ball_txt">蓝波</td>
+    <td class="bian_td_no"><input name='ball_1' type="radio" value='1_63' /></td>
+    <td class="bian_td_odds" id="ball_1_o63">-</td>
+    <td class="ball_txt">蓝波</td>
+    <td class="bian_td_no"><input name='ball_2' type="radio" value='2_63' /></td>
+    <td class="bian_td_odds" id="ball_2_o63">-</td>
+    <td class="ball_txt">蓝波</td>
+    <td class="bian_td_no"><input name='ball_3' type="radio" value='3_63' /></td>
+    <td class="bian_td_odds" id="ball_3_o63">-</td>
+    <td class="ball_txt">蓝波</td>
+    <td class="bian_td_no"><input name='ball_4' type="radio" value='4_63' /></td>
+    <td class="bian_td_odds" id="ball_4_o63">-</td>
+    <td class="ball_txt">蓝波</td>
+    <td class="bian_td_no"><input name='ball_5' type="radio" value='5_63' /></td>
+    <td class="bian_td_odds" id="ball_5_o63">-</td>
+    <td class="ball_txt">蓝波</td>
+    <td class="bian_td_no"><input name='ball_6' type="radio" value='6_63' /></td>
+    <td class="bian_td_odds" id="ball_6_o63">-</td>
+    </tr>
+  <tr>
+    <td class="ball_txt">绿波</td>
+    <td class="bian_td_no"><input name='ball_1' type="radio" value='1_64' /></td>
+    <td class="bian_td_odds" id="ball_1_o64">-</td>
+    <td class="ball_txt">绿波</td>
+    <td class="bian_td_no"><input name='ball_2' type="radio" value='2_64' /></td>
+    <td class="bian_td_odds" id="ball_2_o64">-</td>
+    <td class="ball_txt">绿波</td>
+    <td class="bian_td_no"><input name='ball_3' type="radio" value='3_64' /></td>
+    <td class="bian_td_odds" id="ball_3_o64">-</td>
+    <td class="ball_txt">绿波</td>
+    <td class="bian_td_no"><input name='ball_4' type="radio" value='4_64' /></td>
+    <td class="bian_td_odds" id="ball_4_o64">-</td>
+    <td class="ball_txt">绿波</td>
+    <td class="bian_td_no"><input name='ball_5' type="radio" value='5_64' /></td>
+    <td class="bian_td_odds" id="ball_5_o64">-</td>
+    <td class="ball_txt">绿波</td>
+    <td class="bian_td_no"><input name='ball_6' type="radio" value='6_64' /></td>
+    <td class="bian_td_odds" id="ball_6_o64">-</td>
+    </tr>
+  <tr>
+    <td colspan="18" class="bian_td_gg" id="moneys">&nbsp;</td>
+    </tr>
+  </table>
+<div class="button_body">
+		<a class="button submit" onclick="order();">下注</a>	
+		<a onclick="reset()" class="button again">重填</a>
+</div>
+</form>
+</div>
+<script src="/dd788799view/js/six/class_2.js" type="text/javascript"></script>
+<script type="text/javascript">$(function(){loadInfo();});</script>
+<IFRAME id="OrderFrame" name="OrderFrame" style="display:none"></IFRAME>
+</body>
+</html>

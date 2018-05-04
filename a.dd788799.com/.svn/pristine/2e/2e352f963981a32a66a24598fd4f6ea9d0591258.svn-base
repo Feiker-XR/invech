@@ -1,0 +1,67 @@
+<style>
+.row-bg {
+    background-color: #f9f9f9;
+    border-bottom-color: #d9d9d9;
+    border-bottom-style: solid;
+    border-bottom-width: 1px;
+    border-top-color: #d9d9d9;
+    border-top-style: solid;
+    border-top-width: 1px;
+    box-shadow: 0 0 1px rgba(0, 0, 0, 0.15) inset;
+    margin-bottom: 25px !important;
+    margin-left: -20px !important;
+    margin-right: -20px !important;
+    margin-top: 0 !important;
+    padding-left: 5px;
+    padding-right: 5px;
+    padding-top: 25px;
+}
+</style>
+<div class="row row-bg">
+<div id="graphic" class="col-md-12" style="height: 480px;">
+</div>      
+</div>
+
+
+<script type="text/javascript" src='/js/echarts/echarts.min.js'></script>
+
+<script type="text/javascript">
+
+   var option = {
+        title : {
+            text: '{$page_header}',
+            //subtext: "2017-06-06 10:38:49"
+        },
+        tooltip : {
+            trigger: 'axis'
+        },
+        legend: {$legend},
+        toolbox: {
+            show : true,
+            feature : {
+                dataZoom: {},
+                dataView: {readOnly: false},
+                magicType: {type: ['line', 'bar']},
+                restore: {},
+                saveAsImage: {}
+            }
+        },
+        xAxis : {$xAxis},
+        yAxis : [
+            {
+                type : 'value',
+                name: '数量',
+                axisLabel : {
+                    formatter: '{value} '
+                }
+            }
+        ],
+        series : {$series}
+    };
+
+
+    var dom = document.getElementById("graphic");
+    var myChart = echarts.init(dom);  
+    myChart.setOption(option); 
+
+</script>

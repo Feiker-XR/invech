@@ -1,0 +1,76 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Member</title>
+<link rel="stylesheet" type="text/css" href="/css/general.css"/>
+<link rel="stylesheet" type="text/css" href="/Scripts/jquery-ui.css" />
+<script type="text/javascript" src="/Scripts/jquery.js"></script>
+<script type="text/javascript" src="/Scripts/member.js"></script>
+<script type="text/javascript" src="/Scripts/jquery-ui-datepicker.js"></script>
+<script type="text/javascript">
+$(function(){
+	$("#S_date").datepicker({
+		minDate: -31,
+		maxDate: 0
+	});
+	$("#E_date").datepicker({
+		minDate: -31,
+		maxDate: 0
+	});
+});
+</script>
+</head>
+<body>
+  <div class="ui-moneyBox">
+<ul style="margin-top:10px;">
+      <table width="100%" border="0" cellspacing="0" cellpadding="5">
+          <tr>
+             <th>日期时间</th>
+  <th>单式输赢</th>
+  <th>串关输赢</th>
+  <th>彩票输赢</th>
+
+  <th>总输赢</th>
+
+          </tr>
+{volist name="result" id="row"}
+<tr bgcolor="{$row.bgcolor}" align="center" onMouseOver="this.style.backgroundColor='#FFF9CD'" onMouseOut="this.style.backgroundColor='{$row.bgcolor}'" style="color:#000000;" >
+  <td height="30" align="center">{$key}<br>星期{$row.name}</td>
+  <td align="center"><a href="javascript:void(0);" onclick="Go('{:url('report_ds')}?riqi={$key}');return false" title="查看注单">
+  {if $row.ds>0}<span style="color:red">{$row.ds|abs|number_format=2}</span>
+  {elseif $row.ds<0}<span style="color:green">{$row.ds|abs|number_format=2}</span>
+  {else /}<span>{$row.ds|abs|number_format=2}</span>
+  {/if}
+   [详情]</a></td>
+  <td align="center"><a href="javascript:void(0);" onclick="Go('{:url('report_cg')}?riqi={$key}');return false" title="查看注单">
+  {if $row.cg>0}<span style="color:red">{$row.cg|abs|number_format=2}</span>
+  {elseif $row.cg<0}<span style="color:green">{$row.cg|abs|number_format=2}</span>
+  {else /}<span>{$row.cg|abs|number_format=2}</span>
+  {/if}
+   [详情]</a></td>  
+  <td align="center"><a href="javascript:void(0);" onclick="Go('{:url('report_cp')}?riqi={$key}');return false" title="查看注单">
+  {if $row.cp>0}<span style="color:red">{$row.cp|abs|number_format=2}</span>
+  {elseif $row.cp<0}<span style="color:green">{$row.cp|abs|number_format=2}</span>
+  {else /}<span>{$row.cp|abs|number_format=2}</span>
+  {/if}
+   [详情]</a></td>   
+  <!--新彩票 
+  <td align="center"><a href="javascript:void(0);" onclick="Go('/lottery/new/tzhistory.php?d={$key}&ed={$key}');return false" title="查看注单"><span style="color:red">&gt;0</span> <span style="color:green">&lt;0</span> [详情]</a></td>
+   -->
+  <td align="center"><span style="color:{if $row.sum>0}'#FF0000'{elseif $row.sum<0}'#000000'{else/ }'#0000FF'{/if};">{$row.sum|number_format=2}</span></td>
+  </tr>
+{/volist}
+
+<tr height="30" align="center" bgcolor="#FFF9CD" style="color:#000000;" >
+  <td align="center">小结</td>
+  <td align="center">{$sum.ds|number_format=2}</td>
+  <td align="center">{$sum.cg|number_format=2}</td>
+  <td align="center">{$sum.cp|number_format=2}</td>  
+  <td align="center"><span style="color:{if $sum.sum>0}'#FF0000'{elseif $sum.sum<0}'#000000'{else/ }'#0000FF'{/if};">{$sum.sum|number_format=2}</span></td>
+</tr>
+    </table>
+    </ul>
+  </div>
+</body>
+</html>

@@ -1,0 +1,124 @@
+<?php
+namespace app\admin\controller;
+use app\admin\Login;
+use think\Cache;
+use app\common\model\Bonus as BonusModel;
+use app\common\model\BonusConfig as BonusConfigModel;
+use app\common\model\BonusFlow as BonusFlowModel;
+use app\common\model\ActionLog as LogModel;
+class Bonus extends Login{
+
+    public function _initialize(){
+        parent::_initialize();
+        $menu_group   =   "bonus";
+        $this->assign('menu_group',$menu_group);
+    }
+
+    public function index(){
+        $this->view->page_header = '红利列表';
+        $request = request();
+        $list = BonusModel::getList($request);
+        $this->assign('list',$list);
+        return $this->fetch();
+    }
+
+    public function edit(){  
+        $request = request();
+        $params = $request->param(); 
+        if(request()->isGet()){
+            if(!empty($params['id'])){
+                $info =  BonusModel::get(['id'=>$params['id']]);
+                $this->assign('info',$info);  
+            }
+            return view();
+        }else{
+            $id     =   !empty($params['id'])? $params['id']:'';
+            if($id){
+                $bonus  =   BonusModel::get(intval($id));
+            }else{
+                $bonus  =   new BonusModel($params);
+            } 
+            $list   =   $bonus->validate('Bonus.index')->save($params);
+            if($list){
+                LogModel::log(LogModel::BUSINESS_TYPE_EDIT,$bonus,LogModel::BUSINESS_TYPES[LogModel::BUSINESS_TYPE_EDIT]);
+                return $this->success('操作成功');
+            }else{
+                return $this->error($bonus->getError());
+            }                           
+        }
+    }
+
+    public function del(){
+        $request    =   request();
+        $params     = $request->param();
+        $bonus      =  BonusModel::get(intval($params['id']));
+        $list       = $bonus->delete();
+       if($list){
+            LogModel::log(LogModel::BUSINESS_TYPE_DELE,$bonus,LogModel::BUSINESS_TYPES[LogModel::BUSINESS_TYPE_DELE]);
+            return $this->success('操作成功');
+        }else{
+            return $this->error($bonus->getError());
+        }
+    }
+  
+
+    public function config(){
+        $this->view->page_header    =   '红利配置';
+        $request    =   request();
+        $list       =   model('bonus_config')->getList($request);
+        $list->appends($request->param());
+        $this->assign('list',$list);
+        return $this->fetch();        
+    }
+
+    public function config_edit(){  
+        $request    =   request();
+        $params     =   $request->param();
+        if(request()->isGet()){ 
+            if(!empty($params['id'])){
+                $info   =   BonusConfigModel::get(['id'=>$params['id']]);
+                $this->assign('info',$info);  
+            }
+            return view();
+        }else{
+            $id     =   !empty($params['id'])? $params['id']:'';
+            if($id){
+                $bonusconfig    =   BonusConfigModel::get(intval($id));
+            }else{
+                $bonusconfig    =   new BonusConfigModel($params);
+            }
+            $list = $bonusconfig->validate('Bonus.index')->save($params);
+            if($list){
+                LogModel::log(LogModel::BUSINESS_TYPE_EDIT,$bonusconfig,LogModel::BUSINESS_TYPES[LogModel::BUSINESS_TYPE_EDIT]);
+                return $this->success('操作成功');
+            }else{
+                return $this->error($bonusconfig->getError());
+            }
+        }
+      
+    }
+
+    public function config_del(){
+        $request    =   request();
+        $params     =   $request->param();
+        $bonusconfig    =   BonusConfigModel::get(intval($params['id']));
+        $list   =   $bonusconfig->delete();
+        if($list){
+            LogModel::log(LogModel::BUSINESS_TYPE_DELE,$bonusconfig,LogModel::BUSINESS_TYPES[LogModel::BUSINESS_TYPE_DELE]);
+            return $this->success('操作成功');
+        }else{
+            return $this->error($bonusconfig->getError());
+        }
+    }
+   
+    public function flow(){
+        $this->view->page_header = '红利流水';
+        $request = request();
+        $list =BonusFlowModel::getList($request);
+        $this->assign('list',$list);
+        $bonuses = BonusModel::all(['enable'=>1,]);
+        $this->assign('bonuses',$bonuses);
+        return $this->fetch();          
+    }
+
+}

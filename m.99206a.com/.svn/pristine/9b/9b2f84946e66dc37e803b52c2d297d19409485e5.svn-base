@@ -1,0 +1,89 @@
+<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:88:"/mnt/wwwroot/www.dd788799.com/public/../application/index/newview/activity/zhuanpan.html";i:1512022056;}*/ ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta content="yes" name="apple-mobile-web-app-capable" />
+<meta content="yes" name="apple-touch-fullscreen" />
+<meta content="telephone=no" name="format-detection" />
+<meta content="black" name="apple-mobile-web-app-status-bar-style">
+<meta name="wap-font-scale" content="no">
+<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no" />
+<title>大转盘抽奖</title>
+<meta name="keywords" content="" />
+<meta name="description" content="">
+<link href="/zhuanpan/css/component.css" rel="stylesheet" type="text/css">
+<link href="/zhuanpan/css/style.css" rel="stylesheet" type="text/css">
+
+<script type="text/javascript" src="/zhuanpan/js/jquery-1.10.2.js"></script>
+<script type="text/javascript" src="/zhuanpan/js/awardRotate.js"></script>
+
+<script type="text/javascript">
+var global_restaraunts = [<?php echo $tmp1; ?>];
+var global_colors = [<?php echo $tmp2; ?>];
+var global_item = <?php echo $index; ?>;
+</script>
+<script type="text/javascript" src="/zhuanpan/js/index.js?v2WW1"></script>
+
+</head>
+<body>
+	<div id="reslut_price" style="display:none;"><?php echo $price; ?></div>
+    <div id="have_get" style="display:none;"><?php if($price == '-1'): ?>ok<?php endif; ?></div>
+	<!-------------抽奖页面-------------->
+	<div class="ml-main" id="ml-main">
+        <div class="kePublic">
+            <!--转盘效果开始-->
+            <div style="max-width:640px; margin:0 auto">
+                <div class="banner">
+                    <div class="turnplate" style="background-image:url(/zhuanpan/images/turnplate-bg_2.png);background-size:100% 100%;">
+                        <canvas class="item" id="wheelcanvas" width="516" height="516"></canvas>
+                        <img id="tupBtn" class="pointer" src="/zhuanpan/images/turnplate-pointer_2.png"/>
+                        <!--<button id="tupBtn"><img src="images/turnplate-pointer_2.png"/></button>-->
+                    </div>
+                </div>
+            </div>
+            <!--转盘效果结束-->
+            <div class="clear"></div>
+            
+            <h3>您今日最高一笔充值:<span style="color:red"><?php echo $total; ?></span>元（可领取<span style="color:red"><?php echo $step; ?></span>档奖励）</h3>
+            <h3>规则说明:</h3>
+            <ul>
+            	<li>1.每位玩家每天单笔充值500元即可获得1次轮盘抽奖机会</li>
+                <li>2.第一档奖励5.8~288.8元奖励，充值要求500~10000元</li>
+                <li>3.第二档奖励58.8~2888.8元奖励，充值要求10001~99999元</li>
+                <li>4.第三档奖励288.8~18888.8元奖励，充值要求100000+元</li>
+                <li>5.活动最终解释权为www.77158.com金沙娱乐城所有</li>
+            </ul>
+        </div>
+	</div>
+    
+    <!-------------中奖弹窗页面-------------->
+    <div class="zj-main" id="zj-main">
+            <div class="txzl">
+            	<?php switch($price): case "-1": ?>
+            			<h3>亲！你今天已经领取过了</h3>
+                		<h2>&nbsp;</h2>
+            		<?php break; case "0": ?>
+            			<h3>亲！你需要先充值才可以抽奖</h3>
+		                <h3>如果已充值， 请再次刷新网页</h3>
+		                <h2>&nbsp;</h2>
+            		<?php break; default: ?>
+            		<h3>HI 亲！人品爆发！</h3>
+	                <h2>恭喜抽中<br /><span id="jiangpin"></span>元，已充值到你的账号</h2>
+	                <h2>&nbsp;</h2>
+            	<?php endswitch; ?>
+            </div>
+            <div class="close_zj"><img src="/zhuanpan/images/close_1.png" /></div>
+	</div>
+    
+    <!-------------谢谢参与弹窗-------------->
+    <div class="xxcy-main" id="xxcy-main">
+    	<div class="xxcy">
+        	<h3>谢谢参与！</h3>
+        </div>
+    	<div class="close_xxcy"><img src="/zhuanpan/images/close_1.png" /></div>
+    </div>
+    
+</body>
+</html>

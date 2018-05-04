@@ -1,0 +1,85 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>系统设置</title>
+<link href="/css/base.css" rel="stylesheet" type="text/css" />
+<link href="/css/admin.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="/js/jquery.js"></script>
+<script type="text/javascript" src="/js/jquery.tools.js"></script>
+<script type="text/javascript" src="/js/base.js"></script>
+<script type="text/javascript">
+
+function myconfirm(url) {
+	var result = confirm('是否确认删除！');
+	if (result) {
+		location.href = url;
+	}
+}
+</script>
+</head>
+<body class="list">
+	<div class="bar">
+		开奖管理&nbsp;&nbsp;&nbsp;<a href="javascript:myconfirm('{:url('lottery/quxiao',"type=$type&qishu=$qishu")}')">【取消本期所有注单（慎）】</a>
+	</div>
+
+<div class="body">
+<table id="listTables" class="listTables">  
+  <tr>
+      <th align="center">彩种</th>
+      <th align="center">期数</th>
+      <th align="center">用户名</th>
+      <th align="center"> 投注时间</th>
+      <th align="center"> 投注玩法</th>
+      <th align="center">投注内容</th>
+      <th align="center">投注前余额</th>
+      <th align="center">投注金额</th>
+      <th align="center">投注后余额</th>
+      <th align="center">输赢结果</th>
+      <th align="center">状态</th>
+      <th align="center">操作</th>
+  </tr>
+  
+  {volist name='list' id='vo'}
+  <tr>
+  	  <td align="center">{$vo['type']}</td>
+      <td align="center">{$vo['qishu']}</td>
+      <td align="center">{$vo['username']}</td>
+      <td align="center">{$vo['addtime']}</td>
+      <td align="center">{$vo['mingxi_1']}</td>
+      <td align="center">{$vo['mingxi_2']}</td>
+      <td align="center">{$vo['q_qian']}</td>
+      <td align="center">{$vo['money']}</td>
+      <td align="center">{$vo['h_qian']}</td>
+      <td align="center">{$vo['win']}</td>
+      <td align="center">
+      	{switch name='vo.js'}
+      		{case value='1'}
+      			已结算
+      		{/case}
+      		{case value='2'}
+      			已取消
+      		{/case}
+      		{case value='0'}
+      			未结算
+      		{/case}
+      	{/switch}
+      </td>
+      <td align="center">
+      	{switch name='vo.js'}
+      		{case value='1'}
+      			<a href="#">重新结算</a>
+      		{/case}
+      		{case value='2'}
+      		{/case}
+      		{case value='0'}
+      			<a href="{:url('lottery/danzhuquxiao','id='.$vo.id)}">取消注单</a></td>
+      		{/case}
+      	{/switch}
+  </tr>
+  {/volist}
+</table>
+{notempty name='list'}<div class="pagerBar">{$list->render()}</div>{/notempty}
+</div>
+</body>
+</html>

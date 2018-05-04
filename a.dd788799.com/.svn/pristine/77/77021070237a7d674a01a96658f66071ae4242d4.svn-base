@@ -1,0 +1,691 @@
+<?php
+// +----------------------------------------------------------------------
+// | FileName: user.php
+// +----------------------------------------------------------------------
+// | CreateDate: 2017年10月5日
+// +----------------------------------------------------------------------
+// | Author: xiaoluo
+// +----------------------------------------------------------------------
+namespace app\index\controller;
+use think\Db;
+use app\index\Login;
+use app\classes\iplocation;
+use think\Session;
+
+class user extends Login{
+
+    public final function register(){
+        if($this->request->isPost())
+        {
+            if(!preg_match("/^[0-9a-zA-Z]{4,30}$/",input('username'))){
+                $this->error('用户名只能由英文和数字组成，长度4-30个字符');
+            }
+            
+            /* 检测验证码 */
+            if(!check_verify(input('verify'))){
+                $this->error('验证码输入错误！');
+            }
+            
+            $pwd = input('password');
+            if(strlen($pwd)<6) $this->error('密码至少6位');
+            $linkData = db('links')->where(array('lid'=>input('lid'), 'uid'=>input('uid')))->find();
+            
+            if(!$linkData) $this->error('此链接不存在');
+            if(!$user2 = db('members')->find($linkData['uid'])) $this->error('上级不存在');
+            if(db('members')->where(array('username'=>input('username')))->find()) $this->error('用户名'.input('username').'已存在');
+            $para=array(
+                'username'=>input('username'),
+                'type'=>$linkData['type'],
+                'password'=>think_ucenter_md5(input('password'), UC_AUTH_KEY),
+                'parentId'=>$linkData['uid'],
+                'parents'=>$user2['parents'],
+                'parents2'=>$user2['parents2'].'>'.input('username'),
+                'fanDian'=>$linkData['fanDian'],
+                'fanDianBdw'=>$linkData['fanDianBdw'],
+                'qq'=>input('qq'),
+                'regIP'=>$this->ip(true),
+                'regTime'=>$this->time,
+                'regPath'=> input('regPath')
+            );
+            
+            Db::startTrans();
+            if($lastid = db('members')->insert($para))
+            {
+                if(db('members')->update(array('uid'=>$lastid, 'parents'=>$user2['parents'].','.$lastid)))
+                {
+                    Db::commit();//成功则提交
+                    
+                    $user = db('members')->find($lastid);
+                    $ip = $this->ip(true);
+                    $session=array(
+                        'uid'=>$user['uid'],
+                        'username'=>$user['username'],
+                        'session_key'=>0,//session_id(),
+                        'loginTime'=>$this->time,
+                        'accessTime'=>$this->time,
+                        'loginIP'=>$ip,
+                    );
+                    
+                    if(!($lastid=db('member_session')->insert($session)))
+                        $this->error('插入登陆记录表失败，登陆失败');;
+                        $user['sessionId']=$lastid;
+                        session('user',$user);
+                        session('user_auth_sign2', data_auth_sign($_SERVER['HTTP_USER_AGENT']));
+                        $this->success('注册成功',Url('index/index'));
+                }
+            }
+            
+            Db::rollback();//不成功，则回滚
+            $this->error('注册失败');
+        }
+        else
+        {
+            //如果手机打开，跳到手机站
+            $agent = $_SERVER['HTTP_USER_AGENT'];
+            if(strpos($agent,"comFront") || strpos($agent,"iPhone") || strpos($agent,"MIDP-2.0") || strpos($agent,"Opera Mini") || strpos($agent,"UCWEB") || strpos($agent,"Android") || strpos($agent,"Windows CE") || strpos($agent,"SymbianOS"))
+            {
+                header('location: '.Url('Mobile/user/register?lid='.input('lid').'&uid='.input('uid')));
+                return;
+            }
+            return $this->fetch('register');
+        }
+    }
+    
+    public function login (){
+
+        if ($this->request->isPost()){
+            /* 检测验证码 */
+//            if(!check_verify(input('verify'))){
+//                $this->error('验证码输入错误！');
+//            }
+            $username = input('username');
+
+            if ($username=='') {
+                $error = '用户名不能为空';
+                $this->error($error);
+            }
+            $Members = db('Members');
+            $map     = array();
+            $map['username'] = $username;
+            $user = $Members->where($map)->find();
+
+            if ($user) {
+
+                if ($user['isDelete']==1) {
+                    $error = '用户已被删除';
+                    $this->error($error);
+                } else if ($user['enable']==0) {
+                    $error = '用户已被冻结';
+                    $this->error($error);
+                }  else {
+                    session('username',null);
+                    session('username',$username);
+                    session('safepwd',null);
+                    session('safepwd',$user['safepwd']);
+//                    $this->success('用户名正确！',Url('user/logined'));
+                    $this->redirect(Url('user/logined'));
+                }
+
+            }else{
+                $this->error('用户不存在');
+            }
+        } else {
+            //如果手机打开，跳到手机站
+            $agent = $_SERVER['HTTP_USER_AGENT'];
+            if(strpos($agent,"comFront") || strpos($agent,"iPhone") || strpos($agent,"MIDP-2.0") || strpos($agent,"Opera Mini") || strpos($agent,"UCWEB") || strpos($agent,"Android") || strpos($agent,"Windows CE") || strpos($agent,"SymbianOS"))
+            {
+                header('location: '.Url('Mobile/index/index'));
+                return;
+            }
+            return $this->fetch();
+        }
+    }
+
+    /**
+     * 登录页面
+     * @return mixed
+     */
+    public function logined()
+    {
+      try {
+          $backInfo['code'] = 0  ;
+          $backInfo['msg']  = '' ;
+          $backInfo['url']  = '' ;
+
+          if($this->request->isPost()) { //登录验证
+              $username = session('username');
+              $password = input('password');
+
+              if ($username=='' || $password == '') {
+                  throw new \Exception('用户名或密码不能为空') ;
+              }
+
+              $Members = db('Members');
+              $map     = array();
+              $map['username'] = $username;
+              $map['password'] = think_ucenter_md5($password, UC_AUTH_KEY) ;
+              $user = $Members->where($map)->find() ;
+
+              if ( $user ) {
+                  if ($user['isDelete']==1) {
+                      throw new \Exception('用户已被删除') ;
+                  } else if ($user['enable']==0) {
+                      throw new \Exception('用户已被冻结') ;
+                  } else {
+                      $ip = $_SERVER["REMOTE_ADDR"];//$this->ip(true);
+                      $ip = ip2long($ip);
+                      $session=array(
+                          'uid'=>$user['uid'],
+                          'username'=>$user['username'],
+                          'session_key'=>0,//session_id(),
+                          'loginTime'=>$this->time,
+                          'accessTime'=>$this->time,
+                          'loginIP'=>$ip,
+                      );
+
+                      if ( !($lastid=db('member_session')->insert($session)) ) {
+                          throw new \Exception('插入登陆记录表失败，登陆失败') ;
+                      }
+
+                      $user['sessionId'] = $lastid ;
+                      $data['isOnLine']  = '0' ;
+                      db('member_session')->where('uid='.$user['uid'].' and id<'.$user['sessionId'])->update($data) ;
+
+                      //补充数据写入session
+                      $user['loginIP']     = $ip ;
+                      $user['loginTime']   = time() ;
+                      $user['accessTime']  = time() ;
+                      $user['session_key'] = md5('hello,world'); //session_id(), ;
+
+                      //session('username',null) ;
+                      session('safepwd',null)  ;
+                      session('user',null)     ;
+                      session('user',$user)    ;
+                      session('user_auth_sign2', data_auth_sign($_SERVER['HTTP_USER_AGENT'])) ;//session实现ip认证，防止session被盗取时别人可以登录。在adminControll中验证ip是否一致
+
+                      $backInfo['code'] = 1 ;
+                      $backInfo['msg']  = '登录成功' ;
+                      $backInfo['url']  = Url('index/index') ;
+                      return json_encode($backInfo) ;  die;
+                  }
+              } else {
+                  throw new \Exception('密码错误') ;
+              }
+
+          } else { //显示登录表单
+              return $this->fetch('logined');
+          }
+      } catch (\Exception $e) {
+          $backInfo['msg'] = $e->getMessage() ;
+          echo json_encode($backInfo) ;  die;
+      }
+    }
+    
+    /* 验证码，用于登录和注册 */
+    public function verify()
+    {
+//        $verify = new \COM\Verify();
+//        $verify->imageL = 90;
+//        $verify->imageH = 43;
+//        $verify->fontSize=18;
+//        $verify->fontttf='4.ttf';
+//        $verify->entry(1);
+    }
+
+    /**
+     * 退出登录
+     */
+    public function logout()
+    {
+        if(session('user')){
+            model('member_session')->where(array('uid'=>$_SESSION['user']['uid']))->update(array('isOnLine'=>0));
+        }
+        session('user',null);
+        session('username',null);
+        session('user_auth_sign2',null);
+//        $this->success('退出成功！', Url('user/login'));
+        $this->redirect( Url('user/login'));
+       die;
+    }
+
+    /**
+     * 个人信息
+     * @return mixed
+     */
+    public function info()
+    {
+        if ($this->request->isPost()) {
+            $user = model('members')->find($this->user['uid']);
+            $this->assign('user',$user);
+            //echo think_ucenter_md5(input('password'),UC_AUTH_KEY),"\r\n";
+            if(think_ucenter_md5(input('password'),UC_AUTH_KEY)!=$user['password']) {
+                $this->error('登录密码错误') ;
+            } else {
+                if (model('members')->where('uid='.$this->user['uid'])->update(array('nickname'=>input('nickname'),'safepwd'=>input('safepwd')))) {
+                    $this->success('修改成功');
+                } else {
+                    $this->error('没有改动');
+                }
+            }
+        } else {
+            $user = model('members')->find($this->user['uid']);
+            $this->assign('user',$user);
+            $coins = 0;
+            $linecount = 0;
+            $map = array();
+            $map['uid'] = $this->user['uid'];
+            $mybank = model('member_bank')->where($map)->find();
+            $this->assign('mybank',$mybank);
+            
+            $map = array();
+            $map['uid'] = $this->user['uid'];
+            $map['isOnLine'] = 1;
+            $login = model('member_session')->where($map)->order('id desc')->find();
+            $ip = new iplocation();
+            $addr = $ip->getlocation($login['loginIP']);
+            $login['addr']=$addr['country'];
+            $this->assign('login',$login);
+            
+            $map = array();
+            $map['parents'] = array('like','%,'.$this->user['uid'].',%');
+            $childs = model('members')->where($map)->select();
+            $regcount=0;
+            $time = strtotime('00:00:00');
+            $logins = model('member_session')->where(array('accessTime'=>array('gt',time()-15*60),'isOnLine'=>1))->order('id')->select();
+            $logins2 = [] ;
+            foreach($logins as $l){
+                $logins2[$l['uid']]=$l;
+            }
+
+            foreach ($childs as $child) {
+                $coins += $child['coin'];
+
+                if ($child['regTime'] > $time) {
+                    $regcount++ ;
+                }
+                if ( isset($logins2[$child['uid']]) && !empty($logins2[$child['uid']]) ) {
+                    $linecount++ ;
+                }
+            }
+
+            $childinfo['coins'] = $coins+$user['coin'];
+            $childinfo['count'] = count($childs)+1;
+            $childinfo['linecount'] = $linecount+1;
+            $childinfo['regcount'] = $regcount;
+            $this->assign('childinfo',$childinfo);
+            return $this->fetch();
+        }
+        
+    }
+    
+    /* 密码 */
+    public function password(){
+        return $this->fetch();
+    }
+    
+    /* 设置密码 */
+    public function setPasswd(){
+        if($this->request->isPost()){
+            $opwd=input('oldpassword');
+            if(!$opwd) $this->error('原密码不能为空');
+            if(strlen($opwd)<6) $this->error('原密码至少6位');
+            if(!$npwd=input('newpassword')) $this->error('密码不能为空');
+            if(strlen($npwd)<6) $this->error('密码至少6位');
+            
+            $user = db('members')->where('uid='.$this->user['uid'])->find();
+            $pwd = $user['password'];
+            
+            $opwd=think_ucenter_md5($opwd,UC_AUTH_KEY);
+            if($opwd!=$pwd) $this->error('原密码不正确');
+            
+            if(db('members')->where('uid='.$this->user['uid'])->update(array('password'=>think_ucenter_md5($npwd,UC_AUTH_KEY))))
+                $this->success('修改密码成功');
+                $this->error('修改密码失败或新密码与旧密码一致');
+        }
+    }
+    
+    /* 设置出款密码 */
+    public function setCoinPwd(){
+        if($this->request->isPost()){
+            
+            $opwd=input('oldpassword');
+            if(!$npwd=input('newpassword')) $this->error('出款密码不能为空');
+            if(strlen($npwd)<6) $this->error('出款密码至少6位');
+            
+            $pwd = db('members')->where('uid='.$this->user['uid'])->find();
+            
+            if(!$pwd['coinPassword']){
+                $npwd=think_ucenter_md5($npwd,UC_AUTH_KEY);
+                if($npwd==$pwd['password']) $this->error('出款密码与登录密码不能一样');
+            }else{
+                if(think_ucenter_md5($opwd,UC_AUTH_KEY)!=$pwd['coinPassword']) $this->error('原出款密码不正确');
+                $npwd=think_ucenter_md5($npwd,UC_AUTH_KEY);
+                if($npwd==$pwd['password']) $this->error('出款密码与登录密码不能一样');
+            }
+            if(db('members')->where('uid='.$this->user['uid'])->update(array('coinPassword'=>$npwd)))
+            {
+                $_SESSION['user']['coinPassword'] = think_ucenter_md5($npwd,UC_AUTH_KEY);
+                $this->success('出款密码设置成功');
+            }
+            
+            $this->error('修改出款密码失败');
+        }
+    }
+    
+    /* 银行信息 */
+    public function bank(){
+        $user=db('members')->find($this->user['uid']);
+        if(!$user['coinPassword'])
+            $this->error('请先设置出款密码',Url('user/password'));
+            $map = array();
+            $map['uid'] = $this->user['uid'];
+            $mybank = db('member_bank')->where($map)->select();
+            $this->assign('mybank',$mybank);
+            
+            $banks = db('bank_list')->where('isDelete=0')->order('sort')->select();
+            foreach($banks as $var){
+                $banks2[$var['id']]=$var;
+            }
+            $this->assign('banks',$banks2);
+            $this->assign('flag',true);
+            return $this->fetch();
+    }
+    /**
+     * 设置银行帐户
+     */
+    public function setCBAccount(){
+        if($this->request->isPost()){
+            $user = db('members')->where('uid='.$this->user['uid'])->find();
+            
+            if(think_ucenter_md5(input('coinPassword'), UC_AUTH_KEY)!=$user['coinPassword']) $this->error('出款密码不正确');
+            
+            
+            //检查银行账号唯一
+            $map = array();
+            $map['account'] = input('account');
+            $bank = db('member_bank')->where($map)->find();
+            if($bank)
+                $this->error('该'.input('account').'银行账号已经使用');
+                
+                $map = array();
+                $map['uid'] = $this->user['uid'];
+                $bank = db('member_bank')->where($map)->select();
+                if(count($bank)>0){
+                    $this->error('最多只能绑定1张银行卡');
+                }else{
+                    
+                    if(count($bank)>0 && input('username')!=$bank[0]['username'])
+                        $this->error('绑定的新银行持卡人必须跟之前绑定的一致');
+                        $b['uid'] = $this->user['uid'];
+                        $b['editEnable'] = 0;
+                        $b['bankId'] = input('bankId');
+                        $b['account'] = input('account');
+                        $b['username'] = input('username');
+                        $b['actionTime']=time();
+                        
+                        if(db('member_bank')->insert($b)){
+                            // 如果是工行，参与工行卡首次绑定活动
+                            if(input('bankId')){
+                                //读取系统配置
+                                $this->getSystemSettings();
+                                if($coin=floatval($this->settings['huoDongRegister'])){
+                                    $liqType=51;
+                                    $info='首次绑定银行卡赠送';
+                                    $ip=$this->ip(true);
+                                    $bankAccount = input('account');
+                                    
+                                    if(!$ip) {
+                                        $ip=0;
+                                    }
+                                        // 查找是否已经赠送过
+                                        //$sql="select id from {$this->prename}coin_log where liqType=$liqType and (`uid`={$this->user['uid']} or extfield0=$ip or extfield1=$bankAccount) limit 1";
+                                        
+                                        $where['uid']  = $this->user['uid'];
+                                        $where['extfield0']  = $ip;
+                                        $where['extfield1'] = $bankAccount;
+                                        $where['_logic'] = 'or';
+                                        $map['_complex'] = $where;
+                                        $map['liqType']  = $liqType;
+                                        
+                                        if(!db('coin_log')->where($map)->find()){
+                                            $this->addCoin(array(
+                                                'coin'=>$coin,
+                                                'liqType'=>$liqType,
+                                                'info'=>$info,
+                                                'extfield0'=>$ip,
+                                                'extfield1'=>$bankAccount
+                                            ));
+                                            $this->success(sprintf('更改银行信息成功，由于你第一次绑定银行卡，系统赠送%.2f元', $coin));
+                                        }
+                                }
+                            }
+                            $this->success('更改银行信息成功');
+                        }else{
+                            $this->error('更改银行信息出错');
+                        }
+                }
+        }
+    }
+    
+    
+    
+    /**
+     * 获取用户注册错误信息
+     * @param  integer $code 错误编码
+     * @return string        错误信息
+     */
+    private function showRegError($code = 0){
+        switch ($code) {
+            case -1:  $error = '用户名长度必须在16个字符以内！'; break;
+            case -2:  $error = '用户名被禁止注册！'; break;
+            case -3:  $error = '用户名被占用！'; break;
+            case -4:  $error = '密码长度必须在6-30个字符之间！'; break;
+            case -5:  $error = '邮箱格式不正确！'; break;
+            case -6:  $error = '邮箱长度必须在1-32个字符之间！'; break;
+            case -7:  $error = '邮箱被禁止注册！'; break;
+            case -8:  $error = '邮箱被占用！'; break;
+            case -9:  $error = '手机格式不正确！'; break;
+            case -10: $error = '手机被禁止注册！'; break;
+            case -11: $error = '手机号被占用！'; break;
+            default:  $error = '未知错误';
+        }
+        return $error;
+    }
+    
+    
+    private function getBrowser(){
+        $flag=$_SERVER['HTTP_USER_AGENT'];
+        $para=array();
+        
+        // 检查操作系统
+        if(preg_match('/Windows[\d\. \w]*/',$flag, $match)) $para['os']=$match[0];
+        
+        if(preg_match('/Chrome\/[\d\.\w]*/',$flag, $match)){
+            // 检查Chrome
+            $para['browser']=$match[0];
+        }elseif(preg_match('/Safari\/[\d\.\w]*/',$flag, $match)){
+            // 检查Safari
+            $para['browser']=$match[0];
+        }elseif(preg_match('/MSIE [\d\.\w]*/',$flag, $match)){
+            // IE
+            $para['browser']=$match[0];
+        }elseif(preg_match('/Opera\/[\d\.\w]*/',$flag, $match)){
+            // opera
+            $para['browser']=$match[0];
+        }elseif(preg_match('/Firefox\/[\d\.\w]*/',$flag, $match)){
+            // Firefox
+            $para['browser']=$match[0];
+        }else{
+            $para['browser']='unkown';
+        }
+        //print_r($para);exit;
+        $para=array();
+        return $para;
+    }
+    
+    /*盈亏报表*/
+    public final function report(){
+        
+        $this->reportSearch();
+        //$this->display('user/report');
+        return $this->fetch();
+    }
+    public final function searchReport(){
+        $this->reportSearch();
+        $this->display('user/report-list');
+        return $this->fetch();
+    }
+    
+    public final function reportSearch(){
+        
+        $para=input('get.');
+        
+        $where = array();
+        // 用户限制
+        $uid=$this->user['uid'];
+        
+        $where['uid'] = $uid;
+        
+        $userList = db('members')->where($where)->order('uid')->select();
+        
+        foreach($userList as $user)
+        {
+            $userStr = $userStr.$user['uid'].',';
+        }
+        
+        $map=array();
+        // 时间限制
+        if($para['fromTime'] && $para['toTime']){
+            $map['actionTime'] = array('between',array(strtotime($para['fromTime']),strtotime($para['toTime'])));
+        }elseif($para['fromTime']){
+            $where['actionTime'] = array('egt',strtotime($para['fromTime']));
+        }elseif($para['toTime']){
+            $where['actionTime'] = array('elt',strtotime($para['toTime']));
+        }else{
+            if($GLOBALS['fromTime'] && $GLOBALS['toTime']){
+                $map['actionTime'] = array('between',array($GLOBALS['fromTime'],$GLOBALS['toTime']));
+            }
+        }
+        $map['uid'] = array('in',$userStr);
+        
+        $coinList = db('coin_log')->where($map)->field("uid,sum(case when liqType in ('2','3') then coin else 0 end) as fanDianAmount,
+		0-sum(case when liqType in ('101','102','7') then coin else 0 end) as betAmount,
+		sum(case when liqType=6 then coin else 0 end) as zjAmount,
+		0-sum(case when liqType=107 then fcoin else 0 end) as cashAmount,
+		sum(case when liqType=1 then coin else 0 end) as rechargeAmount,
+		sum(case when liqType in ('50','51','52','53') then coin else 0 end) as brokerageAmount")->group('uid')->select();
+        
+        $i = 0;
+        foreach($userList as $user)
+        {
+            foreach($coinList as $coin)
+            {
+                if($coin['uid'] == $user['uid'])
+                {
+                    $data[$i] = array_merge($user,$coin);
+                    $i++;
+                }
+            }
+        }
+        
+        $this->recordList($data);
+    }
+    
+    public final function getTip(){
+        //提现
+        if($data=db('member_cash')->where(array('uid'=>$this->user['uid'], 'state'=>array('in', array('0','4')), 'isDelete'=>0, 'qflag'=>0))->order('id desc')->find()){
+            
+            if(intval($data['state'])==4){
+                $return = array(
+                    'flag'=>true,
+                    'message'=>'提款失败！<br/>原因：'.$data['info']
+                );
+            }else{
+                $return = array(
+                    'flag'=>true,
+                    'message'=>'提款成功！<br/>金额：'.$data['amount'].'元'
+                );
+            }
+            
+            db('member_cash')->where(array('id'=>$data['id']))->update(array('qflag'=>1));
+            
+            echo json_encode($return);
+            exit();
+        }
+        
+        //充值
+        if($data=db('member_recharge')->where(array('uid'=>$this->user['uid'], 'state'=>array('in', array('1','9')), 'isDelete'=>0, 'qflag'=>0))->order('id desc')->find()){
+            
+            if($data['rechargeAmount']>0){
+                $return = array(
+                    'flag'=>true,
+                    'message'=>'充值成功！<br/>系统充值：'.$data['rechargeAmount'].'元'
+                );
+            }else{
+                $return = array(
+                    'flag'=>true,
+                    'message'=>'扣款成功！<br/>系统扣款：'.abs($data['rechargeAmount']).'元'
+                );
+            }
+            
+            db('member_recharge')->where(array('id'=>$data['id']))->update(array('qflag'=>1));
+            echo json_encode($return);
+            exit();
+        }
+        
+        //盈亏
+        if($datas=db('bets')->where(array('uid'=>$this->user['uid'], 'lotteryNo'=>array('neq', ''), 'isDelete'=>0, 'flag'=>0))->order('id desc')->select()){
+            foreach($datas as $data){
+                if($data['hmEnable'])
+                    $data['tMoney'] = $data['bonus'] - $data['mode']*$data['beiShu']*$data['actionNum']*($data['hmMyFen']+$data['hmBaoDi'])/($data['hmAllFen']);
+                    else
+                        $data['tMoney'] = $data['bonus'] - $data['mode']*$data['beiShu']*$data['actionNum']*(1-$data['fanDian']/100);
+                        if($data['tMoney']>0){
+                            $message = "订单".$data['wjorderId']."：盈亏 <font style='color:#F00;font-weight:bold;font-size:14px;'>".round($data['tMoney'],4)."</font> 元"."<br>".$message;
+                        }else{
+                            $message = "订单".$data['wjorderId']."：盈亏 <font style='color:#060;font-weight:bold;font-size:14px;'>".round($data['tMoney'],4)."</font> 元"."<br>".$message;
+                        }
+            }
+            
+            db('bets')->where(array('uid'=>$this->user['uid']))->update(array('flag'=>1));
+            
+            $return = array(
+                'flag'=>true,
+                'message'=>$message
+            );
+            $this->ajaxReturn($return,'JSON');
+        }
+        
+        $return = array('flag'=>false);
+        echo json_encode($return);
+        exit();
+    }
+    
+    public final function getTip_recharge(){
+        
+        if($data=db('member_recharge')->where(array('uid'=>$this->user['uid'], 'state'=>0,'isDelete'=>0, 'actionTime'=>array('gt',strtotime(' 00:00:00'))))->field('id,flag')->select()){
+            
+            $isDialog = false;
+            foreach($data as $d){
+                if($d['flag']==0)
+                    $isDialog=true;
+            }
+            
+            db('member_recharge')->where(array('flag'=>0))->update(array('flag'=>1));
+            
+            $return = array(
+                'flag'=>true,
+                'isDialog'=>$isDialog,
+                'message'=>'有新的充值请求需要处理',
+                'buttons'=>'前往处理:goToDealWithRec|忽略:defaultCloseModal'
+            );
+            
+            echo json_encode($return);
+            exit();
+            
+        }
+        
+    }
+    
+    
+}

@@ -1,0 +1,111 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+    <title>登录</title>
+    <link type="text/css" rel="stylesheet" href="/css/auth.css">
+    <script type="text/javascript" src="/js/jquery-1.8.0.min.js"></script>
+    <script type="text/javascript" src="/js/show.js"></script>
+</head>
+<body>
+<div class="container">
+    <main>
+        <img src="/images/auth/logo.jpg" alt="logo"/>
+        <ul class="login">
+            <li>
+                <img src="/images/auth/uname.png" alt="uname">
+                <input type="text" id="username" placeholder="请输入账户名称" minlength="6" maxlength="8"> 
+            </li>
+            <li>
+                <img src="/images/auth/pwd.png" alt="pwd">
+                <input type="password" id="password" placeholder="请输入登录密码" minlength="6" maxlength="20">
+            </li>
+            <li>
+                <img src="/images/auth/yzm.png" alt="yam">
+                <input type="text" id="yzm" placeholder="输入验证码" maxlength="4">
+                <a href="javascript:void(0)"><img id="captcha" src="{:url('indexcaptcha/get_captcha?id=login')}"></a>
+            </li>
+        </ul>
+        <button id="submit">登录</button>
+        <p><a href="/index/register">注册</a><a href="" class="right">忘记密码？</a></p>
+        <div class="tip"><span></span></div>
+        <div class="curtion"><img src="/images/loading.gif" alt="loading"/> </div>
+    </main>
+</div>
+ <script type="text/javascript">
+     var _timeout = null,_tip = null;
+     $(function () {
+         _tip = $('.tip').remove();     //保存提示信息
+     });
+     // 更新验证码
+    $("#captcha").click(function(){
+        $(this).attr('src',"{:url('indexcaptcha/get_captcha?id=login')}");
+    });
+    // 提交数据
+    $('#submit').click(function(){
+        var _this = $(this);
+        var _user = {
+            username:'',
+            password:'',
+            code:''
+        };
+        _user.username  = $('#username').val();
+        _user.password   = $('#password').val();
+        _user.code  = $('#yzm').val();
+        if(_user.username == ''){
+            getErrorMsg('用户名不为空');
+            return;
+        }else if(_user.password == ''){
+            getErrorMsg('密码不为空');
+            return;
+        }else if(_user.code == ''){
+            getErrorMsg('验证码不为空');
+            return;
+        }
+        _this.attr('disabled','disabled');
+        _this.addClass('disabled');
+        $('.curtion').show();
+        $.ajax({
+            url: "/index/login",
+            data:_user,
+            dataType:'json',
+            type:'POST',
+            success:function(data){
+                if(data.code == 1){
+                    getErrorMsg('登录成功');
+                    _this.attr('disabled','disabled');
+                    setTimeout(function(){
+                        window.location.href = "/user/main";
+                    },500)
+                }else{
+                    getErrorMsg(data.msg);
+                    $("#captcha").trigger('click');
+                }
+            },
+            error:function (err) {
+                alert('ajax出错了！');
+                $("#captcha").trigger('click');
+            },
+            complete:function () {
+                _this.removeAttr('disabled');
+                _this.removeClass('disabled');
+                $('.curtion').hide();
+            }
+        });
+    });
+    // 弹出错误信息
+     function getErrorMsg(msg) {
+         $('main').append(_tip);
+         _tip.find('span').text(msg);
+         _tip.fadeIn();
+         if(_timeout){
+             clearTimeout(_timeout);
+         }
+         _timeout = setTimeout(function () {
+             _tip = $('.tip').fadeOut().remove();
+         },1000);
+     }
+</script>
+</body>
+</html>

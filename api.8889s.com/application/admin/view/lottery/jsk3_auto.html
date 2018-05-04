@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>系统设置</title>
+<link href="/css/base.css" rel="stylesheet" type="text/css" />
+<link href="/css/admin.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="/js/jquery.js"></script>
+<script type="text/javascript" src="/js/jquery.tools.js"></script>
+<script type="text/javascript" src="/js/base.js"></script>
+<script language="javascript">
+function check_submit(){
+	if($("#qishu").val()==""){
+		alert("请填写开奖期数");
+		$("#qishu").focus();
+		return false;
+	}
+	if($("#datetime").val()==""){
+		alert("请填写开奖时间");
+		$("#datetime").focus();
+		return false;
+	}
+	if($("#ball_1").val()==""){
+		alert("请选择第一位开奖号码");
+		$("#ball_1").focus();
+		return false;
+	}
+	if($("#ball_2").val()==""){
+		alert("请选择第二位开奖号码");
+		$("#ball_2").focus();
+		return false;
+	}
+	if($("#ball_3").val()==""){
+		alert("请选择第三位开奖号码");
+		$("#ball_3").focus();
+		return false;
+	}
+	return true;
+}
+
+$(function() {
+	$('#all_checkbox').click(function() {
+		if ($(this).is(':checked')) {
+			$('.checkbox').prop("checked",true);
+		} else {
+			$('.checkbox').prop("checked",false);
+		}
+	});
+		
+	$('#checkbox_button').click(function() {
+		var is_submit = false;
+		if ($('#checkbox_select').val() == 'yes') {
+			$('#set_my_ok').val('1');
+			is_submit = true;
+		} else if ($('#checkbox_select').val() == 'no') {
+			$('#set_my_ok').val('0');
+			is_submit = true;
+		} else {
+			alert('请先选择');
+			return false;
+		}
+		
+		if (is_submit) {
+			var arr = [];
+			$('.checkbox').each(function() {
+				if ($(this).is(':checked')) {
+					var tempid = $(this).attr('id');
+					var temp_patten = tempid.match(/checkbox_(\d+)/);
+					if (temp_patten && temp_patten[1]) {
+						arr.push(temp_patten[1]);
+					}
+				}
+			});
+			
+			$('#set_my_ids').val(arr.join('.'));
+			$('#set_my_auto').submit();
+		}
+	});
+	
+})
+</script>
+
+<form style="display:none" method="post" id="set_my_auto" action="{:url('lottery/set_my_auto')}">
+	<input type="text" name="ids" id="set_my_ids"/>
+    <input type="text" name="ok" id="set_my_ok"/>
+    <input type="text" name="type" id="set_my_type" value="jsk3" />
+</form>
+</head>
+<body class="list">
+	<!--<div class="bar">
+		江苏快3开奖管理
+	</div>-->
+
+<div class="body">
+<ul id="tab" class="tab">
+	<li><input type="button" value="重庆时时彩" hidefocus  onClick="window.location.href='/index.php/lottery/csc_auto'" /></li>
+  	<li><input type="button" value="新疆时时彩" onClick="window.location.href='/index.php/lottery/xsc_auto'" /></li>
+    <li><input type="button" value="重庆快乐十分" hidefocus onClick="window.location.href='/index.php/lottery/csf_auto'" /></li>
+    <li><input type="button" value="广东快乐十分" hidefocus onClick="window.location.href='/index.php/lottery/gsf_auto'" /></li>
+    <li><input type="button" value="北京PK拾" hidefocus onClick="window.location.href='/index.php/lottery/pk10_auto'" /></li>
+    <li><input type="button" value="广西快乐十分" hidefocus onClick="window.location.href='/index.php/lottery/gxsf_auto'" /></li>
+    <li><input type="button" value="江苏快3" class="current" hidefocus onClick="window.location.href='/index.php/lottery/jsk3_auto'" /></li>
+	<li><input type="button" value="山东11选5" hidefocus onClick="window.location.href='/index.php/lottery/sd11x5_auto'" /></li>
+    <li><input type="button" value="幸运飞艇" hidefocus onClick="window.location.href='/index.php/lottery/xyft_auto'" /></li>
+    <li><input type="button" value="分分彩" hidefocus class="" onClick="window.location.href='/index.php/lottery/ffc_auto'" /></li>
+    <li><input type="button" value="二分彩" hidefocus class="" onClick="window.location.href='/index.php/lottery/f2c_auto'" /></li>
+    <li><input type="button" value="五分彩" hidefocus class="" onClick="window.location.href='/index.php/lottery/f5c_auto'" /></li>  
+</ul>
+<form name="form1" onSubmit="return check_submit();" method="post" action="?id=<?=$id?>&action=<?=$id>0 ? 'edit' : 'add'?>&page={$page}">
+
+<table id="listTables" class="listTables" style="margin-bottom:5px;">
+  <tr>
+    <td width="110" height="40"  align="right" bgcolor="#F2F4F6">开奖期号：</td>
+    <td  align="left" bgcolor="#FFFFFF" style="padding-left:5px;"><input name="qishu" type="text" id="qishu" value="<?=$rs['qishu']?>" size="20" class="formText"/></td>
+  </tr>
+  <tr>
+    <td height="40" align="right" bgcolor="#F2F4F6">开奖时间：</td>
+    <td align="left" bgcolor="#FFFFFF" style="padding-left:5px;"><input name="datetime" type="text" id="datetime" value="<?=$rs['datetime']?>" size="20" maxlength="19" class="formText"/></td>
+  </tr>
+  <tr>
+    <td height="40" align="right" bgcolor="#F2F4F6">开奖号码：</td>
+    <td align="left" bgcolor="#FFFFFF" style="padding-left:5px;"><select name="ball_1" id="ball_1">
+        <option value="1" <?=$rs['ball_1']==1 ? 'selected' : ''?>>1</option>
+        <option value="2" <?=$rs['ball_1']==2 ? 'selected' : ''?>>2</option>
+        <option value="3" <?=$rs['ball_1']==3 ? 'selected' : ''?>>3</option>
+        <option value="4" <?=$rs['ball_1']==4 ? 'selected' : ''?>>4</option>
+        <option value="5" <?=$rs['ball_1']==5 ? 'selected' : ''?>>5</option>
+        <option value="6" <?=$rs['ball_1']==6 ? 'selected' : ''?>>6</option>
+        <option value="" <?=$rs['ball_1']=='' ? 'selected' : ''?>>第一位</option>
+      </select>
+      <select name="ball_2" id="ball_2">
+        <option value="1" <?=$rs['ball_2']==1 ? 'selected' : ''?>>1</option>
+        <option value="2" <?=$rs['ball_2']==2 ? 'selected' : ''?>>2</option>
+        <option value="3" <?=$rs['ball_2']==3 ? 'selected' : ''?>>3</option>
+        <option value="4" <?=$rs['ball_2']==4 ? 'selected' : ''?>>4</option>
+        <option value="5" <?=$rs['ball_2']==5 ? 'selected' : ''?>>5</option>
+        <option value="6" <?=$rs['ball_2']==6 ? 'selected' : ''?>>6</option>
+        <option value="" <?=$rs['ball_2']=='' ? 'selected' : ''?>>第二位</option>
+      </select>
+      <select name="ball_3" id="ball_3">
+        <option value="1" <?=$rs['ball_3']==1 ? 'selected' : ''?>>1</option>
+        <option value="2" <?=$rs['ball_3']==2 ? 'selected' : ''?>>2</option>
+        <option value="3" <?=$rs['ball_3']==3 ? 'selected' : ''?>>3</option>
+        <option value="4" <?=$rs['ball_3']==4 ? 'selected' : ''?>>4</option>
+        <option value="5" <?=$rs['ball_3']==5 ? 'selected' : ''?>>5</option>
+        <option value="6" <?=$rs['ball_3']==6 ? 'selected' : ''?>>6</option>
+        <option value="" <?=$rs['ball_3']=='' ? 'selected' : ''?>>第三位</option>
+      </select></td>
+  </tr>
+  <tr>
+    <td height="40" colspan="2" align="left" bgcolor="#F2F4F6"><input name="submit" type="submit" class="formButton" style="margin-left:110px;" value="确认发布"/></td>
+    </tr>
+</table>
+</form>
+<table id="listTables" class="listTables"> 
+<tr>
+        	<th colspan="6" style="border:none;"></th>
+            <th colspan="2" style="border:none;">
+            	<select id="checkbox_select">
+                	<option>--修改状态--</option>
+                    <option value="yes">已结算</option>
+                    <option value="no">未结算</option>
+                </select>
+                <button type="button" id="checkbox_button">确认修改</button>
+            </th>
+            <th colspan="1" style="border:none;">
+            	全选<input type="checkbox" id="all_checkbox" />
+            </th>
+        </tr> 
+      	<tr>
+        <th align="center">彩票期号</th>
+        <th align="center">开奖时间</th>
+        <th align="center">第一位</th>
+        <th align="center">第二位</th>
+        <th align="center">第三位</th>
+        <th align="center">总和</th>
+        <th align="center">查看注单</th>
+        <th align="center">查看注单</th>
+        <th align="center">结算</th>
+        <th align="center">操作</th>
+        </tr>
+        <?php foreach ($jsk3 as $k => $v){?>
+		<?php
+		if($v['ok']==1){
+			$ok = '<font color="#FF0000">已结算</font>';
+		}else{
+			$ok = '<a href=""><font color="#0000FF">点击结算</font></a>';
+		}
+		?>
+		<tr>        
+        <td height="30" align="center" valign="middle"><?=$v['qishu']?></td>
+        <td align="center" valign="middle"><?=$v['datetime']?></td>
+        <td align="center" valign="middle"><img src="/lottery/images/ball_6/{$v.ball_1}.png"></td>
+        <td align="center" valign="middle"><img src="/lottery/images/ball_6/{$v.ball_2}.png"></td>
+        <td align="center" valign="middle"><img src="/lottery/images/ball_6/{$v.ball_3}.png"></td>
+        <td align="center">{$extral_info[$k][1]} / {$extral_info[$k][2]} / {$extral_info[$k][3]}</td>
+        <td align="center"><a href="{:url('lottery/allzhudan','qishu='.$v.qishu.'&type=江苏快3')}">本期注单</a></td>
+        <td align="center"><a href="#">国彩本期注单</a></td>
+        <td align="center"><?=$ok?></td>
+        <td align="center"><a href="?id=<?=$v["id"]?>&page={$page}">编辑</a>&nbsp;<input type="checkbox" class="checkbox" id="checkbox_<?=$v["id"]?>" /></td>
+        </tr>
+    <?php }?>    
+	</table>
+	{$pages}
+</div>
+</body>
+</html>

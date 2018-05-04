@@ -1,0 +1,156 @@
+<input type="hidden" name="playedGroup" value="<?=$groupId?>"/>
+<input type="hidden" name="playedId" value="<?=$playedId?>"/>
+<input type="hidden" name="type" value="<?=$type?>"/>
+<input type="hidden" name="playedName" value="<?=$played['name']?>"/>
+<!-- mobile 福彩3d_定位 --->
+<div id="sscContent">
+    <div class="lot-content clearfix">
+        <div class="fl main-left">
+            <div class="hd clearfix rehd tzgz" id="toptouzhu">
+                <div class="fl refl">
+                    快捷金额：
+                    <input type="text" class="txt" id="inputMoney">
+                </div>
+                <div class="kjanniu">
+                    <a href="javascript:void(0)" class="img-50" data-num="50"></a>
+                    <a href="javascript:void(0)" class="img-100" data-num="100"></a>
+                    <a href="javascript:void(0)" class="img-500" data-num="500"></a>
+                    <a href="javascript:void(0)" class="img-1000" data-num="1000"></a>
+                    <a href="javascript:void(0)" class="img-5000" data-num="5000"></a>
+                    <a href="javascript:void(0)" class="img-10000" data-num="10000"></a>
+                </div>
+            </div>
+            <div class="hd clearfix f-tab f-bottom">
+                <div class="fr">
+                    <div class="T-tab clearfix">
+                        <a href="javascript:void(0)" onclick="changeTab(this)">百定位</a>
+                        <a href="javascript:void(0)" onclick="changeTab(this)">十定位</a>
+                        <a href="javascript:void(0)" onclick="changeTab(this)">个定位</a>
+                        <a href="javascript:void(0)" onclick="changeTab(this)">百十定位</a>
+                        <a href="javascript:void(0)" onclick="changeTab(this)">百个定位</a>
+                        <a href="javascript:void(0)" onclick="changeTab(this)">十个定位</a>
+                        <a href="javascript:void(0)" onclick="changeTab(this)">百十个定位</a>
+                    </div>
+                </div>
+            </div>
+            <br/>
+            <div class="table-common" id="table-common">
+                <script type="text/html" id="fc3d_dw">
+                    {{if plg.pls.length > 1}}
+                    <table width="100%" border="0" cellpadding="0" cellspacing="0" action="fc3d_dw" class="pp">
+                        <thead>
+                        <tr>
+                            <th>号码</th>
+                            <th>赔率</th>
+                            <th>金额</th>
+                            <th>号码</th>
+                            <th>赔率</th>
+                            <th>金额</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {{each plg.sz.lines value index}}
+                        <tr>
+                            {{each value _value _index}}
+                            <td onclick="setQuickPick(this,true)">
+                                <strong>{{_value.value}}</strong>
+                            </td>
+                            <td onclick="setQuickPick(this,true)">
+                                <strong class="color-red pl" data-plid="{{_value.id}}">{{_value.pl}}</strong>
+                            </td>
+                            <td><input type="text" oninput="checkAmount()" class="table-txt"
+                                       data-name="{{plg.name}}-{{_value.value}}"
+                                       data-plid="{{_value.id}}" data-pl="{{_value.pl}}"></td>
+                            {{/each}}
+                        </tr>
+                        {{/each}}
+                        </tbody>
+                    </table>
+                    {{else}}
+                    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                        <thead>
+                        <tr>
+                            <th colspan="21">{{plg.name}}（中{{plg.len}}@<span class="pl red"
+                                                                             data-plid="{{plg.pls[0].id}}">{{plg.pls[0].pl}}</span>)
+                            </th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {{each plg.bits value index}}
+                        <tr class="pp" action="fc3d_checkbox_dw" length="{{plg.len}}">
+                            <td rowspan="2"><strong>{{value}}位</strong></td>
+                            {{each plg.numbers.slice(0,5) _value _index}}
+                            <td><strong class="pl">{{_value}}</strong></td>
+                            <td><input type="checkbox" value="{{_value}}" data-name="{{_value}}" data-group="{{value}}">
+                            </td>
+                            {{/each}}
+                        </tr>
+                        <tr>
+                            {{each plg.numbers.slice(5) _value _index}}
+                            <td><strong class="pl">{{_value}}</strong></td>
+                            <td><input type="checkbox" value="{{_value}}" data-name="{{_value}}" data-group="{{value}}">
+                            </td>
+                            {{/each}}
+                        </tr>
+                        {{/each}}
+                        </tbody>
+                    </table>
+                    {{/if}}
+                </script>
+            </div>
+            <br/>
+        </div>
+    </div>
+</div>
+
+<script>
+    //var pls;//玩法的所有赔率
+    //var plg;//当前赔率组
+    function changeTab(self) {
+        $(self).siblings().removeClass('active');
+        $(self).addClass('active');
+        var $tabs = $(self).parent().children();
+        var index = $tabs.index(self);
+        plg = pls[index];
+        if (index < 3) {      // 单位定 input
+            plg.sz = plg.pls.slice(0, 10);
+            plg.sz.lines = [];
+            // 第一组
+            for (var i = 0; i < plg.sz.length; i += 2) {
+                var temp = [];
+                temp.push(plg.sz[i]);
+                temp.push(plg.sz[i + 1]);
+                plg.sz.lines.push(temp);
+            }
+            // 第二组
+            var temp1 = [], temp2 = [];
+            for (var j = 0, _arr = plg.pls.slice(10); j < _arr.length; j += 2) {
+                var temp = [];
+                temp.push(_arr[j])
+                temp.push(_arr[j + 1])
+                plg.sz.lines.push(temp);
+            }
+        } else {  // 多位定 checkbox
+            var _active = plg.name.substr(0, plg.name.length - 2);
+            plg.bits = _active.split('');
+            plg.numbers = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+            plg.len = 2;        // 中2 or 中3
+            plg.pls[0].value = 2;       // 至少输入多少位,后台未传,前台赋值
+            if (index == 6) {
+                plg.len = 3;
+                plg.pls[0].value = 3;
+            }
+        }
+        var html = template("fc3d_dw", {plg: plg});
+        $('.table-common').html(html);
+    }
+
+    $(function () {
+        var playedId = "<?=$playedId?>";
+        $.getJSON("/game/pl/playedId/" + playedId, function (data) {
+            pls = data;
+            console.log(data);
+            $('.T-tab.clearfix').children().eq(0).click();
+        });
+    });
+</script>

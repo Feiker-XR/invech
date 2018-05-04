@@ -1,0 +1,199 @@
+<?php
+namespace app\common\model;
+use think\Model;
+
+/**
+ *   时时彩彩种模型
+ * @author mack
+ */
+class  Type  extends Model
+{
+    CONST TYPE_SSC = 1;
+    CONST TYPE_11X5 = 2;
+    CONST TYPE_3D = 3;
+    CONST TYPE_KLSF = 4;
+    CONST TYPE_GXKLSF = 5;
+    CONST TYPE_XYFT = 6;
+    CONST TYPE_K8 = 8;
+    CONST TYPE_K3 = 9;
+    CONST TYPE_XY28 = 10;
+    CONST TYPE_6HC = 100;
+
+    CONST TYPE_ARRAY = [
+        self::TYPE_SSC => '时时彩',
+        self::TYPE_11X5 => '十一选五',
+        self::TYPE_3D => '3D/P3/时时乐',
+        self::TYPE_KLSF => '快乐十分',
+        self::TYPE_GXKLSF => '广西快乐十分',
+        self::TYPE_XYFT => '幸运飞艇',
+        self::TYPE_K8 => '快8',
+        self::TYPE_K3 => '快3',
+        self::TYPE_XY28 => '幸运28',
+        self::TYPE_6HC => '香港六合彩',
+    ];
+
+    public function groups()
+    {
+    	return $this->hasMany('PlayedGroup','type','type')
+    	->where('enable',1)->order('sort,id');
+    }
+
+    public function gfwfgroups()
+    {
+    	return $this->hasMany('PlayedGroup','type','type')
+    	->where('enable',1)->where('is_kqwf',0)->order('sort,id');
+    }
+
+    public function qkwfgroups()
+    {
+    	return $this->hasMany('PlayedGroup','type','type')
+    	->where('enable',1)->where('is_kqwf',1)->order('sort,id');
+    }
+
+    static public function getTypes(){
+    	return self::with('groups.playeds')->select()->toArray();
+    }
+
+    static public function allTypes($id=''){
+    	$types = cache('gygy_types');
+    	if(!$types){
+    		
+    		//$types = self::where('enable',1)->all();
+    		$types = self::all(['enable'=>1]);
+
+    		$types_map = [];
+    		foreach ($types as $type) {
+
+    			$groups_map = [];
+    			foreach ($type->groups as $group) {
+    				
+    				$playeds_map = [];
+    				foreach ($group->playeds as $played) {
+    					$playeds_map[$played->id] = $played->toArray();
+                        if($played->tag){
+                            $playeds_map['tags'][$played->tag][$played->id] = $played->toArray();
+                        }
+    				}
+
+    				$groups_map[$group->id] = $group->toArray();
+    				$groups_map[$group->id]['playeds'] = $playeds_map;
+    			}
+
+    			$types_map[$type->id] = $type->toArray();
+    			$types_map[$type->id]['groups'] = $groups_map;
+
+    		}
+
+    		$types = $types_map;
+    		cache('gygy_types',$types);
+    	}
+
+    	if($id){
+    		return $types[$id]['groups']??null;
+    	}else{
+    		return $types;	
+    	}    	
+    }
+
+    static public function gfwfTypes($id=''){
+    	$types = cache('gfwf_types');
+    	if(!$types){
+    		
+    		//$types = self::where('enable',1)->all();
+    		$types = self::all(['enable'=>1]);
+
+    		$types_map = [];
+    		foreach ($types as $type) {
+
+    			$groups_map = [];
+    			foreach ($type->gfwfgroups as $group) {
+    				
+    				$playeds_map = [];
+    				foreach ($group->playeds as $played) {
+    					$playeds_map[$played->id] = $played->toArray();
+                        if($played->tag){
+                            $playeds_map['tags'][$played->tag][$played->id] = $played->toArray();
+                        }                        
+    				}
+
+    				$groups_map[$group->id] = $group->toArray();
+    				$groups_map[$group->id]['playeds'] = $playeds_map;
+    			}
+
+    			$types_map[$type->id] = $type->toArray();
+    			$types_map[$type->id]['groups'] = $groups_map;
+
+    		}
+
+    		$types = $types_map;
+    		cache('gfwf_types',$types);
+    	}
+
+    	if($id){
+    		return $types[$id]['groups']??null;
+    	}else{
+    		return $types;	
+    	}    	
+    }
+
+    static public function kqwfTypes($id=''){
+    	$types = cache('kqwf_types');
+    	if(!$types){
+    		
+    		//$types = self::where('enable',1)->all();
+    		$types = self::all(['enable'=>1]);
+
+    		$types_map = [];
+    		foreach ($types as $type) {
+
+    			$groups_map = [];
+    			foreach ($type->qkwfgroups as $group) {
+    				
+    				$playeds_map = [];
+    				foreach ($group->playeds as $played) {
+    					$playeds_map[$played->id] = $played->toArray();
+                        if($played->tag){
+                            $playeds_map['tags'][$played->tag][$played->id] = $played->toArray();
+                        }                        
+    				}
+
+    				$groups_map[$group->id] = $group->toArray();
+    				$groups_map[$group->id]['playeds'] = $playeds_map;
+    			}
+
+    			$types_map[$type->id] = $type->toArray();
+    			$types_map[$type->id]['groups'] = $groups_map;
+
+    		}
+
+    		$types = $types_map;
+    		cache('kqwf_types',$types);
+    	}
+
+    	if($id){
+    		return $types[$id]['groups']??null;
+    	}else{
+    		return $types;	
+    	}
+    	
+    }
+
+    //----------------后台------------------
+
+    public static function getList($request){
+    
+        $params = $request->param();
+
+        $query = self::order('type')->order('id desc');
+
+        if($params['xx']??null){
+           //$query->where('xxx', $params['xx']);
+        }
+
+        $data = $query->select();
+        
+        return $data;
+    }
+
+
+}

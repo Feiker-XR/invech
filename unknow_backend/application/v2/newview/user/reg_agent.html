@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Welcome</title>
+<link rel="stylesheet" type="text/css" href="/css/general.css" />
+<link rel="stylesheet" type="text/css" href="/newview/css/theme/style.css?version=2.0.0" />
+<link rel="stylesheet" type="text/css" href="/newview/css/style.css" />
+<link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
+<script src="/js/js/jquery-1.8.0.min.js"></script>
+<script type="text/javascript" src="/js/main.js"></script>
+<script type="text/javascript" src="/Scripts/member.js"></script>
+<script type="text/javascript" src="/newview/js/main.js"></script>
+</head>
+<body>
+<div class="head">
+	<!--欢迎-->
+	{include file='common/nav'}
+</div>
+<div class="block_0"></div>	
+	
+<div class="moneyBox_contain">		
+	<div class="ui-header">
+		<div class="ui-headerBox">
+			<!-- logo -->
+			<a class="ui-icon-logo ui-logo" id="Logo"></a>
+			<!-- 导航 -->
+			<ul class="ui-nav">
+				<li id="Nav_0">
+					<a href="/user/userinfo.html" title="会员首页">
+						<span class="ui-icon ui-icon-home ui-icon-50"></span>
+					</a>
+				</li>
+				<li id="Nav_1">
+					<a href="/pay/member.html" title="财务管理">
+						<span class="ui-icon ui-icon-recharge ui-icon-50"></span>
+					</a>
+				</li>
+				<li id="Nav_2">
+					<a href="/user/record_ds.html" title="游戏记录">
+						<span class="ui-icon ui-icon-gameNote ui-icon-50"></span>
+					</a>
+				</li>
+				<li id="Nav_3" >
+					<a href="/user/report.html" title="历史记录">
+						<span class="ui-icon ui-icon-data ui-icon-50"></span>
+					</a>
+				</li>
+				<li id="Nav_4">
+					<a href="/user/sms.html" title="站内短信">
+						<span class="ui-icon ui-icon-announce ui-icon-50"></span>
+					</a>
+				</li>
+       			 <li id="Nav_5" class="ui-header-active">
+					<a href="/user/agent.html" title="代理中心">
+						<span class="ui-icon ui-icon-newActivity ui-icon-50"></span>
+					</a>
+				</li>
+        		<li style="display:none">
+					<a href="http://messenger.providesupport.com/messenger/1x5b67gp1rcy50kqxa0qpsa0jx.html" title="客服中心">
+						<span class="ui-icon ui-icon-online ui-icon-50"></span>
+					</a>
+				</li>
+			</ul>
+			<ul class="ui-function">
+				<!--<li>
+					<a href="#">
+						<span class="ui-icon ui-icon-down ui-icon-20" id="Menu"></span>
+					</a>
+				</li>
+				<li>
+					<a href="#">
+						<span class="ui-icon ui-icon-min ui-icon-20"></span>
+					</a>
+				</li>
+				<li>
+					<a href="javascript:void(0)" id="Logout">
+						<span class="ui-icon ui-icon-max ui-icon-20"></span>
+					</a>
+				</li>-->
+			</ul>
+		</div>
+	</div>	
+	
+	<div class="ui-body">
+		<div class="ui-search" id="subjsshow5" style="display: block;"> 
+        	<span><i class="fas fa-user-circle" style="font-size: 30px"></i>代理中心</span>
+			<ul>
+                <li class="ui-hover"><a href="/user/agent.html"><i class="fas fa-shopping-cart" style="background-color: #F59A2F"></i>推广网址</a></li>
+                <li><a href="/user/ag_user.html"><i class="fas fa-anchor" style="background-color: #F5b52F"></i>下级列表</a></li>
+                <li><a href="/user/ag_data.html"><i class="fas fa-archive" style="background-color: #5D9A2F"></i>报表统计</a></li>
+            </ul>
+        </div>
+	</div>	
+	
+	
+	<div class="ui-moneyBox">
+		<ul>
+			<table width="100%" border="0" cellspacing="0" cellpadding="5">
+				<form id="form1" name="form1" method="post" action="/user/reg_agent">
+					<tr>
+						<td colspan="2" align="center" bgcolor="#333333"
+							style="font-size: 14px; color: #FF0">请认真填写下列表单，否则我们将无法审核您的代理资格！</td>
+					</tr>
+					<tr>
+						<td width="150" align="right">代理账号：</td>
+						<td><font color="#0000FF">
+								<?php echo $user["username"];?>
+						</font><input type="hidden" name="username" id="username"
+							value="<?php echo $user["username"];?>"/></td>
+					</tr>
+					<tr>
+						<td align="right">真实姓名：</td>
+						<td><font color="#0000FF">
+								<?php echo $user["pay_name"];?>
+								<input type="hidden" name="r_name" id="r_name"
+								value="<?php echo $user["pay_name"];?>"/>
+						</font></td>
+					</tr>
+					<tr>
+						<td align="right">电话号码：</td>
+						<td><input name="mobile" type="text" class="Input_200"
+							id="mobile" value="<?php echo $user["mobile"];?>"
+							onFocus="this.value=''"
+							onBlur="if(!value){value=defaultValue;}"/></td>
+					</tr>
+					<tr>
+						<td align="right">邮箱地址：</td>
+						<td><input name="email" type="text" class="Input_200"
+							id="email" value="<?php echo $user["email"]?>"
+							onFocus="this.value=''"
+							onBlur="if(!value){value=defaultValue;}"/></td>
+					</tr>
+					<tr>
+						<td align="right">申请理由：</td>
+						<td valign="bottom"><textarea name="about" class="Txt_200"
+								id="about" onFocus="this.value=''"
+								onBlur="if(!value){value=defaultValue;}">请简单说明您成为代理后将如何推广！
+这将是我们是否通过您的代理资格的重要信息！</textarea></td>
+					</tr>
+					<tr>
+						<td colspan="2" align="center"><input type="submit" name="button" id="button" value="确认申请" class="m_btn" />
+						</td>
+					</tr>
+				</form>
+			</table>
+		</ul>
+	</div>
+</div>	
+	
+{include file='common/footer'}	
+</body>
+<script type="text/javascript">
+setInterval(function() {
+	$.ajax({
+		type: "post",
+		url: "{:Url('index/home')}",
+		data:{'ajax':1,'get_money':'1'},
+		success:function(data) {
+			if (/^[\d\.]+$/.test(data)) {
+				$('#money,#money_2').text(data);
+			}
+		}
+	});
+},2000);	
+</script>
+</html>

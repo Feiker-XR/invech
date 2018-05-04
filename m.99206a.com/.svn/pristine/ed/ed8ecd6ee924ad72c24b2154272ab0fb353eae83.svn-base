@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Member</title>
+<link rel="stylesheet" type="text/css" href="/css/general.css"/>
+<link rel="stylesheet" type="text/css" href="/Scripts/jquery-ui.css" />
+<script src="/js/js/jquery-1.8.0.min.js"></script>
+<script type="text/javascript" src="/Scripts/member.js"></script>
+</head>
+	<body>
+	  <div class="ui-moneyBox">
+			<ul>
+				<table width="100%" border="0" cellspacing="0" cellpadding="5" id="thetable">
+				<tr>
+	              	<th>彩种/投注时间</th>
+	              	<th>注单号/期数</th>
+	              	<th width="20%">投注详细信息</th>
+		            <th>下注金额</th>
+ 					<th>输赢结果</th>
+		        </tr>
+			 	<?php if(!$cbet){?>	
+					<tr align="center" bgcolor="#FFFFFF">
+				    	<td height="30" colspan="8" valign="middle"><span class="STYLE1">暂无记录</span></td>
+				    </tr>
+				<?php }else{?>
+					<?php foreach ($cbet as $v){?>
+					<?php 
+						if(($v['id']%2)=='0'){
+							$bgcolor="#FFFFFF";
+						}else{
+							$bgcolor="#F5F5F5";
+						}					
+						if($v['jine']>0){								
+							$status	=	"<span style='color:#FF0000;'>".number_format($v['jine'],2)."</span>";
+						}else{
+							$status	=	"<span style='color:#00CC00;'>".number_format($v['jine'],2)."</span>";
+						}						
+					?>					
+					<tr bgcolor="{$bgcolor}" align="center" style="height:60px;">
+					    <td align="center"><?php echo $v['type']?><br /><?php echo date('m-d H:i:s',strtotime($v["addtime"]))?></td>
+					    <td align="center"><?php echo $v["id"]?><br />第 <?php echo $v["qishu"]?> 期</td>
+					    <td align="center"><?php echo $v["mingxi_1"]?>【<font color="#FF0000"><?php echo $v["mingxi_2"]?></font>】</td>
+					    <td align="center"><?php echo $v["money"]?></td>
+					    <td align="center"><?php echo $status?></td>
+				    </tr>
+				    <?php } ?>
+				<?php }?>
+    <th colspan="5" align="center">共 <font color="red">{$count}</font> 条已结算注单，总投注金额：<font color="red">{$sum} RMB</font></th>
+    </tr>				
+				</table>
+			</ul>
+		</div>
+	</body>
+</html>

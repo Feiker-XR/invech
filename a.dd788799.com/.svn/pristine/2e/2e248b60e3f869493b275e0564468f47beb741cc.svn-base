@@ -1,0 +1,228 @@
+<?php
+namespace app\admin\controller;
+use app\admin\Login;
+
+use app\common\model\Api as ApiModel;
+use app\common\model\ApiGroup as ApiGroupModel;
+
+use think\Request;
+
+class Api extends Login{
+    
+    private static function relevance_arr_to_index_arr($array)
+    {
+        
+        $new_array = [];
+        
+        foreach ($array as $v)
+        {
+            
+            $temp_array = [];
+            
+            foreach ($v as $vv)
+            {
+                $temp_array[] = $vv;
+            }
+            
+            $new_array[] = $temp_array;
+        }
+        
+        return $new_array;
+    }
+
+    function transform_array_to_json($array)
+    {
+        
+        return json_encode(self::transform_array($array));
+    }
+
+    function transform_array($array)
+    {
+
+        $new_array = array();
+        $key_array = array();
+
+        foreach ($array as $key=>$val) {
+
+            $key_array[] = $key;
+        }
+
+        $key_count = count($key_array);
+
+        foreach ($array[$key_array[0]] as $i => $val) {
+            
+            $temp_array = array();
+
+            for( $j=0;$j<$key_count;$j++ ){
+
+                $key = $key_array[$j];
+                $temp_array[$key] = $array[$key][$i];
+            }
+
+            $new_array[] = $temp_array;
+        }
+
+        return $new_array;
+    }
+
+    public function index(){
+        $this->view->page_header = 'api列表';
+
+        $request = request();
+        $list = ApiModel::getList($request);
+        $list->appends($request->param());
+        $this->assign('list',$list);
+
+        return $this->fetch();
+    }
+
+    public function edit(Request $request){
+        $id = input('id')??0;
+        if($id==0){
+            $title = '添加api文档';
+            $api = new ApiModel([
+                'name'=>'',
+                'group_id'=>0,
+                'request_type'=>0,
+                'api_url'=>'',
+                'describe'=>'',
+                'describe_text'=>'',
+                'is_request_data'=>0,
+                'request_data'=>'',
+                'response_data'=>'',
+                'is_response_data'=>0,
+                'is_user_token'=>0,
+                'is_response_sign'=>0,
+                'is_request_sign'=>0,
+                'response_examples'=>'',
+                'developer'=>0,
+                'api_status'=>0,
+                'is_page'=>0,
+                'sort'=>0,
+                'enable'=>1,
+                'create_time'=>0,
+                'update_time'=>0,
+            ]);
+        }else{
+            $title = '编辑api文档';
+            $api = ApiModel::find($id);
+        }
+        if($request->isPost()){
+            
+                $data = $request->param();
+                $validate = validate('Api');
+                $ret = $validate->scene('edit')->check($data);
+                if(!$ret){
+                    $this->error($validate->getError());
+                }
+                if (!$validate->checkFieldData($data)) {
+                    $this->error($validate->getError());
+                }
+
+                !empty($data['is_request_data'])  ? $data['request_data'] = self::transform_array_to_json($data['request_data'])  : $data['request_data']  = '';
+                !empty($data['is_response_data']) ? $data['response_data'] = self::transform_array_to_json($data['response_data']) : $data['response_data'] = '';
+                                    
+                $data['describe_text']     = $data['describe_text'];
+                $data['response_examples'] = html_entity_decode($data['response_examples']);
+                
+                try{
+                    $result = $api->save($data);
+                }catch(\Exception $e){                
+                    $this->error($e->getMessage());
+                }
+            
+                $handle_text = empty($data['id']) ? '新增' : '编辑';        
+                $result && action_log($handle_text, 'API_' . $handle_text . '，name：' . $data['name']);
+            
+                if($result!==false){
+                    $this->success('编辑成功', url('api/index'));  
+                }else{
+                    $this->error($api->getError());  
+                }
+        }else{
+
+            $groups = ApiGroupModel::where('enable',1)->order('id')->select();
+            $this->assign('groups',$groups);//group_list 
+        
+            if(empty($api->request_data)){
+                $a = json_encode([['', 0, 0, '']]);
+                $api->request_data_json = json_encode([['', 0, 0, '']]);
+            }else{                
+                $api->request_data_json = json_encode(self::relevance_arr_to_index_arr($api->request_data));
+            }
+            if(empty($api->response_data)){
+                $api->response_data_json = json_encode([['', 0, 0, '']]);
+            }else{
+                $api->response_data_json = json_encode(self::relevance_arr_to_index_arr($api->response_data));
+            }
+            $this->assign('api',$api);
+
+
+            $this->assign('developer',config('api.developer'));
+            $this->assign('api_status',config('api.api_status'));
+
+            $data_type = config('api.data_type');
+            $options = '';
+            foreach ($data_type as $k => $v)
+            {
+                $options .= "<option value='".$k."'>".$v."</option>";
+            }
+            $this->assign('data_type',$options);//api_data_type_option
+
+            $this->view->page_header = $title;
+            return $this->fetch();            
+        }
+    }
+
+    public function del($id=0){
+
+    }
+
+    public function group(){
+        $this->view->page_header = 'api分组';
+
+        $request = request();
+        $list = ApiGroupModel::getList($request);
+        $list->appends($request->param());
+        $this->assign('list',$list);
+
+        return $this->fetch();
+    }
+
+    public function group_edit(Request $request){
+        $id = input('id')??0;
+
+        if($id==0){
+            $title = '添加api分组';
+            $group = new ApiGroupModel([
+                'name'=>'',
+                'sort'=>0,
+            ]);
+        }else{
+            $title = '编辑api分组';
+            $group = ApiGroupModel::find($id);
+        }
+        if($request->isPost()){
+            $data = $request->param();
+            try{
+                $result = $group->validate('ApiGroup.edit')->save($data);
+            }catch(\Exception $e){                
+                $this->error($e->getMessage());
+            }
+            
+            $handle_text = empty($data['id']) ? '新增' : '编辑';        
+            $result && action_log($handle_text, 'ApiGroup_' . $handle_text . '，name：' . $data['name']);
+            
+            if($result!==false){
+                $this->success('编辑成功', url('api/group'));  
+            }else{
+                $this->error($group->getError());  
+            }
+        }else{
+            $this->view->page_header = $title;
+            $this->assign('group',$group);
+            return $this->fetch();
+        }
+    }    
+
+}

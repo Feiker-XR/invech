@@ -1,0 +1,41 @@
+<?php
+	// 中间件执行次序
+	// * > admin.* > admin.system.* > admin.system.middleware
+	// 中间件数组中先定义的先执行;
+	
+	return [
+		'alias' => ['auth' => \app\auth\Authenticate::class,
+					'throttle' => \app\api\middlewares\ThrottleRequests::class,
+				],        
+        
+		//!表示不继承上层中间件,作为最高优先级
+		//api.pub.index路由 匹配 '!api.pub.index' 而非 '!api.pub.*'
+		//'!api.pub.index' => ['pub:index'],
+		//'!api.pub.*' => ['pub'],
+		//'!api.document.index' => ['document:index'],
+		//'!api.document.*' => ['document'],		
+
+		'*' 	=> [
+					//\app\api\middlewares\Nothing::class,
+				], 
+
+        'api.*' => [\app\api\middlewares\Log::class,			        
+			    	'throttle:60,1',//每分钟60次;
+			    	\app\api\middlewares\CheckAccessToken::class,
+			    	//\app\api\middlewares\SetSessionId::class,
+					'auth'//'auth:jwt',
+				],
+		
+		'-api.pub.*' => ['auth',],//表示继承上层中间件,但是减去auth中间件
+		'-api.document.*' => ['auth'],
+		//'api.pub'默认是增加;
+		
+		//test
+		'admin.system.middleware' => [\app\middlewares\Cors::class,],
+		//'admin.system.web' => ['auth:web',],//:分隔中间件和参数,参数之间,分隔
+		'admin.system.web' => ['auth:web',],//:分隔中间件和参数,参数之间,分隔
+		'admin.system.api' => ['auth:api',],//:分隔中间件和参数,参数之间,分隔
+		'admin.system.jwt' => ['auth:jwt',],//:分隔中间件和参数,参数之间,分隔
+		'admin.system.throttle' => ['throttle:2,60',],//60分钟只可以访问2次;
+		//'api.pub.login' => ['auth:web',],//测试记住我
+    ];

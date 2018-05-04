@@ -1,0 +1,52 @@
+	<?php if(Session('uid') && Session('username')){?>
+	<!--登陆后-->
+		<!--顶部固定nav-->
+		<div class="nav500">
+			<div class="nav500_logo">
+				<a href="/index.php"><img src="/img/logo.png"/></a>
+			</div>
+			<div class="nav500_left">
+				<i class="iconfont icon-caidan"></i>
+			</div>
+			<div class="nav500_right_had">
+				<a href="/cunkuan.php" class="cl_fff f14 blue_focus">￥:<span id="user_money"><?=Session('money')?></span></a>
+			</div>
+		</div>
+		
+		<script language="javascript">	
+			function refresh_money(){
+			$.ajax({
+			    cache: false,
+			    url: "/index/home.html",
+				method:'post',
+				data:{ajax:1,get_money:1},
+			    success:function(data){
+			        if(data==""){
+			        }else{
+			         $data_arr=data.split("||");
+					 $("#user_money").html($data_arr[0]);
+					 // $("#user_jifen").html($data_arr[1]);
+			        }
+			    }
+			}); 
+			window.setTimeout("refresh_money();", 15000); 
+			}
+			refresh_money();
+		</script>
+
+	<?php }else{?>
+	<!--登陆前-->
+		<!--顶部固定nav-->
+		<div class="nav500">
+			<div class="nav500_logo">
+				<a href="/index.php"><img src="/img/logo.png" data-src="/img/logo.png"/></a>
+			</div>
+			<div class="nav500_left">
+				<i class="iconfont icon-caidan"></i>
+			</div>	
+			<div class="nav500_right">
+				<a href="#" data-modal="#J_regModal"><img src="/img/nav-right.png"></a>
+			</div>
+		</div>
+
+	<?php }?>

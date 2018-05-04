@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>系统设置</title>
+<link href="/css/base.css" rel="stylesheet" type="text/css" />
+<link href="/css/admin.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="/js/jquery.js"></script>
+<script type="text/javascript" src="/js/jquery.tools.js"></script>
+<script type="text/javascript" src="/js/base.js"></script>
+<script language="javascript">
+function check_submit(){
+	if($("#date_s").val()==""){
+		alert("请选择开始日期");
+		$("#date_s").focus();
+		return false;
+	}
+	if($("#date_e").val()==""){
+		alert("请选择结束日期");
+		$("#date_e").focus();
+		return false;
+	}
+	return true;
+}
+</script>
+
+<script language="JavaScript" src="/js/datePicker/calendar.js"></script>
+</head>
+<body class="list">
+	<div class="bar">
+		会员反水计算
+	</div>
+	
+<form name="form1" method="get" action="" >
+<div class="listBar">
+  <input name="date_s" type="text" id="date_s" value="" onClick="new Calendar(2008,2020).show(this);" size="10" maxlength="10" readonly="readonly" />
+          ~
+          <input name="date_e" type="text" id="date_e" value="" onClick="new Calendar(2008,2020).show(this);" size="10" maxlength="10" readonly="readonly" />
+          &nbsp;&nbsp;<input name="find" type="submit" id="find" value="反水计算" class="formButton"/></td>
+
+  </div>
+</form>
+	<div class="body">
+<form action="fs_ok.php" method="post" name="checkboxform" id="checkboxform">
+<table id="listTable" class="listTable">
+
+				<tr>
+
+					<th>选择</th>
+					<th>会员账号</th>
+					<th>体育投注</th>
+					<th>彩票投注</th>
+					<th>AG厅投注</th>
+					<th>MG厅投注</th>
+					<th>BB厅投注</th>
+					<th>OG厅投注</th>
+					<th>申博厅投注</th>
+					<th>反水比例</th>
+					<th>应当反水</th>
+					<th>是否反水</th>
+				</tr>
+
+      <tr>
+        <td align="center"><input type="checkbox" name="" value="1"></td>
+        <td align="center"><input type=HIDDEN name="" value=""></td>
+        <td align="center"></td>
+        <td align="center"></td>
+        <td align="center"></td>
+        <td align="center"></td>
+        <td align="center"></td>
+        <td align="center"></td>
+		<td align="center"></td>
+        <td align="center"></td>
+        <td align="center"><input type=HIDDEN name="" value=""></td>
+        <td align="center"></td>
+      </tr>
+
+        <td colspan="17" align="center" bgcolor="#E9F0F4"><input type=button class="formButton" onClick="checkAll()" value="全部选中"> <input type=button  class="formButton" onClick="uncheckAll()" value="全部取消"> 
+	    <input name="SUBMIT" type=SUBMIT  class="formButton" style="" value="立即返水"><input name="ks" type="HIDDEN" value=""/><input name="js" type="HIDDEN" value=""/><input name="nums" type="HIDDEN" value=""/></td>
+    </tr>
+  </table>
+</form>
+	</div>
+</body>
+</html>

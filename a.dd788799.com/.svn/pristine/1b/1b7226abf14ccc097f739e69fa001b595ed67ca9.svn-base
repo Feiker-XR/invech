@@ -1,0 +1,98 @@
+<?php
+namespace app\common\model\member;
+use app\common\model\Bet;
+use app\common\model\Apply;
+use app\common\validate\Member;
+use bong\foundation\Str;
+use think\Loader;
+
+trait BasicTrait
+{
+    //----------------前台------------------
+
+    // (new Member)->register();
+    public function register($request){
+        $params = $request->param();
+
+        $agent = null;
+
+        try{
+            if($params['parentId']){
+                $agent_id = dehashid($params['parentId']);
+                $agent = self::get($agent_id);
+            }                            
+        }catch(\Exception $e){
+            return '推荐人无效';
+        }
+
+        try{
+
+            db()->startTrans();
+            $validate = validate('Member')->scene('register');
+            if(!$validate->check($params)){
+                return $validate->getError();                
+            }
+
+            $addUser = $this->save($params);
+            if ($addUser){
+                event('user.register',[$this,$agent]);
+                db()->commit();
+            }
+            //db()->rollback();
+            return true;
+        }catch(\Exception $e){
+            db()->rollback();
+            return false;
+        }
+    }
+
+    public function apply($business='agent'){
+        $param = request()->param();
+        if(!validate('Apply')->scene($business)->check($param)){
+            return false;
+        }
+        return Apply::create([
+        //return (new Apply())->save([
+            'uid'   =>  $this->uid,
+            'business'  =>  $business,
+            'params'    =>  json_encode($param),
+        ]);
+    }
+
+    //----------------后台------------------
+
+    public static function getList($request){
+
+        $query = (new static())->getBuild($request);
+
+        $data = $query->paginate();
+     
+        return $data;
+    }   
+
+    private function getBuild($request){
+        
+        $query = $this->db(true,false);
+
+        $query->order('uid');
+
+        $params = $request->param();
+        if($params['keywords']??''){
+             $query->where('username|nickname', 'like','%'.trim($params['keywords']).'%');
+         }
+        if($params['starttime']??''){
+            $query->where('regTime', '>=',strtotime($params['starttime']));
+        }
+        if($params['endtime']??''){
+            $query->where('regTime', '<=',strtotime($params['endtime']));
+         }
+        if($params['type']??''){
+            $query->where('type', $params['type']);
+        }
+        if($params['enable']??''){
+            $query->where('enable', $params['enable']);
+        }
+
+        return $query; 
+    }    
+}

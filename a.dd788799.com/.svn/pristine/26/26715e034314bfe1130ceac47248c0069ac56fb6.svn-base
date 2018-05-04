@@ -1,0 +1,40 @@
+<div class="help_r_main">
+	<div class="eveb_content">
+		<div class="eveb_transfer_box mb20 clearfix" style="overflow: visible;">
+			<div class="center_wallet fl rel">
+				<span>账户总余额</span>
+				<p class="money"><strong id="wallet" class="money">0.000</strong>元</p>
+				<div class="abs Res" onclick="refreshMoney()"><i class="icon resIcon"></i></div>
+			</div>
+			<ul class="wallet_list wallet_list2 fl">
+				<li><span>可提款总额</span>
+					<p id="wallet_1" class="money">0.000</p></li>
+				<!--<li class="rel">
+                    <a href="javascript:void(0)" class="color-df3c31">资金归集</a>
+                    <p><i class="icon tipIcon"></i></p>
+                    <div class="tipBox abs">
+                        <span class="caret abs"></span>
+                        可将各个平台零钱全部转入中心钱包，方便取款
+                    </div>
+                </li>-->
+			</ul>
+		</div>
+		<form name="withdrawForm" novalidate="novalidate" onsubmit="return false;">
+			<ul class="eveb_form management_bank">
+				<div class="mb10 color-888"><font color="#999999">您还未绑定银行卡 请绑定银行卡，</font><a href="javascript:void(0)" onclick="parent.goSubUrl('/member/zhsz.html?module=yhkgl')" style="color:#ff7800">点击前往&gt;&gt;</a></div>
+			</ul>
+			<ul class="eveb_form eveb_withdraw">
+				<li>
+					<span>提款金额：</span>
+					<input id="money" class="withdraw-bg-input error" name="money" type="text" placeholder="请输入转账金额" style="border: 2px solid #f49c42;background: #faf9f9;height: 28px; padding-left:5px">
+					<label for="money" class="error">* 请输入金额</label>
+				</li>
+
+			</ul>
+			<div class="eveb_form_submit">
+				<input type="submit" id="btnSubmit" value="提交" class="button_medium button_1">
+				<input type="reset" value="重置" class="ml_10 button_medium button_1 button_3" style="color: white;">
+			</div>
+		</form>
+	</div>
+</div>

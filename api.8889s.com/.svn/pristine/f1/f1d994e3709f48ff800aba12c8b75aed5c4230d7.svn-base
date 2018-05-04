@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=0" name="viewport">
+<meta name="format-detection" content="telphone=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<title></title>
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="/styles/ezweb.css">
+<link rel="stylesheet" type="text/css" href="/css/500f_new_wap.css">
+<link rel="stylesheet" href="/gfwf/assets/statics/css/style.css" type="text/css">
+<link rel="stylesheet" href="/gfwf/assets/statics/css/global.css" type="text/css">
+<link rel="stylesheet" href="/gfwf/iconfont/iconfont.css" type="text/css">
+
+<script type="text/javascript" charset="utf-8" src="/js/jquery.1.9.1.min.js"></script>
+<script type="text/javascript" charset="utf-8"  src="/js/zhuce.js"></script>
+</head>
+<body>
+<div class="header">
+    <div class="headerTop">
+        <div class="ui-toolbar-left">
+            <a href="javascript:history.back(-1);"><i class="iconfont icon-zuojiantou"></i></a>
+        </div>
+        <h1 class="ui-toolbar-title">注册</h1>
+    </div>
+</div>	
+<div id="J_regModal" class="reg-modal modal" style="display: block;top: 44px;">
+	<div class="inner container container_500F" style="padding-bottom:100px;padding: 0px 8px;">
+		<form action="" id="register_form" class="form-horizontal">
+			<h2 class="register_form_bg_1">
+				会员登陆信息
+			</h2>
+			<div class="form-group">
+				<label for="" class="col-sm-2 control-label">登录账号：</label>
+				<div class="control-label-1">
+					<input type="text" name="zcname" id="zcusername" maxlength="9" class="form-control">
+				</div>
+				<div class="control-label-2">
+					<strong>*</strong>
+					<span>您在网站的登录账户，5-9个英文数字</span>
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="" class="col-sm-2 control-label">登录密码：</label>
+				<div class="control-label-1">
+					<input type="password" name="zcpwd1" id="zcpwd1" maxlength="12" onblur="pwStrength(this.value,0);"  class="form-control">
+				</div>
+				<div class="control-label-2">
+					<strong>*</strong>
+					<span>由6-12位任意字符组成</span>
+				</div>
+			</div>
+			<div class="form-group password-degree">
+				<label for="" class="col-sm-2 control-label">密码强度：</label>
+				<div class="control-label-1 mb10">
+					<div class="btn-group">
+					  <button id="strength_L0" type="button" class="btn btn-default">弱</button>
+					   <button id="strength_M0" type="button" class="btn btn-default">中</button>
+					   <button id="strength_H0" type="button" class="btn btn-default">强</button>
+					</div>
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="" class="col-sm-2 control-label">确认密码：</label>
+				<div class="control-label-1">
+					<input type="password" name="zcpwd2" id="zcpwd2" maxlength="12" class="form-control">
+				</div>
+				<div class="control-label-2">
+					<strong>*</strong>
+					<span>由6-12位任意字符组成</span>
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="" class="col-sm-2 control-label">使用货币：</label>
+				<div class="control-label-1">
+					<select name="currency" class="form-control"><option value="1">RMB</option></select>
+				</div>
+				<div class="control-label-2">
+					<strong>*</strong>
+					<span>由6-12位任意字符组成</span>
+				</div>
+			</div>
+			<h2 class="register_form_bg_2">会员个人信息</h2>
+			<div class="form-group">
+				<label for="" class="col-sm-2 control-label">真实姓名：</label>
+				<div class="control-label-1">
+					<input type="text" name="zcturename" id="zcturename" class="form-control"></div>
+				<div class="control-label-2">
+					<strong>*</strong>
+					<span>名字必须与您用于提款及存款的银行户口所用名字相同</span>
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="" class="col-sm-2 control-label">提款密码：</label>
+				<div class="control-label-1">
+					<input type="password" name="qkpwd1" id="qkpwd1" maxlength="12" onblur="pwStrength(this.value,1);" class="form-control">
+				</div>
+				<div class="control-label-2">
+					<strong>*</strong>
+					<span>由6-12位任意字符组成</span>
+				</div>
+			</div>
+			<div class="form-group password-degree">
+				<label for="" class="col-sm-2 control-label">密码强度：</label>
+				<div class="control-label-1 mb10">
+					<div class="btn-group">
+					    <button id="strength_L1" type="button" class="btn btn-default">弱</button>
+					    <button id="strength_M1" type="button" class="btn btn-default">中</button>
+					    <button id="strength_H1" type="button" class="btn btn-default">强</button>
+					</div>
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="" class="col-sm-2 control-label">确认密码：</label>
+				<div class="control-label-1">
+					<input type="password" name="qkpwd2" id="qkpwd2" maxlength="12" class="form-control">
+				</div>
+				<div class="control-label-2">
+					<strong>*</strong>
+					<span>由6-20位任意字符组成</span>
+				</div>
+			</div>
+			<h2 class="register_form_bg_3">会员密保信息</h2>
+			<div class="form-group">
+				<label for="" class="col-sm-2 control-label">密保问题：</label>
+				<div class="control-label-1">
+					<select name="zcquestion" id="zcquestion" class="form-control">
+						<option value="您的车牌号码是多少？">您的车牌号码是多少？</option>
+                        <option value="您初中同桌的名字？">您初中同桌的名字？</option>
+                        <option value="您就读的第一所学校的名称？">您就读的第一所学校的名称？</option>
+                        <option value="您第一次亲吻的对象是谁？">您第一次亲吻的对象是谁？</option>
+                        <option value="少年时代心目中的英雄是谁？">少年时代心目中的英雄是谁？</option>
+                        <option value="您最喜欢的休闲运动是什么？">您最喜欢的休闲运动是什么？</option>
+                        <option value="您最喜欢哪支运动队？">您最喜欢哪支运动队？</option>
+                        <option value="您最喜欢的运动员是谁？">您最喜欢的运动员是谁？</option>
+                        <option value="您的第一辆车是什么牌子？">您的第一辆车是什么牌子？</option>
+					</select>
+				</div>
+				<div class="control-label-2">
+					<strong>*</strong>
+					<span>请选择密保问题</span>
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="" class="col-sm-2 control-label">密保答案：</label>
+				<div class="control-label-1">
+					<input type="text" name="zcanswer" id="zcanswer" class="form-control">
+				</div>
+				<div class="control-label-2">
+					<strong>*</strong>
+					<span>请填写您的密保答案</span>
+				</div>
+			</div>
+			{if $sysConfig['regYzm'] eq 1}
+			<div class="form-group captcha-row">
+				<label for="" class="col-sm-2 control-label">验 证 码 ：</label>
+				<div class="control-label-1 control-label-a">
+					<div class="input-group">
+						<input type="text" name="zcyzm" id="zcyzm" class="form-control" style="height:36px;" maxlength="4">
+						<span class="input-group-addon" style="width:30%;">
+							<img src="{:captcha_src()}" alt="(点选此处产生新验证码 )" title="点选此处产生新验证码 " onclick="this.src='{:captcha_src()}?d='+Math.random();" name="zc_img" id="zc_img" style="cursor:pointer;" width="80" height="30" />
+						</span>
+					</div>
+				</div>
+			</div>
+			{/if}
+			<div class="form-group">
+				<label class="col-sm-4 col-sm-offset-2 mt20">
+				<input type="checkbox" name="zccheck" id="zccheck" value="1"> 我已届满合法博彩年龄﹐且同意各项开户条约。<a href="#" id="AGREEMENT" class="red">"开户协议"</a>
+				</label>
+			</div>
+			<div class="form-group form-action">
+				<div class="mt10 mb10">
+					<button id="register">立即注册</button>
+				</div>
+				<div class="mt10 mb20">
+					<a class="login-btn-link" onclick="location.href='/index/loginMobile';return false;">立即登录</a>
+				</div>				
+			</div>
+			<div class="h10"></div>
+		</form>
+	</div>
+</div>
+
+</body>
+</html>			

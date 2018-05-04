@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html;" charset=utf-8" />
+<title>系统设置</title>
+<link href="/css/base.css" rel="stylesheet" type="text/css" />
+<link href="/css/admin.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="/js/jquery.js"></script>
+<script type="text/javascript" src="/js/jquery.tools.js"></script>
+<script type="text/javascript" src="/js/base.js"></script>
+<script language="javascript">
+function check_submit(){
+	if($("#date_s").val()==""){
+		alert("请选择开始日期");
+		$("#date_s").focus();
+		return false;
+	}
+	if($("#date_e").val()==""){
+		alert("请选择结束日期");
+		$("#date_e").focus();
+		return false;
+	}
+	return true;
+}
+$(document).ready(function(){
+	$('.fanshui').click(function(){
+		var uid = $(this).attr('data');
+		var stime = '{$Think.get.date_s}';
+		var etime = '{$Think.get.date_e}';
+		$.post('{:url('cp_fs')}',{uid:uid,date_s:stime,date_e:etime},function(json){
+			if(0 == json.status){
+				window.location.reload();
+			}else{
+				alert(json.msg);
+			}
+		},'json');
+	});
+});
+</script>
+
+<script language="JavaScript" src="/js/calendar.js"></script>
+</head>
+<body class="list">
+	<div class="bar">
+		会员彩票反水计算
+	</div>
+	
+<form name="form1" method="get" action="" >
+<div class="listBar">
+  <input name="date_s" type="text" id="date_s" value="{$Think.get.date_s}" onClick="new Calendar(2008,2020).show(this);" size="10" maxlength="10" readonly="readonly" />
+          ~
+          <input name="date_e" type="text" id="date_e" value="{$Think.get.date_e}" onClick="new Calendar(2008,2020).show(this);" size="10" maxlength="10" readonly="readonly" />
+          &nbsp;&nbsp;<input type="submit" id="find" value="反水计算" class="formButton"/></td>
+
+  </div>
+</form>
+	<div class="body">
+<form action="fs_ok.php" method="post" name="checkboxform" id="checkboxform">
+<table id="listTable" class="listTable">
+				<tr>
+					<th>会员账号</th>
+					<th>彩票投注</th>
+					<th>反水比例</th>
+					<th>反水金额</th>
+					<th>操作</th>
+				</tr>
+{volist name='data' id='row'}
+      <tr>        
+        <td align="center">{$row.username}</td>
+        <td align="center">{$row.tz}</td>
+        <td align="center">{$row.bl}</td>
+        <td align="center">{$row.je}</td>
+        <td align="center">
+        {if $row.je>0}
+        	<a class="fanshui" href="javascript:void(0);" data='{$row.uid}'>立即反水</a>
+        {/if}
+        </td>
+      </tr>
+{/volist}
+  </table>
+</form>
+{$page}
+	</div>
+</body>
+</html>

@@ -1,0 +1,82 @@
+{extend name="base/common"/}
+{block name="body"}
+<style type="text/css">
+	.g-body{
+		top:86px;
+	}
+	.m-index{
+		/*text-align: center;*/
+		padding: 15px 5px;
+		padding-bottom: 50px;
+	}
+	.w-bar2 {
+		display: inline-block;
+		overflow: hidden;
+		position: relative;
+		padding: 0;
+		line-height:normal;
+		color: #525252;
+		margin-bottom: 0;
+		border:none;
+		background: none;
+		width: 32%;
+		box-sizing: border-box;
+		text-align: center;
+	}
+	.w-bar2.simple{
+		width:28%;
+		height: 35px;
+		line-height: 35px;
+		box-sizing: border-box;
+		border:1px solid #d2d2d2;
+		border-radius: 10px;
+		overflow: visible;
+		margin:10px 2%;
+	}
+	.w-bar2 span img{
+		width:42%;
+		margin: 5px auto;
+	}
+	.w-bar-ext2{
+		position: absolute;
+		top: 5px;
+		float: none;
+		display: inline-block;
+		width: 27px;
+		height: 16.5px;
+		padding-top: 0;
+		right: 5px;
+	}
+	.w-bar-ext2.simple{
+		width: 14px;
+		height: 21px;
+		top:-14px;
+		right: -3px;
+	}
+	.w-bar2 span img.simple{
+		display: none;
+	}
+	.w-bar2 span:nth-child(2).simple{
+		/*background: blue;*/
+	}
+	.g-body.simple{
+		top:44px;
+	}
+</style>
+<div class="g-body">
+	<div class="m-index">
+		
+		<div class="g-wrap g-body-bd">
+			{foreach $type as $v}
+				<a href="/game/game/type/{$v.id}" class="w-bar2">
+					<span><img src="/__IMG__/lottery/{$v.id}.png"></img></span>
+					<span>{$v.title}</span>
+					<img src="/__IMG__/lottery/hot.png" alt="hot" class="w-bar-ext2"/>
+				</a>
+			{/foreach}
+		</div>
+	</div>
+</div>
+{/block}
+
+

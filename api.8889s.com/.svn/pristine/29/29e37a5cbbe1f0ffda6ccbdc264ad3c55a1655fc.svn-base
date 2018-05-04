@@ -1,0 +1,11 @@
+<?php
+return [
+	//api每个客户每分钟允许最多请求60次;
+	'throttle_times'	=>	60,
+	'throttle_minutes'	=>	1,
+    'cache'                  => [
+        // 驱动方式
+        'type'   => 'redis',
+    ],
+    'app_debug'	=> 0,
+];

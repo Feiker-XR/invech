@@ -1,0 +1,11 @@
+<div class="tz_xz" style="border-bottom: none;">
+	{if(empty($playeds))}
+		<td colspan="7" align="center">暂无玩法</td>
+	{else /}
+		<?php if(isset($playeds['tags']))unset($playeds['tags']); ?>
+		{foreach($playeds as $play)}
+		<a data_id="{$play['id']}" href="#" tourl="{:Url('game/played?type='.$type.'&playedId='.$play['id'])}" <?= ($play['id']==$playedId) ? ' class="tag"' : '' ?> style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;"><?= $play['name'] ?></a>
+		{/foreach}
+	{/if}
+</div>		
+

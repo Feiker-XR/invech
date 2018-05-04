@@ -1,0 +1,224 @@
+<?php
+namespace app\admin\controller;
+use app\admin\Login;
+use think\Cache;
+use app\common\model\Admin as AdminModel;
+use app\common\model\AdminGroup as AdminGroupModel;
+use app\common\model\AdminRule as  AdminRuleModel;
+use app\common\model\ActionLog as LogModel;
+class admin extends Login{
+
+    public function _initialize(){
+        parent::_initialize();
+        $menu_group   =   "admin";
+        $this->assign('menu_group',$menu_group);
+    }
+
+    public function index(){
+		$this->view->page_header  =   '首页';
+        $request    =   request();
+        $list       =   AdminModel::getList($request);
+        $this->assign('list',$list);
+        return $this->fetch();
+    }
+
+    public function edit(){
+        $request = request();
+        $params = $request->param();
+        if(request()->isGet()){
+            if(!empty($params['id'])){
+                $info       =   AdminModel::get(['id'=>$params['id']]);
+                $groupIds   =   $info->roles->toArray();
+                if($groupIds){
+                    $groups   =   [];
+                    foreach($groupIds as $k=>$v){
+                        $groups[]   =   $v['group_id'];
+                    }
+                    $this->assign('groupids',$groups); 
+                }
+                $this->assign('info',$info);  
+            }
+            $group = AdminGroupModel::getAll();
+            $this->assign('group',$group);
+            return view();
+        }else{
+            $id    =   isset($params['id'])? $params['id']:'';
+            if($id){
+                $admin  =   AdminModel::get(intval($id));
+                $list   =   $admin->validate('Admin.admin_edit')->save($params);
+            }else{
+                $admin  =   new AdminModel($params);
+                $list   =   $admin->validate('Admin.admin_add')->save($params);
+            }
+            if($list){
+                if(!empty($params['group_ids'])){
+                    $admin->roles()->detach();
+                    $admin->roles()->saveAll($params['group_ids']);
+                }
+                LogModel::log(LogModel::BUSINESS_TYPE_EDIT,$admin,LogModel::BUSINESS_TYPES[LogModel::BUSINESS_TYPE_EDIT]);
+                return $this->success('操作成功');
+            }else{
+                return $this->error($admin->getError());
+            }
+        }
+    }
+
+    public function del(){
+        $request    =   request();
+        $params     =   $request->param();
+        $admin      =   AdminModel::get(intval($params['id']));
+        $list       =   $admin->delete();
+        if($list){
+            $admin->roles()->detach();
+            LogModel::log(LogModel::BUSINESS_TYPE_DELE,$admin,LogModel::BUSINESS_TYPES[LogModel::BUSINESS_TYPE_DELE]);
+            return $this->success('操作成功');
+        }else{
+            return $this->error($admin->getError());
+        }
+      
+    }
+
+    public function  group(){
+        $this->view->page_header    =   '首页';
+        $request    =   request();
+        $list       =   AdminGroupModel::getList($request);
+        $this->assign('list',$list);
+        return $this->fetch();
+    }
+
+    public function group_edit(){
+        $request = request();
+        $params = $request->param();
+        if(request()->isGet()){
+            if(!empty($params['id'])){
+                $info   =   AdminGroupModel::get(['group_id'=>$params['id']]);
+                $this->assign('info',$info);  
+            }
+            return view();
+        }else{
+            $group_id   =   isset($params['group_id'])? $params['group_id']:'';
+            if($group_id){
+                $group  =   AdminGroupModel::get(intval($group_id));
+                $list   =   $group->validate('Admin.group_add')->save($params);
+            }else{
+                $group  =   new AdminGroupModel($params);
+                $list   =   $group->validate('Admin.group_edit')->save($params);
+            }
+            if($list){
+                LogModel::log(LogModel::BUSINESS_TYPE_EDIT,$group,LogModel::BUSINESS_TYPES[LogModel::BUSINESS_TYPE_EDIT]);
+                return $this->success('操作成功');
+            }else{
+                return $this->error($group->getError());
+            }   
+        }
+    }
+
+    public function group_add_rule(){  
+        $request    =   request();
+        $params     =   $request->param(); 
+        if(request()->isGet()){   
+            if(!empty($params['id'])){
+                $this->assign('id',$params['id']);
+                $group  =   AdminGroupModel::get(intval($params['id'])); 
+                $info   =   $group->ruleRoles;
+                $infos  =   [];
+                if(!$info->isEmpty()){
+                    $info   =   $info->toArray(); 
+                    foreach($info as $v){
+                        $infos[]    =   $v['id'];  
+                    }
+                }
+                $this->assign('infos',$infos);
+                $this->assign('group',$group);
+            }
+            $list = AdminRuleModel::getTreeData("level");
+            $this->assign('list',$list);
+            return view();
+        }else{
+             if(!empty($params['id'])){
+                $group  =   AdminGroupModel::get(intval($params['id']));
+                $group->ruleRoles()->detach();
+                $list   =   $group->ruleRoles()->saveAll($params['rule_ids']);
+                if($list){
+                    LogModel::log(LogModel::BUSINESS_TYPE_EDIT,$group,LogModel::BUSINESS_TYPES[LogModel::BUSINESS_TYPE_EDIT]);
+                    return $this->success('操作成功');
+                }else{
+                    return $this->error($group->getError());
+                }
+            }else{
+                return $this->error("操作失败");     
+            }
+        }
+       
+    }
+
+    public function group_del(){
+        $request    =   request();
+        $params     =   $request->param();
+        $group      =   AdminGroupModel::get(intval($params['id']));
+        $list       =   $group->delete();
+        if($list){
+            LogModel::log(LogModel::BUSINESS_TYPE_DELE,$group,LogModel::BUSINESS_TYPES[LogModel::BUSINESS_TYPE_DELE]);
+            return $this->success('操作成功');
+        }else{
+            return $this->error($group->getError());
+        }
+    }
+
+   public function rule(){
+        $this->view->page_header   =   '权限列表';
+        $list  =   AdminRuleModel::getTreeData();
+        $this->assign('list',$list);
+        return $this->fetch();
+    }
+
+    public function rule_edit(){
+        $request    =   request();
+        $params     =   $request->param(); 
+        if(request()->isGet()){
+            if(!empty($params['id'])){
+                $info   =   AdminRuleModel::get(['id'=>$params['id']]);
+                $this->assign('info',$info);  
+            }
+            return view();
+        }else{
+            $id =  isset($params['id'])? $params['id']:'';
+            if($id){
+                $rule   =   AdminRuleModel::get(intval($id));
+            }else{
+                $rule   =   new AdminRuleModel($params);
+            }
+            $list   =   $rule->validate('Admin.rule')->save($params);
+            if($list){
+                LogModel::log(LogModel::BUSINESS_TYPE_EDIT,$rule,LogModel::BUSINESS_TYPES[LogModel::BUSINESS_TYPE_EDIT]);
+                return $this->success('操作成功');
+            }else{
+                return $this->error($rule->getError());
+            }
+        }
+    }
+
+    public function rule_chirden_add(){  
+        $request    =   request();
+        $params     =   $request->param(); 
+        if(!empty($params['id'])){
+            $info   =   [];
+            $info['pid']    =   $params['id'];
+            $this->assign('info',$info);  
+        }
+        return view("rule_edit");
+    }
+
+    public function rule_del(){
+        $request    =   request();
+        $params     =   $request->param();
+        $rule       =   AdminRuleModel::get(intval($params['id']));
+        $list       =   $rule->delete();
+        if($list){
+            LogModel::log(LogModel::BUSINESS_TYPE_DELE,$rule,LogModel::BUSINESS_TYPES[LogModel::BUSINESS_TYPE_DELE]);
+            return $this->success('操作成功');
+        }else{
+            return $this->error($rule->getError());
+        } 
+    }
+}

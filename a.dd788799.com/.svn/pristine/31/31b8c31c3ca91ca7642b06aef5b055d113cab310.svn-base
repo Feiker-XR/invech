@@ -1,0 +1,31 @@
+<?php
+namespace app\common\model;
+use think\Model;
+
+/**
+ *  玩法组表表模型
+ * @author mack
+ */
+class DailyReport extends Base {
+	
+    //----------------后台------------------
+
+    public static function getList($request){
+    
+        $params = $request->param();
+
+        $query = self::order('id asc');
+
+        if($params['start_time']??null){
+            $start_time = strtotime($params['start_time']);
+        	$query->where('created_at','>=', $start_time);
+        }
+        if($params['end_time']??null){
+            $end_time = strtotime($params['end_time']);
+            $query->where('created_at','<=', $end_time);
+        }
+        $data = $query->paginate(5);
+        
+        return $data;
+    }
+}

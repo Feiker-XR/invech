@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>澳门博彩公司</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="/newview/css/style.css"/>
+<link rel="stylesheet" type="text/css" href="/newview/css/lottery/caipiao.css">
+
+<script src="/js/jquery-1.8.0.min.js"></script>
+<script type="text/javascript" src="/js/js/jquery.jslides.js"></script>
+<script type="text/javascript" src="/js/js/jquery.SuperSlide.2.1.1.js"></script>
+<script src="/Scripts/swfobject_modified.js" type="text/javascript"></script>
+<!--Self-->
+
+<script type="text/javascript" src="/js/main.js"></script>
+<script type="text/javascript" src="/js/main.new.js"></script>
+<script type="text/javascript" src="/js/layer.js"></script>
+<script type="text/javascript" src="/newview/js/main.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){   
+  $('li.mainlevel').mousemove(function(){
+  	$(this).find('ul').slideDown();//you can give it a speed
+  });
+  $('li.mainlevel').mouseleave(function(){
+  	$(this).find('ul').slideUp("fast");
+  });
+  
+});
+</script>
+<style type="text/css">
+/*menu*/
+#navs {margin:0 auto; width:1132px; display:block; padding:0;height: 32px;border-bottom: 1px solid #b0773b;}
+#navs .mainlevel {width: 89px;background:#fff;color: #666666; float:left;  /*IE6 only*/ list-style:none}
+#navs .mainlevel_on{background: #d99751;color: white;border-top-left-radius: 7px;border-top-right-radius: 7px;}
+#navs .mainlevel_rule{width: 100px;height: 28px;color: white;background: #f4a857;float: right;line-height: 28px;border:1px solid #d28c41;border-radius: 3px;}
+
+#navs .mainlevel.mainlevel_on a{color: white;}
+#navs .mainlevel a {color:#666666; text-decoration:none; line-height:32px; display:block; padding:0; width:89px;}
+#navs .mainlevel #sub_01 a{color: white;}
+#navs .mainlevel #sub_02 a{color: white;}
+#navs .mainlevel #sub_03 a{color: white;}
+#navs .mainlevel a:hover {color:#fff; text-decoration:none; background:#d99751;border-top-left-radius: 7px;border-top-right-radius: 7px;}
+#navs .mainlevel ul {display:none; position:absolute; padding:0; margin:0;}
+#navs .mainlevel li {border-top:1px solid #fff;background:#d99751; width:89px;/*IE6 only*/ list-style:none;}
+.lottery_nav{margin-left: 25px;float: left;width: 1130px;}
+.lottery_nav a{padding: 0 9px;}
+
+</style>
+<!--Self-->
+</head>
+<body>
+<div class="head">
+	
+{include file='common/markSixnav'}	
+
+<script type="text/javascript">
+$(function(){
+	//顶部导航二级菜单
+	$(".nav_right_div").mouseenter(function(){
+		$(this).find("ul").show();
+	}).mouseleave(function(){
+		$(this).find("ul").hide();
+	})
+	
+})
+</script>
+</div>
+<div class="game_c_center">
+
+<div class="big_my_content">
+<div class="big_my_content2">
+<div class="big_my_content_header"></div>
+<div class="big_my_content_cent">
+<div style="width: 1180px;margin: 20px auto;">
+ 
+ 
+ <table  border="0" align="center" cellpadding="0" style="margin: 0 auto;" cellspacing="0" bgcolor="#fff">
+    <tr>
+	  <td align="center" valign="middle">
+		<div class="lottery_nav">
+				<a class="cur" href="javascript:void(0)" onclick="GoTo(5,'index.html','six')">香港六合彩</a>
+				<a href="javascript:void(0)" onclick="GoTo(3,'csc','lottery')">重庆时时彩</a>
+				<a href="javascript:void(0)" onclick="GoTo(3,'xyft','lottery')">幸运飞艇</a>
+				<a href="javascript:void(0)" onclick="GoTo(3,'xsc','lottery')">新疆时时彩</a>
+				<a href="javascript:void(0)" onclick="GoTo(3,'csf','lottery')">重庆快乐十分</a>
+				<a href="javascript:void(0)" onclick="GoTo(3,'gsf','lottery')">广东快乐十分</a>
+				<a href="javascript:void(0)" onclick="GoTo(3,'pk10','lottery')">北京PK拾</a>
+				<a href="javascript:void(0)" onclick="GoTo(3,'gxsf','lottery')">广西快乐十分</a>
+				<a href="javascript:void(0)" onclick="GoTo(3,'jsk3','lottery')">江苏快3</a>
+				<!--<a class="detail" href="javascript:void(0)">新版彩票玩法</a>-->
+				<!--<a class="detail" href="/Rule/Rule_Cqssc.html" target="_blank">游戏规则</a>-->
+		</div> 	  
+	  
+	  
+	  
+	  	<div class="block_10"></div>
+	  	<ul id="navs">
+   	 		<li class="mainlevel mainlevel_on" id="mainlevel_01"><a href="#">特别号码</a>
+    <ul id="sub_01">
+    <li><a href="{:Url('six/six_7_1')}" target="mainFrame">号码 & 两面</a></li>
+    <li><a href="{:Url('six/six_7_2')}" target="mainFrame">波色 & 生肖</a></li>
+    </ul>
+    </li>
+    
+    <li class="mainlevel" id="mainlevel_02"><a href="#">正码特</a>
+    <ul id="sub_02">
+    <li><a href="{:Url('six/six_1')}" target="mainFrame">正码一</a></li>
+    <li><a href="{:Url('six/six_2')}" target="mainFrame">正码二</a></li>
+    <li><a href="{:Url('six/six_3')}" target="mainFrame">正码三</a></li>
+    <li><a href="{:Url('six/six_4')}" target="mainFrame">正码四</a></li>
+    <li><a href="{:Url('six/six_5')}" target="mainFrame">正码五</a></li>
+    <li><a href="{:Url('six/six_6')}" target="mainFrame">正码六</a></li>
+    <li><a href="{:Url('six/six_1_6')}" target="mainFrame">两面 & 波色</a></li>
+    </ul>
+    </li>
+    
+    <li class="mainlevel" id="mainlevel_03"><a href="#">正码</a>
+    <ul id="sub_03">
+    <li><a href="{:Url('six/six_8_1')}" target="mainFrame">号码</a></li>
+    <li><a href="{:Url('six/six_8_2')}" target="mainFrame">过关</a></li>
+    </ul>
+    </li>
+    
+    <li class="mainlevel"><a href="{:Url('six/six_9')}" target="mainFrame">总和</a></li>
+    <li class="mainlevel"><a href="{:Url('six/six_10')}" target="mainFrame">一肖、尾数</a></li>
+    <li class="mainlevel"><a href="{:Url('six/six_11')}" target="mainFrame">连码</a></li>
+    <li class="mainlevel"><a href="{:Url('six/six_12')}" target="mainFrame">合肖</a></li>
+    <li class="mainlevel"><a href="{:Url('six/six_13')}" target="mainFrame">生肖连</a></li>
+    <li class="mainlevel"><a href="{:Url('six/six_14')}" target="mainFrame">尾数连</a></li>
+    <li class="mainlevel"><a href="{:Url('six/six_15')}" target="mainFrame">全不中</a></li>
+    <li class="mainlevel"><a href="{:Url('six/auto')}" target="mainFrame">开奖号码</a></li>
+    <li class="mainlevel_rule"><a href="/rule/six.html" target="_blank">规则说明> </a></li>
+<div class="lottery_clear"></div>
+</ul></td>
+	  </tr>
+	<tr>
+	  <td height="10" align="center" valign="middle"></td>
+	  </tr>
+	<tr>
+	  <td align="center" valign="middle">
+	  	<iframe id="mainFrame" name="mainFrame" border="0" marginwidth="0" framespacing="0" src="Six_7_1" frameborder="0" noresize="noResize" width="1180" scrolling="auto" height="600" vspale="0" allowtransparency="true" style="background-color=transparent"></iframe>
+	  </td>
+	  </tr>
+	</table>
+ 
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="block_0"></div>
+
+{include file='common/footer'}
+
+<div class="block_0"></div>
+<script type="text/javascript">
+function open_new_888(url) {
+    window.open(url,'newwindow','height=640,width=600,top=150,left='+(screen.width-640)/2+',toolbar=no,menubar=no,scrollbars=no, resizable=no,location=no, status=no');
+}
+</script>
+	
+<script>
+function goPay(){
+	if($("#payUsername").val() == ''){
+		alert("请登录后再进行冲值！");
+		return false;
+	}
+	//alert($("#payCoin").val() );
+	if( $("#payCoin").val() <= '50'){
+		//alert("冲值金额不能小于50");
+		//return false;
+	}
+	$("#payForm").submit();
+}
+$(function(){
+	
+	$('#qian_dao .qian_dao').click(function(){
+		//window.open('qian_dao.php','qian_dao','menubar=no,status=yes,scrollbars=yes,top=150,left=400,toolbar=no,width=805,height=520');
+			$.ajax({
+				type: "post",
+				url: '/qian_dao.php',
+				data:{'ajax':1},
+				success:function(data) {
+					alert(data);
+				}
+			});
+	});
+	
+$(".mainlevel").click(function(){
+	$(this).addClass("mainlevel_on").siblings(".mainlevel").removeClass("mainlevel_on")
+})
+	
+//	setInterval(function() {
+//		$.ajax({
+//			type: "post",
+//			url: "{:Url('index/home')}",
+//			data:{'ajax':1,'get_money':'1'},
+//			success:function(data) {
+//				if (/^[\d\.]+$/.test(data)) {
+//					$('#money').text(data);
+//				}
+//			}
+//		});
+//	},2000);
+})
+
+</script>
+<div id="endtime"></div>
+<!-- <script type="text/javascript">loadinfo()</script> -->
+<IFRAME id="OrderFrame" name="OrderFrame" border=0 marginWidth=0 frameSpacing=0 src="" frameBorder=0 noResize width=0 scrolling=AUTO height=0 vspale="0" style="display:none"></IFRAME>
+<div style="display:none" id="look"></div>
+</body>
+
+
+
+</html>

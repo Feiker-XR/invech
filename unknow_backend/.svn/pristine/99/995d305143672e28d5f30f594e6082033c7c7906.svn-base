@@ -1,0 +1,111 @@
+<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:77:"/mnt/wwwroot/www.dd788799.com/houtai/../application/admin/view/gunqiu/bk.html";i:1505452684;}*/ ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>系统设置</title>
+<link href="/css/base.css" rel="stylesheet" type="text/css" />
+<link href="/css/admin.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="/js/jquery.js"></script>
+<script type="text/javascript" src="/js/jquery.tools.js"></script>
+<script type="text/javascript" src="/js/base.js"></script>
+<script language="javascript">
+function gopage(url){
+	location.href = url;
+}
+</script>
+<style type="text/css">
+
+.list .listTables th {
+	background:#F2F4F6;
+}
+
+</style>
+</head>
+<body class="list">
+     <!--<div class="bar">
+        足球滚球管理
+	</div>-->
+	<div class="body">
+        <ul id="tab" class="tab">
+        	<li><input type="button" value="篮球显示管理" hidefocus class="current" onClick="window.location.href='<?php echo url('gunqiu/bk'); ?>'" />
+        	</li>
+          <li><input type="button" value="篮球隐藏管理" onClick="window.location.href='<?php echo url('gunqiu/hidebk'); ?>'" /></li>
+        </ul>
+        <table id="listTables" class="listTables"> 
+        <tr>
+            <th>比赛ID</th>
+            <th >比赛名称</th>
+            <th >比赛时间</th>
+            <th >进行时间</th>
+            <th >主场/客场</th>
+            <th>让分</th>
+            <th>大小</th>
+            <th >操作</th>
+        </tr>
+        <?php 
+        foreach ($lqgq as $k => $v){
+        ?>
+        <tr>
+            <td height="30" align="center" valign="middle"><?= $v['Match_ID']?></td>
+            <td height="30" align="center" valign="middle"><?= $v['Match_Name']?></td>
+            <td height="30" align="center" valign="middle"><?= $v['Match_CoverDate']?></td>
+            <td height="30" align="center" valign="middle"><?= $v['Match_Time']?></td>
+            <td height="30" align="center" valign="middle">
+                <font color="red"><?= $v['Match_Master'] ?></font><br/>
+                <font color="blue"><?= $v['Match_Guest'] ?></font><br/>
+            </td>
+            <td height="30" align="center" valign="middle">
+                <div style="clear: both">
+                    <span style="display:block; float:left; width:50%;">
+                    <?php if($v['Match_ShowType'] == 'H'){?>
+                        <?php echo $v['Match_RGG'];}else{?>
+                        &nbsp;
+                    <?php }?>
+                    </span>
+                    <span style="display:block; float:right; width:50%;">
+                        <font color="red">
+                            <?= $v['Match_Ho'] == 0 ? '' : $v['Match_Ho']?>
+                        </font>
+                    </span>
+                </div>
+                <div>
+                <span style="display:block; float:left;width:50%;">
+                    <?php if($v['Match_ShowType'] == 'C'){?>
+                        <?php echo $v['Match_RGG'];}else{?>
+                        &nbsp;
+                    <?php }?>
+                </span>
+                <span style="display:block; float:right;width:50%;">
+                    <font color="blue"><?= $v['Match_Ao'] == 0 ? '': $v['Match_Ao']?></font>
+                </span>
+                </div>
+            </td>
+            <td height="30" align="center" valign="middle">
+                <div>
+                 <span style="display:block; float:left;width:50%;">
+                <?= $v['Match_DxGG'] === ''? '&nbsp;' : 'O'.$v['Match_DxGG']?>
+                </span>
+                <span style="display:block; float:right;width:50%;">
+                    <font color="red"><?= $v['Match_DxDpl'] == 0 ? '' : $v['Match_DxDpl']?></font>
+                </span>
+                </div>
+                <div>
+                     <span style="display:block; float:left;width:50%;">
+                    <?= $v['Match_DxGG'] === ''? '&nbsp;' : 'U'.$v['Match_DxGG']?>
+                    </span>
+                    <span style="display:block; float:right;width:50%;">
+                        <font color="blue"><?= $v['Match_DxXpl'] == 0 ? '' : $v['Match_DxXpl']?></font>
+                    </span>
+                </div>
+            </td>
+            <td height="30" align="center" valign="middle"><a href="<?php echo url('gunqiu/dohidebk','op=add&matchid='.$v['Match_ID']); ?>">隐藏</a></td>
+        </tr>
+        <?php 
+        }
+        ?>
+    </table>
+    </div>
+    
+</body>
+</html>

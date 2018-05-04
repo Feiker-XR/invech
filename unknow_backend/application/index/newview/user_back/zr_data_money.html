@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Welcome</title>
+<link rel="stylesheet" type="text/css" href="/css/general.css"/>
+<link rel="stylesheet" type="text/css" href="/Scripts/jquery-ui.css" />
+<link rel="stylesheet" type="text/css" href="/newview/css/theme/style.css?version=2.0.0" />
+<link rel="stylesheet" type="text/css" href="/newview/css/style.css" />
+<link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
+<script src='/js/js/jquery-1.8.0.min.js'></script>
+<script type="text/javascript" src="/js/main.js"></script>
+<script type="text/javascript" src="/Scripts/member.js"></script>
+<script type="text/javascript" src="/Scripts/jquery-ui-datepicker.js"></script>
+<script type="text/javascript" src="/newview/js/main.js"></script>
+<script type="text/javascript">
+$(function(){
+	$("#S_date").datepicker({
+		minDate: -31,
+		maxDate: 0
+	});
+	$("#E_date").datepicker({
+		minDate: -31,
+		maxDate: 0
+	});
+setInterval(function() {
+	$.ajax({
+		type: "post",
+		url: "{:Url('index/home')}",
+		data:{'ajax':1,'get_money':'1'},
+		success:function(data) {
+			if (/^[\d\.]+$/.test(data)) {
+				$('#money,#money_2').text(data);
+			}
+		}
+	});
+},2000);	
+});
+
+</script>
+<style type="text/css">
+body{background: white;}
+</style>
+</head>
+<body>
+<div class="head">
+	<!--欢迎-->
+	{include file='common/nav'}
+</div>
+<div class="block_0"></div>	
+	
+<div class="moneyBox_contain">		
+	<div class="ui-header">
+		<div class="ui-headerBox">
+			<!-- logo -->
+			<a class="ui-icon-logo ui-logo" id="Logo"></a>
+			<!-- 导航 -->
+			<ul class="ui-nav">
+				<li id="Nav_0">
+					<a href="/user/userinfo.html" title="会员首页">
+						<span class="ui-icon ui-icon-home ui-icon-50"></span>
+					</a>
+				</li>
+				<li id="Nav_1" class="ui-header-active">
+					<a href="/pay/member.html" title="财务管理">
+						<span class="ui-icon ui-icon-recharge ui-icon-50"></span>
+					</a>
+				</li>
+				<li id="Nav_2">
+					<a href="/user/record_ds.html" title="游戏记录">
+						<span class="ui-icon ui-icon-gameNote ui-icon-50"></span>
+					</a>
+				</li>
+				<li id="Nav_3">
+					<a href="/user/report.html" title="历史记录">
+						<span class="ui-icon ui-icon-data ui-icon-50"></span>
+					</a>
+				</li>
+				<li id="Nav_4" >
+					<a href="/user/sms.html" title="站内短信">
+						<span class="ui-icon ui-icon-announce ui-icon-50"></span>
+					</a>
+				</li>
+       			 <li id="Nav_5">
+					<a href="/user/agent.html" title="代理中心">
+						<span class="ui-icon ui-icon-newActivity ui-icon-50"></span>
+					</a>
+				</li>
+        		<li style="display:none">
+					<a href="http://messenger.providesupport.com/messenger/1x5b67gp1rcy50kqxa0qpsa0jx.html" title="客服中心">
+						<span class="ui-icon ui-icon-online ui-icon-50"></span>
+					</a>
+				</li>
+			</ul>
+			<ul class="ui-function">
+				<!--<li>
+					<a href="#">
+						<span class="ui-icon ui-icon-down ui-icon-20" id="Menu"></span>
+					</a>
+				</li>
+				<li>
+					<a href="#">
+						<span class="ui-icon ui-icon-min ui-icon-20"></span>
+					</a>
+				</li>
+				<li>
+					<a href="javascript:void(0)" id="Logout">
+						<span class="ui-icon ui-icon-max ui-icon-20"></span>
+					</a>
+				</li>-->
+			</ul>
+		</div>
+	</div>	
+	
+	<div class="ui-body">
+		<div class="ui-search" id="subjsshow1" style="display: block;">
+		<span><i class="fas fa-user-circle" style="font-size: 30px"></i>财务中心</span>
+            <ul>
+        <li class="ui-hover"><a href="/pay/member.html"><i class="fas fa-shopping-cart" style="background-color: #F59A2F"></i>账户充值</a></li>
+        <li><a href="/user/get_money.html"><i class="fas fa-search" style="background-color: #F16346"></i>申请提款</a></li>
+        <li><a href="/user/userinfo.html"><i class="fas fa-heart" style="background-color: #F59A2F"></i>额度转换</a></li>
+        <li><a href="/user/data_money.html"><i class="fas fa-bars" style="background-color: #A95BEF"></i>充值记录</a></li>
+        <li><a href="/user/data_h_money.html"><i class="fas fa-list-alt" style="background-color: #2C7FE3"></i>汇款记录</a></li>
+        <li><a href="/user/data_t_money.html"><i class="fas fa-list" style="background-color: #F16346"></i>提现记录</a></li>
+        <li class="ui-hover"><a href="/user/zr_data_money.html"><i class="fas fa-th-list" style="background-color: #24C987"></i>转换记录</a></li>
+            </ul>
+		</div>
+	</div>	
+	
+	<div class="ui-moneyBox">
+		<ul style="margin-top:10px;">
+			<table width="100%" border="0" cellspacing="0" cellpadding="5" id="thetable">
+				<tr>
+					<th>真人账号</th>
+					<th>订单号</th>
+					<th>转账金额</th>
+					<th>说明</td>
+						<th>转账状态</th>
+				</tr>
+				<tr>
+					<?php if($zzinfo){?>
+					<?php foreach ($zzinfo as $v){?>
+					<?php 
+				if(($v['id']%2)=='0'){
+					$bgcolor="#FFFFFF";
+				}else{
+					$bgcolor="#F5F5F5";
+				}	    
+			?>
+					<tr bgcolor="<?=$bgcolor?>" align="center" onMouseOver="this.style.backgroundColor='#FFFFCC'" onMouseOut="this.style.backgroundColor='<?=$bgcolor?>'">
+						<td align="center">
+							<?php echo $v['username']?>
+						</td>
+						<td align="center">
+							<?php echo $v['billNO']?>
+						</td>
+						<td align="center">
+							<?php echo $v['amount']?>
+						</td>
+						<td align="center">
+							<?php echo $v['info']?>
+						</td>
+						<td align="center">
+							<?php echo $v['result']?>
+						</td>
+					</tr>
+					<?php }?>
+					<?php }?>
+				</tr>
+			</table>
+		</ul>
+	</div>
+	<!-- page -->
+	<div class="page_list">
+		<?php echo $page?>
+	</div>
+	<!-- page end -->  
+</div>
+
+{include file='common/footer'}
+
+<script language="javascript">bianse("thetable","#F5F5F5","#FFFFFF","#FFFFCC","#FFFFCC");</script> 
+</body>
+</html>

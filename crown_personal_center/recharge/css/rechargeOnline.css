@@ -1,0 +1,169 @@
+/*支付方式*/
+.pay-type{
+	width: 100%;
+	height: auto;
+	padding-top: 15px;
+	clear: both;
+}
+.pay-type span{
+	display: block;
+	float: left;
+	height: 42px;
+	line-height: 42px;
+	color: #333333;
+	font-size: 14px;
+	margin-left: 15px;
+	margin-right: 8px;
+	font-weight: bold;
+}
+.pay-type-choose{
+	width: 160px;
+	height: 42px;
+	background: #f6f6f6;
+	float: left;
+	border: 1px solid #e9e9e9;
+	cursor: pointer;
+}
+.pay-type-choose.Togger{
+	background: url(../imgs/pay-type-bg.png) no-repeat;
+	border: 1px solid #fff;
+}
+.pay-type-choose img{
+	display: block;
+    float: left;
+    margin-left: 18px;
+    margin-top: 5px;
+}
+.pay-type-choose i{
+	display: block;
+	float: left;
+	font-style: normal;
+	line-height: 42px;
+	color: #333333;
+	font-size: 14px;
+	font-weight: bold;
+	margin-left: 13px;
+}
+ /*支付线路*/
+.pay-line{
+	width: 100%;
+	height: auto;
+	padding-top: 8px;
+	clear: both;
+}
+.pay-line span{
+	display: block;
+    float: left;
+    height: 64px;
+    line-height: 64px;
+    color: #333333;
+    font-size: 14px;
+    margin-left: 15px;
+    margin-right: 8px;
+    font-weight: bold;
+}
+.pay-line-choose{
+	margin-left: 96px;
+}
+.pay-line-choose a{
+	display: block;
+	width: 121px;
+	height: 40px;
+	border: 1px solid #e9e9e9;
+	color: #adadad;
+	text-align: center;
+	line-height: 40px;
+	float: left;
+	margin-right: 10px;
+	margin-top: 10px;
+	font-size: 14px;
+}
+.pay-line-choose a.add-color{
+	color: #ff0000;
+}
+
+/*选择银行*/
+.pay-bank{
+	width: 100%;
+	height: auto;
+	padding-top: 15px;
+	clear: both;
+}
+.pay-bank span{
+	display: block;
+	height: 42px;
+	line-height: 42px;
+	color: #333333;
+	font-size: 14px;
+	margin-left: 15px;
+	margin-right: 8px;
+	font-weight: bold;
+}
+.pay-bank-choose{
+	
+}
+.pay-bank-choose a{
+	width: 160px;
+	height: 42px;
+	background: #f6f6f6;
+	display: block;
+	float: left;
+	overflow: hidden;
+	margin-left: 6px;
+	margin-bottom: 6px;
+}
+.pay-bank-choose a.add-border{
+	width: 160px;
+	height: 42px;
+	background: #f6f6f6;
+	display: block;
+	float: left;
+	background: url(../imgs/border-bg.png) no-repeat;
+}
+.pay-bank-choose a img{
+	display: block;
+    width: 149px;
+    height: 30px;
+    margin-top: 7px;
+    margin-left: 4px;
+}
+
+
+.add-bank{
+	width: 160px;
+	height: 42px;
+	background: #f6f6f6;
+	display: block;
+	float: left;
+	overflow: hidden;
+	margin-left: 6px;
+	margin-bottom: 6px;
+	text-align: center;
+	line-height: 42px;
+	color: #555555;
+	font-size: 14px;
+	cursor: pointer;
+}
+
+/*确定*/
+.btn{
+	padding-top: 15px;
+	padding-bottom: 25px;
+	width: 100%;
+	clear: both;
+}
+.btn button{
+	width: 202px;
+	height: 37px;
+	color: #FFFFFF;
+	background: #474747;
+	outline: none;
+	border: none;
+	border-radius: 20px;
+	font-size: 16px;
+	margin-left: 264px;
+	cursor: pointer;
+}
+.btn button:hover{
+	background: #ff6600;
+}

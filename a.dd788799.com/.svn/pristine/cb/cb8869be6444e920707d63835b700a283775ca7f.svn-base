@@ -1,0 +1,39 @@
+<?php
+namespace app\common\model;
+use think\Model;
+
+class Commission extends Base{
+
+    protected $table = 'gygy_commission';
+    protected $createTime = 'created_at';
+    protected $updateTime = '';
+    protected $autoWriteTimestamp = 'datetime';
+    public function money()
+    {
+        return $this->morphMany('Money',['type','item_id'],'commission');
+    }
+
+    public static function getList($request){
+		$params = $request->param();
+        $query = self::alias('c')->field('c.*')->order('id desc');
+		if($params['nickname']??0){
+            $query->join('gygy_members u','u.uid = c.uid')
+            ->where('u.nickname','like','%'.trim($params['nickname']).'%');
+        }
+      
+        if($params['starttime']??0){            
+            $query->where('c.created_at', '>=', $params['starttime']);
+        }
+
+		if($params['endtime']??0){
+            $query->where('c.created_at', '<=', $params['endtime']);
+        }
+		$data = $query->paginate();
+        return $data;
+    }
+
+    public function user(){
+        return $this->belongsTo('Member','uid','uid');
+    }
+
+}

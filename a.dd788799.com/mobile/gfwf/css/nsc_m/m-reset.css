@@ -1,0 +1,30 @@
+@charset "utf-8";
+/* 重置样式 */
+html,body { margin:0; padding:0; font-size:12px; font-family: 'microsoft yahei';}
+body{  overflow-x: visible;}
+h1,h2,h3,h4,h5,h6,ul,dl,dt,dd,ol,p,input { margin:0; padding:0; }
+img { border:0;}
+li,em { list-style:none; font-style:normal;}
+a { text-decoration:none;}
+a:hover { text-decoration:none;}
+*:focus {outline: none;}
+.left{ float: left; display:inline; }
+.right{ float: right; display:inline; }
+.re { position:relative; }
+.ab { position:absolute; }
+.clear{ clear: both; }
+.hidden { overflow:hidden; }
+
+.form-div{ display: none;}
+.formTable td img{ vertical-align: middle;}
+.mask_list{ width: 100%; height: 100%; background: url("/images/tmbg.png"); position: fixed; left: 0px; top: 0px; z-index: 550; display: none;}
+.mask_list div,#loading_msg{ background: url("/images/loading-large.gif") no-repeat center; font-weight: normal; width: 160px; font-size: 16px;text-shadow:1px 0px 1px #000; height: 24px; position: absolute; z-index: 500; left: 50%; top: 20%; margin-left: -60px;margin-top: -60px; color: white; text-align: center; padding-top: 80px;}
+#loading_msg{ margin-left: 0px;}
+
+/*页面容器*/
+.warp { width: 100%; margin: 0px auto; }
+
+input[name='ptype'],input[name='type'],input[name='ischild']{ display:none;}
+#ptype_personal,#ptype_team{ display: none;}
+
+textarea {resize: vertical;}

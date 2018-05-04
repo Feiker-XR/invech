@@ -1,0 +1,38 @@
+
+<ul class="w-goodsList w-goodsList-l m-user-goodsList" data-pro="list">
+	{php} foreach($data as $vo){ {/php}
+	<li id="pro-view-8" class="w-goodsList-item">
+	<div class="w-goods w-goods-l w-goods-ing m-user-goods">
+		<div class="w-goods-info">
+			<p>
+				用户名：{$vo.username} 
+			</p>
+			<p>
+				成功时间：{php} echo $this->iff($vo['state'], date('m-d H:i:s', $vo['actionTime']), '--') {/php}
+			</p>
+			<p>
+				编号：{$vo.rechargeId}
+			</p>
+			<p>
+				金额：{$vo.amount}
+			</p>
+			<p>
+				充值银行：{php} echo $bankData[$vo['mBankId']]['name']{/php}
+			</p>
+			<p>
+				状态：{php} echo $this->iff($vo['state'], '充值成功', '<span style="color:#653809">正在处理</span>'){/php}
+			</p>
+			<p>
+				备注：{$vo.info}
+			</p>
+			
+		</div>
+	</div>
+	</li>
+	{php} } if(!$data) { {/php}
+	<div style="text-align:center">当前条件下没有记录，请更改条件后搜索</div>
+	{php} } {/php}
+</ul>
+<div class="page">
+	{$_page}
+</div>

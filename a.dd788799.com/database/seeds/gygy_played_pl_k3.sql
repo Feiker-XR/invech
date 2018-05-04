@@ -1,0 +1,86 @@
+/* 404和值
+124 和值
+*/
+insert into `gygy_played_pl` (`playedId`, `pl_group_id`, `value`, `pl`) values('404','124','3','180');
+insert into `gygy_played_pl` (`playedId`, `pl_group_id`, `value`, `pl`) values('404','124','4','60');
+insert into `gygy_played_pl` (`playedId`, `pl_group_id`, `value`, `pl`) values('404','124','5','32.5');
+insert into `gygy_played_pl` (`playedId`, `pl_group_id`, `value`, `pl`) values('404','124','6','20.5');
+insert into `gygy_played_pl` (`playedId`, `pl_group_id`, `value`, `pl`) values('404','124','7','12.5');
+insert into `gygy_played_pl` (`playedId`, `pl_group_id`, `value`, `pl`) values('404','124','8','9.5');
+insert into `gygy_played_pl` (`playedId`, `pl_group_id`, `value`, `pl`) values('404','124','9','8');
+insert into `gygy_played_pl` (`playedId`, `pl_group_id`, `value`, `pl`) values('404','124','10','7.5');
+insert into `gygy_played_pl` (`playedId`, `pl_group_id`, `value`, `pl`) values('404','124','11','7.5');
+insert into `gygy_played_pl` (`playedId`, `pl_group_id`, `value`, `pl`) values('404','124','12','8');
+insert into `gygy_played_pl` (`playedId`, `pl_group_id`, `value`, `pl`) values('404','124','13','9.5');
+insert into `gygy_played_pl` (`playedId`, `pl_group_id`, `value`, `pl`) values('404','124','14','12.5');
+insert into `gygy_played_pl` (`playedId`, `pl_group_id`, `value`, `pl`) values('404','124','15','20.5');
+insert into `gygy_played_pl` (`playedId`, `pl_group_id`, `value`, `pl`) values('404','124','16','32.5');
+insert into `gygy_played_pl` (`playedId`, `pl_group_id`, `value`, `pl`) values('404','124','17','60');
+insert into `gygy_played_pl` (`playedId`, `pl_group_id`, `value`, `pl`) values('404','124','18','180');
+insert into `gygy_played_pl` (`playedId`, `pl_group_id`, `value`, `pl`) values('404','124','大','1.9');
+insert into `gygy_played_pl` (`playedId`, `pl_group_id`, `value`, `pl`) values('404','124','小','1.9');
+insert into `gygy_played_pl` (`playedId`, `pl_group_id`, `value`, `pl`) values('404','124','单','1.9');
+insert into `gygy_played_pl` (`playedId`, `pl_group_id`, `value`, `pl`) values('404','124','双','1.9');
+
+/*405 125通选
+*/
+insert into `gygy_played_pl` (`playedId`, `pl_group_id`, `value`, `pl`) values('405','125','豹子','30');
+insert into `gygy_played_pl` (`playedId`, `pl_group_id`, `value`, `pl`) values('405','125','顺子','8.5');
+insert into `gygy_played_pl` (`playedId`, `pl_group_id`, `value`, `pl`) values('405','125','对子','2');
+insert into `gygy_played_pl` (`playedId`, `pl_group_id`, `value`, `pl`) values('405','125','三不同','1.6');
+
+/*
+406 126三同号单选
+*/
+insert into `gygy_played_pl` (`playedId`, `pl_group_id`, `value`, `pl`) values('406','126','111','180');
+insert into `gygy_played_pl` (`playedId`, `pl_group_id`, `value`, `pl`) values('406','126','222','180');
+insert into `gygy_played_pl` (`playedId`, `pl_group_id`, `value`, `pl`) values('406','126','333','180');
+insert into `gygy_played_pl` (`playedId`, `pl_group_id`, `value`, `pl`) values('406','126','444','180');
+insert into `gygy_played_pl` (`playedId`, `pl_group_id`, `value`, `pl`) values('406','126','555','180');
+insert into `gygy_played_pl` (`playedId`, `pl_group_id`, `value`, `pl`) values('406','126','666','180');
+
+/*
+407 127三不同
+*/
+insert into `gygy_played_pl` (`playedId`, `pl_group_id`, `value`, `pl`) values('407','127','','32.5');
+
+/*
+408 128二同号复选
+*/
+insert into `gygy_played_pl` (`playedId`, `pl_group_id`, `value`, `pl`) values('408','128','11*','11.5');
+insert into `gygy_played_pl` (`playedId`, `pl_group_id`, `value`, `pl`) values('408','128','22*','11.5');
+insert into `gygy_played_pl` (`playedId`, `pl_group_id`, `value`, `pl`) values('408','128','33*','11.5');
+insert into `gygy_played_pl` (`playedId`, `pl_group_id`, `value`, `pl`) values('408','128','44*','11.5');
+insert into `gygy_played_pl` (`playedId`, `pl_group_id`, `value`, `pl`) values('408','128','55*','11.5');
+insert into `gygy_played_pl` (`playedId`, `pl_group_id`, `value`, `pl`) values('408','128','66*','11.5');
+
+/*
+409 129二同号单选
+*/
+insert into `gygy_played_pl` (`playedId`, `pl_group_id`, `value`, `pl`) values('409','129','','60');
+
+/*
+410 130二不同号
+*/
+insert into `gygy_played_pl` (`playedId`, `pl_group_id`, `value`, `pl`) values('410','130','','6.5');
+
+/*
+411 131猜必出
+*/
+insert into `gygy_played_pl` (`playedId`, `pl_group_id`, `value`, `pl`) values('411','131','1','2');
+insert into `gygy_played_pl` (`playedId`, `pl_group_id`, `value`, `pl`) values('411','131','2','2');
+insert into `gygy_played_pl` (`playedId`, `pl_group_id`, `value`, `pl`) values('411','131','3','2');
+insert into `gygy_played_pl` (`playedId`, `pl_group_id`, `value`, `pl`) values('411','131','4','2');
+insert into `gygy_played_pl` (`playedId`, `pl_group_id`, `value`, `pl`) values('411','131','5','2');
+insert into `gygy_played_pl` (`playedId`, `pl_group_id`, `value`, `pl`) values('411','131','6','2');
+
+/*
+412 132猜必不出
+*/
+insert into `gygy_played_pl` (`playedId`, `pl_group_id`, `value`, `pl`) values('412','132','1','1.6');
+insert into `gygy_played_pl` (`playedId`, `pl_group_id`, `value`, `pl`) values('412','132','2','1.6');
+insert into `gygy_played_pl` (`playedId`, `pl_group_id`, `value`, `pl`) values('412','132','3','1.6');
+insert into `gygy_played_pl` (`playedId`, `pl_group_id`, `value`, `pl`) values('412','132','4','1.6');
+insert into `gygy_played_pl` (`playedId`, `pl_group_id`, `value`, `pl`) values('412','132','5','1.6');
+insert into `gygy_played_pl` (`playedId`, `pl_group_id`, `value`, `pl`) values('412','132','6','1.6');
+

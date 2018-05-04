@@ -1,0 +1,97 @@
+<?php
+namespace app\index;
+use think\Db;
+//use think\Controller;
+use app\common\Controller\Base as Controller;
+use think\Cache;
+use app\classes\page;
+use think\view\driver\Think;
+use app\common\model\Type;
+use app\common\model\PlayedGroup;
+use app\common\model\Played;
+use app\common\model\Config;
+
+class Base extends Controller{
+    
+    public $time;
+    public $user;
+    public $settings;
+    public $types;
+    public $playeds;
+    public $groups;
+
+    public $memberSessionName='session-name';
+          
+    protected function _initialize()
+    {
+    	parent::_initialize();
+    	$this->initExceptionHandle();
+
+    	$this->time = time();
+
+        $this->user = $this->request->user();
+        $this->assign('user',$this->user);
+
+		$this->settings = Config::getAll();
+		$this->assign('settings',$this->settings);
+
+		$switchWeb = $this->settings['switchWeb'];
+        if ($switchWeb && $switchWeb == '1') {
+        } else {
+            $this->error('站点已经关闭，请稍后访问~');
+        }
+
+        $this->types = Type::getAll();
+        $this->assign('types',$this->types);
+
+	    $this->groups = PlayedGroup::getAll();
+	    $this->assign('groups',$this->groups);
+
+        $this->playeds = Played::getAll();
+        $this->assign('playeds',$this->playeds);
+
+        $domain = request()->host();
+        $parts = explode('.',$domain);	
+        if($parts[0] == 'm' || in_array($domain,config('mobile_domain'))){
+            $view_path = APP_PATH.$this->request->module().DS.'mview'.DS;
+            $this->view->config('view_path',$view_path);
+        }
+    }
+	
+
+    private function initExceptionHandle(){
+        config('exception_handle',\app\index\exceptions\Handler::class);
+    }
+
+	/**
+	 * 用户资金变动
+	 *
+	 * 请在一个事务里使用
+	 */
+	protected function addCoin($log){
+
+	    if(!isset($log['uid'])) $log['uid']=$this->user['uid'];
+	    if(!isset($log['info'])) $log['info']='';
+	    if(!isset($log['coin'])) $log['coin']=0;
+	    if(!isset($log['type'])) $log['type']=0;
+	    if(!isset($log['fcoin'])) $log['fcoin']=0;
+	    if(!isset($log['extfield0'])) $log['extfield0']=0;
+	    if(!isset($log['extfield1'])) $log['extfield1']='';
+	    if(!isset($log['extfield2'])) $log['extfield2']='';
+	    
+	    $sql=" call setCoin({$log['coin']}, {$log['fcoin']}, {$log['uid']}, {$log['liqType']}, {$log['type']}, '{$log['info']}', {$log['extfield0']}, '{$log['extfield1']}', '{$log['extfield2']}')";
+	    
+	    //echo $sql;exit;
+	    
+	    if(Db::query($sql)===false)
+	        return false;
+	        else
+	            return true;
+	            return false;
+	}
+	
+
+		
+
+	
+}

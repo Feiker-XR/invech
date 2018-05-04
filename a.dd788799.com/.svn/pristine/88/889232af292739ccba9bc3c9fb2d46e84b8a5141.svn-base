@@ -1,0 +1,49 @@
+<?php
+namespace app\admin\controller;
+use app\admin\Login;
+use app\common\model\Message as MessageModel;
+use app\common\model\Member as MemberModel;
+class Message extends Login{
+
+    public function _initialize(){
+        parent::_initialize();
+        $menu_group   =   "message";
+        $this->assign('menu_group',$menu_group);
+    }
+
+    public function outbox(){
+        //自行查询;
+        //$list = MessageModel::all();
+        $list = (new MemberModel)->buildMessageMemberQuery()->paginate();
+        $this->assign('list',$list);
+        $this->view->page_header = '发件箱';
+        return $this->fetch();
+    }
+
+    //发信
+    public function send(){
+        if(IS_GET){
+            return $this->fetch();
+        }else{
+            //MessageModel::create
+        }
+    }
+
+    //收件箱支持软删除,请自行查询文档;
+    //getInboxBuilder获取查询构造器,
+    public function inbox(){
+
+        $list = (new MemberModel)->getInboxBuilder('admin')
+        //其他条件自行添加
+        ->where('status',0)->paginate();
+        $this->assign('list',$list);
+        
+        $this->view->page_header = '收件箱';
+        return $this->fetch();
+    }
+
+
+
+}
+
+

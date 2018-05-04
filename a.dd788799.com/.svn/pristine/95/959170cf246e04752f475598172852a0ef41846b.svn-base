@@ -1,0 +1,349 @@
+<link rel="stylesheet" href="/400w-public/css/cabel-v1.css"/>
+<link rel="stylesheet" href="/400w-public/css/style.css"/>
+<link rel="stylesheet" href="/400w-public/css/animate.min.css"/>
+<link rel="stylesheet" href="/400w-public/css/lottery.css"/>
+<link rel="stylesheet" href="/400w-public/css/liMarquee.css"/>
+<link rel="stylesheet" href="/400w-public/css/jquery.range.css"/>
+<link rel="stylesheet" href="/400w-public/css/global.css"/>
+<link rel="stylesheet" href="/400w-public/css/other.css"/>
+<link rel="stylesheet" href="/400w-public/css/gfwf.css"/>
+<link rel="stylesheet" href="/400w-public/css/layer.css"/>
+
+<input type="hidden" name="playedGroup" value="<?=$groupId?>"/>
+<input type="hidden" name="playedId" value="<?=$playedId?>"/>
+<input type="hidden" name="type" value="<?=$type?>"/>
+<input type="hidden" name="playedName" value="<?=$played['name']?>"/>
+
+<!-- 六合彩-全不中 -->
+
+<div class='pp' action='six_qbz' length="1" data-line="5"></div>
+
+<div id="sscContent">
+    <div class="lot-content clearfix">
+        <div class="fl main-left">
+            <div class="hd clearfix">
+                <div class="fr">
+                    <div class="T-tab clearfix">
+                        <a href="javascript:void(0)" onclick="changeTab(this)" class="active">五不中</a>
+                        <a href="javascript:void(0)" onclick="changeTab(this)">六不中</a>
+                        <a href="javascript:void(0)" onclick="changeTab(this)">七不中</a>
+                        <a href="javascript:void(0)" onclick="changeTab(this)">八不中</a>
+                        <a href="javascript:void(0)" onclick="changeTab(this)">九不中</a>
+                        <a href="javascript:void(0)" onclick="changeTab(this)">十不中</a>
+                        <a href="javascript:void(0)" onclick="changeTab(this)">十一不中</a>
+                        <a href="javascript:void(0)" onclick="changeTab(this)">十二不中</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="table-common">
+
+            </div>
+
+            <div class="hd clearfix rehd tzgz" id="toptouzhu" style="margin: 10px 0;">
+                <div class="fl refl xzje">
+                    下注金额：<input type="text" class="txt" id="inputMoney">
+                </div>
+                <div class="kjanniu">
+                    <a href="javascript:void(0)" class="img-50" data-num="50"></a>
+                    <a href="javascript:void(0)" class="img-100" data-num="100"></a>
+                    <a href="javascript:void(0)" class="img-500" data-num="500"></a>
+                    <a href="javascript:void(0)" class="img-1000" data-num="1000"></a>
+                    <a href="javascript:void(0)" class="img-5000" data-num="5000"></a>
+                    <a href="javascript:void(0)" class="img-10000" data-num="10000"></a>
+                </div>
+            </div>
+        </div>
+
+        <div class="fr main-right cl-10">
+        </div>
+    </div>
+</div>
+
+<script type="text/html" id="six_qbz">
+    <table width="100%" border="1" class="pp" action="six_qbz" data-line="5" style="margin: 10px; overflow: auto;">
+        <thead>
+        <tr>
+            <th width="40">号码</th>
+            <th width="48">赔率</th>
+            <th>勾选</th>
+            <th width="40">号码</th>
+            <th width="48">赔率</th>
+            <th>勾选</th>
+            <th width="40">号码</th>
+            <th width="48">赔率</th>
+            <th>勾选</th>
+            <th width="40">号码</th>
+            <th width="48">赔率</th>
+            <th>勾选</th>
+            <th width="40">号码</th>
+            <th width="48">赔率</th>
+            <th>勾选</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        {{each plg.sz.lines line index1}}
+        {{each line pl index2}}
+        <tr>
+
+            <td style="cursor: pointer;"><span class="ball-icon ball-01"></span></td>
+            <td style="cursor: pointer;"><strong class="color-red pl" data-plid="6804">{{pl.pl}}</strong></td>
+            <td><input type="checkbox" value="1" data-plid="6804"></td>
+
+            <td style="cursor: pointer;"><span class="ball-icon ball-11"></span></td>
+            <td style="cursor: pointer;"><strong class="color-red pl" data-plid="6804">{{pl.pl}}</strong></td>
+            <td><input type="checkbox" value="11" data-plid="6804"></td>
+
+            <td style="cursor: pointer;"><span class="ball-icon ball-21"></span></td>
+            <td style="cursor: pointer;"><strong class="color-red pl" data-plid="6804">{{pl.pl}}</strong></td>
+            <td><input type="checkbox" value="21" data-plid="6804"></td>
+
+            <td style="cursor: pointer;"><span class="ball-icon ball-31"></span></td>
+            <td style="cursor: pointer;"><strong class="color-red pl" data-plid="6804">{{pl.pl}}</strong></td>
+            <td><input type="checkbox" value="31" data-plid="6804"></td>
+
+            <td style="cursor: pointer;"><span class="ball-icon ball-41"></span></td>
+            <td style="cursor: pointer;"><strong class="color-red pl" data-plid="6804">{{pl.pl}}</strong></td>
+            <td><input type="checkbox" value="41" data-plid="6804"></td>
+
+        </tr>
+
+        <tr>
+            <td style="cursor: pointer;"><span class="ball-icon ball-02"></span></td>
+            <td style="cursor: pointer;"><strong class="color-red pl" data-plid="6804">{{pl.pl}}</strong></td>
+            <td><input type="checkbox" value="2" data-plid="6804"></td>
+
+            <td style="cursor: pointer;"><span class="ball-icon ball-12"></span></td>
+            <td style="cursor: pointer;"><strong class="color-red pl" data-plid="6804">{{pl.pl}}</strong></td>
+            <td><input type="checkbox" value="12" data-plid="6804"></td>
+
+            <td style="cursor: pointer;"><span class="ball-icon ball-22"></span></td>
+            <td style="cursor: pointer;"><strong class="color-red pl" data-plid="6804">{{pl.pl}}</strong></td>
+            <td><input type="checkbox" value="22" data-plid="6804"></td>
+
+            <td style="cursor: pointer;"><span class="ball-icon ball-32"></span></td>
+            <td style="cursor: pointer;"><strong class="color-red pl" data-plid="6804">{{pl.pl}}</strong></td>
+            <td><input type="checkbox" value="32" data-plid="6804"></td>
+
+            <td style="cursor: pointer;"><span class="ball-icon ball-42"></span></td>
+            <td style="cursor: pointer;"><strong class="color-red pl" data-plid="6804">{{pl.pl}}</strong></td>
+            <td><input type="checkbox" value="42" data-plid="6804"></td>
+        </tr>
+
+        <tr>
+            <td style="cursor: pointer;"><span class="ball-icon ball-03"></span></td>
+            <td style="cursor: pointer;"><strong class="color-red pl" data-plid="6804">{{pl.pl}}</strong></td>
+            <td><input type="checkbox" value="3" data-plid="6804"></td>
+
+            <td style="cursor: pointer;"><span class="ball-icon ball-13"></span></td>
+            <td style="cursor: pointer;"><strong class="color-red pl" data-plid="6804">{{pl.pl}}</strong></td>
+            <td><input type="checkbox" value="13" data-plid="6804"></td>
+
+            <td style="cursor: pointer;"><span class="ball-icon ball-23"></span></td>
+            <td style="cursor: pointer;"><strong class="color-red pl" data-plid="6804">{{pl.pl}}</strong></td>
+            <td><input type="checkbox" value="23" data-plid="6804"></td>
+
+            <td style="cursor: pointer;"><span class="ball-icon ball-33"></span></td>
+            <td style="cursor: pointer;"><strong class="color-red pl" data-plid="6804">{{pl.pl}}</strong></td>
+            <td><input type="checkbox" value="33" data-plid="6804"></td>
+
+            <td style="cursor: pointer;"><span class="ball-icon ball-43"></span></td>
+            <td style="cursor: pointer;"><strong class="color-red pl" data-plid="6804">{{pl.pl}}</strong></td>
+            <td><input type="checkbox" value="43" data-plid="6804"></td>
+        </tr>
+
+        <tr>
+            <td style="cursor: pointer;"><span class="ball-icon ball-04"></span></td>
+            <td style="cursor: pointer;"><strong class="color-red pl" data-plid="6804">{{pl.pl}}</strong></td>
+            <td><input type="checkbox" value="4" data-plid="6804"></td>
+
+            <td style="cursor: pointer;"><span class="ball-icon ball-14"></span></td>
+            <td style="cursor: pointer;"><strong class="color-red pl" data-plid="6804">{{pl.pl}}</strong></td>
+            <td><input type="checkbox" value="14" data-plid="6804"></td>
+
+            <td style="cursor: pointer;"><span class="ball-icon ball-24"></span></td>
+            <td style="cursor: pointer;"><strong class="color-red pl" data-plid="6804">{{pl.pl}}</strong></td>
+            <td><input type="checkbox" value="24" data-plid="6804"></td>
+
+            <td style="cursor: pointer;"><span class="ball-icon ball-34"></span></td>
+            <td style="cursor: pointer;"><strong class="color-red pl" data-plid="6804">{{pl.pl}}</strong></td>
+            <td><input type="checkbox" value="34" data-plid="6804"></td>
+
+            <td style="cursor: pointer;"><span class="ball-icon ball-44"></span></td>
+            <td style="cursor: pointer;"><strong class="color-red pl" data-plid="6804">{{pl.pl}}</strong></td>
+            <td><input type="checkbox" value="44" data-plid="6804"></td>
+        </tr>
+
+        <tr>
+            <td style="cursor: pointer;"><span class="ball-icon ball-05"></span></td>
+            <td style="cursor: pointer;"><strong class="color-red pl" data-plid="6804">{{pl.pl}}</strong></td>
+            <td><input type="checkbox" value="5" data-plid="6804"></td>
+
+            <td style="cursor: pointer;"><span class="ball-icon ball-15"></span></td>
+            <td style="cursor: pointer;"><strong class="color-red pl" data-plid="6804">{{pl.pl}}</strong></td>
+            <td><input type="checkbox" value="15" data-plid="6804"></td>
+
+            <td style="cursor: pointer;"><span class="ball-icon ball-25"></span></td>
+            <td style="cursor: pointer;"><strong class="color-red pl" data-plid="6804">{{pl.pl}}</strong></td>
+            <td><input type="checkbox" value="25" data-plid="6804"></td>
+
+            <td style="cursor: pointer;"><span class="ball-icon ball-35"></span></td>
+            <td style="cursor: pointer;"><strong class="color-red pl" data-plid="6804">{{pl.pl}}</strong></td>
+            <td><input type="checkbox" value="35" data-plid="6804"></td>
+
+            <td style="cursor: pointer;"><span class="ball-icon ball-45"></span></td>
+            <td style="cursor: pointer;"><strong class="color-red pl" data-plid="6804">{{pl.pl}}</strong></td>
+            <td><input type="checkbox" value="45" data-plid="6804"></td>
+        </tr>
+
+        <tr>
+            <td style="cursor: pointer;"><span class="ball-icon ball-06"></span></td>
+            <td style="cursor: pointer;"><strong class="color-red pl" data-plid="6804">{{pl.pl}}</strong></td>
+            <td><input type="checkbox" value="6" data-plid="6804"></td>
+
+            <td style="cursor: pointer;"><span class="ball-icon ball-16"></span></td>
+            <td style="cursor: pointer;"><strong class="color-red pl" data-plid="6804">{{pl.pl}}</strong></td>
+            <td><input type="checkbox" value="16" data-plid="6804"></td>
+
+            <td style="cursor: pointer;"><span class="ball-icon ball-26"></span></td>
+            <td style="cursor: pointer;"><strong class="color-red pl" data-plid="6804">{{pl.pl}}</strong></td>
+            <td><input type="checkbox" value="26" data-plid="6804"></td>
+
+            <td style="cursor: pointer;"><span class="ball-icon ball-36"></span></td>
+            <td style="cursor: pointer;"><strong class="color-red pl" data-plid="6804">{{pl.pl}}</strong></td>
+            <td><input type="checkbox" value="36" data-plid="6804"></td>
+
+            <td style="cursor: pointer;"><span class="ball-icon ball-46"></span></td>
+            <td style="cursor: pointer;"><strong class="color-red pl" data-plid="6804">{{pl.pl}}</strong></td>
+            <td><input type="checkbox" value="46" data-plid="6804"></td>
+        </tr>
+
+        <tr>
+            <td style="cursor: pointer;"><span class="ball-icon ball-07"></span></td>
+            <td style="cursor: pointer;"><strong class="color-red pl" data-plid="6804">{{pl.pl}}</strong></td>
+            <td><input type="checkbox" value="7" data-plid="6804"></td>
+
+            <td style="cursor: pointer;"><span class="ball-icon ball-17"></span></td>
+            <td style="cursor: pointer;"><strong class="color-red pl" data-plid="6804">{{pl.pl}}</strong></td>
+            <td><input type="checkbox" value="17" data-plid="6804"></td>
+
+            <td style="cursor: pointer;"><span class="ball-icon ball-27"></span></td>
+            <td style="cursor: pointer;"><strong class="color-red pl" data-plid="6804">{{pl.pl}}</strong></td>
+            <td><input type="checkbox" value="27" data-plid="6804"></td>
+
+            <td style="cursor: pointer;"><span class="ball-icon ball-37"></span></td>
+            <td style="cursor: pointer;"><strong class="color-red pl" data-plid="6804">{{pl.pl}}</strong></td>
+            <td><input type="checkbox" value="37" data-plid="6804"></td>
+
+            <td style="cursor: pointer;"><span class="ball-icon ball-47"></span></td>
+            <td style="cursor: pointer;"><strong class="color-red pl" data-plid="6804">{{pl.pl}}</strong></td>
+            <td><input type="checkbox" value="47" data-plid="6804"></td>
+        </tr>
+
+        <tr>
+            <td style="cursor: pointer;"><span class="ball-icon ball-08"></span></td>
+            <td style="cursor: pointer;"><strong class="color-red pl" data-plid="6804">{{pl.pl}}</strong></td>
+            <td><input type="checkbox" value="8" data-plid="6804"></td>
+
+            <td style="cursor: pointer;"><span class="ball-icon ball-18"></span></td>
+            <td style="cursor: pointer;"><strong class="color-red pl" data-plid="6804">{{pl.pl}}</strong></td>
+            <td><input type="checkbox" value="18" data-plid="6804"></td>
+
+            <td style="cursor: pointer;"><span class="ball-icon ball-28"></span></td>
+            <td style="cursor: pointer;"><strong class="color-red pl" data-plid="6804">{{pl.pl}}</strong></td>
+            <td><input type="checkbox" value="28" data-plid="6804"></td>
+
+            <td style="cursor: pointer;"><span class="ball-icon ball-38"></span></td>
+            <td style="cursor: pointer;"><strong class="color-red pl" data-plid="6804">{{pl.pl}}</strong></td>
+            <td><input type="checkbox" value="38" data-plid="6804"></td>
+
+            <td style="cursor: pointer;"><span class="ball-icon ball-48"></span></td>
+            <td style="cursor: pointer;"><strong class="color-red pl" data-plid="6804">{{pl.pl}}</strong></td>
+            <td><input type="checkbox" value="48" data-plid="6804"></td>
+        </tr>
+
+        <tr>
+            <td style="cursor: pointer;"><span class="ball-icon ball-09"></span></td>
+            <td style="cursor: pointer;"><strong class="color-red pl" data-plid="6804">{{pl.pl}}</strong></td>
+            <td><input type="checkbox" value="9" data-plid="6804"></td>
+
+            <td style="cursor: pointer;"><span class="ball-icon ball-19"></span></td>
+            <td style="cursor: pointer;"><strong class="color-red pl" data-plid="6804">{{pl.pl}}</strong></td>
+            <td><input type="checkbox" value="19" data-plid="6804"></td>
+
+            <td style="cursor: pointer;"><span class="ball-icon ball-29"></span></td>
+            <td style="cursor: pointer;"><strong class="color-red pl" data-plid="6804">{{pl.pl}}</strong></td>
+            <td><input type="checkbox" value="29" data-plid="6804"></td>
+
+            <td style="cursor: pointer;"><span class="ball-icon ball-39"></span></td>
+            <td style="cursor: pointer;"><strong class="color-red pl" data-plid="6804">{{pl.pl}}</strong></td>
+            <td><input type="checkbox" value="39" data-plid="6804"></td>
+
+            <td style="cursor: pointer;"><span class="ball-icon ball-49"></span></td>
+            <td style="cursor: pointer;"><strong class="color-red pl" data-plid="6804">{{pl.pl}}</strong></td>
+            <td><input type="checkbox" value="49" data-plid="6804"></td>
+        </tr>
+
+        <tr>
+            <td style="cursor: pointer;"><span class="ball-icon ball-10"></span></td>
+            <td style="cursor: pointer;"><strong class="color-red pl" data-plid="6804">{{pl.pl}}</strong></td>
+            <td><input type="checkbox" value="10" data-plid="6804"></td>
+
+            <td style="cursor: pointer;"><span class="ball-icon ball-20"></span></td>
+            <td style="cursor: pointer;"><strong class="color-red pl" data-plid="6804">{{pl.pl}}</strong></td>
+            <td><input type="checkbox" value="20" data-plid="6804"></td>
+
+            <td style="cursor: pointer;"><span class="ball-icon ball-30"></span></td>
+            <td style="cursor: pointer;"><strong class="color-red pl" data-plid="6804">{{pl.pl}}</strong></td>
+            <td><input type="checkbox" value="30" data-plid="6804"></td>
+
+            <td style="cursor: pointer;"><span class="ball-icon ball-40"></span></td>
+            <td style="cursor: pointer;"><strong class="color-red pl" data-plid="6804">{{pl.pl}}</strong></td>
+            <td><input type="checkbox" value="40" data-plid="6804"></td>
+
+            <td style="cursor: pointer;">&nbsp;</td>
+            <td style="cursor: pointer;">&nbsp;</td>
+            <td style="cursor: pointer;">&nbsp;</td>
+        </tr>
+        {{/each}}
+        {{/each}}
+        </tbody>
+    </table>
+
+</script>
+
+
+<script>
+    //var pls;//玩法的所有赔率
+    //var plg;//当前赔率组
+
+    function changeTab(self) {
+        $(self).siblings().removeClass('active');
+        $(self).addClass('active');
+        var $tabs = $(self).parent().children();
+
+        var index = $tabs.index(self);
+        plg = pls[index];
+
+        plg.sz = plg.pls.slice(0, 49);
+        plg.sm = plg.pls.slice(49);
+
+        var len = $('.pp').data('line');
+        plg.sz.lines = group(plg.sz, len);
+        plg.sm.lines = group(plg.sm, len);
+
+        var html = template("six_qbz", {plg: plg});
+        $('.table-common').html(html);
+    }
+
+    $(function () {
+        //循环表格放到table-common
+        var playedId = "<?=$playedId?>";
+        $.getJSON("/game/pl/playedId/" + playedId, function (data) {
+            console.log(data, playedId);
+            pls = data;
+            $('.T-tab.clearfix').children().eq(0).click();
+        });
+    });
+</script>  

@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>澳门博彩公司</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="/newview/css/style.css" />
+<link type="text/css" rel="stylesheet" href="/newview/css/lottery/jsk3.css" />
+<link rel="stylesheet" type="text/css" href="/newview/css/lottery/caipiao.css">
+
+<script src="/js/jquery-1.8.0.min.js"></script>
+<script type="text/javascript" src="/js/js/jquery.jslides.js"></script>
+<script type="text/javascript" src="/js/js/jquery.SuperSlide.2.1.1.js"></script>
+<script src="/Scripts/swfobject_modified.js" type="text/javascript"></script>
+<!--Self-->
+<script type="text/javascript" language="JavaScript" src="/newview/js/main.js"></script>
+<script type="text/javascript" language="JavaScript" src="/js/main.js?123"></script>
+<script type="text/javascript" language="JavaScript" src="/js/main.new.js"></script>
+<script type="text/javascript" language="JavaScript" src="/js/layer.js"></script>
+<script type="text/javascript" src="/js/lottery/jsk3.js"></script>
+<!--Self-->
+<style type="text/css">
+.clbian_tr_title a {color: #2b57a1;}
+#kong_div {width: 976px;height: 50px;background: #fafafa;}
+#kong_div2 {position: fixed;width: 1px;height: 50px;bottom: 10px;left: 0px;}
+.lottery_box .btn_div {width: 200px;z-index: 999;bottom: 10px;left: 50%;text-align: center;height: 30px;padding: 10px;}
+.lottery_box .btn_div_all{width: 976px;height: 50px;background: #907c67;margin-top: 8px;}
+.lottery_box .btn_div .spanxuanzhong {float: none;}
+
+.lottery_box .btn_div_all{width: 976px;height: 50px;background: #907c67;margin-top: 8px;}
+.ls-info .ls_r .lty_result span.kick{margin-left: 135px;}
+.ls-info .ls_r .lty_result span b{}
+</style>
+
+</head>
+<script type="text/javascript">
+	var _btn_div = '';
+	var _kong_div = '';
+	var _kong_div2 = '';
+	var is_float_my = false;
+	var is_kuaijie_my = false;
+</script>
+<body>
+<div class="head">
+	<!--欢迎-->
+	{include file='common/nav'}
+
+</div>
+<div class="game_c_center">
+	<div class="block_20"></div>
+	<div class="big_my_content">
+		<div class="big_my_content2">
+			<div class="big_my_content_header"></div>
+			<div class="big_my_content_cent">
+				<div style="width: 1180px; margin: 0 auto;background: #fafafa;">
+
+					<div class="lottery_main">
+						<div class="lottery_nav">
+							{include file='lottery/nav'}
+							<!--<a class="detail" href="/Rule/Rule_Cqssc.html" target="_blank">游戏规则</a>-->
+						</div>							
+						<div class="lottery_box">
+							<div class="summary">
+								<div class="ls_l" style="display: none;">
+									<span class="sp-btn">
+  									    <span name="kuaijie">快捷</span><span name="yiban" class="cur">一般</span>
+									</span>
+								</div>
+							</div>
+
+							<div class="ls-info">
+								
+								<div class="ls_l">
+									<span class="sp-btn"> <span name="kuaijie">快捷</span><span name="yiban" class="cur">一般</span>
+									</span>
+								</div>		
+								
+								<span></span> <span class="text" id="open_qihao" style="display: none;"></span>
+
+								<div class="lty_result_ssc fl mt10 mr10">
+									<img src="/img/lty_result_ssc.png" />
+								</div>
+
+								<div class="ls_r">
+									<div class="lty_result">
+										<span>第<font id="numbers">000000</font>期开奖结果</span>
+										<span class="kick"><b>?</b><b>?</b><b>?</b></span>
+										<!--<span id="autoinfo"></span>-->
+									</div>
+								</div>
+									
+								<div class="fl">	
+									<span class="open_qihao_01">距离下期开奖</span><span class="text" id="kaijian">00:00</span>
+								</div>	
+								
+								<div class="fl">	
+									<span class="open_qihao_01">距离封盘</span><span class="text" id="fengpan">00:00</span>
+								</div>
+								
+								<div class="fl lty_result_ssc_rule">
+									<a class="detail" href="/rule/jsk3.html" target="_blank">游戏规则</a>
+								</div>		
+								
+							</div>
+
+							<div class="ls_touzhu">
+
+								<div class="fl">
+									<form id="orderframe" name="orders" action="{:Url('lotterybet/jsk3')}"  method="post" target="OrderFrame">
+										<table name="touzhu_table" class="table" border="0" cellpadding="0" cellspacing="1">
+											<tr class="bian_tr_bg bian_tr_newBg">
+												<td colspan="15">点数</td>
+											</tr>
+											<tr class="bian_tr_title">
+												<td>点数</td>
+												<td>赔率</td>
+												<td width="70" class="bian_td_inp_head">金额</td>
+												<td>点数</td>
+												<td>赔率</td>
+												<td width="70" class="bian_td_inp_head">金额</td>
+												<td>点数</td>
+												<td>赔率</td>
+												<td width="70" class="bian_td_inp_head">金额</td>
+												<td>点数</td>
+												<td>赔率</td>
+												<td width="70" class="bian_td_inp_head">金额</td>
+												<td>点数</td>
+												<td>赔率</td>
+												<td width="70" class="bian_td_inp_head">金额</td>
+											</tr>
+											<tr class="bian_tr_txt">
+												<td class="bian_td_qiu"><img src="/images/lottery/ball_1/04.png" /></td>
+												<td class="bian_td_odds" id="ball_1_h1" width="40"></td>
+												<td class="bian_td_inp" id="ball_1_t1"></td>
+												<td class="bian_td_qiu"><img src="/images/lottery/ball_1/05.png" /></td>
+												<td class="bian_td_odds" id="ball_1_h2" width="40"></td>
+												<td class="bian_td_inp" id="ball_1_t2"></td>
+												<td class="bian_td_qiu"><img src="/images/lottery/ball_1/06.png" /></td>
+												<td class="bian_td_odds" id="ball_1_h3" width="40"></td>
+												<td class="bian_td_inp" id="ball_1_t3"></td>
+												<td class="bian_td_qiu"><img src="/images/lottery/ball_1/07.png" /></td>
+												<td class="bian_td_odds" id="ball_1_h4" width="40"></td>
+												<td class="bian_td_inp" id="ball_1_t4"></td>
+												<td class="bian_td_qiu"><img src="/images/lottery/ball_1/08.png" /></td>
+												<td class="bian_td_odds" id="ball_1_h5" width="40"></td>
+												<td class="bian_td_inp" id="ball_1_t5"></td>
+											</tr>
+											<tr class="bian_tr_txt">
+												<td class="bian_td_qiu"><img src="/images/lottery/ball_1/09.png" /></td>
+												<td class="bian_td_odds" id="ball_1_h6" width="40"></td>
+												<td class="bian_td_inp" id="ball_1_t6"></td>
+												<td class="bian_td_qiu"><img src="/images/lottery/ball_1/10.png" /></td>
+												<td class="bian_td_odds" id="ball_1_h7" width="40"></td>
+												<td class="bian_td_inp" id="ball_1_t7"></td>
+												<td class="bian_td_qiu"><img src="/images/lottery/ball_1/11.png" /></td>
+												<td class="bian_td_odds" id="ball_1_h8" width="40"></td>
+												<td class="bian_td_inp" id="ball_1_t8"></td>
+												<td class="bian_td_qiu"><img src="/images/lottery/ball_1/12.png" /></td>
+												<td class="bian_td_odds" id="ball_1_h9" width="40"></td>
+												<td class="bian_td_inp" id="ball_1_t9"></td>
+												<td class="bian_td_qiu"><img src="/images/lottery/ball_1/13.png" /></td>
+												<td class="bian_td_odds" id="ball_1_h10" width="40"></td>
+												<td class="bian_td_inp" id="ball_1_t10"></td>
+											</tr>
+											<tr class="bian_tr_txt">
+												<td class="bian_td_qiu"><img src="/images/lottery/ball_1/14.png" /></td>
+												<td class="bian_td_odds" id="ball_1_h11"></td>
+												<td class="bian_td_inp" id="ball_1_t11"></td>
+												<td class="bian_td_qiu"><img src="/images/lottery/ball_1/15.png" /></td>
+												<td class="bian_td_odds" id="ball_1_h12"></td>
+												<td class="bian_td_inp" id="ball_1_t12"></td>
+												<td class="bian_td_qiu"><img src="/images/lottery/ball_1/16.png" /></td>
+												<td class="bian_td_odds" id="ball_1_h13"></td>
+												<td class="bian_td_inp" id="ball_1_t13"></td>
+												<td class="bian_td_qiu"><img src="/images/lottery/ball_1/17.png" /></td>
+												<td class="bian_td_odds" id="ball_1_h14"></td>
+												<td class="bian_td_inp" id="ball_1_t14"></td>
+												<td class="bian_td_qiu" colspan="3"></td>
+											</tr>
+										</table>
+										<table name="touzhu_table" class="table" border="0" cellpadding="0" cellspacing="1" style="margin-top:20px;">
+											<tr class="bian_tr_bg bian_tr_newBg">
+												<td colspan="12">双面</td>
+											</tr>
+											<tr class="bian_tr_title">
+												<td>选项</td>
+												<td>赔率</td>
+												<td width="70" class="bian_td_inp_head">金额</td>
+												<td>选项</td>
+												<td>赔率</td>
+												<td width="70" class="bian_td_inp_head">金额</td>
+												<td>选项</td>
+												<td>赔率</td>
+												<td width="70" class="bian_td_inp_head">金额</td>
+												<td>选项</td>
+												<td>赔率</td>
+												<td width="70" class="bian_td_inp_head">金额</td>
+											</tr>
+											<tr class="bian_tr_txt">
+												<td width="50" class="bian_td_qiu">点数大</td>
+												<td class="bian_td_odds" id="ball_2_h1"></td>
+												<td width="70" class="bian_td_inp" id="ball_2_t1"></td>
+												<td width="50" class="bian_td_qiu">点数小</td>
+												<td class="bian_td_odds" id="ball_2_h2"></td>
+												<td width="70" class="bian_td_inp" id="ball_2_t2"></td>
+												<td width="50" class="bian_td_qiu">点数单</td>
+												<td class="bian_td_odds" id="ball_2_h3"></td>
+												<td width="70" class="bian_td_inp" id="ball_2_t3"></td>
+												<td width="50" class="bian_td_qiu">点数双</td>
+												<td class="bian_td_odds" id="ball_2_h4"></td>
+												<td width="70" class="bian_td_inp" id="ball_2_t4"></td>
+											</tr>
+										</table>
+
+										<table name="touzhu_table" class="table" border="0" cellpadding="0" cellspacing="1" style="margin-top:20px;">
+											<tr class="bian_tr_bg bian_tr_newBg">
+												<td colspan="12">三军</td>
+											</tr>
+											<tr class="bian_tr_title">
+												<td>号码</td>
+												<td>赔率</td>
+												<td width="70" class="bian_td_inp_head">金额</td>
+												<td>号码</td>
+												<td>赔率</td>
+												<td width="70" class="bian_td_inp_head">金额</td>
+												<td>号码</td>
+												<td>赔率</td>
+												<td width="70" class="bian_td_inp_head">金额</td>
+												<td>号码</td>
+												<td>赔率</td>
+												<td width="70" class="bian_td_inp_head">金额</td>
+											</tr>
+											<tr class="bian_tr_txt">
+												<td class="bian_td_qiu"><img src="/images/lottery/ball_6/01.png" /></td>
+												<td class="bian_td_odds" id="ball_3_h1" width="40"></td>
+												<td class="bian_td_inp" id="ball_3_t1"></td>
+												<td class="bian_td_qiu"><img src="/images/lottery/ball_6/02.png" /></td>
+												<td class="bian_td_odds" id="ball_3_h2" width="40"></td>
+												<td class="bian_td_inp" id="ball_3_t2"></td>
+												<td class="bian_td_qiu"><img src="/images/lottery/ball_6/03.png" /></td>
+												<td class="bian_td_odds" id="ball_3_h3" width="40"></td>
+												<td class="bian_td_inp" id="ball_3_t3"></td>
+												<td class="bian_td_qiu"><img src="/images/lottery/ball_6/04.png" /></td>
+												<td class="bian_td_odds" id="ball_3_h4" width="40"></td>
+												<td class="bian_td_inp" id="ball_3_t4"></td>
+											</tr>
+											<tr class="bian_tr_txt">
+												<td class="bian_td_qiu"><img src="/images/lottery/ball_6/05.png" /></td>
+												<td class="bian_td_odds" id="ball_3_h5" width="40"></td>
+												<td class="bian_td_inp" id="ball_3_t5"></td>
+												<td class="bian_td_qiu"><img src="/images/lottery/ball_6/06.png" /></td>
+												<td class="bian_td_odds" id="ball_3_h6" width="40"></td>
+												<td class="bian_td_inp" id="ball_3_t6"></td>
+												<td class="bian_td_qiu" colspan="6"></td>
+											</tr>
+										</table>
+
+										<table name="touzhu_table" class="table" border="0" cellpadding="0" cellspacing="1" style="margin-top:20px;">
+											<tr class="bian_tr_bg bian_tr_newBg">
+												<td colspan="12">围骰</td>
+											</tr>
+											<tr class="bian_tr_title">
+												<td>号码</td>
+												<td>赔率</td>
+												<td width="70" class="bian_td_inp_head">金额</td>
+												<td>号码</td>
+												<td>赔率</td>
+												<td width="70" class="bian_td_inp_head">金额</td>
+												<td>号码</td>
+												<td>赔率</td>
+												<td width="70" class="bian_td_inp_head">金额</td>
+												<td>号码</td>
+												<td>赔率</td>
+												<td width="70" class="bian_td_inp_head">金额</td>
+											</tr>
+											<tr class="bian_tr_txt">
+												<td class="bian_td_qiu"><img src="/images/lottery/ball_6/01.png" /><img src="/images/lottery/ball_6/01.png" /><img src="/images/lottery/ball_6/01.png" /></td>
+												<td class="bian_td_odds" id="ball_4_h1" width="40"></td>
+												<td class="bian_td_inp" id="ball_4_t1"></td>
+												<td class="bian_td_qiu"><img src="/images/lottery/ball_6/02.png" /><img src="/images/lottery/ball_6/02.png" /><img src="/images/lottery/ball_6/02.png" /></td>
+												<td class="bian_td_odds" id="ball_4_h2" width="40"></td>
+												<td class="bian_td_inp" id="ball_4_t2"></td>
+												<td class="bian_td_qiu"><img src="/images/lottery/ball_6/03.png" /><img src="/images/lottery/ball_6/03.png" /><img src="/images/lottery/ball_6/03.png" /></td>
+												<td class="bian_td_odds" id="ball_4_h3" width="40"></td>
+												<td class="bian_td_inp" id="ball_4_t3"></td>
+												<td class="bian_td_qiu"><img src="/images/lottery/ball_6/04.png" /><img src="/images/lottery/ball_6/04.png" /><img src="/images/lottery/ball_6/04.png" /></td>
+												<td class="bian_td_odds" id="ball_4_h4" width="40"></td>
+												<td class="bian_td_inp" id="ball_4_t4"></td>
+											</tr>
+											<tr class="bian_tr_txt">
+												<td class="bian_td_qiu"><img src="/images/lottery/ball_6/05.png" /><img src="/images/lottery/ball_6/05.png" /><img src="/images/lottery/ball_6/05.png" /></td>
+												<td class="bian_td_odds" id="ball_4_h5" width="40"></td>
+												<td class="bian_td_inp" id="ball_4_t5"></td>
+												<td class="bian_td_qiu"><img src="/images/lottery/ball_6/06.png" /><img src="/images/lottery/ball_6/06.png" /><img src="/images/lottery/ball_6/06.png" /></td>
+												<td class="bian_td_odds" id="ball_4_h6" width="40"></td>
+												<td class="bian_td_inp" id="ball_4_t6"></td>
+												<td class="bian_td_qiu" colspan="6"></td>
+											</tr>
+										</table>
+
+										<table name="touzhu_table" class="table" border="0" cellpadding="0" cellspacing="1" style="margin-top:20px;">
+											<tr class="bian_tr_bg bian_tr_newBg">
+												<td colspan="12">长牌</td>
+											</tr>
+											<tr class="bian_tr_title">
+												<td>号码</td>
+												<td>赔率</td>
+												<td width="70" class="bian_td_inp_head">金额</td>
+												<td>号码</td>
+												<td>赔率</td>
+												<td width="70" class="bian_td_inp_head">金额</td>
+												<td>号码</td>
+												<td>赔率</td>
+												<td width="70" class="bian_td_inp_head">金额</td>
+												<td>号码</td>
+												<td>赔率</td>
+												<td width="70" class="bian_td_inp_head">金额</td>
+											</tr>
+											<tr class="bian_tr_txt">
+												<td class="bian_td_qiu"><img src="/images/lottery/ball_6/01.png" /><img src="/images/lottery/ball_6/02.png" /></td>
+												<td class="bian_td_odds" id="ball_5_h1" width="40"></td>
+												<td class="bian_td_inp" id="ball_5_t1"></td>
+												<td class="bian_td_qiu"><img src="/images/lottery/ball_6/01.png" /><img src="/images/lottery/ball_6/03.png" /></td>
+												<td class="bian_td_odds" id="ball_5_h2" width="40"></td>
+												<td class="bian_td_inp" id="ball_5_t2"></td>
+												<td class="bian_td_qiu"><img src="/images/lottery/ball_6/01.png" /><img src="/images/lottery/ball_6/04.png" /></td>
+												<td class="bian_td_odds" id="ball_5_h3" width="40"></td>
+												<td class="bian_td_inp" id="ball_5_t3"></td>
+												<td class="bian_td_qiu"><img src="/images/lottery/ball_6/01.png" /><img src="/images/lottery/ball_6/05.png" /></td>
+												<td class="bian_td_odds" id="ball_5_h4" width="40"></td>
+												<td class="bian_td_inp" id="ball_5_t4"></td>
+											</tr>
+											<tr class="bian_tr_txt">
+												<td class="bian_td_qiu"><img src="/images/lottery/ball_6/01.png" /><img src="/images/lottery/ball_6/06.png" /></td>
+												<td class="bian_td_odds" id="ball_5_h5" width="40"></td>
+												<td class="bian_td_inp" id="ball_5_t5"></td>
+												<td class="bian_td_qiu"><img src="/images/lottery/ball_6/02.png" /><img src="/images/lottery/ball_6/03.png" /></td>
+												<td class="bian_td_odds" id="ball_5_h6" width="40"></td>
+												<td class="bian_td_inp" id="ball_5_t6"></td>
+												<td class="bian_td_qiu"><img src="/images/lottery/ball_6/02.png" /><img src="/images/lottery/ball_6/04.png" /></td>
+												<td class="bian_td_odds" id="ball_5_h7" width="40"></td>
+												<td class="bian_td_inp" id="ball_5_t7"></td>
+												<td class="bian_td_qiu"><img src="/images/lottery/ball_6/02.png" /><img src="/images/lottery/ball_6/05.png" /></td>
+												<td class="bian_td_odds" id="ball_5_h8" width="40"></td>
+												<td class="bian_td_inp" id="ball_5_t8"></td>
+											</tr>
+
+											<tr class="bian_tr_txt">
+												<td class="bian_td_qiu"><img src="/images/lottery/ball_6/02.png" /><img src="/images/lottery/ball_6/06.png" /></td>
+												<td class="bian_td_odds" id="ball_5_h9" width="40"></td>
+												<td class="bian_td_inp" id="ball_5_t9"></td>
+												<td class="bian_td_qiu"><img src="/images/lottery/ball_6/03.png" /><img src="/images/lottery/ball_6/04.png" /></td>
+												<td class="bian_td_odds" id="ball_5_h10" width="40"></td>
+												<td class="bian_td_inp" id="ball_5_t10"></td>
+												<td class="bian_td_qiu"><img src="/images/lottery/ball_6/03.png" /><img src="/images/lottery/ball_6/05.png" /></td>
+												<td class="bian_td_odds" id="ball_5_h11" width="40"></td>
+												<td class="bian_td_inp" id="ball_5_t11"></td>
+												<td class="bian_td_qiu"><img src="/images/lottery/ball_6/03.png" /><img src="/images/lottery/ball_6/06.png" /></td>
+												<td class="bian_td_odds" id="ball_5_h12" width="40"></td>
+												<td class="bian_td_inp" id="ball_5_t12"></td>
+											</tr>
+
+											<tr class="bian_tr_txt">
+												<td class="bian_td_qiu"><img src="/images/lottery/ball_6/04.png" /><img src="/images/lottery/ball_6/05.png" /></td>
+												<td class="bian_td_odds" id="ball_5_h13" width="40"></td>
+												<td class="bian_td_inp" id="ball_5_t13"></td>
+												<td class="bian_td_qiu"><img src="/images/lottery/ball_6/04.png" /><img src="/images/lottery/ball_6/06.png" /></td>
+												<td class="bian_td_odds" id="ball_5_h14" width="40"></td>
+												<td class="bian_td_inp" id="ball_5_t14"></td>
+												<td class="bian_td_qiu"><img src="/images/lottery/ball_6/05.png" /><img src="/images/lottery/ball_6/06.png" /></td>
+												<td class="bian_td_odds" id="ball_5_h15" width="40"></td>
+												<td class="bian_td_inp" id="ball_5_t15"></td>
+												<td class="bian_td_qiu" colspan="3"></td>
+											</tr>
+										</table>
+
+										<table name="touzhu_table" class="table" border="0" cellpadding="0" cellspacing="1" style="margin-top:20px;">
+											<tr class="bian_tr_bg bian_tr_newBg">
+												<td colspan="12">短牌</td>
+											</tr>
+											<tr class="bian_tr_title">
+												<td>号码</td>
+												<td>赔率</td>
+												<td width="70" class="bian_td_inp_head">金额</td>
+												<td>号码</td>
+												<td>赔率</td>
+												<td width="70" class="bian_td_inp_head">金额</td>
+												<td>号码</td>
+												<td>赔率</td>
+												<td width="70" class="bian_td_inp_head">金额</td>
+												<td>号码</td>
+												<td>赔率</td>
+												<td width="70" class="bian_td_inp_head">金额</td>
+											</tr>
+											<tr class="bian_tr_txt">
+												<td class="bian_td_qiu"><img src="/images/lottery/ball_6/01.png" /><img src="/images/lottery/ball_6/01.png" /></td>
+												<td class="bian_td_odds" id="ball_6_h1" width="40"></td>
+												<td class="bian_td_inp" id="ball_6_t1"></td>
+												<td class="bian_td_qiu"><img src="/images/lottery/ball_6/02.png" /><img src="/images/lottery/ball_6/02.png" /></td>
+												<td class="bian_td_odds" id="ball_6_h2" width="40"></td>
+												<td class="bian_td_inp" id="ball_6_t2"></td>
+												<td class="bian_td_qiu"><img src="/images/lottery/ball_6/03.png" /><img src="/images/lottery/ball_6/03.png" /></td>
+												<td class="bian_td_odds" id="ball_6_h3" width="40"></td>
+												<td class="bian_td_inp" id="ball_6_t3"></td>
+												<td class="bian_td_qiu"><img src="/images/lottery/ball_6/04.png" /><img src="/images/lottery/ball_6/04.png" /></td>
+												<td class="bian_td_odds" id="ball_6_h4" width="40"></td>
+												<td class="bian_td_inp" id="ball_6_t4"></td>
+											</tr>
+											<tr class="bian_tr_txt">
+												<td class="bian_td_qiu"><img src="/images/lottery/ball_6/05.png" /><img src="/images/lottery/ball_6/05.png" /></td>
+												<td class="bian_td_odds" id="ball_6_h5" width="40"></td>
+												<td class="bian_td_inp" id="ball_6_t5"></td>
+												<td class="bian_td_qiu"><img src="/images/lottery/ball_6/06.png" /><img src="/images/lottery/ball_6/06.png" /></td>
+												<td class="bian_td_odds" id="ball_6_h6" width="40"></td>
+												<td class="bian_td_inp" id="ball_6_t6"></td>
+												<td class="bian_td_qiu" colspan="6"></td>
+											</tr>
+										</table>
+
+										<div class="btn_div_all">
+											<div class="btn_div" style="position: static; width: 956px; z-index: auto; margin-left: 0px; background: none;">
+												<span class="spanxuanzhong">已经选中<font>0</font>注</span>
+												<span class="spanje">金额：</span><input class="inputje" type="text" onkeyup="digitOnly(this)" />
+												<a class="submitbtn" onclick="order('{:Url('lottery/weihu','type=江苏快3')}');" title="下注">下注</a>
+												<a onclick='document.getElementById("orderframe").reset()' class="resetbtn" title="重填">重填</a>
+											</div>
+										</div>
+
+										<div id="kong_div">&nbsp;</div>
+										<div id="kong_div2">&nbsp;</div>
+									</form>
+								</div>
+								<div class="fr lottery_box_new">
+									<table class="table" border="0" cellpadding="0" cellspacing="1">
+										<tr class="bian_tr_title bian_tr_title_new">
+											<td>开奖结果</td>
+										</tr>
+										<tr>
+											<td id="auto_list"></td>
+										</tr>
+									</table>
+								</div>
+								<div class="clear" id="playringdiv"></div>
+							</div>
+						</div>
+
+					</div>
+					<div style="clear:both;"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="block_0"></div>
+
+{include file='common/footer'}
+
+<div class="block_0"></div>
+
+<!--
+	<div class="right_absolute">
+	<div class="right_absolute_1" onclick="window.open('http://messenger.providesupport.com/messenger/1x5b67gp1rcy50kqxa0qpsa0jx.html','24小时在线客服','_blank')">
+		<ul>
+			<li class="right_absolute_1_1"><img src="/img/fix-right-1.png"/></li>
+			<li class="right_absolute_1_2" style="display: none;"><img src="/img/fix-right-5.png" /></li>
+		</ul>
+	</div>
+	<div class="right_absolute_2" onclick="window.open('http://wpa.qq.com/msgrd?v=3&uin=223318&site=qq&menu=yes','QQ客服','_blank')">
+		<ul>
+			<li class="right_absolute_2_1"><p>QQ客服</p></li>
+			<li class="right_absolute_2_2"><p>223318</p></li>
+		</ul>
+	</div>
+	<div class="right_absolute_3" >
+		<a href="http://pay77158.com" target="_blank" style="display: none;">自助充值</a>
+	</div>		
+	<div class="right_absolute_4">
+		<form action="" target="" method="">
+		<input type="hidden" name="username" value="" />
+		<input type="text" name="coin" value="" placeholder="请输入金额" style="display: none;"/>
+		<a href="#" style="display: none">快捷充值</a>
+		</form>
+	</div>		
+</div>-->
+
+<div id="endtime"></div>
+<IFRAME id="OrderFrame" name="OrderFrame" border=0 marginWidth=0 frameSpacing=0 src="" frameBorder=0 noResize width=0 scrolling=AUTO height=0 vspale="0" style="display:none"></IFRAME>
+<div style="display:none" id="look"></div>
+</body>
+
+
+<script type="text/javascript">
+function open_new_888(url) {
+	window.open(url, 'newwindow', 'height=640,width=600,top=150,left=' + (screen.width - 640) / 2 + ',toolbar=no,menubar=no,scrollbars=no, resizable=no,location=no, status=no');
+}	
+	
+loadinfo()	
+	
+$(function() {
+	//顶部导航二级菜单
+	$(".nav_right_div").mouseenter(function() {
+		$(this).find("ul").show();
+	}).mouseleave(function() {
+		$(this).find("ul").hide();
+	})
+
+	$('#qian_dao .qian_dao').click(function() {
+		//window.open('qian_dao.php','qian_dao','menubar=no,status=yes,scrollbars=yes,top=150,left=400,toolbar=no,width=805,height=520');
+		$.ajax({
+			type: "post",
+			url: '/qian_dao.php',
+			data: {
+				'ajax': 1
+			},
+			success: function(data) {
+				alert(data);
+			}
+		});
+	});
+
+	
+setInterval(function() {
+	$.ajax({
+		type: "post",
+		url: "{:Url('index/home')}",
+		data:{'ajax':1,'get_money':'1'},
+		success:function(data) {
+			if (/^[\d\.]+$/.test(data)) {
+				$('#money,#money_2').text(data);
+			}
+		}
+	});
+},2000);
+
+	_btn_div = $('.lottery_box .btn_div');
+	_kong_div = $('#kong_div');
+	_kong_div2 = $('#kong_div2');
+	$(window).scroll(function() {
+		if(_kong_div2.offset().top > _kong_div.offset().top) {
+			_btn_div.css({
+				'position': 'static',
+				'width': '956px',
+				'zIndex': 'auto',
+				'marginLeft': '0px'
+			});
+			_kong_div.css({
+				'height': '1px'
+			});
+			is_float_my = false;
+		} else {
+
+			if(is_kuaijie_my) {
+				_btn_div.css({
+					'position': 'fixed',
+					'width': '470px',
+					'marginLeft': '-150px',
+					'zIndex': '999',
+					'background': '#efefef'
+				});
+			} else {
+				_btn_div.css({
+					'position': 'fixed',
+					'width': '200px',
+					'zIndex': '999',
+					'marginLeft': '-20px',
+					'background': 'none'
+				});
+			}
+
+			_kong_div.css({
+				'height': '50px'
+			});
+			is_float_my = true;
+		}
+	});
+
+
+	$(".sp-btn span").click(function() {
+		$(this).siblings().removeClass("cur");
+	
+		$(this).addClass("cur");
+	
+		if($(this).attr("name") == "kuaijie") {
+			$("table[name=touzhu_table]").addClass("kuaijie");
+			$("table[name=touzhu_table] td").removeClass("checked");
+			$(".bian_td_inp_head").html("选择");
+	
+			var count = $("table[name=touzhu_table] td.bian_td_inp.checked").length;
+	
+			$(".spanxuanzhong").show(0);
+			$(".spanxuanzhong").find("font").html(count);
+	
+			$(".spanje").show(0);
+			$(".inputje").show(0);
+	
+			if(is_float_my) {
+				_btn_div.css({
+					'position': 'fixed',
+					'width': '470px',
+					'marginLeft': '-150px',
+					'zIndex': '999',
+					'background': '#efefef'
+				});
+	
+			} else {
+				_btn_div.css({
+					'position': 'static',
+					'width': '956px',
+					'marginLeft': '0px',
+					'zIndex': 'auto',
+					'background': 'none'
+				});
+			}
+	
+			is_kuaijie_my = true;
+	
+		} else {
+	
+			$("table[name=touzhu_table]").removeClass("kuaijie");
+			$("table[name=touzhu_table] td").removeClass("checked");
+			$(".bian_td_inp_head").html("金额");
+	
+			var count = $("table[name=touzhu_table] td.bian_td_inp.checked").length;
+	
+			$(".spanxuanzhong").hide(0);
+			$(".spanxuanzhong").find("font").html(count);
+	
+			$(".spanje").hide(0);
+			$(".inputje").hide(0);
+	
+			if(is_float_my) {
+				_btn_div.css({
+					'position': 'fixed',
+					'width': '200px',
+					'zIndex': '999',
+					'marginLeft': '-20px',
+					'background': 'none'
+				});
+	
+			} else {
+				_btn_div.css({
+					'position': 'static',
+					'width': '820px',
+					'zIndex': 'auto',
+					'marginLeft': '0px',
+					'background': 'none'
+				});
+			}
+	
+			is_kuaijie_my = false;
+		}
+	
+		document.getElementById("orderframe").reset();
+	});
+	
+	
+
+	$(".bian_td_inp").click(function() {
+		if($(this).hasClass("checked")) {
+			$(this).removeClass("checked");
+			$(this).prev("td").removeClass("checked");
+			$(this).prev("td").prev("td").removeClass("checked");
+			var count = $("table[name=touzhu_table] td.bian_td_inp.checked").length;
+			$(".spanxuanzhong").find("font").html(count);
+
+		} else {
+			$(this).addClass("checked");
+			$(this).prev("td").addClass("checked");
+			$(this).prev("td").prev("td").addClass("checked");
+			var count = $("table[name=touzhu_table] td.bian_td_inp.checked").length;
+			$(".spanxuanzhong").find("font").html(count);
+
+			//$(this).find("input").attr("type","hidden");
+		}
+	})
+
+	$(".bian_td_qiu").click(function() {
+		if($(this).hasClass("checked")) {
+			$(this).removeClass("checked");
+			$(this).next("td").removeClass("checked");
+			$(this).next("td").next("td").removeClass("checked");
+			var count = $("table[name=touzhu_table] td.bian_td_inp.checked").length;
+			$(".spanxuanzhong").find("font").html(count);
+
+		} else {
+			$(this).addClass("checked");
+			$(this).next("td").addClass("checked");
+			$(this).next("td").next("td").addClass("checked");
+			var count = $("table[name=touzhu_table] td.bian_td_inp.checked").length;
+			$(".spanxuanzhong").find("font").html(count);
+
+			//$(this).find("input").attr("type","hidden");
+		}
+	})
+
+	$(".bian_td_odds").click(function() {
+		if($(this).hasClass("checked")) {
+			$(this).removeClass("checked");
+			$(this).next("td").removeClass("checked");
+			$(this).prev("td").removeClass("checked");
+			var count = $("table[name=touzhu_table] td.bian_td_inp.checked").length;
+			$(".spanxuanzhong").find("font").html(count);
+
+		} else {
+			$(this).addClass("checked");
+			$(this).next("td").addClass("checked");
+			$(this).prev("td").addClass("checked");
+			var count = $("table[name=touzhu_table] td.bian_td_inp.checked").length;
+			$(".spanxuanzhong").find("font").html(count);
+
+			//$(this).find("input").attr("type","hidden");
+		}
+	})
+
+
+
+});
+
+
+</script>
+</html>

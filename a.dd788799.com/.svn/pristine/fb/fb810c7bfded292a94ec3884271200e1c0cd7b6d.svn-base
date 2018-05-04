@@ -1,0 +1,28 @@
+
+
+	<table class="tzxqtbl">
+		<tr>
+			<td class="title">用户ID</td>
+			<td><?=$cashInfo['uid']?></td>
+		</tr>
+		<tr>
+			<td class="title">提现金额</td>
+			<td><?=$cashInfo['amount']?>元</td>
+		</tr>
+		<tr>
+			<td class="title">银行</td>
+			<td><?=$bankList[$cashInfo['bankId']]['name']?></td>
+		</tr>
+		<tr>
+			<td class="title">账号</td>
+			<td><?='***'.preg_replace('/^.*(.{4})$/', '\1', $cashInfo['account'])?></td>
+		</tr>
+		<tr>
+			<td class="title">开户名</td>
+			<td><?=$cashInfo['username']?></td>
+		</tr>
+        <tr>
+			<td class="title">申请时间</td>
+			<td><?=date("Y-m-d H:i:s",$cashInfo['actionTime'])?></td>
+		</tr>
+	</table>

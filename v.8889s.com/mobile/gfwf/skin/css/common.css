@@ -1,0 +1,346 @@
+@CHARSET "UTF-8";
+
+
+
+
+body{
+
+  /* height: 100%; */
+  
+
+  /* margin: 0px; */
+  
+
+  /* padding: 0px; */
+  
+
+  /* font-size: 20px; */
+  
+
+  /* background-color: #f5f5f5; */
+}
+
+
+a{text-decoration: none;/* color:#333; *//* outline: none */}
+
+#overlay {
+    z-index: 10;
+    display: none;
+    background-color: black;
+    position: fixed;
+    left:0;
+    top:0;
+    height:100%;
+    width:100%;
+    opacity: 0.5; /* also -moz-opacity, etc. */
+}
+
+ul{
+  margin: 0px;
+  padding: 0px;
+  list-style: none;
+  -webkit-padding-start:0px;
+  -webkit-margin-before:0px;
+  -webkit-margin-after:0px;    
+  margin-left: 0px;
+}
+
+li{
+  list-style: none;
+
+}
+
+.clear{ clear:both}
+
+
+.nav_bar{
+  height: 76px;
+  line-height:76px;
+  background-color: #2b909d;
+  width: 100%;
+  text-align:center;
+  color:white;
+  font-size:28px;
+  box-sizing: border-box;
+	
+   background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #2b2b2c), color-stop(1, #4c4c4e)); /* Saf4+, Chrome
+    */
+    
+   background-image:  -moz-linear-gradient(top,#2b2b2c 0%,#4c4c4e 100%); /* Saf4+, Chrome
+    */
+    	
+	
+
+}
+
+.nav_bar_login{
+  height: 60px;
+  line-height:60px;
+  background-color: #f5f5f5;
+  width: 100%;
+  text-align:center;
+  color:black;
+  font-size:28px;
+  box-sizing: border-box;
+  border-bottom: 1px solid #c2c2c2;
+
+}
+
+
+/* 
+.nav_bar ul{
+    width: 100%;
+    height: 50px;
+    margin: 0px;
+    padding: 0px;
+    position: relative;
+    
+
+}
+
+
+.nav_bar ul li{
+   line-height: 50px;
+   height: 50px;
+    
+   float: left;
+
+}
+ */
+
+
+.gobacka{
+	
+   /* position: absolute;
+    top: 15px;
+    bottom: 15px;
+    left: 10px;
+    height: 46px;
+    width: 46px;	*/
+}
+
+.homepagelink{
+    /* position: absolute; */
+    /* top: 15px; */
+    /* bottom: 15px; */
+    /* right: 20px; */
+    /* height: 46px; */
+    /* width: 46px; */
+    
+
+}
+
+.myaccountlink{
+	
+   /* position: absolute;
+    top: 10px;
+    right: 20px;
+    height: 36px;
+    width: 36px; */
+    	
+}
+
+.mymessagelink{
+	
+    position: absolute;
+    top: 10px;
+    right: 80px;
+    height: 36px;
+    width: 36px;
+    	
+}
+
+
+.indexlogo{
+
+    position: absolute;
+    left: 15px;
+    top: 9px;
+    
+
+}
+
+
+
+
+
+/* .nav_bar ul .title{
+   color: white;
+   font-size: 1em;
+   padding-left: 5px;
+
+}
+ */
+
+
+input{
+    /* height: 72px; */
+    /* font-size: 24px; */
+    /* padding-left: 5px; */
+    /* border-radius: 4px; */
+    /* border: 1px solid #c2c2c2 ; */
+    /* box-sizing: border-box; */
+}
+
+
+.checkbox{
+
+    height: 50px;
+    font-size: 1em;
+    padding: 0px;
+    border-radius: 0px;
+    border: 0px solid #c2c2c2 ;
+    box-sizing:border-box;
+    margin: 0px;
+
+}
+
+
+
+.button{
+
+   font-size: 15px;
+   padding: 0px;
+   border-radius: 5px;
+   height: 40px;
+   color: white;
+   line-height: 40px;
+   text-align: center;
+   border: 0px solid #046e7c ;
+   background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #288e9c), color-stop(1, #01606a)); /* Saf4+, Chrome
+    */
+    
+   background-image:  -moz-linear-gradient(top,#288e9c 0%,#01606a 100%); /* Saf4+, Chrome
+    */
+    
+    
+
+}
+
+
+.graybutton{
+   font-size: 25px;
+   padding: 0px;
+   border-radius: 5px;
+   height: 72px;
+   color: black;
+   line-height: 72px;
+   text-align: center;
+   border: 1px solid #c5c5c5 ;
+   background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #fefefe), color-stop(1, #e5e5e5)); /* Saf4+, Chrome */
+    
+    
+   background-image: -moz-linear-gradient(top, #fefefe 0%, #e5e5e5 100%); /* Saf4+, Chrome */
+}
+
+
+.redbutton{
+   padding: 0px;
+   border-radius: 4px;
+   border: 0px;
+   color: white;
+   text-align: center;
+   background-color: #ba2e06;
+   padding-left: 5px;
+   padding-right: 5px;
+   -webkit-appearance:none;
+
+}
+
+
+
+    /* Dialog*/
+    .eyDialog{
+      display: none;
+    }
+    .iDialogInfo {
+      background: #3e3e3e;
+      box-shadow: 0 0 10px #626262;
+      -webkit-box-shadow: 0 0 10px #626262;
+      -moz-box-shadow: 0 0 10px #626262;
+      color: #fff;
+    }
+    .iDialog {
+      display: none;
+      position: fixed;
+      font: 1rem/1rem "Microsoft Yahei",simsun;
+      color: #2b2b2b;
+      text-align: left;
+      margin: 0 auto;
+      z-index: 1000;
+      overflow: hidden;
+      -webkit-tap-highlight-color: rgba(255,255,255,0);
+      -webkit-transform: translateZ(0);
+      -webkit-user-select: none;
+      -webkit-user-drag: none;
+      -webkit-box-shadow: 0 .1rem .41rem rgba(0,0,0,.6);
+      -moz-box-shadow: 0rem .1rem .41rem rgba(0,0,0,.6);
+      box-shadow: 0rem .1rem .41rem rgba(0,0,0,.6);
+      -webkit-border-radius: .3rem;
+      -moz-border-radius: .3rem;
+      border-radius: .3rem;
+      background-color: #f5f5f5;
+      width: 22.91rem;
+      visibility: visible;
+      z-index: 1014;
+      width: 22.91rem;
+      margin-left: -184.5px;
+      margin-top: -35.5px;
+      top: 50%;
+      left: 50%;
+    }
+    .iDialogLayout {
+      display: none;
+      position: fixed;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background: #000;
+      background: -webkit-radial-gradient(center,rgba(0,0,0,.3),rgba(0,0,0,1) 80%);
+      background: -moz-radial-gradient(center,rgba(0,0,0,.3),rgba(0,0,0,1) 80%);
+      background: -o-radial-gradient(center,rgba(0,0,0,.3),rgba(0,0,0,1) 80%);
+      background: radial-gradient(center,rgba(0,0,0,.3),rgba(0,0,0,1) 80%);
+      opacity: .4;
+      z-index: 1013;
+    }
+
+    .iDialogNoTitle{
+      color: rgb(255, 255, 255);
+      display: block;
+      font-family: 'Microsoft Yahei', simsun;
+      font-size: 30px;
+      font-stretch: normal;
+      font-style: normal;
+      font-variant: normal;
+      font-weight: normal;
+
+    }
+    .iDialogBody {
+      background: #f5f5f5;
+      padding: 0;
+      margin: 0;
+    }
+    .iDialogInfo .iDialogMain {
+      background: #3e3e3e;
+      text-align: center;
+      vertical-align: middle;
+      min-height: 2.92px;
+      overflow: auto;
+      word-wrap: break-word;
+      word-break: break-all;
+      padding: .83rem 1.05rem;
+      line-height: 1.5;
+      color: #fff;
+      height: auto;
+    }
+
+
+
+    
+    .balance_label{
+      color: #f0851a;
+      font-weight: bold;
+      font-size: 24px;
+    
+    }

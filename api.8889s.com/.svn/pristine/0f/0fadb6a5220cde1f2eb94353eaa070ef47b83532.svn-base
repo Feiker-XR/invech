@@ -1,0 +1,121 @@
+﻿<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>足球接收</title>
+    <style type="text/css">
+        <!--
+        * {
+            font-size: 12px;
+            margin: auto;
+        }
+        -->
+    </style>
+</head>
+<body>
+<script>
+    <!--
+    var limit="6:00"
+    if (document.images){
+        var parselimit=limit.split(":")
+        parselimit=parselimit[0]*60+parselimit[1]*1
+    }
+    function beginrefresh(){
+        if (!document.images)
+            return
+        if (parselimit==1)
+            window.location.reload()
+        else{
+            parselimit-=1
+            curmin=Math.floor(parselimit/60)
+            cursec=parselimit%60
+            if (curmin!=0)
+                curtime=curmin+"分"+cursec+"秒后自动登陆！"
+            else
+                curtime=cursec+"秒后自动登陆！"
+            timeinfo.innerHTML=curtime
+            setTimeout("beginrefresh()",1500)
+        }
+    }
+    window.onload=beginrefresh
+    //-->
+</script>
+<span id="timeinfo"></span>
+<table width="720" height="450"  border="0" align="center" cellpadding="0" cellspacing="0">
+    <tr>
+        <td height="90" valign="top">
+            <iframe width=180 height=90 src='zqauto.php' frameborder=0 scrolling="no"></iframe>
+        </td>
+        <td height="90" valign="top">
+            <iframe width=180 height=90 src='zqsbauto.php' frameborder=0 scrolling="no"></iframe>
+        </td>
+        <td height="90" valign="top">
+            <iframe width=180 height=90 src='lqauto.php' frameborder=0 scrolling="no"></iframe>
+        </td>
+        <td height="90" valign="top">
+            <iframe width=180 height=90 src='bqauto.php' frameborder=0 scrolling="no"></iframe>
+        </td>
+    </tr>
+    <tr>
+        <td height="90" valign="top">
+            <iframe width=180 height=90 src='pqauto.php' frameborder=0 scrolling="no"></iframe>
+        </td>
+        <td height="90" valign="top">
+            <iframe width=180 height=90 src='wqauto.php' frameborder=0 scrolling="no"></iframe>
+        </td>
+        <td height="90" valign="top">
+            <iframe width=180 height=90 src='jrgjjs.php' frameborder=0 scrolling="no"></iframe>
+        </td>
+    </tr>
+    <!--
+        <tr>
+            <td height="90" valign="top"><iframe width=180 height=90 src='lottery/Auto_2.php' frameborder=0 scrolling="no"></iframe></td>
+            <td height="90" valign="top"><iframe width=180 height=90 src='lottery/cqssc2.php' frameborder=0 scrolling="no"></iframe></td>
+            <td height="90" valign="top"><iframe width=180 height=90 src='lottery/cqklsf.php' frameborder=0 scrolling="no"></iframe></td>
+            <td height="90" valign="top"><iframe width=180 height=90 src='lottery/Auto_3.php' frameborder=0 scrolling="no"></iframe></td>
+        </tr>
+        <tr>
+            <td height="90" valign="top"><iframe width=180 height=90 src='lottery/Auto_4.php' frameborder=0 scrolling="no"></iframe></td>
+            <td height="90" valign="top"><iframe width=180 height=90 src='lottery/jsk33.php' frameborder=0 scrolling="no"></iframe></td>
+            <td height="90" valign="top"><iframe width=180 height=90 src='lottery/Auto_5.php' frameborder=0 scrolling="no"></iframe></td>
+            <td height="90" valign="top"><iframe width=180 height=90 src='lottery/Auto_6.php' frameborder=0 scrolling="no"></iframe></td>
+        </tr>
+        <tr>
+            <td height="90" valign="top"><iframe width=180 height=90 src='lottery/Auto_7.php' frameborder=0 scrolling="no"></iframe></td>
+            <td height="90" valign="top"><iframe width=180 height=90 src='lottery/Auto_8.php' frameborder=0 scrolling="no"></iframe></td>
+            <td height="90" valign="top"><iframe width=180 height=90 src='lottery/Auto_9_maya86.php' frameborder=0 scrolling="no"></iframe></td>
+            <td height="90" valign="top"><iframe width=180 height=90 src='lottery/gdklsf_maya86.php' frameborder=0 scrolling="no"></iframe></td>
+        </tr>
+    -->
+    <tr>
+        <td height="90" valign="top"><iframe width=180 height=90 src='lottery/api_bjpk10.php' frameborder=0 scrolling="no"></iframe></td>
+        <td height="90" valign="top"><iframe width=180 height=90 src='lottery/api_cqklsf.php' frameborder=0 scrolling="no"></iframe></td>
+        <td height="90" valign="top"><iframe width=180 height=90 src='lottery/api_cqssc.php' frameborder=0 scrolling="no"></iframe></td>
+        <td height="90" valign="top"><iframe width=180 height=90 src='lottery/api_gdklsf.php' frameborder=0 scrolling="no"></iframe></td>
+    </tr>
+    <tr>
+        <td height="90" valign="top"><iframe width=180 height=90 src='lottery/api_gxklsf.php' frameborder=0 scrolling="no"></iframe></td>
+        <td height="90" valign="top"><iframe width=180 height=90 src='lottery/api_jsk3.php' frameborder=0 scrolling="no"></iframe></td>
+        <td height="90" valign="top"><iframe width=180 height=90 src='lottery/api_mlaft.php' frameborder=0 scrolling="no"></iframe></td>
+        <td height="90" valign="top"><iframe width=180 height=90 src='lottery/api_sd11x5.php' frameborder=0 scrolling="no"></iframe></td>
+    </tr>
+    <tr>
+        <td height="90" valign="top"><iframe width=180 height=90 src='lottery/api_xjssc.php' frameborder=0 scrolling="no"></iframe></td>
+    </tr>
+    <tr>
+        <td height="90" valign="top"><iframe width=180 height=90 src='lottery/api_bjpk102.php' frameborder=0 scrolling="no"></iframe></td>
+        <td height="90" valign="top"><iframe width=180 height=90 src='lottery/api_cqklsf2.php' frameborder=0 scrolling="no"></iframe></td>
+        <td height="90" valign="top"><iframe width=180 height=90 src='lottery/api_cqssc2.php' frameborder=0 scrolling="no"></iframe></td>
+        <td height="90" valign="top"><iframe width=180 height=90 src='lottery/api_gdklsf2.php' frameborder=0 scrolling="no"></iframe></td>
+    </tr>
+    <tr>
+        <td height="90" valign="top"><iframe width=180 height=90 src='lottery/api_gxklsf2.php' frameborder=0 scrolling="no"></iframe></td>
+        <td height="90" valign="top"><iframe width=180 height=90 src='lottery/api_jsk32.php' frameborder=0 scrolling="no"></iframe></td>
+        <td height="90" valign="top"><iframe width=180 height=90 src='lottery/api_mlaft2.php' frameborder=0 scrolling="no"></iframe></td>
+        <td height="90" valign="top"><iframe width=180 height=90 src='lottery/api_sd11x52.php' frameborder=0 scrolling="no"></iframe></td>
+    </tr>
+    <tr>
+        <td height="90" valign="top"><iframe width=180 height=90 src='lottery/api_xjssc2.php' frameborder=0 scrolling="no"></iframe></td>
+    </tr>
+</table>
+</body>
+</html>  

@@ -1,0 +1,437 @@
+﻿* {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-family: "微软雅黑";
+}
+.numCircle ul li {
+  width: 90px;
+  height: 90px;
+  background: url("../images/bgnum.png") -1150px -250px no-repeat;
+}
+.numCircle ul .roll_1 {
+  background-position: -20px -108px;
+}
+.numCircle ul .roll_2 {
+  background-position: -123px -108px;
+}
+.numCircle ul .roll_3 {
+  background-position: -226px -108px;
+}
+.numCircle ul .roll_4 {
+  background-position: -330px -108px;
+}
+.numCircle ul .roll_5 {
+  background-position: -434px -108px;
+}
+.numCircle ul .roll_6 {
+  background-position: -537px -108px;
+}
+.numCircle ul .roll_7 {
+  background-position: -641px -108px;
+}
+.numCircle ul .roll_8 {
+  background-position: -745px -108px;
+}
+.numCircle ul .roll_9 {
+  background-position: -848px -108px;
+}
+.numCircle ul .roll_10 {
+  background-position: -951px -108px;
+}
+.numCircle ul .roll_11 {
+  background-position: -20px -213px;
+}
+.numCircle ul .roll_12 {
+  background-position: -123px -213px;
+}
+.numCircle ul .roll_13 {
+  background-position: -226px -213px;
+}
+.numCircle ul .roll_14 {
+  background-position: -330px -213px;
+}
+.numCircle ul .roll_15 {
+  background-position: -434px -213px;
+}
+.numCircle ul .roll_16 {
+  background-position: -537px -213px;
+}
+.numCircle ul .roll_17 {
+  background-position: -641px -213px;
+}
+.numCircle ul .roll_18 {
+  background-position: -745px -213px;
+}
+.numCircle ul .roll_19 {
+  background-position: -848px -213px;
+}
+.numCircle ul .roll_20 {
+  background-position: -951px -213px;
+}
+.numCircle ul .rollActive_1 {
+  background-position: -20px -323px;
+}
+.numCircle ul .rollActive_2 {
+  background-position: -123px -323px;
+}
+.numCircle ul .rollActive_3 {
+  background-position: -226px -323px;
+}
+.numCircle ul .rollActive_4 {
+  background-position: -330px -323px;
+}
+.numCircle ul .rollActive_5 {
+  background-position: -434px -323px;
+}
+.numCircle ul .rollActive_6 {
+  background-position: -537px -323px;
+}
+.numCircle ul .rollActive_7 {
+  background-position: -641px -323px;
+}
+.numCircle ul .rollActive_8 {
+  background-position: -745px -323px;
+}
+.numCircle ul .rollActive_9 {
+  background-position: -848px -323px;
+}
+.numCircle ul .rollActive_10 {
+  background-position: -951px -323px;
+}
+.numCircle ul .rollActive_11 {
+  background-position: -20px -428px;
+}
+.numCircle ul .rollActive_12 {
+  background-position: -123px -428px;
+}
+.numCircle ul .rollActive_13 {
+  background-position: -226px -428px;
+}
+.numCircle ul .rollActive_14 {
+  background-position: -330px -428px;
+}
+.numCircle ul .rollActive_15 {
+  background-position: -434px -428px;
+}
+.numCircle ul .rollActive_16 {
+  background-position: -537px -428px;
+}
+.numCircle ul .rollActive_17 {
+  background-position: -641px -428px;
+}
+.numCircle ul .rollActive_18 {
+  background-position: -745px -428px;
+}
+.numCircle ul .rollActive_19 {
+  background-position: -848px -428px;
+}
+.numCircle ul .rollActive_20 {
+  background-position: -951px -428px;
+}
+.loading {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  z-index: 999;
+  text-align: center;
+  vertical-align: middle;
+  padding-top: 30%;
+  box-sizing: border-box;
+  background: #000;
+  color: #fff;
+}
+.content {
+  width: 1125px;
+  height: 780px;
+  margin: 0 auto;
+}
+.content .cqncAnimate {
+  position: relative;
+  width: 1125px;
+  height: 780px;
+}
+.content .cqncAnimate .bodybg {
+  width: 100%;
+  height: auto;
+}
+.content .cqncAnimate .bodybg img {
+  vertical-align: top;
+  width: 100%;
+  height: 100%;
+}
+.content .cqncAnimate .position {
+  position: absolute;
+  width: 860px;
+  height: 90px;
+  top: 0px;
+  left: 230px;
+  font-size: 30px;
+}
+.content .cqncAnimate .position .current_code {
+  float: left;
+  width: 220px;
+  height: 90px;
+  line-height: 90px;
+  text-align: center;
+}
+.content .cqncAnimate .position .current_code .codeNow {
+  margin: 0 5px;
+}
+.content .cqncAnimate .position .current_code span {
+  white-space: nowrap;
+}
+.content .cqncAnimate .position .kaiNum {
+  position: absolute;
+  width: auto;
+  height: 90px;
+  left: 295px;
+}
+.content .cqncAnimate .position .kaiNum ul {
+  height: 100%;
+  margin-top: 15px;
+}
+.content .cqncAnimate .position .kaiNum li {
+  float: left;
+  width: 60px;
+  height: 60px;
+  margin-right: 8px;
+  background: url("../images/bgnum.png") -1120px -250px no-repeat;
+}
+.content .cqncAnimate .position .kaiNum .history_1 {
+  background-position: -20px -30px;
+}
+.content .cqncAnimate .position .kaiNum .history_2 {
+  background-position: -88px -30px;
+}
+.content .cqncAnimate .position .kaiNum .history_3 {
+  background-position: -156px -30px;
+}
+.content .cqncAnimate .position .kaiNum .history_4 {
+  background-position: -225px -30px;
+}
+.content .cqncAnimate .position .kaiNum .history_5 {
+  background-position: -293px -30px;
+}
+.content .cqncAnimate .position .kaiNum .history_6 {
+  background-position: -361px -30px;
+}
+.content .cqncAnimate .position .kaiNum .history_7 {
+  background-position: -428px -30px;
+}
+.content .cqncAnimate .position .kaiNum .history_8 {
+  background-position: -498px -30px;
+}
+.content .cqncAnimate .position .kaiNum .history_9 {
+  background-position: -566px -30px;
+}
+.content .cqncAnimate .position .kaiNum .history_10 {
+  background-position: -635px -30px;
+}
+.content .cqncAnimate .position .kaiNum .history_11 {
+  background-position: -703px -30px;
+}
+.content .cqncAnimate .position .kaiNum .history_12 {
+  background-position: -772px -30px;
+}
+.content .cqncAnimate .position .kaiNum .history_13 {
+  background-position: -840px -30px;
+}
+.content .cqncAnimate .position .kaiNum .history_14 {
+  background-position: -909px -30px;
+}
+.content .cqncAnimate .position .kaiNum .history_15 {
+  background-position: -978px -30px;
+}
+.content .cqncAnimate .position .kaiNum .history_16 {
+  background-position: -1045px -30px;
+}
+.content .cqncAnimate .position .kaiNum .history_17 {
+  background-position: -1115px -30px;
+}
+.content .cqncAnimate .position .kaiNum .history_18 {
+  background-position: -1182px -30px;
+}
+.content .cqncAnimate .position .kaiNum .history_19 {
+  background-position: -1250px -30px;
+}
+.content .cqncAnimate .position .kaiNum .history_20 {
+  background-position: -1319px -30px;
+}
+.content .cqncAnimate .position .kaiNum .soundsIcon {
+  position: absolute;
+  display: inline-block;
+  width: 54px;
+  height: 54px;
+  top: 18px;
+  left: 543px;
+}
+.content .cqncAnimate .position .kaiNum .on {
+  background: url("../images/on.png") no-repeat;
+}
+.content .cqncAnimate .position .kaiNum .off {
+  background: url("../images/off.png") no-repeat;
+}
+.content .cqncAnimate .numCircle {
+  position: absolute;
+  top: 160px;
+  left: 120px;
+  width: 885px;
+  height: 530px;
+  z-index: 1;
+}
+.content .cqncAnimate .numCircle ul {
+  width: 100%;
+  height: 100%;
+}
+.content .cqncAnimate .numCircle .circle_t li,
+.content .cqncAnimate .numCircle .circle_d li {
+  float: left;
+  margin-right: 42px;
+}
+.content .cqncAnimate .numCircle .circle_t li:last-child,
+.content .cqncAnimate .numCircle .circle_d li:last-child {
+  margin-right: 0px;
+}
+.content .cqncAnimate .numCircle .circle_r,
+.content .cqncAnimate .numCircle .circle_l {
+  position: absolute;
+}
+.content .cqncAnimate .numCircle .circle_r li,
+.content .cqncAnimate .numCircle .circle_l li {
+  margin-bottom: 20px;
+}
+.content .cqncAnimate .numCircle .circle_r {
+  top: 110px;
+  left: 792px;
+}
+.content .cqncAnimate .numCircle .circle_l {
+  top: 110px;
+  width: 90px;
+}
+.content .cqncAnimate .numCircle .circle_l li:first-child {
+  float: left;
+  margin-top: 220px;
+}
+.content .cqncAnimate .numCircle .circle_l li:first-child + li {
+  float: right;
+  margin-top: -220px;
+}
+.content .cqncAnimate .numCircle .circle_d {
+  position: absolute;
+  top: 441px;
+}
+.content .cqncAnimate .numCircle .circle_d li {
+  float: right;
+}
+.content .cqncAnimate .numCircle .circle_d li:first-child {
+  margin-right: 0;
+}
+.content .cqncAnimate .numCircle .circle_d li:last-child {
+  margin-right: 42px;
+}
+.content .cqncAnimate .detail {
+  z-index: 2;
+  position: absolute;
+  top: 315px;
+  left: 272px;
+  width: 580px;
+  height: 230px;
+}
+.content .cqncAnimate .detail .detail_l {
+  float: left;
+  width: 355px;
+  height: 100%;
+  margin-left: 5px;
+}
+.content .cqncAnimate .detail .detail_l .nowIssue {
+  font-size: 30px;
+  color: #524d45;
+  margin-top: 5px;
+  height: 58px;
+  line-height: 58px;
+}
+.content .cqncAnimate .detail .detail_l .nowIssue span {
+  margin-left: 20px;
+  color: #e10000;
+}
+.content .cqncAnimate .detail .detail_l .numlist {
+  margin: 0px;
+  width: 100%;
+  margin-top: 6px;
+  height: 45px;
+  line-height: 45px;
+}
+.content .cqncAnimate .detail .detail_l .numlist li {
+  letter-spacing: -1px;
+  float: left;
+  min-width: 43px;
+  width: 8%;
+  height: 45px;
+  line-height: 45px;
+  font-size: 30px;
+  color: #a17244;
+}
+.content .cqncAnimate .detail .detail_l .numlist li:last-child {
+  margin-right: 5px;
+}
+.content .cqncAnimate .detail .detail_l .sum,
+.content .cqncAnimate .detail .detail_l .longhu {
+  width: 100%;
+  height: 60px;
+  font-size: 30px;
+  color: #524d45;
+}
+.content .cqncAnimate .detail .detail_l .sum {
+  line-height: 60px;
+}
+.content .cqncAnimate .detail .detail_l .longhu span {
+  margin-right: 10px;
+}
+.content .cqncAnimate .detail .detail_r {
+  float: right;
+  width: 220px;
+  height: 100%;
+  font-size: 30px;
+  position: relative;
+}
+.content .cqncAnimate .detail .detail_r #mnkai_text {
+  display: none;
+  position: absolute;
+  border-radius: 3px;
+  top: 132px;
+  left: 37px;
+  font-size: 16px;
+  padding: 5px 8px;
+  background: rgba(0, 0, 0, 0.7);
+  color: rgba(250, 250, 250, 0.8);
+}
+.content .cqncAnimate .detail .detail_r span {
+  display: block;
+  text-align: center;
+}
+.content .cqncAnimate .detail .detail_r .cutTime {
+  width: 216px;
+  height: 70px;
+  line-height: 70px;
+  color: #fff;
+  margin-top: 20px;
+}
+.content .cqncAnimate .detail .detail_r .timeing {
+  width: 216px;
+  height: 70px;
+  color: #fcff00;
+}
+.content .cqncAnimate .detail .detail_r .startBtn {
+  width: 216px;
+  height: 52px;
+  line-height: 52px;
+  color: #fff;
+  cursor: pointer;
+  background: url("../images/startbtn.png") no-repeat;
+}
+.content .cqncAnimate .detail .detail_r .startBtn:hover {
+  color: red;
+}

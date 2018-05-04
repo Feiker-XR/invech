@@ -1,0 +1,69 @@
+<extend name="Public/base" />
+
+<block name="body">
+	<!-- 标题栏 -->
+	<div class="main-title">
+		<h2>银行信息</h2>
+	</div>
+	<form action="{:Url('bank')}" method="post">
+		<div class="cf">
+			<div class="fl">
+			</div>
+
+			<!-- 高级搜索 -->
+			<div class="search-form fr cf">
+				<div class="sleft">
+					用户名：<input type="text" name="username" class="search-input" value="{:I('username')}" placeholder="请输入用户名">
+					<!-- <a class="sch-btn" href="javascript:;" id="search" url="{:Url('user/bank')}"><i class="btn-search"></i></a> -->
+				</div>
+				<div class="sbtn">
+					<button type="submit" class="btn" id="search">查 找</button>
+				</div>	
+			</div>
+		</div>
+	</form>
+    <!-- 数据列表 -->
+    <div class="data-table table-striped">
+	<table class="">
+    <thead>
+        <tr>
+		<th class="">会员UID</th>
+		<th class="">用户名</th>
+		<th class="">银行名称</th>
+		<th class="">开户姓名</th>
+		<th class="">银行账号</th>		
+		</tr>
+    </thead>
+    <tbody>
+		<volist name="_list" id="vo">
+		<tr>
+			<td>{$vo.uid} </td>
+			<td>{$vo.mUsername}</td>
+			<td>{$vo.bankName}</td>
+			<td>{$vo.username}</td>
+			<td>{$vo.account}</td>
+		</tr>
+		</volist>
+	</tbody>
+    </table> 
+	</div>
+    <div class="page">
+        {$_page}
+    </div>
+</block>
+
+<block name="script">
+	<script src="__STATIC__/thinkbox/jquery.thinkbox.js"></script>
+
+	<script type="text/javascript">
+	//回车搜索
+	$("body").keyup(function(e){
+		if(e.keyCode === 13){
+			$("#search").click();
+			return false;
+		}
+	});
+    //导航高亮
+    $('.side-sub-menu').find('a[href="{:Url('User/bank')}"]').closest('li').addClass('current');
+	</script>
+</block>

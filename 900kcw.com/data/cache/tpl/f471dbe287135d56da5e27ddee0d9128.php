@@ -1,0 +1,311 @@
+<?php exit;?>0015505689745b1e1cbe12f379bbce3cbf66f9267bf4s:11070:"a:2:{s:8:"template";s:11005:"<html><!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" /><meta name="format-detection" content="telephone=no" />
+		<title>【<?php echo $categoryInfo["name"];?>开奖结果】<?php echo $categoryInfo["name"];?>开奖查询_<?php echo $categoryInfo["name"];?>开奖号码-<?php echo $sys["site_title"];?></title>
+		<meta name="keywords" content="<?php echo $categoryInfo["keywords"];?>" />
+		<meta name="distribution" content="<?php echo $categoryInfo["description"];?>" />
+		<link rel="stylesheet" href="/themes/168pc/css/headorfood.css" />
+		<link rel="stylesheet" href="/themes/168pc/css/kuai3.css" />
+		<link rel="shortcut icon" href="/themes/168pc/img/icon/168favicon.ico/v=2017981058.html">
+		<link rel="stylesheet" href="/themes/168pc/css/user_adv.css" />
+		<link rel="stylesheet" href="/themes/168pc/css/idangerous.swiper.css" />
+		<script src="/themes/168pc/js/lib/bootstrap-3.3.0/js/tests/vendor/jquery.min.js"></script>
+		<script src="/themes/168pc/js/lib/bootstrap-3.3.0/dist/js/bootstrap.min.js"></script>
+
+		<script type="text/javascript" src="/themes/168pc/js/lib/jquery-1.7.2.min.js"></script>
+	</head>
+	<body>
+		<div class="bodybox">
+<?php $__Template->display("themes/168pc/head"); ?>
+			<div class="haomabox">
+				<div class="waring" id="waringbox">
+					<div class="flash"><i></i></div>
+					温馨提示：因网络问题，开奖结果会有延迟，所以您需要去喝杯咖啡等一会儿！
+				</div>
+				<div class="haomaqu" id="cqSsc">
+					<div class="haomaqul">
+						<div class="haomaline">
+							<div class="haomaimg">
+								<img src="<?php echo $categoryInfo["image"];?>" />
+							</div>
+							<div class="numberqu">
+								<div class="nuberqutit">
+									<a href="kuai3_index.html"><span class="jsk3"><?php echo $categoryInfo["name"];?></span></a>第
+									<span class="preDrawIssue"></span> 期开奖号码
+									<input type="hidden" id="drawTime">
+								</div>
+								<div class="kajianhaod" id="jnumber">
+									<ul class="kajianhao">
+										<li class="num1"></li>
+										<li class="num2"></li>
+										<li class="num4"></li>
+										
+									</ul>
+								</div>
+
+							</div>
+						</div>
+						<div class="haomaline homaline2">
+							<div class="haomaimg">
+								<p class="kaijianname"><?php echo $categoryInfo["name"];?></p>
+							</div>
+							<div class="margt30">
+								<ul class="zoushimap">
+									<li class="list lihead no_left">走势图表：</li>
+									<?php $listList = service("duxcms","Label","categoryList",array( "app"=>"DuxCms", "label"=>"categoryList", "parent_id"=>348 , "limit"=>4));  if(is_array($listList)) foreach($listList as $list){ ?>
+									<li class="list">
+										<a href="<?php echo $list["curl"];?>"><?php echo $list["name"];?></a>
+									</li>
+                                 <?php } ?>
+
+									<li class="list morelist" id="morelist">
+										<a href="javascript:void(0)" class="more">更多<img class="graypre" src="/themes/168pc/img/graypre.png" alt="" /><img class="yellowpre" src="/themes/168pc/img/yellowpre.png" alt="" /></a>
+										<div class="sub_morelist" style="display: none;">
+											<ul class="leftUl">
+												<?php $listList = service("duxcms","Label","categoryList",array( "app"=>"DuxCms", "label"=>"categoryList", "parent_id"=>348, "class_id"=>'353,354,355,356,357,358'));  if(is_array($listList)) foreach($listList as $list){ ?>
+									<li class="list">
+										<a href="<?php echo $list["curl"];?>"><?php echo $list["name"];?></a>
+									</li>
+                                 <?php } ?>
+											</ul>
+										</div>
+									</li>
+								</ul>
+							</div>
+							<div class="newtuijian">
+								<ul class="zoushimap">
+									<li class="list lihead no_left">新手推荐：</li>
+									<li class="list no_left">
+										<a href="/jiangsukuai397505599.html">玩法规则</a>
+									</li>
+								
+								</ul>
+							</div>
+						</div>
+					</div>
+					<div class="haomaqur">
+						<div class="haomaqur_l">
+							<div class="line linetit">距<span class="nextIssue"></span>期开奖仅有</div>
+							<div class="line linetime" id="timebox">
+								<div class="opening opentyle">开奖中...</div>
+								<span class="bgtime hour">...</span>
+								<span class="hourtxt">时</span>
+								<span class="bgtime minute">...</span>
+								<span>分</span>
+								<span class="bgtime second">...</span>
+								<span>秒</span>
+							</div>
+							<div class="line linetit height40">已开<span class="drawCount"></span>期，还有<span class="sdrawCount"></span>期</div>
+							<div class="line soundId">
+								<div class="soundline soundSet" id="soundSet">
+								</div>
+							</div>
+						</div>
+						<div class="line margt20 guangimg" id="startVideo">
+							<img src="/themes/168pc/img/k3v.jpg"/>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="kaijiangjl margt20">
+				<div class="head">
+					<ul class="zoushimap" id="kaijiangjl">
+						<li class="kaijiltit">开奖记录</li>
+						<li class="kaihistory">
+<?php $listList = service("duxcms","Label","categoryList",array( "app"=>"DuxCms", "label"=>"categoryList", "class_id"=>358 , "limit"=>1));  if(is_array($listList)) foreach($listList as $list){ ?>
+						<a href="<?php echo $list["curl"];?>"><?php echo $list["name"];?></a>
+                        <?php } ?>	
+						</li>
+					</ul>
+				</div>
+				<div class="listcontent">
+					<div class="jrsmtj">
+						<div class="headtxt">
+							今日双面统计
+							</div>
+						<table cellpadding="1" cellspacing="1" border="0">
+							<tr>
+								<th width="176">号码</th>
+								<th>0</th>
+								<th>1</th>
+								<th>2</th>
+								<th>3</th>
+								<th>4</th>
+								<th>5</th>
+								
+							</tr>
+							<tr id="shuanmiandata">
+								<td>出现次数</td>
+								<td class="cs0">0</td>
+								<td class="cs1">0</td>
+								<td class="cs2">0</td>
+								<td class="cs3">0</td>
+								<td class="cs4">0</td>
+								<td class="cs5">0</td>
+							
+							</tr>
+						</table>
+						<table class="secondtb" cellpadding="1" cellspacing="1" border="0">
+							<tr>
+								<th width="176">球次</th>
+								<th colspan="4">总和</th>
+								<th colspan="4">第一球</th>
+								<th colspan="4">第二球</th>
+								<th colspan="4">第三球</th>
+								<th colspan="4">第四球</th>
+								<th colspan="4">第五球</th>
+							</tr>
+							<tr id="gylhcs">
+								<td>出现次数</td>
+								<td class="tt1">0</td>
+								<td class="tt2">0</td>
+								<td class="tt3">0</td>
+								<td class="tt4">0</td>
+								<td class="one1">0</td>
+								<td class="one2">0</td>
+								<td class="one3">0</td>
+								<td class="one4">0</td>
+								<td class="two1">0</td>
+								<td class="two2">0</td>
+								<td class="two3">0</td>
+								<td class="two4">0</td>
+								<td class="three1">0</td>
+								<td class="three2">0</td>
+								<td class="three3">0</td>
+								<td class="three4">0</td>
+								<td class="four1">0</td>
+								<td class="four2">0</td>
+								<td class="four3">0</td>
+								<td class="four4">0</td>
+								<td class="five1">0</td>
+								<td class="five2">0</td>
+								<td class="five3">0</td>
+								<td class="five4">0</td>
+							</tr>
+						</table>
+					</div>
+					<div class="cltx">
+						<div class="headtxt">
+							长龙连开提醒
+						</div>
+						<div class="cltxul">
+							<ul id="cltxul">
+								<li>
+									第<span>六</span>
+									名：&nbsp;&nbsp;
+									<span>单</span>
+									&nbsp;&nbsp;
+									<span style="color:#f11821">7</span>期
+								</li>
+							</ul>
+						</div>
+					</div>
+					<div class="hmfb">
+						<div class="head">
+							<ul class="zoushimap" id="chakanchfb">
+								<li class="kaijiltit">查看车号分布：</li>
+								<li class="0">
+									<a href="javascript:">号码0</a>
+									<i></i>
+								</li>
+								<li class="1">
+									<a href="javascript:">号码1</a>
+									<i></i>
+								</li>
+								<li class="2">
+									<a href="javascript:">号码2</a>
+									<i></i>
+								</li>
+								<li class="3">
+									<a href="javascript:">号码3</a>
+									<i></i>
+								</li>
+								<li class="4">
+									<a href="javascript:">号码4</a>
+									<i></i>
+								</li>
+								<li class="5">
+									<a href="javascript:">号码5</a>
+									<i></i>
+								</li>
+								<li class="6">
+									<a href="javascript:">号码6</a>
+									<i></i>
+								</li>
+								
+							</ul>
+						</div>
+						<div class="head head2">
+							<ul class="zoushimap" id="daxiaodsfb">
+								<li class="kaijiltit">大小单双分布：</li>
+								<li id="dannum">
+									<a href="javascript:">单</a>
+									<i></i>
+								</li>
+								<li id="shuangnum">
+									<a href="javascript:">双</a>
+									<i></i>
+								</li>
+								<li id="danum">
+									<a href="javascript:">大</a>
+									<i></i>
+								</li>
+								<li id="xiaonum">
+									<a href="javascript:">小</a>
+									<i></i>
+								</li>
+								<li id="duizinum">
+									<a href="javascript:">对子号</a>
+									<i></i>
+								</li>
+								<li class="reset">
+									还原
+								</li>
+							</ul>
+						</div>
+					</div>
+					<div class="jrsmhmtj" id="jrsmhmtj">
+						<table  id="jrsmhmtjTab" cellpadding="1" cellspacing="1" border="0">
+							<tr>
+								<th>时间</th>
+								<th>期数</th>
+								<th id="numberbtn" class="numberbtn">
+									<span id="kjhm" class="spanselect">开奖号码</span>
+								</th>
+								<th colspan="3">总和</th>
+								<th colspan="3">鱼虾蟹</th>
+							</tr>
+						</table>
+						
+					</div>
+				</div>
+			</div>
+<?php $__Template->display("themes/168pc/foot"); ?>
+
+
+	</body>
+	<script type="text/javascript" src="/themes/168pc/js/lib/config.js"></script>
+	<script type="text/javascript" src="/themes/168pc/js/lib/GA.js"></script>
+	<script type="text/javascript" src="/themes/168pc/js/loacal/kuai3/kuai3_kaijiang.js" ></script>
+	<script type="text/javascript" src="/themes/168pc/js/loacal/kuai3/kuai3_index.js"></script>
+	<script type="text/javascript" src="/themes/168pc/js/loacal/animate/animate.js" ></script>
+	<script src="/themes/168pc/js/lib/idangerous.swiper.min.js"></script>
+	<div id="videobox">
+		<div class="content">
+			<div class="head">
+				江苏快3开奖视频
+				<div class="btn">
+					<ul>
+						<li class="closevideo"><i class="iconfont"></i></li>
+						<li class="small">小屏</li>
+						<li class="big">中屏</li>
+					</ul>
+				</div>
+			</div>
+			<div class="animate">
+				<iframe style="height:100%;width:100%;border: none;" scrolling="no" src="/themes/168pc/js/lib/video/kuai3_video/Kuai3.html"></iframe>
+			</div>
+		</div>
+	</div>
+</html>";s:12:"compile_time";i:1519032974;}";

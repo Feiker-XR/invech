@@ -1,0 +1,360 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<meta name="renderer" content="webkit">
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>首页－{$settings.webName}</title>
+<link href="/__CSS__/bootstrap.min.css" rel="stylesheet">
+<link href="/__CSS__/nifty.min.css" rel="stylesheet">
+<link href="/__CSS__/bootstrap-tour.min.css" rel="stylesheet">
+<link href="/__CSS__/font-awesome.min.css" rel="stylesheet">
+<link href="/__CSS__/css.min.css" rel="stylesheet">
+<link href="/__CSS__/index.min.css" rel="stylesheet">
+<script src="/__JS__/jquery.min.js"></script>
+<script src="/__JS__/bootstrap.min.js"></script>
+<script src="/__JS__/nifty.min.js"></script>
+<script src="/__JS__/common.min.js"></script>
+<script src="/__JS__/fastdata.js"></script>
+<script src="/__JS__/jquery.jplayer.min.js"></script>
+<script src="/__JS__/layout.min.js"></script>
+<script language="javascript" type="text/javascript" src="/nitalk/js/fonts.js?modidate=20160317003"></script>
+<script language="javascript" type="text/javascript" src="/nitalk/js/bundle.js?modidate=20160317003"></script>
+<style>
+body, html {
+	overflow: hidden;
+}
+</style>
+<link id='theme' rel='stylesheet' />
+</head>
+<div id="container" class="effect mainnav-fixed navbar-fixed footer-fixed mainnav-lg">
+	<header id="navbar">
+	<div id="navbar-container">
+		<div class="navbar-header">
+			<a class="navbar-brand" href="javascript:;">
+			<img alt="Logo" class="brand-icon" src="/__IMG__/frame/logo.png">
+			<div class="brand-title">
+				<span class="brand-text"></span>
+			</div>
+			</a>
+		</div>
+		<div class="navbar-content clearfix">
+			<a class="mainnav-toggle" href="javascript:;"><i></i></a>
+			<ul class="nav navbar-top-links pull-left">
+				<li class="dropdown" id="user_message">
+				<a class="mega-dropdown-toggle" href="{$settings.kefuGG}" target="_blank">
+				<i class="fa fa-user fa-lg"></i><em>客服</em>
+				</a>
+				</li>
+				<li class="dropdown" id="user_notice">
+				<a id="fastdata-notice-href" class="dropdown-toggle" href="{:Url('notice/index')}" target="pageframe">
+				<i class="fa fa-bell fa-lg"></i><em>公告</em>
+				<span class="badge badge-header badge-danger" id="user_noticecount" style="display:none; top:0px;">0</span>
+				</a>
+				</li>
+				<li class="mega-dropdown" id="user_main_menu">
+				<a class="mega-dropdown-toggle" href="#">
+				<i class="fa fa-th-large fa-lg"></i><em>菜单</em>
+				</a>
+				<div class="dropdown-menu mega-dropdown-menu">
+					<div class="clearfix">
+						<div class="col-sm-12 col-md-3">
+							<div class="text-center czbg pad-all">
+								<a href="javascript:$.niftyNoty({type: 'danger',icon: 'fa fa-minus',message: '请联系在线客服',container: 'floating',timer: 3000});">
+                                        提交意见
+								</a>
+							</div>
+						</div>
+						<div class="col-sm-4 col-md-3" id="menu_member">
+							<ul class="list-unstyled">
+								<li class="dropdown-header"><img alt="" src="/__IMG__/frame/11.png">会员中心</li>
+								<li>
+								<a href="{:Url('user/info')}" target="pageframe">
+                                            用户中心
+								<span class="pull-right label label-danger">
+                                                New
+								</span>
+								</a>
+								</li>
+								<li>
+								<a href="{:Url('user/save_password')}" target="pageframe">
+									<span class="pull-right label label-danger">
+													Hot
+									</span>修改密码
+								</a>
+								</li>
+								<li><a href="{:Url('user/bank')}" target="pageframe">银行资料</a></li>
+								<li class="divider"></li>
+								{if($user->isAgent())}
+								<li class="dropdown-header"><img alt="" src="/__IMG__/frame/14.png">代理中心</li>
+								<li>
+									<a href="{:Url('agent/bet_record')}" target="pageframe">
+									团队注单
+									</a>
+								</li>
+								<li>
+									<a href="{:Url('agent/bet_day_record')}" target="pageframe">
+									团队日注单
+									</a>
+								</li>
+								<li>
+									<a href="{:Url('agent/recharge_record')}" target="pageframe">
+									团队充值
+									</a>
+								</li>
+								<li>
+									<a href="{:Url('agent/recharge_day_record')}" target="pageframe">
+									团队日充值
+									</a>
+								</li>	
+								<li>
+									<a href="{:Url('agent/withdraw_record')}" target="pageframe">
+									团队提现
+									</a>
+								</li>
+								<li>
+									<a href="{:Url('agent/withdraw_day_record')}" target="pageframe">
+									团队日提现
+									</a>
+								</li>
+								{else /}
+								<li>
+									<a href="{:Url('user/agent')}" target="pageframe">
+									申请代理
+									</a>
+								</li>
+								{/if}							
+							</ul>
+						</div>
+						<div class="col-sm-4 col-md-3" id="menu_proxy">
+							<ul class="list-unstyled">
+								<li class="dropdown-header"><img alt="" src="/__IMG__/frame/12.png">管理中心</li>
+								<!-- <li><a href="{:Url('team/member')}" target="pageframe"><span class="pull-right label label-danger">Hot</span>会员管理</a></li>
+								<li><a href="{:Url('team/linklist')}" target="pageframe" id="autoreg">会员开户</a></li> -->
+								<!-- <li><a href="{:Url('team/report')}" target="pageframe">消费报表</a></li> -->
+								<li><a href="{:Url('user/bet_record')}" target="pageframe">投注记录</a></li>
+								<li><a href="{:Url('user/money_record')}" target="pageframe">帐变明细</a></li>
+								<li><a href="{:Url('user/recharge_record')}" target="pageframe">充值记录</a></li>
+								<li><a href="{:Url('user/withdraw_record')}" target="pageframe">提现记录</a></li>
+								<li><a href="{:Url('user/backwater_record')}" target="pageframe">返水记录</a></li>
+								<li><a href="{:Url('user/inbox')}" target="pageframe">邮件消息</a></li>
+							</ul>
+						</div>
+						<div class="col-sm-4 col-md-3">
+							<ul class="list-unstyled">
+								<li class="dropdown-header"><img alt="" src="/__IMG__/frame/13.png">服务中心</li>
+								
+								<li>
+								<a href="{:Url('activity/xiaofei')}" target="pageframe">
+								<span class="pull-right badge badge-success"></span>最新活动
+								</a>
+								</li>
+								<li><a href="{:Url('notice/index')}" target="pageframe">通知公告</a></li>
+								<li class="divider"></li>
+								<li class="dropdown-header"><img alt="" src="/__IMG__/frame/14.png">资金中心</li>
+								<li>
+								<a href="{:Url('pay/index')}" target="pageframe">
+								<span class="pull-right badge badge-purple">
+                                                秒到
+								</span> 我要充值
+								</a>
+								</li>
+								<li>
+								<a href="{:Url('user/withdraw')}" target="pageframe">
+								<span class="pull-right badge badge-purple">
+                                                秒到
+								</span>我要提现
+								</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+				</li>
+			</ul>
+			<span id="user-span">{include file="user/user"/}</span>
+		</div>
+	</div>
+	</header>
+	<div class="boxed">
+		<div id="content-container" style="padding-bottom: 0">
+			<div id="page-content" style="padding: 0; margin: 0">
+				<iframe id="pageframe" name="pageframe" src="{:Url('user/main')}" style="width: 100%; height: 889px;" allowtransparency="true" frameborder="0">
+				</iframe>
+			</div>
+		</div>
+		<nav id="mainnav-container">
+		<div id="mainnav">
+			<div id="mainnav-shortcut" class="mainnav-widget">
+				<ul class="list-unstyled newmenu">
+					<li title="" data-original-title="" class="col-xs-6">
+					<a class="shortcut-grid" href="{:Url('pay/index')}" target="pageframe">
+					<img alt="" src="/__IMG__/frame/c.png"><strong>充值</strong>
+					</a>
+					</li>
+					<li title="" data-original-title="" class="col-xs-6">
+					<a class="shortcut-grid" href="{:Url('user/withdraw')}" target="pageframe">
+					<img alt="" src="/__IMG__/frame/t.png"><strong>提现</strong>
+					</a>
+					</li>
+				</ul>
+			</div>
+			<div id="mainnav-menu-wrap">
+				<div class="nano has-scrollbar">
+					<div style="right: -17px;" tabindex="0" class="nano-content">
+						<ul id="mainnav-menu" class="list-group">
+							<li class="list-header">导航</li>
+							<li class="active-link">
+							<a class="" title="" data-original-title="" href="{:Url('user/main')}" target="pageframe">
+							<img alt="" src="/__IMG__/frame/0.png">
+							<span class="menu-title">
+							<strong>首页</strong>
+							</span>
+							</a>
+							</li>
+							<li class="list-divider"></li>
+							<li class="list-header">游戏列表</li>
+							<li class="active">
+							<a class="" title="" data-original-title="" href="#">
+							<img alt="" src="/__IMG__/frame/1.png">
+							<span class="menu-title">时时彩</span>
+							<i class="arrow"></i>
+							</a>
+							<ul aria-expanded="true" class="pop-in collapse in">
+								<li><a href="{:Url('game/game?type=1&groupId=2')}" target="pageframe">重庆时时彩<span class="pull-right badge badge-danger">热</span></a></li>
+								<li><a href="{:Url('game/game?type=35&groupId=2')}" target="pageframe">韩国1.5分彩<span class="pull-right badge badge-success">火</span></a></li>
+								<!--li><a href="{:url('game/game?type=42&groupId=2')}" target="pageframe">东京1.5分彩<span class="pull-right badge badge-success">新</span></a></li-->	
+								<!--li><a href="{:url('game/game?type=3&groupId=2')}" target="pageframe">天津时时彩</a></li-->
+								<li><a href="{:Url('game/game?type=12&groupId=2')}" target="pageframe">新疆时时彩</a></li>
+								<li><a href="{:Url('game/game?type=14&groupId=2')}" target="pageframe">乐购5分彩<span class="pull-right badge badge-danger">火</span></a></li>
+								<li><a href="{:Url('game/game?type=34&groupId=2')}" target="pageframe">乐购2分彩<span class="pull-right badge badge-danger">新</span></a></li>
+								<li><a href="{:Url('game/game?type=41&groupId=2')}" target="pageframe">乐购分分彩<span class="pull-right badge badge-success">荐</span></a></li>
+								<!--<a href="{:url('game/game?type=40&groupId=2')}" target="pageframe">腾讯分分彩<span class="pull-right badge badge-success">荐</span></a>-->
+							</ul>
+							</li>
+							<li>
+							<a class="" title="" data-original-title="" href="#">
+							<img alt="" src="/__IMG__/frame/2.png">
+							<span class="menu-title">11选5</span>
+							<i class="arrow"></i>
+							</a>
+							<ul class="collapse pop-in">
+								<li><a href="{:Url('game/game?type=6&groupId=10')}" target="pageframe">广东11选5<span class="pull-right badge badge-danger">热</span></a></li>
+								<li><a href="{:url('game/game?type=15&groupId=10')}" target="pageframe">重庆11选5</a></li>
+								<li><a href="{:Url('game/game?type=16&groupId=10')}" target="pageframe">江西11选5</a></li>
+							</ul>
+							</li>
+							<li>
+							<a class="" title="" data-original-title="" href="#">
+							<img alt="" src="/__IMG__/frame/3.png">
+							<span class="menu-title">快乐彩</span>
+							<i class="arrow"></i>
+							</a>
+							<ul class="collapse pop-in">
+								<li><a href="{:Url('game/game?type=24&groupId=38')}" target="pageframe">北京快乐8</a></li>
+								<li><a href="{:Url('game/game?type=20&groupId=26')}" target="pageframe">北京PK10</a></li>
+							</ul>
+							</li>
+							<li>
+							<a class="" title="" data-original-title="" href="#">
+							<img alt="" src="/__IMG__/frame/4.png">
+							<span class="menu-title">数字三</span><i class="arrow"></i>
+							</a>
+							<ul class="collapse pop-in">
+								<li><a href="{:Url('game/game?type=9&groupId=12')}" target="pageframe">福彩3D<span class="pull-right badge badge-danger">热</span></a></li>
+								<li><a href="{:Url('game/game?type=10&groupId=12')}" target="pageframe">排列三</a></li>
+							</ul>
+							</li>
+
+							<li>
+							<a class="" title="" data-original-title="" href="#">
+							<img alt="" src="/__IMG__/frame/4.png">
+							<span class="menu-title">快3</span><i class="arrow"></i>
+							</a>
+							<ul class="collapse pop-in">
+								<li><a href="{:Url('game/game?type=25&groupId=39')}" target="pageframe">江苏快3<span class="pull-right badge badge-danger">热</span></a></li>
+							</ul>
+							</li>
+
+							<li>
+							<a class="" title="" data-original-title="" href="#">
+							<img alt="" src="/__IMG__/frame/4.png">
+							<span class="menu-title">其他系列</span><i class="arrow"></i>
+							</a>
+							<ul class="collapse pop-in">
+								<li><a href="{:Url('game/game?type=43&groupId=87')}" target="pageframe">香港六合彩<span class="pull-right badge badge-danger">热</span></a></li>
+								<li><a href="{:Url('game/game?type=17')}" target="pageframe">广东快乐十分</a></li>
+								<li><a href="{:Url('game/game?type=44')}" target="pageframe">重庆幸运农场</a></li>							
+							</ul>
+							</li>	
+							
+							<li>
+							<a class="" title="" data-original-title="" href="#">
+							<img alt="" src="/__IMG__/frame/4.png">
+							<span class="menu-title">PC蛋蛋</span><i class="arrow"></i>
+							</a>
+							<ul class="collapse pop-in">
+								<li><a href="{:Url('game/game?type=45')}" target="pageframe">幸运28</a></li>
+							</ul>
+							</li>
+
+							<li class="list-divider"></li>
+							<li class="list-header">服务中心</li>
+							<li>
+							<a class="" title="" data-original-title="" href="{:url('bonus/index')}" target="pageframe">
+							<img alt="" src="/__IMG__/frame/5.png">
+							<span class="menu-title">
+                                    优惠活动
+							<span class="label label-mint pull-right">荐</span>
+							</span>
+							</a>
+							</li>
+							
+							<li>
+							<a class="" title="" data-original-title="" href="javascript:$.niftyNoty({type: 'danger',icon: 'fa fa-minus',message: '请联系在线客服',container: 'floating',timer: 3000});">
+							<img alt="" src="/__IMG__/frame/tousu1.png">
+							<span class="menu-title">投诉建议</span>
+							</a>
+							</li>
+							<li id="kefulink">
+							<a class="" title="" data-original-title="" href="{$settings.kefuGG}" target="_blank">
+							<img alt="" src="/__IMG__/frame/7.png">
+							<span class="menu-title">在线客服</span><span class="pull-right badge badge-danger" style="display:none" id="j-kf-count">0</span>
+							</a>
+							</li>
+							<li class="list-divider"></li>
+							<!--li class="list-header">常用工具</li>
+							<li>
+							<a class="" title="" data-original-title="" href="javascript:$.niftyNoty({type:%20'danger',icon:%20'fa%20fa-minus',message:%20'%E5%B7%A5%E7%A8%8B%E5%B8%88%E6%AD%A3%E5%9C%A8%E5%8A%AA%E5%8A%9B%E5%AE%8C%E5%96%84%E4%B8%AD%E3%80%82%E3%80%82%E3%80%82%E3%80%82%E3%80%82%E3%80%82',container:%20'floating',timer:%203000});">
+							<img alt="" src="/__IMG__/frame/8.png">
+							<span class="menu-title">
+                                    自动投注软件
+							<span class="label label-mint pull-right badge-danger">热</span>
+							</span>
+							</a>
+							</li>
+							<li>
+							<a class="" title="" data-original-title="" href="javascript:$.niftyNoty({type:%20'danger',icon:%20'fa%20fa-minus',message:%20'%E5%B7%A5%E7%A8%8B%E5%B8%88%E6%AD%A3%E5%9C%A8%E5%8A%AA%E5%8A%9B%E5%AE%8C%E5%96%84%E4%B8%AD%E3%80%82%E3%80%82%E3%80%82%E3%80%82%E3%80%82%E3%80%82',container:%20'floating',timer:%203000});">
+							<img alt="" src="/__IMG__/frame/9.png">
+							<span class="menu-title">遗漏分析软件</span>
+							</a>
+							</li-->
+						</ul>
+					</div>
+					<div style="display: none;" class="nano-pane">
+						<div style="height: 20px; transform: translate(0px, 0px);" class="nano-slider">
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		</nav>
+	</div>
+</div>
+
+
+</script>	
+
+

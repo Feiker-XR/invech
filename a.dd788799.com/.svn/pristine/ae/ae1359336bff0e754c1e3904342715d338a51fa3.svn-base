@@ -1,0 +1,256 @@
+<link rel="stylesheet" type="text/css" href="/__CSS__/user/reset.css?v=20170715">
+<link rel="stylesheet" type="text/css" href="/__CSS__/user/hpn-common.css">
+<link rel="stylesheet" type="text/css" href="/__CSS__/user/index.css?v=20171117">
+<link rel="stylesheet" type="text/css" href="/__CSS__/user/global.css">
+<style>
+
+	.reResulttBg{background: #f42023;}
+	.process .layout .monty ul li,.process .layout .list_tems .date:after,.list ul li .slide p.acti,.headmemberbg{background: #f42023;}
+	.process .layout .list_tems .date span, .process .layout .list_tems .date h3,.eveb_amount span,.color-e77c3c,.eveb_setting_table a,.xieyiCss，.gcdtgd{color: #f42023!important;}
+	.eveb_sub_nav_type a:hover, .eveb_sub_nav_type li.on a:link, .eveb_sub_nav_type li.on a:visited{color: #f42023!important;font-weight: 700;border-bottom-color: #e1e1e1;background: #f8f8f8;}
+	.list ul li .slide p:hover,.letterbtn-bg{background: #f42023!important;color: white;}
+	.list h3 a{background: #f42023;border-bottom: 3px solid #a92309; height: 47px; line-height: 47px;}
+	.help_l_menu li .t.sli{border-left: 5px solid #f42023;}
+	.withdraw-bg-input{border: 2px solid #f42023!important;}
+	.clearBet_template .l span i{background: #f42023 url(/static/theme/memberTheme/theme1/img/tm-mdl-icon.png) no-repeat!important; border-radius: 50%;background-position: 0 41%!important;}
+
+	.eveb_nav_sub .on,.button_1, .button_1:link, .button_1:visited,.alert_col h5,.onlineService,.layui-layer-popup .layui-layer-title,.xzqd,.xzqdlskj,.game_name .box2_stage p span i.acti,.Betting,.Single,.list_ject ul li .Result p a.acti,.list_ject ul li .Result p a.acti:hover,.top{background:#f42023!important}
+	.eveb_nav_sub .on a,.bankInfo .name,.help_l_menu .title p .sum,.help_r_main .light,.game_name .box2_stage p span i,.game_name .box1_name  p i,.Account p a.red{color:#f42023!important}
+	.eveb_nav_sub .on,.game_name .box2_stage p span{border:1px solid #f42023!important;}
+	.eveb_nav_sub .on,.game_name .box2_stage p span i.acti{color:#fff!important;}
+	.eveb_nav_sub .on a{border-top:1px #f42023 solid!important;}
+	.eveb_nav_sub ul{border-bottom:1px #f42023 solid!important;}
+	#apptop{background: #f42023}
+	.alert_col div::-webkit-scrollbar-thumb {background-color: #f42023!important;}
+	.head div h5,.Betting .tabs ul li,.top .nav h1{background:#d51910!important}
+	.jf_box .url a,.eveb_form label.error,.eveb_transfer_box .center_wallet .money,.eveb_transfer_box .wallet_list li p{color:#d51910!important}
+	.Betting .tabs ul li.acti{background:#fff!important}
+	.button_1, .button_1:link, .button_1:visited{border:1px solid #d51910!important;}
+</style>
+
+<link type="text/css" rel="stylesheet" href="/__CSS__/user/laydate.css">
+<link rel="stylesheet" href="/__CSS__/user/layer.css?v=3.0.11110">
+<div class="eveb_content">
+	<div class="eveb_nav_sub">
+		<ul class="clearfix">
+			<li><a href="/user/info.html">个人资料</a></li>
+			<li><a href="/user/password.html">登录密码</a></li>
+			<li  class="on"><a href="/user/bank.html">银行卡管理</a></li>
+			<!--<li><a href="javascript:void(0)" onclick="parent.goSubUrl('/member/zhsz.html?module=aqxx')">安全信息</a></li>-->
+		</ul>
+	</div><div class="mb10 color-888">银行卡列表：</div>
+	<ul class="management_bank">
+		<li>
+			<div class="item w125 color-e77c3c" style="width:30px">默认</div>
+			<div class="item w105">中国工商银行</div>
+			<div class="item w105">电风扇</div>
+			<div class="item w205 accountSubStr" data-bank="1525485757575475">1525 **** **** ****  5475</div>
+			<div class="item w230">klajskfasoifj</div>
+			<div class="item">
+				<a href="javascript:void(0)" class="mr10 color-c4463c" onclick="setDefault(101437)">设为默认</a>
+				<a href="javascript:void(0)" class="icon" onclick="ajaxDel(101437)">删除</a>
+			</div>
+		</li>
+	</ul>
+	<div class="eveb_content">
+		<form name="addYhkForm" onsubmit="return false;" novalidate="novalidate">
+			<ul class="eveb_form eveb_withdraw">
+				<li>
+					<span>银行名称：</span>
+					<select name="bankName" id="bankName" style="width:182px" class="valid">
+						<option value="中国工商银行">中国工商银行</option>
+						<option value="中国农业银行">中国农业银行</option>
+						<option value="中国建设银行">中国建设银行</option>
+						<option value="中国银行">中国银行</option>
+						<option value="交通银行">交通银行</option>
+						<option value="招商银行">招商银行</option>
+						<option value="兴业银行">兴业银行</option>
+						<option value="浦发银行">浦发银行</option>
+						<option value="华夏银行">华夏银行</option>
+						<option value="中信银行">中信银行</option>
+						<option value="中国光大银行">中国光大银行</option>
+						<option value="广发银行">广发银行</option>
+						<option value="中国邮政储蓄银行">中国邮政储蓄银行</option>
+						<option value="平安银行">平安银行</option>
+						<option value="上海银行">上海银行</option>
+						<option value="广东省商业银行">广东省商业银行</option>
+						<option value="民生银行">民生银行</option>
+					</select>
+					<label class="error" for="bankName" style="display: none;"></label>
+				</li>
+				<li>
+					<span>开户支行：</span>
+					<input type="text" class="passwinp error" id="subBankName" name="subBankName" style="width:180px;" placeholder="请输入开户支行">
+					<label class="error" for="subBankName">* 请填写开户支行</label>
+				</li>
+				<li>
+					<span>开户人：</span>
+					<input type="text" class="passwinp" id="userName" name="userName" style="width:180px;" placeholder="请输入真实姓名" value="电风扇" readonly="">
+					<label class="error" for="userName" style="display: none;"></label>
+				</li>
+				<li>
+					<span>银行账号：</span>
+					<input type="text" name="bankAccount" id="bankAccount" style="width:180px;" class="passwinp error" placeholder="请输入银行卡号" onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')">
+					<label class="error" for="bankAccount">* 请填写银行账号</label>
+				</li>
+			</ul>
+			<div class="eveb_form_submit">
+				<input type="submit" value="提交" class="button_medium button_1">
+				<input type="reset" value="重置" class="ml_10 button_medium button_3">
+			</div>
+		</form>
+	</div>
+</div>
+</div>
+<script type="text/javascript" src="/__JS__/user/jquery.min.js?v=2017"></script><!--jQuery库-->
+<script src="/__JS__/index2/global.js?v=20170505"></script><!--自定义封装函数-->
+<script src="/__JS__/index2/jquery.cookie.js?v=2017"></script><!--自定义封装函数-->
+<script src="/__JS__/index2/jquery.md5.js?v=2017"></script><!--自定义封装函数-->
+<script src="/__JS__/index2/layer.js?v=2017"></script>
+<script src="/__JS__/index2/jquery.nicescroll.js?v=2017"></script>
+<script src="/__JS__/index2/dateFormat.js?v=2017"></script>
+<script src="/__JS__/index2/template.js?v=2017"></script>
+<script type="text/javascript" src="/__JS__/user/jquery.validate.min.js"></script>
+<script type="text/javascript" src="/__JS__/user/laydate.js"></script>
+<script type="text/javascript" src="/__JS__/user/validate.js"></script>
+<script type="text/javascript" src="/__JS__/user/jquery.form.min.js"></script>
+<script type="text/javascript" src="/__JS__/user/clipboard.min.js"></script>
+<script>
+    function setDefault(id) {
+        ajaxRequest({
+            url: "/member/ajaxSetDefault.json",
+            data: {
+                id: id
+            },
+            beforeSend: function() {
+                parent.showLoading();
+            },
+            success: function(json) {
+                parent.hideLoading();
+                if (json.result == 1) {
+                    location.reload();
+                } else {
+                    Tools.toast("操作失败：" + json.description);
+                }
+            }
+        });
+    }
+
+    function ajaxDel(id) {
+        if (confirm("确认删除")) {
+            ajaxRequest({
+                url: "/member/ajaxDelUserBank.json",
+                data: {
+                    id: id
+                },
+                beforeSend: function() {
+                    parent.showLoading();
+                },
+                success: function(json) {
+                    parent.hideLoading();
+                    if (json.result == 1) {
+                        Tools.toast("删除成功");
+                        location.reload();
+                    } else {
+                        Tools.toast("删除失败：" + json.description);
+                    }
+                }
+            });
+        }
+    }
+
+    $(function() {
+        $("form[name='addYhkForm']").validate({
+            rules: {
+                bankName: {required: true},
+                subBankName: {required: true},
+                bankAccount: {
+                    required: true,
+                    minlength: 15,
+                    maxlength: 20
+                }
+            },
+            messages: {
+                bankName: {required: '* 请填写银行名称'},
+                subBankName: {required: '* 请填写开户支行'},
+                bankAccount: {
+                    required: '* 请填写银行账号',
+                    minlength: '* 请填写15~20位的银行账号',
+                    maxlength: '* 请填写15~20位的银行账号'
+                }
+            }
+            , submitHandler: function (form) {
+                addBankCard();
+            }
+        });
+        $("form[name='addYhkForm']").submit();
+
+
+        $(".management_bank li div.accountSubStr").each(function (index, value) {
+            var dataVal = $(this).attr('data-bank');
+            var tempStr = '';
+            var strVal = dataVal.toString();
+            var startStr = strVal.substr(0, 4);
+            var endStr = strVal.substr(strVal.length - 4, strVal.length);
+            var middleStr = strVal.substr(4, strVal.length - 4);
+
+            tempStr += startStr + " ";
+            for(var i = 0; i < middleStr.length; i++){
+                if(i == 3 && i != 0 || i == 7 && i != 0|| i == 11 && i != 0){
+                    tempStr += '* ';
+                }else {
+                    tempStr += '*';
+                }
+            }
+            tempStr += " " + endStr;
+
+            $(this).html(tempStr);
+        });
+    });
+    function addBankCard() {
+        var bankName = $("select[name='bankName']").val();
+        var subBankName = $("input[name='subBankName']").val();
+        var bankAccount = $("input[name='bankAccount']").val();
+
+        if (!bankName) {
+            Tools.toast("请输入银行名称");
+            $("input[name='bankName']").focus();
+            return;
+        }
+
+        if (!subBankName) {
+            Tools.toast("请输入开户支行");
+            $("input[name='subBankName']").focus();
+            return;
+        }
+
+        if (!bankAccount) {
+            Tools.toast("请输入银行账号");
+            $("input[name='bankAccount']").focus();
+            return;
+        }
+
+        ajaxRequest({
+            url: "/member/ajaxAddUserBank.json",
+            data: {
+                bankName: bankName,
+                subBankName: subBankName,
+                bankAccount: bankAccount
+            },
+            beforeSend: function() {
+                parent.showLoading();
+            },
+            success: function(json) {
+                parent.hideLoading();
+                if (json.result == 1) {
+                    Tools.toast("添加成功");
+//                    parent.getPage('zhsz/yhkgl');
+                    document.location.href = CONFIG.BASEURL + "member/zhsz.html?module=yhkgl";
+                } else {
+                    Tools.toast("添加失败：" + json.description);
+                }
+            }
+        });
+        return false;
+    }
+</script>

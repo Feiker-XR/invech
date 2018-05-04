@@ -1,0 +1,74 @@
+<?php
+namespace app\common\model\member;
+use app\common\model\Bet;
+use app\common\model\Apply;
+use app\common\validate\Member;
+use bong\foundation\Str;
+use think\Loader;
+
+trait BasicTrait
+{
+    //----------------前台------------------
+
+    // (new Member)->register();
+    public function register($request){
+        $params = $request->param();
+
+        $agent = null;
+
+        try{
+            if($params['parentId']){
+                $agent_id = dehashid($params['parentId']);
+                $agent = self::get($agent_id);
+            }                            
+        }catch(\Exception $e){
+            return '推荐人无效';
+        }
+
+        try{
+
+            db()->startTrans();
+            $validate = validate('Member')->scene('register');
+            if(!$validate->check($params)){
+                return $validate->getError();                
+            }
+
+            $addUser = $this->save($params);
+            if ($addUser){
+                event('user.register',[$this,$agent]);
+                db()->commit();
+            }
+            //db()->rollback();
+            return true;
+        }catch(\Exception $e){
+            db()->rollback();
+            return false;
+        }
+    }
+
+    public function apply($business='agent'){
+        $param = request()->param();
+        if(!validate('Apply')->scene($business)->check($param)){
+            return false;
+        }
+        
+        $apply = Apply::create([
+            'uid'   =>  $this->uid,
+            'business'  =>  $business,
+            'params'    =>  json_encode($param),
+        ]);
+
+        $method = 'afterApply' . ucfirst($business);
+        if(method_exists($this, $method)) {
+            call_user_func_array([$this, $method], [$apply]);
+        }
+        return $apply;
+    }
+
+    //提款申请提交后,需要扣除用户余额,增加冻结金额;
+    public function afterApplyWithdraw(Apply $apply){
+        $this->decBalance($apply->amount,'withdraw',$apply->id,'提现申请预扣'.$apply->amount);
+        $this->incFrozenBalance($apply->amount);
+    }
+
+}

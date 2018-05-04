@@ -1,0 +1,634 @@
+<?php
+namespace app\admin\controller;
+use app\admin\Login;
+use think\Cache;
+class Pay extends Login{
+   
+    public function index(){
+
+       $this->set();
+    }
+     /**
+     *菜单入口:支付通道分组
+    */
+     public function set(){
+     	$param = $this->request->param();
+		$where =[];
+		 if($param['keywords']??''){
+          	$where['name|type'] = ['like','%'.$param['keywords'].'%'];
+         }
+     	 config('paginate.query',$param);
+        $set =  db('pay_set')->where($where)->order('id asc')->paginate(5);
+        
+      	$this->assign('set',$set);
+      	$this->view->page_header = '支付类别';
+       return $this->fetch();
+    }
+	 public function set_img(){
+        date_default_timezone_set('PRC');
+        $id = input('setid');
+        $set = db('pay_set')->where(['id'=>$id])->find();
+       
+        if($set){
+            $class0 = $class1 = "";
+            if($set['status']=='0'){
+                $class0 = "checked='checked'";
+            }
+            if($set['status']=='1'){
+                $class1 = "checked='checked'";
+            }
+            $html = "
+            <div id='paycontent'>
+            <div class='paylabel'>是否开启
+            <label class='label_set'>
+            <input type='radio' {$class0} name='set_name_class' class='radio_label_class' value='0'>
+            <span class='new_setclass'>开启</span>
+            </label>
+            <label class='label_set'>
+            <input type='radio' {$class1} name='set_name_class' class='radio_label_class' value='1'>
+            <span class='new_setclass'>关闭</span>
+            </label>
+            </div>
+            <input type='hidden' id='status' value='{$set['status']}'>
+            <input type='hidden' id='set_id' value='{$set['id']}'>
+            <div class='contentinput'>分组名称<input  id='onname' value='{$set['name']}'></div>
+            <div class='contentinput'>英文名称<input  id='onename' value='{$set['type']}'></div>
+            <div class='contentinput'>分组排序<input  id='onsort' disabled='disabled' value='{$set['sort']}'></div>
+            <div class='contentinput'>分组图片<img id='contentimg' src='{$set['pic']}'></div>
+            <div class='control-group'>
+            <div class='controls up_files'>
+            <form id='imageform' method='post' enctype='multipart/form-data' action='" . url('upload') . "' style='width:400px;margin-left: 65px;margin-top: 20px;'>
+            <div id='up_status' style='display:none'><img src='/images/base_loading_bar.gif' alt='uploading'/></div>
+            <div id='up_btn' class='btn' style='margin-left: 172px;'>
+            <input id='photoimg' type='file' name='photoimg'>
+            </div>
+            </form>
+            <div id='preview'></div>
+            </div>
+            </div>
+            <div class='control-group' style='clear: both;margin-left: 252px;'>
+            <div class='controls' style='margin-left: 106px;'>
+            <input type='button' id='EditSave' class='btn btn-success' value='修改保存'>
+            </div>
+            </div>
+            </div>
+            <style>
+            .contentinput input{margin-left:20px;padding:5px;}
+            </style>
+            ";       
+            return ['stat' => 0,'html' => $html,];
+        }else{
+            return ['stat' => 1,'msg' =>'错误:没有这条分组信息!',];
+        }
+    
+    }
+
+      public function set_edit(){
+        date_default_timezone_set('PRC');
+        $id = input('set_id');
+        $set = db('pay_set')->where(['id'=>$id])->find();
+        if($set){
+            $name = input('onname');
+            $type = input('onename');
+            $sort = input('onsort');
+            $status = input('status');
+            $setpic = input('onpic');
+            $newpic = input('onnewpic');
+            if($newpic==null){
+                $pic = $setpic;
+            }else {
+                $pic = $newpic;
+            }
+            $setArr = array(
+                'name'=>$name,
+                'type'=>$type,
+                'status'=>$status,
+                'sort'=>$sort,
+                'pic'=>$pic,
+                'update_time'=>time(),
+            );
+            db('pay_set')->where(['id'=>$id])->update($setArr);
+            return ['stat' => 0,];
+        }else{
+            return ['stat' => 1,'msg' =>'错误:没有这条分组信息!',];
+        }
+    }
+
+     public function set_del(){
+        date_default_timezone_set('PRC');
+        $id = input('setid');
+        $set = db('pay_set')->where(['id'=>$id])->find();
+        if($set){
+            db('pay_set')->where(['id'=>$id])->delete();             //删除分组
+            //db('pay_set_config')->where(['set_id'=>$id])->delete();  //删除通道
+          //  db('pay_thirdcode')->where(['setid'=>$id])->delete();    //删除第三方配置
+            return ['stat' => 0];
+        }else {
+            return ['stat' => 1,'msg' =>'错误:没有这条分组信息!',];
+        }
+    }
+
+    public function way(){
+    	date_default_timezone_set('PRC');
+       	$param = $this->request->param();
+		$where =[];
+		 if($param['keywords']??''){
+          	$where['pw.name|pw.code'] = ['like','%'.$param['keywords'].'%'];
+         }
+         if($param['set_id']??''){
+          	$where['pw.set_id'] = ['eq',$param['set_id']];
+          	$set = db('pay_set')->where(['id' => $param['set_id']])->find();  
+         	$this->assign('set',$set);                
+         }
+         $setlist = db('pay_set')->field('id,name')->order('id asc')->select();
+         $this->assign('setlist',$setlist);
+         $join = [
+		    ['pay_set ps','pw.set_id=ps.id','left'],
+		];
+		config('paginate.query',$param);
+        $way =  db('pay_way')->alias('pw')->field('pw.*, ps.name as pname')->join($join)->where($where)->order('pw.id asc')->paginate(10);
+       
+
+
+      	$this->assign('way',$way);
+        $this->view->page_header = '支付方式';
+        return $this->fetch();
+    }
+    public function way_add(){
+        date_default_timezone_set('PRC');
+        $set_id =  input('set_id');
+        $set = db('pay_set')->where(['id'=>$set_id])->find();
+        if(!$set){
+        	return ['stat' => 1,'msg' => '通道不存在',];	
+        }
+        $name = input('name');
+        $pic = input('pic');
+
+        if($set['type']=='diankapay'){
+            $code = "DK".input('code');
+        }else {
+            $code = strtoupper(input('code'));
+        }
+
+        $addsetconfig = db('pay_way')->where('name',$name)->whereOr('code',$code)->select(); 
+      
+        if($addsetconfig->isEmpty()){
+           $setconfigArr = array(
+                'set_id'=>$set_id,
+                'name'=>$name,
+                'code'=>$code,
+                'img'=>$pic,
+                'add_time'=>time(),
+            );            
+            db('pay_way')->insert($setconfigArr);
+            return ['stat' => 0];
+        }else {
+          return ['stat' => 1,'msg' => '通道已存在',];
+        }
+    }   
+       public function way_img(){
+        date_default_timezone_set('PRC');
+        $id = input('configid');
+        $setconfig = db('pay_way')->where(['id'=>$id,])->find();        
+        if($setconfig){
+            $html = "
+            <div id='paycontent'>
+            <input type='hidden' id='set_id' value='{$setconfig['id']}'>
+            <div class='contentinput'>通道名称<input  id='onname' value='{$setconfig['name']}'></div>
+            <div class='contentinput'>通道代码<input  id='onename' value='{$setconfig['code']}'></div>
+            <div class='contentinput'>通道图片<img id='contentimg' src='{$setconfig['img']}'></div>
+            <div class='control-group'>
+            <div class='controls up_files'>
+            <form id='imageform' method='post' enctype='multipart/form-data' action='" . url('upload') . "' style='width:400px;margin-left: 65px;margin-top: 20px;'>
+            <div id='up_status' style='display:none'><img src='/images/base_loading_bar.gif' alt='uploading'/></div>
+            <div id='up_btn' class='btn' style='margin-left: 172px;'>
+            <input id='photoimg' type='file' name='photoimg'>
+            </div>
+            </form>
+            <div id='preview'></div>
+            </div>
+            </div>
+            <div class='control-group' style='clear: both;margin-left: 252px;'>
+            <div class='controls' style='margin-left: 106px;'>
+            <input type='button' id='EditSave' configid='{$setconfig['id']}' class='btn btn-success' value='修改保存'>
+            </div>
+            </div>
+            </div>
+            <style>
+            .contentinput input{margin-left:20px;padding:5px;}
+            </style>
+            ";
+            return ['stat' => 0,'html' =>$html,];
+        }else{
+            return ['stat' => 1,'msg' =>'错误:没有这条通道信息!',];
+        }	
+    }
+     public function way_edit(){
+        date_default_timezone_set('PRC');
+        $id = input('configid');
+        $setconfig = db('pay_way')->where(['id'=>$id,])->find();
+        $set = db('pay_set')->where(['id'=>$setconfig['set_id'],])->find();
+        if($setconfig){
+            $name = input('onname');
+            if($set['type']=='diankapay'){
+                $code = "DK".input('onename');
+            }else {
+                $code = strtoupper(input('onename'));
+            }
+            $setpic = input('onpic');
+            $newpic = input('onnewpic');
+            if($newpic==null){
+                $pic = $setpic;
+            }else {
+                $pic = $newpic;
+            }
+            $setconfigArr = array(
+                'name'=>$name,
+                'code'=>$code,
+                'img'=>$pic,
+                'update_time'=>time(),
+            );                        
+            db('pay_way')->where(['id'=>$id])->update($setconfigArr);
+            return ['stat' => 0,];
+        }else{
+            return ['stat' => 1,'msg' =>'错误:没有这条通道信息!',];
+        }
+    }
+     public function way_del(){
+        $id = input('configid');
+        $setconfig = db('pay_way')->where(['id'=>$id,])->find();         
+        if($setconfig){
+            db('pay_way')->where(['id'=>$id,])->delete();
+            //db('vc_thirdcode')->where(['set_configid'=>$id,])->delete();
+            return ['stat' => 0];
+        }else {
+            return ['stat' => 1,'msg' =>'错误:没有这条通道信息!',];
+        }
+    }
+
+
+    public function third(){
+    	date_default_timezone_set('PRC');
+       	$param = $this->request->param();
+		$where =[];
+		 if($param['keywords']??''){
+          	$where['name|type'] = ['like','%'.$param['keywords'].'%'];
+         }
+     	config('paginate.query',$param);
+        $third =  db('pay_third')->where($where)->order('id asc')->paginate(10);
+        $this->assign('third',$third);
+        $this->view->page_header = '第三方支付';
+        return $this->fetch();
+    }
+
+  public function third_add(){
+        date_default_timezone_set('PRC');
+        $name = input('Tname');
+        $type = input('FolderName');
+        $pid = input('Tid');
+        $pkey = input('Tkey');
+        $purl = input('Turl');
+        $hrefbackurl = input('Threfbackurl');
+        $callbackurl = input('Tcallbackurl');
+        $queryurl = input('Tqueryurl');
+        if(preg_match('/[\x{4e00}-\x{9fa5}]/u', $callbackurl)>0){
+            return ['stat' => 1,'msg' =>'异步回调地址错误:不能含有中文或者传参数!',];
+        }
+        
+        $paytype = db('pay_third')->where(['name'=>$name,'type'=>$type])->select();
+
+        if($paytype->isEmpty()){
+            $thirdArr = array(
+                'name'=>$name,
+                'type'=>$type,
+                'pid'=>$pid,
+                'pkey'=>$pkey,
+                'purl'=>$purl,
+                'hrefbackurl'=>$hrefbackurl,
+                'callbackurl'=>$callbackurl,
+                'queryurl'=>$queryurl,
+                'add_time'=>time(),
+            );
+            db('pay_third')->insert($thirdArr);            
+            return ['stat' => 0,'msg' =>'添加成功',];
+        }else {
+            return ['stat' => 1,'msg' =>'该第三方已经存在,无需添加',];
+        }
+    }
+    
+    public function third_gethtml(){
+        date_default_timezone_set('PRC');
+        $id = input('id');
+        $thirdpay = db('pay_third')->where(['id'=>$id,])->find();
+        if($thirdpay){
+            $html = "
+            <div id='paycontent'>
+            <input type='hidden' id='thirdid' value='{$thirdpay['id']}'>
+            <div class='contentinput'><span>第三方名称</span><input  id='name' value='{$thirdpay['name']}'></div>
+            <div class='contentinput'><span>文件夹名称</span><input  id='type' value='{$thirdpay['type']}'></div>
+            <div class='contentinput'><span>商户 ID</span><input  id='pid' value='{$thirdpay['pid']}'></div>
+            <div class='contentinput'><span>商户密钥</span><input  id='pkey' value='{$thirdpay['pkey']}'></div>
+            <div class='contentinput'><span>网关地址</span><input  id='purl' value='{$thirdpay['purl']}'></div>
+            <div class='contentinput'><span>同步回调地址</span><input  id='hrefbackurl' value='{$thirdpay['hrefbackurl']}'></div>
+            <div class='contentinput'><span>异步回调地址</span><input  id='callbackurl' value='{$thirdpay['callbackurl']}'></div>
+            <div class='contentinput'><span>查询订单地址</span><input  id='queryurl' value='{$thirdpay['queryurl']}'></div>            
+            <input type='button' id='EditSave' thirdid='{$thirdpay['id']}' class='btn btn-success' value='修改保存'>
+            </div>
+            <style>
+            .contentinput input{margin-left:20px;padding:5px;}
+            #paycontent .contentinput{}
+            #paycontent{text-align: center;padding-top:20px;}
+            #paycontent .contentinput span{display:inline-block;width:100px;}
+            #paycontent .contentinput input{margin-bottom:10px;width: 345px;}
+            #EditSave{float:right;margin-right:109px;margin-top: 20px;}
+            </style>
+            ";
+            return ['stat' => 0,'html'=>$html,];
+        }else {
+            return ['stat' => 1,'msg' =>'错误:没有这条第三方信息!',];
+        }
+    }
+    
+    public function third_edit(){
+        date_default_timezone_set('PRC');
+        $id = input('thirdid');
+        $name = input('name');
+        $type = input('type');
+        $pid = input('pid');
+        $pkey = input('pkey');
+        $purl = input('purl');
+        $hrefbackurl = input('hrefbackurl');
+        $callbackurl = input('callbackurl');
+        $queryurl = input('queryurl');
+        if(!$name || !$type){
+            return ['stat' => 1,'msg' =>'错误:第三方信息不能为空!',];
+        }
+        $thirdpay = db('pay_third')->where(['id'=>$id,])->find();
+        if($thirdpay){
+            $thirdpayArr = array(
+                'name'=>$name,
+                'type'=>$type,
+                'pid'=>$pid,
+                'pkey'=>$pkey,
+                'purl'=>$purl,
+                'hrefbackurl'=>$hrefbackurl,
+                'callbackurl'=>$callbackurl,
+                'queryurl'=>$queryurl,
+                'update_time'=>time(),
+            );            
+            db('pay_third')->where(['id'=>$id])->update($thirdpayArr);
+            return ['stat' => 0,];
+        }else {
+            return ['stat' => 1,'msg' =>'错误:没有这条第三方信息!',];
+        }
+    }
+    
+    public function third_del(){
+        $id = input('id');
+        $thirdpay = db('pay_third')->where(['id'=>$id,])->find();
+        if($thirdpay){
+            db('pay_third')->where(['id'=>$id,])->delete();
+            return ['stat' => 0];
+        }else {
+            return ['stat' => 1,'msg' =>'错误:没有这条第三方信息!',];
+        }
+    }
+    
+    /*
+     * 添加第三方 的 三方支付项 的 配置页面
+     */
+    public function third_set(){
+        $id = input('id');
+        $thirdpay = db('vc_thirdpay')->where(['id'=>$id,])->find();        
+        $set = db('vc_set')->select();
+        
+        $this->assign('id',$id);
+        $this->assign('thirdpay',$thirdpay);
+        $this->assign('set',$set);
+
+        $setid = input('setid');
+        $this->assign('setid',$setid);
+        
+        $query = db('vc_set_config');
+        if($setid && is_numeric($setid)){
+            $query->where('set_id',$setid);
+        }
+        
+        $options = $query->getOptions();
+        $set_config = $query->order('id desc')->paginate();
+        
+        $set_config->appends('id',$id);
+        if($setid){            
+            $set_config->appends('setid',$setid);            
+        }
+        
+        foreach ($set_config as $k=>$v){
+            $result[$k]['id'] = $v['id'];
+            $result[$k]['set_id'] = $v['set_id'];
+            $setN = db('vc_set')->where('id',$v['set_id'])->find();
+            $result[$k]['name'] = $setN['name'];
+            $result[$k]['cname'] = $v['name'];
+            $result[$k]['thirdname'] = $thirdpay['name'];            
+            $thirdcode = db("vc_thirdcode")->where('set_configid',$v['id'])->where('thirdid',$thirdpay['id'])->find();             
+            $result[$k]['code'] = $thirdcode['code'];
+            $result[$k]['min'] = $thirdcode['min'];
+            $result[$k]['max'] = $thirdcode['max'];
+            $result[$k]['status'] = $thirdcode['status'];
+            $result[$k]['warntime'] = $thirdcode['warntime'];
+            $result[$k]['money_decimal'] = $thirdcode['money_decimal'];
+        }
+        
+        $record = db('vc_set_config')->options($options)->count();
+        $set_config->extra(['总记录'=>$record]);
+        
+        $this->assign('set_config',$set_config);
+        $this->assign('result',$result);
+        $this->assign('record',$record);
+        
+        return $this->fetch();
+    }
+    
+    public function third_set_edit(){
+        date_default_timezone_set('PRC');
+        $status = input('status');
+        $setid = input('setid');
+        $setconfigid = input('setconfigid');
+        $thirdid = input('thirdid');
+        $code = input('code');
+        $min = input('min');
+        $max = input('max');
+        $warntime = input('warntime/d',0);
+        if($warntime<0){
+            return ['stat' => 1,'msg' =>'报警时间参数有误！',];
+        }
+        $decimal = input('decimal',0);
+        $thirdcode = db('vc_thirdcode')->where('set_configid',$setconfigid)
+        ->where('thirdid',$thirdid)->find();
+        if(!$thirdcode){
+            $thirdcodeArr = array(
+                'status'=>$status,
+                'setid'=>$setid,
+                'set_configid'=>$setconfigid,
+                'thirdid'=>$thirdid,
+                'code'=>$code,
+                'min'=>$min,
+                'max'=>$max,
+                'add_time'=>time(),
+                'warntime'=>$warntime,                
+            );            
+            db('vc_thirdcode')->insert($thirdcodeArr);
+            return ['stat' => 0,'msg' =>'添加成功',];
+        }else {
+            $thirdcodeArr = array(
+                'status'=>$status,
+                'code'=>$code,
+                'min'=>$min,
+                'max'=>$max,
+                'update_time'=>time(),
+                'warntime'=>$warntime,
+                'money_decimal'=>$decimal,
+            );
+            db('vc_thirdcode')->where('set_configid',$setconfigid)
+            ->where('thirdid',$thirdid)->update($thirdcodeArr);            
+            return ['stat' => 0,'msg' =>'更新成功',];
+        }
+    }
+
+    public function third_key_view(){
+        $id = input('id/d');
+        $type = input('type');
+        if(!$id){
+            return ['stat' => 1,'msg' =>'id参数不能为空！',];
+        }
+        if(!in_array($type, ['pubkey','prikey'])){
+            return ['stat' => 1,'msg' =>'type参数不合法！',];
+        }
+        $thirdpay = db('pay_third')->where('id',$id)->find(); 
+        
+        $path = ROOT_PATH . 'houtai' . DS . 'uploads' . DS;        
+        $file = $path . $thirdpay[$type];
+         
+        //return ['stat' => 1,'msg' =>$file,];
+        //$content = file_get_contents("/www/wwwroot/site/houtai/uploads/20170805/4c051373c8b96cac31f09010e9137c6e.pem");
+        if(!is_file($file)){
+            return ['stat' => 1,'msg' =>'文件不存在！',];
+        }
+            
+        $content = file_get_contents($file);
+        $content = str_replace('\r\n', '<br>', $content);
+        return ['stat' => 0,'html' =>$content,];
+    }
+    
+	 public function channel(){
+      	date_default_timezone_set('PRC');
+       	$param = $this->request->param();
+       	$setid ='';
+       	$thirdid = '';
+       	$set =  db('pay_set')->order('id asc')->select();
+        if(!$set->isEmpty()){
+        	$this->assign('set',$set);
+        }
+      
+		$where =[];
+		 if($param['setid']??''){
+          	$where['pch.setid'] = ['eq',$param['setid']];
+          	$setid = $param['setid'];
+          	         
+         }
+         if($param['id']??''){
+          	$where['pch.thirdid'] = ['eq',$param['id']];
+          	$thirdid = $param['id'];
+          
+         }
+     	 $join = [
+		   	 	['pay_set ps','pch.setid=ps.id','left'],
+		   	 	['pay_way pw','pch.set_configid=pw.id','left'],
+		   	 	['pay_third pt','pch.thirdid=pt.id','left'],
+		];
+		config('paginate.query',$param);
+        $channel =  db('pay_channel')->alias('pch')->field('pch.*, ps.name as pname,pw.name as pwname,pt.name as ptname')->join($join)->where($where)->order('pch.id asc')->paginate(10);
+        $this->assign('setid',$setid); 
+        $this->assign('thirdid',$thirdid); 
+      	$this->assign('channel',$channel);
+        $this->view->page_header = '支付渠道';
+        return $this->fetch();
+    }
+    
+    public function channel_edit(){        
+        date_default_timezone_set('PRC');
+        $status = input('status');
+        $setid = input('setid');
+        $setconfigid = input('setconfigid');
+        $thirdid = input('thirdid');
+        $code = input('code');
+        $min = input('min');
+        $max = input('max');        
+        $warntime = input('warntime/d',0);
+        if($warntime<0){
+            return ['stat' => 1,'msg' =>'报警时间参数有误！',];
+        }        
+        $thirdcode = db('pay_channel')->where(['set_configid'=>$setconfigid,'thirdid'=>$thirdid])->select();
+      
+        if(!$thirdcode->isEmpty()){
+            $UpdateArr = array(
+                'status'=>$status,
+                'code'=>$code,
+                'min'=>$min,
+                'max'=>$max,
+                'update_time'=>time(),
+                'warntime'=>$warntime,
+            );
+            db('pay_channel')->where(['set_configid'=>$setconfigid,'thirdid'=>$thirdid])->update($UpdateArr);
+            return ['stat' => 0,'msg' =>'保存成功',];
+        }else {
+            return ['stat' => 1,'msg' =>'错误,没有这条第三方配置信息',];
+        }
+    }
+
+    public function upload(){
+
+        date_default_timezone_set('PRC');
+        //echo ROOT_PATH;die;
+        $file = request()->file('photoimg');
+        //$path = "uploads/";
+        $path = ROOT_PATH . 'houtai' . DS . 'uploads';
+        $info = $file->move($path);
+        if($info){
+            //dump($info);return;
+            $type = input('itemtype');
+            $ext = $info->getExtension();
+            if(!$type){//上传图片
+                if(!in_array($ext,['png','jpg'])){
+                    echo "图片扩展名有误！";
+                }
+                
+                $url = DS . 'uploads'. DS . $info->getSaveName();
+                echo '<img src="' . $url . '"  class="preview">';         
+                $picArr = array(
+                    'img'=>$url,
+                    'add_time'=>time(),
+                );
+              //  db('vc_set_images')->insert($picArr);
+            }
+            if(in_array($type, ['pubkey','prikey'])){//上传公私密钥
+                if(!in_array($ext,['txt','pem'])){
+                    echo "文件扩展名有误！";
+                }
+                
+                $id = input('itemid');
+                if(!$id){echo "id参数错误!";return;}
+                //$content = file_get_contents($filename);
+                $filename = $info->getSaveName();
+                $data = [$type=>$filename];
+             //   db('vc_thirdpay')->where('id',$id)->update($data);
+                echo $filename;
+            }
+        }else{
+            echo '上传出错了！';
+        }
+        
+      
+    }
+    
+    
+}

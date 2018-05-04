@@ -1,0 +1,55 @@
+<?php
+// +----------------------------------------------------------------------
+// | OneThink [ WE CAN DO IT JUST THINK IT ]
+// +----------------------------------------------------------------------
+// | Copyright (c) 2013 http://www.onethink.cn All rights reserved.
+// +----------------------------------------------------------------------
+// | Author: 麦当苗儿 <zuojiazi@vip.qq.com> <http://www.zjzit.cn>
+// +----------------------------------------------------------------------
+
+namespace app\mobile\Controller;
+use app\mobile\Base;
+
+
+/**
+ * 前台首页控制器
+ * 主要获取首页聚合数据
+ */
+class Index extends Base
+{
+    /**
+     * 系统首页
+     * @return mixed|string
+     */
+    public function index()
+    {
+		$lists = model('score_goods')->where(array('isDelete'=>0, 'enable'=>1))->order('id')->select() ;
+		$this->assign('lists',$lists);//列表
+		return $this->fetch('index');
+    }
+
+	public function toSearch()
+    {
+		return $this->fetch();
+	}
+
+	public function search()
+    {
+		$content = request()->param('content') ;
+		$lists   = model('score_goods')->where(array('title'=>array('like','%'.$content.'%')))->order('id')->select()->toArray() ;
+		$this->assign('lists',$lists) ; //列表内容
+		return $this->fetch() ;
+    }
+
+    public function test(){
+		//$data=M()->query("SELECT * FROM `gy_members` WHERE  uid=%s",$_GET['id']);
+		//dump(M()->getLastSql());
+		//dump($data);
+        // $table = new \OT\DataDictionary;
+        // echo "<pre>".PHP_EOL;
+        // $out = $table->generateAll();
+        // echo "</pre>";
+        // print_r($out);
+    }
+
+}

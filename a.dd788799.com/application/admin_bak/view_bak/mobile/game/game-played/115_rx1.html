@@ -1,0 +1,43 @@
+<input type="hidden" name="playedGroup" value="<?=$groupId?>" />
+<input type="hidden" name="playedId" value="<?=$playedId?>" />
+<input type="hidden" name="type" value="<?=$type?>" />
+<div>
+    <div class="pp pp11" action="tz11x5Select" length="1" >
+        <div class="title"><?=$var?></div>
+        &nbsp;
+        <div class="pp-number">
+			<div style="float:left">
+				<a href="javascript:void" type="button" value="01" class="code d min">01</a>
+				<a href="javascript:void" type="button" value="02" class="code s min" >02</a>
+				<a href="javascript:void" type="button" value="03" class="code d min">03</a> 
+				<a href="javascript:void" type="button" value="04" class="code s min">04</a>
+				<a href="javascript:void" type="button" value="05" class="code d min">05</a>
+			</div>
+			<div style="float:left">
+				<a href="javascript:void" type="button" value="06" class="code s max">06</a>
+				<a href="javascript:void" type="button" value="07" class="code d max">07</a>
+				<a href="javascript:void" type="button" value="08" class="code s max">08</a>
+				<a href="javascript:void" type="button" value="09" class="code d max">09</a>
+				<a href="javascript:void" type="button" value="10" class="code s max">10</a>
+				<a href="javascript:void" type="button" value="11" class="code d max">11</a>
+			</div>
+		</div>
+        &nbsp;&nbsp;
+		<div class="pp-action">
+			<a href="javascript:void" type="button" value="清" class="action none">清</a>
+			<a href="javascript:void" type="button" value="双" action="uniqueSelect" class="action even">双</a>
+			<a href="javascript:void" type="button" value="单" action="uniqueSelect" class="action odd">单</a>
+			<a href="javascript:void" type="button" value="小" action="uniqueSelect" class="action small">小</a>
+			<a href="javascript:void" type="button" value="大" action="uniqueSelect" class="action large">大</a>
+			<a href="javascript:void" type="button" value="全" action="uniqueSelect" class="action all">全</a>
+		</div>
+    </div>
+</div>
+<?php
+	//$maxPl=$getPl($type, $playedId);
+?>
+<script type="text/javascript">
+$(function(){
+	gameSetPl(<?=json_encode($maxPl)?>);
+})
+</script>

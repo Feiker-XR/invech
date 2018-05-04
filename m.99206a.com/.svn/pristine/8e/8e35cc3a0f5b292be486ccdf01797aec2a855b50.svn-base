@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta charset="UTF-8">
+<title>Preferential - 优惠活动页面</title>
+<link rel="stylesheet" type="text/css" href="/newview/css/style.css" />
+<script src="/js/jquery1.9.0.min.js"></script>
+<script type="text/javascript" src="/js/js/jquery.jslides.js"></script>
+<script type="text/javascript" src="/js/js/jquery.SuperSlide.2.1.1.js"></script>
+<script src="/Scripts/swfobject_modified.js" type="text/javascript"></script>
+<!--Self-->
+<script type="text/javascript" language="JavaScript" src="/newview/js/main.js"></script>
+<script type="text/javascript" language="JavaScript" src="/js/main.js"></script>
+<script type="text/javascript" language="JavaScript" src="/js/main.new.js"></script>
+<script type="text/javascript" language="JavaScript" src="/js/layer.js"></script>
+</head>
+<body>
+	<div class="head">
+		<!--欢迎-->
+
+		{include file='common/nav'}
+
+		<!--banner-->
+	</div>
+	<div class="block_0"></div>
+	<!--优惠活动-->
+	<div class="game_r_center">
+		<div class="game_l_login">
+
+			<div class="block_0"></div>
+			<div class="game_p_login_all">
+				<div class="focusBox" style="margin: 0 auto">
+					<ul class="pic">
+						<!-- <li><a href="{:url('game/index')}" target="index"><img src="/img/electr-slider-bg1.png" /></a></li>
+						<li><a href="{:Url('lottery/home')}" target="index"><img src="/img/game-slider-bg.png" /></a></li>
+						<li><a href="{:Url('live/index')}" target="index"><img src="/img/live-slider-bg.png" /></a></li>
+						<li><a href="{:Url('sport/index')}" target="index"><img src="/img/sport-bg1.png" /></a></li> -->
+						<li>
+							<!-- <a href="{:Url('game/index')}" target="index"><img src="/img/electr-slider-bg1.png" /></a> -->
+							<a href="http://hb99206.com/" target="index"><img src="/img/electr-slider-bg1.png" /></a>
+						</li>
+						<li>
+							<!-- <a href="{:Url('lottery/home')}" target="index"><img src="/img/game-slider-bg.png" /></a> -->
+								<a href="/lottery/index/type/csc.html" target="index"><img src="/img/game-slider-bg.png" /></a>
+						</li>
+						<li>
+							<!-- <a href="{:Url('live/index')}" target="index"><img src="/img/live-slider-bg.png" /></a> -->
+							<a href="{:Url('promotions/index')}" target="index"><img src="/img/live-slider-bg.png" /></a>
+						</li>
+						<li>
+							<!-- <a href="{:Url('sport/index')}" target="index"><img src="/img/sport-bg1.png" /></a> -->
+							<a href="{:Url('vipcheck/index')}" target="index"><img src="/img/sport-bg1.png" /></a>
+						</li>
+					</ul>
+					<a class="prev" href="javascript:void(0)"></a> <a class="next"
+						href="javascript:void(0)"></a>
+					<ul class="hd">
+						<li></li>
+						<li></li>
+						<li></li>
+						<li></li>
+					</ul>
+				</div>
+				<div class="block_30"></div>
+				<div class="banner_notice txtMarquee-left">
+					<div class="bd">
+						<span class="f14 fl ml10 mr10">公告：</span>
+						<ul class="fl f14">
+							{volist id="vo" name="notice"}
+								<li class="mt7">{$vo['msg']}</li>
+							{/volist}
+						</ul>
+					</div>
+				</div>
+				<div class="block_0"></div>
+				<div class="preferential_all">
+					<!--活动详情list-->
+					<div class="Discount">
+						<div class="Discountb">
+							<!--<div class="bellows single"></div>
+							<?php foreach ($result as $v){?>
+							<?php if($v['ismobile'] == 0){?>
+								<?php echo $v['title']?>
+							<div id="MemberExclusive" class="preferential_show">
+								<div class="memExclusive_1" style="margin-bottom: 5px;">
+									<a href="javascript:void(0);" onclick="menuclick('ct<?php echo $v['addtime']?>')">
+										<img src="<?php echo $v['img']?>" />
+									</a>
+								</div>
+								<div class="eventtext" style="font-size: 12px; line-height: 22px; display: none" id="ct<?php echo $v['addtime']?>">
+									<?php echo html_entity_decode($v['content'])?>
+								</div>
+							</div>
+							<?php }?>
+							<?php }?>-->
+
+										<div id="MemberExclusive" class="preferential_show">
+								<div class="memExclusive_1" style="margin-bottom: 5px;">
+									<a href="http://yoplay.com/news/guessredpacket_apr18/" onclick="menuclick('ag1')" target="_blank" >
+										<img src="/newview/img/20180405/ag1.png" />
+									</a>
+								</div>
+							<div class="eventtext" style="font-size: 12px; line-height: 22px; display: none" id="ag">
+									<img src="/newview/img/20180327/4-1hfyh.png" />
+								</div>
+							</div>
+
+										<div id="MemberExclusive" class="preferential_show">
+								<div class="memExclusive_1" style="margin-bottom: 5px;">
+									<a href="http://xingaming.com/zh_event.html" onclick="menuclick('ag2')"  target="_blank">
+										<img src="/newview/img/20180405/ag2.png" />
+									</a>
+								</div>
+							<div class="eventtext" style="font-size: 12px; line-height: 22px; display: none" id="ag">
+									<img src="/newview/img/20180327/4-1hfyh.png" />
+								</div>
+							</div>
+
+
+
+
+
+								<div id="MemberExclusive" class="preferential_show">
+								<div class="memExclusive_1" style="margin-bottom: 5px;">
+									<a href="javascript:void(0);" onclick="menuclick('sjb')">
+										<img src="/newview/img/2018317/sjbhf.png" />
+									</a>
+								</div>
+								<div class="eventtext" style="font-size: 12px; line-height: 22px; display: none" id="sjb">
+									<img src="/newview/img/2018317/sjbnr.png" />
+								</div>
+							</div>
+
+
+
+							<div id="MemberExclusive" class="preferential_show">
+								<div class="memExclusive_1" style="margin-bottom: 5px;">
+									<a href="javascript:void(0);" onclick="menuclick('lhc')">
+										<img src="/newview/img//2018317/lhchf.png" />
+									</a>
+								</div>
+								<div class="eventtext" style="font-size: 12px; line-height: 22px; display: none" id="lhc">
+									<img src="/newview/img/2018317/lhcnr.png" />
+								</div>
+							</div>
+
+
+
+
+
+
+
+							<div id="MemberExclusive" class="preferential_show">
+								<div class="memExclusive_1" style="margin-bottom: 5px;">
+									<a href="javascript:void(0);" onclick="menuclick('bjzft')">
+										<img src="/newview/img//2018125/yhhf.png" />
+									</a>
+								</div>
+								<div class="eventtext" style="font-size: 12px; line-height: 22px; display: none" id="bjzft">
+									<img src="/newview/img//2018125/hdxq.png" />
+								</div>
+							</div>
+							<!--
+							<div id="MemberExclusive" class="preferential_show">
+								<div class="memExclusive_1" style="margin-bottom: 5px;">
+									<a href="javascript:void(0);" onclick="menuclick('bjzft')">
+										<img src="/newview/img/20171216/bjzft.png" />
+									</a>
+								</div>
+								<div class="eventtext" style="font-size: 12px; line-height: 22px; display: none" id="bjzft">
+									<img src="/newview/img/20171216/bjzfc.png" />
+								</div>
+							</div>
+							 -->
+						<!--	<div id="MemberExclusive" class="preferential_show">
+								<div class="memExclusive_1" style="margin-bottom: 5px;">
+									<a href="javascript:void(0);" onclick="menuclick('1xjhkt')">
+										<img src="/newview/img/20171119/1xjhkt.png" />
+									</a>
+								</div>
+								<div class="eventtext" style="font-size: 12px; line-height: 22px; display: none" id="1xjhkt">
+									<img src="/newview/img/20171119/1xjhkc.png" />
+								</div>
+							</div>
+
+							<div id="MemberExclusive" class="preferential_show">
+								<div class="memExclusive_1" style="margin-bottom: 5px;">
+									<a href="javascript:void(0);" onclick="menuclick('2tzzrt')">
+										<img src="/newview/img/20171119/2tzzrt.png" />
+									</a>
+								</div>
+								<div class="eventtext" style="font-size: 12px; line-height: 22px; display: none" id="2tzzrt">
+									<img src="/newview/img/20171119/2tzzrc.png" />
+								</div>
+							</div>	-->
+
+
+
+
+							<div id="MemberExclusive" class="preferential_show">
+								<div class="memExclusive_1" style="margin-bottom: 5px;">
+									<a href="javascript:void(0);" onclick="menuclick('4appxzt')">
+										<img src="/newview/img/20171119/4appxzt.png" />
+									</a>
+								</div>
+								<div class="eventtext" style="font-size: 12px; line-height: 22px; display: none" id="4appxzt">
+									<img src="/newview/img/20171119/4appxzc.png" />
+								</div>
+							</div>
+
+							<div id="MemberExclusive" class="preferential_show">
+								<div class="memExclusive_1" style="margin-bottom: 5px;">
+									<a href="javascript:void(0);" onclick="menuclick('5apptzt')">
+										<img src="/newview/img/20171119/5apptzt.png" />
+									</a>
+								</div>
+								<div class="eventtext" style="font-size: 12px; line-height: 22px; display: none" id="5apptzt">
+									<img src="/newview/img/20171119/5apptzc.png" />
+								</div>
+							</div>
+
+								<!-- -- -->
+							<div id="MemberExclusive" class="preferential_show">
+								<div class="memExclusive_1" style="margin-bottom: 5px;">
+									<a href="javascript:void(0);" onclick="menuclick('ct2017-05-24 08:57:29')">
+										<img src="/newview/img/promotions_1.png">
+									</a>
+								</div>
+								<div class="eventtext" style="font-size: 12px; line-height: 22px; display: none" id="ct2017-05-24 08:57:29">
+									<img src="/upload/image/20170524/20170524085719_23916.jpg" alt="">
+								</div>
+							</div>
+							<!--
+							<div id="MemberExclusive" class="preferential_show">
+								<div class="memExclusive_1" style="margin-bottom: 5px;">
+									<a href="javascript:void(0);" onclick="menuclick('ct2017-05-24 09:00:26')">
+										<img src="/newview/img/promotions_2.png">
+									</a>
+								</div>
+								<div class="eventtext" style="font-size: 12px; line-height: 22px; display: none" id="ct2017-05-24 09:00:26">
+									<img src="/hotimg/c20170413001.jpg" alt="">
+								</div>
+							</div>
+
+							<div id="MemberExclusive" class="preferential_show">
+								<div class="memExclusive_1" style="margin-bottom: 5px;">
+									<a href="javascript:void(0);" onclick="menuclick('ct2017-05-24 13:16:16')">
+										<img src="/newview/img/promotions_3.png">
+									</a>
+								</div>
+								<div class="eventtext" style="font-size: 12px; line-height: 22px; display: none" id="ct2017-05-24 13:16:16">
+									<img src="/hotimg/c20170413002.jpg" alt="">
+								</div>
+							</div>
+
+							<div id="MemberExclusive" class="preferential_show">
+								<div class="memExclusive_1" style="margin-bottom: 5px;">
+									<a href="javascript:void(0);" onclick="menuclick('ct2017-05-24 13:17:50')">
+										<img src="/newview/img/promotions_4.png">
+									</a>
+								</div>
+								<div class="eventtext" style="font-size: 12px; line-height: 22px; display: none" id="ct2017-05-24 13:17:50">
+									<img src="/upload/image/20170524/20170524131739_39778.jpg" alt="">
+								</div>
+							</div>
+								 -->
+							<div id="MemberExclusive" class="preferential_show">
+								<div class="memExclusive_1" style="margin-bottom: 5px;">
+									<a href="javascript:void(0);" onclick="menuclick('ct2017-05-24 13:21:10')">
+										<img src="/newview/img/promotions_5.png">
+									</a>
+								</div>
+								<div class="eventtext" style="font-size: 12px; line-height: 22px; display: none" id="ct2017-05-24 13:21:10">
+									<img src="/upload/image/20170524/20170524132101_90282.png" alt="">
+								</div>
+							</div>
+
+							<div id="MemberExclusive" class="preferential_show">
+								<div class="memExclusive_1" style="margin-bottom: 5px;">
+									<a href="javascript:void(0);" onclick="menuclick('ct2017-05-24 13:23:34')">
+										<img src="/newview/img/promotions_6.png">
+									</a>
+								</div>
+								<div class="eventtext" style="font-size: 12px; line-height: 22px; display: none" id="ct2017-05-24 13:23:34">
+									<img src="/upload/image/20170524/20170524132327_43950.jpg" alt="">
+								</div>
+							</div>
+
+							<div id="MemberExclusive" class="preferential_show">
+								<div class="memExclusive_1" style="margin-bottom: 5px;">
+									<a href="javascript:void(0);" onclick="menuclick('ct2017-05-24 13:25:41')">
+										<img src="/newview/img/promotions_7.png">
+									</a>
+								</div>
+								<div class="eventtext" style="font-size: 12px; line-height: 22px; display: none" id="ct2017-05-24 13:25:41">
+									<img src="/upload/image/20170524/20170524132518_22554.jpg" alt="">
+								</div>
+							</div>
+
+							<div id="MemberExclusive" class="preferential_show">
+								<div class="memExclusive_1" style="margin-bottom: 5px;">
+									<a href="javascript:void(0);" onclick="menuclick('ct2017-05-24 13:28:17')">
+										<img src="/newview/img/promotions_8.png">
+									</a>
+								</div>
+								<div class="eventtext" style="font-size: 12px; line-height: 22px; display: none" id="ct2017-05-24 13:28:17">
+									<img src="/upload/image/20170524/20170524132809_64750.png" alt="">
+								</div>
+							</div>
+
+							<div id="MemberExclusive" class="preferential_show">
+								<div class="memExclusive_1" style="margin-bottom: 5px;">
+									<a href="javascript:void(0);" onclick="menuclick('ct2017-05-24 13:30:47')">
+										<img src="/newview/img/promotions_9.png">
+									</a>
+								</div>
+								<div class="eventtext" style="font-size: 12px; line-height: 22px; display: none" id="ct2017-05-24 13:30:47">
+									<img src="/upload/image/20170524/20170524133039_37778.png" alt="">
+								</div>
+							</div>
+								<!--
+							<div id="MemberExclusive" class="preferential_show">
+								<div class="memExclusive_1" style="margin-bottom: 5px;">
+									<a href="javascript:void(0);" onclick="menuclick('ct2017-05-24 13:32:54')">
+										<img src="/newview/img/promotions_10.png">
+									</a>
+								</div>
+								<div class="eventtext" style="font-size: 12px; line-height: 22px; display: none" id="ct2017-05-24 13:32:54">
+									<img src="/upload/image/20170524/20170524111.png" alt="">
+								</div>
+							</div>	 -->
+
+							<div id="MemberExclusive" class="preferential_show">
+								<div class="memExclusive_1" style="margin-bottom: 5px;">
+									<a href="javascript:void(0);" onclick="menuclick('ct2017-05-24 13:35:22')">
+										<img src="/newview/img/promotions_11.png">
+									</a>
+								</div>
+								<div class="eventtext" style="font-size: 12px; line-height: 22px; display: none" id="ct2017-05-24 13:35:22">
+									<img src="/upload/image/20170524/20170524133645_45502.gif" alt="">
+								</div>
+							</div>
+
+							<div id="MemberExclusive" class="preferential_show">
+								<div class="memExclusive_1" style="margin-bottom: 5px;">
+									<a href="javascript:void(0);" onclick="menuclick('ct2017-05-24 13:36:58')">
+										<img src="/newview/img/promotions_12.png">
+									</a>
+								</div>
+								<div class="eventtext" style="font-size: 12px; line-height: 22px; display: none" id="ct2017-05-24 13:36:58">
+									<img src="/upload/image/20170524/20170524134003_23938.png" alt="">
+								</div>
+							</div>
+
+							<div id="MemberExclusive" class="preferential_show">
+								<div class="memExclusive_1" style="margin-bottom: 5px;">
+									<a href="javascript:void(0);" onclick="menuclick('ct2017-05-24 13:40:11')">
+										<img src="/newview/img/promotions_13.png">
+									</a>
+								</div>
+								<div class="eventtext" style="font-size: 12px; line-height: 22px; display: none" id="ct2017-05-24 13:40:11">
+									<img src="/upload/image/20170524/20170524134140_40250.png" alt="">
+								</div>
+							</div>
+
+
+
+							<!--<script src="/js/js/jquery.min.js"></script>-->
+							<script src="/js/js/velocity.min.js"></script>
+							<!-- Include bellows.js -->
+							<script src="/js/js/bellows.min.js"></script>
+							<!-- Construct Bellows -->
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	{include file='common/footer'}
+	{include file='common/fix-left-right'}
+
+	<script type="text/javascript">
+		$(function() {
+//无缝左滚动
+$(".txtMarquee-left").slide({mainCell:".bd ul",autoPlay:true,effect:"leftMarquee",interTime:50,trigger:"click"});
+			$('#qian_dao .qian_dao').click(function() {
+				//window.open('qian_dao.php','qian_dao','menubar=no,status=yes,scrollbars=yes,top=150,left=400,toolbar=no,width=805,height=520');
+				$.ajax({
+					type : "post",
+					url : '/qian_dao.php',
+					data : {
+						'ajax' : 1
+					},
+					success : function(data) {
+						alert(data);
+					}
+				});
+			});
+
+			setInterval(function() {
+				$.ajax({
+					type : "post",
+					url : "{:Url('index/home')}",
+					data : {
+						'ajax' : 1,
+						'get_money' : '1'
+					},
+					success : function(data) {
+						if (/^[\d\.]+$/.test(data)) {
+							$('#money,#money_2').text(data);
+						}
+					}
+				});
+			}, 2000);
+				$(".banner_notice").css({"width":"1034px","height":"32px"});
+				$(".banner_notice .tempWrap").css({"width":"955px","height":"32px"});
+				$(".banner_notice .tempWrap ul").css({"height":"32px"});
+		})
+	</script>
+	<script type="text/javascript">
+		var old_menu = '';
+		function menuclick(submenu) {
+			if (old_menu != submenu) {
+				if (old_menu != '') {
+					document.getElementById(old_menu).style.display = 'none';
+				}
+				document.getElementById(submenu).style.display = 'block';
+				old_menu = submenu;
+			} else {
+				document.getElementById(submenu).style.display = 'none';
+				old_menu = '';
+			}
+		}
+	</script>
+	<script type="text/javascript">
+		function open_new_888(url) {
+			window.open(url,'newwindow','height=640,width=600,top=150,left='+ (screen.width - 640)/ 2+ ',toolbar=no,menubar=no,scrollbars=no, resizable=no,location=no, status=no');
+		}
+	</script>
+	<script>
+		$('.bellows').bellows({
+			singleItemOpen : true,
+			easing : 'ease-in-out',
+			duration : 600
+		})
+	</script>
+</body>
+
+</html>

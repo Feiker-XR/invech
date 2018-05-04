@@ -1,0 +1,93 @@
+<?php
+namespace app\admin\controller;
+use app\admin\Login;
+
+use app\common\model\Slide as SlideModel;
+use app\common\model\ActionLog as LogModel;
+
+class Slide extends Login{
+    
+    public function index(){
+
+        $this->view->page_header = '轮播图列表';
+        $request = request();
+        $list = SlideModel::getList($request);
+        $enable =  SlideModel::ENABLE;
+         $this->assign('enable',$enable);
+        $this->assign('list',$list);
+        return $this->fetch();
+    }
+      public function slide_save(){
+            $request = request();
+            $params = $request->param();
+            $id =  !empty($params['id'])? $params['id']:'';
+            $name =  !empty($params['name'])? $params['name']:'';
+            $desc =  !empty($params['desc'])? $params['desc']:'';
+            $link =  !empty($params['link'])? $params['link']:'';
+            $pic =  !empty($params['pic'])? $params['pic']:'';
+            $sort =  !empty($params['sort'])? $params['sort']:'';
+            $enable =  !empty($params['enable'])? $params['enable']:'';
+            $data = [
+               
+                'name'      => $name,
+                'desc'      => $desc,
+                'link'      => $link,
+                'pic'       => $pic,
+                'sort'      => $sort,
+                'enable'    => $enable,
+            ];
+
+             $res = [];
+            if($id){
+               
+                $slide = SlideModel::get(intval($id));
+                $list = $slide->validate('slide.index')->save($data);
+                if($list){
+                    LogModel::log(LogModel::BUSINESS_TYPE_EDIT,$slide,LogModel::BUSINESS_TYPES[LogModel::BUSINESS_TYPE_EDIT]);
+                   $res['msg'] = "操作成功";
+                }else{
+                    $res['msg']= $payway->getError();
+                }
+                 echo json_encode($res);
+            }else{
+                
+                $slide = new SlideModel();
+                $list = $slide->validate('slide.index')->save($data);
+                if($list){
+                   LogModel::log(LogModel::BUSINESS_TYPE_ADD,$slide,LogModel::BUSINESS_TYPES[LogModel::BUSINESS_TYPE_ADD]);
+                    $res['msg'] = "操作成功";
+                }else{
+                    $res['msg']= $slide->getError();
+                 }
+                 echo json_encode($res);
+            }
+        }
+    public function slide_form(){
+        
+         $request = request();
+         $params = $request->param(); 
+         if(!empty($params['id'])){
+             $info =  SlideModel::get(['id'=>$params['id']]);
+              $this->assign('info',$info);  
+         }
+         $enable =  SlideModel::ENABLE;
+         $this->assign('enable',$enable);
+       return view();
+    }
+
+     public function slide_del(){
+        $request = request();
+        $params = $request->param();
+        $slide =  SlideModel::get(intval($params['id']));
+
+        $list = $slide->delete();
+        $res = [];
+        if($list){
+           LogModel::log(LogModel::BUSINESS_TYPE_DELE,$slide,LogModel::BUSINESS_TYPES[LogModel::BUSINESS_TYPE_DELE]);
+           $res['msg'] = "操作成功";
+        }else{
+            $res['msg']= $slide->getError();
+        }
+        echo json_encode($res);
+    }
+}

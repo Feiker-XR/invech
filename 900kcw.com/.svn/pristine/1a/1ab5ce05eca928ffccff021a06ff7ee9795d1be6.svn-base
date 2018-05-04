@@ -1,0 +1,263 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title></title>
+        <meta name="description" content="">
+        <!--<meta name="viewport" content="user-scalable=yes, width=370, target-densityDpi=device-dpi" />-->
+        <meta name="viewport" content="width=device-width,user-scalable=0, minimum-scale=1.0, maximum-scale=1.0"/>
+
+        <link rel="stylesheet" href="fonts/fonts.css">
+        <link rel="stylesheet" href="css/main.css">
+        <link rel="stylesheet" href="css/style.css">
+        <link rel="stylesheet" href="css/stylespreloader.css" type="text/css" media="screen, print"/>
+
+        <script src="js/vendor/modernizr-2.8.3.min.js"></script>
+    </head>
+    <body id="bbo">
+<div id="preloader">
+	<div id="status">&nbsp;</div>
+</div>
+<div class="container">
+  <div class="header">
+  	<audio id="sound" autoplay="autoplay"></audio>
+   	<div class="logo"><img src="images/900pk_logo.png" width="309" height="59"  alt=""/></div>
+      <div class="position">
+       	  <div class="positm" id="pos1"></div>
+          <div class="positm" id="pos2"></div>
+          <div class="positm" id="pos3"></div>
+          <div class="positm" id="pos4"></div>
+          <div class="positm" id="pos5"></div>
+          <div class="positm" id="pos6"></div>
+          <div class="positm" id="pos7"></div>
+          <div class="positm" id="pos8"></div>
+          <div class="positm" id="pos9"></div>
+          <div class="positm" id="pos10"></div>
+      </div>
+      <div class="currentdraw">
+      	期数 : <span id="currentdrawid">00000000</span><span id="closeSound"></span>
+      </div>
+    
+  </div>
+  <div class="scenary page1">
+  		<div class="scenaryitm" id="scenaryitm">
+   	    <img src="images/scenery.jpg" width="2668" height="119"  alt=""/>
+        </div>  
+  </div>
+  <div class="road page1">
+    	<div class="roadani">
+        	<div class="roaditm" id="roaditm">
+   	    	<img src="images/road.jpg" width="2660" height="520"  alt=""/>
+            </div>
+        </div>
+   		<div class="roadstart" id="roadstart"><img src="images/finisher.png" width="249" height="515"  alt=""/>
+    		
+        </div>
+        <div class="car1" id="car1"><img src="images/car1.png" width="160" height="44"  alt=""/>
+        	<div class="wheel1a">
+				<img src="images/wheel.gif" width="20" height="20"  alt=""/>
+        	</div>
+            <div class="wheel1b">
+				<img src="images/wheel.gif" width="20" height="20"  alt=""/>
+        	</div>
+            <div class="wind">
+       	    	<img src="images/wind.png" width="144" height="53" alt=""/>
+            </div>
+            <div class="flame" style="right: -45px; bottom: 5px;">
+       	    	<img src="images/flame.png" width="49" height="11" alt=""/>
+            </div>
+    </div>
+        <div class="car2" id="car2"><img src="images/car2.png" width="164" height="44"  alt=""/>
+   	  	  <div class="wheel2a">
+				<img src="images/wheel.gif" width="20" height="20"  alt=""/>
+       	  </div>
+            <div class="wheel2b">
+				<img src="images/wheel.gif" width="20" height="20"  alt=""/>
+        	</div>
+            <div class="wind">
+       	    	<img src="images/wind.png" width="154" height="51" alt=""/>
+            </div>
+            <div class="flame" style="right: -45px; bottom: 5px;">
+       	    	<img src="images/flame.png" width="49" height="11" alt=""/>
+            </div>
+    </div>
+        <div class="car3" id="car3"><img src="images/car3.png" width="170" height="47"  alt=""/>
+        	<div class="wheel3a">
+				<img src="images/wheel.gif" width="20" height="20"  alt=""/>
+        	</div>
+            <div class="wheel3b">
+				<img src="images/wheel.gif" width="20" height="20"  alt=""/>
+        	</div>
+            <div class="wind">
+       	    	<img src="images/wind.png" width="162" height="55" alt=""/>
+            </div>
+            <div class="flame" style="right: -45px; bottom: 5px;">
+       	    	<img src="images/flame.png" width="51" height="12" alt=""/>
+            </div>
+        
+    </div>
+        <div class="car4" id="car4"><img src="images/car4.png" width="173" height="47"  alt=""/>
+        	<div class="wheel4a">
+				<img src="images/wheel.gif" width="21" height="21"  alt=""/>
+        	</div>
+            <div class="wheel4b">
+				<img src="images/wheel.gif" width="21" height="21"  alt=""/>
+        	</div>
+            <div class="wind">
+       	    	<img src="images/wind.png" width="154" height="56" alt=""/>
+            </div>
+            <div class="flame" style="right: -45px; bottom: 5px;">
+       	    	<img src="images/flame.png" width="51" height="12" alt=""/>
+            </div>
+        
+    </div>
+        <div class="car5" id="car5"><img src="images/car5.png" width="190" height="50"  alt=""/>
+        	<div class="wheel5a">
+				<img src="images/wheel.gif" width="21" height="21"  alt=""/>
+        	</div>
+            <div class="wheel5b">
+				<img src="images/wheel.gif" width="21" height="21"  alt=""/>
+        	</div>
+            <div class="wind">
+       	    	<img src="images/wind.png" width="158" height="57" alt=""/>
+            </div>
+            <div class="flame" style="right: -47px; bottom: 5px;">
+       	    	<img src="images/flame.png" width="53" height="13" alt=""/>
+            </div>
+        
+    </div>
+        <div class="car6" id="car6"><img src="images/car6.png" width="201" height="53"  alt=""/>
+        	<div class="wheel6a">
+				<img src="images/wheel.gif" width="22" height="22"  alt=""/>
+        	</div>
+            <div class="wheel6b">
+				<img src="images/wheel.gif" width="22" height="22"  alt=""/>
+        	</div>
+            <div class="wind">
+       	    	<img src="images/wind.png" width="161" height="59" alt=""/>
+            </div>
+            <div class="flame" style="right: -47px; bottom: 5px;">
+       	    	<img src="images/flame.png" width="53" height="13" alt=""/>
+            </div>
+    </div>
+        <div class="car7" id="car7"><img src="images/car7.png" width="210" height="59"  alt=""/>
+        	<div class="wheel7a">
+				<img src="images/wheel.gif" width="23" height="23"  alt=""/>
+        	</div>
+            <div class="wheel7b">
+				<img src="images/wheel.gif" width="23" height="23"  alt=""/>
+        	</div>
+            <div class="wind">
+       	    	<img src="images/wind.png" width="163" height="63" alt=""/>
+            </div>
+            <div class="flame" style="right: -48px; bottom: 5px;">
+       	    	<img src="images/flame.png" width="55" height="14" alt=""/>
+            </div>
+    </div>
+        <div class="car8" id="car8"><img src="images/car8.png" width="217" height="59"  alt=""/>
+       	  <div class="wheel8a">
+				<img src="images/wheel.gif" width="24" height="24"  alt=""/>
+       	  </div>
+            <div class="wheel8b">
+				<img src="images/wheel.gif" width="24" height="24"  alt=""/>
+        	</div>
+            <div class="wind">
+       	    	<img src="images/wind.png" width="165" height="65" alt=""/>
+            </div>
+            <div class="flame" style="right: -48px; bottom: 5px;">
+       	    	<img src="images/flame.png" width="55" height="14" alt=""/>
+            </div>
+    </div>
+        <div class="car9" id="car9"><img src="images/car9.png" width="230" height="66"  alt=""/>
+        	<div class="wheel9a">
+				<img src="images/wheel.gif" width="25" height="25"  alt=""/>
+        	</div>
+            <div class="wheel9b">
+				<img src="images/wheel.gif" width="25" height="25"  alt=""/>
+        	</div>
+            <div class="wind" style="left: -13px; top: -3px;">
+       	    	<img src="images/wind.png" width="177" height="72" alt=""/>
+            </div>
+            <div class="flame" style="right: -49px; bottom: 5px;">
+       	    	<img src="images/flame.png" width="57" height="15" alt=""/>
+            </div>
+    </div>
+        <div class="car10" id="car10"><img src="images/car10.png" width="241" height="66"  alt=""/>
+        	<div class="wheel10a">
+				<img src="images/wheel.gif" width="26" height="26"  alt=""/>
+        	</div>
+            <div class="wheel10b">
+				<img src="images/wheel.gif" width="26" height="26"  alt=""/>
+        	</div>
+            <div class="wind" style="left: -13px; top: -3px;">
+       	    	<img src="images/wind.png" width="177" height="72" alt=""/>
+            </div>
+            <div class="flame" style="right: -49px; bottom: 5px;">
+       	    	<img src="images/flame.png" width="58" height="16" alt=""/>
+            </div>
+    </div>
+   
+    
+    
+    <div class="trafficlight">
+    	<div class="countdownnum"></div>
+        <div class="countdownnum2"></div>
+    	<div class="redlight"><img src="images/lightred.png" width="293" height="193" alt=""/></div>
+   	  <div class="yellowlight"><img src="images/lightyellow.png" width="293" height="193" alt=""/></div>
+      <div class="greenlight"><img src="images/lightgreen.png" width="293" height="193" alt=""/></div>
+    </div>
+   
+  
+	</div>
+    
+    <div class="resultpage page2">
+    	<div class="resultitm result1" id="result1"><img src="images/result1.png" width="226" height="177" alt=""/></div>
+        <div class="resultitm result2" id="result2"><img src="images/result2.png" width="258" height="139" alt=""/></div>
+        <div class="resultitm result3" id="result3"><img src="images/result3.png" width="173" height="112" alt=""/></div>
+        <div class="resultitm resultcar2" id="resultcar2"><img src="images/winner1.png" width="422" height="184" alt="" class="resultcarimg2"/></div>
+        <div class="resultitm resultcar3" id="resultcar3"><img src="images/winner1.png" width="384" height="166" alt="" class="resultcarimg3"/></div>
+        <div class="resultitm resultcar1" id="resultcar1"><img src="images/winner1.png" width="510" height="222" alt="" class="resultcarimg1"/></div>
+  	</div>
+  <div class="footer">
+    	<div class="footer1">
+            <div class="footer1_2">期号：<span id="nextdrawtime" style="margin-top: 16px;display: inline-block;">0000-00-00  00:00</span><!--<br><span id="nextdrawid">000000</span>--></div>
+        </div>
+        <div class="footer2">
+        	<div class="footer2_1">冠亚和</div>
+            <div class="footer2_2" id="stat1_1">0</div>
+            <div class="footer2_2" id="stat1_2">0</div>
+            <div class="footer2_2" id="stat1_3">0</div>
+        </div>
+        <div class="footer3">
+        	<div class="footer2_1">龙虎</div>
+            <div class="footer2_2" id="stat2_1">0</div>
+            <div class="footer2_2" id="stat2_2">0</div>
+            <div class="footer2_2" id="stat2_3">0</div>
+            <div class="footer2_2" id="stat2_4">0</div>
+            <div class="footer2_2" id="stat2_5">0</div>
+        </div>
+    </div>
+    
+    <div class="flashlight">
+    </div>
+
+</div>
+
+<br>
+	<button id="an-btn1" onClick='startcountdown (3); showcurrentresult ("5,6,3,4,8,7,9,10,2,1");' style="font-size: 40px;">Countdown
+    </button>&nbsp;&nbsp;
+	<button id="an-btn2" onClick='midgame()' style="font-size: 40px;">Mid Racing</button>&nbsp;&nbsp;
+	<button id="an-btn3" onClick='finishgame("5,2,6,9,8,7,4,10,1,3");' style="font-size: 40px;">Finish game (result
+        out)</button>&nbsp;&nbsp;
+	<button id="an-btn4" onClick='resultpage("10,1,3,9,8,7,4,5,2,6");' style="font-size: 40px;">Result page</button>&nbsp;&nbsp;
+    <button id="an-btn5" onClick='showcurrentresult("5,6,3,4,8,7,9,10,2,1");' style="font-size: 40px;">Change top
+        result</button>&nbsp;&nbsp;
+
+
+        <script src="js/vendor/jquery-1.11.2.min.js"></script>
+        <script src="js/greensock/TweenMax.min.js"></script>
+        <script src="js/plugins.js"></script>
+        <script src="js/main.js"></script>
+    </body>
+</html>

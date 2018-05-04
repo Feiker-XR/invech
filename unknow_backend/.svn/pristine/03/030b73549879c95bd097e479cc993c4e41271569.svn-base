@@ -1,0 +1,409 @@
+	<?php if(Session('uid')!= '' && Session('username') != '') {?>
+	<!--登陆后-->
+		<!--底部nav固定-->
+		<div class="nav500_bottom" style="z-index: 10000;">
+			<span>
+				<a href="/index.php" class="nav500_bottom_a nav500_bottom_active" target="_self">
+					<i class="iconfont icon-zhuye"></i>首页
+				</a>
+			</span>
+			<span>
+				<a class="nav500_bottom_a" href="/promotions/index.html"  target="_self">
+					<i class="iconfont icon-zhuanxianglibao" style="font-size: 25px;"></i>优惠
+				</a>
+			</span>
+			<span>
+				<a href="/index.php/pay/member.html" class="nav500_bottom_a"  target="_self">
+					<i class="iconfont icon-tubiao207"></i>存款
+				</a>
+			</span>
+			<span>
+				<a href="https://messenger.providesupport.com/messenger/0nye75kga3q931e9lwrn16k4q0.html" class="nav500_bottom_a" target="_self">
+					<i class="iconfont icon-kefu"></i>客服
+				</a>
+			</span>
+			<span>
+				<a href="{:Url('user/index')}" class="nav500_bottom_a">
+					<i class="iconfont icon-iconfontcolor19-copy"></i>个人
+				</a>
+			</span>
+		</div>
+		<script>
+		$(function(){
+			//点击底部固定导航条切换
+			$(".nav500_bottom_a").click(function(){
+				var navThis = $(this);
+				navThis.css("color","#d9901e")
+				navThis.parent().siblings("span").find("a").css("color","#999999")
+				navThis.find("i").addClass("nav500_b_active");
+				navThis.parent().siblings("span").find("i").removeClass("nav500_b_active");
+				navThis.addClass("nav500_bottom_active").parent().siblings("span").find("a").removeClass("nav500_bottom_active")
+			});
+			/*$("#nav500_bottom_reg").click(function(){
+				$("#zc_img").trigger("click")
+			})
+
+			$("#reg_user_show").click(function(){
+				$(".login-modal").hide();
+				$(".reg-modal").show();
+				$("#zc_img").trigger("click")
+			})
+
+
+			$("#nav500_bottom_a").click(function(){
+				var x = $("#J_loginModal")
+				x.show();
+				getKey()
+			})
+			$("#nav500_bottom_reg").click(function(){
+				var y = $("#J_regModal")
+				y.show();
+				getKey()
+			})
+			$("#J_loginModal .close").click(function(){
+				$("#J_loginModal").hide()
+			})
+			$("#J_regModal .close").click(function(){
+				$("#J_regModal").hide()
+			})
+			$("#reg_user_show").click(function(){
+				$(".login-modal").hide();
+				$(".reg-modal").show();
+				$("#zc_img").trigger("click")
+			})*/
+		})
+
+		</script>
+
+	<?php }else{?>
+	<!--登陆前-->
+		<!--底部nav固定-->
+		<div class="nav500_bottom" style="z-index: 10000;">
+			<span>
+				<a href="/index.php" class="nav500_bottom_a nav500_bottom_active"  target="_self">
+					<i class="iconfont icon-zhuye"></i>首页
+				</a>
+			</span>
+			<span>
+				<a href="{:Url('promotions/index')}" class="nav500_bottom_a"  target="_self">
+					<i class="iconfont icon-zhuanxianglibao" style="font-size: 25px;"></i>优惠
+				</a>
+			</span>
+			<span>
+				<a href="/index.php/pay/member.html" class="nav500_bottom_a"  target="_self">
+					<i class="iconfont icon-tubiao207"></i>存款
+				</a>
+			</span>
+			<span>
+				<a href="https://messenger.providesupport.com/messenger/0nye75kga3q931e9lwrn16k4q0.html" class="nav500_bottom_a"  target="_self">
+					<i class="iconfont icon-kefu"></i>客服
+				</a>
+			</span>
+			<span>
+				<a href="javascript:void(0)" class="nav500_bottom_a" data-modal="#J_loginModal" id="nav500_bottom_a">
+					<i class="iconfont icon-iconfontcolor19-copy"></i>登录
+				</a>
+			</span>
+		</div>
+
+
+		<!--<div id="J_loginModal" class="login-modal modal">
+			<div class="inner">
+				<div class="close" data-target="#J_loginModal"><i class="fa fa-close"></i></div>
+				<div class="wap_login_bg">
+					<img src="/img/logo.png" data-src="/img/logo.png">
+				</div>
+
+				<form class="form-vertical" action="/index.php/index/login.html" method="post">
+				<input type="hidden" name="action" value="login">
+				<div class="form-group field-loginuser-username required">
+					&lt;!&ndash;<label class="control-label" for="loginuser-username">用户名</label>&ndash;&gt;
+					<div class="input-group">
+						<span class="wap_login_1">
+							<i><img src="/img/500f_login_2.png"></i>
+						</span>
+						<input type="text" id="username" class="form-control" name="username" placeholder="请输入会员账号">
+					</div>
+					<div class="help-block"></div>
+				</div>
+
+				<div class="form-group field-loginuser-password required">
+				&lt;!&ndash;<label class="control-label" for="loginuser-password">密码</label>&ndash;&gt;
+				<div class="input-group">
+					<span class="wap_login_1">
+						<i><img src="/img/500f_login_3.png"></i>
+					</span>
+					<input type="password" id="password" class="form-control" name="password" placeholder="******">
+				</div>
+				<div class="help-block"></div>
+				</div>
+				<div class="form-group field-loginuser-username required">
+					&lt;!&ndash;<label class="control-label" for="loginuser-username">验证码</label>&ndash;&gt;
+					<?php if($sysConfig['loginYzm'] == '1'){ ?>
+					<div class="input-group">
+						<span class="wap_login_1">
+							<i><img src="/img/500f_login_4.png"></i>
+						</span>
+
+
+							<div class="row">
+								<div class="col-xs-9">
+									<input type="text" id="vlcodes" class="form-control" name="dlyzm" placeholder="验证码" >
+								</div>
+								<div class="col-xs-3">
+									<img id="vPic" alt="(点选此处产生新验证码 )" title="( 点选此处产生新验证码 )" src="{:url('Mycaptcha/mobile_login')}" onclick="this.src='{:url('Mycaptcha/mobile_login')}?r='+Math.random()" height="34">
+								</div>
+							</div>
+
+
+					</div>
+					<?php } ?>
+					<div class="help-block"></div>
+				</div>
+
+				<div class="form-group wap_500_login_now">
+	            	<a class="btn btn-green btn-lg btn-block" name="login-button" style="color: white;">立即登录</a>
+	            </div>
+	            <div class="wap_500_forget_psw">
+					<a href="javascript:void(0)" onclick="javascript:Go_forget_pwd();">忘记密码？</a>
+				</div>
+				</form>
+			</div>
+		</div>
+
+		<div id="J_regModal" class="reg-modal modal">
+				<div class="inner container container_500F" style="padding-bottom:100px;padding: 0px 8px;">
+					<div class="close" data-target="#J_regModal">×</div>
+					<h1 class="container_500F_h1">————— 注册 —————</h1>
+					<p class="container_500F_p">——— REGISTER ———</p>
+					<form action="" id="register_form" class="form-horizontal">
+						<h2 class="register_form_bg_1">
+							会员登陆信息
+						</h2>
+						<div class="form-group">
+							<label for="" class="col-sm-2 control-label">登录账号：</label>
+							<div class="control-label-1">
+								<input type="text" name="zcname" id="zcusername" maxlength="9" class="form-control">
+							</div>
+							<div class="control-label-2">
+								<strong>*</strong>
+								<span>您在网站的登录账户，5-9个英文数字</span>
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="" class="col-sm-2 control-label">登录密码：</label>
+							<div class="control-label-1">
+								<input type="password" name="zcpwd1" id="zcpwd1" maxlength="12" onblur="pwStrength(this.value,0);" class="form-control">
+							</div>
+							<div class="control-label-2">
+								<strong>*</strong>
+								<span>由6-12位任意字符组成</span>
+							</div>
+						</div>
+						<div class="form-group password-degree">
+							<label for="" class="col-sm-2 control-label">密码强度：</label>
+							<div class="control-label-1 mb10">
+								<div class="btn-group">
+								  <button id="strength_L0" type="button" class="btn btn-default">弱</button>
+								   <button id="strength_M0" type="button" class="btn btn-default">中</button>
+								   <button id="strength_H0" type="button" class="btn btn-default">强</button>
+								</div>
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="" class="col-sm-2 control-label">确认密码：</label>
+							<div class="control-label-1">
+								<input type="password" name="zcpwd2" id="zcpwd2" maxlength="12" class="form-control">
+							</div>
+							<div class="control-label-2">
+								<strong>*</strong>
+								<span>由6-12位任意字符组成</span>
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="" class="col-sm-2 control-label">使用货币：</label>
+							<div class="control-label-1">
+								<select name="currency" class="form-control"><option value="1">RMB</option></select>
+							</div>
+							<div class="control-label-2">
+								<strong>*</strong>
+								<span>由6-12位任意字符组成</span>
+							</div>
+						</div>
+						<h2 class="register_form_bg_2">会员个人信息</h2>
+						<div class="form-group">
+							<label for="" class="col-sm-2 control-label">真实姓名：</label>
+							<div class="control-label-1">
+								<input type="text" name="zcturename" id="zcturename" class="form-control"></div>
+							<div class="control-label-2">
+								<strong>*</strong>
+								<span>名字必须与您用于提款及存款的银行户口所用名字相同</span>
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="" class="col-sm-2 control-label">提款密码：</label>
+							<div class="control-label-1">
+								<input type="password" name="qkpwd1" id="qkpwd1" maxlength="12" onblur="pwStrength(this.value,1);" class="form-control">
+							</div>
+							<div class="control-label-2">
+								<strong>*</strong>
+								<span>由6-12位任意字符组成</span>
+							</div>
+						</div>
+						<div class="form-group password-degree">
+							<label for="" class="col-sm-2 control-label">密码强度：</label>
+							<div class="control-label-1 mb10">
+								<div class="btn-group">
+								    <button id="strength_L1" type="button" class="btn btn-default">弱</button>
+								    <button id="strength_M1" type="button" class="btn btn-default">中</button>
+								    <button id="strength_H1" type="button" class="btn btn-default">强</button>
+								</div>
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="" class="col-sm-2 control-label">确认密码：</label>
+							<div class="control-label-1">
+								<input type="password" name="qkpwd2" id="qkpwd2" maxlength="12" class="form-control">
+							</div>
+							<div class="control-label-2">
+								<strong>*</strong>
+								<span>由6-20位任意字符组成</span>
+							</div>
+						</div>
+						<h2 class="register_form_bg_3">会员密保信息</h2>
+						<div class="form-group">
+							<label for="" class="col-sm-2 control-label">密保问题：</label>
+							<div class="control-label-1">
+								<select name="zcquestion" id="zcquestion" class="form-control">
+									<option value="您的车牌号码是多少？">您的车牌号码是多少？</option>
+			                        <option value="您初中同桌的名字？">您初中同桌的名字？</option>
+			                        <option value="您就读的第一所学校的名称？">您就读的第一所学校的名称？</option>
+			                        <option value="您第一次亲吻的对象是谁？">您第一次亲吻的对象是谁？</option>
+			                        <option value="少年时代心目中的英雄是谁？">少年时代心目中的英雄是谁？</option>
+			                        <option value="您最喜欢的休闲运动是什么？">您最喜欢的休闲运动是什么？</option>
+			                        <option value="您最喜欢哪支运动队？">您最喜欢哪支运动队？</option>
+			                        <option value="您最喜欢的运动员是谁？">您最喜欢的运动员是谁？</option>
+			                        <option value="您的第一辆车是什么牌子？">您的第一辆车是什么牌子？</option>
+								</select>
+							</div>
+							<div class="control-label-2">
+								<strong>*</strong>
+								<span>请选择密保问题</span>
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="" class="col-sm-2 control-label">密保答案：</label>
+							<div class="control-label-1">
+								<input type="text" name="zcanswer" id="zcanswer" class="form-control">
+							</div>
+							<div class="control-label-2">
+								<strong>*</strong>
+								<span>请填写您的密保答案</span>
+							</div>
+						</div>
+						<div class="form-group captcha-row">
+							<label for="" class="col-sm-2 control-label">验 证 码 ：</label>
+
+
+							<div class="control-label-1 control-label-a">
+								<div class="input-group">
+								<input type="text" name="zcyzm" id="zcyzm" class="form-control" style="height:36px;" maxlength="4">
+								<span class="input-group-addon" style="width:30%;padding: 0;">
+								<img src="{:url('Mycaptcha/mobile_reg')}" onclick="this.src='{:url('Mycaptcha/mobile_reg')}?r='+Math.random()" alt="点击刷新" name="zc_img" id="zc_img" style="cursor:pointer;" width="80" height="30">
+								</span>
+								</div>
+							</div>
+
+
+							&lt;!&ndash;<div class="control-label-2">
+							<strong>*</strong><span>请填写验证码</span>
+							</div>&ndash;&gt;
+						</div>
+
+						<div class="form-group">
+							<label class="col-sm-4 col-sm-offset-2 mt20">
+							<input type="checkbox" name="zccheck" id="zccheck" value="1"> 我已届满合法博彩年龄﹐且同意各项开户条约。<a href="#" id="AGREEMENT" class="red">"开户协议"</a>
+							</label>
+						</div>
+						<div class="form-group form-action">
+							<div class="mt20 mb20">
+								<button id="register">提交开户</button>
+							</div>
+						</div>
+						<div class="h10"></div>
+					</form>
+				</div>
+			</div>-->
+		<script>
+		$(function(){
+		    // 登录
+		    $('[name="login-button"]').click(function(){
+		        var data ={
+                    username:$('#username').val(),
+                    password:$('#password').val(),
+                    dlyzm:$('#vlcodes').val()
+		        };
+		        $('[name="login-button"]').attr('disabled',true).css('background-color','grey');
+		        $.post('{:url('index/login')}',data,function(json){
+		            if('y'==json.status){
+		                console.log(json);
+		                window.location.reload()
+		            }else if('n'==json.status){
+		                alert(json.info);
+		                $('[name="login-button"]').removeAttr('disabled').css('background-color','#e53f50');
+		            }else{
+
+                    }
+                },'json');
+		    });
+			//点击底部固定导航条切换
+			$(".nav500_bottom_a").click(function(){
+				var navThis = $(this);
+				navThis.css("color","#d9901e")
+				navThis.parent().siblings("span").find("a").css("color","#999999")
+				navThis.find("i").addClass("nav500_b_active");
+				navThis.parent().siblings("span").find("i").removeClass("nav500_b_active");
+				navThis.addClass("nav500_bottom_active").parent().siblings("span").find("a").removeClass("nav500_bottom_active")
+
+			});
+
+			/*$("#nav500_bottom_reg").click(function(){
+				$("#zc_img").trigger("click")
+			})
+
+			$("#reg_user_show").click(function(){
+				$(".login-modal").hide();
+				$(".reg-modal").show();
+				$("#zc_img").trigger("click")
+			})
+
+
+			$("#nav500_bottom_a").click(function(){
+				var x = $("#J_loginModal")
+				x.show();
+				getKey()
+				$("#vPic").trigger("click")
+			})
+			$("#nav500_bottom_reg").click(function(){
+				var y = $("#J_regModal")
+				y.show();
+				getKey()
+			})
+			$("#J_loginModal .close").click(function(){
+				$("#J_loginModal").hide()
+			})
+			$("#J_regModal .close").click(function(){
+				$("#J_regModal").hide()
+			})
+			$("#reg_user_show").click(function(){
+				$(".login-modal").hide();
+				$(".reg-modal").show();
+				$("#zc_img").trigger("click")
+			})*/
+
+
+		})
+
+		</script>
+
+	<?php }?>

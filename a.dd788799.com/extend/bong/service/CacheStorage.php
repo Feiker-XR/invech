@@ -1,0 +1,35 @@
+<?php
+
+namespace bong\service;
+use think\Cache;
+
+class CacheStorage
+{
+    protected static $lifetime = 120;
+
+    public static function setMinutesOfLifeTime($time)
+    {
+        if (is_int($time) && $time > 0) {
+            self::$lifetime = $time;
+        }
+    }
+
+    public function set($key, $value)
+    {
+        Cache::set($key, $value, self::$lifetime*60);
+        //cache($key, $value, self::$lifetime);
+    }
+
+    public function get($key, $default)
+    {
+        return Cache::get($key, $default);
+        //return cache($key)??$default;
+    }
+
+    public function forget($key)
+    {
+        if (Cache::has($key)) {
+            Cache::rm($key);
+        }
+    }
+}

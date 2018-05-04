@@ -1,0 +1,14 @@
+<?php
+namespace app\common\model;
+use think\Model;
+
+class Commission extends Base{
+
+    protected $table = 'gygy_commission';
+
+    public function money()
+    {
+        return $this->morphMany('Money',['type','item_id'],'commission');
+    }
+
+}

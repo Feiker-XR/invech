@@ -1,0 +1,2458 @@
+<?php exit;?>00154937453619c151f26637623eac75e2006f40aa3fs:83553:"a:2:{s:8:"template";s:83488:"
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8" />
+		<meta name="format-detection" content="telephone=no" />
+		<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE11" />
+		<title><?php echo $categoryInfo["name"];?><?php echo $sys["site_title"];?> - <?php echo $sys["site_subtitle"];?></title>
+		<meta name="keywords" content="<?php echo $sys["site_keywords"];?>" />
+		<meta name="distribution" content="<?php echo $sys["site_description"];?>" />
+		<link rel="stylesheet" href="/themes/168pc/css/headorfood.css" />
+		<link rel="stylesheet" href="/themes/168pc/css/pk10jianyue.css" />
+		<link rel="shortcut icon" href="themes/168pc/img/icon/168favicon.ico">
+		<link rel="stylesheet" href="/themes/168pc/css/user_adv.css" />
+		<script src="/themes/168pc/js/lib/bootstrap-3.3.0/js/tests/vendor/jquery.min.js"></script>
+		<script src="/themes/168pc/js/lib/bootstrap-3.3.0/dist/js/bootstrap.min.js"></script>
+	</head>
+
+	<body>
+		<div class="bodybox">
+<?php $__Template->display("themes/168pc/head"); ?>
+			<!--热门彩-->
+
+			<div class="middbox" id="toRMC">
+				<div class="leftmenu">
+					<ul>
+						<li class="lisesected">
+							<a href="#toRMC" class="atoRMC">热门彩</a><i></i></li>
+						<li>
+							<a href="#toGPC" class="atoGPC">高频彩</a><i></i></li>
+						<li>
+							<a href="#toJWC" class="atoJWC">境外彩</a><i></i></li>
+						<li>
+							<a href="#toQGC"  class="atoQGC">全国彩</a><i></i></li>
+					</ul>
+				</div>
+				<div class="title">
+					<dl>
+						<dt>热门彩种<!--<span> 共87个彩种</span>--></dt>
+						<dd>
+							<a href="javascript:void(0)" class="showallbtn">显示全部</a>
+						</dd>
+					</dl>
+				</div>
+				<div class="tablehead">
+					<ul>
+						<li class="head">
+							<span class="cz">彩种</span>
+							<span class="kjhm">开奖号码</span>
+							<span class="kjsj">开奖时间</span>
+							<span class="czlast">操作</span>
+						</li>
+						<li class="list" id="cz_10001">
+							<div class="cz">
+								<div class="imgheadl">
+									<a href="/beijingsaichePK10.html"><img src="themes/168pc/img/beijinpk.png" /></a>
+								</div>
+								<div class="title">
+									<p class="lotName">北京PK10</p>
+									<p class="number"><span class="preIssue preDrawIssue">...</span>期</p>
+								</div>
+							</div>
+							<div class="kjhm class">
+								<div class="kajianhao">
+									<ul id="jnumber" class="numberbox">
+										<li class="nub01"></li>
+										<li class="nub02"></li>
+										<li class="nub03"></li>
+										<li class="nub04"></li>
+										<li class="nub05"></li>
+										<li class="nub06"></li>
+										<li class="nub07"></li>
+										<li class="nub08"></li>
+										<li class="nub09"></li>
+										<li class="nub10 li_after"></li>
+									</ul>
+									<div class="progress"><img src="themes/168pc/img/icon/piaog.gif" /></div>
+								</div>
+							</div>
+							<div class="kjsj class">
+								<div>
+									<ul>
+										<li>
+											<a href="/beijingsaichePK10.html">开奖</a>
+										</li>
+										<li>|</li>
+										<li>
+											<a href="/weizhizoushi.html">走势</a>
+										</li>
+										<!--<li>|</li>
+										<li>
+											<a href="">遗漏</a>
+										</li>-->
+									</ul>
+								</div>
+								<div class="kaijintime">
+									<p class="opentyle">开奖中...</p>
+									<div class="line linetime cuttime indextime" id="timebox">
+										<p>距离<span class="nextIssue">...</span> 期开奖时间：
+											<span class="bgtime hour">00</span><span class="hourtxt">时</span>
+											<span class="bgtime minute">00</span>分
+											<span class="bgtime second">00</span>秒
+										</p>
+									</div>
+								</div>
+							</div>
+							<div class="czlast deletebtn"></div>
+						</li>
+						<!--极速赛车（北京PK拾）-->
+						<li class="list" id="cz_10037">
+							<div class="cz">
+								<div class="imgheadl">
+									<a href="/jisusaiche.html"><img src="themes/168pc/img/small_logo/jisusaiche.png" /></a>
+								</div>
+								<div class="title">
+									<p class="lotName">极速赛车</p>
+									<p class="number"><span class="preIssue preDrawIssue">...</span>期</p>
+								</div>
+							</div>
+							<div class="kjhm class">
+								<div class="kajianhao">
+									<ul id="jnumber" class="numberbox">
+										<li class="nub01"></li>
+										<li class="nub02"></li>
+										<li class="nub03"></li>
+										<li class="nub04"></li>
+										<li class="nub05"></li>
+										<li class="nub06"></li>
+										<li class="nub07"></li>
+										<li class="nub08"></li>
+										<li class="nub09"></li>
+										<li class="nub10 li_after"></li>
+									</ul>
+									<div class="progress"><img src="themes/168pc/img/icon/piaog.gif" /></div>
+								</div>
+							</div>
+							<div class="kjsj class">
+								<div>
+									<ul>
+										<li>
+											<a href="/jisusaiche.html">开奖</a>
+										</li>
+										<li>|</li>
+										<li>
+											<a href="/lengrefenxi49525710.html">冷热</a>
+										</li>
+										<!--<li>|</li>
+										<li>
+											<a href="">遗漏</a>
+										</li>-->
+									</ul>
+								</div>
+								<div class="kaijintime">
+									<p class="opentyle">开奖中...</p>
+									<div class="line linetime cuttime indextime" id="timebox">
+										<p>距离<span class="nextIssue">...</span> 期开奖时间：
+											<span class="bgtime hour">00</span><span class="hourtxt">时</span>
+											<span class="bgtime minute">00</span>分
+											<span class="bgtime second">00</span>秒
+										</p>
+									</div>
+								</div>
+							</div>
+							<div class="czlast deletebtn"></div>
+						</li>
+						<!--时时彩-->
+						<li class="list" id="cz_10002">
+							<div class="cz">
+								<div class="imgheadl">
+									<a href="/zhongqingshishicai.html"><img src="themes/168pc/img/chongqingssc2.png" /></a>
+								</div>
+								<div class="title">
+									<p class="lotName">重庆时时彩</p>
+									<p class="number"><span class="preIssue preDrawIssue">...</span>期</p>
+								</div>
+							</div>
+							<div class="kjhm class">
+								<div class="kajianhao">
+									<ul class="numberbox">
+										<li class="numblueHead">1</li>
+										<li class="numblueHead">3</li>
+										<li class="numblueHead">2</li>
+										<li class="numblueHead">4</li>
+										<li class="numblueHead">6</li>
+									</ul>
+								</div>
+							</div>
+							<div class="kjsj class">
+								<div>
+									<ul>
+										<li>
+											<a href="/zhongqingshishicai.html">开奖</a>
+										</li>
+										<li>|</li>
+										<li>
+											<a href="/ssc_jibenzs.html">走势</a>
+										</li>
+										<!--<li>|</li>
+										<li>
+											<a href="">遗漏</a>
+										</li>-->
+									</ul>
+								</div>
+								<div class="kaijintime">
+									<p class="opentyle">开奖中...</p>
+									<div class="line linetime cuttime indextime" id="timebox">
+										<p>距离<span class="nextIssue">...</span> 期开奖时间：
+											<span class="bgtime hour">00</span><span class="hourtxt">时</span>
+											<span class="bgtime minute">00</span>分
+											<span class="bgtime second">00</span>秒
+										</p>
+									</div>
+								</div>
+							</div>
+							<div class="czlast deletebtn"></div>
+						</li>
+						<li class="list" id="cz_10036">
+							<div class="cz">
+								<div class="imgheadl">
+									<a href="/jisushishicai.html"><img src="themes/168pc/img/small_logo/jisussc.png" /></a>
+								</div>
+								<div class="title">
+									<p class="lotName">极速时时彩</p>
+									<p class="number"><span class="preIssue preDrawIssue">...</span>期</p>
+								</div>
+							</div>
+							<div class="kjhm class">
+								<div class="kajianhao">
+									<ul class="numberbox">
+										<li class="numblueHead">1</li>
+										<li class="numblueHead">2</li>
+										<li class="numblueHead">3</li>
+										<li class="numblueHead">4</li>
+										<li class="numblueHead">5</li>
+									</ul>
+								</div>
+							</div>
+							<div class="kjsj class">
+								<div>
+									<ul>
+										<li>
+											<a href="/jisushishicai.html">开奖</a>
+										</li>
+										<li>|</li>
+										<li>
+											<a href="/jibenzoushi.html">走势</a>
+										</li>
+										<!--<li>|</li>
+										<li>
+											<a href="">遗漏</a>
+										</li>-->
+									</ul>
+								</div>
+								<div class="kaijintime">
+									<p class="opentyle">开奖中...</p>
+									<div class="line linetime cuttime indextime" id="timebox">
+										<p>距离<span class="nextIssue">...</span> 期开奖时间：
+											<span class="bgtime hour">00</span><span class="hourtxt">时</span>
+											<span class="bgtime minute">00</span>分
+											<span class="bgtime second">00</span>秒
+										</p>
+									</div>
+								</div>
+							</div>
+							<div class="czlast deletebtn"></div>
+						</li>
+						<li class="list" id="cz_10004">
+							<div class="cz">
+								<div class="imgheadl">
+									<a href="/xinjiangshishicai.html"><img src="themes/168pc/img/small_logo/xinjiangssc.png" /></a>
+								</div>
+								<div class="title">
+									<p class="lotName">新疆时时彩</p>
+									<p class="number"><span class="preIssue preDrawIssue">...</span>期</p>
+								</div>
+							</div>
+							<div class="kjhm class">
+								<div class="kajianhao">
+									<ul class="numberbox">
+										<li class="numblueHead">1</li>
+										<li class="numblueHead">3</li>
+										<li class="numblueHead">2</li>
+										<li class="numblueHead">4</li>
+										<li class="numblueHead">6</li>
+									</ul>
+								</div>
+							</div>
+							<div class="kjsj class">
+								<div>
+									<ul>
+										<li>
+											<a href="/xinjiangshishicai.html">开奖</a>
+										</li>
+										<li>|</li>
+										<li>
+											<a href="/jibenzoushi51535610.html">走势</a>
+										</li>
+										<!--<li>|</li>
+										<li>
+											<a href="">遗漏</a>
+										</li>-->
+									</ul>
+								</div>
+								<div class="kaijintime">
+									<p class="opentyle">开奖中...</p>
+									<div class="line linetime cuttime indextime" id="timebox">
+										<p>距离<span class="nextIssue">...</span> 期开奖时间：
+											<span class="bgtime hour">00</span><span class="hourtxt">时</span>
+											<span class="bgtime minute">00</span>分
+											<span class="bgtime second">00</span>秒
+										</p>
+									</div>
+								</div>
+							</div>
+							<div class="czlast deletebtn"></div>
+						</li>
+						<li class="list" id="cz_10003">
+							<div class="cz">
+								<div class="imgheadl">
+									<a href="/tianjinshishicai.html"><img src="themes/168pc/img/small_logo/tianjinssc.png" /></a>
+								</div>
+								<div class="title">
+									<p class="lotName">天津时时彩</p>
+									<p class="number"><span class="preIssue preDrawIssue">...</span>期</p>
+								</div>
+							</div>
+							<div class="kjhm class">
+								<div class="kajianhao">
+									<ul class="numberbox">
+										<li class="numblueHead">1</li>
+										<li class="numblueHead">3</li>
+										<li class="numblueHead">2</li>
+										<li class="numblueHead">4</li>
+										<li class="numblueHead">6</li>
+									</ul>
+								</div>
+							</div>
+							<div class="kjsj class">
+								<div>
+									<ul>
+										<li>
+											<a href="/tianjinshishicai.html">开奖</a>
+										</li>
+										<li>|</li>
+										<li>
+											<a href="/jibenzoushi55549997.html">走势</a>
+										</li>
+										<!--<li>|</li>
+										<li>
+											<a href="">遗漏</a>
+										</li>-->
+									</ul>
+								</div>
+								<div class="kaijintime">
+									<p class="opentyle">开奖中...</p>
+									<div class="line linetime cuttime indextime" id="timebox">
+										<p>距离<span class="nextIssue">...</span> 期开奖时间：
+											<span class="bgtime hour">00</span><span class="hourtxt">时</span>
+											<span class="bgtime minute">00</span>分
+											<span class="bgtime second">00</span>秒
+										</p>
+									</div>
+								</div>
+							</div>
+							<div class="czlast deletebtn"></div>
+						</li>
+						
+						<!--江苏快3-->
+						<li class="list" id="cz_10007">
+							<div class="cz">
+								<div class="imgheadl">
+									<a href="/jiangsukuai3.html"><img src="themes/168pc/img/small_logo/jsk3.png" /></a>
+								</div>
+								<div class="title">
+									<p class="lotName">江苏快3</p>
+									<p class="number"><span class="preIssue preDrawIssue">...</span>期</p>
+								</div>
+							</div>
+							<div class="kjhm class">
+								<div class="kajianhao">
+									<ul class="pk10num kajianhao numberbox">
+										<li class="num1">&nbsp;</li>
+										<li class="num3">&nbsp;</li>
+										<li class="num2">&nbsp;</li>
+									</ul>
+								</div>
+							</div>
+							<div class="kjsj class">
+								<div>
+									<ul>
+										<li>
+											<a href="jiangsukuai3.html">开奖</a>
+										</li>
+										<li>|</li>
+										<li>
+											<a href="/jibenzoushi50981024.html">走势</a>
+										</li>
+										<!--<li>|</li>
+										<li>
+											<a href="">遗漏</a>
+										</li>-->
+									</ul>
+								</div>
+								<div class="kaijintime">
+									<p class="opentyle">开奖中...</p>
+									<div class="line linetime cuttime indextime" id="timebox">
+										<p>距离<span class="nextIssue">...</span> 期开奖时间：
+											<span class="bgtime hour">00</span><span class="hourtxt">时</span>
+											<span class="bgtime minute">00</span>分
+											<span class="bgtime second">00</span>秒
+										</p>
+									</div>
+								</div>
+							</div>
+							<div class="czlast deletebtn"></div>
+						</li>
+						<!--广东快乐十分-->
+						<li class="list" id="cz_10005">
+							<div class="cz">
+								<div class="imgheadl">
+									<a href="/guangdongkuaileshifen.html"><img src="themes/168pc/img/small_logo/guangdongklsf.png" /></a>
+								</div>
+								<div class="title">
+									<p class="lotName">广东快乐十分</p>
+									<p class="number"><span class="preIssue preDrawIssue">...</span>期</p>
+								</div>
+							</div>
+							<div class="kjhm class">
+								<div class="kajianhao">
+									<ul class="numberbox">
+										<li class="numblueHead">1</li>
+										<li class="numblueHead">3</li>
+										<li class="numblueHead">2</li>
+										<li class="numblueHead">4</li>
+										<li class="numblueHead">6</li>
+										<li class="numblueHead">6</li>
+										<li class="numblueHead">6</li>
+										<li class="numblueHead">6</li>
+									</ul>
+								</div>
+							</div>
+							<div class="kjsj class">
+								<div>
+									<ul>
+										<li>
+											<a href="/guangdongkuaileshifen.html">开奖</a>
+										</li>
+										<li>|</li>
+										<li>
+											<a href="/danshuangzoushi.html">走势</a>
+										</li>
+										<!--<li>|</li>
+										<li>
+											<a href="">遗漏</a>
+										</li>-->
+									</ul>
+								</div>
+								<div class="kaijintime">
+									<p class="opentyle">开奖中...</p>
+									<div class="line linetime cuttime indextime" id="timebox">
+										<p>距离<span class="nextIssue">...</span> 期开奖时间：
+											<span class="bgtime hour">00</span><span class="hourtxt">时</span>
+											<span class="bgtime minute">00</span>分
+											<span class="bgtime second">00</span>秒
+										</p>
+									</div>
+								</div>
+							</div>
+							<div class="czlast deletebtn"></div>
+						</li>
+						<li class="list" id="cz_10008">
+							<div class="cz">
+								<div class="imgheadl">
+									<a href="/shiyiyunduojin.html"><img src="themes/168pc/img/small_logo/shandong11x5.png" /></a>
+								</div>
+								<div class="title">
+									<p class="lotName">十一运夺金</p>
+									<p class="number"><span class="preIssue preDrawIssue">...</span>期</p>
+								</div>
+							</div>
+							<div class="kjhm class">
+								<div class="kajianhao">
+									<ul class="numberbox">
+										<li class="numblueHead">01</li>
+										<li class="numblueHead">03</li>
+										<li class="numblueHead">02</li>
+										<li class="numblueHead">04</li>
+										<li class="numblueHead">06</li>
+									</ul>
+								</div>
+								<div class="progress"><img src="themes/168pc/img/icon/piaog.gif" /></div>
+							</div>
+							<div class="kjsj class">
+								<div>
+									<ul>
+										<li>
+											<a href="/shiyiyunduojin.html">开奖</a>
+										</li>
+										<li>|</li>
+										<li>
+											<a href="/jibenzoushi55524851.html">走势</a>
+										</li>
+										<!--<li>|</li>
+										<li>
+											<a href="">遗漏</a>
+										</li>-->
+									</ul>
+								</div>
+								<div class="kaijintime">
+									<p class="opentyle">开奖中...</p>
+									<div class="line linetime cuttime indextime" id="timebox">
+										<p>距离<span class="nextIssue">...</span> 期开奖时间：
+											<span class="bgtime hour">00</span><span class="hourtxt">时</span>
+											<span class="bgtime minute">00</span>分
+											<span class="bgtime second">00</span>秒
+										</p>
+									</div>
+								</div>
+							</div>
+							<div class="czlast deletebtn"></div>
+						</li>
+						<li class="list" id="cz_10006">
+							<div class="cz">
+								<div class="imgheadl">
+									<a href="/guangdong11xuan5.html"><img src="themes/168pc/img/small_logo/gaungdong11x5.png" /></a>
+								</div>
+								<div class="title">
+									<p class="lotName">广东11选5</p>
+									<p class="number"><span class="preIssue preDrawIssue">...</span>期</p>
+								</div>
+							</div>
+							<div class="kjhm class">
+								<div class="kajianhao">
+									<ul class="numberbox">
+										<li class="numblueHead">01</li>
+										<li class="numblueHead">03</li>
+										<li class="numblueHead">02</li>
+										<li class="numblueHead">04</li>
+										<li class="numblueHead">06</li>
+									</ul>
+								</div>
+							</div>
+							<div class="kjsj class">
+								<div>
+									<ul>
+										<li>
+											<a href="/guangdong11xuan5.html">开奖</a>
+										</li>
+										<li>|</li>
+										<li>
+											<a href="/jibenzoushi52551011.html">走势</a>
+										</li>
+										<!--<li>|</li>
+										<li>
+											<a href="">遗漏</a>
+										</li>-->
+									</ul>
+								</div>
+								<div class="kaijintime">
+									<p class="opentyle">开奖中...</p>
+									<div class="line linetime cuttime indextime" id="timebox">
+										<p>距离<span class="nextIssue">...</span> 期开奖时间：
+											<span class="bgtime hour">00</span><span class="hourtxt">时</span>
+											<span class="bgtime minute">00</span>分
+											<span class="bgtime second">00</span>秒
+										</p>
+									</div>
+								</div>
+							</div>
+							<div class="czlast deletebtn"></div>
+						</li>
+						<li class="list" id="cz_10009">
+							<div class="cz">
+								<div class="imgheadl">
+									<a href="/xingyunnongchang.html"><img src="themes/168pc/img/small_logo/chongqingnc.png" /></a>
+								</div>
+								<div class="title">
+									<p class="lotName">幸运农场</p>
+									<p class="number"><span class="preIssue preDrawIssue">...</span>期</p>
+								</div>
+							</div>
+							<div class="kjhm class">
+								<div class="kajianhao">
+									<ul class="numberbox">
+
+									</ul>
+								</div>
+							</div>
+							<div class="kjsj class">
+								<div>
+									<ul>
+										<li>
+											<a href="/xingyunnongchang.html">开奖</a>
+										</li>
+										<li>|</li>
+										<li>
+											<a href="/danshuangzoushi50531015.html">走势</a>
+										</li>
+										<!--<li>|</li>
+										<li>
+											<a href="">遗漏</a>
+										</li>-->
+									</ul>
+								</div>
+								<div class="kaijintime">
+									<p class="opentyle">开奖中...</p>
+									<div class="line linetime cuttime indextime" id="timebox">
+										<p>距离<span class="nextIssue">...</span> 期开奖时间：
+											<span class="bgtime hour">00</span><span class="hourtxt">时</span>
+											<span class="bgtime minute">00</span>分
+											<span class="bgtime second">00</span>秒
+										</p>
+									</div>
+								</div>
+							</div>
+							<div class="czlast deletebtn"></div>
+						</li>
+						<li class="list" id="cz_10038">
+							<div class="cz">
+								<div class="imgheadl">
+									<a href="guangxikuailiaoshifen.html"><img src="themes/168pc/img/klsf_guangxi.png" /></a>
+								</div>
+								<div class="title">
+									<p class="lotName">广西快乐十分</p>
+									<p class="number"><span class="preIssue preDrawIssue">...</span>期</p>
+								</div>
+							</div>
+							<div class="kjhm class">
+								<div class="kajianhao">
+									<ul class="numberbox">
+										<li class="numblueHead">01</li>
+										<li class="numblueHead">03</li>
+										<li class="numblueHead">02</li>
+										<li class="numblueHead">04</li>
+										<li class="numblueHead">06</li>
+									</ul>
+								</div>
+							</div>
+							<div class="kjsj class">
+								<div>
+									<ul>
+										<li>
+											<a href="guangxikuailiaoshifen.html">开奖</a>
+										</li>
+										<li>|</li>
+										<li>
+											<a href="/luzhufenxi52985748.html">走势</a>
+										</li>
+										<!--<li>|</li>
+										<li>
+											<a href="">遗漏</a>
+										</li>-->
+									</ul>
+								</div>
+								<div class="kaijintime">
+									<p class="opentyle">开奖中...</p>
+									<div class="line linetime cuttime indextime" id="timebox">
+										<p>距离<span class="nextIssue">...</span> 期开奖时间：
+											<span class="bgtime hour">00</span><span class="hourtxt">时</span>
+											<span class="bgtime minute">00</span>分
+											<span class="bgtime second">00</span>秒
+										</p>
+									</div>
+								</div>
+							</div>
+							<div class="czlast deletebtn"></div>
+						</li>
+						<li class="list" id="cz_10046">
+							<div class="cz">
+								<div class="imgheadl">
+									<a href="/PCdandanxingyun28.html"><img src="themes/168pc/img/Egxy28.png" /></a>
+								</div>
+								<div class="title">
+									<p class="lotName">PC蛋蛋幸运28</p>
+									<p class="number"><span class="preIssue preDrawIssue">...</span>期</p>
+								</div>
+							</div>
+							<div class="kjhm class">
+								<div class="kajianhao egxy_kajianhao">
+									<ul class="numberbox egxy_numberbox">
+										<li class="numblueHead">01</li>
+										<li class="numblueHead">03</li>
+										<li class="numblueHead">02</li>
+										<li class="numblueHead">04</li>
+									</ul>
+									<span class="addF1"></span>
+									<span class="addF2 addF1"></span>
+									<span class="equalF"></span>
+								</div>
+							</div>
+							<div class="kjsj class">
+								<div>
+									<ul>
+										<li>
+											<a href="/PCdandanxingyun28.html">开奖</a>
+										</li>
+										<li>|</li>
+										<li>
+											<a href="/PCdandanxingyun28.html">走势</a>
+										</li>
+										<!--<li>|</li>
+										<li>
+											<a href="">遗漏</a>
+										</li>-->
+									</ul>
+								</div>
+								<div class="kaijintime">
+									<p class="opentyle">开奖中...</p>
+									<div class="line linetime cuttime indextime" id="timebox">
+										<p>距离<span class="nextIssue">...</span> 期开奖时间：
+											<span class="bgtime hour">00</span><span class="hourtxt">时</span>
+											<span class="bgtime minute">00</span>分
+											<span class="bgtime second">00</span>秒
+										</p>
+									</div>
+								</div>
+							</div>
+							<div class="czlast deletebtn"></div>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<!--高频彩-->
+			<div class="middbox gpcmiddbox" id="toGPC">
+				<div class="title">
+					<dl>
+						<dt>高频彩种<!--<span> 共87个彩种</span>--></dt>
+						<!--<dd>
+							<a href="javascript:void(0)" class="showallbtn">显示全部</a>
+						</dd>-->
+					</dl>
+				</div>
+				<div class="tablehead">
+					<ul>
+						<!--<li class="head">
+							<span class="cz">彩种</span>
+							<span class="kjhm">开奖号码</span>
+							<span class="kjsj">开奖时间</span>
+							<span class="czlast">操作</span>
+						</li>-->
+						<!--天津快乐十分-->
+						<li class="list" id="cz_10034">
+							<div class="cz">
+								<div class="imgheadl">
+									<a href="/tianjinkuaileshifen.html"><img src="themes/168pc/img/small_logo/tjklsf.png" /></a>
+								</div>
+								<div class="title">
+									<p class="lotName">天津快乐十分</p>
+									<p class="number"><span class="preIssue preDrawIssue">...</span>期</p>
+								</div>
+							</div>
+							<div class="kjhm class">
+								<div class="kajianhao">
+									<ul class="numberbox">
+										<li class="numblueHead">1</li>
+										<li class="numblueHead">3</li>
+										<li class="numblueHead">2</li>
+										<li class="numblueHead">4</li>
+										<li class="numblueHead">6</li>
+										<li class="numblueHead">6</li>
+										<li class="numblueHead">6</li>
+										<li class="numblueHead">6</li>
+									</ul>
+								</div>
+							</div>
+							<div class="kjsj class">
+								<div>
+									<ul>
+										<li>
+											<a href="/tianjinkuaileshifen.html">开奖</a>
+										</li>
+										<li>|</li>
+										<li>
+											<a href="/haomafenbu10251565.htmll">走势</a>
+										</li>
+										<!--<li>|</li>
+										<li>
+											<a href="">遗漏</a>
+										</li>-->
+									</ul>
+								</div>
+								<div class="kaijintime">
+									<p class="opentyle">开奖中...</p>
+									<div class="line linetime cuttime indextime" id="timebox">
+										<p>距离<span class="nextIssue">...</span> 期开奖时间：
+											<span class="bgtime hour">00</span><span class="hourtxt">时</span>
+											<span class="bgtime minute">00</span>分
+											<span class="bgtime second">00</span>秒
+										</p>
+									</div>
+								</div>
+							</div>
+							<div class="czlast deletebtn"></div>
+						</li>
+						<!--上海11选5-->
+						<li class="list" id="cz_10018">
+							<div class="cz">
+								<div class="imgheadl">
+									<a href="/shanghai11xuan5.html"><img src="themes/168pc/img/small_logo/sh11x5.png" /></a>
+								</div>
+								<div class="title">
+									<p class="lotName">上海11选5</p>
+									<p class="number"><span class="preIssue preDrawIssue">...</span>期</p>
+								</div>
+							</div>
+							<div class="kjhm class">
+								<div class="kajianhao">
+									<ul class="numberbox">
+										<li class="numblueHead">01</li>
+										<li class="numblueHead">03</li>
+										<li class="numblueHead">02</li>
+										<li class="numblueHead">04</li>
+										<li class="numblueHead">06</li>
+									</ul>
+								</div>
+							</div>
+							<div class="kjsj class">
+								<div>
+									<ul>
+										<li>
+											<a href="/shanghai11xuan5.htmll">开奖</a>
+										</li>
+										<li>|</li>
+										<li>
+											<a href="/jibenzoushi10056981.htmll">走势</a>
+										</li>
+										<!--<li>|</li>
+										<li>
+											<a href="">遗漏</a>
+										</li>-->
+									</ul>
+								</div>
+								<div class="kaijintime">
+									<p class="opentyle">开奖中...</p>
+									<div class="line linetime cuttime indextime" id="timebox">
+										<p>距离<span class="nextIssue">...</span> 期开奖时间：
+											<span class="bgtime hour">00</span><span class="hourtxt">时</span>
+											<span class="bgtime minute">00</span>分
+											<span class="bgtime second">00</span>秒
+										</p>
+									</div>
+								</div>
+							</div>
+							<div class="czlast deletebtn"></div>
+						</li>
+						<!--安徽11选5-->
+						<li class="list" id="cz_10017">
+							<div class="cz">
+								<div class="imgheadl">
+									<a href="/anhui11xuan5.html"><img src="themes/168pc/img/small_logo/anhui11x5.png" /></a>
+								</div>
+								<div class="title">
+									<p class="lotName">安徽11选5</p>
+									<p class="number"><span class="preIssue preDrawIssue">...</span>期</p>
+								</div>
+							</div>
+							<div class="kjhm class">
+								<div class="kajianhao">
+									<ul class="numberbox">
+										<li class="numblueHead">01</li>
+										<li class="numblueHead">03</li>
+										<li class="numblueHead">02</li>
+										<li class="numblueHead">04</li>
+										<li class="numblueHead">06</li>
+									</ul>
+								</div>
+							</div>
+							<div class="kjsj class">
+								<div>
+									<ul>
+										<li>
+											<a href="/anhui11xuan5.html">开奖</a>
+										</li>
+										<li>|</li>
+										<li>
+											<a href="/jibenzoushi10257559.html">走势</a>
+										</li>
+										<!--<li>|</li>
+										<li>
+											<a href="">遗漏</a>
+										</li>-->
+									</ul>
+								</div>
+								<div class="kaijintime">
+									<p class="opentyle">开奖中...</p>
+									<div class="line linetime cuttime indextime" id="timebox">
+										<p>距离<span class="nextIssue">...</span> 期开奖时间：
+											<span class="bgtime hour">00</span><span class="hourtxt">时</span>
+											<span class="bgtime minute">00</span>分
+											<span class="bgtime second">00</span>秒
+										</p>
+									</div>
+								</div>
+							</div>
+							<div class="czlast deletebtn"></div>
+						</li>
+						<!--江西11选5-->
+						<li class="list" id="cz_10015">
+							<div class="cz">
+								<div class="imgheadl">
+									<a href="/jiangxi11xuan5.html"><img src="themes/168pc/img/small_logo/jx11x5.png" /></a>
+								</div>
+								<div class="title">
+									<p class="lotName">江西11选5</p>
+									<p class="number"><span class="preIssue preDrawIssue">...</span>期</p>
+								</div>
+							</div>
+							<div class="kjhm class">
+								<div class="kajianhao">
+									<ul class="numberbox">
+										<li class="numblueHead">01</li>
+										<li class="numblueHead">03</li>
+										<li class="numblueHead">02</li>
+										<li class="numblueHead">04</li>
+										<li class="numblueHead">06</li>
+									</ul>
+								</div>
+							</div>
+							<div class="kjsj class">
+								<div>
+									<ul>
+										<li>
+											<a href="/jiangxi11xuan5.html">开奖</a>
+										</li>
+										<li>|</li>
+										<li>
+											<a href="/jibenzoushi99519710.html">走势</a>
+										</li>
+										<!--<li>|</li>
+										<li>
+											<a href="">遗漏</a>
+										</li>-->
+									</ul>
+								</div>
+								<div class="kaijintime">
+									<p class="opentyle">开奖中...</p>
+									<div class="line linetime cuttime indextime" id="timebox">
+										<p>距离<span class="nextIssue">...</span> 期开奖时间：
+											<span class="bgtime hour">00</span><span class="hourtxt">时</span>
+											<span class="bgtime minute">00</span>分
+											<span class="bgtime second">00</span>秒
+										</p>
+									</div>
+								</div>
+							</div>
+							<div class="czlast deletebtn"></div>
+						</li>
+						<!--江苏11选5-->
+						<li class="list" id="cz_10016">
+							<div class="cz">
+								<div class="imgheadl">
+									<a href="/jiangsu11xuan5.html"><img src="themes/168pc/img/small_logo/js11x5.png" /></a>
+								</div>
+								<div class="title">
+									<p class="lotName">江苏11选5</p>
+									<p class="number"><span class="preIssue preDrawIssue">...</span>期</p>
+								</div>
+							</div>
+							<div class="kjhm class">
+								<div class="kajianhao">
+									<ul class="numberbox">
+										<li class="numblueHead">01</li>
+										<li class="numblueHead">03</li>
+										<li class="numblueHead">02</li>
+										<li class="numblueHead">04</li>
+										<li class="numblueHead">06</li>
+									</ul>
+								</div>
+							</div>
+							<div class="kjsj class">
+								<div>
+									<ul>
+										<li>
+											<a href="/jiangsu11xuan5.html">开奖</a>
+										</li>
+										<li>|</li>
+										<li>
+											<a href="/jibenzoushi97499752.html">走势</a>
+										</li>
+										<!--<li>|</li>
+										<li>
+											<a href="">遗漏</a>
+										</li>-->
+									</ul>
+								</div>
+								<div class="kaijintime">
+									<p class="opentyle">开奖中...</p>
+									<div class="line linetime cuttime indextime" id="timebox">
+										<p>距离<span class="nextIssue">...</span> 期开奖时间：
+											<span class="bgtime hour">00</span><span class="hourtxt">时</span>
+											<span class="bgtime minute">00</span>分
+											<span class="bgtime second">00</span>秒
+										</p>
+									</div>
+								</div>
+							</div>
+							<div class="czlast deletebtn"></div>
+						</li>
+						<!--辽宁11选5-->
+						<li class="list" id="cz_10019">
+							<div class="cz">
+								<div class="imgheadl">
+									<a href="/liaoning11xuan5.html"><img src="themes/168pc/img/small_logo/ln11x5.png" /></a>
+								</div>
+								<div class="title">
+									<p class="lotName">辽宁11选5</p>
+									<p class="number"><span class="preIssue preDrawIssue">...</span>期</p>
+								</div>
+							</div>
+							<div class="kjhm class">
+								<div class="kajianhao">
+									<ul class="numberbox">
+										<li class="numblueHead">01</li>
+										<li class="numblueHead">03</li>
+										<li class="numblueHead">02</li>
+										<li class="numblueHead">04</li>
+										<li class="numblueHead">06</li>
+									</ul>
+								</div>
+							</div>
+							<div class="kjsj class">
+								<div>
+									<ul>
+										<li>
+											<a href="/liaoning11xuan5.html">开奖</a>
+										</li>
+										<li>|</li>
+										<li>
+											<a href="/jibenzoushi49515648.html">走势</a>
+										</li>
+										<!--<li>|</li>
+										<li>
+											<a href="">遗漏</a>
+										</li>-->
+									</ul>
+								</div>
+								<div class="kaijintime">
+									<p class="opentyle">开奖中...</p>
+									<div class="line linetime cuttime indextime" id="timebox">
+										<p>距离<span class="nextIssue">...</span> 期开奖时间：
+											<span class="bgtime hour">00</span><span class="hourtxt">时</span>
+											<span class="bgtime minute">00</span>分
+											<span class="bgtime second">00</span>秒
+										</p>
+									</div>
+								</div>
+							</div>
+							<div class="czlast deletebtn"></div>
+						</li>
+						<!--湖北11选5-->
+						<li class="list" id="cz_10020">
+							<div class="cz">
+								<div class="imgheadl">
+									<a href="/hubei11xuan5.html"><img src="themes/168pc/img/small_logo/hub11x5.png" /></a>
+								</div>
+								<div class="title">
+									<p class="lotName">湖北11选5</p>
+									<p class="number"><span class="preIssue preDrawIssue">...</span>期</p>
+								</div>
+							</div>
+							<div class="kjhm class">
+								<div class="kajianhao">
+									<ul class="numberbox">
+										<li class="numblueHead">01</li>
+										<li class="numblueHead">03</li>
+										<li class="numblueHead">02</li>
+										<li class="numblueHead">04</li>
+										<li class="numblueHead">06</li>
+									</ul>
+								</div>
+							</div>
+							<div class="kjsj class">
+								<div>
+									<ul>
+										<li>
+											<a href="/hubei11xuan5.html">开奖</a>
+										</li>
+										<li>|</li>
+										<li>
+											<a href="/jibenzoushi97100971.html">走势</a>
+										</li>
+										<!--<li>|</li>
+										<li>
+											<a href="">遗漏</a>
+										</li>-->
+									</ul>
+								</div>
+								<div class="kaijintime">
+									<p class="opentyle">开奖中...</p>
+									<div class="line linetime cuttime indextime" id="timebox">
+										<p>距离<span class="nextIssue">...</span> 期开奖时间：
+											<span class="bgtime hour">00</span><span class="hourtxt">时</span>
+											<span class="bgtime minute">00</span>分
+											<span class="bgtime second">00</span>秒
+										</p>
+									</div>
+								</div>
+							</div>
+							<div class="czlast deletebtn"></div>
+						</li>
+						<!--广西11选5-->
+						<li class="list" id="cz_10022">
+							<div class="cz">
+								<div class="imgheadl">
+									<a href="/guangxi11xuan5.html"><img src="themes/168pc/img/small_logo/gx11x5.png" /></a>
+								</div>
+								<div class="title">
+									<p class="lotName">广西11选5</p>
+									<p class="number"><span class="preIssue preDrawIssue">...</span>期</p>
+								</div>
+							</div>
+							<div class="kjhm class">
+								<div class="kajianhao">
+									<ul class="numberbox">
+										<li class="numblueHead">01</li>
+										<li class="numblueHead">03</li>
+										<li class="numblueHead">02</li>
+										<li class="numblueHead">04</li>
+										<li class="numblueHead">06</li>
+									</ul>
+								</div>
+							</div>
+							<div class="kjsj class">
+								<div>
+									<ul>
+										<li>
+											<a href="/guangxi11xuan5.html">开奖</a>
+										</li>
+										<li>|</li>
+										<li>
+											<a href="/jibenzoushi97100505.html">走势</a>
+										</li>
+										<!--<li>|</li>
+										<li>
+											<a href="">遗漏</a>
+										</li>-->
+									</ul>
+								</div>
+								<div class="kaijintime">
+									<p class="opentyle">开奖中...</p>
+									<div class="line linetime cuttime indextime" id="timebox">
+										<p>距离<span class="nextIssue">...</span> 期开奖时间：
+											<span class="bgtime hour">00</span><span class="hourtxt">时</span>
+											<span class="bgtime minute">00</span>分
+											<span class="bgtime second">00</span>秒
+										</p>
+									</div>
+								</div>
+							</div>
+							<div class="czlast deletebtn"></div>
+						</li>
+						<!--吉林11选5-->
+						<li class="list" id="cz_10023">
+							<div class="cz">
+								<div class="imgheadl">
+									<a href="/jilin11xuan5.html"><img src="themes/168pc/img/small_logo/jl11x5.png" /></a>
+								</div>
+								<div class="title">
+									<p class="lotName">吉林11选5</p>
+									<p class="number"><span class="preIssue preDrawIssue">...</span>期</p>
+								</div>
+							</div>
+							<div class="kjhm class">
+								<div class="kajianhao">
+									<ul class="numberbox">
+										<li class="numblueHead">01</li>
+										<li class="numblueHead">03</li>
+										<li class="numblueHead">02</li>
+										<li class="numblueHead">04</li>
+										<li class="numblueHead">06</li>
+									</ul>
+								</div>
+							</div>
+							<div class="kjsj class">
+								<div>
+									<ul>
+										<li>
+											<a href="/jilin11xuan5.html">开奖</a>
+										</li>
+										<li>|</li>
+										<li>
+											<a href="/jibenzoushi53505654.html">走势</a>
+										</li>
+										<!--<li>|</li>
+										<li>
+											<a href="">遗漏</a>
+										</li>-->
+									</ul>
+								</div>
+								<div class="kaijintime">
+									<p class="opentyle">开奖中...</p>
+									<div class="line linetime cuttime indextime" id="timebox">
+										<p>距离<span class="nextIssue">...</span> 期开奖时间：
+											<span class="bgtime hour">00</span><span class="hourtxt">时</span>
+											<span class="bgtime minute">00</span>分
+											<span class="bgtime second">00</span>秒
+										</p>
+									</div>
+								</div>
+							</div>
+							<div class="czlast deletebtn"></div>
+						</li>
+						<!--内蒙古11选5-->
+						<li class="list" id="cz_10024">
+							<div class="cz">
+								<div class="imgheadl">
+									<a href="/neimenggu11xuan5.html"><img src="themes/168pc/img/small_logo/nmg11x5.png" /></a>
+								</div>
+								<div class="title">
+									<p class="lotName">内蒙古11选5</p>
+									<p class="number"><span class="preIssue preDrawIssue">...</span>期</p>
+								</div>
+							</div>
+							<div class="kjhm class">
+								<div class="kajianhao">
+									<ul class="numberbox">
+										<li class="numblueHead">01</li>
+										<li class="numblueHead">03</li>
+										<li class="numblueHead">02</li>
+										<li class="numblueHead">04</li>
+										<li class="numblueHead">06</li>
+									</ul>
+								</div>
+							</div>
+							<div class="kjsj class">
+								<div>
+									<ul>
+										<li>
+											<a href="/neimenggu11xuan5.html">开奖</a>
+										</li>
+										<li>|</li>
+										<li>
+											<a href="/jibenzoushi10156529.html">走势</a>
+										</li>
+										<!--<li>|</li>
+										<li>
+											<a href="">遗漏</a>
+										</li>-->
+									</ul>
+								</div>
+								<div class="kaijintime">
+									<p class="opentyle">开奖中...</p>
+									<div class="line linetime cuttime indextime" id="timebox">
+										<p>距离<span class="nextIssue">...</span> 期开奖时间：
+											<span class="bgtime hour">00</span><span class="hourtxt">时</span>
+											<span class="bgtime minute">00</span>分
+											<span class="bgtime second">00</span>秒
+										</p>
+									</div>
+								</div>
+							</div>
+							<div class="czlast deletebtn"></div>
+						</li>
+						<!--浙江11选5-->
+						<li class="list" id="cz_10025">
+							<div class="cz">
+								<div class="imgheadl">
+									<a href="/zhejiang11xuan5.html"><img src="themes/168pc/img/small_logo/zj11x5.png" /></a>
+								</div>
+								<div class="title">
+									<p class="lotName">浙江11选5</p>
+									<p class="number"><span class="preIssue preDrawIssue">...</span>期</p>
+								</div>
+							</div>
+							<div class="kjhm class">
+								<div class="kajianhao">
+									<ul class="numberbox">
+										<li class="numblueHead">01</li>
+										<li class="numblueHead">03</li>
+										<li class="numblueHead">02</li>
+										<li class="numblueHead">04</li>
+										<li class="numblueHead">06</li>
+									</ul>
+								</div>
+							</div>
+							<div class="kjsj class">
+								<div>
+									<ul>
+										<li>
+											<a href="/zhejiang11xuan5.html">开奖</a>
+										</li>
+										<li>|</li>
+										<li>
+											<a href="/jibenzoushi53565052.html">走势</a>
+										</li>
+										<!--<li>|</li>
+										<li>
+											<a href="">遗漏</a>
+										</li>-->
+									</ul>
+								</div>
+								<div class="kaijintime">
+									<p class="opentyle">开奖中...</p>
+									<div class="line linetime cuttime indextime" id="timebox">
+										<p>距离<span class="nextIssue">...</span> 期开奖时间：
+											<span class="bgtime hour">00</span><span class="hourtxt">时</span>
+											<span class="bgtime minute">00</span>分
+											<span class="bgtime second">00</span>秒
+										</p>
+									</div>
+								</div>
+							</div>
+							<div class="czlast deletebtn"></div>
+						</li>
+						<!--广西快3-->
+						<li class="list" id="cz_10026">
+							<div class="cz">
+								<div class="imgheadl">
+									<a href="/guangxikuai3.html"><img src="themes/168pc/img/small_logo/gxk3.png" /></a>
+								</div>
+								<div class="title">
+									<p class="lotName">广西快3</p>
+									<p class="number"><span class="preIssue preDrawIssue">...</span>期</p>
+								</div>
+							</div>
+							<div class="kjhm class">
+								<div class="kajianhao">
+									<ul class="pk10num kajianhao numberbox">
+										<li class="num1">&nbsp;</li>
+										<li class="num3">&nbsp;</li>
+										<li class="num2">&nbsp;</li>
+									</ul>
+								</div>
+							</div>
+							<div class="kjsj class">
+								<div>
+									<ul>
+										<li>
+											<a href="/guangxikuai3.html">开奖</a>
+										</li>
+										<li>|</li>
+										<li>
+											<a href="/jibenzoushi49101571.html">走势</a>
+										</li>
+										<!--<li>|</li>
+										<li>
+											<a href="">遗漏</a>
+										</li>-->
+									</ul>
+								</div>
+								<div class="kaijintime">
+									<p class="opentyle">开奖中...</p>
+									<div class="line linetime cuttime indextime" id="timebox">
+										<p>距离<span class="nextIssue">...</span> 期开奖时间：
+											<span class="bgtime hour">00</span><span class="hourtxt">时</span>
+											<span class="bgtime minute">00</span>分
+											<span class="bgtime second">00</span>秒
+										</p>
+									</div>
+								</div>
+							</div>
+							<div class="czlast deletebtn"></div>
+						</li>
+						<!--吉林快3-->
+						<li class="list" id="cz_10027">
+							<div class="cz">
+								<div class="imgheadl">
+									<a href="/jilinkuai3.html"><img src="themes/168pc/img/small_logo/jlk3.png" /></a>
+								</div>
+								<div class="title">
+									<p class="lotName">吉林快3</p>
+									<p class="number"><span class="preIssue preDrawIssue">...</span>期</p>
+								</div>
+							</div>
+							<div class="kjhm class">
+								<div class="kajianhao">
+									<ul class="pk10num kajianhao numberbox">
+										<li class="num1">&nbsp;</li>
+										<li class="num3">&nbsp;</li>
+										<li class="num2">&nbsp;</li>
+									</ul>
+								</div>
+							</div>
+							<div class="kjsj class">
+								<div>
+									<ul>
+										<li>
+											<a href="/jilinkuai3.html">开奖</a>
+										</li>
+										<li>|</li>
+										<li>
+											<a href="/jibenzoushi48975354.html">走势</a>
+										</li>
+										<!--<li>|</li>
+										<li>
+											<a href="">遗漏</a>
+										</li>-->
+									</ul>
+								</div>
+								<div class="kaijintime">
+									<p class="opentyle">开奖中...</p>
+									<div class="line linetime cuttime indextime" id="timebox">
+										<p>距离<span class="nextIssue">...</span> 期开奖时间：
+											<span class="bgtime hour">00</span><span class="hourtxt">时</span>
+											<span class="bgtime minute">00</span>分
+											<span class="bgtime second">00</span>秒
+										</p>
+									</div>
+								</div>
+							</div>
+							<div class="czlast deletebtn"></div>
+						</li>
+						<!--河北快3-->
+						<li class="list" id="cz_10028">
+							<div class="cz">
+								<div class="imgheadl">
+									<a href="/hebeikuai3.html"><img src="themes/168pc/img/small_logo/hebk3.png" /></a>
+								</div>
+								<div class="title">
+									<p class="lotName">河北快3</p>
+									<p class="number"><span class="preIssue preDrawIssue">...</span>期</p>
+								</div>
+							</div>
+							<div class="kjhm class">
+								<div class="kajianhao">
+									<ul class="pk10num kajianhao numberbox">
+										<li class="num1">&nbsp;</li>
+										<li class="num3">&nbsp;</li>
+										<li class="num2">&nbsp;</li>
+									</ul>
+								</div>
+							</div>
+							<div class="kjsj class">
+								<div>
+									<ul>
+										<li>
+											<a href="/hebeikuai3.html">开奖</a>
+										</li>
+										<li>|</li>
+										<li>
+											<a href="/jibenzoushi53495510.html">走势</a>
+										</li>
+										<!--<li>|</li>
+										<li>
+											<a href="">遗漏</a>
+										</li>-->
+									</ul>
+								</div>
+								<div class="kaijintime">
+									<p class="opentyle">开奖中...</p>
+									<div class="line linetime cuttime indextime" id="timebox">
+										<p>距离<span class="nextIssue">...</span> 期开奖时间：
+											<span class="bgtime hour">00</span><span class="hourtxt">时</span>
+											<span class="bgtime minute">00</span>分
+											<span class="bgtime second">00</span>秒
+										</p>
+									</div>
+								</div>
+							</div>
+							<div class="czlast deletebtn"></div>
+						</li>
+						<!--内蒙古快3-->
+						<li class="list" id="cz_10029">
+							<div class="cz">
+								<div class="imgheadl">
+									<a href="/neimenggukuai3.html"><img src="themes/168pc/img/small_logo/nmgk3.png" /></a>
+								</div>
+								<div class="title">
+									<p class="lotName">内蒙古快3</p>
+									<p class="number"><span class="preIssue preDrawIssue">...</span>期</p>
+								</div>
+							</div>
+							<div class="kjhm class">
+								<div class="kajianhao">
+									<ul class="pk10num kajianhao numberbox">
+										<li class="num1">&nbsp;</li>
+										<li class="num3">&nbsp;</li>
+										<li class="num2">&nbsp;</li>
+									</ul>
+								</div>
+							</div>
+							<div class="kjsj class">
+								<div>
+									<ul>
+										<li>
+											<a href="/neimenggukuai3.html">开奖</a>
+										</li>
+										<li>|</li>
+										<li>
+											<a href="/jibenzoushi56971014.html">走势</a>
+										</li>
+										<!--<li>|</li>
+										<li>
+											<a href="">遗漏</a>
+										</li>-->
+									</ul>
+								</div>
+								<div class="kaijintime">
+									<p class="opentyle">开奖中...</p>
+									<div class="line linetime cuttime indextime" id="timebox">
+										<p>距离<span class="nextIssue">...</span> 期开奖时间：
+											<span class="bgtime hour">00</span><span class="hourtxt">时</span>
+											<span class="bgtime minute">00</span>分
+											<span class="bgtime second">00</span>秒
+										</p>
+									</div>
+								</div>
+							</div>
+							<div class="czlast deletebtn"></div>
+						</li>
+						<!--安徽快3-->
+						<li class="list" id="cz_10030">
+							<div class="cz">
+								<div class="imgheadl">
+									<a href="/anhuikuai3.html"><img src="themes/168pc/img/small_logo/anhuik3.png" /></a>
+								</div>
+								<div class="title">
+									<p class="lotName">安徽快3</p>
+									<p class="number"><span class="preIssue preDrawIssue">...</span>期</p>
+								</div>
+							</div>
+							<div class="kjhm class">
+								<div class="kajianhao">
+									<ul class="pk10num kajianhao numberbox">
+										<li class="num1">&nbsp;</li>
+										<li class="num3">&nbsp;</li>
+										<li class="num2">&nbsp;</li>
+									</ul>
+								</div>
+							</div>
+							<div class="kjsj class">
+								<div>
+									<ul>
+										<li>
+											<a href="/anhuikuai3.html">开奖</a>
+										</li>
+										<li>|</li>
+										<li>
+											<a href="/jibenzoushi50509710.html">走势</a>
+										</li>
+										<!--<li>|</li>
+										<li>
+											<a href="">遗漏</a>
+										</li>-->
+									</ul>
+								</div>
+								<div class="kaijintime">
+									<p class="opentyle">开奖中...</p>
+									<div class="line linetime cuttime indextime" id="timebox">
+										<p>距离<span class="nextIssue">...</span> 期开奖时间：
+											<span class="bgtime hour">00</span><span class="hourtxt">时</span>
+											<span class="bgtime minute">00</span>分
+											<span class="bgtime second">00</span>秒
+										</p>
+									</div>
+								</div>
+							</div>
+							<div class="czlast deletebtn"></div>
+						</li>
+						<!--福建快3-->
+						<li class="list" id="cz_10031">
+							<div class="cz">
+								<div class="imgheadl">
+									<a href="/fujiankuai3.html"><img src="themes/168pc/img/small_logo/fjk3.png" /></a>
+								</div>
+								<div class="title">
+									<p class="lotName">福建快3</p>
+									<p class="number"><span class="preIssue preDrawIssue">...</span>期</p>
+								</div>
+							</div>
+							<div class="kjhm class">
+								<div class="kajianhao">
+									<ul class="pk10num kajianhao numberbox">
+										<li class="num1">&nbsp;</li>
+										<li class="num3">&nbsp;</li>
+										<li class="num2">&nbsp;</li>
+									</ul>
+								</div>
+							</div>
+							<div class="kjsj class">
+								<div>
+									<ul>
+										<li>
+											<a href="/fujiankuai3.html">开奖</a>
+										</li>
+										<li>|</li>
+										<li>
+											<a href="/jibenzoushi10098571.html">走势</a>
+										</li>
+										<!--<li>|</li>
+										<li>
+											<a href="">遗漏</a>
+										</li>-->
+									</ul>
+								</div>
+								<div class="kaijintime">
+									<p class="opentyle">开奖中...</p>
+									<div class="line linetime cuttime indextime" id="timebox">
+										<p>距离<span class="nextIssue">...</span> 期开奖时间：
+											<span class="bgtime hour">00</span><span class="hourtxt">时</span>
+											<span class="bgtime minute">00</span>分
+											<span class="bgtime second">00</span>秒
+										</p>
+									</div>
+								</div>
+							</div>
+							<div class="czlast deletebtn"></div>
+						</li>
+						<!--湖北快3-->
+						<li class="list" id="cz_10032">
+							<div class="cz">
+								<div class="imgheadl">
+									<a href="/hubeikuai3.html"><img src="themes/168pc/img/small_logo/hubk3.png" /></a>
+								</div>
+								<div class="title">
+									<p class="lotName">湖北快3</p>
+									<p class="number"><span class="preIssue preDrawIssue">...</span>期</p>
+								</div>
+							</div>
+							<div class="kjhm class">
+								<div class="kajianhao">
+									<ul class="pk10num kajianhao numberbox">
+										<li class="num1">&nbsp;</li>
+										<li class="num3">&nbsp;</li>
+										<li class="num2">&nbsp;</li>
+									</ul>
+								</div>
+							</div>
+							<div class="kjsj class">
+								<div>
+									<ul>
+										<li>
+											<a href="/hubeikuai3.html">开奖</a>
+										</li>
+										<li>|</li>
+										<li>
+											<a href="/jibenzoushi52571019.html">走势</a>
+										</li>
+										<!--<li>|</li>
+										<li>
+											<a href="">遗漏</a>
+										</li>-->
+									</ul>
+								</div>
+								<div class="kaijintime">
+									<p class="opentyle">开奖中...</p>
+									<div class="line linetime cuttime indextime" id="timebox">
+										<p>距离<span class="nextIssue">...</span> 期开奖时间：
+											<span class="bgtime hour">00</span><span class="hourtxt">时</span>
+											<span class="bgtime minute">00</span>分
+											<span class="bgtime second">00</span>秒
+										</p>
+									</div>
+								</div>
+							</div>
+							<div class="czlast deletebtn"></div>
+						</li>
+						<!--北京快3-->
+						<li class="list" id="cz_10033">
+							<div class="cz">
+								<div class="imgheadl">
+									<a href="/beijingkuai3.html"><img src="themes/168pc/img/small_logo/bjkl3.png" /></a>
+								</div>
+								<div class="title">
+									<p class="lotName">北京快3</p>
+									<p class="number"><span class="preIssue preDrawIssue">...</span>期</p>
+								</div>
+							</div>
+							<div class="kjhm class">
+								<div class="kajianhao">
+									<ul class="pk10num kajianhao numberbox">
+										<li class="num1">&nbsp;</li>
+										<li class="num3">&nbsp;</li>
+										<li class="num2">&nbsp;</li>
+									</ul>
+								</div>
+							</div>
+							<div class="kjsj class">
+								<div>
+									<ul>
+										<li>
+											<a href="/beijingkuai3.html">开奖</a>
+										</li>
+										<li>|</li>
+										<li>
+											<a href="/jibenzoushi55579910.html">走势</a>
+										</li>
+										<!--<li>|</li>
+										<li>
+											<a href="">遗漏</a>
+										</li>-->
+									</ul>
+								</div>
+								<div class="kaijintime">
+									<p class="opentyle">开奖中...</p>
+									<div class="line linetime cuttime indextime" id="timebox">
+										<p>距离<span class="nextIssue">...</span> 期开奖时间：
+											<span class="bgtime hour">00</span><span class="hourtxt">时</span>
+											<span class="bgtime minute">00</span>分
+											<span class="bgtime second">00</span>秒
+										</p>
+									</div>
+								</div>
+							</div>
+							<div class="czlast deletebtn"></div>
+						</li>
+						<!--北京快乐8-->
+						<li class="list aozxy20_list" id="cz_10014">
+							<div class="cz">
+								<div class="imgheadl">
+									<a href="/beijingkuaile8.html"><img src="themes/168pc/img/small_logo/bjkl8.png" /></a>
+								</div>
+								<div class="title">
+									<p class="lotName">北京快乐8</p>
+									<p class="number"><span class="preIssue preDrawIssue">...</span>期</p>
+								</div>
+							</div>
+							<div class="kjhm class">
+								<div class="kajianhao">
+									<ul id="jnumber" class="numberbox">
+										<li class="numLightblue">1</li>
+										<li class="numLightblue">2</li>
+										<li class="numLightblue">3</li>
+										<li class="numLightblue">4</li>
+										<li class="numLightblue">5</li>
+										<li class="numLightblue">6</li>
+										<li class="numLightblue">7</li>
+										<li class="numLightblue">8</li>
+										<li class="numLightblue">9</li>
+										<li class="numLightblue tabLine">10</li>
+										<li class="numLightblue">11</li>
+										<li class="numLightblue">12</li>
+										<li class="numLightblue">13</li>
+										<li class="numLightblue">14</li>
+										<li class="numLightblue">15</li>
+										<li class="numLightblue">16</li>
+										<li class="numLightblue">17</li>
+										<li class="numLightblue">18</li>
+										<li class="numLightblue">19</li>
+										<li class="numLightblue">20</li>
+										<li class="numLightblue">21</li>
+									</ul>
+									<div class="progress"><img src="themes/168pc/img/icon/piaog.gif" /></div>
+								</div>
+							</div>
+							<div class="kjsj class">
+								<div>
+									<ul>
+										<li>
+											<a href="/beijingkuaile8.html">开奖</a>
+										</li>
+										<li>|</li>
+										<li>
+											<a href="/luzhufenxi98515251.html">走势</a>
+										</li>
+										<!--<li>|</li>
+										<li>
+											<a href="">遗漏</a>
+										</li>-->
+									</ul>
+								</div>
+								<div class="kaijintime">
+									<p class="opentyle">开奖中...</p>
+									<div class="line linetime cuttime indextime" id="timebox">
+										<p>距离<span class="nextIssue">...</span> 期开奖时间：
+											<span class="bgtime hour">00</span><span class="hourtxt">时</span>
+											<span class="bgtime minute">00</span>分
+											<span class="bgtime second">00</span>秒
+										</p>
+									</div>
+								</div>
+							</div>
+							<div class="czlast deletebtn"></div>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<!--境外彩-->
+			<div class="middbox jwcmiddbox" id="toJWC">
+				<div class="title">
+					<dl>
+						<dt>境外彩种<!--<span> 共87个彩种</span>--></dt>
+						<!--<dd>
+							<a href="javascript:void(0)" class="showallbtn">显示全部</a>
+						</dd>-->
+					</dl>
+				</div>
+				<div class="tablehead">
+					<ul>
+						<!--<li class="head">
+							<span class="cz">彩种</span>
+							<span class="kjhm">开奖号码</span>
+							<span class="kjsj">开奖时间</span>
+							<span class="czlast">操作</span>
+						</li>-->
+						<!--澳洲幸运5 (时时彩)-->
+						<li class="list" id="cz_10010">
+							<div class="cz">
+								<div class="imgheadl">
+									<a href="/aozhouxingyun5.html"><img src="themes/168pc/img/small_logo/aozxy5.png" /></a>
+								</div>
+								<div class="title">
+									<p class="lotName">澳洲幸运5</p>
+									<p class="number"><span class="preIssue preDrawIssue">...</span>期</p>
+								</div>
+							</div>
+							<div class="kjhm class">
+								<div class="kajianhao">
+									<ul class="numberbox">
+										<li class="numblueHead">1</li>
+										<li class="numblueHead">3</li>
+										<li class="numblueHead">2</li>
+										<li class="numblueHead">4</li>
+										<li class="numblueHead">6</li>
+									</ul>
+								</div>
+							</div>
+							<div class="kjsj class">
+								<div>
+									<ul>
+										<li>
+											<a href="/aozhouxingyun5.html">开奖</a>
+										</li>
+										<li>|</li>
+										<li>
+											<a href="/jibenzoushi10149485.html">走势</a>
+										</li>
+										<!--<li>|</li>
+										<li>
+											<a href="">遗漏</a>
+										</li>-->
+									</ul>
+								</div>
+								<div class="kaijintime">
+									<p class="opentyle">开奖中...</p>
+									<div class="line linetime cuttime indextime" id="timebox">
+										<p>距离<span class="nextIssue">...</span> 期开奖时间：
+											<span class="bgtime hour">00</span><span class="hourtxt">时</span>
+											<span class="bgtime minute">00</span>分
+											<span class="bgtime second">00</span>秒
+										</p>
+									</div>
+								</div>
+							</div>
+							<div class="czlast deletebtn"></div>
+						</li>
+						<!--澳洲幸运8 （快乐十分）-->
+						<li class="list" id="cz_10011">
+							<div class="cz">
+								<div class="imgheadl">
+									<a href="/aozhouxingyun8.html"><img src="themes/168pc/img/small_logo/aozxy8.png" /></a>
+								</div>
+								<div class="title">
+									<p class="lotName">澳洲幸运8</p>
+									<p class="number"><span class="preIssue preDrawIssue">...</span>期</p>
+								</div>
+							</div>
+							<div class="kjhm class">
+								<div class="kajianhao">
+									<ul class="numberbox">
+										<li class="numblueHead">1</li>
+										<li class="numblueHead">3</li>
+										<li class="numblueHead">2</li>
+										<li class="numblueHead">4</li>
+										<li class="numblueHead">6</li>
+										<li class="numblueHead">6</li>
+										<li class="numblueHead">6</li>
+										<li class="numblueHead">6</li>
+									</ul>
+								</div>
+							</div>
+							<div class="kjsj class">
+								<div>
+									<ul>
+										<li>
+											<a href="/aozhouxingyun8.html">开奖</a>
+										</li>
+										<li>|</li>
+										<li>
+											<a href="/haomafenbu52575549.html">走势</a>
+										</li>
+										<!--<li>|</li>
+										<li>
+											<a href="">遗漏</a>
+										</li>-->
+									</ul>
+								</div>
+								<div class="kaijintime">
+									<p class="opentyle">开奖中...</p>
+									<div class="line linetime cuttime indextime" id="timebox">
+										<p>距离<span class="nextIssue">...</span> 期开奖时间：
+											<span class="bgtime hour">00</span><span class="hourtxt">时</span>
+											<span class="bgtime minute">00</span>分
+											<span class="bgtime second">00</span>秒
+										</p>
+									</div>
+								</div>
+							</div>
+							<div class="czlast deletebtn"></div>
+						</li>
+						<!--澳洲幸运10 （北京PK拾）-->
+						<li class="list" id="cz_10012">
+							<div class="cz">
+								<div class="imgheadl">
+									<a href="/aozhouxingyun10.html"><img src="themes/168pc/img/small_logo/aozxy10.png" /></a>
+								</div>
+								<div class="title">
+									<p class="lotName">澳洲幸运10</p>
+									<p class="number"><span class="preIssue preDrawIssue">...</span>期</p>
+								</div>
+							</div>
+							<div class="kjhm class">
+								<div class="kajianhao">
+									<ul id="jnumber" class="numberbox">
+										<li class="nub01"></li>
+										<li class="nub02"></li>
+										<li class="nub03"></li>
+										<li class="nub04"></li>
+										<li class="nub05"></li>
+										<li class="nub06"></li>
+										<li class="nub07"></li>
+										<li class="nub08"></li>
+										<li class="nub09"></li>
+										<li class="nub10 li_after"></li>
+									</ul>
+									<div class="progress"><img src="themes/168pc/img/icon/piaog.gif" /></div>
+								</div>
+							</div>
+							<div class="kjsj class">
+								<div>
+									<ul>
+										<li>
+											<a href="/aozhouxingyun10.html">开奖</a>
+										</li>
+										<li>|</li>
+										<li>
+											<a href="/weizhizoushi57555150.html">走势</a>
+										</li>
+										<!--<li>|</li>
+										<li>
+											<a href="">遗漏</a>
+										</li>-->
+									</ul>
+								</div>
+								<div class="kaijintime">
+									<p class="opentyle">开奖中...</p>
+									<div class="line linetime cuttime indextime" id="timebox">
+										<p>距离<span class="nextIssue">...</span> 期开奖时间：
+											<span class="bgtime hour">00</span><span class="hourtxt">时</span>
+											<span class="bgtime minute">00</span>分
+											<span class="bgtime second">00</span>秒
+										</p>
+									</div>
+								</div>
+							</div>
+							<div class="czlast deletebtn"></div>
+						</li>
+						<!--澳洲幸运20 （北京快乐8）-->
+						<li class="list aozxy20_list" id="cz_10013">
+							<div class="cz">
+								<div class="imgheadl">
+									<a href="/aozhouxingyun20.html"><img src="themes/168pc/img/small_logo/aozxy20.png" /></a>
+								</div>
+								<div class="title">
+									<p class="lotName">澳洲幸运20</p>
+									<p class="number"><span class="preIssue preDrawIssue">...</span>期</p>
+								</div>
+							</div>
+							<div class="kjhm class">
+								<div class="kajianhao">
+									<ul id="jnumber" class="numberbox">
+										<li class="numLightblue">1</li>
+										<li class="numLightblue">2</li>
+										<li class="numLightblue">3</li>
+										<li class="numLightblue">4</li>
+										<li class="numLightblue">5</li>
+										<li class="numLightblue">6</li>
+										<li class="numLightblue">7</li>
+										<li class="numLightblue">8</li>
+										<li class="numLightblue">9</li>
+										<li class="numLightblue tabLine">10</li>
+										<li class="numLightblue">11</li>
+										<li class="numLightblue">12</li>
+										<li class="numLightblue">13</li>
+										<li class="numLightblue">14</li>
+										<li class="numLightblue">15</li>
+										<li class="numLightblue">16</li>
+										<li class="numLightblue">17</li>
+										<li class="numLightblue">18</li>
+										<li class="numLightblue">19</li>
+										<li class="numLightblue">20</li>
+										<li class="numLightblue">21</li>
+									</ul>
+									<div class="progress"><img src="themes/168pc/img/icon/piaog.gif" /></div>
+								</div>
+							</div>
+							<div class="kjsj class">
+								<div>
+									<ul>
+										<li>
+											<a href="/aozhouxingyun20.html">开奖</a>
+										</li>
+										<li>|</li>
+										<li>
+											<a href="/luzhufenxi57485353.html">走势</a>
+										</li>
+										<!--<li>|</li>
+										<li>
+											<a href="">遗漏</a>
+										</li>-->
+									</ul>
+								</div>
+								<div class="kaijintime">
+									<p class="opentyle">开奖中...</p>
+									<div class="line linetime cuttime indextime" id="timebox">
+										<p>距离<span class="nextIssue">...</span> 期开奖时间：
+											<span class="bgtime hour">00</span><span class="hourtxt">时</span>
+											<span class="bgtime minute">00</span>分
+											<span class="bgtime second">00</span>秒
+										</p>
+									</div>
+								</div>
+							</div>
+							<div class="czlast deletebtn"></div>
+						</li>
+						<!--台湾宾果-->
+						<li class="list aozxy20_list" id="cz_10047">
+							<div class="cz">
+								<div class="imgheadl">
+									<a href="/taiwanbg.html"><img src="themes/168pc/img/small_logo/twbg.png" /></a>
+								</div>
+								<div class="title">
+									<p class="lotName">台湾宾果</p>
+									<p class="number"><span class="preIssue preDrawIssue">...</span>期</p>
+								</div>
+							</div>
+							<div class="kjhm class">
+								<div class="kajianhao">
+									<ul id="jnumber" class="numberbox">
+										<li class="numLightblue">1</li>
+										<li class="numLightblue">2</li>
+										<li class="numLightblue">3</li>
+										<li class="numLightblue">4</li>
+										<li class="numLightblue">5</li>
+										<li class="numLightblue">6</li>
+										<li class="numLightblue">7</li>
+										<li class="numLightblue">8</li>
+										<li class="numLightblue">9</li>
+										<li class="numLightblue tabLine">10</li>
+										<li class="numLightblue">11</li>
+										<li class="numLightblue">12</li>
+										<li class="numLightblue">13</li>
+										<li class="numLightblue">14</li>
+										<li class="numLightblue">15</li>
+										<li class="numLightblue">16</li>
+										<li class="numLightblue">17</li>
+										<li class="numLightblue">18</li>
+										<li class="numLightblue">19</li>
+										<li class="numLightblue">20</li>
+										<li class="numLightblue">21</li>
+									</ul>
+									<div class="progress"><img src="themes/168pc/img/icon/piaog.gif" /></div>
+								</div>
+							</div>
+							<div class="kjsj class">
+								<div>
+									<ul>
+										<li>
+											<a href="/kaijianglishi57495497.html">开奖</a>
+										</li>
+										<!--<li>|</li>
+										<li>
+											<a href="">遗漏</a>
+										</li>-->
+									</ul>
+								</div>
+								<div class="kaijintime">
+									<p class="opentyle">开奖中...</p>
+									<div class="line linetime cuttime indextime" id="timebox">
+										<p>距离<span class="nextIssue">...</span> 期开奖时间：
+											<span class="bgtime hour">00</span><span class="hourtxt">时</span>
+											<span class="bgtime minute">00</span>分
+											<span class="bgtime second">00</span>秒
+										</p>
+									</div>
+								</div>
+							</div>
+							<div class="czlast deletebtn"></div>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<div class="middbox jwcmiddbox" id="toQGC">
+				<div class="title">
+					<dl>
+						<dt>全国彩种<!--<span> 共9个彩种</span>--></dt>
+					</dl>
+				</div>
+				<div class="tablehead">
+					<ul>
+						<li class="list" id="cz_10039">
+							<div class="cz">
+								<div class="imgheadl">
+									<a href="/shuangseqiu.html"><img src="themes/168pc/img/DoubleBall.png" /></a>
+								</div>
+								<div class="title">
+									<p class="lotName">福彩双色球</p>
+									<p class="number"><span class="preIssue preDrawIssue">...</span>期</p>
+								</div>
+							</div>
+							<div class="kjhm class">
+								<div class="kajianhao">
+									<ul class="numberbox">
+										<li class="numblue numred">1</li>
+										<li class="numblue numred">3</li>
+										<li class="numblue numred">2</li>
+										<li class="numblue numred">4</li>
+										<li class="numblue numred">4</li>
+										<li class="numblue numred">4</li>
+										<li class="numblueHead">6</li>
+									</ul>
+								</div>
+							</div>
+							<div class="kjsj class">
+								<div>
+									<ul>
+										<li>
+											<a href="/shuangseqiu.html">开奖</a>
+										</li>
+										<!--<li>|</li>
+										<li>
+											<a href="../aozxy5/ssc_jibenzs.html">走势</a>
+										</li>
+										<li>|</li>
+										<li>
+											<a href="">遗漏</a>
+										</li>-->
+									</ul>
+								</div>
+								<div class="kaijintime">
+									<p class="opentyle">开奖中...</p>
+									<div class="line linetime cuttime indextime" id="timebox">
+										<p>距离<span class="nextIssue">...</span> 期开奖时间：
+											<span class="bgtime hour">00</span><span class="hourtxt">时</span>
+											<span class="bgtime minute">00</span>分
+											<span class="bgtime second">00</span>秒
+										</p>
+									</div>
+								</div>
+							</div>
+							<div class="czlast deletebtn"></div>
+						</li>
+						<li class="list" id="cz_10040">
+							<div class="cz">
+								<div class="imgheadl">
+									<a href="/chaojidaletou.html"><img src="themes/168pc/img/DLT.png" /></a>
+								</div>
+								<div class="title">
+									<p class="lotName">超级大乐透</p>
+									<p class="number"><span class="preIssue preDrawIssue">...</span>期</p>
+								</div>
+							</div>
+							<div class="kjhm class">
+								<div class="kajianhao">
+									<ul class="numberbox">
+										<li class="numblue numred">1</li>
+										<li class="numblue numred">3</li>
+										<li class="numblue numred">2</li>
+										<li class="numblue numred">4</li>
+										<li class="numblue numred">6</li>
+										<li class="numblueHead">6</li>
+										<li class="numblueHead">6</li>
+									</ul>
+								</div>
+							</div>
+							<div class="kjsj class">
+								<div>
+									<ul>
+										<li>
+											<a href="/chaojidaletou.html">开奖</a>
+										</li>
+										<!--<li>|</li>
+										<li>
+											<a href="../aozxy8/klsf_danshaungzs.html">走势</a>
+										</li>
+										<li>|</li>
+										<li>
+											<a href="">遗漏</a>
+										</li>-->
+									</ul>
+								</div>
+								<div class="kaijintime">
+									<p class="opentyle">开奖中...</p>
+									<div class="line linetime cuttime indextime" id="timebox">
+										<p>距离<span class="nextIssue">...</span> 期开奖时间：
+											<span class="bgtime hour">00</span><span class="hourtxt">时</span>
+											<span class="bgtime minute">00</span>分
+											<span class="bgtime second">00</span>秒
+										</p>
+									</div>
+								</div>
+							</div>
+							<div class="czlast deletebtn"></div>
+						</li>
+						<li class="list" id="cz_10041">
+							<div class="cz">
+								<div class="imgheadl">
+									<a href="/fucai3D.html"><img src="themes/168pc/img/FC3D.png" /></a>
+								</div>
+								<div class="title">
+									<p class="lotName">福彩3D</p>
+									<p class="number"><span class="preIssue preDrawIssue">...</span>期</p>
+								</div>
+							</div>
+							<div class="kjhm class">
+								<div class="kajianhao">
+									<ul class="numberbox">
+										<li class="numblue numred">1</li>
+										<li class="numblue numred">4</li>
+										<li class="numblue numred">6</li>
+									</ul>
+								</div>
+							</div>
+							<div class="kjsj class">
+								<div>
+									<ul>
+										<li>
+											<a href="/fucai3D.html">开奖</a>
+										</li>
+										</li>
+										<!--<li>|</li>
+										<li>
+											<a href="../aozxy8/klsf_danshaungzs.html">走势</a>
+										<li>|</li>
+										<li>
+											<a href="">遗漏</a>
+										</li>-->
+									</ul>
+								</div>
+								<div class="kaijintime">
+									<p class="opentyle">开奖中...</p>
+									<div class="line linetime cuttime indextime" id="timebox">
+										<p>距离<span class="nextIssue">...</span> 期开奖时间：
+											<span class="bgtime hour">00</span><span class="hourtxt">时</span>
+											<span class="bgtime minute">00</span>分
+											<span class="bgtime second">00</span>秒
+										</p>
+									</div>
+								</div>
+							</div>
+							<div class="czlast deletebtn"></div>
+						</li>
+						<li class="list" id="cz_10042">
+							<div class="cz">
+								<div class="imgheadl">
+									<a href="/fucaiqilecai.html"><img src="themes/168pc/img/QLC.png" /></a>
+								</div>
+								<div class="title">
+									<p class="lotName">福彩七乐彩</p>
+									<p class="number"><span class="preIssue preDrawIssue">...</span>期</p>
+								</div>
+							</div>
+							<div class="kjhm class">
+								<div class="kajianhao">
+									<ul class="numberbox">
+										<li class="numblue numred">1</li>
+										<li class="numblue numred">3</li>
+										<li class="numblue numred">2</li>
+										<li class="numblue numred">4</li>
+										<li class="numblue numred">6</li>
+										<li class="numblue numred">6</li>
+										<li class="numblue numred">6</li>
+										<li class="numblueHead">6</li>
+									</ul>
+								</div>
+							</div>
+							<div class="kjsj class">
+								<div>
+									<ul>
+										<li>
+											<a href="/fucaiqilecai.html">开奖</a>
+										</li>
+										<!--<li>|</li>
+										<li>
+											<a href="../aozxy8/klsf_danshaungzs.html">走势</a>
+										</li>
+										<li>|</li>
+										<li>
+											<a href="">遗漏</a>
+										</li>-->
+									</ul>
+								</div>
+								<div class="kaijintime">
+									<p class="opentyle">开奖中...</p>
+									<div class="line linetime cuttime indextime" id="timebox">
+										<p>距离<span class="nextIssue">...</span> 期开奖时间：
+											<span class="bgtime hour">00</span><span class="hourtxt">时</span>
+											<span class="bgtime minute">00</span>分
+											<span class="bgtime second">00</span>秒
+										</p>
+									</div>
+								</div>
+							</div>
+							<div class="czlast deletebtn"></div>
+						</li>
+						<li class="list" id="cz_10043">
+							<div class="cz">
+								<div class="imgheadl">
+									<a href="/ticaipailie3.html"><img src="themes/168pc/img/PaiLie3.png" /></a>
+								</div>
+								<div class="title">
+									<p class="lotName">体彩排列3</p>
+									<p class="number"><span class="preIssue preDrawIssue">...</span>期</p>
+								</div>
+							</div>
+							<div class="kjhm class">
+								<div class="kajianhao">
+									<ul class="numberbox">
+										<li class="numblue numred">6</li>
+										<li class="numblue numred">6</li>
+										<li class="numblue numred">6</li>
+									</ul>
+								</div>
+							</div>
+							<div class="kjsj class">
+								<div>
+									<ul>
+										<li>
+											<a href="/ticaipailie3.html">开奖</a>
+										</li>
+										<!--<li>|</li>
+										<li>
+											<a href="../aozxy8/klsf_danshaungzs.html">走势</a>
+										</li>
+										<li>|</li>
+										<li>
+											<a href="">遗漏</a>
+										</li>-->
+									</ul>
+								</div>
+								<div class="kaijintime">
+									<p class="opentyle">开奖中...</p>
+									<div class="line linetime cuttime indextime" id="timebox">
+										<p>距离<span class="nextIssue">...</span> 期开奖时间：
+											<span class="bgtime hour">00</span><span class="hourtxt">时</span>
+											<span class="bgtime minute">00</span>分
+											<span class="bgtime second">00</span>秒
+										</p>
+									</div>
+								</div>
+							</div>
+							<div class="czlast deletebtn"></div>
+						</li>
+						<li class="list" id="cz_10044">
+							<div class="cz">
+								<div class="imgheadl">
+									<a href="/ticaipailie5.html"><img src="themes/168pc/img/PaiLie5.png" /></a>
+								</div>
+								<div class="title">
+									<p class="lotName">体彩排列5</p>
+									<p class="number"><span class="preIssue preDrawIssue">...</span>期</p>
+								</div>
+							</div>
+							<div class="kjhm class">
+								<div class="kajianhao">
+									<ul class="numberbox">
+										<li class="numblue numred">6</li>
+										<li class="numblue numred">6</li>
+										<li class="numblue numred">6</li>
+										<li class="numblue numred">6</li>
+										<li class="numblue numred">6</li>
+									</ul>
+								</div>
+							</div>
+							<div class="kjsj class">
+								<div>
+									<ul>
+										<li>
+											<a href="/ticaipailie5.html">开奖</a>
+										</li>
+										<!--<li>|</li>
+										<li>
+											<a href="../aozxy8/klsf_danshaungzs.html">走势</a>
+										</li>
+										<li>|</li>
+										<li>
+											<a href="">遗漏</a>
+										</li>-->
+									</ul>
+								</div>
+								<div class="kaijintime">
+									<p class="opentyle">开奖中...</p>
+									<div class="line linetime cuttime indextime" id="timebox">
+										<p>距离<span class="nextIssue">...</span> 期开奖时间：
+											<span class="bgtime hour">00</span><span class="hourtxt">时</span>
+											<span class="bgtime minute">00</span>分
+											<span class="bgtime second">00</span>秒
+										</p>
+									</div>
+								</div>
+							</div>
+							<div class="czlast deletebtn"></div>
+						</li>
+						<li class="list" id="cz_10045">
+							<div class="cz">
+								<div class="imgheadl">
+									<a href="/ticaiqixingcai.html"><img src="themes/168pc/img/QXC.png" /></a>
+								</div>
+								<div class="title">
+									<p class="lotName">体彩七星彩</p>
+									<p class="number"><span class="preIssue preDrawIssue">...</span>期</p>
+								</div>
+							</div>
+							<div class="kjhm class">
+								<div class="kajianhao">
+									<ul class="numberbox">
+										<li class="numWeightblue">1</li>
+										<li class="numWeightblue">3</li>
+										<li class="numWeightblue">2</li>
+										<li class="numWeightblue">4</li>
+										<li class="numblue numLightblue">1</li>
+										<li class="numblue numLightblue">3</li>
+										<li class="numblue numLightblue">6</li>
+									</ul>
+								</div>
+							</div>
+							<div class="kjsj class">
+								<div>
+									<ul>
+										<li>
+											<a href="/ticaiqixingcai.html">开奖</a>
+										</li>
+										<!--<li>|</li>
+										<li>
+											<a href="../aozxy8/klsf_danshaungzs.html">走势</a>
+										</li>
+										<li>|</li>
+										<li>
+											<a href="">遗漏</a>
+										</li>-->
+									</ul>
+								</div>
+								<div class="kaijintime">
+									<p class="opentyle">开奖中...</p>
+									<div class="line linetime cuttime indextime" id="timebox">
+										<p>距离<span class="nextIssue">...</span> 期开奖时间：
+											<span class="bgtime hour">00</span><span class="hourtxt">时</span>
+											<span class="bgtime minute">00</span>分
+											<span class="bgtime second">00</span>秒
+										</p>
+									</div>
+								</div>
+							</div>
+							<div class="czlast deletebtn"></div>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<?php $__Template->display("themes/168pc/foot"); ?>
+
+	</body>
+	<script type="text/javascript" src="/themes/168pc/js/lib/jquery-1.7.2.min.js"></script>
+	<script type="text/javascript" src="/themes/168pc/js/lib/config.js"></script>
+	<script type="text/javascript" src="/themes/168pc/js/loacal/jinayue_index.js"></script>
+	<script type="text/javascript" src="/themes/168pc/js/lib/GA.js"></script>
+	<script type="text/javascript" src="/themes/168pc/js/loacal/animate/animate.js"></script>
+</html>";s:12:"compile_time";i:1517838536;}";

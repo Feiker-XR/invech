@@ -1,0 +1,71 @@
+<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:77:"/mnt/wwwroot/www.dd788799.com/houtai/../application/admin/view/agent/reg.html";i:1505452682;}*/ ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>系统设置</title>
+<link href="/css/base.css" rel="stylesheet" type="text/css" />
+<link href="/css/admin.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="/js/jquery.js"></script>
+<script type="text/javascript" src="/js/jquery.tools.js"></script>
+<script type="text/javascript" src="/js/base.js"></script>
+</head>
+<body class="list">
+	<!--<div class="bar">
+		代理申请审核
+	</div>-->
+	
+
+	<div class="body">
+	<ul id="tab" class="tab">
+		<li>
+			<input type="button" value="代理申请审核" hidefocus class="current"/>
+		</li>
+	</ul>
+
+	<table id="listTable" class="listTable">
+		<tr>
+			<th>代理账号</th>
+			<th>查看下级</th>
+			<th>真实姓名</th>
+			<th>手机号码</th>
+			<th>邮箱地址</th>
+			<th>申请时间</th>
+			<th>操作</th>
+		</tr>
+	
+	<?php if(!(empty($list) || (($list instanceof \think\Collection || $list instanceof \think\Paginator ) && $list->isEmpty()))): if(is_array($list) || $list instanceof \think\Collection || $list instanceof \think\Paginator): $i = 0; $__LIST__ = $list;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$rows): $mod = ($i % 2 );++$i;?>
+		<tr>
+			<td><?php echo $rows['username']; ?></td>
+			<td><?php echo $rows['uid']; ?></td>
+			<td><?php echo $rows['r_name']; ?></td>
+			<td><?php echo $rows['mobile']; ?></td>
+			<td><?php echo $rows['email']; ?></td>
+			<td><?php echo $rows['add_time']; ?></td>
+			<td>
+				<?php switch($rows['status']): case "0": ?>
+						<div>
+							<div style="float:left">
+              					<a onClick="return confirm('确认同意该用户成为代理的请求？');" 
+              					href="cmd.php?uid=<?php echo $rows['uid']; ?>&did=<?php echo $rows['d_id']; ?>&status=1">同意</a>
+              				</div>
+           					<div style="float:right">
+           						<a onClick="return confirm('不同意该用户成为代理的请求？');" 
+           						href="cmd.php?uid=<?php echo $rows['uid']; ?>&did=<?php echo $rows['d_id']; ?>&status=2">不同意</a>
+           					</div>
+		   	</div>
+					<?php break; case "1": ?>
+						<span style="color:#009900;">同意</span>
+					<?php break; case "2": ?>
+						<span style="color:#FF0000;">不同意</span>
+					<?php break; case "3": ?>
+						<span style="color:#0000FF;">操作无效</span>
+					<?php break; endswitch; ?>
+			</td>
+		</tr>
+	<?php endforeach; endif; else: echo "" ;endif; endif; ?>
+	</table>
+  <?php if(!(empty($list) || (($list instanceof \think\Collection || $list instanceof \think\Paginator ) && $list->isEmpty()))): ?><div class="pagerBar"><?php echo $list->render(); ?></div><?php endif; ?>
+</div>
+</body>
+</html>

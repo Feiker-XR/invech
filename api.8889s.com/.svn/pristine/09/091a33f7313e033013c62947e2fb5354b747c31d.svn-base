@@ -1,0 +1,191 @@
+# 采集UID 
+*/2 * * * * php /www/wwwroot/site/caiji/sport/reload.php
+#篮球结算 每分钟运行一次
+* * * * * * php /www/wwwroot/site/caiji/sport/lqauto.php
+#足球结算 每分钟运行一次
+* * * * * * php /www/wwwroot/site/caiji/sport/zqauto.php
+
+#网球比分数据,480秒采集一次,这里网球采集有问题,后面解决
+#*/6 * * * * php /www/wwwroot/site/caiji/sport/wqbf.php
+#网球单式,60秒采集一次
+* * * * * php /www/wwwroot/site/caiji/sport/wqds.php
+#网球计算,960秒运行一次,因为比分问题,暂时不开启
+#*/16 * * * *
+#排球比分数据,480秒采集一次
+*/6 * * * * php /www/wwwroot/site/caiji/sport/pqbf.php
+#排球单式数据,60秒采集一次
+* * * * * php /www/wwwroot/site/caiji/sport/pqds.php
+#排球结算,960秒采集一次
+* * * * * php /www/wwwroot/site/caiji/sport/pqjs.php
+#采集篮球比分数据,每60秒采集一次
+* * * * * php /www/wwwroot/site/caiji/sport/lqbf.php
+#采集篮球早餐数据,60秒采集一次
+* * * * * php /www/wwwroot/site/caiji/sport/lqdj.php 
+#采集篮球单式数据,60秒采集一次
+* * * * * php /www/wwwroot/site/caiji/sport/lqds.php 
+#采集篮球滚球信息,每15秒采集一次
+* * * * * php /www/wwwroot/site/caiji/sport/lqgq2.php
+* * * * * sleep 15; php /www/wwwroot/site/caiji/sport/lqgq2.php
+* * * * * sleep 30; php /www/wwwroot/site/caiji/sport/lqgq2.php
+* * * * * sleep 45; php /www/wwwroot/site/caiji/sport/lqgq2.php
+#采集篮球滚球数据,放入数据库,每10秒钟采集一次
+* * * * * php /www/wwwroot/site/caiji/sport/lqgqsj.php
+* * * * * sleep 10; php /www/wwwroot/site/caiji/sport/lqgqsj.php
+* * * * * sleep 20; php /www/wwwroot/site/caiji/sport/lqgqsj.php
+* * * * * sleep 30; php /www/wwwroot/site/caiji/sport/lqgqsj.php
+* * * * * sleep 40; php /www/wwwroot/site/caiji/sport/lqgqsj.php
+* * * * * sleep 50; php /www/wwwroot/site/caiji/sport/lqgqsj.php
+#采集滚球信息,每15秒采集一次
+* * * * * php /www/wwwroot/site/caiji/sport/zqgq2.php
+* * * * * sleep 15; php /www/wwwroot/site/caiji/sport/zqgq2.php
+* * * * * sleep 30; /www/wwwroot/site/caiji/sport/zqgq2.php
+* * * * * sleep 45; php /www/wwwroot/site/caiji/sport/zqgq2.php
+#采集足球滚球数据,放入数据库,每10秒钟采集一次
+* * * * * php /www/wwwroot/site/caiji/sport/zqgqsj.php
+* * * * * sleep 10; php /www/wwwroot/site/caiji/sport/zqgqsj.php
+* * * * * sleep 20; php /www/wwwroot/site/caiji/sport/zqgqsj.php
+* * * * * sleep 30; php /www/wwwroot/site/caiji/sport/zqgqsj.php
+* * * * * sleep 40; php /www/wwwroot/site/caiji/sport/zqgqsj.php
+* * * * * sleep 50; php /www/wwwroot/site/caiji/sport/zqgqsj.php
+# 足球波胆数据更新,60秒采集一次,多页采集每页休眠3秒
+* * * * * php /www/wwwroot/site/caiji/sport/zqbd.php
+# 足球比分数据,120秒采集一次
+*/2 * * * * php /www/wwwroot/site/caiji/sport/zqbf.php
+# 足球半全场数据,120采集一次
+*/2 * * * * php /www/wwwroot/site/caiji/sport/zqbqc.php
+#足球单式数据,60秒采集一次
+* * * * * php /www/wwwroot/site/caiji/sport/zqds.php
+#足球让球数,60秒采集一次
+* * * * * php /www/wwwroot/site/caiji/sport/zqrqs.php
+#足球上半波胆,60秒采集一次
+* * * * * php /www/wwwroot/site/caiji/sport/zqsbbd.php
+#足球上半场,60秒采集一次
+* * * * * php /www/wwwroot/site/caiji/sport/zqsbc.php
+#早波胆 120秒采集一次
+*/2 * * * * php /www/wwwroot/site/caiji/sport/zqzcbd.php
+#足球早半全场
+*/2 * * * * php /www/wwwroot/site/caiji/sport/zqzcbqc.php
+#足球早单式 120秒采集一次
+*/2 * * * * php /www/wwwroot/site/caiji/sport/zqzcds.php
+#足球早入球数 120秒采集一次
+*/2 * * * * php /www/wwwroot/site/caiji/sport/zqzcds.php
+#足球早上半波胆,120秒采集一次
+*/2 * * * * php /www/wwwroot/site/caiji/sport/zqzcsbbd.php
+#足球早上半场 120秒采集一次
+*/2 * * * * php /www/wwwroot/site/caiji/sport/zqzcsbc.php
+* * * * * php /www/wwwroot/site/caiji/kaijiang/Pk10.php
+* * * * * php /www/wwwroot/site/caiji/kaijiang/Csc.php
+* * * * * php /www/wwwroot/site/caiji/kaijiang/Csf.php
+* * * * * php /www/wwwroot/site/caiji/kaijiang/Gsf.php
+* * * * * php /www/wwwroot/site/caiji/kaijiang/Gxsf.php
+* * * * * php /www/wwwroot/site/caiji/kaijiang/Jsk3.php
+* * * * * php /www/wwwroot/site/caiji/kaijiang/xsc.php
+* * * * * php /www/wwwroot/site/caiji/kaijiang/xyft.php
+* * * * * php /www/wwwroot/site/caiji/lottery/index.php cqssc
+* * * * * sleep 10; php /www/wwwroot/site/caiji/lottery/index.php cqssc
+* * * * * sleep 20; php /www/wwwroot/site/caiji/lottery/index.php cqssc
+* * * * * sleep 30; php /www/wwwroot/site/caiji/lottery/index.php cqssc
+* * * * * sleep 40; php /www/wwwroot/site/caiji/lottery/index.php cqssc
+* * * * * sleep 50; php /www/wwwroot/site/caiji/lottery/index.php cqssc
+* * * * * php /www/wwwroot/site/caiji/lottery/index.php pk10
+* * * * * sleep 10; php /www/wwwroot/site/caiji/lottery/index.php pk10
+* * * * * sleep 20; php /www/wwwroot/site/caiji/lottery/index.php pk10
+* * * * * sleep 30; php /www/wwwroot/site/caiji/lottery/index.php pk10
+* * * * * sleep 40; php /www/wwwroot/site/caiji/lottery/index.php pk10
+* * * * * sleep 50; php /www/wwwroot/site/caiji/lottery/index.php pk10
+* * * * * php /www/wwwroot/site/caiji/lottery/index.php cqklsf
+* * * * * sleep 10; php /www/wwwroot/site/caiji/lottery/index.php cqklsf
+* * * * * sleep 20; php /www/wwwroot/site/caiji/lottery/index.php cqklsf
+* * * * * sleep 30; php /www/wwwroot/site/caiji/lottery/index.php cqklsf
+* * * * * sleep 40; php /www/wwwroot/site/caiji/lottery/index.php cqklsf
+* * * * * sleep 50; php /www/wwwroot/site/caiji/lottery/index.php cqklsf
+* * * * * php /www/wwwroot/site/caiji/lottery/index.php gdklsf
+* * * * * sleep 10; php /www/wwwroot/site/caiji/lottery/index.php gdklsf
+* * * * * sleep 20; php /www/wwwroot/site/caiji/lottery/index.php gdklsf
+* * * * * sleep 30; php /www/wwwroot/site/caiji/lottery/index.php gdklsf
+* * * * * sleep 40; php /www/wwwroot/site/caiji/lottery/index.php gdklsf
+* * * * * sleep 50; php /www/wwwroot/site/caiji/lottery/index.php gdklsf
+* * * * * php /www/wwwroot/site/caiji/lottery/index.php gxklsf
+* * * * * sleep 10; php /www/wwwroot/site/caiji/lottery/index.php gxklsf
+* * * * * sleep 20; php /www/wwwroot/site/caiji/lottery/index.php gxklsf
+* * * * * sleep 30; php /www/wwwroot/site/caiji/lottery/index.php gxklsf
+* * * * * sleep 40; php /www/wwwroot/site/caiji/lottery/index.php gxklsf
+* * * * * sleep 50; php /www/wwwroot/site/caiji/lottery/index.php gxklsf
+* * * * * php /www/wwwroot/site/caiji/lottery/index.php jsk3
+* * * * * sleep 10; php /www/wwwroot/site/caiji/lottery/index.php jsk3
+* * * * * sleep 20; php /www/wwwroot/site/caiji/lottery/index.php jsk3
+* * * * * sleep 30; php /www/wwwroot/site/caiji/lottery/index.php jsk3
+* * * * * sleep 40; php /www/wwwroot/site/caiji/lottery/index.php jsk3
+* * * * * sleep 50; php /www/wwwroot/site/caiji/lottery/index.php jsk3
+* * * * * php /www/wwwroot/site/caiji/lottery/index.php xjssc
+* * * * * sleep 10; php /www/wwwroot/site/caiji/lottery/index.php xjssc
+* * * * * sleep 20; php /www/wwwroot/site/caiji/lottery/index.php xjssc
+* * * * * sleep 30; php /www/wwwroot/site/caiji/lottery/index.php xjssc
+* * * * * sleep 40; php /www/wwwroot/site/caiji/lottery/index.php xjssc
+* * * * * sleep 50; php /www/wwwroot/site/caiji/lottery/index.php xjssc
+* * * * * php /www/wwwroot/site/caiji/lottery/index.php sd11x5
+* * * * * sleep 10; php /www/wwwroot/site/caiji/lottery/index.php sd11x5
+* * * * * sleep 20; php /www/wwwroot/site/caiji/lottery/index.php sd11x5
+* * * * * sleep 30; php /www/wwwroot/site/caiji/lottery/index.php sd11x5
+* * * * * sleep 40; php /www/wwwroot/site/caiji/lottery/index.php sd11x5
+* * * * * sleep 50; php /www/wwwroot/site/caiji/lottery/index.php sd11x5
+* * * * * php /www/wwwroot/site/caiji/lottery/index.php xyft
+* * * * * sleep 10; php /www/wwwroot/site/caiji/lottery/index.php xyft
+* * * * * sleep 20; php /www/wwwroot/site/caiji/lottery/index.php xyft
+* * * * * sleep 30; php /www/wwwroot/site/caiji/lottery/index.php xyft
+* * * * * sleep 40; php /www/wwwroot/site/caiji/lottery/index.php xyft
+* * * * * sleep 50; php /www/wwwroot/site/caiji/lottery/index.php xyft
+* * * * * php /www/wwwroot/site/caiji/lottery/index.php cqssc url2
+* * * * * sleep 10; php /www/wwwroot/site/caiji/lottery/index.php cqssc url2
+* * * * * sleep 20; php /www/wwwroot/site/caiji/lottery/index.php cqssc url2
+* * * * * sleep 30; php /www/wwwroot/site/caiji/lottery/index.php cqssc url2
+* * * * * sleep 40; php /www/wwwroot/site/caiji/lottery/index.php cqssc url2
+* * * * * sleep 50; php /www/wwwroot/site/caiji/lottery/index.php cqssc url2
+* * * * * php /www/wwwroot/site/caiji/lottery/index.php pk10 url2
+* * * * * sleep 10; php /www/wwwroot/site/caiji/lottery/index.php pk10 url2
+* * * * * sleep 20; php /www/wwwroot/site/caiji/lottery/index.php pk10 url2
+* * * * * sleep 30; php /www/wwwroot/site/caiji/lottery/index.php pk10 url2
+* * * * * sleep 40; php /www/wwwroot/site/caiji/lottery/index.php pk10 url2
+* * * * * sleep 50; php /www/wwwroot/site/caiji/lottery/index.php pk10 url2
+* * * * * php /www/wwwroot/site/caiji/lottery/index.php cqklsf url2
+* * * * * sleep 10; php /www/wwwroot/site/caiji/lottery/index.php cqklsf url2
+* * * * * sleep 20; php /www/wwwroot/site/caiji/lottery/index.php cqklsf url2
+* * * * * sleep 30; php /www/wwwroot/site/caiji/lottery/index.php cqklsf url2
+* * * * * sleep 40; php /www/wwwroot/site/caiji/lottery/index.php cqklsf url2
+* * * * * sleep 50; php /www/wwwroot/site/caiji/lottery/index.php cqklsf url2
+* * * * * php /www/wwwroot/site/caiji/lottery/index.php gdklsf url2
+* * * * * sleep 10; php /www/wwwroot/site/caiji/lottery/index.php gdklsf url2
+* * * * * sleep 20; php /www/wwwroot/site/caiji/lottery/index.php gdklsf url2
+* * * * * sleep 30; php /www/wwwroot/site/caiji/lottery/index.php gdklsf url2
+* * * * * sleep 40; php /www/wwwroot/site/caiji/lottery/index.php gdklsf url2
+* * * * * sleep 50; php /www/wwwroot/site/caiji/lottery/index.php gdklsf url2
+* * * * * php /www/wwwroot/site/caiji/lottery/index.php gxklsf url2
+* * * * * sleep 10; php /www/wwwroot/site/caiji/lottery/index.php gxklsf url2
+* * * * * sleep 20; php /www/wwwroot/site/caiji/lottery/index.php gxklsf url2
+* * * * * sleep 30; php /www/wwwroot/site/caiji/lottery/index.php gxklsf url2
+* * * * * sleep 40; php /www/wwwroot/site/caiji/lottery/index.php gxklsf url2
+* * * * * sleep 50; php /www/wwwroot/site/caiji/lottery/index.php gxklsf url2
+* * * * * php /www/wwwroot/site/caiji/lottery/index.php jsk3  url2
+* * * * * sleep 10; php /www/wwwroot/site/caiji/lottery/index.php jsk3 url2
+* * * * * sleep 20; php /www/wwwroot/site/caiji/lottery/index.php jsk3 url2
+* * * * * sleep 30; php /www/wwwroot/site/caiji/lottery/index.php jsk3 url2
+* * * * * sleep 40; php /www/wwwroot/site/caiji/lottery/index.php jsk3 url2
+* * * * * sleep 50; php /www/wwwroot/site/caiji/lottery/index.php jsk3 url2
+* * * * * php /www/wwwroot/site/caiji/lottery/index.php xjssc url2
+* * * * * sleep 10; php /www/wwwroot/site/caiji/lottery/index.php xjssc url2
+* * * * * sleep 20; php /www/wwwroot/site/caiji/lottery/index.php xjssc url2
+* * * * * sleep 30; php /www/wwwroot/site/caiji/lottery/index.php xjssc url2
+* * * * * sleep 40; php /www/wwwroot/site/caiji/lottery/index.php xjssc url2
+* * * * * sleep 50; php /www/wwwroot/site/caiji/lottery/index.php xjssc url2
+* * * * * php /www/wwwroot/site/caiji/lottery/index.php sd11x5 url2
+* * * * * sleep 10; php /www/wwwroot/site/caiji/lottery/index.php sd11x5 url2
+* * * * * sleep 20; php /www/wwwroot/site/caiji/lottery/index.php sd11x5 url2
+* * * * * sleep 30; php /www/wwwroot/site/caiji/lottery/index.php sd11x5 url2
+* * * * * sleep 40; php /www/wwwroot/site/caiji/lottery/index.php sd11x5 url2
+* * * * * sleep 50; php /www/wwwroot/site/caiji/lottery/index.php sd11x5 url2
+* * * * * php /www/wwwroot/site/caiji/lottery/index.php xyft url2
+* * * * * sleep 10; php /www/wwwroot/site/caiji/lottery/index.php xyft url2
+* * * * * sleep 20; php /www/wwwroot/site/caiji/lottery/index.php xyft url2
+* * * * * sleep 30; php /www/wwwroot/site/caiji/lottery/index.php xyft url2
+* * * * * sleep 40; php /www/wwwroot/site/caiji/lottery/index.php xyft url2
+* * * * * sleep 50; php /www/wwwroot/site/caiji/lottery/index.php xyft url2

@@ -1,0 +1,95 @@
+<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:83:"/mnt/wwwroot/www.dd788799.com/houtai/../application/admin/view/money/zhifu_api.html";i:1505452686;}*/ ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>系统设置</title>
+<link href="/css/base.css" rel="stylesheet" type="text/css" />
+<link href="/css/admin.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="/js/jquery.js"></script>
+<script type="text/javascript" src="/js/jquery.tools.js"></script>
+<script type="text/javascript" src="/js/base.js"></script>
+</head>
+<body class="input">
+	<!--<div class="bar">
+		在线支付设置
+	</div>-->
+
+
+	<div class="body">
+		<ul id="tab" class="tab">
+			<li><input type="button" value="支付接口" hidefocus class="current" />
+			</li>
+		</ul>
+		<form name="form1" onSubmit="return check_submit();" method="post"
+			action="?id=<?=$id?>&action=<?php if($id>0){ echo 'edit';}else{ echo 'add';}?>&page=<?php echo $page; ?>">
+			<table class="inputTable tabContent">
+				<tr>
+					<th>接口名称:</th>
+					<td><input type="text" value="<?php echo $rs['name']; ?>" name="name"
+						id="name" class="formText" /></td>
+				</tr>
+				<tr>
+					<th>接口域名:</th>
+					<td><input type="text" value="<?php echo $rs['url']; ?>" name="url"
+						id="url" class="formText" /></td>
+				</tr>
+				<tr>
+					<th>商户ID:</th>
+					<td><input type="text" value="<?php echo $rs['sid']; ?>" name="sid"
+						id="sid" class="formText" /></td>
+				</tr>
+				<tr>
+					<th>商户密匙:</th>
+					<td><input type="text" value="<?php echo $rs['pass']; ?>" name="pass"
+						id="pass" class="formText" /></td>
+				</tr>
+				<tr>
+					<th>是否显示:</th>
+					<td><select name="ok" id="ok">
+							<option value="1" <?php if($rs['ok'] == 1): ?>selected<?php endif; ?>>显示</option>
+							<option value="0" <?php if($rs['ok'] == 0): ?>selected<?php endif; ?>>隐藏</option>
+					</select></td>
+				</tr>
+			</table>
+			<div class="buttonArea">
+				<input type="submit" class="formButton" value="确  定" hidefocus />&nbsp;&nbsp;
+				<input type="button" class="formButton"
+					onClick="window.location.href='<?php echo Url('main/info'); ?>'" value="返  回"
+					hidefocus />
+			</div>
+		</form>
+		<table class="inputTable tabContent">
+			<tr>
+				<td width="100" align="center" bgcolor="#EEF4F9">接口名称</td>
+				<td width="250" align="center" bgcolor="#EEF4F9">接口域名</td>
+				<td width="150" align="center" bgcolor="#EEF4F9">商户ID</td>
+				<td align="center" bgcolor="#EEF4F9">商户密匙</td>
+				<td width="46" align="center" bgcolor="#EEF4F9">状态</td>
+				<td width="46" align="center" bgcolor="#EEF4F9">编辑</td>
+			</tr>
+			<?php if(is_array($rows) || $rows instanceof \think\Collection || $rows instanceof \think\Paginator): $i = 0; $__LIST__ = $rows;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$v): $mod = ($i % 2 );++$i;?>
+			<tr>
+				<td align="center">
+					<?php echo $v["name"]; ?>
+				</td>
+				<td align="center">
+					<?php echo $v["url"]; ?>
+				</td>
+				<td align="center">
+					<?php echo $v["sid"]; ?>
+				</td>
+				<td align="center">
+					<?php echo $v["pass"]; ?>
+				</td>
+				<td align="center">
+					<?php if($v['ok'] == 0): ?><span class="hong">不显示</span><?php else: ?><span class="blue">显示</span><?php endif; ?>
+				</td>
+				<td align="center"><a href="?id=<?=$v['id']?>&page=<?php echo $page; ?>">编辑</a></td>
+			</tr>
+			<?php endforeach; endif; else: echo "" ;endif; ?>
+		</table>
+		<?php echo $pages; ?>
+	</div>
+</body>
+</html>

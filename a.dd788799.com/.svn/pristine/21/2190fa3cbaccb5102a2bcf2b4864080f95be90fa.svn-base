@@ -1,0 +1,61 @@
+{layout name="layout" /}
+
+<div class="row">
+  <div class="col-xs-12">
+    <div class="box">
+      <div class="box-header">
+		<form>
+		      <div class="has-feedback pull-right">
+		        <button type="submit" class="btn btn-block btn-default btn-sm filter">查询</button>
+		      </div>
+				<div class="pull-right">
+                    <input type="text" name="endtime" data-date-format="yyyy-mm-dd" value="{$Think.get.endtime}" placeholder="结束时间" class="form-control input-sm" id="datepicker2">
+               </div>  
+	          <div class="pull-right">
+	                ~
+	          </div> 
+	           <div class="pull-right" style="margin-left:20px;">
+	                   <input type="text" name="starttime" data-date-format="yyyy-mm-dd" value="{$Think.get.starttime}" placeholder="开始时间" class="form-control input-sm" id="datepicker1">
+	            </div>
+               
+		 </form>
+
+      </div>
+      <!-- /.box-header -->
+      <div class="box-body table-responsive no-padding">
+        <table class="table table-hover">
+    		<tr>
+				 <th>#</th>
+				 <th>日期</th>
+				 <th>总金额</th>
+				 <th>注单总数</th>
+				 <th>中奖金额</th>
+				 <th>中奖注数</th>
+				 <th>输赢金额</th>
+			</tr>
+			{foreach $list as $v}
+			 <tr>
+				  <td>{$v->id}</td>
+				  <td>{$v->created_at|date="y-m-d",###}</td>
+				  <td>{$v->bet_amount}</td>
+				  <td>{$v->bet_count}</font></td>
+				  <td>{$v->zj_amount}</td>
+				  <td>{$v->zj_count}</td>
+				  <td>{$v->win}</td>
+			</tr>
+			{/foreach}
+        </table>
+        {$list->render();}
+      </div>
+      <!-- /.box-body -->
+    </div>
+    <!-- /.box -->
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){
+	$("#datepicker1").datepicker();
+	$("#datepicker2").datepicker();
+});
+
+</script>

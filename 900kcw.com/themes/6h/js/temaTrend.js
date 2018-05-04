@@ -1,0 +1,1 @@
+function shengxiaoTab(){$(".shengxiao").on("click","ul>li",function(){$(this).addClass("checked").siblings().removeClass("checked")})}function drawFun(a,b){$.ajax({type:"get",url:url.config140+"findSpecialNumberTrend.php",data:{periods:a},dataType:"json",success:function(d){console.log(d);var c=d.result.data.issues;var e=d.result.data.numbers;drawZXT(e,c,b)}})}drawFun(30,50);

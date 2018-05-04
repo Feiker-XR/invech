@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>亚太娱乐</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+	<link rel="stylesheet" href="/css/bootstrap.min.css">
+	<link rel="stylesheet" href="/css/font-awesome.min.css">
+	<link rel="stylesheet" href="/styles/ezweb.css">
+	<link rel="stylesheet" type="text/css" href="/fonts-new/iconfont.css">		
+	<link rel="stylesheet" href="/css/500f_new_wap.css">
+	
+	<script src="/assets/jquery.js"></script>
+	<script src="/js/bootstrap.min.js"></script>
+</head>
+<script language="javascript" src="/js/jquery.js"></script> 
+<script language="javascript" src="/js/tikuan.js"></script> 
+<style type="text/css">
+body {
+	background:#ffffff;
+	font-size: 12px;
+	font-family:"宋体";
+	width:100%;
+}
+.panel-default{margin: 0 auto;}
+</style>
+<script language="javascript">
+function confirmsxf() {
+	if($("#tikuan_sxf").attr("checked")) {
+		$("#btn").removeAttr('disabled');
+	} else {
+		$("#btn").attr('disabled','disabled');
+	}
+}
+</script>
+<body>
+
+
+
+<div class="block_60"></div>
+<div class="ucenter">
+	<div class="container">
+	<div class="row" style="margin: 0;">
+
+		<div class="panel panel-default">
+		  <div class="panel-heading">
+		    <h3 class="panel-title">提取现金</h3>
+		  </div>
+		  <div class="panel-body">
+		    <form class="form-horizontal" onsubmit="return  check_submit()" action="?action=tikuan" method="post" name="form1">
+				<div class="form-group">
+				    <label class="col-sm-2 control-label">取款金额：</label>
+				    <div class="col-sm-10">
+				    	<input class="form-control" name="pay_value" type="text" id="pay_value" onkeyup="if(isNaN(value))execCommand('undo')" maxlength="6"/>
+				    </div>
+				</div>
+		    	<div class="form-group">
+				    <label class="col-sm-2 control-label">取款密码：</label>
+				    <div class="col-sm-10">
+				    	<input class="form-control" name="qk_pwd" type="password" id="qk_pwd" maxlength="30" />
+				    </div>
+				</div>
+				<div class="form-group">
+				    <label class="col-sm-2 control-label">验证码：</label>
+				    <div class="col-sm-10">
+				    	<div class="row">
+				    		<div class="col-xs-8"><input name="vlcodes" type="text" class="form-control" id="vlcodes" size="5" maxlength="4" /></div>								
+				    		<div class="col-xs-4"><img title="点击更换"  style="cursor:pointer;margin-left:10px;" src="{:url('Mycaptcha/mobile_get_money')}?=<?php echo time();?>" onclick="this.src='{:url('Mycaptcha/mobile_get_money')}?r='+Math.random()" /></div>				
+				    	</div>
+				    </div>
+				</div>
+				<div class="form-group">
+				    <div class="col-sm-10 col-sm-offset-2">
+				    	<input name="submit" type="submit" class="btn btn-green btn-lg btn-block"  id="btn" value="提交"/>
+				    </div>
+				</div>
+		    </form>
+		  </div>
+		</div>
+		<div class="panel panel-default">
+			<div class="panel-heading">
+			    <h3 class="panel-title">会员信息</h3>
+			  </div>
+			  <div class="panel-body">
+			    <p>会员账户：<?=$user["username"]?></p>
+			    <p>当前余额：<span id="hyye" style="color:red"><?=sprintf("%.2f",$user["money"])?></span></p>
+
+				<p>银行名称：<?=$user["pay_card"]?></p>
+				<p>银行账号：<?=cutNum($user["pay_num"])?></p>
+				<p>开户地址：<?=cutNum($user["pay_address"])?></p>
+			  </div>
+		  </div>
+
+		  <div class="panel panel-default">
+		  <div class="panel-heading">
+		    <h3 class="panel-title">提款须知</h3>
+		  </div>
+		  <div class="panel-body">
+		    <p>1 、银行账户持有人姓名必须与注册时姓名一致，否则无法申请提款。</p>
+			  <p>2 、大陆各银行帐户均可申请提款。</p>
+			  <p>3 、充值后未经全额投注提款申请不予受理。</p>
+			  <p>4 、单笔最高提款50万元，每个帐户每24小时内只能提款3次。</p>
+			  <p>5 、每位客户只可以使用一张银行卡进行提款,如需要更换银行卡请与客服人员联系.否则提款将被拒绝。</p>
+			  <p>6 、为保障客户资金安全，我们有可能需要用户提供电话，银行账号或其它资料验证，以确保客户资金不会被冒领。 </p>
+		  </div>
+		  <div class="panel-footer">
+		  <h4 class="text-danger">到帐时间</h4>
+		  <p>1分钟至30分钟到账。</p>
+		  </div>
+		</div>
+		</div>
+	</div>
+</div>
+<div class="block_60"></div>
+<script type="text/javascript" language="javascript" src="/js/left_mouse.js"></script>
+<script type="text/javascript">
+//子页面传递高度给顶层iframe  
+function changeFrameHeight(){
+    bodyClientH = document.body.clientHeight;
+    bodyClientW = document.body.clientWidth;
+    var iframeId = $(window.parent.document).find("#iframeid")
+    iframeId.css("height",bodyClientH + 300)
+}   
+changeFrameHeight()	
+</script>
+</body>
+</html>

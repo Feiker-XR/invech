@@ -1,0 +1,21 @@
+<?php
+
+namespace app\index\controller;
+//use app\index\Base;
+use think\Controller as Base;
+
+class Broadcast extends Base
+{
+    //broadcast/auth?channel_name=private-user.order.1&socket_id=6277.373732
+    public function auth()
+    {
+        $user = $this->request->user();
+        if(!$user){
+            return false;
+        }
+        $this->request->uid = $user->id;
+
+        return container('broadcast')->auth($this->request);
+        //返回数组,要求请求是ajax方式
+    }
+}

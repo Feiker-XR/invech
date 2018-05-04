@@ -1,0 +1,74 @@
+<?php
+namespace app\common\model\member;
+
+use app\common\model\Money;
+use app\events\UserMoneyEvent;
+
+trait MoneyTrait
+{
+    public function incBalance($amount,$type,$item_id,$remark){
+        
+        $money_model = transaction(function() use ($amount,$type,$item_id,$remark){
+
+            if(!in_array($type, Money::TYPE_ARRAY)){
+                throw new \Exception('资金类型不合法!');
+            }
+
+            $old_balance = $this->coin;
+
+            $this->coin += $amount;
+            $this->save();
+
+            $data = [
+                'uid'       =>  $this->id,
+                'amount'    =>  $amount,
+                'f_balance' =>  $old_balance,
+                't_balance' =>  $this->coin,
+                //'direct'    =>  Money::DIRECT_IN,
+                'type'  =>  $type,
+                'item_id'   =>  $item_id,
+                'remark'    =>  $remark,
+            ];                        
+            $ret = Money::create($data);
+            return $ret;
+        });
+
+        event(new UserMoneyEvent($this));
+
+        return $this;
+    }
+
+    public function decBalance($amount,$type,$item_id,$remark){
+        
+        $money_model = transaction(function() use ($amount,$type,$item_id,$remark){
+
+            if(!in_array($type, Money::TYPE_ARRAY)){
+                throw new \Exception('资金类型不合法!');
+            }
+	    
+            $old_balance = $this->coin;
+
+            $this->coin -= $amount;
+            $this->save();//$this->update(); update不起作用;
+
+            $data = [
+                'uid'       =>  $this->id,
+                'amount'    =>  $amount,
+                'f_balance' =>  $old_balance,
+                't_balance' =>  $this->coin,
+                'direct'    =>  Money::DIRECT_OUT,
+                'type'  =>  $type,
+                'item_id'   =>  $item_id,
+                'remark'    =>  $remark,
+            ];
+            
+            
+            $ret = Money::create($data);                     
+            return $ret;
+        });
+
+        event(new UserMoneyEvent($this));
+
+        return $this;
+    }
+}

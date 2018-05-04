@@ -1,0 +1,188 @@
+<?php
+namespace app\admin\controller;
+use app\admin\Login;
+use think\Cache;
+use app\common\model\Admin as AdminModel;
+use app\common\model\Role as  RoleModel;
+use app\common\model\Perm as  PermModel;
+use app\common\model\ActionLog as LogModel;
+
+class admin extends Login{
+
+    public function _initialize(){
+        parent::_initialize();
+        //config('default_ajax_return','html');
+    }
+
+    public function index(){
+		$this->view->page_header  =   '管理员列表';
+        $request    =   request();
+        $list       =   AdminModel::getList($request);
+        $this->assign('list',$list);        
+        return $this->fetch();
+    }
+
+    public function edit(){
+        $params = $this->request->param();
+        $id =  isset($params['id'])? $params['id']:''; 
+        if($id){
+            $admin = AdminModel::get($id);
+        }else{
+            $admin = new AdminModel([]);//这里给默认值
+        }       
+
+        if ($this->user->cannot('opt-admin', $admin)) {
+            return $this->error('无权操作!');
+        }        
+        if(IS_GET){
+            $this->assign('info',$admin);
+            $roles = RoleModel::all();
+            $this->assign('roles',$roles);
+            return view();
+        }else{            
+            $validate   =   $id ? 'Admin.admin_edit' : 'Admin.admin_add';
+            $ret = $admin->validate($validate)->save($params);
+            if($ret){
+                $role = RoleModel::get($params['role_id']);
+                $admin->assignRole($role);
+                LogModel::log(LogModel::BUSINESS_TYPE_EDIT,$admin,LogModel::BUSINESS_TYPES[LogModel::BUSINESS_TYPE_EDIT]);
+                return $this->success('操作成功');
+            }else{
+                return $this->error($admin->getError());
+            }                        
+        }
+    }
+
+    public function del(){
+        $request    = request();
+        $params     = $request->param();
+        $admin      = AdminModel::get(intval($params['id']));
+        if ($this->user->cannot('opt-admin', $admin)) {
+            return $this->error('无权操作!');
+        } 
+        $list       = $admin->delete();
+        if($list){
+            LogModel::log(LogModel::BUSINESS_TYPE_DELE,$admin,LogModel::BUSINESS_TYPES[LogModel::BUSINESS_TYPE_DELE]);
+            return $this->success('操作成功');
+        }else{
+            return $this->error($admin->getError());
+        }
+    }
+
+    public function  role(){
+        $this->view->page_header    =   '角色列表';
+        $request    =   request();
+        $list       =   RoleModel::all();
+        $this->assign('list',$list);
+        return $this->fetch();
+    }
+
+    public function role_edit(){
+        $params = $this->request->param();
+        $id =  isset($params['id'])? $params['id']:''; 
+        if(request()->isGet()){
+            $perms = [];
+            $arr = PermModel::all();//->toArray();
+            foreach ($arr as $v) {
+                $perms[$v['pid']][] = $v;
+            }
+            if($id){
+                $role = RoleModel::get($id);
+                $permids = [];
+                $role_perms = $role->getPerms();
+                foreach ($role_perms as $v) {
+                    $permids[] = $v->id;
+                }   
+                $this->assign('permids',$permids);
+                $this->assign('info',$role);
+            }
+           
+            $this->assign('perms',$perms);
+            return view();
+        }else{
+            if($id){
+                $role = RoleModel::get($id);
+            }else{
+                $role = new RoleModel($params);//这里给默认值
+            }     
+
+            $validate = $id ? 'Admin.group_edit' : 'Admin.group_add';
+            $ret = $role->validate($validate)->save($params);
+            if($ret){
+                $permids = input('permids/a')??[];
+                $ret = $role->perms()->sync($permids);
+                LogModel::log(LogModel::BUSINESS_TYPE_EDIT,$role,LogModel::BUSINESS_TYPES[LogModel::BUSINESS_TYPE_EDIT]);
+                return $this->success('操作成功');
+            }else{
+                return $this->error($role->getError());
+            }   
+        }
+    }
+
+    public function role_del(){
+        $request    = request();
+        $params     = $request->param();
+        $role       = RoleModel::get(intval($params['id']));
+        $list       = $role->delete();
+        if($list){
+            $role->perms()->detach();
+            LogModel::log(LogModel::BUSINESS_TYPE_DELE,$role,LogModel::BUSINESS_TYPES[LogModel::BUSINESS_TYPE_DELE]);
+            return $this->success('操作成功');
+        }else{
+            return $this->error($role->getError());
+        }
+    }
+
+    public function perm(){
+        $this->view->page_header   =   '权限列表';
+        $list  =   PermModel::getTreeData();
+        $this->assign('list',$list);
+        return $this->fetch();
+    }
+
+    public function perm_edit(){
+        $request    =   request();
+        $params     =   $request->param(); 
+        if(request()->isGet()){
+            if(!empty($params['id'])){
+                $info   =   PermModel::get(intval($params['id']));
+                $this->assign('info',$info);  
+            }
+            $pid    =   isset($params['pid'])?$params['pid']:0;
+            $this->assign('pid',$pid);  
+            return view();
+        }else{
+            $id     =   isset($params['id'])? $params['id']:'';
+            $pid    =   isset($params['pid'])? $params['pid']:0;
+            if($id){
+                $perm   =   PermModel::get(intval($id));
+            }else{
+                $perm   =   new PermModel($params);
+            }
+            $validate   =   $pid==0?'Admin.pem_fid':'Admin.pem_cid';
+            $list       =   $perm->validate($validate)->save($params);
+            if($list){
+                cache('gygy_admin_perm',null);
+                LogModel::log(LogModel::BUSINESS_TYPE_EDIT,$perm,LogModel::BUSINESS_TYPES[LogModel::BUSINESS_TYPE_EDIT]);
+                return $this->success('操作成功');
+            }else{
+                return $this->error($perm->getError());
+            }
+        }
+    }
+
+    public function perm_del(){
+        $request    = request();
+        $params     = $request->param();
+        $perm       = PermModel::get(intval($params['id']));
+        $list       = $perm->delete();
+        if($list){
+            $perm->roles()->detach();
+            cache('gygy_admin_perm',null);
+            LogModel::log(LogModel::BUSINESS_TYPE_DELE,$perm,LogModel::BUSINESS_TYPES[LogModel::BUSINESS_TYPE_DELE]);
+            return $this->success('操作成功');
+        }else{
+            return $this->error($perm->getError());
+        }
+    }  
+}

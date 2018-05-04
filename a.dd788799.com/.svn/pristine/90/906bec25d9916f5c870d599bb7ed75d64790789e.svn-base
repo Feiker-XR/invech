@@ -1,0 +1,604 @@
+<?php
+// +----------------------------------------------------------------------
+// | OneThink [ WE CAN DO IT JUST THINK IT ]
+// +----------------------------------------------------------------------
+// | Copyright (c) 2013 http://www.onethink.cn All rights reserved.
+// +----------------------------------------------------------------------
+// | Author: 麦当苗儿 <zuojiazi@vip.qq.com> <http://www.zjzit.cn>
+// +----------------------------------------------------------------------
+
+namespace app\mobile\Controller;
+
+use app\mobile\Base;
+use app\mobile\model\MemberBank;
+use app\mobile\model\MemberSession;
+use think\Db;
+use think\Session;
+
+/**
+ * 用户控制器
+ * 包括用户中心，用户登录及注册
+ */
+class User extends Base
+{
+    public $test;
+
+	protected function _initialize()
+    {
+        $this->user = model('members')->where('uid',Session::get('user.uid'))->find() ;
+		parent::_initialize();
+	}
+
+    /**
+     *  用户中心首页
+     */
+	public function index()
+    {
+		//$login = A('user/user', 'Api')->login('麦当苗儿ss', 'aoiujz');
+		//$login = A('user/user', 'Api')->register('麦当苗儿ss', 'aoiujz', 'xiaoxiaoxiao@qq.com');
+		//$login = A('user/user', 'Api')->checkEmail('zuojiazi@vip.qq.com');
+		// dump($login);
+	}
+	
+	public function test()
+    {
+		// $Model = new \Think\Model();
+		// $sql = 'select * from ssc_members where uid=%d';
+		// dump($sql);
+		// //$return=$Model->query($sql,$_GET['id']);
+		// dump($Model->getLastSql());
+		// dump($return);exit;
+	}
+	
+	/**
+	 * 推广注册
+	 */
+	public final function register()
+    {
+		if ($this->request->isPost()) {
+			if (!preg_match("/^[0-9a-zA-Z]{4,30}$/",request()->param('username'))) {
+				$this->error('用户名只能由英文和数字组成，长度4-30个字符') ;
+			}
+
+			$pwd = request()->param('password') ;
+			if(strlen($pwd)<6) $this->error('密码至少6位') ;
+
+			$linkData = model('links')->where(array('lid'=>request()->param('lid'), 'uid'=> request()->param('uid')))->find() ;
+			if (!$linkData) $this->error('此链接不存在') ;
+
+			if (!$user2 = model('members')->find($linkData['uid'])) $this->error('上级不存在') ;
+			if (model('members')->where(array('username'=>request()->param('username')))->find()) $this->error('用户名'.request()->param('username').'已存在') ;
+			$para = array(
+				'username'   => request()->param('username'),
+				'type'       => $linkData['type'],
+				'password'   => think_ucenter_md5(request()->param('password'), UC_AUTH_KEY),
+				'parentId'   => $linkData['uid'],
+				'parents'    => $user2['parents'],
+				'fanDian'    => $linkData['fanDian'],
+				'fanDianBdw' => $linkData['fanDianBdw'],
+				'qq'         => (request()->param('qq'))?request()->param('qq'):'',
+				'regIP'      => $this->ip(true),
+				'regTime'    => !empty($this->time) ? $this->time : time(),
+			) ;
+			
+			Db::startTrans() ;
+			if(model('members')->save($para)) {
+			    $lastid = model('members')->getLastInsID() ;
+				if(model('members')->save(array('uid'=>$lastid, 'parents'=>$user2['parents'].','.$lastid))) {
+					Db::commit() ; //成功则提交
+					$user = model('members')->find($lastid) ;
+					$ip   = $this->ip(true) ;
+					$session = array(
+						'uid'         => $user['uid'],
+						'username'    => $user['username'],
+						'session_key' => 0,//session_id(),
+						'loginTime'   => $this->time,
+						'accessTime'  => $this->time,
+						'loginIP'     => $ip,
+					) ;
+					
+					if (!($lastid = model('member_session')->save($session))) {
+                        $this->error('插入登陆记录表失败，登陆失败') ;
+                    }
+					$user['sessionId'] = $lastid ;
+					session('user',$user) ;
+					session('user_auth_sign2', data_auth_sign($_SERVER['HTTP_USER_AGENT'])) ;
+					$this->success('注册成功',Url('team/linklist')) ;
+				}
+			}
+			
+			Db::rollback() ; //不成功，则回滚
+			$this->error('注册失败');
+		} else {
+		    $this->assign('lid' , request()->param('lid')) ;
+		    $this->assign('uid' , $this->user['uid']) ;
+			return $this->fetch('user/register')   ;
+		}
+	}
+
+    /**
+     * 登录页面
+     * @return mixed|string
+     */
+	public function login()
+    {
+		if ( $this->request->isPost() ) {
+            $status['status'] = 'error' ;
+            $status['url']    = '' ;
+
+            //登录验证
+			$username = request()->param('username') ;
+			$password = request()->param('password') ;
+
+			if ( $username == '' || $password == '') {
+				$error = '用户名或密码不能为空' ;
+				$this->error($error) ;
+			}
+			$Members         = model('members') ;
+			$map             = array() ;
+			$map['username'] = $username ;
+			$map['password'] = think_ucenter_md5($password, UC_AUTH_KEY) ;
+			$user = $Members->where($map)->find() ;
+
+			if ($user) {
+				if ( $user['isDelete']==1 ) {
+                    $status['status'] = '用户已被删除' ;
+//					$this->error($error) ;
+				} else if( $user['enable']==0 ) {
+                    $status['status'] = '用户已被冻结' ;
+//					$this->error($error) ;
+				} else {
+                    $memberSession              = new MemberSession() ;
+                    $memberSession->uid         = $user['uid'] ;
+                    $memberSession->username    = $user['username'] ;
+                    $memberSession->session_key = session_id() ;
+                    $memberSession->loginTime   = time() ;
+                    $memberSession->accessTime  = !empty($this->time) ? $this->time : '' ;
+                    $memberSession->loginIP     = $this->ip(true) ;
+                    $memberSession->browser     = '' ;
+
+					if ( !($lastid = $memberSession->save()) ) {
+						\Think\Log::write('xief '.model('member_session')->getLastSql()) ;
+                        $status['status'] = '插入登陆记录表失败，登陆失败';
+					}
+					$user['sessionId'] = $lastid ;
+					//$data['isOnLine']  = '0' ;
+					//$memberSession->save($data);
+
+                    $userSessionData = $this->formatSessionUserData($user) ; //获取登录后session需要注册的数据
+					session('user',$userSessionData) ;
+					session('user_auth_sign2', data_auth_sign($_SERVER['HTTP_USER_AGENT'])) ;//session实现ip认证，防止session被盗取时别人可以登录。在adminControll中验证ip是否一致
+					if (request()->param('id')) {
+                        $url = Url('game/game?id='.request()->param('id'));
+                    } else {
+                        $url = Url('index/index');
+                    }
+                    $status['status'] = 'success' ;
+                    $status['url']    = $url ;
+				}
+			} else {
+                $status['status'] = '用户名或密码错误';
+			}
+			return   json_encode($status);
+		} else { //显示登录表单
+			return $this->fetch();
+		}
+	}
+
+
+    /**
+     * 格式化登陆后需要在session中注册的数据
+     * @param $user
+     */
+	protected  function formatSessionUserData($user)
+    {
+        $sessionUserData = null ;
+        $loginIp = $this->getLoginIpByUid($user->uid) ; //获取最后一次登录的IP
+
+        if ( !empty($user) ) {
+            $sessionUserData = [
+                'uid'          => $user->uid ,
+                'username'     => $user->username,
+                'session_key'  => md5('hello,world'), //session_id(),
+                'loginTime'    => time() ,
+                'accessTime'   => time() ,
+                'loginIP'      => long2ip($loginIp),
+                'fanDian'      => $user->fanDian,
+                'fanDianBdw'   => $user->fanDianBdw,
+                'admin'        => $user->admin,
+                'type'         => $user->type,
+                'grade'        => $user->grade,
+                'coinPassword' => $user->coinPassword,
+                'parents'      => $user->parents,
+            ] ;
+        }
+        return $sessionUserData ;
+    }
+
+    /**
+     * 根据uid获取用户登录IP
+     * @param $uid
+     */
+    protected  function  getLoginIpByUid($uid) {
+        $ip = '' ;
+        if ($uid) {
+            $loginRecord = model('member_session')->where('uid',$uid)->field('loginIP')->order('id DESC')->find()->toArray() ;
+            if (!empty($loginRecord) && isset($loginRecord['loginIP'])) $ip = $loginRecord['loginIP'] ;
+        }
+        return $ip ;
+    }
+
+    /**
+     * 退出登录
+     */
+	public function logout()
+    {
+		if (session('user')) {
+			model('member_session')->where('uid',session('user.uid'))->find()->save(array('isOnLine'=>0)) ;
+		}
+		session('user',null) ;
+		session('user_auth_sign2',null) ;
+		session('cart',null) ;
+		$this->success('退出成功！', Url('user/login')) ;
+	}
+
+	private function getBrowser()
+    {
+		$flag=$_SERVER['HTTP_USER_AGENT'];
+		$para=array();
+		
+		// 检查操作系统
+		if(preg_match('/Windows[\d\. \w]*/',$flag, $match)) $para['os']=$match[0];
+		
+		if(preg_match('/Chrome\/[\d\.\w]*/',$flag, $match)){
+			// 检查Chrome
+			$para['browser']=$match[0];
+		}elseif(preg_match('/Safari\/[\d\.\w]*/',$flag, $match)){
+			// 检查Safari
+			$para['browser']=$match[0];
+		}elseif(preg_match('/MSIE [\d\.\w]*/',$flag, $match)){
+			// IE
+			$para['browser']=$match[0];
+		}elseif(preg_match('/Opera\/[\d\.\w]*/',$flag, $match)){
+			// opera
+			$para['browser']=$match[0];
+		}elseif(preg_match('/Firefox\/[\d\.\w]*/',$flag, $match)){
+			// Firefox
+			$para['browser']=$match[0];
+		}else{
+			$para['browser']='unkown';
+		}
+		//print_r($para);exit;
+		$para=array();
+		return $para;
+	}
+
+    /**
+     * 个人信息
+     * @return mixed
+     */
+	public function info()
+    {
+		if($this->request->isPost()){
+			$data['address']  = request()->param('address')  ;
+			$data['nickname'] = request()->param('nickname') ;
+			$data['idCard']   = request()->param('idCard')   ;
+			$data['mobile']   = request()->param('mobile')   ;
+			
+			if(model('members')->where('id',$this->user['id'])->save($data)) {
+				$this->success('保存信息成功') ;
+			} else {
+				$this->error('信息未修改') ;
+			}
+		} else {
+			$user = model('members')->find($this->user['uid']) ;
+			$this->assign('user',$user) ;
+			$this->meta_title = "个人中心" ;
+			return $this->fetch() ;
+		}
+	}
+	
+	public function infodetail()
+    {
+		$user = model('members')->find($this->user['uid']) ;
+		$this->assign('user',$user) ;
+		$this->meta_title = "个人中心" ;
+		return $this->fetch() ;
+	}
+	
+	public function address()
+    {
+		$user = model('members')->find($this->user['uid']);
+		$this->assign('user',$user);
+		$this->meta_title="个人中心";
+		return $this->fetch();
+	}
+
+
+    /**
+     * 登录密码处理
+     * @return mixed
+     */
+	public function password()
+    {
+		if($this->request->isPost()){
+		    $backReturn['status'] = 'error' ;
+		    $backReturn['msg']    = '修改登录密码失败,请重新尝试' ;
+		    $backReturn['url']    = Url('user/info') ;
+			try {
+                $opwd = request()->param('oldpassword') ;
+                if(!$opwd) throw new \Exception('原密码不能为空') ;
+                if(strlen($opwd)<6) throw new \Exception('原密码至少6位') ;
+                if(!$npwd = request()->param('newpassword')) throw new \Exception('密码不能为空') ;
+                if(strlen($npwd)<6) throw new \Exception('密码至少6位') ;
+                if( request()->param('newpassword') != request()->param('repassword')) throw new \Exception('输入的新密码和确认密码不一致');
+
+                $user = model('members')->where('uid='.$this->user['uid'])->find() ;
+                $pwd  = $user['password'] ;
+
+                $opwd = think_ucenter_md5($opwd,UC_AUTH_KEY) ;
+                if ($opwd != $pwd) throw new \Exception('原密码不正确') ;
+
+                if ( $user->save(array('password'=>think_ucenter_md5($npwd,UC_AUTH_KEY))) ) {
+                    $backReturn['status'] = 'success' ;
+                    $backReturn['msg']    = '登录密码修改成功' ;
+                    return json_encode($backReturn) ;
+                }
+
+                throw new \Exception('修改密码失败或新密码与旧密码一致') ;
+
+            } catch (\Exception  $e) {
+                $backReturn['msg'] = $e->getMessage() ;
+                return json_encode($backReturn) ;
+            }
+		} else {
+			return $this->fetch() ;
+		}
+	}
+
+
+    /**
+     * 资金密码修改
+     */
+	public function coinpassword()
+    {
+		if ($this->request->isPost()) {
+		    //返回信息定制
+            $backReturn['status'] = 'error'     ;
+            $backReturn['msg']    = '密码修改失败' ;
+            $backReturn['url']    = Url('user/info') ; //跳转地址
+
+		    try {
+                $opwd = request()->param('oldpassword') ;
+                //资金密码判断
+                if(!$opwd)   throw new \Exception('原密码不能为空');
+			    if(strlen($opwd)<6) throw new \Exception('原密码至少6位');
+                if (!$npwd=request()->param('newpassword')) throw new \Exception('密码不能为空');
+                if (strlen($npwd)<6) throw new \Exception('密码至少6位') ;
+                if (request()->param('newpassword') != request()->param('repassword')) throw new \Exception('输入的新密码和确认密码不一致');
+
+                $user = model('members')->where('uid='.$this->user['uid'])->find() ; //查询成员数据
+
+                //检查原密码是否正确
+                $pwd  = $user['coinPassword'] ;
+                $opwd = think_ucenter_md5($opwd,UC_AUTH_KEY) ;
+
+                if ( $opwd != $pwd ) throw new \Exception('原密码不正确') ;
+                $newPwd = think_ucenter_md5($npwd,UC_AUTH_KEY) ; // 对明文新密码进行加密
+
+                //修改密码
+                if ( $user->save(array('coinPassword'=>$newPwd)) ) {
+                    $backReturn['status'] = 'success' ;
+                    $backReturn['msg']    = '修改密码成功' ;
+                   return  json_encode($backReturn) ;
+                }
+                throw new \Exception('修改密码失败或新密码与旧密码一致') ;
+
+            } catch (\Exception $e) {
+                $backReturn['msg'] = $e->getMessage() ;
+                return json_encode($backReturn) ;
+            }
+		} else {
+			return $this->fetch() ;
+		}
+	}
+
+
+    /**
+     * 银行信息
+     * @return mixed
+     */
+	public function bank()
+    {
+        $uid  = $this->user['uid'] ;
+		$user = model('members')->find($uid) ;
+		if ( !$user['coinPassword'] ) {
+            $this->error('请先设置资金密码',Url('user/coinpassword'));
+        }
+
+		$map        = array() ;
+		$map['uid'] = $uid ;
+		$mybanks    = model('member_bank')->where($map)->select() ;
+		$this->assign('mybanks',$mybanks) ;
+		$banks      = model('bank_list')->where('isDelete',0)->order('sort')->select() ;
+		foreach ( $banks as $var ) {
+			$banks2[$var['id']] = $var ;
+		}
+		$this->assign('banks',$banks2) ;
+		return $this->fetch() ;
+	}
+
+	/**
+	 * 设置银行帐户
+	 */
+	public function setCBAccount()
+    {
+        $backReturn['status'] = 'error' ;
+        $backReturn['msg']    = '设置银行信息失败' ;
+        $backReturn['url']    = '' ;
+		if ( $this->request->isPost() ) {
+           try {
+               $uid = $this->user['uid'] ;
+               $user = model('members')->where('uid',$uid)->find() ; //查询出用户数据
+               $whereLogic = 'and' ;
+
+               //检查资金密码是否一致
+               if ( think_ucenter_md5(request()->param('coinPassword'), UC_AUTH_KEY) != $user['coinPassword'] ) {
+                   throw new \Exception( '资金密码不正确') ;
+               }
+
+               //检查银行账号唯一
+               $map            = array() ;
+               $map['account'] = request()->param('account') ;
+               $bank           = model('member_bank')->where($map)->find() ;
+               if ($bank) {
+                   throw new \Exception('该'.request()->param('account').'银行账号已经使用');
+               }
+
+               $map        = array() ; //重置查询条件
+               $map['uid'] = $uid ;
+               $bank       = model('member_bank')->where($map)->select() ;
+
+               if ( count($bank) > 2 ) {
+                   throw new \Exception('最多只能绑定三张银行卡') ;
+               } else {
+                   if(count($bank)>0 && request()->param('username') != $bank[0]['username']) {
+                       throw new \Exception('绑定的新银行持卡人必须跟之前绑定的一致') ;
+                   }
+
+                   $bankModel             = new MemberBank() ;
+                   $bankModel->uid        = $uid ;
+                   $bankModel->editEnable = 0 ;
+                   $bankModel->bankId     = request()->param('bankId') ;
+                   $bankModel->account    = request()->param('account') ;
+                   $bankModel->username   = request()->param('username') ;
+                   $bankModel->actionTime = time() ;
+
+                   if ( $bankModel->save() ) {
+                       // 如果是工行，参与工行卡首次绑定活动
+                       if ( request()->param('bankId') == 1 ) {
+                           //读取系统配置
+                           $this->getSystemSettings() ;
+                           if ($coin    = floatval($this->settings['huoDongRegister'])) {
+                               $liqType = 51 ;
+                               $info    = '首次绑定工行卡赠送' ;
+                               $ip      = $this->ip(true) ;
+                               $bankAccount = request()->param('account') ;
+                               if(!$ip) $ip = 0 ;
+
+                               // 查找是否已经赠送过
+                               //$sql="select id from {$this->prename}coin_log where liqType=$liqType and (`uid`={$this->user['uid']} or extfield0=$ip or extfield1=$bankAccount) limit 1";
+                               $where['uid']       = $this->user['uid'] ;
+                               $where['extfield0'] = $ip ;
+                               $where['extfield1'] = $bankAccount ;
+                               $whereLogic         = 'or' ;
+                               $where['liqType']   = $liqType ;
+
+                                //数据查询
+                               if ( $whereLogic == 'and' ) {
+                                    $newData = model('coin_log')->where($map)->find() ;
+                               } else {
+                                   $newData = model('coin_log')->whereor($map)->find() ;
+                               }
+
+                               if ( !$newData ) {
+                                   $this->addCoin(array(
+                                       'coin'      => $coin,
+                                       'liqType'   => $liqType,
+                                       'info'      => $info,
+                                       'extfield0' => $ip,
+                                       'extfield1' => $bankAccount
+                                   )) ;
+                                   $backReturn['status'] = 'success' ;
+                                   $backReturn['msg']    = sprintf('更改银行信息成功，由于你第一次绑定工行卡，系统赠送%.2f元', $coin) ;
+                                   $backReturn['url']    = Url('user/bank') ;
+                                   return json_encode($backReturn) ;
+                               }
+                           }
+                       }
+
+                   } else {
+                       throw new \Exception('更改银行信息出错');
+                   }
+
+               }
+           } catch (\Exception $e) {
+               $backReturn['msg']    = $e->getMessage() ;
+               return json_encode($backReturn) ;
+           }
+		}
+
+	}
+
+
+    /**
+     *  提现处理
+     * @return mixed
+     */
+	public final function cash()
+    {
+        $uid = (Session::get('user.uid'));
+		$bank      = model('member_bank')->where(array('enable'=>1,'uid'=>$uid))->select()->toArray();
+		$bankList  = model('bank_list')->where(array('isDelete'=>0))->field('id as lid,name')->select()->toArray();
+		$bankList2 = array();
+
+		foreach($bankList as $b) {
+			$bankList2[$b['lid']] = $b;
+		}
+
+		foreach($bank as $key=>$b) {
+			if ($bbb = $bankList2[$b['bankId']]) {
+				$bank[$key] = array_merge($b,$bbb);
+			}
+		}
+
+		$this->assign('bank',$bank) ;
+		$grade = model('member_level')->where(array('level'=>$this->user['grade']))->field('maxToCashCount')->find() ;
+		$this->assign('maxToCashCount',$grade['maxToCashCount']) ;
+		return $this->fetch() ;
+	}
+
+    /**
+     * 进入充值，生产充值订单
+     * @return mixed
+     */
+	public final function recharge()
+    {
+		if ($this->request->isPost()) {
+			if (request()->param('amount') <= 0) {
+                $this->error('充值金额必须大于0');
+            }
+            $para = [] ;
+			// 插入提现请求表
+			$para['rechargeId'] = $this->getRechId() ;
+			$para['actionTime'] = !empty($this->time) ? $this->time : '' ;
+			$para['uid']        = !empty($this->user['uid']) ? $this->user['uid'] : '' ;
+			$para['username']   = !empty($this->user['username']) ? $this->user['username'] : '' ;
+			$para['actionIP']   = $this->ip(true) ;
+			$para['mBankId']    = 13 ;
+			$para['info']       = '在线支付' ;
+			$para['amount']     = intval(request()->param('amount')) ;
+
+			if ( model('member_recharge')->save($para) ) {
+			} else {
+				$this->error('充值订单生产请求出错') ;
+			}
+
+			$data['rechargeId'] = $para['rechargeId'] ;
+			$this->success('充值成功') ;
+		} else {
+			return $this->fetch() ;
+		}
+	}
+	
+	private final function getRechId()
+    {
+		$rechargeId = mt_rand(100000,999999);
+		if ( model('member_recharge')->where(array('rechargeId'=>$rechargeId))->find() ) {
+			getRechId();
+		} else {
+			return $rechargeId;
+		}
+	}
+
+}

@@ -1,0 +1,82 @@
+<form class="form-horizontal" id="admin_add" method="post" enctype="multipart/form-data">
+  <div class="box-body">
+    <div class="form-group">
+
+    <div class="form-group">
+       <label for="inputEmail3" class="col-sm-2 control-label">用户名</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control"  name="username" placeholder="用户名" 
+         {if(!empty($info['username']))}  value="{$info.username}" {/if}>
+        </div>
+    </div>
+
+    <div class="form-group">
+       <label for="inputEmail3" class="col-sm-2 control-label">密码</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control"  name="password" placeholder="密码" 
+          value="">
+        </div>
+    </div>
+
+    <div class="form-group">
+       <label for="inputEmail3" class="col-sm-2 control-label">邮箱</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control"  name="email" placeholder="邮箱" 
+          {if(!empty($info['email']))}  value="{$info.email}" {/if} >
+        </div>
+    </div>
+    
+       <label for="inputEmail3" class="col-sm-2 control-label">角色</label>
+        <div class="col-sm-10">
+              {foreach $roles as $role}
+                {$role->name}                     
+                <input  type="radio" style="margin-top:10px" name="role_id" value="{$role->id}"
+                  {if(!empty($info['role_id']) && $info['role_id']==$role->id)} checked  {/if}> &emsp;
+              {/foreach}
+        </div>
+    </div>
+
+     <input type="hidden" name="id" value="{$info.id | default=0}" {/if} >
+    <div class="col-sm-offset-2 col-sm-10">
+        <button id="btnajax" class="btn btn-danger">提交</button>
+    </div>
+  </div>
+</form>
+<script type="text/javascript">
+  $(function(){
+   
+    $("#btnajax").click(function () {
+    
+      var options = {
+        url: "{:url('edit')}",
+        dataType : 'json',
+        success : function(data) {
+          $(".layui-layer-close").click();
+
+         layer.alert(data.msg, {
+            time: 20000,
+            skin: 'layui-layer-molv', //该皮肤由layer.seaning.com友情扩展。关于皮肤的扩展规则，去这里查阅
+            closeBtn: 0,
+            anim: 4
+          }, function(){
+             window.location.href = document.URL;
+          })
+        },
+        error: function(data) {
+           $(".layui-layer-close").click();
+          layer.alert(data.msg, {
+            time: 20000,
+            skin: 'layui-layer-molv', //该皮肤由layer.seaning.com友情扩展。关于皮肤的扩展规则，去这里查阅
+            closeBtn: 0,
+            anim: 4
+          }, function(){
+             window.location.href = document.URL;
+          })
+        }
+      };
+        $("#admin_add").ajaxForm(options);
+     })
+
+  });
+
+</script>

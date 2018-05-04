@@ -1,0 +1,75 @@
+<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:83:"/mnt/wwwroot/www.dd788799.com/houtai/../application/admin/view/data/fanshui_bl.html";i:1505452684;}*/ ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>系统设置</title>
+<link href="/css/base.css" rel="stylesheet" type="text/css" />
+<link href="/css/admin.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="/js/jquery.js"></script>
+<script type="text/javascript" src="/js/jquery.tools.js"></script>
+<script type="text/javascript" src="/js/base.js"></script>
+</head>
+<body class="list">
+	<!--<div class="bar">
+		会员反水比例设置
+	</div>-->
+	
+
+	<div class="body">
+<ul id="tab" class="tab">
+				<li>
+					<input type="button" value="会员反水比例" hidefocus class="current" onClick="window.location.href='<?php echo url('fanshui_bl'); ?>'" />
+				</li>
+                <li>
+					<input type="button" value="添加反水比例" hidefocus onClick="window.location.href='<?php echo url('fanshui_bl_edit'); ?>'" />
+				</li>
+  </ul>
+<table id="listTable" class="listTable">
+				<tr>
+					<th>用户组</th>
+					<th>排序</th>
+					<th>体育投注额|反水比例</th>
+					<th>彩票投注额|反水比例</th>
+					<th>AG投注额|反水比例</th>
+					<th>MG投注额|反水比例</th>
+					<th>BB投注额|反水比例</th>
+					<th>OG投注额|反水比例</th>
+					<th>SB投注额|反水比例</th>
+					<th>操作</th>
+				</tr>
+<?php if(is_array($data) || $data instanceof \think\Collection || $data instanceof \think\Paginator): $i = 0; $__LIST__ = $data;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$row): $mod = ($i % 2 );++$i;?>				
+      <tr>
+      	<td align="center"><?php echo $row['name']; ?></td>
+        <td align="center"><?php echo $row['px']; ?></td>
+        <td align="center"><?php echo $row['tz_ty']; ?>元|<?php echo $row['ty']; ?>%</td>
+        <td align="center"><?php echo $row['tz_cp']; ?>元|<?php echo $row['cp']; ?>%</td>
+        <td align="center"><?php echo $row['tz_ag']; ?>元|<?php echo $row['ag']; ?>%</td>
+        <td align="center"><?php echo $row['tz_mg']; ?>元|<?php echo $row['mg']; ?>%</td>
+        <td align="center"><?php echo $row['tz_bb']; ?>元|<?php echo $row['bb']; ?>%</td>
+        <td align="center"><?php echo $row['tz_og']; ?>元|<?php echo $row['og']; ?>%</td>
+        <td align="center"><?php echo $row['tz_sb']; ?>元|<?php echo $row['sb']; ?>%</td>                        
+        <td align="center"><a href="<?php echo url('fanshui_bl_edit'); ?>?id=<?php echo $row['id']; ?>" >修改</a> 
+        | <a class="del" href="javascript:void(0);" data='<?php echo $row['id']; ?>'>删除</a></td>
+        
+      </tr>
+<?php endforeach; endif; else: echo "" ;endif; ?>
+  </table>
+	</div>
+</body>
+<script language="javascript">
+$(document).ready(function(){
+	$('.del').click(function(){
+		var id = $(this).attr('data');
+		$.post('<?php echo url('fanshui_bl_del'); ?>',{id:id},function(json){
+			if(0 == json.status){
+				alert('删除成功!');
+				window.location.reload();
+			}else{
+				alert(json.msg);
+			}
+		},'json');
+	});
+});
+</script>
+</html>

@@ -1,0 +1,173 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+<meta charset="UTF-8">
+<script type="text/javascript" src="/js/jquery1.9.0.min.js"></script>
+<script type="text/javascript" src="/js/jquery.SuperSlide.2.1.1.js"></script>
+<script type="text/javascript" src="/newview/js/main.js"></script>
+<title>关于我们 - 页面</title>
+
+<link rel="stylesheet" type="text/css" href="/newview/css/style.css"/>
+<style>
+	a.aaaa{color: #F5A423;}
+/*个人注册页面*/
+.game_r_center{width: 100%;background-size: cover;}
+.register_all{width: 1080px;height:auto;margin: 0 auto;float: left;padding-bottom: 40px;}
+.register_title{width: 1080px;height: 70px;text-align: center;color: #F5A423;border-bottom: 1px solid #F5A423;padding-top: 25px;}
+.register_title h1{font-size: 70px;float: left;line-height: 23px;margin-left: 334px;margin-right: 8px;}
+.register_title h2{font-size: 18px;}
+.register_title span{float: left;}
+
+.register_nav{width: 165px;height: 420px;background: url(/img/register-bg-1.png) no-repeat 0px 0px;margin: 20px 0px 0px 40px;float: left;}
+.register_nav a{color: #999999;}
+.register_nav ul li{display: block;width: 106px;height: 35px;text-align: center;margin: 0px auto;position: relative;padding-top: 22px;}
+.register_nav ul li a:hover{color: #F5A423;}
+
+.register_nav_i{display: block;height: 1px;width: 106px;background: url(/img/register-bg-1.png) no-repeat 0px -503px;position: absolute;top: 39px;left: 0px;}
+.register_nav ul li h3{margin-top: 0px;}
+.register_nav_i_active{background-position: -57px -498px;}
+
+.register_step1{width: 720px;height: 225px;float: right;margin-top: 10px;color: #999999;font-size: 14px;}
+.register_step1 h1{color: #F5A423;}
+.register_step1 input{border-radius: 5px;border: none;width: 223px;height: 32px;line-height: 32px;padding-left: 5px;}
+.register_step1 i[class="need"]{color: red;font-size: 16px;margin-right: 5px;}
+.register_step1 .js-example-basic-single,.register_step3 .js-example-basic-single2{font-size: 14px;color: #333333;width: 228px;}
+.register_step1 .js-example-basic-single .select2-container--open{font-size: 14px;}
+.select2-container{color: #333333;}
+
+.register_step2{width: 720px;height: 190px;float: right;margin-top: 10px;color: #999999;font-size: 14px;}
+.register_step2 h1{color: #F5A423;}
+.register_step2 input{border-radius: 5px;border: none;width: 223px;height: 32px;line-height: 32px;padding-left: 5px;}
+.register_step2 i[class="need"]{color: red;font-size: 16px;margin-right: 5px;}
+.register_step2 .js-example-basic-single{font-size: 14px;color: #333333;width: 228px;}
+.register_step2 .js-example-basic-single .select2-container--open{font-size: 14px;}
+.select2-container{color: #333333;}
+
+.register_step3{width: 720px;height: 225px;float: right;margin-top: 10px;color: #999999;font-size: 14px;}
+.register_step3 h1{color: #F5A423;}
+.register_step3 input{border-radius: 5px;border: none;width: 223px;height: 32px;line-height: 32px;padding-left: 5px;}
+.register_step3 i[class="need"]{color: red;font-size: 16px;margin-right: 5px;}
+.register_step3 .js-example-basic-single{font-size: 14px;color: #333333;width: 228px;}
+.register_step3 .js-example-basic-single .select2-container--open{font-size: 14px;}
+.select2-container{color: #333333;}
+.register_step3_button{width: 228px;height: 40px;background: url(../img/register-bg-1.png) no-repeat 0px -439px;border: none;cursor: pointer;}
+.register_step3_button:hover{background-position: 0px -560px;}
+.register_step3_active{background-position: 0px -560px;}	
+
+/*关于我们*/
+.about_us{width: 760px;height: auto;color: black;float: left;min-height: 706px;background: #fafafa;border: 1px solid #999;padding: 10px 30px;}
+.about_us ul li{padding: 20px 30px 20px 30px;line-height: 25px;}
+
+.about_pro_nav{width: 680px;height: 30px;border-bottom: 3px solid #FACB1F;margin: 0 auto;}
+.about_pro_nav_li{float: left;display: block;width: 100px;height: 30px;line-height: 30px;padding: 0;text-align: center;cursor: pointer;background: #7B6002;color: white;border-radius: 5px 5px 0 0;margin: 0px 8px 0px 0px;color: #E2E2E2;}
+.about_pro_nav .about_pro_nav_li:hover{background:#FACB1F;color: black;}
+.about_pro_nav_active{background:#FACB1F;color: black;}
+.about_pro_list{line-height: 24px;padding-top: 10px;}
+.about_pro_list ol li{padding: 0;}
+.about_pro_list ol{padding: 0;}
+
+.about_pro_nav2{width: 680px;height: 30px;border-bottom: 3px solid #FACB1F;margin: 0 auto;}
+.about_pro_nav2_li{float: left;display: block;width: 100px;height: 30px;line-height: 30px;padding: 0;text-align: center;cursor: pointer;background: #7B6002;color: white;border-radius: 5px 5px 0 0;margin: 0px 8px 0px 0px;color: #E2E2E2;}
+.about_pro_nav2 .about_pro_nav2_li:hover{background:#FACB1F;color: black;}
+.about_pro_nav2_active{background:#FACB1F;color: black;}
+.about_pro_list2{line-height: 30px;padding-top: 10px;}
+.about_pro_list2 ol li{padding: 0;}
+.about_pro_list2 ol{padding: 0;}
+.about_us h3{color: #FACB1F;}
+body{background: #f1f1f1;}
+
+
+/*注册页面*/
+.reg_all{width: 1080px;height: auto;margin: 0 auto;}
+.reg_l{width: 200px;height: 728px;background: url(/newview/img/reg_bg.png) no-repeat 0px 0px;float: left;margin-right: 20px;}
+.reg_l ul{float: left;margin-top: 60px;}
+.reg_l li{line-height: 46px;width: 140px;text-align: left;padding-left: 60px;}
+.reg_l li a{font-size: 16px;display: block;width: 140px;height: 46px;position: relative;}
+.reg_r{width: 800px;height: 728px;background: url(/newview/img/reg_bg2.png) no-repeat 0px 0px;float: left;}
+.reg_l a:hover{color: #ffc70e;background-position: 0px 50%;}
+.reg_l a:hover i{background-position: 0px 0;}
+.reg_l li a i{display: inline-block;width: 20px;height: 20px;background: url(/newview/img/narrow-leftwap.png) no-repeat 0px 100%;left: 90px;top: 14px;position: absolute;}
+.reg_l li a i.on{background-position: 0px 0;}
+.reg_l li a.on{color: #ffc70e;}
+</style>
+</head>
+<body>
+	{include file='common/nav'}		
+	
+	<div class="block_0"></div>
+	<!--关于我们-->
+	<div class="game_r_center">
+		<div class="game_l_login" style="width: 1080px;">
+			<div class="block_0"></div>
+			<div class="game_p_login_all" style="margin-top: 0px;border: none;width: 1080px;">
+
+				<div class="block_0"></div>
+				<div class="register_all">
+				<div class="block_20"></div>
+					<div class="reg_l">
+						<!--<ul>
+							{volist id="vo" name="menu"}
+							<li>
+								<a href="{:Url('about/index','id='.$vo.id)}" class="{if $current eq $vo.id}aaaa{/if} " >
+									关于我们<i class="register_nav_i {if $current eq $vo.id}register_nav_i_active{/if} " ></i>
+								</a>
+							</li>
+							{/volist}
+						</ul>-->
+						<ul>
+							<li><a href="/about/index/id/1.html" class="on" >关于我们<i class="on"></i></a></li>
+							<li><a href="/about/index/id/2.html">隐私政策<i></i></a></li>
+							<li><a href="/about/index/id/8.html">合作伙伴<i></i></a></li>
+							<li><a href="/about/index/id/4.html">规则条款<i></i></a></li>
+							<li><a href="/about/index/id/6.html">存款帮助<i></i></a></li>
+							<li><a href="/about/index/id/7.html">取款帮助<i></i></a></li>
+							<li><a href="/about/index/id/5.html">常见问题<i></i></a></li>
+							<li><a href="/about/index/id/3.html">责任博彩<i></i></a></li>
+						</ul>
+						
+					</div>
+					<!--关于我们-->
+					<div class="about_us">
+					{$info['content']|html_entity_decode}					
+					</div>
+				</div>
+
+
+			</div>
+		</div>
+	</div>
+	
+	<div class="block_0"></div>
+	{include file="common/footer"}
+</body>
+<!-- <script src="https://cdn.bootcss.com/jquery/1.9.0/jquery.min.js"></script> -->
+
+<script type="text/javascript">
+$(function() {
+	//点击常见问题
+	$(".about_pro_nav_li").click(function(){
+		var aboutIndex = $(this).index();
+		$(this).addClass("about_pro_nav_active").siblings("span").removeClass("about_pro_nav_active");
+		$(".about_pro_list span").eq(aboutIndex).show().siblings("span").hide();
+	})
+	//点击常见问题2
+	$(".about_pro_nav2_li").click(function(){
+		var aboutIndex = $(this).index();
+		$(this).addClass("about_pro_nav2_active").siblings("span").removeClass("about_pro_nav2_active");
+		$(".about_pro_list2 span").eq(aboutIndex).show().siblings("span").hide();
+	})	
+	//点击关于我们
+	$(".register_nav li").click(function(){
+		var regiIndex = $(this).index();
+		$(".about_us li").eq(regiIndex).show().siblings("li").hide();
+	})
+	
+	//欢迎登陆注册账号页面
+	//点击左边导航变色
+	$(".register_nav ul li").click(function(){
+		$(this).find("a").css("color","#F5A423").find("i").addClass("register_nav_i_active");
+		$(this).siblings("li").find("a").css("color","#999999").find("i").removeClass("register_nav_i_active");
+	})	
+});	
+</script>
+</html>

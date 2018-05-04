@@ -1,0 +1,57 @@
+@charset "utf-8";
+
+/*皮肤*/
+.clerafix:after { display: block; overflow: hidden; clear: both; height: 0; visibility: hidden; content: ".";}
+.skin-mask { display: none; position: fixed; width: 100%; height: 100%; top: 0; left: 0; z-index: 399;opacity:0.6;filter:alpha(opacity=60); background: #000;}
+.skin-box { display: none; width: 714px; height: 460px; position:fixed; margin: -230px 0 0 -357px; left: 50%; top: 50%; background: #f9f9f9; z-index: 400;}
+.skin-box .close_box {background: url("/images/nsc/exchange-skin_imgbg.png") no-repeat -52px 0; width: 15px; height: 15px; display: inline-block; position: absolute; top: 12px; right: 14px; cursor: pointer;}
+.skin_tit { padding:0 14px 0 10px; background: url("/images/nsc/exchange-skin_titbg.png") repeat-x; border-bottom:1px solid #694d85; height: 40px; line-height: 40px; font-size: 16px; color: #fff; overflow: hidden;}
+.skin_tit i { background: url("/images/nsc/exchange-skin_imgbg.png") no-repeat; width: 32px; height: 32px; display: inline-block; vertical-align: -10px; margin-right: 5px;}
+
+.skin_ulbox { padding: 30px 0 0 35px;}
+.skin_ulbox li { float: left; margin:0 20px 20px 0;}
+.skin_ulbox li a { position: relative; background-color: #f1f1f2; border: 1px solid #e5e1e9; width: 110px; height: 110px; display: block; -moz-box-shadow: 0 2px 3px #ddd; -webkit-box-shadow: 0 2px 3px #ddd; box-shadow: 0 2px 3px #ddd;}
+.skin_ulbox li a img { width: 110px; height: 110px; border: 0;}
+.skin_ulbox li a.active { background-color: #ebebed; border: 1px solid #b1a3bf; -moz-box-shadow: 0 0 18px 2px #b27ae9; -webkit-box-shadow: 0 0 18px 2px #b27ae9; box-shadow: 0 0 18px 2px #b27ae9;}
+.skin_ulbox li span { display: block; text-align: center; font-size: 14px; color: #383838; margin-top: 20px; height: 14px; line-height: 14px;}
+
+.skin_page { padding: 0 40px;}
+
+.skin_page .btn_default,.skin_page .btn_set,.skin_page .btn_cancel { -moz-box-shadow: 0 1px 2px #bfbfbf; -webkit-box-shadow: 0 1px 2px #bfbfbf; box-shadow: 0 1px 2px #bfbfbf;}
+
+.skin_page .btn_default { display: inline-block; width: 102px; height: 28px; line-height: 28px; text-align: center; border: 1px solid #cbcbcb; border-radius:8px; font-size: 14px; color: #686868; margin:5px 15px 0 0;}
+.skin_page .btn_default:hover { background-color: #eee;}
+
+.skin_page .btn_cancel { display: inline-block; width: 52px; height: 28px; line-height: 28px; text-align: center; border: 1px solid #cbcbcb; border-radius:8px; font-size: 14px; color: #686868; margin:5px 15px 0 0;}
+.skin_page .btn_cancel:hover { background-color: #eee;}
+
+.skin_page .btn_set { float: right; display: inline-block; width: 120px; height: 36px; line-height: 36px; text-align: center; background: url("/images/nsc/exchange-skin_titbg.png") repeat-x; border: 1px solid #9784aa; border-radius:8px; font-size: 16px; color: #fff;}
+.skin_page .btn_set:hover { background-color: #eae6ef;}
+
+.skin_page .btn_default i,.skin_page .btn_set i { width: 18px; height: 18px; display: inline-block; margin-right: 5px;}
+.skin_page .btn_default i.ic-hfmr {background: url("/images/nsc/exchange-skin_imgbg.png") no-repeat 0 -40px; vertical-align: -2px;}
+.skin_page .btn_set i.ic-bcsz {background: url("/images/nsc/exchange-skin_imgbg.png") no-repeat 0 -67px;vertical-align: -4px;}
+
+
+.nsc_background01 { background:#ebebed url("/images/nsc/skin_bg/skin-img01.jpg") repeat;}
+.nsc_background02 { background:#ffffff url("/images/nsc/skin_bg/skin-img02.jpg") no-repeat center top;}
+.nsc_background03 { background:#dfe5ef url("/images/nsc/skin_bg/skin-img03.jpg") no-repeat center top;}
+.nsc_background04 { background:#15121e url("/images/nsc/skin_bg/skin-img04.jpg") no-repeat center top;}
+.nsc_background05 { background:#151225 url("/images/nsc/skin_bg/skin-img05.jpg") no-repeat center top;}
+.nsc_background06 { background:#fffaf7 url("/images/nsc/skin_bg/skin-img06.jpg") no-repeat center top;}
+.nsc_background07 { background:#080808 url("/images/nsc/skin_bg/skin-img07.jpg") no-repeat center top;}
+.nsc_background08 { background:#e4efff url("/images/nsc/skin_bg/skin-img08.jpg") no-repeat center top;}
+.nsc_background09 { background:#150520 url("/images/nsc/skin_bg/skin-img09.jpg") no-repeat center top;}
+.nsc_background10 { background:#15021a url("/images/nsc/skin_bg/skin-img10.jpg") no-repeat center top;}
+
+/*
+.nsc_background01 { background:#dfe5ef url("/images/nsc/skin_bg/skin-img01.jpg") no-repeat center top;}
+.nsc_background02 { background:#fdf2d4 url("/images/nsc/skin_bg/skin-img02.jpg") no-repeat center top;}
+.nsc_background03 { background:#151225 url("/images/nsc/skin_bg/skin-img03.jpg") no-repeat center top;}
+.nsc_background04 { background:#e9f0f4 url("/images/nsc/skin_bg/skin-img04.jpg") no-repeat center top;}
+.nsc_background05 { background:#edf4f6 url("/images/nsc/skin_bg/skin-img05.jpg") no-repeat center top;}
+.nsc_background06 { background: url("/images/nsc/skin_bg/skin-img06.jpg") no-repeat center top;}
+.nsc_background07 { background:#f3f7ff url("/images/nsc/skin_bg/skin-img07.jpg") no-repeat center top;}
+.nsc_background08 { background:#12021d url("/images/nsc/skin_bg/skin-img08.jpg") no-repeat center top;}
+.nsc_background09 { background:#fff url("/images/nsc/skin_bg/skin-img09.jpg") no-repeat center top;}
+.nsc_background10 { background:#15021a#fffaf7 url("/images/nsc/skin_bg/skin-img10.jpg") no-repeat center top;}*/

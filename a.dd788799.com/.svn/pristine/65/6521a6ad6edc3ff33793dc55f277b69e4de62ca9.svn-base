@@ -1,0 +1,142 @@
+<form class="form-horizontal" id="member_add" >
+  <div class="box-body">
+    <div class="form-group">
+     
+      <label for="inputEmail3" class="col-sm-2 control-label">用户名</label>
+
+      <div class="col-sm-10">
+        <input type="text" class="form-control" id="Username" name="username" placeholder="用户名" {if(!empty($info['username']))} value="{$info['username']}" {/if}>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="inputPassword3" class="col-sm-2 control-label">会员昵称</label>
+
+      <div class="col-sm-10">
+        <input type="text" class="form-control" id="Nickname" name="nickname"  placeholder="会员昵称" {if(!empty($info['nickname']))} value="{$info['nickname']}" {/if}>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="inputPassword3" class="col-sm-2 control-label">真实姓名</label>
+
+      <div class="col-sm-10">
+        <input type="text" class="form-control" id="Name" name="name"  placeholder="真实姓名" {if(!empty($info['name']))} value="{$info['name']}" {/if}>
+      </div>
+    </div>
+    {if(empty($info['password']))}
+      <div class="form-group">
+        <label for="inputPassword3" class="col-sm-2 control-label">密码</label>
+
+        <div class="col-sm-10">
+          <input type="text" class="form-control" id="Password" name="password" placeholder="密码"  value="" />
+        </div>
+      </div>
+    {/if}
+    <div class="form-group">
+      <label for="inputPassword3" class="col-sm-2 control-label">性别</label>
+       <div class="col-sm-10">
+        <select class="form-control select2 select2-hidden-accessible tabindex="-1" name="sex" id="Sex" aria-hidden="true">
+               {foreach $sex as $k=>$v}
+                    <option value="{$k}" {if(!empty($info['sex']) && $info['sex']==$k)} selected="selected"{/if}>{$v}</option>
+                {/foreach}
+        </select>
+        </div>
+    </div>
+    <div class="form-group">
+      <label for="inputPassword3" class="col-sm-2 control-label">会员类型</label>
+      <div class="col-sm-10">
+        <select class="form-control select2 select2-hidden-accessible tabindex="-1"  name="type" id="Type" aria-hidden="true">
+                {foreach $type as $k=>$v}
+                    <option value="{$k}" {if(!empty($info['type']) && $info['type']==$k)} selected="selected"{/if}>{$v}</option>
+                {/foreach}
+       </select>
+      </div>
+    </div>
+
+      <div class="form-group">
+      <label for="inputPassword3" class="col-sm-2 control-label">会员类型</label>
+      <div class="col-sm-10">
+        <select class="form-control select2 select2-hidden-accessible tabindex="-1"  name="enable" id="enable" aria-hidden="true">
+              {foreach $enable as $k=>$v}
+                    <option value="{$k}" {if(!empty($info['enable']) && $info['enable']==$k)}  selected="selected"{/if}>{$v}</option>
+              {/foreach}
+         </select>
+      </div>
+    </div>
+
+     <div class="form-group">
+      <label for="inputPassword3" class="col-sm-2 control-label">收款银行</label>
+
+      <div class="col-sm-10">
+        <input type="text" class="form-control" id="bank_name" name="bank_name"  placeholder="收款银行" {if(!empty($info->bank_name))} value="{$info->bank_name}" {/if}>
+      </div>
+    </div>
+
+     <div class="form-group">
+      <label for="inputPassword3" class="col-sm-2 control-label">收款人</label>
+
+      <div class="col-sm-10">
+        <input type="text" class="form-control" id="bank_username" name="bank_username"  placeholder="收款人" {if(!empty($info->bank_username))} value="{$info->bank_username}" {/if}>
+      </div>
+    </div>
+    
+    <div class="form-group">
+      <label for="inputPassword3" class="col-sm-2 control-label">收款账号</label>
+
+      <div class="col-sm-10">
+        <input type="text" class="form-control" id="bank_account" name="bank_account"  placeholder="收款账号" {if(!empty($info->bank_account))} value="{$info->bank_account}" {/if}>
+      </div>
+    </div>
+
+     <div class="form-group">
+      <label for="inputPassword3" class="col-sm-2 control-label">开户地址</label>
+
+      <div class="col-sm-10">
+        <input type="text" class="form-control" id="bank_address" name="bank_address"  placeholder="开户地址" {if(!empty($info->bank_address))} value="{$info->bank_address}" {/if}>
+      </div>
+    </div>
+
+    <input type="hidden" name="uid" {if(!empty($info['uid']))} value="{$info['uid']}" {/if} >
+    <div class="col-sm-offset-2 col-sm-10">
+        <button id="btnajax" class="btn btn-danger">提交</button>
+    </div>
+  </div>
+</form>
+<script type="text/javascript">
+$(function(){
+ 
+  $("#btnajax").click(function () {
+  
+    var options = {
+       url: "{:url('member_save')}",
+       type : 'POST',
+      dataType : 'json',
+      success : function(data) {
+        $(".layui-layer-close").click();
+
+       layer.alert(data.msg, {
+          time: 20000,
+          skin: 'layui-layer-molv', //该皮肤由layer.seaning.com友情扩展。关于皮肤的扩展规则，去这里查阅
+          closeBtn: 0,
+          anim: 4
+        }, function(){
+           window.location.href = document.URL;
+        })
+      },
+      error: function(data) {
+         $(".layui-layer-close").click();
+        layer.alert(data.msg, {
+          time: 20000,
+          skin: 'layui-layer-molv', //该皮肤由layer.seaning.com友情扩展。关于皮肤的扩展规则，去这里查阅
+          closeBtn: 0,
+          anim: 4
+        }, function(){
+           window.location.href = document.URL;
+        })
+      }
+    };
+      $("#member_add").ajaxForm(options);
+   })
+
+});
+
+</script>

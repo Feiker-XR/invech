@@ -1,0 +1,129 @@
+{extend name="base/common"/}
+{block name="title"}<title>会员管理－ {$settings.webName}</title>{/block}
+{block name="style"}
+<link rel="stylesheet" type="text/css" href="__CSS__/user.css">
+<link href="__CSS__/bootstrap.min.css" rel="stylesheet">
+<link href="__CSS__/bootstrap-datetimepicker.min.css" rel="stylesheet">
+{/block}
+{block name="header"}{/block}
+{block name="body"}
+<div class="m-user">
+	<div class="m-simpleHeader" id="dvHeader">
+		<a href="javascript:history.back(-1);" data-pro="back" data-back="true" class="m-simpleHeader-back"><i class="ico ico-back"></i></a>
+		<a href="#" data-pro="ok" class="m-simpleHeader-ok queryMask" id="aHome"><i class="ico ico-add"></i></a>
+		<h1 style="margin-top:12px;">会员管理</h1>		
+	</div>
+	<div class="mask" id="queryMask" style="bottom: 0px; display: none;">
+		<div class="maskbox">
+			<div class="win">
+				<div class="winhead">
+					添    加
+				</div>
+				<div class="winmain">
+					<ul class="writebox">
+						<li>
+						<div>
+							类型
+						</div>
+						<p>
+							<select name="type" class="form-control" id="type">
+								<option value="1">代理</option>
+								<option value="0">会员</option>
+							</select>
+						</p>
+						</li>
+						<li>
+						<div>
+							用户名
+						</div>
+						<p>
+							<input name="username" class="form-control" id="username" type="text" placeholder="用户名" value="">
+						</p>
+						</li>
+
+						<li id="pwd-span">						
+						<div>
+							密码
+						</div>
+						<p>
+							<input name="password" class="form-control" id="password" type="text" placeholder="用户名" value="123456">
+						</p>
+						</li>
+
+						<li>
+							<div>
+								返点
+							</div>
+							<p>
+								<input name="fanDian" class="form-control" id="fanDian" type="text" placeholder="0-{:number_format($user['fanDian']-0.1,1)}" value="">
+							</p>
+						</li>
+					</ul>
+				</div>
+				<div class="winfoot">
+					<p>
+						<input class="btn btnblock" type="submit" data-pro="add" data-action="{:Url('team/insertMember')}" id="btn-ok" value="提交" />
+					</p>
+					<p>
+						<input class="btn btnblock btnblue" onclick="$('#queryMask').css('display', 'none');" type="button" value="取消" />
+					</p>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="m-user-duobaoRecord" id="duobaoRcd_dvWrapper">
+		<div id="pro-view-6">
+			<div data-pro="loading">
+			</div>
+			<span id="record-span">
+				{include file="team/member-list"}
+			</span>
+		</div>
+	</div>
+</div>
+<button id="pro-view-0" class="w-button w-button-round w-button-backToTop" style="bottom: 55px; display: none;">返回顶部</button>
+<script src="__JS__/bootstrap-datetimepicker.min.js"></script>
+<script src="__JS__/bootstrap-datetimepicker.zh-CN.min.js"></script>
+<script>
+	$(document).ready(function () {		
+		$('.form_datetime').datetimepicker({
+			autoclose: 1,
+			todayBtn: 0,
+			minView: 2,
+			language: 'zh-CN',
+			format: 'yyyy-mm-dd hh:ii'
+		}) ;
+		$('.form_datetime').focus(function () {
+			this.blur();
+		}) ;
+	});
+</script>
+{/block}
+{block name="script"}
+<script type="text/javascript">
+var lid=0;
+$(function(){
+	$('.queryMask').live('click', function () {
+		$('#type').val(1);
+		$("#username").attr("disabled", false);
+		$('#username').val('');
+		$('#pwd-span').css('display','table');
+		$('#password').val('123456');
+		$('#fanDian').val('');
+		$('#btn-ok').attr('data-action',"{:Url('team/insertMember')}");
+		
+		$('#queryMask').css('display', 'block');
+	}) ;
+	$('.updateMember').live('click', function () {
+		$('#type').val($(this).attr('usertype'))  ;
+		$('#username').val($(this).attr('title')) ;
+		$("#username").attr("disabled", true) ;
+		$('#pwd-span').css('display','none') ;
+		$('#fanDian').val($(this).attr('min')) ;
+		$('#btn-ok').attr('data-action',"{:Url('team/userUpdateed')}") ;
+		$('#queryMask').css('display', 'block') ;
+	}) ;
+}) ;
+</script>
+{/block}
+{block name="footer"}{/block}

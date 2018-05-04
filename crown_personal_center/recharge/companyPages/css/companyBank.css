@@ -1,0 +1,183 @@
+
+.payment-wp{
+	
+}
+.payment-first{
+	margin-top: 15px;
+}
+.payment-first h2{
+	font-size: 16px;
+	font-weight: bold;
+	color: #555555;
+}
+.payment-first h3{
+	font-size: 16px;
+	font-weight: bold;
+	color: #555555;
+    margin-left: 59px;
+}
+.payment-first h3 span{
+	color:#ff0000;
+	font-size: 12px;
+	margin-left: 8px;
+}
+
+
+/*选择银行*/
+.choose-bank{
+	width: 610px;
+	margin: 0 auto;
+	margin-top: 80px;
+}
+.choose-bank .bank{
+	width: 177px;
+    height: 68px;
+    border: 1px solid #dbdbdb;
+    border-radius: 8px;
+    margin-left: 24px;
+    float: left;
+    margin-top: 16px;
+    cursor: pointer;
+}
+.choose-bank .bank.addborder{
+	border-color: #ff6600;
+}
+.choose-bank .bank img{
+	display: block;
+	margin: 0 auto;
+	margin-top: 10px;
+}
+
+
+
+.payment-first h2 span{
+	color:#ff0000;
+	font-size: 12px;
+	margin-left: 8px;
+}
+.payment-first-cont{
+	width: 333px;
+	height: 112px;
+	background: url(../../imgs/com-info-bg.png) no-repeat;
+	padding: 14px 30px;
+	color: #FFFFFF;
+	margin-left: 17px;
+    margin-top: 16px;
+}
+.payment-first-cont h4{
+	font-size: 16px;
+	width: 285px;
+	font-weight: bold;
+}
+.payment-first-cont h4 em{
+	font-style: normal;
+	line-height: 22px;
+}
+.payment-first-cont p{
+	font-size: 14px;
+    line-height: 21px;
+    width: 285px;
+    text-overflow:ellipsis;
+    overflow:hidden;
+    white-space:nowrap;
+}
+.payment-first-cont p em{
+	font-style: normal;
+}
+
+
+
+.choose-label{
+	margin-left: 30px;
+	margin-top: 8px;
+}
+.choose-label-top{
+	margin-top: 20px;
+}
+.choose-label label{
+	color: #555555;
+	font-size: 14px;
+}
+.choose-label select{
+	width: 370px;
+	height: 36px;
+	outline: none;
+	line-height: 36px;
+	padding-left: 10px;
+	border: 1px solid #e9e9e9;
+	border-radius: 8px;
+	cursor: pointer;
+	color: #ff8042;
+}
+.choose-label select option{
+	cursor: pointer;
+}
+.choose-label input{
+	width: 360px;
+	height: 36px;
+	outline: none;
+	padding-left: 10px;
+	border: 1px solid #e9e9e9;
+	border-radius: 8px;
+	color: #555555;
+}
+.choose-label input::-webkit-input-placeholder{
+    color:#b0b0b0;
+}
+.choose-label input::-moz-placeholder{   /* Mozilla Firefox 19+ */
+    color:#b0b0b0;
+}
+.choose-label input:-moz-placeholder{    /* Mozilla Firefox 4 to 18 */
+    color:#b0b0b0;
+}
+.choose-label input:-ms-input-placeholder{  /* Internet Explorer 10-11 */ 
+    color:#b0b0b0;
+}
+.btn{
+	width: 485px;
+    margin: 15px 0px;
+    margin-left: 80px;
+}
+.btn button.prev{
+	background: #b8b8b8;
+}
+.btn button{
+	width: 148px;
+	height: 30px;
+	outline: none;
+	border-radius: 15px;
+	border: none;
+	color: #FFFFFF;
+	margin-left: 40px;
+	cursor: pointer;
+	background: #515151;
+}
+.btn button:hover{
+	background: #ff6600;
+}
+
+.btn-next{
+	width: 148px;
+	height: 30px;
+	margin: 0 auto;
+	clear: both;
+	padding: 25px 0px;
+}
+.btn-next a{
+	width: 148px;
+	height: 30px;
+	outline: none;
+	border-radius: 15px;
+	border: none;
+	color: #FFFFFF;
+	cursor: pointer;
+	background: #515151;
+	margin: 0 auto;
+	margin-top: 58px;
+	display: block;
+	text-align: center;
+	line-height: 30px;
+}
+.btn-next a:hover{
+	background: #ff6600;
+}

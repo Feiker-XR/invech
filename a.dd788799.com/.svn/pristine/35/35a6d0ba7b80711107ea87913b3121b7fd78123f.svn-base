@@ -1,0 +1,131 @@
+<?php
+namespace app\admin\controller;
+use app\admin\Login;
+
+use app\common\model\Type as TypeModel;
+use app\common\model\PlayedGroup as PlayedGroupModel;
+use app\common\model\PlayedPlGroup as PlayedPlGroupModel;
+use app\common\model\PlayedPl as PlayedPlModel;
+use app\common\model\AllTime as AllTimeModel;
+
+class Lottery extends Login{
+    
+    public function index(){
+        $this->view->page_header = '彩种列表';
+
+        $request = request();
+        $list = model('type')->getList($request);
+        //$list = TypeModel::getList($request);
+        //$list->appends($request->param());
+        $this->assign('list',$list);
+
+        $this->assign('types',TypeModel::TYPE_ARRAY);
+        return $this->fetch();
+    }
+
+    public function playedGroup(){
+        $this->view->page_header = '玩法分组';
+
+        $request = request();
+        $list = model('played_group')->getList($request);
+        //$list = TypeModel::getList($request);
+        $list->appends($request->param());
+        $this->assign('list',$list);
+
+        $this->assign('types',TypeModel::TYPE_ARRAY);
+        return $this->fetch();
+    }
+
+    public function played(){
+        $this->view->page_header = '玩法列表';
+
+        $request = request();
+        $list = model('played')->getList($request);
+        //$list = TypeModel::getList($request);
+        $list->appends($request->param());
+        $this->assign('list',$list);
+
+        $this->assign('types',TypeModel::TYPE_ARRAY);
+        return $this->fetch();        
+    }
+    
+    public function plgroup(){
+        $this->view->page_header = '赔率分组';
+
+        $request = request();
+        $list = model('played_pl_group')->getList($request);
+        //$list = TypeModel::getList($request);
+        $list->appends($request->param());
+        $this->assign('list',$list);
+
+        $this->assign('types',TypeModel::TYPE_ARRAY);
+        return $this->fetch();        
+    }
+
+    public function pl(){
+        $this->view->page_header = '赔率列表';
+
+        $request = request();
+        $list = model('played_pl')->getList($request);
+        //$list = TypeModel::getList($request);
+        $list->appends($request->param());
+        $this->assign('list',$list);
+
+        return $this->fetch();        
+    }
+
+    public function time(){
+        $this->view->page_header = '开奖时间表';
+
+        $types = model('type')->allTypes();
+
+        $type = input('type/d');
+        if(!$type){
+            $this->error('请选择彩种!');
+        }
+        $lottery = $types[$type]??null;
+        if(!$lottery){
+            $this->error('彩种不存在!');
+        }
+        $this->view->type = $type;
+        $this->assign('types',$types);
+
+        if($type==43){
+            $model = model('lhc_time');
+        }else{
+            $model = model('data_time');
+        }
+
+        $request = request();
+        $list = $model->getList($request);
+        $list->appends($request->param());
+        $this->assign('list',$list);
+
+        return $this->fetch();
+    }
+
+    public function data(){
+        
+        $types = model('type')->allTypes();
+
+        $type = input('type/d');
+        if(!$type){
+            $this->error('请选择彩种!');
+        }
+        $lottery = $types[$type]??null;
+        if(!$lottery){
+            $this->error('彩种不存在!');
+        }
+        $this->view->type = $type;
+        $this->assign('types',$types);
+
+        $request = request();
+        $list = model('data')->getList($request);
+        //$list = TypeModel::getList($request);
+        $list->appends($request->param());
+        $this->assign('list',$list);
+
+        $this->view->page_header = '开奖结果';
+        return $this->fetch();        
+    }        
+}

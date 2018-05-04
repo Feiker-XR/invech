@@ -1,0 +1,200 @@
+{extend name="base:common"/}
+{block name="title"}<title>系统公告－{$settings.webName}</title>{/block}
+{block name="style"}
+<style>
+        .form-inline {
+            margin-bottom: 10px;
+            margin-left: 10px;
+        }
+        ul.tongzhilist {
+            height: 100%;
+            overflow: auto;
+            padding: 0;
+            margin: 0;
+        }
+            ul.tongzhilist li {
+                list-style: none;
+                margin: 0;
+                padding: 10px;
+                border-bottom: 1px #eee solid;
+                cursor: pointer;
+            }
+                ul.tongzhilist li strong {
+                    display: block;
+                    font-size: 16px;
+                    font-weight: normal;
+                    padding-bottom: 5px;
+                    padding-left: 5px;
+                }
+                ul.tongzhilist li span {
+                    margin-left: 30px;
+                    color: #999;
+                }
+                ul.tongzhilist li p {
+                    padding-left: 30px;
+                    padding-right: 5px;
+                }
+        i.orangestar {
+            color: orangered;
+            margin-right: 10px;
+        }
+        i.graystar {
+            color: #ccc;
+            margin-right: 10px;
+        }
+        ul.tongzhilist li span i {
+            margin-right: 5px;
+        }
+        ::-webkit-scrollbar-track {
+            background-color: #eae0db;
+        }
+        ::-webkit-scrollbar {
+            width: 12px;
+            border-radius: 10px;
+            background-color: #b7b0ad;
+        }
+        ::-webkit-scrollbar-thumb {
+            border-radius: 10px;
+            background-color: #b7b0ad;
+        }
+        .tongzhileft {
+            border-top: 1px #eee solid;
+            border-bottom: 1px #eee solid;
+            border-left: 1px #eee solid;
+            padding: 0;
+        }
+        .tongzhiright {
+            border-top: 1px #eee solid;
+            border-right: 1px #eee solid;
+            border-bottom: 1px #eee solid;
+            padding-right: 0;
+        }
+        .tongzhiview {
+            padding: 20px;
+            padding-left: 10px;
+            padding-top: 10px;
+            overflow: auto;
+            height: 100%;
+        }
+        .tongzhiviewtitle {
+            font-size: 16px;
+            padding-bottom: 10px;
+            font-weight: bold;
+            color: #666;
+            text-align: center;
+        }
+        .tongzhiviewinfo {
+            text-align: center;
+            color: #999;
+            padding-bottom: 10px;
+        }
+        .tongzhiviewtxt {
+            padding-top: 20px;
+            font-size: 21px;
+            padding-left: 20px;
+            padding-right: 20px;
+        }
+            .tongzhiviewtxt p {
+                font-size: 21px;
+            }
+        li.tongzhilistthis {
+            background-color: #fbf6f3;
+            border-left: 3px #ed6c44 solid;
+            box-sizing: border-box;
+        }
+        label.wd {
+            float: right;
+            background-color: #ffb230;
+            color: #fff;
+            font-size: 11px;
+            padding-left: 2px;
+            padding-right: 2px;
+            border-radius: 2px;
+            font-family: 宋体;
+        }
+        label.yd {
+            float: right;
+            background-color: #63befa;
+            color: #fff;
+            font-size: 11px;
+            padding-left: 2px;
+            padding-right: 2px;
+            border-radius: 2px;
+            font-family: 宋体;
+        }
+</style>
+{/block}
+{block name="body"}
+<div class="effect mainnav-lg mainnav-fixed navbar-fixed footer-fixed" id="container">
+	<div id="page-content">
+		<form id="notice" role="form" action="/notice/notice" method="post">
+			<div class="panel">
+				<div class="panel-heading">
+					<h3 class="panel-title"><img alt="" src="/__IMG__/main/titleiconf.jpg">通知公告</h3>
+				</div>
+				<div class="panel-body" style="padding: 0px 8px 3px 7px;">
+					<div class="tongzhi row">
+						<div class="tongzhileft col-sm-3">
+							<ul class="tongzhilist">
+								<?php
+									foreach($data as $var){
+									$last=$var;
+								?>
+								<li class="{$this->iff($var==$info,'tongzhilistthis','')}" href="{:Url('notice/info?id='.$var['id'])}"><strong><i class="fa fa-star orangestar"></i> 
+                                     {$var.title}                                   
+								<label class="yd">已读</label>
+								</strong>
+								<p>
+									{$var.title}
+								</p>
+								<span><i class="fa fa-clock-o"></i>{$var['created_at']}</span>
+								</li>
+								<?php } ?>
+							</ul>
+						</div>
+						<div class="tongzhiright col-sm-9">
+							<div class="tongzhiview">
+								<div class="tongzhiviewtitle">
+									{$info['title']}
+								</div>
+								<div class="tongzhiviewinfo">
+									<span>发布时间：{$info['created_at']}</span>
+								</div>
+								<div class="tongzhiviewtxt">
+									{:nl2br($info['content'])}
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<input name="__RequestVerificationToken" type="hidden" value="CfDJ8Ktgxm2FAlNEsoI7VoMQlWlAMlHOQpT2zoNzZZCIO-A_P9U8P7nISaHtKqdRIQzDjdE3crtwjeggFou41nsnFLUu7beumKW4Zz5XrxY7s0Q-BSXFqMF3RtYcNRzwuai135NAPq1B09rJIVxXW_0IkGLVDW9uBV5q0fYezLaY2AgZLBB6oCzVjgxQTw8-_42bfw">
+		</form>
+	</div>
+</div>
+{/block}
+{block name="script"}
+<script src="/__JS__/dataTables.min.js"></script>
+<script src="/__JS__/dataTables.bootstrap.min.js"></script>
+<script src="/__JS__/dataTables.responsive.min.js"></script>
+<script src="/__JS__/bootbox.min.js"></script>
+<script type="text/javascript">
+	$(document).ready(function () {
+		var bodyheight = jQuery(window).height() - 100;
+		$(".tongzhileft,.tongzhiright").css("height", bodyheight);
+		$("ul.tongzhilist li").click(
+		  function toggle() {
+			  $("ul.tongzhilist li").removeClass("tongzhilistthis");
+			  $(this).addClass("tongzhilistthis");
+			  //document.location.href = $(this).attr('href');
+			  $('.tongzhiright').load($(this).attr('href'));
+		  }
+		);	
+	});
+	$(window).resize(function () {
+		var bodyheight = jQuery(window).height() - 100;
+		$(".tongzhileft,.tongzhiright").css("height", bodyheight);
+	})
+
+</script>
+{/block}

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Member</title>
+<link rel="stylesheet" type="text/css" href="/css/general.css"/>
+<link rel="stylesheet" type="text/css" href="/Scripts/jquery-ui.css" />
+<script type="text/javascript" src="/Scripts/jquery.js"></script>
+<script type="text/javascript" src="/Scripts/member.js"></script>
+<script type="text/javascript" src="/Scripts/jquery-ui-datepicker.js"></script>
+<script type="text/javascript">
+$(function(){
+	$("#data_k").datepicker({
+		//minDate: -31,
+		maxDate: 0
+	});
+	$("#data_o").datepicker({
+		//minDate: -31,
+		maxDate: 0
+	});
+});
+</script>
+</head>
+<body>
+  <div class="ui-moneyBox">
+  
+  <table width="100%" border="0" cellspacing="0" cellpadding="0">
+    <tr>
+    <form id="MyForm" action="" method="post">
+      <td align="center"><table border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td>日期范围：</td>
+          <td><input name="data_k" type="text" id="data_k" readonly="readonly" value="" class="Input_100"/></td>
+          <td align="center">&nbsp;~&nbsp;</td>
+          <td><input name="data_o" type="text" id="data_o" readonly="readonly" value="" class="Input_100"/></td>
+          <td>用户名：</td>
+          <td><input name="username" type="text" value="" /></td>
+          <td><input type="submit" name="Button" value="" id="Button" class="S_btn" /></td>
+        </tr>
+      </table></td>
+      </form>
+    </tr>
+    </table> 
+<ul>
+	<table width="100%" border="0" cellspacing="0" cellpadding="5" id="thetable">
+	   	<tr>
+		    <th>用户姓名</th>
+		    <th>会员账号</th>
+		    <th>注册日期</th>
+		    <th>最近登录</th>
+		    <th>账户余额</th>
+		    <th>本月存款</th>
+		    <th>本月提款</th>
+		    <th>本月亏盈</th>
+		    <th>状态</th>
+	  </tr>
+	  <tr align="center" bgcolor=""  onMouseOver="this.style.backgroundColor='#FFFFCC'" onMouseOut="this.style.backgroundColor=''">
+	  	<td align="center"></td>
+	    <td align="center"></td>
+	    <td align="center"></td>
+	    <td align="center"></td>
+	    <td align="center"></td>
+	    <td align="center"></td>
+	    <td align="center"></td>
+	    <td align="center"></td>
+	    <td align="center"></td>
+	  </tr>
+		<tr>
+			<td colspan="7" style="color:red; text-align:center;">
+	        	余额总计: &nbsp;&nbsp;
+			            存款总计: &nbsp;&nbsp;
+			            提款总计: &nbsp;&nbsp;
+			            亏盈总计: &nbsp;&nbsp;
+	        </td>
+	    </tr>
+	</table>
+</ul>   
+    <!-- page -->
+  </div>
+<script language="javascript">bianse("thetable","#F5F5F5","#FFFFFF","#FFFFCC","#FFFFCC");</script> 
+</body>
+</html>

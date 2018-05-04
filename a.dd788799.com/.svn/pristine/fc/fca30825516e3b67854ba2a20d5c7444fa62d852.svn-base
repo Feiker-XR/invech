@@ -1,0 +1,29 @@
+<?php
+namespace app\common\model;
+use think\Model;
+use app\common\traits\model\ApiToken;
+use bong\service\auth\traits\Authenticatable;
+use app\common\model\admin\BasicTrait;
+use app\common\model\admin\PolicyTrait;
+use bong\service\auth\access\Authorizable;
+
+class Admin extends Base{
+
+    use ApiToken,Authenticatable,Authorizable;
+    use BasicTrait,PolicyTrait;
+
+    protected $table ='gygy_admin';
+    protected $createTime = 'created_at';
+    protected $updateTime = 'updated_at';
+    protected $autoWriteTimestamp = 'datetime';
+
+    //protected $pk = 'id';
+    //protected $field = ['id','username','password','email','api_token','remember_token'];
+
+    public static function getList($request){
+      $params = $request->param();
+      $query = self::order('id');
+      $data = $query->paginate();
+      return $data;
+    }
+}

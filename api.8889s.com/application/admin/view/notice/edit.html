@@ -1,0 +1,112 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>系统设置</title>
+<link href="/css/base.css" rel="stylesheet" type="text/css" />
+<link href="/css/admin.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="/js/jquery.js"></script>
+<script type="text/javascript" src="/js/jquery.tools.js"></script>
+<script type="text/javascript" src="/js/base.js"></script>
+</head>
+<body class="input">
+	<!--<div class="bar">
+		公告管理
+	</div>-->
+	
+
+<div class="body">
+		<ul id="tab" class="tab">
+			<li>
+				<input type="button" value="首页公告" hidefocus class="current" onClick="window.location.href='{:Url('notice/index','type=0')}'" />
+			</li>
+			<li>
+				<input type="button" value="体育公告" hidefocus onClick="window.location.href='{:Url('notice/index','type=1')}'" />
+			</li>
+			<li>
+				<input type="button" value="彩票公告" hidefocus onClick="window.location.href='{:Url('notice/index','type=2')}'" />
+			</li>
+			<li>
+				<input type="button" value="真人公告" hidefocus onClick="window.location.href='{:Url('notice/index','type=3')}'" />
+			</li>
+			<li>
+				<input type="button" value="代理公告" hidefocus onClick="window.location.href='{:Url('notice/index','type=888')}'" />
+			</li>
+		</ul>
+<form name="form1" onSubmit="return check_submit();" method="post" action="{:Url('notice/save')}">
+			<input type="hidden" name="nid" value="{$info.nid}" />
+			<table class="inputTable tabContent">
+				<tr>
+				  <th>
+						公告内容: 
+					</th>
+					<td><textarea name="msg" id="msg" class="formTextarea">{$info.msg}</textarea></td>
+				</tr>
+				<tr>
+					<th>
+						有效时间: 
+					</th>
+					<td>
+
+						<input type="text" value="{$info.end_time}" name="end_time" id="end_time" class="formText" /></td>
+				</tr>
+				<tr>
+				  <th>是否显示: </th>
+				  <td><select name="is_show" id="is_show">
+        <option value="1" {if $info.is_show eq '1'}selected{/if}>显示</option>
+        <option value="0" {if $info.is_show eq '0'}selected{/if}>隐藏</option>
+      </select></td>
+			  </tr>
+				<tr>
+				  <th>公告分类:</th>
+				  <td>
+				  	<select name="is_class" id="is_class">
+				  		{FOREACH name="typelist" item="vo"}
+				        <option value="{$key}" {if $info.is_class eq $key} selected {/if}>{$vo}</option>
+				        {/FOREACH}
+				    </select>
+      			 </td>
+			  </tr>
+				<tr>
+				  <th>排序:</th>
+				  <td><input type="text" value="{$info.sort;}" name="sort" id="sort" class="formText" /><label class="requireField"> 数字越大排序越靠前</label></td>
+			  </tr>
+			</table>
+			<div class="buttonArea">
+				
+				<input type="submit" class="formButton" value="确  定" hidefocus />&nbsp;&nbsp;
+				<input type="button" class="formButton" onClick="window.location.href='{:Url('notice/index')}'" value="返  回" hidefocus />
+	  </div>
+</form>
+<table class="inputTable tabContent">
+	<tr>
+		<td width="120" align="center" bgcolor="#758fb9" style="color:#FFF; font-size:14px;">发布时间</td>
+		<td width="120" align="center" bgcolor="#758fb9" style="color:#FFF; font-size:14px;">过期时间</td>
+		<td width="60" align="center" bgcolor="#758fb9" style="color:#FFF; font-size:14px;">公告类别</td>
+		<td align="center" bgcolor="#758fb9" style="color:#FFF; font-size:14px;">公告内容</td>
+		<td width="46" align="center" bgcolor="#758fb9" style="color:#FFF; font-size:14px;">状态</td>
+		<td width="146" align="center" bgcolor="#758fb9" style="color:#FFF; font-size:14px;">编辑</td>
+	 </tr>
+	{volist id="list" name="notices"}
+	<tr>
+		<td align="center">{$list.add_time}</td>
+		<td align="center">{$list.end_time}</td>
+		<td align="center">{$typelist[$list.is_class]}</td>
+		<td align="left">{$list.msg}</td>
+		<td align="center">{if $list.is_show eq '0'}<span class="red">隐藏</span>{else}<span class="blue">显示</span>{/if}</td>
+		<td align="center">
+			<a href="{:Url('notice/edit','id='.$list.nid)}">编辑</a>
+			&nbsp;&nbsp;<span>|</span>
+			<a href="{:Url('notice/delete','id='.$list.nid)}">删除</a>
+		</td>
+	</tr>
+	{/volist}
+	<tr>
+		<td colspan="6" align="center">
+			<div class="pagerBar">{$notices->render()}</div>
+		</td>
+	</tr>
+</table>
+</div>
+</body>
+</html>

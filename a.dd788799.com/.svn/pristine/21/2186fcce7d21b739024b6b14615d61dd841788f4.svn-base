@@ -1,0 +1,27 @@
+<?php
+namespace app\admin\controller;
+use app\admin\Login;
+use think\Cache;
+class Order extends Login{
+      /**
+     *菜单入口:订单列表
+    */  
+    public function index(){
+    	$setcg = db('pay_way')->select();//所有支付方式
+        $this->assign('setcg',$setcg);
+        $export_args = [];
+        $export_args = http_build_query($export_args);
+       
+         $join = [
+         	['members m','o.uid=m.uid','left'],
+		    ['pay_way pw','o.local_code=pw.code','left'],
+		];
+		$orlist =  db('orders')->alias('o')->field('o.*, m.username,pw.name as pwname')->join($join)->order('o.id asc')->paginate(10);
+		$this->assign('export_args',$export_args);
+     	$this->assign('orlist',$orlist);
+    	$this->view->page_header = '订单列表';
+      return $this->fetch();
+
+    }
+    
+}

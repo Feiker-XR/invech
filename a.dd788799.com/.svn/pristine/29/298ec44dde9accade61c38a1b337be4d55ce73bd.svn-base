@@ -1,0 +1,506 @@
+<link rel="stylesheet" href="/400w-public/css/global.css" />
+<link rel="stylesheet" href="/400w-public/css/other.css" />
+<link rel="stylesheet" href="/400w-public/css/style.css" />
+<link rel="stylesheet" href="/400w-public/css/lottery.css" />
+
+<script type="text/javascript" src="/js/jquery-1.8.0.min.js"></script>
+<script type="text/javascript" src="/js/template-web.js"></script>
+<script type="text/javascript" src="/js/kqwf.js"></script>
+
+<input type="hidden" name="playedGroup" value="<?=$groupId?>" />
+<input type="hidden" name="playedId" value="<?=$playedId?>" />
+<input type="hidden" name="type" value="<?=$type?>" />
+<input type="hidden" name="playedName" value="<?=$played['name']?>" />
+
+<div id="sscContent"><!-- content -->
+<div class="lot-content clearfix">
+    <div class="fl main-left">
+        <div class="hd clearfix rehd tzgz" id="toptouzhu">
+        <div class="fl refl">
+                快捷金额：
+                <input type="text" class="txt">
+            </div>
+        <div class="kjanniu">
+            <a href="javascript:void(0)" class="img-50" data-num="50"></a>
+            <a href="javascript:void(0)" class="img-100" data-num="100"></a>
+            <a href="javascript:void(0)" class="img-500" data-num="500"></a>
+            <a href="javascript:void(0)" class="img-1000" data-num="1000"></a>
+            <a href="javascript:void(0)" class="img-5000" data-num="5000"></a>
+            <a href="javascript:void(0)" class="img-10000" data-num="10000"></a>
+        </div>
+        </div>
+<div class="table-common">
+            <table width="100%" border="1">
+                <thead>
+                <tr>
+                    <th colspan="3">冠军</th>
+                    <th colspan="3">亚军</th>
+                    <th colspan="3">季军</th>
+                    <th colspan="3">第四名</th>
+                    <th colspan="3">第五名</th>
+                </tr>
+                </thead>
+
+                <tbody>
+                <tr>
+                    <td width="30" style="cursor: pointer;"><strong>1</strong></td>
+                    <td style="cursor: pointer;"><strong class="color-red pl" data-plid="8267">9.85</strong></td>
+                    <td><input type="text" class="table-txt" data-name="冠军-1" data-plid="8267"></td>
+
+                    <td width="30" style="cursor: pointer;"><strong>1</strong></td>
+                    <td style="cursor: pointer;"><strong class="color-red pl" data-plid="8268">9.85</strong></td>
+                    <td><input type="text" class="table-txt" data-name="亚军-1" data-plid="8268"></td>
+
+                    <td width="30" style="cursor: pointer;"><strong>1</strong></td>
+                    <td style="cursor: pointer;"><strong class="color-red pl" data-plid="8269">9.85</strong></td>
+                    <td><input type="text" class="table-txt" data-name="季军-1" data-plid="8269"></td>
+
+                    <td width="30" style="cursor: pointer;"><strong>1</strong></td>
+                    <td style="cursor: pointer;"><strong class="color-red pl" data-plid="8270">9.85</strong></td>
+                    <td><input type="text" class="table-txt" data-name="第四名-1" data-plid="8270"></td>
+
+                    <td width="30" style="cursor: pointer;"><strong>1</strong></td>
+                    <td style="cursor: pointer;"><strong class="color-red pl" data-plid="8271">9.85</strong></td>
+                    <td><input type="text" class="table-txt" data-name="第五名-1" data-plid="8271"></td>
+                </tr>
+
+                <tr>
+                    <td width="30" style="cursor: pointer;"><strong>2</strong></td>
+                    <td style="cursor: pointer;"><strong class="color-red pl" data-plid="8277">9.85</strong></td>
+                    <td><input type="text" class="table-txt" data-name="冠军-2" data-plid="8277"></td>
+
+                    <td width="30" style="cursor: pointer;"><strong>2</strong></td>
+                    <td style="cursor: pointer;"><strong class="color-red pl" data-plid="8278">9.85</strong></td>
+                    <td><input type="text" class="table-txt" data-name="亚军-2" data-plid="8278"></td>
+
+                    <td width="30" style="cursor: pointer;"><strong>2</strong></td>
+                    <td style="cursor: pointer;"><strong class="color-red pl" data-plid="8279">9.85</strong></td>
+                    <td><input type="text" class="table-txt" data-name="季军-2" data-plid="8279"></td>
+
+                    <td width="30" style="cursor: pointer;"><strong>2</strong></td>
+                    <td style="cursor: pointer;"><strong class="color-red pl" data-plid="8280">9.85</strong></td>
+                    <td><input type="text" class="table-txt" data-name="第四名-2" data-plid="8280"></td>
+
+                    <td width="30" style="cursor: pointer;"><strong>2</strong></td>
+                    <td style="cursor: pointer;"><strong class="color-red pl" data-plid="8281">9.85</strong></td>
+                    <td><input type="text" class="table-txt" data-name="第五名-2" data-plid="8281"></td>
+                </tr>
+
+                <tr>
+                    <td width="30" style="cursor: pointer;"><strong>3</strong></td>
+                    <td style="cursor: pointer;"><strong class="color-red pl" data-plid="8287">9.85</strong></td>
+                    <td><input type="text" class="table-txt" data-name="冠军-3" data-plid="8287"></td>
+
+                    <td width="30" style="cursor: pointer;"><strong>3</strong></td>
+                    <td style="cursor: pointer;"><strong class="color-red pl" data-plid="8288">9.85</strong></td>
+                    <td><input type="text" class="table-txt" data-name="亚军-3" data-plid="8288"></td>
+
+                    <td width="30" style="cursor: pointer;"><strong>3</strong></td>
+                    <td style="cursor: pointer;"><strong class="color-red pl" data-plid="8289">9.85</strong></td>
+                    <td><input type="text" class="table-txt" data-name="季军-3" data-plid="8289"></td>
+
+                    <td width="30" style="cursor: pointer;"><strong>3</strong></td>
+                    <td style="cursor: pointer;"><strong class="color-red pl" data-plid="8290">9.85</strong></td>
+                    <td><input type="text" class="table-txt" data-name="第四名-3" data-plid="8290"></td>
+
+                    <td width="30" style="cursor: pointer;"><strong>3</strong></td>
+                    <td style="cursor: pointer;"><strong class="color-red pl" data-plid="8291">9.85</strong></td>
+                    <td><input type="text" class="table-txt" data-name="第五名-3" data-plid="8291"></td>
+                </tr>
+
+                <tr>
+                    <td width="30" style="cursor: pointer;"><strong>4</strong></td>
+                    <td style="cursor: pointer;"><strong class="color-red pl" data-plid="8297">9.85</strong></td>
+                    <td><input type="text" class="table-txt" data-name="冠军-4" data-plid="8297"></td>
+
+                    <td width="30" style="cursor: pointer;"><strong>4</strong></td>
+                    <td style="cursor: pointer;"><strong class="color-red pl" data-plid="8298">9.85</strong></td>
+                    <td><input type="text" class="table-txt" data-name="亚军-4" data-plid="8298"></td>
+
+                    <td width="30" style="cursor: pointer;"><strong>4</strong></td>
+                    <td style="cursor: pointer;"><strong class="color-red pl" data-plid="8299">9.85</strong></td>
+                    <td><input type="text" class="table-txt" data-name="季军-4" data-plid="8299"></td>
+
+                    <td width="30" style="cursor: pointer;"><strong>4</strong></td>
+                    <td style="cursor: pointer;"><strong class="color-red pl" data-plid="8300">9.85</strong></td>
+                    <td><input type="text" class="table-txt" data-name="第四名-4" data-plid="8300"></td>
+
+                    <td width="30" style="cursor: pointer;"><strong>4</strong></td>
+                    <td style="cursor: pointer;"><strong class="color-red pl" data-plid="8301">9.85</strong></td>
+                    <td><input type="text" class="table-txt" data-name="第五名-4" data-plid="8301"></td>
+                </tr>
+
+                <tr>
+                    <td width="30" style="cursor: pointer;"><strong>5</strong></td>
+                    <td style="cursor: pointer;"><strong class="color-red pl" data-plid="8307">9.85</strong></td>
+                    <td><input type="text" class="table-txt" data-name="冠军-5" data-plid="8307"></td>
+
+                    <td width="30" style="cursor: pointer;"><strong>5</strong></td>
+                    <td style="cursor: pointer;"><strong class="color-red pl" data-plid="8308">9.85</strong></td>
+                    <td><input type="text" class="table-txt" data-name="亚军-5" data-plid="8308"></td>
+
+                    <td width="30" style="cursor: pointer;"><strong>5</strong></td>
+                    <td style="cursor: pointer;"><strong class="color-red pl" data-plid="8309">9.85</strong></td>
+                    <td><input type="text" class="table-txt" data-name="季军-5" data-plid="8309"></td>
+
+                    <td width="30" style="cursor: pointer;"><strong>5</strong></td>
+                    <td style="cursor: pointer;"><strong class="color-red pl" data-plid="8310">9.85</strong></td>
+                    <td><input type="text" class="table-txt" data-name="第四名-5" data-plid="8310"></td>
+
+                    <td width="30" style="cursor: pointer;"><strong>5</strong></td>
+                    <td style="cursor: pointer;"><strong class="color-red pl" data-plid="8311">9.85</strong></td>
+                    <td><input type="text" class="table-txt" data-name="第五名-5" data-plid="8311"></td>
+                </tr>
+
+                <tr>
+                    <td width="30" style="cursor: pointer;"><strong>6</strong></td>
+                    <td style="cursor: pointer;"><strong class="color-red pl" data-plid="8317">9.85</strong></td>
+                    <td><input type="text" class="table-txt" data-name="冠军-6" data-plid="8317"></td>
+
+                    <td width="30" style="cursor: pointer;"><strong>6</strong></td>
+                    <td style="cursor: pointer;"><strong class="color-red pl" data-plid="8318">9.85</strong></td>
+                    <td><input type="text" class="table-txt" data-name="亚军-6" data-plid="8318"></td>
+
+                    <td width="30" style="cursor: pointer;"><strong>6</strong></td>
+                    <td style="cursor: pointer;"><strong class="color-red pl" data-plid="8319">9.85</strong></td>
+                    <td><input type="text" class="table-txt" data-name="季军-6" data-plid="8319"></td>
+
+                    <td width="30" style="cursor: pointer;"><strong>6</strong></td>
+                    <td style="cursor: pointer;"><strong class="color-red pl" data-plid="8320">9.85</strong></td>
+                    <td><input type="text" class="table-txt" data-name="第四名-6" data-plid="8320"></td>
+
+                    <td width="30" style="cursor: pointer;"><strong>6</strong></td>
+                    <td style="cursor: pointer;"><strong class="color-red pl" data-plid="8321">9.85</strong></td>
+                    <td><input type="text" class="table-txt" data-name="第五名-6" data-plid="8321"></td>
+                </tr>
+
+                <tr>
+                    <td width="30" style="cursor: pointer;"><strong>7</strong></td>
+                    <td style="cursor: pointer;"><strong class="color-red pl" data-plid="8327">9.85</strong></td>
+                    <td><input type="text" class="table-txt" data-name="冠军-7" data-plid="8327"></td>
+
+                    <td width="30" style="cursor: pointer;"><strong>7</strong></td>
+                    <td style="cursor: pointer;"><strong class="color-red pl" data-plid="8328">9.85</strong></td>
+                    <td><input type="text" class="table-txt" data-name="亚军-7" data-plid="8328"></td>
+
+                    <td width="30" style="cursor: pointer;"><strong>7</strong></td>
+                    <td style="cursor: pointer;"><strong class="color-red pl" data-plid="8329">9.85</strong></td>
+                    <td><input type="text" class="table-txt" data-name="季军-7" data-plid="8329"></td>
+
+                    <td width="30" style="cursor: pointer;"><strong>7</strong></td>
+                    <td style="cursor: pointer;"><strong class="color-red pl" data-plid="8330">9.85</strong></td>
+                    <td><input type="text" class="table-txt" data-name="第四名-7" data-plid="8330"></td>
+
+                    <td width="30" style="cursor: pointer;"><strong>7</strong></td>
+                    <td style="cursor: pointer;"><strong class="color-red pl" data-plid="8331">9.85</strong></td>
+                    <td><input type="text" class="table-txt" data-name="第五名-7" data-plid="8331"></td>
+                </tr>
+
+                <tr>
+                    <td width="30" style="cursor: pointer;"><strong>8</strong></td>
+                    <td style="cursor: pointer;"><strong class="color-red pl" data-plid="8337">9.85</strong></td>
+                    <td><input type="text" class="table-txt" data-name="冠军-8" data-plid="8337"></td>
+
+                    <td width="30" style="cursor: pointer;"><strong>8</strong></td>
+                    <td style="cursor: pointer;"><strong class="color-red pl" data-plid="8338">9.85</strong></td>
+                    <td><input type="text" class="table-txt" data-name="亚军-8" data-plid="8338"></td>
+
+                    <td width="30" style="cursor: pointer;"><strong>8</strong></td>
+                    <td style="cursor: pointer;"><strong class="color-red pl" data-plid="8339">9.85</strong></td>
+                    <td><input type="text" class="table-txt" data-name="季军-8" data-plid="8339"></td>
+
+                    <td width="30" style="cursor: pointer;"><strong>8</strong></td>
+                    <td style="cursor: pointer;"><strong class="color-red pl" data-plid="8340">9.85</strong></td>
+                    <td><input type="text" class="table-txt" data-name="第四名-8" data-plid="8340"></td>
+
+                    <td width="30" style="cursor: pointer;"><strong>8</strong></td>
+                    <td style="cursor: pointer;"><strong class="color-red pl" data-plid="8341">9.85</strong></td>
+                    <td><input type="text" class="table-txt" data-name="第五名-8" data-plid="8341"></td>
+                </tr>
+
+                <tr>
+                    <td width="30" style="cursor: pointer;"><strong>9</strong></td>
+                    <td style="cursor: pointer;"><strong class="color-red pl" data-plid="8347">9.85</strong></td>
+                    <td><input type="text" class="table-txt" data-name="冠军-9" data-plid="8347"></td>
+
+                    <td width="30" style="cursor: pointer;"><strong>9</strong></td>
+                    <td style="cursor: pointer;"><strong class="color-red pl" data-plid="8348">9.85</strong></td>
+                    <td><input type="text" class="table-txt" data-name="亚军-9" data-plid="8348"></td>
+
+                    <td width="30" style="cursor: pointer;"><strong>9</strong></td>
+                    <td style="cursor: pointer;"><strong class="color-red pl" data-plid="8349">9.85</strong></td>
+                    <td><input type="text" class="table-txt" data-name="季军-9" data-plid="8349"></td>
+
+                    <td width="30" style="cursor: pointer;"><strong>9</strong></td>
+                    <td style="cursor: pointer;"><strong class="color-red pl" data-plid="8350">9.85</strong></td>
+                    <td><input type="text" class="table-txt" data-name="第四名-9" data-plid="8350"></td>
+
+                    <td width="30" style="cursor: pointer;"><strong>9</strong></td>
+                    <td style="cursor: pointer;"><strong class="color-red pl" data-plid="8351">9.85</strong></td>
+                    <td><input type="text" class="table-txt" data-name="第五名-9" data-plid="8351"></td>
+                </tr>
+
+                <tr>
+                    <td width="30" style="cursor: pointer;"><strong>10</strong></td>
+                    <td style="cursor: pointer;"><strong class="color-red pl" data-plid="8357">9.85</strong></td>
+                    <td><input type="text" class="table-txt" data-name="冠军-10" data-plid="8357"></td>
+
+                    <td width="30" style="cursor: pointer;"><strong>10</strong></td>
+                    <td style="cursor: pointer;"><strong class="color-red pl" data-plid="8358">9.85</strong></td>
+                    <td><input type="text" class="table-txt" data-name="亚军-10" data-plid="8358"></td>
+
+                    <td width="30" style="cursor: pointer;"><strong>10</strong></td>
+                    <td style="cursor: pointer;"><strong class="color-red pl" data-plid="8359">9.85</strong></td>
+                    <td><input type="text" class="table-txt" data-name="季军-10" data-plid="8359"></td>
+
+                    <td width="30" style="cursor: pointer;"><strong>10</strong></td>
+                    <td style="cursor: pointer;"><strong class="color-red pl" data-plid="8360">9.85</strong></td>
+                    <td><input type="text" class="table-txt" data-name="第四名-10" data-plid="8360"></td>
+
+                    <td width="30" style="cursor: pointer;"><strong>10</strong></td>
+                    <td style="cursor: pointer;"><strong class="color-red pl" data-plid="8361">9.85</strong></td>
+                    <td><input type="text" class="table-txt" data-name="第五名-10" data-plid="8361"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="table-common">
+            <table width="100%" border="1">
+                <thead>
+                <tr>
+                    <th colspan="3">第六名</th>
+                    <th colspan="3">第七名</th>
+                    <th colspan="3">第八名</th>
+                    <th colspan="3">第九名</th>
+                    <th colspan="3">第十名</th>
+                </tr>
+                </thead>
+
+                <tbody>
+                <tr>
+                    <td width="30" style="cursor: pointer;"><strong>1</strong></td>
+                    <td style="cursor: pointer;"><strong class="color-red pl" data-plid="8272">9.85</strong></td>
+                    <td><input type="text" class="table-txt" data-name="第六名-1" data-plid="8272"></td>
+
+                    <td width="30" style="cursor: pointer;"><strong>1</strong></td>
+                    <td style="cursor: pointer;"><strong class="color-red pl" data-plid="8273">9.85</strong></td>
+                    <td><input type="text" class="table-txt" data-name="第七名-1" data-plid="8273"></td>
+
+                    <td width="30" style="cursor: pointer;"><strong>1</strong></td>
+                    <td style="cursor: pointer;"><strong class="color-red pl" data-plid="8274">9.85</strong></td>
+                    <td><input type="text" class="table-txt" data-name="第八名-1" data-plid="8274"></td>
+
+                    <td width="30" style="cursor: pointer;"><strong>1</strong></td>
+                    <td style="cursor: pointer;"><strong class="color-red pl" data-plid="8275">9.85</strong></td>
+                    <td><input type="text" class="table-txt" data-name="第九名-1" data-plid="8275"></td>
+
+                    <td width="30" style="cursor: pointer;"><strong>1</strong></td>
+                    <td style="cursor: pointer;"><strong class="color-red pl" data-plid="8276">9.85</strong></td>
+                    <td><input type="text" class="table-txt" data-name="第十名-1" data-plid="8276"></td>
+                </tr>
+
+                <tr>
+                    <td width="30" style="cursor: pointer;"><strong>2</strong></td>
+                    <td style="cursor: pointer;"><strong class="color-red pl" data-plid="8282">9.85</strong></td>
+                    <td><input type="text" class="table-txt" data-name="第六名-2" data-plid="8282"></td>
+
+                    <td width="30" style="cursor: pointer;"><strong>2</strong></td>
+                    <td style="cursor: pointer;"><strong class="color-red pl" data-plid="8283">9.85</strong></td>
+                    <td><input type="text" class="table-txt" data-name="第七名-2" data-plid="8283"></td>
+
+                    <td width="30" style="cursor: pointer;"><strong>2</strong></td>
+                    <td style="cursor: pointer;"><strong class="color-red pl" data-plid="8284">9.85</strong></td>
+                    <td><input type="text" class="table-txt" data-name="第八名-2" data-plid="8284"></td>
+
+                    <td width="30" style="cursor: pointer;"><strong>2</strong></td>
+                    <td style="cursor: pointer;"><strong class="color-red pl" data-plid="8285">9.85</strong></td>
+                    <td><input type="text" class="table-txt" data-name="第九名-2" data-plid="8285"></td>
+
+                    <td width="30" style="cursor: pointer;"><strong>2</strong></td>
+                    <td style="cursor: pointer;"><strong class="color-red pl" data-plid="8286">9.85</strong></td>
+                    <td><input type="text" class="table-txt" data-name="第十名-2" data-plid="8286"></td>
+                </tr>
+
+                <tr>
+                    <td width="30" style="cursor: pointer;"><strong>3</strong></td>
+                    <td style="cursor: pointer;"><strong class="color-red pl" data-plid="8292">9.85</strong></td>
+                    <td><input type="text" class="table-txt" data-name="第六名-3" data-plid="8292"></td>
+
+                    <td width="30" style="cursor: pointer;"><strong>3</strong></td>
+                    <td style="cursor: pointer;"><strong class="color-red pl" data-plid="8293">9.85</strong></td>
+                    <td><input type="text" class="table-txt" data-name="第七名-3" data-plid="8293"></td>
+
+                    <td width="30" style="cursor: pointer;"><strong>3</strong></td>
+                    <td style="cursor: pointer;"><strong class="color-red pl" data-plid="8294">9.85</strong></td>
+                    <td><input type="text" class="table-txt" data-name="第八名-3" data-plid="8294"></td>
+
+                    <td width="30" style="cursor: pointer;"><strong>3</strong></td>
+                    <td style="cursor: pointer;"><strong class="color-red pl" data-plid="8295">9.85</strong></td>
+                    <td><input type="text" class="table-txt" data-name="第九名-3" data-plid="8295"></td>
+
+                    <td width="30" style="cursor: pointer;"><strong>3</strong></td>
+                    <td style="cursor: pointer;"><strong class="color-red pl" data-plid="8296">9.85</strong></td>
+                    <td><input type="text" class="table-txt" data-name="第十名-3" data-plid="8296"></td>
+                </tr>
+
+                <tr>
+                    <td width="30" style="cursor: pointer;"><strong>4</strong></td>
+                    <td style="cursor: pointer;"><strong class="color-red pl" data-plid="8302">9.85</strong></td>
+                    <td><input type="text" class="table-txt" data-name="第六名-4" data-plid="8302"></td>
+
+                    <td width="30" style="cursor: pointer;"><strong>4</strong></td>
+                    <td style="cursor: pointer;"><strong class="color-red pl" data-plid="8303">9.85</strong></td>
+                    <td><input type="text" class="table-txt" data-name="第七名-4" data-plid="8303"></td>
+
+                    <td width="30" style="cursor: pointer;"><strong>4</strong></td>
+                    <td style="cursor: pointer;"><strong class="color-red pl" data-plid="8304">9.85</strong></td>
+                    <td><input type="text" class="table-txt" data-name="第八名-4" data-plid="8304"></td>
+
+                    <td width="30" style="cursor: pointer;"><strong>4</strong></td>
+                    <td style="cursor: pointer;"><strong class="color-red pl" data-plid="8305">9.85</strong></td>
+                    <td><input type="text" class="table-txt" data-name="第九名-4" data-plid="8305"></td>
+
+                    <td width="30" style="cursor: pointer;"><strong>4</strong></td>
+                    <td style="cursor: pointer;"><strong class="color-red pl" data-plid="8306">9.85</strong></td>
+                    <td><input type="text" class="table-txt" data-name="第十名-4" data-plid="8306"></td>
+                </tr>
+
+                <tr>
+                    <td width="30" style="cursor: pointer;"><strong>5</strong></td>
+                    <td style="cursor: pointer;"><strong class="color-red pl" data-plid="8312">9.85</strong></td>
+                    <td><input type="text" class="table-txt" data-name="第六名-5" data-plid="8312"></td>
+
+                    <td width="30" style="cursor: pointer;"><strong>5</strong></td>
+                    <td style="cursor: pointer;"><strong class="color-red pl" data-plid="8313">9.85</strong></td>
+                    <td><input type="text" class="table-txt" data-name="第七名-5" data-plid="8313"></td>
+
+                    <td width="30" style="cursor: pointer;"><strong>5</strong></td>
+                    <td style="cursor: pointer;"><strong class="color-red pl" data-plid="8314">9.85</strong></td>
+                    <td><input type="text" class="table-txt" data-name="第八名-5" data-plid="8314"></td>
+
+                    <td width="30" style="cursor: pointer;"><strong>5</strong></td>
+                    <td style="cursor: pointer;"><strong class="color-red pl" data-plid="8315">9.85</strong></td>
+                    <td><input type="text" class="table-txt" data-name="第九名-5" data-plid="8315"></td>
+
+                    <td width="30" style="cursor: pointer;"><strong>5</strong></td>
+                    <td style="cursor: pointer;"><strong class="color-red pl" data-plid="8316">9.85</strong></td>
+                    <td><input type="text" class="table-txt" data-name="第十名-5" data-plid="8316"></td>
+                </tr>
+
+                <tr>
+                    <td width="30" style="cursor: pointer;"><strong>6</strong></td>
+                    <td style="cursor: pointer;"><strong class="color-red pl" data-plid="8322">9.85</strong></td>
+                    <td><input type="text" class="table-txt" data-name="第六名-6" data-plid="8322"></td>
+
+                    <td width="30" style="cursor: pointer;"><strong>6</strong></td>
+                    <td style="cursor: pointer;"><strong class="color-red pl" data-plid="8323">9.85</strong></td>
+                    <td><input type="text" class="table-txt" data-name="第七名-6" data-plid="8323"></td>
+
+                    <td width="30" style="cursor: pointer;"><strong>6</strong></td>
+                    <td style="cursor: pointer;"><strong class="color-red pl" data-plid="8324">9.85</strong></td>
+                    <td><input type="text" class="table-txt" data-name="第八名-6" data-plid="8324"></td>
+
+                    <td width="30" style="cursor: pointer;"><strong>6</strong></td>
+                    <td style="cursor: pointer;"><strong class="color-red pl" data-plid="8325">9.85</strong></td>
+                    <td><input type="text" class="table-txt" data-name="第九名-6" data-plid="8325"></td>
+
+                    <td width="30" style="cursor: pointer;"><strong>6</strong></td>
+                    <td style="cursor: pointer;"><strong class="color-red pl" data-plid="8326">9.85</strong></td>
+                    <td><input type="text" class="table-txt" data-name="第十名-6" data-plid="8326"></td>
+                </tr>
+
+                <tr>
+                    <td width="30" style="cursor: pointer;"><strong>7</strong></td>
+                    <td style="cursor: pointer;"><strong class="color-red pl" data-plid="8332">9.85</strong></td>
+                    <td><input type="text" class="table-txt" data-name="第六名-7" data-plid="8332"></td>
+
+                    <td width="30" style="cursor: pointer;"><strong>7</strong></td>
+                    <td style="cursor: pointer;"><strong class="color-red pl" data-plid="8333">9.85</strong></td>
+                    <td><input type="text" class="table-txt" data-name="第七名-7" data-plid="8333"></td>
+
+                    <td width="30" style="cursor: pointer;"><strong>7</strong></td>
+                    <td style="cursor: pointer;"><strong class="color-red pl" data-plid="8334">9.85</strong></td>
+                    <td><input type="text" class="table-txt" data-name="第八名-7" data-plid="8334"></td>
+
+                    <td width="30" style="cursor: pointer;"><strong>7</strong></td>
+                    <td style="cursor: pointer;"><strong class="color-red pl" data-plid="8335">9.85</strong></td>
+                    <td><input type="text" class="table-txt" data-name="第九名-7" data-plid="8335"></td>
+
+                    <td width="30" style="cursor: pointer;"><strong>7</strong></td>
+                    <td style="cursor: pointer;"><strong class="color-red pl" data-plid="8336">9.85</strong></td>
+                    <td><input type="text" class="table-txt" data-name="第十名-7" data-plid="8336"></td>
+                </tr>
+
+                <tr>
+                    <td width="30" style="cursor: pointer;"><strong>8</strong></td>
+                    <td style="cursor: pointer;"><strong class="color-red pl" data-plid="8342">9.85</strong></td>
+                    <td><input type="text" class="table-txt" data-name="第六名-8" data-plid="8342"></td>
+
+                    <td width="30" style="cursor: pointer;"><strong>8</strong></td>
+                    <td style="cursor: pointer;"><strong class="color-red pl" data-plid="8343">9.85</strong></td>
+                    <td><input type="text" class="table-txt" data-name="第七名-8" data-plid="8343"></td>
+
+                    <td width="30" style="cursor: pointer;"><strong>8</strong></td>
+                    <td style="cursor: pointer;"><strong class="color-red pl" data-plid="8344">9.85</strong></td>
+                    <td><input type="text" class="table-txt" data-name="第八名-8" data-plid="8344"></td>
+
+                    <td width="30" style="cursor: pointer;"><strong>8</strong></td>
+                    <td style="cursor: pointer;"><strong class="color-red pl" data-plid="8345">9.85</strong></td>
+                    <td><input type="text" class="table-txt" data-name="第九名-8" data-plid="8345"></td>
+
+                    <td width="30" style="cursor: pointer;"><strong>8</strong></td>
+                    <td style="cursor: pointer;"><strong class="color-red pl" data-plid="8346">9.85</strong></td>
+                    <td><input type="text" class="table-txt" data-name="第十名-8" data-plid="8346"></td>
+                </tr>
+
+                <tr>
+                    <td width="30" style="cursor: pointer;"><strong>9</strong></td>
+                    <td style="cursor: pointer;"><strong class="color-red pl" data-plid="8352">9.85</strong></td>
+                    <td><input type="text" class="table-txt" data-name="第六名-9" data-plid="8352"></td>
+
+                    <td width="30" style="cursor: pointer;"><strong>9</strong></td>
+                    <td style="cursor: pointer;"><strong class="color-red pl" data-plid="8353">9.85</strong></td>
+                    <td><input type="text" class="table-txt" data-name="第七名-9" data-plid="8353"></td>
+
+                    <td width="30" style="cursor: pointer;"><strong>9</strong></td>
+                    <td style="cursor: pointer;"><strong class="color-red pl" data-plid="8354">9.85</strong></td>
+                    <td><input type="text" class="table-txt" data-name="第八名-9" data-plid="8354"></td>
+
+                    <td width="30" style="cursor: pointer;"><strong>9</strong></td>
+                    <td style="cursor: pointer;"><strong class="color-red pl" data-plid="8355">9.85</strong></td>
+                    <td><input type="text" class="table-txt" data-name="第九名-9" data-plid="8355"></td>
+
+                    <td width="30" style="cursor: pointer;"><strong>9</strong></td>
+                    <td style="cursor: pointer;"><strong class="color-red pl" data-plid="8356">9.85</strong></td>
+                    <td><input type="text" class="table-txt" data-name="第十名-9" data-plid="8356"></td>
+                </tr>
+
+                <tr>
+                    <td width="30" style="cursor: pointer;"><strong>10</strong></td>
+                    <td style="cursor: pointer;"><strong class="color-red pl" data-plid="8362">9.85</strong></td>
+                    <td><input type="text" class="table-txt" data-name="第六名-10" data-plid="8362"></td>
+
+                    <td width="30" style="cursor: pointer;"><strong>10</strong></td>
+                    <td style="cursor: pointer;"><strong class="color-red pl" data-plid="8363">9.85</strong></td>
+                    <td><input type="text" class="table-txt" data-name="第七名-10" data-plid="8363"></td>
+
+                    <td width="30" style="cursor: pointer;"><strong>10</strong></td>
+                    <td style="cursor: pointer;"><strong class="color-red pl" data-plid="8364">9.85</strong></td>
+                    <td><input type="text" class="table-txt" data-name="第八名-10" data-plid="8364"></td>
+
+                    <td width="30" style="cursor: pointer;"><strong>10</strong></td>
+                    <td style="cursor: pointer;"><strong class="color-red pl" data-plid="9322">9.85</strong></td>
+                    <td><input type="text" class="table-txt" data-name="第九名-10" data-plid="9322"></td>
+
+                    <td width="30" style="cursor: pointer;"><strong>10</strong></td>
+                    <td style="cursor: pointer;"><strong class="color-red pl" data-plid="9321">9.85</strong></td>
+                    <td><input type="text" class="table-txt" data-name="第十名-10" data-plid="9321"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>
+</div>

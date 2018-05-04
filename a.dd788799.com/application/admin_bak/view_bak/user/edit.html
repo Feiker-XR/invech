@@ -1,0 +1,101 @@
+{extend name="common/base"/}
+
+{block name="body"}
+    <div class="main-title">
+        <h2>{$Request.param.id?'编辑':'新增'}用户</h2>
+    </div>
+    <form action="{:Url('user/edit')}" method="post" class="form-horizontal">
+		<input type="hidden" name="uid" value="{$Request.param.id}"/>
+		<input type="hidden" name="oldpassword" value="{$user.password}">
+		<input type="hidden" name="oldcoinPassword" value="{$user.coinPassword}">
+		<input type="hidden" name="oldparentPath" value="{$parentPath}">
+		<div class="form-item">
+            <label class="item-label">上级关系<span class="check-tips">（用>隔开，中间不要有空格）</span></label>
+            <div class="controls">
+				<!-- <label>{$parentPath}</label> -->
+				<input type="text" class="text input-large" name="parentPath" value="{$parentPath}">
+            </div>
+        </div>
+		<div class="form-item">
+            <label class="item-label">用户名<span class="check-tips">（用户名长度1-16位）</span></label>
+            <div class="controls">
+                <label>{$user.username}</label>
+            </div>
+        </div>
+		<div class="form-item">
+            <label class="item-label">账号类型<span class="check-tips">（代理或普通会员）</span></label>
+            <div class="controls">
+				<label><input type="radio" name="type" value="1" {php} if($user['type']==1) echo 'checked'; {/php}>代理</label>
+				<label><input type="radio" name="type" value="0" {php} if($user['type']==0) echo 'checked'; {/php}>会员</label>
+            </div>
+        </div>
+        <div class="form-item">
+            <label class="item-label">登录密码<span class="check-tips">（不修改时请不要改动）</span></label>
+            <div class="controls">
+                <input type="password" class="text input-large" name="password" value="{$user.password}">
+            </div>
+        </div>
+		<div class="form-item">
+            <label class="item-label">资金密码<span class="check-tips">（不修改时请不要改动）</span></label>
+            <div class="controls">
+                <input type="password" class="text input-large" name="coinPassword" value="{$user.coinPassword}">
+            </div>
+        </div>
+		<div class="form-item">
+            <label class="item-label">可用资金<span class="check-tips">（可用资金）</span></label>
+            <div class="controls">
+                <input type="text" class="text input-large" name="coin" value="{$user.coin}">
+            </div>
+        </div>
+		<div class="form-item">
+            <label class="item-label">冻结资金<span class="check-tips">（冻结资金）</span></label>
+            <div class="controls">
+                <input type="text" class="text input-large" name="fcoin" value="{$user.fcoin}">
+            </div>
+        </div>
+        <div class="form-item">
+            <label class="item-label">QQ<span class="check-tips">（用户QQ，用于找回密码等安全操作）</span></label>
+            <div class="controls">
+				<input type="text" class="text input-large" name="qq" value="{$user.qq}">
+            </div>
+        </div>
+		<div class="form-item">
+            <label class="item-label">返点<span class="check-tips">（投注时返点）</span></label>
+            <div class="controls">
+                <input type="text" class="text input-large" name="fanDian" value="{$user.fanDian}">
+            </div>
+        </div>
+		<div class="form-item">
+            <label class="item-label">不定位返点<span class="check-tips">（投注时不定位的返点）</span></label>
+            <div class="controls">
+                <input type="text" class="text input-large" name="fanDianBdw" value="{$user.fanDianBdw}">
+            </div>
+        </div>
+		<div class="form-item">
+            <label class="item-label">注册时间<span class="check-tips">（注册时间）</span></label>
+            <div class="controls">
+                <label>{:date('Y-m-d H:i:s',$user['regTime'])}</label>
+            </div>
+        </div>
+		<!--<div class="form-item">-->
+            <!--<label class="item-label">重置银行<span class="check-tips">（重置银行）</span></label>-->
+            <!--<div class="controls">-->
+				<!--<label><input type="radio" name="resetBank" value="1">重置</label>-->
+				<!--<label><input type="radio" name="resetBank" value="0" checked>不重置</label>-->
+            <!--</div>-->
+        <!--</div>-->
+        <div class="form-item">
+            <input type="hidden" name="id" value="{info.id|default=''}">
+            <!--ajax-post-->
+            <button class="btn submit-btn " id="submit" type="submit" target-form="form-horizontal">确 定</button>
+            <button class="btn btn-return" onclick="javascript:history.back(-1);return false;">返 回</button>
+        </div>
+    </form>
+{/block}
+
+{block name="script"}
+    <script type="text/javascript">
+        //导航高亮
+        $('.side-sub-menu').find('a[href="{:Url('User/index')}"]').closest('li').addClass('current');
+    </script>
+{/block}

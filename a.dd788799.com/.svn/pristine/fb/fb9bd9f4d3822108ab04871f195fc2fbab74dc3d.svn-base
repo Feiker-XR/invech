@@ -1,0 +1,187 @@
+<link rel="stylesheet" type="text/css" href="/__CSS__/user/reset.css?v=20170715">
+<link rel="stylesheet" type="text/css" href="/__CSS__/user/hpn-common.css">
+<link rel="stylesheet" type="text/css" href="/__CSS__/user/index.css?v=20171117">
+<link rel="stylesheet" type="text/css" href="/__CSS__/user/global.css">
+<style>
+
+    .reResulttBg{background: #f42023;}
+    .process .layout .monty ul li,.process .layout .list_tems .date:after,.list ul li .slide p.acti,.headmemberbg{background: #f42023;}
+    .process .layout .list_tems .date span, .process .layout .list_tems .date h3,.eveb_amount span,.color-e77c3c,.eveb_setting_table a,.xieyiCss，.gcdtgd{color: #f42023!important;}
+    .eveb_sub_nav_type a:hover, .eveb_sub_nav_type li.on a:link, .eveb_sub_nav_type li.on a:visited{color: #f42023!important;font-weight: 700;border-bottom-color: #e1e1e1;background: #f8f8f8;}
+    .list ul li .slide p:hover,.letterbtn-bg{background: #f42023!important;color: white;}
+    .list h3 a{background: #f42023;border-bottom: 3px solid #a92309; height: 47px; line-height: 47px;}
+    .help_l_menu li .t.sli{border-left: 5px solid #f42023;}
+    .withdraw-bg-input{border: 2px solid #f42023!important;}
+    .clearBet_template .l span i{background: #f42023 url(/static/theme/memberTheme/theme1/img/tm-mdl-icon.png) no-repeat!important; border-radius: 50%;background-position: 0 41%!important;}
+
+    .eveb_nav_sub .on,.button_1, .button_1:link, .button_1:visited,.alert_col h5,.onlineService,.layui-layer-popup .layui-layer-title,.xzqd,.xzqdlskj,.game_name .box2_stage p span i.acti,.Betting,.Single,.list_ject ul li .Result p a.acti,.list_ject ul li .Result p a.acti:hover,.top{background:#f42023!important}
+    .eveb_nav_sub .on a,.bankInfo .name,.help_l_menu .title p .sum,.help_r_main .light,.game_name .box2_stage p span i,.game_name .box1_name  p i,.Account p a.red{color:#f42023!important}
+    .eveb_nav_sub .on,.game_name .box2_stage p span{border:1px solid #f42023!important;}
+    .eveb_nav_sub .on,.game_name .box2_stage p span i.acti{color:#fff!important;}
+    .eveb_nav_sub .on a{border-top:1px #f42023 solid!important;}
+    .eveb_nav_sub ul{border-bottom:1px #f42023 solid!important;}
+    #apptop{background: #f42023}
+    .alert_col div::-webkit-scrollbar-thumb {background-color: #f42023!important;}
+    .head div h5,.Betting .tabs ul li,.top .nav h1{background:#d51910!important}
+    .jf_box .url a,.eveb_form label.error,.eveb_transfer_box .center_wallet .money,.eveb_transfer_box .wallet_list li p{color:#d51910!important}
+    .Betting .tabs ul li.acti{background:#fff!important}
+    .button_1, .button_1:link, .button_1:visited{border:1px solid #d51910!important;}
+</style>
+
+<link type="text/css" rel="stylesheet" href="/__CSS__/user/laydate.css">
+<link rel="stylesheet" href="/__CSS__/user/layer.css?v=3.0.11110">
+<div class="help_r_main">
+    <div class="eveb_content">
+        <div class="eveb_nav_sub">
+            <ul class="clearfix">
+                <li><a href="/user/recharge_record">充值记录</a></li>
+                <li class="on"><a href="/user/withdraw_record">提现记录</a></li>
+                <li><a href="/user/money_record">资金流水</a></li>
+                <li><a href="/user/bet_record">投注记录</a></li>
+            </ul>
+        </div><h2>
+        <div class="eveb_search eveb_search_h2">
+            <input type="hidden" name="pageIndex">
+            类型：
+            <select name="status" id="status">
+                <option value="">所有</option>
+                <option value="0">未处理</option>
+                <option value="1">已通过</option>
+                <option value="2">已拒绝</option>
+            </select>
+            　起止时间：
+            <input name="starttime" id="starttime" value="2018-04-02 00:00" type="text" size="8" class="suminp" onclick="laydate({istime: true, format: 'YYYY-MM-DD hh:mm'})"> -
+            <input name="endtime" id="endtime" value="2018-04-03 00:00" type="text" size="11" class="suminp" onclick="laydate({istime: true, format: 'YYYY-MM-DD hh:mm'})">
+            <a href="javascript:void(0)" class="button_small button_1" onclick="shaixuan()">筛选</a>
+            <a href="javascript:void(0)" class="button_small button_4" onclick="searchday(1)">今日</a>
+            <a href="javascript:void(0)" class="button_small button_4" onclick="searchday(3)">3天</a>
+            <a href="javascript:void(0)" class="button_small button_4" onclick="searchday(7)">本周</a>
+        </div>
+    </h2>
+        <table class="eveb_box eveb_table" id="dataTable">
+            <thead>
+            <tr>
+                <th>序号</th>
+                <th>单号</th>
+                <th>申请时间</th>
+                <th>取款金额</th>
+                <th>备注</th>
+                <th>状态</th>
+            </tr>
+            </thead>
+            <tbody><tr><td colspan="7" styl="text-align:center;">暂无数据</td></tr></tbody>
+        </table>
+        <div class="eveb_amount fl">当前小计<span id="pageMoney">0</span>元，总计<span id="totalMoney">0</span>元</div>
+        <div class="eveb_page fr"></div>
+    </div>
+</div>
+<script src="/__JS__/jquery.min.js"></script>
+<script src="/__JS__/jquery.validate.min.js"></script>
+<script src="/__JS__/user/validate.js"></script>
+<script src="/__JS__/user/global.js"></script>
+<script src="/__JS__/jquery.form.min.js"></script>
+<script src="/__JS__/md5.min.js"></script>
+<script src="/__JS__/index2/layer.js"></script>
+<script src="/__JS__/index2/jquery.nicescroll.js"></script>
+<script src="/__JS__/clipboard.min.js"></script>
+<script src="/__JS__/index2/dateFormat.js"></script>
+<script src="/__JS__/index2/template.js"></script>
+<script src="/__JS__/index2/jquery.cookie.js"></script>
+<script src="/__JS__/bootstrap.min.js"></script>
+<script src="/__JS__/nifty.min.js"></script>
+<script src="/__JS__/common.min.js"></script>
+<script src="/__JS__/fastdata.js"></script>
+<script src="/__JS__/jquery.jplayer.min.js"></script>
+<script src="/__JS__/user/laydate.js"></script>
+<script>
+
+    $(function () {
+        getTkjlData();
+    });
+
+    function goPage(pageIndex) {
+        $("input[name='pageIndex']").val(pageIndex);
+        getTkjlData();
+    }
+    function shaixuan() {
+        $("input[name='pageIndex']").val(1);
+        getTkjlData();
+    }
+
+    function getTkjlData() {
+        $.ajax({
+            url: "/member/ajaxGetTkjl.json",
+            data: {
+                pageIndex: $("input[name='pageIndex']").val(),
+                startTime: $("input[name='starttime']").val(),
+                endTime: $("input[name='endtime']").val(),
+                pageSize: "10",
+                status: $("select[name='status']").val()
+            },
+            beforeSend: function () {
+                $("#dataTable tbody").html('<tr><td colspan="7" styl="text-align:center;"><img src="/static/theme/memberTheme/theme1/img/base_loading.gif"/></td></tr>');
+                $("#pageMoney").html(0);
+                $("#totalMoney").html(0);
+                $(".eveb_page").html('');
+            },
+            success: function (json) {
+                if (json.result != 1) {
+                    return;
+                }
+
+                if (json.userWithdrawList.length == 0) {
+                    $("#dataTable tbody").html('<tr><td colspan="7" styl="text-align:center;">暂无数据</td></tr>');
+                    return;
+                }
+
+                $("input[name='pageIndex']").val(json.pageNum);
+
+                // 数据
+                var str = '';
+                $.each(json.userWithdrawList, function (index, value) {
+                    var currentPageNum = (json.pageNum) * json.pageSize;
+                    str += '<tr>';
+                    str += '<td>' + (index + currentPageNum) + '</td>';
+                    str += '<td>' + value.orderNo + '</td>';
+                    str += '<td>' + Tools.formatDate(value.time) + '</td>';
+                    str += '<td class="light">' + value.money + '</td>';
+                    str += '<td>' + Tools.null2Str(value.remarks) + '</td>';
+                    str += '<td>';
+                    if (value.status == 0) {
+                        str += '未处理';
+                    } else if (value.status == 1) {
+                        str += '已通过';
+                    } else if (value.status == 2) {
+                        str += '已拒绝';
+                    }
+                    str += '</td>';
+                    str += '</tr>';
+                });
+
+                $("#dataTable tbody").html(str);
+
+                $("#pageMoney").html(json.pageMoney);
+                $("#totalMoney").html(json.totalMoney);
+
+                // 分页
+                str = '';
+                str += '<span style="margin:0 3px;float:left;width:auto;padding:0 5px;height:25px;line-height:25px;">总共' + (Math.ceil(json.total / json.pageSize)) + '页，' + json.total + '条，当前第' + json.pageNum + '页</span>';
+                if (json.hasPreviousPage) {
+                    str += '<a href="javascript:void(0)" onclick="goPage(' + (json.prePage) + ')" style="margin:0 3px;float:left;width:auto;padding:0 5px;">上一页</a>';
+                } else {
+                    str += '<a href="javascript:void(0)" style="margin:0 3px;float:left;width:auto;padding:0 5px;">上一页</a>';
+                }
+                str += '<span style="margin:0 3px;float:left;width:auto;padding:0 5px;height:25px;line-height:25px;">跳转到</span>';
+                str += '<input type="text" id="pageNum" style="margin:0 3px;float:left;border:1px solid #eee;width:30px;line-height:25px;height:25px;" value="' + json.pageNum + '" />';
+                str += '<button onclick="goPage(document.getElementById(\'pageNum\').value)" type="text" style="margin:0 3px;float:left;border:1px solid #eee;width:30px;line-height:25px;height:25px;background:#fa6200;padding:0 5px;width:auto;color:#fff;font-size:14px;" value="0">确定</button>';
+                if (json.hasNextPage) {
+                    str += '<a href="javascript:void(0)" onclick="goPage(' + (json.nextPage) + ')" style="margin:0 3px;float:left;width:auto;padding:0 5px;">下一页</a>';
+                } else {
+                    str += '<a href="javascript:void(0)" style="margin:0 3px;float:left;width:auto;padding:0 5px;">下一页</a>';
+                }
+                $(".eveb_page").html(str);
+            }
+        });
+    }
+
+</script>

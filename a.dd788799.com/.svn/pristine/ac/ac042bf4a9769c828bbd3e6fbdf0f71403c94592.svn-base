@@ -1,0 +1,37 @@
+<?php
+
+namespace app\common\model;
+use think\Model;
+use app\common\model\report\DailyTrait;
+use app\common\model\attach\MoneyRecordTrait;
+
+class BonusFlow extends Base
+{
+    use DailyTrait,MoneyRecordTrait;
+
+    protected $createTime = 'created_at';
+    protected $updateTime = '';
+    protected $autoWriteTimestamp = 'datetime';
+
+    protected $table = 'gygy_bonus_flow';
+
+    public function bonus()
+    {
+        return $this->belongsTo('Bonus','bonus_id');
+    }
+
+    public function user()
+    {
+        return $this->belongsTo('Member','uid','uid');
+    }
+
+    public static function attachToSelfRequest(&$query){
+
+        $params = request()->param();
+
+        if($params['bonus_id']??''){
+           $query->where('x.bonus_id', $params['bonus_id']);
+        }
+        
+    }    
+}

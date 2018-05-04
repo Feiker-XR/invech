@@ -1,0 +1,771 @@
+<link rel="stylesheet" href="/400w-public/css/cabel-v1.css" />
+<link rel="stylesheet" href="/400w-public/css/style.css" />
+<link rel="stylesheet" href="/400w-public/css/animate.min.css" />
+<link rel="stylesheet" href="/400w-public/css/lottery.css" />
+<link rel="stylesheet" href="/400w-public/css/liMarquee.css" />
+<link rel="stylesheet" href="/400w-public/css/jquery.range.css" />
+<link rel="stylesheet" href="/400w-public/css/global.css" />
+<link rel="stylesheet" href="/400w-public/css/other.css" />
+<link rel="stylesheet" href="/400w-public/css/gfwf.css" />
+<link rel="stylesheet" href="/400w-public/css/layer.css" />
+
+<script type="text/javascript" src="/400w-public/js/mobile-detect.min.js"></script>
+<script type="text/javascript" src="/400w-public/js/scrollanim.min.js"></script>
+<script type="text/javascript" src="/400w-public/js/type.js"></script>
+<script type="text/javascript" src="/400w-public/js/global.js"></script>
+<script type="text/javascript" src="/400w-public/js/jquery.cookie.js"></script>
+<script type="text/javascript" src="/400w-public/js/jquery.md5.js"></script>
+<script type="text/javascript" src="/400w-public/js/layer.js"></script>
+<script type="text/javascript" src="/400w-public/js/jquery.nicescroll.js"></script>
+<script type="text/javascript" src="/400w-public/js/dateFormat.js"></script>
+<script type="text/javascript" src="/400w-public/js/template.js"></script>
+<script type="text/javascript" src="/400w-public/js/swfobject.js"></script>
+<script type="text/javascript" src="/400w-public/js/jquery.liMarquee.js"></script>
+
+<script type="text/javascript" src="/400w-public/js/placeholders.jquery.min.js"></script>
+<script type="text/javascript" src="/400w-public/js/jquery.range-min.js"></script>
+<script type="text/javascript" src="/400w-public/js/gfwf.js"></script>
+<script type="text/javascript" src="/400w-public/js/ssc.js"></script>
+
+<div id="sscContent">
+	<!-- content -->
+	<div class="lot-content clearfix">
+		<div class="fl main-left">
+			<div class="hd clearfix rehd" id="toptouzhu">
+				<div class="fl refl">
+					快捷金额：<input type="text" class="txt">
+				</div>
+				<div class="kjanniu">
+					<a href="javascript:void(0)" class="img-50" data-num="50"></a>
+					<a href="javascript:void(0)" class="img-100" data-num="100"></a>
+					<a href="javascript:void(0)" class="img-500" data-num="500"></a>
+					<a href="javascript:void(0)" class="img-1000" data-num="1000"></a>
+					<a href="javascript:void(0)" class="img-5000" data-num="5000"></a>
+					<a href="javascript:void(0)" class="img-10000" data-num="10000"></a>
+				</div>
+				<div class="fr">
+					<div class="T-tab clearfix" style="margin-top: 4.4px;">
+						<a href="javascript:void(0)" onclick="getSscSubPage('lhc-zm_a')">正码A</a>
+						<a href="javascript:void(0)" onclick="getSscSubPage('lhc-zm_b')" class="active">正码B</a>
+					</div>
+				</div>
+			</div>
+
+			<div class="table-common">
+				<table width="100%" border="1">
+					<thead>
+						<tr>
+							<th width="47">号码</th>
+							<th width="56">赔率</th>
+							<th>金额</th>
+							<th width="47">号码</th>
+							<th width="56">赔率</th>
+							<th>金额</th>
+							<th width="47">号码</th>
+							<th width="56">赔率</th>
+							<th>金额</th>
+							<th width="47">号码</th>
+							<th width="56">赔率</th>
+							<th>金额</th>
+							<th width="47">号码</th>
+							<th width="56">赔率</th>
+							<th>金额</th>
+						</tr>
+					</thead>
+
+					<tbody>
+						<tr>
+							<td style="cursor: pointer;"><span class="ball-icon ball-01"></span></td>
+							<td data-num="1" style="cursor: pointer;"><strong class="color-red pl" data-plid="6157">8.02</strong></td>
+							<td><input type="text" class="table-txt" data-name="正码B-1" data-plid="6157"></td>
+
+							<td style="cursor: pointer;"><span class="ball-icon ball-11"></span></td>
+							<td data-num="11" style="cursor: pointer;"><strong class="color-red pl" data-plid="6167">8.02</strong></td>
+							<td><input type="text" class="table-txt" data-name="正码B-11" data-plid="6167"></td>
+
+							<td style="cursor: pointer;"><span class="ball-icon ball-21"></span></td>
+							<td data-num="21" style="cursor: pointer;"><strong class="color-red pl" data-plid="6177">8.02</strong></td>
+							<td><input type="text" class="table-txt" data-name="正码B-21" data-plid="6177"></td>
+
+							<td style="cursor: pointer;"><span class="ball-icon ball-31"></span></td>
+							<td data-num="31" style="cursor: pointer;"><strong class="color-red pl" data-plid="6187">8.02</strong></td>
+							<td><input type="text" class="table-txt" data-name="正码B-31" data-plid="6187"></td>
+
+							<td style="cursor: pointer;"><span class="ball-icon ball-41"></span></td>
+							<td data-num="41" style="cursor: pointer;"><strong class="color-red pl" data-plid="6197">8.02</strong></td>
+							<td><input type="text" class="table-txt" data-name="正码B-41" data-plid="6197"></td>
+						</tr>
+
+						<tr>
+							<td style="cursor: pointer;"><span class="ball-icon ball-02"></span></td>
+							<td data-num="2" style="cursor: pointer;"><strong class="color-red pl" data-plid="6158">8.02</strong></td>
+							<td><input type="text" class="table-txt" data-name="正码B-2" data-plid="6158"></td>
+
+							<td style="cursor: pointer;"><span class="ball-icon ball-12"></span></td>
+							<td data-num="12" style="cursor: pointer;"><strong class="color-red pl" data-plid="6168">8.02</strong></td>
+							<td><input type="text" class="table-txt" data-name="正码B-12" data-plid="6168"></td>
+
+							<td style="cursor: pointer;"><span class="ball-icon ball-22"></span></td>
+							<td data-num="22" style="cursor: pointer;"><strong class="color-red pl" data-plid="6178">8.02</strong></td>
+							<td><input type="text" class="table-txt" data-name="正码B-22" data-plid="6178"></td>
+
+							<td style="cursor: pointer;"><span class="ball-icon ball-32"></span></td>
+							<td data-num="32" style="cursor: pointer;"><strong class="color-red pl" data-plid="6188">8.02</strong></td>
+							<td><input type="text" class="table-txt" data-name="正码B-32" data-plid="6188"></td>
+
+							<td style="cursor: pointer;"><span class="ball-icon ball-42"></span></td>
+							<td data-num="42" style="cursor: pointer;"><strong class="color-red pl" data-plid="6198">8.02</strong></td>
+							<td><input type="text" class="table-txt" data-name="正码B-42" data-plid="6198"></td>
+						</tr>
+
+						<tr>
+							<td style="cursor: pointer;"><span class="ball-icon ball-03"></span></td>
+							<td data-num="3" style="cursor: pointer;"><strong class="color-red pl" data-plid="6159">8.02</strong></td>
+							<td><input type="text" class="table-txt" data-name="正码B-3" data-plid="6159"></td>
+
+							<td style="cursor: pointer;"><span class="ball-icon ball-13"></span></td>
+							<td data-num="13" style="cursor: pointer;"><strong class="color-red pl" data-plid="6169">8.02</strong></td>
+							<td><input type="text" class="table-txt" data-name="正码B-13" data-plid="6169"></td>
+
+							<td style="cursor: pointer;"><span class="ball-icon ball-23"></span></td>
+							<td data-num="23" style="cursor: pointer;"><strong class="color-red pl" data-plid="6179">8.02</strong></td>
+							<td><input type="text" class="table-txt" data-name="正码B-23" data-plid="6179"></td>
+
+							<td style="cursor: pointer;"><span class="ball-icon ball-33"></span></td>
+							<td data-num="33" style="cursor: pointer;"><strong class="color-red pl" data-plid="6189">8.02</strong></td>
+							<td><input type="text" class="table-txt" data-name="正码B-33" data-plid="6189"></td>
+
+							<td style="cursor: pointer;"><span class="ball-icon ball-43"></span></td>
+							<td data-num="43" style="cursor: pointer;"><strong class="color-red pl" data-plid="6199">8.02</strong></td>
+							<td><input type="text" class="table-txt" data-name="正码B-43" data-plid="6199"></td>
+						</tr>
+
+						<tr>
+							<td style="cursor: pointer;"><span class="ball-icon ball-04"></span></td>
+							<td data-num="4" style="cursor: pointer;"><strong class="color-red pl" data-plid="6160">8.02</strong></td>
+							<td><input type="text" class="table-txt" data-name="正码B-4" data-plid="6160"></td>
+
+							<td style="cursor: pointer;"><span class="ball-icon ball-14"></span></td>
+							<td data-num="14" style="cursor: pointer;"><strong class="color-red pl" data-plid="6170">8.02</strong></td>
+							<td><input type="text" class="table-txt" data-name="正码B-14" data-plid="6170"></td>
+
+							<td style="cursor: pointer;"><span class="ball-icon ball-24"></span></td>
+							<td data-num="24" style="cursor: pointer;"><strong class="color-red pl" data-plid="6180">8.02</strong></td>
+							<td><input type="text" class="table-txt" data-name="正码B-24" data-plid="6180"></td>
+
+							<td style="cursor: pointer;"><span class="ball-icon ball-34"></span></td>
+							<td data-num="34" style="cursor: pointer;"><strong class="color-red pl" data-plid="6190">8.02</strong></td>
+							<td><input type="text" class="table-txt" data-name="正码B-34" data-plid="6190"></td>
+
+							<td style="cursor: pointer;"><span class="ball-icon ball-44"></span></td>
+							<td data-num="44" style="cursor: pointer;"><strong class="color-red pl" data-plid="6200">8.02</strong></td>
+							<td><input type="text" class="table-txt" data-name="正码B-44" data-plid="6200"></td>
+						</tr>
+
+						<tr>
+							<td style="cursor: pointer;"><span class="ball-icon ball-05"></span></td>
+							<td data-num="5" style="cursor: pointer;"><strong class="color-red pl" data-plid="6161">8.02</strong></td>
+							<td><input type="text" class="table-txt" data-name="正码B-5" data-plid="6161"></td>
+
+							<td style="cursor: pointer;"><span class="ball-icon ball-15"></span></td>
+							<td data-num="15" style="cursor: pointer;"><strong class="color-red pl" data-plid="6171">8.02</strong></td>
+							<td><input type="text" class="table-txt" data-name="正码B-15" data-plid="6171"></td>
+
+							<td style="cursor: pointer;"><span class="ball-icon ball-25"></span></td>
+							<td data-num="25" style="cursor: pointer;"><strong class="color-red pl" data-plid="6181">8.02</strong></td>
+							<td><input type="text" class="table-txt" data-name="正码B-25" data-plid="6181"></td>
+
+							<td style="cursor: pointer;"><span class="ball-icon ball-35"></span></td>
+							<td data-num="35" style="cursor: pointer;"><strong class="color-red pl" data-plid="6191">8.02</strong></td>
+							<td><input type="text" class="table-txt" data-name="正码B-35" data-plid="6191"></td>
+
+							<td style="cursor: pointer;"><span class="ball-icon ball-45"></span></td>
+							<td data-num="45" style="cursor: pointer;"><strong class="color-red pl" data-plid="6201">8.02</strong></td>
+							<td><input type="text" class="table-txt" data-name="正码B-45" data-plid="6201"></td>
+						</tr>
+
+						<tr>
+							<td style="cursor: pointer;"><span class="ball-icon ball-06"></span></td>
+							<td data-num="6" style="cursor: pointer;"><strong class="color-red pl" data-plid="6162">8.02</strong></td>
+							<td><input type="text" class="table-txt" data-name="正码B-6" data-plid="6162"></td>
+
+							<td style="cursor: pointer;"><span class="ball-icon ball-16"></span></td>
+							<td data-num="16" style="cursor: pointer;"><strong class="color-red pl" data-plid="6172">8.02</strong></td>
+							<td><input type="text" class="table-txt" data-name="正码B-16" data-plid="6172"></td>
+
+							<td style="cursor: pointer;"><span class="ball-icon ball-26"></span></td>
+							<td data-num="26" style="cursor: pointer;"><strong class="color-red pl" data-plid="6182">8.02</strong></td>
+							<td><input type="text" class="table-txt" data-name="正码B-26" data-plid="6182"></td>
+
+							<td style="cursor: pointer;"><span class="ball-icon ball-36"></span></td>
+							<td data-num="36" style="cursor: pointer;"><strong class="color-red pl" data-plid="6192">8.02</strong></td>
+							<td><input type="text" class="table-txt" data-name="正码B-36" data-plid="6192"></td>
+
+							<td style="cursor: pointer;"><span class="ball-icon ball-46"></span></td>
+							<td data-num="46" style="cursor: pointer;"><strong class="color-red pl" data-plid="6202">8.02</strong></td>
+							<td><input type="text" class="table-txt" data-name="正码B-46" data-plid="6202"></td>
+						</tr>
+
+						<tr>
+							<td style="cursor: pointer;"><span class="ball-icon ball-07"></span></td>
+							<td data-num="7" style="cursor: pointer;"><strong class="color-red pl" data-plid="6163">8.02</strong></td>
+							<td><input type="text" class="table-txt" data-name="正码B-7" data-plid="6163"></td>
+
+							<td style="cursor: pointer;"><span class="ball-icon ball-17"></span></td>
+							<td data-num="17" style="cursor: pointer;"><strong class="color-red pl" data-plid="6173">8.02</strong></td>
+							<td><input type="text" class="table-txt" data-name="正码B-17" data-plid="6173"></td>
+
+							<td style="cursor: pointer;"><span class="ball-icon ball-27"></span></td>
+							<td data-num="27" style="cursor: pointer;"><strong class="color-red pl" data-plid="6183">8.02</strong></td>
+							<td><input type="text" class="table-txt" data-name="正码B-27" data-plid="6183"></td>
+
+							<td style="cursor: pointer;"><span class="ball-icon ball-37"></span></td>
+							<td data-num="37" style="cursor: pointer;"><strong class="color-red pl" data-plid="6193">8.02</strong></td>
+							<td><input type="text" class="table-txt" data-name="正码B-37" data-plid="6193"></td>
+
+							<td style="cursor: pointer;"><span class="ball-icon ball-47"></span></td>
+							<td data-num="47" style="cursor: pointer;"><strong class="color-red pl" data-plid="6203">8.02</strong></td>
+							<td><input type="text" class="table-txt" data-name="正码B-47" data-plid="6203"></td>
+						</tr>
+
+						<tr>
+							<td style="cursor: pointer;"><span class="ball-icon ball-08"></span></td>
+							<td data-num="8" style="cursor: pointer;"><strong class="color-red pl" data-plid="6164">8.02</strong></td>
+							<td><input type="text" class="table-txt" data-name="正码B-8" data-plid="6164"></td>
+
+							<td style="cursor: pointer;"><span class="ball-icon ball-18"></span></td>
+							<td data-num="18" style="cursor: pointer;"><strong class="color-red pl" data-plid="6174">8.02</strong></td>
+							<td><input type="text" class="table-txt" data-name="正码B-18" data-plid="6174"></td>
+
+							<td style="cursor: pointer;"><span class="ball-icon ball-28"></span></td>
+							<td data-num="28" style="cursor: pointer;"><strong class="color-red pl" data-plid="6184">8.02</strong></td>
+							<td><input type="text" class="table-txt" data-name="正码B-28" data-plid="6184"></td>
+
+							<td style="cursor: pointer;"><span class="ball-icon ball-38"></span></td>
+							<td data-num="38" style="cursor: pointer;"><strong class="color-red pl" data-plid="6194">8.02</strong></td>
+							<td><input type="text" class="table-txt" data-name="正码B-38" data-plid="6194"></td>
+
+							<td style="cursor: pointer;"><span class="ball-icon ball-48"></span></td>
+							<td data-num="48" style="cursor: pointer;"><strong class="color-red pl" data-plid="6204">8.02</strong></td>
+							<td><input type="text" class="table-txt" data-name="正码B-48" data-plid="6204"></td>
+						</tr>
+
+						<tr>
+							<td style="cursor: pointer;"><span class="ball-icon ball-09"></span></td>
+							<td data-num="9" style="cursor: pointer;"><strong class="color-red pl" data-plid="6165">8.02</strong></td>
+							<td><input type="text" class="table-txt" data-name="正码B-9" data-plid="6165"></td>
+
+							<td style="cursor: pointer;"><span class="ball-icon ball-19"></span></td>
+							<td data-num="19" style="cursor: pointer;"><strong class="color-red pl" data-plid="6175">8.02</strong></td>
+							<td><input type="text" class="table-txt" data-name="正码B-19" data-plid="6175"></td>
+
+							<td style="cursor: pointer;"><span class="ball-icon ball-29"></span></td>
+							<td data-num="29" style="cursor: pointer;"><strong class="color-red pl" data-plid="6185">8.02</strong></td>
+							<td><input type="text" class="table-txt" data-name="正码B-29" data-plid="6185"></td>
+
+							<td style="cursor: pointer;"><span class="ball-icon ball-39"></span></td>
+							<td data-num="39" style="cursor: pointer;"><strong class="color-red pl" data-plid="6195">8.02</strong></td>
+							<td><input type="text" class="table-txt" data-name="正码B-39" data-plid="6195"></td>
+
+							<td style="cursor: pointer;"><span class="ball-icon ball-49"></span></td>
+							<td data-num="49" style="cursor: pointer;"><strong class="color-red pl" data-plid="6205">8.02</strong></td>
+							<td><input type="text" class="table-txt" data-name="正码B-49" data-plid="6205"></td>
+						</tr>
+
+						<tr>
+							<td style="cursor: pointer;"><span class="ball-icon ball-10"></span></td>
+							<td data-num="10" style="cursor: pointer;"><strong class="color-red pl" data-plid="6166">8.02</strong></td>
+							<td><input type="text" class="table-txt" data-name="正码B-10" data-plid="6166"></td>
+
+							<td style="cursor: pointer;"><span class="ball-icon ball-20"></span></td>
+							<td data-num="20" style="cursor: pointer;"><strong class="color-red pl" data-plid="6176">8.02</strong></td>
+							<td><input type="text" class="table-txt" data-name="正码B-20" data-plid="6176"></td>
+
+							<td style="cursor: pointer;"><span class="ball-icon ball-30"></span></td>
+							<td data-num="30" style="cursor: pointer;"><strong class="color-red pl" data-plid="6186">8.02</strong></td>
+							<td><input type="text" class="table-txt" data-name="正码B-30" data-plid="6186"></td>
+
+							<td style="cursor: pointer;"><span class="ball-icon ball-40"></span></td>
+							<td data-num="40" style="cursor: pointer;"><strong class="color-red pl" data-plid="6196">8.02</strong></td>
+							<td><input type="text" class="table-txt" data-name="正码B-40" data-plid="6196"></td>
+
+							<td style="cursor: pointer;">&nbsp;</td>
+							<td style="cursor: pointer;">&nbsp;</td>
+							<td style="cursor: pointer;">&nbsp;</td>
+						</tr>
+					</tbody>
+
+					<tbody>
+						<tr>
+							<td style="cursor: pointer;">总大</td>
+							<td style="cursor: pointer;"><strong class="color-red pl" data-plid="6210">1.98</strong></td>
+							<td><input type="text" class="table-txt" data-name="正码B-总大" data-plid="6210"></td>
+
+							<td style="cursor: pointer;">总小</td>
+							<td style="cursor: pointer;"><strong class="color-red pl" data-plid="6211">1.98</strong></td>
+							<td><input type="text" class="table-txt" data-name="正码B-总小" data-plid="6211"></td>
+
+							<td style="cursor: pointer;">总单</td>
+							<td style="cursor: pointer;"><strong class="color-red pl" data-plid="6212">1.98</strong></td>
+							<td><input type="text" class="table-txt" data-name="正码B-总单" data-plid="6212"></td>
+
+							<td style="cursor: pointer;">总双</td>
+							<td style="cursor: pointer;"><strong class="color-red pl" data-plid="6213">1.98</strong></td>
+							<td><input type="text" class="table-txt" data-name="正码B-总双" data-plid="6213"></td>
+
+							<td style="cursor: pointer;">&nbsp;</td>
+							<td style="cursor: pointer;">&nbsp;</td>
+							<td style="cursor: pointer;">&nbsp;</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+
+			<div class="btns">
+				<button type="submit" class="btn btn-1">提交</button>
+				<button class="btn btn-2">重设</button>
+			</div>
+		</div>
+
+		<div class="fr main-right cl-10">
+			<div class="table-common table-border-color">
+				<table width="100%" border="1">
+					<tbody>
+						<tr>
+							<td><input type="checkbox" name="checkbox" value="checkbox" data-nums="25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48"></td>
+							<td>大</td>
+							<td><input type="checkbox" name="checkbox" value="checkbox" data-nums="1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24"></td>
+							<td>小</td>
+						</tr>
+						<tr>
+							<td><input type="checkbox" name="checkbox" value="checkbox" data-nums="1,3,5,7,9,11,13,15,17,19,21,23,25,27,29,31,33,35,37,39,41,43,45,47"></td>
+							<td>单</td>
+							<td><input type="checkbox" name="checkbox" value="checkbox" data-nums="2,4,6,8,10,12,14,16,18,20,22,24,26,28,30,32,34,36,38,40,42,44,46,48"></td>
+							<td>双</td>
+						</tr>
+						<tr>
+							<td><input type="checkbox" name="checkbox" value="checkbox" data-nums="1,7,12,18,23,29,30,34,45,5,16,21,27,32,38,43,49,3,9,10,14,25,36,41,47"></td>
+							<td>合单</td>
+							<td><input type="checkbox" name="checkbox" value="checkbox" data-nums="2,8,13,19,24,35,40,46,6,11,17,22,28,33,39,44,4,15,20,26,31,37,42,48"></td>
+							<td>合双</td>
+						</tr>
+						<tr>
+							<td><input type="checkbox" name="checkbox" value="checkbox" data-nums="25,27,29,31,33,35,37,39,41,43,45,47"></td>
+							<td>大单</td>
+							<td><input type="checkbox" name="checkbox" value="checkbox" data-nums="1,3,5,7,9,11,13,15,17,19,21,23"></td>
+							<td>小单</td>
+						</tr>
+						<tr>
+							<td><input type="checkbox" name="checkbox" value="checkbox" data-nums="26,28,30,32,34,36,38,40,42,44,46,48"></td>
+							<td>大双</td>
+							<td><input type="checkbox" name="checkbox" value="checkbox" data-nums="2,4,6,8,10,12,14,16,18,20,22,24"></td>
+							<td>小双</td>
+						</tr>
+						<tr>
+							<td><input type="checkbox" name="checkbox" value="checkbox" data-nums="5,6,7,8,9,15,16,17,18,19,25,26,27,28,29,35,36,37,38,39,45,46,47,48"></td>
+							<td>尾大</td>
+							<td><input type="checkbox" name="checkbox" value="checkbox" data-nums="1,2,3,4,10,11,12,13,14,20,21,22,23,24,30,31,32,33,34,40,41,42,43,44"></td>
+							<td>尾小</td>
+						</tr>
+						<tr>
+							<td><input type="checkbox" name="checkbox" value="checkbox" data-nums="10,22,34,46"></td>
+							<td>鼠</td>
+							<td><input type="checkbox" name="checkbox" value="checkbox" data-nums="9,21,33,45"></td>
+							<td>牛</td>
+						</tr>
+						<tr>
+							<td><input type="checkbox" name="checkbox" value="checkbox" data-nums="8,20,32,44"></td>
+							<td>虎</td>
+							<td><input type="checkbox" name="checkbox" value="checkbox" data-nums="7,19,31,43"></td>
+							<td>兔</td>
+						</tr>
+						<tr>
+							<td><input type="checkbox" name="checkbox" value="checkbox" data-nums="6,18,30,42"></td>
+							<td>龙</td>
+							<td><input type="checkbox" name="checkbox" value="checkbox" data-nums="5,17,29,41"></td>
+							<td>蛇</td>
+						</tr>
+						<tr>
+							<td><input type="checkbox" name="checkbox" value="checkbox" data-nums="4,16,28,40"></td>
+							<td>马</td>
+							<td><input type="checkbox" name="checkbox" value="checkbox" data-nums="3,15,27,39"></td>
+							<td>羊</td>
+						</tr>
+						<tr>
+							<td><input type="checkbox" name="checkbox" value="checkbox" data-nums="2,14,26,38"></td>
+							<td>猴</td>
+							<td><input type="checkbox" name="checkbox" value="checkbox" data-nums="1,13,25,37,49"></td>
+							<td>鸡</td>
+						</tr>
+						<tr>
+							<td><input type="checkbox" name="checkbox" value="checkbox" data-nums="12,24,36,48"></td>
+							<td>狗</td>
+							<td><input type="checkbox" name="checkbox" value="checkbox" data-nums="11,23,35,47"></td>
+							<td>猪</td>
+						</tr>
+						<tr>
+							<td><input type="checkbox" name="checkbox" value="checkbox" data-nums="9,21,33,45,4,16,28,40,3,15,27,39,1,13,25,37,49,12,24,36,48,11,23,35,47"></td>
+							<td>家禽</td>
+							<td><input type="checkbox" name="checkbox" value="checkbox" data-nums="10,22,34,46,8,20,32,44,7,19,31,43,6,18,30,42,5,17,29,41,2,14,26,38"></td>
+							<td>野兽</td>
+						</tr>
+						<tr>
+							<td><input type="checkbox" name="checkbox" value="checkbox" data-nums="29,30,34,35,40,45,46"></td>
+							<td><span class="color-red">红</span>大</td>
+							<td><input type="checkbox" name="checkbox" value="checkbox" data-nums="1,2,7,8,12,13,18,19,23,24"></td>
+							<td><span class="color-red">红</span>小</td>
+						</tr>
+						<tr>
+							<td><input type="checkbox" name="checkbox" value="checkbox" data-nums="1,7,13,19,23,29,35,45"></td>
+							<td><span class="color-red">红</span>单</td>
+							<td><input type="checkbox" name="checkbox" value="checkbox" data-nums="2,8,12,18,24,30,34,40,46"></td>
+							<td><span class="color-red">红</span>双</td>
+						</tr>
+						<tr>
+							<td><input type="checkbox" name="checkbox" value="checkbox" data-nums="25,26,31,36,37,41,42,47,48"></td>
+							<td><span class="color-blue">蓝</span>大</td>
+							<td><input type="checkbox" name="checkbox" value="checkbox" data-nums="3,4,9,10,14,15,20"></td>
+							<td><span class="color-blue">蓝</span>小</td>
+						</tr>
+						<tr>
+							<td><input type="checkbox" name="checkbox" value="checkbox" data-nums="3,9,15,25,31,37,41,47"></td>
+							<td><span class="color-blue">蓝</span>单</td>
+							<td><input type="checkbox" name="checkbox" value="checkbox" data-nums="4,10,14,20,26,36,42,48"></td>
+							<td><span class="color-blue">蓝</span>双</td>
+						</tr>
+						<tr>
+							<td><input type="checkbox" name="checkbox" value="checkbox" data-nums="27,28,32,33,38,39,43,44,49"></td>
+							<td><span class="color-green">绿</span>大</td>
+							<td><input type="checkbox" name="checkbox" value="checkbox" data-nums="5,6,11,16,17,21,22"></td>
+							<td><span class="color-green">绿</span>小</td>
+						</tr>
+						<tr>
+							<td><input type="checkbox" name="checkbox" value="checkbox" data-nums="5,11,17,21,27,33,39,43,49"></td>
+							<td><span class="color-green">绿</span>单</td>
+							<td><input type="checkbox" name="checkbox" value="checkbox" data-nums="6,16,22,28,32,38,44"></td>
+							<td><span class="color-green">绿</span>双</td>
+						</tr>
+						<tr>
+							<td><input type="checkbox" name="checkbox" value="checkbox" data-nums="1,2,7,8,12,13,18,19,23,24,29,30,34,35,40,45,46"></td>
+							<td>红波</td>
+							<td><input type="checkbox" name="checkbox" value="checkbox" data-nums="3,4,9,10,14,15,20,25,26,31,36,37,41,42,47,48"></td>
+							<td>蓝波</td>
+						</tr>
+						<tr>
+							<td><input type="checkbox" name="checkbox" value="checkbox" data-nums="5,6,11,16,17,21,22,27,28,32,33,38,39,43,44,49"></td>
+							<td>绿波</td>
+							<td><input type="checkbox" name="checkbox" value="checkbox" data-nums="1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49"></td>
+							<td>全选</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+
+	</div>
+	<script>
+		$(function() {
+			$(".table-common table td").each(function() {
+				if($(this).find("input").length > 0) {
+
+				} else {
+					$(this).css({
+						"cursor": "pointer"
+					});
+				}
+			});
+			// 点击变黄
+			$(".main-left .table-common tbody tr td").click(function() {
+				if($(".main-left .fl input").length == 0) {
+					return;
+				}
+				var val = $(".main-left .fl input").val();
+				if(typeof val == 'undefined' || !val) {
+					val = '';
+				}
+
+				if($.inArray(playId, [227, 239, 251, 286, 303, 336, 390, 390, 402, 414]) >= 0) { //$.inArray() 函数用于在数组中查找指定值，并返回它的索引值（如果没有找到，则返回-1）
+					var index = $(this).index();
+					if($(this).find("input").length > 0) {} else if($(this).find(".pl").length > 0) {
+						if($(this).hasClass("bg-yellow")) {
+							$(this).removeClass("bg-yellow");
+							$(this).parent().prev().find("td").eq(index).removeClass("bg-yellow");
+							$(this).parent().next().find("td").eq(index).find("input").val("");
+						} else {
+							$(this).addClass("bg-yellow");
+							$(this).parent().prev().find("td").eq(index).addClass("bg-yellow");
+							$(this).parent().next().find("td").eq(index).find("input").val(val);
+						}
+					} else {
+						if($(this).hasClass("bg-yellow")) {
+							$(this).removeClass("bg-yellow");
+							$(this).parent().next().find("td").eq(index).removeClass("bg-yellow");
+							$(this).parent().next().next().find("td").eq(index).find("input").val("");
+						} else {
+							$(this).addClass("bg-yellow");
+							$(this).parent().next().find("td").eq(index).addClass("bg-yellow");
+							$(this).parent().next().next().find("td").eq(index).find("input").val(val);
+						}
+					}
+				} else if($.inArray(playId, [223, 235, 247, 207, 258, 318, 382, 406, 394, 480, 494]) >= 0) {
+					if($(this).find("input").length > 0) {} else if($(this).find(".pl").length > 0) {
+						if($(this).hasClass("bg-yellow")) {
+							$(this).removeClass("bg-yellow");
+							$(this).next().find("input").val("");
+						} else {
+							$(this).addClass("bg-yellow");
+							$(this).next().find("input").val(val);
+						}
+					}
+				} else if($.inArray(playId, [216, 217, 218, 221, 226, 228, 229, 230, 233, 238, 240, 241, 242, 245, 250, 204, 205, 206, 209, 210, 211, 259, 260, 261, 262, 263, 264, 265, 266, 267, 268, 269, 270, 252, 287, 288, 289, 290, 254, 293, 657, 257, 292, 294, 295, 296, 297, 298, 299, 300, 301, 302, 303, 277, 278, 279, 280, 281, 282, 283, 284, 285, 286, 253, 332, 338, 342, 337, 333, 339, 389, 413, 401, 385, 387, 389, 409, 413, 392, 380, 404, 395, 383, 407, 399, 387, 339, 397, 399, 411, 437, 438, 439, 441, 444, 445, 454, 463, 472, 450, 459, 468, 446, 455, 464, 447, 456, 465, 452, 448, 461, 457, 466, 470, 493, 479, 473, 492, 478, 491, 276, 1038, 1035, 1037, 1036, 1039]) >= 0) {
+					if($(this).find("input").length > 0) {} else if($(this).find(".pl").length > 0) {
+
+						if($(this).hasClass("bg-yellow")) {
+							$(this).removeClass("bg-yellow");
+							$(this).prev().find("input").length == 0 && $(this).prev().html() != '&nbsp;' && (typeof $(this).prev().html() != 'undefined' && $(this).prev().html().indexOf('和数') < 0) && $(this).prev().removeClass("bg-yellow");
+							$(this).next().find("input").val("");
+						} else {
+							$(this).addClass("bg-yellow");
+							$(this).prev().find("input").length == 0 && $(this).prev().html() != '&nbsp;' && (typeof $(this).prev().html() != 'undefined' && $(this).prev().html().indexOf('和数') < 0) && $(this).prev().addClass("bg-yellow");
+							$(this).next().find("input").val(val);
+						}
+					} else if($(this).html() != '&nbsp;' && ($(this).prev().find("strong").length == 0 || $(this).prev().find("strong").html() == 'undefined' || $(this).prev().find("strong").html().indexOf('和数') < 0)) {
+						if($(this).find("strong").length > 0 && $(this).find("strong").html().indexOf('和数') >= 0 || $(this).find(".ball-icon").length > 0) {
+							return;
+						}
+						if($(this).hasClass("bg-yellow")) {
+							$(this).removeClass("bg-yellow");
+							$(this).next().removeClass("bg-yellow");
+							$(this).next().next().find("input").val("");
+						} else {
+							$(this).addClass("bg-yellow");
+							$(this).next().addClass("bg-yellow");
+							$(this).next().next().find("input").val(val);
+						}
+					}
+				}
+			});
+
+			$(".main-left .table-common .touzhuArea tbody tr td").click(function() {
+				if($(this).find('input').length == 1) {
+					return;
+				}
+
+				var val = $(".main-left .fl input").val();
+				if(typeof val == 'undefined' || !val) {
+					val = '';
+				}
+				if($.inArray(playId, [318, 330, 319, 321, 325, 496, 495]) >= 0) {
+					var obj = $(this).parent().children(':last-child').prevAll();
+					var wu_flag = $(this).parent();
+					if(obj.hasClass('bg-yellow')) {
+						$(this).parent().children(':last-child').prevAll().removeClass("bg-yellow");
+						$(this).parent().children(':last-child').find("input").val("");
+					} else {
+						if(!wu_flag.hasClass('wu')) {
+							$(this).parent().children(':last-child').prevAll().addClass("bg-yellow");
+							$(this).parent().children(':last-child').find("input").val(val);
+						}
+					}
+				}
+			});
+
+			// 幸运选号
+			var tmpXyxhNums = getQueryString("nums");
+
+			var tmpXyxhMoney = getQueryString("money");
+
+			if(typeof tmpXyxhNums != 'undefined' && typeof tmpXyxhMoney != 'undefined' && tmpXyxhNums != '' && tmpXyxhMoney != '' && tmpXyxhNums != null && tmpXyxhMoney != null) {
+				var oArr = [
+					['wan', '万位'],
+					['qian', '千位'],
+					['bai', '百位'],
+					['shi', '十位'],
+					['ge', '个位'],
+					['tm_b', '特码B'],
+					['gj', '冠军'],
+					['jj', '季军'],
+					['yj', '亚军'],
+					['q4', '第四名'],
+					['q5', '第五名'],
+					['q6', '第六名'],
+					['q7', '第七名'],
+					['q8', '第八名'],
+					['q9', '第九名'],
+					['q10', '第十名']
+				];
+
+				for(var i = 0; i < oArr.length; ++i) {
+					tmpXyxhNums = tmpXyxhNums.replace(new RegExp(oArr[i][0], 'gm'), oArr[i][1]);
+				}
+
+				$(".main-left .fl input").val(tmpXyxhMoney);
+				var arr = tmpXyxhNums.split(",");
+
+				for(var i = 0; i < arr.length; ++i) {
+					var obj = $("[data-name='" + arr[i] + "']");
+					$(obj).val(tmpXyxhMoney);
+					$(obj).parent().prev().addClass("bg-yellow");
+					$(obj).parent().prev().prev().addClass("bg-yellow");
+				}
+
+				//安徽快3
+				var arrK3 = (tmpXyxhNums.toString()).split(",");
+				for(var n = 0; n < arrK3.length; n++) {
+					var strNum = (arrK3[n]).toString();
+					var subLen = strNum.substr(strNum.length - 1, 1);
+					var obj = $("[data-name='" + subLen + "']");
+					$(obj).val(tmpXyxhMoney);
+					$(obj).parent().prev().addClass("bg-yellow");
+					$(obj).parent().prev().prev().addClass("bg-yellow");
+				}
+
+				//排列3
+				var pl3 = (tmpXyxhNums.toString()).split(",");
+				for(var n = 0; n < pl3.length; n++) {
+					var strNum = (pl3[n]).toString();
+					var subLen = strNum.substr(strNum.length - 1, 1);
+					var obj = $("[data-name='百定位-" + subLen + "']");
+					$(obj).val(tmpXyxhMoney);
+					$(obj).parent().prev().addClass("bg-yellow");
+					$(obj).parent().prev().prev().addClass("bg-yellow");
+				}
+			}
+		});
+	</script>
+	<script type="text/html" id="rightContentTemplate">
+		<div class="table-common table-border-color">
+			<table width="100%" border="1">
+				<tbody>
+					<tr>
+						<td><input type="checkbox" name="checkbox" value="checkbox" data-nums="{{arr1}}"></td>
+						<td>大</td>
+						<td><input type="checkbox" name="checkbox" value="checkbox" data-nums="{{arr2}}"></td>
+						<td>小</td>
+					</tr>
+					<tr>
+						<td><input type="checkbox" name="checkbox" value="checkbox" data-nums="{{arr3}}"></td>
+						<td>单</td>
+						<td><input type="checkbox" name="checkbox" value="checkbox" data-nums="{{arr4}}"></td>
+						<td>双</td>
+					</tr>
+					<tr>
+						<td><input type="checkbox" name="checkbox" value="checkbox" data-nums="{{arr5}}"></td>
+						<td>合单</td>
+						<td><input type="checkbox" name="checkbox" value="checkbox" data-nums="{{arr6}}"></td>
+						<td>合双</td>
+					</tr>
+					<tr>
+						<td><input type="checkbox" name="checkbox" value="checkbox" data-nums="{{arr7}}"></td>
+						<td>大单</td>
+						<td><input type="checkbox" name="checkbox" value="checkbox" data-nums="{{arr8}}"></td>
+						<td>小单</td>
+					</tr>
+					<tr>
+						<td><input type="checkbox" name="checkbox" value="checkbox" data-nums="{{arr9}}"></td>
+						<td>大双</td>
+						<td><input type="checkbox" name="checkbox" value="checkbox" data-nums="{{arr10}}"></td>
+						<td>小双</td>
+					</tr>
+					<tr>
+						<td><input type="checkbox" name="checkbox" value="checkbox" data-nums="{{arr11}}"></td>
+						<td>尾大</td>
+						<td><input type="checkbox" name="checkbox" value="checkbox" data-nums="{{arr12}}"></td>
+						<td>尾小</td>
+					</tr>
+					<tr>
+						<td><input type="checkbox" name="checkbox" value="checkbox" data-nums="{{arr13}}"></td>
+						<td>鼠</td>
+						<td><input type="checkbox" name="checkbox" value="checkbox" data-nums="{{arr14}}"></td>
+						<td>牛</td>
+					</tr>
+					<tr>
+						<td><input type="checkbox" name="checkbox" value="checkbox" data-nums="{{arr15}}"></td>
+						<td>虎</td>
+						<td><input type="checkbox" name="checkbox" value="checkbox" data-nums="{{arr16}}"></td>
+						<td>兔</td>
+					</tr>
+					<tr>
+						<td><input type="checkbox" name="checkbox" value="checkbox" data-nums="{{arr17}}"></td>
+						<td>龙</td>
+						<td><input type="checkbox" name="checkbox" value="checkbox" data-nums="{{arr18}}"></td>
+						<td>蛇</td>
+					</tr>
+					<tr>
+						<td><input type="checkbox" name="checkbox" value="checkbox" data-nums="{{arr19}}"></td>
+						<td>马</td>
+						<td><input type="checkbox" name="checkbox" value="checkbox" data-nums="{{arr20}}"></td>
+						<td>羊</td>
+					</tr>
+					<tr>
+						<td><input type="checkbox" name="checkbox" value="checkbox" data-nums="{{arr21}}"></td>
+						<td>猴</td>
+						<td><input type="checkbox" name="checkbox" value="checkbox" data-nums="{{arr22}}"></td>
+						<td>鸡</td>
+					</tr>
+					<tr>
+						<td><input type="checkbox" name="checkbox" value="checkbox" data-nums="{{arr23}}"></td>
+						<td>狗</td>
+						<td><input type="checkbox" name="checkbox" value="checkbox" data-nums="{{arr24}}"></td>
+						<td>猪</td>
+					</tr>
+					<tr>
+						<td><input type="checkbox" name="checkbox" value="checkbox" data-nums="{{arr25}}"></td>
+						<td>家禽</td>
+						<td><input type="checkbox" name="checkbox" value="checkbox" data-nums="{{arr26}}"></td>
+						<td>野兽</td>
+					</tr>
+					<tr>
+						<td><input type="checkbox" name="checkbox" value="checkbox" data-nums="{{arr27}}"></td>
+						<td><span class="color-red">红</span>大</td>
+						<td><input type="checkbox" name="checkbox" value="checkbox" data-nums="{{arr28}}"></td>
+						<td><span class="color-red">红</span>小</td>
+					</tr>
+					<tr>
+						<td><input type="checkbox" name="checkbox" value="checkbox" data-nums="{{arr29}}"></td>
+						<td><span class="color-red">红</span>单</td>
+						<td><input type="checkbox" name="checkbox" value="checkbox" data-nums="{{arr30}}"></td>
+						<td><span class="color-red">红</span>双</td>
+					</tr>
+					<tr>
+						<td><input type="checkbox" name="checkbox" value="checkbox" data-nums="{{arr31}}"></td>
+						<td><span class="color-blue">蓝</span>大</td>
+						<td><input type="checkbox" name="checkbox" value="checkbox" data-nums="{{arr32}}"></td>
+						<td><span class="color-blue">蓝</span>小</td>
+					</tr>
+					<tr>
+						<td><input type="checkbox" name="checkbox" value="checkbox" data-nums="{{arr33}}"></td>
+						<td><span class="color-blue">蓝</span>单</td>
+						<td><input type="checkbox" name="checkbox" value="checkbox" data-nums="{{arr34}}"></td>
+						<td><span class="color-blue">蓝</span>双</td>
+					</tr>
+					<tr>
+						<td><input type="checkbox" name="checkbox" value="checkbox" data-nums="{{arr35}}"></td>
+						<td><span class="color-green">绿</span>大</td>
+						<td><input type="checkbox" name="checkbox" value="checkbox" data-nums="{{arr36}}"></td>
+						<td><span class="color-green">绿</span>小</td>
+					</tr>
+					<tr>
+						<td><input type="checkbox" name="checkbox" value="checkbox" data-nums="{{arr37}}"></td>
+						<td><span class="color-green">绿</span>单</td>
+						<td><input type="checkbox" name="checkbox" value="checkbox" data-nums="{{arr38}}"></td>
+						<td><span class="color-green">绿</span>双</td>
+					</tr>
+					<tr>
+						<td><input type="checkbox" name="checkbox" value="checkbox" data-nums="{{arr39}}"></td>
+						<td>红波</td>
+						<td><input type="checkbox" name="checkbox" value="checkbox" data-nums="{{arr40}}"></td>
+						<td>蓝波</td>
+					</tr>
+					<tr>
+						<td><input type="checkbox" name="checkbox" value="checkbox" data-nums="{{arr41}}"></td>
+						<td>绿波</td>
+						<td><input type="checkbox" name="checkbox" value="checkbox" data-nums="{{arr42}}"></td>
+						<td>全选</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</script>
+
+</div>

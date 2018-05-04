@@ -1,0 +1,72 @@
+<input type="hidden" name="playedGroup" value="<?=$groupId?>"/>
+<input type="hidden" name="playedId" value="<?=$playedId?>"/>
+<input type="hidden" name="type" value="<?=$type?>"/>
+<input type="hidden" name="playedName" value="<?=$played['name']?>"/>
+<!-- mobile 江苏快3_三不同 -->
+<div id="sscContent">
+    <div class="lot-content clearfix">
+        <div class="fl main-left re-main-left">
+            <div class="table-common" id="table-common">
+                <script type="text/html" id="k3_3bt">
+                    <table width="100%" border="0" cellspacing="0" cellpadding="0" class="pp sx" action="k3_sbt" min-len="3">
+                        <thead>
+                        <tr>
+                            <th colspan="6"><strong>三不同@<span class="pl red" data-plid="{{pls[0].pls[0].id}}">{{pls[0].pls[0].pl}}</span></strong>(请选择3~6个号码)
+                            </th>
+                        </tr>
+                        <tr>
+                            <th>号码</th>
+                            <th>选择</th>
+                            <th>号码</th>
+                            <th>选择</th>
+                            <th>号码</th>
+                            <th>选择</th>
+                        </tr>
+                        </thead>
+
+                        <tbody>
+                        {{each pls[0].arrs value index}}
+                        {{if index%2==0}}
+                        <tr>
+                            {{/if}}
+                            <td><strong class="pl">{{index+1}}</strong></td>
+                            <td><input type="checkbox" data-pl="{{pls[0].pls[0].pl}}"
+                                       data-name="{{pls[0].name}}-{{index+1}}" value="{{index+1}}"></td>
+                            {{/each}}
+                        </tbody>
+                    </table>
+                </script>
+            </div>
+            <br/>
+            <div class="hd clearfix rehd tzgz" id="toptouzhu">
+                <div class="fl refl xzje">
+                    下注金额：<input type="text" class="txt" id="inputMoney">
+                </div>
+                <div class="kjanniu">
+                    <a href="javascript:void(0)" class="img-50" data-num="50"></a>
+                    <a href="javascript:void(0)" class="img-100" data-num="100"></a>
+                    <a href="javascript:void(0)" class="img-500" data-num="500"></a>
+                    <a href="javascript:void(0)" class="img-1000" data-num="1000"></a>
+                    <a href="javascript:void(0)" class="img-5000" data-num="5000"></a>
+                    <a href="javascript:void(0)" class="img-10000" data-num="10000"></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    $(function () {
+        var playedId = "<?=$playedId?>";
+        $.getJSON("/game/pl/playedId/" + playedId, function (data) {
+            pls = data;
+            var arr = [];
+            for (var i = 1; i <= 6; i++) {
+                arr.push(i);
+            }
+            pls[0].arrs = arr;
+            //debug(pls)
+            var html = template("k3_3bt", {pls: pls});
+            $('.table-common').html(html);
+        });
+    });
+</script>

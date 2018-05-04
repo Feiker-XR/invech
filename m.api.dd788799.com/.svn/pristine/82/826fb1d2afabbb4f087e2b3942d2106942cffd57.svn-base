@@ -1,0 +1,43 @@
+.subNav {
+width:187PX;
+height:40PX;
+cursor:pointer;
+font-size:18px;
+line-height:40px;
+border-radius:13px;
+background:#FFF;
+color:#000;
+padding:0 13px;
+margin-bottom:4px;
+margin:10px auto;
+font-family:"Microsoft Yahei";
+}
+
+.currentDt {
+background-image:url(../images/jiantou.jpg);
+}
+
+.navContent {
+display:none;
+height:auto;
+overflow:hidden;
+}
+
+.subNavBox {
+border-radius:0 0 13px 13px;
+
+padding:4px 5px 4px 7px;
+}
+
+.navContent li {
+font-size:14px;
+float:left;
+width:50%;
+text-align:center;
+margin:10px auto;
+}
+
+.subNav:hover,.currentDd {
+background:#E86A6B;
+color:#fff;
+}

@@ -1,0 +1,123 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>系统设置</title>
+<link href="/css/base.css" rel="stylesheet" type="text/css" />
+<link href="/css/admin.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="/js/jquery.js"></script>
+<script type="text/javascript" src="/js/jquery.tools.js"></script>
+<script type="text/javascript" src="/js/base.js"></script>
+</head>
+
+<body class="input">
+<!--	<div class="bar">
+		会员反水比例设置
+	</div>
+	-->
+
+<div class="body">
+	<ul id="tab" class="tab">
+		<li>
+			<input type="button" value="会员反水比例" hidefocus onClick="window.location.href='{:url('fanshui_bl')}'" />
+		</li>
+		<li>
+			<input type="button" value="添加反水比例" hidefocus class="current" onClick="window.location.href='{:url('fanshui_bl_edit')}'" />
+		</li>
+	</ul>
+	<form name="form1" id="form1" method="post" action="">
+		<table class="inputTable tabContent">
+			<tr>
+				<th>会员组：</th>
+				<td><label>
+					<select name='gid'>
+						{volist name="groups" id="group"}
+							{if $group.id == $bl.id}								
+								<option value='{$group.id}' selected='selected'>{$group.name}</option>
+							{else/}
+								<option value='{$group.id}'>{$group.name}</option>
+							{/if}
+						{/volist}
+					</select>
+				</label></td>
+			</tr>
+			<tr>
+				<th>排序：</th>
+				<td><label>
+					<input name="px" type="text" id="px" value="{$bl.px}" size="20" class="formText" maxlength="10">
+				</label></td>
+			</tr>
+
+	        <tr>
+				<th>体育有效投注额：</th>
+				<td><input name="tz_ty" type="text" value="{$bl.tz_ty}" size="20" class="formText" maxlength="10"></td>
+			</tr>
+	        <tr>
+				<th>体育反水比例：</th>
+				<td><input name="ty" type="text" value="{$bl.ty}" size="20" class="formText" maxlength="10"></td>
+			</tr>
+			
+	        <tr>
+				<th>彩票有效投注额：</th>
+				<td><input name="tz_cp" type="text" value="{$bl.tz_cp}" size="20" class="formText" maxlength="10"></td>
+			</tr>
+	        <tr>
+				<th>彩票反水比例：</th>
+				<td><input name="cp" type="text" value="{$bl.cp}" size="20" class="formText" maxlength="10"></td>
+			</tr>
+			
+	        <tr>
+				<th>AG有效投注额：</th>
+				<td><input name="tz_ag" type="text" value="{$bl.tz_ag}" size="20" class="formText" maxlength="10"></td>
+			</tr>
+	        <tr>
+				<th>AG反水比例：</th>
+				<td><input name="ag" type="text" value="{$bl.ag}" size="20" class="formText" maxlength="10"></td>
+			</tr>			
+			
+	        <tr>
+				<th>MG有效投注额：</th>
+				<td><input name="tz_mg" type="text" value="{$bl.tz_mg}" size="20" class="formText" maxlength="10"></td>
+			</tr>
+	        <tr>
+				<th>MG反水比例：</th>
+				<td><input name="mg" type="text" value="{$bl.mg}" size="20" class="formText" maxlength="10"></td>
+			</tr>
+			
+	        <tr>
+				<th>OG有效投注额：</th>
+				<td><input name="tz_og" type="text" value="{$bl.tz_og}" size="20" class="formText" maxlength="10"></td>
+			</tr>
+	        <tr>
+				<th>OG反水比例：</th>
+				<td><input name="og" type="text" value="{$bl.og}" size="20" class="formText" maxlength="10"></td>
+			</tr>
+			
+	        <tr>
+				<th>BB有效投注额：</th>
+				<td><input name="tz_bb" type="text" value="{$bl.tz_bb}" size="20" class="formText" maxlength="10"></td>
+			</tr>
+	        <tr>
+				<th>BB反水比例：</th>
+				<td><input name="bb" type="text" value="{$bl.bb}" size="20" class="formText" maxlength="10"></td>
+			</tr>			
+			
+	        <tr>
+				<th>SB有效投注额：</th>
+				<td><input name="tz_sb" type="text" value="{$bl.tz_sb}" size="20" class="formText" maxlength="10"></td>
+			</tr>
+	        <tr>
+				<th>SB反水比例：</th>
+				<td><input name="sb" type="text" value="{$bl.sb}" size="20" class="formText" maxlength="10"></td>
+			</tr>				
+		</table>
+		<div class="buttonArea">
+			<input name="id" type="hidden" id="id" value="{$bl.id}"></th>
+			<input name="submit" type="submit" class="formButton" value="确认修改">
+			<input type="button" class="formButton" onClick="window.location.href='{:url('fanshui_bl')}'" value="取 消" hidefocus />
+		</div>
+	</form>
+	</div>
+</body>
+</html>

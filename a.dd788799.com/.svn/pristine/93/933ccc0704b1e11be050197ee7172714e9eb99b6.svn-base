@@ -1,0 +1,14 @@
+1.安全机制access_token
+access_token生成规则 md5(COMPANY . date("Ymd") . API_KEY);
+COMPANY为bong,
+date("Ymd")为年月日,比如20180404, 
+API_KEY为XXXX (在'auth.guards.jwt.jwt_key'中配置)
+2.token在用户登录后返回,用户信息相关的api,请求头带上bearer token
+(Authorization: Bearer xxxxxx)
+3.token刷新机制 
+token有效期为60分钟,在59分钟的时候,旧token可以使用,
+响应头中有新的bearer token,直至请求中使用新token;过期不候;
+4.APP缓存版本控制机制 
+在每个请求的响应头中返回版本信息
+game-types   表示game/types请求的数据版本
+game-kqwfpls 表示game/kqwfpls请求的数据版本

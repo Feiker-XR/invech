@@ -1,0 +1,63 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>系统设置</title>
+<link href="/css/base.css" rel="stylesheet" type="text/css" />
+<link href="/css/admin.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="/js/jquery.js"></script>
+<script type="text/javascript" src="/js/jquery.tools.js"></script>
+<script type="text/javascript" src="/js/base.js"></script>
+</head>
+<body class="input">
+	<!--<div class="bar">
+		代理佣金比例设置
+	</div>-->
+	
+
+<div class="body">
+<ul id="tab" class="tab">
+				<li>
+					<input type="button" value="代理佣金比例" hidefocus onClick="window.location.href='{:url('agent/bili')}'" />
+				</li>
+                <li>
+					<input type="button" value="添加佣金比例" hidefocus class="current" onClick="window.location.href='{:url('agent/biliedit')}'" />
+				</li>
+  </ul>
+<form name="form1" id="form1" method="post" action="{:url('agent/biliadd')}">
+<table class="inputTable tabContent">
+	        <tr>
+	          <th>排序：</th>
+	          <td><label>
+	            <input name="px" type="text" id="px" value="<?=@$rs['px']?>" size="20" class="formText" maxlength="10">
+	          </label></td>
+        </tr>
+	        <tr>
+	          <th>会员数量：</th>
+	          <td><input name="ren" type="text" id="ren" value="<?=@$rs['ren']?>" size="20" class="formText" maxlength="10"></td>
+        </tr>
+	        <tr>
+	          <th>盈利金额：</th>
+	          <td><input name="win" type="text" id="win" value="<?=@$rs['win']?>" size="20" class="formText" maxlength="10"></td>
+        </tr>
+	        <tr>
+	          <th>佣金比例：</th>
+	          <td><input name="ty" type="text" id="ty" value="<?=@$rs['ty']?>" size="20" class="formText" maxlength="10"></td>
+        </tr>
+	        <tr>
+	          <th>其他：</th>
+	          <td><input name="cp" type="text" id="cp" value="<?=@$rs['cp']?>" size="20" class="formText" maxlength="10"></td>
+        </tr>
+	        <tr>
+	          <th>其他：{notempty name='vo.id'}<input name="id" type="hidden" id="id" value="<?=$id?>">{/notempty}</th>
+	          <td><input name="zr" type="text" id="zr" value="<?=@$rs['zr']?>" size="20" class="formText" maxlength="10"></td>
+        </tr>
+    </table>
+  <div class="buttonArea">
+<input name="Submit" type="submit" class="formButton" value="确认修改">
+	  <input type="button" class="formButton" onClick="window.location.href='bili.php'" value="取 消" hidefocus />
+    </div>
+</form>
+	</div>
+</body>
+</html>

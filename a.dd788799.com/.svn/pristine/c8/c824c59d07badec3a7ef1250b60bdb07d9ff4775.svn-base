@@ -1,0 +1,58 @@
+<?php
+namespace app\admin\controller;
+use app\admin\Login;
+use think\Cache;
+
+use app\common\model\Bonus as BonusModel;
+//use app\common\model\BonusConfig as BonusConfigModel;
+//use app\common\model\BonusFlow as BonusFlowModel;
+
+class Bonus extends Login{
+    
+    public function index(){
+        $this->view->page_header = '红利列表';
+
+        $request = request();
+        $list = model('bonus')->getList($request);
+        //$list = BonusModel::getList($request);
+        $list->appends($request->param());
+        $this->assign('list',$list);
+
+        return $this->fetch();
+    }
+
+    public function config(){
+        $this->view->page_header = '红利配置';
+
+        $request = request();
+        $list = model('bonus_config')->getList($request);
+        //$list = BonusConfigModel::getList($request);
+        $list->appends($request->param());
+        $this->assign('list',$list);
+
+        return $this->fetch();        
+    }
+
+    public function flow(){
+        $this->view->page_header = '红利流水';
+
+        $request = request();
+        $list = model('bonus_flow')->getList($request);
+        //$list = BonusFlowModel::getList($request);
+        $list->appends($request->param());
+        $this->assign('list',$list);
+
+        $bonuses = BonusModel::all(['enable'=>1,]);
+        $this->assign('bonuses',$bonuses);
+        
+        return $this->fetch();          
+    }
+
+
+
+    public function logout(){
+        session(null);
+        cookie(null,config('cookie.prefix'));
+       	$this->redirect('/index/login');
+    }    
+}

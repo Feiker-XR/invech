@@ -1,0 +1,104 @@
+<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:85:"/mnt/wwwroot/www.dd788799.com/houtai/../application/admin/view/lottery/my_search.html";i:1514785037;}*/ ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>系统设置</title>
+<link href="/css/base.css" rel="stylesheet" type="text/css" />
+<link href="/css/admin.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="/js/jquery.js"></script>
+<script type="text/javascript" src="/js/jquery.tools.js"></script>
+<script type="text/javascript" src="/js/base.js"></script>
+<script language="JavaScript" src="/js/datePicker/calendar.js"></script>
+
+<script language="JavaScript">
+function jumpTo(url) {
+	var username = $('#username').val();
+	var str1 = '';
+	var str2 = '';
+	window.open(url + '?username=' + username + '&str1=' + str1 + '&str2=' + str2);
+}
+</script>
+</head>
+<body class="list">
+	<div class="bar">
+		真人数据查看
+	</div>
+
+<div class="body">
+<form name="form1" method="get" action="">
+<div class="listBar">
+		  游戏大厅：
+          <select name="dating">
+          	<option value = "all">全部大厅</option>
+          	<option value="ag">AG</option>
+            <option value="bb">BB</option>
+            <option value="mg">MG</option>
+            <option value="na">NA</option>
+          </select>
+          会员账号：
+          <input name="username" type="text" id="username" value="<?php echo (\think\Request::instance()->get('username')) ? \think\Request::instance()->get('username') : ''; ?>" size="15">
+          &nbsp;&nbsp; <input type="button" value="进入MG" class="formButton" style="background: #3d6098;color: #FFF;" onclick="jumpTo('')"/>
+          &nbsp;&nbsp; <input type="button" value="进入BB" class="formButton" style="background: #3d6098;color: #FFF;" onclick="jumpTo('')"/>
+          <!--&nbsp;&nbsp; <input type="button" value="进入AG" onclick="jumpTo('http://www.021239.com/aggame/index_ag.php')"/>-->
+
+            &nbsp;&nbsp;日期范围：
+            <input name="s_time" type="text" id="s_time" value="" onClick="new Calendar(2008,2020).show(this);" size="10" maxlength="10" readonly="readonly" />
+            ~
+            <input name="e_time" type="text" id="e_time" value="" onClick="new Calendar(2008,2020).show(this);" size="10" maxlength="10" readonly="readonly" />
+            &nbsp;&nbsp;<input name="find" type="submit" id="find" value="查看报表" class="formButton"/>
+
+	</div>
+</form>
+<ul id="tab" class="tab">
+                <li><input type="button" value="真人数据查看" hidefocus class="current"/></li>
+			</ul>
+<table id="listTables" class="listTables">
+
+				<tr>
+					<th>注单编号</th>
+					<th>用户</th>
+					<th>有效投注额</th>
+					<th>中奖金额/盈亏</th>
+					<th>大厅</th>
+					<th>投注or更新/时间</th>
+				</tr>
+
+      <tr>
+        <td height="30" align="center" valign="middle"></td>
+        <td align="center" valign="middle"></td>
+        <td align="center" valign="middle"></td>
+        <td align="center" valign="middle"></td>
+        <td align="center" valign="middle"></td>
+        <td align="center" valign="middle"></td>
+      </tr>
+
+		<tr>
+        	<td colspan="6" style="text-align:center; color:red;">
+            	流水总计: &nbsp;&nbsp;
+                AG流水: &nbsp;&nbsp;
+                AG盈亏: &nbsp;&nbsp;
+                BB流水: &nbsp;&nbsp;
+                BB盈亏: &nbsp;&nbsp;
+                MG流水: &nbsp;&nbsp;
+                MG中奖: &nbsp;&nbsp;
+                NA流水: &nbsp;&nbsp;
+                NA盈亏: &nbsp;&nbsp;
+            </td>
+        </tr>
+  </table>
+ <!-- page -->
+ <!-- page end-->
+
+       <tr>
+        	<td colspan="6" style="text-align:center; color:red;">
+            	请选择条件进行查询！
+            </td>
+        </tr>
+  </table>
+
+  </div>
+
+  
+</body>
+</html>

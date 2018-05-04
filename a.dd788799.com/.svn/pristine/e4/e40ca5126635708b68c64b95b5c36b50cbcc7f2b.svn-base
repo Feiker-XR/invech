@@ -1,0 +1,280 @@
+{extend name="base/common"/}
+
+{block name="title"}<title>修改密码－{:cache('WEB_NAME')}</title>{/block}
+
+{block name="body"}
+<div class="effect mainnav-lg mainnav-fixed navbar-fixed footer-fixed" id="container">
+	<div id="page-content">
+		<div class="panel">
+			<div class="panel-heading">
+				<h3 class="panel-title"><img alt="" src="/__IMG__/fei_game/titleicond.jpg">修改登录与出款密码</h3>
+			</div>
+			<div class="panel-body">
+				<div class="tab-base">
+					<ul class="nav nav-tabs">
+						<li><a aria-expanded="false" href="#tabs-loginpass" data-toggle="tab"><i class="fa fa-check" style="padding-top: 0px; font-size: 12px; display: inline-block;"></i>登录密码 
+						</a></li>
+						<li class="active"><a aria-expanded="true" href="#tabs-fundspass" data-toggle="tab"><i class="fa fa-check" style="padding-top: 0px; font-size: 12px; display: inline-block;"></i>出款密码 
+						</a></li>
+					</ul>
+					<div class="tab-content">
+						<div class="mminfo">
+							<div class="mminfohead">
+								<span><i class="fa fa-exclamation"></i> 
+温馨提示
+								</span>
+							</div>
+							<div class="mminfobox">
+								<div class="row">
+									<div class="col-md-4">
+										                                定期更换密码可以让你的账户更安全
+									</div>
+									<div class="col-md-3">
+										                                请确保你的登录密码与出款密码不同
+									</div>
+									<div class="col-md-5">
+建议密码采用大小字母、数字、特殊符号混合，并且不短于8位
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="tab-pane fade" id="tabs-loginpass">
+							<form class="panel-body form-horizontal form-padding" id="loginpass" role="form" action="http://jsl-js.yaoxingdinshen.com/safety/pwdmanage" method="post">
+								<div class="form-group">
+									<label class="col-md-2 control-label">账户名</label>
+									<div class="col-md-5">
+										<label class="text-danger text-2x">{$user.username}</label>
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-md-2 control-label">当前登录密码</label>
+									<div class="col-md-5">
+										<input name="OLP" class="form-control" id="OLP" style="font-size: 18px; -ms-ime-mode: disabled;" type="password" maxlength="50" autocomplete="off">
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-md-2 control-label">新登录密码</label>
+									<div class="col-md-5">
+										<input name="NLP" class="form-control" id="NLP" style="font-size: 18px; -ms-ime-mode: disabled;" type="password" maxlength="50" autocomplete="off">
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-md-2 control-label">登录密码强度</label>
+									<div class="col-md-5">
+										<div class="progress" style="margin-top: 5px;">
+											<div class="progress-bar progress-bar-danger" id="LPSDIV" style="width: 33%;">
+												弱
+											</div>
+										</div>
+										<input name="LPS" id="LPS" type="hidden" value="1" data-val-required="LPS 字段是必需的。" data-val="true">
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-md-2 control-label">确认新登录密码</label>
+									<div class="col-md-5">
+										<input name="CLP" class="form-control" id="CLP" style="font-size: 18px; -ms-ime-mode: disabled;" type="password" maxlength="50" autocomplete="off">
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-md-2 control-label"></label>
+									<div class="col-md-5">
+										<button class="btn btn-danger" style="width: 160px;" onclick="checkLoginPwdAndCommit();" type="button">确    定</button>
+										<button class="btn btn-danger" style="width: 160px; margin-left: 20px;" onclick="window.location.href='{:Url('index/main')}'" type="button">返    
+回
+										</button><input name="PwdTypeId" id="PwdTypeId" type="hidden" value="1" data-val-required="PwdTypeId 字段是必需的。" data-val="true">
+									</div>
+								</div>
+								<input name="__RequestVerificationToken" type="hidden" value="CfDJ8Ktgxm2FAlNEsoI7VoMQlWmfclac1Xy-und4Nf80PvTU2Q6OHiEiZfzUJwVl490JP_IH4whLm3-R76Rkf1RgJLee4VAQKtRNvRKY2IeIgxzkpV2kP0_BhuS1ylNu-OPixhjNIwx2bOtsx5qSfI_RHuDFRBbg8Xb4LuCwPSiBOw4RnTJ9ygM96E9vumwnbTKpyg">
+							</form>
+						</div>
+						<div class="tab-pane fade active in" id="tabs-fundspass">
+							<form class="panel-body form-horizontal form-padding" id="fundspass" role="form" action="/safety/pwdmanage" method="post">
+								<div class="form-group">
+									<label class="col-md-2 control-label">账户名</label>
+									<div class="col-md-5">
+										<label class="text-danger text-2x">{$user.username}</label>
+									</div>
+								</div>
+								<?php									
+									if(isset($user['coinPassword']) && $user['coinPassword']){
+								 ?>
+									<div class="form-group">
+										<label class="col-md-2 control-label">旧出款密码</label>
+										<div class="col-md-5">
+											<input value="" class="form-control" style="ime-mode:disabled; font-size:18px;" autocomplete="off" maxlength="50" id="OFP" name="OFP" type="password">
+										</div>
+									</div>
+								<?php } ?>
+								<div class="form-group">
+									<label class="col-md-2 control-label">绑定出款密码</label>
+									<div class="col-md-5">
+										<input name="NFP" class="form-control" id="NFP" style="font-size: 18px; -ms-ime-mode: disabled;" type="password" maxlength="50" autocomplete="off">
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-md-2 control-label">出款密码强度</label>
+									<div class="col-md-5">
+										<div class="progress" style="margin-top: 5px;">
+											<div class="progress-bar progress-bar-danger" id="FPSDIV" style="width: 33%;">
+												弱
+											</div>
+										</div>
+										<input name="FPS" id="FPS" type="hidden" value="1" data-val-required="FPS 字段是必需的。" data-val="true">
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-md-2 control-label">确认出款密码</label>
+									<div class="col-md-5">
+										<input name="CFP" class="form-control" id="CFP" style="font-size: 18px; -ms-ime-mode: disabled;" type="password" maxlength="50" autocomplete="off">
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-md-2 control-label"></label>
+									<div class="col-md-5">
+										<button class="btn btn-danger" style="width: 160px;" onclick="checkFundsPwdAndCommit();" type="button">确    定</button>
+										<button class="btn btn-danger" style="width: 160px; margin-left: 20px;" onclick="window.location.href='{:Url('index/main')}'" type="button">返    
+回
+										</button><input name="PwdTypeId" id="PwdTypeId" type="hidden" value="2" data-val-required="PwdTypeId 字段是必需的。" data-val="true">
+										<input name="IsSetSafePassWord" id="IsSetSafePassWord" type="hidden" value="0" data-val-required="IsSetSafePassWord 字段是必需的。" data-val="true">
+									</div>
+								</div>
+								<input name="__RequestVerificationToken" type="hidden" value="CfDJ8Ktgxm2FAlNEsoI7VoMQlWkMnilXyHDXWM71bWNDGw6FbeQjqpSkzE6EJrhogngD3OGi4tPxGGIbVYpi5bP1OsvUuukm49D0fYVzi8r7Ox6iOv19R_6-LBEaYez5gql4NbIx9auPTMzqO6GB6GrU_VTmboJ8Cz98QKTWRTSPGINnkq75ibkaqJK-Yp-lHgecqA">
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<input id="hdVC" type="hidden" value="597c53bff9637bf460670abbba0ed68a">
+	</div>
+</div>
+{/block}
+{block name="script"}
+
+<script>
+	$('.choice-pwdtype').on('click', function () {
+		$('#PwdTypeName').text('修改' + $(this).text());
+		if ($(this).text() == '登录密码') {
+			$('#PwdTypeId').val(1);
+		} else if ($(this).text() == '出款密码') {
+			$('#PwdTypeId').val(2);
+		} else {
+			$('#PwdTypeId').val(1);
+			return;
+		}
+	});
+	function checkLoginPwdAndCommit() {
+		if ($('#OLP').val() == '') {
+			$.niftyNoty({ type: 'danger', message: '当前登录密码不能为空。', container: 'floating', closeBtn: true, timer: 3000 });
+			return;
+		}
+		if ($('#OLP').val().length < 6 || $('#OLP').val().length > 50) {
+			$.niftyNoty({ type: 'danger', message: '登录密码的长度必须在6-50之间。', container: 'floating', closeBtn: true, timer: 3000 });
+			return;
+		}
+		if ($('#NLP').val() == '') {
+			$.niftyNoty({ type: 'danger', message: '新登录密码不能为空。', container: 'floating', closeBtn: true, timer: 3000 });
+			return;
+		}
+		if ($('#NLP').val().length < 6 || $('#NLP').val().length > 50) {
+			$.niftyNoty({ type: 'danger', message: '新登录密码的长度必须在6-50之间。', container: 'floating', closeBtn: true, timer: 3000 });
+			return;
+		}
+		if ($('#OLP').val() == $('#NLP').val()) {
+			$.niftyNoty({ type: 'danger', message: '当前登录密码和新登录密码不能相同。', container: 'floating', closeBtn: true, timer: 3000 });
+			return;
+		}
+		if ($('#CLP').val() == '') {
+			$.niftyNoty({ type: 'danger', message: '确认新登录密码不能为空。', container: 'floating', closeBtn: true, timer: 3000 });
+			return;
+		}
+		if ($('#CLP').val().length < 6 || $('#CLP').val().length > 50) {
+			$.niftyNoty({ type: 'danger', message: '确认新登录密码的长度必须在6-50之间。', container: 'floating', closeBtn: true, timer: 3000 });
+			return;
+		}
+		if ($('#NLP').val() != $('#CLP').val()) {
+			$.niftyNoty({ type: 'danger', message: '新登录密码和确认新登录密码不一致。', container: 'floating', closeBtn: true, timer: 3000 });
+			return;
+		}
+		$('.btn-mint').attr('disabled',true);
+		$.ajax({
+			type: "POST",
+			url: "{:Url('user/setPasswd')}",
+			data: { oldpassword: $('#OLP').val(), newpassword: $('#NLP').val() },
+			dataType: "json",
+			global: false,
+			success: function (result) {
+				$('.btn-mint').removeAttr('disabled');
+				var niftyType = result.status ? 'success' : 'danger';
+				$.niftyNoty({ type: niftyType, message: result.info, container: 'floating', closeBtn: true, timer: 3000 });
+			}, error: function () {
+				$('.btn-mint').removeAttr('disabled');
+				$.niftyNoty({ type: 'danger', message: '未知错误', container: 'floating', closeBtn: true, timer: 3000 });
+			}
+		});
+		
+		//$('#loginpass').submit();
+	}
+	function checkFundsPwdAndCommit() {
+		if ($('#OFP').length > 0) {
+			if ($('#OFP').val() == '') {
+				$.niftyNoty({ type: 'danger', message: '旧出款密码不能为空。', container: 'floating', closeBtn: true, timer: 3000 });
+				return;
+			}
+			if ($('#OFP').val().length < 6 || $('#OFP').val().length > 50) {
+				$.niftyNoty({ type: 'danger', message: '旧出款密码的长度必须在6-50之间。', container: 'floating', closeBtn: true, timer: 3000 });
+				return;
+			}
+		}            
+		if ($('#NFP').val() == '') {
+			$.niftyNoty({ type: 'danger', message: '绑定出款密码不能为空。', container: 'floating', closeBtn: true, timer: 3000 });
+			return;
+		}
+		if ($('#NFP').val().length < 6 || $('#NFP').val().length > 50) {
+			$.niftyNoty({ type: 'danger', message: '绑定出款密码的长度必须在6-50之间。', container: 'floating', closeBtn: true, timer: 3000 });
+			return;
+		}
+		if ($('#OFP').length > 0) {
+			if ($('#OFP').val() == $('#NFP').val()) {
+				$.niftyNoty({ type: 'danger', message: '旧出款密码和绑定出款密码不能相同。', container: 'floating', closeBtn: true, timer: 3000 });
+				return;
+			}
+		}
+		if ($('#CFP').val() == '') {
+			$.niftyNoty({ type: 'danger', message: '确认出款密码不能为空。', container: 'floating', closeBtn: true, timer: 3000 });
+			return;
+		}
+		if ($('#CFP').val().length < 6 || $('#CFP').val().length > 50) {
+			$.niftyNoty({ type: 'danger', message: '确认出款密码的长度必须在6-50之间。', container: 'floating', closeBtn: true, timer: 3000 });
+			return;
+		}
+		if ($('#NFP').val() != $('#CFP').val()) {
+			$.niftyNoty({ type: 'danger', message: '绑定出款密码和确认出款密码不一致。', container: 'floating', closeBtn: true, timer: 3000 });
+			return;
+		}
+		
+		$('.btn-mint').attr('disabled',true);
+		$.ajax({
+			type: "POST",
+			url: "{:Url('user/setCoinPwd')}",
+			data: { oldpassword: $('#OFP').val(), newpassword: $('#NFP').val() },
+			dataType: "json",
+			global: false,
+			success: function (result) {
+				$('.btn-mint').removeAttr('disabled');
+				var niftyType = result.status ? 'success' : 'danger';
+				$.niftyNoty({ type: niftyType, message: result.info, container: 'floating', closeBtn: true, timer: 3000 });
+			}, error: function () {
+				$('.btn-mint').removeAttr('disabled');
+				$.niftyNoty({ type: 'danger', message: '未知错误', container: 'floating', closeBtn: true, timer: 3000 });
+			}
+		});
+	}
+	$('#NLP').keyup(function () {
+		passwordStrength('#NLP', '#LPS', '#LPSDIV');
+	});
+	$('#NFP').keyup(function () {
+		passwordStrength('#NFP', '#FPS', '#FPSDIV');
+	});
+</script>
+{/block}

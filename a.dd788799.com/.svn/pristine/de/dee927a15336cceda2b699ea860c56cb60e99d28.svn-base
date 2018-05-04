@@ -1,0 +1,78 @@
+<?php
+	// 中间件执行次序
+	// * > admin.* > admin.system.* > admin.system.middleware
+	// 中间件数组中先定义的先执行;
+	
+	return [
+		'alias' => [
+					'throttle' => \app\api\middlewares\ThrottleRequests::class,
+					'access_token' => app\api\middlewares\CheckAccessToken::class,
+					'auth' => \bong\service\auth\Authenticate::class,
+					'guest' => \app\middlewares\RedirectIfAuthenticated::class,
+					'online' => \app\api\middlewares\Online::class,
+					'version' => \app\api\middlewares\Version::class,
+					'log' =>	\app\api\middlewares\Log::class,
+					
+					'cors' => \app\middlewares\Cors::class,
+					//'auth_rule' => \app\admin\middlewares\CheckAuthRule::class,
+					'auth_menu' => \app\admin\middlewares\AuthMenu::class,
+				],
+        
+		//!表示不继承上层中间件,作为最高优先级
+		//api.pub.index路由 匹配 '!api.pub.index' 而非 '!api.pub.*'
+		//'!api.pub.index' => ['pub:index'],
+		//'!api.pub.*' => ['pub'],
+		//'!api.document.index' => ['document:index'],
+		//'!api.document.*' => ['document'],		
+
+		'*' 	=> [
+					//\app\api\middlewares\Nothing::class,
+				], 
+
+		'index.index.login' => ['guest',],
+		//'index.index.index' => ['guest',],
+		'index.user.*' => ['auth',],
+		'index.agent.*' => ['auth',],
+		'index.game.*' => ['auth',],
+		'-index.game.game' => ['auth',],
+
+		'admin.index.login' => ['guest',],
+		'admin.*' => ['auth','auth_menu'],
+		'-admin.index.login' => ['auth','auth_menu'],
+		'-admin.index.logout' => ['auth_menu'],
+
+		//'-admin.index.index' => ['auth',],
+		//'-admin.ueditor.*' => ['auth',],
+
+		'agent.index.login' => ['guest',],
+		'agent.*' => ['auth'],
+		'-agent.index.login' => ['auth',],
+		
+        'api.*' => [
+			    	'throttle:60,1',//每分钟60次;
+			    	'access_token',			    	
+					'auth',//'auth:jwt',
+					'online',
+					//'log',
+				],
+		
+		'-api.pub.*' => ['auth',],//表示继承上层中间件,但是减去auth中间件
+		'-api.document.*' => ['auth'],
+		'-api.pub.app' => ['access_token'],
+		'-api.game.*' => ['auth'],
+		'api.game.*' => ['version'],
+		'api.game.postall' => ['auth'],
+		'-api.pay.*' => ['auth'],
+		'api.pay.pay' => ['auth'],
+		//'api.pub'默认是增加;		
+		
+		//test
+		'admin.test.middleware' => ['cors',],
+		//'admin.test.web' => ['auth:web',],//:分隔中间件和参数,参数之间,分隔
+		'admin.test.web' => ['auth:web',],//:分隔中间件和参数,参数之间,分隔
+		'admin.test.api' => ['auth:api',],//:分隔中间件和参数,参数之间,分隔
+		'admin.test.jwt' => ['auth:jwt',],//:分隔中间件和参数,参数之间,分隔
+		'admin.test.throttle' => ['throttle:2,60',],//60分钟只可以访问2次;
+		//'api.pub.login' => ['auth:web',],//测试记住我
+		'-admin.test.*' => ['auth',],
+    ];

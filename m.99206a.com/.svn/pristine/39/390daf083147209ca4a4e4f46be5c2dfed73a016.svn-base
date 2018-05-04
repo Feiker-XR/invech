@@ -1,0 +1,232 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<title>幸运农场--皇冠娱乐城</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+<link rel="stylesheet" href="/css/font-awesome.min.css">
+<link rel="stylesheet" href="/styles/ucenter.css">
+<link href="/lottery/css/style.css" rel="stylesheet" type="text/css" />
+<link href="/css/jquery_dialog.css" rel="stylesheet" type="text/css" />
+<script src="/assets/jquery.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="/lottery/Js/cq_sf.js"></script>
+<script type="text/javascript" src="/lottery/Js/jsc/jquery-1.6.1.js"></script>
+<script type="text/javascript" src="/lottery/Js/jsc/top.js"></script>
+<script src="/Box/jquery.jBox-2.3.min.js"></script>
+<script src="/Box/jquery.jBox-zh-CN.js"></script>
+<link type="text/css" rel="stylesheet" href="/Box/GrayCool/jbox.css"/>
+<link rel="stylesheet" href="/css/500f_new_wap.css">
+<style type="text/css">
+.zh {font-size: 12px; color: #fa4141;}
+.zh font {color: #00b8ff;}
+.open {text-align: center; height:23px;font-size:14px;}
+.sj {font-weight:bold; position: absolute; font-size:20px;height:23px; left:210px;top:9px;}
+.aa {font-weight:bold; font-size:18px;height:23px;color:#FFFFFF;}
+.bian_td_odds{line-height: 25px; color:#c53737; font-size:14px; font-weight:bold;}
+.bian_td_inp{line-height: 25px; color:#c53737;font-size:14px; font-weight:bold;}
+
+/*分辨率小于330PX*/
+@media only screen and (max-width: 375px) {
+.open_number img{display: block;float: left;}
+
+}
+</style>
+</head>
+<script language="JavaScript">
+
+if(self==top){
+	top.location='/';
+}
+
+function formReset(){
+  	document.getElementById("orders").reset()
+}
+</script>
+<body>
+<!--幸运农场头部号码滚动-->	
+<div class="f_lottery">
+	<div class="panel-heading f_lottery_open_top">
+		<div>
+	    	<h3 class="panel-title mt10 ml10">幸运农场</h3>
+	    </div>
+	    <div>
+	    	<span class="open">NO.<font id="open_qihao" color="#FFFFFF">0000-00-000</font></span>
+	    </div>
+	    <div>
+	    	<i><img src="/img/Hourglass.png"></i>
+	    	<span class="pull-right aa mr10 mt2" id="cqc_time" style="color: white;">00:00</span>
+	    </div>
+	</div>
+	
+	<div class="panel-body f_lottery_open_c">
+		<div>
+			<i><img src="/img/xync.png"></i>
+		</div>		
+		<div>
+		    <h3 class="ssc pb10">
+		    	<span class="open">NO.<font id="numbers" color="#e80a19">0000-00-000</font>开奖号码</span>
+		    </h3>
+		    <span class="open_number">
+				<img src="/lottery/Images/Open_xyncs/x.gif"/>
+				<img src="/lottery/Images/Open_xyncs/x.gif"/>
+				<img src="/lottery/Images/Open_xyncs/x.gif"/>
+				<img src="/lottery/Images/Open_xyncs/x.gif"/>
+				<img src="/lottery/Images/Open_xyncs/x.gif"/>
+				<img src="/lottery/Images/Open_xyncs/x.gif"/>
+				<img src="/lottery/Images/Open_xyncs/x.gif"/>
+				<img src="/lottery/Images/Open_xyncs/x.gif"/>
+		    </span> 		    
+	    </div>
+		<div>
+	    	<a href="#" onClick="url('cqsf_list.html');" class="pull-right">开<br>奖<br>历<br>史</a>
+	    </div>
+	     
+	</div>
+	<div class="f_lottery_open_star">
+		<img src="/img/star.png"/>
+	</div>
+	<div class="f_lottery_open_explain">
+		<span class="zh" id="autoinfo"></font></span>
+	</div>		
+</div>
+
+<!--龙虎组合-->
+<div class="block_10"></div>
+<div class="panel-footer f_lottery_footer">
+    <a href="#" onClick="url('Cqsf.php');" class="f_lottery_footer_b">珠 仔</a> 
+    <a href="#" onClick="url('Cqsf_2.php');" class="f_lottery_footer_a">总和龙虎</a>
+    <div class="clearfix"></div>
+</div>
+<div class="block_10"></div>
+  
+    <div class="touzhu">
+<input type="hidden" id='token' name="csrf_token" value="MTQ5ODE5ODM1MXRZZFJsZzVXWHE2c1A2SXh4RFcxdUo3dXNwZHJBOGR4"/>
+<form name="orders" id="orders" action="order/order3.php?type=4" method="post" target="OrderFrame">
+	
+	
+<table width="100%">
+  <tr>
+    <td height="30" colspan="15">
+      <div class="startOdds">
+      <table class="fist table table-bordered">
+        <tr>
+          <td width="15%" height="30" class="biankuang">玩法</td>
+          <td width="15%" class="biankuang">赔率</td>
+          <td width="20%" class="biankuang">金额</td>
+          <td width="15%" height="30" class="biankuang">玩法</td>
+          <td width="15%" class="biankuang">赔率</td>
+          <td width="20%" class="biankuang">金额</td>
+        </tr>
+        <tr>
+        <td valign="bottom" class="biankuang">大</td>
+        <td class="bian_td_odds" id="ball_9_h1"></td>
+        <td class="bian_td_inp" id="ball_9_t1"></td>
+       
+        <td valign="bottom" class="biankuang">小</td>
+        <td class="bian_td_odds" id="ball_9_h2"></td>
+        <td class="bian_td_inp" id="ball_9_t2"></td>        
+        </tr>  
+              
+        <td valign="bottom" class="biankuang">单</td>
+        <td class="bian_td_odds" id="ball_9_h3"></td>
+        <td class="bian_td_inp" id="ball_9_t3"></td>
+        
+        <td valign="bottom" class="biankuang">双</td>
+        <td class="bian_td_odds" id="ball_9_h4"></td>
+        <td class="bian_td_inp" id="ball_9_t4"></td>        
+        </tr>  
+        
+        <td valign="bottom" class="biankuang">尾大</td>
+        <td class="bian_td_odds" id="ball_9_h5"></td>
+        <td class="bian_td_inp" id="ball_9_t5"></td>
+        
+        <td valign="bottom" class="biankuang">尾小</td>
+        <td class="bian_td_odds" id="ball_9_h6"></td>
+        <td class="bian_td_inp" id="ball_9_t6"></td>        
+        </tr> 
+        
+        <td valign="bottom" class="biankuang">龙</td>
+        <td class="bian_td_odds" id="ball_9_h7"></td>
+        <td class="bian_td_inp" id="ball_9_t7"></td>
+        
+        <td valign="bottom" class="biankuang">虎</td>
+        <td class="bian_td_odds" id="ball_9_h8"></td>
+        <td class="bian_td_inp" id="ball_9_t8"></td>        
+        </tr>       
+        <tr>
+      </table>
+      </div>
+    </td>
+  </tr>
+</table>
+
+<table class="table">
+  <tr>
+    <td><a href="javascript:;" title="重置金额" onclick="formReset()" value="Reset" class="reset_count">重填</a></td>
+    <td><a href="javascript:;" title="提交下注" onclick="order();" class="order_table">投注</a></td>
+  </tr>
+</table>
+
+</form>
+</div>
+
+<div id="endtime"></div>
+<script type="text/javascript">loadinfo()</script>
+<IFRAME id="OrderFrame" name="OrderFrame" border=0 marginWidth=0 frameSpacing=0 src="" frameBorder=0 noResize width=0 scrolling=AUTO height=0 vspale="0" style="display:none"></IFRAME>
+<div style="display:none" id="look"></div>
+</body>
+<script language="javascript" src="/lottery/js/load_results_cqssc.js"></script>
+<script>
+function cs_table(tag,el,id,element,num){
+	var tagsContent = document.getElementById(tag);
+	var tagsLi = tagsContent.getElementsByTagName(el);
+
+	var tagContent = document.getElementById(id);
+	var tagLi = tagContent.getElementsByTagName(element);
+	var len= tagsLi.length;
+	var back_img,n_img;
+	for(var i=0; i<len; i++){				
+		if(i == '0'){
+			back_img = '#e13347';
+			n_img = '#f5f5f5';
+		}else if(i+1 == len){
+			back_img = '#e13347';
+			n_img = '#f5f5f5';
+		}else{
+			back_img = '#e13347';
+			n_img = '#f5f5f5';
+		}
+		
+		if(i == num){
+			tagsLi[i].style.backgroundColor = back_img;
+			tagsLi[i].style.fontWeight = 'normal';
+			tagLi[i].style.display="block";
+			
+			tagsLi[i].style.color = '#fff';
+//			tagLi[i].style.color = "#fff";				
+		}else{
+			tagsLi[i].style.backgroundColor = n_img;
+			tagsLi[i].style.fontWeight = 'normal';
+			tagLi[i].style.display="none";
+
+			tagsLi[i].style.color = '#666666';
+			tagLi[i].style.color = "#666666";
+		}
+	}
+	if(tag=='tag4'){
+		window.scrollTo(0,document.body.scrollHeight);
+	}
+}
+
+if(self==top){
+	//top.location='/';
+}
+function url(u){
+	window.location.href=u;
+}
+</script>
+<script type="text/javascript" language="javascript" src="/js/left_mouse.js"></script>
+<script type="text/javascript" language="javascript" src="/js/ifcp.js"></script>
+</html>

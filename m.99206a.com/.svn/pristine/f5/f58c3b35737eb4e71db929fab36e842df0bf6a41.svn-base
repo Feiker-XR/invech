@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="keywords" content="娱乐"/>
+<meta name="description" content="娱乐"/>
+<title>皇冠娱乐城----皇冠娱乐城官方网址打造东方最具公信力的第一线上娱乐城</title>
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black">	
+<link rel="shortcuticon" href="/favicon.ico" /><link rel="stylesheet" href="/css/bootstrap.min.css"><link rel="stylesheet" href="/css/font-awesome.min.css">	<link rel="stylesheet" type="text/css" href="/fonts-new/iconfont.css">	<link rel="stylesheet" href="/styles/ezweb.css"><link rel="stylesheet" href="/css/500f_new_wap.css"><script src="/js/jquery-2.2.0.min.js"></script><script src="/js/zhuce.js"></script><script src="/js/trend_listen_scrllo.js"></script><script src="/js/common.js"></script><script src="/js/bet_match.js"></script>	
+<script type="text/javascript">
+if (self != top){
+    top.location.href = self.location;href;
+}
+</script><style>body{margin:0; padding:0;}body, html{height: 100%;}.swiper-wrapper .swiper-container-horizontal>.swiper-pagination{bottom: 60px;left: 0;width: 100%;}</style>
+</head>
+<!--<frameset rows="*" frameborder="NO" border="0" framespacing="0" width="100%">
+
+<frame name="mem_index" src="{:Url("Index/home")}" style="background: #f2f2f2;"><noframes> -->
+<body bgcolor="#FFFFFF" text="#000000" style="height: 100%;">	{include file='common/nav'}	{include file='common/header'}<iframe name="mem_index" src="/index/home.html" scrolling="no" frameborder="0"  id="iframeid"  style="display: none;"></iframe>
+</body>
+<!--</noframes> -->
+
+<script type="text/javascript">$(function(){	//  var ifm= $("#iframeid");
+//  
+//  ifm.css("height",$(window).height());
+//  ifm.css("width",$(window).width());
+////	alert(ifm.width)
+//  $(".hide_gif").hide();
+//  $("#iframeid").show();		$(window).resize(function(){
+
+	    var ifm= $("#iframeid");	    var bodyClientH = screen.height;	   	var bodyClientW = screen.width;	    
+	    ifm.width(bodyClientW);		    ifm.height(bodyClientH);	
+	    $(".hide_gif").hide();
+	    $("#iframeid").show();//	    	parent.location.reload();
+	})//传值监听走势图//var iframeId_out = $(window.frames["mem_index"].document).find(".wap_500_style")//iframeId_out.css({//	top : $(document).scrollTop() + $(window).height() - 90//})	//$(window).scroll(function(){// 	trendHeight = $(document).scrollTop() + $(window).height() - 90;//	var	y = $(window).height() - 50;//	var iframeId_style = $(window.frames["mem_index"].document).find(".wap_500_style");//	var iframeId_middle = $(window.frames["mem_index"].document).find(".wap_500_middle");//  iframeId_style.css({// 		"top" : trendHeight//  });//  iframeId_middle.css({//  	"top" : trendHeight - 350//  })//})//var iframeId_style = $(window.frames["mem_index"].document).find(".wap_500_style");//var trendHeight = $(window.frames["mem_index"].document).height() - 90////iframeId_style.css({//	"top" : trendHeight//});$(window).bind('scrollstart', function(){    var iframeId_style = $(window.frames["mem_index"].document).find(".wap_500_style");    iframeId_style.hide(); 	var trendHeightS = $(document).scrollTop() + $(window).height() - 90;    iframeId_style.css({   		"top" : trendHeightS    });});$(window).bind('scrollstop', function(e){//	$(window.frames["mem_index"].document).changeFrameHeight()//	$("#iframeid").find("iframe")[0].contentWindow.changeFrameHeight()//	$(window.document).contents().find("#iframeid")[0].contentWindow.changeFrameHeight();   	var trendHeightP = $(document).scrollTop() + $(window).height() - 90;	var iframeId_style = $(window.frames["mem_index"].document).find(".wap_500_style");	var iframeId_middle = $(window.frames["mem_index"].document).find(".wap_500_middle");    iframeId_style.css({   		"top" : trendHeightP    });    iframeId_middle.css({    	"top" : trendHeightP - 350    })        iframeId_style.show()});	$(window).scroll(function(){		windowTopAll = $(window).scrollTop();		childTopAll = $(window.frames["mem_index"].document).find("#s_betiframe")		childTopSport = $(window.frames["mem_index"].document).find("#J_SportsIFrame")		//		childTopSport.document.find("#bbbbbbbbbb")//		//		//		//		$("#bbbbbbbbbb").val(windowTopAll + 60)//		childTopAll.css({//			top : windowTopAll + 60//		})			})})</script>
+</html>

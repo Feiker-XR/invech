@@ -1,0 +1,16 @@
+			<div class="container-fluid">
+				<table border="1" width="100%" style="border:1px solid #ccc;margin:10px auto" >
+					<tr align="center">
+						<th>第三方名称</th>
+						<th>分组名称</th>
+						<th>通道名称</th>
+					</tr>	
+					{volist name='warn_codes' id='row'}
+					<tr align="center">					
+						<td>{$row.paythird_name}</td>				
+						<td>{$row.set_name}</td>
+						<td>{$row.setconfig_name}</td>								
+					</tr>
+					{/volist}
+				</table>		
+			</div>

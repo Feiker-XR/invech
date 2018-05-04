@@ -1,0 +1,25 @@
+<?php
+namespace app\admin\controller;
+use app\admin\Login;
+use think\Cache;
+class admin extends Login{
+    
+    public function index(){
+
+        $adminid = session('adminid');
+
+        $now_date = date("Y-m", time());
+        $date = input('date',$now_date);
+        $firstday = $date.'-01';
+        $lastday = date('Y-m-d', strtotime("$firstday +1 month -1 day"));
+
+        $this->view->page_header = '首页';
+        return $this->fetch();
+    }
+
+    public function logout(){
+        session(null);
+        cookie(null,config('cookie.prefix'));
+       	$this->redirect('/index/login');
+    }    
+}

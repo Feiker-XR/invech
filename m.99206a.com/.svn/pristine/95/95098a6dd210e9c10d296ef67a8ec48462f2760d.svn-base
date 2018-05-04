@@ -1,0 +1,317 @@
+<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:83:"/mnt/wwwroot/www.dd788799.com/mobile/../application/index/mview/user/record_ds.html";i:1513608006;}*/ ?>
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>万丰国际</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+	<link rel="stylesheet" href="/css/bootstrap.min.css">
+	<link rel="stylesheet" href="/css/font-awesome.min.css">
+	<link rel="stylesheet" href="/styles/ucenter.css">
+	<link rel="stylesheet" type="text/css" href="/fonts-new/iconfont.css">	
+	<link rel="stylesheet" href="/styles/ezweb.css">
+	<link rel="stylesheet" href="/css/500f_new_wap.css">		
+	<script src="/assets/jquery.js"></script>
+	<script src="/js/bootstrap.min.js"></script>
+</head> 
+<script language="javascript">
+//if(self==top){
+//	top.location='/index.php';
+//}
+</script>
+<body>
+	
+	
+<div class="block_0"></div>
+<div class="ucenter">
+	<div class="container" style="margin: 60px 0px;">
+		<div class="row" style="margin-left: 0px;">
+			<div class="panel panel-default">
+			  <div class="panel-heading">
+			    <h3 class="panel-title">未结注单 <span class="pull-right" ><a target="mem_index" href="/user/report.html">历史报表</a></span></h3>
+			  </div>
+			  <div class="panel-body">
+			    <div role="tabpanel">
+				  <!-- Nav tabs -->
+				  <ul class="nav nav-tabs nav-tile" role="tablist">
+				    <li class="active"><a target="mem_index" href="/user/record_ds">体育单式</a></li>
+				    <li><a target="mem_index" href="/user/record_cg">体育串关</a></li>
+				    <li ><a target="mem_index" href="/user/record_cp">彩票游戏</a></li>
+				  </ul>
+
+				  <!-- Tab panes -->
+				  <div class="tab-content">
+				    <div role="tabpanel" class="tab-pane active">
+				    	<div class="table-responsive">
+						  <table class="table table-bordered">
+						    <tr class="success">
+							  <td class="zd_item_header">时间/单号</td>
+							  <td class="zd_item_header">投注详细信息</td>
+							  <td class="zd_item_header">金额</td>
+							</tr>
+							
+							<?php if(empty($list)): ?>
+							<tr align="center" bgcolor="#FFFFFF">
+						    <td colspan="3" valign="middle" bgcolor="#FFFFFF"><p class="bg-danger">暂无记录</p></td>
+						    </tr>
+						    <?php endif; foreach($list as $i=>$vo): 
+						    	$score ++ ;
+		       			$bet_money += $vo['bet_money'];
+						$ky += $vo['bet_win'];
+								if(($i%2)==0) $bgcolor="#FFFFFF";
+								else $bgcolor="#F5F5F5";
+							?>
+						    <tr bgcolor="<?=$bgcolor?>" align="center" onMouseOver="this.style.backgroundColor='#FFFFCC'" onMouseOut="this.style.backgroundColor='<?=$bgcolor?>'" style="height:60px;" >
+							  <td>
+							  <span style="color:#46AF98"><?=$vo["bet_time"]?></span><br>
+							  <span style="color:#0DC4FF">
+								<?php echo $vo['ball_sort']; switch($vo['ball_sort']): case "冠军":case "金融": break; ?>
+									{defalut /}<?php echo $vo['master']; endswitch; switch($vo['point_column']): case "match_ho":case "match_ao": ?>
+										让球
+									<?php break; case "match_dxdpl":case "match_dxxpl": ?>
+										大小
+									<?php break; case "match_dsdpl":case "match_dsspl": ?>
+										单双
+									<?php break; case "match_bho":case "match_bao": ?>
+										上半场让球
+									<?php break; case "match_bdpl":case "match_bxpl": ?>
+										上半场大小
+									<?php break; case "match_bzm":case "match_bzg":case "match_bzh": ?>
+										全场独赢
+									<?php break; case "match_bmdy":case "match_bgdy":case "match_bhdy": ?>
+										半场独赢
+									<?php break; case "match_hr_bd10":case "match_hr_bd20":case "match_hr_bd21":case "match_hr_bd30":case "match_hr_bd31":case "match_hr_bd32":case "match_hr_bd40":case "match_hr_bd41":case "match_hr_bd42":case "match_hr_bd43": ?>
+										上半波胆主
+									<?php break; case "match_hr_bdg10":case "match_hr_bdg20":case "match_hr_bdg21":case "match_hr_bdg30":case "match_hr_bdg31":case "match_hr_bdg32":case "match_hr_bdg40":case "match_hr_bdg41":case "match_hr_bdg42":case "match_hr_bdg43": ?>
+										上半波胆客
+									<?php break; case "value=\'match_hr_bd00":case "match_hr_bd11":case "match_hr_bd22":case "match_hr_bd33":case "match_hr_bd44":case "match_hr_bdup5\"": ?>
+										上半波胆平
+									<?php break; case "match_bd10":case "match_bd20":case "match_bd21":case "match_bd30":case "match_bd31":case "match_bd32":case "match_bd40":case "match_bd41":case "match_bd42":case "match_bd43": ?>
+										波胆主
+									<?php break; case "match_bdg10":case "match_bdg20":case "match_bdg21":case "match_bdg30":case "match_bdg31":case "match_bdg32":case "match_bdg40":case "match_bdg41":case "match_bdg42":case "match_bdg43": ?>
+										波胆客
+									<?php break; case "value=\'match_bd00":case "match_bd11":case "match_bd22":case "match_bd33":case "match_bd44":case "match_bdup5\"": ?>
+										波胆平
+									<?php break; case "match_total01pl":case "match_total23pl":case "match_total46pl":case "match_total7uppl": ?>
+										入球数
+									<?php break; case "match_bqmm":case "match_bqmh":case "match_bqmg":case "match_bqhm":case "match_bqhh":case "match_bqhg":case "match_bqgm":case "match_bqgh":case "match_bqgg": ?>
+										半全场
+									<?php break; endswitch; ?>							  	
+							  </span><br>
+							  <span style="color:#F90">HG_<?=$vo["number"]?></span></td>
+							  <td>
+					    	<span style="color:#F00"><?php echo $vo['match_name']; ?></span>
+					    	<?php if($vo['match_type'] == 2): ?>
+					    		<?php echo $vo['match_time']; endif; ?>
+					    	<br>
+					    	<?php if(($vo['point_column'] == 'match_ho') or ($vo['point_column'] == 'match_ao') or ($vo['point_column'] == 'match_bao') or ($vo['point_column'] == 'match_bho')): if(($vo['match_showtype'] == 'c') or ($vo['match_showtype'] == 'C')): ?>
+				    				<font style="color:#000000"><?php echo $vo['guest']; ?></font>
+				    				<?php echo $vo['match_rgg']; ?>
+				    				<font style="color:#000000"><?php echo $vo['master']; ?></font>(主)
+				    			<?php else: ?>
+				    				<font style="color:#000000"><?php echo $vo['master']; ?></font>
+				    				<?php echo $vo['match_rgg']; ?>
+				    				<font style="color:#000000"><?php echo $vo['guest']; ?></font>
+				    			<?php endif; else: ?>
+				    			<font style="color:#000000"><?php echo $vo['master']; ?></font>
+				    			<?php switch($vo['point_column']): case "match_bd10": ?>
+										1:0
+									<?php break; case "match_bd20": ?>
+										2:0
+									<?php break; case "match_bd21": ?>
+										2:1
+									<?php break; case "match_bd30": ?>
+										3:0
+									<?php break; case "match_bd31": ?>
+										3:1
+									<?php break; case "match_bd32": ?>
+										3:2
+									<?php break; case "match_bd40": ?>
+										4:0
+									<?php break; case "match_bd41": ?>
+										4:1
+									<?php break; case "match_bd42": ?>
+										4:2
+									<?php break; case "match_bd43": ?>
+										4:3
+									<?php break; case "match_bdg10": ?>
+										1:0
+									<?php break; case "match_bdg20": ?>
+										2:0
+									<?php break; case "match_bdg21": ?>
+										2:1
+									<?php break; case "match_bdg30": ?>
+										3:0
+									<?php break; case "match_bdg31": ?>
+										3:1
+									<?php break; case "match_bdg32": ?>
+										3:2
+									<?php break; case "match_bdg40": ?>
+										4:0
+									<?php break; case "match_bdg41": ?>
+										4:1
+									<?php break; case "match_bdg42": ?>
+										4:2
+									<?php break; case "match_bdg43": ?>
+										4:3
+									<?php break; case "match_bd00": ?>
+										0:0
+									<?php break; case "match_bd11": ?>
+										1:1
+									<?php break; case "match_bd22": ?>
+										2:2
+									<?php break; case "match_bd33": ?>
+										3:3
+									<?php break; case "match_bd44": ?>
+										4:4
+									<?php break; case "match_bdup5": ?>
+										UP5
+									<?php break; default: if($vo['guest'] != ''): ?>
+											VS.
+										<?php endif; endswitch; ?>
+				    			
+				    			<font style="color:#890209"><?php echo $vo['guest']; ?></font>
+					    	<?php endif; ?>
+					    	<br/>
+					    	<font  style="color:#000000">
+					    	<?php if(($vo['ball_sort'] == '冠军') or ($vo['ball_sort'] == '金融')): $ss	=	explode("@",$vo["bet_info"]); ?>
+					    		<font color='red'><?php echo $ss[0]; ?></font>@<font font="red"><?php echo $ss[1]; ?></font>
+					    	<?php else: switch($vo['point_column']): case "match_hr_bd10":case "match_hr_bd20":case "match_hr_bd21":case "match_hr_bd30":case "match_hr_bd31":case "match_hr_bd32":case "match_hr_bd40":case "match_hr_bd41":case "match_hr_bd42":case "match_hr_bd43": ?>
+											波胆  @ <font color='red'><?php echo $vo['bet_point']; ?></font>
+										<?php break; case "match_hr_bdg10":case "match_hr_bdg20":case "match_hr_bdg21":case "match_hr_bdg30":case "match_hr_bdg31":case "match_hr_bdg32":case "match_hr_bdg40":case "match_hr_bdg41":case "match_hr_bdg42":case "match_hr_bdg43": ?>
+											波胆  @ <font color='red'><?php echo $vo['bet_point']; ?></font>
+										<?php break; case "value=\'match_hr_bd00":case "match_hr_bd11":case "match_hr_bd22":case "match_hr_bd33":case "match_hr_bd44":case "match_hr_bdup5\"": ?>
+											波胆  @ <font color='red'><?php echo $vo['bet_point']; ?></font>
+										<?php break; case "match_bd10":case "match_bd20":case "match_bd21":case "match_bd30":case "match_bd31":case "match_bd32":case "match_bd40":case "match_bd41":case "match_bd42":case "match_bd43": ?>
+											波胆  @ <font color='red'><?php echo $vo['bet_point']; ?></font>
+										<?php break; case "match_bdg10":case "match_bdg20":case "match_bdg21":case "match_bdg30":case "match_bdg31":case "match_bdg32":case "match_bdg40":case "match_bdg41":case "match_bdg42":case "match_bdg43": ?>
+											波胆  @ <font color='red'><?php echo $vo['bet_point']; ?></font>
+										<?php break; case "value=\'match_bd00":case "match_bd11":case "match_bd22":case "match_bd33":case "match_bd44":case "match_bdup5\"": ?>
+											波胆  @ <font color='red'><?php echo $vo['bet_point']; ?></font>
+										<?php break; case "match_ho":case "match_bho": ?>
+											<?php echo $vo['master']; if(!(empty($vo['match_nowscore']) || (($vo['match_nowscore'] instanceof \think\Collection || $vo['match_nowscore'] instanceof \think\Paginator ) && $vo['match_nowscore']->isEmpty()))): ?>(<?php echo $vo['match_nowscore']; ?>)<?php endif; ?> @ <font color='red'><?php echo $vo['bet_point']; ?></font>
+										<?php break; case "match_ao":case "match_bao": ?>
+											<?php echo $vo['guest']; if(!(empty($vo['match_nowscore']) || (($vo['match_nowscore'] instanceof \think\Collection || $vo['match_nowscore'] instanceof \think\Paginator ) && $vo['match_nowscore']->isEmpty()))): ?>(<?php echo $vo['match_nowscore']; ?>)<?php endif; ?> @ <font color='red'><?php echo $vo['bet_point']; ?></font>
+										<?php break; ?>
+										<!-- 标准盘 -->
+										<?php case "match_bzm":case "match_bmdy": ?>
+											<?php echo $vo['master']; ?> 独赢<?php if(!(empty($vo['match_nowscore']) || (($vo['match_nowscore'] instanceof \think\Collection || $vo['match_nowscore'] instanceof \think\Paginator ) && $vo['match_nowscore']->isEmpty()))): ?>(<?php echo $vo['match_nowscore']; ?>)<?php endif; ?> @ <font color='red'><?php echo $vo['bet_point']; ?></font>
+										<?php break; case "match_bzg":case "match_bgdy": ?>
+											<?php echo $vo['guest']; ?> 独赢<?php if(!(empty($vo['match_nowscore']) || (($vo['match_nowscore'] instanceof \think\Collection || $vo['match_nowscore'] instanceof \think\Paginator ) && $vo['match_nowscore']->isEmpty()))): ?>(<?php echo $vo['match_nowscore']; ?>)<?php endif; ?> @ <font color='red'><?php echo $vo['bet_point']; ?></font>
+										<?php break; case "match_bzh":case "match_bhdy": ?>
+											和局<?php if(!(empty($vo['match_nowscore']) || (($vo['match_nowscore'] instanceof \think\Collection || $vo['match_nowscore'] instanceof \think\Paginator ) && $vo['match_nowscore']->isEmpty()))): ?>(<?php echo $vo['match_nowscore']; ?>)<?php endif; ?> @ <font color='red'><?php echo $vo['bet_point']; ?></font>
+										<?php break; case "match_bdpl":case "match_dxdpl": ?>
+											O<?php echo $vo['match_dxgg']; ?> @ <font color='red'><?php echo $vo['bet_point']; ?></font>
+										<?php break; case "match_bxpl":case "match_dxxpl": ?>
+											U<?php echo $vo['match_dxgg']; ?> @ <font color='red'><?php echo $vo['bet_point']; ?></font>
+										<?php break; case "match_dsdpl": ?>
+											单  @ <font color='red'><?php echo $vo['bet_point']; ?></font>
+										<?php break; case "match_dsspl": ?>
+											双  @ <font color='red'><?php echo $vo['bet_point']; ?></font>
+										<?php break; case "match_total01pl": ?>
+											0~1  @ <font color='red'><?php echo $vo['bet_point']; ?></font>
+										<?php break; case "match_total23pl": ?>
+											2~3  @ <font color='red'><?php echo $vo['bet_point']; ?></font>
+										<?php break; case "match_total46pl": ?>
+											4~6  @ <font color='red'><?php echo $vo['bet_point']; ?></font>
+										<?php break; case "match_total7uppl": ?>
+											7UP  @ <font color='red'><?php echo $vo['bet_point']; ?></font>
+										<?php break; case "match_bqmm": ?>
+											<?php echo $vo['master']; ?>/<?php echo $vo['master']; ?> @ <font color='red'><?php echo $vo['bet_point']; ?></font>
+										<?php break; case "match_bqmh": ?>
+											<?php echo $vo['master']; ?>/和局  @ <font color='red'><?php echo $vo['bet_point']; ?></font>
+										<?php break; case "match_bqmg": ?>
+											<?php echo $vo['master']; ?>/<?php echo $vo['guest']; ?> @ <font color='red'><?php echo $vo['bet_point']; ?></font>
+										<?php break; case "match_bqhm": ?>
+											和局/<?php echo $vo['master']; ?> @ <font color='red'><?php echo $vo['bet_point']; ?></font>
+										<?php break; case "match_bqhh": ?>
+											和局/和局 @ <font color='red'><?php echo $vo['bet_point']; ?></font>
+										<?php break; case "match_bqhg": ?>
+											和局/<?php echo $vo['guest']; ?> @ <font color='red'><?php echo $vo['bet_point']; ?></font>
+										<?php break; case "match_bqgm": ?>
+											<?php echo $vo['guest']; ?>/<?php echo $vo['master']; ?> @ <font color='red'><?php echo $vo['bet_point']; ?></font>
+										<?php break; case "match_bqgh": ?>
+											<?php echo $vo['guest']; ?>/和局 @ <font color='red'><?php echo $vo['bet_point']; ?></font>
+										<?php break; case "match_bqgg": ?>
+											<?php echo $vo['guest']; ?>/<?php echo $vo['guest']; ?> @ <font color='red'><?php echo $vo['bet_point']; ?></font>
+										<?php break; endswitch; endif; ?>
+					    	</font>
+					    	<?php if(!in_array(($vo['status']), explode(',',"0,3,7,6"))): 					    		if((strtolower($vo["match_showtype"])=="c")&&(strpos('&match_ao,match_ho,match_bho,match_bao&',$vo["point_column"])>0)){
+								?>
+								[<?php echo $vo['TG_Inball']; ?>]:[<?php echo $vo['MB_Inball']; ?>]
+								<?php
+								}elseif($vo["ball_sort"] == "冠军" || $vo["ball_sort"] == "金融"){
+								}else{
+								?>
+								[<?php echo $vo['MB_Inball']; ?>]:[<?php echo $vo['TG_Inball']; ?>]
+								<?php
+								}
+								endif; if(($vo['lose_ok'] == '0') and ($vo['ball_sort'] == '足球滚球')): ?>
+					    		[确认中]
+					    	<?php elseif(($vo['status'] == '0') and ($vo['ball_sort'] == '足球滚球')): ?>
+					    		[已确认]
+					    	<?php else: endif; ?>
+						      </td>
+							  <td ><span style="color:#46AF98">下注:</span><br><?=$vo["bet_money"]?><br><?php
+	  if($vo["status"]==0){
+		  if(strtotime($vo["bet_time"])+60<time()) echo '<span style="color:#0DC4FF">赢:</span><br><font color="red">'.$vo["bet_win"].'</font>';
+			else echo '<span style="color:#0DC4FF">最高可赢:</span><br><font color="red">'.double_format($vo["bet_win"]+$vo["fs"]).'</font>';
+	  }else{
+		  echo '<span style="color:#0DC4FF">赢:</span><br><font color="red">'.double_format($vo["bet_win"]+$vo["fs"]).'</font>';
+	  }
+	?></td>
+						      </tr>
+							<?php endforeach; ?>
+		
+							
+						    <td colspan="3" style="padding:0;">
+                            	<div class="panel-footer">  	
+                            		<ul class="pagination">
+                            			
+                            			<li><a href="javascript:;">总投注金额：<span style="color:#FF0000"><?php echo $bet_money; ?></span>，最高可赢金额：<span style="color:#FF0000"><?php echo $ky; ?></span></a></li>
+                            		</ul>
+                            	</div>
+                            </td>
+                            
+                            
+     
+						  </table>  
+						  <div><?php echo $list->render(); ?></div>                        
+						</div>
+				    </div>
+				  </div>
+
+				</div>
+			  </div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="block_60"></div>
+<script>
+$(function(){
+	//点击底部固定导航条切换
+$(".nav500_bottom_a").click(function(){
+	var navThis = $(this);
+	navThis.css("color","#d9901e")
+	navThis.parent().siblings("span").find("a").css("color","#999999")
+	navThis.find("i").addClass("nav500_b_active");
+	navThis.parent().siblings("span").find("i").removeClass("nav500_b_active");
+	navThis.addClass("nav500_bottom_active").parent().siblings("span").find("a").removeClass("nav500_bottom_active")
+	});
+	
+})
+</script>
+<script type="text/javascript" language="javascript" src="/js/left_mouse.js"></script>
+<script type="text/javascript">
+//子页面传递高度给顶层iframe  
+function changeFrameHeight(){
+    bodyClientH = document.body.clientHeight;
+    bodyClientW = document.body.clientWidth;
+    var iframeId = $(window.parent.document).find("#iframeid")
+    iframeId.css("height",bodyClientH + 300)
+}   
+changeFrameHeight()			
+</script>
+</body>
+</html>

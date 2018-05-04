@@ -1,0 +1,45 @@
+<extend name="Public/base" />
+
+<block name="body">
+	<!-- 标题栏 -->
+
+		<div class="main-title">
+        <h2>{:I('id')?'编辑':'新增'}管理员</h2>
+    </div>
+	<!-- 修改密码表单 -->
+	<form action="__SELF__" method="post" class="form-horizontal">
+		<input type="hidden" name="id" value="{:I('id')}">
+		<div class="form-item">
+			<label class="item-label">管理员名字：</label>
+			<div class="controls">
+				<input type="text" name="username" class="text input-large" <?=(I('id')?'readonly':'')?> autocomplete="off" value="{$user['username']}"/>
+			</div>
+		</div>
+		<div class="form-item">
+			<label class="item-label">密码：</label>
+			<div class="controls">
+				<input type="password" name="password" class="text input-large" autocomplete="off" />
+			</div>
+		</div>
+		<div class="form-item">
+			<label class="item-label">确认密码：</label>
+			<div class="controls">
+				<input type="password" name="repassword" class="text input-large" autocomplete="off" />
+			</div>
+		</div>
+		<div class="form-item">
+			<button type="submit" class="btn submit-btn ajax-post" target-form="form-horizontal">确 认</button>
+			<button class="btn btn-return" onclick="javascript:history.back(-1);return false;">返 回</button>
+		</div>
+	</form>
+			</div>
+	</div>
+</block>
+
+<block name="script">
+	<script src="__STATIC__/thinkbox/jquery.thinkbox.js"></script>
+	<script type="text/javascript">
+        //导航高亮
+        $('.side-sub-menu').find('a[href="{:Url('User/admin_list')}"]').closest('li').addClass('current');
+    </script>
+</block>

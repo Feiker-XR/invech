@@ -1,0 +1,193 @@
+<?php exit;?>00155039658567e4dbaeecb993af6422d0a58327d95cs:8529:"a:2:{s:8:"template";s:8465:"<html><!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8" />
+		<meta name="format-detection" content="telephone=no" />
+		<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE11" />
+		<title>【<?php echo $categoryInfo["name"];?>开奖结果】<?php echo $categoryInfo["name"];?>开奖查询_<?php echo $categoryInfo["name"];?>开奖号码-<?php echo $sys["site_title"];?></title>
+		<meta name="keywords" content="<?php echo $categoryInfo["keywords"];?>" />
+		<meta name="distribution" content="<?php echo $categoryInfo["description"];?>" />
+		<link rel="stylesheet" href="/themes/168pc/css/headorfood.css" />
+		<link rel="stylesheet" href="/themes/168pc/css/bjkl8_index.css" />
+		<link rel="stylesheet" href="/themes/168pc/css/user_adv.css" />
+		<link rel="stylesheet" href="/themes/168pc/css/idangerous.swiper.css" />
+		<script src="/themes/168pc/js/lib/bootstrap-3.3.0/js/tests/vendor/jquery.min.js"></script>
+		<script src="/themes/168pc/js/lib/bootstrap-3.3.0/dist/js/bootstrap.min.js"></script>
+		<script type="text/javascript" src="/themes/168pc/js/lib/jquery-1.7.2.min.js"></script>
+	</head>
+	<body>
+		<div class="bodybox">
+		<?php $__Template->display("themes/168pc/head"); ?>
+			<div class="haomabox">
+				<div class="waring" id="waringbox">
+					<div class="flash"><i></i></div>
+					温馨提示：因网络问题，开奖结果会有延迟，所以您需要去喝杯咖啡等一会儿！
+				</div>
+				<div class="haomaqu" id="klsf">
+					<div class="haomaqul">
+						<div class="haomaline">
+							<div class="haomaimg">
+								<img src="/themes/168pc/img/small_logo/bjkl8.png" />
+							</div>
+							<div class="numberqu">
+								<div class="nuberqutit">
+									<span class="klsf">北京快乐8</span>第
+									<span class="preDrawIssue"></span> 期开奖号码
+									<input type="hidden" id="drawTime">
+									<input type="hidden" id="preDrawIssue" />
+								</div>
+								<div class="kajianhao"  id="jnumber">
+									<ul>
+										<li class="numLightblue">1</li>
+										<li class="numLightblue">2</li>
+										<li class="numLightblue">3</li>
+										<li class="numLightblue">4</li>
+										<li class="numLightblue">5</li>
+										<li class="numLightblue">6</li>
+										<li class="numLightblue">7</li>
+										<li class="numLightblue">8</li>
+										<li class="numLightblue">9</li>
+										<li class="numLightblue tabLine">10</li>
+										<li class="numLightblue">11</li>
+										<li class="numLightblue">12</li>
+										<li class="numLightblue">13</li>
+										<li class="numLightblue">14</li>
+										<li class="numLightblue">15</li>
+										<li class="numLightblue">16</li>
+										<li class="numLightblue">17</li>
+										<li class="numLightblue">18</li>
+										<li class="numLightblue">19</li>
+										<li class="numLightblue">20</li>
+										<li class="numLightblue">21</li>
+									</ul>
+								</div>
+
+							</div>
+						</div>
+						<div class="haomaline homaline2">
+							<div class="haomaimg">
+								<p class="kaijianname">北京快乐8</p>
+							</div>
+							<div class="margt30">
+								<ul class="zoushimap">
+									<li class="list lihead no_left">走势图表：</li>
+								<?php $listList = service("duxcms","Label","categoryList",array( "app"=>"DuxCms", "label"=>"categoryList", "parent_id"=>446 , "limit"=>4));  if(is_array($listList)) foreach($listList as $list){ ?>
+									<li class="list">
+										<a href="<?php echo $list["curl"];?>"><?php echo $list["name"];?></a>
+									</li>
+                                 <?php } ?>
+								</ul>
+							</div>
+							<div class="newtuijian">
+								<ul class="zoushimap">
+									<li class="list lihead no_left">新手推荐：</li>
+									<li class="list no_left">
+										<a href="/beijingkuaile849100501.html">玩法规则</a>
+									</li>
+									
+								</ul>
+							</div>
+						</div>
+					</div>
+					<div class="haomaqur">
+						<div class="haomaqur_l">
+							<div class="line linetit">距<span class="nextIssue"></span>期开奖仅有</div>
+							<div class="line linetime" id="timebox">
+								<div class="opening opentyle">开奖中...</div>
+								<span class="bgtime hour">...</span>
+								<span class="hourtxt">时</span>
+								<span class="bgtime minute">...</span>
+								<span>分</span>
+								<span class="bgtime second">...</span>
+								<span>秒</span>
+							</div>
+							<div class="line linetit height40">已开<span class="drawCount"></span>期，还有<span class="sdrawCount"></span>期</div>
+							<div class="line soundId">
+								<div class="soundline soundSet" id="soundSet">
+									<div class="soundbtn"><i>铃声设置</i>
+										<div class="soundicon stopsound">
+											<audio src="media/RING_01.wav" controls="controls" id="audioid">
+												Your browser does not support the audio tag.
+											</audio>
+										</div>
+										<div class="soundpanel">
+											<div class="close"></div>
+											<div class="soundlist">
+												<ul>
+													<li><label><input type="radio" name="sound" value="none" checked="checked">&nbsp;不提示(默认)</label></li>
+													<li><label><input type="radio" name="sound" value="RING_01">&nbsp;声音一(闹钟铃)</label></li>
+													<li><label><input type="radio" name="sound" value="RING_02">&nbsp;声音二(上课铃)</label></li>
+													<li><label><input type="radio" name="sound" value="RING_03">&nbsp;声音三(打锣声)</label></li>
+													<li><label><input type="radio" name="sound" value="RING_04">&nbsp;声音四(打鼓声)</label></li>
+													<li><label><input type="radio" name="sound" value="RING_05">&nbsp;声音五(点滴声)</label></li>
+													<li>
+														提示时间：
+														<select>
+															<option value="5">开奖前5秒</option>
+															<option value="10" selected="selected">开奖前10秒</option>
+															<option value="20">开奖前20秒</option>
+															<option value="30">开奖前30秒</option>
+															<option value="40">开奖前40秒</option>
+															<option value="50">开奖前50秒</option>
+															<option value="60">开奖前60秒</option>
+														</select>
+													</li>
+												</ul>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="line margt20 guangimg" id="startVideo">
+							<img src="/themes/168pc/img/video/kaile8.jpg" />
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="kaijiangjl margt20">
+				<div class="head">
+					<ul class="zoushimap index_kjls klsfindex_kjls" id="kaijiangjl">
+						<li class="kaijiltit">开奖记录</li>
+					</ul>
+					<div id="kjls">
+<?php $listList = service("duxcms","Label","categoryList",array( "app"=>"DuxCms", "label"=>"categoryList", "class_id"=>447 , "limit"=>1));  if(is_array($listList)) foreach($listList as $list){ ?>
+						<a href="<?php echo $list["curl"];?>"><?php echo $list["name"];?></a>
+                        <?php } ?>						</div>
+				</div>
+				<div class="listcontent">
+					<div class="jrsmhmtj" id="jrsmhmtj">
+						<table id="jrsmhmtjTab" cellpadding="1" cellspacing="1" border="0">
+						</table>
+
+					</div>
+				</div>
+			</div>
+<?php $__Template->display("themes/168pc/foot"); ?>
+
+	</body>
+	<script type="text/javascript" src="/themes/168pc/js/lib/config.js"></script>
+	<script type="text/javascript" src="/themes/168pc/js/lib/GA.js"></script>
+	<script type="text/javascript" src="/themes/168pc/js/loacal/bjkl8/bjkl8_index.js"></script>
+	<script type="text/javascript" src="/themes/168pc/js/loacal/bjkl8/bjkl8_kaijiang.js"></script>
+	<script type="text/javascript" src="/themes/168pc/js/loacal/animate/animate.js"></script>
+	<script src="/themes/168pc/js/lib/idangerous.swiper.min.js"></script>
+	<div id="videobox">
+		<div class="content">
+			<div class="head">
+				北京快乐8开奖视频
+				<div class="btn">
+					<ul>
+						<li class="closevideo"><i class="iconfont"></i></li>
+						<li class="small">小屏</li>
+						<li class="big">中屏</li>
+					</ul>
+				</div>
+			</div>
+			<div class="animate">
+				<iframe style="height:100%;width:100%;border: none;" scrolling="no" src="/themes/168pc/js/lib/video/bjkl8Video/index.html"></iframe>
+			</div>
+		</div>
+	</div>
+</html>";s:12:"compile_time";i:1518860585;}";

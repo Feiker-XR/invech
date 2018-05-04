@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport"
+	content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<title>皇冠娱乐城</title>
+<link rel="stylesheet" href="/css/style_new_500f.css" />
+<script src="/js/jquery1.9.0.min.js"></script>
+<script src="//.com/device.js/0.2.7/device.js"></script>
+<style type="text/css">
+* {
+	margin: 0;
+	padding: 0;
+}
+
+a {
+	text-decoration: none;
+}
+
+.weixin-tip {
+	display: none;
+	position: fixed;
+	left: 0;
+	top: 0;
+	bottom: 0;
+	background: rgba(0, 0, 0, 0.8);
+	filter: alpha(opacity = 80);
+	height: 100%;
+	width: 100%;
+	z-index: 9999;
+}
+
+.weixin-tip p {
+	text-align: center;
+	margin-top: 10%;
+	padding: 0 5%;
+}
+
+.nav500_right_had a.blue_focus {
+	width: 100px;
+	font-size: 16px;
+}
+
+.nav500_right_had span {
+	color: #ffb611;
+	margin-top: 2px;
+}
+</style>
+</head>
+<body>
+	<div class="weixin-tip">
+		<div class="nav500_right_had">
+			<a href='/' class="cl_fff f14 blue_focus test_url"> <img
+				src="/img/narrow-leftwap2.png" class="fl" /> <span class="fl">返回首页</span>
+			</a>
+		</div>
+		<p>
+			<img src="/img/live_weixin.png" alt="微信打开" />
+		</p>
+	</div>
+	<div class="head">
+		<img src="/img/logo-pay-wap.png" />
+	</div>
+	<div class="block_30"></div>
+	<a href="/" class="wap_btn">继续访问WAP手机端</a>
+	<div class="block_20"></div>
+	<div class="wap_tip">温馨提示：WAP手机端直接点击链接访问。</div>
+	<div class="block_30"></div>
+	<div class="wap_load">
+		<a href="http://jqbsj.cn/500f.apk"><img src="/img/left_1.png" /></a> <a
+			href="itms-apps://itunes.apple.com/cn/app/500%E5%8F%91/id1260968885?mt=8"><img
+			src="/img/left_2.png" /></a>
+	</div>
+	<div class="block_30"></div>
+	<div class="wap_tip_2">推荐您使用手机APP购彩，请选择对应系统下载。</div>
+	<div class="block_40"></div>
+	<div class="footer">copy right © 皇冠娱乐城 reserved</div>
+</body>
+<script type="text/javascript">
+	$(window)
+			.on(
+					"load",
+					function() {
+						var winHeight = $(window).height();
+						function is_weixin() {
+							var ua = navigator.userAgent.toLowerCase();
+							if (ua.match(/MicroMessenger/i) == "micromessenger") {
+								return true;
+							} else {
+								return false;
+							}
+						}
+						var isWeixin = is_weixin();
+						if (isWeixin) {
+							$(".weixin-tip").css("height", winHeight);
+							$(".weixin-tip").show();
+						} else {
+							$(".weixin-tip").hide();
+							if (device.ios()) {
+								window.location = 'itms-apps://itunes.apple.com/cn/app/500%E5%8F%91/id1260968885?mt=8';
+							} else if (device.android()) {
+								window.location = 'http://jqbsj.cn/500f.apk';
+							}
+						}
+					})
+</script>
+</html>

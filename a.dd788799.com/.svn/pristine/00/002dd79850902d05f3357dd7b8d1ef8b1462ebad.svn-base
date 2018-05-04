@@ -1,0 +1,61 @@
+<form class="form-horizontal">
+  <div class="box-body">
+    <div class="form-group">
+      <input type="hidden" id="soft-id" value="0">
+      <label for="inputEmail3" class="col-sm-2 control-label">软件名称</label>
+
+      <div class="col-sm-10">
+        <input type="text" class="form-control" id="Name" placeholder="软件名称" value="">
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="inputPassword3" class="col-sm-2 control-label">软件描述</label>
+
+      <div class="col-sm-10">
+        <input type="text" class="form-control" id="Desc" placeholder="软件描述" value="">
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="inputPassword3" class="col-sm-2 control-label">软件类型</label>
+
+      <div class="col-sm-10">
+        <input type="text" class="form-control" id="qid" placeholder="软件类型ID" value="">
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="inputPassword3" class="col-sm-2 control-label">图标地址</label>
+
+      <div class="col-sm-10">
+        <input type="text" class="form-control" id="IconUrl" placeholder="图标地址" value="">
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="inputPassword3" class="col-sm-2 control-label">软件大小</label>
+
+      <div class="col-sm-10">
+        <input type="text" class="form-control" id="Size" placeholder="软件大小" value="">
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="inputPassword3" class="col-sm-2 control-label">软件地址</label>
+
+      <div class="col-sm-10">
+        <input type="text" class="form-control" id="FileURL" placeholder="软件地址" value="">
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="inputPassword3" class="col-sm-2 control-label">软件版本</label>
+
+      <div class="col-sm-10">
+        <input type="text" class="form-control" id="Ver" placeholder="软件版本" value="">
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="inputPassword3" class="col-sm-2 control-label">运行参数</label>
+
+      <div class="col-sm-10">
+        <input type="text" class="form-control" id="Parame" placeholder="运行参数" value="">
+      </div>
+    </div>
+  </div>
+</form>

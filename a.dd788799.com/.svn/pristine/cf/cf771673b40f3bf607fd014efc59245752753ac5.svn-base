@@ -1,0 +1,49 @@
+<?php
+namespace app\index\controller;
+use app\index\Login;
+use app\common\model\Type;
+class agent extends Login{
+
+	 //代理名下会员投注记录
+    public function bet_record(){        
+        $request    = request();
+        $list       = $this->user->getBetList($request);
+       	$this->assign('list',$list);
+        return $this->fetch();
+    }
+     //代理名下会员日投注记录
+    public function bet_day_record(){  
+        $list    =   $this->user->getBetDailyAllBuild()->paginate();
+        $this->assign('list',$list);
+        return $this->fetch();
+    }
+    
+    //充值记录
+    public function recharge_record(){
+
+        $request    =   request();
+        $list       =   $this->user->getDepositList($request);
+        $this->assign('list',$list);
+        return $this->fetch();
+    } 
+     //代理名下会员日充值记录
+    public function recharge_day_record(){  
+       
+        $list    =   $this->user->getDepositDailyAllBuild()->paginate();
+        $this->assign('list',$list);
+        return $this->fetch();
+    }
+    //提现记录
+    public function withdraw_record(){
+        $request    =   request();
+        $list       =   $this->user->getWithdrawList($request);
+        $this->assign('list',$list);
+        return $this->fetch();
+    }
+     //代理名下会员日提现记录
+    public function withdraw_day_record(){  
+        $list    =   $this->user->getWithdrawDailyAllBuild()->paginate();
+        $this->assign('list',$list);
+        return $this->fetch();
+    }
+}

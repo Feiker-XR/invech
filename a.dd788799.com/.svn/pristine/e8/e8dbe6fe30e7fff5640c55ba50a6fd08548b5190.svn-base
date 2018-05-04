@@ -1,0 +1,195 @@
+{extend name="public/user_head"/}
+{block name="body"}
+<header class="header">
+    <i class='left' onclick="javascript:history.back(-1);">返回</i>
+    <h1>提现记录</h1>
+</header>
+<style type="text/css">
+    ul.condition li:last-child span{
+        float: left;
+    }
+    ul.condition li:last-child {
+        float: left;
+    }
+    section.table{
+        margin-bottom: .5rem;
+    }
+    header h1{
+        margin:0;
+    }
+    ul.condition li:last-child span{
+        margin-left:.3rem;
+    }
+    ul.condition li input[type=date]{
+        line-height: normal;
+        padding: 0;
+        border-radius: 0;
+        font-size: .12rem!important;
+        text-align: center;
+        width: 50%;
+    }
+</style>
+<main class="inner_body">
+    <section class="fund_detail">
+         <ul class="condition">
+             <li>
+                 <p _long="3">最近三天</p>
+                 <p _long="7">最近七天</p>
+                 <p _long="30">最近一月</p>
+             </li>
+            <li><span>提现时间：</span><input type="date" value="" id="_date"/></li>
+        </ul>
+    </section>
+    <section class="table">
+        <div id="pullrefresh" class="mui-content mui-scroll-wrapper">
+            <div class="mui-scroll">
+                <table>
+                    <thead>
+                    <tr>
+                        <th>申请时间</th>
+                        <th>申请金额</th>
+                        <th>手续费</th>
+                        <th>到账金额</th>
+                    </tr>
+                    </thead>
+                    <tbody id="lists">
+                    {if(!$list['list']->isEmpty())}
+                    {foreach $list['list'] as $v}
+                    <tr>
+                        <td>{$v->created_at}</td>
+                        <td>{$v->amount}</td>
+                        <td style="color:green">-{$v->debit_amount}</td>
+                        <td>{$v->real_amount}</td>
+
+                    </tr>
+                    {/foreach}
+                    {else}
+                    <tr><td colspan="4" styl="text-align:center;">暂无数据</td></tr>
+                    {/if}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <input type="hidden" id="startTime" value=""/>
+        <input type="hidden" id="endTime" value=""/>
+    </section>
+</main>
+<script type="text/javascript">
+    $(function () {
+
+        // 设置容器高度
+         $('section.table').height($('main').height()-$('ul.condition').height() - $('section.table table tr td').height());
+         // 设置默认日期
+        //$('#_date').val(formatDate(new Date()).split(' ')[0]);
+    });
+    mui.init({
+        pullRefresh: {
+            container: '#pullrefresh',
+            up: {
+                contentrefresh: '正在加载...',
+                contentnomore:'没有更多数据了',
+                callback: pullupRefresh
+            }
+        }
+    });
+    var page = 1;
+    /**
+     * 上拉加载具体业务实现
+     */
+    function pullupRefresh() {
+        //setTimeout(function() {
+            page++;
+            var stime   = $('#startTime').val();
+            var endTime = $("#endTime").val();
+            loadMore(stime,endTime,page)
+           /* mui.ajax('/user/withdraw_record?page='+page+'&startTime='+stime+'&endTime='+endTime,{
+                dataType:'json',
+                type:'POST',
+                timeout:10000,
+                headers:{'Content-Type':'application/json'},
+                success:function(data){
+                    var html = data.data;
+                    var len  = (html.split("tr").length-1)/2;
+                    if(html){
+                        $('#lists').append(html);
+                        mui('#pullrefresh').pullRefresh().endPullupToRefresh(false);
+                    }else{
+                        mui('#pullrefresh').pullRefresh().endPullupToRefresh(true);
+                    }
+                },
+                error:function(xhr,type,errorThrown){
+                    //异常处理；
+                    console.log(type);
+                }
+            });*/
+        //}, 1500);
+    }
+    // 搜寻日期
+    $('#_date').change(function(){
+       
+        var stime = $("#_date").val();
+            stime = stime+" 00:00:00";
+        var endTime = stime.split(' ')[0] + " 59:59:59";
+        $('#startTime').val(stime);
+        $('#endTime').val(endTime);  
+       loadMore(stime,endTime);
+    });
+    // 快捷日期
+    $('.condition li:first-child p').click(function () {
+        var _this = $(this);
+        var _startTime = setQuickDate(_this);
+        var _endTime = formatDate(new Date());
+        $('#startTime').val(_startTime);
+        $('#endTime').val(_endTime);
+        loadMore(_startTime,_endTime);
+    });
+
+    // 加载数据
+    function loadMore(_startTime,_endTime,page){
+        var _url = '/user/withdraw_record';
+        if(page){
+            _url += '?page='+page+'&startTime='+_startTime+'&endTime='+_endTime;
+        }else{
+            _url += '?startTime='+_startTime+'&endTime='+_endTime;
+        }
+        mui.ajax(_url,{
+            dataType:'json',
+            type:'POST',
+            timeout:10000,
+            headers:{'Content-Type':'application/json'},
+            success:function(data){
+                var html = data.data;
+                var len  = (html.split("tr").length-1)/2;
+                console.log(html);
+                if(page){
+                    if(html){
+                        $('#lists').append(html);
+                        //mui('#pullrefresh').pullRefresh().endPullupToRefresh(false);
+                        this.endPullupToRefresh(false);
+                    }else{
+                        //mui('#pullrefresh').pullRefresh().endPullupToRefresh(true);
+                        this.endPullupToRefresh(true);
+                    }
+                }else{
+                    if(html){
+                        if(len<15){
+                            //mui('#pullrefresh').pullRefresh().disablePullupToRefresh();
+                            this.disablePullupToRefresh();
+                        }else{
+                            //mui('#pullrefresh').pullRefresh().enablePullupToRefresh();
+                            this.enablePullupToRefresh();
+                        }
+                        $('#lists').html(html);
+                    }else{
+                        $('#lists').html('<tr><td colspan="4" style="text-align:center;">暂无数据</td></tr>');
+                    }
+                }
+            },
+            error:function (error) {
+                console.log(error);
+                alert('ajax error');
+            }
+        });
+    }
+</script>
+{/block}

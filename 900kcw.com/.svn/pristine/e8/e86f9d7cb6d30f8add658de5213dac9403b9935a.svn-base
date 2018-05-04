@@ -1,0 +1,1578 @@
+<?php
+namespace app\home\controller;
+
+/**
+ *  开采网,开奖号码数据接口
+ */
+class LotteryController extends DataController
+{
+    /**
+     * 北京赛车pk10
+     */
+    public function pk10()
+    {
+        try{
+            $mem   = $this->create_link() ;
+            $code  = !empty($_REQUEST['code']) ? $_REQUEST['code'] : 10001 ;
+            $new_request =  isset($_REQUEST['lottery']) ? 1 : 0 ; //是否需要立即新请求数据
+            $url   = 'https://k.leqq.cc/pks/getLotteryPksInfo.php?issue=&lotCode='.$code ;
+
+            $prefix= 'pk10' ; //key前缀
+            $key   = $prefix.'_lottery';
+            $issue = 60 * 5 ;
+            $data  = $mem->get($key) ;
+            $isNextLottery = $this->isNewLottery($data) ; //判断是否到了下一期的开奖时间
+
+            //缓存数据为空,或者有新请求,或者
+            if (empty($data) || $new_request || $isNextLottery)
+            {
+                $data = $this->getData($url) ;
+                $mem->set($key,$data,0,$issue) ;
+                //如果是请求新开奖数据,那么清除对应的缓存数据,保证数据的时效
+                $this->cleanCache($new_request,$prefix);
+            } else {
+                $this->formatTime($data) ;
+            }
+
+            echo $data;die;
+
+        } catch (\Exception $e){
+            echo '网络延迟' ; die;
+        }
+    }
+
+    /**
+     * 极速赛车
+     */
+    public function jssc()
+    {
+        try{
+            $mem   = $this->create_link() ;
+            $code  = !empty($_REQUEST['code']) ? $_REQUEST['code'] : 10037 ;
+            $new_request =  isset($_REQUEST['lottery']) ? 1 : 0 ; //是否需要立即新请求数据
+            $url   = 'https://k.leqq.cc/pks/getLotteryPksInfo.php?issue=&lotCode='.$code ;
+
+            $prefix= 'jssc' ; //key前缀
+            $key   = $prefix.'_lottery';
+            $issue = 60 * 5 ;
+            $data  = $mem->get($key) ;
+            $isNextLottery = $this->isNewLottery($data) ; //判断是否到了下一期的开奖时间
+
+            //缓存数据为空,或者有新请求,或者
+            if (empty($data) || $new_request || $isNextLottery)
+            {
+                $data = $this->getData($url) ;
+                $mem->set($key,$data,0,$issue) ;
+                //如果是请求新开奖数据,那么清除对应的缓存数据,保证数据的时效
+                $this->cleanCache($new_request,$prefix);
+            } else {
+                $this->formatTime($data) ;
+            }
+
+            echo $data;die;
+
+        } catch (\Exception $e){
+            echo '网络延迟' ; die;
+        }
+    }
+
+
+    /**
+     *  重庆时时彩
+     */
+    public function cqssc()
+    {
+        try{
+            $mem   = $this->create_link() ;
+            $code  = !empty($_REQUEST['code']) ? $_REQUEST['code'] : 10002 ;
+            $url   = 'https://k.leqq.cc/CQShiCai/getBaseCQShiCai.php?issue=&lotCode='.$code ;
+            $new_request =  isset($_REQUEST['lottery']) ? 1 : 0 ; //是否需要立即新请求数据
+
+            $prefix= 'cqssc' ; //key前缀
+            $key   = $prefix.'_lottery';
+            $issue = 60 * 10 ;
+            $data  = $mem->get($key) ;
+            $isNextLottery = $this->isNewLottery($data) ; //判断是否到了下一期的开奖时间
+
+            //缓存数据为空,或者有新请求,或者
+            if (empty($data) || $new_request || $isNextLottery)
+            {
+                $data = $this->getData($url);
+                $mem->set($key,$data,0,$issue);
+                //如果是请求新开奖数据,那么清除对应的缓存数据,保证数据的时效
+                $this->cleanCache($prefix);
+            } else {
+                $this->formatTime($data) ;
+            }
+            echo $data;die;
+
+        } catch (\Exception $e) {
+            echo '网络延迟' ; die;
+        }
+    }
+
+    /**
+     *  天津时时彩
+     */
+    public function tjssc()
+    {
+        try{
+            $mem   = $this->create_link() ;
+            $code  = !empty($_REQUEST['code']) ? $_REQUEST['code'] : 10003 ;
+            $url   = 'https://k.leqq.cc/CQShiCai/getBaseCQShiCai.php?issue=&lotCode='.$code ;
+            $new_request =  isset($_REQUEST['lottery']) ? 1 : 0 ; //是否需要立即新请求数据
+
+            $prefix = 'tjssc' ;
+            $key    = $prefix.'_lottery';
+            $issue  = 60 * 10 ;
+            $data   = $mem->get($key) ;
+
+            $isNextLottery = $this->isNewLottery($data) ; //判断是否到了下一期的开奖时间
+
+            if (empty($data) || $new_request || $isNextLottery)
+            {
+                $data = $this->getData($url) ;
+                $mem->set($key,$data,0,$issue) ;
+                //如果是请求新开奖数据,那么清除对应的缓存数据,保证数据的时效
+                $this->cleanCache($prefix);
+            } else {
+                $this->formatTime($data) ;
+            }
+            echo $data;die;
+
+        } catch (\Exception $e) {
+            echo '网络延迟' ; die;
+        }
+    }
+
+
+    /**
+     * 新疆时时彩
+     */
+    public function xjssc()
+    {
+        try{
+            $mem   = $this->create_link() ;
+            $code  = !empty($_REQUEST['code']) ? $_REQUEST['code'] : 10004 ;
+            $url   = 'https://k.leqq.cc/CQShiCai/getBaseCQShiCai.php?issue=&lotCode='.$code ;
+            $new_request =  isset($_REQUEST['lottery']) ? 1 : 0 ; //是否需要立即新请求数据
+
+            $prefix = 'xjssc' ;
+            $key    = $prefix.'_lottery';
+            $issue  = 60 * 10 ;
+            $data   = $mem->get($key) ;
+
+            $isNextLottery = $this->isNewLottery($data) ; //判断是否到了下一期的开奖时间
+
+            if ( empty($data) || $new_request || $isNextLottery )
+            {
+                $data = $this->getData($url) ;
+                $mem->set($key,$data,0,$issue) ;
+                //如果是请求新开奖数据,那么清除对应的缓存数据,保证数据的时效
+                $this->cleanCache($prefix) ;
+            } else {
+                $this->formatTime($data) ;
+            }
+            echo $data;die;
+
+        } catch (\Exception $e) {
+            echo '网络延迟' ; die;
+        }
+    }
+
+
+    /**
+     *  极速时时彩
+     */
+    public function jsssc()
+    {
+        try{
+            $mem   = $this->create_link() ;
+            $code  = !empty($_REQUEST['code']) ? $_REQUEST['code'] : 10036 ;
+            $url   = 'https://k.leqq.cc/CQShiCai/getBaseCQShiCai.php?issue=&lotCode='.$code ;
+            $new_request =  isset($_REQUEST['lottery']) ? 1 : 0 ; //是否需要立即新请求数据
+
+            $prefix = 'jsssc' ;
+            $key    = $prefix.'_lottery';
+            $issue  = 60 * 10 ;
+            $data   = $mem->get($key) ;
+
+            $isNextLottery = $this->isNewLottery($data) ; //判断是否到了下一期的开奖时间
+
+            if ( empty($data) || $new_request || $isNextLottery )
+            {
+                $data = $this->getData($url) ;
+                $mem->set($key,$data,0,$issue) ;
+                //如果是请求新开奖数据,那么清除对应的缓存数据,保证数据的时效
+                $this->cleanCache($prefix) ;
+            } else {
+                $this->formatTime($data) ;
+            }
+            echo $data;die;
+
+        } catch (\Exception $e) {
+            echo '网络延迟' ; die;
+        }
+    }
+
+
+    /**
+     *  广东快乐十分
+     */
+    public function gdkl10f()
+    {
+        try{
+            $mem   = $this->create_link() ;
+            $code  = !empty($_REQUEST['code']) ? $_REQUEST['code'] : 10005 ;
+            $url   = 'https://k.leqq.cc/klsf/getLotteryInfo.php?issue=&lotCode='.$code ;
+            $new_request =  isset($_REQUEST['lottery']) ? 1 : 0 ; //是否需要立即新请求数据
+
+            $prefix = 'gdkl10f' ;
+            $key    = $prefix.'_lottery';
+            $issue  = 60 * 10 ;
+            $data   = $mem->get($key) ;
+
+            $isNextLottery = $this->isNewLottery($data) ; //判断是否到了下一期的开奖时间
+
+            if ( empty($data) || $new_request || $isNextLottery )
+            {
+                $data = $this->getData($url) ;
+                $mem->set($key,$data,0,$issue) ;
+                //如果是请求新开奖数据,那么清除对应的缓存数据,保证数据的时效
+                $this->cleanCache($prefix) ;
+            } else {
+                $this->formatTime($data) ;
+            }
+            echo $data;die;
+
+        } catch (\Exception $e) {
+            echo '网络延迟' ; die;
+        }
+    }
+
+
+    /**
+     *  广西快乐十分
+     */
+    public function gxkl10f()
+    {
+        try{
+            $mem   = $this->create_link() ;
+            $code  = !empty($_REQUEST['code']) ? $_REQUEST['code'] : 10038 ;
+            $url   = 'https://k.leqq.cc/gxklsf/getLotteryInfo.php?issue=&lotCode='.$code ;
+            $new_request =  isset($_REQUEST['lottery']) ? 1 : 0 ; //是否需要立即新请求数据
+
+            $prefix = 'gxkl10f' ;
+            $key    = $prefix.'_lottery';
+            $issue  = 60 * 10 ;
+            $data   = $mem->get($key) ;
+
+            $isNextLottery = $this->isNewLottery($data) ; //判断是否到了下一期的开奖时间
+
+            if ( empty($data) || $new_request || $isNextLottery )
+            {
+                $data = $this->getData($url) ;
+                $mem->set($key,$data,0,$issue) ;
+                //如果是请求新开奖数据,那么清除对应的缓存数据,保证数据的时效
+                $this->cleanCache($prefix) ;
+            } else {
+                $this->formatTime($data) ;
+            }
+            echo $data;die;
+
+        } catch (\Exception $e) {
+            echo '网络延迟' ; die;
+        }
+    }
+
+
+
+    /**
+     *  十一运多金
+     */
+    public function syydj()
+    {
+        try{
+            $mem   = $this->create_link() ;
+            $code  = !empty($_REQUEST['code']) ? $_REQUEST['code'] : 10008 ;
+            $url   = 'https://k.leqq.cc/ElevenFive/getElevenFiveInfo.php?issue=&lotCode='.$code ;
+            $new_request =  isset($_REQUEST['lottery']) ? 1 : 0 ; //是否需要立即新请求数据
+
+            $prefix = 'syydj' ;
+            $key   = $prefix.'_lottery' ;
+            $issue = 60 * 10 ;
+            $data  = $mem->get($key) ;
+
+            $isNextLottery = $this->isNewLottery($data) ; //判断是否到了下一期的开奖时间
+
+            if ( empty($data) || $new_request || $isNextLottery )
+            {
+                $data = $this->getData($url);
+                $mem->set($key,$data,0,$issue);
+                //如果是请求新开奖数据,那么清除对应的缓存数据,保证数据的时效
+                $this->cleanCache($prefix) ;
+            } else {
+                $this->formatTime($data) ;
+            }
+            echo $data;die;
+
+        } catch (\Exception $e) {
+            echo '网络延迟' ; die;
+        }
+    }
+
+
+    /**
+     *  pc蛋蛋幸运28
+     */
+    public function pcddxy28()
+    {
+        try{
+            $mem   = $this->create_link() ;
+            $code  = !empty($_REQUEST['code']) ? $_REQUEST['code'] : 10008 ;
+            $url   = 'https://k.leqq.cc/LuckTwenty/getPcLucky28.php?issue=' ;
+            $new_request =  isset($_REQUEST['lottery']) ? 1 : 0 ; //是否需要立即新请求数据
+
+            $prefix = 'pcddxy28' ;
+            $key   = $prefix.'_lottery' ;
+            $issue = 60 * 10 ;
+            $data  = $mem->get($key) ;
+
+            $isNextLottery = $this->isNewLottery($data) ; //判断是否到了下一期的开奖时间
+
+            if ( empty($data) || $new_request || $isNextLottery )
+            {
+                $data = $this->getData($url);
+                $mem->set($key,$data,0,$issue);
+                //如果是请求新开奖数据,那么清除对应的缓存数据,保证数据的时效
+                $this->cleanCache($prefix) ;
+            } else {
+                $this->formatTime($data) ;
+            }
+            echo $data;die;
+
+        } catch (\Exception $e) {
+            echo '网络延迟' ; die;
+        }
+    }
+
+
+    /**
+     *  广东11选5
+     */
+    public function gd11x5()
+    {
+        try{
+            $mem   = $this->create_link() ;
+            $code  = !empty($_REQUEST['code']) ? $_REQUEST['code'] : 10006 ;
+            $url   = 'https://k.leqq.cc/ElevenFive/getElevenFiveInfo.php?issue=&lotCode='.$code ;
+            $new_request =  isset($_REQUEST['lottery']) ? 1 : 0 ; //是否需要立即新请求数据
+
+            $prefix = 'gd11x5' ;
+            $key    = $prefix.'_lottery';
+            $issue  = 60 * 10 ;
+            $data   = $mem->get($key) ;
+
+            $isNextLottery = $this->isNewLottery($data) ; //判断是否到了下一期的开奖时间
+
+            if ( empty($data) || $new_request || $isNextLottery )
+            {
+                $data = $this->getData($url) ;
+                $mem->set($key,$data,0,$issue) ;
+                //如果是请求新开奖数据,那么清除对应的缓存数据,保证数据的时效
+                $this->cleanCache($prefix) ;
+            } else {
+                $this->formatTime($data) ;
+            }
+            echo $data;die ;
+
+        } catch (\Exception $e) {
+            echo '网络延迟' ; die;
+        }
+    }
+
+
+    /**
+     *   上海11选5
+     */
+    public function sh11x5()
+    {
+        try{
+            $mem   = $this->create_link() ;
+            $code  = !empty($_REQUEST['code']) ? $_REQUEST['code'] : 10018 ;
+            $url   = 'https://k.leqq.cc/ElevenFive/getElevenFiveInfo.php?issue=&lotCode='.$code ;
+            $new_request =  isset($_REQUEST['lottery']) ? 1 : 0 ; //是否需要立即新请求数据
+
+            $prefix = 'sh11x5' ;
+            $key    = $prefix.'_lottery';
+            $issue  = 60 * 10 ;
+            $data   = $mem->get($key) ;
+
+            $isNextLottery = $this->isNewLottery($data) ; //判断是否到了下一期的开奖时间
+
+            if ( empty($data) || $new_request || $isNextLottery )
+            {
+                $data = $this->getData($url) ;
+                $mem->set($key,$data,0,$issue) ;
+                //如果是请求新开奖数据,那么清除对应的缓存数据,保证数据的时效
+                $this->cleanCache($prefix) ;
+            } else {
+                $this->formatTime($data) ;
+            }
+            echo $data;die ;
+
+        } catch (\Exception $e) {
+            echo '网络延迟' ; die;
+        }
+    }
+
+
+    /**
+     *   安徽11选5
+     */
+    public function ah11x5()
+    {
+        try{
+            $mem   = $this->create_link() ;
+            $code  = !empty($_REQUEST['code']) ? $_REQUEST['code'] : 10017 ;
+            $url   = 'https://k.leqq.cc/ElevenFive/getElevenFiveInfo.php?issue=&lotCode='.$code ;
+            $new_request =  isset($_REQUEST['lottery']) ? 1 : 0 ; //是否需要立即新请求数据
+
+            $prefix = 'ah11x5' ;
+            $key    = $prefix.'_lottery';
+            $issue  = 60 * 10 ;
+            $data   = $mem->get($key) ;
+
+            $isNextLottery = $this->isNewLottery($data) ; //判断是否到了下一期的开奖时间
+
+            if ( empty($data) || $new_request || $isNextLottery )
+            {
+                $data = $this->getData($url) ;
+                $mem->set($key,$data,0,$issue) ;
+                //如果是请求新开奖数据,那么清除对应的缓存数据,保证数据的时效
+                $this->cleanCache($prefix) ;
+            } else {
+                $this->formatTime($data) ;
+            }
+            echo $data;die ;
+
+        } catch (\Exception $e) {
+            echo '网络延迟' ; die;
+        }
+    }
+
+
+    /**
+     *   江西11选5
+     */
+    public function jx11x5()
+    {
+        try{
+            $mem   = $this->create_link() ;
+            $code  = !empty($_REQUEST['code']) ? $_REQUEST['code'] : 10015 ;
+            $url   = 'https://k.leqq.cc/ElevenFive/getElevenFiveInfo.php?issue=&lotCode='.$code ;
+            $new_request =  isset($_REQUEST['lottery']) ? 1 : 0 ; //是否需要立即新请求数据
+
+            $prefix = 'jx11x5' ;
+            $key    = $prefix.'_lottery';
+            $issue  = 60 * 10 ;
+            $data   = $mem->get($key) ;
+
+            $isNextLottery = $this->isNewLottery($data) ; //判断是否到了下一期的开奖时间
+
+            if ( empty($data) || $new_request || $isNextLottery )
+            {
+                $data = $this->getData($url) ;
+                $mem->set($key,$data,0,$issue) ;
+                //如果是请求新开奖数据,那么清除对应的缓存数据,保证数据的时效
+                $this->cleanCache($prefix) ;
+            } else {
+                $this->formatTime($data) ;
+            }
+            echo $data;die ;
+
+        } catch (\Exception $e) {
+            echo '网络延迟' ; die;
+        }
+    }
+
+
+    /**
+     *   吉林11选5
+     */
+    public function jl11x5()
+    {
+        try{
+            $mem         = $this->create_link() ;
+            $code        = !empty($_REQUEST['code']) ? $_REQUEST['code'] : 10023 ;
+            $url         = 'https://k.leqq.cc/ElevenFive/getElevenFiveInfo.php?issue=&lotCode='.$code ;
+            $new_request =  isset($_REQUEST['lottery']) ? 1 : 0 ; //是否需要立即新请求数据
+
+            $prefix = 'jl11x5' ;
+            $key    = $prefix.'_lottery';
+            $issue  = 60 * 10 ;
+            $data   = $mem->get($key) ;
+
+            $isNextLottery = $this->isNewLottery($data) ; //判断是否到了下一期的开奖时间
+
+            if ( empty($data) || $new_request || $isNextLottery )
+            {
+                $data = $this->getData($url) ;
+                $mem->set($key,$data,0,$issue) ;
+                //如果是请求新开奖数据,那么清除对应的缓存数据,保证数据的时效
+                $this->cleanCache($prefix) ;
+            } else {
+                $this->formatTime($data) ;
+            }
+            echo $data;die ;
+
+        } catch (\Exception $e) {
+            echo '网络延迟' ; die;
+        }
+    }
+
+
+    /**
+     *   广西11选5
+     */
+    public function gx11x5()
+    {
+        try{
+            $mem         = $this->create_link() ;
+            $code        = !empty($_REQUEST['code']) ? $_REQUEST['code'] : 10022 ;
+            $url         = 'https://k.leqq.cc/ElevenFive/getElevenFiveInfo.php?issue=&lotCode='.$code ;
+            $new_request =  isset($_REQUEST['lottery']) ? 1 : 0 ; //是否需要立即新请求数据
+
+            $prefix = 'gx11x5' ;
+            $key    = $prefix.'_lottery';
+            $issue  = 60 * 10 ;
+            $data   = $mem->get($key) ;
+
+            $isNextLottery = $this->isNewLottery($data) ; //判断是否到了下一期的开奖时间
+
+            if ( empty($data) || $new_request || $isNextLottery )
+            {
+                $data = $this->getData($url) ;
+                $mem->set($key,$data,0,$issue) ;
+                //如果是请求新开奖数据,那么清除对应的缓存数据,保证数据的时效
+                $this->cleanCache($prefix) ;
+            } else {
+                $this->formatTime($data) ;
+            }
+            echo $data;die ;
+
+        } catch (\Exception $e) {
+            echo '网络延迟' ; die;
+        }
+    }
+
+
+    /**
+     *   湖北11选5
+     */
+    public function hb11x5()
+    {
+        try{
+            $mem         = $this->create_link() ;
+            $code        = !empty($_REQUEST['code']) ? $_REQUEST['code'] : 10020 ;
+            $url         = 'https://k.leqq.cc/ElevenFive/getElevenFiveInfo.php?issue=&lotCode='.$code ;
+            $new_request =  isset($_REQUEST['lottery']) ? 1 : 0 ; //是否需要立即新请求数据
+
+            $prefix = 'hb11x5' ;
+            $key    = $prefix.'_lottery';
+            $issue  = 60 * 10 ;
+            $data   = $mem->get($key) ;
+
+            $isNextLottery = $this->isNewLottery($data) ; //判断是否到了下一期的开奖时间
+
+            if ( empty($data) || $new_request || $isNextLottery )
+            {
+                $data = $this->getData($url) ;
+                $mem->set($key,$data,0,$issue) ;
+                //如果是请求新开奖数据,那么清除对应的缓存数据,保证数据的时效
+                $this->cleanCache($prefix) ;
+            } else {
+                $this->formatTime($data) ;
+            }
+            echo $data;die ;
+
+        } catch (\Exception $e) {
+            echo '网络延迟' ; die;
+        }
+    }
+
+
+    /**
+     *   辽宁11选5
+     */
+    public function ln11x5()
+    {
+        try{
+            $mem         = $this->create_link() ;
+            $code        = !empty($_REQUEST['code']) ? $_REQUEST['code'] : 10019 ;
+            $url         = 'https://k.leqq.cc/ElevenFive/getElevenFiveInfo.php?issue=&lotCode='.$code ;
+            $new_request =  isset($_REQUEST['lottery']) ? 1 : 0 ; //是否需要立即新请求数据
+
+            $prefix = 'ln11x5' ;
+            $key    = $prefix.'_lottery';
+            $issue  = 60 * 10 ;
+            $data   = $mem->get($key) ;
+
+            $isNextLottery = $this->isNewLottery($data) ; //判断是否到了下一期的开奖时间
+
+            if ( empty($data) || $new_request || $isNextLottery )
+            {
+                $data = $this->getData($url) ;
+                $mem->set($key,$data,0,$issue) ;
+                //如果是请求新开奖数据,那么清除对应的缓存数据,保证数据的时效
+                $this->cleanCache($prefix) ;
+            } else {
+                $this->formatTime($data) ;
+            }
+            echo $data;die ;
+
+        } catch (\Exception $e) {
+            echo '网络延迟' ; die;
+        }
+    }
+
+
+    /**
+     *   江苏11选5
+     */
+    public function js11x5()
+    {
+        try{
+            $mem         = $this->create_link() ;
+            $code        = !empty($_REQUEST['code']) ? $_REQUEST['code'] : 10016 ;
+            $url         = 'https://k.leqq.cc/ElevenFive/getElevenFiveInfo.php?issue=&lotCode='.$code ;
+            $new_request =  isset($_REQUEST['lottery']) ? 1 : 0 ; //是否需要立即新请求数据
+
+            $prefix = 'js11x5' ;
+            $key    = $prefix.'_lottery';
+            $issue  = 60 * 10 ;
+            $data   = $mem->get($key) ;
+
+            $isNextLottery = $this->isNewLottery($data) ; //判断是否到了下一期的开奖时间
+
+            if ( empty($data) || $new_request || $isNextLottery )
+            {
+                $data = $this->getData($url) ;
+                $mem->set($key,$data,0,$issue) ;
+                //如果是请求新开奖数据,那么清除对应的缓存数据,保证数据的时效
+                $this->cleanCache($prefix) ;
+            } else {
+                $this->formatTime($data) ;
+            }
+            echo $data;die ;
+
+        } catch (\Exception $e) {
+            echo '网络延迟' ; die;
+        }
+    }
+
+
+    /**
+     *   浙江11选5
+     */
+    public function zj11x5()
+    {
+        try{
+            $mem         = $this->create_link() ;
+            $code        = !empty($_REQUEST['code']) ? $_REQUEST['code'] : 10025 ;
+            $url         = 'https://k.leqq.cc/ElevenFive/getElevenFiveInfo.php?issue=&lotCode='.$code ;
+            $new_request =  isset($_REQUEST['lottery']) ? 1 : 0 ; //是否需要立即新请求数据
+
+            $prefix = 'zj11x5' ;
+            $key    = $prefix.'_lottery';
+            $issue  = 60 * 10 ;
+            $data   = $mem->get($key) ;
+
+            $isNextLottery = $this->isNewLottery($data) ; //判断是否到了下一期的开奖时间
+
+            if ( empty($data) || $new_request || $isNextLottery )
+            {
+                $data = $this->getData($url) ;
+                $mem->set($key,$data,0,$issue) ;
+                //如果是请求新开奖数据,那么清除对应的缓存数据,保证数据的时效
+                $this->cleanCache($prefix) ;
+            } else {
+                $this->formatTime($data) ;
+            }
+            echo $data;die ;
+
+        } catch (\Exception $e) {
+            echo '网络延迟' ; die;
+        }
+    }
+
+
+    /**
+     *   内蒙古11选5
+     */
+    public function nmg11x5()
+    {
+        try{
+            $mem         = $this->create_link() ;
+            $code        = !empty($_REQUEST['code']) ? $_REQUEST['code'] : 10024 ;
+            $url         = 'https://k.leqq.cc/ElevenFive/getElevenFiveInfo.php?issue=&lotCode='.$code ;
+            $new_request =  isset($_REQUEST['lottery']) ? 1 : 0 ; //是否需要立即新请求数据
+
+            $prefix = 'nmg11x5' ;
+            $key    = $prefix.'_lottery';
+            $issue  = 60 * 10 ;
+            $data   = $mem->get($key) ;
+
+            $isNextLottery = $this->isNewLottery($data) ; //判断是否到了下一期的开奖时间
+
+            if ( empty($data) || $new_request || $isNextLottery )
+            {
+                $data = $this->getData($url) ;
+                $mem->set($key,$data,0,$issue) ;
+                //如果是请求新开奖数据,那么清除对应的缓存数据,保证数据的时效
+                $this->cleanCache($prefix) ;
+            } else {
+                $this->formatTime($data) ;
+            }
+            echo $data;die ;
+
+        } catch (\Exception $e) {
+            echo '网络延迟' ; die;
+        }
+    }
+
+
+    /**
+     *   天津快乐十分
+     */
+    public function tjkl0f()
+    {
+        try{
+            $mem         = $this->create_link() ;
+            $code        = !empty($_REQUEST['code']) ? $_REQUEST['code'] : 10034 ;
+            $url         = 'https://k.leqq.cc/klsf/getLotteryInfo.php?issue=&lotCode='.$code ;
+            $new_request =  isset($_REQUEST['lottery']) ? 1 : 0 ; //是否需要立即新请求数据
+
+            $prefix = 'tjkl0f' ;
+            $key    = $prefix.'_lottery';
+            $issue  = 60 * 10 ;
+            $data   = $mem->get($key) ;
+
+            $isNextLottery = $this->isNewLottery($data) ; //判断是否到了下一期的开奖时间
+
+            if ( empty($data) || $new_request || $isNextLottery )
+            {
+                $data = $this->getData($url) ;
+                $mem->set($key,$data,0,$issue) ;
+                //如果是请求新开奖数据,那么清除对应的缓存数据,保证数据的时效
+                $this->cleanCache($prefix) ;
+            } else {
+                $this->formatTime($data) ;
+            }
+            echo $data;die ;
+
+        } catch (\Exception $e) {
+            echo '网络延迟' ; die;
+        }
+    }
+
+
+    /**
+     *  江苏快3
+     */
+    public function jsk3()
+    {
+        try{
+            $mem   = $this->create_link() ;
+            $code  = !empty($_REQUEST['code']) ? $_REQUEST['code'] : 10007 ;
+            $url   = 'https://k.leqq.cc/lotteryJSFastThree/getBaseJSFastThree.php?issue=&lotCode='.$code ;
+            $new_request =  isset($_REQUEST['lottery']) ? 1 : 0 ; //是否需要立即新请求数据
+
+            $prefix = 'jsk3' ;
+            $key    = $prefix.'_lottery';
+            $issue  = 60 * 10 ;
+            $data   = $mem->get($key) ;
+
+            $isNextLottery = $this->isNewLottery($data) ; //判断是否到了下一期的开奖时间
+
+            if ( empty($data) || $new_request || $isNextLottery )
+            {
+                $data = $this->getData($url) ;
+                $mem->set($key,$data,0,$issue) ;
+                //如果是请求新开奖数据,那么清除对应的缓存数据,保证数据的时效
+                $this->cleanCache($prefix) ;
+            } else {
+                $this->formatTime($data) ;
+            }
+            echo $data;die ;
+
+        } catch (\Exception $e) {
+            echo '网络延迟' ; die;
+        }
+    }
+
+    /**
+     *  吉林快3
+     */
+    public function jlk3()
+    {
+        try{
+            $mem   = $this->create_link() ;
+            $code  = !empty($_REQUEST['code']) ? $_REQUEST['code'] : 10027 ;
+            $url   = 'https://k.leqq.cc/lotteryJSFastThree/getBaseJSFastThree.php?issue=&lotCode='.$code ;
+            $new_request =  isset($_REQUEST['lottery']) ? 1 : 0 ; //是否需要立即新请求数据
+
+            $prefix = 'jlk3' ;
+            $key    = $prefix.'_lottery';
+            $issue  = 60 * 10 ;
+            $data   = $mem->get($key) ;
+
+            $isNextLottery = $this->isNewLottery($data) ; //判断是否到了下一期的开奖时间
+
+            if ( empty($data) || $new_request || $isNextLottery )
+            {
+                $data = $this->getData($url) ;
+                $mem->set($key,$data,0,$issue) ;
+                //如果是请求新开奖数据,那么清除对应的缓存数据,保证数据的时效
+                $this->cleanCache($prefix) ;
+            } else {
+                $this->formatTime($data) ;
+            }
+            echo $data;die ;
+
+        } catch (\Exception $e) {
+            echo '网络延迟' ; die;
+        }
+    }
+
+
+    /**
+     *  河北快3
+     */
+    public function hbk3()
+    {
+        try{
+            $mem   = $this->create_link() ;
+            $code  = !empty($_REQUEST['code']) ? $_REQUEST['code'] : 10028 ;
+            $url   = 'https://k.leqq.cc/lotteryJSFastThree/getBaseJSFastThree.php?issue=&lotCode='.$code ;
+            $new_request =  isset($_REQUEST['lottery']) ? 1 : 0 ; //是否需要立即新请求数据
+
+            $prefix = 'hbk3' ;
+            $key    = $prefix.'_lottery';
+            $issue  = 60 * 10 ;
+            $data   = $mem->get($key) ;
+
+            $isNextLottery = $this->isNewLottery($data) ; //判断是否到了下一期的开奖时间
+
+            if ( empty($data) || $new_request || $isNextLottery )
+            {
+                $data = $this->getData($url) ;
+                $mem->set($key,$data,0,$issue) ;
+                //如果是请求新开奖数据,那么清除对应的缓存数据,保证数据的时效
+                $this->cleanCache($prefix) ;
+            } else {
+                $this->formatTime($data) ;
+            }
+            echo $data;die ;
+
+        } catch (\Exception $e) {
+            echo '网络延迟' ; die;
+        }
+    }
+
+
+    /**
+     *  安徽快3
+     */
+    public function ahk3()
+    {
+        try{
+            $mem   = $this->create_link() ;
+            $code  = !empty($_REQUEST['code']) ? $_REQUEST['code'] : 10030 ;
+            $url   = 'https://k.leqq.cc/lotteryJSFastThree/getBaseJSFastThree.php?issue=&lotCode='.$code ;
+            $new_request =  isset($_REQUEST['lottery']) ? 1 : 0 ; //是否需要立即新请求数据
+
+            $prefix = 'ahk3' ;
+            $key    = $prefix.'_lottery';
+            $issue  = 60 * 10 ;
+            $data   = $mem->get($key) ;
+
+            $isNextLottery = $this->isNewLottery($data) ; //判断是否到了下一期的开奖时间
+
+            if ( empty($data) || $new_request || $isNextLottery )
+            {
+                $data = $this->getData($url) ;
+                $mem->set($key,$data,0,$issue) ;
+                //如果是请求新开奖数据,那么清除对应的缓存数据,保证数据的时效
+                $this->cleanCache($prefix) ;
+            } else {
+                $this->formatTime($data) ;
+            }
+            echo $data;die ;
+
+        } catch (\Exception $e) {
+            echo '网络延迟' ; die;
+        }
+    }
+
+
+    /**
+     *  内蒙古快3
+     */
+    public function nmgk3()
+    {
+        try{
+            $mem   = $this->create_link() ;
+            $code  = !empty($_REQUEST['code']) ? $_REQUEST['code'] : 10029 ;
+            $url   = 'https://k.leqq.cc/lotteryJSFastThree/getBaseJSFastThree.php?issue=&lotCode='.$code ;
+            $new_request =  isset($_REQUEST['lottery']) ? 1 : 0 ; //是否需要立即新请求数据
+
+            $prefix = 'nmgk3' ;
+            $key    = $prefix.'_lottery';
+            $issue  = 60 * 10 ;
+            $data   = $mem->get($key) ;
+
+            $isNextLottery = $this->isNewLottery($data) ; //判断是否到了下一期的开奖时间
+
+            if ( empty($data) || $new_request || $isNextLottery )
+            {
+                $data = $this->getData($url) ;
+                $mem->set($key,$data,0,$issue) ;
+                //如果是请求新开奖数据,那么清除对应的缓存数据,保证数据的时效
+                $this->cleanCache($prefix) ;
+            } else {
+                $this->formatTime($data) ;
+            }
+            echo $data;die ;
+
+        } catch (\Exception $e) {
+            echo '网络延迟' ; die;
+        }
+    }
+
+
+    /**
+     *  福建快3
+     */
+    public function fjk3()
+    {
+        try{
+            $mem   = $this->create_link() ;
+            $code  = !empty($_REQUEST['code']) ? $_REQUEST['code'] : 10031 ;
+            $url   = 'https://k.leqq.cc/lotteryJSFastThree/getBaseJSFastThree.php?issue=&lotCode='.$code ;
+            $new_request =  isset($_REQUEST['lottery']) ? 1 : 0 ; //是否需要立即新请求数据
+
+            $prefix = 'fjk3' ;
+            $key    = $prefix.'_lottery';
+            $issue  = 60 * 10 ;
+            $data   = $mem->get($key) ;
+
+            $isNextLottery = $this->isNewLottery($data) ; //判断是否到了下一期的开奖时间
+
+            if ( empty($data) || $new_request || $isNextLottery )
+            {
+                $data = $this->getData($url) ;
+                $mem->set($key,$data,0,$issue) ;
+                //如果是请求新开奖数据,那么清除对应的缓存数据,保证数据的时效
+                $this->cleanCache($prefix) ;
+            } else {
+                $this->formatTime($data) ;
+            }
+            echo $data;die ;
+
+        } catch (\Exception $e) {
+            echo '网络延迟' ; die;
+        }
+    }
+
+
+    /**
+     *  湖北快三
+     */
+    public function hubk3()
+    {
+        try{
+            $mem   = $this->create_link() ;
+            $code  = !empty($_REQUEST['code']) ? $_REQUEST['code'] : 10032 ;
+            $url   = 'https://k.leqq.cc/lotteryJSFastThree/getBaseJSFastThree.php?issue=&lotCode='.$code ;
+            $new_request =  isset($_REQUEST['lottery']) ? 1 : 0 ; //是否需要立即新请求数据
+
+            $prefix = 'hubk3' ;
+            $key    = $prefix.'_lottery';
+            $issue  = 60 * 10 ;
+            $data   = $mem->get($key) ;
+
+            $isNextLottery = $this->isNewLottery($data) ; //判断是否到了下一期的开奖时间
+
+            if ( empty($data) || $new_request || $isNextLottery )
+            {
+                $data = $this->getData($url) ;
+                $mem->set($key,$data,0,$issue) ;
+                //如果是请求新开奖数据,那么清除对应的缓存数据,保证数据的时效
+                $this->cleanCache($prefix) ;
+            } else {
+                $this->formatTime($data) ;
+            }
+            echo $data;die ;
+
+        } catch (\Exception $e) {
+            echo '网络延迟' ; die;
+        }
+    }
+
+
+    /**
+     *  北京快三
+     */
+    public function bjk3()
+    {
+        try{
+            $mem   = $this->create_link() ;
+            $code  = !empty($_REQUEST['code']) ? $_REQUEST['code'] : 10033 ;
+            $url   = 'https://k.leqq.cc/lotteryJSFastThree/getBaseJSFastThree.php?issue=&lotCode='.$code ;
+            $new_request =  isset($_REQUEST['lottery']) ? 1 : 0 ; //是否需要立即新请求数据
+
+            $prefix = 'bjk3' ;
+            $key    = $prefix.'_lottery';
+            $issue  = 60 * 10 ;
+            $data   = $mem->get($key) ;
+
+            $isNextLottery = $this->isNewLottery($data) ; //判断是否到了下一期的开奖时间
+
+            if ( empty($data) || $new_request || $isNextLottery )
+            {
+                $data = $this->getData($url) ;
+                $mem->set($key,$data,0,$issue) ;
+                //如果是请求新开奖数据,那么清除对应的缓存数据,保证数据的时效
+                $this->cleanCache($prefix) ;
+            } else {
+                $this->formatTime($data) ;
+            }
+            echo $data;die ;
+
+        } catch (\Exception $e) {
+            echo '网络延迟' ; die;
+        }
+    }
+
+
+    /**
+     *  广西快三
+     */
+    public function gxk3()
+    {
+        try{
+            $mem   = $this->create_link() ;
+            $code  = !empty($_REQUEST['code']) ? $_REQUEST['code'] : 10026 ;
+            $url   = 'https://k.leqq.cc/lotteryJSFastThree/getBaseJSFastThree.php?issue=&lotCode='.$code ;
+            $new_request =  isset($_REQUEST['lottery']) ? 1 : 0 ; //是否需要立即新请求数据
+
+            $prefix = 'gxk3' ;
+            $key    = $prefix.'_lottery';
+            $issue  = 60 * 10 ;
+            $data   = $mem->get($key) ;
+
+            $isNextLottery = $this->isNewLottery($data) ; //判断是否到了下一期的开奖时间
+
+            if ( empty($data) || $new_request || $isNextLottery )
+            {
+                $data = $this->getData($url) ;
+                $mem->set($key,$data,0,$issue) ;
+                //如果是请求新开奖数据,那么清除对应的缓存数据,保证数据的时效
+                $this->cleanCache($prefix) ;
+            } else {
+                $this->formatTime($data) ;
+            }
+            echo $data;die ;
+
+        } catch (\Exception $e) {
+            echo '网络延迟' ; die;
+        }
+    }
+
+
+    /**
+     *  北京快乐8
+     */
+    public function bjkl8()
+    {
+        try{
+            $mem   = $this->create_link() ;
+            $code  = !empty($_REQUEST['code']) ? $_REQUEST['code'] : 10014 ;
+            $url   = 'https://k.leqq.cc/LuckTwenty/getBaseLuckTewnty.php?issue=&lotCode='.$code ;
+            $new_request =  isset($_REQUEST['lottery']) ? 1 : 0 ; //是否需要立即新请求数据
+
+            $prefix = 'bjkl8' ;
+            $key    = $prefix.'_lottery' ;
+            $issue  = 60 * 10 ;
+            $data   = $mem->get($key) ;
+
+            $isNextLottery = $this->isNewLottery($data) ; //判断是否到了下一期的开奖时间
+
+            if ( empty($data) || $new_request || $isNextLottery )
+            {
+                $data = $this->getData($url) ;
+                $mem->set($key,$data,0,$issue) ;
+                //如果是请求新开奖数据,那么清除对应的缓存数据,保证数据的时效
+                $this->cleanCache($prefix) ;
+            } else {
+                $this->formatTime($data) ;
+            }
+            echo $data;die ;
+
+        } catch (\Exception $e) {
+            echo '网络延迟' ; die;
+        }
+    }
+
+    /**
+     *  澳洲幸运5
+     */
+    public function azxy5()
+    {
+        try{
+            $mem   = $this->create_link() ;
+            $code  = !empty($_REQUEST['code']) ? $_REQUEST['code'] : 10010 ;
+            $url   = 'https://k.leqq.cc/CQShiCai/getBaseCQShiCai.php?issue=&lotCode='.$code ;
+            $new_request =  isset($_REQUEST['lottery']) ? 1 : 0 ; //是否需要立即新请求数据
+
+            $prefix = 'azxy5' ;
+            $key    = $prefix.'_lottery' ;
+            $issue  = 60 * 10 ;
+            $data   = $mem->get($key) ;
+
+            $isNextLottery = $this->isNewLottery($data) ; //判断是否到了下一期的开奖时间
+
+            if ( empty($data) || $new_request || $isNextLottery )
+            {
+                $data = $this->getData($url) ;
+                $mem->set($key,$data,0,$issue) ;
+                //如果是请求新开奖数据,那么清除对应的缓存数据,保证数据的时效
+                $this->cleanCache($prefix) ;
+            } else {
+                $this->formatTime($data) ;
+            }
+            echo $data;die ;
+
+        } catch (\Exception $e) {
+            echo '网络延迟' ; die;
+        }
+    }
+
+    /**
+     *  澳洲幸运8
+     */
+    public function azxy8()
+    {
+        try{
+            $mem   = $this->create_link() ;
+            $code  = !empty($_REQUEST['code']) ? $_REQUEST['code'] : 10011 ;
+            $url   = 'https://k.leqq.cc/klsf/getLotteryInfo.php?issue=&lotCode='.$code ;
+            $new_request =  isset($_REQUEST['lottery']) ? 1 : 0 ; //是否需要立即新请求数据
+
+            $prefix = 'azxy8' ;
+            $key    = $prefix.'_lottery' ;
+            $issue  = 60 * 10 ;
+            $data   = $mem->get($key) ;
+
+            $isNextLottery = $this->isNewLottery($data) ; //判断是否到了下一期的开奖时间
+
+            if ( empty($data) || $new_request || $isNextLottery )
+            {
+                $data = $this->getData($url) ;
+                $mem->set($key,$data,0,$issue) ;
+                //如果是请求新开奖数据,那么清除对应的缓存数据,保证数据的时效
+                $this->cleanCache($prefix) ;
+            } else {
+                $this->formatTime($data) ;
+            }
+            echo $data;die ;
+
+        } catch (\Exception $e) {
+            echo '网络延迟' ; die;
+        }
+    }
+
+
+    /**
+     *  澳洲幸运10
+     */
+    public function azxy10()
+    {
+        try{
+            $mem   = $this->create_link() ;
+            $code  = !empty($_REQUEST['code']) ? $_REQUEST['code'] : 10012 ;
+            $url   = 'https://k.leqq.cc/pks/getLotteryPksInfo.php?issue=&lotCode='.$code ;
+            $new_request =  isset($_REQUEST['lottery']) ? 1 : 0 ; //是否需要立即新请求数据
+
+            $prefix = 'azxy10' ;
+            $key    = $prefix.'_lottery' ;
+            $issue  = 60 * 10 ;
+            $data   = $mem->get($key) ;
+
+            $isNextLottery = $this->isNewLottery($data) ; //判断是否到了下一期的开奖时间
+
+            if ( empty($data) || $new_request || $isNextLottery )
+            {
+                $data = $this->getData($url) ;
+                $mem->set($key,$data,0,$issue) ;
+                //如果是请求新开奖数据,那么清除对应的缓存数据,保证数据的时效
+                $this->cleanCache($prefix) ;
+            } else {
+                $this->formatTime($data) ;
+            }
+            echo $data;die ;
+
+        } catch (\Exception $e) {
+            echo '网络延迟' ; die;
+        }
+    }
+
+
+    /**
+     *  澳洲幸运20
+     */
+    public function azxy20()
+    {
+        try{
+            $mem   = $this->create_link() ;
+            $code  = !empty($_REQUEST['code']) ? $_REQUEST['code'] : 10013 ;
+            $url   = 'https://k.leqq.cc/LuckTwenty/getBaseLuckTewnty.php?issue=&lotCode='.$code ;
+            $new_request =  isset($_REQUEST['lottery']) ? 1 : 0 ; //是否需要立即新请求数据
+
+            $prefix = 'azxy20' ;
+            $key    = $prefix.'_lottery' ;
+            $issue  = 60 * 10 ;
+            $data   = $mem->get($key) ;
+
+            $isNextLottery = $this->isNewLottery($data) ; //判断是否到了下一期的开奖时间
+
+            if ( empty($data) || $new_request || $isNextLottery )
+            {
+                $data = $this->getData($url) ;
+                $mem->set($key,$data,0,$issue) ;
+                //如果是请求新开奖数据,那么清除对应的缓存数据,保证数据的时效
+                $this->cleanCache($prefix) ;
+            } else {
+                $this->formatTime($data) ;
+            }
+            echo $data;die ;
+
+        } catch (\Exception $e) {
+            echo '网络延迟' ; die;
+        }
+    }
+
+
+    /**
+     *  台湾宾果
+     */
+    public function twbg()
+    {
+        try{
+            $mem   = $this->create_link() ;
+            $code  = !empty($_REQUEST['code']) ? $_REQUEST['code'] : 10047 ;
+            $url   = 'https://k.leqq.cc/LuckTwenty/getBaseLuckTewnty.php?issue=&lotCode='.$code ;
+            $new_request =  isset($_REQUEST['lottery']) ? 1 : 0 ; //是否需要立即新请求数据
+
+            $prefix = 'twbg' ;
+            $key    = $prefix.'_lottery' ;
+            $issue  = 60 * 10 ;
+            $data   = $mem->get($key) ;
+
+            $isNextLottery = $this->isNewLottery($data) ; //判断是否到了下一期的开奖时间
+
+            if ( empty($data) || $new_request || $isNextLottery )
+            {
+                $data = $this->getData($url) ;
+                $mem->set($key,$data,0,$issue) ;
+                //如果是请求新开奖数据,那么清除对应的缓存数据,保证数据的时效
+                $this->cleanCache($prefix) ;
+            } else {
+                $this->formatTime($data) ;
+            }
+            echo $data;die ;
+
+        } catch (\Exception $e) {
+            echo '网络延迟' ; die;
+        }
+    }
+
+
+    /**
+     *  福彩双色球
+     */
+    public function fcssq()
+    {
+        try{
+            $mem   = $this->create_link() ;
+            $code  = !empty($_REQUEST['code']) ? $_REQUEST['code'] : 10039 ;
+            $url   = 'https://k.leqq.cc/QuanGuoCai/getLotteryInfo.php?issue=&lotCode='.$code ;
+            $new_request =  isset($_REQUEST['lottery']) ? 1 : 0 ; //是否需要立即新请求数据
+
+            $prefix = 'fcssq' ;
+            $key    = $prefix.'_lottery' ;
+            $issue  = 60 * 10 ;
+            $data   = $mem->get($key) ;
+
+            $isNextLottery = $this->isNewLottery($data) ; //判断是否到了下一期的开奖时间
+
+            if ( empty($data) || $new_request || $isNextLottery )
+            {
+                $data = $this->getData($url) ;
+                $mem->set($key,$data,0,$issue) ;
+                //如果是请求新开奖数据,那么清除对应的缓存数据,保证数据的时效
+                $this->cleanCache($prefix) ;
+            } else {
+                $this->formatTime($data) ;
+            }
+            echo $data;die ;
+
+        } catch (\Exception $e) {
+            echo '网络延迟' ; die;
+        }
+    }
+
+
+    /**
+     *  福彩3D
+     */
+    public function fc3d()
+    {
+        try{
+            $mem   = $this->create_link() ;
+            $code  = !empty($_REQUEST['code']) ? $_REQUEST['code'] : 10041 ;
+            $url   = 'https://k.leqq.cc/QuanGuoCai/getLotteryInfo1.php?issue=&lotCode='.$code ;
+            $new_request =  isset($_REQUEST['lottery']) ? 1 : 0 ; //是否需要立即新请求数据
+
+            $prefix = 'fc3d' ;
+            $key    = $prefix.'_lottery' ;
+            $issue  = 60 * 10 ;
+            $data   = $mem->get($key) ;
+
+            $isNextLottery = $this->isNewLottery($data) ; //判断是否到了下一期的开奖时间
+
+            if ( empty($data) || $new_request || $isNextLottery )
+            {
+                $data = $this->getData($url) ;
+                $mem->set($key,$data,0,$issue) ;
+                //如果是请求新开奖数据,那么清除对应的缓存数据,保证数据的时效
+                $this->cleanCache($prefix) ;
+            } else {
+                $this->formatTime($data) ;
+            }
+            echo $data;die ;
+
+        } catch (\Exception $e) {
+            echo '网络延迟' ; die;
+        }
+    }
+
+
+    /**
+     *  福彩七乐彩
+     */
+    public function fc7lc()
+    {
+        try{
+            $mem   = $this->create_link() ;
+            $code  = !empty($_REQUEST['code']) ? $_REQUEST['code'] : 10042 ;
+            $url   = 'https://k.leqq.cc/QuanGuoCai/getLotteryInfo.php?issue=&lotCode='.$code ;
+            $new_request =  isset($_REQUEST['lottery']) ? 1 : 0 ; //是否需要立即新请求数据
+
+            $prefix = 'fc7lc' ;
+            $key    = $prefix.'_lottery' ;
+            $issue  = 60 * 60 * 5 ;
+            $data   = $mem->get($key) ;
+
+            $isNextLottery = $this->isNewLottery($data) ; //判断是否到了下一期的开奖时间
+
+            if ( empty($data) || $new_request || $isNextLottery )
+            {
+                $data = $this->getData($url) ;
+                $mem->set($key,$data,0,$issue) ;
+                //如果是请求新开奖数据,那么清除对应的缓存数据,保证数据的时效
+                $this->cleanCache($prefix) ;
+            } else {
+                $this->formatTime($data) ;
+            }
+            echo $data;die ;
+
+        } catch (\Exception $e) {
+            echo '网络延迟' ; die;
+        }
+    }
+
+
+    /**
+     *  超级大乐透
+     */
+    public function ccdlt()
+    {
+        try{
+            $mem   = $this->create_link() ;
+            $code  = !empty($_REQUEST['code']) ? $_REQUEST['code'] : 10042 ;
+            $url   = 'https://k.leqq.cc/QuanGuoCai/getLotteryInfo.php?issue=&lotCode='.$code ;
+            $new_request =  isset($_REQUEST['lottery']) ? 1 : 0 ; //是否需要立即新请求数据
+
+            $prefix = 'ccdlt' ;
+            $key    = $prefix.'_lottery' ;
+            $issue  = 60 * 60 * 24 ;
+            $data   = $mem->get($key) ;
+
+            $isNextLottery = $this->isNewLottery($data) ; //判断是否到了下一期的开奖时间
+
+            if ( empty($data) || $new_request || $isNextLottery )
+            {
+                $data = $this->getData($url) ;
+                $mem->set($key,$data,0,$issue) ;
+                //如果是请求新开奖数据,那么清除对应的缓存数据,保证数据的时效
+                $this->cleanCache($prefix) ;
+            } else {
+                $this->formatTime($data) ;
+            }
+            echo $data;die ;
+
+        } catch (\Exception $e) {
+            echo '网络延迟' ; die;
+        }
+    }
+
+
+    /**
+     *  体彩排列3
+     */
+    public function tcpl3()
+    {
+        try{
+            $mem   = $this->create_link() ;
+            $code  = !empty($_REQUEST['code']) ? $_REQUEST['code'] : 10043 ;
+            $url   = 'https://k.leqq.cc/QuanGuoCai/getLotteryInfo1.php?issue=&lotCode='.$code ;
+            $new_request =  isset($_REQUEST['lottery']) ? 1 : 0 ; //是否需要立即新请求数据
+
+            $prefix = 'tcpl3' ;
+            $key    = $prefix.'_lottery' ;
+            $issue  = 60 * 60 * 24 ;
+            $data   = $mem->get($key) ;
+
+            $isNextLottery = $this->isNewLottery($data) ; //判断是否到了下一期的开奖时间
+
+            if ( empty($data) || $new_request || $isNextLottery )
+            {
+                $data = $this->getData($url) ;
+                $mem->set($key,$data,0,$issue) ;
+                //如果是请求新开奖数据,那么清除对应的缓存数据,保证数据的时效
+                $this->cleanCache($prefix) ;
+            } else {
+                $this->formatTime($data) ;
+            }
+            echo $data;die ;
+
+        } catch (\Exception $e) {
+            echo '网络延迟' ; die;
+        }
+    }
+
+
+    /**
+     *  体彩排列5
+     */
+    public function tcpl5()
+    {
+        try{
+            $mem   = $this->create_link() ;
+            $code  = !empty($_REQUEST['code']) ? $_REQUEST['code'] : 10044 ;
+            $url   = 'https://k.leqq.cc/QuanGuoCai/getLotteryInfo.php?issue=&lotCode='.$code ;
+            $new_request =  isset($_REQUEST['lottery']) ? 1 : 0 ; //是否需要立即新请求数据
+
+            $prefix = 'tcpl5' ;
+            $key    = $prefix.'_lottery' ;
+            $issue  = 60 * 60 * 24 ;
+            $data   = $mem->get($key) ;
+
+            $isNextLottery = $this->isNewLottery($data) ; //判断是否到了下一期的开奖时间
+
+            if ( empty($data) || $new_request || $isNextLottery )
+            {
+                $data = $this->getData($url) ;
+                $mem->set($key,$data,0,$issue) ;
+                //如果是请求新开奖数据,那么清除对应的缓存数据,保证数据的时效
+                $this->cleanCache($prefix) ;
+            } else {
+                $this->formatTime($data) ;
+            }
+            echo $data;die ;
+
+        } catch (\Exception $e) {
+            echo '网络延迟' ; die;
+        }
+    }
+
+
+    /**
+     *  体彩七星彩
+     */
+    public function tcqxc()
+    {
+        try{
+            $mem   = $this->create_link() ;
+            $code  = !empty($_REQUEST['code']) ? $_REQUEST['code'] : 10045 ;
+            $url   = 'https://k.leqq.cc/QuanGuoCai/getLotteryInfo.php?lotCode='.$code ;
+            $new_request =  isset($_REQUEST['lottery']) ? 1 : 0 ; //是否需要立即新请求数据
+
+            $prefix = 'tcqxc' ;
+            $key    = $prefix.'_lottery' ;
+            $issue  = 60 * 60 * 24 ;
+            $data   = $mem->get($key) ;
+
+            $isNextLottery = $this->isNewLottery($data) ; //判断是否到了下一期的开奖时间
+
+            if ( empty($data) || $new_request || $isNextLottery )
+            {
+                $data = $this->getData($url) ;
+                $mem->set($key,$data,0,$issue) ;
+                //如果是请求新开奖数据,那么清除对应的缓存数据,保证数据的时效
+                $this->cleanCache($prefix) ;
+            } else {
+                $this->formatTime($data) ;
+            }
+            echo $data;die ;
+
+        } catch (\Exception $e) {
+            echo '网络延迟' ; die;
+        }
+    }
+
+
+    /**
+     * 格式化时间戳
+     * @param $data
+     */
+    public function formatTime(&$data)
+    {
+        $tmp = json_decode($data,true) ;
+        $tmp['result']['data']['serverTime'] = date('Y-m-d H:i:s',time()) ;
+        $data = json_encode($tmp) ;
+        unset($tmp) ;
+    }
+
+
+    /**
+     *  判断是否到了下一期的开奖时间
+     * @param $data
+     */
+    private  function isNewLottery($data=[])
+    {
+        $status = false ;
+        if (!empty($data)) {
+            $data = json_decode($data,true) ;
+            $time = time(); //当前时间
+            $next_time = strtotime($data['result']['data']['drawTime']) ; //下一期开奖时间
+            if ($time >= $next_time) {
+                $status = true ;
+            }
+        }
+        return $status ;
+    }
+
+}

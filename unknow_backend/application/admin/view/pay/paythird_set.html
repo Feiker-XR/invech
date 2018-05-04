@@ -1,0 +1,262 @@
+{include file="pay:base"}
+
+<!-- page start -->
+<script src="/lib/jquery.wallform.js"></script>
+<<link rel="stylesheet" type="text/css" href="/multiple-select/multiple-select.css" />
+<script src="/multiple-select/multiple-select.js" type="text/javascript"></script>
+<div class="content">
+	  <div class="header">
+	  	 <h1 class="page-title">配置第三方</h1>
+	  </div>
+	  <ul class="breadcrumb">
+		   <li><a href="{:url('index')}">主页</a> <span class="divider">/</span></li>
+		   <li><a href="{:url('paythird')}">添加第三方</a> <span class="divider">/</span></li>
+		   <li class="active"><?php echo $thirdpay['name']?>配置</li>
+	  </ul>
+	<?php if($set){?>
+	<script src="/layer/layer.js"></script>
+	<div class="btn-toolbar">
+		<label style="height:30px;line-height:30px;display: inline-block;vertical-align: middle;margin-left: 20px;float:left;" >筛选分组：</label>	
+	  	<form action="{:url('paythird_set')}?id=<?php echo $id;?>" method="get" style="float: left;">
+	  		<input type="hidden" name="id" value="<?php echo $thirdpay['id']?>">
+		  	<select name="setid" id="setid" class="search-query" style="width:120px;margin-right:10px;">
+				<option value='all'>全部</option>
+				<?php foreach ($set as $v){?>
+				<option value='<?php echo $v['id']?>' <?php if($v['id']==$setid){ echo "selected='selected'";}?> ><?php echo $v['name']?></option>
+				<?php }?>
+			</select>	
+			<input type="submit" class="btn" value="确定" style="margin-top:-8px;"/>
+		</form>
+	</div>
+	
+	<div class="container-fluid">
+		<table border="1" width="100%" style="border:1px solid #ccc;margin:10px auto" >
+			<tr align="center" style="font-size:14px;">
+				<th>#</th>
+				<th>分组名称</th>
+				<th>通道名称</th>
+				<th>第三方名称</th>
+				<th>通道代码</th>
+				<th>最低充值金额</th>
+				<th>最高充值金额</th>
+				<th>报警时间(单位:分)</th>
+				<th>排序权重(大的靠前)</th>
+				<th>风控开关</th>
+				<th title="是否跳转到第三方支付">跳转</th>	
+				<th>状态</th>	
+				<th>会员组</th>			
+				<th>操作</th>
+			</tr>	
+				
+			<?php foreach ($result as $value){?>
+			<tr align="center">	
+				<input type="hidden" class="setid" value="<?php echo $value['set_id']?>"> 	
+				<input type="hidden" class="setconfigid" value="<?php echo $value['id']?>">
+				<input type="hidden" class="thirdid" value="<?php echo $thirdpay['id']?>">	
+				<input type="hidden" class="stat" value="<?php echo $value['status']?>">	
+				<input type="hidden" class="status" value="">	
+				<input type="hidden" class="decimal" value="<?php echo $value['money_decimal']?>">	
+				<td><?php echo $value['id'];?></td>
+				<td width="6%"><?php echo $value['name'];?></td>
+				<td width="6%"><?php echo $value['cname'];?></td>
+				<td width="6%"><?php echo $value['thirdname'];?></td>
+				<td width="6%"><input type="text" class="code" value="<?php echo $value['code']?>" style="width:150px;"></td>
+				<td width="6%"><input type="text" class="min"  value="<?php echo $value['min']?>" style="width:150px;"></td>
+				<td width="6%"><input type="text" class="max"  value="<?php echo $value['max']?>" style="width:150px;"></td>
+				<td width="6%"><input type="text" class="warntime" value="<?php echo $value['warntime']?>" style="width:150px"></td>
+				<td width="6%"><input type="text" class="order" value="<?php echo $value['order']?>" style="width:50px"></td>
+				<td width="10%">
+					<label>
+						<input type='radio' <?php if($value['money_decimal']=='1'){ echo "checked='checked'";}?> name='decimal_<?php echo $value['id']?>' class='radio_decimal' value='1'>
+						<span class='new_show_span_2'>开启</span>
+					</label>				
+					<label>
+						<input type='radio' <?php if($value['money_decimal']=='0'){ echo "checked='checked'";}?> name='decimal_<?php echo $value['id']?>' class='radio_decimal' value='0'>
+						<span class='new_show_span_2'>关闭</span>
+					</label>
+				</td>	
+				<td width="6%">
+					<label title="如果是返回支付地址,或者是二维码,请选择此项">
+						<input type='radio' <?php if($value['cashier']=='0'){ echo "checked='checked'";}?> name='third_cashier_<?php echo $value['id']?>' class='radio_oon' value='0' />
+						<span class='new_show_span_2'>否</span>
+					</label>				
+					<label title="如果需要跳转到第三方网站上完成支付,请选择此项">
+						<input type='radio' <?php if($value['cashier']=='1'){ echo "checked='checked'";}?> name='third_cashier_<?php echo $value['id']?>' class='radio_oon' value='1'>
+						<span class='new_show_span_2'>是</span>
+					</label>
+				</td>			
+				<td width="10%">
+					<label>
+						<input type='radio' <?php if($value['status']=='0'){ echo "checked='checked'";}?> name='third_open_<?php echo $value['id']?>' class='radio_oon' value='0'>
+						<span class='new_show_span_2'>开启</span>
+					</label>				
+					<label>
+						<input type='radio' <?php if($value['status']=='1'){ echo "checked='checked'";}?> name='third_open_<?php echo $value['id']?>' class='radio_oon' value='1'>
+						<span class='new_show_span_2'>关闭</span>
+					</label>
+				</td>
+				<td width="10%">
+					
+					<select name="" multiple=”multiple”>
+						<?php if($value['gid'] == ''){ 
+							foreach($m_group as $k=>$v){
+						?>
+							<option value="<?php echo $v['id'];?>" selected="selected" ><?php echo $v['name']; ?></option>
+						<?php
+							}
+						}else{
+							$gids = explode(',',$value['gid']);
+							foreach($m_group as $k=>$v){
+								if(in_array($v['id'],$gids)){ 
+								?>
+									<option value="<?php echo $v['id'];?>" selected="selected"><?php echo $v['name']; ?></option>
+								<?php 
+								}else{
+								?>
+								<option value="<?php echo $v['id'];?>"><?php echo $v['name']; ?></option>
+								<?php
+								}
+							}
+						}
+						?>
+					</select>
+				</td>
+				<td><a href="javascript:;" class="EditSave btn">保存</a></td>
+			</tr>
+			<?php }?>
+		</table>		
+	</div>
+	<?php }?>
+	
+	<div style="width:100%;margin-left:20px;">
+		{$set_config->render()}
+	</div>
+	
+	<hr>
+	
+	<footer>
+	<p class="pull-right">
+		<a href="javascript:;">
+				<?php echo $appSet[ 'app_name'];?>
+			</a>
+	</p>
+	<p>&copy;
+			<?php echo $appSet[ 'company_year'];?>
+			<a href="<?php echo $appSet['company_url'];?>"
+			title="<?php echo $appSet['company'];?>" target="_blank">
+				<?php echo $appSet[ 'company'];?>
+			</a>
+	</p>
+	</footer>
+	
+</div>
+
+<style>
+	#up_btn{width:46px;overflow: hidden;height:20px;border:none;display: inline-block;float: left;}
+	#up_btn input{margin-left:-13px;margin-top:-3px;}
+	.photoimg_p{display: inline-block;padding-top: 5px;padding-left: 15px;}
+	#imageform{width:380px;float:left}
+	#preview{margin-top: -12px;}
+	.container_fluid_news{clear:both;border-top:1px solid #ddd;}
+	.row_fluid_news{width:300px;float:left;height:215px;}
+	.form-horizontal .control-group .controls span{margin-top:3px;}
+	.form-horizontal .controls{padding-top:4px;}
+	.contentinput{margin-left: 165px;margin-top: 20px;}
+	.contentinput img{margin-left:15px;}
+	.controls_set_01 label{display:inline-block;width:100px;margin-left:15px;margin-top:5px;}
+	.controls_set_01 label input{margin-top:-3px;}
+	.container-fluid th,.container-fluid td{padding:5px;text-align:center;}
+	.add-third{width: 100px;float: left;color: black;margin-left: 20px;}
+	.btn-toolbar{font-size: 14px;}
+	.form-search{margin-right: 20px;}
+	.container-fluid label{display:inline-block;margin:0px 10px;}
+	.select{position:relative;width:134px;min-width:134px;height:36px;border:1px solid #eee;cursor:pointer;}
+     .select:after{content:"";position:absolute;top:50%;right:10px;margin-top:-2px;border-top:5px solid #666;border-right:5px solid transparent;border-left:5px solid transparent;}
+     .select .select_text{padding:0 20px 0 10px;height:36px;line-height:36px;}
+     .select_ul{display:none;position:absolute;top:34px;left:-1px;width:134px;min-width:134px;border:1px solid #D4D4D4;border-bottom-right-radius:3px;border-bottom-left-radius:3px;background:#fff;}
+     .select_ul li{line-height:36px;text-indent:10px;}
+     .select_ul li:hover{color:#fff;background:#6AA7EA;}
+     .select_ul li.cur{color:#fff;background:#195DA3;}
+
+</style>
+
+<script type="text/javascript">
+	$(function(){
+		  $('select').multipleSelect();
+	});
+
+	$(function(){
+		$(".radio_oon").click(function(){
+			var status = $(this).val();
+			$(this).parents().parents().siblings(".status").val(status);
+		})
+	})
+	$(function(){
+		$(".radio_decimal").click(function(){
+			var decimal = $(this).val();
+			$(this).parents().parents().siblings(".decimal").val(decimal);
+		})
+	})	
+	$(function(){
+		$(".EditSave").click(function(){
+			var status = $(this).parents().siblings(".status").val();
+			if(status==''){
+				Stat = $(this).parents().siblings(".stat").val();
+			}else{
+				Stat = status;
+			}			
+			
+			var setid = $(this).parents().siblings(".setid").val();
+			var setconfigid = $(this).parents().siblings(".setconfigid").val();
+			var thirdid = $(this).parents().siblings(".thirdid").val();
+			var code = $(this).parent().siblings("td").find(".code").val();
+			var min = $(this).parent().siblings("td").find(".min").val();
+			var max = $(this).parent().siblings("td").find(".max").val();
+			var warntime = $(this).parent().siblings("td").find(".warntime").val();
+			var order = $(this).parent().siblings("td").find(".order").val();
+			if(code==''){
+				 alert("第三方通道代码不能为空");
+				 return false;
+			}
+			if(Stat==''){
+				 alert("请选择是否开启");
+				 return false;
+			}
+			if(Number(warntime)<0){
+				 alert("请输入非负整数");
+				 return false;				
+			}		
+			var decimal = $(this).parents().siblings(".decimal").val();
+			$.post("{:url('paythird_set_edit')}?id=<?php echo $id?>",{			
+				status:Stat,
+				setid:setid,
+				setconfigid:setconfigid,
+				thirdid:thirdid,
+				code:code,
+				min:min,
+				max:max,
+				warntime:warntime,
+				decimal:decimal,
+				order:order
+			},function(obj){
+				if(obj.stat == 0){
+					alert(obj.msg);
+					window.location.href = document.URL;
+				}else if(obj.stat == 1){
+					alert(obj.msg);
+				}else{
+					alert(obj.msg);
+				}
+
+			},"json");
+		})
+	})
+</script>
+
+<script type="text/javascript">
+$(function(){
+	$("#pay-menu").addClass('in');
+})
+</script>
+
+{include file="pay:foot"}

@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Member</title>
+<link rel="stylesheet" type="text/css" href="/css/general.css"/>
+<link rel="stylesheet" type="text/css" href="/Scripts/jquery-ui.css" />
+<link rel="stylesheet" type="text/css" href="/newview/css/theme/style.css?version=2.0.0" />
+<link rel="stylesheet" type="text/css" href="/newview/css/style.css" />
+<link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
+<script src="/js/js/jquery-1.8.0.min.js"></script>
+<script type="text/javascript" src="/js/main.js"></script>
+<script type="text/javascript" src="/Scripts/member.js"></script>
+<script type="text/javascript" src="/newview/js/main.js"></script>
+<style type="text/css">
+body{background: white;}
+</style>
+</head>
+<body>
+<div class="head">
+	<!--欢迎-->
+	{include file='common/nav'}
+</div>
+<div class="block_0"></div>	
+	
+<div class="moneyBox_contain">		
+	<div class="ui-header">
+		<div class="ui-headerBox">
+			<!-- logo -->
+			<a class="ui-icon-logo ui-logo" id="Logo"></a>
+			<!-- 导航 -->
+			<ul class="ui-nav">
+				<li id="Nav_0">
+					<a href="/user/userinfo.html" title="会员首页">
+						<span class="ui-icon ui-icon-home ui-icon-50"></span>
+					</a>
+				</li>
+				<li id="Nav_1">
+					<a href="/pay/member.html" title="财务管理">
+						<span class="ui-icon ui-icon-recharge ui-icon-50"></span>
+					</a>
+				</li>
+				<li id="Nav_2">
+					<a href="/user/record_ds.html" title="游戏记录">
+						<span class="ui-icon ui-icon-gameNote ui-icon-50"></span>
+					</a>
+				</li>
+				<li id="Nav_3" class="ui-header-active">
+					<a href="/user/report.html" title="历史记录">
+						<span class="ui-icon ui-icon-data ui-icon-50"></span>
+					</a>
+				</li>
+				<li id="Nav_4" >
+					<a href="/user/sms.html" title="站内短信">
+						<span class="ui-icon ui-icon-announce ui-icon-50"></span>
+					</a>
+				</li>
+       			 <li id="Nav_5">
+					<a href="/user/agent.html" title="代理中心">
+						<span class="ui-icon ui-icon-newActivity ui-icon-50"></span>
+					</a>
+				</li>
+        		<li style="display:none">
+					<a href="http://messenger.providesupport.com/messenger/1x5b67gp1rcy50kqxa0qpsa0jx.html" title="客服中心">
+						<span class="ui-icon ui-icon-online ui-icon-50"></span>
+					</a>
+				</li>
+			</ul>
+			<ul class="ui-function">
+				<!--<li>
+					<a href="#">
+						<span class="ui-icon ui-icon-down ui-icon-20" id="Menu"></span>
+					</a>
+				</li>
+				<li>
+					<a href="#">
+						<span class="ui-icon ui-icon-min ui-icon-20"></span>
+					</a>
+				</li>
+				<li>
+					<a href="javascript:void(0)" id="Logout">
+						<span class="ui-icon ui-icon-max ui-icon-20"></span>
+					</a>
+				</li>-->
+			</ul>
+		</div>
+	</div>	
+	
+	<div class="ui-body">
+		<div class="ui-search" id="subjsshow3" style="display: block;"> 
+	        <span><i class="fas fa-user-circle" style="font-size: 30px"></i>历史记录</span>
+			<ul>
+	            <li class="ui-hover"><a href="/user/report.html"><i class="fas fa-anchor" style="background-color: #F5b52F"></i>报表全览</a></li>
+			</ul>
+		</div>	
+	</div>	
+	
+	
+	
+	<div class="ui-moneyBox">
+		<ul>
+			<table width="100%" border="0" cellspacing="0" cellpadding="5" id="thetable">
+				<tr>
+					<th>投注时间</th>
+					<th>注单号/模式</th>
+					<th width="350">投注详细信息</th>
+					<th>下注金额</th>
+					<th>输赢结果</th>
+				</tr>
+				{empty name="data"}
+				<tr align="center" bgcolor="#FFFFFF">
+					<td height="30" colspan="8" valign="middle"><span class="STYLE1">暂无记录</span></td>
+				</tr>
+				{else} {foreach name="data" item="vo" key="k"}
+				<?php
+
+							if($k % 2 == 0) 
+								$bgcolor = '#FFF';
+							else
+								$bgcolor = '#f5f5f5';
+			       		?>
+					<tr bgcolor="{$bgcolor}" align="center" style="height: 60px; background-color: rgb(245, 245, 245);">
+						<td align="center">
+							<?php echo date('m-d',strtotime('-12 hours',strtotime($vo["bet_time"]))).'<br>'.date('H:i:s',strtotime('-12 hours',strtotime($vo["bet_time"])));?></td>
+						<td align="center">
+							<font color="#000000">{$vo['number']}</font>
+							<br> {$vo['ball_sort']} {switch name='vo.ball_sort'} {case value='冠军|金融'}{/case} {defalut /}{$vo.master} {/switch} {switch name='vo.point_column'} {case value='match_ho|match_ao'} 让球 {/case} {case value='match_dxdpl|match_dxxpl'} 大小 {/case} {case value='match_dsdpl|match_dsspl'} 单双 {/case} {case value='match_bho|match_bao'} 上半场让球 {/case} {case value='match_bdpl|match_bxpl'} 上半场大小 {/case} {case value='match_bzm|match_bzg|match_bzh'} 全场独赢 {/case} {case value='match_bmdy|match_bgdy|match_bhdy'} 半场独赢 {/case} {case value='match_hr_bd10|match_hr_bd20|match_hr_bd21|match_hr_bd30|match_hr_bd31|match_hr_bd32|match_hr_bd40|match_hr_bd41|match_hr_bd42|match_hr_bd43'} 上半波胆主 {/case} {case value='match_hr_bdg10|match_hr_bdg20|match_hr_bdg21|match_hr_bdg30|match_hr_bdg31|match_hr_bdg32|match_hr_bdg40|match_hr_bdg41|match_hr_bdg42|match_hr_bdg43'} 上半波胆客 {/case} {case value='match_hr_bd00|match_hr_bd11|match_hr_bd22|match_hr_bd33|match_hr_bd44|match_hr_bdup5"} 上半波胆平 {/case} {case value='match_bd10|match_bd20|match_bd21|match_bd30|match_bd31|match_bd32|match_bd40|match_bd41|match_bd42|match_bd43'} 波胆主 {/case} {case value='match_bdg10|match_bdg20|match_bdg21|match_bdg30|match_bdg31|match_bdg32|match_bdg40|match_bdg41|match_bdg42|match_bdg43'} 波胆客 {/case} {case value='match_bd00|match_bd11|match_bd22|match_bd33|match_bd44|match_bdup5"} 波胆平 {/case} {case value='match_total01pl|match_total23pl|match_total46pl|match_total7uppl'} 入球数 {/case} {case value='match_bqmm|match_bqmh|match_bqmg|match_bqhm|match_bqhh|match_bqhg|match_bqgm|match_bqgh|match_bqgg'} 半全场 {/case} {/switch}
+						</td>
+						<td align="center">
+							<span style="color:#F00">{$vo['match_name']}</span> {if $vo.match_type eq 2} {$vo.match_time} {/if}
+							<br> {if ($vo.point_column eq 'match_ho') or ($vo.point_column eq 'match_ao') or ($vo.point_column eq 'match_bao') or ($vo.point_column eq 'match_bho')} {if ($vo.match_showtype eq 'c') or ($vo.match_showtype eq 'C') }
+							<font style="color:#000000">{$vo.guest}</font>
+							{$vo.match_rgg}
+							<font style="color:#000000">{$vo.master}</font>(主) {else}
+							<font style="color:#000000">{$vo.master}</font>
+							{$vo.match_rgg}
+							<font style="color:#000000">{$vo.guest}</font>
+							{/if} {else}
+							<font style="color:#000000">{$vo.master}</font>
+							{switch name='vo.point_column'} {case value='match_bd10'} 1:0 {/case} {case value='match_bd20'} 2:0 {/case} {case value='match_bd21'} 2:1 {/case} {case value='match_bd30'} 3:0 {/case} {case value='match_bd31'} 3:1 {/case} {case value='match_bd32'} 3:2 {/case} {case value='match_bd40'} 4:0 {/case} {case value='match_bd41'} 4:1 {/case} {case value='match_bd42'} 4:2 {/case} {case value='match_bd43'} 4:3 {/case} {case value='match_bdg10'} 1:0 {/case} {case value='match_bdg20'} 2:0 {/case} {case value='match_bdg21'} 2:1 {/case} {case value='match_bdg30'} 3:0 {/case} {case value='match_bdg31'} 3:1 {/case} {case value='match_bdg32'} 3:2 {/case} {case value='match_bdg40'} 4:0 {/case} {case value='match_bdg41'} 4:1 {/case} {case value='match_bdg42'} 4:2 {/case} {case value='match_bdg43'} 4:3 {/case} {case value='match_bd00'} 0:0 {/case} {case value='match_bd11'} 1:1 {/case} {case value='match_bd22'} 2:2 {/case} {case value='match_bd33'} 3:3 {/case} {case value='match_bd44'} 4:4 {/case} {case value='match_bdup5'} UP5 {/case} {default /} {if $vo.guest neq ''} VS. {/if} {/switch}
+
+							<font style="color:#890209">{$vo.guest}</font>
+							{/if}
+							<br/>
+							<font style="color:#000000">
+								{if ($vo.ball_sort eq '冠军') or ($vo.ball_sort eq '金融')}
+								<?php $ss	=	explode("@",$vo["bet_info"]); ?>
+								<font color='red'>{$ss[0]}</font>@
+								<font font="red">{$ss[1]}</font>
+								{else} {switch name='vo.point_column'} {case value='match_hr_bd10|match_hr_bd20|match_hr_bd21|match_hr_bd30|match_hr_bd31|match_hr_bd32|match_hr_bd40|match_hr_bd41|match_hr_bd42|match_hr_bd43'} 波胆 @
+								<font color='red'>{$vo.bet_point}</font>
+								{/case} {case value='match_hr_bdg10|match_hr_bdg20|match_hr_bdg21|match_hr_bdg30|match_hr_bdg31|match_hr_bdg32|match_hr_bdg40|match_hr_bdg41|match_hr_bdg42|match_hr_bdg43'} 波胆 @
+								<font color='red'>{$vo.bet_point}</font>
+								{/case} {case value='match_hr_bd00|match_hr_bd11|match_hr_bd22|match_hr_bd33|match_hr_bd44|match_hr_bdup5"} 波胆 @
+								<font color='red'>{$vo.bet_point}</font>
+								{/case} {case value='match_bd10|match_bd20|match_bd21|match_bd30|match_bd31|match_bd32|match_bd40|match_bd41|match_bd42|match_bd43'} 波胆 @
+								<font color='red'>{$vo.bet_point}</font>
+								{/case} {case value='match_bdg10|match_bdg20|match_bdg21|match_bdg30|match_bdg31|match_bdg32|match_bdg40|match_bdg41|match_bdg42|match_bdg43'} 波胆 @
+								<font color='red'>{$vo.bet_point}</font>
+								{/case} {case value='match_bd00|match_bd11|match_bd22|match_bd33|match_bd44|match_bdup5"} 波胆 @
+								<font color='red'>{$vo.bet_point}</font>
+								{/case} {case value='match_ho|match_bho'} {$vo.master}{notempty name='vo.match_nowscore'}({$vo.match_nowscore}){/notempty} @
+								<font color='red'>{$vo.bet_point}</font>
+								{/case} {case value='match_ao|match_bao'} {$vo.guest}{notempty name='vo.match_nowscore'}({$vo.match_nowscore}){/notempty} @
+								<font color='red'>{$vo.bet_point}</font>
+								{/case}
+								<!-- 标准盘 -->
+								{case value='match_bzm|match_bmdy'} {$vo.master} 独赢{notempty name='vo.match_nowscore'}({$vo.match_nowscore}){/notempty} @
+								<font color='red'>{$vo.bet_point}</font>
+								{/case} {case value='match_bzg|match_bgdy'} {$vo.guest} 独赢{notempty name='vo.match_nowscore'}({$vo.match_nowscore}){/notempty} @
+								<font color='red'>{$vo.bet_point}</font>
+								{/case} {case value='match_bzh|match_bhdy'} 和局{notempty name='vo.match_nowscore'}({$vo.match_nowscore}){/notempty} @
+								<font color='red'>{$vo.bet_point}</font>
+								{/case} {case value='match_bdpl|match_dxdpl'} O{$vo.match_dxgg} @
+								<font color='red'>{$vo.bet_point}</font>
+								{/case} {case value='match_bxpl|match_dxxpl'} U{$vo.match_dxgg} @
+								<font color='red'>{$vo.bet_point}</font>
+								{/case} {case value='match_dsdpl'} 单 @
+								<font color='red'>{$vo.bet_point}</font>
+								{/case} {case value='match_dsspl'} 双 @
+								<font color='red'>{$vo.bet_point}</font>
+								{/case} {case value='match_total01pl'} 0~1 @
+								<font color='red'>{$vo.bet_point}</font>
+								{/case} {case value='match_total23pl'} 2~3 @
+								<font color='red'>{$vo.bet_point}</font>
+								{/case} {case value='match_total46pl'} 4~6 @
+								<font color='red'>{$vo.bet_point}</font>
+								{/case} {case value='match_total7uppl'} 7UP @
+								<font color='red'>{$vo.bet_point}</font>
+								{/case} {case value='match_bqmm'} {$vo.master}/{$vo.master} @
+								<font color='red'>{$vo.bet_point}</font>
+								{/case} {case value='match_bqmh'} {$vo.master}/和局 @
+								<font color='red'>{$vo.bet_point}</font>
+								{/case} {case value='match_bqmg'} {$vo.master}/{$vo.guest} @
+								<font color='red'>{$vo.bet_point}</font>
+								{/case} {case value='match_bqhm'} 和局/{$vo.master} @
+								<font color='red'>{$vo.bet_point}</font>
+								{/case} {case value='match_bqhh'} 和局/和局 @
+								<font color='red'>{$vo.bet_point}</font>
+								{/case} {case value='match_bqhg'} 和局/{$vo.guest} @
+								<font color='red'>{$vo.bet_point}</font>
+								{/case} {case value='match_bqgm'} {$vo.guest}/{$vo.master} @
+								<font color='red'>{$vo.bet_point}</font>
+								{/case} {case value='match_bqgh'} {$vo.guest}/和局 @
+								<font color='red'>{$vo.bet_point}</font>
+								{/case} {case value='match_bqgg'} {$vo.guest}/{$vo.guest} @
+								<font color='red'>{$vo.bet_point}</font>
+								{/case} {/switch} {/if}
+							</font>
+							{notin name='vo.status' value='0,3,7,6'}
+							<?php
+					    		if((strtolower($vo["match_showtype"])=="c")&&(strpos('&match_ao,match_ho,match_bho,match_bao&',$vo["point_column"])>0)){
+								?>
+								[{$vo.TG_Inball}]:[{$vo.MB_Inball}]
+								<?php
+								}elseif($vo["ball_sort"] == "冠军" || $vo["ball_sort"] == "金融"){
+								}else{
+								?>
+									[{$vo.MB_Inball}]:[{$vo.TG_Inball}]
+									<?php
+								}
+								?> {/notin} {if ($vo.lose_ok eq '0') and ($vo.ball_sort eq '足球滚球')} [确认中] {elseif ($vo.status eq '0') and ($vo.ball_sort eq '足球滚球')} [已确认] {else} {/if}
+						</td>
+						<td align="center">{$vo.bet_money|sprintf="%.2f"}</td>
+
+						<td align="center">
+							{switch name="vo.status"} {case value="1"}
+							<span style="color:#FF0000;">{$vo.jine|number_format='2'}</span> {/case} {case value="2"}
+							<span style="color:#000000;">{$vo.jine|number_format='2'}</span> {/case} {case value="4"}
+							<span style="color:#FF0000;">{$vo.jine|number_format='2'}</span> {/case} {case value="5"}
+							<span style="color:#000000;">{$vo.jine|number_format='2'}</span> {/case} {default /} {/switch}
+						</td>
+					</tr>
+					{/foreach} {/empty}
+
+					<th colspan="5" align="center">共
+						<font color="red">{$count}</font> 条已结算注单，总投注金额：
+						<font color="red">{$sum|number_format="2"}</font>RMB
+					</th>
+					</tr>
+			</table>
+			<div>{$list->render()}</div>
+		</ul>
+	</div>
+</div>	
+
+{include file='common/footer'} 
+</body>
+<script type="text/javascript">
+setInterval(function() {
+	$.ajax({
+		type: "post",
+		url: "{:Url('index/home')}",
+		data:{'ajax':1,'get_money':'1'},
+		success:function(data) {
+			if (/^[\d\.]+$/.test(data)) {
+				$('#money,#money_2').text(data);
+			}
+		}
+	});
+},2000);	
+</script>
+</html>
+	

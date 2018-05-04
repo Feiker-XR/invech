@@ -1,0 +1,100 @@
+<?php
+return [
+    'menu_list' => [
+        [
+            'name' => '会员管理',
+            'group' => 'member',
+            'sub_menu' => [
+                [
+                    'name'=>'会员列表',
+                    'link'=>'/member/index',
+                ],
+                [
+                    'name'=>'当月有效会员',
+                    'link'=>'/member/avail',
+                ],                
+            ],
+        
+        ],
+
+        [
+            'name' => '注单管理',
+            'group' => 'bet',
+            'sub_menu' => [
+                [
+                    'name'=>'投注记录',
+                    'link'=>'/bet/index',
+                ],
+                [
+                    'name'=>'投注日报表',
+                    'link'=>'/bet/daily_report',
+                ],                
+            ],
+        
+        ],        
+
+        [
+            'name' => '存款管理',
+            'group' => 'deposit',
+            'sub_menu' => [
+                [
+                    'name'=>'存款记录',
+                    'link'=>'/deposit/index',
+                ],
+                [
+                    'name'=>'存款日报表',
+                    'link'=>'/deposit/daily_report',
+                ],                
+            ],
+        
+        ],        
+
+        [
+            'name' => '提款管理',
+            'group' => 'withdraw',
+            'sub_menu' => [
+                [
+                    'name'=>'提款记录',
+                    'link'=>'/withdraw/index',
+                ],
+                [
+                    'name'=>'提款日报表',
+                    'link'=>'/withdraw/daily_report',
+                ],                
+            ],
+        
+        ],   
+/*
+        [
+            'name' => '佣金管理',
+            'group' => 'commission',
+            'sub_menu' => [
+                [
+                    'name'=>'佣金总计',
+                    'link'=>'/commission/stat',
+                ],
+                [
+                    'name'=>'会员佣金',
+                    'link'=>'/commission/list',
+                ],
+            ],
+        
+        ],
+*/
+        [
+            'name' => '站内信',
+            'group' => 'message',
+            'sub_menu' => [
+                [
+                    'name'=>'发件箱',
+                    'link'=>'/message/outbox',
+                ],
+                [
+                    'name'=>'收件箱',
+                    'link'=>'/message/inbox',
+                ],                          
+            ],        
+        ],   
+                
+    ],
+];

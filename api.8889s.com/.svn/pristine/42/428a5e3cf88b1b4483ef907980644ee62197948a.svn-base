@@ -1,0 +1,20 @@
+<input type="hidden" name="playedGroup" value="<?=$groupId?>" />
+<input type="hidden" name="playedId" value="<?=$playedId?>" />
+<input type="hidden" name="type" value="<?=$type?>" />
+<?php foreach(array('特殊号') as $var){ ?>
+<div class="pp ssc5xlhh" action="tz11x5Select" length="1" random="sscRandom">
+	&nbsp;<div class="ssc_3x_pp5_containers">
+		<div class="title"><?=$var?></div>
+		<input type="button" value="豹子" class="code min s ssc_3x_pp5_containers_input" />
+		<input type="button" value="顺子" class="code min d ssc_3x_pp5_containers_input" />
+		<input type="button" value="对子" class="code min s ssc_3x_pp5_containers_input" />
+	</div>
+</div>
+<?php
+	}
+?>
+<script type="text/javascript">
+$(function(){
+	gameSetPl(<?=json_encode($maxPl)?>);
+})
+</script>

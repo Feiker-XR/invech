@@ -1,0 +1,61 @@
+<?php
+namespace app\common\model;
+use think\Model;
+
+class ActionLog extends Base{
+
+    protected $table = 'gygy_action_log';
+    protected $createTime = 'created_at';
+    protected $updateTime = 'updated_at';
+    protected $autoWriteTimestamp = 'datetime';
+
+    CONST BUSINESS_TYPE_LOGIN = 1;
+    CONST BUSINESS_TYPE_MEMBER = 2;
+    CONST BUSINESS_TYPE_ADD = 3;
+    CONST BUSINESS_TYPE_EDIT = 4;
+    CONST BUSINESS_TYPE_DELE = 5;
+    CONST BUSINESS_TYPES = [self::BUSINESS_TYPE_LOGIN=>'登录',
+        self::BUSINESS_TYPE_MEMBER=>'会员',
+        self::BUSINESS_TYPE_ADD=>'增加',
+        self::BUSINESS_TYPE_EDIT=>'修改',
+        self::BUSINESS_TYPE_DELE=>'删除',
+    ]; 
+    //CONST BUSINESS_DESCS = ['登录','会员',];    
+
+    public static function log($business,$obj,$content, string $json_extra = null){
+        $adminid = session('adminid');
+        $admin = session('admin');
+        $model = get_class($obj);
+        $pk = $obj->getPk();
+        $aid = $obj->$pk;
+        $data = ['uid'  =>  $adminid,
+            'username'  =>  $admin['username'],
+            'business'  =>  $business,
+            'model'     =>  $model,
+            'aid'       =>  $aid,
+            'content'   =>  $content,
+            //'json_extra'=>  $json_extra,
+        ];
+        return self::create($data);
+    }
+
+    public static function getList($request){
+
+        $params = $request->param();
+
+        $query = self::order('id');
+
+        if($params['name']??0){
+            $query->where('username','like','%'.trim($params['name']).'%');
+        }
+        $type = $params['type']??'';
+        if(is_numeric($type)){
+            $query->where('business',$type);
+        }
+
+        $data = $query->paginate(10);
+        
+        return $data;
+    }
+
+}

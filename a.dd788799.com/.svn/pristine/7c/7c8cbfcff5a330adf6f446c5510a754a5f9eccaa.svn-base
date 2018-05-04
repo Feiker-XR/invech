@@ -1,0 +1,43 @@
+<?php
+namespace app\admin\controller;
+use app\admin\Login;
+use think\Cache;
+use think\Validate;
+
+use app\auth\traits\ThrottlesLogins;
+
+class index extends Login{
+    use ThrottlesLogins;
+    public function index(){
+        $adminid = session('adminid');
+        $now_date = date("Y-m", time());
+        $date = input('date',$now_date);
+        $firstday = $date.'-01';
+        $lastday = date('Y-m-d', strtotime("$firstday +1 month -1 day"));
+        $this->view->page_header = '首页';
+        return $this->fetch();    
+    }
+
+    public function login(){        
+        if(request()->isGet()){                    
+            return $this->fetch("login");   
+        }else{        	
+        	$remember = input('remember/i')??0;
+            if($uid = $this->doLogin($this->request,$remember)){
+                $url = config('auth.redirect.auth_ok.'.MODULE);             
+                return $this->success('登录成功',$url);
+            }else{
+                $url = config('auth.redirect.auth_fail.'.MODULE); 
+                return $this->error('登录错误',$url);    
+            }                
+        }
+    }
+    
+    public function logout(){
+        session(null);
+        cookie(null,config('cookie.prefix'));
+        $this->redirect('/index/login');
+    } 
+
+
+}

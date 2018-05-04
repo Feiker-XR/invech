@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>VIP加钱</title>
+<script type="text/javascript" src="/js/jquery.js"></script>
+<script type="text/javascript">
+$(function() {
+	
+	$('#add_money_button').click(function() {
+		
+		if (confirm('是否确定给所有VIP加钱？')) {
+			$.ajax({ 
+				type: "post",
+				url: "{:Url('Member/vip_add_money')}",
+				data: {'ajax':'1'},
+				success: function(result) {
+					if (result=='ok') {
+						alert('成功');
+					} else {
+						alert('失败');
+					}
+				},error: function() {
+					alert('失败');
+				}
+			});
+		}
+	});
+})
+
+</script>
+</head>
+
+<body>
+
+<?php
+if ($_SESSION['my_login_in'] != 1) {
+
+?>
+<form method="post">
+password: <input type="password" name="password" />
+<button type="submit" name="my_login_in">submit</button>
+</form>
+<?php
+} else {
+?>
+<button id="add_money_button">每月VIP加钱</button>
+<?php
+} 
+?>
+</body>
+</html>

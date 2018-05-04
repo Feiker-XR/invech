@@ -1,0 +1,379 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>系统设置</title>
+<link href="/css/base.css" rel="stylesheet" type="text/css" />
+<link href="/css/admin.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="/js/jquery.js"></script>
+<script type="text/javascript" src="/js/jquery.tools.js"></script>
+<script type="text/javascript" src="/js/base.js"></script>
+<script type="text/javascript">
+    var v;
+	var num;
+    function check(obj){
+	    if(obj.name.value==""){
+		    alert("请您输入会员组名称..");
+			obj.name.focus();
+			return false;
+		}
+		return true;
+	}
+	
+	function isnum(obj){
+	    v = obj.value;
+		if(v == (parseInt(v)*1)){
+		     num = v.indexOf(".");
+			 if(num == -1) return true;
+			 else{
+		        alert("限额只能为正整数..");
+			    obj.select();
+			    return false;
+		     }
+		}else{
+		    alert("限额只能为正整数..");
+			obj.focus();
+			return false;
+		}
+	}
+</script>
+</head>
+<body class="input">
+	<!--<div class="bar">
+		会员资料修改
+	</div>-->
+	
+
+<div class="body">
+<ul id="tab" class="tab">
+				<li>
+					<input type="button" value="会员组列表" hidefocus onClick="window.location.href='{:Url('level/index')}'" />
+				</li>
+                <li>
+					<input type="button" value="添加会员组" hidefocus class="current" onClick="window.location.href='{:Url('level/add')}'" />
+				</li>
+  </ul>
+<form name="form1" id="form1" method="post" action="{:Url('level/save')}" onSubmit="return check(this);">
+<table class="inputTable tabContent">
+	        <tr>
+	          <th>用户组名称：</th>
+              <td colspan="3"><label>
+                <input name="name" type="text" id="name" value="{$info.name}" size="20" class="formText" maxlength="20">
+              </label></td>
+          </tr>
+		  <tr>
+			<td>在线支付赠送设置：</td><td><input type="text" name="czyh" value="{$info.czyh}"/>请输入要赠送的百分比</td>
+			<td>公司入款赠送设置：</td><td><input type="text" name="rkyh" value="{$info.rkyh}"/>请输入要赠送的百分比</td>
+		  </tr>
+	        <tr>
+	          <td colspan="4" align="center" bgcolor="#F2F4F6"><strong>足球</strong></td>
+        </tr>
+	        <tr>
+	          <td align="center" bgcolor="#EEF4F9"><strong>类型</strong></td>
+	          <td align="center" bgcolor="#EEF4F9"><strong>额度</strong></td>
+              <td align="center" bgcolor="#EEF4F9"><strong>类型</strong></td>
+              <td align="center" bgcolor="#EEF4F9"><strong>额度</strong></td>
+        </tr>
+	        <tr>
+	          <th>全场让球单注限额：</th>
+	          <td><label>
+	            <input name="qc_rqdz" type="text" id="qc_rqdz" value="{$info.qc_rqdz}" size="20" class="formText" maxlength="10" onBlur="return isnum(this);" >
+	          </label></td>
+              <th>全场让球单场限额：</th>
+              <td><input name="qc_rqdc" type="text" id="qc_rqdc" value="{$info.qc_rqdc}" size="20" class="formText" maxlength="10" onBlur="return isnum(this);" ></td>
+        </tr>
+	        <tr>
+	          <th>全场单双单注限额：</th>
+	          <td><input name="qc_dsdz" type="text" id="qc_dsdz" value="{$info.qc_dsdz}" size="20" class="formText" maxlength="10" onBlur="return isnum(this);" ></td>
+              <th>全场单双单场限额：</th>
+              <td><input name="qc_dsdc" type="text" id="qc_dsdc" value="{$info.qc_dsdc}" size="20" class="formText" maxlength="10" onBlur="return isnum(this);" ></td>
+        </tr>
+	        <tr>
+	          <th>全场大小单注限额：</th>
+	          <td><input name="qc_dxdz" type="text" id="qc_dxdz" value="{$info.qc_dxdz}" size="20" class="formText" maxlength="10" onBlur="return isnum(this);" ></td>
+              <th>全场大小单场限额：</th>
+              <td><input name="qc_dxdc" type="text" id="qc_dxdc" value="{$info.qc_dxdc}" size="20" class="formText" maxlength="10" onBlur="return isnum(this);" ></td>
+        </tr>
+	        <tr>
+	          <th>全场独赢单注限额：</th>
+	          <td><input name="qc_dydz" type="text" id="qc_dydz" value="{$info.qc_dydz}" size="20" class="formText" maxlength="10" onBlur="return isnum(this);" ></td>
+              <th>全场独赢单场限额：</th>
+              <td><input name="qc_dydc" type="text" id="qc_dydc" value="{$info.qc_dydc}" size="20" class="formText" maxlength="10" onBlur="return isnum(this);" ></td>
+        </tr>
+	        <tr>
+	          <th>上半让球单注限额：</th>
+	          <td><input name="sb_rqdz" type="text" id="sb_rqdz" value="{$info.sb_rqdz}" size="20" class="formText" maxlength="10" onBlur="return isnum(this);" ></td>
+              <th>上半让球单场限额：</th>
+              <td><input name="sb_rqdc" type="text" id="sb_rqdc" value="{$info.sb_rqdc}" size="20" class="formText" maxlength="10" onBlur="return isnum(this);" ></td>
+        </tr>
+	        <tr>
+	          <th>上半大小单注限额：</th>
+	          <td><input name="sb_dxdz" type="text" id="sb_dxdz" value="{$info.sb_dxdz}" size="20" class="formText" maxlength="10" onBlur="return isnum(this);" ></td>
+              <th>上半大小单场限额：</th>
+              <td><input name="sb_dxdc" type="text" id="sb_dxdc" value="{$info.sb_dxdc}" size="20" class="formText" maxlength="10" onBlur="return isnum(this);" ></td>
+        </tr>
+	        <tr>
+	          <th>上半独赢单注限额：</th>
+	          <td><input name="sb_dydz" type="text" id="sb_dydz" value="{$info.sb_dydz}" size="20" class="formText" maxlength="10" onBlur="return isnum(this);" ></td>
+              <th>上半独赢单场限额：</th>
+              <td><input name="sb_dydc" type="text" id="sb_dydc" value="{$info.sb_dydc}" size="20" class="formText" maxlength="10" onBlur="return isnum(this);" ></td>
+        </tr>
+	        <tr>
+	          <th>波胆单注限额：</th>
+	          <td><input name="bd_dz" type="text" id="bd_dz" value="{$info.bd_dz}" size="20" class="formText" maxlength="10" onBlur="return isnum(this);" ></td>
+              <th>波胆单场限额：</th>
+              <td><input name="bd_dc" type="text" id="bd_dc" value="{$info.bd_dc}" size="20" class="formText" maxlength="10" onBlur="return isnum(this);" ></td>
+        </tr>
+	        <tr>
+	          <th>入球数单注限额：</th>
+	          <td><input name="rqs_dz" type="text" id="rqs_dz" value="{$info.rqs_dz}" size="20" class="formText" maxlength="10" onBlur="return isnum(this);" ></td>
+              <th>入球数单场限额：</th>
+              <td><input name="rqs_dc" type="text" id="rqs_dc" value="{$info.rqs_dc}" size="20" class="formText" maxlength="10" onBlur="return isnum(this);" ></td>
+        </tr>
+	        <tr>
+	          <th>半全场单注限额：</th>
+	          <td><input name="bqc_dz" type="text" id="bqc_dz" value="{$info.bqc_dz}" size="20" class="formText" maxlength="10" onBlur="return isnum(this);" ></td>
+              <th>半全场单场限额：</th>
+              <td><input name="bqc_dc" type="text" id="bqc_dc" value="{$info.bqc_dc}" size="20" class="formText" maxlength="10" onBlur="return isnum(this);" ></td>
+        </tr>
+	        <tr>
+	          <th>滚球全场让球单注限额：</th>
+	          <td><input name="gq_qcrqdz" type="text" id="gq_qcrqdz" value="{$info.gq_qcrqdz}" size="20" class="formText" maxlength="10" onBlur="return isnum(this);" ></td>
+              <th>滚球全场让球当场限额：</th>
+              <td><input name="gq_qcrqdt" type="text" id="gq_qcrqdt" value="{$info.gq_qcrqdt}" size="20" class="formText" maxlength="10" onBlur="return isnum(this);" ></td>
+        </tr>
+	        <tr>
+	          <th>滚球全场大小单注限额：</th>
+	          <td><input name="gq_qcdxdz" type="text" id="gq_qcdxdz" value="{$info.gq_qcdxdz}" size="20" class="formText" maxlength="10" onBlur="return isnum(this);" ></td>
+              <th>滚球全场大小单场限额：</th>
+              <td><input name="gq_qcdxdc" type="text" id="gq_qcdxdc" value="{$info.gq_qcdxdc}" size="20" class="formText" maxlength="10" onBlur="return isnum(this);" ></td>
+        </tr>
+	        <tr>
+	          <th>滚球上半让球单注限额：</th>
+	          <td><input name="gq_sbrqdz" type="text" id="gq_sbrqdz" value="{$info.gq_sbrqdz}" size="20" class="formText" maxlength="10" onBlur="return isnum(this);" ></td>
+              <th>滚球上半让球单场限额：</th>
+              <td><input name="gq_sbrqdc" type="text" id="gq_sbrqdc" value="{$info.gq_sbrqdc}" size="20" class="formText" maxlength="10" onBlur="return isnum(this);" ></td>
+        </tr>
+	        <tr>
+	          <th>滚球上半大小单注限额：</th>
+	          <td><input name="gq_sbdxdz" type="text" id="gq_sbdxdz" value="{$info.gq_sbdxdz}" size="20" class="formText" maxlength="10" onBlur="return isnum(this);" ></td>
+              <th>滚球上半大小单场限额：</th>
+              <td><input name="gq_sbdxdc" type="text" id="gq_sbdxdc" value="{$info.gq_sbdxdc}" size="20" class="formText" maxlength="10" onBlur="return isnum(this);" ></td>
+        </tr>
+	        <tr>
+	          <th>滚球全场独赢单注限额：</th>
+	          <td><input name="gq_qcdydz" type="text" id="gq_qcdydz" value="{$info.gq_qcdydz}" size="20" class="formText" maxlength="10" onBlur="return isnum(this);" ></td>
+              <th>滚球全场独赢单场限额：</th>
+              <td><input name="gq_qcdydc" type="text" id="gq_qcdydc" value="{$info.gq_qcdydc}" size="20" class="formText" maxlength="10" onBlur="return isnum(this);" ></td>
+        </tr>
+	        <tr>
+	          <th>滚球上半独赢单注限额：</th>
+	          <td><input name="gq_sbdydz" type="text" id="gq_sbdydz" value="{$info.gq_sbdydz}" size="20" class="formText" maxlength="10" onBlur="return isnum(this);" ></td>
+              <th>滚球上半独赢单场限额：</th>
+              <td><input name="gq_sbdydc" type="text" id="gq_sbdydc" value="{$info.gq_sbdydc}" size="20" class="formText" maxlength="10" onBlur="return isnum(this);" ></td>
+        </tr>
+	        <tr>
+	          <td colspan="4" align="center" bgcolor="#F2F4F6"><strong>篮球</strong></td>
+        </tr>
+	        <tr>
+              <td align="center" bgcolor="#EEF4F9"><strong>类型</strong></td>
+	          <td align="center" bgcolor="#EEF4F9"><strong>额度</strong></td>
+	          <td align="center" bgcolor="#EEF4F9"><strong>类型</strong></td>
+	          <td align="center" bgcolor="#EEF4F9"><strong>额度</strong></td>
+        </tr>
+	        <tr>
+	          <th>篮球单双单注限额：</th>
+	          <td><input name="lq_dsdz" type="text" id="lq_dsdz" value="{$info.lq_dsdz}" size="20" class="formText" maxlength="10" onBlur="return isnum(this);" ></td>
+	          <th>篮球单双单场限额：</th>
+	          <td><input name="lq_dsdc" type="text" id="lq_dsdc" value="{$info.lq_dsdc}" size="20" class="formText" maxlength="10" onBlur="return isnum(this);" ></td>
+        </tr>
+	        <tr>
+	          <th>篮球让分单注限额：</th>
+	          <td><input name="lq_rfdz" type="text" id="lq_rfdz" value="{$info.lq_rfdz}" size="20" class="formText" maxlength="10" onBlur="return isnum(this);" ></td>
+	          <th>篮球让分单场限额：</th>
+	          <td><input name="lq_rfdc" type="text" id="lq_rfdc" value="{$info.lq_rfdc}" size="20" class="formText" maxlength="10" onBlur="return isnum(this);" ></td>
+        </tr>
+	        <tr>
+	          <th>篮球大小单注限额：</th>
+	          <td><input name="lq_dxdz" type="text" id="lq_dxdz" value="{$info.lq_dxdz}" size="20" class="formText" maxlength="10" onBlur="return isnum(this);" ></td>
+	          <th>篮球大小单场限额：</th>
+	          <td><input name="lq_dxdc" type="text" id="lq_dxdc" value="{$info.lq_dxdc}" size="20" class="formText" maxlength="10" onBlur="return isnum(this);" ></td>
+        </tr>
+	        <tr>
+	          <th>滚球让分单注限额：</th>
+	          <td><input name="gq_rfdz" type="text" id="gq_rfdz" value="{$info.gq_rfdz}" size="20" class="formText" maxlength="10" onBlur="return isnum(this);" ></td>
+              <th>滚球让分单场限额：</th>
+              <td><input name="gq_rfdc" type="text" id="gq_rfdc" value="{$info.gq_rfdc}" size="20" class="formText" maxlength="10" onBlur="return isnum(this);" ></td>
+        </tr>
+	        <tr>
+	          <th>滚球大小单注限额：</th>
+	          <td><input name="gq_dxdz" type="text" id="gq_dxdz" value="{$info.gq_dxdz}" size="20" class="formText" maxlength="10" onBlur="return isnum(this);" ></td>
+              <th>滚球大小单场限额：</th>
+              <td><input name="gq_dxdc" type="text" id="gq_dxdc" value="{$info.gq_dxdc}" size="20" class="formText" maxlength="10" onBlur="return isnum(this);" ></td>
+        </tr>
+	        <tr>
+	          <td colspan="4" align="center" bgcolor="#F2F4F6"><strong>网球</strong></td>
+        </tr>
+	        <tr>
+              <td align="center" bgcolor="#EEF4F9"><strong>类型</strong></td>
+	          <td align="center" bgcolor="#EEF4F9"><strong>额度</strong></td>
+	          <td align="center" bgcolor="#EEF4F9"><strong>类型</strong></td>
+	          <td align="center" bgcolor="#EEF4F9"><strong>额度</strong></td>
+        </tr>
+	        <tr>
+	          <th>网球独赢单注限额：</th>
+	          <td><input name="wq_dydz" type="text" id="wq_dydz" value="{$info.wq_dydz}" size="20" class="formText" maxlength="10" onBlur="return isnum(this);" ></td>
+              <th>网球独赢单场限额：</th>
+              <td><input name="wq_dydc" type="text" id="wq_dydc" value="{$info.wq_dydc}" size="20" class="formText" maxlength="10" onBlur="return isnum(this);" ></td>
+        </tr>
+	        <tr>
+	          <th>网球让盘单注限额：</th>
+	          <td><input name="wq_rbdz" type="text" id="wq_rbdz" value="{$info.wq_rbdz}" size="20" class="formText" maxlength="10" onBlur="return isnum(this);" ></td>
+              <th>网球让盘单场限额：</th>
+              <td><input name="wq_rbdc" type="text" id="wq_rbdc" value="{$info.wq_rbdc}" size="20" class="formText" maxlength="10" onBlur="return isnum(this);" ></td>
+        </tr>
+	        <tr>
+	          <th>网球单双单注限额：</th>
+	          <td><input name="wq_dsdz" type="text" id="wq_dsdz" value="{$info.wq_dsdz}" size="20" class="formText" maxlength="10" onBlur="return isnum(this);" ></td>
+              <th>网球单双单场限额：</th>
+              <td><input name="wq_dsdc" type="text" id="wq_dsdc" value="{$info.wq_dsdc}" size="20" class="formText" maxlength="10" onBlur="return isnum(this);" ></td>
+        </tr>
+	        <tr>
+	          <th>网球大小单注限额：</th>
+	          <td><input name="wq_dxdz" type="text" id="wq_dxdz" value="{$info.wq_dxdz}" size="20" class="formText" maxlength="10" onBlur="return isnum(this);" ></td>
+              <th>网球大小单场限额：</th>
+              <td><input name="wq_dxdc" type="text" id="wq_dxdc" value="{$info.wq_dxdc}" size="20" class="formText" maxlength="10" onBlur="return isnum(this);" ></td>
+        </tr>
+	        <tr>
+	          <td colspan="4" align="center" bgcolor="#F2F4F6"><strong>排球</strong></td>
+        </tr>
+	        <tr>
+              <td align="center" bgcolor="#EEF4F9"><strong>类型</strong></td>
+	          <td align="center" bgcolor="#EEF4F9"><strong>额度</strong></td>
+	          <td align="center" bgcolor="#EEF4F9"><strong>类型</strong></td>
+	          <td align="center" bgcolor="#EEF4F9"><strong>额度</strong></td>
+        </tr>
+	        <tr>
+	          <th>排球独赢单注限额：</th>
+	          <td><input name="pq_dydz" type="text" id="pq_dydz" value="{$info.pq_dydz}" size="20" class="formText" maxlength="10" onBlur="return isnum(this);" ></td>
+              <th>排球独赢单场限额：</th>
+              <td><input name="pq_dydc" type="text" id="pq_dydc" value="{$info.pq_dydc}" size="20" class="formText" maxlength="10" onBlur="return isnum(this);" ></td>
+        </tr>
+	        <tr>
+	          <th>排球让盘单注限额：</th>
+	          <td><input name="pq_rpdz" type="text" id="pq_rpdz" value="{$info.pq_rpdz}" size="20" class="formText" maxlength="10" onBlur="return isnum(this);" ></td>
+              <th>排球让盘单场限额：</th>
+              <td><input name="pq_rpdc" type="text" id="pq_rpdc" value="{$info.pq_rpdc}" size="20" class="formText" maxlength="10" onBlur="return isnum(this);" ></td>
+	        </tr>
+	        <tr>
+	          <th>排球大小单注限额：</th>
+	          <td><input name="pq_dxdz" type="text" id="pq_dxdz" value="{$info.pq_dxdz}" size="20" class="formText" maxlength="10" onBlur="return isnum(this);" ></td>
+              <th>排球大小单场限额：</th>
+              <td><input name="pq_dxdc" type="text" id="pq_dxdc" value="{$info.pq_dxdc}" size="20" class="formText" maxlength="10" onBlur="return isnum(this);" ></td>
+        </tr>
+	        <tr>
+	          <th>排球单双单注限额：</th>
+	          <td><input name="pq_dsdz" type="text" id="pq_dsdz" value="{$info.pq_dsdz}" size="20" class="formText" maxlength="10" onBlur="return isnum(this);" ></td>
+              <th>排球单双单场限额：</th>
+              <td><input name="pq_dsdc" type="text" id="pq_dsdc" value="{$info.pq_dsdc}" size="20" class="formText" maxlength="10" onBlur="return isnum(this);" ></td>
+        </tr>
+	        <tr>
+	          <td colspan="4" align="center" bgcolor="#F2F4F6"><strong>棒球</strong></td>
+        </tr>
+	        <tr>
+              <td align="center" bgcolor="#EEF4F9"><strong>类型</strong></td>
+	          <td align="center" bgcolor="#EEF4F9"><strong>额度</strong></td>
+	          <td align="center" bgcolor="#EEF4F9"><strong>类型</strong></td>
+	          <td align="center" bgcolor="#EEF4F9"><strong>额度</strong></td>
+        </tr>
+	        <tr>
+	          <th>棒球让分单注限额：</th>
+	          <td><input name="bp_rfdz" type="text" id="bp_rfdz" value="{$info.bp_rfdz}" size="20" class="formText" maxlength="10" onBlur="return isnum(this);" ></td>
+              <th>棒球让分单场限额：</th>
+              <td><input name="bp_rfdc" type="text" id="bp_rfdc" value="{$info.bp_rfdc}" size="20" class="formText" maxlength="10" onBlur="return isnum(this);" ></td>
+        </tr>
+	        <tr>
+	          <th>棒球大小单注限额：</th>
+	          <td><input name="bp_dxdz" type="text" id="bp_dxdz" value="{$info.bp_dxdz}" size="20" class="formText" maxlength="10" onBlur="return isnum(this);" ></td>
+              <th>棒球大小单场限额：</th>
+              <td><input name="bp_dxdc" type="text" id="bp_dxdc" value="{$info.bp_dxdc}" size="20" class="formText" maxlength="10" onBlur="return isnum(this);" ></td>
+        </tr>
+	        <tr>
+	          <th>棒球单双单注限额：</th>
+	          <td><input name="bp_dsdz" type="text" id="bp_dsdz" value="{$info.bp_dsdz}" size="20" class="formText" maxlength="10" onBlur="return isnum(this);" ></td>
+              <th>棒球单双单场限额：</th>
+              <td><input name="bp_dsdc" type="text" id="bp_dsdc" value="{$info.bp_dsdc}" size="20" class="formText" maxlength="10" onBlur="return isnum(this);" ></td>
+        </tr>
+	        <tr>
+	          <td colspan="4" align="center" bgcolor="#F2F4F6"><strong>冠军</strong></td>
+        </tr>
+	        <tr>
+              <td align="center" bgcolor="#EEF4F9"><strong>类型</strong></td>
+	          <td align="center" bgcolor="#EEF4F9"><strong>额度</strong></td>
+	          <td align="center" bgcolor="#EEF4F9"><strong>类型</strong></td>
+	          <td align="center" bgcolor="#EEF4F9"><strong>额度</strong></td>
+        </tr>
+	        <tr>
+	          <th>冠军单注限额：</th>
+	          <td><input name="gj_dz" type="text" id="gj_dz" value="{$info.gj_dz}" size="20" class="formText" maxlength="10" onBlur="return isnum(this);" ></td>
+              <th>冠军单场限额：</th>
+              <td><input name="gj_dc" type="text" id="gj_dc" value="{$info.gj_dc}" size="20" class="formText" maxlength="10" onBlur="return isnum(this);" ></td>
+        </tr>
+	        <tr>
+	          <td colspan="4" align="center" bgcolor="#F2F4F6"><strong>金融</strong></td>
+        </tr>
+	        <tr>
+              <td align="center" bgcolor="#EEF4F9"><strong>类型</strong></td>
+	          <td align="center" bgcolor="#EEF4F9"><strong>额度</strong></td>
+	          <td align="center" bgcolor="#EEF4F9"><strong>类型</strong></td>
+	          <td align="center" bgcolor="#EEF4F9"><strong>额度</strong></td>
+        </tr>
+	        <tr>
+	          <th>金融单注限额：</th>
+	          <td><input name="jr_dz" type="text" id="jr_dz" value="{$info.jr_dz}" size="20" class="formText" maxlength="10" onBlur="return isnum(this);" ></td>
+              <th>金融单场限额：</th>
+              <td><input name="jr_dc" type="text" id="jr_dc" value="{$info.jr_dc}" size="20" class="formText" maxlength="10" onBlur="return isnum(this);" ></td>
+        </tr>
+	        <tr>
+	          <td colspan="4" align="center" bgcolor="#F2F4F6"><strong>串关</strong></td>
+        </tr>
+	        <tr>
+              <td align="center" bgcolor="#EEF4F9"><strong>类型</strong></td>
+	          <td align="center" bgcolor="#EEF4F9"><strong>额度</strong></td>
+	          <td align="center" bgcolor="#EEF4F9"><strong>类型</strong></td>
+	          <td align="center" bgcolor="#EEF4F9"><strong>额度</strong></td>
+        </tr>
+	        <tr>
+	          <th>串关单注限额：</th>
+	          <td><input name="gg_dz" type="text" id="gg_dz" value="{$info.gg_dz}" size="20" class="formText" maxlength="10" onBlur="return isnum(this);" ></td>
+              <th>串关单天限额：</th>
+              <td><input name="gg_dc" type="text" id="gg_dc" value="{$info.gg_dc}" size="20" class="formText" maxlength="10" onBlur="return isnum(this);" ></td>
+        </tr>
+	        <tr>
+	          <td colspan="4" align="center" bgcolor="#F2F4F6"><strong>未定义</strong></td>
+        </tr>
+	        <tr>
+              <td align="center" bgcolor="#EEF4F9"><strong>类型</strong></td>
+	          <td align="center" bgcolor="#EEF4F9"><strong>额度</strong></td>
+	          <td align="center" bgcolor="#EEF4F9"><strong>类型</strong></td>
+	          <td align="center" bgcolor="#EEF4F9"><strong>额度</strong></td>
+        </tr>
+	        <tr>
+	          <th>未定义单注限额：</th>
+	          <td><input name="wdy_dz" type="text" id="wdy_dz" value="{$info.qc_rqdz}" size="20" class="formText" maxlength="10" onBlur="return isnum(this);" ></td>
+              <th>未定义单场限额：</th>
+              <td><input name="wdy_dc" type="text" id="wdy_dc" value="{$info.qc_rqdz}" size="20" class="formText" maxlength="10" onBlur="return isnum(this);" ></td>
+        </tr>
+	        <tr>
+	          <td colspan="4"><input name="hf_id" type="hidden" id="hf_id" value="{$info.id}">&nbsp;</td>
+        </tr>
+    </table>
+  <div class="buttonArea">
+<input name="Submit" type="submit" class="formButton" value="确认修改">
+				<input type="button" class="formButton" onClick="window.location.href='{:Url('level/index')}'" value="取 消" hidefocus />
+    </div>
+</form>
+	</div>
+</body>
+</html>

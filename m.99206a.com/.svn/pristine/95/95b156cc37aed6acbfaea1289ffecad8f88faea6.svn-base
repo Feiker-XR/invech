@@ -1,0 +1,156 @@
+.lottery_nav{width: 990px; height: 30px; margin-top: 10px; border-top-left-radius: 10px; border-top-right-radius: 10px; overflow: hidden; background: #3300ff;}
+.lottery_nav a{display: block; line-height: 30px; padding: 0 10px; color: #fff; text-decoration: none; float: left;}
+.lottery_nav a:hover{background: #cc3333;}
+.lottery_nav a.cur{background: #cc3333;}
+.lottery_nav a[href="/lottery_new.php"]{
+	animation:myfirst 1s infinite alternate;
+	-moz-animation:myfirst 1s infinite alternate; /* Firefox */
+	-webkit-animation:myfirst 1s infinite alternate; /* Safari and Chrome */
+	-o-animation:myfirst 1s infinite alternate; /* Opera */
+}
+@keyframes myfirst
+{
+	from {background:red;}
+	to {background:rgb(87,30,116);}
+}
+
+@-moz-keyframes myfirst /* Firefox */
+{
+	from {background:red;}
+	to {background:rgb(87,30,116);}
+}
+
+@-webkit-keyframes myfirst /* Safari and Chrome */
+{
+	from {background:red;}
+	to {background:rgb(87,30,116);}
+}
+
+@-o-keyframes myfirst /* Opera */
+{
+	from {background:red;}
+	to {background:rgb(87,30,116);}
+}
+
+.lottery_nav a.detail{float: right;}
+    
+.lottery_box{width: 990px; background: #efefef; color: #333;}
+    
+.lottery_box .summary{width: 990px; height: 45px;}
+.lottery_box .summary .ls_l{display: block; float: left;}
+.lottery_box .summary .ls_l .sp-btn{float: left; margin: 9px; border: 1px solid #c33; border-radius: 3px; background: #fff; cursor: pointer;}
+.lottery_box .summary .ls_l .sp-btn span{display: block; float: left; line-height: 25px; text-align: center; padding: 0 15px; color: #c33;}
+.lottery_box .summary .ls_l .sp-btn span.cur{background: #c33; color: #fff;}
+.lottery_box .summary .ls_r{display: block; float: right;}
+.lottery_box .summary .ls_r .lty_result{display: block; float: right; height: 25px; margin: 9px;}
+.lottery_box .summary .ls_r .lty_result span{display: block; float: left; line-height: 25px; margin-left:10px;}
+.lottery_box .summary .ls_r .lty_result span font{color: #c33; font-weight: bold;}
+.lottery_box .summary .ls_r .lty_result span b{width: 25px; height: 25px; margin: 0 1px; display: block; line-height: 25px; text-align: center; float: left; background: url(icon.png) -150px -186px no-repeat;}
+.lottery_box .summary .ls_r .lty_result span.pk10 b{width: 58px; height: 17px; margin: 4px 1px; display: block; line-height: 17px; text-align: center; float: left; background:none;}
+
+.lottery_box .summary .ls_r .lty_result span.xyft b{background:none;}
+.lottery_box .wanfa{width: 100%; height: 30px; background: #d7d7d7;}
+
+.lottery_box .wanfa span{float: left; line-height: 30px; padding: 0 10px;}
+.lottery_box .wanfa a{line-height: 30px; padding: 0 10px; text-decoration: none; color: #333;}
+.lottery_box .wanfa a:hover{ text-decoration: underline;}
+.lottery_box .wanfa a.cur{color: #c33;}
+
+.lottery_box .ls-info{width: 990px; height: 45px; }
+.lottery_box .ls-info span{display: block; float: left; line-height: 25px; margin:10px;}
+.lottery_box .ls-info span font{color: #c33; font-weight: bold;}
+.lottery_box .ls-info span.text{border-radius: 3px; background: #fff; border: 1px solid #bebdbd; padding: 0 10px; margin: 10px 10px 10px 0; font-weight: bold; color: #c33;}
+
+.lottery_box form{margin: 0; padding: 0;}
+
+.lottery_box .ls_touzhu{width: 990px;}
+.lottery_box .ls_touzhu .fl{width: 820px; float: left; overflow: hidden; margin: 0 10px;}
+.lottery_box .ls_touzhu .fr{width: 130px; float: right; margin-right: 10px;}
+
+.lottery_box .ls_touzhu .table {
+	border-collapse:collapse;
+	border-spacing:0;
+	empty-cells:show;
+	border:1px solid #bebdbd;
+	width:100%;
+	background:#fff;
+	text-align:center;
+}
+
+.lottery_box .ls_touzhu .table tr.bian_tr_title{background:#008B8B;}
+.lottery_box .ls_touzhu .table tr.bian_tr_title td{ color: #fff; }
+
+.lottery_box .ls_touzhu .table.kuaijie tr td.checked{background:#FFe98e; cursor: pointer;}
+
+.lottery_box .ls_touzhu .inp1{background: #fff none repeat scroll 0 0;
+    width: 50px;
+    border: 1px solid #bebdbd;
+    border-radius: 2px;
+    box-sizing: border-box;
+    display: inline-block;
+    font-size: 12px;
+    height: 24px;
+    line-height: 24px;
+    padding: 0 4px;
+    vertical-align: middle; text-align: center;}
+.lottery_box .ls_touzhu .inp1m{background: #fff none repeat scroll 0 0;
+    width: 50px;
+    border: 1px solid #bebdbd;
+    border-radius: 2px;
+    box-sizing: border-box;
+    display: inline-block;
+    font-size: 12px;
+    height: 24px;
+    line-height: 24px;
+    padding: 0 4px;
+    vertical-align: middle; text-align: center;}
+
+.lottery_box .ls_touzhu .inp1m{background: #FFe98e;}
+
+.lottery_box .table.kuaijie .bian_td_inp input{background: #FFe98e; height: 0; width: 0; overflow: hidden; border: none; padding: 0; margin: 0;}
+
+.lottery_box .table{width: 100%;}
+.lottery_box .table .table-column {
+	width:60px;
+}
+.lottery_box .table .table-odd {
+	background-color:#efefef;
+	width:54px;
+	font-weight:bold;
+	color:#595959;
+}
+.lottery_box .table .table-current {
+	background:#FFe98e;
+	color:#c61e2f;
+}
+.lottery_box .table .td-issue {
+	width:40px;
+}
+.lottery_box .table caption {
+	padding:0;
+	margin:0;
+	text-align:center;
+	position:relative;
+}
+.lottery_box .table td,.table th {
+	border:1px solid #bebdbd;
+	font-size:inherit;
+	margin:0;
+	overflow:visible;
+	padding:4px;
+	word-wrap:break-word;
+	word-break:break-all;
+}
+
+.lottery_box .btn_div{width: 820px; text-align: center; height: 30px; padding: 10px;}
+.lottery_box .btn_div .spanxuanzhong{display: none; float: left; line-height: 30px; margin: 0 5px;}
+.lottery_box .btn_div .spanxuanzhong font{color: #c33; font-weight: bold;}
+.lottery_box .btn_div .spanje{display: none; line-height: 30px; margin: 0 5px;}
+.lottery_box .btn_div .inputje{width: 100px; height: 30px; text-align: center; display: none; border-radius: 3px; line-height: 28px; border: 1px solid #ccc;}
+.lottery_box .btn_div .inputje:focus{background: #FFe98e;}
+.lottery_box .btn_div .submitbtn{border-radius:3px; background: #c33; display: inline-block; padding:0 15px; color: #fff; line-height: 30px; margin: 0 5px; cursor: pointer;}
+.lottery_box .btn_div .resetbtn{border-radius:3px; background: #5c5c5c; display: inline-block; padding:0 15px; color: #fff; line-height: 30px; margin: 0 5px; cursor: pointer; }
+.lottery_box .btn_div .submitbtn:hover{background: #b71c2b; color: #fff;}
+.lottery_box .btn_div .resetbtn:hover{background: #555555; color: #fff;}
+
+.lottery_box .clear{height: 0; overflow: hidden; display: block; overflow: hidden; clear: both;}

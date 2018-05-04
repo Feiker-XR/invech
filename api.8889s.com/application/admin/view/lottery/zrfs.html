@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>系统设置</title>
+<link href="/css/base.css" rel="stylesheet" type="text/css" />
+<link href="/css/admin.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="/js/jquery.js"></script>
+<script type="text/javascript" src="/js/jquery.tools.js"></script>
+<script type="text/javascript" src="/js/base.js"></script>
+</head>
+<body class="input">
+	<!--<div class="bar">
+		真人分数报表
+	</div>-->
+	
+
+	<div class="body">
+	  <ul id="tab" class="tab">
+				<li>
+					<input type="button" value="真人分数报表" hidefocus class="current" />
+				</li>
+			</ul>
+<form name="form1" onSubmit="return check_submit();" method="post" action="">
+			<table class="inputTable tabContent">
+
+<table class="inputTable tabContent">
+				<tr>
+				  <td width="100" align="center" bgcolor="#EEF4F9">接口名称</td>
+				  <td width="250" align="center" bgcolor="#EEF4F9">累计加分</td>
+				  <td width="150" align="center" bgcolor="#EEF4F9">消费</td>
+				  <td width="150" align="center" bgcolor="#EEF4F9">目前剩余分数</td>
+				  <td width="150" align="center" bgcolor="#EEF4F9">官方购买比例</td>
+    			</tr>
+				<?php foreach ($rs as $v){?>
+				<tr>
+					<td align="center">{$v['name']}</td>
+					<td align="center">{$v['zongjia']}</td>
+					<td align="center">{$v['xiaofei']}</td>
+					<td align="center">{$v['muqian']}</td>
+					<td align="center">{$v['about']}</td>
+				</tr>
+			<?php }?>
+			</table>
+	</div>
+</body>
+</html>

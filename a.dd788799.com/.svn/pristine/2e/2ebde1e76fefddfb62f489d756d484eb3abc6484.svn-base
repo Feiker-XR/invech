@@ -1,0 +1,59 @@
+
+{layout name="layout" /}
+<script type="text/javascript" src="/js/datePicker/WdatePicker.js"></script>
+<div class="row">
+  <div class="col-xs-12">
+    <div class="box">
+       <div class="box-header">
+ 				
+			<form action="{:url('bet')}" method="post" class="form-search pull-left">
+				
+				  <label>时间范围：</label>
+				  <input id="start_time" name="start_time" type="text" 
+				  	class='Wdate'  value="" onFocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',maxDate:'#F{literal}{$dp.$D(\'end_time\')}{/literal}'})"></input>
+				  <label>到：</label>
+				  <input id="end_time" name="end_time" type="text" class='Wdate'  value="" onFocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',minDate:'#F{literal}{$dp.$D(\'start_time\')}{/literal}'})"></input>					  
+				  <input type="submit" class="btn" value="搜索">
+			</form>
+			
+      </div>
+      <!-- /.box-header -->
+      <div class="box-body table-responsive no-padding">
+		<table class="table table-hover">
+	          <tbody>
+	          	<tr>
+					 <th>#</th>
+					 <th>日期</th>
+					 <th>总金额</th>
+					 <th>注单总数</th>
+					 <th>中奖金额</th>
+					 <th>中奖注数</th>
+					 <th>输赢金额</th>
+				</tr>
+				{foreach $list as $v}
+				 <tr>
+					  <td>{$v->id}</td>
+					  <td>{$v->created_at|date="y-m-d",###}</td>
+					  <td>{$v->bet_amount}</td>
+					  <td>{$v->bet_count}</font></td>
+					  <td>{$v->zj_amount}</td>
+					  <td>{$v->zj_count}</td>
+					  <td>{$v->win}</td>
+				</tr>
+				{/foreach}
+			</tbody>
+		</table>
+			   
+      </div>
+      	<div style="width:100%;margin-left:20px;">
+			{$list->render();}
+		</div>
+      <!-- /.box-body -->
+    </div>
+    <!-- /.box -->
+  </div>
+</div>
+
+
+
+

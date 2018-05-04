@@ -1,0 +1,249 @@
+<form class="form-horizontal" id="played_add" method="post" enctype="multipart/form-data">
+  <div class="box-body">
+
+      <div class="form-group">
+          <label for="inputEmail3" class="col-sm-2 control-label">玩法名称</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control"  name="name" placeholder="玩法名称" {if(!empty($info['name']))} value="{$info['name']}" {/if}>
+          </div>
+      </div>
+
+     <div class="form-group">
+        <label for="inputPassword3" class="col-sm-2 control-label">类别</label>
+        <div class="col-sm-10">
+          <select class="form-control" id="type" name="type" aria-hidden="true">
+                <option value="">请选择类别</option>
+               {foreach($types as $key=>$type)}
+                    <option value="{$key}" {if(!empty($info['type']) && $info['type'] == $key)} selected {/if} >{$type}</option>
+                {/foreach}   
+           </select>
+        </div>
+    </div>
+
+     <div class="form-group">
+        <label for="inputPassword3" class="col-sm-2 control-label">玩法分组</label>
+        <div class="col-sm-10">
+          <select class="form-control"  id="groupId" name="groupId" aria-hidden="true">
+               <option value="">请先选择类别</option>
+            </select>
+          
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="inputEmail3" class="col-sm-2 control-label">标签</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control"  name="tag" placeholder="标签" {if(!empty($info['tag']))} value="{$info['tag']}" {/if}>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="inputEmail3" class="col-sm-2 control-label">赔率</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control"  name="bonusProp" placeholder="赔率" {if(!empty($info['bonusProp']))} value="{$info['bonusProp']}" {/if}>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="inputEmail3" class="col-sm-2 control-label">最低赔率</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control"  name="bonusPropBase" placeholder="最低赔率" {if(!empty($info['bonusPropBase']))} value="{$info['bonusPropBase']}" {/if}>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="inputEmail3" class="col-sm-2 control-label">每注号码个数</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control"  name="selectNum" placeholder="每注号码个数" {if(!empty($info['selectNum']))} value="{$info['selectNum']}" {/if}>
+        </div>
+    </div>
+    
+    <div class="form-group">
+          <label for="inputEmail3" class="col-sm-2 control-label">结算函数</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control"  name="ruleFun" placeholder="结算函数" {if(!empty($info['ruleFun']))} value="{$info['ruleFun']}" {/if}>
+          </div>
+    </div>
+    
+    <div class="form-group">
+          <label for="inputEmail3" class="col-sm-2 control-label">随机函数</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control"  name="randomSscFun" placeholder="随机函数" {if(!empty($info['randomSscFun']))} value="{$info['randomSscFun']}" {/if}>
+          </div>
+    </div>
+
+    <div class="form-group">
+          <label for="inputEmail3" class="col-sm-2 control-label">注数检查</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control"  name="betCountFun" placeholder="注数检查" {if(!empty($info['betCountFun']))} value="{$info['betCountFun']}" {/if}>
+          </div>
+    </div>
+
+    <div class="form-group">
+          <label for="inputEmail3" class="col-sm-2 control-label">内容检查</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control"  name="betCheckFun" placeholder="内容检查" {if(!empty($info['betCheckFun']))} value="{$info['betCheckFun']}" {/if}>
+          </div>
+    </div>
+
+    <div class="form-group">
+          <label for="inputEmail3" class="col-sm-2 control-label">玩法页面模板</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control"  name="playedTpl" placeholder="玩法页面模板" {if(!empty($info['playedTpl']))} value="{$info['playedTpl']}" {/if}>
+          </div>
+    </div>
+    
+    <div class="form-group">
+          <label for="inputEmail3" class="col-sm-2 control-label">排序</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control"  name="sort" placeholder="排序" {if(!empty($info['sort']))} value="{$info['sort']}" {/if}>
+          </div>
+      </div>
+
+    <div class="form-group">
+        <label for="inputEmail3" class="col-sm-2 control-label">玩法简单说明</label>
+        <div class="col-sm-10">
+            <textarea class="form-control" rows="3" name="simpleInfo" placeholder="玩法简单说明">{if(!empty($info['simpleInfo']))} {$info['simpleInfo']} {/if}</textarea>
+        </div>
+    </div>
+
+     <div class="form-group">
+        <label for="inputEmail3" class="col-sm-2 control-label">玩法说明</label>
+        <div class="col-sm-10">
+            <textarea class="form-control" rows="3" name="info" placeholder="玩法说明">{if(!empty($info['simpleInfo']))} {$info['info']} {/if}</textarea>
+        </div>
+    </div>
+
+     <div class="form-group">
+        <label for="inputEmail3" class="col-sm-2 control-label">中奖举例</label>
+        <div class="col-sm-10">
+            <textarea class="form-control" rows="3" name="example" placeholder="中奖举例">{if(!empty($info['example']))} {$info['example']} {/if}</textarea>
+        </div>
+    </div>
+
+      <div class="form-group">
+        <label for="inputPassword3" class="col-sm-2 control-label">玩法</label>
+        <div class="col-sm-10">
+          <select class="form-control select2 select2-hidden-accessible tabindex="-1"  name="is_kqwf" aria-hidden="true">
+             <option value="0" {if(!empty($info['is_kqwf']) && $info['is_kqwf'] == '0')} selected {/if} >官方玩法</option>
+             <option value="1" {if(!empty($info['is_kqwf']) && $info['is_kqwf'] == '1')} selected {/if} >快钱玩法</option>  
+          </select>
+        </div>
+    </div>
+
+    
+  <div class="form-group">
+        <label for="inputPassword3" class="col-sm-2 control-label">混合玩法</label>
+        <div class="col-sm-10">
+          <select class="form-control select2 select2-hidden-accessible tabindex="-1"  name="is_mix" aria-hidden="true">
+            <option value="0" {if(!empty($info['is_mix']) && $info['is_mix'] == '0')} selected {/if} >否</option>
+            <option value="1" {if(!empty($info['is_mix']) && $info['is_mix'] == '1')} selected {/if} >是</option>  
+           </select>
+        </div>
+    </div>
+     <div class="form-group">
+          <label for="inputEmail3" class="col-sm-2 control-label">混合玩法关联的玩法</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control"  name="mix_ids" placeholder="混合玩法关联的玩法,'|'分隔" {if(!empty($info['mix_ids']))} value="{$info['mix_ids']}" {/if}>
+          </div>
+    </div>
+    
+    <div class="form-group">
+          <label for="inputEmail3" class="col-sm-2 control-label">任选模式</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control"  name="rx_mode" placeholder="任选模式,tpf:通配符,wym:位掩码" {if(!empty($info['rx_mode']))} value="{$info['rx_mode']}" {/if}>
+          </div>
+      </div>
+
+       <div class="form-group">
+          <label for="inputEmail3" class="col-sm-2 control-label">玩法尾数</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control"  name="weishu" placeholder="玩法尾数" {if(!empty($info['weishu']))} value="{$info['weishu']}" {/if}>
+          </div>
+      </div>
+
+       <div class="form-group">
+        <label for="inputPassword3" class="col-sm-2 control-label">状态</label>
+        <div class="col-sm-10">
+          <select class="form-control select2 select2-hidden-accessible tabindex="-1"  name="enable" aria-hidden="true">
+             <option value="1" {if(!empty($info['enable']) && $info['enable'] == '1')} selected {/if} >开启</option>  
+             <option value="0" {if(!empty($info['enable']) && $info['enable'] == '0')} selected {/if} >关闭</option>
+             
+           </select>
+        </div>
+    </div>
+
+     <input type="hidden" name="id" {if(!empty($info['id']))} value="{$info['id']}" {/if} >
+    <div class="col-sm-offset-2 col-sm-10">
+        <button id="btnajax" class="btn btn-danger">提交</button>
+    </div>
+  </div>
+</form>
+
+<script type="text/javascript">
+$(function(){
+    {if(!empty($info['id']))}
+        getGroupByid();
+    {/if}
+    $("#type").change(function(){
+        getGroupByid();
+    });
+    $("#btnajax").click(function () {
+
+    var options = {
+       url: "{:url('played_edit')}",
+      // type : 'POST',
+     dataType : 'json',
+      success : function(data) {
+        $(".layui-layer-close").click();
+
+       layer.alert(data.msg, {
+          time: 20000,
+          skin: 'layui-layer-molv', //该皮肤由layer.seaning.com友情扩展。关于皮肤的扩展规则，去这里查阅
+          closeBtn: 0,
+          anim: 4
+        }, function(){
+           window.location.href = document.URL;
+        })
+      },
+      error: function(data) {
+         $(".layui-layer-close").click();
+        layer.alert(data.msg, {
+          time: 20000,
+          skin: 'layui-layer-molv', //该皮肤由layer.seaning.com友情扩展。关于皮肤的扩展规则，去这里查阅
+          closeBtn: 0,
+          anim: 4
+        }, function(){
+           window.location.href = document.URL;
+        })
+      }
+    };
+      $("#played_add").ajaxForm(options);
+   })
+});
+function getGroupByid(){
+   var types = $("#type").val();
+    $.get('/lottery/getGroupByid',{type:types},function(data){
+          var html ='';
+          if(data){
+            {if(!empty($info["groupId"]))}
+              var groupId = '{$info["groupId"]}';
+            {else}
+              var groupId = '';
+            {/if}
+            $.each(data, function(k, val) {
+              if(val.id == groupId){
+                html += '<option value="'+val.id+'" selected >'+val.groupName+'</option>';
+              }else{
+                html += '<option value="'+val.id+'">'+val.groupName+'</option>';     
+              }
+              
+            }); 
+          }else{
+             html += '<option value="">请先选择类别</option>';
+          }
+          
+           $("#groupId").html(html);
+    },'json');
+}
+</script>

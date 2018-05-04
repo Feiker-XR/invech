@@ -1,0 +1,217 @@
+{layout name="layout" /}
+
+<div class="row">
+  <div class="col-xs-12">
+    <div class="box">
+      <div class="box-header">
+		<form>
+
+          <div class="pull-left">
+             <input class="form-control input-sm search" value="{$Think.get.agentname}" placeholder="请输入代理名称" type="text" name="agentname" > 
+          </div> 
+
+          <div class="pull-left">
+             <input class="form-control input-sm search" value="{$Think.get.username}" placeholder="请输入用户名称" type="text" name="username" > 
+          </div> 
+          <div class="pull-left" style="margin-left:20px;">
+              <input type="text" name="startTime"  value="{$Think.get.startTime}" placeholder="开始时间" class="form-control input-sm" id="datepicker1">
+          </div>
+
+          <div class="pull-left">
+                ~
+          </div> 
+
+          <div class="pull-left">
+            <input type="text" name="endTime"  value="{$Think.get.endTime}" placeholder="结束时间" class="form-control input-sm" id="datepicker2">
+          </div> 
+
+          <div class="has-feedback pull-left" style="margin-left:20px;">
+              <button type="submit" class="btn btn-block btn-default btn-sm filter">查询</button>
+          </div>
+
+		 </form>
+
+      </div>
+      <!-- /.box-header -->
+
+      {//include file="common/report_echart" /}
+
+<div class="row">
+        <div class="col-lg-3 col-xs-6">
+          <div class="small-box bg-aqua">
+            <div class="inner">
+              <h3>0</h3>
+              <p>公司入款</p>
+            </div>
+            <div class="icon">
+              <i class="ion ion-bag"></i>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-3 col-xs-6">
+
+          <div class="small-box bg-green">
+            <div class="inner">
+              <h3>{$stat.deposit_real_amount}
+              	<!--<sup style="font-size: 20px">%</sup>-->              	
+              </h3>
+              <p>线上入款</p>
+            </div>
+            <div class="icon">
+              <i class="ion ion-stats-bars"></i>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-3 col-xs-6">
+          <div class="small-box bg-yellow">
+            <div class="inner">
+              <h3>{$stat.manual_deposit_amount}</h3>
+              <p>人工存入</p>
+            </div>
+            <div class="icon">
+              <i class="ion ion-person-add"></i>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-3 col-xs-6">
+          <div class="small-box bg-red">
+            <div class="inner">
+              <h3>{$stat.withdraw_debit_amount}</h3>
+              <p>出款扣款</p>
+            </div>
+            <div class="icon">
+              <i class="ion ion-pie-graph"></i>
+            </div>
+          </div>
+        </div>
+</div>
+
+<div class="row">
+        <div class="col-lg-3 col-xs-6">
+          <div class="small-box bg-aqua">
+            <div class="inner">
+              <h3>{$stat.withdraw_real_amount}</h3>
+              <p>会员出款</p>
+            </div>
+            <div class="icon">
+              <i class="ion ion-bag"></i>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-3 col-xs-6">
+
+          <div class="small-box bg-green">
+            <div class="inner">
+              <h3>{$stat.bonus_amount}
+              	<!--<sup style="font-size: 20px">%</sup>-->              	
+              </h3>
+              <p>给予优惠</p>
+            </div>
+            <div class="icon">
+              <i class="ion ion-stats-bars"></i>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-3 col-xs-6">
+          <div class="small-box bg-yellow">
+            <div class="inner">
+              <h3>{$stat.manual_withdraw_amount}</h3>
+              <p>人工提出</p>
+            </div>
+            <div class="icon">
+              <i class="ion ion-person-add"></i>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-3 col-xs-6">
+          <div class="small-box bg-red">
+            <div class="inner">
+              <h3>{$stat.backwater_amount}</h3>
+              <p>给予返水</p>
+            </div>
+            <div class="icon">
+              <i class="ion ion-pie-graph"></i>
+            </div>
+          </div>
+        </div>
+</div>
+
+      <div class="box-body table-responsive no-padding">
+        <table class="table table-hover">
+    		<tr>
+				 <th>用户id</th>
+				 <th>用户名称</th>
+				 <th>用户昵称</th>
+				 <th>投注金额</th>
+				 <th>投注数量</th>
+				 <th>中奖金额</th>
+				 <th>中奖数量</th>
+				 <th>输赢金额</th>
+				 <th>返水金额</th>
+				 <th>预存款金额</th>
+				 <th>存款金额</th>
+				 <th>取款金额(出款金额/扣款金额)</th>
+				 <th>红利金额</th>
+				 <th>手工存款</th>
+				 <th>手工扣款</th>	
+			</tr>
+			{foreach $list as $v}
+			 <tr>
+				  <td>{$v.uid}</td>
+				  <td>{$v.username}</td>
+				  <td>{$v.nickname}</td>
+				  <td>{$v.bet_amount}</td>
+				  <td>{$v.bet_count}</td>
+				  <td>{$v.zj_amount}</td>
+				  <td>{$v.zj_count}</td>
+				  <td>{$v.win_amount}</td>
+				  <td>{$v.backwater_amount}</td>
+				  <td>{$v.deposit_amount}</td>
+				  <td>{$v.deposit_real_amount}</td>
+				  <td>{$v.withdraw_amount}({$v.withdraw_real_amount}/{$v.withdraw_debit_amount})</td>
+				  <td>{$v.bonus_amount}</td>
+				  <td>{$v.manual_deposit_amount}</td>
+				  <td>{$v.manual_withdraw_amount}</td>
+			</tr>
+			{/foreach}
+			<tr>
+			  <td colspan="3">总计</td>
+			  <td>{$stat.bet_amount}</td>
+			  <td>{$stat.bet_count}</td>
+			  <td>{$stat.zj_amount}</td>
+			  <td>{$stat.zj_count}</td>
+			  <td>{$stat.win_amount}</td>
+			  <td>{$stat.backwater_amount}</td>
+			  <td>{$stat.deposit_amount}</td>
+			  <td>{$stat.deposit_real_amount}</td>
+			  <td>{$stat.withdraw_amount}({$stat.withdraw_real_amount}/{$stat.withdraw_debit_amount})</td>
+			  <td>{$stat.bonus_amount}</td>
+			  <td>{$stat.manual_deposit_amount}</td>
+			  <td>{$stat.manual_withdraw_amount}</td>				
+			</tr>
+        </table>
+        {$list->render();}
+      </div>
+      <!-- /.box-body -->
+    </div>
+    <!-- /.box -->
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){
+	var obj = {
+            autoclose: true,
+            todayHighlight: true,
+            language:"zh-CN", 
+            format:"yyyy-mm-dd" 
+       };	
+	$("#datepicker1").datepicker(obj);
+	$("#datepicker2").datepicker(obj);
+});
+</script>

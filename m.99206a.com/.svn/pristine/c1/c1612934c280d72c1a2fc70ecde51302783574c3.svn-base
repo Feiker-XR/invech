@@ -1,0 +1,20 @@
+<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:78:"/mnt/wwwroot/www.dd788799.com/public/../application/index/newview/live/pt.html";i:1505452698;}*/ ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>PTGAME</title>
+</head>
+
+<body onload="document.myform.submit();">
+<?php if(!(empty($return) || (($return instanceof \think\Collection || $return instanceof \think\Paginator ) && $return->isEmpty()))): ?>
+<form action="http://www.bong88.cn/play.php" name="myform" id="myform" method="post">
+<?php if(is_array($return) || $return instanceof \think\Collection || $return instanceof \think\Paginator): if( count($return)==0 ) : echo "" ;else: foreach($return as $k=>$i): ?>
+<input type='hidden' name='<?php echo $k; ?>' value='<?php echo $i; ?>' />
+<?php endforeach; endif; else: echo "" ;endif; ?>
+</form>
+<?php else: ?>
+<script>alert('系统错误!')</script>
+<?php endif; ?>
+</body>
+</html>

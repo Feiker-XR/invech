@@ -1,0 +1,49 @@
+{layout name="layout" /}
+
+<div class="row">
+  <div class="col-xs-12">
+    <div class="box">
+      <div class="box-header">
+<form>
+
+    <div class="pull-left" style="margin-left:15px;">
+      <select class="form-control input-sm filterStatus" name="type">
+        
+        {foreach($types as $key=>$type)}
+          <option value="{$key}" {if($Think.get.type == $key)}selected{/if} >{$type.title}</option>
+        {/foreach}
+      </select>
+    </div>   
+
+    <div class="has-feedback pull-right">
+      <button type="submit" class="btn btn-block btn-default btn-sm filter">查询</button>                  
+    </div>  
+ </form>
+      </div>
+      <!-- /.box-header -->
+      <div class="box-body table-responsive no-padding">
+        <table class="table table-hover">
+          <tr>
+            <th >ID</th>
+            <th >彩种</th>
+            <th >当天期号</th>            
+            <th >开奖时间</th>
+            <th >操作</th>
+          </tr>
+          {foreach($list as $item)}
+          <tr>
+            <td>{$item->id}</td>
+            <td>{$item->lottery->title}</td>
+            <td>{$item->actionNo}</td>
+            <td>{$item->actionTime}</td>
+            <td>编辑</td>
+          </tr>
+          {/foreach}
+        </table>
+        {$list->render()}
+      </div>
+      <!-- /.box-body -->
+    </div>
+    <!-- /.box -->
+  </div>
+</div>

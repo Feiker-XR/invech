@@ -1,0 +1,44 @@
+<?php
+// +----------------------------------------------------------------------
+// | FileName: Advice.php
+// +----------------------------------------------------------------------
+// | CreateDate: 2017年10月6日
+// +----------------------------------------------------------------------
+// | Author: xiaoluo
+// +----------------------------------------------------------------------
+namespace app\index\controller;
+
+use app\index\Login;
+
+class advice extends Login {
+    
+    //系统首页
+    public function index(){
+        $lists = db('advice')->where(array('uid'=>$this->user['uid']))->order('id desc')->select();
+        $this->assign('lists',$lists);//列表
+        return $this -> fetch();
+    }
+    
+    public function submit(){
+        if($this->request->isPost()){
+            if(input('content')==''){
+                $this->error('建议内容不能为空');
+            }
+            $map['uid'] = $this->user['uid'];
+            $map['content'] = input('content');
+            $map['addTime'] = time();
+            
+            if(db('advice')->insert($map)) {
+                $this->success('添加建议成功', url('index'));
+            }
+            else {
+                $this->error('添加建议失败');
+            }
+            
+            $this->error('error -1');
+        }else {
+            return $this->fetch();
+        }
+    }
+    
+}

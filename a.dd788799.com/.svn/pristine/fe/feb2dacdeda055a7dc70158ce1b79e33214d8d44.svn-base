@@ -1,0 +1,90 @@
+<input type="hidden" name="playedGroup" value="<?=$groupId?>"/>
+<input type="hidden" name="playedId" value="<?=$playedId?>"/>
+<input type="hidden" name="type" value="<?=$type?>"/>
+<input type="hidden" name="playedName" value="<?=$played['name']?>"/>
+<!-- mobile 六合彩_生肖连 --->
+<div id="sscContent">
+    <div class="lot-content clearfix">
+        <div class="fl main-left">
+            <div class="hd clearfix f-tab f-bottom">
+                <div class="fr">
+                    <div class="T-tab clearfix">
+                        <a href="javascript:void(0)" onclick="changeTab(this)" length="2">二肖连中</a>
+                        <a href="javascript:void(0)" onclick="changeTab(this)" length="3">三肖连中</a>
+                        <a href="javascript:void(0)" onclick="changeTab(this)" length="4">四肖连中</a>
+                        <a href="javascript:void(0)" onclick="changeTab(this)" length="5">五肖连中</a>
+                        <a href="javascript:void(0)" onclick="changeTab(this)" length="6">二肖连不中</a>
+                        <a href="javascript:void(0)" onclick="changeTab(this)" length="7">三肖连不中</a>
+                        <a href="javascript:void(0)" onclick="changeTab(this)" length="8">四肖连不中</a>
+                    </div>
+                </div>
+            </div>
+            <div class="table-common" id="table-common">
+                <script type="text/html" id="six_sxl">
+                    <table width="100%" border="0" cellspacing="0" cellpadding="0" class='pp sx' action='six_sxl' style="overflow: auto;">
+                        <thead>
+                        <tr>
+                            <th>生肖</th>
+                            <th>赔率</th>
+                            <th>金额</th>
+                            <th>号码</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {{each res value index}}
+                        <tr>
+                            <td><strong>{{value.name}}</strong></td>
+                            <td><strong class="color-red pl"></strong></td>
+                            <td><input type="checkbox" value="{{value.name}}"></td>
+                            <td>
+                                {{each value.nums v i}}
+                                <span class="ball-icon ball-{{v}}"></span>
+                                {{/each}}
+                            </td>
+                        </tr>
+                        {{/each}}
+                        </tbody>
+                    </table>
+                    <div class="main-left">
+                        <div class="hd clearfix rehd tzgz" id="toptouzhu">
+                            <div class="fl refl xzje">
+                                下注金额：<input type="text" class="txt" id="inputMoney">
+                            </div>
+                            <div class="kjanniu">
+                                <a href="javascript:void(0)" class="img-50" data-num="50"></a>
+                                <a href="javascript:void(0)" class="img-100" data-num="100"></a>
+                                <a href="javascript:void(0)" class="img-500" data-num="500"></a>
+                                <a href="javascript:void(0)" class="img-1000" data-num="1000"></a>
+                                <a href="javascript:void(0)" class="img-5000" data-num="5000"></a>
+                                <a href="javascript:void(0)" class="img-10000" data-num="10000"></a>
+                            </div>
+                        </div>
+                    </div>
+                </script>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    function changeTab(self) {
+        $('.table-common input[type=checkbox]').removeAttr('checked');
+        $(self).siblings().removeClass('active');
+        $(self).addClass('active');
+        var $tabs = $(self).parent().children();
+        var index = $tabs.index(self);
+        plg = pls[index];
+        $('.color-red').text(plg.pls[0].pl)
+    }
+    $(function () {
+        var playedId = "<?=$playedId?>";
+        $.getJSON("/game/pl/playedId/" + playedId, function (data) {
+            pls = data;
+            var res = get_final_sx(false);
+            res = [].concat.apply([], res);
+            var html = template('six_sxl', {res: res});
+            $('.table-common').html(html);
+            $('.T-tab.clearfix').children().eq(0).click();
+        });
+    });
+
+</script>

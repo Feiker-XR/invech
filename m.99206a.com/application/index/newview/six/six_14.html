@@ -1,0 +1,157 @@
+{include file='/six/header' /}
+<body>
+<div class="content">
+<form name="orders" action="{:Url('lotterybet/six')}?type=0&class=14" method="post" target="OrderFrame">
+
+<table width="800" border="0" align="center" cellpadding="0" cellspacing="0" class="numberinfo">
+  <tr>
+    <td>
+    		<div class="top">&nbsp;&nbsp;尾数连 => 尾数连</div>
+  	</td>
+  	<td align="center">
+  			<div id="openNumber">开奖号码载入中...</div>
+  	</td>
+    <td>
+    	<div class="time-item-all">
+    			<div class="time-item-num">&nbsp;&nbsp;第 <span id="open_qihao">0000000</span> 距离封盘：</div>
+    			<div class="time-item"><span id="hour_show">0 时</span>：<span id="minute_show">0 分</span>：<span id="second_show">0 秒</span></div>
+    	</div>
+    </td>
+  </tr>
+</table>
+<div class="left" style="width: 845px;">
+<table border="0" align="center" cellpadding="0" cellspacing="1" class="bian" style="margin-top:10px;">
+  <tr>
+    <th><input name='ball_14' type="radio" value='1'/>
+      二尾连中</th>
+    <th><input name='ball_14' type="radio" value='2'/>
+      三尾连中</th>
+    <th><input name='ball_14' type="radio" value='3'/>
+      四尾连中</th>
+    <th><input name='ball_14' type="radio" value='4'/>
+      五尾连中</th>
+  </tr>
+  </table>
+<table border="0" align="center" cellpadding="0" cellspacing="1" class="bian" style="margin-top:10px;">
+  <tr>
+    <th>尾数</th>
+    <th>所属号码</th>
+    <th>选择</th>
+    <th>赔率</th>
+    <th>尾数</th>
+    <th>所属号码</th>
+    <th>选择</th>
+    <th>赔率</th>
+  </tr>
+  <tr>
+    <td class="ball_txt">0尾</td>
+    <td class="bian_td_no"><div class="ball_10">10</div>
+      <div class="ball_20">20</div>
+      <div class="ball_30">30</div>
+      <div class="ball_40">40</div></td>
+    <td class="bian_td_no"><input name="ball[]" type="checkbox" value="1" /></td>
+    <td class="bian_td_odds" id="ball_14_o1">-</td>
+    <td class="ball_txt">1尾</td>
+    <td class="bian_td_no"><div class="ball_01">01</div>
+      <div class="ball_11">11</div>
+      <div class="ball_21">21</div>
+      <div class="ball_31">31</div>
+      <div class="ball_41">41</div></td>
+    <td class="bian_td_no"><input name="ball[]" type="checkbox" value="2" /></td>
+    <td class="bian_td_odds" id="ball_14_o2">-</td>
+  </tr>
+  <tr>
+    <td class="ball_txt">2尾</td>
+    <td class="bian_td_no"><div class="ball_02">02</div>
+      <div class="ball_12">12</div>
+      <div class="ball_22">22</div>
+      <div class="ball_32">32</div>
+      <div class="ball_42">42</div></td>
+    <td class="bian_td_no"><input name="ball[]" type="checkbox" value="3" /></td>
+    <td class="bian_td_odds" id="ball_14_o3">-</td>
+    <td class="ball_txt">3尾</td>
+    <td class="bian_td_no"><div class="ball_03">03</div>
+      <div class="ball_13">13</div>
+      <div class="ball_23">23</div>
+      <div class="ball_33">33</div>
+      <div class="ball_43">43</div></td>
+    <td class="bian_td_no"><input name="ball[]" type="checkbox" value="4" /></td>
+    <td class="bian_td_odds" id="ball_14_o4">-</td>
+  </tr>
+  <tr>
+    <td class="ball_txt">4尾</td>
+    <td class="bian_td_no"><div class="ball_04">04</div>
+      <div class="ball_14">14</div>
+      <div class="ball_24">24</div>
+      <div class="ball_34">34</div>
+      <div class="ball_44">44</div></td>
+    <td class="bian_td_no"><input name="ball[]" type="checkbox" value="5" /></td>
+    <td class="bian_td_odds" id="ball_14_o5">-</td>
+    <td class="ball_txt">5尾</td>
+    <td class="bian_td_no"><div class="ball_05">05</div>
+      <div class="ball_15">15</div>
+      <div class="ball_25">25</div>
+      <div class="ball_35">35</div>
+      <div class="ball_45">45</div></td>
+    <td class="bian_td_no"><input name="ball[]" type="checkbox" value="6" /></td>
+    <td class="bian_td_odds" id="ball_14_o6">-</td>
+  </tr>
+  <tr>
+    <td class="ball_txt">6尾</td>
+    <td class="bian_td_no"><div class="ball_06">06</div>
+      <div class="ball_16">16</div>
+      <div class="ball_26">26</div>
+      <div class="ball_36">36</div>
+      <div class="ball_46">46</div></td>
+    <td class="bian_td_no"><input name="ball[]" type="checkbox" value="7" /></td>
+    <td class="bian_td_odds" id="ball_14_o7">-</td>
+    <td class="ball_txt">7尾</td>
+    <td class="bian_td_no"><div class="ball_07">07</div>
+      <div class="ball_17">17</div>
+      <div class="ball_27">27</div>
+      <div class="ball_37">37</div>
+      <div class="ball_47">47</div></td>
+    <td class="bian_td_no"><input name="ball[]" type="checkbox" value="8" /></td>
+    <td class="bian_td_odds" id="ball_14_o8">-</td>
+  </tr>
+  <tr>
+    <td class="ball_txt">8尾</td>
+    <td class="bian_td_no"><div class="ball_08">08</div>
+      <div class="ball_18">18</div>
+      <div class="ball_28">28</div>
+      <div class="ball_38">38</div>
+      <div class="ball_48">48</div></td>
+    <td class="bian_td_no"><input name="ball[]" type="checkbox" value="9" /></td>
+    <td class="bian_td_odds" id="ball_14_o9">-</td>
+    <td class="ball_txt">9尾</td>
+    <td class="bian_td_no"><div class="ball_09">09</div>
+      <div class="ball_19">19</div>
+      <div class="ball_29">29</div>
+      <div class="ball_39">39</div>
+      <div class="ball_49">49</div></td>
+    <td class="bian_td_no"><input name="ball[]" type="checkbox" value="10" /></td>
+    <td class="bian_td_odds" id="ball_14_o10">-</td>
+  </tr>
+  <!--<tr>
+    <td colspan="8" class="bian_td_gg" id="moneys">&nbsp;</td>
+    </tr>-->
+</table>
+<div class="lottery_clear"></div>
+<div class="button_body">
+		<span class="bian_td_gg" id="moneys">&nbsp;</span>
+		<a class="button submit" onclick="order();">下注</a>	
+		<a onclick="reset()" class="button again">重填</a>
+</div>
+</div>
+<div class="right">
+<div class="title">组合窗口</div>
+<div id="zuhe">请先选择类型</div>
+</div>
+<div class="lottery_clear"></div>
+</form>
+</div>
+<script src="/dd788799view/js/six/class_14.js" type="text/javascript"></script>
+<script type="text/javascript">$(function(){loadInfo();});</script>
+<IFRAME id="OrderFrame" name="OrderFrame" style="display:none"></IFRAME>
+</body>
+</html>

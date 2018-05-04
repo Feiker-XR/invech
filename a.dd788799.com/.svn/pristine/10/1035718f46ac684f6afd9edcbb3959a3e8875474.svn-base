@@ -1,0 +1,89 @@
+
+{layout name="layout" /}
+<script type="text/javascript" src="/js/datePicker/WdatePicker.js"></script>
+<div class="row">
+  <div class="col-xs-12">
+    <div class="box">
+       <div class="box-header">
+ 				
+			<form action="{:url('index')}" method="post" class="form-search pull-left">
+				
+				  <label>时间范围：</label>
+				  <input id="start_time" name="start_time" type="text" class='Wdate'  value="" onFocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',maxDate:'#F{literal}{$dp.$D(\'end_time\')}{/literal}'})"></input>
+				  <label>到：</label>
+				  <input id="end_time" name="end_time" type="text" class='Wdate'  value="" onFocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',minDate:'#F{literal}{$dp.$D(\'start_time\')}{/literal}'})"></input>					  
+				  
+				  <label style="height:30px;line-height:30px;display: inline-block;vertical-align: middle;" >支付方式：</label>
+				
+				  <select name="pay_type" id="pay_type" class="search-query" style="width:120px;margin-right:10px;">
+					<option value='' selected>全部</option>
+					{foreach $setcg as $v}
+						<option value='{$v.code}'>{:str_replace("'",'',$v.name)}</option>
+					{/foreach}
+				  </select>
+				  
+				  <label style="height:30px;line-height:30px;display: inline-block;vertical-align: middle;" >订单状态：</label>
+				
+				  <select name="order_state" id="order_state" class="search-query" style="width:120px;margin-right:10px;">
+					<option value='all' selected>全部状态</option>
+					<option value='0'>支付处理中</option>
+					<option value='1'>支付成功</option>
+				  </select>
+				  
+				  <input type="text" style="width:300px;" name="keywords" id="keywords"  placeholder="用户名、订单编号" class="search-query">
+				  <input type="submit" class="btn" value="搜索">
+				  
+				  <a href="{:url('export')}?{$export_args}" target='_blank' class="btn btn-primary">导出Excel</a>
+				  
+				  <a href="javascript:;" onclick="delForm('{:url('mgr_list')}?action=del&{$export_args}')" class="btn btn-danger">清空数据</a>
+				 
+			</form>
+			
+      </div>
+      <!-- /.box-header -->
+      <div class="box-body table-responsive no-padding">
+		<table class="table table-hover">
+	          <tbody>
+	          	<tr>
+				  <th>#</th>
+				  <th>订单编号</th>
+				  <th>用户名</th>
+				  <th>支付方式</th>
+				  <th>订单金额</th>
+				  <th>订单时间</th>
+				  <th>订单来源</th>
+				 <th>订单状态</th>
+				 
+				</tr>
+				{foreach $orlist as $v}
+				 <tr>
+					  <td>{$v.id}</td>
+					  <td>{$v.orderno}</td>
+					  <td>{$v.username}</td>
+					  <td>{$v.pwname}</font></td>
+					  <td>{$v.amount}</td>
+					  <td>{$v.order_time}</td>
+					  <td>{$v.pay_name}</td>
+					  <td>
+							{eq name="$v.status" value="0"}<font color=blue>未支付</font>{/eq}
+							{eq name="$v.status" value="1"}<font color=green>支付成功</font>{/eq}							  
+					  </td>
+				
+				</tr>
+				{/foreach}
+			</tbody>
+		</table>
+			   
+      </div>
+      	<div style="width:100%;margin-left:20px;">
+			{$orlist->render();}
+		</div>
+      <!-- /.box-body -->
+    </div>
+    <!-- /.box -->
+  </div>
+</div>
+
+
+
+

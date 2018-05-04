@@ -1,0 +1,83 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>系统设置</title>
+
+<link rel="stylesheet" type="text/css" href="/css/page.css" />
+<link href="/css/base.css" rel="stylesheet" type="text/css" />
+<link href="/css/admin.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="/js/jquery.js"></script>
+<script type="text/javascript" src="/js/jquery.tools.js"></script>
+<script type="text/javascript" src="/js/base.js"></script>
+</head>
+<body class="input">
+	<div class="bar">
+		冠军结果设置
+	</div>
+<div class="body">
+<ul id="tab" class="tab">
+   <li><input type="button" value="足球比分" hidefocus onClick="window.location.href='{:url('sports/zuqiu')}'" /></li>
+   <li><input type="button" value="篮球比分" hidefocus onClick="window.location.href='{:url('sports/lanqiu')}'" /></li>
+   <li><input type="button" value="网球比分" hidefocus onClick="window.location.href='{:url('sports/tennis')}'" /></li>
+   <li><input type="button" value="排球比分" hidefocus onClick="window.location.href='{:url('sports/volleyball')}'" /></li>
+   <li><input type="button" value="棒球比分" hidefocus onClick="window.location.href='{:url('sports/baseball')}'" /></li>
+   <li><input type="button" value="冠军比分" hidefocus class="current" onClick="window.location.href='{:url('sports/guanjun')}'" /></li>
+</ul>
+			<table class="inputTable tabContent">
+				<tr>
+					<th>
+						联赛名称: 
+					</th>
+					<td colspan="2"><?=$rows["x_title"]?></td>
+				</tr>
+				<tr>
+					<th>
+						项目名称: 
+					</th>
+					<td colspan="2"><?=$rows["match_name"]?></td>
+				</tr>
+				<tr>
+				  <th>结束日期: </th>
+				  <td colspan="2"><?=$rows["match_date"]?></td>
+			  </tr>
+				<tr>
+				  <th>结束时间:</th>
+				  <td colspan="2"><?=$rows["match_time"]?></td>
+			  </tr>
+				<tr>
+				  <th>封盘时间:</th>
+				  <td colspan="2"><?=$rows["match_coverdate"]?></td>
+			  </tr>
+				<tr>
+					<th>
+						比赛结果: 
+					</th>
+					<td>
+						<?php 
+							if($rows["x_result"]=="") 
+								echo "暂无结果";
+							else 
+								echo $rows["x_result"];
+						?>
+					</td>
+								
+					<td><a href="{:url('danshi/teamdel')}?xid=<?=$_GET["id"]?>&type=1" onClick="return confirm('您确定要清除结果')">清除结果</a></td>
+				</tr>
+				<tr>
+				  <td colspan="3" align="left" bgcolor="#EEF4F9">比赛结果设置</td>
+{volist name='list' id='rows'}
+				<tr>
+					<th>
+						<?=$rows["team_name"]?>
+					</th>
+					<td>
+						<?=$rows["point"]?>
+					</td>
+					<td><a onClick="return confirm('确定把该项设为结果');" href="{:url('setresultcmd')}?xid=<?=$_GET["id"]?>&amp;tid=<?=$rows["tid"]?>">设为结果</a></td>
+				</tr>
+{/volist}
+			</table>
+	</div>
+</body>
+</html>

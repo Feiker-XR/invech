@@ -1,0 +1,77 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>系统设置</title>
+<link href="/css/base.css" rel="stylesheet" type="text/css" />
+<link href="/css/admin.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="/js/jquery.js"></script>
+<script type="text/javascript" src="/js/jquery.tools.js"></script>
+<script type="text/javascript" src="/js/base.js"></script>
+</head>
+<body class="list">
+	<!--<div class="bar">
+		代理申请审核
+	</div>-->
+	
+
+	<div class="body">
+	<ul id="tab" class="tab">
+		<li>
+			<input type="button" value="代理申请审核" hidefocus class="current"/>
+		</li>
+	</ul>
+
+	<table id="listTable" class="listTable">
+		<tr>
+			<th>代理账号</th>
+			<th>查看下级</th>
+			<th>真实姓名</th>
+			<th>手机号码</th>
+			<th>邮箱地址</th>
+			<th>申请时间</th>
+			<th>操作</th>
+		</tr>
+	
+	{notempty name='list'}
+	{volist name='list' id='rows'}
+		<tr>
+			<td>{$rows['username']}</td>
+			<td>{$rows['uid']}</td>
+			<td>{$rows['r_name']}</td>
+			<td>{$rows['mobile']}</td>
+			<td>{$rows['email']}</td>
+			<td>{$rows['add_time']}</td>
+			<td>
+				{switch name='rows.status'}
+					{case value='0'}
+						<div>
+							<div style="float:left">
+              					<a onClick="return confirm('确认同意该用户成为代理的请求？');" 
+              					href="cmd.php?uid={$rows.uid}&did={$rows.d_id}&status=1">同意</a>
+              				</div>
+           					<div style="float:right">
+           						<a onClick="return confirm('不同意该用户成为代理的请求？');" 
+           						href="cmd.php?uid={$rows.uid}&did={$rows.d_id}&status=2">不同意</a>
+           					</div>
+		   	</div>
+					{/case}
+					{case value='1'}
+						<span style="color:#009900;">同意</span>
+					{/case}
+					{case value='2'}
+						<span style="color:#FF0000;">不同意</span>
+					{/case}
+					{case value='3'}
+						<span style="color:#0000FF;">操作无效</span>
+					{/case}
+				{/switch}
+			</td>
+		</tr>
+	{/volist}
+	{/notempty}
+	</table>
+  {notempty name='list'}<div class="pagerBar">{$list->render()}</div>{/notempty}
+</div>
+</body>
+</html>

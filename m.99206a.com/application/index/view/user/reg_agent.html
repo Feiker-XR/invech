@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Welcome</title>
+<link rel="stylesheet" type="text/css" href="/css/general.css" />
+<script src="/js/js/jquery-1.8.0.min.js"></script>
+<script type="text/javascript" src="/Scripts/member.js"></script>
+</head>
+<body>
+	<div class="ui-moneyBox">
+		<ul>
+			<table width="100%" border="0" cellspacing="0" cellpadding="5">
+				<form id="form1" name="form1" method="post" action="/user/reg_agent">
+					<tr>
+						<td colspan="2" align="center" bgcolor="#333333"
+							style="font-size: 14px; color: #FF0">请认真填写下列表单，否则我们将无法审核您的代理资格！</td>
+					</tr>
+					<tr>
+						<td width="150" align="right">代理账号：</td>
+						<td><font color="#0000FF">
+								<?php echo $user["username"];?>
+						</font><input type="hidden" name="username" id="username"
+							value="<?php echo $user["username"];?>"/></td>
+					</tr>
+					<tr>
+						<td align="right">真实姓名：</td>
+						<td><font color="#0000FF">
+								<?php echo $user["pay_name"];?>
+								<input type="hidden" name="r_name" id="r_name"
+								value="<?php echo $user["pay_name"];?>"/>
+						</font></td>
+					</tr>
+					<tr>
+						<td align="right">电话号码：</td>
+						<td><input name="mobile" type="text" class="Input_200"
+							id="mobile" value="<?php echo $user["mobile"];?>"
+							onFocus="this.value=''"
+							onBlur="if(!value){value=defaultValue;}"/></td>
+					</tr>
+					<tr>
+						<td align="right">邮箱地址：</td>
+						<td><input name="email" type="text" class="Input_200"
+							id="email" value="<?php echo $user["email"]?>"
+							onFocus="this.value=''"
+							onBlur="if(!value){value=defaultValue;}"/></td>
+					</tr>
+					<tr>
+						<td align="right">申请理由：</td>
+						<td valign="bottom"><textarea name="about" class="Txt_200"
+								id="about" onFocus="this.value=''"
+								onBlur="if(!value){value=defaultValue;}">请简单说明您成为代理后将如何推广！
+这将是我们是否通过您的代理资格的重要信息！</textarea></td>
+					</tr>
+					<tr>
+						<td colspan="2" align="left" style="padding-left: 160px;"><input
+							type="submit" name="button" id="button" value="确认申请"
+							class="m_btn" /></td>
+					</tr>
+				</form>
+			</table>
+		</ul>
+	</div>
+</body>
+</html>

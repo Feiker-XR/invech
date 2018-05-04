@@ -1,0 +1,208 @@
+<?php if (!defined('THINK_PATH')) exit(); /*a:2:{s:81:"/mnt/wwwroot/www.dd788799.com/public/../application/index/newview/six/six_15.html";i:1512723729;s:81:"/mnt/wwwroot/www.dd788799.com/public/../application/index/newview/six/header.html";i:1506679563;}*/ ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Welcome</title>
+<link type="text/css" rel="stylesheet" href="/dd788799view/css/six/6hc.css"/><link rel="stylesheet" type="text/css" href="/newview/css/style.css"/>
+<script src="/js/jquery1.9.0.min.js"></script>
+<script src="/js/layer/layer.min.js" type="text/javascript"></script><script type="text/javascript" src="/js/main.js"></script>
+</head>
+<body>
+<div class="content">
+<form name="orders" action="<?php echo Url('lotterybet/six'); ?>?type=0&class=15" method="post" target="OrderFrame">
+
+<table width="800" border="0" align="center" cellpadding="0" cellspacing="0" class="numberinfo">
+  <tr>
+    <td>
+    		<div class="top">&nbsp;&nbsp;全不中 => 全不中</div>
+  	</td>
+  	<td align="center">
+  			<div id="openNumber">开奖号码载入中...</div>
+  	</td>
+    <td>
+    	<div class="time-item-all">
+    			<div class="time-item-num">&nbsp;&nbsp;第 <span id="open_qihao">0000000</span> 距离封盘：</div>
+    			<div class="time-item"><span id="hour_show">0 时</span>：<span id="minute_show">0 分</span>：<span id="second_show">0 秒</span></div>
+    	</div>
+    </td>
+  </tr>
+</table>
+<div class="left" style="width: 845px;">
+<table border="0" align="center" cellpadding="0" cellspacing="1" class="bian" style="margin-top:10px;">
+  <tr>
+    <th><input name='ball_15' type="radio" value='1'/>五不中</th>
+    <th><input name='ball_15' type="radio" value='2'/>六不中</th>
+    <th><input name='ball_15' type="radio" value='3'/>七不中</th>
+    <th><input name='ball_15' type="radio" value='4'/>八不中</th>
+    <th><input name='ball_15' type="radio" value='5'/>九不中</th>
+    <th><input name='ball_15' type="radio" value='6'/>十不中</th>
+    <th><input name='ball_15' type="radio" value='7'/>十一不中</th>
+    <th><input name='ball_15' type="radio" value='8'/>十二不中</th>
+    </tr>
+  <tr>
+    <td class="bian_td_odds_15" id="ball_15_o1">-</td>
+    <td class="bian_td_odds_15" id="ball_15_o2">-</td>
+    <td class="bian_td_odds_15" id="ball_15_o3">-</td>
+    <td class="bian_td_odds_15" id="ball_15_o4">-</td>
+    <td class="bian_td_odds_15" id="ball_15_o5">-</td>
+    <td class="bian_td_odds_15" id="ball_15_o6">-</td>
+    <td class="bian_td_odds_15" id="ball_15_o7">-</td>
+    <td class="bian_td_odds_15" id="ball_15_o8">-</td>
+    </tr>
+  </table>
+<table border="0" align="center" cellpadding="0" cellspacing="1" class="bian" style="margin-top:10px;">
+  <tr>
+    <th>号码</th>
+    <th>选择</th>
+    <th>号码</th>
+    <th>选择</th>
+    <th>号码</th>
+    <th>选择</th>
+    <th>号码</th>
+    <th>选择</th>
+    <th>号码</th>
+    <th>选择</th>
+    </tr>
+  <tr>
+    <td class="bian_td_no_15"><div class="ball_c_01">01</div></td>
+    <td class="bian_td_no"><input name="ball[]" type="checkbox" value="1" /></td>
+    <td class="bian_td_no_15"><div class="ball_c_11">11</div></td>
+    <td class="bian_td_no"><input name="ball[]" type="checkbox" value="11" /></td>
+    <td class="bian_td_no_15"><div class="ball_c_21">21</div></td>
+    <td class="bian_td_no"><input name="ball[]" type="checkbox" value="21" /></td>
+    <td class="bian_td_no_15"><div class="ball_c_31">31</div></td>
+    <td class="bian_td_no"><input name="ball[]" type="checkbox" value="31" /></td>
+    <td class="bian_td_no_15"><div class="ball_c_41">41</div></td>
+    <td class="bian_td_no"><input name="ball[]" type="checkbox" value="41" /></td>
+    </tr>
+  <tr>
+    <td class="bian_td_no_15"><div class="ball_c_02">02</div></td>
+    <td class="bian_td_no"><input name="ball[]" type="checkbox" value="2" /></td>
+    <td class="bian_td_no_15"><div class="ball_c_12">12</div></td>
+    <td class="bian_td_no"><input name="ball[]" type="checkbox" value="12" /></td>
+    <td class="bian_td_no_15"><div class="ball_c_22">22</div></td>
+    <td class="bian_td_no"><input name="ball[]" type="checkbox" value="22" /></td>
+    <td class="bian_td_no_15"><div class="ball_c_32">32</div></td>
+    <td class="bian_td_no"><input name="ball[]" type="checkbox" value="32" /></td>
+    <td class="bian_td_no_15"><div class="ball_c_42">42</div></td>
+    <td class="bian_td_no"><input name="ball[]" type="checkbox" value="42" /></td>
+    </tr>
+  <tr>
+    <td class="bian_td_no_15"><div class="ball_c_03">03</div></td>
+    <td class="bian_td_no"><input name="ball[]" type="checkbox" value="3" /></td>
+    <td class="bian_td_no_15"><div class="ball_c_13">13</div></td>
+    <td class="bian_td_no"><input name="ball[]" type="checkbox" value="13" /></td>
+    <td class="bian_td_no_15"><div class="ball_c_23">23</div></td>
+    <td class="bian_td_no"><input name="ball[]" type="checkbox" value="23" /></td>
+    <td class="bian_td_no_15"><div class="ball_c_33">33</div></td>
+    <td class="bian_td_no"><input name="ball[]" type="checkbox" value="33" /></td>
+    <td class="bian_td_no_15"><div class="ball_c_43">43</div></td>
+    <td class="bian_td_no"><input name="ball[]" type="checkbox" value="43" /></td>
+    </tr>
+  <tr>
+    <td class="bian_td_no_15"><div class="ball_c_04">04</div></td>
+    <td class="bian_td_no"><input name="ball[]" type="checkbox" value="4" /></td>
+    <td class="bian_td_no_15"><div class="ball_c_14">14</div></td>
+    <td class="bian_td_no"><input name="ball[]" type="checkbox" value="14" /></td>
+    <td class="bian_td_no_15"><div class="ball_c_24">24</div></td>
+    <td class="bian_td_no"><input name="ball[]" type="checkbox" value="24" /></td>
+    <td class="bian_td_no_15"><div class="ball_c_34">34</div></td>
+    <td class="bian_td_no"><input name="ball[]" type="checkbox" value="34" /></td>
+    <td class="bian_td_no_15"><div class="ball_c_44">44</div></td>
+    <td class="bian_td_no"><input name="ball[]" type="checkbox" value="44" /></td>
+    </tr>
+  <tr>
+    <td class="bian_td_no_15"><div class="ball_c_05">05</div></td>
+    <td class="bian_td_no"><input name="ball[]" type="checkbox" value="5" /></td>
+    <td class="bian_td_no_15"><div class="ball_c_15">15</div></td>
+    <td class="bian_td_no"><input name="ball[]" type="checkbox" value="15" /></td>
+    <td class="bian_td_no_15"><div class="ball_c_25">25</div></td>
+    <td class="bian_td_no"><input name="ball[]" type="checkbox" value="25" /></td>
+    <td class="bian_td_no_15"><div class="ball_c_35">35</div></td>
+    <td class="bian_td_no"><input name="ball[]" type="checkbox" value="35" /></td>
+    <td class="bian_td_no_15"><div class="ball_c_45">45</div></td>
+    <td class="bian_td_no"><input name="ball[]" type="checkbox" value="45" /></td>
+    </tr>
+  <tr>
+    <td class="bian_td_no_15"><div class="ball_c_06">06</div></td>
+    <td class="bian_td_no"><input name="ball[]" type="checkbox" value="6" /></td>
+    <td class="bian_td_no_15"><div class="ball_c_16">16</div></td>
+    <td class="bian_td_no"><input name="ball[]" type="checkbox" value="16" /></td>
+    <td class="bian_td_no_15"><div class="ball_c_26">26</div></td>
+    <td class="bian_td_no"><input name="ball[]" type="checkbox" value="26" /></td>
+    <td class="bian_td_no_15"><div class="ball_c_36">36</div></td>
+    <td class="bian_td_no"><input name="ball[]" type="checkbox" value="36" /></td>
+    <td class="bian_td_no_15"><div class="ball_c_46">46</div></td>
+    <td class="bian_td_no"><input name="ball[]" type="checkbox" value="46" /></td>
+    </tr>
+  <tr>
+    <td class="bian_td_no_15"><div class="ball_c_07">07</div></td>
+    <td class="bian_td_no"><input name="ball[]" type="checkbox" value="7" /></td>
+    <td class="bian_td_no_15"><div class="ball_c_17">17</div></td>
+    <td class="bian_td_no"><input name="ball[]" type="checkbox" value="17" /></td>
+    <td class="bian_td_no_15"><div class="ball_c_27">27</div></td>
+    <td class="bian_td_no"><input name="ball[]" type="checkbox" value="27" /></td>
+    <td class="bian_td_no_15"><div class="ball_c_37">37</div></td>
+    <td class="bian_td_no"><input name="ball[]" type="checkbox" value="37" /></td>
+    <td class="bian_td_no_15"><div class="ball_c_47">47</div></td>
+    <td class="bian_td_no"><input name="ball[]" type="checkbox" value="47" /></td>
+    </tr>
+  <tr>
+    <td class="bian_td_no_15"><div class="ball_c_08">08</div></td>
+    <td class="bian_td_no"><input name="ball[]" type="checkbox" value="8" /></td>
+    <td class="bian_td_no_15"><div class="ball_c_18">18</div></td>
+    <td class="bian_td_no"><input name="ball[]" type="checkbox" value="18" /></td>
+    <td class="bian_td_no_15"><div class="ball_c_28">28</div></td>
+    <td class="bian_td_no"><input name="ball[]" type="checkbox" value="28" /></td>
+    <td class="bian_td_no_15"><div class="ball_c_38">38</div></td>
+    <td class="bian_td_no"><input name="ball[]" type="checkbox" value="38" /></td>
+    <td class="bian_td_no_15"><div class="ball_c_48">48</div></td>
+    <td class="bian_td_no"><input name="ball[]" type="checkbox" value="48" /></td>
+    </tr>
+  <tr>
+    <td class="bian_td_no_15"><div class="ball_c_09">09</div></td>
+    <td class="bian_td_no"><input name="ball[]" type="checkbox" value="9" /></td>
+    <td class="bian_td_no_15"><div class="ball_c_19">19</div></td>
+    <td class="bian_td_no"><input name="ball[]" type="checkbox" value="19" /></td>
+    <td class="bian_td_no_15"><div class="ball_c_29">29</div></td>
+    <td class="bian_td_no"><input name="ball[]" type="checkbox" value="29" /></td>
+    <td class="bian_td_no_15"><div class="ball_c_39">39</div></td>
+    <td class="bian_td_no"><input name="ball[]" type="checkbox" value="39" /></td>
+    <td class="bian_td_no_15"><div class="ball_c_49">49</div></td>
+    <td class="bian_td_no"><input name="ball[]" type="checkbox" value="49" /></td>
+    </tr>
+  <tr>
+    <td class="bian_td_no_15"><div class="ball_c_10">10</div></td>
+    <td class="bian_td_no"><input name="ball[]" type="checkbox" value="10" /></td>
+    <td class="bian_td_no_15"><div class="ball_c_20">20</div></td>
+    <td class="bian_td_no"><input name="ball[]" type="checkbox" value="20" /></td>
+    <td class="bian_td_no_15"><div class="ball_c_30">30</div></td>
+    <td class="bian_td_no"><input name="ball[]" type="checkbox" value="30" /></td>
+    <td class="bian_td_no_15"><div class="ball_c_40">40</div></td>
+    <td class="bian_td_no"><input name="ball[]" type="checkbox" value="40" /></td>
+    <td colspan="2" align="center" class="bian_td_no"><input type="hidden" name="o_num" value="0"></td>
+  </tr>
+  <!--<tr>
+    <td colspan="10" class="bian_td_gg" id="moneys">&nbsp;</td>
+    </tr>-->
+</table>
+<div class="lottery_clear"></div>
+<div class="button_body">
+		<span class="bian_td_gg" id="moneys">&nbsp;</span>
+		<a class="button submit" onclick="order();">下注</a>	
+		<a onclick="reset()" class="button again">重填</a>
+</div>
+</div>
+<div class="right">
+<div class="title">组合窗口</div>
+<div id="zuhe">请先选择类型</div>
+</div>
+<div class="lottery_clear"></div>
+</form>
+</div>
+<script src="/dd788799view/js/six/class_15.js" type="text/javascript"></script>
+<script type="text/javascript">$(function(){loadInfo();});</script>
+<IFRAME id="OrderFrame" name="OrderFrame" style="display:none"></IFRAME>
+</body>
+</html>

@@ -1,0 +1,70 @@
+{extend name="base/common"/}
+
+{block name="title"}<title>用户登录－{$settings.webName}</title>{/block}
+{block name="style"}
+<link rel="stylesheet" type="text/css" href="/__CSS__/login.css">
+{/block}
+{block name="script"}
+{/block}
+
+{block name="header"}{/block}
+{block name="body"}
+<div class="m-simpleHeader" id="dvHeader">
+    <a href="javascript:history.back(-1);" data-pro="back" data-back="true" class="m-simpleHeader-back"><i class="ico ico-back"></i></a>
+    <h1>用户登录</h1>
+</div>
+<div class="m-login">
+	<input type="hidden" name="id" value="{$Request.param.id}">
+    <div class="m-login-tips" id="tips"></div>
+    <div class="m-login-form w-form">
+        <div class="w-form-item m-login-form-account w-inputBar w-bar" id="dvAccount"><div class="w-bar-label">帐号：</div><a data-pro="clear" href="javascript:void(0);" class="w-bar-input-clear">×</a><div class="w-bar-control"><input placeholder="请输入帐号" autocapitalize="off" data-pro="input" class="w-bar-input" name="username"  id="username" type="text"></div></div>
+        <div class="w-form-item m-login-form-password w-inputBar w-bar" id="dvPassword"><div class="w-bar-label">密码：</div><a data-pro="clear" href="javascript:void(0);" class="w-bar-input-clear">×</a><div class="w-bar-control"><input placeholder="请输入密码" autocapitalize="off" data-pro="input" class="w-bar-input" name="password" id="password" value="" type="password"></div></div>
+        <div class="m-login-menu" id="autoCmpl" style="display:none;"></div>
+    </div>
+    <div class="m-login-tips-bottom" id="tipsBottom"></div>
+    <div class="m-login-submit"><button class="w-button w-button-main"  data-action="{:Url('index/login')}" id="btnLogin" >登 录</button></div>
+    <input type="hidden" id="login_url" value="{:Url('index/login')}">
+    <div class="m-login-link">
+        <a href="#"></a>
+        <a href="{:Url('index/register')}" id="aForget" class="aside" style="display:none">没有账号？</a>
+    </div>
+    <div class="m-login-extLogin" style="display:none">
+        <div class="hd"><span>第三方登录</span></div>
+        <div class="bd">
+            <div class="m-login-extLogin-item">
+                <a class="ico ico-thirdLogin ico-thirdLogin-qq" href="http://reg.163.com/outerLogin/oauth2/connect.do?target=1&amp;product=mail_one&amp;url=http://m.1.163.com/&amp;url2=http://m.1.163.com/"></a>
+                <p>QQ</p>
+            </div>
+            <div class="m-login-extLogin-item">
+                <a class="ico ico-thirdLogin ico-thirdLogin-weibo" href="http://reg.163.com/outerLogin/oauth2/connect.do?target=3&amp;product=mail_one&amp;url=http://m.1.163.com/&amp;url2=http://m.1.163.com/"></a>
+                <p>新浪微博</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+{/block}
+{block name="script"}
+<script type="text/javascript">
+
+$(function (){
+    //异步提交登录处理
+    $('#btnLogin').click( function (){
+        var username = $('#username').val() ;
+        var password = $('#password').val() ;
+        var url      = $('#login_url').val() ;
+       $.post(url,{username:username,password:password},function (json) {
+            //res = eval('('+data+')');
+            if (json.code==1) {
+                //window.location.href = json.url ;
+                window.location.href = '/index/index' ;
+            } else {
+                alert(json.msg);
+            }
+       },'json') ;
+    }) ;
+
+})
+</script>
+{/block}
+{block name="footer"}{/block>

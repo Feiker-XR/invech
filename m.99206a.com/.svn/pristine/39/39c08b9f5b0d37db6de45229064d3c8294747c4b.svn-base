@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>短信公告</title>
+<link rel="stylesheet" type="text/css" href="/css/general.css"/>
+<link rel="stylesheet" type="text/css" href="/Scripts/jquery-ui.css" />
+<link rel="stylesheet" type="text/css" href="/newview/css/theme/style.css?version=2.0.0" />
+<link rel="stylesheet" type="text/css" href="/newview/css/style.css" />
+<link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
+<link rel="stylesheet" type="text/css"  href="/css/newstyle	/public.css">
+<link rel="stylesheet" type="text/css"  href="/css/newstyle/page_3.css">
+
+<script src='/js/js/jquery-1.8.0.min.js'></script>
+<script type="text/javascript" src="/js/main.js"></script>
+<script type="text/javascript" src="/Scripts/member.js"></script>
+<script type="text/javascript" src="/newview/js/main.js"></script>
+<style type="text/css">
+.ui-moneyBox a{color: #a69a8e;}
+.next_btn{
+	clear: none;
+	padding-top: 0;
+}
+.list_Tbody_wp li span em,.list_Tbody_wp li span a,.list_Tbody_wp li span b.list_Tbody_totle{
+	line-height: 28px;
+}
+	.mouse_hover:hover{
+		text-decoration: underline;
+	}
+</style>
+</head>
+<body>
+<div class="head">
+	<!--欢迎-->
+	{include file='common/nav'}
+</div>
+<div class="block_0"></div>	
+	
+<div class="moneyBox_contain modify_wp">
+	<!--<div class="ui-header">
+		<div class="ui-headerBox">
+			&lt;!&ndash; logo &ndash;&gt;
+			<a class="ui-icon-logo ui-logo" id="Logo"></a>
+			&lt;!&ndash; 导航 &ndash;&gt;
+			<ul class="ui-nav">
+				<li id="Nav_0">
+					<a href="/user/userinfo.html" title="会员首页">
+						<span class="ui-icon ui-icon-home ui-icon-50"></span>
+					</a>
+				</li>
+				<li id="Nav_1">
+					<a href="/pay/member.html" title="财务管理">
+						<span class="ui-icon ui-icon-recharge ui-icon-50"></span>
+					</a>
+				</li>
+				<li id="Nav_2">
+					<a href="/user/record_ds.html" title="游戏记录">
+						<span class="ui-icon ui-icon-gameNote ui-icon-50"></span>
+					</a>
+				</li>
+				<li id="Nav_3" >
+					<a href="/user/report.html" title="历史记录">
+						<span class="ui-icon ui-icon-data ui-icon-50"></span>
+					</a>
+				</li>
+				<li id="Nav_4" class="ui-header-active">
+					<a href="/user/sms.html" title="站内短信">
+						<span class="ui-icon ui-icon-announce ui-icon-50"></span>
+					</a>
+				</li>
+       			 <li id="Nav_5">
+					<a href="/user/agent.html" title="代理中心">
+						<span class="ui-icon ui-icon-newActivity ui-icon-50"></span>
+					</a>
+				</li>
+        		<li style="display:none">
+					<a href="http://messenger.providesupport.com/messenger/1x5b67gp1rcy50kqxa0qpsa0jx.html" title="客服中心">
+						<span class="ui-icon ui-icon-online ui-icon-50"></span>
+					</a>
+				</li>
+			</ul>
+			<ul class="ui-function">
+				&lt;!&ndash;<li>
+					<a href="#">
+						<span class="ui-icon ui-icon-down ui-icon-20" id="Menu"></span>
+					</a>
+				</li>
+				<li>
+					<a href="#">
+						<span class="ui-icon ui-icon-min ui-icon-20"></span>
+					</a>
+				</li>
+				<li>
+					<a href="javascript:void(0)" id="Logout">
+						<span class="ui-icon ui-icon-max ui-icon-20"></span>
+					</a>
+				</li>&ndash;&gt;
+			</ul>
+		</div>
+	</div>	-->
+	<div class="modify_header">
+		<a href="/user/userinfo.html" class="nav_1">首页</a>
+		<a href="/pay/member.html" class="nav_2">财务管理</a>
+		<a href="/user/record_ds.html" class="nav_3">游戏记录</a>
+		<a href="/user/report.html" class="nav_4">历史记录</a>
+		<a href="/user/sms.html" class="nav_5 active">短信记录</a>
+		<a href="/user/agent.html" class="nav_6">代理中心</a>
+	</div>
+
+	<!--<div class="ui-body">
+		<div class="ui-search" id="subjsshow4" style="display: block;"> 
+    	<span><i class="fas fa-user-circle" style="font-size: 30px"></i>站内公告</span>
+			<ul>
+        	<li class="ui-hover"><a href="/user/sms.html"><i class="fas fa-comment-alt" style="background-color: #F59A2F"></i>站内短信</a></li>
+			</ul>
+		</div>
+	</div>	-->
+	
+	<!--<div class="ui-moneyBox">
+		<ul>
+			<table width="100%" border="0" cellspacing="0" cellpadding="5" id="thetable">
+				<tr>
+					<th width="80">状态</th>
+					<th width="350">短信标题</th>
+					<th width="100">发布时间 </th>
+					<th width="60">操作</th>
+				</tr>
+				{notempty name='usermsg'} {volist name='usermsg' id='vo'}
+				<tr bgcolor="#FFFFFF" align="center" onMouseOver="this.style.backgroundColor='#FFFFCC'" onMouseOut="this.style.backgroundColor='#FFFFFF'">
+					<td align="center">
+						{if $vo.islook eq 0}
+						<font color="#006600">未读</font>
+						{else}
+						<font color="#FF0000">已读</font>
+						{/if}
+					</td>
+					<td align="left">
+						<a href="javascript:void(0);" onclick="Go('{:url('user/smsshow','id='.$vo.msg_id)}');return false">
+							<?php echo strlen(trim($vo["msg_title"])) ? $vo["msg_title"] : '无标题信息' ?>
+						</a>
+					</td>
+					<td align="center">
+						<?php echo date("Y-m-d",strtotime($vo["msg_time"]))?>
+					</td>
+					<td align="center">
+						<a href="javascript:void(0);" onclick="Go('{:url('user/smsdel','id='.$vo.msg_id)}');return false" style="color:#00F">
+							点击删除
+						</a>
+					</td>
+				</tr>
+				{/volist} {/notempty}
+				<tr>
+				</tr>
+			</table>
+		</ul>
+	</div>-->
+	<div class="list_table_wp">
+		<div class="list_table_title">
+			<span style="width:120px; height: 35px;">状态</span>
+			<span style="width:477px; height: 35px;">短信标题</span>
+			<span style="width:185px; height: 35px;">发布时间</span>
+			<span style="width:192px; height: 35px;">操作</span>
+		</div>
+		<ul class="list_Tbody_wp">
+			{notempty name='usermsg'} {volist name='usermsg' id='vo'}
+			<li style="height: 28px;">
+                  <span style="width:120px; height: 28px;">
+					  {if $vo.islook eq 0}
+                      <em style="color:#00a91c" >未读</em>
+					  <!--<a href="javaScript:;" onclick="Go('{:url('user/smsshow','id='.$vo.msg_id)}');return false">[详情]</a>-->
+					  {else}
+					  <em style="color: #d00000">已读</em>
+					  {/if}
+
+                  </span>
+				<span  style="width:477px; height: 28px; text-align: left; text-indent: 25px;" class="mouse_hover">
+                     <!-- <em>0.00</em>-->
+                      <a href="javaScript:;" onclick="Go('{:url('user/smsshow','id='.$vo.msg_id)}');return false">
+						  <?php echo strlen(trim($vo["msg_title"])) ? $vo["msg_title"] : '无标题信息' ?>
+					  </a>
+                  </span>
+				<span  style="width:185px; height: 28px;">
+                     <!-- <em>0.00</em>-->
+                      <a href="javaScript:;"><?php echo date("Y-m-d",strtotime($vo["msg_time"]))?></a>
+                  </span>
+				<span  style="width:192px; height: 28px;">
+                      <b class="list_Tbody_totle" onclick="Go('{:url('user/smsdel','id='.$vo.msg_id)}');return false" style="color:#00F">点击删除</b>
+                  </span>
+			</li>
+			{/volist} {/notempty}
+		</ul>
+		<!--<div class="list_table_tfooter">
+			<span>小结</span>
+			<span>00.0<a href="javaScript:;">[详情]</a></span>
+			<span>00.0<a href="javaScript:;">[详情]</a></span>
+			<span>00.0<a href="javaScript:;">[详情]</a></span>
+		</div>-->
+	</div>
+	<div class="paging_wp">
+		<div class="paging">
+			<div class="prve-pages prev_btn">
+				<img src="/css/img/prve_btn.png" alt="">
+			</div>
+			<div class="paging_cont_page">
+				<a href="javaScript:;" class="add_background_a">1</a>
+				<!--<a href="javaScript:;">2</a>
+				<a href="javaScript:;">3</a>
+				<a href="javaScript:;">4</a>
+				<a href="javaScript:;">5</a>-->
+			</div>
+			<div class="prve-pages next_btn">
+				<img src="/css/img/next_btn.png" alt="">
+			</div>
+		</div>
+		<div class="show-page">
+			当前在第 <span>1</span> 页，每页显示 <span>11</span> 条，共 <span>558899</span> 条记录。
+		</div>
+	</div>
+
+	<!-- page -->
+	<div class="page_list">
+		<?php echo $page?>
+	</div>
+	<!-- page end -->
+</div>	
+
+{include file='common/footer'}
+<script src="/js/jquery1.9.0.min.js"></script>
+<script type="text/javascript">
+    $(function(){
+
+        $(".list_Tbody_wp li:odd").css("background","#f8f8f6");
+        $(".list_Tbody_wp li:even").attr("bg","#fff");
+        $(".list_Tbody_wp li:odd").attr("bg","#f8f8f6");
+        $(".list_Tbody_wp li").mouseover(function(){
+            $(this).css({"background":"#fffcdf"});
+            $(this).addClass("li_add_border_d");
+            $(this).next().addClass("li_add_border_top");
+            $(this).find($(".list_Tbody_totle")).addClass("list_Tbody_totle_right");
+            $(this).find('span').css({'border-right':'1px solid transparent'});
+            $(this).find($(".list_Tbody_totle")).css("border-right","1px dashed #ff7433");
+        })
+        $(".list_Tbody_wp li").mouseout(function(){
+            var bgc = $(this).attr("bg");
+            $(this).css("background",bgc);
+            $(this).removeClass("li_add_border_d");
+            $(this).next().removeClass("li_add_border_top");
+            $(this).find($(".list_Tbody_totle")).removeClass("list_Tbody_totle_right");
+            $(this).find('span').css('border-right','1px solid #dbdbdb');
+            $(this).find($(".list_Tbody_totle")).css("border-right","1px solid #dbdbdb");
+        })
+
+        $(".list_Tbody_wp li:last").mouseover(function(){
+            $(this).css({"background":"#fffcdf",'border-bottom':'1px dashed #ff7433'});
+            $(this).addClass("li_add_border_d");
+            $(this).find($(".list_Tbody_totle")).addClass("list_Tbody_totle_right")
+        })
+        $(".list_Tbody_wp li:last").mouseout(function(){
+            var bgc = $(this).attr("bg");
+            $(this).css({"background":bgc,'border-bottom':'1px solid #dbdbdb'});
+            $(this).removeClass("li_add_border_d");
+            $(this).find($(".list_Tbody_totle")).removeClass("list_Tbody_totle_right")
+        })
+
+
+
+        $(".paging_cont_page a").click(function () {
+            $(this).addClass("add_background_a").siblings().removeClass("add_background_a");
+        })
+    })
+
+	//bianse("thetable","#F5F5F5","#FFFFFF","#FFFFCC","#FFFFCC");
+	
+setInterval(function() {
+	$.ajax({
+		type: "post",
+		url: "{:Url('index/home')}",
+		data:{'ajax':1,'get_money':'1'},
+		success:function(data) {
+			if (/^[\d\.]+$/.test(data)) {
+				$('#money,#money_2').text(data);
+			}
+		}
+	});
+},2000);	
+</script>
+</body>
+</html>

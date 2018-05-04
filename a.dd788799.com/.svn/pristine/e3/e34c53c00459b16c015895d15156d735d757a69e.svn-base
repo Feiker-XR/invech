@@ -1,0 +1,134 @@
+<input type="hidden" name="playedGroup" value="<?=$groupId?>"/>
+<input type="hidden" name="playedId" value="<?=$playedId?>"/>
+<input type="hidden" name="type" value="<?=$type?>"/>
+<input type="hidden" name="playedName" value="<?=$played['name']?>"/>
+<!-- mobile 六合彩_肖尾 -->
+<div id="sscContent">
+    <div class="lot-content clearfix">
+        <div class="fl main-left">
+            <div class="hd clearfix rehd tzgz" id="toptouzhu">
+                <div class="fl refl">
+                    快捷金额：
+                    <input type="text" class="txt" id="inputMoney">
+                </div>
+                <div class="kjanniu">
+                    <a href="javascript:void(0)" class="img-50" data-num="50"></a>
+                    <a href="javascript:void(0)" class="img-100" data-num="100"></a>
+                    <a href="javascript:void(0)" class="img-500" data-num="500"></a>
+                    <a href="javascript:void(0)" class="img-1000" data-num="1000"></a>
+                    <a href="javascript:void(0)" class="img-5000" data-num="5000"></a>
+                    <a href="javascript:void(0)" class="img-10000" data-num="10000"></a>
+                </div>
+            </div>
+            <div class="table-common">
+                <script type="text/html" id="six_xw">
+                    <table width="100%" border="0" cellpadding="0" cellspacing="0" class='pp' action='six_xw' style="overflow: auto;">
+                        <thead>
+                        <tr>
+                            <th>号码</th>
+                            <th>赔率</th>
+                            <th>金额</th>
+                            <th>号码</th>
+                           <!-- <th>号码</th>
+                            <th>赔率</th>
+                            <th>金额</th>
+                            <th>号码</th>-->
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {{each pls[2] value index}}
+                        <tr>
+                            <td onclick="setQuickPick(this,true)"><strong>{{value[0].name}}</strong>
+                            </td>
+                            <td onclick="setQuickPick(this,true)"><strong class="color-red pl">{{value[0].pl}}</strong>
+                            </td>
+                            <td><input type="text" class="table-txt" data-name="一肖-{{value[0].name}}"
+                                       data-pl="{{value[0].pl}}" data-plid="{{value[0].plid}}"></td>
+                            <td>
+                                {{each value[0].nums v i}}
+                                <span class="ball-icon ball-{{v}}"></span>
+                                {{/each}}
+                            </td>
+                            <!--<td onclick="setQuickPick(this,true)"><strong>{{value[1].name}}</strong>
+                            </td>
+                            <td onclick="setQuickPick(this,true)"><strong class="color-red pl">{{value[1].pl}}</strong>
+                            </td>
+                            <td><input type="text" class="table-txt" data-name="一肖-{{value[1].name}}"
+                                       data-pl="{{value[1].pl}}" data-plid="{{value[1].plid}}"></td>
+                            <td>
+                                {{each value[1].nums v i}}
+                                <span class="ball-icon ball-{{v}}"></span>
+                                {{/each}}
+                            </td>-->
+                        </tr>
+                        {{/each}}
+                        </tbody>
+                    </table>
+             <!--       <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                        <tbody>
+                        {{each pls[1].pls value index}}
+                        <tr>
+                            <td onclick="setQuickPick(this,true)">{{value[0].value}}</td>
+                            <td onclick="setQuickPick(this,true)"><strong
+                                    class="color-red pl">{{value[0].pl}}</strong></td>
+                            <td><input type="text" class="table-txt" data-name="一尾-{{value[0].value}}"
+                                                  data-pl="{{value[0].pl}}" data-plid="{{value[0].id}}"></td>
+
+                            <td onclick="setQuickPick(this,true)">{{value[1].value}}</td>
+                            <td onclick="setQuickPick(this,true)"><strong
+                                    class="color-red pl">{{value[1].pl}}</strong></td>
+                            <td><input type="text" class="table-txt" data-name="一尾-{{value[1].value}}"
+                                                  data-pl="{{value[1].pl}}" data-plid="{{value[1].id}}"></td>
+
+                            &lt;!&ndash;<td onclick="setQuickPick(this,true)">{{value[2].value}}</td>
+                            <td onclick="setQuickPick(this,true)"><strong
+                                    class="color-red pl">{{value[2].pl}}</strong></td>
+                            <td><input type="text" class="table-txt" data-name="一尾-{{value[2].value}}"
+                                                  data-pl="{{value[2].pl}}" data-plid="{{value[2].id}}"></td>
+
+                            <td onclick="setQuickPick(this,true)">{{value[3].value}}</td>
+                            <td onclick="setQuickPick(this,true)"><strong
+                                    class="color-red pl">{{value[3].pl}}</strong></td>
+                            <td><input type="text" class="table-txt" data-name="一尾-{{value[3].value}}"
+                                                  data-pl="{{value[3].pl}}" data-plid="{{value[3].id}}"></td>
+
+                            <td onclick="setQuickPick(this,true)">{{value[4].value}}</td>
+                            <td onclick="setQuickPick(this,true)"><strong
+                                    class="color-red pl">{{ value[4].pl }}</strong></td>
+                            <td><input type="text" class="table-txt" data-name="一尾-{{value[4].value}}"
+                                                  data-pl="{{value[4].pl}}" data-plid="{{value[4].id}}"></td>&ndash;&gt;
+                        </tr>
+                        {{/each}}
+                        </tbody>
+                    </table>-->
+                </script>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    $(function () {
+        var playedId = "<?=$playedId?>";
+        $.getJSON("/game/pl/playedId/" + playedId, function (data) {
+            pls = data;
+            var res = get_final_sx(pls);
+            var _res = [];
+            for(var i=0; i<res.length; i++){
+                for(var j =0; j<res[j].length;j++){
+                    _res.push(res[i][j]);
+                }
+            }
+            //console.log(_res);
+            //return;
+            pls.push(_res);
+            // 格式化尾数数据
+            var temp = pls[1].pls;
+            pls[1].pls = [];
+            pls[1].pls = group(temp, 2);
+            console.log(pls);
+            //return;
+            var html = template("six_xw", {pls: pls});
+            $('.table-common').html(html);
+        });
+    });
+</script>

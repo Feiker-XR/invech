@@ -1,0 +1,844 @@
+* {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-family: "微软雅黑";
+}
+@-webkit-keyframes rotationL {
+  from {
+    -webkit-transform: rotate(0deg);
+  }
+  to {
+    -webkit-transform: rotate(360deg);
+  }
+}
+@-webkit-keyframes rotationR {
+  from {
+    -webkit-transform: rotate(0deg);
+  }
+  to {
+    -webkit-transform: rotate(-360deg);
+  }
+}
+.rotationL {
+  -webkit-transform: rotate(360deg);
+  animation: rotationL 2s linear infinite;
+  -moz-animation: rotationL 2s linear infinite;
+  -webkit-animation: rotationL 2s linear infinite;
+  -o-animation: rotationL 2s linear infinite;
+}
+.rotationL2 {
+  -webkit-transform: rotate(360deg);
+  animation: rotationL .7s linear infinite;
+  -moz-animation: rotationL .7s linear infinite;
+  -webkit-animation: rotationL .7s linear infinite;
+  -o-animation: rotationL .7s linear infinite;
+}
+.rotationR {
+  -webkit-transform: rotate(-360deg);
+  animation: rotationR 2s linear infinite;
+  -moz-animation: rotationR 2s linear infinite;
+  -webkit-animation: rotationR 2s linear infinite;
+  -o-animation: rotationR 2s linear infinite;
+}
+.rotationR2 {
+  -webkit-transform: rotate(-360deg);
+  animation: rotationR .7s linear infinite;
+  -moz-animation: rotationR .7s linear infinite;
+  -webkit-animation: rotationR .7s linear infinite;
+  -o-animation: rotationR .7s linear infinite;
+}
+.blackbg {
+  width: 90px;
+  height: 90px;
+  background: url("../img/blackNum.png") no-repeat;
+}
+.content {
+  width: 1125px;
+  height: 780px;
+  margin: 0 auto;
+  transform-origin: left top;
+}
+.content .cqncAnimate {
+  position: relative;
+  width: 1125px;
+  height: 780px;
+}
+.content .cqncAnimate .bodybg {
+  width: 100%;
+  height: auto;
+}
+.content .cqncAnimate .bodybg img {
+  vertical-align: top;
+  width: 100%;
+  height: 100%;
+}
+.content .cqncAnimate .zhezao {
+  position: absolute;
+  top: 0px;
+  left: 99px;
+  width: 927px;
+  height: 180px;
+}
+.content .cqncAnimate .position {
+  position: absolute;
+  width: 899px;
+  height: 62px;
+  top: 35px;
+  left: 113px;
+  font-size: 30px;
+}
+.content .cqncAnimate .position ul {
+  width: 100%;
+  height: 62px;
+  border-radius: 10px;
+  line-height: 62px;
+}
+.content .cqncAnimate .position ul li {
+  float: left;
+  width: auto;
+  height: inherit;
+  color: #ffffff;
+  font-size: 22px;
+  text-align: center;
+}
+.content .cqncAnimate .position ul .logo {
+  width: 160px;
+}
+.content .cqncAnimate .position ul .logo span {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+.content .cqncAnimate .position ul .azxy20_logo {
+  background-size: 100%;
+  background: url("../img/azxy20.png") no-repeat;
+  background-position: center;
+}
+.content .cqncAnimate .position ul .bjkl8_logo {
+  background-size: 100%;
+  background: url("../img/bjkl8logo.png") no-repeat;
+  background-position: center;
+}
+.content .cqncAnimate .position ul .issue {
+  width: 185px;
+}
+.content .cqncAnimate .position ul #cutTime {
+  width: 213px;
+}
+.content .cqncAnimate .position ul #cutTime #hourtxt {
+  padding: 0px;
+  font-size: 30px;
+  color: #ffcc00;
+}
+.content .cqncAnimate .position ul #cutTime #opening {
+  display: none;
+  width: 180px;
+  height: 40px;
+  margin-top: 11px;
+  margin-left: 20px;
+  line-height: 40px;
+  text-align: center;
+  border-radius: 4px;
+  background: #193157;
+}
+.content .cqncAnimate .position ul .kaiTime {
+  width: 265px;
+}
+.content .cqncAnimate .position ul #kaiTime {
+  padding-left: 0px;
+  padding-right: 17px;
+}
+.content .cqncAnimate .position ul .soundsOn {
+  width: 42px;
+  height: 42px;
+  margin-left: 18px;
+  margin-top: 12px;
+  background: url(../img/kuaileb.png) -259px -642px no-repeat;
+}
+.content .cqncAnimate .position ul .soundsOff {
+  width: 42px;
+  height: 42px;
+  margin-left: 17px;
+  margin-top: 11px;
+  background: url(../img/kuaileb.png) -326px -643px no-repeat;
+}
+.content .cqncAnimate .numList {
+  position: absolute;
+  top: 112px;
+  left: 99px;
+  width: 926px;
+  height: 68px;
+}
+.content .cqncAnimate .numList ul {
+  width: 100%;
+  height: 100%;
+}
+.content .cqncAnimate .numList ul li {
+  background-size: 790px;
+  float: left;
+  width: 40px;
+  height: 40px;
+  margin-right: 3px;
+  margin-top: 12px;
+}
+.content .cqncAnimate .numList ul li:first-child {
+  margin-left: 13px;
+}
+.content .cqncAnimate .numList ul li:last-child {
+  margin-right: 0px;
+}
+.content .cqncAnimate .jzCheck {
+  position: absolute;
+  display: inline-block;
+  top: 196px;
+  width: 127px;
+  height: 30px;
+  line-height: 30px;
+  font-size: 14px;
+  border-radius: 4px;
+  background: rgba(0, 0, 0, 0.7);
+  color: rgba(250, 250, 250, 0.8);
+  margin-left: 509px;
+}
+.content .cqncAnimate .bottomBg {
+  position: absolute;
+  top: 443px;
+  left: 0px;
+  width: 1125px;
+  height: 307px;
+  z-index: 999;
+  background: url(../img/bottomby.png) no-repeat;
+}
+.content .cqncAnimate .bottomBg #tryBtn {
+  display: inline-block;
+  width: 183px;
+  height: 60px;
+  margin-top: 226px;
+  margin-left: 480px;
+  background: url(../img/kuaileb.png) -24px -635px no-repeat;
+}
+.content .cqncAnimate .pipList {
+  position: absolute;
+  top: 180px;
+  left: 114px;
+  width: 896px;
+  height: 540px;
+  z-index: 1;
+}
+.content .cqncAnimate .pipList .paUl {
+  width: 100%;
+  height: 100%;
+}
+.content .cqncAnimate .pipList .paUl .paLi {
+  float: left;
+  width: 73px;
+  height: 100%;
+  background: url(../img/guantop.png);
+  margin-right: 8px;
+}
+.content .cqncAnimate .pipList .paUl li:first-child {
+  margin-left: 7px;
+}
+.content .cqncAnimate .pipList .paUl li:last-child {
+  margin-right: 0px;
+}
+.content .cqncAnimate .pipList .sonUl {
+  width: 100%;
+  height: 100%;
+}
+.content .cqncAnimate .pipList .sonUl li {
+  width: 44px;
+  height: 44px;
+  margin-left: 15px;
+  margin-top: 5px;
+  border-radius: 22px;
+}
+.content .cqncAnimate .pipList .sonUl li:first-child {
+  margin-left: 15px;
+}
+.content .cqncAnimate .pipListKai {
+  position: absolute;
+  top: 720px;
+  left: 114px;
+  width: 896px;
+  height: 540px;
+}
+.content .cqncAnimate .pipListKai .paUl {
+  position: relative;
+  width: 100%;
+  height: 110px;
+}
+.content .cqncAnimate .pipListKai .paUl .pipkai {
+  float: left;
+  width: 75px;
+  height: 100%;
+  background: url(../img/guanbottom.png) no-repeat;
+  margin-right: 6px;
+}
+.content .cqncAnimate .pipListKai .paUl .pipkai .sonUl {
+  width: 100%;
+  height: 100%;
+}
+.content .cqncAnimate .pipListKai .paUl .pipkai .sonUl li {
+  position: absolute;
+  width: 44px;
+  height: 44px;
+  margin-left: 15px;
+  border-radius: 22px;
+  margin-top: 3px;
+}
+.content .cqncAnimate .pipListKai .paUl li:first-child {
+  margin-left: 6px;
+}
+.content .cqncAnimate .pipListKai .paUl li:last-child {
+  margin-right: 0px;
+  top: 46px;
+}
+.content .cqncAnimate .pipListKai .crossRotary {
+  width: 100%;
+  height: 400px;
+}
+.content .cqncAnimate .pipListKai .crossRotary div {
+  position: relative;
+  width: 50%;
+  height: 100%;
+}
+.content .cqncAnimate .pipListKai .crossRotary div img {
+  z-index: 999;
+  margin: 70px auto;
+}
+.content .cqncAnimate .pipListKai .crossRotary div i {
+  z-index: 1;
+  position: absolute;
+  display: inline-block;
+  width: 44px;
+  height: 44px;
+  top: 20px;
+  left: 20px;
+  border-radius: 22px;
+}
+.content .cqncAnimate .pipListKai .crossRotary .crossL {
+  float: left;
+  text-align: center;
+}
+.content .cqncAnimate .pipListKai .crossRotary .crossR {
+  text-align: center;
+  margin-left: 50%;
+}
+.numRed1 {
+  background: url("../img/kuaileb.png") -580px -502px no-repeat;
+}
+.numRed2 {
+  background: url("../img/kuaileb.png") -660px -502px no-repeat;
+}
+.numRed3 {
+  background: url("../img/kuaileb.png") -740px -502px no-repeat;
+}
+.numRed4 {
+  background: url("../img/kuaileb.png") -580px -567px no-repeat;
+}
+.numRed5 {
+  background: url("../img/kuaileb.png") -660px -567px no-repeat;
+}
+.numRed10 {
+  background: url("../img/kuaileb.png") -740px -567px no-repeat;
+}
+.num01 {
+  background: url("../img/kuaileb.png") -24px -25px no-repeat;
+}
+.num03 {
+  background: url("../img/kuaileb.png") -104px -25px no-repeat;
+}
+.num05 {
+  background: url("../img/kuaileb.png") -183px -25px no-repeat;
+}
+.num07 {
+  background: url("../img/kuaileb.png") -263px -25px no-repeat;
+}
+.num09 {
+  background: url("../img/kuaileb.png") -343px -25px no-repeat;
+}
+.num11 {
+  background: url("../img/kuaileb.png") -423px -25px no-repeat;
+}
+.num13 {
+  background: url("../img/kuaileb.png") -502px -25px no-repeat;
+}
+.num15 {
+  background: url("../img/kuaileb.png") -582px -25px no-repeat;
+}
+.num17 {
+  background: url("../img/kuaileb.png") -663px -25px no-repeat;
+}
+.num19 {
+  background: url("../img/kuaileb.png") -742px -25px no-repeat;
+}
+.num21 {
+  background: url("../img/kuaileb.png") -822px -25px no-repeat;
+}
+.num02 {
+  background: url("../img/kuaileb.png") -24px -88px no-repeat;
+}
+.num04 {
+  background: url("../img/kuaileb.png") -104px -88px no-repeat;
+}
+.num06 {
+  background: url("../img/kuaileb.png") -183px -88px no-repeat;
+}
+.num08 {
+  background: url("../img/kuaileb.png") -263px -88px no-repeat;
+}
+.num10 {
+  background: url("../img/kuaileb.png") -343px -88px no-repeat;
+}
+.num12 {
+  background: url("../img/kuaileb.png") -423px -88px no-repeat;
+}
+.num14 {
+  background: url("../img/kuaileb.png") -502px -88px no-repeat;
+}
+.num16 {
+  background: url("../img/kuaileb.png") -582px -88px no-repeat;
+}
+.num18 {
+  background: url("../img/kuaileb.png") -663px -88px no-repeat;
+}
+.num20 {
+  background: url("../img/kuaileb.png") -742px -88px no-repeat;
+}
+.num22 {
+  background: url("../img/kuaileb.png") -822px -88px no-repeat;
+}
+.num23 {
+  background: url("../img/kuaileb.png") -24px -182px no-repeat;
+}
+.num25 {
+  background: url("../img/kuaileb.png") -104px -182px no-repeat;
+}
+.num27 {
+  background: url("../img/kuaileb.png") -183px -182px no-repeat;
+}
+.num29 {
+  background: url("../img/kuaileb.png") -263px -182px no-repeat;
+}
+.num31 {
+  background: url("../img/kuaileb.png") -343px -182px no-repeat;
+}
+.num33 {
+  background: url("../img/kuaileb.png") -423px -182px no-repeat;
+}
+.num35 {
+  background: url("../img/kuaileb.png") -502px -182px no-repeat;
+}
+.num37 {
+  background: url("../img/kuaileb.png") -582px -182px no-repeat;
+}
+.num39 {
+  background: url("../img/kuaileb.png") -663px -182px no-repeat;
+}
+.num41 {
+  background: url("../img/kuaileb.png") -742px -182px no-repeat;
+}
+.num43 {
+  background: url("../img/kuaileb.png") -822px -182px no-repeat;
+}
+.num24 {
+  background: url("../img/kuaileb.png") -24px -245px no-repeat;
+}
+.num26 {
+  background: url("../img/kuaileb.png") -104px -245px no-repeat;
+}
+.num28 {
+  background: url("../img/kuaileb.png") -183px -245px no-repeat;
+}
+.num30 {
+  background: url("../img/kuaileb.png") -263px -245px no-repeat;
+}
+.num32 {
+  background: url("../img/kuaileb.png") -343px -245px no-repeat;
+}
+.num34 {
+  background: url("../img/kuaileb.png") -423px -245px no-repeat;
+}
+.num36 {
+  background: url("../img/kuaileb.png") -502px -245px no-repeat;
+}
+.num38 {
+  background: url("../img/kuaileb.png") -582px -245px no-repeat;
+}
+.num40 {
+  background: url("../img/kuaileb.png") -663px -245px no-repeat;
+}
+.num42 {
+  background: url("../img/kuaileb.png") -742px -245px no-repeat;
+}
+.num44 {
+  background: url("../img/kuaileb.png") -822px -245px no-repeat;
+}
+.num45 {
+  background: url("../img/kuaileb.png") -24px -347px no-repeat;
+}
+.num47 {
+  background: url("../img/kuaileb.png") -104px -347px no-repeat;
+}
+.num49 {
+  background: url("../img/kuaileb.png") -183px -347px no-repeat;
+}
+.num51 {
+  background: url("../img/kuaileb.png") -263px -347px no-repeat;
+}
+.num53 {
+  background: url("../img/kuaileb.png") -343px -347px no-repeat;
+}
+.num55 {
+  background: url("../img/kuaileb.png") -423px -347px no-repeat;
+}
+.num57 {
+  background: url("../img/kuaileb.png") -502px -347px no-repeat;
+}
+.num59 {
+  background: url("../img/kuaileb.png") -582px -347px no-repeat;
+}
+.num61 {
+  background: url("../img/kuaileb.png") -663px -347px no-repeat;
+}
+.num63 {
+  background: url("../img/kuaileb.png") -742px -347px no-repeat;
+}
+.num65 {
+  background: url("../img/kuaileb.png") -822px -347px no-repeat;
+}
+.num46 {
+  background: url("../img/kuaileb.png") -24px -410px no-repeat;
+}
+.num48 {
+  background: url("../img/kuaileb.png") -104px -410px no-repeat;
+}
+.num50 {
+  background: url("../img/kuaileb.png") -183px -410px no-repeat;
+}
+.num52 {
+  background: url("../img/kuaileb.png") -263px -410px no-repeat;
+}
+.num54 {
+  background: url("../img/kuaileb.png") -343px -410px no-repeat;
+}
+.num56 {
+  background: url("../img/kuaileb.png") -423px -410px no-repeat;
+}
+.num58 {
+  background: url("../img/kuaileb.png") -502px -410px no-repeat;
+}
+.num60 {
+  background: url("../img/kuaileb.png") -582px -410px no-repeat;
+}
+.num62 {
+  background: url("../img/kuaileb.png") -663px -410px no-repeat;
+}
+.num64 {
+  background: url("../img/kuaileb.png") -742px -410px no-repeat;
+}
+.num66 {
+  background: url("../img/kuaileb.png") -822px -410px no-repeat;
+}
+.num67 {
+  background: url("../img/kuaileb.png") -24px -500px no-repeat;
+}
+.num69 {
+  background: url("../img/kuaileb.png") -104px -500px no-repeat;
+}
+.num71 {
+  background: url("../img/kuaileb.png") -183px -500px no-repeat;
+}
+.num73 {
+  background: url("../img/kuaileb.png") -263px -500px no-repeat;
+}
+.num75 {
+  background: url("../img/kuaileb.png") -343px -500px no-repeat;
+}
+.num77 {
+  background: url("../img/kuaileb.png") -424px -500px no-repeat;
+}
+.num79 {
+  background: url("../img/kuaileb.png") -502px -500px no-repeat;
+}
+.num68 {
+  background: url("../img/kuaileb.png") -24px -564px no-repeat;
+}
+.num70 {
+  background: url("../img/kuaileb.png") -104px -564px no-repeat;
+}
+.num72 {
+  background: url("../img/kuaileb.png") -183px -564px no-repeat;
+}
+.num74 {
+  background: url("../img/kuaileb.png") -263px -564px no-repeat;
+}
+.num76 {
+  background: url("../img/kuaileb.png") -343px -564px no-repeat;
+}
+.num78 {
+  background: url("../img/kuaileb.png") -423px -564px no-repeat;
+}
+.num80 {
+  background: url("../img/kuaileb.png") -502px -564px no-repeat;
+}
+.codeRed1 {
+  background: url("../img/kuaileb.png") -509px -441px no-repeat;
+}
+.codeRed2 {
+  background: url("../img/kuaileb.png") -579px -441px no-repeat;
+}
+.codeRed3 {
+  background: url("../img/kuaileb.png") -650px -441px no-repeat;
+}
+.codeRed4 {
+  background: url("../img/kuaileb.png") -509px -499px no-repeat;
+}
+.codeRed5 {
+  background: url("../img/kuaileb.png") -579px -499px no-repeat;
+}
+.codeRed10 {
+  background: url("../img/kuaileb.png") -650px -499px no-repeat;
+}
+.code01 {
+  background: url("../img/kuaileb.png") -21px -23px no-repeat;
+}
+.code03 {
+  background: url("../img/kuaileb.png") -91px -23px no-repeat;
+}
+.code05 {
+  background: url("../img/kuaileb.png") -161px -23px no-repeat;
+}
+.code07 {
+  background: url("../img/kuaileb.png") -232px -23px no-repeat;
+}
+.code09 {
+  background: url("../img/kuaileb.png") -302px -23px no-repeat;
+}
+.code11 {
+  background: url("../img/kuaileb.png") -372px -23px no-repeat;
+}
+.code13 {
+  background: url("../img/kuaileb.png") -442px -23px no-repeat;
+}
+.code15 {
+  background: url("../img/kuaileb.png") -512px -23px no-repeat;
+}
+.code17 {
+  background: url("../img/kuaileb.png") -582px -23px no-repeat;
+}
+.code19 {
+  background: url("../img/kuaileb.png") -652px -23px no-repeat;
+}
+.code21 {
+  background: url("../img/kuaileb.png") -722px -23px no-repeat;
+}
+.code02 {
+  background: url("../img/kuaileb.png") -21px -78px no-repeat;
+}
+.code04 {
+  background: url("../img/kuaileb.png") -91px -78px no-repeat;
+}
+.code06 {
+  background: url("../img/kuaileb.png") -161px -78px no-repeat;
+}
+.code08 {
+  background: url("../img/kuaileb.png") -232px -78px no-repeat;
+}
+.code10 {
+  background: url("../img/kuaileb.png") -301px -78px no-repeat;
+}
+.code12 {
+  background: url("../img/kuaileb.png") -372px -78px no-repeat;
+}
+.code14 {
+  background: url("../img/kuaileb.png") -442px -78px no-repeat;
+}
+.code16 {
+  background: url("../img/kuaileb.png") -512px -78px no-repeat;
+}
+.code18 {
+  background: url("../img/kuaileb.png") -582px -78px no-repeat;
+}
+.code20 {
+  background: url("../img/kuaileb.png") -653px -78px no-repeat;
+}
+.code22 {
+  background: url("../img/kuaileb.png") -722px -78px no-repeat;
+}
+.code23 {
+  background: url("../img/kuaileb.png") -21px -161px no-repeat;
+}
+.code25 {
+  background: url("../img/kuaileb.png") -91px -161px no-repeat;
+}
+.code27 {
+  background: url("../img/kuaileb.png") -161px -161px no-repeat;
+}
+.code29 {
+  background: url("../img/kuaileb.png") -232px -161px no-repeat;
+}
+.code31 {
+  background: url("../img/kuaileb.png") -301px -161px no-repeat;
+}
+.code33 {
+  background: url("../img/kuaileb.png") -372px -161px no-repeat;
+}
+.code35 {
+  background: url("../img/kuaileb.png") -442px -161px no-repeat;
+}
+.code37 {
+  background: url("../img/kuaileb.png") -512px -161px no-repeat;
+}
+.code39 {
+  background: url("../img/kuaileb.png") -582px -161px no-repeat;
+}
+.code41 {
+  background: url("../img/kuaileb.png") -653px -161px no-repeat;
+}
+.code43 {
+  background: url("../img/kuaileb.png") -722px -161px no-repeat;
+}
+.code24 {
+  background: url("../img/kuaileb.png") -21px -216px no-repeat;
+}
+.code26 {
+  background: url("../img/kuaileb.png") -91px -216px no-repeat;
+}
+.code28 {
+  background: url("../img/kuaileb.png") -161px -216px no-repeat;
+}
+.code30 {
+  background: url("../img/kuaileb.png") -232px -216px no-repeat;
+}
+.code32 {
+  background: url("../img/kuaileb.png") -301px -216px no-repeat;
+}
+.code34 {
+  background: url("../img/kuaileb.png") -372px -216px no-repeat;
+}
+.code36 {
+  background: url("../img/kuaileb.png") -442px -216px no-repeat;
+}
+.code38 {
+  background: url("../img/kuaileb.png") -512px -216px no-repeat;
+}
+.code40 {
+  background: url("../img/kuaileb.png") -582px -216px no-repeat;
+}
+.code42 {
+  background: url("../img/kuaileb.png") -653px -216px no-repeat;
+}
+.code44 {
+  background: url("../img/kuaileb.png") -722px -216px no-repeat;
+}
+.code45 {
+  background: url("../img/kuaileb.png") -21px -305px no-repeat;
+}
+.code47 {
+  background: url("../img/kuaileb.png") -91px -305px no-repeat;
+}
+.code49 {
+  background: url("../img/kuaileb.png") -161px -305px no-repeat;
+}
+.code51 {
+  background: url("../img/kuaileb.png") -232px -305px no-repeat;
+}
+.code53 {
+  background: url("../img/kuaileb.png") -301px -305px no-repeat;
+}
+.code55 {
+  background: url("../img/kuaileb.png") -372px -305px no-repeat;
+}
+.code57 {
+  background: url("../img/kuaileb.png") -442px -305px no-repeat;
+}
+.code59 {
+  background: url("../img/kuaileb.png") -512px -305px no-repeat;
+}
+.code61 {
+  background: url("../img/kuaileb.png") -582px -305px no-repeat;
+}
+.code63 {
+  background: url("../img/kuaileb.png") -653px -305px no-repeat;
+}
+.code65 {
+  background: url("../img/kuaileb.png") -722px -305px no-repeat;
+}
+.code46 {
+  background: url("../img/kuaileb.png") -21px -361px no-repeat;
+}
+.code48 {
+  background: url("../img/kuaileb.png") -91px -361px no-repeat;
+}
+.code50 {
+  background: url("../img/kuaileb.png") -161px -361px no-repeat;
+}
+.code52 {
+  background: url("../img/kuaileb.png") -232px -361px no-repeat;
+}
+.code54 {
+  background: url("../img/kuaileb.png") -301px -361px no-repeat;
+}
+.code56 {
+  background: url("../img/kuaileb.png") -372px -361px no-repeat;
+}
+.code58 {
+  background: url("../img/kuaileb.png") -442px -361px no-repeat;
+}
+.code60 {
+  background: url("../img/kuaileb.png") -512px -361px no-repeat;
+}
+.code62 {
+  background: url("../img/kuaileb.png") -582px -361px no-repeat;
+}
+.code64 {
+  background: url("../img/kuaileb.png") -653px -361px no-repeat;
+}
+.code66 {
+  background: url("../img/kuaileb.png") -722px -361px no-repeat;
+}
+.code67 {
+  background: url("../img/kuaileb.png") -21px -440px no-repeat;
+}
+.code69 {
+  background: url("../img/kuaileb.png") -91px -440px no-repeat;
+}
+.code71 {
+  background: url("../img/kuaileb.png") -161px -440px no-repeat;
+}
+.code73 {
+  background: url("../img/kuaileb.png") -232px -440px no-repeat;
+}
+.code75 {
+  background: url("../img/kuaileb.png") -301px -440px no-repeat;
+}
+.code77 {
+  background: url("../img/kuaileb.png") -372px -440px no-repeat;
+}
+.code79 {
+  background: url("../img/kuaileb.png") -442px -440px no-repeat;
+}
+.code68 {
+  background: url("../img/kuaileb.png") -21px -495px no-repeat;
+}
+.code70 {
+  background: url("../img/kuaileb.png") -91px -495px no-repeat;
+}
+.code72 {
+  background: url("../img/kuaileb.png") -161px -495px no-repeat;
+}
+.code74 {
+  background: url("../img/kuaileb.png") -232px -495px no-repeat;
+}
+.code76 {
+  background: url("../img/kuaileb.png") -301px -495px no-repeat;
+}
+.code78 {
+  background: url("../img/kuaileb.png") -372px -495px no-repeat;
+}
+.code80 {
+  background: url("../img/kuaileb.png") -442px -495px no-repeat;
+}

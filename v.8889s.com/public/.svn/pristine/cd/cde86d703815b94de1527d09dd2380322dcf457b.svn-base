@@ -1,0 +1,57 @@
+.noUi-pips {
+	box-sizing: border-box; -moz-box-sizing: border-box;
+}
+.noUi-pips * {
+	box-sizing: border-box; -moz-box-sizing: border-box;
+}
+.noUi-pips {
+	color: rgb(153, 153, 153); position: absolute;
+}
+.noUi-value {
+	width: 40px; text-align: center; position: absolute;
+}
+.noUi-value-sub {
+	color: rgb(204, 204, 204); font-size: 10px;
+}
+.noUi-marker {
+	background: rgb(204, 204, 204); position: absolute;
+}
+.noUi-marker-large {
+	background: rgb(170, 170, 170);
+}
+.noUi-marker-sub {
+	background: rgb(170, 170, 170);
+}
+.noUi-pips-horizontal {
+	padding: 15px 0px; left: 0px; top: 100%; width: 100%; height: 50px;
+}
+.noUi-value-horizontal {
+	padding-top: 20px; margin-left: -20px;
+}
+.noUi-value-sub.noUi-value-horizontal {
+	padding-top: 15px;
+}
+.noUi-marker.noUi-marker-horizontal {
+	width: 2px; height: 5px; margin-left: -1px;
+}
+.noUi-marker-sub.noUi-marker-horizontal {
+	height: 10px;
+}
+.noUi-marker-large.noUi-marker-horizontal {
+	height: 15px;
+}
+.noUi-pips-vertical {
+	padding: 0px 15px; left: 100%; top: 0px; height: 100%;
+}
+.noUi-value-vertical {
+	width: 15px; margin-top: -5px; margin-left: 20px;
+}
+.noUi-marker.noUi-marker-vertical {
+	width: 5px; height: 2px; margin-top: -1px;
+}
+.noUi-marker-sub.noUi-marker-vertical {
+	width: 10px;
+}
+.noUi-marker-large.noUi-marker-vertical {
+	width: 15px;
+}

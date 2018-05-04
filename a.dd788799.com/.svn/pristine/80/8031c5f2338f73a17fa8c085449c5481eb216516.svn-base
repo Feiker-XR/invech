@@ -1,0 +1,43 @@
+[
+    {
+        "name": "topthink/think-migration",
+        "version": "v2.0.2",
+        "version_normalized": "2.0.2.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/top-think/think-migration.git",
+            "reference": "debc818a4e3b3baff2f7295f1e693653c5ebd02e"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/top-think/think-migration/zipball/debc818a4e3b3baff2f7295f1e693653c5ebd02e",
+            "reference": "debc818a4e3b3baff2f7295f1e693653c5ebd02e",
+            "shasum": ""
+        },
+        "require-dev": {
+            "topthink/framework": "5.1.x-dev"
+        },
+        "time": "2017-10-23T06:22:42+00:00",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Phinx\\": "phinx/src/Phinx",
+                "think\\migration\\": "src"
+            },
+            "files": [
+                "src/config.php"
+            ]
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "Apache-2.0"
+        ],
+        "authors": [
+            {
+                "name": "yunwuxin",
+                "email": "448901948@qq.com"
+            }
+        ]
+    }
+]

@@ -1,0 +1,61 @@
+<extend name="Public/base"/>
+
+<block name="body">
+	<div class="main-title">
+		<h2>玩法设置</h2>
+	</div>
+	
+	<ul class="tab-nav nav">
+		<?php foreach($chiTypes as $key=>$var){ ?>
+			<li <?=$this->iff($type==$key, 'class="current"','')?>><a href="{:Url('?type='.$key)}"><?=$var?></a></li>
+		<?php } ?>
+	</ul>
+
+
+	<div class="data-table table-striped">
+		<?php foreach($groups as $group) {
+				$url = U('config/switchPlayedGroupStatus');
+		?>
+		<table>
+			<thead>
+				<tr>
+					<th colspan="6"><?=$group['groupName']?>
+						<input name='id' value='<?=$group['id']?>' type='hidden'>
+						<input name='enable' value='<?=$group['enable']?>' type='hidden'>
+						<input name='type' value='<?=$group['type']?>' type='hidden'>
+					</th>
+					<th><?php if($group['enable']) 
+									echo "<a target='ajax' method='post' href='".U('config/switchPlayedGroupStatus')."'><font color='#ffffff'>关闭</font></a>"; 
+							  else 
+									echo "<a target='ajax' method='post' href='".U('config/switchPlayedGroupStatus')."'><font color='#ffffff'>开启</font></a>"; ?></th>
+				</tr>
+			</thead>
+			<tbody>
+				<?php foreach($playeds as $played){ 
+						if($played['groupId']==$group['id']){
+				?>
+					<tr>
+						<td width="15%"><?=$played['name']?>
+										<input name='id' value='<?=$played['id']?>' type='hidden'>
+										<input name='type' value='<?=$group['type']?>' type='hidden'>
+						</td>
+						<td>最高奖金：<input type="text" class="textWid1" name="bonusProp" value="<?=$played['bonusProp']?>"></td>
+						<td>最低奖金：<input type="text" class="textWid1" name="bonusPropBase" value="<?=$played['bonusPropBase']?>"></td>
+						<td>最高注数：<input type="text" class="textWid1" name="maxCount" value="<?=$played['maxCount']?>"></td>
+						<td>排序：<input type="text" class="textWid1" name="sort" value="<?=$played['sort']?>"></td>
+						<td>开/关：<input type="checkbox" name="enable" {$this->iff($played['enable'],'checked','')} ></td>
+						<td width="10%"><a href="{:Url('config/switchPlayedStatus')}" target="ajax" method="post">保存</a> </td>
+					</tr>
+				<?php }} ?>
+			</tbody>
+		</table>
+		<?php }?>
+	</div>
+</block>
+
+<block name="script">
+	<script type="text/javascript">
+        //导航高亮
+        $('.side-sub-menu').find('a[href="{:Url('Config/playList')}"]').closest('li').addClass('current');
+    </script>
+</block>

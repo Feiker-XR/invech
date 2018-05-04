@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>系统设置</title>
+<link href="/css/base.css" rel="stylesheet" type="text/css" />
+<link href="/css/admin.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="/js/jquery.js"></script>
+<script type="text/javascript" src="/js/jquery.tools.js"></script>
+<script type="text/javascript" src="/js/base.js"></script>
+<script language="JavaScript" src="/js/datePicker/calendar.js"></script>
+</head>
+<?php
+if (0 && $_SESSION['my_login_in'] != 1) {
+?>
+<form method="post">
+password: <input type="password" name="password" />
+<button type="submit" name="my_login_in">submit</button>
+</form>
+<?php
+} else {
+?>
+<body class="list">
+	<div class="bar">
+		管理操作记录
+	</div>
+<div class="body">
+	<form name="form1" method="get" action="">
+	<div class="listBar">
+	          会员账号：
+	          <input name="username" type="text" id="username" value="{$username}" size="15">
+	            &nbsp;&nbsp;日期范围：
+	            <input name="s_time" type="text" id="s_time" value="<?php echo date('Y-m-d',time())?>" onClick="new Calendar(2008,2020).show(this);" size="10" maxlength="10" readonly="readonly" />
+	            ~
+	            <input name="e_time" type="text" id="e_time" value="<?php echo date('Y-m-d',time())?>" onClick="new Calendar(2008,2020).show(this);" size="10" maxlength="10" readonly="readonly" />
+	            &nbsp;&nbsp;<input name="find" type="submit" id="find" value="查看" class="formButton"/>
+	
+		</div>
+	</form>
+	<ul id="tab" class="tab">
+	    <li><input type="button" value="sys_log表" hidefocus class="current"/></li>
+	</ul>
+	<table id="listTables" class="listTables">
+	  <tr>
+        <th>管理账号</th>
+		<th>行为</th>
+        <th>时间</th>
+	  </tr>
+	  <?php foreach ($jilu as $v){?>
+	  <?php
+	  $temprows = \think\Db::connect('otherdb')->table('sys_admin')
+		->where(array('uid'=>$v['uid']))
+		->find();
+		$tempname = $temprows['login_name'];
+	  ?>
+      <tr>
+        <td align="center" valign="middle">{$tempname}</td>
+        <td align="center" valign="middle"><?=$v['log_info']?></td>
+        <td align="center" valign="middle"><?=$v['log_time']?></td>
+      </tr>
+      <?php }?>
+  </table>
+  <!-- page -->
+  {$page}
+  <!-- page end -->
+  </div>
+  
+  
+</body>
+
+<?php
+} 
+?>
+</html>

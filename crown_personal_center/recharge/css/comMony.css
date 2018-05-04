@@ -1,0 +1,153 @@
+.tab-pay{
+	padding-top: 40px;
+}
+.pay-amount{
+	width:100%;
+	height: 70px;
+	background: #f7f7f7;
+	margin: 0 auto;
+	clear: both;
+}
+.pay-amount label{
+	float: left;
+	color: #555;
+	line-height: 70px;
+	font-size: 14px;
+	font-weight: bold;
+	margin-left: 16px;
+}
+.pay-amount div{
+	float: left;
+	width:386px;
+	height: 40px;
+	line-height: 40px;
+	border: 1px solid #e9e9e9;
+	margin-top: 14px;
+	background: #FFFFFF;
+	margin-left: 6px;
+	border-radius: 8px;
+}
+.pay-amount div input{
+	width: 334px;
+	margin-left: 8px;
+	height: 100%;
+	outline: none;
+	border: none;
+}
+.pay-amount div i{
+	color:#adadad ;
+}
+.pay-amount span{
+	color: #ff0000;
+	line-height: 70px;
+	display: block;
+	float: left;
+	margin-left: 40px;
+}
+
+
+.standType{
+	height: 78px;
+	overflow: hidden;
+}
+.standType span{
+	display: block;
+	float: left;
+	color: #555555;
+	font-size: 14px;
+	font-weight: bold;
+	margin-left: 16px;
+	line-height: 40px;
+	margin-top: 28px;
+}
+.standType div{
+	margin-top: 24px;
+	width: 160px;
+	height: 42px;
+	background: #f6f6f6;
+	float: left;
+	cursor: pointer;
+	margin-left: 8px;
+}
+.standType div.bg{
+	background: url(../imgs/border-bg.png) no-repeat;
+}
+.standType div img{
+	display: block;
+	width: 117px;
+	height: 31px;
+	padding-left: 14px;
+	padding-top: 6px;
+}
+
+
+.standBy{
+	width:100%;
+	margin: 0 auto;
+	margin-top: 10px;
+}
+
+.standBy span{
+	display: block;
+	float: left;
+	color: #555555;
+	font-size: 14px;
+	font-weight: bold;
+	margin-left: 16px;
+	line-height: 40px;
+}
+.standBy div{
+	margin-left: 85px;
+}
+.standBy div a{
+	color: #b9b9b9;
+	display: block;
+    float: left;
+    width: 111px;
+    height: 40px;
+    border: 1px solid #e9e9e9;
+    margin-left: 5px;
+    line-height: 40px;
+    text-align: center;
+    margin-right: 6px;
+    margin-bottom: 10px;
+}
+.standBy div a.color{
+	color: #ff0000;
+}
+.btn-submit{
+	width:100%;
+	margin: 0 auto;
+	clear: both;
+}
+.btn-submit button{
+	width: 203px;
+	height: 40px;
+	outline: none;
+	border-radius: 30px;
+	border: none;
+	color: #FFFFFF;
+	cursor: pointer;
+	background: #515151;
+	margin-left: 187px;
+    margin-top: 40px;
+    font-size: 16px;
+    font-weight: bold;
+}
+.btn-submit button:hover{
+	background: #ff6600;
+}
+
+.tip{
+	clear: both;
+	color:#555555 ;
+	margin-top: 18px;
+}
+.tip h6{
+	font-size: 14px;
+	font-weight: bold;
+}
+.tip p{
+	font-size: 12px;
+	color:#b9b9b9 ;
+}

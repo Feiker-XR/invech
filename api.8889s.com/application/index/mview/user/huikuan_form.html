@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>公司入款页面 </title>
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">	
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+<link rel="stylesheet" href="/css/font-awesome.min.css">	
+<link rel="stylesheet" href="/styles/ezweb.css">
+<link rel="stylesheet" type="text/css" href="/fonts-new/iconfont.css">	
+<link rel="stylesheet" href="/css/500f_new_wap.css">
+
+<link rel="stylesheet" href="/css/pay-500F.css" />
+<script type="text/javascript" src="/js/jquery-2.2.0.min.js"></script>
+<script type="text/javascript" src="/js/calendar.js"></script>
+<script type="text/javascript" src="/js/pay-500F.js"></script>
+</head>
+<body>
+<div class="block_60"></div>	
+<!--在线支付-->	
+<!-- <div class="pay_all">
+	<ul class="ml30">
+		<li><img src="img/logo-1.png" /></li>
+		<li>账户余额</li>
+	</ul>
+	<span id="money">88888888</span>
+</div>  -->
+<div class="block_10"></div>	
+<div class="pay_online">
+	<a href="{:url('pay/index')}" class="pay_online_1 on">在线支付</a>
+	<a href="{:url('user/huikuan_new')}" class="pay_online_2 on">公司入款</a>
+</div>	
+<div class="block_10"></div>
+<form action="{:url('user/hk_money_set','into=true')}" method="post">
+
+<!--提交表单第二步-->
+<div class="pay_name" style="display: block;">
+	<h2>请填写汇款信息</h2>
+	<div class="block_10"></div>
+	<div class="pay_input">
+		<table class="table">
+			<tbody>
+				<tr>
+					<td align="right">会员帐号:</td>
+					<td align="left">
+						<input type="text" value="{$Think.session.username}" disabled="disabled" class="form-control"/>
+					</td>
+				</tr>
+				<tr style="border: none;background: #F5F5F5;">
+					<td style="padding: 4px;"></td>
+					<td style="padding: 4px;"></td>
+				</tr>
+				<tr>
+					<td align="right">存款金额:</td>
+					<td align="left"><input name="v_amount" type="number" pattern="[0-9]*"  id="v_amount" class="form-control" onkeyup="clearNoNum(this);" size="15" style="color: red;"></td>
+				</tr>
+				<tr style="border: none;background: #F5F5F5;">
+					<td style="padding: 4px;"></td>
+					<td style="padding: 4px;"></td>
+				</tr>				
+				<tr>
+					<td align="right">
+						汇款银行:</td>
+					<td align="left">
+						<select id="IntoBank" name="IntoBank" class="form-control" onchange="showType1();" style="border: none;">
+							<option value="" selected="selected">请选择转入银行</option>
+							{volist name='bank' id='vo'}
+							<option value='{$vo.card_bankName}' {if $info.id eq $vo.id} selected="selected" {/if}>{$vo.card_bankName}-{$vo.id} - {$info.id}</option>
+							{/volist}
+						</select>
+					</td>
+				</tr>
+				<tr style="border: none;background: #F5F5F5;">
+					<td style="padding: 4px;"></td>
+					<td style="padding: 4px;"></td>
+				</tr>	
+				<tr>
+					<td align="right" style="width: 90px;">
+						汇款方式:</td>
+					<td align="left">
+						<div class="row">
+							<div class="col-sm-6">
+								<select id="InType" name="InType" onchange="showType();" class="form-control" style="border: none;"> 
+									<option value="">请选择汇款方式</option>
+									<option value="银行柜台">银行柜台</option>
+									<option value="ATM现金">ATM现金</option>
+									<option value="ATM卡转">ATM卡转</option>
+									<option value="网银转账">网银转账</option>
+									<option value="支付宝转账">支付宝转账</option>
+									<option value="微信支付">微信支付</option>
+									<option value="0">其它[手动输入]</option>
+								</select>
+							</div>
+							<div class="col-sm-6">
+								<input id="v_type" name="v_type" type="text" size="19" value="请输入其它汇款方式" onfocus="javascript:$('v_type').select();" class="form-control" style=" display:none;">
+								<input type="hidden" id="IntoType" name="IntoType" value="" class="form-control">
+							</div>
+						</div>
+					</td>
+				</tr>
+				<tr style="border: none;background: #F5F5F5;">
+					<td style="padding: 4px;"></td>
+					<td style="padding: 4px;"></td>
+				</tr>				
+				<tr id="tr_v" style="display:none;">
+					<td align="right" style="width: 80px;">
+						汇款方持卡人姓名:</td>
+					<td align="left"> <input name="v_Name" type="text" id="v_Name" class="form-control" onfocus="javascript:this.select();" size="34"></td>
+				</tr>
+				<tr>
+					<td align="right">
+						汇款地点:</td>
+					<td align="left">
+						<span style="color: #999999">
+                        	<input id="v_site" name="v_site" type="text" size="34" class="form-control" placeholder="请输入您汇款的所在地区">
+	                   </span>
+					</td>
+				</tr>				
+				<tr style="border: none;background: #F5F5F5;">
+					<td style="padding: 4px;"></td>
+					<td style="padding: 4px;"></td>
+				</tr>				
+				<tr>
+					<td align="right">
+						汇款日期:</td>
+					<td align="left" class="font-black"><input name="cn_date" type="text" id="cn_date" onclick="new Calendar(2008,2020).show(this);" size="10" maxlength="10" readonly="" value="<?=date('Y-m-d')?>" class="form-control"> <br>
+						<select name="s_h" id="s_h" class="form-control" style="display:inline-block;width:44px;">
+							<option value="00">00</option>
+							<option value="01">01</option>
+							<option value="02">02</option>
+							<option value="03">03</option>
+							<option value="04">04</option>
+							<option value="05">05</option>
+							<option value="06">06</option>
+							<option value="07">07</option>
+							<option value="08">08</option>
+							<option value="09">09</option>
+							<option value="10">10</option>
+							<option value="11">11</option>
+							<option value="12">12</option>
+							<option value="13">13</option>
+							<option value="14">14</option>
+							<option value="15">15</option>
+							<option value="16">16</option>
+							<option value="17">17</option>
+							<option value="18">18</option>
+							<option value="19">19</option>
+							<option value="20">20</option>
+							<option value="21">21</option>
+							<option value="22">22</option>
+							<option value="23">23</option>
+						</select>
+						时
+						<select name="s_i" id="s_i" class="form-control" style="display:inline-block;width:44px;">
+							<option value="00">00</option>
+							<option value="01">01</option>
+							<option value="02">02</option>
+							<option value="03">03</option>
+							<option value="04">04</option>
+							<option value="05">05</option>
+							<option value="06">06</option>
+							<option value="07">07</option>
+							<option value="08">08</option>
+							<option value="09">09</option>
+							<option value="10">10</option>
+							<option value="11">11</option>
+							<option value="12">12</option>
+							<option value="13">13</option>
+							<option value="14">14</option>
+							<option value="15">15</option>
+							<option value="16">16</option>
+							<option value="17">17</option>
+							<option value="18">18</option>
+							<option value="19">19</option>
+							<option value="20">20</option>
+							<option value="21">21</option>
+							<option value="22">22</option>
+							<option value="23">23</option>
+							<option value="24">24</option>
+							<option value="25">25</option>
+							<option value="26">26</option>
+							<option value="27">27</option>
+							<option value="28">28</option>
+							<option value="29">29</option>
+							<option value="30">30</option>
+							<option value="31">31</option>
+							<option value="32">32</option>
+							<option value="33">33</option>
+							<option value="34">34</option>
+							<option value="35">35</option>
+							<option value="36">36</option>
+							<option value="37">37</option>
+							<option value="38">38</option>
+							<option value="39">39</option>
+							<option value="40">40</option>
+							<option value="41">41</option>
+							<option value="42">42</option>
+							<option value="43">43</option>
+							<option value="44">44</option>
+							<option value="45">45</option>
+							<option value="46">46</option>
+							<option value="47">47</option>
+							<option value="48">48</option>
+							<option value="49">49</option>
+							<option value="50">50</option>
+							<option value="51">51</option>
+							<option value="52">52</option>
+							<option value="53">53</option>
+							<option value="54">54</option>
+							<option value="55">55</option>
+							<option value="56">56</option>
+							<option value="57">57</option>
+							<option value="58">58</option>
+							<option value="59">59</option>
+						</select>
+						分
+						<select name="s_s" id="s_s" class="form-control" style="display:inline-block;width:44px;">
+							<option value="00">00</option>
+							<option value="01">01</option>
+							<option value="02">02</option>
+							<option value="03">03</option>
+							<option value="04">04</option>
+							<option value="05">05</option>
+							<option value="06">06</option>
+							<option value="07">07</option>
+							<option value="08">08</option>
+							<option value="09">09</option>
+							<option value="10">10</option>
+							<option value="11">11</option>
+							<option value="12">12</option>
+							<option value="13">13</option>
+							<option value="14">14</option>
+							<option value="15">15</option>
+							<option value="16">16</option>
+							<option value="17">17</option>
+							<option value="18">18</option>
+							<option value="19">19</option>
+							<option value="20">20</option>
+							<option value="21">21</option>
+							<option value="22">22</option>
+							<option value="23">23</option>
+							<option value="24">24</option>
+							<option value="25">25</option>
+							<option value="26">26</option>
+							<option value="27">27</option>
+							<option value="28">28</option>
+							<option value="29">29</option>
+							<option value="30">30</option>
+							<option value="31">31</option>
+							<option value="32">32</option>
+							<option value="33">33</option>
+							<option value="34">34</option>
+							<option value="35">35</option>
+							<option value="36">36</option>
+							<option value="37">37</option>
+							<option value="38">38</option>
+							<option value="39">39</option>
+							<option value="40">40</option>
+							<option value="41">41</option>
+							<option value="42">42</option>
+							<option value="43">43</option>
+							<option value="44">44</option>
+							<option value="45">45</option>
+							<option value="46">46</option>
+							<option value="47">47</option>
+							<option value="48">48</option>
+							<option value="49">49</option>
+							<option value="50">50</option>
+							<option value="51">51</option>
+							<option value="52">52</option>
+							<option value="53">53</option>
+							<option value="54">54</option>
+							<option value="55">55</option>
+							<option value="56">56</option>
+							<option value="57">57</option>
+							<option value="58">58</option>
+							<option value="59">59</option>
+						</select>秒</td>
+				</tr>
+				<tr style="border: none;background: #F5F5F5;">
+					<td style="padding: 4px;"></td>
+					<td style="padding: 4px;"></td>
+				</tr>				
+				<tr>
+					<td height="35" align="right">
+						验 证 码:</td>
+					<td align="left" valign="middle">
+						<table width="135">
+							<tbody>
+								<tr>
+									<td class="STYLE5"><input name="vlcodes" type="text" id="vlcodes" size="10" maxlength="4" onfocus="next_checkNum_img()"  class="form-control"></td>
+									<td>&nbsp;</td>
+									<td>
+										<img name="checkNum_img" id="checkNum_img" style="cursor:pointer; top:3px;"  onclick="this.src='{:captcha_src()}?d='+Math.random();" alt="点击更换" src="{:captcha_src()}" >
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+		
+
+	</div>
+</div>	
+<div class="block_20"></div>	
+<input name="SubTran" type="submit" class="btn btn-success btn-lg btn-block" id="SubTran" value="提交汇款信息"> 
+</form>	
+<div class="block_60"></div>	
+<div class="block_60"></div>
+<div class="block_60"></div>	
+	
+	
+	
+	
+<!--顶部固定nav-->
+
+<script language="javascript">	
+	function refresh_money(){
+	$.ajax({
+	    cache: false,
+	    url: "/get_money.php",
+	    success:function(data){
+	        if(data==""){
+	        }else{
+	         $data_arr=data.split("||");
+			 $("#user_money,#money").html($data_arr[0]);
+			 // $("#user_jifen").html($data_arr[1]);
+	        }
+	    }
+	}); 
+	window.setTimeout("refresh_money();", 15000); 
+	}
+	refresh_money();
+</script> 
+
+<!--------------->
+
+<!--底部nav固定-->
+
+<script>
+$(function(){
+	//点击底部固定导航条切换
+	$(".nav500_bottom_a").click(function(){
+		var navThis = $(this);
+		navThis.css("color","#d9901e")
+		navThis.parent().siblings("span").find("a").css("color","#999999")
+		navThis.find("i").addClass("nav500_b_active");
+		navThis.parent().siblings("span").find("i").removeClass("nav500_b_active");
+		navThis.addClass("nav500_bottom_active").parent().siblings("span").find("a").removeClass("nav500_bottom_active")
+	});
+	
+})
+</script>	
+	
+	
+</body>
+
+<script>
+$(function(){
+	//子页面传递高度给顶层iframe	
+	function changeFrameHeight(){
+		bodyClientH = document.body.clientHeight;
+		bodyClientW = document.body.clientWidth;
+		var iframeId = $(window.parent.document).find("#iframeid")
+		iframeId.css("height",bodyClientH + 50)
+	}	
+	changeFrameHeight()		
+})
+</script>
+</html>

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>皇冠娱乐城</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+	<link rel="stylesheet" href="/css/bootstrap.min.css">
+	<link rel="stylesheet" href="/css/font-awesome.min.css">
+	<link rel="stylesheet" href="/styles/ucenter.css">
+	<link rel="stylesheet" type="text/css" href="/fonts-new/iconfont.css">	
+	<link rel="stylesheet" href="/styles/ezweb.css">
+	<link rel="stylesheet" href="/css/500f_new_wap.css">		
+	<script src="/assets/jquery.js"></script>
+	<script src="/js/bootstrap.min.js"></script>
+</head> 
+<script language="javascript">
+//if(self==top){
+//	top.location='/index.php';
+//}
+</script>
+<body>
+	
+	{include file='common/user-nav'}
+	{include file='common/header'}	
+	
+<div class="h10"></div>
+<div class="ucenter">
+	<div class="container" style="margin: 60px 0px;">
+		<div class="row" style="margin-left: 0px;">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h3 class="panel-title">未结注单 <span class="pull-right" ><a href="xm.php">历史报表</a></span></h3>
+				</div>
+
+				<div class="panel-body">
+					<div role="tabpanel">
+						<!-- Nav tabs -->
+						<ul class="nav nav-tabs nav-tile" role="tablist">
+							<li>
+								<a href="tzjl.php?ac=ty">体育单式</a>
+							</li>
+							<li>
+								<a href="tzjl_cg.php">体育串关</a>
+							</li>
+							<li class="active">
+								<a href="tzjl_cp.php">彩票游戏</a>
+							</li>
+						</ul>
+
+						<!-- Tab panes -->
+						<div class="tab-content">
+							<div role="tabpanel" class="tab-pane active">
+								<div class="table-responsive">
+									<table class="table table-bordered">
+										<tr class="success">
+											<td class="zd_item_header">时间/单号</td>
+											<td class="zd_item_header">投注详细</td>
+											<td class="zd_item_header">金额</td>
+										</tr>
+
+										<tr align="center" bgcolor="#FFFFFF">
+											<td colspan="3" valign="middle" bgcolor="#FFFFFF">
+												<p class="bg-danger">暂无记录</p>
+											</td>
+										</tr>
+										<tr>
+											<td colspan="3" style="padding:0;">
+												<div class="panel-footer">
+													<ul class="pagination">
+														<li class="active">
+															<a href="#">1</a>
+														</li>
+														<li>
+															<a href="#">1/1/1</a>
+														</li>
+														<li>
+															<a href="javascript:;">总投注金额：<span style="color:#FF0000"></span>，最高可赢金额：<span style="color:#FF0000">0</span></a>
+														</li>
+													</ul>
+												</div>
+											</td>
+										</tr>
+									</table>
+								</div>
+							</div>
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script>
+$(function(){
+	//点击底部固定导航条切换
+	$(".nav500_bottom_a").click(function(){
+		var navThis = $(this);
+		navThis.css("color","#d9901e")
+		navThis.parent().siblings("span").find("a").css("color","#999999")
+		navThis.find("i").addClass("nav500_b_active");
+		navThis.parent().siblings("span").find("i").removeClass("nav500_b_active");
+		navThis.addClass("nav500_bottom_active").parent().siblings("span").find("a").removeClass("nav500_bottom_active")
+	});
+})
+</script>
+<script type="text/javascript" language="javascript" src="/js/left_mouse.js"></script>
+</body>
+</html>

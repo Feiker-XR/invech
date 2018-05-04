@@ -1,0 +1,65 @@
+$(function(){
+	// set rem origin;
+	var setHtmlFontsize = function(){
+        var _width = window.innerWidth,
+            designWidth = 750;
+        $('html').css('fontSize',_width/designWidth*100+'px');
+        $('main').height(window.innerHeight-$('header').height());  // 设置内容区高度
+    };
+    setHtmlFontsize();
+    $(window).on('resize',setHtmlFontsize);
+
+    $('.container').show(); // 所有元素，事件添加完毕再显示页面
+})
+
+
+// 弹出错误信息
+function getErrorMsg(msg) {
+    $('main').append(_tip);
+    _tip.find('span').text(msg);
+    _tip.fadeIn();
+    if(_timeout){
+        clearTimeout(_timeout);
+    }
+    _timeout = setTimeout(function () {
+        _tip = $('.tip').fadeOut().remove();
+    },1000);
+}
+
+// 快捷日期选择
+function setQuickDate(_this){
+    if(!_this){
+        return;
+    }
+    var __this = _this;
+    var _long = __this.attr('_long');
+    __this.addClass('active').siblings().removeClass('active');
+    var curDate = new Date();
+    var preDate = null;
+    switch (_long){
+        case '3':
+            var preDate = new Date(curDate.getTime() - 24*60*60*1000*3);
+            break;
+        case '7':
+            var preDate = new Date(curDate.getTime() - 24*60*60*1000*7);
+            break;
+        case '30':
+            var preDate = new Date(curDate.getTime() - 24*60*60*1000*30);
+            break;
+        default:
+            alert('未选中任何区间');
+    }
+    return formatDate(preDate);
+}
+
+function formatDate(preDate){
+    var args = {
+        Y: preDate.getFullYear(),
+        M: preDate.getMonth()+1 < 10 ? '0'+ (preDate.getMonth()+1) : preDate.getMonth()+1,
+        D: preDate.getDate() < 10 ? '0'+ preDate.getDate() : preDate.getDate(),
+        h: preDate.getHours() < 10 ? '0'+ preDate.getHours() : preDate.getHours(),
+        m: preDate.getMinutes() < 10 ? '0'+ preDate.getMinutes() : preDate.getMinutes(),
+        s: preDate.getSeconds() < 10 ? '0'+ preDate.getSeconds() : preDate.getSeconds(),
+    };
+    return args.Y+'-'+args.M + '-' +args.D+' '+args.h+':'+args.m+':'+args.s;
+}

@@ -1,0 +1,67 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>系统设置</title>
+<link href="/css/base.css" rel="stylesheet" type="text/css" />
+<link href="/css/admin.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="/js/jquery.js"></script>
+<script type="text/javascript" src="/js/jquery.tools.js"></script>
+<script type="text/javascript" src="/js/base.js"></script>
+<script type="text/javascript" src="/js/calendar.js"></script>
+
+</head>
+<body class="list">
+	<!--<div class="bar">
+		会员等级设置
+	</div>-->
+	
+
+	<div class="body">
+<ul id="tab" class="tab">
+				<li>
+					<input type="button" value="今日签到用户" hidefocus class="" onClick="window.location.href='{:url('activity/todaysignin')}'" />
+				</li>
+                <li>
+					<input type="button" value="历史签到用户" hidefocus class="current" onClick="window.location.href='{:url('activity/historysignin')}'" />
+				</li>
+			</ul>
+<form method="GET">
+	<label>用户名:<input type="text" name="username" value='{$username}'/></label>
+	<label>开始时间:<input type="text" name="stime" onClick="new Calendar(2008,2020).show(this);" id="stime" value="{$stime}" /></label>
+	<label>结束时间:<input type="text" name="etime" onClick="new Calendar(2008,2020).show(this);" id="etime" value="{$etime}"/></label>
+	<input type="hidden" name="query" value='1' />
+	<input type="submit" />
+</form>
+<table id="listTable" class="listTable">
+
+<tr>
+	<th>会员ID</th>
+	<th>会员名</th>
+	<th>签到时间</th>
+	<th>获得奖励</th>
+	<th>详情</th>
+</tr>
+{empty name='query'}
+	<tr><td colspan='5' align='center'><font color='red'>请选择筛选条件</font></td></tr>
+{else}
+	{empty name='list'}
+		暂无数据!
+	{else}
+		{volist name='list' id='rows'}
+		<tr>
+			<td align="center">{$rows['uid']}</td>
+			<td align="center">{$rows['username']}</td>
+			<td align="center">{$rows['m_make_time']}</td>
+			<td align="center">{$rows['m_value']}</td>
+			<td align="center">{$rows['about']}</td>
+		 </tr>
+		 {/volist}
+	{/empty}
+{/empty}
+  </table>
+  {notempty name='list'}<div class="pagerBar">{$list->render()}</div>{/notempty}
+	</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>皇冠娱乐城-优惠活动页面</title>
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+<link rel="stylesheet" href="/css/font-awesome.min.css">
+<link rel="stylesheet" href="/css/ui-dialog.css">
+<link rel="stylesheet" href="/styles/ezweb.css">
+<link rel="stylesheet" type="text/css" href="/fonts-new/iconfont.css">	
+<link rel="stylesheet" href="/css/500f_new_wap.css">
+<link href="/css/swiper.min.css" rel="stylesheet">
+
+<script src="/js/jquery.1.9.1.min.js"></script>
+<script src="/js/common.js"></script>
+<script src="/js/swiper.js"></script>
+<style type="text/css">
+.flex-control-paging li a {width: 10px;height: 10px;border-radius: 50%;}
+.slides {overflow:hidden;}
+.slides li {float:left;display:none;}
+.slides li:nth-child(1) {display:block;}
+/*从此处开始添加*/
+/* Margin & Padding */
+.m5 { margin: 5px }.m10 { margin: 10px }.m15 { margin: 15px }.m20 { margin: 20px }.m25 { margin: 25px }.m30 { margin: 30px }.m50 { margin: 50px }.mt5 { margin-top: 5px }.mt10 { margin-top: 10px }.mt15 { margin-top: 15px }.mt20 { margin-top: 20px }.mt25 { margin-top: 25px }
+.mt30 { margin-top: 30px }.mt40 { margin-top: 40px }.mt50 { margin-top: 50px }.mr4{margin-right: 4px}.mr5 { margin-right: 5px }.mr10 { margin-right: 10px }.mr15 { margin-right: 15px }.mr20 { margin-right: 20px }.mr25 { margin-right: 25px }.mr30 { margin-right: 30px }.mr50 { margin-right: 50px }.mb5 { margin-bottom: 5px }.mb10 { margin-bottom: 10px }.mb15 { margin-bottom: 15px }.mb20 { margin-bottom: 20px }.mb25 { margin-bottom: 25px }.mb30 { margin-bottom: 30px }.mb50 { margin-bottom: 50px }.ml0{margin-left: 0px;}.ml5 { margin-left: 5px }.ml7{margin-left: 7px;}.ml10 { margin-left: 10px }.ml15 { margin-left: 15px }.ml20 { margin-left: 20px }.ml35{margin-left:35px}
+.ml25 { margin-left: 25px }.ml30 { margin-left: 30px }.ml50 { margin-left: 50px }.p5 { padding: 5px }.p10 { padding: 10px }.p15 { padding: 15px }.p20 { padding: 20px }.p25 { padding: 25px }.p30 { padding: 30px }.p50 { padding: 50px }.pt5 { padding-top: 5px }.pt7 { padding-top: 7px }.pt10 { padding-top: 10px }.pt15 { padding-top: 15px }.pt20 { padding-top: 20px }.pt25 { padding-top: 25px }.pt30 { padding-top: 30px }.pt50 { padding-top: 50px }.pr5 { padding-right: 5px }.pr10 { padding-right: 10px }.pr15 { padding-right: 15px }.pr20 { padding-right: 20px }.pr25 { padding-right: 25px }.pr30 { padding-right: 30px }.pr50 { padding-right: 50px }.pb5 { padding-bottom: 5px }.pb10 { padding-bottom: 10px }.pb15 { padding-bottom: 15px }.pb20 { padding-bottom: 20px }.pb25 { padding-bottom: 25px }.pb30 { padding-bottom: 30px }.pb50 { padding-bottom: 50px }.pl75{padding-left:0.75rem;}.pr75{padding-right:0.75rem;}.pl5 { padding-left: 5px }.pl10 { padding-left: 10px }.pl15 { padding-left: 15px }.pl20 { padding-left: 20px }.pl25 { padding-left: 25px }.pl30 { padding-left: 30px }.pl50 { padding-left: 50px }
+.fl{float:left;}
+.fr{float:right;}
+.dsblock{display: block;}
+img{border: none;}
+a{text-decoration: none;}
+body img, html img{max-width: 100%;}
+/* 字体自定义 */
+.f12{font-size: 12px;}.f14{font-size: 14px;}.f16{font-size: 16px;}.f18{font-size: 18px;}
+/***占位清除浮动***/
+.block_0{width:100%;clear:both;height:0px;overflow:hidden;*zoom:1;}
+.block_5{width:100%;clear:both;height:5px;overflow:hidden;*zoom:1;}
+.block_10{width:100%;clear:both;height:10px;overflow:hidden;*zoom:1;}
+.block_15{width:100%;clear:both;height:15px;overflow:hidden;*zoom:1;}
+.block_20{width:100%;clear:both;height:20px;overflow:hidden;*zoom:1;}
+.block_30{width:100%;clear:both;height:30px;overflow:hidden;*zoom:1;}
+.block_40{width:100%;clear:both;height:44px;overflow:hidden;*zoom:1;}
+.block_45{width:100%;clear:both;height:45px;overflow:hidden;*zoom:1;}
+.block_50{width:100%;clear:both;height:50px;overflow:hidden;*zoom:1;}
+.block_55{width:100%;clear:both;height:55px;overflow:hidden;*zoom:1;}
+.block_60{width:100%;clear:both;height:60px;overflow:hidden;*zoom:1;}
+
+/*500F彩票首页WAP*/
+.wap_500f_h1{float: left;width: 100%;height: 40px;background: #f1f1f1;border-bottom: 1px solid #bfbfbf;color: #333333;line-height: 40px;}
+.wap_500f_h1 h2{margin: 0;margin-left: 10px;display: block;padding: 0px 10px;border-left: 2px solid red;height: 21px;font-size: 16px;line-height: 20px;margin-top: 10px;color: #333333;}
+.wap_500f_game{width: 100%;background: white;display: table;border-bottom: 1px solid #BFBFBF;}
+.wap_500f_game div{text-align: center;display: block;float: left;width: 25%;font-size: 15px;padding: 15px 0;}
+.wap_500f_game div i{display: inline-block;width: 55%;}
+.wap_500f_game a{color: #333333;}
+
+.wap_500f_game_a{border-bottom: 3px solid #ff7702;margin-bottom: -1px;}
+.wap_500f_game_b{border-bottom: 3px solid #ea3500;margin-bottom: -1px;}
+.wap_500f_game_c{border-bottom: 3px solid #1891e8;margin-bottom: -1px;}
+.wap_500f_game_d{border-bottom: 3px solid #6659a4;margin-bottom: -1px;}
+/*热门彩票*/
+.wap_500f_lottery{width: 100%;height: auto;background: white;font-size: 0;}
+.wap_500f_lottery_1{width: 33.1%;height: 140px;display: inline-block;font-size: 16px;text-align: center;border-left: 1px solid #e5e5e5;border-bottom: 1px solid #E5E5E5;}
+.wap_500f_lottery a:nth-child(1) div,.wap_500f_lottery a:nth-child(4) div,.wap_500f_lottery a:nth-child(7) div{border-left: none;}
+.wap_500f_lottery a:nth-child(7) div.wap_500f_lottery_1{border-right: 1px solid #E5E5E5;}
+.wap_500f_lottery_1 div{width: 60%;margin: 0 auto;margin-top: 20px;}
+.wap_500f_lottery a{color: #333333;}
+
+/*真人视讯*/
+.wap_500f_live{width: 100%;height: auto;background: white;font-size: 0;border-top: 1px solid #E5E5E5;border-bottom: 1px solid #E5E5E5;}
+.wap_500f_live_1{width: 49.8%;height: 170px;display: inline-block;font-size: 16px;text-align: center;border-left: 1px solid #e5e5e5;border-bottom: 1px solid #E5E5E5;}
+.wap_500f_live_1 div{width: 90%;margin: 0 auto;margin-top: 10px;}
+.wap_500f_live a:nth-child(1) div,.wap_500f_live a:nth-child(3) div{border-left: none;}
+/*体育赛事*/
+.wap_500f_sport{width: 100%;height: auto;background: white;float: left;padding-bottom: 10px;}
+.wap_500f_sport_1{width: 100%;height:auto;float: left;}
+.wap_500f_sport_1 img{display: block;width: 100%;}
+
+.wap_500f_sport_2{width: 100%;height:auto;float: left;}
+.wap_500f_sport_2 img{display: block;width: 100%;}
+
+/*电子游艺*/
+.wap_500f_electric{width: 100%;height: auto;background: white;font-size: 0;}
+.wap_500f_electric_1{width: 33.1%;height: 140px;display: inline-block;font-size: 16px;text-align: center;border-left: 1px solid #e5e5e5;border-bottom: 1px solid #E5E5E5;}
+.wap_500f_electric a:nth-child(1) div,.wap_500f_electric a:nth-child(4) div,.wap_500f_electric a:nth-child(7) div{border-left: none;}
+.wap_500f_electric a:nth-child(5) div.wap_500f_electric_1{border-right: 1px solid #E5E5E5;}
+.wap_500f_electric_1 div{width: 80%;margin: 0 auto;margin-top: 10px;}
+.wap_500f_electric a{color: #333333;}
+
+/*尺寸600PX到1199PX*/
+@media screen and (min-width: 600px) and (max-width: 1199px) {
+.wap_500f_lottery_1{font-size: 18px;height: 180px;}
+.wap_500f_lottery_1 div{margin-top: 12px;}
+.wap_500f_live_1{height: 290px;}
+.wap_500f_electric_1{height: 240px;}
+}
+
+/*尺寸宽度小过350PX  ipone5尺寸*/
+@media screen and (max-width: 350px) {
+.wap_500f_lottery_1{font-size: 14px;height: 110px;}
+.wap_500f_lottery_1 div{margin-top: 10px;}
+.wap_500f_live_1{height: 140px;}
+.wap_500f_electric_1{height: 120px;}
+}
+
+.pop {
+	position: fixed;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	background: rgba(0, 0, 0, 0.7);
+	z-index: 10000;
+	display: none;
+}
+.pop .p_cont{
+	with:100%;
+	height: auto;
+	overflow: auto;
+	margin-top:60px;
+	padding:5px;
+}
+#act_title{
+	font-size: 18px;
+	font-weight: bold;
+	line-height: 40px;
+	color: white;
+}
+
+
+	</style>
+</head>
+<body>
+<!--<iframe id="topFrame" name="topFrame" frameborder="0" scrolling="no" width="0" height="0" src="top.php" style="display:none"></iframe>
+    
+ 	
+	<!--<div class="header">
+		<div class="blackbar">
+			<div class="container">
+				<p class="pull-right" style="margin-top:5px;">
+					<a href="#" data-modal="#J_loginModal" class="btn btn-green">登录</a>
+					<a href="#" data-modal="#J_regModal" class="btn btn-green">注册</a>
+				</p>
+				<p>
+					<a id="tlogo" href="index.html" data-slide="#J_p1" class="brand active"><img src="/images/logo.png"></a>
+					<!-- <a id="tback" href='/'><i class="fa fa-chevron-left"></i> 返回首页</a> 
+				</p>
+			</div>
+		</div>		
+	</div>-->
+	
+	{include file='common/activities-nav'}
+	{include file='common/header'}
+<script type="text/javascript">	
+
+function changeFrameHeight(){	   
+	 bodyClientH = document.body.clientHeight;      	
+	 bodyClientW = document.body.clientWidth;	
+	 var iframeId = $(window.top.document).find("#iframeid")
+	 iframeId.css("height",bodyClientH + 1050)
+	 console.log(bodyClientH)
+}
+changeFrameHeight()	
+
+</script>
+
+
+<script>
+$(function(){
+	//点击底部固定导航条切换
+	$(".nav500_bottom_a").click(function(){
+		var navThis = $(this);
+		navThis.css("color","#d9901e")
+		navThis.parent().siblings("span").find("a").css("color","#999999")
+		navThis.find("i").addClass("nav500_b_active");
+		navThis.parent().siblings("span").find("i").removeClass("nav500_b_active");
+		navThis.addClass("nav500_bottom_active").parent().siblings("span").find("a").removeClass("nav500_bottom_active")
+	});
+	
+})
+</script>
+	
+	<div class="page-slide" style="margin:60px 0;">
+		<div id="J_p1" class="page active index-page">	
+		<div class="banner">	
+	        <div class="swiper-wrapper">
+		            <div class="swiper-slide"><a href="#"><img src="/images/flash/f1.jpg" data-src="/images/flash/f1.jpg" /></a></div>
+		            <!--<div class="swiper-slide"><a href="#"><img src="images/flash/f2.png" data-src="images/flash/f2.png" /></a></div>-->
+		            <div class="swiper-slide"><a href="#"><img src="/images/flash/f3.png" data-src="/images/flash/f3.png" /></a></div>
+		        </div>
+		        <!-- Add Pagination -->
+		        <div class="swiper-pagination"></div>
+		    </div>
+		</div>	
+		<div class="clearfix"></div>
+		<script type="text/javascript">
+		//swiper 初始化	
+
+		$(document).ready(function(e) {
+			// var wb = $('.banner').find('img:first').height();
+			// if(wb>0){$('.banner').height(wb);}
+			$('#show').flexslider({
+				animation: "slide",
+				direction:"horizontal",
+				easing:"swing",
+				slideshowSpeed: 5000
+			});
+		});
+		</script>  
+				<div class="notice">
+		  	<!--<div class="container">-->
+			  	<!--<div class="col-sm-12">-->
+					<div class="broadcast"><i><img src="/img/notice-index.png" data-src="/img/notice-index.png"/></i></div>
+					<div id="J_broadcast" class="broadcast-content">
+					{volist id="vo" name="notice"}
+						<a >{$vo['msg']}</a>
+					{/volist}
+					</div>
+				<!--</div>-->
+			<!--</div>-->
+		</div>
+			<div class="main" style="background:#FFF;">
+<!--优惠活动页面-->
+<div class="sideMenu">
+	<div class="pop">
+		<div class="nav500">
+			<div class="nav500_logo">
+				<a href="javascript:return;" id="act_title"><!--<img src="/img/logo.png">--></a>
+			</div>
+			<div class="nav500_right_had">
+				<a href="javascript:void(0)" class="cl_fff f14 blue_focus" onclick="javascript:document.getElementsByClassName('pop')[0].style.display= 'none';"><img src="/img/narrow-leftwap2.png"></a>
+			</div>
+		</div>
+		<div class="p_cont">
+			<img src="" alt="loading"/>
+		</div>
+	</div>
+
+	<!--<ul >
+		<li><img data-src="/images/hot/20171216c.png" src="/images/hot/20171216c.png"></li>
+	</ul>-->
+  
+	<!--<h3 class="on">
+		<img data-src="/images/hot/20171122001t.png" src="/images/hot/20171122001t.png">
+	</h3>
+	<ul >
+		<li><img data-src="/images/hot/20171122001c.png" src="/images/hot/20171122001c.png"></li>
+	</ul>
+	
+	<h3 class="">
+		<img data-src="/images/hot/20171122002t.png" src="/images/hot/20171122002t.png">
+	</h3>
+	<ul>
+		<li><img data-src="/images/hot/20171122002c.png" src="/images/hot/20171122002c.png"></li>
+	</ul>
+	
+	<h3 class="">
+		<img data-src="/images/hot/201711220013t.png" src="/images/hot/20171122003t.png">
+	</h3>
+	<ul>
+		<li><img data-src="/images/hot/20171122003c.png" src="/images/hot/20171122003c.png"></li>
+	</ul>-->
+	<h3 class="">
+		<img show-src="sjb.png" show-title="世界杯" src="/images/hot/sjbx.png">
+	</h3>
+	<h3 class="">
+		<img show-src="1x.png" show-title="六合彩" src="/images/hot/1.png">
+	</h3>
+		<h3 class="">
+		<img show-src="2.png" show-title="红包抽奖" src="/images/hot/2x.png">
+	</h3>
+	<h3 class="">
+		<img show-src="20171122004c.png" show-title="APP下载教程" src="/images/hot/20171122004t.png">
+	</h3>
+	<h3 class="">
+		<img show-src="4x.png" show-title="世界杯" src="/images/hot/4.png">
+	</h3>
+	<h3 class="">
+		<img show-src="5x.png" show-title="世界杯" src="/images/hot/5h.png">
+	</h3>
+	<h3 class="">
+		<img show-src="6x.png" show-title="世界杯" src="/images/hot/6.png">
+	</h3>
+	<h3 class="">
+		<img show-src="ds5x.png" show-title="世界杯" src="/images/hot/ds5.png">
+	</h3>
+	<h3 class="">
+		<img show-src="7x.png" show-title="世界杯" src="/images/hot/7.png">
+	</h3>
+	<h3 class="">
+		<img show-src="8x.png" show-title="世界杯" src="/images/hot/8.png">
+	</h3>
+	<h3 class="">
+		<img show-src="9x.png" show-title="世界杯" src="/images/hot/9.png">
+	</h3>
+	
+	<h3 class="">
+		<img show-src="10x.png" show-title="世界杯" src="/images/hot/10.png">
+	</h3>
+
+
+	<!--<ul>
+		<li><img data-src="/images/hot/20171122004c.png" src="/images/hot/20171122004c.png"></li>
+	</ul>-->
+	<!-- 
+	<h3 class="">
+		<img data-src="/images/hot/20171122005t.png" src="/images/hot/20171122005t.png">
+	</h3>
+	<ul>
+		<li><img data-src="/images/hot/20171122005c.png" src="/images/hot/20171122005c.png"></li>
+	</ul>
+	 -->
+</div>
+</div>
+</div>
+
+	<!--<div class="footer">		
+		<div class="nav-links">
+			<div class="container">
+				©2017 500F娱乐 Casino 版权所有 <a href="http://www.77158.com/home.php" target="_blank"><font color="#F6CC88">切换电脑版</font></a>
+			</div>
+		</div>
+	</div>-->	
+
+
+
+<script src="/scripts/base.js"></script>
+<!-- <script src="/scripts/carousel.js"></script> -->
+<!-- <script src="/scripts/carousel2.js"></script> -->
+<script src="/scripts/page-slide.js"></script>
+<script src="/scripts/nav.js"></script>
+<script src="/scripts/common.js"></script>
+<script src="/scripts/iframe-menu.js"></script>
+<script type="text/javascript">
+// document.addEventListener("touchmove",function(e){
+// 	e.preventDefault();
+// 	e.stopPropagation();
+// },false);
+$(document).ready(function() {
+	$('.page-discount .col-sm-12').click(function(event) {
+		event.preventDefault();
+		var ec = $('#J_p6carousel ul li').eq($('.page-discount .col-sm-12').index(this));
+		console.log(ec.html().replace(/[\r\n]/g,""));
+		var d = dialog({
+	    	title: '优惠活动',
+	    	content: ec.html(),
+	    	id:'sdialog'
+		});
+		d.showModal();
+	});
+	setInterval(function(){			
+		$.ajax({url:"/timeout.php",success:function(data){if(data=='1'){window.location.href='/user/logout.php';}}});
+		//console.log($('.page.active').height());
+		$('.page.active').height(2000);
+	},60000);
+	$("html").niceScroll();
+	$('.page.active').height(200);
+	//alert($(window).height());
+});
+</script>		
+</body>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/dialog-min.js"></script>
+<script type="text/javascript" src="/js/top.js"></script>
+<script src="/js/zhuce.js"></script>
+<script src="/scripts/slider.js"></script>
+<script type="text/javascript" src="/js/jquery.SuperSlide.2.1.1.js"></script>
+<!--<script src="http://static.ydbimg.com/API/YdbOnline.js"></script>-->
+<script>
+$(function(){
+    $('.pop .p_cont').css('height',window.innerHeight - 44 + 'px');
+	$(".sideMenu").slide({
+		titCell:"h3", //鼠标触发对象
+		targetCell:"ul", //与titCell一一对应，第n个titCell控制第n个targetCell的显示隐藏
+		effect:"slideDown", //targetCell下拉效果
+		trigger:"click",
+		delayTime:300 , //效果时间
+		triggerTime:150, //鼠标延迟触发时间（默认150）
+		defaultPlay:false,//默认是否执行效果（默认true）
+		returnDefault:true //鼠标从.sideMen移走后返回默认状态（默认false）
+	});
+
+	$('.sideMenu h3').click(function(){
+		//changeFrameHeight()
+		$('.pop .p_cont img').attr('src','/images/hot/'+ $(this).find('img').attr('show-src'));
+		$('#act_title').text($(this).find('img').attr('show-title'))
+		$('.pop').show();
+	});
+    $('.pop .p_cont img').on('load',function(){
+        console.log(1);
+	})
+
+	//点击底部固定导航条切换
+	$(".nav500_bottom_a").click(function(){
+		var navThis = $(this);
+		navThis.find("i").addClass("nav500_b_active");
+		navThis.parent().siblings("span").find("i").removeClass("nav500_b_active");
+		navThis.addClass("nav500_bottom_active").parent().siblings("span").find("a").removeClass("nav500_bottom_active")
+	});
+})
+
+</script>
+</html>

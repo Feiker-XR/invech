@@ -1,0 +1,217 @@
+<?php
+$type=='' ? $se1 = 'class="current"' : $se1 = '';
+$type=='足球' ? $se2 = 'class="current"' : $se2 = '';
+$type=='篮球' ? $se3 = 'class="current"' : $se3 = '';
+$type=='网球' ? $se4 = 'class="current"' : $se4 = '';
+$type=='排球' ? $se5 = 'class="current"' : $se5 = '';
+$type=='棒球' ? $se6 = 'class="current"' : $se6 = '';
+$type=='冠军' ? $se7 = 'class="current"' : $se7 = '';
+?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>系统设置</title>
+<link href="/css/base.css" rel="stylesheet" type="text/css" />
+<link href="/css/admin.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="/js/jquery.js"></script>
+<script type="text/javascript" src="/js/jquery.tools.js"></script>
+<script type="text/javascript" src="/js/base.js"></script>
+<script language="javascript">
+
+function winopen(bid,status){
+	window.open("{:url('danshi/setscore')}?bid="+bid+"&status="+status,"list","width=440,height=180,left=50,top=100,scrollbars=no"); 
+}
+
+function windowopen(url){
+	window.open(url,"wx","width=600,height=500,left=50,top=100,scrollbars=no"); 
+}
+
+function go(value){
+	if(value != "") location.href=value;
+	else return false;
+}
+
+function check(){
+	if($("#tf_id").val().length > 5){
+		$("#status").val("8,0,1,2,3,4,5,6,7");
+	}
+	return true;
+}
+</script>
+<script language="JavaScript" src="/js/calendar.js"></script>
+</head>
+<body class="list">
+	<div class="bar">
+		手工结算单式
+	</div>
+	
+<div class="body">
+<form name="form1" method="get" action="<?=$_SERVER["REQUEST_URI"]?>" onSubmit="return check();">
+<div class="listBar">查询类型：
+            <select name="status" id="status">
+            <option value="0" style="color:#FF9900;" <?=$status =='0' ? 'selected' : ''?>>未结算注单</option>
+            <option value="1,4" style="color:#FF0000;" <?=$status=='1,4' ? 'selected' : ''?>>已赢注单</option>
+            <option value="2,5" style="color:#009900;" <?=$status=='2,5' ? 'selected' : ''?>>已输注单</option>
+            <option value="3,6,7,8" style="color:#0000FF;" <?=$status=='3,6,7,8' ? 'selected' : ''?>>和局或取消</option>
+            <option value="8,0,1,2,3,4,5,6,7" <?=$status=='8,0,1,2,3,4,5,6,7' ? 'selected' : ''?>>全部注单</option>
+          </select>&nbsp;&nbsp;
+          联赛名:<input name="match_name" type="text" id="match_name" value="<?=$match_name?>" size="15" />
+          会员：<input name="username" type="text" id="username" value="<?=$username?>" size="15">
+            &nbsp;&nbsp;日期：
+            <input name="s_time" type="text" id="s_time" value="<?=$s_time?>" onClick="new Calendar(2008,2020).show(this);" size="10" maxlength="10" readonly="readonly" />
+            ~
+            <input name="e_time" type="text" id="e_time" value="<?=$e_time?>" onClick="new Calendar(2008,2020).show(this);" size="10" maxlength="10" readonly="readonly" />&nbsp;&nbsp;注单号：
+            <input name="tf_id" type="text" id="tf_id" value="<?=$tf_id?>" size="22">
+            &nbsp;&nbsp;<input name="find" type="submit" id="find" value="查找" class="formButton"/></td>
+
+	</div>
+</form>
+<ul id="tab" class="tab">
+	<li><input type="button" value="全部注单" hidefocus <?=$se1?> onClick="window.location.href='?type='" /></li>
+	<li><input type="button" value="足球注单" hidefocus <?=$se2?> onClick="window.location.href='?type=足球'" /></li>
+	<li><input type="button" value="篮球注单" hidefocus <?=$se3?> onClick="window.location.href='?type=篮球'" /></li>
+	<li><input type="button" value="网球注单" hidefocus <?=$se4?> onClick="window.location.href='?type=网球'" /></li>
+	<li><input type="button" value="排球注单" hidefocus <?=$se5?> onClick="window.location.href='?type=排球'" /></li>
+	<li><input type="button" value="棒球注单" hidefocus <?=$se6?> onClick="window.location.href='?type=棒球'" /></li>
+	<li><input type="button" value="冠军注单" hidefocus <?=$se7?> onClick="window.location.href='?type=冠军'" /></li>
+</ul>
+
+<table id="listTables" class="listTables">
+
+<tr>
+	<th>注单号/联赛名</th>
+	<th>主场/客场</th>
+	<th>投注信息</th>
+	<th>下注前余额</th>
+	<th>下注金额</th>
+	<th>下注后余额</th>
+	<th>结算结果</th>
+	<th>可赢金额</th>
+	<th>开赛时间</th>
+	<th>投注时间</th>
+	<th>投注会员</th>
+	<th>操作</th>
+</tr>
+{volist id='rows' name='list'}
+<tr>
+  <td align="center">
+  	<?=$rows["number"]?><br><?=$rows["match_name"]?>
+  </td>
+  <td align="center">
+  	<?php 
+		if(strpos($rows["master_guest"],'VS.')){ 
+			echo str_replace("VS.","<br/>",$rows["master_guest"]);
+		}else{
+			echo str_replace("VS","<br/>",$rows["master_guest"]);
+		}
+	?>
+</td>
+  <td align="center">
+  	<a href="?ball_sort=<?=urlencode($rows["ball_sort"])?>">
+  		<font color="<?php if ($rows["ball_sort"]=="足球滚球"){echo "#0066FF";}else{echo "#336600";}?>">
+  			<b><?=$rows["ball_sort"]?></b>
+  		</font>
+  	</a>
+  	<br/>
+  		<?=$rows["match_time"]?>
+  	<font style="color:#FF0033">
+	  	<?php 
+			if($rows["point_column"]==="match_jr" || $rows["point_column"]==="match_gj") 
+				echo $rows["bet_info"];
+			else 
+				echo str_replace("-","<br>",$rows["bet_info"]);
+		?>
+	</font>
+		<?php 
+		if($rows["status"]!=0 && $rows["status"]!=3)
+			if($rows["MB_Inball"]!=''){
+		?>
+  			[<?=$rows["MB_Inball"]?>:<?=$rows["TG_Inball"]?>]
+		<?php 
+			} 
+		?>
+		</td>
+  	<td align="center">
+  		<?=$rows["q_qian"]?>
+  	</td>
+  	<td align="center">
+  		<?=$rows["bet_money"]?>
+  	</td>
+  	<td align="center">
+  		<?=$rows["h_qian"]?>
+  	</td>
+  	<td align="center">
+  		<?=$rows["win"]?>
+  	</td>
+  	<td align="center">
+  		<?=$rows["bet_win"]?>
+  	</td>
+  	
+
+	<td  align="center">
+		<?=date("m-d H:i:s",strtotime($rows["match_time"]));?>
+  	</td>
+  	<td align="center">
+  		<?=date("m-d H:i:s",strtotime($rows["bet_time"]))?>
+  	</td>
+  	<td align="center">
+  		<?=$rows["username"]?>
+  	</td>
+  	<td align="center">
+  		<?php 
+			if ($rows["status"]==0){
+			  	 if($rows["point_column"]==="match_jr" || $rows["point_column"]==="match_gj"){
+		?>
+			<a href="javascript:windowopen('jrgjjs.php?match_id=<?=$rows["match_id"]?>&bid=<?=$rows["bid"]?>')">结算</a>
+		<?php
+ 			}else{
+		?>
+			<a href="javascript:winopen(<?=$rows["bid"]?>,2);">输</a> <a href="javascript:winopen(<?=$rows["bid"]?>,1);">赢</a> 
+			<a href="javascript:winopen(<?=$rows["bid"]?>,8);">和</a> 
+			<?php if($rows["ben_add"]==1){?>
+ 			<br/>
+			<a href="javascript:winopen(<?=$rows["bid"]?>,5)">输一半</a>
+    		<br/>
+ 			<a href="javascript:winopen(<?=$rows["bid"]?>,4)">赢一半</a> 
+ 			<?php }
+			}
+		?>
+		<br/>
+		<a href="javascript:windowopen('{:url('danshi/setbet3')}?bid=<?=$rows["bid"]?>&new=1')">无效</A>
+	<?php 
+		}elseif($rows["status"]==3){
+	?>
+        <?php 
+			echo $rows['sys_about'];
+		?>
+	<?php }else if($rows["status"]==4){?>
+        	<font color="red">赢一半</font>
+	<?php }else if($rows["status"]==5){?>
+        	<font color="green">输一半</font>
+	<?php }else if($rows["status"]==6){?>
+        	<font color="blue">进球无效</font>
+	<?php }else if($rows["status"]==7){?>
+        	<font color="blue">红卡取消</font>
+	<?php }else if($rows["status"]==1){?>
+			<font color="red">赢</font>
+<?php }else if($rows["status"]==2){?>
+			<font color="green">输</font>
+<?php }else if($rows["status"]==8){?>
+			<font color="blue">和局</font>
+<?php } ?>
+<?php if($rows["status"]!=0){?>
+<br/>
+ <a onClick="return confirm('确定重新审核？')" href="javascript:windowopen('{:url('danshi/qxbet')}?bid=<?=$rows["bid"]?>&status=<?=$rows["status"]?>')">重新审核</a>
+<?php }?></td>
+</tr>
+{/volist}
+<tr>
+	<td colspan="10" style="text-align:center; color:red;">
+	</td>
+</tr>
+  </table>
+<div class="pagerBar">{$list->render()}</div>
+	</div>
+</body>
+</html>

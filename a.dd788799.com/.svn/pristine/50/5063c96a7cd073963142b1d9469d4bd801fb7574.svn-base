@@ -1,0 +1,15 @@
+<?php
+namespace app\common\model\admin;
+use app\common\model\Apply;
+
+trait BasicTrait
+{
+
+    public function agree_audit(Apply $apply,$remark=''){
+        $apply->agree($remark,$this);
+    }
+    public function deny_audit(Apply $apply,$remark=''){
+        $apply->deny($remark,$this);
+    }
+
+}

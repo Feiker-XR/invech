@@ -1,0 +1,38 @@
+<?php
+namespace app\admin\controller;
+use app\admin\Base;
+use think\Cache;
+use think\Validate;
+
+use app\auth\traits\ThrottlesLogins;
+
+class index extends Base{
+
+	use ThrottlesLogins;
+
+    public function index(){
+        if($user = $this->request->user()){
+            $this->redirect('admin/index');
+        }else{
+            $this->redirect('index/login');    
+        }        
+    }
+
+    public function login(){        
+        if(request()->isGet()){                    
+            return $this->fetch("login");   
+        }else{        	
+        	$remember = input('remember/i')??0;
+            if($uid = $this->doLogin($this->request,$remember)){
+            	//session('adminid',$uid);
+            	//session('admin',$admin);          	
+                $url = config('auth.redirect.auth_ok.'.MODULE);             
+                return $this->success('成功',$url);
+            }else{
+                $url = config('auth.redirect.auth_fail.'.MODULE); 
+                return $this->error('错误',$url);    
+            }                
+        }
+    }
+
+}

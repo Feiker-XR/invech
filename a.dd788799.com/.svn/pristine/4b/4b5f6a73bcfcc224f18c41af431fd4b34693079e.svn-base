@@ -1,0 +1,45 @@
+<?php
+
+namespace bong\service\queue\Driver;
+
+use bong\service\queue\Queue;
+use bong\service\queue\Contracts\Queue as QueueContract;
+use bong\service\queue\Jobs\SyncJob;
+
+class SyncQueue extends Queue implements QueueContract
+{
+
+    public function size($queue = null)
+    {
+        return 0;
+    }
+
+    public function push($job, $data = '', $queue = null)
+    {
+        $queueJob = $this->resolveJob($this->createPayload($job, $data), $queue);
+
+        $queueJob->fire();
+
+        return 0;
+    }
+
+    protected function resolveJob($payload, $queue)
+    {
+        return new SyncJob($payload, $queue);
+    }
+
+    public function pushRaw($payload, $queue = null, array $options = [])
+    {
+        //
+    }
+
+    public function later($delay, $job, $data = '', $queue = null)
+    {
+        return $this->push($job, $data, $queue);
+    }
+
+    public function pop($queue = null)
+    {
+        //
+    }
+}

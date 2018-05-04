@@ -1,0 +1,875 @@
+*{
+	margin:0;
+	padding:0;
+}
+input,select {
+	margin-bottom: 0px!important;
+	font-size:12px!important; 
+}
+ul,ol{
+	list-style:none;
+}
+a{
+	text-decoration: none;
+}
+body{
+	font-family:'微软雅黑';
+	background: #F9F9F9;
+}
+.container{
+	background: #F9F9F9;
+	width: 100%;
+	height: 100%;
+	display: none;
+}
+/** header **/
+header{
+	width: 100%;
+	height:.88rem;
+	background:#FC503A;
+	position:fixed;
+	z-index: 2;
+}
+header h1{
+	font-size: .36rem;
+	color:#FFFFFF;
+	text-align:center;
+	line-height:.88rem;	
+}
+header i{
+	width:.88rem;
+	height:.88rem;
+	font-size:.28rem;
+	line-height:.88rem;
+	text-align:center;
+	color:#ffffff;
+	font-style:normal;
+	position:absolute;
+}
+header i.right{
+	right:0;
+}
+header i.right.wider{
+	right:0;
+	top:0;
+	width: 1.4rem;
+}
+header i.left{
+	left:0;
+}
+/****
+*****	container
+*****/
+main{
+	width:100%;
+	position: absolute;
+	top:.88rem;
+	overflow: auto;
+}
+main section{
+	overflow: hidden;
+	font-size:.28rem;
+	background: #ffffff;
+}
+
+/*** profile **/
+
+section.profile{
+	width:100%;
+	height: 2.27rem;
+	background: url('../images/center/profile_bg.jpg');
+	background-size: contain;
+}
+section.profile .center_box{
+	width:100%;
+	height: 1.4rem;
+	overflow: hidden;
+	margin-top:.43rem;
+}
+
+section.profile .center_box div{
+	display: inline-block;
+	float: left;
+	width:4rem;
+	height: 1.4rem;
+}
+section.profile .center_box div h2{
+	font-size:.28rem;
+	margin-top: .17rem;
+	color:#000000;
+	margin-left:.2rem;
+}
+section.profile .center_box div h2:last-child{
+	font-size:.26rem;
+	color:#454545;
+}
+section.profile .center_box>div:first-child{
+	width:1.4rem;
+	margin-left:.3rem;
+	border-radius: 50%;
+	background: url('../images/center/avator_bg.jpg');
+	background-size: 100%;
+}
+section.profile .center_box>div:first-child img{
+	width: 1.4rem;
+	height: 1.4rem;
+}
+section.profile .center_box>div:last-child{
+	width:1.6rem;
+	height: .66rem;
+	background: #FFBB59;
+	float: right;
+	margin-top:.37rem;
+	font-size:.2rem;
+	text-align: center;
+	color: #fff;
+	font-weight: 500;
+	border-top-left-radius: .5rem;
+	border-bottom-left-radius: .5rem;
+}
+section.profile .center_box>div:last-child span{
+	display: block;
+	margin-top: .01rem;
+}
+
+/*** info ***/
+section.info{
+	width:100%;
+	height: 2.54rem;
+}
+section.info div,section.charge div,section.records div,section.security div{
+	width:100%;
+	border-top: 1px solid #DDDDDD;
+}
+section.info div ul,section.charge div ul,section.records div ul,section.security div ul{
+	width: 100%;
+	height: .7rem;
+	margin: .14rem 0;
+	overflow: hidden;
+}
+section.info div ul li,section.charge div ul li,section.records div ul li,section.security div ul li{
+	width:50%;
+	margin-left:-1px;
+	border-right: 1px solid #DDDDDD;
+	float: left;
+	height: .7rem;
+	text-align: center;
+}
+section.info div ul li img,section.charge div ul li img,section.records div ul li img,section.security div ul li img{
+	width: .56rem;
+	height: .56rem;
+	margin: .08rem;
+}
+section.info div ul li strong,section.charge div ul li strong,section.records div ul li strong,section.security div ul li strong{
+	font-size:.28rem;
+	color:#333;
+	position: relative;
+	top: -0.25rem;
+}
+section.info div ul li strong span,section.charge div ul li strong span,section.records div ul li strong span,section.security div ul li strong span{
+	display: block;
+	position: absolute;
+	right: -0.26rem;
+	top: -0.13rem;
+	width: .26rem;
+	height: .26rem;
+	background: #FC503A;
+	border-radius: 50%;
+	text-align: center;
+	font-size: .2rem;
+	color:#fff;
+	font-weight: bold;
+	line-height: .26rem;
+}
+section.info div ul li:last-child,section.charge div ul li:last-child,section.records div ul li:last-child,section.security div ul li:last-child{
+	border: none;
+}
+section.info div ol{
+	width: 100%;
+	height: 1.28rem;
+	margin:.14rem 0;
+}
+section.info div ol li{
+	width:33.3333%;
+	height: 1.28rem;
+	float: left;
+	margin-left:-1px;
+	border-right: 1px solid #DDDDDD;
+	text-align: center;
+	box-sizing: border-box;
+	padding-top: .25rem;
+}
+section.info div ol li strong,section.info div ol li span{
+	display: block;
+	width: 100%;
+	font-size: .32rem;
+	line-height: .4rem;
+}
+section.info div ol li span{
+	font-size:.24rem;
+	color: #666666;
+}
+section.info div ol li:last-child{
+	border: none;
+}
+
+/** charge ***/
+section.charge{
+	width:100%;
+	height: 1.2rem;
+	margin-top:10px;
+}
+section.charge div,section.security div{
+	border: none;
+}
+section.charge div ul{
+	height: .8rem;
+	margin: .2rem 0;
+}
+section.charge div ul li,section.records div ul li{
+	text-align: left;
+	padding-left: .6rem;
+	height: .8rem;
+	box-sizing: border-box;
+}
+section.charge div ul li img,section.records div ul li img,section.security div ul li img{
+	width: .41rem;
+	height: .4rem;
+	margin: .2rem;
+}
+
+/** records **/
+section.records{
+	width:100%;
+	height: 2.68rem;
+	margin-top:10px;
+}
+section.records div:first-child{
+	border:none;
+}
+section.records div ul,section.security div ul{
+	height: 1rem;
+	margin:.17rem 0;
+}
+section.records div ul li,section.security div ul li{
+	height: 1rem;
+}
+section.records div ul li strong, section.security div ul li strong{
+	top:-0.4rem;
+}
+section.records div ul li span,section.security div ul li span{
+	margin-left:-1.2rem;
+	font-size: .22rem;
+	color: #999999;
+}
+
+/** security **/
+section.security{
+	width:100%;
+	height: 1.34rem;
+	margin-top:.15rem;
+}
+section.security div ul li img{
+	margin-left:-.2rem;
+}
+
+/****
+******** 充值页面 ********
+****/
+
+section.charge_marquee{
+	width:100%;
+	height: .56rem;
+	background: #FFE4BC;
+}
+section.charge_marquee marquee{
+	font-size: .24rem;
+	color: #FF4200;
+	margin: 0 .3rem;
+	line-height: .56rem;
+}
+
+
+section.charge_user{
+	height: 1.28rem;
+	box-sizing: border-box;
+	padding-top: .18rem;
+}
+section.charge_user p{
+	box-sizing: border-box;
+	padding-left: .3rem;
+	line-height: .45rem;
+	color: #454545;
+	font-size:.24rem;
+}
+
+section.charge_amount{
+	height: 3.2rem;
+	margin-top:.2rem;
+}
+section.charge_amount p{
+	box-sizing: border-box;
+	padding: 0 .3rem;
+	color: #454545;
+	font-size:.24rem;
+	margin: .2rem 0;
+}
+section.charge_amount p input{
+	width: 100%;
+	height: .56rem;
+	border:1px solid #DDDDDD;
+	text-indent: .25rem;
+	border-radius: .1rem;
+}
+section.charge_amount ul{
+	box-sizing: border-box;
+	padding: 0 .3rem;
+	text-align: center;
+	display: inline-block;
+}
+section.charge_amount ul li{
+	width: 2.1rem;
+	height: .56rem;
+	float: left;
+	border: 1px solid #DDDDDD;
+	color: #999999;
+	text-align: center;
+	line-height: .56rem;
+	font-size:.24rem;
+	margin: .1rem .3rem;
+	margin-right: 0;
+	box-sizing: border-box;
+	border-radius: .1rem;
+}
+section.charge_amount ul li.active{
+	background: #ff4200;
+	color:#fff;
+}
+section.charge_amount ul li:nth-child(3n+1){
+	margin-left: 0;
+}
+
+section.charge_payWay{
+	height: 3.9rem;
+}
+section.charge_payWay p{
+	padding-left: .3rem;
+	font-size:.24rem;
+	color:#454545;
+	height: .7rem;
+	line-height: .7rem;
+	background: #F1F1F1;
+}
+section.charge_payWay ul{
+	width: 7.2rem;
+	height: 3.2rem;
+	margin:0 auto;
+}
+section.charge_payWay li{
+	width: 3.6rem;
+	height: 1.1rem;
+	border-bottom: 1px solid #DDDDDD;
+	float: left;
+	overflow: hidden;
+	box-sizing: border-box;
+}
+section.charge_payWay li:nth-last-child(1),section.charge_payWay li:nth-last-child(2){
+	border:none;
+}
+section.charge_payWay li div{
+	width:3.6rem;
+	height: .7rem;
+	box-sizing:border-box;
+	margin:.2rem 0;
+	border-right: 1px solid #DDDDDD;
+	margin-left:-1px;
+}
+section.charge_payWay li:nth-child(2n) div{
+	border:none;
+}
+
+section.charge_payWay li div img{
+	width: .6rem;
+	height: .6rem;
+	float: left;
+	margin:.05rem .2rem;
+}
+section.charge_payWay li div strong{
+	font-size:.3rem;
+	color:#333333;
+	float: left;
+	margin-top: .13rem;
+}
+section.charge_payWay li div i{
+	display: inline-block;
+	width: .36rem;
+	height: .36rem;
+	background: url('../images/charge/radio.png');
+	background-size: contain;
+	float: right;
+	margin-top: .18rem;
+	margin-right: .5rem;
+}
+section.charge_payWay li div i.checked{
+	background-image: url('../images/charge/radio_checked.png');
+}
+
+
+section.charge_pay{
+	height: .88rem;
+	position: fixed;
+	bottom: 0;
+	width: 100%;
+}
+section.charge_pay button{
+	width: 7.5rem;
+	background: #FC503A;
+	display: block;
+	text-align: center;
+	line-height: .88rem;
+	font-size:.28rem;
+	color:#ffffff;
+	border:none;
+	margin:0 auto;
+	outline: none;
+}
+section.charge_pay button.smaller{
+	width:4.25rem;
+	height: .68rem;
+	margin-top: .1rem;
+	line-height: .68rem;
+	border-radius: 15px;
+}
+
+/** msg **/
+section.msg_list ul{
+	width:100%;
+	height: auto;
+	box-sizing: border-box;
+}
+section.msg_list ul li{
+	width:7.5rem;
+	height: 1.3rem;
+	border-bottom: 1px dashed #dddddd;
+	box-sizing: border-box;
+	padding-left: .6rem;
+	overflow: hidden;
+	position: relative;
+}
+section.msg_list ul li h2{
+	height: .65rem;
+	line-height: 1rem;
+	font-size: .28rem;
+	color:#454545;
+}
+section.msg_list ul li h2.read{
+	color:#999999;
+}
+section.msg_list ul li p{
+	height: .65rem;
+	line-height: .65rem;
+	font-size: .20rem;
+	color:#999999;
+}
+
+section.msg_list ul li button{
+	width: 1.88rem;
+	height: 1.26rem;
+	position: absolute;
+	right: 0;
+	margin-top: -1.28rem;
+	border: none;
+	background: #fc503a;
+	font-size:.32rem;
+	text-align: center;
+	line-height: 1.26rem;
+	color:#ffffff;
+	right: -1.88rem;
+}
+
+/** msg detail **/
+section.msg_detail h1{
+	font-size:.32rem;
+	height: .8rem;
+	border-bottom: 1px solid #dddddd;
+	color:#333333;
+	box-sizing: border-box;
+	padding-left: .35rem;
+	line-height: .8rem;
+}
+section.msg_detail h1 span{
+	color:#999999;
+	font-size: .26rem;
+	line-height: .8rem;
+}
+section.msg_detail h1 input{
+	width: 80%;
+	border:none;
+	outline:none;
+	height: .45rem;
+	text-indent: 5px;
+}
+section.msg_detail div,section.msg_detail p{
+	font-size:.26rem;
+	color:#333333;
+	box-sizing: border-box;
+	padding-left: .35rem;
+	line-height: .45rem;
+	margin-top: .3rem;
+	margin-bottom: .5rem;
+}
+section.msg_detail div textarea{
+	width: 94%;
+	height: 5rem;
+	border-radius: 5px;
+	text-indent: .2rem;
+	padding: 5px;
+	box-sizing: border-box;
+}
+section.msg_detail p{
+	margin-top: .1rem;
+	margin-bottom: .1rem;
+}
+section.msg_detail p:last-child{
+	margin-bottom: .5rem;
+}
+
+/*公共条件筛选头**/
+ul.condition{
+	width: 100%;
+	position: fixed;
+	top: .88rem;
+	height: .88rem;
+	box-sizing: border-box;
+	line-height: .88rem;
+	color: #666666;
+	font-size: .24rem;
+	background: #fff;
+	border-bottom: 1px solid #e7e7e7;
+	box-shadow: 2px 2px 1px #e7e7e7;
+	padding: 0 5%;
+	z-index: 2;
+}
+ul.condition li{
+	width: 50%;
+	height: .88rem;
+	float: left;
+}
+ul.condition li p{
+	width: 32%;
+	border: 1px solid #ff4200;
+	border-radius: 15px;
+	float: left;
+	font-size: .22rem;
+	color: #ff4200;
+	height: .45rem;
+	line-height: .4rem;
+	box-sizing: border-box;
+	margin-top: .21rem;
+	margin-right: .03rem;
+	text-align: center;
+}
+ul.condition li p.active{
+	color:#fff;
+	background: #ff4200;
+}
+ul.condition li:last-child{
+	float: right;
+}
+
+ul.condition li span{
+	display: inline-block;
+	height: .88rem;
+	float: left;
+}
+ul.condition li:last-child span{
+	float: right;
+}
+
+ul.condition li input[type=date]{
+	float: left;
+	width: 60%;
+	height: .6rem;
+	margin-top: .14rem;
+	background: #fff;
+	border: none;
+	outline: none;
+}
+ul.condition li input[type=date]::-webkit-inner-spin-button,ul.condition li input[type=date]::-webkit-clear-button{
+	display: none;
+}
+ul.condition li select{
+	float: right;
+	width: auto;
+	height: .6rem;
+	margin-top: .14rem;
+	background: #fff;
+	border: none;
+	outline: none;
+	font-size:.24rem;
+}
+ul.condition li select.left{
+	float: left;
+}
+
+section.table{
+	position: relative;
+	top: 1rem;
+}
+
+section.table table{
+	width: 100%;
+}
+section.table table thead.hide{
+	visibility: hidden;
+}
+
+section.table table.fix{
+	position: fixed;
+	background: #ffffff;
+	top: 1.76rem;
+}
+section.table table.fix th:first-child{
+	width: 25%;
+}
+
+section.table table td{
+	height: .72rem;
+	box-sizing: border-box;
+}
+
+section.table table tr th{
+	font-size:.24rem;
+	color:#333333;
+	line-height: .72rem;
+	font-weight: bold;
+}
+section.table table tr td{
+	border-top: 1px dashed #dddddd;
+	font-size:.2rem;
+	text-align: center;
+}
+section.table table tr td.red{
+	color:#ff4200;
+}
+section.table table tr td.green{
+	color: #26bc46;
+}
+
+/** withdraw */
+section.withdraw_amount{
+	height: .88rem;
+	background: none;
+}
+section.withdraw_amount p{
+	text-align: center;
+	font-size:.2rem;
+	color:#bbbbbb;
+	line-height: .88rem;
+}
+section.withdraw_amount p span{
+	color:#fc503a;
+	margin: 0 3px;
+}
+
+
+.charge_user.ol_box{
+	height: auto;
+	padding-top: 0;
+}
+.charge_user ol{
+	width:auto;
+	height: auto;
+}
+.charge_user ol li{
+	width: 94%;
+	height: .8rem;
+	border-bottom: 1px solid #dddddd;
+	line-height: .8rem;
+	box-sizing: border-box;
+	margin-left:3%;
+	font-size:.24rem;
+	color:#333333;
+}
+.charge_user ol li:last-child{
+	border-bottom: none;
+}
+.charge_user ol li span{
+	display: inline-block;
+	float: left;
+}
+.charge_user ol li input{
+	float: left;
+	height: .4rem;
+	width: 60%;
+	text-indent: .1rem;
+	font-size: .24rem;
+	box-sizing: border-box;
+	margin-top: .2rem;
+}
+.charge_user ol li select{
+	float: left;
+	height: .4rem;
+	width: 60%;
+	text-indent: .1rem;
+	font-size: .24rem;
+	box-sizing: border-box;
+	margin-top: .2rem;
+}
+.charge_user ol li input.disabled{
+	border:none;
+	outline:none;
+	background: #ffffff;
+}
+.charge_user ol li select.disabled{
+	border:none;
+	outline:none;
+	background: #ffffff;
+}
+/** security **/
+section.security{
+	margin-top:0;
+}
+section.security.margin{
+	margin-top:.3rem;
+}
+.security ol li span{
+	width: 1.35rem;
+}
+.security ol li span.phone{
+	background: #fff;
+}
+.security ol li span i.hide{
+	visibility: hidden;
+}
+
+section.security ol li input.disabled{
+	color:#999999;
+}
+section.security ol li input#yzm{
+	width: 2.75rem;
+}
+section.security ol li a{
+	display: inline-block;
+	text-decoration: none;
+	width: 1rem;
+	height: .4rem;
+	background: #2dc042;
+	color: #ffffff;
+	font-size: .2rem;
+	text-align: center;
+	line-height: .4rem;
+	margin-top:.2rem;
+	float:right;
+	margin-right: .1rem;
+	border-radius: 15px;
+}
+section.security ol li a.yzm{
+	width:1.8rem;
+	height: .5rem;
+	background: #fffece;
+	color:#2dc042;
+	line-height: .5rem;
+	font-size: .26rem;
+	font-weight: bold;
+	letter-spacing: .05rem;
+	border-radius: 0;
+}
+
+section.charge_user.security p{
+	color:#666666;
+	text-align: center;
+	font-size: .2rem;
+}
+
+section.charge_pay.sub{
+	margin-top:.5rem;
+	position: static;
+}
+
+section.charge_pay.sub button{
+	width:6.6rem;
+	height: .75rem;
+	margin:.06rem auto;
+	line-height: .75rem;
+	border-radius: 20px;
+	outline: none;
+}
+
+/*** footer **/
+.g-footer {
+	margin-top: 5px;
+	border-top: 1px solid #ededed;
+	background-color: #fff;
+	color: #999;
+	font-size: 12px;
+	line-height: 24px;
+	text-align: center;
+	_zoom: 1;
+	position: fixed;
+	width: 100%;
+	bottom: 0;
+	z-index: 2;
+}
+
+.g-footer .g-wrap {
+	padding: 10px 0;
+}
+
+.g-main {
+	float: left;
+}
+
+.g-side {
+	float: right;
+}
+
+.g-wrap {
+	margin: 0 auto;
+	width: 320px;
+	position: relative;
+}
+
+@media only screen and (max-width :640px) {
+	.g-wrap {
+		width: 100%;
+	}
+}
+
+@media only screen and (min-width :641px) {
+	.g-wrap {
+		width: 640px;
+	}
+}
+
+.g-footer .g-wrap{
+	padding: 0;
+}
+.m-state{
+	width: 96%;
+	box-sizing: border-box;
+	margin-left:2%;
+	padding:0;
+}
+.m-state li{
+	width: 20%;
+	box-sizing: border-box;
+	height: 44px;
+	text-align: center;
+	margin-right: 0;
+	padding: 0;
+	float: left;
+	line-height: 15px;
+}
+.m-state li a{
+	color:#999;
+}
+.m-state li.active a{
+	color:#ff4200;
+}
+.m-state li img{
+	display: block;
+	width:35%;
+	margin: 3px auto;
+	margin-bottom:1px;
+}

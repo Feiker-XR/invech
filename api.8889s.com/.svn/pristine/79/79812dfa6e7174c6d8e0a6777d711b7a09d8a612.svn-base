@@ -1,0 +1,62 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN""http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <title>玩法选择</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="stylesheet" href="public/public.css">
+    <link href="public/iconfont.css" rel="stylesheet" type="text/css"/>
+    <link rel="stylesheet" href="public/play_options_choose.css">
+</head>
+<body>
+    <div class="play_options_choose_wp">
+        <header class="play_options_choose_header">
+            <span class="edit">编辑</span>
+        </header>
+        <section class="play_options_choose_main_wp">
+            <div class="play_options_choose_main">
+                <div class="play_options_choose_main_top">
+                   <span>我的玩法</span>
+                </div>
+                <div class="play_options_choose_main_bottom">
+                    <div class="my_play_options_list_delete">
+                        <p class="list_options_p">
+                            <span class="">五星直选</span>
+                            <i class="icon iconfont icon-guanbi list_options_i"></i>
+                            <input type="radio" name="play_options_delete" class="list_options_input" value="1">
+                        </p>
+                        <p class="list_options_p">
+                            <span class="">五星直选222</span>
+                            <i class="icon iconfont icon-guanbi list_options_i"></i>
+                            <input type="radio" name="play_options_delete" class="list_options_input" value="12">
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="play_options_choose_main">
+                <div class="play_options_choose_main_top">
+                    <span>五星直选</span>
+                </div>
+                <div class="play_options_choose_main_bottom">
+                    <div class="play_options_list_add">
+                        <p class="list_options_p">
+                            <span>五星直选复式</span>
+                            <i class="icon iconfont icon-zengjia list_options_i"></i>
+                            <input type="radio" name="play_options_add" value="1" class="list_options_input list_options_add">
+                        </p>
+                        <p class="list_options_p">
+                            <span>五星直选单式</span>
+                            <i class="icon iconfont icon-zengjia list_options_i"></i>
+                            <input type="radio" name="play_options_add" value="2" class="list_options_input list_options_add">
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    <script src="public/jquery1.9.0.min.js"></script>
+    <script src="public/play_options_choose.js"></script>
+</body>
+</html>

@@ -1,0 +1,4568 @@
+<?php
+// +----------------------------------------------------------------------
+// | FileName: index.php
+// +----------------------------------------------------------------------
+// | CreateDate: 2017年11月6日
+// +----------------------------------------------------------------------
+// | Author: xiaoluo
+// +----------------------------------------------------------------------
+
+/**
+ * 算法模型
+ *　func(betData, kjData, betWeiShu)
+ *
+ * @params betData      投注号码
+ * @params kjData       开奖号码
+ * @params betWeiShu    投注位数，一般不用，在任选的时候用
+ *
+ * @return              返回中奖注数，如果不中奖，则返回0
+ *
+ * @throw               遇到不明的可以抛出，抛出等于忽略，手工处理
+ * 时时彩
+ */
+
+
+// +----------------------------------------------------------------------
+// | 多星玩法
+// +----------------------------------------------------------------------
+
+/**
+ * 五星单式
+ * @param  [type] $betData [description]
+ * @param  [type] $kjData  [description]
+ * @return [type]          [description]
+ */
+function dxwf5d($betData,$kjData) {
+    return ds($betData, $kjData);
+}
+
+/**
+ * 五星复式
+ * @param  [type] $betData [投注号码]
+ * @param  [type] $kjData  [开奖号码]
+ * @return [type]          [description]
+ */
+function dxwf5f($betData,$kjData) {
+    return fs($betData, $kjData);
+}
+
+
+/**
+ * 五星-一帆风顺
+ *
+ *  example
+ *  bet:3,6
+ *  win:2,3,4,5,7
+ * @param  [type] $betData [投注号码]
+ * @param  [type] $kjData  [开奖号码]
+ * @return [type]          [中奖状态]
+ */
+function dxwf5yffs($betData,$kjData) {
+    $winStatus = 0 ;
+    $betData   = array_filter(str_split($betData),function($v) use($kjData,&$winStatus) {
+        if (strpos($kjData,$v) !== false ) {
+            ++$winStatus ;
+        }
+    });
+
+    return $winStatus;
+}
+
+
+/**
+ * 五星-好事成双
+ *
+ *  example
+ *  bet:3,6
+ *  win:2,3,3,5,7
+ * @param  [type] $betData [投注号码]
+ * @param  [type] $kjData  [开奖号码]
+ * @return [type]          [中奖状态]
+ */
+function dxwf5hscs($betData,$kjData) {
+    $winStatus = 0 ;
+    $count     = 0 ;
+    $betData   = array_filter(str_split($betData),function($v) use($kjData,&$winStatus) {
+        $count = 0 ; //统计中奖次数
+        //将投注号与开奖号码对比
+        array_filter(explode(',',$kjData),function($k) use($v,&$count) {
+            if ($k == $v) {
+                ++$count ;
+            }
+        });
+
+        if ($count >= 2) {
+            return ++$winStatus ;
+        }
+
+    });
+
+    return $winStatus;
+}
+
+
+/**
+ * 五星-三星报喜
+ *
+ *  example
+ *  bet:3,6
+ *  win:2,3,3,5,3
+ * @param  [type] $betData [投注号码]
+ * @param  [type] $kjData  [开奖号码]
+ * @return [type]          [中奖状态]
+ */
+function dxwf5sxbx($betData,$kjData) {
+    $winStatus = 0 ;
+    $betData   = array_filter(str_split($betData),function($v) use($kjData,&$winStatus) {
+        $count = 0 ; //统计中奖次数
+        //将投注号与开奖号码对比
+        array_filter(explode(',',$kjData),function($k) use($v,&$count) {
+            if ($k == $v) {
+                ++$count ;
+            }
+        });
+
+        if ($count >= 3) {
+            return ++$winStatus ;
+        }
+
+    });
+
+    return $winStatus;
+}
+
+
+/**
+ * 五星-四季发财
+ *
+ *  example
+ *  bet:3,6
+ *  win:3,3,3,5,3
+ * @param  [type] $betData [投注号码]
+ * @param  [type] $kjData  [开奖号码]
+ * @return [type]          [中奖状态]
+ */
+function dxwf5sjfc($betData,$kjData) {
+    $winStatus = 0 ;
+    $betData   = array_filter(str_split($betData),function($v) use($kjData,&$winStatus) {
+        //将投注号与开奖号码对比
+        array_filter(explode(',',$kjData),function($k) use($v,&$count) {
+            if ($k == $v) {
+                ++$count ;
+            }
+        });
+
+        if ($count >= 4) {
+            return ++$winStatus ;
+        }
+
+    });
+
+    return $winStatus;
+}
+
+
+/**
+ * 五星-组选120
+ * @param  [type] $betData [投注号码]
+ * @param  [type] $kjData  [开奖号码]
+ * @return [type]          [中奖状态]
+ */
+function  ssczx120($betData, $kjData) {
+    //return z120($betData, $kjData) ;
+    return array_contain(_arr($betData), _arr($kjData));
+}
+
+
+/**
+ * 五星-组选60
+ *
+ * example:
+ * bet: '3,256'
+ * win: '2,3,3,6,5'
+ * @param  [type] $betData [投注号码]
+ * @param  [type] $kjData  [开奖号码]
+ * @return [type]          [中奖状态]
+ */
+/*
+function  ssczx60($betData, $kjData) {
+    $winStatus = 0 ;  //中奖状态
+    $count  = 0  ;
+    $double = '' ; //重号
+    $single  = [] ; //单号
+    $bet = [] ;
+
+    //筛选出中奖号中的单号和重号
+    array_filter(explode(',',$kjData),function($v) use($kjData,&$double,&$single,&$count) {
+
+        if (count(explode($v,$kjData))-1 == 2) {
+            ++$count;
+            $double = $v ;
+        } else {
+            $single[] = $v ;
+        }
+    }) ;
+    $single = implode(',',$single) ; //将中奖单号由数组转为逗号分割字符串
+
+    //有一个重号的时候
+    if ($count == 2) {
+
+        $number = explode(',',$betData) ; //分割投注号码,方便后面提取重号和单号
+
+        //检索用户投注重号是否在开奖重号中
+        if (strpos($number[0],$double) !== false) {
+            //得到单号排列组合
+            array_filter( permutation(str_split($number[1]),3), function($v) use(&$bet) {
+                $bet[] = implode(',',$v) ;
+            }) ;
+            //检索是否单号中奖
+            foreach ($bet as $v) {
+                if ( strpos($v,$single) !== false ) {
+                    ++$winStatus ; break ;
+                }
+            }
+
+        }
+    }
+    return $winStatus ;
+}
+*/
+//组选,投N注最多中1注;
+function  ssczx60($betData, $kjData) {
+    $p = parse_repeat($kjData,1,2,3,1);
+    if(!$p){
+        return 0;
+    }
+    $number = explode(',',$betData);
+    return array_contain($number[0],$p[0]) && array_contain($number[1],$p[1]);
+}
+
+/**
+ * 五星-组选30
+ *
+ * example:
+ * bet: '32,6'
+ * win: '2,2,3,3,6'
+ * @param  [type] $betData [投注号码]
+ * @param  [type] $kjData  [开奖号码]
+ * @return [type]          [中奖状态]
+ */
+/*
+function  ssczx30($betData, $kjData) {
+    $winStatus = 0 ;  //中奖状态
+    $count     = 0  ;
+    $double    = [] ; //重号
+    $single    = '' ; //单号
+    $bet       = [] ;
+
+    //筛选出中奖号中的单号和重号
+    array_filter(explode(',',$kjData),function($v) use($kjData,&$double,&$single,&$count) {
+        if (count(explode($v,$kjData))-1 == 2) {
+            ++$count;
+            //避免重复判断
+            if (!in_array($v,$double) ) {
+                $double[] = $v ;
+            }
+        } else {
+            $single = $v ;
+        }
+    }) ;
+    $double = implode(',',$double); //将数组转成,号分割字符串
+
+    //有两个重号的时候
+    if ($count == 4) {
+        $number = explode(',',$betData) ; //分割投注号码,方便后面提取重号和单号
+        $number[0] =  str_replace($single,'',$number[0]) ; //如果重号中有单号则替换掉
+
+        //检索用户投注单号是否中奖
+        if (strpos($number[1],$single) !== false) {
+            //检索重号是否中奖
+            array_filter(permutation(str_split($number[0]),2), function($v) use(&$bet) {
+                $bet[] = implode(',',$v);
+            }) ;
+            array_filter($bet,function($v) use(&$winStatus,$double) {
+                if (strpos($v,$double) !== false){
+                    ++$winStatus ;
+                }
+            }) ;
+
+        }
+    }
+
+    return $winStatus ;
+}
+*/
+function  ssczx30($betData, $kjData) {
+    $p = parse_repeat($kjData,2,2,1,1);
+    if(!$p){
+        return 0;
+    }
+    $number = explode(',',$betData);
+    return array_contain($number[0],$p[0]) && array_contain($number[1],$p[1]);    
+}
+
+/**
+ * 五星-组选20
+ *
+ * example:
+ * bet: '2,36'
+ * win: '2,3,3,3,6'
+ * @param  [type] $betData [投注号码]
+ * @param  [type] $kjData  [开奖号码]
+ * @return [type]          [中奖状态]
+ */
+/*
+function  ssczx20($betData, $kjData) {
+    $winStatus = 0  ; //中奖状态
+    $count     = 0  ;
+    $third     = '' ; //三重号
+    $single    = [] ; //单号
+    $bet       = [] ;
+
+    //筛选出中奖号中的单号和重号
+    array_filter(explode(',',$kjData),function($v) use($kjData,&$third,&$single,&$count) {
+        if (count(explode($v,$kjData))-1 == 3) {
+            ++$count;
+            $third = $v ;
+        } else {
+            $single[] = $v;
+        }
+    }) ;
+    $single = implode(',',$single); //将数组转成,号分割字符串
+
+    //符合一个三重号的时候
+    if ($count == 3) {
+        $number    = explode(',',$betData) ; //分割投注号码,方便后面提取重号和单号
+        $number[1] = str_replace($third,'',$number[1]) ; //如果单号中含有重号则替换掉
+
+        //检索三重号是否中奖
+        if (strpos($number[0],$third) !== false) {
+            //得到单号排列数组
+            array_filter(permutation(str_split($number[1]),2), function($v) use(&$bet) {
+                $bet[] = implode(',',$v);
+            }) ;
+            //检索单号是否中奖
+            array_filter($bet,function($v) use(&$winStatus,$single) {
+                if (strpos($v,$single) !== false) {
+                    ++$winStatus ;
+                }
+            }) ;
+        }
+    }
+
+    return $winStatus ;
+}
+*/
+function  ssczx20($betData, $kjData) {
+    $p = parse_repeat($kjData,1,3,2,1);
+    if(!$p){
+        return 0;
+    }
+    $number = explode(',',$betData);
+    return array_contain($number[0],$p[0]) && array_contain($number[1],$p[1]);    
+}
+
+/**
+ * 五星-组选10
+ *
+ * example:
+ * bet: '3,6'
+ * win: '3,3,3,6,6'
+ * @param  [type] $betData [投注号码]
+ * @param  [type] $kjData  [开奖号码]
+ * @return [type]          [中奖状态]
+ */
+/*
+function  ssczx10($betData, $kjData) {
+    $winStatus = 0  ; //中奖状态
+    $count3    = 0  ;
+    $count2    = 0  ;
+    $double    = '' ; //二重号
+    $third     = '' ; //三重号
+    $bet       = [] ;
+
+    //筛选出中奖号中的单号和重号
+    array_filter(explode(',',$kjData),function($v) use($kjData,&$double,&$third,&$count3,&$count2) {
+        if (count(explode($v,$kjData))-1 == 3) { //三重号处理
+            ++$count3 ;
+            $third = $v ;
+        }
+        if (count(explode($v,$kjData))-1 == 2) { //二重号处理
+            ++$count2 ;
+            $double = $v ;
+        }
+
+    }) ;
+
+    //符合一个三重号的时候
+    if ($count3==3 && $count2==2) {
+        $number    = explode(',',$betData) ; //分割投注号码,方便后面提取重号和单号
+        //检索三重号是否中奖
+        if (strpos($number[0],$third) !== false) {
+            //检索二重号是否中奖
+            if (strpos($number[1],$double) !== false) {
+                ++$winStatus ;
+            }
+        }
+    }
+
+    return $winStatus ;
+}
+*/
+function  ssczx10($betData, $kjData) {
+    $p = parse_repeat($kjData,1,3,1,2);
+    if(!$p){
+        return 0;
+    }
+    $number = explode(',',$betData);
+    return array_contain($number[0],$p[0]) && array_contain($number[1],$p[1]);    
+}
+
+/**
+ * 五星-组选5
+ *
+ * example:
+ * bet: '3,6'
+ * win: '3,3,3,3,6'
+ * @param  [type] $betData [投注号码]
+ * @param  [type] $kjData  [开奖号码]
+ * @return [type]          [中奖状态]
+ */
+/*
+function  ssczx5($betData, $kjData) {
+    $winStatus = 0  ; //中奖状态
+    $count     = 0  ;
+    $four      = '' ; //四重号
+    $single    = '' ; //单号
+    $bet       = [] ;
+
+    //筛选出中奖号中的单号和重号
+    array_filter(explode(',',$kjData),function($v) use($kjData,&$single,&$four,&$count) {
+        if (count(explode($v,$kjData))-1 == 4) { //四重号处理
+            ++$count ;
+            $four = $v ;
+        } else {
+            $single = $v ;
+        }
+    }) ;
+
+    //符合一个四重号
+    if ($count==4) {
+        $number = explode(',',$betData) ; //分割投注号码,方便后面提取重号和单号
+
+        //检索四重号是否中奖
+        if (strpos($number[0],$four) !== false) {
+            //检索单号是否中奖
+            if (strpos($number[1],$single) !== false) {
+                ++$winStatus ;
+            }
+        }
+    }
+
+    return $winStatus ;
+}
+*/
+function  ssczx5($betData, $kjData) {
+    $p = parse_repeat($kjData,1,4,1,1);
+    if(!$p){
+        return 0;
+    }
+    $number = explode(',',$betData);
+    return array_contain($number[0],$p[0]) && array_contain($number[1],$p[1]);    
+}
+
+function  ssc5x_lh($betData, $kjData) {
+        
+    $kjData= explode(',',$kjData);
+    if($kjData[0] > $kjData[4]){
+        $res = '龙';
+    }elseif($kjData[0] == $kjData[4]){
+        $res = '和';
+    }else{
+        $res = '虎';
+    }
+    
+    $count = 0;    
+    $bets = explode('|',$betData);
+    foreach ($bets as $bet){
+        if($bet == $res){
+            $count++;
+        }
+    }
+    return $count;
+}
+
+//总和大小单双
+function  ssc5x_zhdxds($betData, $kjData) {
+    $kjData= explode(',',$kjData);
+    $sum = $kjData[0] + $kjData[1] + $kjData[2] + $kjData[3] + $kjData[4];
+    $res = [];
+    if($sum>=23){
+        $res[] = '总和大';
+    }else{
+        $res[] = '总和小';
+    }
+    if($sum%2==0){
+        $res[] = '总和双';
+    }else{
+        $res[] = '总和单';
+    }
+
+    $count = 0;
+    //$bets = explode('|',$betData);
+    $bets = _arr($betData);
+    foreach ($bets as $bet){
+        if(in_array($bet,$res)){
+            $count++;
+        }
+    }
+    return $count;
+}
+
+//五星直选-五星组合,混合玩法;
+//依次返回中5星,4星,3星,2星,1星的中奖次数;
+//'34,45,6,7,8'  (2选1 * 2选1 * 1选1 * 1选1 * 1选1)*5
+function  ssc5xzh_slow($betData, $kjData) {
+    
+    $bet1 = _qh($betData,-1);
+    $kj1 = _qh($kjData,-1);
+    //$x1 = fs($bet1,$kj1);
+    $x1 = (int)in_array($kj1, _arr($bet1));
+
+    $bet2 = _qh($betData,-2);
+    $kj2 = _qh($kjData,-2);
+    $x2 = fs($bet2,$kj2);
+
+    $bet3 = _qh($betData,-3);
+    $kj3 = _qh($kjData,-3);
+    $x3 = fs($bet3,$kj3);
+    
+    $bet4 = _qh($betData,-4);
+    $kj4 = _qh($kjData,-4);
+    $x4 = fs($bet4,$kj4);
+
+    $x5 = fs($betData,$kjData);
+    
+    return [$x5,$x4,$x3,$x2,$x1];
+}
+
+//快速判定+N星通用; 因为,最多只能中一个1星
+//$kjData是_qh截断后的开奖结果; 不支持通配符;  
+function  sscnxzh($betData, $kjData) {
+        
+    if( count(_arr($betData)) != count(_arr($kjData)) ){
+        return [];
+    }
+    
+    $bets = array_reverse(_arr($betData));
+    $kjs = array_reverse(_arr($kjData));
+    
+    $cnts = [];
+    foreach($bets as $key => $bet){
+        $count = (int)in_array($kjs[$key],_arr($bet));
+        array_unshift($cnts,$count);
+    }
+    
+    return $cnts;
+}
+
+function  ssc_5xzh($betData, $kjData) {
+    return sscnxzh($betData, $kjData);
+}
+
+//后四 四星组合, 
+//如果是任四-四星组合,使用通配符,通配符得特殊处理,
+//投注内容的通配符位置内容和开奖内容对应位置的内容 清除;
+function  ssc_h4xzh($betData, $kjData) {
+    $kjData = _qh($kjData,-4);
+    return sscnxzh($betData, $kjData);
+}
+
+//任四-四星组合(通配符)
+function  ssc_r4xzh($betData, $kjData) {
+    rx_tpf_trim($betData, $kjData);
+    return sscnxzh($betData, $kjData);
+}
+
+//任四-四星组合(位掩码)-推荐, 注单注数统计方便
+function  ssc_r4xzhw($betData, $kjData, $w) {
+    $kjData = rx_wym($w, $kjData);
+    return sscnxzh($betData, $kjData);
+}
+
+//前三-三星组合
+function  ssc_q3xzh($betData, $kjData) {
+    $kjData = _qh($kjData,3);
+    return sscnxzh($betData, $kjData);
+}
+
+//后三-三星组合
+function  ssc_h3xzh($betData, $kjData) {
+    $kjData = _qh($kjData,-3);
+    return sscnxzh($betData, $kjData);
+}
+
+//任三-三星组合(通配符)
+function  ssc_r3xzh($betData, $kjData) {
+    rx_tpf_trim($betData, $kjData);
+    return sscnxzh($betData, $kjData);
+}
+
+//任三-三星组合(位掩码)
+function  ssc_r3xzhw($betData, $kjData, $w) {
+    $kjData = rx_wym($w, $kjData);
+    return sscnxzh($betData, $kjData);
+}
+
+/**
+ * 任四组24
+ *
+ * example:
+ * bet    = '43657892' ; //投注号码,四个号码为一注
+ KjData = '3,4,5,6,2' ; //开奖号码
+ w      = 30 ;          //用户所选位数
+ * @param  [type] $betData [投注号码]
+ * @param  [type] $kjData  [开奖号码]
+ * @param  [type] $w       [用户选择位数 16万位 8:千位 4:百位 2:十位 1:个位]
+ * @return [type]          [description]
+ */
+function ssczx4_24($betData,$kjData,$w) {
+    $winStatus = 0 ;
+    $kjData = explode(',',$kjData);
+    $weishu = [16,8,4,2,1] ;
+    $kj     = [] ;
+    $bet    = [] ;
+    
+    foreach ($weishu as $key=>$val) {
+        if ( ($w&$val)==0 ) unset($kjData[$key]) ;
+    }
+    
+    if(array_contain(str_split($betData),$kjData)){++$winStatus;}
+    
+    /*
+     $kjData = implode(',',$kjData) ;
+     
+     array_filter(permutation(explode(',',$kjData),4), function ($v) use(&$kj) {
+     $kj[] = implode(',',$v) ;
+     });
+     
+     array_filter(combin(str_split($betData),4), function ($v) use(&$bet) {
+     $bet[] = implode(',',$v) ;
+     }) ;
+     
+     //对比是否中奖
+     foreach ($bet as $betNumber) {
+     foreach ($kj as $kjNumber) {
+     if (strpos($kjNumber,$betNumber) !== false) {
+     ++$winStatus; break ;
+     }
+     }
+     }
+     */
+    return$winStatus ;
+}
+
+//前四组24
+function sscQ4Z24($betData,$kjData) {
+    
+    $kjData = _qh($kjData,4);
+    
+    return (int)array_contain(_arr($betData),_arr($kjData));
+}
+
+//后四组24
+function sscH4Z24($betData,$kjData) {
+    
+    $kjData = _qh($kjData,-4);
+    
+    return (int)array_contain(_arr($betData),_arr($kjData));
+}
+
+//任四组24
+function ssczx24($betData,$kjData,$w) {
+    
+    $kjData = rx_wym($w,$kjData);
+    
+    return (int)array_contain(_arr($betData),_arr($kjData));
+}
+
+/**
+ * 任四组12
+ * @param  [type] $betData [投注号码]
+ * @param  [type] $kjData  [开奖号码]
+ * @param  [type] $w       [用户选择位数 16万位 8:千位 4:百位 2:十位 1:个位]
+ * @return [type]          [description]
+ */
+function ssczx4_12($betData,$kjData,$w) {
+    $winStatus = 0 ;
+    $kjData = explode(',',$kjData);
+    $weishu = [16,8,4,2,1] ;
+    $kj     = [] ;
+    $bet    = [] ;
+    
+    foreach ($weishu as $key=>$val) {
+        if ( ($w&$val)==0 ) unset($kjData[$key]) ;
+    }
+    $kjData = implode(',',$kjData) ;
+    
+    $count  = 0  ;
+    $second = '' ; //重号
+    $third  = [] ; //单号
+    
+    array_filter(explode(',',$kjData), function($v) use($kjData,&$count,&$second,&$third) {
+        if (count(explode($v,$kjData))-1 == 2) { //出现两次字符串
+            ++$count ;
+            $second  = $v ;
+        } else {
+            $third[] = $v ;
+        }
+    });
+        $third = implode(',',$third) ; //数组转成,分割字符串
+        
+        //符合一个四重号
+        if ($count==2) {
+            $number    = explode(',',$betData) ; //分割投注号码,方便后面提取重号和单号
+            $number[1] = str_replace($second,'',$number[1]) ; //如果单号中含有重号则替换掉
+            
+            //检索重号是否中奖
+            if (strpos($number[0],$second) !== false) {
+                
+                if(array_contain(str_split($number[1]),explode(',',$third))){++$winStatus;}
+                /*
+                 array_filter(permutation(str_split($number[1]),2), function($v) use(&$bet){
+                 $bet[] = implode(',',$v) ;
+                 });
+                 
+                 foreach ($bet as $val) {
+                 if (strpos($third,$val) !== false) {
+                 ++$winStatus ;
+                 }
+                 }
+                 */
+            }
+        }
+        
+        return $winStatus ;
+}
+
+//前四组12
+function sscQ4Z12($betData,$kjData) {
+    
+    $kjData = _qh($kjData,4);
+    $p = parse_repeat($kjData,1,2,2,1);
+    if(!$p){
+        return 0;
+    }
+    $number = explode(',',$betData);
+    return array_contain($number[0],$p[0]) && array_contain($number[1],$p[1]);
+}
+
+//后四组12
+function sscH4Z12($betData,$kjData) {
+    
+    $kjData = _qh($kjData,-4);
+    $p = parse_repeat($kjData,1,2,2,1);
+    if(!$p){
+        return 0;
+    }
+    $number = explode(',',$betData);
+    return array_contain($number[0],$p[0]) && array_contain($number[1],$p[1]);
+}
+
+//任四组12
+function ssczx12($betData,$kjData,$w) {
+    
+    $kjData = rx_wym($w,$kjData);
+    $p = parse_repeat($kjData,1,2,2,1);
+    if(!$p){
+        return 0;
+    }
+    $number = explode(',',$betData);
+    return array_contain($number[0],$p[0]) && array_contain($number[1],$p[1]);    
+}
+
+/**
+ * 任四组6
+ * @param  [type] $betData [投注号码]
+ * @param  [type] $kjData  [开奖号码]
+ * @param  [type] $w       [用户选择位数 16万位 8:千位 4:百位 2:十位 1:个位]
+ * @return [type]          [description]
+ */
+function ssczx4_6($betData,$kjData,$w) {
+    $winStatus = 0 ;
+    $kjData = explode(',',$kjData);
+    $weishu = [16,8,4,2,1] ;
+    $bet    = [] ;
+    
+    foreach ($weishu as $key=>$val) {
+        if ( ($w&$val)==0 ) unset($kjData[$key]) ;
+    }
+    $kjData = implode(',',$kjData) ;
+    
+    $count  = 0  ;
+    $second = [] ; //重号
+    
+    array_filter(explode(',',$kjData), function($v) use($kjData,&$count,&$second) {
+        if (count(explode($v,$kjData))-1 == 2) { //出现两次字符串
+            ++$count ;
+            if(!in_array($v,$second)){
+                $second[] =  $v ;
+            }
+        }
+    });
+        $second = implode(',',$second) ; //数组转成,分割字符串
+        
+        //符合重号
+        if ($count==4) {
+            if(array_contain(_arr($betData),_arr($second))){++$winStatus;}
+            /*
+             //得到投注号码排列组合
+             array_filter(permutation($betData,2), function($v) use(&$bet){
+             $bet[] = implode(',',$bet) ;
+             });
+             //对比判断是否中奖
+             foreach($bet as $v) {
+             if (strpos($second,$v) !== false) {
+             ++$winStatus ;
+             }
+             }
+             */
+        }
+        
+        return $winStatus ;
+}
+
+//前四组6
+function sscQ4Z6($betData,$kjData) {
+    
+    $kjData = _qh($kjData,4);
+    $p = parse_repeat($kjData,2,2);
+    if(!$p){
+        return 0;
+    }
+    $number = explode(',',$betData);
+    return array_contain($number[0],$p[0]);
+}
+
+//后四组6
+function sscH4Z6($betData,$kjData) {
+    
+    $kjData = _qh($kjData,-4);
+    $p = parse_repeat($kjData,2,2);
+    if(!$p){
+        return 0;
+    }
+    $number = explode(',',$betData);
+    return array_contain($number[0],$p[0]);
+}
+
+function ssczx6($betData,$kjData,$w) {
+    
+    $kjData = rx_wym($w,$kjData);
+    $p = parse_repeat($kjData,2,2);
+    if(!$p){
+        return 0;
+    }
+    $number = explode(',',$betData);
+    return array_contain($number[0],$p[0]);    
+}
+
+/**
+ * 任四组4
+ *
+ * example:
+ * $bet    = '81,6523' ;
+ * $KjData = '1,8,8,8,6' ;
+ * $w      = 15 ;
+ * @param  [type] $betData [投注号码]
+ * @param  [type] $kjData  [开奖号码]
+ * @param  [type] $w       [用户选择位数 16万位 8:千位 4:百位 2:十位 1:个位]
+ * @return [type]          [description]
+ */
+function ssczx4_4($betData,$kjData,$w) {
+    $winStatus = 0 ;
+    $kjData = explode(',',$kjData);
+    $weishu = [16,8,4,2,1] ;
+    $bet    = [] ;
+    
+    foreach ($weishu as $key=>$val) {
+        if ( ($w&$val)==0 ) unset($kjData[$key]) ;
+    }
+    $kjData = implode(',',$kjData) ;
+    
+    $count  = 0  ;
+    $sing   = '' ; //单号
+    $third  = '' ; //三重号
+    
+    //检索开奖数据中的三重号和单号
+    array_filter(explode(',',$kjData), function($v) use(&$count,&$sing,&$third,$kjData) {
+        if (count(explode($v,$kjData))-1 == 3) { //选出三重号
+            ++$count ;
+            $third = $v;
+        } else {
+            $sing = $v;
+        }
+    });
+        //$sing = implode(',',$sing) ; //数组转成,分割字符串
+        
+        //开奖号码有三重号
+        if ( $count == 3 ) {
+            $number = explode(',',$betData) ; //分割投注号码,方便后面提取三重号和单号
+            
+            //检查三重号是否中奖
+            if (strpos($number[0],$third) !== false) {
+                if(array_contain(_arr($number[1]),_arr($sing))){++$winStatus;}
+                /*
+                 //得到投注单号排列组合
+                 array_filter(permutation(str_split($number[1]),1), function($v) use(&$bet) {
+                 $bet[] = implode(',',$v) ;
+                 });
+                 //对比单号是否中奖
+                 foreach($bet as $v) {
+                 if ( strpos($sing,$v) !== false ) {
+                 ++$winStatus ; break ;
+                 }
+                 }
+                 */
+            }
+        }
+        
+        return $winStatus ;
+}
+
+function sscQ4Z4($betData,$kjData) {
+    
+    $kjData = _qh($kjData,4);
+    $p = parse_repeat($kjData,1,3,1,1);
+    if(!$p){
+        return 0;
+    }
+    $number = explode(',',$betData);
+    return array_contain($number[0],$p[0]);
+}
+
+function sscH4Z4($betData,$kjData) {
+    
+    $kjData = _qh($kjData,-4);
+    $p = parse_repeat($kjData,1,3,1,1);
+    if(!$p){
+        return 0;
+    }
+    $number = explode(',',$betData);
+    return array_contain($number[0],$p[0]);
+}
+
+function ssczx4($betData,$kjData,$w) {
+    
+    $kjData = rx_wym($w,$kjData);
+    $p = parse_repeat($kjData,1,3,1,1);
+    if(!$p){
+        return 0;
+    }
+    $number = explode(',',$betData);
+    return array_contain($number[0],$p[0]);    
+}
+
+/**
+ * 前4复式
+ *
+ * example:
+ * $betData = '12,34,56,78' ;
+ * $KjData  = '1,3,5,8,0'   ;
+ * @param  [type] $betDat [投注数据]
+ * @param  [type] $kjData [开奖数据]
+ * @return [type]         [description]
+ */
+function dxwfQ4f($betData,$kjData) {
+    //$kjData = removeFromList($kjData,',',5) ;
+    $kjData = _qh($kjData,4) ;
+    return fs($betData, $kjData);
+}
+
+
+/**
+ * 前4单式
+ *
+ * example:
+ * $betData = '1,3,5,8' ;
+ * $KjData  = '1,3,5,8,0'   ;
+ * @param  [type] $betDat [投注数据]
+ * @param  [type] $kjData [开奖数据]
+ * @return [type]         [description]
+ */
+function dxwfQ4d($betData,$kjData) {
+    //$kjData = removeFromList($kjData,',',5) ;
+    $kjData = _qh($kjData,4) ;
+    return ds($betData, $kjData);
+}
+
+
+/**
+ * 后4复式
+ *
+ * example:
+ * $betData = '12,34,56,78' ;
+ * $KjData  = '0,1,3,5,8'   ;
+ * @param  [type] $betDat [投注数据]
+ * @param  [type] $kjData [开奖数据]
+ * @return [type]         [description]
+ */
+function dxwfH4f($betData,$kjData) {
+    //$kjData = removeFromList($kjData,',',1) ;
+    $kjData = _qh($kjData,-4) ;
+    return fs($betData, $kjData);
+}
+
+
+/**
+ * 后4单式
+ *
+ * example:
+ * $betData = '1,3,5,8' ;
+ * $KjData  = '0,1,3,5,8' ;
+ * @param  [type] $betDat [投注数据]
+ * @param  [type] $kjData [开奖数据]
+ * @return [type]         [description]
+ */
+function dxwfH4d($betData,$kjData) {
+    //$kjData = removeFromList($kjData,',',1) ;
+    $kjData = _qh($kjData,-4) ;
+    return ds($betData, $kjData);
+}
+
+
+/**
+ * 任选4复式
+ *
+ * example:
+ * $betData = '01,23,-,56,78';
+ * $KjData  = '0,2,3,5,8' ;
+ * @param  [type] $betDat [投注数据]
+ * @param  [type] $kjData [开奖数据]
+ * @return [type]         [description]
+ */
+function dxwfR4f($betData,$kjData) {
+    /*
+    $tmpArr = explode(',' , $betData) ;
+    $index  = array_search('-',$tmpArr) ;
+    $kjData = replaceList($kjData,'-',$index);
+    */
+    $kjData = rx_tpf($betData,$kjData);
+    return fs($betData,$kjData) ;
+}
+
+
+/**
+ * 任选4单式
+ *
+ * example:
+ * $betData = '1,3,-,5,8' ;
+ * $KjData  = '0,1,3,5,8' ;
+ * @param  [type] $betDat [投注数据]
+ * @param  [type] $kjData [开奖数据]
+ * @return [type]         [description]
+ */
+function dxwfR4d($betData,$kjData) {    
+    /*
+    $tmpArr = substr($betData,0,9) ;
+    $tmpArr = explode(',' , $tmpArr) ;
+    $index  = array_search('-',$tmpArr) ;
+    $kjData = replaceList($kjData,'-',$index);
+    */
+    $kjData = rx_tpf($betData,$kjData);
+    return ds($betData, $kjData);
+}
+
+//这里规定,任选三/四, 直选单式/复式, 都使用-来确定位置;
+//组选使用weiShu参数确定位置;
+
+// +----------------------------------------------------------------------
+// |  三星组选
+// +----------------------------------------------------------------------
+
+/**
+ *  前三复式
+ *  example:
+ *  $betData = '124,032,568';
+ *  $kjData  = '2,3,5,7,9' ;
+ * @param  [type] $betData [投注号码]
+ * @param  [type] $kjData  [开奖号码]
+ * @return [type]          [description]
+ */
+function sxwfQ3f ($betData,$kjData) {
+    //$kjData = removeFromList($kjData,',',4,5) ;
+    $kjData = _qh($kjData,3) ;
+    return fs($betData,$kjData) ;
+}
+
+
+/**
+ *  前三单式
+ *  example:
+ *  $betData = '2,3,5';
+ *  $kjData  = '2,3,5,7,9' ;
+ * @param  [type] $betData [投注号码]
+ * @param  [type] $kjData  [开奖号码]
+ * @return [type]          [description]
+ */
+function sxwfQ3d ($betData,$kjData) {
+    //$kjData = removeFromList($kjData,',',4,5) ;
+    $kjData = _qh($kjData,3) ;
+    return ds($betData,$kjData) ;
+}
+
+
+/**
+ *  后三复式
+ *  example:
+ *  $betData = '124,032,568';
+ *  $kjData  = '2,3,5,7,9' ;
+ * @param  [type] $betData [投注号码]
+ * @param  [type] $kjData  [开奖号码]
+ * @return [type]          [description]
+ */
+function sxwfH3f ($betData,$kjData) {
+    //$kjData = removeFromList($kjData,',',4,5) ;
+    $kjData = _qh($kjData,-3) ;
+    return fs($betData,$kjData) ;
+}
+
+/**
+ *  后三单式
+ *  example:
+ *  $betData = '2,3,5';
+ *  $kjData  = '2,3,5,7,9' ;
+ * @param  [type] $betData [投注号码]
+ * @param  [type] $kjData  [开奖号码]
+ * @return [type]          [description]
+ */
+function sxwfH3d ($betData,$kjData) {
+    //$kjData = removeFromList($kjData,',',4,5) ;
+    $kjData = _qh($kjData,-3) ;
+    return ds($betData,$kjData) ;
+}
+
+
+/**
+ *  任选三复式
+ *  example:
+ *  $betData = '21,31,51,71,-' ;
+ *  $kjData  = '2,3,5,7,9'  ;
+ * @param  [type] $betData [投注号码]
+ * @param  [type] $kjData  [开奖号码]
+ * @return [type]          [description]
+ */
+function sxwfR3f ($betData,$kjData) {
+    /*
+    $tmpArr = explode(',' , $betData) ;
+    $index  = array_search('-',$tmpArr) ; 
+    $kjData = replaceList($kjData,'-',$index);
+    */
+    $kjData = rx_tpf($betData,$kjData);
+    return fs($betData,$kjData) ;
+}
+
+/**
+ *  任选三单式
+ *  example:
+ *  $betData = '21,31,51,71,-' ;
+ *  $kjData  = '2,3,5,7,9'  ;
+ * @param  [type] $betData [投注号码]
+ * @param  [type] $kjData  [开奖号码]
+ * @return [type]          [description]
+ */
+function sxwfR3d ($betData,$kjData) {
+    /*
+    $tmpArr = explode(',' , $betData) ;
+    $index  = array_search('-',$tmpArr) ; 
+    $kjData = replaceList($kjData,'-',$index);
+    */
+    $kjData = rx_tpf($betData,$kjData);
+    return ds($betData,$kjData) ;
+}
+
+
+
+/**
+ *   前三组三
+ * $betData = '139';
+ * $kjData  = '1,3,3,5,6' ;
+ * @param  [type] $betData [投注号码]
+ * @param  [type] $kjData  [开奖号码]
+ * @return [type]          [description]
+ */
+function sxzxQ3z3($betData,$kjData) {
+    $kjData = _qh($kjData,3);
+    return z3($betData , $kjData);
+}
+
+/**
+ * 前三组六
+ * $betData = '234510';
+ * $kjData  = '7,3,5,8,9' ;
+ * @param  [type] $betData [投注号码]
+ * @param  [type] $kjData  [开奖号码]
+ * @return [type]          [description]
+ */
+function sxzxQ3z6($betData, $kjData) {
+    $kjData = _qh($kjData,3);
+    return z6($betData, $kjData) ;
+}
+
+
+/**
+ * 前三混合组选
+ * TODO::源文件缺失这个方法的代码,待补充
+ * @param  [type] $betData [投注号码]
+ * @param  [type] $kjData  [开奖号码]
+ * @return [type]          [description]
+ */
+function sxzxQ3h($betData, $kjData){
+    $kjData = _qh($kjData,3);
+    return z36($betData, $kjData);
+}
+
+
+/**
+ * 后三组三
+ * $betData = '89';
+ * $kjData  = '7,3,8,8,9' ;
+ * @param  [type] $betData [投注号码]
+ * @param  [type] $kjData  [开奖号码]
+ * @return [type]          [description]
+ */
+function sxzxH3z3($betData, $kjData) {
+    $kjData = _qh($kjData,-3);
+    return z3($betData, $kjData) ;
+}
+
+/**
+ * 后三组六
+ * $betData = '589';
+ * $kjData  = '7,3,5,8,9' ;
+ * @param  [type] $betData [投注号码]
+ * @param  [type] $kjData  [开奖号码]
+ * @return [type]          [description]
+ */
+function sxzxH3z6($betData, $kjData) {
+    $kjData = _qh($kjData,-3);
+    return z6($betData, $kjData) ;
+}
+
+/**
+ * 后三混合组选
+ * TODO::源文件缺失这个方法的代码,待补充
+ * @param  [type] $betData [投注号码]
+ * @param  [type] $kjData  [开奖号码]
+ * @return [type]          [description]
+ */
+function sxzxH3h($betData, $kjData){
+    $kjData = _qh($kjData,-3);
+    return z36($betData, $kjData);
+}
+
+/**
+ * 任三组三
+ * @param  [type] $betData [description]
+ * @param  [type] $kjData  [description]
+ * @param  [type] $w       [description]
+ * @return [type]          [description]
+ */
+function sxzxR3z3($betData,$kjData,$w) {
+    $kjData = rx_wym($w,$kjData);
+    return z3($betData,$kjData);
+}
+
+
+/**
+ * 任三组六
+ * @param  [type] $betData [description]
+ * @param  [type] $kjData  [description]
+ * @param  [type] $w       [description]
+ * @return [type]          [description]
+ */
+function sxzxR3z6($betData,$kjData,$w) {
+    $kjData = rx_wym($w,$kjData);
+    return z6($betData,$kjData);
+}
+
+/**
+ * 任三混合组
+ * TODO::源文件缺失这个方法的代码,待补充
+ * @param  [type] $betData [投注号码]
+ * @param  [type] $kjData  [开奖号码]
+ * @return [type]          [description]
+ */
+function sxzxR3h($betData, $kjData, $w){
+    $kjData = rx_wym($w, $kjData);
+    return z36($betData, $kjData);
+}
+
+
+//前三直选和值
+function sxwfQ3_hz($betData, $kjData){
+    
+    $kjData = _qh($kjData,3);
+    $kjData = _arr($kjData);
+    
+    $hz = $kjData[0] + $kjData[1] + $kjData[2];
+    
+    $count = 0;
+    $bets = explode(',',$betData);
+    foreach ($bets as $bet){
+        if($bet == $hz){
+            $count++;
+        }
+    }
+    return $count;
+}
+
+//后三直选和值
+function sxwfH3_hz($betData, $kjData){
+    
+    $kjData = _qh($kjData,-3);
+    $kjData = _arr($kjData);
+    
+    $hz = $kjData[0] + $kjData[1] + $kjData[2];
+    
+    $count = 0;
+    $bets = explode(',',$betData);
+    foreach ($bets as $bet){
+        if($bet == $hz){
+            $count++;
+        }
+    }
+    return $count;
+}
+
+//任3直选和值,最多中一注
+function sxwfR3_hz($betData, $kjData, $w){
+    
+    $kjData = rx_wym($w,$kjData);
+    $kjData = _arr($kjData);
+    
+    $hz = $kjData[0] + $kjData[1] + $kjData[2];
+    
+    $count = 0;
+    $bets = explode(',',$betData);
+    foreach ($bets as $bet){
+        if($bet == $hz){
+            $count++;
+        }
+    }
+    return $count;
+}
+
+//前三直选跨度
+function sxwfQ3_kd($betData, $kjData){
+    
+    $kjData = _qh($kjData,3);
+    $kjData = _arr($kjData);
+    
+    sort($kjData);
+    
+    $kd = $kjData[2] - $kjData[0];
+    
+    $count = 0;
+    $bets = explode(',',$betData);
+    foreach ($bets as $bet){
+        if($bet == $kd){
+            $count++;
+        }
+    }
+    return $count;
+}
+
+//后三直选跨度
+function sxwfH3_kd($betData, $kjData){
+    
+    $kjData = _qh($kjData,-3);
+    $kjData = _arr($kjData);
+    
+    sort($kjData);
+    
+    $kd = $kjData[2] - $kjData[0];
+    
+    $count = 0;
+    $bets = explode(',',$betData);
+    foreach ($bets as $bet){
+        if($bet == $kd){
+            $count++;
+        }
+    }
+    return $count;
+}
+
+//任3直选跨度
+function sxwfR3_kd($betData, $kjData, $w){
+    
+    $kjData = rx_wym($w,$kjData);
+    $kjData = _arr($kjData);
+    
+    sort($kjData);    
+    
+    $kd = $kjData[2] - $kjData[0];
+    
+    $count = 0;
+    $bets = explode(',',$betData);
+    foreach ($bets as $bet){
+        if($bet == $kd){
+            $count++;
+        }
+    }
+    return $count;
+}
+
+//前3组选和值
+function sxzxQ3_hz($betData, $kjData){
+    
+    $kjData = _qh($kjData,3);
+    $kjData = _arr($kjData);
+    
+    if($kjData[0] == $kjData[1] && $kjData[1] == $kjData[2]){
+        return [0,0];
+    }
+    
+    //count(array_count_values($kjData))==3
+    $z6 = count(array_unique($kjData))==3;
+    
+    $hz = $kjData[0] + $kjData[1] + $kjData[2];
+    
+    if(in_array($hz, _arr($betData))){
+        if($z6){
+            [0,1];
+        }else{
+            [1,0];
+        }
+    }
+    
+    return [0,0];
+}
+
+//后3组选和值
+function sxzxH3_hz($betData, $kjData){
+    
+    $kjData = _qh($kjData,-3);
+    $kjData = _arr($kjData);
+    
+    if($kjData[0] == $kjData[1] && $kjData[1] == $kjData[2]){
+        return [0,0];
+    }
+    
+    //count(array_count_values($kjData))==3
+    $z6 = count(array_unique($kjData))==3;
+    
+    $hz = $kjData[0] + $kjData[1] + $kjData[2];
+    
+    if(in_array($hz, _arr($betData))){
+        if($z6){
+            [0,1];
+        }else{
+            [1,0];
+        }
+    }
+    
+    return [0,0];
+}
+
+//任3组选和值,混合模式,返回信息 组三中N次,组六中N次;豹子不中奖;
+function sxzxR3_hz($betData, $kjData, $w){
+    
+    $kjData = rx_wym($w,$kjData);
+    $kjData = _arr($kjData);
+
+    if($kjData[0] == $kjData[1] && $kjData[1] == $kjData[2]){
+        return [0,0];
+    }
+
+    //count(array_count_values($kjData))==3
+    $z6 = count(array_unique($kjData))==3;
+    
+    $hz = $kjData[0] + $kjData[1] + $kjData[2];
+    
+    if(in_array($hz, _arr($betData))){
+        if($z6){
+            [0,1];
+        }else{
+            [1,0];
+        }
+    }
+    
+    return [0,0];
+}
+
+//前三组选包胆
+function sxzxQ3_bd($betData, $kjData){
+    
+    $kjData = _qh($kjData,3);
+    $kjData = _arr($kjData);
+    
+    if($kjData[0] == $kjData[1] && $kjData[1] == $kjData[2]){
+        return [0,0];
+    }
+    
+    //count(array_count_values($kjData))==3
+    $z6 = count(array_unique($kjData))==3;
+    
+    if(in_array($betData,$kjData)){
+        if($z6){
+            [0,1];
+        }else{
+            [1,0];
+        }
+    }
+    
+    return [0,0];
+}
+
+//后三组选包胆
+function sxzxH3_bd($betData, $kjData){
+    
+    $kjData = _qh($kjData,-3);
+    $kjData = _arr($kjData);
+    
+    if($kjData[0] == $kjData[1] && $kjData[1] == $kjData[2]){
+        return [0,0];
+    }
+    
+    //count(array_count_values($kjData))==3
+    $z6 = count(array_unique($kjData))==3;
+    
+    if(in_array($betData,$kjData)){
+        if($z6){
+            [0,1];
+        }else{
+            [1,0];
+        }
+    }
+    
+    return [0,0];
+}
+
+//任3组选 包胆, 混合玩法
+function sxzxR3_bd($betData, $kjData, $w){
+
+    $kjData = rx_wym($w,$kjData);
+    $kjData = _arr($kjData);
+    
+    if($kjData[0] == $kjData[1] && $kjData[1] == $kjData[2]){
+        return [0,0];
+    }
+
+    //count(array_count_values($kjData))==3
+    $z6 = count(array_unique($kjData))==3;
+    
+    if(in_array($betData,$kjData)){
+        if($z6){
+            [0,1];
+        }else{
+            [1,0];
+        }
+    }
+
+    return [0,0];
+}
+
+//前3直选 和值尾数
+function sxwfQ3_hzws($betData, $kjData){
+    
+    $kjData = _qh($kjData,3);
+    $kjData = _arr($kjData);
+    
+    $hz = $kjData[0] + $kjData[1] + $kjData[2];
+    $hzws = $hz%10;
+    
+    return (int)in_array($hzws, _arr($betData));
+}
+
+//后3直选 和值尾数
+function sxwfH3_hzws($betData, $kjData){
+    
+    $kjData = _qh($kjData,-3);
+    $kjData = _arr($kjData);
+    
+    $hz = $kjData[0] + $kjData[1] + $kjData[2];
+    $hzws = $hz%10;
+    
+    return (int)in_array($hzws, _arr($betData));
+}
+
+//任3直选 和值尾数
+function sxwfR3_hzws($betData, $kjData, $w){
+
+    $kjData = rx_wym($w,$kjData);
+    $kjData = _arr($kjData);
+    
+    $hz = $kjData[0] + $kjData[1] + $kjData[2];
+    $hzws = $hz%10;
+    
+    return (int)in_array($hzws, _arr($betData));
+}
+
+function sxwfQ3_tsh($betData, $kjData){
+    
+    $kjData = _qh($kjData,3);
+    $kjData = _arr($kjData);
+    
+    $bz = ssc_baozi($kjData);
+    
+    return (int)in_array($bz, _arr($betData));
+}
+
+function sxwfH3_tsh($betData, $kjData){
+    
+    $kjData = _qh($kjData,-3);
+    $kjData = _arr($kjData);
+    
+    $bz = ssc_baozi($kjData);
+    
+    return (int)in_array($bz, _arr($betData));
+}
+
+//任3直选特殊号, //豹子,顺子,对子, 拉菲网上3者有相同赔率,赔率不正确
+function sxwfR3_tsh($betData, $kjData, $w){
+
+    $kjData = rx_wym($w,$kjData);
+    $kjData = _arr($kjData);
+    
+    $bz = ssc_baozi($kjData);
+    
+    return (int)in_array($bz, _arr($betData));
+}
+
+// +----------------------------------------------------------------------
+// |   二星直选
+// +----------------------------------------------------------------------
+
+/**
+ * 前二复式
+ * @param  [type] $betData [投注号码]
+ * @param  [type] $kjData  [开奖号码]
+ * @return [type]          [description]
+ */
+function rxwfQ2f($betData,$kjData) {
+    $kjData = _qh($kjData,2);
+    return fs($betData,$kjData) ;
+}
+
+/**
+ * 前二单式
+ * @param  [type] $betData [投注号码]
+ * @param  [type] $kjData  [开奖号码]
+ * @return [type]          [description]
+ */
+function rxwfQ2d($betData,$kjData) {
+    $kjData = _qh($kjData,2);
+    return ds($betData,$kjData) ;
+}
+
+/**
+ * 后二复式
+ * @param  [type] $betData [投注号码]
+ * @param  [type] $kjData  [开奖号码]
+ * @return [type]          [description]
+ */
+function rxwfH2f($betData,$kjData) {
+    $kjData = _qh($kjData,-2);
+    return fs($betData,$kjData) ;
+}
+
+/**
+ * 后二单式
+ * @param  [type] $betData [投注号码]
+ * @param  [type] $kjData  [开奖号码]
+ * @return [type]          [description]
+ */
+function rxwfH2d($betData,$kjData) {
+    $kjData = _qh($kjData,-2);
+    return ds($betData,$kjData) ;
+}
+
+/**
+ * 任选二复式
+ * @param  [type] $betData [投注号码]
+ * @param  [type] $kjData  [开奖号码]
+ * @return [type]          [description]
+ */
+function rxwfR2f($betData,$kjData) {
+   //return sxwfR3f($betData,$kjData) ;
+    $kjData = rx_tpf($betData,$kjData);
+    return fs($betData,$kjData) ;
+}
+
+/**
+ * 任选二单式
+ * @param  [type] $betData [投注号码]
+ * @param  [type] $kjData  [开奖号码]
+ * @return [type]          [description]
+ */
+function rxwfR2d($betData,$kjData) {
+    //return sxwfR3d($betData,$kjData) ;
+    $kjData = rx_tpf($betData,$kjData);
+    return ds($betData,$kjData) ;
+}
+
+
+// +----------------------------------------------------------------------
+// |   二星组选
+// +----------------------------------------------------------------------
+
+
+/**
+ * 前二组复式
+ * $betData = '23';
+ * $kjData  = '2,3,5,8,9' ;
+ * @param  [type] $betData [投注号码]
+ * @param  [type] $kjData  [开奖号码]
+ * @return [type]          [description]
+ */
+function rxzxQ2f($betData,$kjData) {
+    $kjData = _qh($kjData,2);
+    return z2f($betData,$kjData) ;
+}
+
+/**
+ * 前二组单式
+ * $betData = '23';
+ * $kjData  = '2,3,5,8,9' ;
+ * @param  [type] $betData [投注号码]
+ * @param  [type] $kjData  [开奖号码]
+ * @return [type]          [description]
+ */
+function rxzxQ2d($betData,$kjData) {
+    $kjData = _qh($kjData,2);
+    return z2d($betData,$kjData) ;
+}
+
+/**
+ * 后二组复式
+ * $betData = '89';
+ * $kjData  = '2,3,5,8,9' ;
+ * @param  [type] $betData [投注号码]
+ * @param  [type] $kjData  [开奖号码]
+ * @return [type]          [description]
+ */
+function rxzxH2f($betData,$kjData) {
+    $kjData = _qh($kjData,-2);
+    return z2f($betData,$kjData) ;
+}
+
+/**
+ * 后二组单式
+ * $betData = '89';
+ * $kjData  = '2,3,5,8,9' ;
+ * @param  [type] $betData [投注号码]
+ * @param  [type] $kjData  [开奖号码]
+ * @return [type]          [description]
+ */
+function rxzxH2d($betData,$kjData) {
+    $kjData = _qh($kjData,-2);
+    return z2d($betData,$kjData) ;
+}
+
+/**
+ * 任选二组选复式 ###
+ * @param  [type] $betData [description]
+ * @param  [type] $kjData  [description]
+ * @param  [type] $w       [description]
+ * @return [type]          [description]
+ */
+function rxzxR2f($betData, $kjData, $w) {    
+    $kjData = rx_wym($w,$kjData);
+    return z2f($betData, $kjData);
+}
+
+/**
+ * 任选二组选单式 ###
+ * @param  [type] $betData [description]
+ * @param  [type] $kjData  [description]
+ * @param  [type] $w       [description]
+ * @return [type]          [description]
+ */
+function rxzxR2d($betData, $kjData, $w) {
+/*
+    array_filter(explode('|',$betData), function($b) use(&$bet,$w) {
+        $b = explode(',',$b) ;
+        $weishu = [16,8,4,2,1] ;
+        foreach ($weishu as $key=>$val) {
+            if ( ($w&$val)==0 ) unset($b[$key]) ;
+        }
+        $bet[] = implode(',',$b) ;
+    });
+    $betData = implode('|',$bet);
+*/
+    $kjData = rx_wym($w,$kjData);
+    return z2d($betData, $kjData);
+}
+
+//前2直选和值
+function rxwfQ2_hz($betData, $kjData){
+    
+    $kjData = _qh($kjData,2);
+    $kjData = _arr($kjData);
+    
+    $hz = $kjData[0] + $kjData[1];
+    
+    $count = 0;
+    $bets = explode(',',$betData);
+    foreach ($bets as $bet){
+        if($bet == $hz){
+            $count++;
+        }
+    }
+    return $count;
+}
+
+//后2直选和值
+function rxwfH2_hz($betData, $kjData){
+    
+    $kjData = _qh($kjData,-2);
+    $kjData = _arr($kjData);
+    
+    $hz = $kjData[0] + $kjData[1];
+    
+    $count = 0;
+    $bets = explode(',',$betData);
+    foreach ($bets as $bet){
+        if($bet == $hz){
+            $count++;
+        }
+    }
+    return $count;
+}
+
+//任2直选和值,最多中一注
+function rxwfR2_hz($betData, $kjData, $w){
+    
+    $kjData = rx_wym($w,$kjData);
+    $kjData = _arr($kjData);
+    
+    $hz = $kjData[0] + $kjData[1];
+    
+    $count = 0;
+    $bets = explode(',',$betData);
+    foreach ($bets as $bet){
+        if($bet == $hz){
+            $count++;
+        }
+    }
+    return $count;
+}
+
+//前2直选跨度
+function rxwfQ2_kd($betData, $kjData){
+    
+    $kjData = _qh($kjData,2);
+    $kjData = _arr($kjData);
+    
+    sort($kjData);
+    
+    $kd = $kjData[1] - $kjData[0];
+    
+    $count = 0;
+    $bets = explode(',',$betData);
+    foreach ($bets as $bet){
+        if($bet == $kd){
+            $count++;
+        }
+    }
+    return $count;
+}
+
+//后2直选跨度
+function rxwfH2_kd($betData, $kjData){
+    
+    $kjData = _qh($kjData,-2);
+    $kjData = _arr($kjData);
+    
+    sort($kjData);
+    
+    $kd = $kjData[1] - $kjData[0];
+    
+    $count = 0;
+    $bets = explode(',',$betData);
+    foreach ($bets as $bet){
+        if($bet == $kd){
+            $count++;
+        }
+    }
+    return $count;
+}
+
+//任2直选跨度
+function rxwfR2_kd($betData, $kjData, $w){
+
+    $kjData = rx_wym($w,$kjData);
+    $kjData = _arr($kjData);
+    
+    sort($kjData);
+    
+    $kd = $kjData[1] - $kjData[0];
+    
+    $count = 0;
+    $bets = explode(',',$betData);
+    foreach ($bets as $bet){
+        if($bet == $kd){
+            $count++;
+        }
+    }
+    return $count;
+}
+
+//前2组选和值
+function rxzxQ2_hz($betData, $kjData){
+    
+    $kjData = _qh($kjData,2);
+    $kjData = _arr($kjData);
+    
+    if($kjData[0] == $kjData[1]){
+        return 0;
+    }
+    
+    $hz = $kjData[0] + $kjData[1];
+    
+    if(in_array($hz, _arr($betData))){
+        return 1;
+    }
+    
+    return 0;
+}
+
+//后2组选和值
+function rxzxH2_hz($betData, $kjData){
+    
+    $kjData = _qh($kjData,-2);
+    $kjData = _arr($kjData);
+    
+    if($kjData[0] == $kjData[1]){
+        return 0;
+    }
+    
+    $hz = $kjData[0] + $kjData[1];
+    
+    if(in_array($hz, _arr($betData))){
+        return 1;
+    }
+    
+    return 0;
+}
+
+//任2组选和值,非混合玩法,对子不中奖;
+function rxzxR2_hz($betData, $kjData, $w){
+    
+    $kjData = rx_wym($w,$kjData);
+    $kjData = _arr($kjData);
+    
+    if($kjData[0] == $kjData[1]){
+        return 0;
+    }
+    
+    $hz = $kjData[0] + $kjData[1];
+    
+    if(in_array($hz, _arr($betData))){
+        return 1;
+    }
+    
+    return 0;
+}
+
+//前2组选包胆
+function rxzxQ2_bd($betData, $kjData){
+    
+    $kjData = _qh($kjData,2);
+    $kjData = _arr($kjData);
+    
+    if($kjData[0] == $kjData[1]){
+        return 0;
+    }
+    
+    if(in_array($betData,$kjData)){
+        return 1;
+    }
+    
+    return 0;
+}
+
+//后2组选包胆
+function rxzxH2_bd($betData, $kjData){
+    
+    $kjData = _qh($kjData,-2);
+    $kjData = _arr($kjData);
+    
+    if($kjData[0] == $kjData[1]){
+        return 0;
+    }
+    
+    if(in_array($bet,$kjData)){
+        return 1;
+    }
+    
+    return 0;
+}
+
+//任2组选 包胆, 非混合玩法,对子不中奖;
+function rxzxR2_bd($betData, $kjData, $w){
+
+    $kjData = rx_wym($w,$kjData);
+    $kjData = _arr($kjData);
+    
+    if($kjData[0] == $kjData[1]){
+        return 0;
+    }
+    
+    if(in_array($bet,$kjData)){
+        return 1;
+    }
+    
+    return 0;
+}
+
+/**
+ *  五星定位胆
+ * @param  [type] $betData [投注号码]
+ * @param  [type] $kjData  [开奖号码]
+ * @return [type]          [description]
+ */
+function dwd5x($betData,$kjData) {
+    $winStatus = 0 ;
+    $kjData    = explode(',',$kjData) ;
+    $betData   = explode(',',$betData) ;
+    $count     = 0 ;
+
+    foreach ( $betData as $key=>$val ) {
+        if (strlen($val) > 1) {
+            $val = str_split($val) ;
+            foreach ($val as $v) {
+                if ( $v==$kjData[$key] ) ++$count;
+            }
+
+        } else {
+            if ( $val==$kjData[$key] ) ++$count;
+        }
+    }
+
+    return $count ;
+}
+
+/**
+ * 十星定位胆##, 十星定位胆格式 01 02,03 04,-,-,-,-,-,-,-,-
+ * @param  [type] $betData [description]
+ * @param  [type] $kjData  [description]
+ * @return [type]          [description]
+ */
+function dwd10x($betData,$kjData) {
+    $winStatus = 0 ;
+    $kjData    = explode(',',$kjData) ;
+    $betData   = explode(',',$betData) ;
+    $count     = 0 ;
+
+    foreach ( $betData as $key=>$val ) {
+        if (strlen($val) > 2) {
+            $val = str_split($val) ;
+            foreach ($val as $v) {
+                if ( $v==$kjData[$key] ) ++$count;
+            }
+
+        } else {
+            if ( $val==$kjData[$key] ) ++$count;
+        }
+    }
+
+    return $count ;
+}
+
+//通用定位,3星,5星,10星,只限数字
+function dwd($betData,$kjData) {
+    $kjData    = _arr($kjData) ;
+    $betData   = _arr($betData) ;
+    $count     = 0 ;
+    foreach ( $betData as $pos=>$vals ) {
+        $vals = _arr($vals);
+        foreach ($vals as $v) {
+            if ( $v==$kjData[$pos] ) ++$count;
+        }
+    }
+    
+    return $count ;    
+}
+
+
+/**
+ * 后三不定胆##
+ * @param  [type] $betData [description]
+ * @param  [type] $kjData  [description]
+ * @return [type]          [description]
+ */
+function bddH3_old($betData,$kjData) {
+    $kjData = _qh($kjData,-3);
+    
+    $bet = array_filter(_arr($betData), function($v) use($kjData) {
+        if ( strpos($kjData,$v)!==false ) {
+            return true;
+        } else {
+            return false ;
+        }
+    });
+    return count($bet) ;
+}
+
+/**
+ * 前三不定胆 ###
+ * @param  [type] $betData [description]
+ * @param  [type] $kjData  [description]
+ * @return [type]          [description]
+ */
+function bddQ3_old($betData,$kjData) {
+    $kjData = _qh($kjData,3);
+
+    $bet = array_filter(_arr($betData), function($v) use($kjData) {
+        if ( strpos($kjData,$v)!==false ) {
+            return true;
+        } else {
+            return false ;
+        }
+    });
+
+    return count($bet) ;
+}
+
+/**
+ * 中三不定胆 ###
+ * @param  [type] $betData [description]
+ * @param  [type] $kjData  [description]
+ * @return [type]          [description]
+ */
+function bddZ3_old($betData,$kjData) {
+    $kjData = substr($kjData,2,5) ;
+
+    $bet = array_filter(_arr($betData), function($v) use($kjData) {
+        if ( strpos($kjData,$v)!==false ) {
+            return true;
+        } else {
+            return false ;
+        }
+    });
+
+    return count($bet) ;
+}
+
+
+/**
+ * 任选三不定胆 ###
+ * @param  [type] $betData [description]
+ * @param  [type] $kjData  [description]
+ * @return [type]          [description]
+ */
+function bddR3_old($betData,$kjData,$w) {
+    $kjData = explode(',',$kjData);
+    $weishu = [16,8,4,2,1] ;
+    foreach ($weishu as $key=>$v) {
+        if ( ($w&$v)==0 ) unset($kjData[$key]) ;
+    }
+    $kjData = implode(',',$kjData) ;
+
+    $bet = array_filter(_arr($betData), function($v) use($kjData) {
+        if ( strpos($kjData,$v)!==false ) {
+            return true;
+        } else {
+            return false ;
+        }
+    });
+    // bet=bet.split('').filter(function(v){
+    //     return kj.indexOf(v)!=-1;
+    // });
+
+    return count($bet) ;
+}
+
+/**
+ * 前三二码  二码不定位 ###
+ * @param  [type] $betData [description]
+ * @param  [type] $kjData  [description]
+ * @return [type]          [description]
+ */
+function bdwQ32_old($betData, $kjData){
+
+    $kj= _qh($kjData,3);    
+    $bet2 = '';
+    //$betData = explode(',',$betData) ;
+    $betData = _arr($betData,' ') ;   
+    for($i=0,$l=count($betData); $i<$l; $i++) {      
+        if ( strpos($kj,$betData[$i]) !==false ) {
+            $bet2 .= $betData[$i];
+        }
+    }
+
+    return count( combin( str_split($bet2),2 ) );
+}
+
+
+/**
+ * 后三二码 ###
+ * @param  [type] $betData [description]
+ * @param  [type] $kjData  [description]
+ * @return [type]          [description]
+ */
+function bdwH32_old($betData, $kjData) {
+
+    $kj= _qh($kjData,-3);  
+    $bet2 = '';
+    //$betData = explode(' ',$betData) ;
+    $betData = _arr($betData) ;
+    for($i=0,$l=count($betData); $i<$l; $i++) {
+        if ( strpos($kj,$betData[$i]) !==false ) {
+            $bet2 .= $betData[$i];
+        }
+    }
+
+    return count( combin( str_split($bet2),2 ) );
+}
+
+//三星
+function bddQ3($betData,$kjData) {
+    $kjData = _qh($kjData,3);
+    return rx($betData,$kjData,1);
+}
+function bddH3($betData,$kjData) {
+    $kjData = _qh($kjData,-3);
+    return rx($betData,$kjData,1);
+}
+function bddZ3($betData,$kjData) {
+    $kjData = substr($kjData,2,5) ;
+    return rx($betData,$kjData,1);
+}
+function bddR3($betData,$kjData,$w) {
+    return ssc_bdd_r1($betData,$kjData,$w);
+}
+function bdwQ32($betData,$kjData) {
+    $kjData = _qh($kjData,3);
+    return rx($betData,$kjData,2);
+}
+function bdwH32($betData,$kjData) {
+    $kjData = _qh($kjData,-3);
+    return rx($betData,$kjData,2);
+}
+
+//四星
+function bddQ4($betData,$kjData) {//前四一码
+    $kjData = _qh($kjData,4);
+    return rx($betData,$kjData,1);
+}
+function bddH4($betData,$kjData) {
+    $kjData = _qh($kjData,-4);
+    return rx($betData,$kjData,1);
+}
+function bddR4($betData,$kjData,$w) {
+    return ssc_bdd_r1($betData,$kjData,$w);
+}
+function bdwQ42($betData,$kjData) {//前四二码
+    $kjData = _qh($kjData,4);
+    return rx($betData,$kjData,2);
+}
+function bdwH42($betData,$kjData) {
+    $kjData = _qh($kjData,-4);
+    return rx($betData,$kjData,2);
+}
+function bdwQ43($betData,$kjData) {//前四三码
+    $kjData = _qh($kjData,4);
+    return rx($betData,$kjData,3);
+}
+function bdwH43($betData,$kjData) {
+    $kjData = _qh($kjData,-4);
+    return rx($betData,$kjData,3);
+}
+//五星一码,五星四码
+function bdd5($betData,$kjData) {
+    return rx($betData,$kjData,1);
+}
+function bdw52($betData,$kjData) {
+    return rx($betData,$kjData,2);
+}
+function bdw53($betData,$kjData) {
+    return rx($betData,$kjData,3);
+}
+function bdw54($betData,$kjData) {
+    return rx($betData,$kjData,4);
+}
+
+
+
+//不定位的任选N,有效开奖号码用位掩码确定; 任三一码,任四一码,
+function ssc_bdd_r1($betData,$kjData,$w) {
+    $kjData = rx_wym($w,$kjData);
+    return rx($betData,$kjData,1);
+}
+
+//任三二码,任四二码,五星二码
+function ssc_bdd_r2($betData,$kjData,$w) {
+    $kjData = rx_wym($w,$kjData);
+    return rx($betData,$kjData,2);
+}
+
+function ssc_bdd_r3($betData,$kjData,$w) {
+    $kjData = rx_wym($w,$kjData);
+    return rx($betData,$kjData,3);
+}
+
+function ssc_bdd_r4($betData,$kjData,$w) {
+    $kjData = rx_wym($w,$kjData);
+    return rx($betData,$kjData,4);
+}
+
+// +----------------------------------------------------------------------
+// |   大 小 单 双
+// +----------------------------------------------------------------------
+
+/**
+ * 前二大小单双
+ * $betData = '大,单';
+ * $kjData  = '5,3,5,7,9' ;
+ * @param  [type] $betData [投注号码]
+ * @param  [type] $kjData  [开奖号码]
+ * @return [type]          [description]
+ */
+function dsQ2($betData,$kjData) {
+    $kjData = _qh($kjData,2);  
+    return dxds($betData,$kjData) ;
+}
+
+/**
+ * 后二大小单双
+ * $betData = '大,单';
+ * $kjData  = '5,3,5,7,9' ;
+ * @param  [type] $betData [投注号码]
+ * @param  [type] $kjData  [开奖号码]
+ * @return [type]          [description]
+ */
+function dsH2($betData,$kjData) {
+    $kjData = _qh($kjData,-2); 
+    return dxds($betData,$kjData) ;
+}
+
+/**
+ * 任选二大小单双
+ * $betData = '大,单,-,-,-';
+ * $kjData  = '6,1,5,7,9' ;
+ * @param  [type] $betData [description]
+ * @param  [type] $kjData  [description]
+ * @return [type]          [description]
+ */
+function dsR2($betData, $kjData) {
+    $kjData  = explode(',',$kjData)  ;
+    $betData = explode(',',$betData) ;
+    foreach ($betData as $key=>$val) {
+        if ( $val=='-' ) {
+            unset($kjData[$key]) ;
+        }
+    }
+    $betData = implode(',',$betData) ;
+    $kjData  = implode(',',$kjData) ;
+
+    return dxds($betData, $kjData);
+}
+
+//大小单双-前二单式
+function dxdsQ2d($betData,$kjData) {
+    $kjData = _qh($kjData,2); 
+    return ds($betData,$kjData,'compare_dxds');
+}
+
+//大小单双-前二复式
+function dxdsQ2f($betData,$kjData) {
+    $kjData = _qh($kjData,2);
+    return fs($betData,$kjData,'compare_dxds');
+}
+
+//大小单双-后二复式
+function dxdsH2f($betData,$kjData) {
+    $kjData = _qh($kjData,-2); 
+    return fs($betData,$kjData,'compare_dxds');
+}
+
+//大小单双-任二复式
+function dxdsR2f($betData,$kjData) {
+    //return dxdsrw($betData, $kjData, $w);
+    return dxdsr($betData, $kjData);
+}
+
+//大小单双-前三复式
+function dxdsQ3f($betData,$kjData) {
+    $kjData = _qh($kjData,3);
+    return fs($betData,$kjData,'compare_dxds');
+}
+
+//大小单双-后三复式
+function dxdsH3f($betData,$kjData) {
+    $kjData = _qh($kjData,-3);
+    return fs($betData,$kjData,'compare_dxds');
+}
+
+//大小单双-任三复式
+function dxdsR3f($betData,$kjData) {
+    //return dxdsrw($betData, $kjData, $w);
+    return dxdsr($betData, $kjData);
+}
+
+
+
+// +----------------------------------------------------------------------
+// |   时时彩结束
+// +----------------------------------------------------------------------
+
+
+
+// +----------------------------------------------------------------------
+// |    福彩3D
+// +----------------------------------------------------------------------
+
+/**
+ * 三星直选－复式
+ * @param  [type] $betData [投注号码]
+ * @param  [type] $kjData  [开奖号码]
+ * @return [type]          [description]
+ */
+function fc3dFs($betData,$kjData) {
+    return fs($betData,$kjData);
+}
+
+/**
+ * 三星直选－单式
+ * @param  [type] $betData [投注号码]
+ * @param  [type] $kjData  [开奖号码]
+ * @return [type]          [description]
+ */
+function fc3dDs($betData,$kjData) {
+    return ds($betData,$kjData);
+}
+
+/**
+ * 三星组选－组三
+ * @param  [type] $betData [投注号码]
+ * @param  [type] $kjData  [开奖号码]
+ * @return [type]          [description]
+ */
+function fc3dZ3($betData,$kjData) {
+    return z3($betData,$kjData);
+}
+
+/**
+ * 三星组选－组六
+ * @param  [type] $betData [投注号码]
+ * @param  [type] $kjData  [开奖号码]
+ * @return [type]          [description]
+ */
+function fc3dZ6($betData,$kjData) {
+    return z6($betData,$kjData);
+}
+
+/**
+ * 二星直选－前二单式
+ * @param  [type] $betData [投注号码]
+ * @param  [type] $kjData  [开奖号码]
+ * @return [type]          [description]
+ */
+function fc3dQ2d($betData,$kjData) {
+    return rxwfQ2d($betData,$kjData);
+}
+
+/**
+ * 二星直选－前二复式
+ * @param  [type] $betData [投注号码]
+ * @param  [type] $kjData  [开奖号码]
+ * @return [type]          [description]
+ */
+function fc3dQ2f($betData,$kjData) {
+    return rxwfQ2f($betData,$kjData);
+}
+
+/**
+ * 二星直选－后二单式
+ * @param  [type] $betData [投注号码]
+ * @param  [type] $kjData  [开奖号码]
+ * @return [type]          [description]
+ */
+function fc3dH2d($betData,$kjData) {
+    //$kjData = substr($kjData,2,5) ;    
+    //return ds($betData,$kjData);
+    return rxwfH2d($betData,$kjData);
+}
+
+/**
+ * 二星直选－后二复式
+ * @param  [type] $betData [投注号码]
+ * @param  [type] $kjData  [开奖号码]
+ * @return [type]          [description]
+ */
+function fc3dH2f($betData,$kjData) {
+    //$kjData = substr($kjData,2,5) ;    
+    //return fs($betData,$kjData);
+    return rxwfH2f($betData,$kjData);
+}
+
+/**
+ * 二星组选－前二组选单式
+ * @param  [type] $betData [投注号码]
+ * @param  [type] $kjData  [开奖号码]
+ * @return [type]          [description]
+ */
+function fc3dZQ2d($betData,$kjData) {
+    return rxzxQ2d($betData,$kjData);
+}
+
+/**
+ * 二星组选－前二组选复式
+ * @param  [type] $betData [投注号码]
+ * @param  [type] $kjData  [开奖号码]
+ * @return [type]          [description]
+ */
+function fc3dZQ2f($betData,$kjData) {
+    return rxzxQ2f($betData,$kjData);
+}
+
+/**
+ * 二星组选－后二组选单式
+ * @param  [type] $betData [投注号码]
+ * @param  [type] $kjData  [开奖号码]
+ * @return [type]          [description]
+ */
+function fc3dZH2d($betData,$kjData) {
+    //$kjData = substr($kjData,2,5) ;
+    //return z2d($betData,$kjData);
+    return rxzxH2d($betData,$kjData);    
+}
+
+/**
+ * 二星组选－后二组选复式
+ * @param  [type] $betData [投注号码]
+ * @param  [type] $kjData  [开奖号码]
+ * @return [type]          [description]
+ */
+function fc3dZH2f($betData,$kjData) {
+    //$kjData = substr($kjData,2,5) ;
+    //return z2f($betData,$kjData);
+    return rxzxH2f($betData,$kjData);
+}
+
+
+
+/**
+ * 三星定位胆
+ * @param  [type] $betData [投注号码]
+ * @param  [type] $kjData  [开奖号码]
+ * @return [type]          [description]
+ */
+function fc3d3xdw($betData,$kjData) {
+    return dwd5x($betData,$kjData);
+}
+
+/**
+ * 不定胆
+ * @param  [type] $betData [投注号码]
+ * @param  [type] $kjData  [开奖号码]
+ * @return [type]          [description]
+ */
+function fc3dbdd($betData,$kjData) {
+    return bddQ3($betData,$kjData);
+}
+
+/**
+ * 后二大小单双
+ * @param  [type] $betData [投注号码]
+ * @param  [type] $kjData  [开奖号码]
+ * @return [type]          [description]
+ */
+function fc3dH2dxds($betData,$kjData) {
+    //$kjData = substr($kjData,2,5) ;    
+    //return dxds($betData,$kjData);    
+    return dxdsH2f($betData,$kjData);
+}
+
+/**
+ * 任选二大小单双###
+ * @param  [type] $betData [description]
+ * @param  [type] $kjData  [description]
+ * @param  [type] $w       [description]
+ * @return [type]          [description]
+ */
+/*
+function fc3dR2dxds($betData, $kjData, $w) {    
+    $kjData = explode(',',$kjData);
+    $weishu = [4,2,1] ;
+
+    foreach ($weishu as $key=>$val) {
+        if ( ($w&$val)==0 ) unset($kjData[$key]) ;
+    }
+    $kjData = implode(',',$kjData) ;
+
+    return dxds($betData,$kjData);
+}
+*/
+function fc3dR2dxds($betData, $kjData) {  
+    return dxdsR2f($betData,$kjData);
+}
+
+//混合组选
+function fc3dZ36($betData,$kjData) {
+    return z36($betData,$kjData);
+}
+//直选和值
+function fc3d_zxhz($betData,$kjData) {
+    return sxwfQ3_hz($betData,$kjData);
+}
+//组选和值
+function fc3d_zuhz($betData,$kjData) {
+    return sxzxQ3_hz($betData,$kjData);
+}
+
+
+
+// +----------------------------------------------------------------------
+// |   十一选五玩法
+// +----------------------------------------------------------------------
+
+/**
+ * 任选一###
+ * @param  [type] $betData [投注号码]
+ * @param  [type] $kjData  [开奖号码]
+ * @return [type]          [description]
+ */
+function gd11x5R1($betData,$kjData) {
+
+    $data = array_filter(explode(' ',$betData), function($v) use($kjData){
+        if (strpos($kjData,$v)!==false) {
+            return true ;
+        } else {
+            return false ;
+        }
+    }) ;
+
+    return count($data) ;
+}
+
+/**
+ * 任选二
+ * $betData = '02 03' ;
+ * $kjData  = '02,03,04,07,05'   ;
+ * @param  [type] $betData [投注号码]
+ * @param  [type] $kjData  [开奖号码]
+ * @return [type]          [description]
+ */
+function gd11x5R2($betData,$kjData) {
+    return rx($betData, $kjData, 2);
+}
+
+/**
+ * 任选三###
+ * $betData = '02 01 04' ;
+ * $kjData  = '02,03,04,07,05'   ;
+ * @param  [type] $betData [投注号码]
+ * @param  [type] $kjData  [开奖号码]
+ * @return [type]          [description]
+ */
+function gd11x5R3($betData,$kjData) {
+    return rx($betData, $kjData, 3);
+}
+
+/**
+ * 任选四###
+ * $betData = '02 01 04 05' ;
+ * $kjData  = '02,03,04,07,05'   ;
+ * @param  [type] $betData [投注号码]
+ * @param  [type] $kjData  [开奖号码]
+ * @return [type]          [description]
+ */
+function gd11x5R4($betData,$kjData) {
+    return rx($betData, $kjData, 4);
+}
+
+/**
+ * 任选五###
+ * $betData = '02 01 04 05 06' ;
+ * $kjData  = '02,03,04,07,05'   ;
+ * @param  [type] $betData [投注号码]
+ * @param  [type] $kjData  [开奖号码]
+ * @return [type]          [description]
+ */
+function gd11x5R5($betData,$kjData) {
+    return rx($betData, $kjData, 5);
+}
+
+/**
+ * 任选六###
+ * $betData = '02 01 04 05 06 07' ;
+ * $kjData  = '02,03,04,07,05'   ;
+ * @param  [type] $betData [投注号码]
+ * @param  [type] $kjData  [开奖号码]
+ * @return [type]          [description]
+ */
+function gd11x5R6($betData,$kjData) {
+    return rx($betData, $kjData, 6);
+}
+
+/**
+ * 任选七###
+ * $betData = '02 01 04 05 06 07 03' ;
+ * $kjData  = '02,03,04,07,05'   ;
+ * @param  [type] $betData [投注号码]
+ * @param  [type] $kjData  [开奖号码]
+ * @return [type]          [description]
+ */
+function gd11x5R7($betData,$kjData) {
+    return rx($betData, $kjData, 7);
+}
+
+/**
+ * 任选八###
+ * $betData = '02 01 04 05 06 07 08 03' ;
+ * $kjData  = '02,03,04,07,05'   ;
+ * @param  [type] $betData [投注号码]
+ * @param  [type] $kjData  [开奖号码]
+ * @return [type]          [description]
+ */
+function gd11x5R8($betData,$kjData) {
+    return rx($betData, $kjData, 8);
+}
+
+/**
+ * 任选九###
+ * $betData = '02 01 04 05 06 07 08 09 03' ;
+ * $kjData  = '02,03,04,07,05'   ;
+ * @param  [type] $betData [投注号码]
+ * @param  [type] $kjData  [开奖号码]
+ * @return [type]          [description]
+ */
+function gd11x5R9($betData,$kjData) {
+    return rx($betData, $kjData, 9);
+}
+
+/**
+ * 任选十###
+ * $betData = '02 01 04 05 06 07 08 09 03 10' ;
+ * $kjData  = '02,03,04,07,05'   ;
+ * @param  [type] $betData [投注号码]
+ * @param  [type] $kjData  [开奖号码]
+ * @return [type]          [description]
+ */
+function gd11x5R10($betData,$kjData) {
+    return rx($betData, $kjData, 10);
+}
+
+
+/**
+ *  前一直选
+ * $betData = '01' ;
+ * $kjData  = '01,03,02,04,06'   ;
+ * @param  [type] $betData [投注号码]
+ * @param  [type] $kjData  [开奖号码]
+ * @return [type]          [description]
+ */
+function gd11x5Q1($betData,$kjData){
+    return qs($betData, $kjData, 1);
+}
+
+/**
+ *  前二直选
+ * $betData = '01 02,03 04' ;
+ * $kjData  = '01,03,02,04,06'   ;
+ * @param  [type] $betData [投注号码]
+ * @param  [type] $kjData  [开奖号码]
+ * @return [type]          [description]
+ */
+function gd11x5Q2($betData,$kjData){
+    return qs($betData, $kjData, 2);
+}
+
+/**
+ *  前二组选
+ * $betData = '01 02,03 04' ;
+ * $kjData  = '01,03,02,04,06'   ;
+ * @param  [type] $betData [投注号码]
+ * @param  [type] $kjData  [开奖号码]
+ * @return [type]          [description]
+ */
+function gd11x5Q2z($betData,$kjData){
+    $kjData = substr($kjData,0,5) ;
+    return zx($betData, $kjData);
+}
+
+/**
+ * 前三直选###
+ * @param  [type] $betData [投注号码]
+ * @param  [type] $kjData  [开奖号码]
+ * @return [type]          [description]
+ */
+function gd11x5Q3($betData, $kjData) {
+    return qs($betData, $kjData, 3) ;
+}
+
+/**
+ * 前三组选
+ * $betData = '(01) 03 05 07 06' ;
+ * $Data  =  '01,03,05,07,08';
+ * @param  [type] $betData [投注号码]
+ * @param  [type] $kjData  [开奖号码]
+ * @return [type]          [description]
+ */
+function gd11x5Q3z($betData, $kjData) {
+    $kjData = substr($kjData,0,8) ;
+    return zx($betData, $kjData) ;
+}
+
+/**
+ * 前四组选###
+ * @param  [type] $betData [投注号码]
+ * @param  [type] $kjData  [开奖号码]
+ * @return [type]          [description]
+ */
+function gd11x5Q4z($betData, $kjData) {
+    $kjData = substr($kjData,0,11) ;
+    return zx($betData, $kjData) ;
+}
+
+
+// +----------------------------------------------------------------------
+// |   快乐十分玩法
+// +----------------------------------------------------------------------
+
+/**
+ * 任选一 选一数投
+ * $betData = '01 02 03 04'        ;
+ * $kjData  = '01,05,06,07,08'     ;
+ * @param  [type] $betData [投注号码]
+ * @param  [type] $kjData  [开奖号码]
+ * @return [type]          [description]
+ */
+function klsfR1B($betData, $kjData) {
+    $kj = substr($kjData,0,2) ;
+    $result = array_filter(explode(' ',$betData), function($v) use($kj) {
+        if ( strpos($kj,$v)!==false ) {
+            return true;
+        } else {
+            return false ;
+        }
+    }) ;
+
+    return count($result) ;
+}
+
+/**
+ * 任选一 选一红投 ###
+ * @param  [type] $betData [投注号码]
+ * @param  [type] $kjData  [开奖号码]
+ * @return [type]          [description]
+ */
+function klsfR1R($betData, $kjData) {
+    $kj = substr($kjData,0,2) ;
+    $result = array_filter(explode(' ',$betData), function($v) use($kj) {
+        if ( strpos($kj,$v)!==false ) {
+            return true;
+        } else {
+            return false ;
+        }
+    }) ;
+
+    return count($result) ;
+}
+
+/**
+ * klsfR2 ###
+ * @param  [type] $betData [投注号码]
+ * @param  [type] $kjData  [开奖号码]
+ * @return [type]          [description]
+ */
+function klsfR2($betData, $kjData) {
+    return rx($betData, $kjData, 2);
+}
+
+/**
+ * klsfR3 ###
+ * @param  [type] $betData [投注号码]
+ * @param  [type] $kjData  [开奖号码]
+ * @return [type]          [description]
+ */
+function klsfR3($betData, $kjData) {
+    return rx($betData, $kjData, 3);
+}
+
+/**
+ * klsfR4 ###
+ * @param  [type] $betData [投注号码]
+ * @param  [type] $kjData  [开奖号码]
+ * @return [type]          [description]
+ */
+function klsfR4($betData, $kjData) {
+    return rx($betData, $kjData, 4);
+}
+
+/**
+ * klsfR5 ###
+ * @param  [type] $betData [投注号码]
+ * @param  [type] $kjData  [开奖号码]
+ * @return [type]          [description]
+ */
+function klsfR5($betData, $kjData) {
+    return rx($betData, $kjData, 5);
+}
+
+/**
+ * 前二直选 ###
+ * @param  [type] $betData [投注号码]
+ * @param  [type] $kjData  [开奖号码]
+ * @return [type]          [description]
+ */
+function klsfQ2($betData, $kjData) {
+    return qs($betData, $kjData, 2);
+}
+
+/**
+ * 前二组选 ###
+ * @param  [type] $betData [投注号码]
+ * @param  [type] $kjData  [开奖号码]
+ * @return [type]          [description]
+ */
+function klsfQ2z($betData, $kjData) {
+    $kjData = substr($kjData,0,5) ;
+    return zx($betData, $kjData, 2);
+}
+
+/**
+ * 前三直选 ###
+ * @param  [type] $betData [投注号码]
+ * @param  [type] $kjData  [开奖号码]
+ * @return [type]          [description]
+ */
+function klsfQ3($betData, $kjData) {
+    return qs($betData, $kjData, 3);
+}
+
+/**
+ * 前三组选 ###
+ * @param  [type] $betData [投注号码]
+ * @param  [type] $kjData  [开奖号码]
+ * @return [type]          [description]
+ */
+function klsfQ3z($betData, $kjData) {
+    $kjData = substr($kjData,0,8) ;
+    return zx($betData, $kjData, 2);
+}
+
+
+// +----------------------------------------------------------------------
+// |   北京PK10玩法 1至10位开奖
+// +----------------------------------------------------------------------
+
+/**
+ * 冠军
+ * @param  [type] $betData [description]
+ * @param  [type] $kjData  [description]
+ * @return [type]          [description]
+ */
+function kjq1($betData, $kjData) {
+    return qs($betData,$kjData, 1);
+}
+
+/**
+ * 冠亚军
+ * @param  [type] $betData [description]
+ * @param  [type] $kjData  [description]
+ * @return [type]          [description]
+ */
+function kjq2($betData, $kjData) {
+    return qs($betData,$kjData, 2);
+}
+
+/**
+ * 前三
+ * @param  [type] $betData [description]
+ * @param  [type] $kjData  [description]
+ * @return [type]          [description]
+ */
+function kjq3($betData, $kjData) {
+    return qs($betData,$kjData, 3);
+}
+
+/**
+ * 冠亚季选一
+ * @param  [type] $betData [description]
+ * @param  [type] $kjData  [description]
+ * @return [type]          [description]
+ */
+function pk10r123($betData, $kjData) {
+    $kjData = substr($kjData,0,8);
+    return rx($betData, $kjData, 1);
+}
+
+/**
+ * 冠亚总和
+ * @param  [type] $betData [description]
+ * @param  [type] $kjData  [description]
+ * @return [type]          [description]
+ */
+function pk10gy2($betData, $kjData) {
+    $kjData  = explode(',',$kjData) ;
+    $betData = explode(' ',$betData) ;
+    $val     = intval($kjData[0]) + intval($kjData[1]) ;
+    $count   = 0 ;
+    $l=count($betData) ;
+    for ( $i=0; $i<$l; $i++ ) {
+        if ( intval($betData[$i]) == $val ) {
+            ++$count ;
+        }
+    }
+
+    return $count ;
+}
+
+/**
+ * 冠亚组合
+ * $betData = '1-7 1-8 1-9 1-10 2-3';
+ * $kjData  = '1,7,10,7,8'     ;
+ * @param  [type] $betData [description]
+ * @param  [type] $kjData  [description]
+ * @return [type]          [description]
+ */
+function pk10gyzh($betData, $kjData) {
+    $kjData   = explode(',',$kjData) ;
+    $val1 = intval($kjData[0]) ;
+    $val2 = intval($kjData[1]) ;
+    $str1 = $val1.'-'.$val2 ;
+    $str2 = $val2.'-'.$val1 ;
+    $betData = explode(' ',$betData) ;
+    $count   = 0 ;
+    $l = count($betData) ;
+
+    for ($i=0; $i<$l; $i++) {
+        if ($betData[$i]==$str1 || $betData[$i]==$str2) {
+            ++$count ;
+        }
+    }
+
+    return $count ;
+}
+
+/**
+ *  龙虎
+ * @param  [type] $betData [description]
+ * @param  [type] $kjData  [description]
+ * @return [type]          [description]
+ */
+function pk10lh1($betData, $kjData) {
+    return pk10lh($betData, $kjData, 1) ;
+}
+
+/**
+ *  pk10lh2
+ * @param  [type] $betData [description]
+ * @param  [type] $kjData  [description]
+ * @return [type]          [description]
+ */
+function pk10lh2($betData, $kjData) {
+    return pk10lh($betData, $kjData, 2) ;
+}
+
+/**
+ *  pk10lh3
+ * @param  [type] $betData [description]
+ * @param  [type] $kjData  [description]
+ * @return [type]          [description]
+ */
+function pk10lh3($betData, $kjData) {
+    return pk10lh($betData, $kjData, 3) ;
+}
+
+/**
+ *  pk10lh4
+ * @param  [type] $betData [description]
+ * @param  [type] $kjData  [description]
+ * @return [type]          [description]
+ */
+function pk10lh4($betData, $kjData) {
+    return pk10lh($betData, $kjData, 4) ;
+}
+
+/**
+ *  pk10lh5
+ * @param  [type] $betData [description]
+ * @param  [type] $kjData  [description]
+ * @return [type]          [description]
+ */
+function pk10lh5($betData, $kjData) {
+    return pk10lh($betData, $kjData, 5) ;
+}
+
+
+/**
+ * [pk10lh12 description]
+ * @param  [type] $betData [description]
+ * @param  [type] $kjData  [description]
+ * @return [type]          [description]
+ */
+function pk10lh12($betData, $kjData) {
+    $kjData  = explode(',',$kjData) ;
+    $total   = count($kjData)-1 ;
+    $val1    = intval($kjData[0])+intval($kjData[1]) ;
+    $val2    = intval($kjData[$total])+intval($kjData[$total-1]) ;
+    $betData = str_split($betData) ;
+    $count   = 0 ;
+    $l       = count($betData) ;
+
+    for ($i=0; $i<$l; $i++) {
+        if ($betData[$i]=='龙') {
+            if ($val1>$val2) ++$count ;
+        } elseif($betData[$i]=='虎') {
+            if ($val1 <$val2) ++$count;
+        }
+    }
+
+    return $count ;
+}
+
+/**
+ * [pk10lh123 description]
+ * @param  [type] $betData [description]
+ * @param  [type] $kjData  [description]
+ * @return [type]          [description]
+ */
+function pk10lh123($betData, $kjData) {
+    $kjData  = explode(',',$kjData) ;
+    $total   = count($kjData)-1 ;
+    $val1    = intval($kjData[0])+intval($kjData[1])+intval($kjData[2]) ;
+    $val2    = intval($kjData[$total])+intval($kjData[$total-1])+intval($kjData[$total-2]) ;
+    $betData = str_split($betData) ;
+    $count   = 0 ;
+    $l       = count($betData) ;
+
+    for ($i=0; $i<$l; $i++) {
+        if ($betData[$i]=='龙') {
+            if ($val1>$val2) ++$count ;
+        } elseif($betData[$i]=='虎') {
+            if ($val1 <$val2) ++$count;
+        }
+    }
+
+    return $count ;
+}
+
+/**
+ * 前二组选
+ * @param  [type] $betData [description]
+ * @param  [type] $kjData  [description]
+ * @return [type]          [description]
+ */
+function kjzx2($betData, $kjData) {
+    $kjData = substr($kjData,0,5) ;
+    return zx($betData, $kjData);
+}
+
+/**
+ * 前三组选
+ * @param  [type] $betData [description]
+ * @param  [type] $kjData  [description]
+ * @return [type]          [description]
+ */
+function kjzx3($betData, $kjData) {
+    $kjData = substr($kjData,0,8) ;
+    return zx($betData, $kjData);
+}
+
+
+//pk10和11选5都用的qs算法,是简单的前N直选fs(快速判定);
+//02,03 不能用ds和fs,只能用rx
+function pk10_zxQ1($betData, $kjData) {
+    $kjData = _qh($kjData,1);
+    return (int)in_array($kjData, _arr($betData));    
+}
+function pk10_zxQ2d($betData, $kjData) {
+    return rxwfQ2d($betData, $kjData);
+}
+function pk10_zxQ2f($betData, $kjData) {
+    return rxwfQ2f($betData, $kjData);
+}
+function pk10_zuQ2d($betData, $kjData) {
+    return rxzxQ2d($betData, $kjData);
+}
+function pk10_zuQ2f($betData, $kjData) {
+    return rxzxQ2f($betData, $kjData);
+}
+
+function pk10_zxQ3d($betData, $kjData) {
+    return sxwfQ3d($betData, $kjData);
+}
+function pk10_zxQ3f($betData, $kjData) {
+    return sxwfQ3f($betData, $kjData);
+}
+function pk10_zuQ3d($betData, $kjData) {
+    //所选号码一定在10个开奖号码中;//判定在前3个中;
+    $kjData = _qh($kjData,3);
+    return ds($betData, $kjData, 'array_equal');
+}
+function pk10_zuQ3f($betData, $kjData) {
+    $kjData = _qh($kjData,3);
+    //return rx($betData, $kjData, 3);
+    return (int)array_contain(_arr($betData),_arr($kjData));
+}
+
+
+
+
+/**
+ * 北京快乐8
+ * @param  [type] $betData [description]
+ * @param  [type] $kjData  [description]
+ * @return [type]          [description]
+ */
+function k8R1($betData, $kjData){
+    $kjData = explode('|',$kjData);
+    return rx($betData, $kjData[0], 1);
+}
+
+/**
+ * k8R2
+ * @param  [type] $betData [description]
+ * @param  [type] $kjData  [description]
+ * @return [type]          [description]
+ */
+function k8R2($betData, $kjData){
+    $kjData = explode('|',$kjData);
+    return rx($betData, $kjData[0], 2);
+}
+
+/**
+ * k8R3
+ * @param  [type] $betData [description]
+ * @param  [type] $kjData  [description]
+ * @return [type]          [description]
+ */
+function k8R3($betData, $kjData){
+    $kjData = explode('|',$kjData);
+    return rx($betData, $kjData[0], 3);
+}
+
+/**
+ * k8R4
+ * @param  [type] $betData [description]
+ * @param  [type] $kjData  [description]
+ * @return [type]          [description]
+ */
+function k8R4($betData, $kjData){
+    $kjData = explode('|',$kjData);
+    return rx($betData, $kjData[0], 4);
+}
+
+/**
+ * k8R5
+ * @param  [type] $betData [description]
+ * @param  [type] $kjData  [description]
+ * @return [type]          [description]
+ */
+function k8R5($betData, $kjData){
+    $kjData = explode('|',$kjData);
+    return rx($betData, $kjData[0], 5);
+}
+
+/**
+ * k8R6
+ * @param  [type] $betData [description]
+ * @param  [type] $kjData  [description]
+ * @return [type]          [description]
+ */
+function k8R6($betData, $kjData){
+    $kjData = explode('|',$kjData);
+    return rx($betData, $kjData[0], 6);
+}
+
+/**
+ * k8R7
+ * @param  [type] $betData [description]
+ * @param  [type] $kjData  [description]
+ * @return [type]          [description]
+ */
+function k8R7($betData, $kjData){
+    $kjData = explode('|',$kjData);
+    return rx($betData, $kjData[0], 7);
+}
+
+
+// +----------------------------------------------------------------------
+// |  快3 - 万金娱乐平台
+// +----------------------------------------------------------------------
+
+/**
+ * 和值###
+ * @param  [type] $betData [description]
+ * @param  [type] $kjData  [description]
+ * @return [type]          [description]
+ */
+function k3hz($betData, $kjData) {
+    $kjData  = explode(',',$kjData) ;
+    $val     = intval($kjData[0])+intval($kjData[1])+intval($kjData[2]) ;
+    $betData = explode(' ',$betData) ;
+
+    
+    $count   = 0 ;
+    $l       = count($betData) ;
+
+    for ( $i=0; $i<$l; $i++) {
+        if ( intval($betData[$i])==$val ) {++$count ;}
+    }
+    return $count ;
+    
+    //return (int)in_array($val,$betData);
+}
+
+/**
+ * 三同号通选###
+ * @param  [type] $betData [投注号码]
+ * @param  [type] $kjData  [开奖号码]
+ * @return [type]          [description]
+ */
+function k33tx($betData,$kjData) {
+    
+    $kjData = str_replace(',','',$kjData);
+    $count  = 0 ;
+    if ( strpos($betData,$kjData)!==false ) ++$count;
+
+    return $count ;
+    
+    //return (int)preg_match('/^(\d),\1,\1/',$kjData);
+}
+
+/**
+ * 三连号通选###
+ * @param  [type] $betData [投注号码]
+ * @param  [type] $kjData  [开奖号码]
+ * @return [type]          [description]
+ */
+function k33ltx($betData,$kjData) {
+
+    //算法前提: 开奖号码已经排序,123
+    return k33tx($betData,$kjData) ;
+    /*    
+    $kjData = explode(',',$kjData);
+    sort($kjData);
+    $kjData = implode(',',$kjData);
+    */    
+}
+
+/**
+ * 三同号单选###
+ * @param  [type] $betData [投注号码]
+ * @param  [type] $kjData  [开奖号码]
+ * @return [type]          [description]
+ */
+function k33dx($betData,$kjData) {
+    //算法前提: 开奖号码已经排序,双数在前,比如441,
+    $winStatus = 0;
+    $betData = str_replace('*','',$betData);
+    $betData = explode(' ',$betData);
+    $kjData  = explode(',',$kjData);
+    $kj      = [] ;
+
+    $kj[] = $kjData[0].$kjData[1] ;
+    $kj[] = $kjData[2] ;
+
+    foreach ($kj as $key=>$kjNumber) {
+        if ( strpos($betData[$key],$kjNumber)!==false ) {
+            ++$winStatus ;break ;
+        }
+    }
+
+    return $winStatus;
+
+    /*
+    if(!preg_match('/^(\d),\1,\1/',$kjData))return 0;
+
+    $kjData = str_replace(',','',$kjData);
+
+    $count  = 0 ;
+    if ( strpos($betData,$kjData)!==false ) ++$count;
+    return $count ;
+    */
+}
+
+/**
+ * 二同号复选 ###
+ * @param  [type] $betData [投注号码]
+ * @param  [type] $kjData  [开奖号码]
+ * @return [type]          [description]
+ */
+function k32fx($betData,$kjData) {
+    return k33dx($betData,$kjData);
+}
+
+/**
+ * 三不同号 ###
+ * @param  [type] $betData [投注号码]
+ * @param  [type] $kjData  [开奖号码]
+ * @return [type]          [description]
+ */
+function k33x($betData,$kjData) {
+    return zx($betData,$kjData);
+}
+
+/**
+ * 二不同号 ###
+ * @param  [type] $betData [投注号码]
+ * @param  [type] $kjData  [开奖号码]
+ * @return [type]          [description]
+ */
+function k32x($betData,$kjData) {
+    return k33x($betData,$kjData);
+}
+
+/**
+ * 二同号单选
+ * @param  [type] $betData [投注号码]
+ * @param  [type] $kjData  [开奖号码]
+ * @return [type]          [description]
+ */
+function k32dx($betData, $kjData) {
+    $betData = explode(' ',$betData) ;
+    $kjData  = str_replace(',','',$kjData) ;
+    $count   = 0 ;
+    $l = count($betData) ;
+
+    for ($i=0; $i<$l; $i++) {
+        if ( strpos($betData[$i],$kjData)!==false ) ++$count ;
+    }
+    return $count ;
+}
+
+
+
+
+
+
+
+// +----------------------------------------------------------------------
+// |   常用算法
+// +----------------------------------------------------------------------
+
+/**
+ * 组合算法
+ * @param array $a
+ * @param int $m
+ * @return array|array[]|unknown[][]
+ */
+function combin($a, $m) {
+    $r = array();
+
+    $n = count($a);
+    if ($m <= 0 || $m > $n) {
+        return $r;
+    }
+
+    for ($i=0; $i<$n; $i++) {
+        $t = array($a[$i]);
+        if ($m == 1) {
+            $r[] = $t;
+        } else {
+            $b = array_slice($a, $i+1);
+            $c = combin($b, $m-1);
+            foreach ($c as $v) {
+                $r[] = array_merge($t, $v);
+            }
+        }
+    }
+
+    return $r;
+}
+
+/**
+ * 排列算法
+ * @param array $a
+ * @param int $m
+ * @return array|array[]|unknown[]
+ */
+function permutation($a, $m) {
+    $r = array();
+
+    $n = count($a);
+    if ($m <= 0 || $m > $n) {
+        return $r;
+    }
+
+    for ($i=0; $i<$n; $i++) {
+        $b = $a;
+        $t = array_splice($b, $i, 1);
+        if ($m == 1) {
+            $r[] = $t;
+        } else {
+            $c = permutation($b, $m-1);
+            foreach ($c as $v) {
+                $r[] = array_merge($t, $v);
+            }
+        }
+    }
+    return $r;
+}
+
+/**
+ * 求$n的阶乘
+ * @param int $n
+ * @return number
+ */
+function factorial($n) {
+    return array_product(range(1, $n));
+}
+
+/**
+ * $n的$m排列数
+ * @param int $n
+ * @param int $m
+ * @return number
+ */
+function A($n, $m) {
+    return factorial($n)/factorial($n-$m);
+}
+
+/**
+ * $n的$m组合数
+ * @param int $n
+ * @param int $m
+ * @return number
+ */
+function C($n, $m) {
+    return A($n, $m)/factorial($m);
+}
+
+/**
+ * 大小单双
+ *
+ * @params bet      投注列表：大单,小单
+ * @params data     开奖所需的那几位号码：4,5
+ *
+ * @return          返回中奖注数
+ */
+function dxds($betData, $kjData) {
+    $kjData = explode(',',$kjData) ;
+    $bets   = [] ;
+    $data   = [] ;
+    
+    array_filter(explode(',', $betData),function($item) use (&$bets) {
+        $bets[] = mbStrSplit($item);
+    } ) ;
+        
+        $descar = call_user_func_array('descartesAlgorithm', $bets) ;
+        
+        $data = array_filter($descar, function ($v) use($kjData,&$data) {
+            
+            $o = [
+                '大'=> '56789',
+                '小'=> '01234',
+                '单'=> '13579',
+                '双'=> '02468',
+            ];
+            
+            if ( ( strpos($o[$v[0]],$kjData[0])!==false ) && ( strpos($o[$v[1]],$kjData[1])!==false ) ) {
+                return true ;
+            } else {
+                return false ;
+            }
+        });
+            
+            return count($data) ;
+}
+
+
+//任2-3大小单双,位掩码模式
+function dxdsrw($betData, $kjData, $w) {
+    $kjData = rx_wym($w,$kjData);
+    return fs($betData,$kjData,'compare_dxds');
+}
+
+//任选大小单双,通配符模式
+function dxdsr($betData, $kjData) {
+    $kjData = rx_tpf($betData,$kjData);
+    return fs($betData,$kjData,'compare_dxds');
+}
+
+/**
+ * 单式算法
+ * @param string $bet 投注列表：1,5,2,9|3,2,4,6
+ * @param string $data 开奖所需的那几位号码：4,5,3,6
+ * @return 返回中奖注数
+ */
+function ds($bet, $kjData, $fn='compare_digit'){
+    $bets = explode('|',$bet);
+    $counter = 0;
+    //array_filter($bets,function($val) use ($kjData,&$counter){
+        
+    foreach($bets as $val){
+        if($fn($val,$kjData)){
+            $counter++;
+        }
+    }
+
+    return $counter;
+}
+
+
+/**
+ * 常用复式算法
+ *
+ * @params bet      投注列表：123,45,2,59 (投注号码)
+ * @params kjData     开奖所需的那几个：3,4,2,9(中奖号码)
+ * @return          返回中奖注数
+ */
+function fs($bet,$kjData,$fn='compare_digit',$reject = null) {
+    $bets = array();
+  
+    //1.将复选值分割
+    /*
+    array_filter(explode(',', $bet),function($item) use ($data,&$bets) {
+        $bets[] = str_split($item);
+    } ) ;
+    */
+    array_filter(_arr($bet),function($item) use (&$bets) {
+        $bets[] = _arr($item);
+    } ) ;
+    
+    //2.计算该复选值的笛卡尔积
+    $descar = call_user_func_array('descartesAlgorithm', $bets) ;
+    
+    
+    if($reject){
+        foreach ($descar as $key => $val){
+            if($reject($val)){
+                //array_slice($descar,$key,1);
+                unset($descar[$key]);
+            }
+        }
+    }
+    
+    /*
+    //3.对比是否为中奖号
+    $winStatus = comparisonWin($descar,$data) ;
+    return $winStatus;
+    */
+    
+    $count = 0 ;
+    foreach ($descar as $val){
+        if($fn($val,$kjData)){
+            ++$count;
+        }
+    }
+    return $count;
+}
+
+function compare_digit($arr,$kjData) {
+    //$tmp = implode(',',$arr) ;
+    $tmp = implode(',',_arr($arr)) ;
+    $kjData = implode(',',_arr($kjData)) ;
+    return $tmp == $kjData;
+}
+
+function compare_dxds($arr,$kjData) {
+    rx_tpf_trim($arr,$kjData);
+    $arr = _arr($arr);
+    $kjData = _arr($kjData);
+    $kjData2 = [];
+    foreach ($kjData as $ball){
+        $dxds[] = ($ball>=5)?'大':'小';
+        $dxds[] = ($ball%2==0)?'双':'单';
+        $kjData2[] = $dxds;
+    }
+    foreach ($arr as $key=>$val){
+        if(!in_array($val, $kjData2[$key])){
+            return false;
+        }
+    }
+    return true;
+}
+
+/**
+ * 根据笛卡尔积和中奖号码, 对比是否中奖
+ * @param  [type] $descar    [复式投注笛卡尔积]
+ * @param  [type] $WinNumber [中奖号码]
+ * @return [type]            [description]
+ */
+function comparisonWin($descar,$WinNumber) {
+    $count = 0 ;
+    foreach ( $descar as $val ) {
+        $tmp = implode(',',$val) ;
+        if ( $tmp == $WinNumber) {
+            ++$count;
+        }
+    }
+    return $count ;
+}
+
+/**
+ * 笛卡尔乘积算法
+ * useage:
+ * (descartesAlgorithm(2, [4,5], [6,0],[7,8,9],...));
+ * (descartesAlgorithm([2,3,4], [4,5], [6,0],[7,8,9],...));
+ */
+function descartesAlgorithm() {
+    $data   = func_get_args();
+    $result = array();
+
+    //笛卡尔积X
+    foreach($data[0] as $item) {
+        $result[] =  is_array($item) ? $item :[$item];
+    }
+
+    //计算笛卡尔积
+    $cnt   = count($data);
+    for($i = 1; $i < $cnt; $i++) {
+        $result = combineArray($result,$data[$i]);
+    }
+
+    return $result;
+}
+
+/**
+ * 两个数组的笛卡尔积
+ *
+ * @param unknown_type $arr1
+ * @param unknown_type $arr2
+ */
+function combineArray($arr1,$arr2) {
+    $result = array();
+    foreach ($arr1 as $item1) {
+        foreach ($arr2 as $item2) {
+            $temp     = $item1 ;
+            $temp[]   = $item2 ;
+            $result[] = $temp ;
+        }
+    }
+    return $result;
+}
+
+/**
+ * 组120
+ *
+ * @params bet      投注列表：'567894'
+ * @params data     开奖所需的那几位号码：'2,3,4,5,6'
+ *
+ * @return          返回中奖注数
+ */
+function z120($betData, $kjData) {
+
+    $winStatus = 0 ;
+    $bet = [];
+
+    //1.豹子不算中奖
+    if (preg_match('/^(\d),\1,\1,\1,\1/',$kjData)) return $winStatus ;
+
+    //2.对不同投注方式进行处理,转化成相同的数据结构
+    if (strpos($betData,',') !==false) {
+        // 录入式投注
+        $bet = explode(',',$betData) ;
+    } else {
+        // 点击按钮投注
+        array_filter( permutation(str_split($betData),5), function($v) use(&$bet) {
+            $bet[] =  implode(',',$v) ;
+        }) ;
+    }
+
+    //3.然后对比投注号码和中奖号码,得出客户是否中奖
+    foreach ($bet as $key=>$numberList) {
+        if (strpos($kjData,$numberList) !== false) {
+            ++$winStatus ;
+            break;
+        }
+    }
+
+    return $winStatus;
+}
+
+
+
+
+
+/**
+ * 组二复式
+ *
+ * @param betData 投注列表：135687
+ * @param kjData  开奖所需的那几位号码：87
+ * @return          返回中奖注数
+ */
+function z2f_old($betData, $kjData) {
+   $winStatus = 0 ;
+   if(array_contain(_arr($betData),_arr($kjData))){++$winStatus;}
+   return $winStatus ;
+   /*
+    $winStatus = 0 ;
+    $kjData1   = $kjData ;
+    $kjData    = explode(',',$kjData);
+    $kjData = implode(',', array_reverse($kjData) )  ; //数组元素顺序颠倒
+
+    array_filter(combin(str_split($betData),2), function($v) use(&$winStatus,$kjData,$kjData1) {
+        $v = implode(',',$v) ;
+        if ( ($v == $kjData) || ($v==$kjData1) ) {
+            ++$winStatus ;
+        }
+    });
+    return $winStatus ;
+   */
+}
+
+
+/**
+ * 组二单式
+ *
+ * @params betData 投注列表：1,3|5,6|8,7
+ * @params kjData  开奖所需的那几位号码：4,5
+ * @return          返回中奖注数
+ */
+function z2d_old($betData, $kjData){
+    $winStatus = 0 ;
+
+
+    $kjData1  = array_reverse(_arr($kjData)) ;
+
+    array_filter(explode('|',$betData), function($v) use(&$winStatus,$kjData,$kjData1) {
+        $kjData1 = implode(',', $kjData1);
+        if ( ($v==$kjData) || ($v==$kjData1) ) {
+            ++$winStatus ;
+        }
+    });
+
+    return $winStatus;
+}
+
+
+function z2f($betData, $kjData){
+    return z2($betData, $kjData);
+}
+
+function z2d($betData, $kjData){
+    return z2($betData, $kjData);
+}
+
+function z2_my1($betData, $kjData){
+
+    // 对子不算中奖
+    if (preg_match('/^(\d),\1/',$kjData)) return 0;
+    
+    //单式
+    if (strpos($betData,'|')!==false) {
+        $bets = _arr($betData);
+    } else {
+        $bets = combin(_arr($betData),2);
+    }
+    
+    foreach ($bets as $bet){
+        if(array_equal($bet, $kjData)){
+            $count++;
+        }
+    }
+    
+    return $count;
+}
+
+function z2_my2($betData, $kjData){
+    
+    // 对子不算中奖
+    if (preg_match('/^(\d),\1/',$kjData)) return 0;
+    
+    //单式
+    if (strpos($betData,'|')!==false) {
+        return ds($betData, $kjData, 'array_equal');//组选单式
+    } else {
+        return rx($betData, $kjData, 2);
+    }    
+}
+
+//快速判定,因为复式最多中一注
+function z2($betData, $kjData){
+    
+    // 对子不算中奖
+    if (preg_match('/^(\d),\1/',$kjData)) return 0;
+    
+    //单式
+    if (strpos($betData,'|')!==false) {
+        return ds($betData, $kjData, 'array_equal');//组选单式
+    } else {
+        return (int)array_contain(_arr($betData),_arr($kjData));
+    }
+}
+
+//快速判定,因为复式最多中一注,1234,'1,1,2'
+function z3($betData,$kjData) {
+    
+    // 豹子不算中奖
+    if (preg_match('/^(\d),\1,\1/',$kjData)) return 0;
+    // 没有对子算不中奖
+    if(!preg_match('/^(\d)(,\d)?,\1/',$kjData)) return 0;
+    
+    //单式
+    if (strpos($betData,'|')!==false) {
+        return ds($betData, $kjData, 'array_equal');//组选单式
+    } else {
+        return (int)array_contain(_arr($betData),_arr($kjData));
+    }
+}
+
+
+//快速判定,因为复式最多中一注,1234,'1,2,3'
+function z6($betData,$kjData) {
+    
+    // 豹子不算中奖
+    if (preg_match('/^(\d),\1,\1/',$kjData)) return 0;
+    // 对子算不中奖
+    if(preg_match('/^(\d)(,\d)?,\1/',$kjData)) return 0;
+    
+    //单式
+    if (strpos($betData,'|')!==false) {
+        return ds($betData, $kjData, 'array_equal');//组选单式
+    } else {
+        return (int)array_contain(_arr($betData),_arr($kjData));
+    }
+}
+
+//混合组选 '001|123', 中N个组3,N个组6;
+function z36($betData,$kjData) {
+
+    $bets = explode('|',$bet);
+    $counter = 0;
+
+    $z6 = count(array_unique(_arr($kjData)))==3;
+
+    foreach($bets as $bet){
+        
+        $z6_bet = count(array_unique(_arr($bet)))==3;
+        
+        if($z6&&$z6_bet){
+            if(array_equal($bet,$kjData)){
+                $z6_cnt ++ ;
+            }
+        }
+        
+        if(!$z6&&!$z6_bet){
+            if(array_equal($bet,$kjData)){
+                $z3_cnt ++ ;
+            }
+        }
+    };
+    
+    return [$z3_cnt,$z6_cnt];
+}
+/**
+ *  组三
+ *
+ *  @param betData  投注列表：135687或112,334
+ *  @param kjData   开奖所需的那几位号码：4,5,3
+ *  @return         返回中奖注数
+ */
+function z3_old($betData,$kjData) {
+    $winStatus = 0 ;
+    $bet = [] ;
+    $reg = '/(\d)\d?\1/' ;
+    
+    // 豹子不算中奖
+    if (preg_match('/^(\d),\1,\1/',$kjData)) return $winStatus;
+    
+    if ( (strpos($betData,',')!==false ) || preg_match($reg,$betData) ) {
+        //单选处理
+        $betData = explode(',',$betData);
+        $kjData  = explode(',',$kjData);
+        $kjData  = implode('',$kjData);
+        $m       = [] ;
+        preg_match($reg,$kjData,$m);
+        if(!$m) return 0 ; //如果三位数没有相同,则不中奖
+        $m = $m[1] ;
+        $s = str_replace($m,'',$kjData) ; //不重复的位数
+        
+        $result = array_filter($betData,function($v) use($m,$s){
+            
+            if ( str_replace($m,'',$v) == $s) {
+                return true;
+            } else {
+                return false ;
+            }
+        });
+            
+    } else {
+        
+        //组三要求所选号码至少两个数字相同;
+        //$kjData = explode(',',$kjData);
+        //$kjData = array_unique($kjData);
+        //if(array_contain(_arr($betData),_arr($kjData))){return 1;}
+        
+        
+        //得到投注组合号码
+        array_filter(combin(str_split($betData),2),function($v) use(&$bet) {
+            $bet[] = implode(',',$v) ;
+        } );
+            $kjData = explode(',',$kjData);
+            
+            $result = array_filter($bet,function($v) use($kjData) {
+                foreach ($kjData as $data) {
+                    if (strpos($v,$data)===false) {
+                        return false ;
+                    }
+                }
+                return true ;
+            });
+                
+    }
+    
+    return count($result) ;
+    
+    //TODO::单选暂时还没有用到,所以保留未转换JS源码,便于日后调试
+    // if(bet.indexOf(',')!=-1||reg.test(bet)){
+    // // 单选处理
+    // bet=bet.split(',');
+    // data=data.split(',').join('');
+    
+    // var m=data.match(reg);
+    // if(!m) return 0;        // 如果三位数没有相同，则不中奖
+    // m=m[1];     // 重复位数
+    // reg=new RegExp(m, 'g')
+    // var s=data.replace(reg,''); // 不重复的位数
+    
+    // return bet.filter(function(v){
+    //     //console.log('v:%s, s:%s', v, s);
+    //     //console.log(reg);
+    //     return v.replace(reg,'')==s;
+    // }).length;
+    // }else{
+    // // 复选处理
+    // bet=combine(bet.split(''),2).map(function(v){return v.join(',')});
+    // data=data.split(',');
+    // return bet.filter(function(v){
+    //     var i=0;
+    //     for(i in data){
+    //         if(v.indexOf(data[i])==-1) return false;
+    //     }
+    //     return true;
+    // })
+    // .length;
+    //  }
+}
+
+/**
+ * 组六
+ *
+ * @params betData 投注列表：135687
+ * @params kjData  开奖所需的那几位号码：4,5,3
+ * @return         返回中奖注数
+ */
+function z6_old($betData, $kjData) {
+    $winStatus = 0 ;
+    $bet = [] ;
+      // 豹子不算中奖
+     if (preg_match('/^(\d),\1,\1/',$kjData)) return $winStatus;
+    
+        
+        if ( strpos($betData,',')!==false ) {
+                // 录入式投注 '123,139'
+                $bet = explode(',',$betData);
+                foreach($bet as &$item){
+                  $item = implode(',',str_split($item));
+                }
+        } else {
+                // 点击按钮投注
+                array_filter(combin(str_split($betData),3), function($v) use(&$bet) {
+                    $bet[] = implode(',',$v) ;
+                }) ;
+        }
+
+        array_filter($bet, function($v)  use($kjData,&$winStatus) {
+
+             if (strpos($kjData,$v)!==false) {
+               ++$winStatus;
+            }
+        });
+      
+      return $winStatus ;
+}
+
+
+
+/**
+ * 组选
+ * $betData = '01 02 03 04'        ;
+ * $kjData  = '02,01,03,04,05'     ;
+ * @param  [type] $betData [description]
+ * @param  [type] $kjData  [description]
+ * @return [type]          [description]
+ */
+function zx($betData, $kjData) {
+    $m   = '';
+    $reg = '/^\(([\d ]+)\)([\d ]+)$/';
+    $kjData = explode(',',$kjData) ;
+
+    if( preg_match($reg,$betData,$m)){
+        // 胆拖投注
+        $d =  explode(' ',$m[1]) ;
+        //判断胆拖是否在开奖号中
+        foreach ($d as $val) {
+            if ( !in_array($val,$kjData)) { return 0 ;}
+        }
+
+        $result = array_filter( combin( explode(' ',$m[2]), count($kjData)-count($d) ), function($v) use($kjData) {
+            $status = true ;
+            //如果有一个不满足,则整个表达式为假
+            foreach ($v as $key=>$number) {
+                if ( !in_array($number,$kjData) ){
+                    $status = false ; break;
+                }
+            }
+            return $status ;
+        } );
+        //未转换前源码
+        // var d=m[1].split(' ');
+        // if(d.some(function(c){return kj.indexOf(c)==-1})) return 0;
+        // return combine(m[2].split(' '), kj.length-d.length)
+        // .filter(function(v){
+        //     return v.every(function(c){
+        //         return kj.indexOf(c)!=-1;
+        //     });
+        // }).length;
+
+    } else {
+        // 普通投注
+        $result = array_filter( combin(explode(' ',$betData),count($kjData)), function($v) use($kjData) {
+            $count = 0;
+            foreach ($v as $betNumber) {
+                if ( in_array($betNumber,$kjData) ) {
+                    ++$count ;
+                }
+            }
+
+            if ($count==count($v)) return true ;
+        }) ;
+
+    }
+    return count($result);
+}
+
+
+/**
+ * 常用前选算法
+ *
+ * @param betData  投注列表：01,02,03,04
+ * @param kjData   开奖所需的那几个：04,05
+ * @param weizhu   开奖前几位数
+ * @return          返回中奖注数
+ */
+function qs($betData, $kjData, $weishu) {
+    $count   = 0 ;
+    $betData = explode(',',$betData) ;
+    $kjData  = substr($kjData,0,($weishu*3-1)) ;
+    $kjData  = explode(',',$kjData);
+
+    foreach ($kjData as $key=>$val) {
+        if ( strpos($betData[$key],$val)!==false ) {
+            ++$count ;
+        }
+    }
+
+    //指定位数的投注号码均中奖,则返回真
+    return ($count==count($kjData)) ? 1 : 0 ;
+}
+
+
+
+/**
+ *   任选处理
+ * @param  [type] $betData [投注号码]
+ * @param  [type] $kjData  [开奖号码]
+ * @param  [type] $num     [选几个]
+ * @return [type] $fn      [判定函数]
+ * @return [type] $hit     [判定函数参数,命中次数,0表示全中]
+ */
+function rx($betData,$kjData,$num,$hit=0,$fn='any_in') {
+    $m   = '' ;
+    $reg = '/^\(([\d ]+)\)([\d ]+)$/';
+    $bet = [] ;
+    $result = [] ;
+    if (preg_match($reg,$betData,$m)) {
+        // 胆拖投注
+        $d = explode(' ',$m[1]) ;     
+      /*
+        //胆拖是否中奖判断
+        foreach ($d as $val) {
+            if ( strpos($kjData,$val)===false ) { return 0 ;}
+        }
+         
+        //判断其他号码是否中奖
+        $result = array_filter( combin(explode(' ',$m[2]),$num-count($d)), function($v) use($kjData,$num,$d)  {
+            $count = 0 ;
+
+            if( $num<5 ) {
+                foreach ($v as $number) {
+                    if ( strpos($kjData,$number)!==false) ++$count ;
+                }
+
+                if ($count==count($v)) return true; //里面的每一个元素都通过返回真
+
+            } else {
+                $v = array_merge($v,$d); //胆拖和投注号码合并
+                $kjData = explode(',',$kjData) ;
+                //判断
+                foreach ($kjData as $kjNumber) {
+                    if ( in_array($kjNumber,$v) ) ++$count ;
+                }
+                if ($count==count($v)) return true; //里面的每一个元素都通过返回真
+
+            }
+            return false ;
+        });
+        */
+         //gd11x5R7('(01 02 03 04 05 06)07 08 09 10 11' , '01,02,03,04,05'); 任7 6胆码 被判定为 未中;
+        $result = array_filter( combin(explode(' ',$m[2]),$num-count($d)), function($v) use($kjData,$num,$d,$fn,$hit)  {
+            $v = array_merge($v,$d);//胆拖和投注号码合并                    
+            return $fn($v,$kjData,$hit);
+
+            /*
+            $kjData = _arr($kjData);
+            if( $num > count($kjData) ){
+               if(array_contain($v,$kjData))return true;
+            }else{
+               if(array_contain($kjData,$v))return true;
+            }            
+            return false ;
+            */
+        });     
+        //  var d=m[1].split(' ');
+
+        // if(d.some(function(c){return kj.indexOf(c)==-1})) return 0;
+
+        // return combine(m[2].split(' '), num-d.length)
+        // .filter(function(v){
+        //     if(num<5){
+        //         return v.every(function(c){
+        //             return kj.indexOf(c)!=-1;
+        //         });
+        //     }else{
+        //         v=v.concat(d);
+        //         return kj.split(',').every(function(c){
+        //             return v.indexOf(c)!=-1;
+        //         });
+        //     }
+        // }).length;
+
+    } else {
+        // 普通投注
+        $bet = [] ;
+
+        //$result = array_filter( combin(explode(' ',$betData),$num) , function($v) use($kjData,$num,$fn,$hit) {
+        $result = array_filter( combin(_arr($betData),$num) , function($v) use($kjData,$num,$fn,$hit) {
+            /*
+            $count  = 0 ;            
+            if ( $num<5 ) {
+                //一组数据中都在开奖号码中,即为中奖
+                foreach ($v as $number) {
+                    if ( strpos($kjData,$number)!==false ) {
+                        ++$count ;
+                    }
+                }
+                if ($count==count($v)) return true; //里面的每一个元素都通过返回真
+
+            } else {
+                $kjData = explode(',',$kjData) ;
+                foreach ($kjData as $kjNumber) {
+                    if ( in_array($kjNumber,$v) ) {
+                        ++$count ;
+                    }
+                }
+                if ($count==count($v)) return true; //里面的每一个元素都通过返回真
+            }
+            */
+            /*
+            $kjData = _arr($kjData);
+            if( $num > count($kjData) ){
+               //gd11x5R6中每注6个号码,开奖号码5个;
+               if(array_contain($v,$kjData))return true;
+            }else{
+               //k8R6中没住6个号码,开奖号码20个;
+               if(array_contain($kjData,$v))return true;
+            }            
+            return false ;
+            */
+            return $fn($v,$kjData,$hit);
+        });
+    }
+
+    return count($result) ;
+}
+
+
+/**
+ * 龙虎处理
+ * @param  [type] $betData [投注号码]
+ * @param  [type] $kjData  [开奖]
+ * @param  [type] $num     [description]
+ * @return [type]          [description]
+ */
+function pk10lh($betData, $kjData, $num) {
+    $kjData  = explode(',',$kjData)     ;
+    $total   = count($kjData); // 统计一共几个开奖号
+    $val1    = intval($kjData[$num-1])  ;  //大位
+    $val2    = intval($kjData[$total-$num]) ; //小位
+    $betData = mbStrSplit($betData) ;
+    $count   = 0 ;
+    $l       = count($betData) ;
+
+    foreach ($betData as $betNumber) {
+        if ($betNumber=='龙') {
+            if ($val1>$val2) ++$count;
+        } elseif ($betNumber=='虎') {
+            if ($val1 < $val2) ++$count;
+        }
+    }
+    return $count;
+}
+
+
+/**
+ *  截取指定位数值
+ * @param  [type] $kjData   [开奖数据]
+ * @param  [type] $symbol   [截取符号]
+ * @param  [type] $position [截取位置]
+ * @return [type]           [截取后的数据]
+ */
+function removeFromList($kjData,$symbol,$position) {
+    $arguments = func_get_args() ;
+    $count     = count($arguments) ;
+    $kjData    = explode($symbol,$kjData) ;
+
+    for ( $i=2; $i<$count; $i++ ) {
+        unset($kjData[$arguments[$i]-1]) ;  //这里数组的开始索引是0 所以这里有-1操作
+    }
+
+    return implode(',',$kjData) ; //转成字符串返回
+}
+
+
+/**
+ *  将数据指定位数替换成指定符号
+ * @param  [type] $content [要替换的内容]
+ * @param  [type] $index   [索引位置]
+ * @param  string $s       [数据分割符号]
+ * @return [type]          [替换后的数据]
+ */
+function replaceList($kjData,$content,$index,$s=',') {
+    $kjData  = explode($s,$kjData);
+    $kjData[$index] = $content ;
+    return implode($s,$kjData) ;
+}
+
+/**
+ * 截取中文字符串
+ * @param  [type]  $string [description]
+ * @param  integer $len    [description]
+ * @return [type]          [description]
+ */
+function mbStrSplit ($string, $len=1) {
+    $start = 0;
+    $strlen = mb_strlen($string);
+    while ($strlen) {
+        $array[] = mb_substr($string,$start,$len,"utf8");
+        $string = mb_substr($string, $len, $strlen,"utf8");
+        $strlen = mb_strlen($string);
+    }
+    return $array;
+}
+
+//格式化打印调试函数
+function dd($arr) {
+    echo '<pre>'  ;
+    print_r($arr) ;
+    die ;
+}
+
+// 字符串分隔次序: '|' > ',' > ' '
+function _arr($str,$delim='',$split=true){
+    if(is_array($str)){
+        return $str;
+    }
+
+    if(is_null($str)){
+        return [];
+    }
+
+    if($delim){
+        return explode($delim,$str);
+    }else{
+        if(false !== strpos($str, '|')){
+            return explode('|',$str);
+        }elseif(false !== strpos($str, ',')){
+            return explode(',',$str);
+        }elseif(false !== strpos($str, ' ')){
+            return explode(' ',$str);
+        }else{
+            if($split){
+                return mb_str_split($str);
+            }else{
+                return [$str];
+            }
+        }        
+    }
+}
+
+function _arr_no_split($str){
+    return _arr($str,'',false);
+}
+
+function _arr_no_delim($str){//不用默认分隔符分割
+    return _arr($str,'X');
+}
+
+function _arr_fs_split($str){
+    $ret = [];
+    foreach(_arr($str) as $arr){
+        $ret = array_merge($ret,$arr);
+    }
+    return $ret;
+}
+
+//任选的通配符处理
+function rx_tpf($betData,$kjData){
+    $tmpArr = explode(',' , $kjData) ;
+    foreach(_arr($betData) as $key=>$bet){
+        if('-' == $bet){
+            $tmpArr[$key] = '-';
+        }
+    }
+    return implode(',',$tmpArr);
+}
+
+function rx_tpf_trim(&$betData,&$kjData){
+
+    $ret = 0;
+
+    $bets = _arr($betData);
+    $kjs  = _arr($kjData);
+    
+    foreach($bets as $key=>$bet){
+        if('-' == $bet){
+            //array_splice($bets,$key,1);
+            //array_splice($kjs,$key,1);
+            unset($bets[$key]);
+            unset($kjs[$key]);
+            $ret++;
+        }
+    }
+
+    $betData = implode(',',$bets);
+    $kjData = implode(',', $kjs);
+
+    return $ret;
+}
+
+//任选的位掩码处理
+function rx_wym($w,$kjData){   
+    $kjData = _arr($kjData);
+    $weishu = [16,8,4,2,1] ;    
+    foreach ($weishu as $key=>$val) {
+        if ( ($w&$val)==0 ) {
+            //array_splice($kjData,$key,1);
+            unset($kjData[$key]);
+        }
+    }
+    return implode(',',$kjData);
+}
+
+//num=3,前三,num=-3,后三;
+function _qh($kjData,$num = 0){
+    $arr = _arr($kjData);
+    if($num == 0){
+        $arr = [];
+    }
+    if($num > 0){
+        $arr = array_slice($arr,0,$num);
+    }
+    if($num < 0){
+        $arr = array_slice($arr,$num,-$num);
+    }
+    return implode(',',$arr);
+}
+
+
+
+//$times = 1 , $num1 = 3 表示出现1个3重号
+function parse_repeat($kjData,$times1,$num1,$times2=0,$num2=1){
+    $val = array_count_values(_arr($kjData));
+    $cnt = array_count_values($val);
+    $arr1 = [];$arr2=[];
+    $b1 = ($cnt[$num1]??0) == $times1;
+    $b2 = ($cnt[$num2]??0) == $times2;
+    if($b2 && $b2){
+        foreach ($val as $key => $value) {
+            if($value == $num1){
+                $arr1[] = $key;
+            }
+            if($value == $num2){
+                $arr2[] = $key;
+            }            
+        }
+        return [$arr1,$arr2];
+    }
+
+    return [];
+}
+
+function array_equal($arr1,$arr2){
+    $arr11 = _arr($arr1);
+    $arr22 = _arr($arr2);
+    sort($arr11);
+    sort($arr22);
+    return $arr11 == $arr22;
+}
+
+function array_intersect_my($arr1,$arr2){
+    $ret = [];
+    foreach ($arr1 as $value) {
+        $index = array_search($value,$arr2);
+        if($index !== false){
+            $ret[] = $value;
+            array_splice($arr2, $index, 1); 
+        }
+    }
+    return $ret;
+}
+
+function array_contain($arr1,$arr2){
+    $sub = array_intersect_my($arr1,$arr2);
+    return array_equal($sub,$arr2);
+}
+
+function array_include($arr1,$arr2){
+    $diff = array_diff(_arr($arr2),_arr($arr1));
+    return empty($diff);
+}
+
+//判定某注输赢 四中一,四中二,三中二,四全中 都可以
+function any_in($bet,$kjData,$num=0){
+    //$set = array_intersect(_arr($bet),_arr($kjData));
+    $set = array_intersect_my(_arr($bet),_arr($kjData));
+
+    //return !empty($set); 
+    
+    $num1 = count(_arr($bet));
+    $num2 = count(_arr($kjData));
+    
+    if(0==$num1||0==$num2){
+        return false;
+    }
+    
+    $min = ($num1<$num2)?$num1:$num2;
+    if($num>$min){
+        throw new \Exception("任选命中次数参数有误!");        
+    }
+    if(!$num){
+        $num = $min;
+    }
+    return count($set) >= $num; 
+}
+
+//全不中;
+function any_not_in($bet,$kjData,$num=0){
+    $set = array_intersect(_arr($bet),_arr($kjData));
+
+    return count($set) == 0;
+}
+
+function trim_zero($arr){
+    //$arr = preg_split("/(|,)/",$string);//多个分隔符进行分隔
+    return preg_replace_callback('/\d{2}/', function($matches){
+        return (int)$matches[0];
+    }, $arr);
+}
+

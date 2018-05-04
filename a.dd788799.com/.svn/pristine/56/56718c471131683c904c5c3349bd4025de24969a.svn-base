@@ -1,0 +1,236 @@
+<?php
+namespace app\common\model\report;
+
+use app\common\model\Member;
+use app\common\model\Bet;
+use app\common\model\Order;
+use app\common\model\Withdraw;
+use app\common\model\ManualMoney;
+use app\common\model\BonusFlow;
+
+trait GlobalFromFlowTrait
+{
+    //global_user和global_agent二合一
+    //输入代理名,查代理下的用户; 输入用户名,查指定用户;
+    //指定代理名下的某些用户agentname+username
+
+    private static function attachToAgentByGlobal(&$query,$username,$field_uid='uid')
+    {
+        //如果username匹配到多个代理或0个代理,报异常;//不能用模糊匹配
+    	$agent = Member::AgentScope()->where('username',$username)->find();
+    	if(!$agent){
+    		throw new \Exception('找不到此代理!');
+    	}
+
+    	$agent->attachToAgent($query,'x.uid');
+
+        //子查询可优化为子连接
+        //无限代理只能用子查询,固定N级代理,用N个自连接;
+    }
+
+    private static function attachToUserByGlobal(&$query,$username,$field_uid='uid')
+    {
+        //如果username匹配到多个用户,每个用户一行,分组显示
+        $query->where('nickname|username','like','%'.trim($username).'%');
+    }
+
+    public static function attachToJoinMember(&$query){
+        /*
+        $subsql = db()->table('gygy_members')
+                ->field('uid,username,nickname')->buildSql();
+        */
+        $query_new = (new static)->db(false,true);
+        $subsql = $query_new->table('gygy_members')
+                ->field('uid,username,nickname')->buildSql();
+        
+        $query->join([$subsql=> 'u'], 'u.uid = x.uid');
+        $query->field('x.uid as uid,username,nickname');
+    }
+
+    public static function attachToRequestByGlobal(&$query){
+            
+        $params = request()->param();
+
+        $query->alias('x');
+
+        if($params['agentname']??''){
+            self::attachToAgentByGlobal($query,$params['agentname']);
+        }
+
+        if($params['username']??''){
+            self::attachToUserByGlobal($query,$params['username']);
+        }
+
+        if($params['startTime']??''){
+            $query->where('x.created_at', '>=',$params['startTime']);
+        }
+        if($params['endTime']??''){
+            $query->where('x.created_at', '<=',$params['endTime']);
+        }
+    }   
+
+    public static function getReportBuildByGlobal($fields=[],$where=[],$paginate=true,$group='uid'){
+
+        $model = (new static);
+
+        $query = $model->db(false,true);
+
+        self::attachToFieldAndWhere($query,$fields,$where);
+        self::attachToJoinMember($query);        
+        self::attachToRequestByGlobal($query);
+        
+        $query->group($group);
+
+        if($paginate){
+            return self::makeWrapperForPaginate($query,$group);
+        }else{
+            return $query;
+        }
+    }
+
+    public static function getAllReportDataByGlobal(){
+        $query = self::getAllReportBuildByGlobal();
+        
+        $fields = [    
+            'ifnull(sum(bet_amount),0.00) as bet_amount',
+            'ifnull(sum(bet_count),0.00) as bet_count',
+            'ifnull(sum(zj_amount),0.00) as zj_amount',
+            'ifnull(sum(zj_count),0) as zj_count',
+            'ifnull(sum(win_amount),0) as win_amount',
+            'ifnull(sum(backwater_amount),0.00) as backwater_amount',
+
+            'ifnull(sum(deposit_amount),0.00) as deposit_amount',
+            'ifnull(sum(deposit_real_amount),0.00) as deposit_real_amount',
+
+            'ifnull(sum(withdraw_amount),0.00) as withdraw_amount',
+            'ifnull(sum(withdraw_real_amount),0.00) as withdraw_real_amount',
+            'ifnull(sum(withdraw_debit_amount),0.00) as withdraw_debit_amount',
+
+            'ifnull(sum(bonus_amount),0.00) as bonus_amount',
+
+            'ifnull(sum(manual_deposit_amount),0.00) as manual_deposit_amount',
+            'ifnull(sum(manual_withdraw_amount),0.00) as manual_withdraw_amount',            
+        ];
+
+        //$query_sum = self::makeWrapperForSum($query,$fields);
+        //$query_page = self::makeWrapperForPaginate($query);
+        
+        list($query_page,$query_sum) = self::makeWrapperForPaginateAndSum($query,$fields);
+
+        $paginate = $query_page->paginate();
+        $stat = $query_sum->find();
+                    
+        return [$paginate,$stat];
+    }
+
+    /*private*/ public static function getAllReportBuildByGlobal(){
+
+        $bet_fields = [
+            'ifnull(sum(mode*beiShu*actionNum),0.00) as bet_amount',
+            'ifnull(sum(actionNum),0.00) as bet_count',
+            'ifnull(sum(bonus),0.00) as zj_amount',  
+            'ifnull(sum(zjCount),0.00) as zj_count',
+            'ifnull(sum(mode*beiShu*actionNum)-sum(bonus),0.00) as win_amount',
+            'ifnull(sum(fanDianAmount),0.00) as backwater_amount',            
+            ];
+        $bet_where = [];
+        $query_bet = Bet::getReportBuildByGlobal($bet_fields,
+            $bet_where,false);
+
+        $deposit_fields = 
+            [
+                'ifnull(sum(amount),0.00) as deposit_amount',
+            ];
+        $deposit_where = [];
+        $query_deposit = Order::getReportBuildByGlobal($deposit_fields,
+            $deposit_where,false);
+
+        $deposit_real_fields = [
+                'ifnull(sum(amount),0.00) as deposit_real_amount',
+            ];
+        $deposit_real_where = ['status'=>1,];
+        $query_deposit_real = Order::getReportBuildByGlobal($deposit_real_fields,
+            $deposit_real_where,false);
+
+        $withdraw_fields = [
+            'ifnull(sum(amount),0.00) as withdraw_amount',
+            'ifnull(sum(real_amount),0.00) as withdraw_real_amount',
+            'ifnull(sum(debit_amount),0.00) as withdraw_debit_amount',
+        ];
+        $withdraw_where = [];
+        $query_withdraw = Withdraw::getReportBuildByGlobal($withdraw_fields,
+            $withdraw_where,false);
+
+        $bonus_fields = [
+            'ifnull(sum(amount),0.00) as bonus_amount',
+        ];
+        $bonus_where = [];
+        $query_bonus = BonusFlow::getReportBuildByGlobal($bonus_fields,
+            $bonus_where,false);
+
+        $manual_withdraw_fields = [
+            'sum(amount) as manual_withdraw_amount',
+        ];
+        $manual_withdraw_where = ['bonus_id'=>-1];
+        $query_manual_withdraw = ManualMoney::getReportBuildByGlobal($manual_withdraw_fields,
+            $manual_withdraw_where,false);
+
+        $manual_deposit_fields = [
+            'sum(amount) as manual_deposit_amount',
+        ];
+        $manual_deposit_where = ['bonus_id'=>0];        
+        $query_manual_deposit = ManualMoney::getReportBuildByGlobal($manual_deposit_fields,
+            $manual_deposit_where,false);
+
+
+        $sub_query_bet = $query_bet->select(false);
+        $sub_query_deposit = $query_deposit->select(false);
+        $sub_query_deposit_real = $query_deposit_real->select(false);
+        $sub_query_withdraw = $query_withdraw->select(false);
+        $sub_query_bonus = $query_bonus->select(false);
+        $sub_query_manual_withdraw = $query_manual_withdraw->select(false);
+        $sub_query_manual_deposit = $query_manual_deposit->select(false);
+
+        $mode = 'uid';
+        //$query = db()->table('('.$sub_query_bet.') b');
+        $query = (new static)->db(false,true);
+        $query->table('('.$sub_query_bet.') b');
+        $query->join('('.$sub_query_deposit.') d','b.'.$mode.'=d.'.$mode,'LEFT');
+        $query->join('('.$sub_query_deposit_real.') dr','b.'.$mode.'=dr.'.$mode,'LEFT');
+        $query->join('('.$sub_query_withdraw.') w','b.'.$mode.'=w.'.$mode,'LEFT');
+        $query->join('('.$sub_query_bonus.') bo','b.'.$mode.'=bo.'.$mode,'LEFT');
+        $query->join('('.$sub_query_manual_withdraw.') mw','b.'.$mode.'=mw.'.$mode,'LEFT');
+        $query->join('('.$sub_query_manual_deposit.') md','b.'.$mode.'=md.'.$mode,'LEFT');
+
+        $fields = [
+ 
+            'b.uid as uid',
+            'b.username as username',
+            'b.nickname as nickname',
+
+            'ifnull(bet_amount,0.00) as bet_amount',
+            'ifnull(bet_count,0.00) as bet_count',
+            'ifnull(zj_amount,0.00) as zj_amount',
+            'ifnull(zj_count,0) as zj_count',
+            'ifnull(win_amount,0) as win_amount',
+            'ifnull(backwater_amount,0.00) as backwater_amount',
+
+            'ifnull(deposit_amount,0.00) as deposit_amount',
+            'ifnull(deposit_real_amount,0.00) as deposit_real_amount',
+
+            'ifnull(withdraw_amount,0.00) as withdraw_amount',
+            'ifnull(withdraw_real_amount,0.00) as withdraw_real_amount',
+            'ifnull(withdraw_debit_amount,0.00) as withdraw_debit_amount',
+
+            'ifnull(bonus_amount,0.00) as bonus_amount',
+
+            'ifnull(manual_deposit_amount,0.00) as manual_deposit_amount',
+            'ifnull(manual_withdraw_amount,0.00) as manual_withdraw_amount',           
+        ];        
+
+        $query->field($fields)->order('b.uid');
+
+        return $query;           
+    }
+
+}

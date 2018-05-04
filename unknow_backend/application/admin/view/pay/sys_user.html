@@ -1,0 +1,91 @@
+{include file="pay:base"}
+
+<!-- page start -->
+<div class="content">
+    <div class="header">        
+        <h1 class="page-title">用户管理</h1>
+    </div>
+    <ul class="breadcrumb">
+        <li><a href="{:url('index')}">主页</a>  <span class="divider">/</span>
+        </li>
+        <li class="active">用户管理</li>
+    </ul>
+    <div class="container-fluid">
+        <div class="row-fluid">
+              <div class="btn-toolbar" style="height:30px;">
+					<button onclick="window.location.href='{:url('sys_add')}'" class="btn btn-primary"><i class="icon-plus"></i> 新增操作员</button>
+					<form action="{:url('sys_user')}" method="post" class="form-search pull-right">
+					  <input type="text" name="keywords"  placeholder="输入用户名" class="input-xlarge search-query">
+					  <button type="submit" class="btn">搜索</button>
+					</form>
+				</div>				
+				
+					<table class="table table-hover table-bordered">
+					  <thead>
+						<tr>
+						  <th>#编号</th>
+						  <th>用户名</th>
+						  <th>用户密码</th>
+						  <th>用户类型</th>
+						  <th>用户昵称</th>	
+						  <th>上次登录</th>	
+						  <th>登录IP</th>						  
+						  <th>操作</th>
+						</tr>
+					  </thead>
+					  <tbody>
+					  <?php 
+					  foreach($datas as $item){						  
+					  ?>
+					  <tr>
+						  <td><?php echo $item['id'];?></td>
+						  <td><?php echo $item['sys_user'];?></td>
+						  <td><?php echo $item['sys_password'];?></td>
+						  <td>
+							{if $item.sys_level == 1}系统管理员{/if}
+							{if $item.sys_level == 2}操作员{/if}
+						  </td>
+						  <td><?php echo $item['nick_name'];?></td>
+					  
+						  <td><?php echo $item['last_login'];?></td>
+						  <td><?php echo $item['last_ip'];?></td>						  
+						  <td><a title='编辑' href="{:url('sys_edit')}?action=edit&id=<?php echo $item['id'];?>">编辑</a>&nbsp;|&nbsp;<a title='删除' onclick="confirmAction('?action=delete&id=<?php echo $item['id'];?>')" href='javascript:;' >删除</a></td>
+					  </tr>
+					  <?php
+					  }
+					  ?>
+						
+						
+					  </tbody>
+					</table>
+{$datas->render()}
+            <footer>
+                <hr>
+                <p class="pull-right">
+                    <a href="javascript:;">
+                        <?php echo $appSet[ 'app_name'];?>
+                    </a>
+                </p>
+                <p>&copy;
+                    <?php echo $appSet[ 'company_year'];?>
+                    <a href="<?php echo $appSet['company_url'];?>" title="<?php echo $appSet['company'];?>" target="_blank">
+                        <?php echo $appSet[ 'company'];?>
+                    </a>
+                </p>
+            </footer>
+        </div>
+    </div>
+</div>
+
+<!-- page end -->
+
+<script type="text/javascript">
+$(function(){
+	$("#legal-menu").addClass('in');	
+	{if $delete_ok == 1}
+		alert('删除成功！');
+	{/if}
+})
+</script>
+
+{include file="pay:foot"}

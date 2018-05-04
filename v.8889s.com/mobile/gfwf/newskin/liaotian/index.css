@@ -1,0 +1,143 @@
+body{
+    margin:0;
+    padding:0;
+    text-align:center;
+    background-color:#EEEEEE;
+}
+#title{
+    width:100%;
+    height:30px;
+    margin-left:auto;
+    margin-right:auto;
+    background-color: #EEEEEE;
+    line-height:30px;
+    font-size:14px;
+    color: #FB5200;
+}
+#chat{
+    width:100%;
+    height:auto;
+    display:table;
+    background-color: #EEEEEE;  
+}
+#chat .window{
+    width:95%;
+    height:495px;
+    background-color: #FFFFFF;
+    margin-left:auto;
+    margin-right:auto;
+    text-align:left;
+    line-height:24px;
+    font-size:14px;
+    color: #696969;
+    background: url(/images/nsc/logo.png?v=1.16.10.1) #FFFFFF no-repeat right 11px bottom 5px;
+    overflow-x: auto;
+}
+#chat .bottom{
+    width:95%;
+    height:30px;
+    background-color: #EEEEEE;
+    margin-left:auto;
+    margin-right:auto;
+    line-height:30px;
+    font-size:14px;
+    color: #8A8A8A;
+}
+#shuru{
+    width:95%;
+    height:60px;
+    background-color: #EEEEEE;
+    margin-left:auto;
+    margin-right:auto;
+    font-size:14px;
+    color: #8A8A8A;
+}
+#form{
+    width:95%;
+    height:40px;
+    background-color: #EEEEEE;
+    margin-left:auto;
+    margin-right:auto;
+    text-align:center;
+    line-height:40px;
+    color: #FB5200;
+    font-size:14px;
+}
+#form input.send{
+    width:100%;
+    height:33px;
+    line-height:30px;
+    background-color: #FB5200;
+    color:#FFFFFF;
+    border:0;
+}
+#form input.fanhui{
+    width:100%;
+    height:33px;
+    line-height:30px;
+    background-color: #006B9F;
+    color:#FFFFFF;
+    border:0;
+}
+
+#bg{
+    display: none;
+    width:100%;
+    height:100%;
+    left:0;
+    top:0;
+    position:fixed;
+        background-color: #D8D8D8;
+    filter:alpha(opacity=50);  
+      -moz-opacity:0.5;  
+      -khtml-opacity: 0.5;  
+      opacity: 0.5;
+      z-index:1;
+}
+#window{
+    display: none;
+    z-index:3;
+    width:100%;
+    height:100%;
+    left:0;
+    top:0;
+    position:fixed;
+    background:none;
+}
+
+#window .t{
+    width:300px;
+    height:188px;
+    margin-left:auto;
+    margin-right:auto;
+    margin-top:50px;
+    z-index:20;
+    background-color: #FFFFFF;
+}
+#window .t .title{
+    width:300px;
+    height:30px;
+    line-height:30px;
+    color:#FFFFFF;
+    z-index:30;
+    background-color: #282828;
+}
+#window .t .nc{
+    margin-top:25px;
+    width:300px;
+    height:auto;
+    background-color:#FFFFFF;
+}
+
+#bottom{
+    width:100%;
+    height:50px;
+    line-height:50px;
+    font-size:14px;
+    color: #9D9D9D;
+}
+#bottom a{
+    text-decoration:none;
+    font-size:14px;
+    color: #EA4D00;
+}

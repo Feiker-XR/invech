@@ -1,0 +1,58 @@
+<extend name="Public/base"/>
+
+<block name="body">
+    <div class="main-title">
+        <h2>{$info['id']?'编辑':'新增'}用户</h2>
+    </div>
+    <form action="__SELF__" method="post" class="form-horizontal">
+		<div class="form-item">
+            <label class="item-label">账号类型<span class="check-tips">（代理或普通会员）</span></label>
+            <div class="controls">
+				<label><input type="radio" name="type" value="1" checked>代理</label>
+				<label><input type="radio" name="type" value="0">会员</label>
+            </div>
+        </div>
+        <div class="form-item">
+            <label class="item-label">用户名<span class="check-tips">（用户名长度1-16位）</span></label>
+            <div class="controls">
+                <input type="text" class="text input-large" name="username" value="">
+            </div>
+        </div>
+        <div class="form-item">
+            <label class="item-label">密码<span class="check-tips">（用户密码不能少于6位）</span></label>
+            <div class="controls">
+                <input type="password" class="text input-large" name="password" value="">
+            </div>
+        </div>
+        <div class="form-item">
+            <label class="item-label">QQ<span class="check-tips">（用户QQ，用于找回密码等安全操作）</span></label>
+            <div class="controls">
+                <input type="text" class="text input-large" name="qq" value="">
+            </div>
+        </div>
+		<div class="form-item">
+            <label class="item-label">返点<span class="check-tips">（投注时返点）</span></label>
+            <div class="controls">
+                <input type="text" class="text input-large" name="fanDian" value="">
+            </div>
+        </div>
+		<div class="form-item">
+            <label class="item-label">不定位返点<span class="check-tips">（投注时不定位的返点）</span></label>
+            <div class="controls">
+                <input type="text" class="text input-large" name="fanDianBdw" value="">
+            </div>
+        </div>
+        <div class="form-item">
+            <input type="hidden" name="id" value="{$info.id|default=''}">
+            <button class="btn submit-btn ajax-post" id="submit" type="submit" target-form="form-horizontal">确 定</button>
+            <button class="btn btn-return" onclick="javascript:history.back(-1);return false;">返 回</button>
+        </div>
+    </form>
+</block>
+
+<block name="script">
+    <script type="text/javascript">
+        //导航高亮
+        $('.side-sub-menu').find('a[href="{:Url('User/index')}"]').closest('li').addClass('current');
+    </script>
+</block>

@@ -1,0 +1,30 @@
+<html lang="en"><head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- CSRF Token -->
+    <meta name="csrf-token" content="oUqNNuYneevv0tFQa9jVYwSRUBpmlPpWddaAihWr">
+
+    <title>Think</title>
+
+    <!-- Styles -->
+    <link href="{$domain}/css/app.css" rel="stylesheet">
+<style></style></head>
+<body style="margin-bottom: 331px;">
+    <div id="app"><nav class="navbar navbar-default navbar-static-top"><div class="container"><div class="navbar-header"><button type="button" data-toggle="collapse" data-target="#app-navbar-collapse" class="navbar-toggle collapsed"><span class="sr-only">Toggle Navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span></button> <a href="{$domain}" class="navbar-brand">
+                        Think
+                    </a></div> <div id="app-navbar-collapse" class="collapse navbar-collapse"><ul class="nav navbar-nav">
+                        &nbsp;
+                    </ul> 
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="{$domain}/index/login">Login</a></li> 
+                        <!--<li><a href="{$domain}/register">Register</a></li>-->
+                    </ul>
+                </div></div></nav>  <div class="container"><div class="row"><div class="col-md-8 col-md-offset-2"><div class="panel panel-default"><div class="panel-heading">Reset Password</div> <div class="panel-body"><form method="POST" action="{$domain}/password/reset" class="form-horizontal"><input type="hidden" name="token" value="{$token}"> <div class="form-group"><label for="email" class="col-md-4 control-label">E-Mail Address</label> <div class="col-md-6"><input id="email" type="email" name="email" value="" required="required" autofocus="autofocus" class="form-control"></div></div> <div class="form-group"><label for="password" class="col-md-4 control-label">Password</label> <div class="col-md-6"><input id="password" type="password" name="password" required="required" class="form-control"></div></div> <div class="form-group"><label for="password-confirm" class="col-md-4 control-label">Confirm Password</label> <div class="col-md-6"><input id="password-confirm" type="password" name="password_confirmation" required="required" class="form-control"></div></div> <div class="form-group"><div class="col-md-6 col-md-offset-4"><button type="submit" class="btn btn-primary">
+                                    Reset Password
+                                </button></div></div></form></div></div></div></div></div></div>
+
+
+
+</body></html>

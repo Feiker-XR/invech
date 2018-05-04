@@ -1,0 +1,34 @@
+<input type="hidden" name="playedGroup" value="<?=$groupId?>" />
+<input type="hidden" name="playedId" value="<?=$playedId?>" />
+<input type="hidden" name="type" value="<?=$type?>" />
+<?php foreach(array('跨度') as $var){ ?>
+<div class="pp" action="gf2xZxkd" length="1" random="sscRandom">
+	<div class="title"><?=$var?></div>
+	&nbsp;
+	<div class="pp_1">
+		<input type="button" value="0" class="code min s" />
+		<input type="button" value="1" class="code min d" />
+		<input type="button" value="2" class="code min s" />
+		<input type="button" value="3" class="code min d" />
+		<input type="button" value="4" class="code min s" />
+	</div>
+	<div class="pp_2">
+		<input type="button" value="5" class="code max d" />
+		<input type="button" value="6" class="code max s" />
+		<input type="button" value="7" class="code max d" />
+		<input type="button" value="8" class="code max s" />
+		<input type="button" value="9" class="code max d" />
+	</div>
+	&nbsp;&nbsp;
+
+	&nbsp;&nbsp;
+</div>
+<?php
+	}
+?>
+<script type="text/javascript">
+$(function(){
+	gameSetPl(<?=json_encode($maxPl)?>);
+})
+
+</script>

@@ -1,0 +1,35 @@
+	<!--左右两侧固定悬浮-->
+	<div class="left_absolute">
+		<a href="javascript:;" onclick="open_new_888('{:url('activity/zhuanpan')}');" class="popupkefu" target="_blank">
+			<img src="/img/zhuanpan23.gif" />
+		</a>
+		<div id="qian_dao" style="display:block;">
+			<img  class="qian_dao" style="cursor:pointer;" src="/img/qiandao.png" />
+		</div>
+	</div>
+	
+	<div class="right_absolute">
+		<div class="right_absolute_1" onclick="window.open('http://messenger.providesupport.com/messenger/1x5b67gp1rcy50kqxa0qpsa0jx.html','24小时在线客服','_blank')">
+			<ul>
+				<li class="right_absolute_1_1"><img src="/img/fix-right-1.png"/></li>
+				<li class="right_absolute_1_2" style="display: none;"><img src="/img/fix-right-5.png" /></li>
+			</ul>
+		</div>
+		<div class="right_absolute_2" onclick="window.open('http://wpa.qq.com/msgrd?v=3&uin=223318&site=qq&menu=yes','QQ客服','_blank')">
+			<ul>
+				<li class="right_absolute_2_1"><p>QQ客服</p></li>
+				<li class="right_absolute_2_2"><p>223318</p></li>
+			</ul>
+		</div>
+		<div class="right_absolute_3" >
+			<a href="http://pay77158.com" target="_blank" style="display: none;">自助充值</a>
+		</div>		
+		<div class="right_absolute_4">
+			<form action="http://pay77158.com/api/101pay/pay.php" target="_blank" method="post" id="payForm">
+			<input type="hidden" name="username" id="payUsername" value="" />
+			<input type="hidden" name="type" value="ALIPAY" />
+			<input type="number" name="coin" id="payCoin"  placeholder="请输入金额" style="display: none;"/>
+			<a href="#" style="display: none" onclick="goPay()">快捷充值</a>
+			</form>
+		</div>		
+	</div>

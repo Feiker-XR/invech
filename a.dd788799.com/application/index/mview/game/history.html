@@ -1,0 +1,80 @@
+{extend name="base/common"/}
+
+{block name="title"}<title>历史开奖－{$settings.webName}</title>{/block}
+{block name="style"}
+<link rel="stylesheet" type="text/css" href="__CSS__/detail.css">
+<link rel="stylesheet" type="text/css" href="__CSS__/user.css">
+{/block}
+{block name="script"}
+{/block}
+
+{block name="header"}{/block}
+{block name="body"}
+<div class="g-body">
+	<div class="m-winRecord">
+		<div class="m-simpleHeader" id="dvHeader">
+			<a href="javascript:history.back(-1);" data-pro="back" data-back="true" class="m-simpleHeader-back"><i class="ico-back"></i></a>
+			<h1>历史开奖</h1>
+		</div>
+		<div class="g-wrap">
+			<div class="m-winRecord-wrap">
+				<div style="display: none;" afmoldstyle="block" class="w-loading">
+					<img style="display:inline;vertical-align:middle" src="http://mimg.127.net/p/yymobile/lib/img/common/loading.gif" height="20" width="20"> 正在努力加载中……
+				</div>
+				<div id="pro-view-1" >
+					<ul class="m-winRecord-list hahah" data-pro="entry">						
+						{volist name="_list" id="vo"}
+						<li id="pro-view-13" class="w-record m-winRecord-revealed">
+						<div class="w-goods w-goods-l w-goods-ing m-user-goods">
+							<div class="w-goods-info">
+								<p>
+									第 {$vo.number} 期
+								</p>
+								<p>
+									<ul class="kjhao">
+									   {php}
+								       $arr_numbers = explode(',',$vo['data']) ;
+									   foreach ($arr_numbers as $var) {
+								        {/php}
+											<li>{$var}</li>
+										 {php}
+										   } {/php}
+									</ul>
+								</p>
+							</div>
+						</div>
+						<script>lid="{$vo['id']?$vo['id']:''}";</script>
+						</li>
+						{/volist}
+					</ul>
+					<div data-pro="more">
+						<div id="pro-view-15" class="w-more">
+							<div data-pro="link">
+								<a href="javascript:void(0);">上拉加载更多</a>
+							</div>
+							<div data-pro="loading" style="display:none">
+								<b class="ico ico-loading"></b> 努力加载中
+							</div>
+							<div data-pro="disable" style="display:none">
+								已经没有更多
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<button id="pro-view-0" class="w-button w-button-round w-button-backToTop" style="bottom: 55px; display: none;">返回顶部</button>
+{/block}
+{block name="script"}
+<script type="text/javascript">
+var lid=0;
+$(function() {
+	var type = "{$Request.param.type}" ;
+	var url  = "{:Url('game/gethistory')}";
+	scrollUpdate(url,type,0,'.m-winRecord-list');
+});
+</script>
+{/block}
+{block name="footer"}{/block}

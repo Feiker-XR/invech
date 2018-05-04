@@ -1,0 +1,51 @@
+html,body{height:100%; font-size:62.5%;}
+body { margin:0; padding:0; line-height:1.5; font-family:'Microsoft Yahei';}
+h1,h2,h3,h4,h5,h6,ul,ol,dl,dt,dd,p { margin:0; padding:0;}
+li { list-style:none;}
+img { border:0;}
+.clearfix:after { content:"."; display:block; height:0; clear:both; visibility:hidden;}
+
+/*注册*/
+
+.zc_cont{ width:100%; min-height:100%; height:auto; background:url('/images/nsc/register/agency1/zc_cpyy_bg_h5.jpg') center top no-repeat; background-size:cover }
+.zc_content{width:100%; margin:0 auto; position:relative;}
+.zc_content .zc_title{ width:100%; padding-top:1.8rem; text-align:center;}
+.zc_content .zc_title img{ border:0; width:8rem; vertical-align: middle;}
+.zc_content .zc_title span{ border-left:#fff solid 1px; margin-left: 0.5rem; padding:0.1rem 0 0.4rem 10px; color:#fff; font:bold 1.6rem/3rem 'Microsoft YaHei'}
+
+.zc_list{ width:100%; height:auto; margin:1.6rem auto 0;}
+.zc_list li{ width:100%; margin:0 auto 1.3rem; position:relative; clear:both;}
+.zc_list .zc_label{display:none;}
+.zc_list .zc_input{margin:0 auto; width:80%; position:relative; }
+.zc_list .zc_input input[type=text],.zc_list .zc_input input[type=password]{ float:left; width:100%; height:3.4rem; line-height:3.4rem; background-color:#fff; border:0; margin-bottom:0.4rem; text-indent:3.5rem; border-radius:5px; transition:background-color 0.3s; }
+.zc_list .zc_input input[type=text]:focus{ background-color:#eee }
+.zc_list .zc_input input::-webkit-input-placeholder{color:#666;}
+.zc_list .zc_input p{ width:96%; margin-left:2%; line-height:1.4rem; font-size:1rem; color:#aa99a9}
+.zc_list .zc_input .zc_code{ width:7.2rem; height:2.2rem; cursor:pointer; z-index:999; position:absolute; right:.5rem; top:.6rem; }
+.zc_list .zc_input .zc_btn{ width:100%; height:3.4rem; color:#fff; font-size:1.8rem; font-family:'Microsoft YaHei'; cursor:pointer; background-color:#f98705; border:0; border-radius:5px; margin-top:1.6rem; margin-bottom:1.2rem; transition:background-color 0.3s;z-index:999;}
+.zc_list .zc_input .zc_btn:hover{ background-color:#f97005}
+.zc_list .zc_input a{ font-size:1.4rem; color:#544060; font-family:'Microsoft YaHei'; }
+.zc_list .zc_input a:hover{ text-decoration: underline;}
+.zc_content .zc_lxkf{display:none; text-align: right; color:#888; margin:0 10px 0 0; padding-bottom:10px;}
+.zc_content .zc_lxkf a{ color:#544060; text-decoration: underline; }
+
+.zc_list ul li .tip{position:absolute; display:block; left:13%; top:0; width:87%; }
+.zc_list ul li .success-tip{width:27px; height:24px; left:auto; right:0.4rem; top:0.7rem; background:url(/images/nsc/register/reg_ico.png) no-repeat;}
+.zc_list ul li .error-tip{ top:1rem; }
+.zc_list ul li .error-tip em{display:none; float:left; width:24px; height:24px; position:absolute; left:0; top:6px; background:url(/images/nsc/register/reg_ico.png) 0 -24px no-repeat;}
+.zc_list ul li .error-tip p{color:#EA1515; font-size:1rem; line-height:1.4rem;}
+
+/*注册页icon*/
+i[class^="iczc-"], i[class*="iczc-"]{position:absolute; left:0.5rem; top:0.7rem; width:2rem; height:2rem; padding-right:0.5rem; background-size:2rem; border-right:#d5c9d5 solid 1px; background-image: url('/images/nsc/register/icon_zc2.png'); background-repeat: no-repeat; }
+.iczc-number2 { background-position: 0 0; }
+.iczc-username2 { background-position: 0 -2rem; }
+.iczc-password2 { background-position: 0 -4.1rem; }
+.iczc-phone2 { background-position: 0 -6.1rem; }
+.iczc-warning2 { background-position: 0 -8.15rem; }
+.iczc-notice2 { top:0.4rem !important; width:2.4rem; height:2.4rem; background-position: 0 bottom; border-right:0 !important }
+.notice{ display:inline-block; margin-left:3rem; color:#fff; font-size:1.2rem; line-height:1.4rem;}
+
+.footer_lxfs{ width:76%; margin:0 auto; padding-bottom:1.4rem; color:#aa99a9; font-size:1.2rem; line-height:1.6rem}
+.footer_lxfs p{clear:both; display:block;}
+.footer_lxfs span{ margin-right:0.3rem; color:#aa99a9; white-space:nowrap;}
+.footer_lxfs b{ float:left; font-weight:normal; white-space: nowrap; padding-bottom:0.2rem;}

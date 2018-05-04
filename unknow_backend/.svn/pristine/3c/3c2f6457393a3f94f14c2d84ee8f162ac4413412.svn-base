@@ -1,0 +1,42 @@
+<!--登陆前-->
+{if $Think.session.uid eq ''}
+<div class="header_login" >
+	<form action="{:url('index/login')}">
+	<ul>
+		<li><input type="text" class="header_login_name" id="username" /></li>
+		<li><input type="password" id="password" /></li>
+		{if $sysConfig.loginYzm eq "1"}
+		<li><input type="text" placeholder="验证码" name='dlyzm' id="dlyzm" class="header_login_yz"/></li>
+		<li><img src="/captcha.html" class="header_login_yzpic"  onclick="this.src='/captcha.html?d='+Math.random();" style="cursor:pointer;" /></li>
+		{else}
+		<input type="hidden" id="dlyzm" name="dlyzm" />
+		{/if}
+		<li><a href="javascript:;" onclick="alert('请联系在线客服找回密码!')" class="color_999">忘记密码？</a></li>
+		<li><a href="JavaScript:;" onclick="Login()" class="header_login_a">登录</a></li>
+		<li><a href="/index/reg" class="header_login_open">开户</a></li>
+	</ul>
+	</form>
+</div>
+
+<!--登陆后-->
+{else}
+<div class="header_login_had" >
+	<ul class="login_vip">
+		<li><img src="/newview/img/vip-diamond.png" /></li>
+		<li class="color_yellow">VIP会员中心</li>
+		<li class="login_vip_1 ml15">账户：<span class="color_yellow">{$Think.session.username}</span></li>
+		<li class="login_vip_2">余额：<span class="color_yellow" id="money">获取中...</span></li>
+		<li class="login_vip_3 ml10"><a href="{:url('user/get_money')}">提款</a></li>
+		<li class="login_vip_4 ml10"><a href="{:url('index/logout')}">退出</a></li>
+	</ul>
+	<ul class="login_list">
+		<li><a href="{:url('user/userinfo')}">会员资料</a></li>
+		<li><a href="{:url('user/report')}">账户历史</a></li>
+		<li><a href="{:url('user/record_ds')}">交易记录</a></li>
+		<li><a href="{:url('pay/member')}">财务中心</a></li>
+		<li><a href="{:url('user/agent')}">代理中心</a></li>
+		<li><a href="{:url('pay/member')}">会员存款</a></li>
+		<li><a href="{:url('user/userinfo')}">额度转换</a></li>
+	</ul>
+</div>
+{/if}

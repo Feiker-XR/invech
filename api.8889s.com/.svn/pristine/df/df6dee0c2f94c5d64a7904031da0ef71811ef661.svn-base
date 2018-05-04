@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>系统设置</title>
+<link href="/css/base.css" rel="stylesheet" type="text/css" />
+<link href="/css/admin.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="/js/jquery.js"></script>
+<script type="text/javascript" src="/js/jquery.tools.js"></script>
+<script type="text/javascript" src="/js/base.js"></script>
+<script type="text/javascript">
+function check(){
+	if (confirm('是否確定充值？') ) {
+		document.getElementById("form1").submit(); 
+	}
+	
+}
+
+function change_zengsong() {
+	var zengsong_bili = $('#hf_bili').val();
+	var zengsong = parseFloat($('#my_money').val() * parseFloat(zengsong_bili) / 100);
+	$('#hf_sxf').val(zengsong.toFixed(2));
+}
+</script>
+</head>
+<body class="input">
+	<!--<div class="bar">
+		人工公司入款
+	</div>-->
+	
+
+<div class="body">
+<ul id="tab" class="tab">
+	<li>
+		<input type="button" value="人工入款" class="current" hidefocus />
+	</li>
+</ul>
+<form name="form1" id="form1" method="post" action="?action=true">
+<table class="inputTable tabContent">
+
+	<tr>
+	  <th align="center">汇款用户:</th>
+	  <td align="left"><input type="text" name="username" /></td>
+    </tr>
+	<tr>
+	  <th align="center">汇款金额:</th>
+	  <td align="left"><input type="text" name="money" id="my_money" onkeyup="change_zengsong()" /></td>
+    </tr>
+    
+    <tr>
+	  <th align="center">汇款银行:</th>
+	  <td align="left"><input type="text" name="bank" /></td>
+    </tr>
+	
+	<tr>
+	  <th align="center">赠送手续费:</th>
+	  <td align="left">
+			  <label>
+	            <input name="is_zsjr" type="checkbox" id="is_zsjr" value="1" checked>
+	          	勾选则赠送，不勾则不赠送。同城同行汇款不赠送
+              </label>
+	  </td>
+    </tr>
+    
+    <tr>
+	  <th align="center">赠送固定比例:</th>
+	  <td align="left"><input name="hf_bili" type="text" id="hf_bili" value="<?php echo $my_zengsong;?>" size="5" maxlength="5"/>%</td>
+    </tr>
+
+	<tr>
+	  <th align="center">赠送实际金额:</th>
+	  <td align="left"><input name="hf_sxf" type="text" id="hf_sxf" value="0" size="5" maxlength="5"/></td>
+    </tr>
+  </table>
+  <div class="buttonArea">
+                <input name="Submit2" type="button" class="formButton" onClick="check();" value="充值成功">
+				<input type="button" class="formButton" onClick="window.location.href='{:Url('main/info')}'" value="返  回" hidefocus />
+    </div>
+</form>
+	</div>
+</body>
+</html>

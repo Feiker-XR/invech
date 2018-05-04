@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<head>
+  <title>Pusher Test</title>
+  <script src="/js/pusher.js"></script>
+  <script>
+
+    // Enable pusher logging - don't include this in production
+    Pusher.logToConsole = true;
+
+    var pusher = new Pusher('{$pusher_app_key}', {
+      authEndpoint: '{:url('broadcasting/auth')}',
+      //authTransport: 'ajax',
+      cluster: '{$pusher_cluster}',
+      encrypted: true
+    });
+
+    var channel = pusher.subscribe('private-user.order.1');
+    channel.bind('app\\events\\BroadEvent', function(data) {
+      alert(data.message);
+    });
+  </script>
+</head>

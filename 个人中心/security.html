@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset='utf-8'>
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+    <title>安全中心</title>
+    <link type="text/css" rel="stylesheet" href="./css/personal.css">
+</head>
+<body>
+
+<div class="container">
+    <header class="header">
+        <i class='left'>保存</i>
+        <h1>安全中心</h1>
+    </header>
+    <main class="inner_body">
+        <section class="charge_user ol_box security">
+            <ol>
+                <li>
+                    <span><i class="hide">占</i>用户名</span><input type="text" disabled class="disabled" value="tgy7879"/>
+                </li>
+                <li>
+                    <span class="phone"><i class="hide">站位</i>手机</span><input type="text" id="phone1" class="disabled" value="" placeholder="填写号码"/>
+                </li>
+                <li>
+                    <span><i class="hide">站位手机</i></span><input type="text" id="phone2" class="disabled" value="" placeholder="添加号码"/>
+                </li>
+                <li>
+                    <span>邮件地址</span><input type="text" id="email" class="disabled" value=""  placeholder="填写邮箱地址"/>
+                </li>
+                <li>
+                    <span>QQ号码</span><input type="text" id="qq_num" class="disabled" value=""  placeholder="填写QQ号码"/>
+                </li>
+            </ol>
+        </section>
+
+        <section class="charge_user ol_box security margin">
+            <ol>
+                <li>
+                    <span><i class="hide">占</i>银行卡</span><input type="text" disabled class="disabled" value="未绑定"/><a href="bind_bank_card.html">绑定</a>
+                </li>
+            </ol>
+        </section>
+
+        <section class="charge_user ol_box security margin">
+            <ol>
+                <li>
+                    <span>登录密码</span><input type="text" disabled class="disabled" value="******"/><a href="change_login_pwd.html">修改</a>
+                </li>
+                <li>
+                    <span>提款密码</span><input type="text" disabled class="disabled" value="******"/><a href="change_withdraw_pwd.html">修改</a>
+                </li>
+            </ol>
+        </section>
+    </main>
+</div>
+
+<script type="text/javascript" src="./js/jquery.1.9.1.min.js"></script>
+<script type="text/javascript" src="./js/show.js"></script>
+<script type="text/javascript">
+    // 提交数据
+    $('.header i').click(function () {
+        //$(this).attr('disabled','disabled');
+        var obj = {
+            phone1:'',
+            phone2:'',
+            email:'',
+            qq:''
+        }
+        obj.phone1 = $('#phone1').val();      // 手机
+        obj.phone2 = $('#phone2').val();      // 手机2
+        obj.email = $('#email').val();      // mail
+        obj.qq = $('#qq_num').val();      // qq
+
+        console.log(obj)
+    })
+</script>
+</body>
+</html>

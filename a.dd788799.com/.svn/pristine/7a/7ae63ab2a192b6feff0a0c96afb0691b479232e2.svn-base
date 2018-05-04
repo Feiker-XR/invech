@@ -1,0 +1,832 @@
+<?php
+// +----------------------------------------------------------------------
+// | FileName: Game.php
+// +----------------------------------------------------------------------
+// | CreateDate: 2017年10月3日
+// +----------------------------------------------------------------------
+// | Author: xiaoluo
+// +----------------------------------------------------------------------
+namespace app\index\controller;
+
+use app\index\Login;
+use think\Db;
+use app\classes\bet;
+use app\classes\betC;
+use app\classes\betQ;
+use app\common\model\Type;
+use app\common\model\Played;
+
+class Game extends Login
+{
+    public function _initialize()
+    {
+        parent::_initialize();
+
+        $this->type = input('type');
+        $this->assign('type',$this->type);
+    }
+
+    public function pl($playedId){
+        //301双面,302数字
+        //config('default_return_type','json');
+        $pls2 = model('played')->kqwfPls($playedId);
+        echo json_encode($pls2);    
+    }
+    
+    public function game($type = null, $groupId = null, $played = null)
+    {
+        $types = model('type')->allTypes();
+
+        $type = input('type/d');
+        if(!$type){
+            $this->error('请选择彩种!');
+        }
+        $lottery = $types[$type]??null;
+        if(!$lottery){
+            $this->error('彩种不存在!');
+        }
+        $this->view->type = $type;
+        
+        
+        //快钱玩法组 和 官方玩法组
+        $gfwf_groups = model('type')->gfwfTypes($type);
+        $this->view->gfwf_groups = $gfwf_groups;
+        $kqwf_groups = model('type')->kqwfTypes($type);
+        $this->view->kqwf_groups = $kqwf_groups;
+
+        //全部玩法组判定玩法是否存在
+        $groupId = input('groupId/d');
+        $group = $types[$type]['groups'][$groupId]??null;        
+        if(!$group){
+            //$groupId = current($types[$type]['groups']); 
+            $groupIds = array_keys($types[$type]['groups']);
+            $groupId = $groupIds[0]; 
+            $group = $types[$type]['groups'][$groupId];
+        }
+        $this->view->groupId = $groupId;
+        $this->view->group = $group;
+
+        if($group['is_kqwf']){
+            $this->view->groups = $kqwf_groups;
+        }else{
+            $this->view->groups = $gfwf_groups;    //['groups']
+        }
+        
+        $this->view->playeds = $types[$type]['groups'][$groupId]['playeds']??null;
+        $this->view->gfwf_playeds = $gfwf_groups[$groupId]['playeds']??null;
+        $this->view->kqwf_playeds = $kqwf_groups[$groupId]['playeds']??null;
+
+        $playedId = input('playedId/d');
+        $played = $types[$type]['groups'][$groupId]['playeds'][$playedId]??null;
+        if(!$played){ 
+            $playedIds = array_keys($types[$type]['groups'][$groupId]['playeds']);
+            $playedId = $playedIds[0]; 
+            $played = $types[$type]['groups'][$groupId]['playeds'][$playedId];
+        }
+        $this->view->playedId = $playedId;
+        $this->view->played = $played;
+        $this->view->playedName = $this->view->played['name'];
+        if($this->view->played['is_kqwf']==1){
+            $this->view->tpl = 'game/game-fast/'.$this->view->played['playedTpl'];
+        }else{
+            $this->view->tpl = 'game/game-played/'.$this->view->played['playedTpl'];
+        }
+
+        //$lastNo = $this->getGameLastNo($type) ;  //拿到对应类型的投注信息
+        $lastNo = Type::getLastGamePhase($type);
+        //获取开奖号码
+        $kjHao = db('data')->where('type',$type)->where('number',$lastNo['actionNo'])
+            ->value('data');    
+        if ($kjHao)$kjHao = explode(',', $kjHao) ;
+
+        //$actionNo   = $this->getGameNo($type) ; //读取将要开奖期号
+        $actionNo   = type::getGamePhase($type) ; //读取将要开奖期号
+        $types      = $this->types; //获取所有的 彩种信息
+        $ftime = $kjdTime    = $types[$type]['data_ftime'] ; //开奖停止下注时间
+
+        $fptime = $diffTime   = strtotime($actionNo['actionTime']) - $this->time - $kjdTime ;
+        $kptime = $kjDiffTime = strtotime($lastNo['actionTime'])   - $this->time ;
+
+        $this->assign('actionNo', $actionNo) ;
+        $this->assign('lastNo', $lastNo) ;
+        $this->assign('kjHao', $kjHao) ;
+        //$this->assign('kjdTime', $kjdTime) ;
+        //$this->assign('diffTime', $diffTime) ;
+        //$this->assign('kjDiffTime', $kjDiffTime) ;
+        $this->assign('ftime', $ftime) ;
+        $this->assign('fptime', $fptime) ;
+        $this->assign('kptime', $kptime) ;
+
+        //获取历史开奖记录
+        $history = db('data')->where('type',$type)->order('number DESC')->limit(5)->field('time, number, data')->select() ;
+        $this->assign('history', $history);
+
+        //$maxPl = $this->getPl($playedId);
+        $maxPl = Played::gfwfPl($playedId);
+
+        $this->assign('maxPl', $maxPl);
+        
+        $order_list = db('bets')->where('uid',$this->user['uid'])
+            ->limit(10)->order('id desc')->select() ;
+
+        $this->assign('order_list', $order_list) ;
+        
+        $this->get_top(); // 奖金排行
+        $this->get_recharge_top() ;  // 充值排行
+
+        return $this->fetch();
+    }
+
+    public final function group($type, $groupId)
+    {
+        $types = model('type')->allTypes();
+
+        $type = input('type/d');
+        if(!$type){
+            $this->error('请选择彩种!');
+        }
+        $lottery = $types[$type]??null;
+        if(!$lottery){
+            $this->error('彩种不存在!');
+        }
+        $this->view->type = $type;
+        $this->view->groups = $types[$type]['groups'];
+        
+        $group = $types[$type]['groups'][$groupId]??null;        
+        if(!$group){
+            //$groupId = current($types[$type]['groups']); 
+            $groupIds = array_keys($types[$type]['groups']);
+            $groupId = $groupIds[0]; 
+            $group = $types[$type]['groups'][$groupId];
+        }
+        $this->view->groupId = $groupId;
+        $this->view->group = $group;
+        $this->view->playeds = $group['playeds']??null;
+        
+        $playedIds = array_keys($this->view->playeds);
+        $playedId = $playedIds[0];
+        $this->view->playedId = $playedId;
+        $this->view->played = $this->view->playeds[$playedId];
+        $this->view->playedName = $this->view->played['name'];
+        if($this->view->played['is_kqwf']==1){
+            $this->view->tpl = 'game/game-fast/'.$this->view->played['playedTpl'];
+        }else{
+            $this->view->tpl = 'game/game-played/'.$this->view->played['playedTpl'];
+        }
+
+        //$maxPl = $this->getPl($playedId);//赔率
+        $maxPl = Played::gfwfPl($playedId);
+        $this->assign('maxPl', $maxPl);
+
+        //快钱玩法组 和 官方玩法组
+        $gfwf_groups = model('type')->gfwfTypes($type);
+        $this->view->gfwf_groups = $gfwf_groups;
+        $kqwf_groups = model('type')->kqwfTypes($type);
+        $this->view->kqwf_groups = $kqwf_groups;
+
+        echo $this->fetch('inc_game_played');        exit();
+    }    
+
+    public final function played($type, $playedId)
+    {
+        $types = model('type')->allTypes();
+
+        $type = input('type/d');
+        if(!$type){
+            return ['status'=>-1,'msg'=>'请选择彩种!!',];
+        }
+        $lottery = $types[$type]??null;
+        if(!$lottery){
+            return ['status'=>-1,'msg'=>'彩种不存在!',];
+        }
+        $this->view->type = $type;
+        
+        foreach($types[$type]['groups'] as $groupId => $group){
+            if($group['playeds'][$playedId]??null){
+                $this->view->groupId = $groupId;
+                $this->view->playedId = $playedId;
+                $this->view->played = $group['playeds'][$playedId];
+                $this->view->playedName = $this->view->played['name'];
+                if($this->view->played['is_kqwf']==1){
+                    $this->view->tpl = 'game/game-fast/'.$this->view->played['playedTpl'];
+                }else{
+                    $this->view->tpl = 'game/game-played/'.$this->view->played['playedTpl'];
+                }                
+                break;
+            }
+        }
+
+        if(!isset($this->view->playedId)){
+            return ['status'=>-1,'msg'=>'玩法不存在!',];
+        }
+
+        //$maxPl = $this->getPl($playedId);
+        $maxPl = Played::gfwfPl($playedId);
+        $this->assign('maxPl', $maxPl);
+
+        //快钱玩法组 和 官方玩法组
+        $gfwf_groups = model('type')->gfwfTypes($type);
+        $this->view->gfwf_groups = $gfwf_groups;
+        $kqwf_groups = model('type')->kqwfTypes($type);
+        $this->view->kqwf_groups = $kqwf_groups;
+        
+        echo $this->fetch("inc_game_content");
+        exit();
+    }
+
+    //前端提交的注单列表,可以是官方玩法和快钱玩法;
+    //只支持追号,不支持飞盘和合买;整个前后端都没有实现合买和飞盘
+    //追号,实现为 快钱和官方玩法一起追号,同时翻倍
+    public function postAll(){
+        try{
+
+            $ret['status'] = 0 ;
+            $ret['info'] = '投注失败,请重试...' ;
+
+            $codes   = input('code/a');
+            $para    = input('para/a');
+            
+            if ($this->settings['switchBuy'] == 0)
+                throw new \Exception('本平台已经停止购买！');
+            if ($this->settings['switchDLBuy'] == 0 && $this->user['type'])
+                throw new \Exception('代理不能买单！');
+            if (count($codes) == 0)
+                throw new \Exception('请先选择号码再提交投注');
+
+            //$para['type']彩种ID,$code['type']彩种ID,$code['type']并非彩种类别ID,
+            $actionTime = $this->getGameActionTime($para['type']); // 当期时间
+            $actionNo = $this->getGameActionNo($para['type']); 
+            // 当期期数,已格式化为前端所见,带'-'
+            $actionNo_num = doubleval(str_replace('-', '', $actionNo));//数字化
+
+
+            //追号时才有多期
+            $actionNos = explode('|', $para['actionNo']);
+            foreach ($actionNos as $action_no) {                
+                //请求参数中的期数,不管有无'-',注单表的期数为无'-'的格式;
+                //与开奖表data以及开奖接口data.8889s.com的期数保持一致
+                $action_no_num = doubleval(str_replace('-', '', $action_no)); 
+                if ($action_no_num < $actionNo_num)
+                    throw new \Exception('投注失败：该期投注时间已过'.$action_no_num.'----'.$actionNo_num);
+                //formatActionNo 处理 新疆时时彩的bug? 需要多补一个0?
+                //$para['actionNo'] = $this->formatActionNo($para['actionNo'],$para['type']) ;                
+            }
+
+            $zhuihao = input('zhuiHao');
+            if($zhuihao){
+                $beishus = explode('|', $para['beishu']);
+                if(count($actionNos)!=count($beishus)){
+                    throw new \Exception('投注失败：追号期数个数和倍数个数不一致!');
+                }
+                $liqType  = 102;
+                $info     = '追号投注';                
+            }else{
+                $beishus = [1];
+                $liqType  = 101;
+                $info     = '投注';                 
+            }
+            
+            // 查检每个注单的数据完整性
+            $amount = 0;
+            $bets = [];//注单,追号,一个投注内容,对应多个期数,则对应多个注单;
+            
+            $type = $para['type']??null;
+            if(!$type){
+                throw new \Exception("请输入彩种ID!");
+            }
+            $groups = model('type')->allTypes($type);//参数彩种ID
+            if(!$groups){
+                throw new \Exception("彩种不存在!");                    
+            }
+
+            foreach ($codes as $code) {
+                /*$para['type']彩种ID,$code['type']彩种类别
+                $type = $code['type']??null;
+                if(!$type){
+                    throw new \Exception("请输入彩种参数!");
+                }
+                $groups = model('type')->allTypes($type);//参数彩种ID
+                if(!$groups){
+                    throw new \Exception("彩种不存在!");                    
+                }
+                */
+                $groupId = $code['playedGroup']??null;//input('playedGroup/d');
+                $group = $groups[$groupId]??null;
+                if(!$group){
+                    throw new \Exception("玩法组不存在!");
+                }
+                $playedId = $code['playedId']??null;//input('playedId/d');
+                $played = $group['playeds'][$playedId]??null;
+                if(!$played){
+                    throw new \Exception("玩法不存在!");
+                }
+                if (! $played['enable']){
+                    throw new \Exception('玩法已停!');
+                }
+                
+                //if ($played['type']!=$code['type']){
+                if ($para['type']!=$code['type']){
+                    throw new \Exception('彩种id有误!');
+                }
+
+                $actionData = $code['actionData']??'';
+                if(is_null($actionData)){
+                    throw new \Exception("投注内容不能为空!");
+                }    
+
+                if (floatval($code['mode']) <= 0)
+                    throw new \Exception('倍数模式必须大于0!');
+
+                if($played['is_kqwf']){
+                    $actionData = explode('-',$actionData,2);
+                    if(count($actionData)<2){
+                        throw new \Exception("投注内容格式错误!");
+                    }
+                    $plg = $actionData[0];//赔率组
+                    $bet = $actionData[1];
+
+                    $plid = $code['plid']??0;//input('plid/d');
+                  
+                    $pl = model('played_pl')->get($plid);
+                  
+                    if(!$pl){
+                        throw new \Exception("赔率不存在!");
+                    }
+                    if($plg != $pl->plgroup->name){
+                        throw new \Exception("投注内容-赔率组错误!");
+                    }
+
+                    if($pl->plgroup->mode == 2){
+                        if(count(_arr($bet)) != $pl->value){
+                            throw new \Exception("赔率有误!");
+                        }
+                    }
+                    
+                    $bonusProp = $code['bonusProp']??0;                
+                    if($pl->pl != $bonusProp){
+                        throw new \Exception("赔率有误!");
+                    }
+
+                    //$money = floatval($code['money']??0); //input('money/f');
+                    //快钱的单注金额 还是放在 mode字段,不放在money字段了
+                    //另外快钱的复式投注 也使用复式存储;
+                    $money = floatval($code['mode']??0);
+                    if($money<=0){
+                        throw new \Exception("投注额有误!");
+                    }
+
+                    $code['beiShu'] = 1;
+                    $code['fanDian'] = 0.0;                    
+                    $code['flag'] = 0;
+                    //$code['mode'] = 2;
+                }else{
+
+                    // 检查返点
+                    if (floatval($code['fanDian']) > floatval($this->user['fanDian']) || floatval($code['fanDian']) > floatval($this->settings['fanDianMax']))
+                    throw new \Exception('返点数据出错，请重新投注!');
+
+                    // 检查赔率
+                    if($played['is_mix']){
+                        $prop_pairs = db('played')->where('id','in',$played['mix_ids'])->field('bonusProp,bonusPropBase')->select();
+                    }else{
+                        $prop_pairs = [['bonusProp'=>$played['bonusProp'],
+                                        'bonusPropBase'=>$played['bonusPropBase'],],];
+                    }
+                    $props = explode('|',$code['bonusProp']);
+                    if(count($props)!=count($prop_pairs)){
+                        throw new \Exception('赔率个数出错，请重新投注!');
+                    }
+                    foreach($prop_pairs as $key => $pair){
+                        $chkBonus = ($pair['bonusProp'] - $pair['bonusPropBase']) / $this->settings['fanDianMax'] * ($this->user['fanDian'] - $code['fanDian']) + $pair['bonusPropBase']; // 实际奖金
+                        if ($props[$key] > $pair['bonusProp'])
+                            throw new \Exception('赔率出错，请重新投注 -1');
+                        if ($props[$key] < $pair['bonusPropBase'])
+                            throw new \Exception('赔率出错，请重新投注 -2');
+                        if (intval($chkBonus) != intval($props[$key]))
+                            throw new \Exception('赔率出错，请重新投注 -3');
+                    }
+                    
+                    // 检查倍数
+                    if (intval($code['beiShu']) < 1)
+                    throw new \Exception('倍数只能为大于1正整数');                 
+                }
+                
+                $orderId = $code['orderId']??null;
+                if(!$orderId){
+                    throw new \Exception("订单id不能为空!");
+                }
+
+                // 检查注数
+                $betCountFun = $played['betCountFun'];
+                if($betCountFun){
+                    $betCount = bet::$betCountFun($code['actionData']);
+                    if($code['actionNum'] != $betCount){
+                        throw new \Exception('提交数据出错，请重新投注，有效注数' . $betCount);
+                    }                
+                }
+                
+                if($played['rx_mode']!='wym'){
+                    $code['weiShu'] = 0;
+                }
+                //内容检查,包括内容,以及通配符和位掩码;
+                //官方玩法也没有 内容检查,
+                //或者通过玩法名分支做了简易检查, strpos($played['name'], "任选")
+                //可以玩法添加内容检查函数betCheckFun;
+                $betCheckFun = $played['betCheckFun'];
+                if($betCheckFun){
+                    $betCheck = betC::$betCheckFun($code['actionData'],$code['weiShu']);
+                    if(!$betCheck){
+                        throw new \Exception('投注内容有误，请重新投注!');
+                    }                
+                }
+
+                $ip = $this->request->ip();
+                $code['zhuiHao'] = (bool)$zhuihao;
+                $zhuiHaoMode = isset($para['zhuiHaoMode']) ? $para['zhuiHaoMode'] : '';
+
+                //追号倍数,1个元素时表示普通投注
+                foreach($actionNos as $key=>$actionNo){
+                    $para2 = array(
+                        'actionTime' => $this->time,
+                        'actionNo' => $actionNo,
+                        'kjTime' => $actionTime,
+                        'actionIP' => $ip,
+                        'uid' => $this->user['uid'],
+                        'username' => $this->user['username'],
+                        'zhuiHaoMode' => $zhuiHaoMode,
+                        'serializeId' => uniqid(),
+                    );
+                    $code['beiShu'] = $code['beiShu'] * $beishus[$key];
+                    $bets[] = array_merge($code, $para2);
+
+                    $money = $code['actionNum'] * $code['mode'] * $code['beiShu'];
+                    $money = $money * $beishus[$key];
+                    $amount += $money;
+                }
+            }    
+
+            // 查询用户可用资金
+            $coin = db('members')->where('uid',$this->user['uid'])->value('coin');
+            if ($coin < $amount){
+                throw new \Exception('您的可用资金不足，是否充值？');
+            }
+
+            // 开始事物处理,bets中的注单,是经过补全和调整过的
+            db()->startTrans() ;
+            foreach ($bets as $code) {           
+                /*
+                unset($code['plid']);
+                $code['wjorderId'] = $code['type'] . $code['playedId'] . $this->randomkeys(8 - strlen($code['type'] . $code['playedId']));
+                $betid = db('bets')->data($code)->insert();
+                if(!$betid){
+                    db()->rollback();
+                    $ret['info'] = '投注失败' ;
+                    return json_encode($backReturn)  ;                    
+                }
+                $money = $code['actionNum'] * $code['mode'] * $code['beiShu'];
+                $r = $this->addCoin(array(
+                    'uid' => $this->user['uid'],
+                    'type' => $code['type'],
+                    'liqType' => $liqType,
+                    'info' => $info,
+                    'extfield0' => $betid,
+                    'extfield1' => $para2['serializeId'],
+                    'coin' => - $money,
+                ));
+                if(!$r){
+                    db()->rollback();
+                    $ret['info'] = '投注失败' ;
+                    return json_encode($backReturn)  ;
+                }
+                */
+                $this->user->bet($code,$info);
+            }
+            db()->commit() ; // 成功则提交
+            $ret['status'] = 1  ;
+            $ret['info'] = '投注成功' ;
+            return json_encode($ret)  ;  
+        }catch (\Exception $e) {
+            db()->rollback();
+            $ret['info'] = $e->getMessage() ;
+            return json_encode($ret) ;
+        }
+    }
+
+    /**
+     *  ajax撤单
+     */
+    public final function deleteCode()
+    {
+        // $this->beginTransaction();
+        Db::startTrans();
+        $id = input('id');
+        // $sql="select * from {$this->prename}bets where id=".$id;
+        if (! $data = db('bets')->where(array(
+            'id' => input('id')
+        ))->find())
+            $this->error('找不到定单。');
+        if ($data['isDelete'])
+            $this->error('这单子已经撤单过了。');
+        if ($data['uid'] != $this->user['uid'])
+            $this->error('这单子不是您的，您不能撤单。'); // 可考虑管理员能给用户撤单情况
+        if ($data['kjTime'] <= $this->time)
+            $this->error('已过开奖期，不能撤单');
+        if ($data['lotteryNo'])
+            $this->error('已经开奖，不能撤单');
+        if ($data['qz_uid'])
+            $this->error('单子已经被人抢庄，不能撤单');
+        
+        // 冻结时间后不能撤单
+        $this->getTypes() ;
+        //$ftime = $this->getTypeFtime($data['type']) ;
+        $ftime = Type::getFtime($data['type']) ;
+        if ($data['kjTime'] - $ftime < $this->time)
+            $this->error('这期已经结冻，不能撤单') ;
+        
+        if ($data['hmEnable'])
+            $amount = $data['beiShu'] * $data['mode'] * $data['actionNum'] * ($data['hmMyFen'] + $data['hmOldBaoDi']) / $data['hmAllFen'] ;
+        else
+            $amount = $data['beiShu'] * $data['mode'] * $data['actionNum'] * intval(($data['fpEnable'] ? '2' : '1')) ;
+        $amount = abs($amount) ;
+        // 添加用户资金变更日志
+        $isSuc1 = $this->addCoin(array(
+            'uid' => $data['uid'],
+            'type' => $data['type'],
+            'playedId' => $data['playedId'],
+            'liqType' => 7,
+            'info' => "撤单",
+            'extfield0' => $id,
+            'coin' => $amount
+        ));
+        
+        // 更改定单为已经删除状态
+        $map['isDelete'] = 1;
+        $isSuc2 = db('bets')->where('id=' . $id)->save($map);
+        
+        if ($isSuc1 !== false && $isSuc2 == true) {
+            // 将投注记录写入文件
+            if (! is_dir('./record/'))
+                mkdir('./record/');
+            $fp = fopen("./record/" . $data['username'] . ".txt", "a+");
+            $tz_content = $data['wjorderId'] . " 撤单 " . date('m-d H:i:s', time()) . "\r\n\r\n";
+            $flag = fwrite($fp, $tz_content);
+            if (! $flag) {
+                $this->error('创建投注记录文件失败');
+            }
+            fclose($fp);
+            
+            Db::commit(); // 成功则提交
+            $this->success('撤单成功');
+        } else {
+            Db::rollback(); // 不成功，则回滚
+            $this->error('撤单失败');
+        }
+    }
+
+    public final function getNo($type)
+    {
+        $types = model('type')->allTypes();
+        
+        if(!$type){
+            echo json_encode([]);
+        }
+
+        $lottery = $types[$type]??null;
+        if(!$lottery){
+            echo json_encode([]);
+        }
+
+        //$kjTime = $this->getTypeFtime($type);
+        //$actionNo = $this->getGameNo($type);
+        $kjTime = Type::getFtime($type);
+        $actionNo = Type::getGamePhase($type);
+
+        $actionNo['actionTime'] = strtotime($actionNo['actionTime']); 
+        $actionNo['endtime'] = $actionNo['actionTime'] - time() - $kjTime;
+        $actionNo['opentime'] = $actionNo['actionTime'] - time();
+
+        $history = db('data')->where('type',$type)->order('number DESC')->limit(5)->field('time, number, data')->select() ;
+        $actionNo['list'] = $history;
+        echo json_encode($actionNo);
+    }
+
+    //获取当期时间
+    protected function getGameActionTime($type,$old=0){
+        $actionNo = Type::getGamePhase($type);
+        
+        if($type==1 && $actionNo['actionTime']=='00:00'){
+            $actionTime=strtotime($actionNo['actionTime'])+24*3600;
+        }else{
+            $actionTime=strtotime($actionNo['actionTime']);
+        }
+        if(!$actionTime) $actionTime=$old;
+        return $actionTime;
+    }/////
+    
+    //获取当期期数
+    protected function getGameActionNo($type){
+        $actionNo = Type::getGamePhase($type);
+        return $actionNo['actionNo'];
+    }/////   
+
+
+    /**
+     * ajax取定单列表
+     */
+    public final function getOrdered($type = null)
+    {
+        if (!isset($this->type))
+            $this->type = $type;
+        
+        $order_list = db('bets')->where(array(
+            'uid' => $this->user['uid']
+        ))
+            ->limit(10)
+            ->order('id desc')
+            ->select() ;
+
+        $this->assign('order_list', $order_list) ;
+        $this->assign('time', $this->time);
+        
+        //$types = $this->getTypes() ;
+        //$this->assign('types', $types) ;
+        
+        //$playeds = $this->getPlayeds() ;
+        //$this->assign('playeds', $playeds) ;
+        
+        echo  $this->fetch('inc_game_order');
+        exit();
+    }
+
+    // 随机函数
+    public function randomkeys($length)
+    {
+        $key      = "";
+        $pattern  = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+        $pattern1 = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $pattern2 = '0123456789';
+        for ($i = 0; $i < $length; $i ++) {
+            $key .= $pattern{mt_rand(0, 35)};
+        }
+        
+        return $key;
+    }
+
+    /**
+     *  走势图
+     * @return mixed
+     */
+    public function zoushitu() {
+        return $this->fetch() ;
+    }
+
+    /**
+     * 走势图11X5
+     * @return mixed
+     */
+     public function zoushitu_11x5() {
+            return $this->fetch() ;
+     }
+
+    public function get_recharge_top()
+    {
+        // 奖金排行
+        $where = array(
+            'actionTime' => array(
+                'gt',
+                strtotime(' 00:00:00')
+            ),
+            'state' => array(
+                'neq',
+                0
+            ),
+            'rechargeAmount' => array(
+                'gt',
+                1000
+            )
+        ) ;
+        //$recharge_tops = model('member_recharge')->where($where)->order('rechargeAmount desc')->select();
+        $recharge_tops = [];
+        if (count($recharge_tops) < 10) {
+            for ($i = 0; $i < 10; $i ++) {
+                if (! (isset($recharge_tops[$i]) ? $recharge_tops[$i] : 0)) {
+                    $top['username'] = $this->randStr(rand(5, 10));
+                    $top['rechargeAmount'] = rand(1000, 20000) + rand(0, 100) / 100;
+                    $recharge_tops[$i] = $top;
+                }
+            }
+        }
+        $this->assign('recharge_tops', $recharge_tops);
+    }
+
+    public function get_top()
+    {
+        // 奖金排行
+        $tops = db('bets')->where(array(
+            'actionTime' => array(
+                'gt',
+                time() - 30 * 60
+            ),
+            'bonus' => array(
+                'gt',
+                1000
+            )
+        ))
+            ->order('bonus desc')
+            ->select();
+        if (count($tops) < 20) {
+            $type_str = array(
+                1,
+                6,
+                14,
+                15,
+                16,
+                20
+            );
+            for ($i = 0; $i < 20; $i ++) {
+                if (! (isset($tops[$i]) ? $tops[$i] : 0)) {
+                    $top['username'] = $this->randStr(rand(5, 10));
+                    if (time() < strtotime(' 02:00:00')) {
+                        $type_str = array(
+                            1,
+                            14
+                        );
+                        $top['type'] = $type_str[rand(0, 1)];
+                    } else if (time() < strtotime(' 09:00:00')) {
+                        $top['type'] = 14;
+                    } else {
+                        $top['type'] = $type_str[rand(0, 5)];
+                    }
+                    
+                    $top['bonus'] = rand(1000, 20000) + rand(0, 100) / 100;
+                    $tops[$i] = $top;
+                }
+            }
+        }
+        $this->assign('tops', $tops);
+    }
+
+    public function gettop()
+    {
+        $this->get_top();
+        return $this->fetch('inc_top');
+    }
+
+    function randStr($i)
+    {
+        $str = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+        $finalStr = "";
+        for ($j = 0; $j < $i; $j ++) {
+            $finalStr .= substr($str, rand(0, 60), 1);
+        }
+        return $finalStr;
+    }
+
+     //playid ： 玩法ID
+   public  function  getrandom($playid){
+         $playid = input('playid');
+         if(!$playid){
+            $playid = 2;    
+         }
+        $playinfo =  Db('played')->field('selectNum,weishu,randomSscFun')->where('id','eq',$playid)->find();
+        $randomSscFun =  $playinfo['randomSscFun'];
+        $random = new \app\classes\random();
+        var_dump( $randomSscFun);
+        $info = $random::$randomSscFun($playinfo['selectNum'],$playinfo['weishu'],$playid);
+        return json_encode( $info);
+   }
+    public  function zhuiHaoModal(){
+        echo $this->fetch('game/zuihao') ;    
+        exit;       
+    }
+
+      // 追号层加载期号
+      // $type : 彩票种类
+      // $count ： 显示多少期数
+      // $actionNum : 当前期数
+      // $time
+    public  function zhuiHaoQs($type,$price,$beishu,$count){
+       
+        date_default_timezone_set('PRC');
+        $type = input('type');
+        $price = input('price');
+        $beishu =  input('beishu');
+         $count = input('count');
+        if( !$type){
+             $type = 1; 
+        }
+       if(!$count){
+             $count = 0;
+        }
+        $list =[];
+        $typeinfo = db('type')->where('id',$type) ->find(); 
+        $fun = $typeinfo['onGetNoed'];
+        $list = betQ::$fun($type, $count, $typeinfo['data_ftime']);
+        $this->assign('list', $list);
+        $this->assign('price', $price);
+        $this->assign('beishu', $beishu);
+        echo $this->fetch('game/zuihao_qs') ;    
+      
+        exit;  
+    }
+}

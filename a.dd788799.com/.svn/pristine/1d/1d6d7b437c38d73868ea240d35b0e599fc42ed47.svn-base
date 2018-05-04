@@ -1,0 +1,160 @@
+{extend name="base/common"/}
+
+{block name="title"><title>在线充值－{$settings.webName}</title>{/block}
+{block name="style">
+<link href="/__CSS__/chongzhi.css" rel="stylesheet">
+{/block}
+{block name="body"}
+<?php
+/* *
+ * 功能：一般支付调试入口页面
+ * 版本：1.0
+ * 日期：2015-03-26
+ * 说明：
+ * 以下代码只是为了方便商户测试而提供的样例代码。
+ */
+	$time		= time();
+	$orderNo	= date("YmdHis",$time);
+	$tradeDate	= date("Ymd",$time);
+?>
+
+<div class="effect mainnav-lg mainnav-fixed navbar-fixed footer-fixed" id="container">
+	<div id="page-content">
+		<form action="{:Url('recharge/index')}" method="post" id="MerOrder">
+			<div class="panel">
+				<div class="panel-heading">
+					<h3 class="panel-title"><img alt="" src="/__IMG__/main/cz.png">充值</h3>
+				</div>
+				<div class="panel-body chongzhibox">
+					<div class="czbox">
+						<div class="czrow">
+							<div class="czlabel">
+								                        充值方式：
+							</div>
+							<div class="cztxt">
+								<div class="radio">
+									<?php											
+										if($banks) foreach($banks as $bank){
+									?>
+									<label class="form-radio form-normal form-text active" id="yhh"><input autocomplete="off" value="<?=$bank['bankId']?>" name="mBankId" checked id="yh" type="radio"> <?=$bank['name']?> </label>
+									<?php } ?>
+									<!-- <label class="form-radio form-normal form-text active" id="yhh"><input autocomplete="off" name="def-w-label" checked id="yh" type="radio"> 银行充值 </label> -->
+									<!-- <label class="form-radio form-normal form-text" id="wxx"><input autocomplete="off" name="def-w-label" id="wx" type="radio"> 微信充值 </label> -->
+								</div>
+							</div>
+						</div>
+						<div class="czrow" id="xzyh" style="display: none;">
+							<div class="cztxt graybg">
+								<ul class="bankboxlist">
+									<li>
+									<div class="bankbox thisbank" style-name="alipayzhaoshang" min-recharge="10" max-recharge="24000">
+										<img alt="" src="cash_files/alipay.png">
+										<img alt="" src="cash_files/line.png">
+									</div>
+									</li>
+									<li>
+									<div class="bankbox " style-name="cmbc" min-recharge="10" max-recharge="50000">
+										<img alt="" src="cash_files/cmbc.png">
+										<img alt="" src="cash_files/line.png">
+									</div>
+									</li>
+									<li>
+									<div class="bankbox " style-name="weixin" min-recharge="10" max-recharge="500">
+										<img alt="" src="cash_files/weixin.png">
+										<img alt="" src="cash_files/line.png">
+									</div>
+									</li>
+								</ul>
+							</div>
+						</div>
+						<div class="czrow" id="xzfs" style="display: none;">
+							<div class="cztxt graybg">
+								<ul class="bankboxlist">
+									<li>
+									<div class="bankbox " style-name="thk" min-recharge="10" max-recharge="100000">
+										<img class="bankselect" alt="" src="cash_files/chongzhilabbg.jpg">
+										<img alt="" src="cash_files/line.png"><span>A通汇</span>
+									</div>
+									</li>
+									<li>
+									<div class="bankbox " style-name="newpay" min-recharge="10" max-recharge="50000">
+										<img class="bankselect" alt="" src="cash_files/chongzhilabbg.jpg">
+										<img alt="" src="cash_files/line.png"><span>C新生</span>
+									</div>
+									</li>
+								</ul>
+							</div>
+						</div>
+						<hr>
+						<div class="czrow">
+							<div class="czlabel">
+								                        充值金额：
+							</div>
+							<div class="cztxt">
+								<div class="jinebox">
+									<input name="StyleName" id="StyleName" type="hidden" value="alipayzhaoshang ">
+									<input name="amount" id="amount" type="text" placeholder="请输入充值金额" value="" data-val-required="RechargeMoney 字段是必需的。" data-val-number="The field RechargeMoney must be a number." data-val="true"> 
+元
+								</div>
+								充值金额：<strong>单笔最低充值金额为<span id="txtminmoney">{$settings.rechargeMin1}</span>元，最高<span id="txtmaxmoney">{$settings.rechargeMax1}</span>元</strong>
+							</div>
+						</div>
+					</div>
+					<div class="czfoot">
+						<div class="czfootbox">
+							<button class="btn btn-primary" autocomplete="off" type="submit" onclick="return fukuan(this);"> 
+                       继续下一步                     
+							</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			<input size="50" type="hidden" name="orderNo" id="orderNo" value='{$orderNo?$orderNo:""}' />
+			<input size="50" type="hidden" name="tradeDate" id="tradeDate" value='{$tradeDate?$tradeDate:""}' />
+			<input size="50" type="hidden" name="merchParam" id="merchParam" value="{$user.uid?$user.uid:''}" />
+			<input size="50" type="hidden" name="tradeSummary" id="tradeSummary" value="{$user.username?$user.username:''}" />
+		</form>
+	</div>
+</div>
+{/block}
+{block name="script">
+<script src="/__JS__/bootbox.min.js"></script>
+<script type="text/javascript">
+function fukuan(me){
+	
+	var min = {$settings.rechargeMin1?$settings.rechargeMin1:''};
+	var max = {$settings.rechargeMax1?$settings.rechargeMax1:''};
+	var amount = parseFloat($('#amount').val());
+	if(isNaN(amount) || amount<min || amount>max){
+		bootbox.alert('充值金额必须在' + min + '元和' + max + '元之间');
+		return false;
+	}
+	
+	$('#MerOrder').submit();
+	return false;
+}
+
+$(document).ready(function () {
+	$("#j-query").on("click", function () {
+		var me=this;
+		$(me).attr('disabled',true);
+		$.ajax({
+			type: "POST",
+			url: '{:Url("cash/cash")}',
+			data: { amount: $('#TikuanMoney').val(), coinpwd: $('#FundsPass').val(), id: $('#UserBankId').val()},
+			dataType: "json",
+			global: false,
+			success: function (result) {
+				$(me).removeAttr('disabled');
+				bootbox.alert(result.info);
+			}, error: function (err) {
+				var t=err;				
+			}
+		});
+		//$("#teambetrecord").submit();
+	});
+	
+});
+
+</script>
+{/block}

@@ -1,0 +1,87 @@
+<html><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link href="/css/wechat_pay.css" rel="stylesheet" media="screen">
+    <script type="text/javascript" src="/js/jquery-1.8.0.min.js"></script>
+    <script src="/js/jquery.qrcode.min.js"></script>
+    <title>扫码支付</title>
+</head>
+<body>
+<div class="body">
+    <h1 class="mod-title">
+        <span class="ico-wechat"></span><span class="text">扫码支付</span>
+    </h1>
+    <div class="mod-ct">
+        <!--<div class="order">
+        </div>-->
+        <div class="amount">
+            <span>￥</span>{$data['money']}	</div>
+        <div class="qr-image" style="">
+            <div id="barCode" style="margin-left: 0px;min-height:300px;"><canvas width="300" height="300"></canvas></div>
+        </div>
+        <!--detail-open 加上这个类是展示订单信息，不加不展示-->
+        <div class="detail detail-open" id="orderDetail" style="">
+            <dl class="detail-ct" style="display: block;">
+                <dt>交易单号</dt>
+                <dd id="billId">{$data['orderid']}</dd>
+            </dl>
+        </div>
+        <div class="tip">
+            <span class="dec dec-left"></span>
+            <span class="dec dec-right"></span>
+            <div class="ico-scan">
+            </div>
+            <div class="tip-text">
+                <!--<p>
+                    请使用支付宝扫一扫
+                </p>-->
+                <p>
+                    扫描二维码完成支付
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="foot">
+        <div class="inner">
+            <p>
+            </p>
+
+        </div>
+    </div>
+</div>
+
+
+<script>
+
+    function query(orderid){
+        var datas = 'OrderId='+orderid;
+        $.ajax({
+            url: '/index/queryOrder',
+            method: 'post',
+            data: datas,
+            dataType: 'json',
+            success: function(data) {
+                if(data.status == '1'){
+                    alert('支付成功');
+                    window.location.href = '/';
+                }
+            }
+        });
+    }
+    $(function(){
+        $('#barCode').empty();
+        $('#barCode').qrcode({
+            render : "canvas", //table方式
+            width : 300, //宽度
+            height : 300, //高度
+            text : '{$data[\'info\']}', //任意内容 background: "#ffffff",
+            background : "#ffffff",
+        });
+        setInterval("query('{$data['orderid']}')",5000);
+    })
+</script>
+
+
+</body></html>

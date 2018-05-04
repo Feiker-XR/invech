@@ -1,0 +1,84 @@
+<input type="hidden" name="playedGroup" value="<?=$groupId?>"/>
+<input type="hidden" name="playedId" value="<?=$playedId?>"/>
+<input type="hidden" name="type" value="<?=$type?>"/>
+<input type="hidden" name="playedName" value="<?=$played['name']?>"/>
+<!-- mobile 广东快乐十分_龙虎 -->
+<div id="sscContent">
+    <div class="lot-content clearfix">
+        <div class="fl main-left">
+            <div class="hd clearfix rehd retoptz" id="toptouzhu">
+                <div class="fl refl">
+                    快捷金额：<input type="text" class="txt" id="inputMoney">
+                </div>
+                <div class="kjanniu">
+                    <a href="javascript:void(0)" class="img-50" data-num="50"></a>
+                    <a href="javascript:void(0)" class="img-100" data-num="100"></a>
+                    <a href="javascript:void(0)" class="img-500" data-num="500"></a>
+                    <a href="javascript:void(0)" class="img-1000" data-num="1000"></a>
+                    <a href="javascript:void(0)" class="img-5000" data-num="5000"></a>
+                    <a href="javascript:void(0)" class="img-10000" data-num="10000"></a>
+                </div>
+            </div>
+            <div style="clear: both; width: 100%;"></div>
+            <div class="table-common clearfix reclearfix pp" action="klsf_lh" id="table-common">
+                <script type="text/html" id="klsf_lh">
+                    {{each pls value index}}
+                    <table width="100%" border="0" cellspacing="0" cellpadding="0" class="item">
+                        <tbody>
+                        <tr>
+                            {{each value.pls _value _index}}
+                            <td onclick="kqQuick(this)">{{value.name.split('vs')[_index]}}</td>
+                            {{/each}}
+                        </tr>
+                        <tr>
+                            {{each value.pls _value _index}}
+                            <td onclick="kqQuick(this)"><span class="color-red pl" data-plid="{{_value.id}}">{{_value.pl}}</span>
+                            </td>
+                            {{/each}}
+                        </tr>
+                        <tr>
+                            {{each value.pls _value _index}}
+                            <td><input type="text" oninput="checkAmount()" class="table-txt" data-name="{{value.name}}-{{_value.value}}"
+                                       data-plid="{{_value.id}}" data-pl="{{_value.pl}}"></td>
+                            {{/each}}
+                        </tr>
+                        </tbody>
+                    </table>
+                    {{if index%2==0}}
+                    <br/>
+                    {{/if}}
+                    {{/each}}
+                </script>
+            </div>
+
+        </div>
+    </div>
+</div>
+<script>
+    $(function () {
+        var playedId = "<?=$playedId?>";
+        $.getJSON("/game/pl/playedId/" + playedId, function (data) {
+            pls = data;
+            console.log(data);
+            var html = template("klsf_lh", {pls: pls});
+            $('.table-common').html(html);
+        });
+    });
+
+    function kqQuick(self) {
+        var $this = $(self);
+        var index = $this.closest('tr').find('td').index($this);
+        var isCenterBtn = $this.closest('tr').next().find('input').length > 0 ? true : false;
+        if (!$this.attr('ischoosed')) {
+            $this.attr('ischoosed', 'yes');
+            $this.css('background', 'yellow');
+            isCenterBtn ? $this.closest('tr').prev().find('td').eq(index).css('background', 'yellow') : $this.closest('tr').next().find('td').eq(index).css('background', 'yellow');
+            $this.closest('tr').siblings().find('input').eq(index).val($('#inputMoney').val());
+        } else {
+            $this.removeAttr('ischoosed');
+            $this.css('background', '');
+            isCenterBtn ? $this.closest('tr').prev().find('td').eq(index).css('background', '') : $this.closest('tr').next().find('td').eq(index).css('background', '');
+            $this.closest('tr').siblings().find('input').eq(index).val('');
+        }
+    }
+</script>

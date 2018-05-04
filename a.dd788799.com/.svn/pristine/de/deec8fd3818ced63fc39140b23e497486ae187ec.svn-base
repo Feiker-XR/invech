@@ -1,0 +1,17 @@
+; 这个是注释;
+; [] 分段
+[mail]
+driver = smtp
+host = smtp.mailtrap.io
+port = 2525
+username = 
+password = 
+encryption = 
+
+[broadcast]
+driver = pusher
+pusher_app_key = 2e7fdae34b51fcd2736c
+pusher_app_secret = d34c8680a1396229e15b
+pusher_app_id = 493562
+pusher_cluster = us2
+

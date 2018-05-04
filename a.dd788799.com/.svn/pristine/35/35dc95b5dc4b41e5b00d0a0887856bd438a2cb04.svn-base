@@ -1,0 +1,18 @@
+<extend name="Base/common"/>
+
+<block name="title"><title>申请提现 - {:S('WEB_NAME')}</title></block>
+
+
+
+<block name="body">
+<div class="pagemain">
+	
+    <div class="display biao-cont">
+
+		<div class="tips">
+        	<p>提现正在处理中，排队<strong class="red"><?=intval($txcount)+intval($settings['cashPersons'])?></strong></p>
+        </div>
+
+    </div>
+</div>
+</block>

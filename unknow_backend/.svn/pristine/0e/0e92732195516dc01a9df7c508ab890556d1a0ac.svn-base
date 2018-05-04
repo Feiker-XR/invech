@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>修改密码</title>
+<link rel="stylesheet" type="text/css" href="/css/general.css"/>
+<link rel="stylesheet" type="text/css" href="/newview/css/theme/style.css?version=2.0.0" />
+<link rel="stylesheet" type="text/css" href="/newview/css/style.css" />
+<link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
+<link rel="stylesheet" type="text/css"  href="/css/newstyle	/public.css">
+<link rel="stylesheet" type="text/css"  href="/css/newstyle/laydate.css">
+<link rel="stylesheet" type="text/css"  href="/css/newstyle/style.css">
+<style>
+	.modify_main_title{width: 842px;height: 40px;color: #ff6c00;font-size: 14px;line-height: 40px;text-indent: 20px;border-bottom: 2px solid #ff6c00;margin: 0 auto;text-align: center;}
+	.modify_main_label{color: #999;font-size: 14px;margin-left: 80px;margin-top: 30px;width: 352px;float: left;}
+	.modify_input{width: 234px;height: 43px;color: #0079d7;font-size: 16px;text-indent: 10px;border: none;outline: none;}
+	.modify_main_label li.on{margin: 16px 0px;border: 1px solid #ccc;width: 350px;}
+	.modify_textarea{width: 332px;height:150px;text-indent: 10px;font-size: 16px;padding-top: 10px;}
+	.modify_main_label li span{display: inline-block;width: 65px;text-align: right;border-right: 1px solid #ccc;padding: 5px 15px 5px 0px;}
+	.modify_main_label li i{display: block;width: 25px;float: left;margin-top: 10px;margin-left: 5px;}
+
+	.modify_main_label li i img{
+		margin-top: 4px;
+		margin-left: 10px;
+	}
+	.modify_main_right{width: 390px;height: 225px;float: left;margin-top: 30px;margin-left: 70px;}
+	.modify_main_li{text-align: center;width: 330px;margin: 0 auto;clear: both;}
+	.modify_main_li a.del{margin-left：24px;display: block;width: 120px;height: 40px;background: #cdcdcd;border-radius: 40px;color: white;text-align:center;line-height: 40px;font-size: 16px;float: left;}
+	.modify_main_li a.sumbit{display: block;width: 120px;height: 40px;background: #ff6c00;border-radius: 40px;color: white;text-align: center;line-height: 40px;font-size: 16px;float: left;margin-left: 50px;}
+
+	.modify_main_li a.sumbit:hover{background: #d86714;}
+
+	.modify_main_li a.sumbit.sumbit-blue{
+		background: #45b1ff
+	}
+	.modify_main_li a.sumbit.sumbit-blue:hover{background: #0795fb;}
+	.modify_main_right_1{text-align: center;color: #666;height: 50px;border-bottom: 1px solid #ccc;width: 360px;margin: 0 auto;}
+	.modify_main_right_1 i{display: inline-block;margin-right: 5px;float: left;margin-left: 130px;margin-top: 13px;}
+	.modify_main_right_1 span{font-size: 16px;float: left;margin-top: 13px;}
+
+	.modify_main_right_2{color: #999;font-size: 14px;margin-left: 15px;}
+	.modify_main_right_2 p{margin: 10px 0;}
+	.modify_wp{position: relative;}
+	.modify_bt_right{position: absolute;right: 10px;bottom: 10px;}
+	.modify_main_title span{font-weight: bold;}
+
+
+	.day-day-heard{
+		color: #ff6c00;
+		border-bottom: 2px solid #ff6c00;padding-bottom: 8px;
+	}
+	.day-day-heard h3{
+		font-size: 17px;
+		font-weight: bolder;
+	}
+	.day-day-heard p{
+		font-size: 15px;
+		line-height: 25px;
+	}
+	.day-day-heard-blue{
+		color: #45b1ff;
+		border-bottom: 2px solid #45b1ff;padding-bottom: 8px;
+	}
+</style>
+
+<script src='/js/js/jquery-1.8.0.min.js'></script>
+<script type="text/javascript" src="/Scripts/member.js"></script>
+<script type="text/javascript" src="/js/main.js"></script>
+<script type="text/javascript" src="/newview/js/main.js"></script>
+<style type="text/css">
+	body{background: white;}
+</style>
+</head>
+<body>
+<div class="head">
+	<!--欢迎-->
+	{include file='common/nav'}
+</div>
+<div class="block_0"></div>	
+	
+<div class="moneyBox_contain modify_wp">
+<!--	<div class="ui-header">
+		<div class="ui-headerBox">
+			&lt;!&ndash; logo &ndash;&gt;
+			<a class="ui-icon-logo ui-logo" id="Logo"></a>
+			&lt;!&ndash; 导航 &ndash;&gt;
+			<ul class="ui-nav">
+				<li id="Nav_0" class="ui-header-active">
+					<a href="/user/userinfo.html" title="会员首页">
+						<span class="ui-icon ui-icon-home ui-icon-50"></span>
+					</a>
+				</li>
+				<li id="Nav_1" >
+					<a href="/pay/member.html" title="财务管理">
+						<span class="ui-icon ui-icon-recharge ui-icon-50"></span>
+					</a>
+				</li>
+				<li id="Nav_2">
+					<a href="/user/record_ds.html" title="游戏记录">
+						<span class="ui-icon ui-icon-gameNote ui-icon-50"></span>
+					</a>
+				</li>
+				<li id="Nav_3">
+					<a href="/user/report.html" title="历史记录">
+						<span class="ui-icon ui-icon-data ui-icon-50"></span>
+					</a>
+				</li>
+				<li id="Nav_4" >
+					<a href="/user/sms.html" title="站内短信">
+						<span class="ui-icon ui-icon-announce ui-icon-50"></span>
+					</a>
+				</li>
+        <li id="Nav_5">
+					<a href="/user/agent.html" title="代理中心">
+						<span class="ui-icon ui-icon-newActivity ui-icon-50"></span>
+					</a>
+				</li>
+        <li style="display:none">
+					<a href="http://messenger.providesupport.com/messenger/1x5b67gp1rcy50kqxa0qpsa0jx.html" title="客服中心">
+						<span class="ui-icon ui-icon-online ui-icon-50"></span>
+					</a>
+				</li>
+			</ul>
+			<ul class="ui-function">
+				&lt;!&ndash;<li>
+					<a href="#">
+						<span class="ui-icon ui-icon-down ui-icon-20" id="Menu"></span>
+					</a>
+				</li>
+				<li>
+					<a href="#">
+						<span class="ui-icon ui-icon-min ui-icon-20"></span>
+					</a>
+				</li>
+				<li>
+					<a href="javascript:void(0)" id="Logout">
+						<span class="ui-icon ui-icon-max ui-icon-20"></span>
+					</a>
+				</li>&ndash;&gt;
+			</ul>
+		</div>
+	</div>	-->
+	<div class="modify_header">
+		<a href="/user/userinfo.html" class="nav_1">首页</a>
+		<a href="/pay/member.html" class="nav_2">财务管理</a>
+		<a href="/user/record_ds.html" class="nav_3">游戏记录</a>
+		<a href="/user/report.html" class="nav_4">历史记录</a>
+		<a href="/user/sms.html" class="nav_5">短信记录</a>
+		<a href="/user/agent.html" class="nav_6">代理中心</a>
+	</div>
+	
+	<!--<div class="ui-body">
+		<div class="ui-search" id="subjsshow0" style="display: block;">
+        <span><i class="fas fa-user-circle" style="font-size: 30px"></i>会员中心</span>
+        <ul>
+        <li><a href="/user/userinfo.html"><i class="fas fa-shopping-cart" style="background-color: #F59A2F"></i>账户全览</a></li>
+        <li class="ui-hover"><a href="/user/password.html"><i class="fas fa-envelope-o" style="background-color: #Fa564F"></i>修改密码</a></li>
+        </ul>
+		</div>
+	</div>-->
+
+	<div class="modify_main_wp">
+		<div class="modify_main_btn">
+			<a href="/user/userinfo.html">账户全览</a>
+			<a href="/user/password.html" class="click_A">修改密码</a>
+		</div>
+	<div class="block_0"></div>
+	<div class="modify_main_label">
+		<div class="day-day-heard">
+			<h3>密码登录</h3>
+			<p>密码常登陆天天都安心</p>
+		</div>
+		<form id="form1" name="form1" method="post" action="/user/password">
+			<input type="hidden" name="formtype" value="login" />
+		<ul>
+			<li class="on">
+				<i><img src="/css/img/pwds.png" /></i>
+				<span>旧密码</span>
+				<input type="password" class="modify_input" name="oldpass" placeholder="请输入旧密码"/>
+			</li>
+			<li class="on">
+				<i style="margin-top: 13px;"><img src="/css/img/pwds.png" /></i>
+				<span>新密码</span>
+				<input type="password" class="modify_input" name="newpass" placeholder="请输入新密码"/>
+			</li>
+			<li class="on">
+				<span style="width: 96px;">确认新密码</span>
+				<input type="password" class="modify_input" name="newpass2" placeholder="请确认新密码"/>
+			</li>
+		</ul>
+		<div class="modify_main_li">
+			<a href="javascript:;" class="del"onclick="_reset('form1')">取消</a>
+			<a href="javascript:;" class="sumbit" onclick="_submit('form1')">立即修改</a>
+		</div>
+		</form>
+	</div>
+	<div class="modify_main_label modify_main_right">
+		<div class="day-day-heard day-day-heard-blue">
+			<h3>资金密码</h3>
+			<p>提款认证必须，请勿必记住</p>
+		</div>
+		<form id="form2" name="form2" method="post" action="/user/password">
+			<input type="hidden" name="formtype" value="pay" />
+		<ul>
+			<li class="on">
+				<i><img src="/css/img/pwds-b.png" /></i>
+				<span>旧密码</span>
+				<input type="password" class="modify_input" name="oldmoneypass" placeholder="请输入旧密码"/>
+			</li>
+			<li class="on">
+				<i style="margin-top: 13px;"><img src="/css/img/pwds-b.png" /></i>
+				<span>新密码</span>
+				<input type="password" class="modify_input" name="newmoneypass" placeholder="请输入新密码"/>
+			</li>
+			<li class="on">
+				<span style="width: 96px;">确认新密码</span>
+				<input type="password" class="modify_input" name="newmoneypass2" placeholder="请确认新密码"/>
+			</li>
+		</ul>
+		<div class="modify_main_li">
+			<a href="javascript:;" class="del" onclick="_reset('form2')">取消</a>
+			<a href="javascript:;" class="sumbit sumbit-blue" onclick="_submit('form2')">立即修改</a>
+		</div>
+		</form>
+	</div>
+	<div class="block_20"></div>
+
+	<div class="modify_bt_right">
+		<img src="/css/img/tikuan_2.png" />
+	</div>
+</div>
+	<!--<div class="ui-moneyBox">
+		<ul>
+			<table width="100%" border="0" cellspacing="0" cellpadding="5">
+				<tr>
+					<th width="50%">修改登录密码</th>
+					<th width="50%">修改资金密码</th>
+				</tr>
+				<tr>
+					<form id="form1" name="form1" method="post" action="/user/password">
+						<input type="hidden" name="formtype" value="login" />
+						<td height="200" align="center">
+							<div style="width:340px; height:40px; margin:0 auto; line-height:40px; text-align:left; border-bottom:1px #CCCCCC solid; padding-left:10px;">请输入原登录密码：<input name="oldpass" type="password" class="Input_200" id="oldpass" />
+							</div>
+							<div style="width:340px; height:40px; margin:0 auto; line-height:40px; text-align:left; border-bottom:1px #CCCCCC solid; padding-left:10px;">请输入新登录密码：<input name="newpass" type="password" class="Input_200" id="newpass" maxlength="10" />
+							</div>
+							<div style="width:340px; height:40px; margin:0 auto; line-height:40px; text-align:left; border-bottom:1px #CCCCCC solid; padding-left:10px;">请确认新登录密码：<input name="newpass2" type="password" class="Input_200" id="newpass2" maxlength="10" />
+							</div>
+							<div style="width:350px; height:50px; margin:0 auto; line-height:40px; text-align:center; padding-top:10px;">
+	
+								<input name="button" type="submit" class="m_btn" id="button" value="确认修改" />
+	
+							</div>
+						</td>
+					</form>
+					<form id="form2" name="form2" method="post" action="/user/password">
+						<input type="hidden" name="formtype" value="pay" />
+						<td height="200" align="center">
+							<div style="width:340px; height:40px; margin:0 auto; line-height:40px; text-align:left; border-bottom:1px #CCCCCC solid; padding-left:10px;">请输入原资金密码：
+								<input name="oldmoneypass" type="password" class="Input_200" id="oldmoneypass" />
+							</div>
+							<div style="width:340px; height:40px; margin:0 auto; line-height:40px; text-align:left; border-bottom:1px #CCCCCC solid; padding-left:10px;">请输入新资金密码：
+								<input name="newmoneypass" type="password" class="Input_200" id="newmoneypass" maxlength="10" />
+							</div>
+							<div style="width:340px; height:40px; margin:0 auto; line-height:40px; text-align:left; border-bottom:1px #CCCCCC solid; padding-left:10px;">请确认新资金密码：
+								<input name="newmoneypass2" type="password" class="Input_200" id="newmoneypass2" maxlength="10" />
+							</div>
+							<div style="width:350px; height:50px; margin:0 auto; line-height:40px; text-align:center; padding-top:10px;">
+	
+								<input name="button" type="submit" class="m_btn" id="button" value="确认修改" />
+	
+							</div>
+						</td>
+					</form>
+				</tr>
+			</table>
+		</ul>
+	</div>-->
+</div>
+</div>
+
+{include file='common/footer'}
+</body>
+<script type="text/javascript">
+setInterval(function() {
+	$.ajax({
+		type: "post",
+		url: "{:Url('index/home')}",
+		data:{'ajax':1,'get_money':'1'},
+		success:function(data) {
+			if (/^[\d\.]+$/.test(data)) {
+				$('#money,#money_2').text(data);
+			}
+		}
+	});
+},2000);
+// 提交
+function _submit(_form){
+	$('#'+_form).submit();
+}
+// 重置
+function _reset(_form){
+    $('#'+_form).find('.modify_input').val('');
+}
+
+</script>
+
+</html>

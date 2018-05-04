@@ -1,0 +1,125 @@
+<?php
+	$modeName=array('2.00'=>'元', '0.20'=>'角', '0.02'=>'分');
+	$liqTypeName=array(
+		1=>'充值',
+		2=>'返点',
+		//3=>'返点',//分红
+		//4=>'抽水金额',
+		5=>'停止追号',
+		6=>'中奖金额',
+		7=>'撤单',
+		8=>'提现失败返回冻结金额',
+		9=>'管理员充值',
+		10=>'解除抢庄冻结金额',
+		//11=>'收单金额',
+		12=>'下级转账',
+		13=>'上级充值成功扣款',
+		50=>'签到赠送',
+		51=>'首次绑定银行卡赠送',
+		52=>'充值佣金',
+		53=>'消费活动',
+		54=>'充值赠送',
+		55=>'注册佣金',
+		
+		100=>'抢庄冻结金额',
+		101=>'投注冻结金额',
+		102=>'追号投注',
+		103=>'抢庄返点金额',
+		//104=>'抢庄抽水金额',
+		105=>'抢庄赔付金额',
+		106=>'提现冻结',
+		107=>'提现成功扣除冻结金额',
+		108=>'开奖扣除冻结金额'
+	);
+?>
+<div>
+<table width="100%" class="table table-striped" id="my-datatable" cellspacing="0">
+	<thead>
+		<tr>
+			<th class="min-tablet text-center">时间</td>
+			<th class="min-tablet text-center">用户名</td>
+			<th class="min-tablet text-center">帐变类型</td>
+			<th class="min-tablet text-center">单号</td>
+			<th class="min-tablet text-center">游戏</td>
+			<th class="min-tablet text-center">玩法</td>
+			<th class="min-tablet text-center">期号</td>
+			<th class="min-tablet text-center">模式</td>
+			<th class="min-tablet text-center">资金</td>
+			<th class="min-tablet text-center">余额</td>
+		</tr>
+	</thead>
+	<tbody>
+	<?php if($data){
+	foreach($data as $var){ ?>
+		<tr class="odd" role="row">
+			<td><?php echo substr(date('Y-m-d H:i:s', $var['actionTime']),2)?></td>
+			<td><?=$var['username']?></td>
+			<td><?=$liqTypeName[$var['liqType']]?></td>
+			<!-- <td><?//=$var['info']?></td> -->
+			
+			<?php if($var['extfield0'] && in_array($var['liqType'], array(2,3,4,5,6,7,10,11,100,101,102,103,104,105,108))){ ?>
+                <td><a href="#" action="<?=url('record/betInfo?id='.$var['extfield0']) ?>" width="800" class="text-primary showDetails" data-target="#details-modal" data-toggle="modal" data-value="{$var['extfield0']}"><font color="#009900"><?=@$var['wjorderId']?></font></a>
+                </td>
+                <td><?=@$types[$var['type']]['shortName']?></td>
+                <td><?=@$playeds[$var['playedId']]['name']?></td>
+                <td><?=@$var['actionNo']?></td>
+                <td><?=@$modeName[$var['mode']]?></td>
+			<?php }elseif(in_array($var['liqType'], array(1,9,52))){?>
+                <td><a href="#" action="<?=url('recharge/info?id='.$var['extfield0']) ?>" width="500" class="text-primary showDetails" data-target="#details-modal" data-toggle="modal"><font color="#009900"><?=$var['extfield1']?></font></a></td>
+                <td>--</td>
+                <td>--</td>
+                <td>--</td>
+                <td>--</td>
+			<?php }elseif(in_array($var['liqType'], array(8,106,107))){?>
+                <td><a href="#" action="<?=url('cash/info?id='.$var['extfield0']) ?>" width="500" title="提现信息" target="modal"><font color="#009900" class="showDetails"><?=$var['extfield0']?></font></a></td>
+                <td>--</td>
+                <td>--</td>
+                <td>--</td>
+                <td>--</td>
+                
+            <?php }elseif(in_array($var['liqType'], array(12))){?>
+                <td><a href="#" action="<?=url('cash/turnMoneyInfo?id='.$var['extfield0']) ?>" width="500" title="上级转账" target="modal"><font color="#009900" class="showDetails"><?=$var['id']?></font></a></td>
+                <td>--</td>
+                <td>--</td>
+                <td>--</td>
+                <td>--</td>
+                
+            <?php }else{ ?>
+                <td>--</td>
+                <td>--</td>
+                <td>--</td>
+                <td>--</td>
+                <td>--</td>
+            <?php } ?>
+            
+            <td><?=$var['coin']?></td>
+			
+			<td><?=$var['userCoin']?></td>
+		</tr>
+	<?php } }else{ ?>
+    <tr><td colspan="12" width="910px">当前没有查询到任何数据。</td></tr>
+    <?php } ?>
+	</tbody>
+</table>
+</div>
+<div class="page">
+    {$_page}
+</div>
+<script src="/js/jquery.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function () {
+	$('.showDetails').bind('click', showBet);
+	//解决分页问题
+	$('.page a').bind('click', function(){
+		if(this.tagName == 'A'){
+			var parent = this.parentNode.parentNode;
+			var value = $(parent).attr('target');
+			if(value=='_blank')	
+				return true;
+			var url = $(this).attr('href');
+			$('#record-span').load(url);
+			return false;
+		}
+	});
+});
+</script>

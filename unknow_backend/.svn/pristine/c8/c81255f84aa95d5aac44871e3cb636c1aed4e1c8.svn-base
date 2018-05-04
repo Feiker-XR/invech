@@ -1,0 +1,83 @@
+<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:81:"/mnt/wwwroot/www.dd788799.com/houtai/../application/admin/view/live/transfer.html";i:1505452684;}*/ ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>系统设置</title>
+<link href="/css/base.css" rel="stylesheet" type="text/css" />
+<link href="/css/admin.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="/js/jquery.js"></script>
+<script type="text/javascript" src="/js/jquery.tools.js"></script>
+<script type="text/javascript" src="/js/base.js"></script>
+<script language="JavaScript" src="/js/calendar.js"></script>
+</head>
+<body class="list">
+	<div class="bar">
+		用户转换记录
+	</div>
+
+<div class="body">
+<form name="form1" method="get" action="<?php echo url('live/transfer'); ?>">
+<div class="listBar">会员账号：<input name="username" type="text" id="username" value="<?php echo $username; ?>" size="15">
+	&nbsp;&nbsp;平台类型：
+	<select name='platform'>
+		<option value='' <?php if($platform === ''): ?>selected<?php endif; ?>>请选择</option>
+		<option value='AG' <?php if($platform == 'AG'): ?>selected<?php endif; ?>>AG</option>
+		<option value='BB' <?php if($platform == 'BB'): ?>selected<?php endif; ?>>BB</option>
+		<option value='MG' <?php if($platform == 'MG'): ?>selected<?php endif; ?>>MG</option>
+		<option value='PT' <?php if($platform == 'PT'): ?>selected<?php endif; ?>>PT</option>
+	</select>
+	&nbsp;&nbsp;转账类型：
+	<select name='transType'>
+		<option value='' <?php if($transType=== ''): ?>selected<?php endif; ?>>请选择</option>
+		<option value='IN' <?php if($transType== 'IN'): ?>selected <?php endif; ?>>转入</option>
+		<option value='OUT' <?php if($transType== 'OUT'): ?>selected <?php endif; ?>>转出</option>
+	</select>
+	  &nbsp;&nbsp;日期范围：
+	  <input name="s_time" type="text" id="s_time" value="<?php echo $s_time; ?>" onClick="new Calendar(2008,2020).show(this);" size="10" maxlength="10" readonly="readonly" />
+	~
+	<input name="e_time" type="text" id="e_time" value="<?php echo $e_time; ?>" onClick="new Calendar(2008,2020).show(this);" size="10" maxlength="10" readonly="readonly" />
+		&nbsp;&nbsp;<input name="find" type="submit" id="find" value="查看报表" class="formButton"/>
+</div>
+</form>
+<ul id="tab" class="tab">
+                <li><input type="button" value="用户转换记录" hidefocus class="current"/></li>
+			</ul>
+<table id="listTables" class="listTables">
+
+				<tr>
+                	<th>转换时间</th>
+					<th>用户</th>
+                    <th>转前余额</th>
+					<th>转帐金额</th>
+					<th>转后余额</th>
+					<th>操作</th>
+                    <th>状态</th>
+                    <th>订单号</th>
+				</tr>
+				<?php if(is_array($list) || $list instanceof \think\Collection || $list instanceof \think\Paginator): $i = 0; $__LIST__ = $list;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$rows): $mod = ($i % 2 );++$i;?>
+				<tr>
+				  <td height="30" align="center" valign="middle"><?php echo date('Y-m-d H:i:s',$rows['actionTime']);?></td>
+				  <td height="30" align="center" valign="middle"><?=$rows['username']?></td>
+				  <td align="center" valign="middle"><?=$rows['old_money']?></td>
+				  <td align="center" valign="middle"><?=$rows['amount']?></td>
+				  <td align="center" valign="middle"><?=$rows['new_money']?></td>
+				  <td align="center" valign="middle"><?=$rows['info']?></td>
+				  <td align="center" valign="middle"><?=$rows['result']?></td>
+				  <td align="center" valign="middle"><?=$rows['billNO']?></td>
+				</tr>
+				<?php endforeach; endif; else: echo "" ;endif; ?>
+		
+		<tr>
+        	<td colspan="8" style="text-align:center; color:red;">
+            	转入总计: <?php echo $zhuanru_all;?>&nbsp;&nbsp;
+                转出总计: <?php echo $zhuanchu_all;?>&nbsp;&nbsp;
+            </td>
+        </tr>
+  </table>
+  <div class="pagerBar"><?php echo $list->render(); ?></div>
+  </div>
+  
+  
+</body>
+</html>

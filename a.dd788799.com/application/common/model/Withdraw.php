@@ -1,0 +1,74 @@
+<?php
+namespace app\common\model;
+use think\Db;
+use think\Model;
+use app\common\traits\model\Bank as BankTrait;
+
+use app\common\traits\model\UserFlow;
+use app\common\model\report\DailyMakerTrait;
+//use app\common\model\attach\MoneyRecordTrait;
+
+use app\common\model\report\CommonForFlowTrait;
+use app\common\model\report\DailyAndMonthForFlowTrait;
+//use app\common\model\report\GlobalUserFromFlowTrait;
+//use app\common\model\report\GlobalAgentFromFlowTrait;
+use app\common\model\report\GlobalFromFlowTrait;
+
+class Withdraw extends Base{
+
+    use UserFlow;
+	use BankTrait;
+
+    use DailyMakerTrait;
+    use CommonForFlowTrait,DailyAndMonthForFlowTrait;
+    use /*GlobalUserFromFlowTrait,GlobalAgentFromFlowTrait,*/GlobalFromFlowTrait;
+
+    protected $table = 'gygy_withdraw';
+    protected $createTime = 'created_at';
+    protected $updateTime = '';
+    protected $autoWriteTimestamp = 'datetime';    
+
+    public function money()
+    {
+        return $this->morphMany('Money',['type','item_id']);
+    }
+
+    public function user()
+    {
+        return $this->belongsTo('Member','uid','uid');
+    }
+
+    public function admin()
+    {
+        return $this->belongsTo('Admin','audit_uid','id');
+    }
+        
+    //-------------------前台--------------------
+    public static function getQlist($request){
+        $params =   $request->param();
+        $query  =   self::order('id desc');
+        if($params['startTime']??''){  
+            $query->where('created_at', '>=', $params['startTime']);          
+        }
+        if($params['endTime']??''){
+            $query->where('created_at', '<=', $params['endTime']);  
+        }
+        $query->where('uid',$request->user()->id);
+        $options = $query->getOptions();
+        $CountAmount    =   $query->sum('amount'); 
+        $data   =   [];
+        $data['list']   =   $query->options($options)->paginate();
+        $data['CountAmount']    =  $CountAmount?$CountAmount:0;
+        $PageAmount = 0;
+        foreach ($data['list'] as $v){
+            $PageAmount = bcadd($PageAmount,$v->amount,2);
+        }
+        $data['PageAmount']     =  $PageAmount;
+        return $data;
+    }
+
+
+    //--------------------api--------------------
+    protected $append = ['username'];
+    protected $hidden = ['uid','audit_uid',]; 
+}

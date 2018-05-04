@@ -1,0 +1,89 @@
+
+<div>
+<table width="100%" class="table table-striped" id="my-datatable" cellspacing="0">
+	<thead>
+		<tr class="table_b_th">
+			<th>用户名</td>
+            <th>用户类型</td>
+            <th>返点</td>
+			<th>余额</td>
+			<th>注册时间</td>
+			<th>状态</td>
+			<th>操作</td>
+		</tr>
+	</thead>
+	<tbody class="table_b_tr">
+	<?php if($data){
+	foreach($data as $var){ ?>
+		<tr>
+			<td><?=$var['username']?></td>
+            <td><?=$this->iff($var['type'],'代理','会员')?></td>
+            <td><?=$var['fanDian']?>%</td>
+			<td><?=$var['coin']?></td>
+			<td><?=date('Y-m-d H:i',$var['regTime'])?></td>
+			<td><?=$this->iff($var['enable'],'正常','冻结')?></td>                            
+			<td>
+			<?php if($user['uid']!=$var['uid'] && $var['parentId']==$user['uid']){ ?>
+			<a class="text-primary updateMember" href="#" target="modal" usertype="{$var.type}" title="{$var.username}" min="{$var.fanDian}" max="{$user.fanDian}">修改</a>&nbsp;&nbsp;
+			<?php } ?>
+			<?php if($var['type']==1) { ?>
+			<a target="ajax" class="text-primary" href="<?=U('team/searchMember?utype=2&uid='.$var['uid']) ?>">查看下级</a>
+			<?php } ?>
+			</td>
+            
+		</tr>
+	<?php } }else{ ?>
+    <tr><td colspan="12" width="910px">当前没有查询到任何数据。</td></tr>
+    <?php } ?>
+	</tbody>
+</table>
+</div>
+<div class="page">
+    {$_page}
+</div>
+<script src="__JS__/jquery.min.js"></script>
+<script src="__JS__/bootstrap.min.js"></script>
+<script src="__JS__/jquery.nouislider.all.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function () {
+	$('a[target=ajax]').bind('click', function(){
+		var url = $(this).attr('href');
+		$('#record-span').load(url);
+		return false;
+	});
+	
+	$('.updateMember').bind('click', function () {
+		$('#MemberQuota').val(0);
+		$('#OperatType').val(2);
+		$('#operatTitle').text('修改会员');
+		$('#username').val($(this).attr('title'));
+		$("#username").attr("readonly", true);
+		$('#li-password').css('display', 'none');
+		var usertype = $(this).attr('usertype');
+		if (usertype == '1') {
+			$('#MemberType').val(1);
+			$('#radioAgent').click();
+		} else {
+			$('#MemberType').val(0);
+			$('#radioMember').click();
+		}
+		$('#btnSubmit').attr('action' , "{:Url('team/userUpdateed')}");
+		$('#add-modal').modal('show');			
+		loadbouns($(this).attr('min'),$(this).attr('max'),'range-def-val');
+		return false;
+	});
+	
+	//解决分页问题
+	$('.page a').bind('click', function(){
+		if(this.tagName == 'A'){
+			var parent = this.parentNode.parentNode;
+			var value = $(parent).attr('target');
+			if(value=='_blank')	
+				return true;
+			var url = $(this).attr('href');
+			$('#record-span').load(url);
+			return false;
+		}
+	});
+});
+</script>

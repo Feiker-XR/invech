@@ -1,0 +1,25 @@
+<?php
+namespace app\common\validate;
+use think\Validate;
+class Pay extends Validate
+{
+    protected $rule = [
+        'name'         => 'require',
+        'type'         => 'require',
+        'set_id'       => 'require',
+        'code'         => 'require',
+        
+     ];
+
+    protected $message = [
+        'name.require'  => '请输入名称',
+        'type.require'  => '请输入类型',
+        'set_id.require'  => '请选择通道分组',
+        'code.require'  => '请输入通道代码',
+     ];
+
+    protected $scene = [
+       'save'  =>    ['name','type'],
+       'way'  =>    ['name','set_id','code'],
+    ];
+}

@@ -1,0 +1,12 @@
+<?php
+namespace app\index\controller;
+use app\index\Base;
+use bong\service\Mycaptcha;
+class Indexcaptcha extends Base
+{
+    public function get_captcha($id='')
+    {
+    	$Mycaptcha = new Mycaptcha();
+		return $Mycaptcha->mobile_get_captcha($id);
+    }      
+}

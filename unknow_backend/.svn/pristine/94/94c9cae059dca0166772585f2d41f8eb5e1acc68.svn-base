@@ -1,0 +1,58 @@
+<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:82:"/mnt/wwwroot/www.dd788799.com/houtai/../application/admin/view/config/aboutus.html";i:1505452684;}*/ ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>系统设置</title>
+<link href="/css/base.css" rel="stylesheet" type="text/css" />
+<link href="/css/admin.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="/js/jquery.js"></script>
+<script type="text/javascript" src="/js/jquery.tools.js"></script>
+<script type="text/javascript" src="/js/base.js"></script>
+<script charset="utf-8" src="/edits/kindeditor-min.js"></script>
+<script charset="utf-8" src="/edits/lang/zh_CN.js"></script>
+<script>
+var editor;
+var editor2;
+KindEditor.ready(function(K) {
+			K.create('textarea[name="content"]', {
+				filterMode : false,
+				allowFileManager : true
+			});
+		});
+</script>
+</head>
+<body class="list">
+	<!--<div class="bar">
+		公告管理
+	</div>-->	
+
+	<div class="body">
+	  <ul id="tab" class="tab">
+				<li><input type="button" value="关于我们" hidefocus <?php if($id==1){ echo "class='current'";}?> onClick="window.location.href='?id=1'" /></li>
+                <li><input type="button" value="博彩责任" hidefocus <?php if($id==2){ echo "class='current'";}?> onClick="window.location.href='?id=2'" /></li>
+                <li><input type="button" value="隐私政策" hidefocus <?php if($id==3){ echo "class='current'";}?> onClick="window.location.href='?id=3'" /></li>
+                <li><input type="button" value="规则条款" hidefocus <?php if($id==4){ echo "class='current'";}?> onClick="window.location.href='?id=4'" /></li>
+                <li><input type="button" value="常见问题" hidefocus <?php if($id==5){ echo "class='current'";}?> onClick="window.location.href='?id=5'" /></li>
+                <li><input type="button" value="存款帮助" hidefocus <?php if($id==6){ echo "class='current'";}?> onClick="window.location.href='?id=6'" /></li>
+                <li><input type="button" value="取款帮助" hidefocus <?php if($id==7){ echo "class='current'";}?> onClick="window.location.href='?id=7'" /></li>
+                <li><input type="button" value="代理方案" hidefocus <?php if($id==8){ echo "class='current'";}?> onClick="window.location.href='?id=8'" /></li>
+			</ul>
+			<form action="?action=save&id=<?=$id?>" method="post" name="editForm1" id="editForm1" >
+				<table id="listTables" class="listTables">
+					<tr>
+					  <th align="center"><?=$aboutus["title"]?> - 内容编辑</th>
+					</tr>
+					<tr>
+						<td style="padding:5px;"><textarea name="content" class="textfield" style="width:100%; height:500px;"><?=$aboutus["content"]?></textarea></td>
+					</tr>
+				</table>
+				<div class="buttonArea">
+	  				<input type="submit" class="formButton" value="确  定" hidefocus />&nbsp;&nbsp;
+					<input type="button" class="formButton" onClick="window.location.href='<?php echo Url('main/info'); ?>'" value="返  回" hidefocus />
+		  		</div>
+			</form>
+	</div>
+</body>
+</html>
+

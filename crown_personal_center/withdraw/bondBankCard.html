@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>绑定银行卡</title>
+	</head>
+	<!--公用部分 css-->
+	<link rel="stylesheet" type="text/css" href="../public/css/public.css"/>
+	<link rel="stylesheet" href="../public/css/com.css" />
+	<!--提现和绑定银行卡 共用css-->
+	<link rel="stylesheet" href="css/comCard.css" />
+	<body>
+		<div class="com-wp">
+			<!--header-->
+			<div class="com-header">
+				<div class="logo-wp">
+					<img src="../public/images/logo.png" alt="" />
+				</div>
+				<div class="logo-title-wp">
+					<img src="../public/images/logo-title.png" alt="" />
+				</div>
+				<div class="hours-right">
+					<img src="../public/images/logo-huors.png" alt="" />
+				</div>
+			</div>
+			<!--main-->
+			<div class="main-wp">
+				<!--com-left-->
+				<div class="com-left">
+					<h3 class="com-left-title">
+						<img src="../public/images/person-info.png" alt="" />
+						<span>个人中心</span>
+					</h3>
+					<div class="com-left-nav">
+						<ul class="com-left-nav-list">
+							<li class="nav-bg">
+								<i class="nav-i">
+									<img src="../public/images/nav-1.png" alt="" />
+								</i>
+								<i class="nav-bg-i">
+									<img src="../public/images/nav-bg-1.png" alt="" />
+								</i>
+								<a href="javaScript:;" class="nav-cr">账户信息</a>
+								<span></span>
+							</li>
+							<li>
+								<i class="nav-i">
+									<img src="../public/images/nav-2.png" alt="" />
+								</i>
+								<i class="nav-bg-i">
+									<img src="../public/images/nav-bg-2.png" alt="" />
+								</i>
+								<a href="javaScript:;">充值</a>
+								<span></span>
+							</li>
+							<li>
+								<i class="nav-i">
+									<img src="../public/images/nav-3.png" alt="" />
+								</i>
+								<i class="nav-bg-i">
+									<img src="../public/images/nav-bg-3.png" alt="" />
+								</i>
+								<a href="javaScript:;">提现</a>
+								<span></span>
+							</li>
+							<li>
+								<i class="nav-i">
+									<img src="../public/images/nav-4.png" alt="" />
+								</i>
+								<i class="nav-bg-i">
+									<img src="../public/images/nav-bg-4.png" alt="" />
+								</i>
+								<a href="javaScript:;">往来记录</a>
+								<span></span>
+							</li>
+							<li>
+								<i class="nav-i">
+									<img src="../public/images/nav-5.png" alt="" />
+								</i>
+								<i class="nav-bg-i">
+									<img src="../public/images/nav-bg-5.png" alt="" />
+								</i>
+								<a href="javaScript:;">额度转换</a>
+								<span></span>
+							</li>
+							<li>
+								<i class="nav-i">
+									<img src="../public/images/nav-6.png" alt="" />
+								</i>
+								<i class="nav-bg-i">
+									<img src="../public/images/nav-bg-6.png" alt="" />
+								</i>
+								<a href="javaScript:;">注单管理</a>
+								<span></span>
+							</li>
+							<li>
+								<i class="nav-i"> 
+									<img src="../public/images/nav-7.png" alt="" />
+								</i>
+								<i class="nav-bg-i">
+									<img src="../public/images/nav-bg-7.png" alt="" />
+								</i>
+								<a href="javaScript:;">投注报表</a>
+								<span></span>
+							</li>
+							<li>
+								<i class="nav-i">
+									<img src="../public/images/nav-8.png" alt="" />
+								</i>
+								<i class="nav-bg-i">
+									<img src="../public/images/nav-bg-8.png" alt="" />
+								</i>
+								<a href="javaScript:;">公告信息</a>
+								<span></span>
+							</li>
+							<li>
+								<i class="nav-i">
+									<img src="../public/images/nav-9.png" alt="" />
+								</i>
+								<i class="nav-bg-i">
+									<img src="../public/images/nav-bg-9.png" alt="" />
+								</i>
+								<a href="javaScript:;">代理中心</a>
+								<span></span>
+							</li>
+						</ul>
+					</div>
+				</div>
+				<!--com right 跳转-->
+				<div class="com-right">
+					<form action="">
+						<div class="bond-bank-wp">
+							<div class="bond-bank bond-bank-disabled">
+								<label for="">真实姓名：</label>
+								<input type="text" disabled="disabled" placeholder="张明明"/>
+							</div>
+							<div class="bond-bank">
+								<label for="">出款银行：</label>
+								<div class="select-wp">
+									<div id="" class="select-show">
+										<div class="select-img">
+											<img src="imgs/bank-1.png" alt="" />
+										</div>
+										<span>工商银行</span>
+										<img src="imgs/san.png" alt="" class="san"/>
+									</div>
+									<div class="select-options">
+										<div>
+											<p>
+												<img src="imgs/bank-1.png" alt="" />
+											</p>
+											<span data-value='0' data-font='建设银行'>建设银行</span>
+										</div>
+										<div>
+											<p>
+												<img src="imgs/bank-1.png" alt="" />
+											</p>
+											<span data-value='1' data-font='工商银行'>工商银行</span>
+										</div>
+										<div>
+											<p>
+												<img src="imgs/bank-1.png" alt="" />
+											</p>
+											<span data-value='2' data-font='工商银行'>工商银行</span>
+										</div>
+										<div>
+											<p>
+												<img src="imgs/bank-1.png" alt="" />
+											</p>
+											<span data-value='3' data-font='工商银行'>工商银行</span>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="bond-bank">
+								<label for="">支行地址：</label>
+								<input type="text" placeholder="请输入支行地址"/>
+							</div>
+							<div class="bond-bank bond-bank-color">
+								<label for="">开户省份：</label>
+								<input type="text" placeholder="*如：工商银行**市支行"/>
+							</div>
+							<div class="bond-bank">
+								<label for="">开户县市：</label>
+								<input type="text" placeholder="请输入开户县市"/>
+							</div>
+							<div class="bond-bank">
+								<label for="">银行卡号：</label>
+								<input type="text" placeholder="请输入银行卡号"/>
+							</div>
+							<div class="btn-submit">
+								<button>确&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;定</button>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+		<!--共用部分 js-->
+		<script src="../public/lib/jquery1.9.0.min.js"></script>
+		<script src="../public/lib/com.js"></script>
+		<!--本页面 私用 js-->
+		<script>
+			$(function(){
+				$('.select-show').click(function(){
+					$(".select-options").toggle();
+				})
+				$(".select-options div").click(function(){
+					$(this).parent().toggle();
+					var img=$(this).find('img').attr('src');
+					var font=$(this).find('span').text();
+					$(".select-show").find('span').text(font);
+					$(".select-img").find('img').attr({'src':img})
+					console.log($(".select-show").find('span').text())
+					$(".select-options").find('img')
+					
+					console.log(img,font)
+				})
+			})
+		</script>
+	</body>
+</html>
++
+
+
+
+

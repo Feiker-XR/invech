@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>手机APP下载</title>
+<link rel="stylesheet" href="/newview/css/style_new_pc.css" />
+</head>
+<body>
+	<!--logo-->
+	<div class="pay_all">
+		<div class="pay">
+			<h1>手机APP下载</h1>
+			<div class="pay_left">
+				<span><a href="#" id="uri">手机APP下载</a></span> 
+				<img src="/newview/img/code_imgs.png?v2018041602" class="pay_left_img" />
+			</div>
+			<div class="pay_right"></div>
+		</div>
+		<div class="foot_all">
+			<ul>
+				<li>温馨提示：</li>
+				<li>最佳显示建议iOS 8.0 以上系统使用内建浏览器，Android 4.0以上系统使用 Chrome 浏览器。</li>
+				<li>若当您无法顺利使用手机APP，请您将您的 IP 以及资讯回报的代码提供给线上客服，我们会尽快帮您处理。</li>
+			</ul>
+		</div>
+	</div>
+</body>
+<script type="text/javascript" src="/newview/js/jquery1.9.0.min.js"></script>
+<script type="text/javascript">
+$(function(){
+	$p1 = 'm';
+	$p2 = '99206';
+	$p3 = 'y';
+	$p4 = '.com';
+	$uri = 'https://'+$p1+'.'+$p2+$p3+$p4;
+	$("#uri").text($uri);
+	$("#uri").attr({'href':$uri,'target':'_blank'})
+})
+</script>
+</html>

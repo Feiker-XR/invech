@@ -1,0 +1,93 @@
+<?php
+
+namespace bong\service\auth;
+
+use InvalidArgumentException;
+use bong\foundation\Str;
+use bong\service\auth\Contracts\Factory as FactoryContract;
+use bong\service\auth\Driver\SessionGuard;
+use bong\service\auth\Driver\TokenGuard;
+use bong\service\auth\Driver\JwtRefreshTokenGuard;
+
+class AuthManager implements FactoryContract
+{
+    protected $guards = [];
+
+    public function __construct()
+    {
+
+    }
+
+    public function getDefaultDriver()
+    {
+        $module = request()->module();
+        return config('auth.default.'.$module);
+    }
+
+    public function setDefaultDriver($name)
+    {
+        $module = request()->module();
+        config('auth.default.'.$module, $name);
+    }
+
+    public function shouldUse($name)
+    {
+        $name = $name ?: $this->getDefaultDriver();
+
+        $this->setDefaultDriver($name);
+    }
+
+            
+    public function guard($name = null)
+    {
+        $name = $name ?: $this->getDefaultDriver();
+
+        return isset($this->guards[$name])
+                    ? $this->guards[$name]
+                    : $this->guards[$name] = $this->resolve($name);
+    }
+
+    protected function resolve($name)
+    {        
+        $guards = config('auth.guards');
+        $guard = $guards[$name];
+
+        if (is_null($guard)) {
+            throw new InvalidArgumentException("Auth guard [{$name}] is not defined.");
+        }
+
+        $driverMethod = 'create'.Str::studly($guard['driver']).'Driver';
+
+        if (method_exists($this, $driverMethod)) {
+            return $this->{$driverMethod}($guard['model'],$guard['scope']??'');
+        }
+
+        throw new InvalidArgumentException("Auth guard driver [{$name}] is not defined.");      
+    }
+
+    public function createSessionDriver($model,$scope)
+    {
+        $guard = new SessionGuard($model,$scope);
+
+        return $guard;
+    }
+
+    public function createTokenDriver($model,$scope)
+    {
+        $guard = new TokenGuard($model,$scope);
+
+        return $guard;
+    }
+
+    public function createJwtRefreshTokenDriver($model,$scope)
+    {
+        $guard = new JwtRefreshTokenGuard($model,$scope);
+
+        return $guard;
+    }
+    
+    public function __call($method, $parameters)
+    {
+        return $this->guard()->{$method}(...$parameters);
+    }
+}

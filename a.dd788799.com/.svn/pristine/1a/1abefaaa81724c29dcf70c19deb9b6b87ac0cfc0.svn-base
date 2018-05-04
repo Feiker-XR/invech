@@ -1,0 +1,71 @@
+<?php
+
+namespace app\broadcast\Driver;
+
+use Pusher\Pusher;
+
+use app\service\Str;
+use app\broadcast\BroadcastException;
+
+class PusherBroadcaster extends Broadcaster
+{
+    protected $pusher;
+
+    public function __construct($config)
+    {
+        $this->pusher = new Pusher($config['key'], $config['secret'],
+            $config['app_id'], $config['options'] ?? []);
+    }
+
+    public function broadcast(array $channels, $event, array $payload = [])
+    {
+        $socket = $payload['socket']??null;
+
+        $response = $this->pusher->trigger(
+            $this->formatChannels($channels), $event, $payload, $socket, true
+        );
+
+        if ((is_array($response) && $response['status'] >= 200 && $response['status'] <= 299)
+            || $response === true) {
+            return;
+        }
+
+        throw new BroadcastException(
+            is_bool($response) ? 'Failed to connect to Pusher.' : $response['body']
+        );
+    }
+
+    public function auth($request)
+    {
+        $channel_name = $request->param('channel_name');
+        if (Str::startsWith($channel_name, ['private-', 'presence-']) &&
+            ! $request->uid) {
+            throw new \Exception('channel auth failed!');
+        }
+
+        $channelName = Str::startsWith($channel_name, 'private-')
+                            ? Str::replaceFirst('private-', '', $channel_name)
+                            : Str::replaceFirst('presence-', '', $channel_name);
+
+        return parent::verifyUserCanAccessChannel(
+            $request, $channelName
+        );
+    }
+
+    public function validAuthenticationResponse($request, $result)
+    {
+        $channel_name = $request->param('channel_name');
+        $socket_id = $request->param('socket_id');
+        if (Str::startsWith($channel_name, 'private')) {
+            $auth = $this->pusher->socket_auth($channel_name, $socket_id);
+        }else{
+            $auth = $this->pusher->presence_auth(
+                $channel_name, $socket_id, $request->uid, $result
+            );    
+        }
+
+        //return json($auth);
+        return $auth; //JSON.parse(r.responseText)
+    }
+
+}

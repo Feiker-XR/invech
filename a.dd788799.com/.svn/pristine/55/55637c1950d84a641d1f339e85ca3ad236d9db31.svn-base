@@ -1,0 +1,89 @@
+<?php
+namespace app\behavior;
+
+//初始化服务容器;
+
+use think\Request;
+use \Firebase\JWT\JWT;
+use bong\foundation\Str;
+
+class Container 
+{
+
+    public function initEvents(){
+        $dispatcher = container('events');
+        $file = APP_PATH.'required/events.php';
+        $events = is_file($file)?require($file):[];
+        foreach($events as $event => $listeners){
+            foreach($listeners as $listener){
+                $dispatcher->listen($event,$listener);
+            }
+        }
+    }
+
+    private function initQueue(){
+        // 容器内的'queue' 从某个queue驱动 升级为 queue缓存
+    }
+
+    private function initBroadcast(){
+        $this->initChannels();
+    }
+
+	public function run(&$dispatch)
+	{		
+        $this->initEvents();
+        //$this->initQueue();
+        $this->initBroadcast();
+        $this->initAuth();
+	}
+
+    private function initChannels(){
+        
+	   require_once(APP_PATH.'required/channels.php');
+       
+    }
+
+    private function initAuth(){
+
+        $callback = function (Request $request,$name = null) {
+            return container('auth')->user();
+        }; 
+        //$request = request(); $request->user = $callback;
+        Request::hook('user',$callback);     
+
+        $callback_jwt_token = function (Request $request,$inputKey='api_token') {
+
+            $token = input($inputKey);
+
+            if (empty($token)) {
+
+                $header = $request->header('Authorization')??'';
+
+                if (Str::startsWith($header, 'Bearer ')) {
+                    $token = Str::substr($header, 7);
+                }
+     
+            }
+
+            return $token;
+        };
+
+        Request::hook('jwt_token',$callback_jwt_token);  
+
+        $callback_jwt = function (Request $request) {
+
+            $jwt = null;
+
+            $token = $request->jwt_token();
+
+            if (! empty($token)) {
+                $jwt = JWT::decode($token, JWT_KEY, array('HS256'));//异常由上层处理;
+            }
+
+            return $jwt;
+        };
+
+        Request::hook('jwt',$callback_jwt);            
+    }
+
+}

@@ -1,0 +1,63 @@
+{layout name="layout" /}
+<div class="row">
+  <div class="col-xs-12">
+    <div class="box">
+		<div class="box-header">
+			<form>
+				<div class="pull-left" style="margin-left:15px;">
+	               <input type="text" name="startTime"  value="{$Think.get.startTime}" placeholder="开始时间" class="form-control input-sm" id="datepicker1">
+	            </div>   		     
+		       <div class="pull-left" style="margin-left:15px;">
+	                <input type="text" name="endTime"  value="{$Think.get.endTime}" placeholder="结束时间" class="form-control input-sm" id="datepicker2">
+	           </div> 
+
+			    <div class="has-feedback pull-left" style="margin-left:15px;">
+			        <button type="submit" class="btn btn-block btn-default btn-sm filter">查询</button>
+			    </div>
+			</form>
+		</div>
+      <!-- /.box-header -->
+		<div class="box-body table-responsive no-padding">
+			<table class="table table-hover">
+					<tr>
+					<th>日期</th>
+					<th>投注金额</th>
+					<th>派奖金额</th>
+					<th>输赢值(输)</th>
+					<th>注单数</th>
+					<th>中奖次数</th>
+					<th>返点金额</th>
+				</tr>
+				{foreach $list as $v}
+				 <tr>
+					<td>{$v.day}</td>			
+					<td>{$v.bet_amount}</td>			
+					<td>{$v.zj_amount}</td>
+					<td>{$v.win_amount}</td>
+					<td>{$v.bet_count}</td>
+					<td>{$v.zj_count}</td>
+					<td>{$v.backwater_amount}</td>
+				</tr>
+				{/foreach}
+			</table>
+			{$list->render();}
+		</div>
+      <!-- /.box-body -->
+    </div>
+    <!-- /.box -->
+  </div>
+</div>
+
+<script type="text/javascript">
+$(function(){
+        var obj = {
+                autoclose: true,
+                todayHighlight: true,
+                language:"zh-CN", 
+                format:"yyyy-mm-dd" 
+           };
+    $("#datepicker1").datepicker(obj)
+    $("#datepicker2").datepicker(obj);
+});
+
+</script>

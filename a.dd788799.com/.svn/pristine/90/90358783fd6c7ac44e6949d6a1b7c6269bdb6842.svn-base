@@ -1,0 +1,492 @@
+<?php
+namespace app\admin\controller;
+use app\admin\Login;
+use think\Cache;
+use app\common\model\PaySet as PaySetModel;
+use app\common\model\PayWay as PayWayModel;
+use app\common\model\PayThird as PayThirdModel;
+use app\common\model\ActionLog as LogModel;
+class Pay extends Login{
+   
+  	 /**
+     *菜单入口:支付通道分组
+    */
+     public function set(){
+        $this->view->page_header = '支付类别';
+		$request = request();
+        $list = PaySetModel::getList($request);
+        $this->assign('list',$list);
+        return $this->fetch();
+    }
+    public function set_save(){
+            $request = request();
+        $params = $request->param();
+        $id =  !empty($params['id'])? $params['id']:'';
+        $name =  !empty($params['name'])? $params['name']:'';
+        $type =  !empty($params['type'])? $params['type']:'';
+        $sort =  !empty($params['sort'])? $params['sort']:'';
+        $status =  !empty($params['status'])? $params['status']:'';
+        $pic =  !empty($params['pic'])? $params['pic']:'';
+        $data = [
+           
+            'name'      => $name,
+            'type'      => $type,
+            'sort'      => $sort,
+            'status'    => $status,
+            'pic'       => $pic,
+            'add_time'  => time(),
+            'update_time'=> time()
+        ];
+         $res = [];
+        if($id){
+            unset($data['add_time']);
+            $payset = PaySetModel::get(intval($id));
+            $list = $payset->validate('Pay.save')->save($data);
+            if($list){
+                LogModel::log(LogModel::BUSINESS_TYPE_EDIT,$payset,LogModel::BUSINESS_TYPES[LogModel::BUSINESS_TYPE_EDIT]);
+               $res['msg'] = "操作成功";
+            }else{
+                $res['msg']= $payset->getError();
+            }
+             echo json_encode($res);
+        }else{
+            
+            $payset = new PaySetModel();
+            $list = $payset->validate('Pay.save')->save($data);
+            if($list){
+               LogModel::log(LogModel::BUSINESS_TYPE_ADD,$payset,LogModel::BUSINESS_TYPES[LogModel::BUSINESS_TYPE_ADD]);
+                $res['msg'] = "操作成功";
+            }else{
+                $res['msg']= $payset->getError();
+             }
+             echo json_encode($res);
+        }
+    }
+
+    public function set_form(){
+        
+         $request = request();
+         $params = $request->param(); 
+         if(!empty($params['id'])){
+             $info =  PaySetModel::get(['id'=>$params['id']]);
+              $this->assign('info',$info);  
+         }
+        $paylist = PaySetModel::PAY_SET_TYPE;
+        $this->assign('paylist',$paylist); 
+          return view();
+    }
+	
+     public function set_del(){
+        $request = request();
+        $params = $request->param();
+        $payset =  PaySetModel::get(intval($params['id']));
+
+        $list = $payset->delete();
+        $res = [];
+        if($list){
+           LogModel::log(LogModel::BUSINESS_TYPE_DELE,$payset,LogModel::BUSINESS_TYPES[LogModel::BUSINESS_TYPE_DELE]);
+           $res['msg'] = "操作成功";
+        }else{
+            $res['msg']= $payset->getError();
+        }
+        echo json_encode($res);
+    }
+
+     public function way(){
+        $this->view->page_header = '支付方式';
+        $request = request();
+        $list = PayWayModel::getList($request);
+        $setlist = PaySetModel::getAll();
+        $this->assign('setlist',$setlist);
+        $this->assign('list',$list);
+        return $this->fetch();
+    }
+    public function way_save(){
+        $request = request();
+        $params = $request->param();
+        $id =  !empty($params['id'])? $params['id']:'';
+        $name =  !empty($params['name'])? $params['name']:'';
+        $set_id =  !empty($params['set_id'])? $params['set_id']:'';
+        $code =  !empty($params['code'])? $params['code']:'';
+        $img =  !empty($params['img'])? $params['img']:'';
+       $data = [
+           
+            'name'      => $name,
+            'set_id'      => $set_id,
+            'code'      => $code,
+            'img'    => $img,
+            'add_time'  => time(),
+            'update_time'=> time()
+        ];
+
+         $res = [];
+        if($id){
+            unset($data['add_time']);
+            $payway = PayWayModel::get(intval($id));
+            $list = $payway->validate('Pay.way')->save($data);
+            if($list){
+                LogModel::log(LogModel::BUSINESS_TYPE_EDIT,$payway,LogModel::BUSINESS_TYPES[LogModel::BUSINESS_TYPE_EDIT]);
+               $res['msg'] = "操作成功";
+            }else{
+                $res['msg']= $payway->getError();
+            }
+             echo json_encode($res);
+        }else{
+            
+            $payway = new PayWayModel();
+            $list = $payway->validate('Pay.way')->save($data);
+            if($list){
+               LogModel::log(LogModel::BUSINESS_TYPE_ADD,$payway,LogModel::BUSINESS_TYPES[LogModel::BUSINESS_TYPE_ADD]);
+                $res['msg'] = "操作成功";
+            }else{
+                $res['msg']= $payway->getError();
+             }
+             echo json_encode($res);
+        }
+    }
+
+    public function way_form(){
+        
+         $request = request();
+         $params = $request->param(); 
+         if(!empty($params['id'])){
+             $info =  PayWayModel::get(['id'=>$params['id']]);
+              $this->assign('info',$info);  
+         }
+         $setlist = PaySetModel::getAll();
+        $this->assign('setlist',$setlist);
+          return view();
+    }
+    
+     public function way_del(){
+        $request = request();
+        $params = $request->param();
+        $payway =  PayWayModel::get(intval($params['id']));
+
+        $list = $payway->delete();
+        $res = [];
+        if($list){
+           LogModel::log(LogModel::BUSINESS_TYPE_DELE,$payway,LogModel::BUSINESS_TYPES[LogModel::BUSINESS_TYPE_DELE]);
+           $res['msg'] = "操作成功";
+        }else{
+            $res['msg']= $payway->getError();
+        }
+        echo json_encode($res);
+    }
+
+  public function third(){
+        $this->view->page_header = '支付方式';
+        $request = request();
+        $list = PayThirdModel::getList($request);
+        $this->assign('list',$list);
+        return $this->fetch();
+    }
+    public function third_save(){
+        $request = request();
+        $params = $request->param();
+        $id =  !empty($params['id'])? $params['id']:'';
+        $name =  !empty($params['name'])? $params['name']:'';
+        $set_id =  !empty($params['set_id'])? $params['set_id']:'';
+        $code =  !empty($params['code'])? $params['code']:'';
+        $img =  !empty($params['img'])? $params['img']:'';
+       $data = [
+           
+            'name'      => $name,
+            'set_id'      => $set_id,
+            'code'      => $code,
+            'img'    => $img,
+            'add_time'  => time(),
+            'update_time'=> time()
+        ];
+      
+         $res = [];
+        if($id){
+            unset($data['add_time']);
+            $paythird = PayThirdModel::get(intval($id));
+            $list = $paythird->validate('Pay.way')->save($data);
+            if($list){
+                LogModel::log(LogModel::BUSINESS_TYPE_EDIT,$paythird,LogModel::BUSINESS_TYPES[LogModel::BUSINESS_TYPE_EDIT]);
+               $res['msg'] = "操作成功";
+            }else{
+                $res['msg']= $paythird->getError();
+            }
+             echo json_encode($res);
+        }else{
+            
+            $paythird = new PayThirdModel();
+            $list = $paythird->validate('Pay.way')->save($data);
+            if($list){
+               LogModel::log(LogModel::BUSINESS_TYPE_ADD,$paythird,LogModel::BUSINESS_TYPES[LogModel::BUSINESS_TYPE_ADD]);
+                $res['msg'] = "操作成功";
+            }else{
+                $res['msg']= $paythird->getError();
+             }
+             echo json_encode($res);
+        }
+    }
+
+    public function third_form(){
+        
+         $request = request();
+         $params = $request->param(); 
+         if(!empty($params['id'])){
+             $info =  PayThirdModel::get(['id'=>$params['id']]);
+              $this->assign('info',$info);  
+         }
+         return view();
+    }
+    
+     public function third_del(){
+        $request = request();
+        $params = $request->param();
+        $paythird =  PayThirdModel::get(intval($params['id']));
+
+        $list = $paythird->delete();
+        $res = [];
+        if($list){
+           LogModel::log(LogModel::BUSINESS_TYPE_DELE,$paythird,LogModel::BUSINESS_TYPES[LogModel::BUSINESS_TYPE_DELE]);
+           $res['msg'] = "操作成功";
+        }else{
+            $res['msg']= $paythird->getError();
+        }
+        echo json_encode($res);
+    }
+   
+    
+    /*
+     * 添加第三方 的 三方支付项 的 配置页面
+     */
+    public function third_set(){
+        $id = input('id');
+        $thirdpay = db('vc_thirdpay')->where(['id'=>$id,])->find();        
+        $set = db('vc_set')->select();
+        
+        $this->assign('id',$id);
+        $this->assign('thirdpay',$thirdpay);
+        $this->assign('set',$set);
+
+        $setid = input('setid');
+        $this->assign('setid',$setid);
+        
+        $query = db('vc_set_config');
+        if($setid && is_numeric($setid)){
+            $query->where('set_id',$setid);
+        }
+        
+        $options = $query->getOptions();
+        $set_config = $query->order('id desc')->paginate();
+        
+        $set_config->appends('id',$id);
+        if($setid){            
+            $set_config->appends('setid',$setid);            
+        }
+        
+        foreach ($set_config as $k=>$v){
+            $result[$k]['id'] = $v['id'];
+            $result[$k]['set_id'] = $v['set_id'];
+            $setN = db('vc_set')->where('id',$v['set_id'])->find();
+            $result[$k]['name'] = $setN['name'];
+            $result[$k]['cname'] = $v['name'];
+            $result[$k]['thirdname'] = $thirdpay['name'];            
+            $thirdcode = db("vc_thirdcode")->where('set_configid',$v['id'])->where('thirdid',$thirdpay['id'])->find();             
+            $result[$k]['code'] = $thirdcode['code'];
+            $result[$k]['min'] = $thirdcode['min'];
+            $result[$k]['max'] = $thirdcode['max'];
+            $result[$k]['status'] = $thirdcode['status'];
+            $result[$k]['warntime'] = $thirdcode['warntime'];
+            $result[$k]['money_decimal'] = $thirdcode['money_decimal'];
+        }
+        
+        $record = db('vc_set_config')->options($options)->count();
+        $set_config->extra(['总记录'=>$record]);
+        
+        $this->assign('set_config',$set_config);
+        $this->assign('result',$result);
+        $this->assign('record',$record);
+        
+        return $this->fetch();
+    }
+    
+    public function third_set_edit(){
+        date_default_timezone_set('PRC');
+        $status = input('status');
+        $setid = input('setid');
+        $setconfigid = input('setconfigid');
+        $thirdid = input('thirdid');
+        $code = input('code');
+        $min = input('min');
+        $max = input('max');
+        $warntime = input('warntime/d',0);
+        if($warntime<0){
+            return ['stat' => 1,'msg' =>'报警时间参数有误！',];
+        }
+        $decimal = input('decimal',0);
+        $thirdcode = db('vc_thirdcode')->where('set_configid',$setconfigid)
+        ->where('thirdid',$thirdid)->find();
+        if(!$thirdcode){
+            $thirdcodeArr = array(
+                'status'=>$status,
+                'setid'=>$setid,
+                'set_configid'=>$setconfigid,
+                'thirdid'=>$thirdid,
+                'code'=>$code,
+                'min'=>$min,
+                'max'=>$max,
+                'add_time'=>time(),
+                'warntime'=>$warntime,                
+            );            
+            db('vc_thirdcode')->insert($thirdcodeArr);
+            return ['stat' => 0,'msg' =>'添加成功',];
+        }else {
+            $thirdcodeArr = array(
+                'status'=>$status,
+                'code'=>$code,
+                'min'=>$min,
+                'max'=>$max,
+                'update_time'=>time(),
+                'warntime'=>$warntime,
+                'money_decimal'=>$decimal,
+            );
+            db('vc_thirdcode')->where('set_configid',$setconfigid)
+            ->where('thirdid',$thirdid)->update($thirdcodeArr);            
+            return ['stat' => 0,'msg' =>'更新成功',];
+        }
+    }
+
+    public function third_key_view(){
+        $id = input('id/d');
+        $type = input('type');
+        if(!$id){
+            return ['stat' => 1,'msg' =>'id参数不能为空！',];
+        }
+        if(!in_array($type, ['pubkey','prikey'])){
+            return ['stat' => 1,'msg' =>'type参数不合法！',];
+        }
+        $thirdpay = db('pay_third')->where('id',$id)->find(); 
+        
+        $path = ROOT_PATH . 'houtai' . DS . 'uploads' . DS;        
+        $file = $path . $thirdpay[$type];
+         
+        //return ['stat' => 1,'msg' =>$file,];
+        //$content = file_get_contents("/www/wwwroot/site/houtai/uploads/20170805/4c051373c8b96cac31f09010e9137c6e.pem");
+        if(!is_file($file)){
+            return ['stat' => 1,'msg' =>'文件不存在！',];
+        }
+            
+        $content = file_get_contents($file);
+        $content = str_replace('\r\n', '<br>', $content);
+        return ['stat' => 0,'html' =>$content,];
+    }
+    
+	 public function channel(){
+      	date_default_timezone_set('PRC');
+       	$param = $this->request->param();
+       	$setid ='';
+       	$thirdid = '';
+       	$set =  db('pay_set')->order('id asc')->select();
+        if(!$set->isEmpty()){
+        	$this->assign('set',$set);
+        }
+      
+		$where =[];
+		 if($param['setid']??''){
+          	$where['pch.setid'] = ['eq',$param['setid']];
+          	$setid = $param['setid'];
+          	         
+         }
+         if($param['id']??''){
+          	$where['pch.thirdid'] = ['eq',$param['id']];
+          	$thirdid = $param['id'];
+          
+         }
+     	 $join = [
+		   	 	['pay_set ps','pch.setid=ps.id','left'],
+		   	 	['pay_way pw','pch.set_configid=pw.id','left'],
+		   	 	['pay_third pt','pch.thirdid=pt.id','left'],
+		];
+		config('paginate.query',$param);
+        $channel =  db('pay_channel')->alias('pch')->field('pch.*, ps.name as pname,pw.name as pwname,pt.name as ptname')->join($join)->where($where)->order('pch.id asc')->paginate(10);
+        $this->assign('setid',$setid); 
+        $this->assign('thirdid',$thirdid); 
+      	$this->assign('channel',$channel);
+        $this->view->page_header = '支付渠道';
+        return $this->fetch();
+    }
+    
+    public function channel_edit(){        
+        date_default_timezone_set('PRC');
+        $status = input('status');
+        $setid = input('setid');
+        $setconfigid = input('setconfigid');
+        $thirdid = input('thirdid');
+        $code = input('code');
+        $min = input('min');
+        $max = input('max');        
+        $warntime = input('warntime/d',0);
+        if($warntime<0){
+            return ['stat' => 1,'msg' =>'报警时间参数有误！',];
+        }        
+        $thirdcode = db('pay_channel')->where(['set_configid'=>$setconfigid,'thirdid'=>$thirdid])->select();
+      
+        if(!$thirdcode->isEmpty()){
+            $UpdateArr = array(
+                'status'=>$status,
+                'code'=>$code,
+                'min'=>$min,
+                'max'=>$max,
+                'update_time'=>time(),
+                'warntime'=>$warntime,
+            );
+            db('pay_channel')->where(['set_configid'=>$setconfigid,'thirdid'=>$thirdid])->update($UpdateArr);
+            return ['stat' => 0,'msg' =>'保存成功',];
+        }else {
+            return ['stat' => 1,'msg' =>'错误,没有这条第三方配置信息',];
+        }
+    }
+
+    public function upload(){
+
+        date_default_timezone_set('PRC');
+        //echo ROOT_PATH;die;
+        $file = request()->file('file');
+        //$path = "uploads/";
+        $path = ROOT_PATH . 'houtai' . DS . 'uploads';
+        $info = $file->move($path);
+        if($info){
+            //dump($info);return;
+            $type = input('itemtype');
+            $ext = $info->getExtension();
+            if(!$type){//上传图片
+                if(!in_array($ext,['png','PNG','jpg','gif','jpeg','bmp'])){
+                    echo "图片扩展名有误！";
+                }
+                
+                $url = DS . 'uploads'. DS . $info->getSaveName();
+                $res = [];
+                $res['url'] = $url;
+                $res['html'] = '<img src="' . $url . '"  class="preview">';         
+              echo json_encode($res);
+              //  db('vc_set_images')->insert($picArr);
+            }
+            if(in_array($type, ['pubkey','prikey'])){//上传公私密钥
+                if(!in_array($ext,['txt','pem'])){
+                    echo "文件扩展名有误！";
+                }
+                
+                $id = input('itemid');
+                if(!$id){echo "id参数错误!";return;}
+                //$content = file_get_contents($filename);
+                $filename = $info->getSaveName();
+                $data = [$type=>$filename];
+                db('pay_third')->where('id',$id)->update($data);
+                echo $filename;
+            }
+        }else{
+            echo '上传出错了！';
+        }
+        
+      
+    }
+    
+    
+}

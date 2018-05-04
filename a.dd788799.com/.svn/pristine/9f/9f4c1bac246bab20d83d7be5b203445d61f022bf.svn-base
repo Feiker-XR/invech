@@ -1,0 +1,89 @@
+<link rel="stylesheet" type="text/css" href="/__CSS__/user/reset.css?v=20170715">
+<link rel="stylesheet" type="text/css" href="/__CSS__/user/hpn-common.css">
+<link rel="stylesheet" type="text/css" href="/__CSS__/user/index.css?v=20171117">
+<link rel="stylesheet" type="text/css" href="/__CSS__/user/global.css">
+<link rel="stylesheet" type="text/css" href="/__CSS__/user/info.css">
+<link rel="stylesheet" href="/__JS__/datepicker/datepicker3.css">
+<script src="/__JS__/jquery.min.js"></script>
+<script src="/__JS__/datepicker/bootstrap-datepicker.js"></script>
+<script src="/__JS__/datepicker/bootstrap-datepicker.zh-CN.js"></script>
+<div class="help_r_main">
+    <div class="eveb_content">
+        <div class="eveb_nav_sub">
+            <ul class="clearfix">
+                <li ><a href="/agent/bet_record">团队投注</a></li>
+                <li ><a href="/agent/bet_day_record">团队日投注</a></li>
+                <li class="on"><a href="/agent/recharge_record">团队充值</a></li>
+                <li><a href="/user/money_record">团队日充值</a></li>
+                <li><a href="/agent/withdraw_record">团队提现</a></li>
+                <li><a href="/user/backwater_record">团队日提现</a></li>
+            </ul>
+        </div>
+        <h2>
+            <div class="eveb_search eveb_search_h2">
+                <form>
+                    <label>用户名称：</label>
+                    <input name="username"   value="{$Think.get.username}" placeholder="用户名称" type="text">
+                    <label style="margin-left:10px">起止时间：</label>
+                    <input name="starttime" id="datepicker1"   value="{$Think.get.starttime}" placeholder="开始时间" type="text"> -
+                    <input name="endtime"   id="datepicker2"   value="{$Think.get.endtime}" placeholder="结束时间" type="text">
+                    <label style="margin-left:10px">状态：</label>
+                    <select name="status" id="status">
+                        <option value="" >全部状态</option>
+                        <option value="0" {if($Think.get.status=='0')} selected="selected" {/if}>未付款</option>
+                        <option value="1" {if($Think.get.status=='1')} selected="selected" {/if}>已付款</option>
+                    </select>
+                    <input type="submit" class="button_small button_1" value="筛选">
+                </form>
+            </div>
+        </h2>
+        <table class="eveb_box eveb_table" id="dataTable">
+            <thead>
+                <tr>
+                    <th>序号</th>
+                    <th>会员名称</th>
+                    <th>单号</th>
+                    <th>申请时间</th>
+                    <th>存款方式</th>
+                    <th>存款金额</th>
+                    <th>状态</th>
+                </tr>
+            </thead>
+            <tbody>
+                {if(!$list->isEmpty())}
+                    {foreach $list as $v}
+                        <tr>
+                            <td>{$v->id}</td>
+                            <td>{if(!empty($v->user->username))}{$v->user->username}{/if}</td>
+                            <td>{$v->orderno}</td>
+                            <td>{$v->created_at}</td>
+                            <td>{if(!empty($v->way->name))}{$v->way->name}{/if}</td>
+                            <td>{$v->amount}</td>
+                            <td>
+                                {eq name="$v->status" value="0"}未付款{/eq}
+                                {eq name="$v->status" value="1"}已付款{/eq}
+                            </td>
+                        </tr>
+                    {/foreach}
+                {else}
+                    <tr><td colspan="7" styl="text-align:center;">暂无数据</td></tr>
+                {/if}
+            </tbody>
+         </table>
+     
+        <div class="eveb_page fr"> {$list->render();}</div>
+    </div>
+</div>
+<script type="text/javascript">
+$(function(){
+        var obj = {
+                autoclose: true,
+                todayHighlight: true,
+                language:"zh-CN", 
+                format:"yyyy-mm-dd" 
+           };
+    $("#datepicker1").datepicker(obj)
+    $("#datepicker2").datepicker(obj);
+});
+
+</script>

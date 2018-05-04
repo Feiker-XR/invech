@@ -1,0 +1,77 @@
+<link rel="stylesheet" type="text/css" href="/__CSS__/user/reset.css?v=20170715">
+<link rel="stylesheet" type="text/css" href="/__CSS__/user/hpn-common.css">
+<link rel="stylesheet" type="text/css" href="/__CSS__/user/index.css?v=20171117">
+<link rel="stylesheet" type="text/css" href="/__CSS__/user/global.css">
+<link rel="stylesheet" type="text/css" href="/__CSS__/user/info.css">
+<link rel="stylesheet" href="/__JS__/datepicker/datepicker3.css">
+<style type="text/css">
+.datepicker table tr td.disabled, .datepicker table tr td.disabled:hover{
+    color:gray;
+}
+</style>
+<script src="/__JS__/jquery.min.js"></script>
+<script src="/__JS__/datepicker/bootstrap-datepicker.js"></script>
+<script src="/__JS__/datepicker/bootstrap-datepicker.zh-CN.js"></script>
+<div class="help_r_main">
+    <div class="eveb_content">
+        <div class="eveb_nav_sub">
+            <ul class="clearfix">
+                <li ><a href="/agent/bet_record">团队投注</a></li>
+                <li class="on"><a href="/agent/bet_day_record">团队日投注</a></li>
+                <li ><a href="/agent/recharge_record">团队充值</a></li>
+                <li><a href="/user/money_record">团队日充值</a></li>
+                <li><a href="/agent/withdraw_record">团队提现</a></li>
+                <li><a href="/user/backwater_record">团队日提现</a></li>
+            </ul>
+        </div>
+        <h2>
+            <div class="eveb_search eveb_search_h2">
+                <form>
+                    <label >选择时间：</label>
+                    <input name="starttime" id="datepicker1"   value="{$Think.get.starttime}"  type="text">
+                   
+                    <input type="submit" class="button_small button_1" value="筛选">
+                </form>
+            </div>
+        </h2>
+        <table class="eveb_box eveb_table" id="dataTable">
+            <thead>
+                <tr>
+                    <th>日期</th>
+                    <th>团队日提款金额</th>
+                    <th>团队日提款次数</th>
+                    <th>团队日提款人数</th>
+                </tr>
+            </thead>
+            <tbody>
+                {if(!empty($list))}
+                    {foreach $list as $k=>$v}
+                        <tr>
+                            <td>{$k}</td>
+                            <td>{$v.CountAmount}</td>
+                            <td>{$v.countTime}</td>
+                            <td>{$v.countPerson}</td>
+                    {/foreach}
+                {else}
+                    <tr><td colspan="4" styl="text-align:center;">暂无数据</td></tr>
+                {/if}
+            </tbody>
+         </table>
+    </div>
+</div>
+<script type="text/javascript">
+$(function(){
+    $("#datepicker1").datepicker({
+        autoclose: true,
+        minView:-5,
+        maxView:0,
+        language:"zh-CN", 
+        todayHighlight: true,
+        startDate: '-30d',
+        endDate: 'today',
+        format:"yyyy-mm-dd",
+        hideIfNoPrevNext: true
+    });
+});
+
+</script>

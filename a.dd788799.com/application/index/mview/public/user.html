@@ -1,0 +1,32 @@
+<table>
+    <tbody>
+        <tr>
+        <td>用户：<strong>{user.username}</strong></td>
+        <td>余额：</td>
+        <td><strong>{$user.coin}<a href="#"  onclick="reloadMemberInfo()"><img src="__IMG__/header/ref.png" alt="刷新余额"></a></strong></td>
+        <td class="score"></td>
+        <td><!--消息：
+        <strong class="msgnum">
+        <a href="/">0</a>
+        </strong>-->
+        <a href="{:Url('recharge/index')}"><img src="__IMG__/header/chongzhi.jpg"></a></td>
+        <td><a href="{:Url('cash/index')}"><img src="__IMG__/header/tikuan.jpg" /></a></td>
+        <td><a href="{:Url('user/logout')}"><img src="__IMG__/header/tuichu.jpg" /></a></td>
+		<td><a href="#" onclick="wjkf168()"><img src="__IMG__/header/kefu.jpg"/></a></td>
+		<td><a href="./huijin.exe"><img src="__IMG__/header/download.jpg" /></a></td>
+        </td>
+        </tr>
+    </tbody>
+</table>
+
+<script type='text/javascript'>
+function wjkf168(){
+    {php} if($settings['kefuStatus']){  {/php}
+	var newWin=window.open("<?=$settings['kefuGG']?>","","height=600, width=800, top=0, left=0,toolbar=no, menubar=no, scrollbars=no, resizable=no, location=n o, status=no");
+	if(!newWin||!newWin.open||newWin.closed){newWin=window.open('about:blank');}else{return false;}
+        {php} }else{  {/php}
+	alert("暂时还没开通");
+        {php} }  {/php}
+	return false;
+}
+</script> 

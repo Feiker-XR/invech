@@ -1,0 +1,213 @@
+<html><!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8" /><meta name="format-detection" content="telephone=no" />
+		<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE11" />
+		<title>【{$parentCategoryInfo.name}{$categoryInfo.name}】{$parentCategoryInfo.name}号码 开奖结果查询 - {$sys.site_title}</title>
+		<meta name="keywords" content="{$categoryInfo.keywords}" />
+		<meta name="distribution" content="{$categoryInfo.description}" />
+		<link rel="stylesheet" href="css/headorfood.css" />
+		<link rel="stylesheet" href="css/pk10kai.css" />
+		<link rel="stylesheet" href="css/calendar.css" />
+		<link rel="shortcut icon" href="img/icon/168favicon.ico/v=2017981058.html">
+		<link rel="stylesheet" href="css/user_adv.css" />
+		<script src="js/lib/bootstrap-3.3.0/js/tests/vendor/jquery.min.js"></script>
+		<script src="js/lib/bootstrap-3.3.0/dist/js/bootstrap.min.js"></script>
+		<script type="text/javascript" src="js/lib/jquery-1.7.2.min.js"></script>
+	</head>
+
+	<body>
+		<div class="bodybox pk10lzzhfxymbox mrcltj">
+					<!--#include file="head.html"-->
+			<div class="haomabox">
+				<div class="waring" id="waringbox">
+					<div class="flash"><i></i></div>
+					温馨提示：因网络问题，开奖结果会有延迟，所以您需要去喝杯咖啡等一会儿！
+				</div>
+			<div class="haomaqu" id="pk10">
+					<div class="haomaqubox">
+						<div class="haomaqul">
+							<div class="haomaline">
+								<div class="haomaimg">
+									<a href="{$parentCategoryInfo.urlname}.html"><img src="{$parentCategoryInfo.image}" /></a>
+								</div>
+								<div class="numberqu">
+									<div class="nuberqutit">
+										<div class="divl">
+											<a href="{$parentCategoryInfo.urlname}.html"><span class="pk10tit">北京PK拾</span></a>第<span class="redfont preDrawIssue"></span>期&nbsp;开奖
+										</div>
+										<div class="divr">
+											全天<span class="totalCount">...</span>期，当前<span class="drawCount">...</span>期,剩<span class="sdrawCount">...</span>期
+										</div>
+									</div>
+									<div class="kajianhao">
+										<ul id="jnumber" class="numberbox">
+											<li class="nub02 "></li>
+											<li class="nub01 "></li>
+											<li class="nub10 "></li>
+											<li class="nub04 "></li>
+											<li class="nub03 "></li>
+											<li class="nub06 "></li>
+											<li class="nub07 "></li>
+											<li class="nub08 "></li>
+											<li class="nub05 "></li>
+											<li class="nub09 li_after"></li>
+										</ul>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="haomaqur">
+							<div class="line linetime" id="timebox">
+								<div class="opening opentyle">开奖中...</div>
+								<div class="clock cuttime">
+									距&nbsp;&nbsp;<span class="nextIssue"></span>&nbsp;&nbsp;期开奖仅有
+									<span class="bgtime hour">0</span>
+									<span class="hourtxt">时</span>
+									<span class="bgtime minute">0</span>
+									<span>分</span>
+									<span class="bgtime second">0</span>
+									<span>秒</span>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="hreflist">
+						<ul>
+							<li>
+								<a href="/{$parentCategoryInfo.urlname}.html">即时开奖</a>
+							</li>
+							<!--list{app="DuxCms" label="categoryList" parent_id=4 limit=100}-->
+  <!--if{$list['class_id']==$categoryInfo['class_id']}-->
+    <li class="checked"><a href="{$list.curl}" title="{$list.name}">
+					<span class="n">{$list.name}</span></a></li>
+  <!--{else}-->
+  
+    <li><a href="{$list.curl}" title="{$list.name}"><i class="icon_global icon_{$list.i}"></i>
+					<span class="n">{$list.name}</span></a></li>
+  <!--{/if}-->
+<!--{/list}-->
+						</ul>
+					</div>
+				</div>
+			</div>
+			<div class="zhlzbox margt20">
+				<div class="listhead">
+					<div class="listheadl checkbtndx" id="tabdsdxcl">
+						<span class="zhms xxselected"><i title="0">1</i>单长龙</span>
+						<span class="dxms"><i title="0">2</i>双长龙</span>
+						<span class="lmms"><i title="0">3</i>大长龙</span>
+						<span class="scl"><i title="0">4</i>小长龙</span>
+						<span class="lcl"><i title="1">5</i>龙长龙</span>
+						<span class="hcl"><i title="1">6</i>虎长龙</span>
+					</div>
+				</div>
+				<div class="listbox">
+					<div class="checkbox">
+						<div id="dxdsmc" class="checkbtnzh checkbtndx block" style="display: block;">
+							<ul class="xuanzhemc">
+								<li class="mctitle">该页面统计长龙每天出现的条数，例如某日连续开出5期长龙（该形态）共出现10次</li>
+							</ul>
+							<ul class="xuanzhemc">
+								<li class="mctitle">选择名次：</li>
+								<li class="sinli checked"><span>1</span>
+									<a href="javascript:void(0)">冠军</a>
+								</li>
+								<li class="sinli"><span>2</span>
+									<a href="javascript:void(0)">亚军</a>
+								</li>
+								<li class="sinli"><span>3</span>
+									<a href="javascript:void(0)">第三名</a>
+								</li>
+								<li class="sinli"><span>4</span>
+									<a href="javascript:void(0)">第四名</a>
+								</li>
+								<li class="sinli"><span>5</span>
+									<a href="javascript:void(0)">第五名</a>
+								</li>
+								<li class="sinli"><span>6</span>
+									<a href="javascript:void(0)">第六名</a>
+								</li>
+								<li class="sinli"><span>7</span>
+									<a href="javascript:void(0)">第七名</a>
+								</li>
+								<li class="sinli"><span>8</span>
+									<a href="javascript:void(0)">第八名</a>
+								</li>
+								<li class="sinli"><span>9</span>
+									<a href="javascript:void(0)">第九名</a>
+								</li>
+								<li class="sinli"><span>10</span>
+									<a href="javascript:void(0)">第十名</a>
+								</li>
+							</ul>
+						</div>
+						<div id="lhmc" class="checkbtnzh checkbtndx">
+							<ul class="xuanzhemc">
+								<li class="mctitle">该页面统计长龙每天出现的条数，例如某日连续开出5期长龙（该形态）共出现10次</li>
+							</ul>
+							<ul class="xuanzhemc">
+								<li class="mctitle">选择名次：</li>
+								<li class="sinli checked"><span>1</span>
+									<a href="javascript:void(0)">冠军</a>
+								</li>
+								<li class="sinli"><span>2</span>
+									<a href="javascript:void(0)">亚军</a>
+								</li>
+								<li class="sinli"><span>3</span>
+									<a href="javascript:void(0)">第三名</a>
+								</li>
+								<li class="sinli"><span>4</span>
+									<a href="javascript:void(0)">第四名</a>
+								</li>
+								<li class="sinli"><span>5</span>
+									<a href="javascript:void(0)">第五名</a>
+								</li>
+							</ul>
+						</div>
+
+					</div>
+					<div class="listcontent">
+						<div class="box">
+							<div id="waitBox" class="bastren w1200">
+								<div id="chartLinediv" style="position:relative;*position:static;">
+									<table id="table_cltj" width="100%" border="0" cellpadding="0" cellspacing="0" style="display: table;">
+										<thead>
+											<tr>
+												<th rowspan="2" width="123" height="38" class="sanjiao" style="overflow: hidden;">
+													<div class="div_out">
+														<span class="spanc">长龙</span> <span class="spanr">日期</span>
+														<div class="div_gai">
+														</div>
+													</div>
+												</th>
+												<th colspan="2" id="headcolspan">开“<span id="cltype"></span>”长龙出现条数</th>
+											</tr>
+											<tr id="qihao">
+											</tr>
+										</thead>
+										<tbody>
+
+										</tbody>
+									</table>
+								</div>
+								<div id="chartbottom" style="display: none;">
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+							<!--#include file="foot.html"-->
+
+		<script type="text/javascript" src="js/lib/calendar.js"></script>
+	</body>
+	<script type="text/javascript" src="js/lib/config.js"></script>
+	<script type="text/javascript" src="js/loacal/animate/animate.js"></script>
+	<script type="text/javascript" src="js/lib/GA.js"></script>
+	<script type="text/javascript" src="js/loacal/pk10_900/pk10_meiricltj.js"></script>
+	<script type="text/javascript" src="js/loacal/pk10_900/pk10_kai.js"></script>
+
+</html>

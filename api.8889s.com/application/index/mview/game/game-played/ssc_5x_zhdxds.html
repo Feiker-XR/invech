@@ -1,0 +1,23 @@
+<input type="hidden" name="playedGroup" value="<?=$groupId?>" />
+<input type="hidden" name="playedId" value="<?=$playedId?>" />
+<input type="hidden" name="playedName" value="<?=$playedName?>" />
+<input type="hidden" name="type" value="<?=$type?>" />
+<?php foreach(array('总和大小') as $var){ ?>
+<div class="pp ssc5xlhh" action="tz11x5Select" length="1" random="sscRandom">
+	<!--<div class="title"><?=$var?></div>-->
+	<div class="total_conatiners_addClass">
+		<input type="button" value="总和大" class="code min s total_wp_addClass" />
+		<input type="button" value="总和小" class="code min d total_wp_addClass" />
+		<input type="button" value="总和单" class="code min s total_wp_addClass" />
+		<input type="button" value="总和双" class="code min d total_wp_addClass" />
+	</div>&nbsp;
+
+</div>
+<?php
+	}
+?>
+<script type="text/javascript">
+$(function(){
+	gameSetPl(<?=json_encode($maxPl)?>);
+})
+</script>

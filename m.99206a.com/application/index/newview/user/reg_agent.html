@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Welcome</title>
+<link rel="stylesheet" type="text/css" href="/css/general.css" />
+<link rel="stylesheet" type="text/css" href="/newview/css/theme/style.css?version=2.0.0" />
+<link rel="stylesheet" type="text/css" href="/newview/css/style.css" />
+<link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
+	<link rel="stylesheet" href="/css/newstyle	/public.css">
+	<link rel="stylesheet" href="/css/newstyle	/style.css">
+
+	<style>
+		.modify_main_title{width: 842px;height: 40px;color: #ff6c00;font-size: 14px;line-height: 40px;text-indent: 20px;border-bottom: 2px solid #ff6c00;margin: 0 auto;text-align: center;}
+		.modify_main_label{color: #999;font-size: 14px;margin-left: 80px;margin-top: 30px;width: 352px;float: left;}
+		.modify_input{width: 234px;height: 43px;color: #0079d7;font-size: 16px;text-indent: 10px;border: none;outline: none;}
+		.modify_main_label li.on{margin: 16px 0px;border: 1px solid #ccc;width: 350px;height: 43px;line-height: 43px;}
+		.modify_textarea{width: 332px;height:150px;text-indent: 10px;font-size: 16px;padding-top: 10px;}
+		.modify_main_label li span{display: inline-block;
+    width: 65px;
+    text-align: right;
+    border-right: 1px solid #ccc;
+    padding: 5px 15px 5px 0px;
+    float: left;
+    margin-left: 5px;
+    height: 33px;
+    line-height: 33px;}
+		.modify_main_label li i{display: block;width: 25px;float: left;margin-top: 10px;margin-left: 5px;}
+		.modify_main_right{width: 390px;height: 225px;border: 1px solid #ccc;float: left;margin-top: 45px;margin-left: 70px;}
+		.modify_main_li{text-align: center;width: 330px;margin: 0 auto;clear: both;}
+		.modify_main_li input.del{cursor: pointer;display: block;width: 120px;height: 40px;background: #cdcdcd;border-radius: 40px;color: white;text-align: center;line-height: 40px;font-size: 16px;float: left;}
+		.modify_main_li input.del:hover{background: #d86714}
+		.modify_main_li input.sumbit{display: block;width: 120px;height: 40px;background: #ff6c00;border-radius: 40px;color: white;text-align: center;line-height: 40px;font-size: 16px;float: left;margin-left: 50px;}
+		.modify_main_li input.sumbit:hover{background: #d86714;}
+		.modify_main_right_1{text-align: center;color: #666;height: 50px;border-bottom: 1px solid #ccc;width: 360px;margin: 0 auto;}
+		.modify_main_right_1 i{display: inline-block;margin-right: 5px;float: left;margin-left: 130px;margin-top: 13px;}
+		.modify_main_right_1 span{font-size: 16px;float: left;margin-top: 13px;}
+
+		.modify_main_right_2{color: #999;font-size: 14px;margin-left: 15px;}
+		.modify_main_right_2 p{margin: 10px 0;}
+		.modify_main_right_2 textarea{
+			margin: 10px 0;
+    display: block;
+    width: 90%;
+    padding: 10px;}
+		.modify_wp{position: relative;}
+		.modify_bt_right{position: absolute;right: 10px;bottom: 10px;}
+		.modify_main_title span{font-weight: bold;}
+
+	</style>
+<script src="/js/js/jquery-1.8.0.min.js"></script>
+<script type="text/javascript" src="/js/main.js"></script>
+<script type="text/javascript" src="/Scripts/member.js"></script>
+<script type="text/javascript" src="/newview/js/main.js"></script>
+</head>
+<body>
+<div class="head">
+	<!--欢迎-->
+	{include file='common/nav'}
+</div>
+<div class="block_0"></div>
+
+<div class="moneyBox_contain modify_wp">
+	<div class="">
+		<div class="ui-headerBox">
+			<div class="modify_header">
+				<a href="/user/userinfo.html" class="nav_1">首页</a>
+				<a href="/pay/member.html" class="nav_2">财务管理</a>
+				<a href="/user/record_ds.html" class="nav_3">游戏记录</a>
+				<a href="/user/report.html" class="nav_4">历史记录</a>
+				<a href="/user/sms.html" class="nav_5">短信记录</a>
+				<a href="/user/agent.html" class="nav_6 active">代理中心</a>
+			</div>
+		</div>
+	</div>
+
+	<div class="ui-body">
+		<div class="ui-search" id="subjsshow5" style="display: block;">
+        	<span><i class="fas fa-user-circle" style="font-size: 30px"></i>代理中心</span>
+			<ul>
+                <li class="ui-hover"><a href="/user/agent.html"><i class="fas fa-shopping-cart" style="background-color: #F59A2F"></i>推广网址</a></li>
+                <li><a href="/user/ag_user.html"><i class="fas fa-anchor" style="background-color: #F5b52F"></i>下级列表</a></li>
+                <li><a href="/user/ag_data.html"><i class="fas fa-archive" style="background-color: #5D9A2F"></i>报表统计</a></li>
+            </ul>
+        </div>
+	</div>
+
+
+	<div class="ui-moneyBox">
+		<!-- <ul> -->
+			<!-- <table width="100%" border="0" cellspacing="0" cellpadding="5">
+				<form id="form1" name="form1" method="post" action="/user/reg_agent">
+					<tr>
+						<td colspan="2" align="center" bgcolor="#333333"
+							style="font-size: 14px; color: #FF0">请认真填写下列表单，否则我们将无法审核您的代理资格！</td>
+					</tr>
+					<tr>
+						<td width="150" align="right">代理账号：</td>
+						<td><font color="#0000FF">
+								<?php echo $user["username"];?>
+						</font><input type="hidden" name="username" id="username"
+							value="<?php echo $user["username"];?>"/></td>
+					</tr>
+					<tr>
+						<td align="right">真实姓名：</td>
+						<td><font color="#0000FF">
+								<?php echo $user["pay_name"];?>
+								<input type="hidden" name="r_name" id="r_name"
+								value="<?php echo $user["pay_name"];?>"/>
+						</font></td>
+					</tr>
+					<tr>
+						<td align="right">电话号码：</td>
+						<td><input name="mobile" type="text" class="Input_200"
+							id="mobile" value="<?php echo $user["mobile"];?>"
+							onFocus="this.value=''"
+							onBlur="if(!value){value=defaultValue;}"/></td>
+					</tr>
+					<tr>
+						<td align="right">邮箱地址：</td>
+						<td><input name="email" type="text" class="Input_200"
+							id="email" value="<?php echo $user["email"]?>"
+							onFocus="this.value=''"
+							onBlur="if(!value){value=defaultValue;}"/></td>
+					</tr>
+					<tr>
+						<td align="right">申请理由：</td>
+						<td valign="bottom"><textarea name="about" class="Txt_200"
+								id="about" onFocus="this.value=''"
+								onBlur="if(!value){value=defaultValue;}">请简单说明您成为代理后将如何推广！
+这将是我们是否通过您的代理资格的重要信息！</textarea></td>
+					</tr>
+					<tr>
+						<td colspan="2" align="center"><input type="submit" name="button" id="button" value="确认申请" class="m_btn" />
+						</td>
+					</tr>
+				</form>
+			</table> -->
+		<!-- </ul> -->
+		<div class="modify_main_wp">
+ 		<div class="modify_main_title">
+ 			<span class="f16">请认真填写并确认下列表单</span> 否则我们将无法正常出款！
+ 		</div>
+		<div class="block_0"></div>
+		<form id="form1" name="form1" method="post" action="/user/reg_agent">
+		<div class="modify_main_label">
+			<ul>
+				<li class="on">
+					<i><img src="/css/img/tikuan_12.png" /></i>
+					<span>代理账号</span>
+					<?php echo $user["username"];?>
+						<input class="modify_input" placeholder="请输入" type="hidden" name="username" id="username" value="<?php echo $user["username"];?>"/>
+					<!-- <input type="text" class="modify_input" placeholder="请输入"/> -->
+				</li>
+				<li class="on">
+					<i style="margin-top: 3px;"><img src="/css/img/tikuan_13.png" /></i>
+					<span>真实姓名</span>
+					<?php echo $user["pay_name"];?>
+					<input type="hidden" name="r_name" id="r_name"
+					value="<?php echo $user["pay_name"];?>"/>
+					<!-- <input type="text" class="modify_input" placeholder="请输入"/> -->
+				</li>
+				<li class="on">
+					<i><img src="/css/img/tikuan_14.png" style="float: right;margin-right: 5px;"/></i>
+					<span>电话号码</span>
+					<input name="mobile" type="text" class="modify_input"
+						id="mobile" value="<?php echo $user["mobile"];?>"
+						onFocus="this.value=''"
+						onBlur="if(!value){value=defaultValue;}" />
+					<!-- <input type="text" class="modify_input" placeholder="请输入"/> -->
+				</li>
+				<li class="on">
+					<i style="margin-top: 3px;"><img src="/css/img/tikuan_15.png" /></i>
+					<span>邮箱地址</span>
+					<input name="email" type="text" class="modify_input"
+						id="email" value="<?php echo $user["email"]?>"
+						onFocus="this.value=''"
+						onBlur="if(!value){value=defaultValue;}" />
+					<!-- <input type="text" class="modify_input" placeholder="请输入"/> -->
+				</li>
+			</ul>
+		</div>
+		<div class="modify_main_right">
+			<div class="modify_main_right_1">
+				<i><img src="/css/img/tikuan_11.png" /></i>
+				<span>申请理由</span>
+			</div>
+			<div class="modify_main_right_2">
+				<!-- <p>请简单说明您成为我们的代理后将如何推广！</p>
+				<p>这将是我们是否通过您的代理资格的重要信息！</p> -->
+				<textarea name="about" class="Txt_200"
+						id="about" onFocus="this.value=''"
+						onBlur="if(!value){value=defaultValue;}">请简单说明您成为代理后将如何推广！
+这将是我们是否通过您的代理资格的重要信息！</textarea>
+			</div>
+		</div>
+		<div class="block_20"></div>
+		<div class="modify_main_li">
+			<!-- <a href="javascript:;" class="del">取消</a>
+			<a href="javascript:;" class="sumbit">立即申请</a> -->
+			<input type="reset"  value="取消" class="del" />
+			<input type="submit" name="button" id="button" value="确认申请" class="sumbit" />
+		</div>
+		</form>
+    </div>
+  	<div class="modify_bt_right">
+  		<img src="/css/img/tikuan_2.png" />
+  	</div>
+	</div>
+</div>
+
+{include file='common/footer'}
+</body>
+<script type="text/javascript">
+setInterval(function() {
+	$.ajax({
+		type: "post",
+		url: "{:Url('index/home')}",
+		data:{'ajax':1,'get_money':'1'},
+		success:function(data) {
+			if (/^[\d\.]+$/.test(data)) {
+				$('#money,#money_2').text(data);
+			}
+		}
+	});
+},2000);
+</script>
+</html>

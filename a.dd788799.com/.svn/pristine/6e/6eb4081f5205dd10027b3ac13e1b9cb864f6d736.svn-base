@@ -1,0 +1,87 @@
+{layout name="layout" /}
+<div class="row">
+  <div class="col-xs-12">
+    <div class="box">
+      <div class="box-header">
+        <i class="fa fa-plus-square pull-right add_played"></i>
+        <form>
+          <div class="pull-left" style="margin-left:15px;">
+            <input class="form-control input-sm search" value="{$Think.get.name}" placeholder="请输入玩法名称/ID或赔率组名称" type="text" name="name" >
+          </div>        
+          <div class="has-feedback pull-left" style="margin-left:15px;">
+            <button type="submit" class="btn btn-block btn-default btn-sm filter">查询</button>
+          </div>
+        </form>
+    </div>
+      <!-- /.box-header -->
+      <div class="box-body table-responsive no-padding">
+        <table class="table table-hover">
+          <tr>
+            <th>#</th>
+            <th >名称</th>
+            <th >赔率模式</th>
+            <th >玩法分组ID</th>
+            <th >玩法分组</th>            
+            <th >玩法ID</th>
+            <th >玩法</th>            
+            <th >操作</th>
+        </tr>
+        {foreach $list as $item}
+         <tr>
+            <td>{$item->id}</td>
+            <td>
+              {$item->name}
+            </td>
+            <td>
+              {eq name="$item->mode" value="0"} 值模式 {/eq}
+              {eq name="$item->mode" value="1"} 定长组合模式 {/eq} 
+              {eq name="$item->mode" value="2"} 变长组合模式 {/eq} 
+            </td>
+            <td>{$item->played->playedgroup->id}</td>
+            <td>{$item->played->playedgroup->groupName}</td>
+            <td>{$item->played->id}</td>
+            <td>{$item->played->name}</td>            
+            
+            <td >
+              <i  data-id="{$item->id}" class="edit fa fa-pencil"></i>
+             </td>
+        </tr>
+        {/foreach}
+        </table>
+        {$list->render()}
+      </div>
+      <!-- /.box-body -->
+    </div>
+    <!-- /.box -->
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){
+  $(".add_played").click(function(){
+    $.get('/lottery/plgroup_edit',{},function(data){
+      layer.open({
+        type: 1,
+        title: '新增彩种',
+        maxmin: true, //开启最大化最小化按钮
+        area: ['900px', '700px'],
+        content: data
+      });
+    },'html');
+  });
+  
+  $(".edit").click(function(){
+    var id = $(this).attr('data-id');
+    $.get('/lottery/plgroup_edit',{id:id},function(data){
+      layer.open({
+        type: 1,
+        title: '修改彩种',
+        maxmin: true, //开启最大化最小化按钮
+        area: ['900px', '700px'],
+        content: data
+      });
+    },'html');
+  });
+
+});
+
+</script>

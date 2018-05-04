@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>系统设置</title>
+<link href="/css/base.css" rel="stylesheet" type="text/css" />
+<link href="/css/admin.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="/js/jquery.js"></script>
+<script type="text/javascript" src="/js/jquery.tools.js"></script>
+<script type="text/javascript" src="/js/base.js"></script>
+<script language="javascript">
+function check_submit(){
+	if($("#qishu").val()==""){
+		alert("请填写开奖期数");
+		$("#qishu").focus();
+		return false;
+	}
+	if($("#datetime").val()==""){
+		alert("请填写开奖时间");
+		$("#datetime").focus();
+		return false;
+	}
+	if($("#ball_1").val()==""){
+		alert("请选择冠军车号");
+		$("#ball_1").focus();
+		return false;
+	}
+	if($("#ball_2").val()==""){
+		alert("请选择亚军车号");
+		$("#ball_2").focus();
+		return false;
+	}
+	if($("#ball_3").val()==""){
+		alert("请选择第三名车号");
+		$("#ball_3").focus();
+		return false;
+	}
+	if($("#ball_4").val()==""){
+		alert("请选择第四名车号");
+		$("#ball_4").focus();
+		return false;
+	}
+	if($("#ball_5").val()==""){
+		alert("请选择第五名车号");
+		$("#ball_5").focus();
+		return false;
+	}
+	if($("#ball_6").val()==""){
+		alert("请选择第六名车号");
+		$("#ball_6").focus();
+		return false;
+	}
+	if($("#ball_7").val()==""){
+		alert("请选择第七名车号");
+		$("#ball_7").focus();
+		return false;
+	}
+	if($("#ball_8").val()==""){
+		alert("请选择第八名车号");
+		$("#ball_8").focus();
+		return false;
+	}
+	if($("#ball_9").val()==""){
+		alert("请选择第九名车号");
+		$("#ball_9").focus();
+		return false;
+	}
+	if($("#ball_10").val()==""){
+		alert("请选择第十名车号");
+		$("#ball_10").focus();
+		return false;
+	}
+	return true;
+}
+
+$(function() {
+	$('#all_checkbox').click(function() {
+		if ($(this).is(':checked')) {
+			$('.checkbox').prop("checked",true);
+		} else {
+			$('.checkbox').prop("checked",false);
+		}
+	});
+		
+	$('#checkbox_button').click(function() {
+		var is_submit = false;
+		if ($('#checkbox_select').val() == 'yes') {
+			$('#set_my_ok').val('1');
+			is_submit = true;
+		} else if ($('#checkbox_select').val() == 'no') {
+			$('#set_my_ok').val('0');
+			is_submit = true;
+		} else {
+			alert('请先选择');
+			return false;
+		}
+		
+		if (is_submit) {
+			var arr = [];
+			$('.checkbox').each(function() {
+				if ($(this).is(':checked')) {
+					var tempid = $(this).attr('id');
+					var temp_patten = tempid.match(/checkbox_(\d+)/);
+					if (temp_patten && temp_patten[1]) {
+						arr.push(temp_patten[1]);
+					}
+				}
+			});
+			
+			$('#set_my_ids').val(arr.join('.'));
+			$('#set_my_auto').submit();
+		}
+	});
+	
+})
+</script>
+
+<form style="display:none" method="post" id="set_my_auto" action="{:url('lottery/set_my_auto')}">
+	<input type="text" name="ids" id="set_my_ids"/>
+    <input type="text" name="ok" id="set_my_ok"/>
+    <input type="text" name="type" id="set_my_type" value="pk10" />
+</form>
+</head>
+<body class="list">
+	<!--<div class="bar">
+		北京PK拾开奖管理
+	</div>-->
+
+<div class="body">
+<ul id="tab" class="tab">
+	<li><input type="button" value="重庆时时彩" hidefocus  onClick="window.location.href='/index.php/lottery/csc_auto'" /></li>
+  	<li><input type="button" value="新疆时时彩" onClick="window.location.href='/index.php/lottery/xsc_auto'" /></li>
+    <li><input type="button" value="重庆快乐十分" hidefocus onClick="window.location.href='/index.php/lottery/csf_auto'" /></li>
+    <li><input type="button" value="广东快乐十分" hidefocus onClick="window.location.href='/index.php/lottery/gsf_auto'" /></li>
+    <li><input type="button" value="北京PK拾" hidefocus class="current" onClick="window.location.href='/index.php/lottery/pk10_auto'" /></li>
+    <li><input type="button" value="广西快乐十分" hidefocus onClick="window.location.href='/index.php/lottery/gxsf_auto'" /></li>
+    <li><input type="button" value="江苏快3" hidefocus onClick="window.location.href='/index.php/lottery/jsk3_auto'" /></li>
+	<li><input type="button" value="山东11选5" hidefocus onClick="window.location.href='/index.php/lottery/sd11x5_auto'" /></li>
+    <li><input type="button" value="幸运飞艇" hidefocus onClick="window.location.href='/index.php/lottery/xyft_auto'" /></li>
+    <li><input type="button" value="分分彩" hidefocus class="" onClick="window.location.href='/index.php/lottery/ffc_auto'" /></li>
+    <li><input type="button" value="二分彩" hidefocus class="" onClick="window.location.href='/index.php/lottery/2fc_auto'" /></li>
+    <li><input type="button" value="五分彩" hidefocus class="" onClick="window.location.href='/index.php/lottery/5fc_auto'" /></li>
+</ul>
+<form name="form1" onSubmit="return check_submit();" method="post" action="?id=<?=$id?>&action=<?=$id>0 ? 'edit' : 'add'?>&page={$page}">
+
+<table id="listTables" class="listTables" style="margin-bottom:5px;">
+  <tr>
+    <td width="110" height="40"  align="right" bgcolor="#F2F4F6">开奖期号：</td>
+    <td  align="left" bgcolor="#FFFFFF" style="padding-left:5px;"><input name="qishu" type="text" id="qishu" value="<?=$rs['qishu']?>" size="20" class="formText"/></td>
+  </tr>
+  <tr>
+    <td height="40" align="right" bgcolor="#F2F4F6">开奖时间：</td>
+    <td align="left" bgcolor="#FFFFFF" style="padding-left:5px;"><input name="datetime" type="text" id="datetime" value="<?=$rs['datetime']?>" size="20" maxlength="19" class="formText"/></td>
+  </tr>
+  <tr>
+    <td height="40" align="right" bgcolor="#F2F4F6">开奖号码：</td>
+    <td align="left" bgcolor="#FFFFFF" style="padding-left:5px;"><select name="ball_1" id="ball_1">
+        <option value="1" <?=$rs['ball_1']==1 ? 'selected' : ''?>>1</option>
+        <option value="2" <?=$rs['ball_1']==2 ? 'selected' : ''?>>2</option>
+        <option value="3" <?=$rs['ball_1']==3 ? 'selected' : ''?>>3</option>
+        <option value="4" <?=$rs['ball_1']==4 ? 'selected' : ''?>>4</option>
+        <option value="5" <?=$rs['ball_1']==5 ? 'selected' : ''?>>5</option>
+        <option value="6" <?=$rs['ball_1']==6 ? 'selected' : ''?>>6</option>
+        <option value="7" <?=$rs['ball_1']==7 ? 'selected' : ''?>>7</option>
+        <option value="8" <?=$rs['ball_1']==8 ? 'selected' : ''?>>8</option>
+        <option value="9" <?=$rs['ball_1']==9 ? 'selected' : ''?>>9</option>
+        <option value="10" <?=$rs['ball_1']==10 ? 'selected' : ''?>>10</option>
+        <option value="" <?=$rs['ball_1']=='' ? 'selected' : ''?>>冠军</option>
+      </select>
+      <select name="ball_2" id="ball_2">
+        <option value="1" <?=$rs['ball_2']==1 ? 'selected' : ''?>>1</option>
+        <option value="2" <?=$rs['ball_2']==2 ? 'selected' : ''?>>2</option>
+        <option value="3" <?=$rs['ball_2']==3 ? 'selected' : ''?>>3</option>
+        <option value="4" <?=$rs['ball_2']==4 ? 'selected' : ''?>>4</option>
+        <option value="5" <?=$rs['ball_2']==5 ? 'selected' : ''?>>5</option>
+        <option value="6" <?=$rs['ball_2']==6 ? 'selected' : ''?>>6</option>
+        <option value="7" <?=$rs['ball_2']==7 ? 'selected' : ''?>>7</option>
+        <option value="8" <?=$rs['ball_2']==8 ? 'selected' : ''?>>8</option>
+        <option value="9" <?=$rs['ball_2']==9 ? 'selected' : ''?>>9</option>
+        <option value="10" <?=$rs['ball_2']==10 ? 'selected' : ''?>>10</option>
+        <option value="" <?=$rs['ball_2']=='' ? 'selected' : ''?>>亚军</option>
+      </select>
+      <select name="ball_3" id="ball_3">
+        <option value="1" <?=$rs['ball_3']==1 ? 'selected' : ''?>>1</option>
+        <option value="2" <?=$rs['ball_3']==2 ? 'selected' : ''?>>2</option>
+        <option value="3" <?=$rs['ball_3']==3 ? 'selected' : ''?>>3</option>
+        <option value="4" <?=$rs['ball_3']==4 ? 'selected' : ''?>>4</option>
+        <option value="5" <?=$rs['ball_3']==5 ? 'selected' : ''?>>5</option>
+        <option value="6" <?=$rs['ball_3']==6 ? 'selected' : ''?>>6</option>
+        <option value="7" <?=$rs['ball_3']==7 ? 'selected' : ''?>>7</option>
+        <option value="8" <?=$rs['ball_3']==8 ? 'selected' : ''?>>8</option>
+        <option value="9" <?=$rs['ball_3']==9 ? 'selected' : ''?>>9</option>
+        <option value="10" <?=$rs['ball_3']==10 ? 'selected' : ''?>>10</option>
+        <option value="" <?=$rs['ball_3']=='' ? 'selected' : ''?>>第三名</option>
+      </select>
+      <select name="ball_4" id="ball_4">
+        <option value="1" <?=$rs['ball_4']==1 ? 'selected' : ''?>>1</option>
+        <option value="2" <?=$rs['ball_4']==2 ? 'selected' : ''?>>2</option>
+        <option value="3" <?=$rs['ball_4']==3 ? 'selected' : ''?>>3</option>
+        <option value="4" <?=$rs['ball_4']==4 ? 'selected' : ''?>>4</option>
+        <option value="5" <?=$rs['ball_4']==5 ? 'selected' : ''?>>5</option>
+        <option value="6" <?=$rs['ball_4']==6 ? 'selected' : ''?>>6</option>
+        <option value="7" <?=$rs['ball_4']==7 ? 'selected' : ''?>>7</option>
+        <option value="8" <?=$rs['ball_4']==8 ? 'selected' : ''?>>8</option>
+        <option value="9" <?=$rs['ball_4']==9 ? 'selected' : ''?>>9</option>
+        <option value="10" <?=$rs['ball_4']==10 ? 'selected' : ''?>>10</option>
+        <option value="" <?=$rs['ball_4']=='' ? 'selected' : ''?>>第四名</option>
+      </select>
+      <select name="ball_5" id="ball_5">
+        <option value="1" <?=$rs['ball_5']==1 ? 'selected' : ''?>>1</option>
+        <option value="2" <?=$rs['ball_5']==2 ? 'selected' : ''?>>2</option>
+        <option value="3" <?=$rs['ball_5']==3 ? 'selected' : ''?>>3</option>
+        <option value="4" <?=$rs['ball_5']==4 ? 'selected' : ''?>>4</option>
+        <option value="5" <?=$rs['ball_5']==5 ? 'selected' : ''?>>5</option>
+        <option value="6" <?=$rs['ball_5']==6 ? 'selected' : ''?>>6</option>
+        <option value="7" <?=$rs['ball_5']==7 ? 'selected' : ''?>>7</option>
+        <option value="8" <?=$rs['ball_5']==8 ? 'selected' : ''?>>8</option>
+        <option value="9" <?=$rs['ball_5']==9 ? 'selected' : ''?>>9</option>
+        <option value="10" <?=$rs['ball_5']==10 ? 'selected' : ''?>>10</option>
+        <option value="" <?=$rs['ball_5']=='' ? 'selected' : ''?>>第五名</option>
+      </select>
+      <select name="ball_6" id="ball_6">
+        <option value="1" <?=$rs['ball_6']==1 ? 'selected' : ''?>>1</option>
+        <option value="2" <?=$rs['ball_6']==2 ? 'selected' : ''?>>2</option>
+        <option value="3" <?=$rs['ball_6']==3 ? 'selected' : ''?>>3</option>
+        <option value="4" <?=$rs['ball_6']==4 ? 'selected' : ''?>>4</option>
+        <option value="5" <?=$rs['ball_6']==5 ? 'selected' : ''?>>5</option>
+        <option value="6" <?=$rs['ball_6']==6 ? 'selected' : ''?>>6</option>
+        <option value="7" <?=$rs['ball_6']==7 ? 'selected' : ''?>>7</option>
+        <option value="8" <?=$rs['ball_6']==8 ? 'selected' : ''?>>8</option>
+        <option value="9" <?=$rs['ball_6']==9 ? 'selected' : ''?>>9</option>
+        <option value="10" <?=$rs['ball_6']==10 ? 'selected' : ''?>>10</option>
+        <option value="" <?=$rs['ball_6']=='' ? 'selected' : ''?>>第六名</option>
+      </select>
+      <select name="ball_7" id="ball_7">
+        <option value="1" <?=$rs['ball_7']==1 ? 'selected' : ''?>>1</option>
+        <option value="2" <?=$rs['ball_7']==2 ? 'selected' : ''?>>2</option>
+        <option value="3" <?=$rs['ball_7']==3 ? 'selected' : ''?>>3</option>
+        <option value="4" <?=$rs['ball_7']==4 ? 'selected' : ''?>>4</option>
+        <option value="5" <?=$rs['ball_7']==5 ? 'selected' : ''?>>5</option>
+        <option value="6" <?=$rs['ball_7']==6 ? 'selected' : ''?>>6</option>
+        <option value="7" <?=$rs['ball_7']==7 ? 'selected' : ''?>>7</option>
+        <option value="8" <?=$rs['ball_7']==8 ? 'selected' : ''?>>8</option>
+        <option value="9" <?=$rs['ball_7']==9 ? 'selected' : ''?>>9</option>
+        <option value="10" <?=$rs['ball_7']==10 ? 'selected' : ''?>>10</option>
+        <option value="" <?=$rs['ball_7']=='' ? 'selected' : ''?>>第七名</option>
+      </select>
+      <select name="ball_8" id="ball_8">
+        <option value="1" <?=$rs['ball_8']==1 ? 'selected' : ''?>>1</option>
+        <option value="2" <?=$rs['ball_8']==2 ? 'selected' : ''?>>2</option>
+        <option value="3" <?=$rs['ball_8']==3 ? 'selected' : ''?>>3</option>
+        <option value="4" <?=$rs['ball_8']==4 ? 'selected' : ''?>>4</option>
+        <option value="5" <?=$rs['ball_8']==5 ? 'selected' : ''?>>5</option>
+        <option value="6" <?=$rs['ball_8']==6 ? 'selected' : ''?>>6</option>
+        <option value="7" <?=$rs['ball_8']==7 ? 'selected' : ''?>>7</option>
+        <option value="8" <?=$rs['ball_8']==8 ? 'selected' : ''?>>8</option>
+        <option value="9" <?=$rs['ball_8']==9 ? 'selected' : ''?>>9</option>
+        <option value="10" <?=$rs['ball_8']==10 ? 'selected' : ''?>>10</option>
+        <option value="" <?=$rs['ball_8']=='' ? 'selected' : ''?>>第八名</option>
+      </select>
+      <select name="ball_9" id="ball_9">
+        <option value="1" <?=$rs['ball_9']==1 ? 'selected' : ''?>>1</option>
+        <option value="2" <?=$rs['ball_9']==2 ? 'selected' : ''?>>2</option>
+        <option value="3" <?=$rs['ball_9']==3 ? 'selected' : ''?>>3</option>
+        <option value="4" <?=$rs['ball_9']==4 ? 'selected' : ''?>>4</option>
+        <option value="5" <?=$rs['ball_9']==5 ? 'selected' : ''?>>5</option>
+        <option value="6" <?=$rs['ball_9']==6 ? 'selected' : ''?>>6</option>
+        <option value="7" <?=$rs['ball_9']==7 ? 'selected' : ''?>>7</option>
+        <option value="8" <?=$rs['ball_9']==8 ? 'selected' : ''?>>8</option>
+        <option value="9" <?=$rs['ball_9']==9 ? 'selected' : ''?>>9</option>
+        <option value="10" <?=$rs['ball_9']==10 ? 'selected' : ''?>>10</option>
+
+        <option value="" <?=$rs['ball_9']=='' ? 'selected' : ''?>>第九名</option>
+      </select>
+      <select name="ball_10" id="ball_10">
+        <option value="1" <?=$rs['ball_10']==1 ? 'selected' : ''?>>1</option>
+        <option value="2" <?=$rs['ball_10']==2 ? 'selected' : ''?>>2</option>
+        <option value="3" <?=$rs['ball_10']==3 ? 'selected' : ''?>>3</option>
+        <option value="4" <?=$rs['ball_10']==4 ? 'selected' : ''?>>4</option>
+        <option value="5" <?=$rs['ball_10']==5 ? 'selected' : ''?>>5</option>
+        <option value="6" <?=$rs['ball_10']==6 ? 'selected' : ''?>>6</option>
+        <option value="7" <?=$rs['ball_10']==7 ? 'selected' : ''?>>7</option>
+        <option value="8" <?=$rs['ball_10']==8 ? 'selected' : ''?>>8</option>
+        <option value="9" <?=$rs['ball_10']==9 ? 'selected' : ''?>>9</option>
+        <option value="10" <?=$rs['ball_10']==10 ? 'selected' : ''?>>10</option>
+        <option value="" <?=$rs['ball_10']=='' ? 'selected' : ''?>>第十名</option>
+      </select></td>
+  </tr>
+  <tr>
+    <td height="40" colspan="2" align="left" bgcolor="#F2F4F6"><input name="submit" type="submit" class="formButton" style="margin-left:110px;" value="确认发布"/></td>
+    </tr>
+</table>
+</form>
+<table id="listTables" class="listTables"> 
+<tr>
+        	<th colspan="12" style="border:none;"></th>
+            <th colspan="2" style="border:none;">
+            	<select id="checkbox_select">
+                	<option>--修改状态--</option>
+                    <option value="yes">已结算</option>
+                    <option value="no">未结算</option>
+                </select>
+                <button type="button" id="checkbox_button">确认修改</button>
+            </th>
+            <th colspan="1" style="border:none;">
+            	全选<input type="checkbox" id="all_checkbox" />
+            </th>
+        </tr>
+      <tr>
+        <th align="center">彩票期号</th>
+        <th align="center">开奖时间</th>
+        <th align="center">冠军</th>
+        <th align="center">亚军</th>
+        <th align="center">第三名</th>
+        <th align="center">第四名</th>
+        <th align="center">第五名</th>
+        <th align="center">第六名</th>
+        <th align="center">第七名</th>
+        <th align="center">第八名</th>
+        <th align="center">第九名</th>
+        <th align="center">第十名</th>
+        <th align="center">查看注单</th>
+        <th align="center">查看注单</th>
+        <th align="center">结算</th>
+        <th align="center">操作</th>
+          </tr>
+		<?php foreach ($pk10 as $v){?>
+		<?php
+		if($v['ok']==1){
+			$ok = '<font color="#FF0000">已结算</font>';
+		}else{
+			$ok = '<a href=""><font color="#0000FF">点击结算</font></a>';
+		}
+		?>
+      <tr>
+        <td height="30" align="center" valign="middle"><?=$v['qishu']?></td>
+        <td align="center" valign="middle"><?=$v['datetime']?></td>
+        {for start='1' end='11' step='1' name='b'}
+        <td align="center" valign="middle"><img src="/lottery/images/ball_3/{$v['ball_'.$b]}.png"></td>
+        {/for}
+        <td align="center"><a href="{:url('lottery/allzhudan','qishu='.$v.qishu.'&type=北京PK拾')}">本期注单</a></td>
+        <td align="center"><a href="">国彩本期注单</a></td>
+        <td align="center"><?=$ok?></td>
+        <td align="center"><a href="?id=<?=$v['id']?>&page={$page}">编辑</a>&nbsp;<input type="checkbox" class="checkbox" id="checkbox_<?=$v['id']?>" /></td>
+        </tr>
+	<?php }?>
+	</table>
+	{$pages}
+</div>
+</body>
+</html>

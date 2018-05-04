@@ -1,0 +1,192 @@
+<?php
+namespace app\index\controller;
+use think\Validate;
+use app\index\Base;
+use app\classes\iplocation;
+use app\common\model\Type;
+use app\common\model\Notice;
+use app\common\model\Member as UserModel;
+use bong\service\auth\traits\ThrottlesLogins;
+//use bong\service\Mycaptcha;
+use bong\service\CaptchaService;
+
+class Index extends Base{
+
+    use ThrottlesLogins;
+
+    public function index() {  
+        $types  =   Type::getAll();
+        $list   =   [];
+        $list   =   array_chunk($types,8);
+        $notice =   Notice::getFirst();
+        $this->assign('list',$list);
+        $this->assign('notice',$notice) ;
+        return $this->fetch();
+    }
+    public function main(){  
+        $types = Type::getAll();
+        $this->assign('type',$types) ;
+        return $this->fetch();
+    }
+    public function login(){
+
+        if(request()->isGet()){        
+            return $this->fetch("login");   
+        }else{
+            $remember = false;
+            // 判断是否注册登陆 auth=1注册登陆
+            $auth = !empty($_POST['auth'])?$_POST['auth']:0;
+            if (!$auth){
+                //$Mycaptcha = new Mycaptcha();
+                $Mycaptcha = new CaptchaService();
+                $params = $this->request->param();
+                $rel =  $Mycaptcha->check_verify($params['code'],'login');
+                if(!$rel){
+                    return $this->error('验证码错误');
+                }
+            }
+            if($uid = $this->doLogin($this->request,$remember)){
+                $user = request()->user();
+                event('user.login',[$user]);
+                $url = config('auth.redirect.auth_ok.'.MODULE);             
+                return $this->success('成功',$url);
+            }else{
+                $url = config('auth.redirect.auth_fail.'.MODULE); 
+                return $this->error('错误',$url);    
+            }                
+        }
+    }
+    public function customer(){
+         return $this->fetch();  
+    }
+
+
+    public final function getLastKjData()
+    {
+        //$types = model('type')->allTypes();
+        $types = Type::getAll();
+        $type = input('type');
+        if(!$type){
+            echo json_encode('');return;
+        }
+        $lottery = $types[$type]??null;
+        if(!$lottery){
+            echo json_encode('');return;
+        }
+  
+        //上期开奖结果
+        //$lastNo = $this->getGameLastNo($type);
+        //$lastNo = Type::getLastGamePhase($type);
+        $lastNo = $lottery->getLastGamePhase();
+        if(!$lastNo) $this->error('查找最后开奖期号出错');
+        //格式化开奖期号
+        $lastNo['actionNo'] = $this->formatActionNo($lastNo['actionNo'],$type) ; 
+        $data = db('data')->where(array('type'=>$type, 'number'=>$lastNo['actionNo']))->field('data')->find() ;
+        if(!$data){echo json_encode('');return;}
+        $lastNo['data'] = $data['data'];
+
+        //本期期号以及倒计时
+        //$thisNo = $this->getGameNo($type);
+        //$thisNo = Type::getGamePhase($type);
+        $thisNo = $lottery->getGamePhase();
+        $lastNo['actionName'] = $lottery['title'];
+        $lastNo['thisNo']     = $thisNo['actionNo'];
+        $lastNo['diffTime']   = strtotime($thisNo['actionTime'])-$this->time;
+        //$lastNo['kjdTime']    = $this->getTypeFtime($type);
+        //$lastNo['kjdTime']    = Type::getFtime($type);
+        $lastNo['kjdTime'] = $lottery->data_ftime;
+        echo json_encode($lastNo);exit();
+    }
+
+    private  function  formatActionNo($actionNo,$type)
+    {
+       if ($actionNo && $type) {
+            if ($type == 12) {
+                //新疆时时彩处理, 期号类似这样2017-60
+                //而数据库中的期号是2017060 这样子, 所以要把期号格式化一致,方便下一步准确找到数据
+                $tmp      = explode('-',$actionNo) ;
+                $tmp[1]   = (strlen($tmp[1])==2) ? '0'.$tmp[1] : $tmp[1] ;
+                $actionNo = $tmp[0].$tmp[1] ;
+            } else {
+                //普通处理
+                $actionNo = str_replace('-','',$actionNo) ;
+            }
+       }
+       return $actionNo ;
+    }
+
+    public final function getQiHao()
+    {
+        $types = Type::getAll();
+        $type = input('type');
+        if(!$type){
+            echo json_encode('');return;
+        }
+        $lottery = $types[$type]??null;
+        if(!$lottery){
+            echo json_encode('');return;
+        }
+
+        //$thisNo=$this->getGameNo($this);
+        //$lastNo = Type::getLastGamePhase($type);
+        //$thisNo = Type::getGamePhase($type);
+        $lastNo = $lottery->getLastGamePhase();
+        $thisNo = $lottery->getGamePhase();
+        $type   = input('type','','intval') ;
+        //$thisNo = $this->getGameNo($type) ; //下一期的期号数据
+        $data   = array(
+            //'lastNo'    => $this->getGameLastNo($type),
+            //'thisNo'    => $this->getGameNo($type),
+            'lastNo'    => $lastNo,
+            'thisNo'    => $thisNo,
+            'diffTime'  => strtotime($thisNo['actionTime'])-$this->time,
+            'validTime' => $thisNo['actionTime'],
+            //'kjdTime'   => $this->getTypeFtime($type)
+            //'kjdTime'   => Type::getFtime($type)
+            'kjdTime'   => $lottery->data_ftime
+        );
+        //dump($data);
+        echo json_encode($data);
+        exit();
+        //return $data;
+    }
+
+    public final function getHistoryData()
+    {
+        $this->type=input('type','','intval');
+        $history = db('data')->where(array('type'=>$this->type))->order('number desc,time desc')->limit(10)->field('time,number,data')->select();
+        $this->assign('type',$this->type) ;
+        $this->assign('history',$history) ;
+        echo  $this->fetch('/game/inc_game_history') ; exit();
+    }
+
+    public  function register(){
+        if(IS_GET){
+            return $this->fetch();
+        }else{
+            $request = request();
+            $Mycaptcha = new CaptchaService();
+            $params = $this->request->param();
+            $rel =  $Mycaptcha->check_verify($params['code'],'register');
+            if(!$rel){
+               return $this->error('验证码错误');
+            }
+            $UserModel = new UserModel();
+            $rel =  $UserModel->register();
+            if($rel){
+                return $this->success('注册成功');
+            }else{
+                //return $this->error(validate('Member')->getError());
+                return $this->error($UserModel->getError());
+            }    
+        }
+    }
+
+    public function hashid($id=312){
+        echo hashid($id);
+    }
+    public function dehashid($id='p0aAO0'){
+        $ret = dehashid($id);
+        echo (string)$ret;
+    }    
+}

@@ -1,0 +1,113 @@
+{include file="pay:base"}
+
+<!-- page start -->
+<div class="content">
+    <div class="header">
+        <h1 class="page-title">修改操作员信息</h1>
+    </div>
+    <ul class="breadcrumb">
+        <li><a href="{:url('index')}">主页</a>  <span class="divider">/</span>
+        </li>
+        <li><a href="{:url('sys_user')}">用户管理</a>  <span class="divider">/</span>
+        </li>
+        <li class="active">修改信息</li>
+    </ul>
+    <div class="container-fluid">
+        <div class="row-fluid" style="padding-top:20px;">
+		
+			<form class="form-horizontal" onsubmit="return false;">
+			  <div class="control-group">
+				<label class="control-label"  for="sys_user">用户名</label>
+				<div class="controls">
+				  <input type="text" id="sys_user" readonly value="<?php echo $info['sys_user'];?>">
+				</div>
+			  </div>
+			  <div class="control-group">
+				<label class="control-label"  for="sys_password">用户密码</label>
+				<div class="controls">
+				  <input type="text" id="sys_password" value="<?php echo $info['sys_password'];?>">
+				</div>
+			  </div>
+			  <div class="control-group">
+				<label class="control-label"  for="r_password">确认密码</label>
+				<div class="controls">
+				  <input type="text" id="r_password" value="<?php echo $info['sys_password'];?>">
+				</div>
+			  </div>
+			  <div class="control-group">
+				<label class="control-label"  for="nick_name">用户昵称</label>
+				<div class="controls">
+				  <input type="text" id="nick_name" value="<?php echo $info['nick_name'];?>">
+				</div>
+			  </div>			  
+			  <div class="control-group">
+				<div class="controls">
+				  <input type="hidden" id="hid_id" name="hid_id" value="<?php echo $info['id'];?>" />
+				  <button id="btnSave" class="btn btn-success">提交修改</button>
+				</div>
+			  </div>
+			</form>
+			
+        </div>
+		
+		<footer>
+                <hr>
+                <p class="pull-right">
+                    <a href="javascript:;">
+                        <?php echo $appSet[ 'app_name'];?>
+                    </a>
+                </p>
+                <p>&copy;
+                    <?php echo $appSet[ 'company_year'];?>
+                    <a href="<?php echo $appSet['company_url'];?>" title="<?php echo $appSet['company'];?>" target="_blank">
+                        <?php echo $appSet[ 'company'];?>
+                    </a>
+                </p>
+            </footer>
+		
+    </div>
+</div>
+
+<script type="text/javascript">
+	$(function(){
+		$("#btnSave").click(function(){
+
+			var _sys_password = $("#sys_password").val();
+			if(_sys_password == ""){
+				alert("用户密码不能为空");
+				return;
+			}
+			
+			var r_password = $("#r_password").val();
+			if(r_password!=_sys_password){
+				alert("两次输入密码不一致");
+				return;
+			}
+			
+			var _nick_name = $("#nick_name").val();
+			if(_nick_name == ""){
+				alert("用户昵称不能为空");
+				return;
+			}
+
+			$.post("{:url('sys_edit')}?act=edit",{id:$("#hid_id").val(),sys_password:_sys_password,nick_name:_nick_name},function(obj){
+				if(obj.stat == 0){
+					alert('修改成功!');
+					window.location.href = '{:url('sys_user')}';
+				}else{
+					alert('修改失败!');
+				}
+
+			},"json");
+			
+		})
+	})
+</script>
+
+<script type="text/javascript">
+$(function(){
+	$("#legal-menu").addClass('in');
+})
+</script>
+
+{include file="pay:foot"}

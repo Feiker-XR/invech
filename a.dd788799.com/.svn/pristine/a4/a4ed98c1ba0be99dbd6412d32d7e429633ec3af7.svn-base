@@ -1,0 +1,85 @@
+{layout name="layout" /}
+
+<div class="row">
+  <div class="col-xs-12">
+    <div class="box">
+      <div class="box-header">
+		<form>
+		      <div class="has-feedback pull-right">
+		        <button type="submit" class="btn btn-block btn-default btn-sm filter">查询</button>
+		      </div>
+				
+		      <div class="pull-right" style="margin-left:15px;">
+		      	<input class="form-control input-sm search" value="{$Think.get.username}"  name="username" id="username"  placeholder="用户名" type="text"  style="width: 250px;">
+		      </div> 
+		       <div class="pull-right">
+                    <input type="text" name="endtime" value="{$Think.get.endtime}" placeholder="结束时间" class="form-control input-sm" id="datepicker2">
+               </div>  
+				<div class="pull-right" style="margin-left:20px;">
+                   <input type="text" name="starttime" value="{$Think.get.starttime}" placeholder="开始时间" class="form-control input-sm" id="datepicker1">
+                </div>
+                <div class="pull-right">
+	              
+	               
+	             	<select class="form-control input-sm" name="status" aria-hidden="true">
+	             	   <option value="" >全部状态</option>
+	             	     {foreach $status as $k=>$v}
+                   	  		<option value="{$k}" {if($Think.get.status==$k)} selected="selected"{/if}>{$v}</option>
+		            	{/foreach}
+                   	
+		         	</select>
+             	 </div>
+		 </form>
+
+      </div>
+      <!-- /.box-header -->
+      <div class="box-body table-responsive no-padding">
+        <table class="table table-hover">
+         	  	<tr>
+				  <th>#</th>
+				  <th>订单编号</th>
+				  <th>用户名</th>
+				  <th>支付方式</th>
+				  <th>订单金额</th>
+				  <th>订单时间</th>
+				  <th>订单来源</th>
+				 <th>订单状态</th>
+				</tr>
+					{foreach $list as $v}
+				 <tr>
+						  <td>{$v.id}</td>
+						  <td>{$v.orderno}</td>
+						  <td>{$v.username}</td>
+						  <td>{$v.name}</td>
+						  <td>{$v.amount}</td>
+						  <td>{$v.order_time}</td>
+						  <td>{$v.pay_name}</td>
+						  <td>
+						  		{foreach $status as $k=>$val}
+						  			{eq name="$v.status" value="$k"}{$val}{/eq}
+						  		{/foreach}
+						 </td>
+						  
+					</tr>
+					{/foreach}
+			 </table>
+        {$list->render();}
+      </div>
+      <!-- /.box-body -->
+    </div>
+    <!-- /.box -->
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){
+		var obj = {
+                autoclose: true,
+                todayHighlight: true,
+                language:"zh-CN", 
+                format:"yyyy-mm-dd" 
+           };
+	$("#datepicker1").datepicker(obj)
+	$("#datepicker2").datepicker(obj);
+});
+
+</script>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <title>ALAFEI API文档</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <link href="/doc/bootstrap.css" rel="stylesheet" media="screen">
+    <link href="/doc/style.css" rel="stylesheet">
+    <script src="/doc/jquery-2.2.3.min.js"></script>
+    <script src="/doc/jquery.form.js"></script>
+    <style>
+        p{
+            color:#000;
+        }
+        .sub_li{display: none;}
+    </style>
+    </head>
+<body>
+
+{include file="../application/api/view/document/fakeloader.html" /}
+    
+<div class="container-fluid">
+    <div class="row-fluid">
+        <div id="sidenav" class="span2">
+        <nav id="scrollingNav">
+          <ul class="sidenav nav nav-list">
+                {foreach($groups as $group)}
+                    <li class="nav-header" onclick="showSub($api.length)">
+                        <a>{$group.name}</a>
+                    </li>
+                    {foreach($group->apis as $api)}
+                        <li class="sub_li">
+                            <a onclick="apiDetails(this)" url="{:url('details', ['id' => $api.id])}" style="cursor:pointer;">{$api.name}</a>
+                        </li>                    
+                    {/foreach}
+                {/foreach}
+          </ul>
+        </nav>
+    </div>
+
+    <div id="content">
+        {$content}
+        <div id="remark">
+            {$remark}
+        </div>
+    </div>
+
+    </div>
+</div>
+
+<script>
+
+    function apiDetails(obj) {
+        $('.fakeloader').show();
+        $.get($(obj).attr('url'), {}, success, "json");
+        return false;
+        function success(data) {
+            $("#content").html(data.content);
+            $('.fakeloader').hide();
+        }
+    }
+
+    function showSub(len){
+        console.log(len);
+    }
+</script>
+
+</body>
+</html>

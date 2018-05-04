@@ -1,0 +1,143 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>管理中心</title>
+<link href="/css/base.css" rel="stylesheet" type="text/css" />
+<link href="/css/admin.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="/js/jquery.js"></script>
+<script type="text/javascript" src="/js/jquery.jplayer.js">
+<script type="text/javascript" src="/js/base.js"></script>
+<script type="text/javascript">
+$().ready(function() {
+
+	var $menuItem = $("#menu .menuItem");
+	var $previousMenuItem;
+	
+	$menuItem.click( function() {
+		var $this = $(this);
+		if ($previousMenuItem != null) {
+			$previousMenuItem.removeClass("current");
+		}
+		$previousMenuItem = $this;
+		$this.addClass("current");
+	})
+})
+
+
+function showleft(id) {
+	for(var i=1; i<=9; i++){
+		window.parent.frames['menuFrame'].document.getElementById("left_tab_"+i).style.display='none';
+	}
+	window.parent.frames['menuFrame'].document.getElementById("left_tab_"+id).style.display='';
+}
+function Logout() {
+	window.parent.location.href='{:url('index/logout')}';
+}
+</script>
+<style>
+.header .link a{
+	color:#FFF;
+	display:block;
+	line-height:16px;
+	font-size:10px;
+}
+</style>
+</head>
+<body class="header">
+	<div class="body">
+		<div class="bodyLeft">
+			<div class="logo"></div>
+		</div>
+		<div class="bodyRight">
+        <div id="hk_mp3" style="width:0px;height:0px;line-height:0;overflow:hidden;"></div>
+			<div id="menu" class="menu">
+				<ul>
+						<li class="menuItem">
+							<a href="javascript:void(0)" onClick="javascript:showleft(1);" target="menuFrame" hidefocus>
+                            <span class="icon sys"></span>
+                            系统设置
+                            </a>
+						</li>
+                        <li class="menuItem">
+							<a href="javascript:void(0)" onClick="javascript:showleft(2);" target="menuFrame" hidefocus>
+                            <span class="icon cw"></span>
+                            财务管理
+                            </a>
+						</li>
+						<li class="menuItem">
+							<a href="javascript:void(0)" onClick="javascript:showleft(3);" target="menuFrame" hidefocus>
+                            <span class="icon hy"></span>
+                            会员管理
+                            </a>
+						</li>
+						<li class="menuItem">
+							<a href="javascript:void(0)" onClick="javascript:showleft(4);" target="menuFrame" hidefocus>
+                            <span class="icon dl"></span>
+                            代理管理
+                            </a>
+						</li>
+						<li class="menuItem">
+							<a href="javascript:void(0)" onClick="javascript:showleft(5);" target="menuFrame" hidefocus>
+                            <span class="icon ty"></span>
+                            体育管理
+                            </a>
+						</li>
+						<li class="menuItem">
+							<a href="javascript:void(0)" onClick="javascript:showleft(6);" target="menuFrame" hidefocus>
+                            <span class="icon cp"></span>
+                            彩票管理
+                            </a>
+						</li>
+						<li class="menuItem">
+							<a href="javascript:void(0)" onClick="javascript:showleft(7);" target="menuFrame" hidefocus>
+                            <span class="icon zr"></span>
+                            真人管理
+                            </a>
+						</li>
+                        <li class="menuItem">
+							<a href="javascript:void(0)" onClick="javascript:showleft(8);" target="menuFrame" hidefocus>
+                            <span class="icon bb"></span>
+                            报表管理
+                            </a>
+						</li> 
+                        <li class="menuItem">
+							<a href="javascript:void(0)" onClick="javascript:showleft(9);" target="menuFrame" hidefocus>
+                            <span class="icon fs"></span>
+                            一键反水
+                            </a>
+						</li> 
+                        <!--<li class="menuItem">
+							<a href="javascript:void(0)" onClick="javascript:showleft(9);" target="menuFrame" hidefocus>数据维护</a>
+						</li>-->
+                        <!--<li class="menuItem">
+							<a href="Money/zrfs.php" target="_blank">真人分数</a>
+						</li>
+						</li>
+						    <li class="menuItem">
+							<a href="cha/cf.html" target="_blank">真人查分</a>
+						</li>
+						    <li class="menuItem">
+							<a href="http://xyglw2.na23456.com/creditadmin/index_pc" target="_blank">VIP查分</a>-->
+						</li>
+                        <li class="menuItem">
+							<a href="javascript:void(0)" onClick="javascript:Logout();" target="menuFrame" hidefocus>
+                            <span class="icon tc"></span>
+                            退出登录
+                            </a>
+						</li>
+	            </ul>
+                
+			</div>
+		</div>
+
+	</div>
+    <div class="link" id="m_xx" style="color:#F00;  width:100px;">
+    <a href="/Money/TiKuan.php" target="mainFrame" onclick="$('#hk_mp3').remove();" >提款（0）条</a>
+    <a href="/Money/HuiKuan.php" target="mainFrame" onclick="$('#hk_mp3').remove();" >汇款（0）条</a>
+    <a href="/Agent/reg.php" target="mainFrame">代理（0）条</a>
+    <a href="/Sports/Chuan_Js.php" target="mainFrame">串关（0）条</a></div>
+    <a href="/Sports/Chuan_Js.php" target="mainFrame">在线（0）人</a></div>
+<script type="text/javascript" language="javascript" src="/js/systop.js"></script>
+</body>
+</html>

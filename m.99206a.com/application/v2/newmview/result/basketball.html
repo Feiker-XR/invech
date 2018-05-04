@@ -1,0 +1,156 @@
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>皇冠娱乐城</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/css/footable.core.min.css">
+  <link href="../css/jquery_dialog.css" rel="stylesheet" type="text/css" />
+  <link rel="stylesheet" type="text/css" href="/fonts-new/iconfont.css">
+  <link rel="stylesheet" href="/styles/ucenter.css">
+<link rel="stylesheet" href="/styles/ezweb.css">
+  <style type="text/css">
+  .panel-body{padding: 5px;}
+    body table{font-size:12px;}
+</style>
+</head>
+<body>
+<!--头部-->
+<div class="nav500">
+  <div class="nav500_logo">
+    <a href='/'><img src="/img/logo.png"/></a>
+  </div>
+  <div class="nav500_right_had">
+    <a href="javascript:void(0)" class="cl_fff f14 blue_focus" onclick="javascript:history.back(-1);">
+      <img src="/img/narrow-leftwap2.png"></a>
+  </div>
+</div>
+
+<!--底部-->
+<div class="nav500_bottom" style="z-index: 10000;">
+  <span>
+      <a href='/' class="nav500_bottom_a nav500_bottom_active" target="_self">
+          <i class="iconfont icon-zhuye"></i>首页
+      </a>
+  </span>
+  <span>
+      <a class="nav500_bottom_a" href="/promotions/index.html"  target="_self">
+          <i class="iconfont icon-zhuanxianglibao" style="font-size: 25px;"></i>优惠
+      </a>
+  </span>
+  <span>
+      <a href="/pay/member.html" class="nav500_bottom_a"  target="_self">
+          <i class="iconfont icon-tubiao207"></i>存款
+      </a>
+  </span>
+  <span>
+      <a href="https://messenger.providesupport.com/messenger/0nye75kga3q931e9lwrn16k4q0.html" class="nav500_bottom_a" target="_self">
+          <i class="iconfont icon-kefu"></i>客服
+      </a>
+  </span>
+  <span>
+      <a href="/user/index.html" class="nav500_bottom_a">
+          <i class="iconfont icon-iconfontcolor19-copy"></i>个人
+      </a>
+  </span>
+</div>
+<input type="button" value="< 返回" class="ft_danshi_default ft_danshi_contain_yellow" onclick="history.back();" style="margin-top:60px;"><div class="h10"></div>
+<div class="panel panel-default" style="margin-bottom:60px;">
+  <div class="panel-heading">
+    <h3 class="panel-title">篮球结果 ></h3>
+  </div>
+  <div class="panel-body">
+    <ul class="pagination">
+    <?php  for($i=0;$i<7;$i++){
+              $d  = date('Y-m-d',time()-$i*86400);
+              $dd = date('m-d',time()-$i*86400);
+             if($d==$date ){ ?>
+                <li class="active"><a href="#"><?=$dd?></a></li>
+        <?php }else{ ?>
+                <li><a href="?ymd=<?=$d?>"><?=$dd?></a></li>
+     
+             
+        <?php }} ?></ul>
+
+      <table class="table table-bordered table-hover">
+      <thead><tr class="success">
+  <th data-toggle="true">赛程<br>点击每行展开</th>
+    <th>开赛时间<br>主场/客场</th>
+    <th data-hide="phone,tablet">1</th>
+    <th data-hide="phone,tablet">2</th>
+    <th data-hide="phone,tablet">3</th>
+    <th data-hide="phone,tablet">4</th>
+    <th data-hide="phone,tablet">上半</th>
+    <th data-hide="phone,tablet">下半</th>
+    <th data-hide="phone,tablet">加时</th>
+    <th data-hide="phone,tablet">全场</th>
+  </tr></thead><tbody>
+
+      {if empty($rows)}
+      <tr><td height='100' colspan='4' align='center' bgcolor='#FFFFFF'>暂无任何赛果</td></tr>
+      {/if}
+
+      {foreach $rows as $row}
+      <tr>
+        <td><strong>{$row.match_name}</strong></td>
+        <td><span class="red">{$row.Match_Date} {$row.Match_Time}</span><br><span class="zhu">{$row.match_master}</span>-<span class="ke">{$row.match_guest}</span></td>
+        <td>{if ($row.MB_Inball_1st<0)}
+          <span class="zhu">无效</span>-<span class="ke">无效</span>
+        {else /}
+          <span class="zhu">{$row.MB_Inball_1st}</span>-<span class="ke">{$row.TG_Inball_1st}</span>
+        {/if}</td>
+        <td>{if ($row.MB_Inball_2st<0)}
+          <span class="zhu">无效</span>-<span class="ke">无效</span>
+        {else /}
+          <span class="zhu">{$row.MB_Inball_2st}</span>-<span class="ke">{$row.TG_Inball_2st}</span>
+        {/if}</td>
+        <td>{if ($row.MB_Inball_3st<0)}
+          <span class="zhu">无效</span>-<span class="ke">无效</span>
+        {else /}
+          <span class="zhu">{$row.MB_Inball_3st}</span>-<span class="ke">{$row.TG_Inball_3st}</span>
+        {/if}</td>
+        <td>{if ($row.MB_Inball_4st<0)}
+          <span class="zhu">无效</span>-<span class="ke">无效</span>
+        {else /}
+          <span class="zhu">{$row.MB_Inball_4st}</span>-<span class="ke">{$row.TG_Inball_4st}</span>
+        {/if}</td>
+        <td>{if ($row.MB_Inball_HR<0)}
+          <span class="zhu">无效</span>-<span class="ke">无效</span>
+        {else /}
+          <span class="zhu">{$row.MB_Inball_HR}</span>-<span class="ke">{$row.TG_Inball_HR}</span>
+        {/if}</td>
+        <td>{if ($row.MB_Inball_ER<0)}
+          <span class="zhu">无效</span>-<span class="ke">无效</span>
+        {else /}
+          <span class="zhu">{$row.MB_Inball_ER}</span>-<span class="ke">{$row.TG_Inball_ER}</span>
+        {/if}</td>
+        <td>{if ($row.MB_Inball_Add<0)}
+          <span class="zhu">无效</span>-<span class="ke">无效</span>
+        {else /}
+          <span class="zhu">{$row.MB_Inball_Add}</span>-<span class="ke">{$row.MB_Inball_Add}</span>
+        {/if}</td>
+        <td>{if ($row.MB_Inball<0)}
+          <span class="zhu">无效</span>-<span class="ke">无效</span>
+        {else /}
+          <span class="zhu">{$row.MB_Inball}</span>-<span class="ke">{$row.TG_Inball}
+        {/if}</span></td>
+      </tr>
+      {/foreach}          
+
+      </tbody>
+    </table>
+  </div>
+</div>
+    <script src="/assets/jquery.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/footable.min.js"></script>
+    <script language="javascript" src="/js/mouse.js"></script>
+    <script language="javascript" src="/js/ifsports.js"></script>
+    <script type="text/javascript">
+    $(function (){
+        $('.table').footable();
+    });
+    </script>
+</body>
+</html>

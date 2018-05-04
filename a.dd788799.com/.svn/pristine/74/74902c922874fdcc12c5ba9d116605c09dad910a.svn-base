@@ -1,0 +1,102 @@
+<input type="hidden" name="playedGroup" value="<?=$groupId?>"/>
+<input type="hidden" name="playedId" value="<?=$playedId?>"/>
+<input type="hidden" name="type" value="<?=$type?>"/>
+<input type="hidden" name="playedName" value="<?=$played['name']?>"/>
+<!-- mobile 时时彩_快钱_组选3 -->
+<div class="fl main-left">
+    <div class="hd clearfix">
+        <div class="fr">
+            <div class="T-tab clearfix f-tab">
+                <a href="javascript:void(0)" onclick="changeTab(this)">前三组选三</a>
+                <a href="javascript:void(0)" onclick="changeTab(this)">中三组选三</a>
+                <a href="javascript:void(0)" onclick="changeTab(this)">后三组选三</a>
+            </div>
+        </div>
+    </div>
+    <div class="table-common">
+    </div>
+    <br/>
+    <div class="hd clearfix rehd tzgz" id="toptouzhu">
+        <div class="fl refl xzje">
+            下注金额：<input type="text" class="txt" id="inputMoney">
+        </div>
+        <div class="kjanniu">
+            <a href="javascript:void(0)" class="img-50" data-num="50"></a>
+            <a href="javascript:void(0)" class="img-100" data-num="100"></a>
+            <a href="javascript:void(0)" class="img-500" data-num="500"></a>
+            <a href="javascript:void(0)" class="img-1000" data-num="1000"></a>
+            <a href="javascript:void(0)" class="img-5000" data-num="5000"></a>
+            <a href="javascript:void(0)" class="img-10000" data-num="10000"></a>
+        </div>
+    </div>
+</div>
+<script type="text/html" id="ssc_kq_z3">
+    <table width="100%" border="0" cellspacing="0" cellpadding="0" class="pp f-table" action="ssc_kq_z3" min-len="5">
+        <thead>
+        <tr>
+            <th colspan="10"><strong>后三组选三@<font id="pl" class="pl red"></font></strong> (请选择5个及以上号码)</th>
+        </tr>
+        <tr>
+            <th>号码</th>
+            <th>选择</th>
+            <th>号码</th>
+            <th>选择</th>
+            <th>号码</th>
+            <th>选择</th>
+            <th>号码</th>
+            <th>选择</th>
+            <th>号码</th>
+            <th>选择</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr>
+            <td><strong class="pl">0</strong></td>
+            <td><input type="checkbox" value="0"></td>
+            <td><strong class="pl">1</strong></td>
+            <td><input type="checkbox" value="1"></td>
+            <td><strong class="pl">2</strong></td>
+            <td><input type="checkbox" value="2"></td>
+            <td><strong class="pl">3</strong></td>
+            <td><input type="checkbox" value="3"></td>
+            <td><strong class="pl">4</strong></td>
+            <td><input type="checkbox" value="4"></td>
+        </tr>
+        <tr>
+            <td><strong class="pl">5</strong></td>
+            <td><input type="checkbox" value="5"></td>
+            <td><strong class="pl">6</strong></td>
+            <td><input type="checkbox" value="6"></td>
+            <td><strong class="pl">7</strong></td>
+            <td><input type="checkbox" value="7"></td>
+            <td><strong class="pl">8</strong></td>
+            <td><input type="checkbox" value="8"></td>
+            <td><strong class="pl">9</strong></td>
+            <td><input type="checkbox" value="9"></td>
+        </tr>
+        </tbody>
+    </table>
+</script>
+<script>
+    //var pls;//玩法的所有赔率
+    //var plg;//当前赔率组
+    function changeTab(self) {
+        $(self).siblings().removeClass('active');
+        $(self).addClass('active');
+        var $tabs = $(self).parent().children();
+        var index = $tabs.index(self);
+        plg = pls[index];
+        var html = template("ssc_kq_z3", {plg: plg});
+        $('.table-common').html(html);
+        $('.pp :checkbox').live('click', gameMsgAutoTip);
+    }
+    $(function () {
+        var playedId = "<?=$playedId?>";
+        $.getJSON("/game/pl/playedId/" + playedId, function (data) {
+            console.log(data);
+            pls = data;
+            $('.T-tab.clearfix').children().eq(0).click();
+        });
+    });
+</script>    

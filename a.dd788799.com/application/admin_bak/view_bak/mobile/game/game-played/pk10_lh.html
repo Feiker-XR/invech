@@ -1,0 +1,18 @@
+<input type="hidden" name="playedGroup" value="<?=$groupId?>" />
+<input type="hidden" name="playedId" value="<?=$playedId?>" />
+<input type="hidden" name="type" value="<?=$type?>" />
+
+<div class="pp" action="tzAllSelect" length="1" random="sscRandom">
+    <div class="title"><?=$wfName?></div>
+	<input type="button" value="龙" class="code" />
+	<input type="button" value="虎" class="code" />
+
+</div>
+<?php
+	//$maxPl=$getPl($type, $playedId);
+?>
+<script type="text/javascript">
+$(function(){
+	gameSetPl(<?=json_encode($maxPl)?>,false,<?=$user['fanDianBdw']?>);
+})
+</script>

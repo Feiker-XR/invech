@@ -1,0 +1,95 @@
+<?php
+namespace app\common\model;
+use think\Db;
+use think\Model;
+
+use app\common\traits\model\UserFlow;
+use app\common\model\report\DailyMakerTrait;
+//use app\common\model\attach\MoneyRecordTrait;
+
+use app\common\model\report\CommonForFlowTrait;
+use app\common\model\report\DailyAndMonthForFlowTrait;
+//use app\common\model\report\GlobalUserFromFlowTrait;
+//use app\common\model\report\GlobalAgentFromFlowTrait;
+use app\common\model\report\GlobalFromFlowTrait;
+
+class Order extends Base{
+
+    protected $table = 'gygy_orders';
+    protected $createTime = 'created_at';
+    protected $updateTime = 'updated_at';
+    protected $autoWriteTimestamp = 'datetime';
+    protected $auto = ['status'=>0,];
+
+    use UserFlow;
+    
+    use DailyMakerTrait;
+    use CommonForFlowTrait,DailyAndMonthForFlowTrait;
+    use /*GlobalUserFromFlowTrait,GlobalAgentFromFlowTrait,*/GlobalFromFlowTrait;
+
+    public function money()
+    {
+        return $this->morphMany('Money',['type','item_id'],'recharge');
+        // db('money')->where('item_id' => $this->id , 'type'    => 第三参数??$this->modelName);
+    }
+
+    public function user()
+    {
+        return $this->belongsTo('Member','uid','uid');
+    }
+
+    public function way(){
+
+        return $this->belongsTo('PayWay','local_code','code');
+    }
+
+    public static function getQlist($request){
+        $params =   $request->param();
+        $query  =   self::field('id,orderno,out_trade_no,amount,created_at,status,local_code')->order('id desc');
+        if(isset($params['status']) && is_numeric($params['status'])){
+             $query->where('status', $params['status']);
+        }
+       
+        if($params['startTime']??''){  
+            $query->where('created_at', '>=', $params['startTime']);          
+        }
+        if($params['endTime']??''){
+            $query->where('created_at', '<=', $params['endTime']);   
+        }
+       // $query->where('uid',$request->user()->id);
+        $data   =   [];
+        $options = $query->getOptions();
+        $CountAmount    =   $query->sum('amount');
+        $data['list']   =   $query->options($options)->paginate();
+        $data['CountAmount']    =  $CountAmount?$CountAmount:0;
+        $PageAmount = 0;
+        foreach ($data['list'] as $v){
+            $PageAmount = bcadd($PageAmount,$v->amount,2);
+        }
+        $data['PageAmount']     =  $PageAmount;
+        return $data;
+    }
+
+    //后台查询
+    public static function attachToSelfRequest(&$query,$params=[]){
+
+        $params = request()->param();
+
+        $status = $params['status']??'';
+        if(is_numeric($status)){
+            $query->where('x.status', $status);
+        }
+
+        if($params['local_code']??''){
+           $query->where('x.local_code', $params['local_code']);
+        }
+    }
+
+    //----api----
+    protected $append = ['way_name','username',];
+    protected $visible = ['id','out_trade_no','amount','created_at',/*'pay_name','local_code'*/];
+    //protected $hidden = ['way','user'];
+    public function getWayNameAttr($value,$data){
+        return $this->way->getAttr('name');
+    } 
+}

@@ -1,0 +1,78 @@
+.noUiSlider {
+	display: block; cursor: default; box-sizing: border-box; -ms-user-select: none; -webkit-box-sizing: border-box; -moz-box-sizing: border-box; -webkit-user-select: none; -moz-user-select: none;
+}
+.noUiSlider * {
+	display: block; cursor: default; box-sizing: border-box; -ms-user-select: none; -webkit-box-sizing: border-box; -moz-box-sizing: border-box; -webkit-user-select: none; -moz-user-select: none;
+}
+.noUiSlider {
+	position: relative;
+}
+.noUiSlider a {
+	position: absolute; z-index: 1;
+}
+.noUiSlider a:nth-child(2) {
+	background: inherit !important;
+}
+.vertical.noUiSlider a {
+	width: 100%; bottom: 0px;
+}
+.horizontal.noUiSlider a {
+	height: 100%; right: 0px;
+}
+@media screen and (-ms-high-contrast:active), all and (-ms-high-contrast:none)
+{
+.noUiSlider::before {
+	-ms-touch-action: none;
+}
+body.TOUCH {
+	-ms-touch-action: none;
+}
+.noUiSlider div {
+	-ms-touch-action: none;
+}
+.noUiSlider::before {
+	left: -25%; top: -150%; width: 150%; height: 400%; display: block; position: absolute; z-index: -1; content: "";
+}
+.vertical.noUiSlider::before {
+	left: -150%; top: -25%; width: 400%; height: 150%;
+}
+}
+.noUiSlider {
+	border-radius: 3px; border: 1px solid rgb(144, 141, 132); border-image: none;
+}
+.connect.noUiSlider a {
+	background: rgb(178, 169, 143);
+}
+.lower.connect.noUiSlider {
+	background: rgb(178, 169, 143);
+}
+.noUiSlider {
+	background: rgb(217, 215, 203); box-shadow: inset 0px 1px 7px #b6b4a8;
+}
+.lower.connect.noUiSlider a {
+	background: rgb(217, 215, 203); box-shadow: inset 0px 1px 7px #b6b4a8;
+}
+.disabled.noUiSlider {
+	background: rgb(204, 204, 204); box-shadow: none;
+}
+.lower.connect.disabled.noUiSlider a {
+	background: rgb(204, 204, 204); box-shadow: none;
+}
+.noUiSlider div {
+	background: linear-gradient(#fe9732, #f35a31); border-radius: 3px; border: 1px solid rgb(153, 150, 143); border-image: none; width: 18px; height: 18px;
+}
+.disabled.noUiSlider div {
+	background: none;
+}
+.horizontal.noUiSlider {
+	width: 100%; height: 10px;
+}
+.horizontal.noUiSlider div {
+	margin: -5px 0px 0px -9px;
+}
+.vertical.noUiSlider {
+	width: 10px; height: 300px;
+}
+.vertical.noUiSlider div {
+	margin: -9px 0px 0px -5px;
+}

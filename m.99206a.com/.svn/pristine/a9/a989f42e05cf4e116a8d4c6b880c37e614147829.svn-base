@@ -1,0 +1,730 @@
+<?php if (!defined('THINK_PATH')) exit(); /*a:3:{s:83:"/mnt/wwwroot/www.dd788799.com/mobile/../application/index/mview/user/report_ds.html";i:1513608612;s:84:"/mnt/wwwroot/www.dd788799.com/mobile/../application/index/mview/common/user-nav.html";i:1505452692;s:82:"/mnt/wwwroot/www.dd788799.com/mobile/../application/index/mview/common/header.html";i:1505452692;}*/ ?>
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>万丰国际</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+	<link rel="stylesheet" href="/css/bootstrap.min.css">
+	<link rel="stylesheet" href="/css/font-awesome.min.css">
+	<link rel="stylesheet" href="/styles/ucenter.css">
+	<link rel="stylesheet" type="text/css" href="/fonts-new/iconfont.css">	
+	<link rel="stylesheet" href="/styles/ezweb.css">
+	<link rel="stylesheet" href="/css/500f_new_wap.css">		
+	<script src="/assets/jquery.js"></script>
+	<script src="/js/bootstrap.min.js"></script>
+</head> 
+<script language="javascript">
+if(self==top){
+	//top.location='/index.php';
+}
+</script>
+<body>
+
+		<?php if(Session('uid')!= '' && Session('username') != '') {?>
+	<!--登陆后-->
+		<!--底部nav固定-->
+		<div class="nav500_bottom">
+			<span>
+				<a href="/index.php" class="nav500_bottom_a ">
+					<i class="iconfont icon-zhuye"></i>首页
+				</a>
+			</span>
+			<span>
+				<a target="mem_index" class="nav500_bottom_a" href="/promotions/index.html">
+					<i class="iconfont icon-zhuanxianglibao" style="font-size: 25px;"></i>优惠
+				</a>
+			</span>
+			<span>
+				<a target="mem_index" href="/index.php/pay/index.html" class="nav500_bottom_a">
+					<i class="iconfont icon-tubiao207"></i>存款
+				</a>
+			</span>
+			<span>
+				<a href="http://messenger.providesupport.com/messenger/1x5b67gp1rcy50kqxa0qpsa0jx.html" class="nav500_bottom_a" target="_blank">
+					<i class="iconfont icon-kefu"></i>客服
+				</a>
+			</span>
+			<span>
+				<a target="mem_index" href="<?php echo Url('user/index'); ?>" class="nav500_bottom_a nav500_bottom_active">
+					<!--<a href="<?php echo Url('user/index'); ?>" class="nav500_bottom_a">-->
+					<i class="iconfont icon-iconfontcolor19-copy"></i>个人
+				</a>
+			</span>
+		</div>
+		<!--<script src="http://static.ydbimg.com/API/YdbOnline.js"></script>-->
+		<script>
+//		var YDB = new YDBOBJ();
+		$(function(){
+			//点击底部固定导航条切换
+			$(".nav500_bottom_a").click(function(){
+				var navThis = $(this);
+				navThis.css("color","#d9901e")
+				navThis.parent().siblings("span").find("a").css("color","#999999")
+				navThis.find("i").addClass("nav500_b_active");
+				navThis.parent().siblings("span").find("i").removeClass("nav500_b_active");
+				navThis.addClass("nav500_bottom_active").parent().siblings("span").find("a").removeClass("nav500_bottom_active")
+			});
+			$("#nav500_bottom_reg").click(function(){
+				$("#zc_img").trigger("click")
+			})
+			
+			$("#reg_user_show").click(function(){
+				$(".login-modal").hide();
+				$(".reg-modal").show();
+				$("#zc_img").trigger("click")
+			})
+			
+
+			$("#nav500_bottom_a").click(function(){
+				var x = $("#J_loginModal")
+				x.show();
+				getKey()
+			})
+			$("#nav500_bottom_reg").click(function(){
+				var y = $("#J_regModal")
+				y.show();
+				getKey()
+			})	
+			$("#J_loginModal .close").click(function(){
+				$("#J_loginModal").hide()
+			})
+			$("#J_regModal .close").click(function(){
+				$("#J_regModal").hide()
+			})
+			$("#reg_user_show").click(function(){
+				$(".login-modal").hide();
+				$(".reg-modal").show();
+				$("#zc_img").trigger("click")
+			})
+		})
+		
+		</script>	
+
+	<?php }else{?>
+	<!--登陆前-->
+		<!--底部nav固定-->
+		<div class="nav500_bottom">
+			<span>
+				<a href="/index.php" class="nav500_bottom_a nav500_bottom_active">
+					<i class="iconfont icon-zhuye"></i>首页
+				</a>
+			</span>
+			<span>
+				<a target="mem_index" href="<?php echo Url('promotions/index'); ?>" class="nav500_bottom_a">
+					<i class="iconfont icon-zhuanxianglibao" style="font-size: 25px;"></i>优惠
+				</a>
+			</span>
+			<span>
+				<a target="mem_index" href="/index.php/pay/index.html" class="nav500_bottom_a">
+					<i class="iconfont icon-tubiao207"></i>存款
+				</a>
+			</span>
+			<span>
+				<a href="http://messenger.providesupport.com/messenger/1x5b67gp1rcy50kqxa0qpsa0jx.html" class="nav500_bottom_a" target="_blank">
+					<i class="iconfont icon-kefu"></i>客服
+				</a>
+			</span>
+			<span>
+				<a href="#" class="nav500_bottom_a" data-modal="#J_loginModal" id="nav500_bottom_a">
+					<i class="iconfont icon-iconfontcolor19-copy"></i>登录
+				</a>
+			</span>
+		</div>
+		
+		
+		<div id="J_loginModal" class="login-modal modal">
+			<div class="inner">
+				<div class="close" data-target="#J_loginModal"><i class="fa fa-close"></i></div>
+				<div class="wap_login_bg">
+					<img src="/img/logo.png" data-src="/img/logo.png">
+				</div>
+				
+				<form class="form-vertical" action="/index.php/index/login.html" method="post">
+				<input type="hidden" name="action" value="login">
+				<div class="form-group field-loginuser-username required">
+					<!--<label class="control-label" for="loginuser-username">用户名</label>-->
+					<div class="input-group">
+						<span class="wap_login_1">
+							<i><img src="/img/500f_login_2.png"></i>
+						</span>
+						<input type="text" id="username" class="form-control" name="username" placeholder="请输入会员账号">
+					</div>
+					<div class="help-block"></div>
+				</div>
+	
+				<div class="form-group field-loginuser-password required">
+				<!--<label class="control-label" for="loginuser-password">密码</label>-->
+				<div class="input-group">
+					<span class="wap_login_1">
+						<i><img src="/img/500f_login_3.png"></i>
+					</span>
+					<input type="password" id="password" class="form-control" name="password" placeholder="******">
+				</div>
+				<div class="help-block"></div>
+				</div>
+				<div class="form-group field-loginuser-username required">
+					<!--<label class="control-label" for="loginuser-username">验证码</label>-->
+					<?php if($sysConfig['loginYzm'] == '1'){ ?>
+					<div class="input-group">
+						<span class="wap_login_1">
+							<i><img src="/img/500f_login_4.png"></i>
+						</span>
+						
+						
+							<div class="row">
+								<div class="col-xs-9">
+									<input type="text" id="vlcodes" class="form-control" name="dlyzm" placeholder="验证码" >
+								</div>
+								<div class="col-xs-3">
+									<img id="vPic" alt="(点选此处产生新验证码 )" title="( 点选此处产生新验证码 )" src="<?php echo url('Mycaptcha/mobile_login'); ?>" onclick="this.src='<?php echo url('Mycaptcha/mobile_login'); ?>?r='+Math.random()" height="34">
+								</div>
+							</div>
+					
+							
+					</div>
+					<?php } ?>
+					<div class="help-block"></div>
+				</div>				
+				
+				<div class="form-group wap_500_login_now">
+	            	<button type="submit" class="btn btn-green btn-lg btn-block" name="login-button">立即登录</button>
+	            </div>
+	            <div class="wap_500_forget_psw">
+					<a href="javascript:void(0)" onclick="javascript:Go_forget_pwd();">忘记密码？</a>
+					<!--<input type="checkbox"> 下次自动登录-->
+				</div>
+				</form>
+			</div>
+		</div>		
+		
+		<div id="J_regModal" class="reg-modal modal">
+				<div class="inner container container_500F" style="padding-bottom:100px;padding: 0px 8px;">
+					<div class="close" data-target="#J_regModal">×</div>
+					<h1 class="container_500F_h1">————— 注册 —————</h1>
+					<p class="container_500F_p">——— REGISTER ———</p>
+					<form action="" id="register_form" class="form-horizontal">
+						<h2 class="register_form_bg_1">
+							会员登陆信息
+						</h2>
+						<div class="form-group">
+							<label for="" class="col-sm-2 control-label">登录账号：</label>
+							<div class="control-label-1">
+								<input type="text" name="zcname" id="zcusername" maxlength="9" class="form-control">
+							</div>
+							<div class="control-label-2">
+								<strong>*</strong>
+								<span>您在网站的登录账户，5-9个英文数字</span>
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="" class="col-sm-2 control-label">登录密码：</label>
+							<div class="control-label-1">
+								<input type="password" name="zcpwd1" id="zcpwd1" maxlength="12" onblur="pwStrength(this.value,0);" class="form-control">
+							</div>
+							<div class="control-label-2">
+								<strong>*</strong>
+								<span>由6-12位任意字符组成</span>
+							</div>
+						</div>
+						<div class="form-group password-degree">
+							<label for="" class="col-sm-2 control-label">密码强度：</label>
+							<div class="control-label-1 mb10">
+								<div class="btn-group">
+								  <button id="strength_L0" type="button" class="btn btn-default">弱</button>
+								   <button id="strength_M0" type="button" class="btn btn-default">中</button>
+								   <button id="strength_H0" type="button" class="btn btn-default">强</button>
+								</div>
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="" class="col-sm-2 control-label">确认密码：</label>
+							<div class="control-label-1">
+								<input type="password" name="zcpwd2" id="zcpwd2" maxlength="12" class="form-control">
+							</div>
+							<div class="control-label-2">
+								<strong>*</strong>
+								<span>由6-12位任意字符组成</span>
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="" class="col-sm-2 control-label">使用货币：</label>
+							<div class="control-label-1">
+								<select name="currency" class="form-control"><option value="1">RMB</option></select>
+							</div>
+							<div class="control-label-2">
+								<strong>*</strong>
+								<span>由6-12位任意字符组成</span>
+							</div>
+						</div>
+						<h2 class="register_form_bg_2">会员个人信息</h2>
+						<div class="form-group">
+							<label for="" class="col-sm-2 control-label">真实姓名：</label>
+							<div class="control-label-1">
+								<input type="text" name="zcturename" id="zcturename" class="form-control"></div>
+							<div class="control-label-2">
+								<strong>*</strong>
+								<span>名字必须与您用于提款及存款的银行户口所用名字相同</span>
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="" class="col-sm-2 control-label">提款密码：</label>
+							<div class="control-label-1">
+								<input type="password" name="qkpwd1" id="qkpwd1" maxlength="12" onblur="pwStrength(this.value,1);" class="form-control">
+							</div>
+							<div class="control-label-2">
+								<strong>*</strong>
+								<span>由6-12位任意字符组成</span>
+							</div>
+						</div>
+						<div class="form-group password-degree">
+							<label for="" class="col-sm-2 control-label">密码强度：</label>
+							<div class="control-label-1 mb10">
+								<div class="btn-group">
+								    <button id="strength_L1" type="button" class="btn btn-default">弱</button>
+								    <button id="strength_M1" type="button" class="btn btn-default">中</button>
+								    <button id="strength_H1" type="button" class="btn btn-default">强</button>
+								</div>
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="" class="col-sm-2 control-label">确认密码：</label>
+							<div class="control-label-1">
+								<input type="password" name="qkpwd2" id="qkpwd2" maxlength="12" class="form-control">
+							</div>
+							<div class="control-label-2">
+								<strong>*</strong>
+								<span>由6-20位任意字符组成</span>
+							</div>
+						</div>
+						<h2 class="register_form_bg_3">会员密保信息</h2>
+						<div class="form-group">
+							<label for="" class="col-sm-2 control-label">密保问题：</label>
+							<div class="control-label-1">
+								<select name="zcquestion" id="zcquestion" class="form-control">
+									<option value="您的车牌号码是多少？">您的车牌号码是多少？</option>
+			                        <option value="您初中同桌的名字？">您初中同桌的名字？</option>
+			                        <option value="您就读的第一所学校的名称？">您就读的第一所学校的名称？</option>
+			                        <option value="您第一次亲吻的对象是谁？">您第一次亲吻的对象是谁？</option>
+			                        <option value="少年时代心目中的英雄是谁？">少年时代心目中的英雄是谁？</option>
+			                        <option value="您最喜欢的休闲运动是什么？">您最喜欢的休闲运动是什么？</option>
+			                        <option value="您最喜欢哪支运动队？">您最喜欢哪支运动队？</option>
+			                        <option value="您最喜欢的运动员是谁？">您最喜欢的运动员是谁？</option>
+			                        <option value="您的第一辆车是什么牌子？">您的第一辆车是什么牌子？</option>
+								</select>
+							</div>
+							<div class="control-label-2">
+								<strong>*</strong>
+								<span>请选择密保问题</span>
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="" class="col-sm-2 control-label">密保答案：</label>
+							<div class="control-label-1">
+								<input type="text" name="zcanswer" id="zcanswer" class="form-control">
+							</div>
+							<div class="control-label-2">
+								<strong>*</strong>
+								<span>请填写您的密保答案</span>
+							</div>
+						</div>
+						<div class="form-group captcha-row">
+							<label for="" class="col-sm-2 control-label">验 证 码 ：</label>
+							
+
+							<div class="control-label-1 control-label-a">
+								<div class="input-group">
+								<input type="text" name="zcyzm" id="zcyzm" class="form-control" style="height:36px;" maxlength="4">
+								<span class="input-group-addon" style="width:30%;padding: 0;">
+								<img src="<?php echo url('Mycaptcha/mobile_reg'); ?>" onclick="this.src='<?php echo url('Mycaptcha/mobile_reg'); ?>?r='+Math.random()" alt="点击刷新" name="zc_img" id="zc_img" style="cursor:pointer;" width="80" height="30">
+								</span>
+								</div>
+							</div>
+
+							
+							<!--<div class="control-label-2">
+							<strong>*</strong><span>请填写验证码</span>
+							</div>-->
+						</div>			
+			
+						<div class="form-group">
+							<label class="col-sm-4 col-sm-offset-2 mt20">
+							<input type="checkbox" name="zccheck" id="zccheck" value="1"> 我已届满合法博彩年龄﹐且同意各项开户条约。<a href="#" id="AGREEMENT" class="red">"开户协议"</a>
+							</label>
+						</div>
+						<div class="form-group form-action">
+							<div class="mt20 mb20">
+								<button id="register">提交开户</button>
+							</div>
+						</div>
+						<div class="h10"></div>
+					</form>
+				</div>
+			</div>		
+		
+		
+		
+		<script>
+		$(function(){
+			//点击底部固定导航条切换
+			$(".nav500_bottom_a").click(function(){
+				var navThis = $(this);
+				navThis.css("color","#d9901e")
+				navThis.parent().siblings("span").find("a").css("color","#999999")
+				navThis.find("i").addClass("nav500_b_active");
+				navThis.parent().siblings("span").find("i").removeClass("nav500_b_active");
+				navThis.addClass("nav500_bottom_active").parent().siblings("span").find("a").removeClass("nav500_bottom_active")
+				
+			});
+			
+			$("#nav500_bottom_reg").click(function(){
+				$("#zc_img").trigger("click")
+			})
+			
+			$("#reg_user_show").click(function(){
+				$(".login-modal").hide();
+				$(".reg-modal").show();
+				$("#zc_img").trigger("click")
+			})
+			
+			
+			$("#nav500_bottom_a").click(function(){
+				var x = $("#J_loginModal")
+				x.show();
+				getKey()
+				$("#vPic").trigger("click")
+			})
+			$("#nav500_bottom_reg").click(function(){
+				var y = $("#J_regModal")
+				y.show();
+				getKey()
+			})	
+			$("#J_loginModal .close").click(function(){
+				$("#J_loginModal").hide()
+			})
+			$("#J_regModal .close").click(function(){
+				$("#J_regModal").hide()
+			})
+			$("#reg_user_show").click(function(){
+				$(".login-modal").hide();
+				$(".reg-modal").show();
+				$("#zc_img").trigger("click")
+			})				
+			
+			
+		})
+		
+		</script>
+
+	<?php }if(Session('uid') && Session('username')){?>
+	<!--登陆后-->
+		<!--顶部固定nav-->
+		<div class="nav500">
+			<div class="nav500_logo">
+				<a href="/index.php"><img src="/img/logo.png"/></a>
+			</div>
+			<!--<div class="nav500_left">
+				<i class="iconfont icon-caidan"></i>
+				<a href="/cunkuan.php" class="cl_fff f14 blue_focus">￥:<span id="user_money"><?=Session('money')?></span></a>
+			</div>-->
+			<div class="nav500_right_had">
+				<a href="javascript:void(0)" class="cl_fff f14 blue_focus" onclick="javascript:history.back(-1);"><img src="/img/narrow-leftwap2.png"></a>
+			</div>
+		</div>
+		<script language="javascript">	
+			function refresh_money(){
+			$.ajax({
+			    cache: false,
+			    url: "/index/home.html",
+				method:'post',
+				data:{ajax:1,get_money:1},
+			    success:function(data){
+			        if(data==""){
+			        }else{
+			         $data_arr=data.split("||");
+					 $("#user_money").html($data_arr[0]);
+					 // $("#user_jifen").html($data_arr[1]);
+			        }
+			    }
+			}); 
+			window.setTimeout("refresh_money();", 5000); 
+			}
+			refresh_money();
+		</script>
+
+	<?php }else{?>
+	<!--登陆前-->
+		<!--顶部固定nav-->
+		<div class="nav500">
+			<div class="nav500_logo">
+				<a href="/index.php"><img src="/img/logo.png" data-src="/img/logo.png"/></a>
+			</div>
+			<!--<div class="nav500_right_had">
+				<a href="javascript:void(0)" class="cl_fff f14 blue_focus" data-modal="#J_regModal" id="nav500_bottom_reg"><img src="/img/nav-right.png"></a>
+			</div>-->
+		</div>
+
+	<?php }?>	
+	
+<div class="h10"></div>
+<div class="ucenter">
+	<div class="container">
+		<div class="row" style="margin-left: 0px;margin-top: 60px;margin-bottom: 60px;">
+			<div class="panel panel-default">
+			  <div class="panel-heading">
+			    <h3 class="panel-title">体育历史查询<span class="pull-right" ><a href="/user/report">返回报表</a></span></h3>
+			  </div>
+			  <div class="panel-body">
+			    <div role="tabpanel">
+				  <!-- Tab panes -->
+				  <div class="tab-content">
+				    <div role="tabpanel" class="tab-pane active">
+				    	<div class="table-responsive">
+						  <table class="table table-bordered">
+    <tr class="success">
+	  <td class="zd_item_header">时间/单号</td>
+	  <td class="zd_item_header">投注详细信息</td>
+      <td class="zd_item_header">结果</td>
+      <td class="zd_item_header">金额</td>
+	</tr>
+
+			       <?php if(empty($data) || (($data instanceof \think\Collection || $data instanceof \think\Paginator ) && $data->isEmpty())): ?>
+					<tr align="center" bgcolor="#FFFFFF">
+				    <td colspan="4" valign="middle" bgcolor="#FFFFFF"><p class="bg-danger">暂无记录</p></td>
+				    </tr>
+			       <?php else: if(is_array($data) || $data instanceof \think\Collection || $data instanceof \think\Paginator): if( count($data)==0 ) : echo "" ;else: foreach($data as $k=>$vo): 
+
+							if($k % 2 == 0) 
+								$bgcolor = '#FFF';
+							else
+								$bgcolor = '#f5f5f5';
+			       		?>
+    <tr bgcolor="<?=$bgcolor?>" align="center" onMouseOver="this.style.backgroundColor='#FFFFCC'" onMouseOut="this.style.backgroundColor='<?=$bgcolor?>'" style="height:60px;" >
+
+					    <td align="center">
+					    <span style="color:#46AF98"><?php echo date('m-d',strtotime('-12 hours',strtotime($vo["bet_time"]))).'<br>'.date('H:i:s',strtotime('-12 hours',strtotime($vo["bet_time"])));?>
+					    </span><br>
+						<span style="color:#0DC4FF">
+						<?php echo $vo['ball_sort']; switch($vo['ball_sort']): case "冠军":case "金融": break; ?>
+						{defalut /}<?php echo $vo['master']; endswitch; switch($vo['point_column']): case "match_ho":case "match_ao": ?>
+						让球
+						<?php break; case "match_dxdpl":case "match_dxxpl": ?>
+						大小
+						<?php break; case "match_dsdpl":case "match_dsspl": ?>
+						单双
+						<?php break; case "match_bho":case "match_bao": ?>
+						上半场让球
+						<?php break; case "match_bdpl":case "match_bxpl": ?>
+						上半场大小
+						<?php break; case "match_bzm":case "match_bzg":case "match_bzh": ?>
+						全场独赢
+						<?php break; case "match_bmdy":case "match_bgdy":case "match_bhdy": ?>
+						半场独赢
+						<?php break; case "match_hr_bd10":case "match_hr_bd20":case "match_hr_bd21":case "match_hr_bd30":case "match_hr_bd31":case "match_hr_bd32":case "match_hr_bd40":case "match_hr_bd41":case "match_hr_bd42":case "match_hr_bd43": ?>
+						上半波胆主
+						<?php break; case "match_hr_bdg10":case "match_hr_bdg20":case "match_hr_bdg21":case "match_hr_bdg30":case "match_hr_bdg31":case "match_hr_bdg32":case "match_hr_bdg40":case "match_hr_bdg41":case "match_hr_bdg42":case "match_hr_bdg43": ?>
+						上半波胆客
+						<?php break; case "value=\'match_hr_bd00":case "match_hr_bd11":case "match_hr_bd22":case "match_hr_bd33":case "match_hr_bd44":case "match_hr_bdup5\"": ?>
+						上半波胆平
+						<?php break; case "match_bd10":case "match_bd20":case "match_bd21":case "match_bd30":case "match_bd31":case "match_bd32":case "match_bd40":case "match_bd41":case "match_bd42":case "match_bd43": ?>
+						波胆主
+						<?php break; case "match_bdg10":case "match_bdg20":case "match_bdg21":case "match_bdg30":case "match_bdg31":case "match_bdg32":case "match_bdg40":case "match_bdg41":case "match_bdg42":case "match_bdg43": ?>
+						波胆客
+						<?php break; case "value=\'match_bd00":case "match_bd11":case "match_bd22":case "match_bd33":case "match_bd44":case "match_bdup5\"": ?>
+						波胆平
+						<?php break; case "match_total01pl":case "match_total23pl":case "match_total46pl":case "match_total7uppl": ?>
+						入球数
+						<?php break; case "match_bqmm":case "match_bqmh":case "match_bqmg":case "match_bqhm":case "match_bqhh":case "match_bqhg":case "match_bqgm":case "match_bqgh":case "match_bqgg": ?>
+						半全场
+						<?php break; endswitch; ?>							  	
+						</span><br>					    
+					    <span style="color:#F90">HG_<?=$vo["number"]?></span>
+					    </td>
+					    <td align="center">
+					    	<span style="color:#F00"><?php echo $vo['match_name']; ?></span>
+					    	<?php if($vo['match_type'] == 2): ?>
+					    		<?php echo $vo['match_time']; endif; ?>
+					    	<br>
+					    	<?php if(($vo['point_column'] == 'match_ho') or ($vo['point_column'] == 'match_ao') or ($vo['point_column'] == 'match_bao') or ($vo['point_column'] == 'match_bho')): if(($vo['match_showtype'] == 'c') or ($vo['match_showtype'] == 'C')): ?>
+				    				<font style="color:#000000"><?php echo $vo['guest']; ?></font>
+				    				<?php echo $vo['match_rgg']; ?>
+				    				<font style="color:#000000"><?php echo $vo['master']; ?></font>(主)
+				    			<?php else: ?>
+				    				<font style="color:#000000"><?php echo $vo['master']; ?></font>
+				    				<?php echo $vo['match_rgg']; ?>
+				    				<font style="color:#000000"><?php echo $vo['guest']; ?></font>
+				    			<?php endif; else: ?>
+				    			<font style="color:#000000"><?php echo $vo['master']; ?></font>
+				    			<?php switch($vo['point_column']): case "match_bd10": ?>
+										1:0
+									<?php break; case "match_bd20": ?>
+										2:0
+									<?php break; case "match_bd21": ?>
+										2:1
+									<?php break; case "match_bd30": ?>
+										3:0
+									<?php break; case "match_bd31": ?>
+										3:1
+									<?php break; case "match_bd32": ?>
+										3:2
+									<?php break; case "match_bd40": ?>
+										4:0
+									<?php break; case "match_bd41": ?>
+										4:1
+									<?php break; case "match_bd42": ?>
+										4:2
+									<?php break; case "match_bd43": ?>
+										4:3
+									<?php break; case "match_bdg10": ?>
+										1:0
+									<?php break; case "match_bdg20": ?>
+										2:0
+									<?php break; case "match_bdg21": ?>
+										2:1
+									<?php break; case "match_bdg30": ?>
+										3:0
+									<?php break; case "match_bdg31": ?>
+										3:1
+									<?php break; case "match_bdg32": ?>
+										3:2
+									<?php break; case "match_bdg40": ?>
+										4:0
+									<?php break; case "match_bdg41": ?>
+										4:1
+									<?php break; case "match_bdg42": ?>
+										4:2
+									<?php break; case "match_bdg43": ?>
+										4:3
+									<?php break; case "match_bd00": ?>
+										0:0
+									<?php break; case "match_bd11": ?>
+										1:1
+									<?php break; case "match_bd22": ?>
+										2:2
+									<?php break; case "match_bd33": ?>
+										3:3
+									<?php break; case "match_bd44": ?>
+										4:4
+									<?php break; case "match_bdup5": ?>
+										UP5
+									<?php break; default: if($vo['guest'] != ''): ?>
+											VS.
+										<?php endif; endswitch; ?>
+				    			
+				    			<font style="color:#890209"><?php echo $vo['guest']; ?></font>
+					    	<?php endif; ?>
+					    	<br/>
+					    	<font  style="color:#000000">
+					    	<?php if(($vo['ball_sort'] == '冠军') or ($vo['ball_sort'] == '金融')): $ss	=	explode("@",$vo["bet_info"]); ?>
+					    		<font color='red'><?php echo $ss[0]; ?></font>@<font font="red"><?php echo $ss[1]; ?></font>
+					    	<?php else: switch($vo['point_column']): case "match_hr_bd10":case "match_hr_bd20":case "match_hr_bd21":case "match_hr_bd30":case "match_hr_bd31":case "match_hr_bd32":case "match_hr_bd40":case "match_hr_bd41":case "match_hr_bd42":case "match_hr_bd43": ?>
+											波胆  @ <font color='red'><?php echo $vo['bet_point']; ?></font>
+										<?php break; case "match_hr_bdg10":case "match_hr_bdg20":case "match_hr_bdg21":case "match_hr_bdg30":case "match_hr_bdg31":case "match_hr_bdg32":case "match_hr_bdg40":case "match_hr_bdg41":case "match_hr_bdg42":case "match_hr_bdg43": ?>
+											波胆  @ <font color='red'><?php echo $vo['bet_point']; ?></font>
+										<?php break; case "value=\'match_hr_bd00":case "match_hr_bd11":case "match_hr_bd22":case "match_hr_bd33":case "match_hr_bd44":case "match_hr_bdup5\"": ?>
+											波胆  @ <font color='red'><?php echo $vo['bet_point']; ?></font>
+										<?php break; case "match_bd10":case "match_bd20":case "match_bd21":case "match_bd30":case "match_bd31":case "match_bd32":case "match_bd40":case "match_bd41":case "match_bd42":case "match_bd43": ?>
+											波胆  @ <font color='red'><?php echo $vo['bet_point']; ?></font>
+										<?php break; case "match_bdg10":case "match_bdg20":case "match_bdg21":case "match_bdg30":case "match_bdg31":case "match_bdg32":case "match_bdg40":case "match_bdg41":case "match_bdg42":case "match_bdg43": ?>
+											波胆  @ <font color='red'><?php echo $vo['bet_point']; ?></font>
+										<?php break; case "value=\'match_bd00":case "match_bd11":case "match_bd22":case "match_bd33":case "match_bd44":case "match_bdup5\"": ?>
+											波胆  @ <font color='red'><?php echo $vo['bet_point']; ?></font>
+										<?php break; case "match_ho":case "match_bho": ?>
+											<?php echo $vo['master']; if(!(empty($vo['match_nowscore']) || (($vo['match_nowscore'] instanceof \think\Collection || $vo['match_nowscore'] instanceof \think\Paginator ) && $vo['match_nowscore']->isEmpty()))): ?>(<?php echo $vo['match_nowscore']; ?>)<?php endif; ?> @ <font color='red'><?php echo $vo['bet_point']; ?></font>
+										<?php break; case "match_ao":case "match_bao": ?>
+											<?php echo $vo['guest']; if(!(empty($vo['match_nowscore']) || (($vo['match_nowscore'] instanceof \think\Collection || $vo['match_nowscore'] instanceof \think\Paginator ) && $vo['match_nowscore']->isEmpty()))): ?>(<?php echo $vo['match_nowscore']; ?>)<?php endif; ?> @ <font color='red'><?php echo $vo['bet_point']; ?></font>
+										<?php break; ?>
+										<!-- 标准盘 -->
+										<?php case "match_bzm":case "match_bmdy": ?>
+											<?php echo $vo['master']; ?> 独赢<?php if(!(empty($vo['match_nowscore']) || (($vo['match_nowscore'] instanceof \think\Collection || $vo['match_nowscore'] instanceof \think\Paginator ) && $vo['match_nowscore']->isEmpty()))): ?>(<?php echo $vo['match_nowscore']; ?>)<?php endif; ?> @ <font color='red'><?php echo $vo['bet_point']; ?></font>
+										<?php break; case "match_bzg":case "match_bgdy": ?>
+											<?php echo $vo['guest']; ?> 独赢<?php if(!(empty($vo['match_nowscore']) || (($vo['match_nowscore'] instanceof \think\Collection || $vo['match_nowscore'] instanceof \think\Paginator ) && $vo['match_nowscore']->isEmpty()))): ?>(<?php echo $vo['match_nowscore']; ?>)<?php endif; ?> @ <font color='red'><?php echo $vo['bet_point']; ?></font>
+										<?php break; case "match_bzh":case "match_bhdy": ?>
+											和局<?php if(!(empty($vo['match_nowscore']) || (($vo['match_nowscore'] instanceof \think\Collection || $vo['match_nowscore'] instanceof \think\Paginator ) && $vo['match_nowscore']->isEmpty()))): ?>(<?php echo $vo['match_nowscore']; ?>)<?php endif; ?> @ <font color='red'><?php echo $vo['bet_point']; ?></font>
+										<?php break; case "match_bdpl":case "match_dxdpl": ?>
+											O<?php echo $vo['match_dxgg']; ?> @ <font color='red'><?php echo $vo['bet_point']; ?></font>
+										<?php break; case "match_bxpl":case "match_dxxpl": ?>
+											U<?php echo $vo['match_dxgg']; ?> @ <font color='red'><?php echo $vo['bet_point']; ?></font>
+										<?php break; case "match_dsdpl": ?>
+											单  @ <font color='red'><?php echo $vo['bet_point']; ?></font>
+										<?php break; case "match_dsspl": ?>
+											双  @ <font color='red'><?php echo $vo['bet_point']; ?></font>
+										<?php break; case "match_total01pl": ?>
+											0~1  @ <font color='red'><?php echo $vo['bet_point']; ?></font>
+										<?php break; case "match_total23pl": ?>
+											2~3  @ <font color='red'><?php echo $vo['bet_point']; ?></font>
+										<?php break; case "match_total46pl": ?>
+											4~6  @ <font color='red'><?php echo $vo['bet_point']; ?></font>
+										<?php break; case "match_total7uppl": ?>
+											7UP  @ <font color='red'><?php echo $vo['bet_point']; ?></font>
+										<?php break; case "match_bqmm": ?>
+											<?php echo $vo['master']; ?>/<?php echo $vo['master']; ?> @ <font color='red'><?php echo $vo['bet_point']; ?></font>
+										<?php break; case "match_bqmh": ?>
+											<?php echo $vo['master']; ?>/和局  @ <font color='red'><?php echo $vo['bet_point']; ?></font>
+										<?php break; case "match_bqmg": ?>
+											<?php echo $vo['master']; ?>/<?php echo $vo['guest']; ?> @ <font color='red'><?php echo $vo['bet_point']; ?></font>
+										<?php break; case "match_bqhm": ?>
+											和局/<?php echo $vo['master']; ?> @ <font color='red'><?php echo $vo['bet_point']; ?></font>
+										<?php break; case "match_bqhh": ?>
+											和局/和局 @ <font color='red'><?php echo $vo['bet_point']; ?></font>
+										<?php break; case "match_bqhg": ?>
+											和局/<?php echo $vo['guest']; ?> @ <font color='red'><?php echo $vo['bet_point']; ?></font>
+										<?php break; case "match_bqgm": ?>
+											<?php echo $vo['guest']; ?>/<?php echo $vo['master']; ?> @ <font color='red'><?php echo $vo['bet_point']; ?></font>
+										<?php break; case "match_bqgh": ?>
+											<?php echo $vo['guest']; ?>/和局 @ <font color='red'><?php echo $vo['bet_point']; ?></font>
+										<?php break; case "match_bqgg": ?>
+											<?php echo $vo['guest']; ?>/<?php echo $vo['guest']; ?> @ <font color='red'><?php echo $vo['bet_point']; ?></font>
+										<?php break; endswitch; endif; ?>
+					    	</font>
+					    	<?php if(!in_array(($vo['status']), explode(',',"0,3,7,6"))): 
+					    		if((strtolower($vo["match_showtype"])=="c")&&(strpos('&match_ao,match_ho,match_bho,match_bao&',$vo["point_column"])>0)){
+								?>
+								[<?php echo $vo['TG_Inball']; ?>]:[<?php echo $vo['MB_Inball']; ?>]
+								<?php
+								}elseif($vo["ball_sort"] == "冠军" || $vo["ball_sort"] == "金融"){
+								}else{
+								?>
+								[<?php echo $vo['MB_Inball']; ?>]:[<?php echo $vo['TG_Inball']; ?>]
+								<?php
+								}
+								endif; if(($vo['lose_ok'] == '0') and ($vo['ball_sort'] == '足球滚球')): ?>
+					    		[确认中]
+					    	<?php elseif(($vo['status'] == '0') and ($vo['ball_sort'] == '足球滚球')): ?>
+					    		[已确认]
+					    	<?php else: endif; ?>
+							</td>
+					    <td align="center">
+					    <?php if($vo['status'] == 0): ?>
+					    未知
+					    <?php else: 
+					    $vo["status"]!=6 && $vo["status"]!=3 ? $vo["MB_Inball"].':'.$vo["TG_Inball"].'<br>' : '';
+					    endif; ?>
+					    </td>					    
+
+					    <td align="center">
+					    <span style="color:#46AF98">下注:</span><br><?php echo sprintf($vo['bet_money'],"%.2f"); ?><br>
+							盈利:					    	
+					    	<?php switch($vo['status']): case "1": ?>						
+							    	<span style="color:#FF0000;"><?php echo number_format($vo['jine'],'2'); ?></span>
+								<?php break; case "2": ?>
+							    	<span style="color:#000000;"><?php echo number_format($vo['jine'],'2'); ?></span>
+							    <?php break; case "4": ?>
+							    	<span style="color:#FF0000;"><?php echo number_format($vo['jine'],'2'); ?></span>
+							    <?php break; case "5": ?>
+							    	<span style="color:#000000;"><?php echo number_format($vo['jine'],'2'); ?></span>
+							    <?php break; default: endswitch; ?>
+					    </td>
+					  </tr>
+					  <?php endforeach; endif; else: echo "" ;endif; endif; ?>
+					
+    <th colspan="5" align="center">共 <font color="red"><?php echo $count; ?></font> 条已结算注单，总盈利金额：<font color="red"><?php echo number_format($sum,'2'); ?> RMB</font></th>
+    </tr>
+				</table>
+				<div><?php echo $list->render(); ?></div>
+			</ul>
+		</div>
+	</body>
+</html>
+	
+	

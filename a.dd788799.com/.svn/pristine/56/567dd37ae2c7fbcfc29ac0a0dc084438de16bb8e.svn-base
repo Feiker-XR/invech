@@ -1,0 +1,51 @@
+{layout name="layout" /}
+<div class="row">
+  <div class="col-xs-12">
+    <div class="box">
+       <!-- /.box-header -->
+      <div class="box-body table-responsive no-padding">
+		<table class="table table-hover">
+	          <tbody>
+	          	<tr>
+					<th>#</th>
+					<th>订单ID</th>
+					<th>用户名称</th>
+					<th>玩法名称</th>
+					<th>投注期号</th>
+					<th>投注时间</th>
+					<th>投注手机</th>
+					<th>投注注数</th>
+					<th>投注号码</th>
+					<th>开奖时间</th>
+					
+				</tr>
+				{foreach $bets as $v}
+				 <tr>
+					<td>{$v.id}</td>
+					<td>{$v.orderId}</td>
+					<td>{$v.username}</td>
+					<td>{$v.playedName}</td>
+					<td>{$v.actionNo}</td>
+					<td>{$v.actionTime|date="y-m-d H:i:s",###}</td>
+					<td>{$v.actionIP}</td>
+					<td>{$v.actionNum}</td>
+					<td>{$v.actionData}</td>
+					<td>{$v.kjTime|date="y-m-d H:i:s",###}</td>
+					
+				</tr>
+				{/foreach}
+			</tbody>
+		</table>
+			   
+      </div>
+      	<div style="width:100%;margin-left:20px;">
+			{$bets->render();}
+		</div>
+      <!-- /.box-body -->
+    </div>
+    <!-- /.box -->
+  </div>
+</div>
+
+
+

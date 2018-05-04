@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Welcome</title>
+<link rel="stylesheet" type="text/css" href="/css/general.css"/>
+<link rel="stylesheet" type="text/css" href="/newview/css/theme/style.css?version=2.0.0?version=2.0.0" />
+<link rel="stylesheet" type="text/css" href="/newview/css/style.css" />
+<link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
+
+
+<link rel="stylesheet" href="/css/newstyle/public.css">
+<link rel="stylesheet" href="/css/newstyle/style.css">
+
+<style>
+.modify_main_wp{
+	height: 600px;
+}
+.modify_main_title{width: 979px;height: 40px;color: black;font-size: 14px;line-height: 40px;text-indent: 20px;border-bottom: 1px solid #dbdbdb ;}
+.modify_main_label{color: black;font-size: 14px;margin-top: 30px;width: 450px;float: left;margin-top: 50px;border: 1px solid #ccc;border-left: none;height: 446px;border-bottom-right-radius: 20px;border-top-right-radius: 20px;}
+.modify_input{width: 232px;height: 18px;color: #0079d7;font-size: 16px;text-indent: 10px;outline: none;border: none;}
+.modify_main_label li{margin: 10px 0px;width: 350px;border: 1px solid #ccc;padding-left: 10px;margin-left: 40px;}
+.modify_textarea{width: 332px;height:150px;text-indent: 10px;font-size: 16px;padding-top: 10px;}
+.modify_main_li{text-align: center;margin-top: 29px;}
+.modify_main_li a{display: block;width: 180px;height: 30px;background: #ff6c00;border-radius: 30px;color: white;text-align: center;line-height: 30px;font-size: 16px;margin-left: 86px;margin-top: 0px;}
+.modify_main_label li span{display: inline-block;width: 70px;text-align: right;border-right: 1px solid #ccc;padding-right: 15px;color: #666;}
+.modify_main_label li i{display: block;float: left;margin-top: 4px;width: 22px;}
+.table_left{float: left;margin-left: 145px;margin-top: 50px;}
+.modify_main_li a.del{display: block;width: 120px;height: 40px;background: #cdcdcd;border-radius: 40px;color: white;text-align: center;line-height: 40px;font-size: 16px;float: left;}
+.modify_main_li a.sumbit{display: block;width: 120px;height: 40px;background: #00b7ee;border-radius: 40px;color: white;text-align: center;line-height: 40px;font-size: 16px;float: left;margin-left: 30px;}
+
+</style>
+
+<script src='/js/js/jquery-1.8.0.min.js'></script>
+<script type="text/javascript" src="/js/main.js"></script>
+<script type="text/javascript" src="/Scripts/member.js"></script>
+<script type="text/javascript" src="/Scripts/City.js"></script>
+<script type="text/javascript" src="/newview/js/main.js"></script>
+<style type="text/css">
+body{background: white;}
+</style>
+</head>
+<div class="head">
+	<!--欢迎-->
+	{include file='common/nav'}
+</div>
+<div class="block_0"></div>
+
+<div class="moneyBox_contain">
+	<div class="">
+		<div class="ui-headerBox">
+			<!-- logo -->
+			<a class="ui-icon-logo ui-logo" id="Logo"></a>
+			<!-- 导航 -->
+			<!-- <ul class="ui-nav">
+				<li id="Nav_0">
+					<a href="/user/userinfo.html" title="会员首页">
+						<span class="ui-icon ui-icon-home ui-icon-50"></span>
+					</a>
+				</li>
+				<li id="Nav_1" class="ui-header-active">
+					<a href="/pay/member.html" title="财务管理">
+						<span class="ui-icon ui-icon-recharge ui-icon-50"></span>
+					</a>
+				</li>
+				<li id="Nav_2">
+					<a href="/user/record_ds.html" title="游戏记录">
+						<span class="ui-icon ui-icon-gameNote ui-icon-50"></span>
+					</a>
+				</li>
+				<li id="Nav_3">
+					<a href="/user/report.html" title="历史记录">
+						<span class="ui-icon ui-icon-data ui-icon-50"></span>
+					</a>
+				</li>
+				<li id="Nav_4" >
+					<a href="/user/sms.html" title="站内短信">
+						<span class="ui-icon ui-icon-announce ui-icon-50"></span>
+					</a>
+				</li>
+       			 <li id="Nav_5">
+					<a href="/user/agent.html" title="代理中心">
+						<span class="ui-icon ui-icon-newActivity ui-icon-50"></span>
+					</a>
+				</li>
+        		<li style="display:none">
+					<a href="http://messenger.providesupport.com/messenger/1x5b67gp1rcy50kqxa0qpsa0jx.html" title="客服中心">
+						<span class="ui-icon ui-icon-online ui-icon-50"></span>
+					</a>
+				</li>
+			</ul> -->
+			<div class="modify_header">
+				<a href="/user/userinfo.html" class="nav_1">首页</a>
+				<a href="/pay/member.html" class="nav_2">财务管理</a>
+				<a href="/user/record_ds.html" class="nav_3">游戏记录</a>
+				<a href="/user/report.html" class="nav_4">历史记录</a>
+				<a href="/user/sms.html" class="nav_5">短信记录</a>
+				<a href="/user/agent.html" class="nav_6">代理中心</a>
+			</div>
+			<ul class="ui-function">
+				<!--<li>
+					<a href="#">
+						<span class="ui-icon ui-icon-down ui-icon-20" id="Menu"></span>
+					</a>
+				</li>
+				<li>
+					<a href="#">
+						<span class="ui-icon ui-icon-min ui-icon-20"></span>
+					</a>
+				</li>
+				<li>
+					<a href="javascript:void(0)" id="Logout">
+						<span class="ui-icon ui-icon-max ui-icon-20"></span>
+					</a>
+				</li>-->
+			</ul>
+		</div>
+	</div>
+
+	<div class="ui-body">
+    		<div class="ui-search" id="subjsshow1" style="display: block;">
+    		<span><i class="fas fa-user-circle" style="font-size: 30px"></i>财务中心</span>
+                <ul>
+            <li><a href="/pay/member.html"><i class="fas fa-shopping-cart" style="background-color: #F59A2F"></i>账户充值</a></li>
+            <li class="ui-hover"><a href="/user/get_money.html"><i class="fas fa-yen-sign" style="background-color: #F16346"></i>申请提款</a></li>
+            <li><a href="/user/userinfo.html"><i class="fas fa-exchange-alt" style="background-color: #F59A2F"></i>额度转换</a></li>
+            <li><a href="/user/data_money.html"><i class="fas fa-bars" style="background-color: #A95BEF"></i>充值记录</a></li>
+            <li><a href="/user/data_h_money.html"><i class="fas fa-list-alt" style="background-color: #2C7FE3"></i>汇款记录</a></li>
+            <li><a href="/user/data_t_money.html"><i class="fas fa-list" style="background-color: #F16346"></i>提现记录</a></li>
+            <li class="ui-hover"><a href="/user/zr_data_money.html"><i class="fas fa-th-list" style="background-color: #24C987"></i>转换记录</a></li>
+                </ul>
+    		</div>
+    	</div>
+
+  <div class="ui-moneyBox">
+    <ul>
+        <!-- <table width="100%" border="0" cellspacing="0" cellpadding="5">
+        <form id="MyForm" action="/user/set_card" method="post">
+          <tr>
+            <td align="right">会员账号：</td>
+            <td>{$user['username']}</td>
+          </tr>
+          <tr>
+            <td width="150" align="right">收款人姓名：</td>
+            <td><font style="font-size:14px;color:#F00; font-weight:bold">{$user['pay_name']}</font></td>
+          </tr>
+          <tr>
+            <td colspan="2" align="left" bgcolor="#384967" style="font-size:14px; color:#FF0">以下为您的收款信息，一旦录入将无法修改，请认真填写！</td>
+          </tr>
+          <tr>
+            <td align="right">收款银行：</td>
+            <td><input type="text" id="pay_card" name="pay_card" class="Input_250"/>
+           </td>
+          </tr>
+          <tr>
+            <td align="right">银行账号：</td>
+            <td><input type="text" id="pay_num" name="pay_num" class="Input_250"/></td>
+          </tr>
+          <tr>
+            <td align="right">开户行地址：</td>
+            <td>
+						<select id="Address_1" name="Address_1" runat="server" onChange="selectCity();" style="height:26px;border:1px solid #d7d7d7;margin-top:2px;">
+						<option value="" selected="true">省/直辖市</option>
+					</select>
+            <select id="Address_2" name="Address_2" runat="server" onChange="selectcounty()" style="height:26px;border:1px solid #d7d7d7;margin-top:2px;">
+						<option value="" selected="true">请选择</option>
+					</select>
+            <select id="Address_3" name="Address_3" runat="server" style="height:26px;border:1px solid #d7d7d7; margin-top:2px;">
+						<option value="" selected="true">请选择</option>
+					</select>
+            <input name="Address_4" type="text" class="Input_250" id="Address_4" value="XX街XX支行" onFocus="this.value=''" onBlur="if(!value){value=defaultValue;}"/></td>
+          </tr>
+          <tr>
+            <td align="right">请输入您的资金密码：</td>
+            <td><input type="password" id="MoneyPass" name="MoneyPass" class="Input_100"/></td>
+          </tr>
+          <tr>
+            <td colspan="2" align="center"><input type="submit" name="button" id="button" value="确认录入" class="m_btn"/></td>
+          </tr>
+          </form>
+        </table> -->
+				<div class="modify_main_wp">
+					<div class="block_0"></div>
+					<div class="table_left">
+						<img src="/css/img/tikuan_1.png" />
+					</div>
+					<div class="modify_main_label">
+						<div class="block_10"></div>
+						<form id="MyForm" action="/user/set_card" method="post">
+						<ul>
+							<li>
+								<i><img src="/css/img/tikuan_3.png" /></i>
+								<span>会员账号</span>
+								<input type="text" class="modify_input" placeholder="会员账号" value='{$user['username']}'/>
+							</li>
+							<li>
+								<i><img src="/css/img/tikuan_4.png" /></i>
+								<span>真实姓名</span>
+								<input type="text" class="modify_input" placeholder="真实姓名" value='{$user['pay_name']}'/>
+							</li>
+							<!--  账户额度没有-->
+							<li>
+								<i><img src="/css/img/tikuan_5.png" /></i>
+								<span>账户额度</span>
+								<input type="text" class="modify_input" placeholder="账户额度"/>
+							</li>
+							<li>
+								<i><img src="/css/img/tikuan_6.png" /></i>
+								<span>收款银行</span>
+								<input  type="text" id="pay_card" name="pay_card" class="modify_input" placeholder="收款银行"/>
+							</li>
+							<li>
+								<i><img src="/css/img/tikuan_7.png" /></i>
+								<span>银行账号</span>
+								<input type="text" id="pay_num" name="pay_num" class="modify_input" placeholder="银行账号"/>
+							</li>
+							<!-- 输入框 -->
+							<li>
+								<i><img src="/css/img/tikuan_8.png" /></i>
+								<span>开户地址</span>
+								<input type="text" class="modify_input" placeholder="开户行地址"/>
+							</li>
+							<!-- 入款金额 -->
+							<li>
+								<i><img src="/css/img/tikuan_9.png" /></i>
+								<span>取款金额</span>
+								<input type="text" class="modify_input" placeholder="取款金额"/>
+							</li>
+							<li>
+								<i><img src="/css/img/tikuan_10.png" /></i>
+								<span>资金密码</span>
+								<input type="password" id="MoneyPass" name="MoneyPass" type="password" class="modify_input" placeholder="资金密码"/>
+							</li>
+						</ul>
+						</form>
+						<div class="modify_main_li">
+							<a href="javascript:;" class="del">取消</a>
+							<a href="javascript:;" class="sumbit" type="submit" name="button" id="button">立即提款</a>
+						</div>
+					</div>
+			   </div>
+    </ul>
+  </div>
+</div>
+
+{include file='common/footer'}
+
+<script type="text/javascript">
+  Init('','','')
+
+setInterval(function() {
+	$.ajax({
+		type: "post",
+		url: "{:Url('index/home')}",
+		data:{'ajax':1,'get_money':'1'},
+		success:function(data) {
+			if (/^[\d\.]+$/.test(data)) {
+				$('#money,#money_2').text(data);
+			}
+		}
+	});
+},2000);
+</script>
+</body>
+</html>

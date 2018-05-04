@@ -1,0 +1,67 @@
+{layout name="layout" /}
+
+
+<div class="row">
+  <div class="col-xs-12">
+    <div class="box">
+      <div class="box-header">
+<form>
+
+              <div class="has-feedback pull-right">
+                <button type="submit" class="btn btn-block btn-default btn-sm filter">查询</button>                  
+              </div>  
+
+              <div class="pull-right" style="margin-left:15px;">
+                <input class="datepicker" data-date-format="yyyy-mm" value="{$Request.get.date|default=''}" name="date">
+              </div> 
+
+
+ </form>
+      </div>
+
+      <!-- /.box-header -->
+      <div class="box-body table-responsive no-padding">
+        <table class="table table-hover">
+          <tr>
+            <th >会员ID</th>
+            <th >会员名称</th>
+            <th >体育投注</th>
+            <th >体育输赢</th>
+            <th >串关投注</th>
+            <th >串关输赢</th>
+            <th >真人投注</th>
+            <th >真人输赢</th>
+            <th >彩票投注</th>
+            <th >彩票输赢</th>
+          </tr>
+          {foreach($result as $row)}          
+          <tr>
+            <td>{$row['uid']}</td>
+            <td>{$row['username']}</td>
+            <td>{$row['ty_bet']}</td>
+            <td>{$row['ty_win']}</td>
+            <td>{$row['tycg_bet']}</td>
+            <td>{$row['tycg_win']}</td>
+            <td>{$row['agzr_bet']}</td>
+            <td>{$row['agzr_win']}</td> 
+            <td>{$row['cp_bet']}</td>
+            <td>{$row['cp_win']}</td>                                
+          </tr>
+          {/foreach}
+        </table>
+      </div>
+      <!-- /.box-body -->
+    </div>
+    <!-- /.box -->
+  </div>
+</div>
+
+
+<script type="text/javascript">
+$(document).ready(function(){
+  $('.datepicker').datepicker({
+      //startDate: '-3d',
+      format: 'yyyy-mm',
+  });
+});
+</script>

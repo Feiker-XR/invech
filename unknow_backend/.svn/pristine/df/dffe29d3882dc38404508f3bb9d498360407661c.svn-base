@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>额度转换</title>
+<link rel="stylesheet" type="text/css" href="/css/general.css"/>
+<link rel="stylesheet" type="text/css" href="/Scripts/jquery-ui.css" />
+<link rel="stylesheet" type="text/css" href="/newview/css/theme/style.css?version=2.0.0" />
+<link rel="stylesheet" type="text/css" href="/newview/css/style.css" />
+<link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
+<link rel="stylesheet" type="text/css"  href="/css/newstyle	/public.css">
+<link rel="stylesheet" type="text/css"  href="/css/newstyle/res_pages_1.css">
+
+<!--<script type="text/javascript" src="/images/member.js"></script>-->
+<script type="text/javascript" src="../js/jquery-1.7.2.min.js?_=171"></script>
+<script type="text/javascript" src="/newview/js/jquery.SuperSlide.2.1.1.js"></script>
+<script type="text/javascript" src="/js/main.js"></script>
+<script type="text/javascript" src="/newview/js/main.js"></script>
+<!--[if IE 6]><script type="text/javascript" src="images/DD_belatedPNG.js"></script><![endif]-->
+
+<script type="text/javascript">
+//数字验证 过滤非法字符
+function clearNoNum(obj){
+	obj.value = obj.value.replace(/[^\d.]/g,""); //先把非数字的都替换掉，除了数字和.
+	obj.value = obj.value.replace(/^\./g,""); //必须保证第一个为数字而不是.
+	obj.value = obj.value.replace(/\.{2,}/g,"."); //保证只有出现一个.而没有多个.
+	obj.value = obj.value.replace(".","$#$").replace(/\./g,"").replace("$#$","."); //保证.只出现一次，而不能出现两次以上
+	if(obj.value != ''){
+		var re=/^\d+\.{0,1}\d{0,2}$/;
+		if(!re.test(obj.value)){
+			obj.value = obj.value.substring(0,obj.value.length-1);
+			return false;
+		}
+	}
+}
+// 设置金额
+$('.liAdd_bg input').live('input',function(){
+    $('#zz_money').val($(this).val());
+})
+
+// 提交转换
+function SubInfo(){
+		$("#SubTran").prop("disabled", true);
+        var hk=$('#zz_money').val();
+        var fs = $("#zz_type").val();
+		if(fs == 14 || fs == 24){
+			alert('维护中');
+			$("#SubTran").prop("disabled", false);
+			return;
+		}
+		if(fs == '' || fs == null){
+            alert('请选择转帐方式！');
+			$("#SubTran").prop("disabled", false);
+            return;
+        }
+        if(hk==''){
+            alert('请输入转账金额');
+            $('.liAdd_bg input').focus();
+			$("#SubTran").prop("disabled", false);
+            return;
+        }else{
+            hk = hk*1;
+            if(hk<1){
+				alert('转账金额最低为:1元');
+                $('.liAdd_bg input').focus();
+				$("#SubTran").prop("disabled", false);
+                return;
+            }
+        }
+        $("#SubTran").val("转账提交中..");
+        $('#form1').submit();
+    }
+
+$(function(){
+    $('.modify_main_cont_ul li span input').val('');	// 初始化为空
+	// 查询余额
+	$(".thbody_td").click(function(){
+        var _this = $(this);
+	    if(_this.text() == '维护'){
+			return;
+		}
+		$.ajax({
+			url:'{:url('user/balance')}',
+			dataType:'json',
+			contentType:'json',
+			data:{'type':_this.attr('data')},
+			success:function(data){
+			    /*console.log(data);*/
+				if(data.status == 0){
+				    _this.text(data.money);
+				}else{
+					alert(data.msg);
+				}
+			}
+		})
+	})
+})
+
+</script>
+
+<style type="text/css">
+td{ text-align:center; width:129px;}
+th{ line-height:40px; border:#ddd solid 1px; border-bottom:none; width:159px;}
+.price{font-size:24px; color:#F00; font-weight:bold; text-align:center; display:block; font-family:Georgia, 'Times New Roman', Times, serif; border:#ddd solid 1px; line-height:60px;}
+.th,.output{
+	border:#ddd solid 1px;
+	margin-top:15px;
+	line-height:30px;
+	padding-top:35px;
+	padding-bottom:35px;
+	font-size:14px;
+	width:129px;
+}
+
+.selected{
+	border:#F00 1px solid; background-color:#FCC;
+}
+
+.th{font-weight:bold;}
+.zzmoney input {width:70px; z-index:999;}
+.m_btn{
+	width: 88px;
+    height: 35px;
+    background: url(http://www.99206.com/Member/images/input2.png);
+    margin: 0px auto;
+    border: 0px;
+    cursor: pointer;
+}
+
+.tbCtn{
+	width:800px;
+	margin:auto;
+	margin-top:0px;
+	height:100%;
+}
+
+.price{
+	cursor:pointer;
+}
+
+body{background: white;}
+</style>
+</head>
+
+<body>
+<div class="head">
+	<!--欢迎-->
+	{include file='common/nav'}
+</div>
+<div class="block_0"></div>
+<div class="moneyBox_contain modify_wp">
+	<!--<div class="ui-header">
+
+		<div class="ui-headerBox">
+
+			&lt;!&ndash; logo &ndash;&gt;
+
+			<a class="ui-icon-logo ui-logo" id="Logo"></a>
+
+			&lt;!&ndash; 导航 &ndash;&gt;
+
+			<ul class="ui-nav">
+
+				<li id="Nav_0" class="ui-header-active">
+
+					<a href="/user/userinfo.html" title="会员首页">
+
+						<span class="ui-icon ui-icon-home ui-icon-50"></span>
+
+					</a>
+
+				</li>
+
+				<li id="Nav_1" >
+
+					<a href="/pay/member.html" title="财务管理">
+
+						<span class="ui-icon ui-icon-recharge ui-icon-50"></span>
+
+					</a>
+
+				</li>
+
+				<li id="Nav_2">
+
+					<a href="/user/record_ds.html" title="游戏记录">
+
+						<span class="ui-icon ui-icon-gameNote ui-icon-50"></span>
+
+					</a>
+
+				</li>
+
+				<li id="Nav_3">
+
+					<a href="/user/report.html" title="历史记录">
+
+						<span class="ui-icon ui-icon-data ui-icon-50"></span>
+
+					</a>
+
+				</li>
+
+				<li id="Nav_4" >
+
+					<a href="/user/sms.html" title="站内短信">
+
+						<span class="ui-icon ui-icon-announce ui-icon-50"></span>
+
+					</a>
+
+				</li>
+
+        		<li id="Nav_5">
+
+					<a href="/user/agent.html" title="代理中心">
+
+						<span class="ui-icon ui-icon-newActivity ui-icon-50"></span>
+
+					</a>
+
+				</li>
+
+                <li style="display:none">
+
+					<a href="http://messenger.providesupport.com/messenger/1x5b67gp1rcy50kqxa0qpsa0jx.html"  title="客服中心">
+
+						<span class="ui-icon ui-icon-online ui-icon-50"></span>
+
+					</a>
+
+				</li>
+
+			</ul>
+
+			<ul class="ui-function">
+
+				&lt;!&ndash;<li>
+
+					<a href="#">
+
+						<span class="ui-icon ui-icon-down ui-icon-20" id="Menu"></span>
+
+					</a>
+
+				</li>
+
+				<li>
+
+					<a href="#">
+
+						<span class="ui-icon ui-icon-min ui-icon-20"></span>
+
+					</a>
+
+				</li>
+
+				<li>
+
+					<a href="javascript:void(0)" id="Logout">
+
+						<span class="ui-icon ui-icon-max ui-icon-20"></span>
+
+					</a>
+
+				</li>&ndash;&gt;
+
+			</ul>
+
+		</div>
+
+	</div>	-->
+	<div class="modify_header">
+		<a href="/user/userinfo.html" class="nav_1">首页</a>
+		<a href="/pay/member.html" class="nav_2">财务管理</a>
+		<a href="/user/record_ds.html" class="nav_3">游戏记录</a>
+		<a href="/user/report.html" class="nav_4">历史记录</a>
+		<a href="/user/sms.html" class="nav_5">短信记录</a>
+		<a href="/user/agent.html" class="nav_6">代理中心</a>
+	</div>
+	<div class="modify_main_wp">
+		<div class="modify_main_btn">
+			<a href="/user/userinfo.html" class="click_A">账户全览</a>
+			<a href="/user/password.html">修改密码</a>
+		</div>
+		<div class="enter-input-wp">
+			<p class="enter-input">
+				<label>转入账户</label>
+				<select class="" name="">
+					<option>请选择转入账户</option>
+					<option>请选择转入账户</option>
+					<option>请选择转入账户</option>
+					<option>请选择转入账户</option>
+				</select>
+			</p>
+			<p class="enter-input">
+				<label>转入账户</label>
+				<input type="text" name="" value="" placeholder="请输入转入整数金额">
+			</p>
+			<p class="enter-btn">确认转入</p>
+		</div>
+		<div class="enter-input-wp">
+			<p class="enter-input">
+				<label>转出账户</label>
+				<select class="" name="">
+					<option>请选择转入账户</option>
+					<option>请选择转入账户</option>
+					<option>请选择转入账户</option>
+					<option>请选择转入账户</option>
+				</select>
+			</p>
+			<p class="enter-input">
+				<label>转出账户</label>
+				<input type="text" name="" value="" placeholder="请输入转入整数金额">
+			</p>
+			<p class="enter-btn enter-btn-exit">确认转出</p>
+		</div>
+		<div class="tip-font">
+			<span>温馨提示</span>：1.主帐额度无需转换即可玩体育、彩票.  2.电子转出请先退出所有电子游戏房间再进行转出操作，否则无法转出.
+		</div>
+		<div class="pay-my">
+			<div class="pay">
+				<span>账户余额</span>
+				<p>
+					<b>*****</b>
+					<img src="img/res.png" alt="">
+				</p>
+			</div>
+			<div class="pay">
+				<span>账户余额</span>
+				<p>
+					<b>85485</b>
+					<img src="img/res.png" alt="">
+				</p>
+			</div>
+			<div class="pay">
+				<span>账户余额</span>
+				<p>
+					<b>*****</b>
+					<img src="img/res.png" alt="">
+				</p>
+			</div>
+			<div class="pay">
+				<span>账户余额</span>
+				<p>
+					<b>*****</b>
+					<img src="img/res.png" alt="">
+				</p>
+			</div>
+			<div class="pay">
+				<span>账户余额</span>
+				<p>
+					<b>*****</b>
+					<img src="img/res.png" alt="">
+				</p>
+			</div>
+			<div class="pay">
+				<span>账户余额</span>
+				<p>
+					<b>*****</b>
+					<img src="img/res.png" alt="">
+				</p>
+			</div>
+			<div class="pay">
+				<span>账户余额</span>
+				<p>
+					<b>*****</b>
+					<img src="img/res.png" alt="">
+				</p>
+			</div>
+			<div class="pay-btn">
+				<img src="img/res-btn.png" alt="">
+				<span>刷新所有余额</span>
+			</div>
+		</div>
+</div>
+<script src="/js/jquery1.9.0.min.js"></script>
+<script src="/js/laydate.js"></script>
+<script>
+    $(function () {
+        $(".modify_main_btn").find("a").click(function () {
+            $(this).addClass("click_A").siblings().removeClass("click_A");
+        })
+        $(".pay p").find('img').click(function(){
+            $(this).parent("p").find("b").text("888 ")
+        })
+    });
+</script>
+{include file='common/footer'}
+</body>
+</html>

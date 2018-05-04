@@ -1,0 +1,81 @@
+<?php
+namespace app\common\model;
+use think\Db;
+use think\Model;
+
+use app\common\traits\model\UserFlow;
+
+use app\common\model\report\DailyMakerTrait;
+//use app\common\model\attach\MoneyRecordTrait;
+use app\common\model\report\CommonForFlowTrait;
+use app\common\model\report\DailyAndMonthForFlowTrait;
+//use app\common\model\report\GlobalUserFromFlowTrait;
+//use app\common\model\report\GlobalAgentFromFlowTrait;
+use app\common\model\report\GlobalFromFlowTrait;
+
+class Bet extends Base{
+
+    protected $table = 'gygy_bets';
+    protected $createTime = 'created_at';
+    protected $updateTime = 'updated_at';
+    protected $autoWriteTimestamp = 'datetime';
+    
+    use UserFlow;
+    use DailyMakerTrait;
+    use CommonForFlowTrait,DailyAndMonthForFlowTrait;
+    use /*GlobalUserFromFlowTrait,GlobalAgentFromFlowTrait,*/GlobalFromFlowTrait;
+
+    public function money()
+    {
+        return $this->morphMany('Money',['type','item_id']);
+    }
+
+    public function getBetMoneyAttr($value)
+    {        
+        //快钱玩法和官方玩法的投注金额算法一样
+        return $this->data['mode'] * $this->data['beiShu'] * $this->data['actionNum'];
+    }
+
+    public function getWinMoneyAttr($value)
+    {        
+        if($this->data['lotteryNo']){
+            return $this->bet_money - $this->data['bonus'];
+        }else{
+            return 0;
+        }        
+    }
+
+    //----------------前台------------------
+    public function types(){
+           return $this->belongsTo('Type','type','id');
+    }
+
+    public function played(){
+        return $this->belongsTo('Played','playedId','id');
+    }
+
+/*
+    public function user()
+    {
+        return $this->belongsTo('Member','uid','uid');
+    }
+*/
+
+    protected $append = ['lottery_title','played_name',];
+    protected $hidden = ['user','types','played',];
+
+    public function getLotteryTitleAttr($value,$data){
+        return $this->types->title;
+    } 
+    public function getPlayedNameAttr($value,$data){
+        return $this->played->getAttr('name');
+    }
+
+    public static function attachToSelfRequest(&$query,$params=[]){
+        if($params['type']??0){
+           $query->where('x.type', $params['type']);
+        }                  
+    }   
+    //----------------后台------------------
+    public function scopeSsc($query){return $query->where('type',1);}
+}

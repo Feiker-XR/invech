@@ -1,0 +1,654 @@
+<?php
+namespace app\index;
+use think\Db;
+use think\Controller;
+use think\Cache;
+use app\classes\page;
+use think\view\driver\Think;
+
+class Base extends Controller{
+    
+    public $memberSessionName='session-name';
+    public $time;
+    public $settings;
+    public $prename;
+    public $user;
+    
+    public $types;
+    public $playeds;
+    public $groups;
+    
+    protected function _initialize()
+    {
+    	
+         $session=array(
+            'uid'=>'312',
+            'username'=>'aaa666',
+            'session_key'=>md5('hello,world'), //session_id(),
+            'loginTime'=>time(),
+            'accessTime'=>time(),
+            'loginIP'=>ip2long('118.99.60.16'),
+            'fanDian'=>4.4,
+            'fanDianBdw' => 0,
+            'admin' => 0,
+            'type'  => 1,
+            'grade' => 1,
+            'coinPassword' => '150ba83deb19f420b93a1cadc2a4dbaa',
+        );
+        session('user',null);
+        session('user',$session);
+
+        $this->user = session('user');
+        $this->time = time();
+        $this->prename = 'gygy_';
+        $this->time = intval($_SERVER['REQUEST_TIME']);
+        $this->settings = $this->getSystemSettings();
+        cache('WEB_NAME',$this->settings['webName'],15*60);
+        $this->assign('user',$this->user);
+        $this->assign('settings',$this->settings);
+        $switchWeb = $this->settings['switchWeb'];
+        if ($switchWeb && $switchWeb == '1') {
+
+        } else {
+            $this->error('站点已经关闭，请稍后访问~');
+        }
+	
+	$this->type = input('type');
+    }
+
+	public function getGamenextNo($type, $time=null){
+		$type=intval($type);
+		if($time===null) $time=$this->time;
+		$kjTime=$this->getTypeFtime($type);
+		$atime=date('H:i:s', $time);
+		$sql="select actionNo, actionTime from {$this->prename}data_time where type=$type and actionTime>? order by actionTime limit 1";
+		$return = $this->getRow($sql, $atime);
+		if(!$return){
+			$sql="select actionNo, actionTime from {$this->prename}data_time where type=$type order by actionTime limit 1";
+			$return =$this->getRow($sql, $atime);
+			$time=$time+24*3600;
+		}
+		$types=$this->getTypes();
+		if(($fun=$types[$type]['onGetNoed']) && method_exists($this, $fun)){
+			$this->$fun($return['actionNo'], $return['actionTime'], $time);
+		}
+		return $return;
+	}
+	
+	public function getGameNos($type, $num=0, $time=null){
+		$type=intval($type);
+		if($time===null) $time=$this->time;
+		if($type==43){ //六合彩
+			$atime=date('Y-m-d H:i:s', $time);
+			$atimedb=$this->prename.'lhc_time';
+		}else{
+			$atime=date('H:i:s', $time);
+			$atimedb=$this->prename.'data_time';
+		}
+		
+		$sql="select actionNo, actionTime from {$atimedb} where type=$type and actionTime>? order by actionTime";
+		if($num) $sql.=" limit $num";
+		$return = $this->getRows($sql, $atime);
+
+		$types=$this->getTypes();
+		if(($fun=$types[$type]['onGetNoed']) && method_exists($this, $fun)){
+			if($return) foreach($return as $i=>$var){
+				$this->$fun($return[$i]['actionNo'], $return[$i]['actionTime'], $time);
+				$return[$i]['actionTime']=strtotime($return[$i]['actionTime']);
+			}
+		}
+		
+		if(count($return)<$num){
+			$sql="select actionNo, actionTime from {$this->prename}data_time where type=$type order by actionTime limit " . ($num-count($return));
+			$return1=$this->getRows($sql);
+
+			if(($fun=$types[$type]['onGetNoed']) && method_exists($this, $fun)){
+				if($return1) foreach($return1 as $i=>$var){
+					$this->$fun($return1[$i]['actionNo'], $return1[$i]['actionTime'], $time+24*3600);
+					
+					$return1[$i]['actionTime']=strtotime($return1[$i]['actionTime']);
+				}
+			}
+			$return=array_merge($return, $return1);
+		}
+		
+		return $return;
+	}
+
+	
+	public function onHdXjSsc(&$actionNo, &$actionTime, $time=null){
+		$this->setTimeNo($actionTime, $time);
+		if($actionNo>=96){
+			$actionNo=date('Ymd-'.$actionNo, $time - 24*3600);
+		}else{
+			$actionNo=date('Ymd-', $time).substr(100+$actionNo,1);
+		}
+	}
+	
+	public function noHd(&$actionNo, &$actionTime, $time=null){
+		//echo $actionNo;
+		$this->setTimeNo($actionTime, $time);
+		$actionNo=date('Ymd-', $time).substr(100+$actionNo,1);
+	}
+
+	public function no6Hd(&$actionNo, &$actionTime, $time=null){
+		if(!$time) $time=$this->time;
+		$actionNo=substr(date('Yz', $time),0,4).substr(1000+$actionNo,1);
+	}
+
+	public function no0Hdk3(&$actionNo, &$actionTime, $time=null){
+		$this->setTimeNo($actionTime, $time);
+		$actionNo=date('md', $time).substr(100+$actionNo,1);
+	}
+
+	public function no0Hdf(&$actionNo, &$actionTime, $time=null){
+		$this->setTimeNo($actionTime, $time);
+		$actionNo=date('Ymd-', $time).substr(10000+$actionNo,1);
+	}
+	
+	public function GXklsf(&$actionNo, &$actionTime, $time=null){
+		$this->setTimeNo($actionTime, $time);
+		$actionNo=date('Yz', $time).substr(100+$actionNo,1)+100;
+		$actionNo=substr($actionNo,0,4).substr(substr($actionNo,4)+100000,1);
+	}
+	
+	//北京快乐8
+	public function bjkl8(&$actionNo, &$actionTime, $time=null){
+		$this->setTimeNo($actionTime, $time);
+
+		$actionNo = 179*(strtotime(date('Y-m-d', $time))-strtotime('2004-09-19'))/3600/24+$actionNo-3857;
+		
+	}
+	//澳门快乐8
+	public function amkl8(&$actionNo, &$actionTime, $time=null){
+		$this->setTimeNo($actionTime, $time);
+		$actionNo = 288*(strtotime(date('Y-m-d', $time))-strtotime('2004-09-19'))/3600/24+$actionNo-1234;
+	}
+	//韩国快乐8
+	public function hgkl8(&$actionNo, &$actionTime, $time=null){
+		$this->setTimeNo($actionTime, $time);
+		$actionNo = 288*(strtotime(date('Y-m-d', $time))-strtotime('2004-09-19'))/3600/24+$actionNo-4567;
+	}
+	//澳门幸运农场
+	public function amxync(&$actionNo, &$actionTime, $time=null){
+		$this->setTimeNo($actionTime, $time);
+		$actionNo=date('17md', $time).substr(1000+$actionNo,1);
+	}	
+	
+	//台湾幸运农场
+	public function twxync(&$actionNo, &$actionTime, $time=null){
+		$this->setTimeNo($actionTime, $time);
+		$actionNo=date('17md', $time).substr(1000+$actionNo,1);
+	}		
+	//澳门PK10
+	public function ampk10(&$actionNo, &$actionTime, $time=null){
+		$this->setTimeNo($actionTime, $time);
+		$actionNo = 288*(strtotime(date('Y-m-d', $time))-strtotime('2007-11-11'))/3600/24+$actionNo-6789;
+	}
+	//台湾PK10
+	public function twpk10(&$actionNo, &$actionTime, $time=null){
+		$this->setTimeNo($actionTime, $time);
+		$actionNo = 288*(strtotime(date('Y-m-d', $time))-strtotime('2007-11-11'))/3600/24+$actionNo-4321;
+	}	
+	//天津时时彩
+	public function tjssc(&$actionNo, &$actionTime, $time=null){
+		$this->setTimeNo($actionTime, $time);
+		if($actionNo>84){
+			$time-=24*3600;
+		}
+		
+		$actionNo=date('17md', $time).substr(1000+$actionNo,1);
+	}	
+	//广东11选5
+	public function gd11(&$actionNo, &$actionTime, $time=null){
+		$this->setTimeNo($actionTime, $time);
+		if($actionNo>84){
+			$time-=24*3600;
+		}
+		
+		$actionNo=date('17md', $time).substr(100+$actionNo,1);
+	}	
+	//江西11选5
+	public function jx11(&$actionNo, &$actionTime, $time=null){
+		$this->setTimeNo($actionTime, $time);
+		if($actionNo>84){
+			$time-=24*3600;
+		}
+		
+		$actionNo=date('Ymd-', $time).substr(100+$actionNo,1);
+	}	
+	//山东11选5
+	public function sd11(&$actionNo, &$actionTime, $time=null){
+		$this->setTimeNo($actionTime, $time);
+		if($actionNo>90){
+			$time-=24*3600;
+		}
+		
+		$actionNo=date('17md', $time).substr(100+$actionNo,1);
+	}	
+	//上海11选5
+	public function sh11(&$actionNo, &$actionTime, $time=null){
+		$this->setTimeNo($actionTime, $time);
+		$actionNo=date('17md', $time).substr(100+$actionNo,1);
+	}
+	//江苏快3
+	public function jsk3(&$actionNo, &$actionTime, $time=null){
+		$this->setTimeNo($actionTime, $time);
+		$actionNo=date('Ymd', $time).substr(1000+$actionNo,1);
+	}	
+	
+	public function xjssc(&$actionNo, &$actionTime, $time=null){
+		$this->setTimeNo($actionTime, $time);
+		if($actionNo>84){
+			$time-=24*3600;
+		}
+		
+		$actionNo=date('Ymd-', $time).substr(100+$actionNo,1);
+	}
+	
+	
+	/**
+	 * 获取系统配置
+	 */
+	protected function getSystemSettings()
+    {
+	    $this->settings = array();
+	    
+	    if($data = model('params')->cache(true,10*60,'xcache')->where(1)->select()->toArray()){
+	        foreach($data as $var){
+	            $this->settings[$var['name']]=$var['value'];
+	        }
+	    }
+	    return $this->settings;
+	}
+    
+	/**
+	 * 是否是APP下注
+	 * @return boolean
+	 */
+	protected function isApp(){
+	    $agent = $_SERVER['HTTP_USER_AGENT'];
+	    return true;
+	}
+	
+	public static function CsubStr($str,$start,$len,$suffix='...'){
+	    preg_match_all("/[\x01-\x7f]|[\xc2-\xdf][\x80-\xbf]|\xe0[\xa0-\xbf][\x80-\xbf]|[\xe1-\xef][\x80-\xbf][\x80-\xbf]|\xf0[\x90-\xbf][\x80-\xbf][\x80-\xbf]|[\xf1-\xf7][\x80-\xbf][\x80-\xbf][\x80-\xbf]/", $str, $info);
+	    $len*=2;
+	    $i=0;
+	    $tmpstr = '';
+	    while($i < $len && array_key_exists($start,$info[0])) {
+	        if (strlen($info[0][$start]) > 1) {
+	            $i+=2;
+	            if ($i <= $len)  $tmpstr .= $info[0][$start];
+	        }else {
+	            if (++$i <= $len)  $tmpstr .= $info[0][$start];
+	        }
+	        $start++;
+	    }
+	    return array_key_exists($start,$info[0]) ? $tmpstr.=$suffix : $tmpstr;
+	}
+
+    /**
+     * 获取时时彩 彩种信息
+     * @return array
+     */
+	protected function getTypes()
+    {
+	    $this->types = db('type')->cache(true,10*60,'xcache')->where(array('isDelete'=>0))->order('sort')->select() ;
+	    $data = array() ;
+	    if ($this->types) {
+            foreach($this->types as $var){
+                $data[$var['id']] = $var ;
+            }
+        }
+	    return $this->types = $data;
+	}
+
+    /**
+     *  获取玩法表数据
+     * @return array
+     */
+	protected function getPlayeds()
+    {
+	    $this->playeds = db('played')->cache(true,10*60,'xcache')->where(array('enable'=>1))->order('sort')->select() ;
+	    $data = array() ;
+	    if($this->playeds) {
+            foreach($this->playeds as $var) {
+                $data[$var['id']] = $var;
+            }
+        }
+	    return $this->playeds = $data;
+	}
+
+    /**
+     * 获取玩法组数据
+     * @return array
+     */
+	protected function getGroups()
+    {
+	    $this->groups = model('played_group')->cache(true,10*60,'xcache')->where(array('enable'=>1))->order('sort,id')->select()->toArray() ;
+	    $data = array();
+	    if($this->groups) foreach($this->groups as $var){
+	        $data[$var['id']]=$var;
+	    }
+	    return $this->groups = $data;
+	}
+
+    /**
+     *
+     *  获取游戏
+     * @param $type
+     * @param null $time
+     * @return mixed
+     */
+	protected function getGameLastNo($type, $time=null)
+    {
+	    if($time===null) $time = $this->time ;
+	    $kjTime = $this->getTypeFtime($type) ; //得到开奖前停止下注时间
+
+		if($type==43){ //六合彩
+			$atime = date('Y-m-d H:i:s', $time);
+			$time_table = 'lhc_time';
+		}else{
+			//$atime = date('H:i:s', $time);
+			$atime  = date('H:i:s', $time+$kjTime) ; //投注有效時間 = 當前時間 + 停止下注時間
+			$time_table = 'data_time';
+		}
+	    
+	    //$sql="select actionNo, actionTime from {$this->prename}data_time where type=$type and actionTime<='".$atime."' order by actionTime desc limit 1";
+        //获取开奖时间小于投注有效时间的开奖数据
+	    //$return = db($time_table)->where(array('type'=>$type, 'actionTime'=>array('elt',$atime)))->order('actionTime desc')->limit(1)->find() ;
+		$return = db($time_table)->where('type',$type)->where('actionTime','<=',$atime)->order('actionTime desc')->limit(1)->find() ;
+
+	    if (!$return) {
+	        //$sql="select actionNo, actionTime from {$this->prename}data_time where type=$type order by actionNo desc limit 1";
+	        $return = db($time_table)->where('type',$type)->order('actionNo desc')->limit(1)->find() ;
+	        $time   = $time-24*3600 ;
+	    }
+
+	    $types = $this->getTypes();
+	    foreach($types as $play) {
+	        if($play['id']==$type) {
+	            $fun = $play['onGetNoed']; //获取后置事件函数
+	        }
+	    }
+	    if (method_exists($this, $fun)) {
+	        $this->$fun($return['actionNo'], $return['actionTime'], $time);
+	    }
+
+	    return $return;
+	}
+
+	/**
+	 * 读取将要开奖期号
+	 *
+	 * @params $type		彩种ID
+	 * @params $time		时间，如果没有，当默认当前时间
+	 * @params $flag		如果为true，则返回最近过去的一期（一般是最近开奖的一期），如果为flase，则是将要开奖的一期
+	 */
+	protected function getGameNo($type, $time=null) {
+	    if($time===null) $time=time();
+	    $kjTime = $this->getTypeFtime($type);
+	    if($type=='45'){
+	    	$type='24';
+	    }
+		if($type==43){ //六合彩
+			$atime = date('Y-m-d H:i:s', $time);
+			$time_table = 'lhc_time';
+		}else{
+			//$atime = date('H:i:s', $time);	
+			$atime  = date('H:i:s', $time+$kjTime) ; //投注有效時間 = 當前時間 + 停止下注時間
+			$time_table = 'data_time';
+		}
+	
+	    //$return = db($time_table)->where(array('type'=>$type, 'actionTime'=>array('gt',$atime)))->order('actionTime')->limit(1)->find();
+	    $return = db($time_table)->where('type',$type)->where('actionTime','>',$atime)->order('actionTime')->limit(1)->find();
+
+	    if(!$return){
+	        $return = db($time_table)->where('type',$type)->order('actionTime')->limit(1)->find();
+	        $time=$time+24*3600;
+	    }
+	    
+	    $types=$this->getTypes();
+
+	    foreach ($types as $play) {
+	        if($play['id']==$type)
+	        {
+	            $fun=$play['onGetNoed'];
+
+	        }
+	    }
+
+	    if (method_exists($this, $fun)) {
+	        $this->$fun($return['actionNo'], $return['actionTime'], $time);
+	    }
+
+	    return $return;
+	}
+	
+	
+	//获取延迟时间
+	protected function getTypeFtime($type) {
+	    if($type){
+	        //$Ftime=$this->getValue("select data_ftime from {$this->prename}type where id = ".$type);
+	        $data = model('type')->where(array('id'=>$type))->field('data_ftime')->find();
+	        $Ftime = $data['data_ftime'];
+	    }
+	    if(!$Ftime)
+	        $Ftime=0;
+	        return intval($Ftime);
+	}
+	
+	
+	//获取当期时间
+	protected function getGameActionTime($type,$old=0){
+	    $actionNo=$this->getGameNo($type);
+	    
+	    if($type==1 && $actionNo['actionTime']=='00:00'){
+	        $actionTime=strtotime($actionNo['actionTime'])+24*3600;
+	    }else{
+	        $actionTime=strtotime($actionNo['actionTime']);
+	    }
+	    if(!$actionTime) $actionTime=$old;
+	    return $actionTime;
+	}/////
+	
+	//获取当期期数
+	protected function getGameActionNo($type){
+	    $actionNo=$this->getGameNo($type);
+	    return $actionNo['actionNo'];
+	}/////
+
+
+    /**
+     *   重庆时时彩 后置事件处理函数
+     * @param $actionNo
+     * @param $actionTime
+     * @param null $time
+     */
+	private function noHdCQSSC(&$actionNo, &$actionTime, $time=null) {
+	    $this->setTimeNo($actionTime, $time);
+	    if($actionNo==0||$actionNo==120){
+	        //echo 999;
+	        $actionNo=date('Ymd-120', $time - 24*3600);
+	        $actionTime=date('Y-m-d 00:00', $time);
+	        
+	    }else{
+	        $actionNo=date('Ymd-', $time).substr(1000+$actionNo,1);
+	    }
+	}
+
+	//江西时时彩
+	private function no0Hd(&$actionNo, &$actionTime, $time=null){
+	    $this->setTimeNo($actionTime, $time);
+	    $actionNo=date('Ymd-', $time).substr(1000+$actionNo,1);
+	}
+	
+	private function noFF0Hd(&$actionNo, &$actionTime, $time=null){
+	    $this->setTimeNo($actionTime, $time);
+	    $actionNo=date('Ymd-', $time).substr(10000+$actionNo,1);
+	}
+	
+	// 韩国1.5分彩
+	private function hgssc(&$actionNo, &$actionTime, $time=null) {
+
+	    $this->setTimeNo($actionTime, $time);
+	    $actionNo = intval((strtotime($actionTime) - 30 - strtotime('2016-12-20 23:57:00')) / 90) + 1718360;
+	    $actionNo = strval($actionNo);
+	    //$actionTime = date('Y-m-d H:i:s', strtotime($actionTime) + 30);
+	    //echo $actionTime.' '.$actionNo;exit;
+	}
+	
+	// dj1.5分彩
+	private function djssc(&$actionNo, &$actionTime, $time=null) {
+	    $this->setTimeNo($actionTime, $time);
+	    $actionNo = intval((strtotime($actionTime) - 30 - strtotime('2016-12-20 23:57:00')) / 90) + 1713161;
+	    $actionNo = strval($actionNo);
+	    //$actionTime = date('Y-m-d H:i:s', strtotime($actionTime) + 30);
+	    //echo $actionTime.' '.$actionNo;exit;
+	}
+	
+	//五分 二分彩
+	private function noWF0Hd(&$actionNo, &$actionTime, $time=null){
+	    $this->setTimeNo($actionTime, $time);
+	    if($actionNo==1 && time()>strtotime(' 23:55:00')){
+	        //echo 999;
+	        if($time > time()+ 23*3600) $time = $time-24*3600;
+	        $actionNo=date('Ymd-001', $time + 24*3600);
+	        $actionTime=date('Y-m-d 00:00', $time + 24*3600);
+	        
+	    }elseif($actionNo==2 && time()>strtotime(' 23:55:00')){
+	        //echo 999;
+	        $actionNo=date('Ymd-002', strtotime($actionTime) + 24*3600);
+	        $actionTime=date('Y-m-d H:i:s', strtotime($actionTime) + 24*3600);
+	    }
+	    else{
+	        $actionNo=date('Ymd-', $time).substr(1000+$actionNo,1);
+	    }
+	}
+	
+	//新疆时时彩
+	private function noxHd(&$actionNo, &$actionTime, $time=null){
+	    $this->setTimeNo($actionTime, $time);
+	    if($actionNo>=84){
+	        $time-=24*3600;
+	    }
+	    
+	    $actionNo=date('Ymd-', $time).substr(100+$actionNo,1);
+	}
+	
+	//福彩3D、排列三
+	private function pai3(&$actionNo, &$actionTime, $time=null){
+	    $this->setTimeNo($actionTime, $time);
+	    $actionNo=date('Yz', $time);
+	    $actionNo=substr($actionNo,0,4).substr(substr($actionNo,4)+994,1);
+	    
+	    if($actionTime >= date('Y-m-d H:i:s', $time)){
+	        
+	    }else{
+	        $kjTime=$this->getTypeFtime($this->type);
+	        if(date('Y-m-d H:i:s', time()+$kjTime)<date('Y-m-d 23:59:59',time()))
+	            $actionTime=date('Y-m-d 19:30', time()+24*60*60);
+	            else
+	            {
+	                $actionNo = $actionNo+1;
+	                $actionTime=date('Y-m-d 19:30', time()+24*60*60);
+	            }
+	    }
+	}
+	
+	//北京PK10
+	private function BJpk10(&$actionNo, &$actionTime, $time=null){
+	    $this->setTimeNo($actionTime, $time);
+	    $actionNo = 179*(strtotime(date('Y-m-d', $time))-strtotime('2007-11-11'))/3600/24+$actionNo-3774-19;
+	}
+	
+	//北京快乐8
+	private function Kuai8(&$actionNo, &$actionTime, $time=null){
+	    $this->setTimeNo($actionTime, $time);
+	    $actionNo = 179*(strtotime(date('Y-m-d', $time))-strtotime('2004-09-19'))/3600/24+$actionNo-3838;
+	}
+	
+	//幸运飞艇
+	private function onXyft(&$actionNo, &$actionTime, $time=null){
+	    $this->setTimeNo($actionTime, $time);
+	    if($actionNo>132){
+	    	$actionNo = date("Ymd",$time-60*60*5).substr(1000+$actionNo,1);
+	    }else{
+			$actionNo = date("Ymd",$time).substr(1000+$actionNo,1);
+	    }
+	}
+
+	//重庆快乐十分 96期 同新疆时时彩
+	private function onCsf(&$actionNo, &$actionTime, $time=null){
+	    self::noxHd($actionNo,$actionTime,$time);
+	}
+
+	//北京28 和 北京快乐8 开奖期号一致,
+
+	private function setTimeNo(&$actionTime, &$time=null){
+
+	    if(!$time) $time=$this->time;
+	    
+	    $actionTime=date('Y-m-d ', $time).$actionTime;
+	}
+	
+	/**
+	 * 用户资金变动
+	 *
+	 * 请在一个事务里使用
+	 */
+	protected function addCoin($log){
+
+	    if(!isset($log['uid'])) $log['uid']=$this->user['uid'];
+	    if(!isset($log['info'])) $log['info']='';
+	    if(!isset($log['coin'])) $log['coin']=0;
+	    if(!isset($log['type'])) $log['type']=0;
+	    if(!isset($log['fcoin'])) $log['fcoin']=0;
+	    if(!isset($log['extfield0'])) $log['extfield0']=0;
+	    if(!isset($log['extfield1'])) $log['extfield1']='';
+	    if(!isset($log['extfield2'])) $log['extfield2']='';
+	    
+	    $sql=" call setCoin({$log['coin']}, {$log['fcoin']}, {$log['uid']}, {$log['liqType']}, {$log['type']}, '{$log['info']}', {$log['extfield0']}, '{$log['extfield1']}', '{$log['extfield2']}')";
+	    
+	    //echo $sql;exit;
+	    
+	    if(Db::query($sql)===false)
+	        return false;
+	        else
+	            return true;
+	            return false;
+	}
+	
+	/**
+	 * 获取来访IP地址
+	 */
+	protected static final function ip($outFormatAsLong=false){
+	    $request= \think\Request::instance();
+	    return $request->ip(1);
+	}
+	
+	
+	/**
+	 * 数据集分页
+	 * @param array $records 传入的数据集
+	 */
+	public function recordList($records , $count=15)
+    {
+        $request    =  request()->param() ;
+	    $total      =   $records? count($records) : 1 ;
+
+	    if ( isset($request['r']) ) {
+	        $listRows = (int)$request['r'];
+	    } else {
+            $listRows = config('paginate.list_rows') > 0 ? config('paginate.list_rows') : 10 ;
+	    }
+
+        $page       =  new page($total, $listRows, $request) ;
+	    $voList     =  array_slice($records, $page->firstRow, $page->listRows) ;
+	    $p			=  $page->show() ;
+	    $this->assign('data', $voList) ;
+	    $this->assign('_page', $p? $p: '') ;
+	}
+	
+}

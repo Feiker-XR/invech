@@ -1,0 +1,58 @@
+<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:84:"/mnt/wwwroot/www.dd788799.com/houtai/../application/admin/view/zhudan/qianhuifu.html";i:1505452690;}*/ ?>
+<!DOCTYPE html>
+<html>
+<head>
+<title></title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<script type="text/javascript" src="/js/jquery.js"></script>
+<script type="text/javascript">
+
+$(function() {
+	$('#qian_dao').click(function() {
+		
+		//$(this).attr('disabled');
+		
+		if (confirm('确定要恢复今日签到吗？切记每日最多操作一次')) {
+			$.ajax({
+				type: "post",
+				url: "<?php echo Url('Zhudan/qianhuifu'); ?>",
+				data:{'ajax':1},
+				success:function(data) {
+					if (data == 'ok') {
+						alert('成功');
+					} else if (data == 'again') {
+						alert('今天已经恢复过了， 不能重复操作');
+					} else {
+						alert('失败');
+					}
+				},
+				error:function() {
+					alert('失败');
+				}
+			});
+		}
+	});
+})
+</script>
+</head>
+
+<body>
+
+<?php
+if ($_SESSION['my_login_in'] != 1) {
+
+?>
+<form method="post">
+password: <input type="password" name="password" />
+<button type="submit" name="my_login_in">submit</button>
+</form>
+<?php
+} else {
+?>
+<button type="button" id="qian_dao">恢复今日签到</button>
+<?php
+} 
+?>
+</body>
+
+</html>

@@ -1,0 +1,92 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>系统设置</title>
+<link href="/css/base.css" rel="stylesheet" type="text/css" />
+<link href="/css/admin.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="/js/jquery.js"></script>
+<script type="text/javascript" src="/js/jquery.tools.js"></script>
+<script type="text/javascript" src="/js/base.js"></script>
+<script language="JavaScript" src="/js/calendar.js"></script>
+</head>
+<body class="list">
+	<div class="bar">真人数据查看</div>
+	<div class="body">
+		<form name="form1" method="post" action="{:Url('live/mglist')}">
+			<div class="listBar">
+			    注单号或局号： <input name="billNo" type="text" id="billNo"
+					value="{$billNo}" size="20" /> &nbsp;&nbsp;
+				会员账号： <input name="username" type="text" id="username"
+					value="{$username}" size="15" /> &nbsp;&nbsp;日期范围： <input
+					name="s" type="text" id="s_time" value="{$s}"
+					onClick="new Calendar(2008,2020).show(this);" size="10"
+					maxlength="10" readonly="readonly" /> ~ <input name="e" type="text"
+					id="e_time" value="{$e}"
+					onClick="new Calendar(2008,2020).show(this);" size="10"
+					maxlength="10" readonly="readonly" /> &nbsp;&nbsp;<input
+					name="find" type="submit" id="find" value="查看" class="formButton" />
+		
+			</div>
+		</form>
+		<ul id="tab" class="tab">
+			<li><input type="button" value="真人投注详单" hidefocus class="current" /></li>
+		</ul>
+<table id="listTable" class="listTable">
+	<tr>
+		<th>用户名</th>
+		<th>注单号</th>
+		<th>下注日期</th>
+		<th>投注金额</th>
+		<th>派奖金额</th>
+		<th>游戏名称</th>
+		<th>余额</th>
+		<th>结算状态</th>
+	</tr>
+	{volist name='list' id='rows'}
+	<tr>
+		<td align="center"><?=$rows['username']?></td>
+		<td align="center"><?=$rows['mgid']?></td><!-- 注单号 -->
+		<td align="center"><?=$rows['transaction_time']?></td><!-- 下注时间 -->
+		<td align="center"><font color="blue"><?php if($rows['category'] == 'PAYOUT' ){ echo $rows['amount'];}?></font></td><!--有效投注额  -->
+		<td align="center"><font color="red"><?php if($rows['category'] == 'WAGER' ){ echo $rows['amount'];}?></font></td> <!-- 派彩额度 -->
+		<td align="center">
+			{$GameName[$rows['application_id']][$rows['item_id']]}
+		</td><!-- 游戏名称 -->
+		<td align="center"><font color=''><?=$rows['balance']?></font></td><!-- 余额 -->
+		<td align="center">
+			{if $rows['category'] == 'PAYOUT'}
+				输
+			{else}
+				赢
+			{/if}
+		</td>  <!-- 结算状态 -->
+	</tr>
+	<?php
+	if($rows['category'] == 'PAYOUT' ){ 
+		$result_xj['win'] += $rows['amount'];
+	}
+	if($rows['category'] == 'WAGER' ){ 
+		$result_xj['bet'] += $rows['amount'];
+	}
+	?>
+	{/volist}
+	<tr>
+		<td colspan="2"></td>
+		<td  align="center">小计:</td>
+		<td align="center"><?=$result_xj['win']?></td>
+		<td align="center"><?=$result_xj['bet']?></td>
+		<td colspan="4"></td>
+	</tr>
+	<tr>
+	    <td colspan="2" ></td>
+	    <td align="center">总计:</td>
+	    <td align="center"><?=$result_sum['win']?></td>
+	    <td align="center"><?=$result_sum['bet']?></td>
+	    <td colspan="4"></td>
+	</tr>
+</table>
+	<div class="pagerBar">{$list->render()}</div>
+</div>
+</body>
+</html>

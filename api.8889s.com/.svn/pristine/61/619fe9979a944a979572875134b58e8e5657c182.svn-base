@@ -1,0 +1,157 @@
+<link rel="stylesheet" href="/400w-public/css/cabel-v1.css" />
+<link rel="stylesheet" href="/400w-public/css/style.css" />
+<link rel="stylesheet" href="/400w-public/css/animate.min.css" />
+<link rel="stylesheet" href="/400w-public/css/lottery.css" />
+<link rel="stylesheet" href="/400w-public/css/liMarquee.css" />
+<link rel="stylesheet" href="/400w-public/css/jquery.range.css" />
+<link rel="stylesheet" href="/400w-public/css/global.css" />
+<link rel="stylesheet" href="/400w-public/css/other.css" />
+<link rel="stylesheet" href="/400w-public/css/gfwf.css" />
+<link rel="stylesheet" href="/400w-public/css/layer.css" />
+
+<!--
+<script type="text/javascript" src="/js/jquery-1.8.0.min.js"></script>
+<script type="text/javascript" src="/js/template-web.js"></script>
+<script type="text/javascript" src="/js/kqwf.js"></script>
+-->
+
+<input type="hidden" name="playedGroup" value="<?=$groupId?>" />
+<input type="hidden" name="playedId" value="<?=$playedId?>" />
+<input type="hidden" name="type" value="<?=$type?>" />
+<input type="hidden" name="playedName" value="<?=$played['name']?>" />
+
+<div class='pp' action='six_dw' length="1" data-line="5"></div>
+
+<div id="sscContent">
+	<!-- content -->
+	<div class="lot-content clearfix">
+		<div class="fl main-left">
+			<div class="hd clearfix rehd" id="toptouzhu">
+				<div class="fl refl">
+					快捷金额：<input type="text" class="txt">
+				</div>
+				<div class="kjanniu">
+					<a href="javascript:void(0)" class="img-50" data-num="50"></a>
+					<a href="javascript:void(0)" class="img-100" data-num="100"></a>
+					<a href="javascript:void(0)" class="img-500" data-num="500"></a>
+					<a href="javascript:void(0)" class="img-1000" data-num="1000"></a>
+					<a href="javascript:void(0)" class="img-5000" data-num="5000"></a>
+					<a href="javascript:void(0)" class="img-10000" data-num="10000"></a>
+				</div>
+				<div class="fr">
+					<div class="T-tab clearfix" style="margin-top: 4.4px;">
+						<a href="javascript:void(0)" onclick="changeTab(this)">正一</a>
+						<a href="javascript:void(0)" onclick="changeTab(this)">正二</a>
+						<a href="javascript:void(0)" onclick="changeTab(this)">正三</a>
+						<a href="javascript:void(0)" onclick="changeTab(this)">正四</a>
+						<a href="javascript:void(0)" onclick="changeTab(this)">正五</a>
+						<a href="javascript:void(0)" onclick="changeTab(this)">正六</a>
+						<a href="javascript:void(0)" onclick="changeTab(this)">特码</a>
+					</div>
+				</div>
+			</div>
+
+			<div class="table-common">
+
+			</div>
+		</div>
+
+		<div class="fr main-right cl-10">
+		</div>
+	</div>
+
+</div>
+
+<script type="text/html" id="six_dw">
+	<table width="100%" border="1" class="pp" action="six_dw" data-line="5">
+		<thead>
+			<tr>
+				<th width="47">号码</th>
+				<th width="56">赔率</th>
+				<th>金额</th>
+				<th width="47">号码</th>
+				<th width="56">赔率</th>
+				<th>金额</th>
+				<th width="47">号码</th>
+				<th width="56">赔率</th>
+				<th>金额</th>
+				<th width="47">号码</th>
+				<th width="56">赔率</th>
+				<th>金额</th>
+				<th width="47">号码</th>
+				<th width="56">赔率</th>
+				<th>金额</th>
+			</tr>
+		</thead>
+
+		<tbody>
+			{{each plg.sz.lines line index1}}
+			<tr>
+				{{each line pl index2}}
+
+				<td style="cursor: pointer;"><span class="ball-icon ball-{{pl.value | number}}"></span></td>
+				<td style="cursor: pointer;"><strong class="color-red pl">{{pl.pl}}</strong></td>
+				<td><input type="text" class="table-txt" data-name="{{plg.name}}-{{pl.value}}" data-plid="{{pl.id}}" data-pl="{{pl.pl}}"></td>
+
+				{{/each}}
+			</tr>
+			{{/each}}
+		</tbody>
+
+		<tbody>
+			{{each plg.sm.lines line index1}}
+			<tr>
+				{{each line pl index2}}
+
+				<td style="cursor: pointer;">{{pl.value}}</td>
+				<td style="cursor: pointer;"><strong class="color-red pl">{{pl.pl}}</strong></td>
+				<td><input type="text" class="table-txt" data-name="{{plg.name}}-{{pl.value}}" data-plid="{{pl.id}}" data-pl="{{pl.pl}}"></td>
+
+				{{/each}}
+			</tr>
+			{{/each}}
+		</tbody>
+	</table>
+</script>				
+
+<script>
+//var pls;//玩法的所有赔率
+//var plg;//当前赔率组
+
+function changeTab(self){
+    $(self).siblings().removeClass('active');
+    $(self).addClass('active');
+    var $tabs = $(self).parent().children();
+
+    var index = $tabs.index(self);
+    plg = pls[index];
+
+    plg.sz = plg.pls.slice(0, 49);
+    plg.sm = plg.pls.slice(49);
+
+	var len = $('.pp').data('line');
+	//plg.sz.lines = group_six(plg.sz,len);
+	//plg.sm.lines = group_six(plg.sm,len);
+	plg.sz.lines = group_six_sz(plg.sz);
+	plg.sm.lines = group_six_sm(plg.sm);
+
+    var html = template("six_dw",{plg:plg});    
+    $('.table-common').html(html);
+}
+
+$(function(){
+    //循环表格放到table-common    
+    var playedId = "<?=$playedId?>";
+    $.getJSON("/game/pl/playedId/"+playedId,function(data){
+        console.log(data);
+        pls = data;
+        $('.T-tab.clearfix').children().eq(0).click();
+    });
+    //快捷金额input
+    $("#toptouzhu .kjanniu a").click(function () {
+        var num = $(this).data('num');
+        $('#inputMoney').val(num);
+    });
+
+});
+</script>    

@@ -1,0 +1,130 @@
+<form class="form-horizontal" id="admin_group_add" >
+  <div class="box-body">
+  
+      <div class="form-group">
+          <label for="tag" class="col-md-3 control-label">角色名称</label>
+          <div class="col-md-5">
+              <input type="text" class="form-control" name="name" id="tag" {if(!empty($info['name']))} value="{$info.name}" {/if} autofocus>
+          </div>
+      </div>
+
+      <div class="form-group">
+          <label for="tag" class="col-md-3 control-label">角色概述</label>
+          <div class="col-md-5">
+              <textarea name="desc" class="form-control" rows="3">{if(!empty($info['desc']))} {$info.desc} {/if}</textarea>
+          </div>
+      </div>
+
+      <div class="form-group">
+          <label for="tag" class="col-md-3 control-label">权限列表</label>
+      </div>
+      <div class="form-group">
+          <div class="form-group">
+              {if($perms)}
+                  {foreach($perms[0] as $v)}
+                      <div class="form-group fcheckbox_box" class="checkbox" >
+                        <label class="control-label col-md-3 all-check">
+                          <input  type="Checkbox" value="{$v.id}" class="fcheckbox" name="permids[]">&nbsp;{$v->name}：
+                        </label>
+          
+                          <div class="col-md-6">
+                            {if(isset($perms[$v.id]))}
+                                {foreach($perms[$v.id] as $vv)}
+                                  <div class="col-md-4" style="float:left;padding-left:20px;margin-top:8px;">
+                                    <span class="checkbox-custom checkbox-default">
+                                    <i class="fa"></i>
+                                        <input class="form-actions sub_nodes"
+                                              {if(!empty($permids))}
+                                                 {if(in_array($vv.id,$permids))}
+                                                 checked
+                                                 {/if}
+                                              {/if}
+                                               id="inputChekbox{$vv.id}" type="Checkbox" value="{$vv.id}"
+                                               name="permids[]"> <label for="inputChekbox{$vv.id}">
+                                            {$vv.name}
+                                        </label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    </span>
+                                  </div>
+                                {/foreach}
+                            {/if}
+                          </div>
+                      </div>
+                  {/foreach}
+              {/if}
+          </div>
+      </div>
+
+     <input type="hidden" name="id" {if(!empty($info['id']))} value="{$info['id']}" {/if} >
+    <div class="col-sm-offset-2 col-sm-10">
+        <button id="btnajax" class="btn btn-danger">提交</button>
+    </div>
+  </div>
+</form>
+<script type="text/javascript">
+$(function(){
+  // 父节点事件
+  $(".fcheckbox").click(function(){
+    var _inputs = $(this).parents('div.fcheckbox_box').find('div.col-md-6 input[type=checkbox]');
+    if($(this).attr('checked') == 'checked'){
+      _inputs.attr('checked','checked');
+    }else{
+      _inputs.removeAttr('checked');
+    }
+  });
+  // 子节点事件
+  $('.sub_nodes').click(function(){
+    var _parent = $(this).parents('div.fcheckbox_box');
+    //console.log(_parent.find('.sub_nodes:checked').length);
+    if(_parent.find('.sub_nodes:checked').length == 0){
+       _parent.find('input.fcheckbox').removeAttr('checked');
+    }else{
+     
+      _parent.find('input.fcheckbox').attr('checked','checked');
+    }
+   /* if($(this).attr('checked') == 'checked'){
+      if(_parent.find('.sub_nodes:checked').length == 0){
+        _parent.find('div.fcheckbox').removeAttr('checked');
+      }
+    }else{
+      _parent.find('div.fcheckbox').attr('checked','checked');
+    }*/
+  })
+
+
+
+  $("#btnajax").click(function () {
+  
+    var options = {
+      url: "{:url('role_edit')}",
+      type : 'POST',
+      dataType : 'json',
+      success : function(data) {
+        $(".layui-layer-close").click();
+
+       layer.alert(data.msg, {
+          time: 20000,
+          skin: 'layui-layer-molv', //该皮肤由layer.seaning.com友情扩展。关于皮肤的扩展规则，去这里查阅
+          closeBtn: 0,
+          anim: 4
+        }, function(){
+           window.location.href = document.URL;
+        })
+      },
+      error: function(data) {
+         $(".layui-layer-close").click();
+        layer.alert(data.msg, {
+          time: 20000,
+          skin: 'layui-layer-molv', //该皮肤由layer.seaning.com友情扩展。关于皮肤的扩展规则，去这里查阅
+          closeBtn: 0,
+          anim: 4
+        }, function(){
+           window.location.href = document.URL;
+        })
+      }
+    };
+      $("#admin_group_add").ajaxForm(options);
+   })
+
+});
+
+</script>

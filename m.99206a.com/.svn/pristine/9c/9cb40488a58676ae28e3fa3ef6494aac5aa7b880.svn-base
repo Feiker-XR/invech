@@ -1,0 +1,162 @@
+<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:85:"/mnt/wwwroot/www.dd788799.com/mobile/../application/index/mview/user/huikuan_new.html";i:1508319436;}*/ ?>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>在线支付存款页面 </title>
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">	
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+<link rel="stylesheet" href="/css/font-awesome.min.css">	
+<link rel="stylesheet" href="/styles/ezweb.css">
+<link rel="stylesheet" type="text/css" href="/fonts-new/iconfont.css">	
+<link rel="stylesheet" href="/css/500f_new_wap.css">	
+	
+<link rel="stylesheet" href="/css/pay-500F.css" />
+
+<script type="text/javascript" src="/js/jquery-2.2.0.min.js"></script>
+<script type="text/javascript" src="/js/pay-500F.js"></script>
+<style type="text/css">
+.pay_style h2{font-size: 1.5rem;}
+.pay_style_tip h2{font-size: 1.5rem;}
+</style>
+</head>
+<body>
+<div class="block_60"></div>	
+<!--在线支付-->	
+<div class="block_10"></div>	
+<div class="pay_online">
+	<a href="<?php echo url('pay/index'); ?>" class="pay_online_1">在线支付</a>
+	<a href="<?php echo url('user/huikuan_new'); ?>" class="pay_online_2 on">公司入款</a>
+</div>	
+<div class="block_10"></div>
+<!--<div class="pay_name">
+	<h2>请填写存款信息</h2>
+	<div class="block_20"></div>
+	<div class="pay_input">
+		<ul class="pay_inputul_1 fl">
+			<li>会员名称：</li>
+			<li><input type="text" placeholder="用户名" disabled="disabled"/></li>
+		</ul>
+		<ul class="pay_inputul_2 fl mt20">
+			<li>存款金额：</li>
+			<li><input type="text" placeholder="请输入金额" onkeyup="clearNoNum(this);" /></li>
+		</ul>
+	</div>
+</div>	-->
+<div class="block_0"></div>	
+<div class="pay_style">
+	<h2>支付方式：</h2>
+	<div class="block_0"></div>
+	<div class="pay_style_choose">
+		<?php if(is_array($bank) || $bank instanceof \think\Collection || $bank instanceof \think\Paginator): $i = 0; $__LIST__ = $bank;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?>
+		<a href="<?php echo url('user/huikuan_2','id='.$vo['id']); ?>" >		
+			<div class="pay_style_choose_1">
+				<img src="<?php echo $vo['card_logo']; ?>" />
+				<span><?php echo $vo['card_bankName']; ?></span>			
+			</div>	
+		</a>
+       <?php endforeach; endif; else: echo "" ;endif; ?>
+		<!-- 
+		<a href="alipay-page.html">
+			<div class="pay_style_choose_2">
+				<img src="img/logo-8.png" />
+				<span>支付宝</span>
+			</div>
+		</a>
+		<a href="conmpany-pay-bef.html">			
+			<div class="pay_style_choose_1">
+				<img src="img/logo-4.png" />
+				<span>工商银行</span>
+			</div>
+		</a>
+		<a href="conmpany-pay-bef.html">			
+			<div class="pay_style_choose_2">
+				<img src="img/logo-5.png" />
+				<span>农业银行</span>	
+			</div>
+		</a>
+		<a href="conmpany-pay-bef.html">
+			<div class="pay_style_choose_1">
+				<img src="img/logo-6.png" />
+				<span>建设银行</span>
+			</div>
+		</a>-->
+		<div class="block_10"></div>
+	</div>	
+</div>	
+<div class="block_0"></div>	
+<div class="pay_style_tip">
+	<h2>温馨提示</h2>
+	<div class="block_10"></div>
+	<ul>
+		<li>1.请在金额转出之后务必填写网页下方的汇款信息表格，以便我们财务人员能及时为您确认添加金额到您的会员账户。</li>
+		<li>2.本公司最低汇款金额为100元。</li>
+		<li>3.本公司不支持跨行转账方式进行汇款。</li>
+	</ul>
+</div>
+
+<div class="block_60"></div>	
+<div class="block_60"></div>
+<div class="block_60"></div>
+	
+	
+<!--顶部固定nav-->
+
+<script language="javascript">	
+  /*
+	function refresh_money(){
+	$.ajax({
+	    cache: false,
+	    url: "/get_money.php",
+	    success:function(data){
+	        if(data==""){
+	        }else{
+	         $data_arr=data.split("||");
+			 $("#user_money,#money").html($data_arr[0]);
+			 // $("#user_jifen").html($data_arr[1]);
+	        }
+	    }
+	}); 
+	window.setTimeout("refresh_money();", 15000); 
+	}
+	//refresh_money();
+    */
+</script> 
+
+<!--------------->
+
+<!--底部nav固定-->
+
+<script>
+$(function(){
+	//点击底部固定导航条切换
+	$(".nav500_bottom_a").click(function(){
+		var navThis = $(this);
+		navThis.css("color","#d9901e")
+		navThis.parent().siblings("span").find("a").css("color","#999999")
+		navThis.find("i").addClass("nav500_b_active");
+		navThis.parent().siblings("span").find("i").removeClass("nav500_b_active");
+		navThis.addClass("nav500_bottom_active").parent().siblings("span").find("a").removeClass("nav500_bottom_active")
+	});
+	
+})
+</script>		
+	
+	
+</body>
+
+<script>
+$(function(){
+	//子页面传递高度给顶层iframe	
+	function changeFrameHeight(){
+		bodyClientH = document.body.clientHeight;
+		bodyClientW = document.body.clientWidth;
+		var iframeId = $(window.parent.document).find("#iframeid")
+		iframeId.css("height",bodyClientH + 50)
+	}	
+	changeFrameHeight()		
+})
+</script>
+</html>

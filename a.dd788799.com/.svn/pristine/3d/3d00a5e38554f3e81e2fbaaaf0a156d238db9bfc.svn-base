@@ -1,0 +1,92 @@
+<?php
+namespace app\common\model\member;
+use app\common\model\Bet;
+use app\common\model\Apply;
+use app\common\validate\Member;
+use bong\foundation\Str;
+use think\Loader;
+
+trait BasicTrait
+{
+    //----------------前台------------------
+
+    // (new Member)->register();
+    public function register($request){
+        $params = $request->param();
+
+        $agent = null;
+
+        try{
+            if(!empty($params['parentId'])){
+                $agent_id = dehashid($params['parentId']);
+                $agent = self::get($agent_id);
+            }                            
+        }catch(\Exception $e){
+
+            return '推荐人无效';
+        }
+
+        try{
+
+            db()->startTrans();
+            $validate = validate('Member')->scene('register');
+            if(!$validate->check($params)){
+                return $validate->getError();                
+            }
+
+            $addUser = $this->save($params);
+            if ($addUser){
+                event('user.register',[$this,$agent]);
+                db()->commit();
+            }
+            //db()->rollback();
+            return true;
+        }catch(\Exception $e){
+            db()->rollback();
+            return false;
+        }
+    }
+
+    public function apply($business='agent'){
+        $param = request()->param();
+        if(!validate('Apply')->scene($business)->check($param)){
+            return false;
+        }
+
+        $b_method = 'beforeApply' . ucfirst($business);
+        if(method_exists($this, $b_method)) {
+            call_user_func_array([$this, $b_method], []);
+        }
+
+        $apply = Apply::create([
+            'uid'   =>  $this->uid,
+            'business'  =>  $business,
+            'params'    =>  json_encode($param),
+        ]);
+
+        $a_method = 'afterApply' . ucfirst($business);
+        if(method_exists($this, $a_method)) {
+            call_user_func_array([$this, $a_method], [$apply]);
+        }
+        return $apply;
+    }
+
+    //提款创建之前,需要检查数据合法性
+    public function beforeApplyWithdraw(){
+        $info = $this->get_withdraw_info();
+        $check =  input('amount') == $info['amount']
+            && input('audit_remain') == $info['audit_remain']
+            && input('real_amount') == $info['real_amount']
+            && input('debit_amount') == $info['debit_amount'] ;
+        if(!$check){
+            throw new \Exception('提款申请数据有误!');
+        } 
+    }
+
+    //提款申请提交后,需要扣除用户余额,增加冻结金额;
+    public function afterApplyWithdraw(Apply $apply){
+        $this->decBalance($apply->amount,'withdraw',$apply->id,'提现申请预扣'.$apply->amount);
+        $this->incFrozenBalance($apply->amount);
+    }
+
+}

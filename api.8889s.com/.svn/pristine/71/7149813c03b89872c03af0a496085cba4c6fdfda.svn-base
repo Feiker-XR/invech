@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Welcome</title>
+<link rel="stylesheet" type="text/css" href="/css/general.css"/>
+<script src='/js/jquery-1.8.0.min.js'></script>
+<script type="text/javascript" src="/Scripts/member.js"></script>
+<script language="javascript">
+function check_submit(){
+	if($("#pay_value").val()==""){
+		 alert("请输入您的提款金额");
+		 $("#pay_value").focus();
+		 return false;
+	 }
+	if($("#qk_pwd").val()==""){
+		 alert("请输入您注册时设置的取款密码");
+		 $("#qk_pwd").focus();
+	 	 return false;
+ 	 }
+ 	if($("#pay_value").val()<100){
+		 alert("每次最低提款金额为100");
+		 $("#pay_value").focus();
+		 return false;
+	}
+}
+</script>
+</head>
+  <div class="ui-moneyBox">
+    <ul>
+        <table width="100%" border="0" cellspacing="0" cellpadding="5">
+        <form id="MyForm" onsubmit="return  check_submit()" action="/user/get_money" method="post">
+          <tr>
+            <td align="right">会员账号：</td>
+            <td>{$user['username']}</td>
+          </tr>
+          <tr>
+            <td width="150" align="right">收款人姓名：</td>
+            <td><font style="font-size:14px;color:#F00; font-weight:bold">{$user['pay_name']}</font></td>
+          </tr>
+          <tr>
+            <td width="150" align="right">账户额度：</td>
+            <td><font style="font-size:14px;color:#F00; font-weight:bold">{$user['money']}</font></td>
+          </tr>
+          <tr>
+            <td align="right">收款银行：</td>
+            <td>{$user['pay_card']}
+           </td>
+          </tr>
+          <tr>
+            <td align="right">银行账号：</td>
+            <td>{$user['pay_num']}</td>
+          </tr>
+          <tr>
+            <td align="right">开户行地址：</td>
+            <td>{$user['pay_address']}</td>
+          </tr>
+          <tr>
+            <td align="right">取款金额：</td>
+            <td><input name="pay_value" type="text" class="Input_100" id="pay_value" onkeyup="if(isNaN(value))execCommand('undo')" maxlength="6"/></td>
+          </tr>
+          <tr>
+            <td align="right">请输入您的资金密码：</td>
+            <td><input type="password" id="qk_pwd" name="qk_pwd" class="Input_100"/></td>
+          </tr>
+          <tr>
+            <td colspan="2" align="center" style="padding-left:160px;"><input type="submit" name="button" id="button" value="确认录入" class="m_btn"/></td>
+          </tr>
+          </form>
+        </table>
+    </ul>
+  </div>
+<script type="text/javascript">
+	//Init('','','')
+</script>
+</body>
+</html>

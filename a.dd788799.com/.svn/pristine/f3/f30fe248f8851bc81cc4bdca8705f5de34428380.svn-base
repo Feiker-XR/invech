@@ -1,0 +1,68 @@
+<?php
+namespace app\common\model;
+use think\Model;
+use think\model\Relation;
+
+class Base extends Model{
+    /*放在此处有误;new static()造成
+    public function __construct($data = []){
+        if(empty($this->field)){
+            $this->field = $this->getQuery()->getTableInfo('', 'fields');    
+        }        
+        return parent::__construct($data);
+    }
+    */
+    //请求的分页参数list_rows支持
+    public static function __callStatic($method, $args)
+    {
+        if('paginate' == $method){
+
+            $args['list_rows'] = input('list_rows')??null;
+        }
+        return parent::__callStatic($method, $args);
+    }
+
+    public function __call($method, $args)
+    {
+    	if($listRows = input('list_rows')??null){
+    		config('paginate.list_rows',$listRows);
+    	}
+      
+    	return parent::__call($method, $args);
+    }
+
+    //通用hashid
+    public function getHashidAttr($value)
+    {
+        return hashid($this->id);
+    }
+
+    public function setPasswordAttr($value,$data)
+    {
+        return $this->data['password'] = bcrypt($value);
+    }    
+
+    protected function getRelationData(Relation $modelRelation)
+    {
+        //TP5处理同表关联的bug,Member::getSubMembers中
+        //$this->sub_members得到的关联模型列表,其模型的父模型是$this模型;
+        //关联模型使用关联属性sub_members得到的是$this模型(父模型),
+        //而不是关联模型下线会员列表;
+        $value = $modelRelation->getRelation();
+        return $value;
+    }
+
+    public function save($data = [], $where = [], $sequence = null)
+    {
+        $vdata = empty($data)?$this->data:$data;
+ 
+        if (!$this->validateData($vdata)) {
+            return false;
+        }
+        
+        if(empty($this->field)){
+            $this->field = $this->getQuery()->getTableInfo('', 'fields');    
+        }        
+        return parent::save($data);
+    }
+}

@@ -1,0 +1,267 @@
+<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:83:"/mnt/wwwroot/www.dd788799.com/mobile/../application/index/mview/user/record_cg.html";i:1513608558;}*/ ?>
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>交易记录串关</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+	<link rel="stylesheet" href="/css/bootstrap.min.css">
+	<link rel="stylesheet" href="/css/font-awesome.min.css">
+	<link rel="stylesheet" href="/styles/ucenter.css">
+	<link rel="stylesheet" type="text/css" href="/fonts-new/iconfont.css">	
+	<link rel="stylesheet" href="/styles/ezweb.css">
+	<link rel="stylesheet" href="/css/500f_new_wap.css">			
+	<script src="/assets/jquery.js"></script>
+	<script src="/js/bootstrap.min.js"></script>
+</head>
+<script language="javascript">
+//if(self==top){
+//	top.location='/index.php';
+//}
+</script>
+<body>
+	
+
+	
+<div class="h10"></div>
+<div class="ucenter">
+	<!--chaxun-->
+	<div class="container" style="margin: 60px 0px;">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h3 class="panel-title">未结注单 <span class="pull-right" ><a target="mem_index" href="/user/report.html">历史报表</a></span></h3>
+			</div>
+
+			<div class="panel-body">
+				<div role="tabpanel">
+					<!-- Nav tabs -->
+					<ul class="nav nav-tabs nav-tile" role="tablist">
+						<li>
+							<a target="mem_index" href="/user/record_ds">体育单式</a>
+						</li>
+						<li class="active">
+							<a target="mem_index" href="/user/record_cg">体育串关</a>
+						</li>
+						<li>
+							<a target="mem_index" href="/user/record_cp">彩票游戏</a>
+						</li>
+					</ul>
+					<!-- Tab panes -->
+					<div class="tab-content">
+						<div role="tabpanel" class="tab-pane active">
+							<div class="table-responsive">
+								<table class="table table-bordered">
+									<tr class="success">
+										<td width="150" class="zd_item_header">投注时间</td>
+										<td width="366" class="zd_item_header">投注详细信息</td>
+										<td width="80" class="zd_item_header">下注</td>
+									</tr>
+
+									<?php if(empty($betcg)): ?>
+									<tr>
+										<td height="30" colspan="5" align="center" bgcolor="#FFFFFF" ><p class="bg-danger">暂无记录</p></td>
+									</tr>
+									<?php else: if(is_array($betcg) || $betcg instanceof \think\Collection || $betcg instanceof \think\Paginator): if( count($betcg)==0 ) : echo "" ;else: foreach($betcg as $k=>$vo): if($current != $vo['gid']): 							
+			       			$bet_money += $vo['bet_money'];
+							$ky += $vo['bet_win'];
+							if($line_count % 2 == 0) 
+								$bgcolor = '#FFF';
+							else
+								$bgcolor = '#f5f5f5';
+							$line_count ++;
+			       		?>
+					    <tr bgcolor="<?=$bgcolor?>" align="center" onMouseOver="this.style.backgroundColor='#FFFFCC'" onMouseOut="this.style.backgroundColor='<?=$bgcolor?>'" >
+						  <td rowspan="<?php echo $vo['cg_count']; ?>" align="center"><span style="color:#46AF98"><?=date('Y-m-d',strtotime($vo["bet_time"])).'<br>'.date('H:i:s',strtotime($vo["bet_time"]))?></span><br>
+						  <span style="color:#0DC4FF"><?=$vo["cg_count"]?>串1</span><br>
+						  <span style="color:#F90">HG_<?=$vo['gid']?></span></td>
+			       		<?php else: ?>
+			       			<tr bgcolor="<?=$bgcolor?>" align="center" style="height:60px;">
+			       			<!--<div style="width:99%; padding:10px;">-->
+			       		<?php endif; ?>
+			       		<td>		       	
+			       			<?php switch($vo['point_column']): case "match_ho": ?>
+			       					让球 <span style="color:#F00"><?php echo $vo['match_name']; ?></span>
+			       					<br />
+			       					
+			       					<?php if(($vo['match_showtype'] == 'c') or ($vo['match_showtype'] == 'C')): ?>
+			       						<font style="color:#000000"><?php echo $vo['guest']; ?></font>
+					    				<?php echo $vo['match_rgg']; ?>
+					    				<font style="color:#000000"><?php echo $vo['master']; ?></font>(主)
+			       					<?php else: ?>
+			       						<font style="color:#000000"><?php echo $vo['master']; ?></font>
+					    				<?php echo $vo['match_rgg']; ?>
+					    				<font style="color:#000000"><?php echo $vo['guest']; ?></font>
+			       					<?php endif; ?>
+			       					<br/>
+			       					<?php echo $vo['master']; ?> @ <font color='red'><?php echo $vo['bet_point']; ?></font>
+			       				<?php break; case "match_ao": ?>
+			       					让球 <span style="color:#F00"><?php echo $vo['match_name']; ?></span>
+			       					<br />
+			       					
+			       					<?php if(($vo['match_showtype'] == 'c') or ($vo['match_showtype'] == 'C')): ?>
+			       						<font style="color:#000000"><?php echo $vo['guest']; ?></font>
+					    				<?php echo $vo['match_rgg']; ?>
+					    				<font style="color:#000000"><?php echo $vo['master']; ?></font>(主)
+			       					<?php else: ?>
+			       						<font style="color:#000000"><?php echo $vo['master']; ?></font>
+					    				<?php echo $vo['match_rgg']; ?>
+					    				<font style="color:#000000"><?php echo $vo['guest']; ?></font>
+			       					<?php endif; ?>
+			       					<br/>
+			       					<?php echo $vo['guest']; ?> @ <font color='red'><?php echo $vo['bet_point']; ?></font>
+			       				<?php break; case "value='match_bho": ?>
+			       					上半场让球 <span style="color:#F00"><?php echo $vo['match_name']; ?></span>
+			       					<br />
+			       					
+			       					<?php if(($vo['match_showtype'] == 'c') or ($vo['match_showtype'] == 'C')): ?>
+			       						<font style="color:#000000"><?php echo $vo['guest']; ?></font>
+					    				<?php echo $vo['match_rgg']; ?>
+					    				<font style="color:#000000"><?php echo $vo['master']; ?></font>(主)
+			       					<?php else: ?>
+			       						<font style="color:#000000"><?php echo $vo['master']; ?></font>
+					    				<?php echo $vo['match_rgg']; ?>
+					    				<font style="color:#000000"><?php echo $vo['guest']; ?></font>
+			       					<?php endif; ?>
+			       					<?php echo $vo['master']; ?> @ <font color='red'><?php echo $vo['bet_point']; ?></font>
+			       				<?php break; case "value='match_bao": ?>
+			       					上半场让球 <span style="color:#F00"><?php echo $vo['match_name']; ?></span>
+			       					<br />
+			       					<font style="color:#000000">
+			       					<?php if(($vo['match_showtype'] == 'c') or ($vo['match_showtype'] == 'C')): ?>
+			       						<font style="color:#000000"><?php echo $vo['guest']; ?></font>
+					    				<?php echo $vo['match_rgg']; ?>
+					    				<font style="color:#000000"><?php echo $vo['master']; ?></font>(主)
+			       					<?php else: ?>
+			       						<font style="color:#000000"><?php echo $vo['master']; ?></font>
+					    				<?php echo $vo['match_rgg']; ?>
+					    				<font style="color:#000000"><?php echo $vo['guest']; ?></font>
+			       					<?php endif; ?>
+			       					<br/>
+			       					<?php echo $vo['guest']; ?> @ <font color='red'><?php echo $vo['bet_point']; ?></font>
+			       				<?php break; case "match_dxdpl": ?>
+			       					大小 <span style="color:#F00"><?php echo $vo['match_name']; ?></span>
+			       					<br />
+			       					<font style="color:#000000"><?php echo $vo['master']; ?></font> VS. <font style="color:#890209"><?php echo $vo['guest']; ?></font>
+			       					<br/>
+			       					O<?php echo $vo['match_dxgg']; ?> @ <font color="red"><?php echo $vo['bet_point']; ?></font>
+			       				<?php break; case "match_dxxpl": ?>
+			       					大小 <span style="color:#F00"><?php echo $vo['match_name']; ?></span>
+			       					<br />
+			       					<font style="color:#000000"><?php echo $vo['master']; ?></font> VS. <font style="color:#890209"><?php echo $vo['guest']; ?></font>
+			       					U<?php echo $vo['match_dxgg']; ?> @ <font color="red"><?php echo $vo['bet_point']; ?></font>
+			       				<?php break; case "match_bdpl": ?>
+			       					半场大小 <span style="color:#F00"><?php echo $vo['match_name']; ?></span><br />
+			       					<font style="color:#000000"><?php echo $vo['master']; ?></font> VS. <font style="color:#890209"><?php echo $vo['guest']; ?></font>
+			       					O<?php echo $vo['match_dxgg']; ?> @ <font color="red"><?php echo $vo['bet_point']; ?></font>
+			       				<?php break; case "match_bxpl": ?>
+			       					半场大小 <span style="color:#F00"><?php echo $vo['match_name']; ?></span>
+			       					<br />
+			       					<font style="color:#000000"><?php echo $vo['master']; ?></font> VS. <font style="color:#890209"><?php echo $vo['guest']; ?></font>
+			       					U<?php echo $vo['match_dxgg']; ?> @ <font color="red"><?php echo $vo['bet_point']; ?></font>
+			       				<?php break; case "match_bzm": ?>
+			       					独赢 <span style="color:#F00"><?php echo $vo['match_name']; ?></span>
+			       					<br />
+			       					<font style="color:#000000"><?php echo $vo['master']; ?></font> VS. <font style="color:#890209"><?php echo $vo['guest']; ?></font>
+			       					<br/>
+			       					<font style="color:#000000"><?php echo $vo['master']; ?> @ <font color="red"><?php echo $vo['bet_point']; ?></font></font>
+			       				<?php break; case "match_bzg": ?>
+			       					独赢 <span style="color:#F00"><?php echo $vo['match_name']; ?></span>
+			       					<br />
+			       					<font style="color:#000000"><?php echo $vo['master']; ?></font> VS. <font style="color:#890209"><?php echo $vo['guest']; ?></font>
+			       					<br/>
+			       					<font style="color:#000000"><?php echo $vo['guest']; ?> @ <font color="red"><?php echo $vo['bet_point']; ?></font></font>
+			       				<?php break; case "match_bzh": ?>
+			       					独赢 <span style="color:#F00"><?php echo $vo['match_name']; ?></span>
+			       					<br />
+			       					<font style="color:#000000"><?php echo $vo['master']; ?></font> VS. <font style="color:#890209"><?php echo $vo['guest']; ?></font>
+			       					<br/>
+			       					<font style="color:#000000">和局 @ <font color="red"><?php echo $vo['bet_point']; ?></font></font>
+			       				<?php break; case "match_bmdy": ?>
+			       					半场独赢 <span style="color:#F00"><?php echo $vo['match_name']; ?></span>
+			       					<br />
+			       					<font style="color:#000000"><?php echo $vo['master']; ?></font> VS. <font style="color:#890209"><?php echo $vo['guest']; ?></font>
+			       					<br/>
+			       					<font style="color:#000000"><?php echo $vo['master']; ?> @ <font color="red"><?php echo $vo['bet_point']; ?></font></font>
+			       				<?php break; case "match_bgdy": ?>
+			       					半场独赢 <span style="color:#F00"><?php echo $vo['match_name']; ?></span>
+			       					<br />
+			       					<font style="color:#000000"><?php echo $vo['master']; ?></font> VS. <font style="color:#890209"><?php echo $vo['guest']; ?></font>
+			       					<br/>
+			       					<font style="color:#000000"><?php echo $vo['guest']; ?> @ <font color="red"><?php echo $vo['bet_point']; ?></font></font>
+			       				<?php break; case "match_bhdy": ?>
+			       					半场独赢 <span style="color:#F00"><?php echo $vo['match_name']; ?></span>
+			       					<br />
+			       					<font style="color:#000000"><?php echo $vo['master']; ?></font> VS. <font style="color:#890209"><?php echo $vo['guest']; ?></font>
+			       					<br/>
+			       					<font style="color:#000000">和局 @ <font color="red"><?php echo $vo['bet_point']; ?></font></font>
+			       				<?php break; case "match_dsdpl": ?>
+			       					单双 <span style="color:#F00"><?php echo $vo['match_name']; ?></span>
+			       					<br />
+			       					<font style="color:#000000"><?php echo $vo['master']; ?></font> VS. <font style="color:#890209"><?php echo $vo['guest']; ?></font>
+			       					<br/>
+			       					<font style="color:#000000">单 @ <font color="red"><?php echo $vo['bet_point']; ?></font></font>
+			       				<?php break; case "match_dsspl": ?>
+			       					单双 <span style="color:#F00"><?php echo $vo['match_name']; ?></span>
+			       					<br />
+			       					<font style="color:#000000"><?php echo $vo['master']; ?></font> VS. <font style="color:#890209"><?php echo $vo['guest']; ?></font>
+			       					<br/>
+			       					<font style="color:#000000">双 @ <font color="red"><?php echo $vo['bet_point']; ?></font></font>
+			       				<?php break; endswitch; ?>
+			       		</td>
+			       		<?php if($current != $vo['gid']): ?>
+						  <td rowspan="<?php echo $vo['cg_count']; ?>"><span style="color:#46AF98">下注:</span><br><?=$vo["bet_money"]?><br><span style="color:#0DC4FF">可赢:</span><br><?php
+							  echo double_format($vo["bet_win"]+$vo["fs"]);
+						?></td>
+						<?php endif; ?>
+			       		</tr>
+			       		<?php
+			       		$current = $vo['gid'];
+						endforeach; endif; else: echo "" ;endif; endif; ?>
+
+									<!--
+									<tr>
+										<td colspan="3" style="padding:0;">
+											<div class="panel-footer">
+												<ul class="pagination">
+													<li class="active">
+														<a href="#">1</a>
+													</li>
+													<li>
+														<a href="#">1/1/1</a>
+													</li>
+													<li>
+														<a href="javascript:;">总投注金额：<span style="color:#FF0000">0</span>，可赢：<span style="color:#FF0000">0</span></a>
+													</li>
+												</ul>
+											</div>
+										</td>
+									</tr>
+									-->
+								</table>
+							</div>
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script>
+$(function(){
+	//点击底部固定导航条切换
+	$(".nav500_bottom_a").click(function(){
+		var navThis = $(this);
+		navThis.css("color","#d9901e")
+		navThis.parent().siblings("span").find("a").css("color","#999999")
+		navThis.find("i").addClass("nav500_b_active");
+		navThis.parent().siblings("span").find("i").removeClass("nav500_b_active");
+		navThis.addClass("nav500_bottom_active").parent().siblings("span").find("a").removeClass("nav500_bottom_active")
+	});
+	
+})
+</script>
+<script type="text/javascript" language="javascript" src="/js/left_mouse.js"></script>
+</body>
+</html>

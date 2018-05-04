@@ -1,0 +1,45 @@
+<?php
+namespace app\common\model;
+use think\Model;
+
+/*
+站内信设计:使用myisam引擎;
+使用场景:类似于邮件系统,用于在点击收件箱的时候才拉取信件;
+发送者在发送信件的时候,不走广播消息,不用时时的告诉接收者;
+广播消息 会 发送 用户订单 用户投注 用户余额的信息给前端;
+站内信 也可以发送这些信息, 也可以通过广播消息发站内信, 那业务上就很混乱;
+这里定义的站内信, 类似邮件系统,由发送者主动写信件进行发送, 业务层不发站内信;
+*/
+class Message extends Base{
+
+    protected $table = 'gygy_message';
+    protected $createTime = 'created_at';
+    protected $updateTime = 'updated_at';
+    protected $autoWriteTimestamp = 'datetime';
+
+    public function sender(){
+        return $this->morphTo(['send_type','send_uid'],[
+            'member'    =>  \app\common\model\Member::class,
+            'agent'     =>  \app\common\model\Member::class,
+            'admin'     =>  \app\common\model\Admin::class,
+        ]);
+    }
+
+    public function directReceiver(){
+        return $this->morphTo(['recv_type','recv_uid'],[
+            'member'    =>  \app\common\model\Member::class,
+            'agent'     =>  \app\common\model\Member::class,
+            'admin'     =>  \app\common\model\Admin::class,
+        ]);        
+    } 
+
+    public static function getList($request){
+        $params = $request->param();
+        $query = self::order('id desc');
+        if($params['recv_type']??''){
+            $query->where("recv_type",$params['recv_type']);
+        }
+        $query->where("send_type","admin");
+        return $query->paginate();
+    }
+}

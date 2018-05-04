@@ -1,0 +1,120 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>系统设置</title>
+<link href="/css/base.css" rel="stylesheet" type="text/css" />
+<link href="/css/admin.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="/js/jquery.js"></script>
+<script type="text/javascript" src="/js/jquery.tools.js"></script>
+<script type="text/javascript" src="/js/base.js"></script>
+<script language="JavaScript" src="/js/calendar.js"></script>
+<script language="javascript">
+function winopen(bid,status){
+	window.open("{:url('chuanguan/set_score_cg')}?bid="+bid+"&status="+status,"list","width=440,height=165,left=50,top=100,scrollbars=no"); 
+}
+
+
+function go(value){
+	location.href=value;
+}
+</script>
+</head>
+<body class="list">
+	<div class="bar">串关详情</div>
+<div class="body">
+<ul id="tab" class="tab">
+				<li><input type="button" value="串关详情" hidefocus class="current"/></li>
+			</ul>
+
+<table id="listTables" class="listTables">
+
+				<tr>
+
+					<th>编号/联赛名</th>
+
+					<th>主场/客场</th>
+
+					<th>投注信息</th>
+
+					<th>开赛时间</th>
+				  <th>投注时间</th>
+
+				  <th>投注会员</th>
+                    <th>操作</th>
+
+				</tr>
+<?php
+     while ($rows = $query->fetch_array()) {
+        if(@$temp_gid!=$rows["gid"])
+		{
+      echo "<tr align=\"center\"><td height=\"25\" colspan=\"7\" align=\"center\" valign=\"middle\" bgcolor=\"#FFFFFF\">串关注单号：".$rows["gid"]."</td></tr>";
+		$temp_gid=$rows["gid"];
+		} 
+	  	?>
+      <tr>
+        <td align="center"><?=$rows["bid"]?><br><?=$rows["match_name"]?></td>
+        <td align="center"><?=$rows["match_id"]?><br/>
+<?php
+if(strpos($rows["master_guest"],'VS.')) echo str_replace("VS.","<br/>",$rows["master_guest"]);
+else  echo str_replace("VS","<br/>",$rows["master_guest"]);
+?></td>
+        <td align="center" valign="middle"><?=$rows["ball_sort"]?>
+			 <br/><font style="color:#FF0033">
+			  <?=str_replace("-","<br/>",$rows["bet_info"])?>
+			  </font>
+			 <? if($rows["status"]!=0&&$rows["status"]!=3)
+			if($rows["MB_Inball"]!=''){?>
+			<br>[<?=$rows["MB_Inball"]?>:<?=$rows["TG_Inball"]?>]
+			<? } ?>
+            <?php
+            if($rows['status'] == 3){
+				echo "<br>[取消]";
+			}
+			?></td>
+        <td align="center"><?=date("m-d H:i:s",strtotime($rows["match_endtime"]))?></td>
+        <td align="center"><?=date("m-d H:i:s",strtotime($rows["bet_time"]))?></td>
+        <td align="center"><?=$rows["username"]?></td>
+        <td align="center"><? if ($rows["status"]==0 || $rows["status"]==6){?>
+		      <a href="javascript:winopen(<?=$rows["bid"]?>,2)">输</a> <a href="javascript:winopen(<?=$rows["bid"]?>,1)">赢</a>
+			 <br/>
+			  <a href="javascript:winopen(<?=$rows["bid"]?>,8)">平手</a>
+			  
+			  
+			  <? if($rows["ben_add"]==1) {?>
+
+               
+			  <br/>
+ <a href="javascript:winopen(<?=$rows["bid"]?>,5)">输一半</a>
+		       <br/>
+			  <a href="javascript:winopen(<?=$rows["bid"]?>,4)">赢一半</a> 
+			<? }?>
+			  <br/>
+			  <a href="set_cg_bet.php?bid=<?=$rows["bid"]?>&status=3&MB_Inball=null&TG_Inball=null">无效</A>
+			  <? }else if($rows["status"]==3){?>
+              无效	
+			   <? }else if($rows["status"]==4){?>
+              赢一半
+			   <? }else if($rows["status"]==5){?>
+             输一半
+			  <? }else if($rows["status"]==1){?>
+			  赢
+			  <? }else if($rows["status"]==2){?>
+			  输
+              <? }else if($rows["status"]==6){?>
+			  未审核
+			  <? }else if($rows["status"]==8){?>
+			 平手
+			  <? }?>	
+			  <? if($rows["status"]!=0){?>
+			  <br/>
+			  <a onClick="return confirm('确定重新审核该注单？\n<? if($rows["status"]==2||$rows["status"]==6) echo "同组其他注单也要重新审核!"; ?>')" href="qx_cgbet.php?bid=<?=$rows["bid"]?>&status=<?=$rows["status"]?>&gid=<?=$rows["gid"]?>">重新审核</a>
+			  <? }?></td>
+      </tr>
+<?
+      }
+      ?>
+  </table>
+  </div>
+</body>
+</html>

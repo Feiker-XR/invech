@@ -1,0 +1,88 @@
+<?php
+
+namespace app\auth\Driver;
+
+use app\service\Str;
+
+use app\auth\Contracts\Guard;
+use app\auth\Contracts\UserProvider as UserProviderContract;
+use app\auth\traits\GuardHelpers;
+use app\auth\traits\UserProvider;
+use app\auth\traits\AttemptLogin;
+
+class TokenGuard implements Guard,UserProviderContract
+{
+    use GuardHelpers,UserProvider,AttemptLogin;
+
+    protected $inputKey;
+
+    protected $storageKey;
+
+    public function __construct($model)
+    {
+        $this->setModel($model);       
+        $this->inputKey = 'api_token';
+        $this->storageKey = 'api_token';
+    }
+
+    public function user()
+    {
+
+        if (! is_null($this->user)) {
+            return $this->user;
+        }
+
+        $user = null;
+
+        $token = $this->getTokenForRequest();
+
+        if (! empty($token)) {
+            $user = $this->retrieveByCredentials(
+                [$this->storageKey => $token]
+            );
+
+            if($user){
+                $cache = cache($token);
+                if(!$cache){                   
+                    return null;              
+                }else{
+                    $cache_time = config('auth.guards.api.cache_time')??3600;
+                    cache($token,$token,$cache_time);
+                }                
+            }            
+        }
+
+        return $this->user = $user;
+    }
+
+    public function getTokenForRequest()
+    {
+        $request = request();
+        $token = input($this->inputKey);
+
+        if (empty($token)) {
+
+            $header = $request->header('Authorization')??'';
+
+            if (Str::startsWith($header, 'Bearer ')) {
+                $token = Str::substr($header, 7);
+            }
+ 
+        }
+
+        return $token;
+    }
+
+    public function login($user, $remember = false)
+    {
+        $this->setUser($user);
+
+        $token = $user->freshToken();
+
+        $cache_time = config('auth.guards.api.cache_time')??3600;
+        cache($token,$token,$cache_time);
+        
+        return $token;
+    }
+
+}

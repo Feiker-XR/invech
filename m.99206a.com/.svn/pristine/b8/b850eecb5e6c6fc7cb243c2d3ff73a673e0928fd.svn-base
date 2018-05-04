@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>皇冠娱乐城</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+<link rel="stylesheet" href="/css/font-awesome.min.css">
+<link rel="stylesheet" href="/styles/ucenter.css">
+<!--<link href="../css/tikuan2.css" rel="stylesheet" type="text/css" />-->
+<link rel="stylesheet" type="text/css" href="/fonts-new/iconfont.css">	
+<link rel="stylesheet" href="/styles/ezweb.css">
+<link rel="stylesheet" href="/css/500f_new_wap.css">
+<script src="/assets/jquery.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+</head> 
+<style type='text/css'>
+</style>
+<script language="javascript">
+//if(self==top){
+//	top.location='/index.php';
+//}
+</script>
+<body>
+	
+	{include file='common/nav'}
+	{include file='common/header'}	
+	
+<div class="h10"></div>
+<div class="ucenter">
+	<div class="container" style="margin: 60px 0px;">
+		<div class="row" style="margin-left: 0px;">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h3 class="panel-title">财务明细查询</h3>
+				</div>
+				<div class="panel-zd">
+					<div role="tabpanel">
+						<!-- Nav tabs -->
+						<ul class="nav nav-tabs nav-tile" role="tablist">
+							<li>
+								<a href="cha_ckonline.php">存款记录</a>
+							</li>
+							<li class="active">
+								<a href="cha_huikuan.php">汇款记录</a>
+							</li>
+							<li>
+								<a href="cha_qukuan.php">取款记录</a>
+							</li>
+							<!--<li><a href="cha_zhenren.php?type=4">娱乐场记录</a></li>
+                    <li><a href="cha_jifen.php?type=4">积分记录</a></li>-->
+
+						</ul>
+
+						<!-- Tab panes -->
+						<div class="tab-content">
+							<div id="top_lishi">
+								<div class="waikuang00">
+									<table class="table table-bordered">
+										<!---->
+										<tr class="sekuai_01">
+											<th>流水号</th>
+											<th>时间</th>
+											<th>金额</th>
+											<th>赠送金额</th>
+											<th>积分</th>
+											<th>银行</th>
+											<th>汇款方式</th>
+											<th>状态</th>
+										</tr>
+
+										<tr>
+											<td height="30" colspan="6"><span class="STYLE2">暂无结果</span></td>
+										</tr>
+									</table>
+									<div class="panel-footer">
+										<ul class="pagination">
+											<li class="active">
+												<a href="#">1</a>
+											</li>
+											<li>
+												<a href="#">1/1/1</a>
+											</li>
+											<li>
+												<a href="javascript:;">本页汇款成功总金额：
+													<font color="#D7524E">0.00</font> RMB </a>
+											</li>
+										</ul>
+									</div>
+								</div>
+							</div>
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<script>
+$(function(){
+	//点击底部固定导航条切换
+	$(".nav500_bottom_a").click(function(){
+		var navThis = $(this);
+		navThis.css("color","#d9901e")
+		navThis.parent().siblings("span").find("a").css("color","#999999")
+		navThis.find("i").addClass("nav500_b_active");
+		navThis.parent().siblings("span").find("i").removeClass("nav500_b_active");
+		navThis.addClass("nav500_bottom_active").parent().siblings("span").find("a").removeClass("nav500_bottom_active")
+	});
+	
+})
+</script>
+<script type="text/javascript" language="javascript" src="/js/left_mouse.js"></script>
+</body>
+</html>

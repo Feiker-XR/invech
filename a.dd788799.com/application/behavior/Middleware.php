@@ -1,0 +1,286 @@
+<?php
+namespace app\behavior;
+
+use think\App;
+use think\Loader;
+use think\Hook;
+use think\Response;
+use think\Error;
+use think\exception\HttpException;
+use think\exception\HttpResponseException;
+use bong\service\auth\AuthenticationException;
+
+use bong\service\Pipeline;
+
+use Closure;
+
+class Middleware 
+{
+    private $module;
+    private $controller;
+    private $action;
+    private $actionName;
+
+	public function run(&$request)
+	{	     
+        $this->init($request);
+
+        //先经过中间件再构造控制器
+        //list($call, $vars) = $this->parseCallable($request);
+
+        $ms = $this->parseMiddlewares($request);
+
+        $pipeline = new Pipeline();
+	    
+        //中间件只能抛出HttpResponseException异常,或者只能返回response对象
+
+        try{
+            $response = $pipeline->send($request)
+                    ->through($ms)
+                    ->then(function ($request) /*use ($call, $vars)*/ {
+                            list($call, $vars) = $this->parseCallable($request);
+                            Hook::listen('action_begin', $call);
+                            return $this->prepareResponse(
+                                App::invokeMethod($call, $vars)
+                            );
+                        });
+        }catch(\Exception $e){
+            $response = $this->handleException($request,$e);
+        }
+        /*
+        catch(AuthenticationException $e){
+	       return $this->error('请先登录!',config('auth.redirect.auth_fail.'.MODULE));
+        }        
+        catch(HttpResponseException $e){
+            throw $e;
+        }catch(\Exception $e){
+            $response = $this->handleException($request,$e);
+
+        }
+        */
+
+        throw new HttpResponseException($response);
+	}
+
+    //授权失败异常,普通请求 也返回json,而不重定向了;
+    protected function handleException($passable, $e)
+    {
+        //return redirect('index/login')->with(['errors'=>[$e->getMessage()],])
+
+        $handler = Error::getExceptionHandler();
+
+        $handler->report($e);
+
+        $response = $handler->render($e);
+
+        return $response;
+    }
+
+    private function init($request){
+
+        $module = $request->module();       
+        $controller = $request->controller();
+        $actionName = $request->action();
+
+        defined('MODULE') or define('MODULE'     , $module);
+        defined('CONTROLLER') or define('CONTROLLER' , lcfirst($controller));
+        defined('ACTION') or define('ACTION'     , $actionName);
+
+        $this->module = $module;
+        $this->controller = lcfirst($controller);
+        $this->action = $actionName . config('action_suffix');
+        $this->actionName = $actionName;
+
+        $this->initExceptionHandle();
+
+        $this->module_init($request);        
+    }
+
+    private function initExceptionHandle(){
+        $handler_class = "\\app\\{$this->module}\\exceptions\\Handler";
+        if(class_exists($handler_class)){
+            config('exception_handle',$handler_class);    
+        }        
+    }
+
+    //行为扩展支持模块化;
+    //问题是module_init的第一个行为是app的中间件行为;
+    //中间件行为直接返回数据,没有执行其他行为;
+    private function module_init($request){
+        //Hook::listen('module_init', $request);
+        $behaviors = Hook::get('module_init');
+        foreach ($behaviors as $behavior) {
+            if($behavior != get_class($this)){
+                Hook::exec($behavior, 'module_init', $request);
+            }
+        }        
+    }
+
+
+    private function parseCallable(){
+
+        $controller_layer = config('url_controller_layer');
+        $controller_suffix = config('controller_suffix');
+        $controller_empty = config('empty_controller');
+
+        $controller = ucfirst($this->controller);
+        $action = $this->action;
+        $actionName = $this->actionName;
+
+        $instance = Loader::controller($controller, $controller_layer, $controller_suffix, $controller_empty);
+        if (is_null($instance)) {
+            throw new HttpException(404, 'controller not exists:' . Loader::parseName($controller, 1));
+        }
+
+        $vars = [];
+        if (is_callable([$instance, $action])) {
+            // 执行操作方法
+            $call = [$instance, $action];
+        } elseif (is_callable([$instance, '_empty'])) {
+            // 空操作
+            $call = [$instance, '_empty'];
+            $vars = [$actionName];
+        } else {
+            throw new HttpException(404, 'method not exists:' . get_class($instance) . '->' . $action . '()');
+        }
+
+        return [$call, $vars];
+    }
+
+    private function parseMiddlewares(){
+
+        $ms = $this->parsePriority();
+        if(empty($ms)){
+            $ms = $this->parseNormal();
+        }
+
+    	$this->parseAlias($ms);
+
+        return $ms;
+    }
+
+    private function getRegexs($operator=''){
+        /*
+        $m0 = $middlewares['*']??[];
+        $m1 = $middlewares[$module.'.'.'*']??[];
+        $m2 = $middlewares[$module.'.'.$controller.'.'.'*']??[];
+        $m3 = $middlewares[$module.'.'.$controller.'.'.$action]??[];
+        $ms = array_merge($m0,$m1,$m2,$m3);
+        */
+
+        $module = $this->module;       
+        $controller = $this->controller;
+        $action = $this->action;   
+
+        $regexs = [];
+        $regexs[] = $operator.'*';
+        $regexs[] = $operator.$module.'.'.'*';
+        $regexs[] = $operator.$module.'.'.$controller.'.'.'*';
+        $regexs[] = $operator.$module.'.'.$controller.'.'.$action;   
+
+        if($operator=='!'){
+            $regexs = array_reverse($regexs);
+        }
+
+        return $regexs;     
+    }
+
+    private function parsePriority(){//解析优先,!操作
+
+        $middlewares = config('middlewares');
+
+        $regexs = $this->getRegexs('!');
+
+        foreach($regexs as $regex){
+            if(isset($middlewares[$regex])){
+                return $middlewares[$regex];
+            }
+        }
+
+        return [];
+    }
+
+    private function parseNormal_bak(){//解析常规,-操作
+
+        $ms = [];
+
+        $middlewares = config('middlewares');
+
+        $regexs = $this->getRegexs();
+        foreach($regexs as $regex){
+            if(isset($middlewares[$regex])){
+                $ms = array_merge($ms,$middlewares[$regex]);
+            }
+        }
+        $ms = array_unique($ms);
+
+        $regexs_diff = $this->getRegexs('-');
+        foreach($regexs_diff as $regex){
+            if(isset($middlewares[$regex])){
+                foreach($middlewares[$regex] as $m){
+                    $key = array_search($m,$ms);
+                    if($key !== false){
+                        array_splice($ms,$key,1);
+                    }
+                }
+            }
+        }
+
+        return $ms;     
+    }
+
+    //'-api.game.*' => ['auth'],
+    //'+api.game.postAll' => ['auth'],
+    //+可以简单实现,但是不好理解;
+    private function parseNormal(){//解析常规,-操作
+
+        $ms = [];
+
+        $middlewares = config('middlewares');
+
+        $regexs = $this->getRegexs();
+        foreach($regexs as $regex){
+            if(isset($middlewares[$regex])){
+                $ms = array_merge($ms,$middlewares[$regex]);
+                $ms = array_unique($ms);
+            }
+            if(isset($middlewares['-'.$regex])){
+                foreach($middlewares['-'.$regex] as $m){
+                    $key = array_search($m,$ms);
+                    if($key !== false){
+                        array_splice($ms,$key,1);
+                    }
+                }                
+            }
+        }
+     
+        return $ms;     
+    }
+
+    private function parseAlias(&$ms){//解析别名
+        $alias = config('middlewares.alias');
+        foreach ($ms as &$mp) {
+            $ma = explode(':',$mp);
+            $m = $ma[0];
+            if(isset($alias[$m])){
+                $mp = str_replace($m,$alias[$m],$mp);
+            }
+        }        
+    }
+
+    private function prepareResponse($data)
+    {
+        if ($data instanceof Response) {
+            $response = $data;
+        } elseif (!is_null($data)) {
+            // 默认自动识别响应输出类型
+            $isAjax   = request()->isAjax();
+            $type     = $isAjax ? config('default_ajax_return') : config('default_return_type');
+            $response = Response::create($data, $type);
+        } else {
+            $response = Response::create();
+        }    	
+        //throw new HttpResponseException($response);
+        return $response;
+    }	
+}

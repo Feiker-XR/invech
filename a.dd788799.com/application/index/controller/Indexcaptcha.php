@@ -1,0 +1,15 @@
+<?php
+namespace app\index\controller;
+use app\index\Base;
+use bong\service\Mycaptcha;
+use bong\service\CaptchaService;
+
+class Indexcaptcha extends Base
+{
+    public function get_captcha($id='',$config='default')
+    {
+    	//$Mycaptcha = new Mycaptcha();
+		//return $Mycaptcha->mobile_get_captcha($id);
+		return (new CaptchaService())->captcha($config,$id);
+    }      
+}

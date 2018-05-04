@@ -1,0 +1,85 @@
+{extend name="base/common"/}
+
+{block name="title"><title>申请提现－{:cache('WEB_NAME')}</title>{/block}
+{block name="body"}
+<div class="effect mainnav-lg mainnav-fixed navbar-fixed footer-fixed" id="container">
+	<div id="page-content">
+		<div class="panel">
+			<div class="panel-heading">
+				<h3 class="panel-title"><img alt="" src="/images/main/tx.png">提现</h3>
+			</div>
+			<form class="panel-body form-horizontal form-padding" id="withdrawform" role="form" action="/cash/cash" method="post">
+				<div class="tixian">
+					<p>
+						<label>提款信息</label>
+						<div>
+							<label>提款时间：</label> 从 <strong>{$settings.cashFromTime}</strong> 至 <strong>{$settings.cashToTime}</strong>. 
+                    每天限制提款 
+							<strong>{$settings.cashTimes}</strong>次      
+              最小提款额：
+							<strong>{$settings.cashMin}</strong> 元，最大提款额：<strong>{$settings.cashMax}</strong> 元        
+							<br>
+							系统消费比例限制为：<strong>{$settings.cashMinAmount}%</strong>
+						</div>
+						<p>
+						</p>
+						
+						<p>
+							<label>提现金额</label><strong><input name="TikuanMoney" id="TikuanMoney" type="number" value="100" data-val-required="TikuanMoney 字段是必需的。" data-val-number="The field TikuanMoney must be a number." data-val="true"></strong>元
+						</p>
+						<p>
+							<label>提款银行</label>
+							<select class="selectpicker dropdown-toggle selectpicker btn-default" data-val="true" data-val-required="UserBankId 字段是必需的。" id="UserBankId" name="UserBankId">
+							<?php foreach($bank as $b) { ?>		
+								<option value="{$b.id}">[{$b.name}][<?=mb_substr($b['username'],0,1,'utf-8').'**' ?>]卡尾号:<?=preg_replace('/^.*(\w{4})$/', '\1', $b['account'])?></option>
+							<?php } ?>
+							</select>
+						</p>
+						<p>
+							<label>资金密码</label><strong><input name="FundsPass" id="FundsPass" type="password" autocomplete="off"></strong>
+						</p>
+												
+						<div style="text-align: center; padding-bottom: 20px;">
+							<button autocomplete="off" class="btn btn-primary" style="width: 100px;" type="button" id="j-query">确定</button>
+						</div>
+					</div>
+					<input name="__RequestVerificationToken" type="hidden" value="CfDJ8Ktgxm2FAlNEsoI7VoMQlWkLkjIptuUZo1Dq51FM7kyVZsOZ31SdozfDgEKe-jmiZmYtH3Bwa56DRqYZd9NnTDVuQjv43713zSTyE7pjt2QhssiXbfc79kCwH2U5Mi1fb_b6Wk8Mv57cz8jC11SD6qIyCOOoC-36j7EnReTvaBKPAVtNHrvp-GGp8BkO0qNhTA">
+				</form>
+			</div>
+			<input id="hdVC" type="hidden" value="71643a98dc3680701ad1ac0c4ff790bb">
+			<input id="hdfee" type="hidden" value="no">
+			<input id="hdfeeratio" type="hidden" value="0.03">
+		</div>
+	</div>
+{/block}
+{block name="script"}
+<script src="/__JS__/dataTables.min.js"></script>
+<script src="/__JS__/dataTables.bootstrap.min.js"></script>
+<script src="/__JS__/dataTables.responsive.min.js"></script>
+<script src="/__JS__/bootbox.min.js"></script>
+<script type="text/javascript">
+
+$(document).ready(function () {
+	$("#j-query").on("click", function () {
+		var me=this;
+		$(me).attr('disabled',true);
+		$.ajax({
+			type: "POST",
+			url: '{:Url("cash/cash")}',
+			data: { amount: $('#TikuanMoney').val(), coinpwd: $('#FundsPass').val(), id: $('#UserBankId').val()},
+			dataType: "json",
+			global: false,
+			success: function (result) {
+				$(me).removeAttr('disabled');
+				bootbox.alert(result.info);
+			}, error: function (err) {
+				var t=err;				
+			}
+		});
+		//$("#teambetrecord").submit();
+	});
+	
+});
+
+</script>
+{/block}

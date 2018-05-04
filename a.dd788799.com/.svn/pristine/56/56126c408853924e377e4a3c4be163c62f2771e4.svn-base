@@ -1,0 +1,212 @@
+<?php
+
+namespace app\auth\access;
+
+use InvalidArgumentException;
+use app\service\Str;
+use app\service\Arr;
+
+class Policy
+{
+    protected $policies = [];
+
+    protected $beforeCallbacks = [];
+
+    protected $afterCallbacks = [];
+
+    public function __construct()
+    {
+         $this->policies = config('policy');
+    }
+
+    public function policy($class, $policy)
+    {
+        $this->policies[$class] = $policy;
+
+        return $this;
+    }
+
+    public function before(callable $callback)
+    {
+        $this->beforeCallbacks[] = $callback;
+
+        return $this;
+    }
+
+    public function after(callable $callback)
+    {
+        $this->afterCallbacks[] = $callback;
+
+        return $this;
+    }
+
+    public function allows($ability, $arguments = [])
+    {
+        return $this->check($ability, $arguments);
+    }
+
+    public function denies($ability, $arguments = [])
+    {
+        return ! $this->allows($ability, $arguments);
+    }
+
+    public function check($abilities, $arguments = [])
+    {
+        $abilities = Arr::wrap($abilities);
+        foreach ($abilities as $ability) {
+            $ret = (bool) $this->raw($ability, $arguments);
+            if (!$ret) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    public function any($abilities, $arguments = [])
+    {
+        $abilities = Arr::wrap($abilities);
+        foreach ($abilities as $ability) {
+            $ret = (bool) $this->raw($ability, $arguments);
+            if ($ret) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    protected function raw($ability, $arguments = [])
+    {
+        if (! $user = request()->user()) {
+            return false;
+        }
+
+        $arguments = Arr::wrap($arguments);
+
+        $result = $this->callBeforeCallbacks(
+            $user, $ability, $arguments
+        );
+
+        if (is_null($result)) {
+            $result = $this->callAuthCallback($user, $ability, $arguments);
+        }
+
+        $this->callAfterCallbacks(
+            $user, $ability, $arguments, $result
+        );
+
+        return $result;
+    }
+
+    protected function callAuthCallback($user, $ability, array $arguments)
+    {
+        $callback = $this->resolveAuthCallback($user, $ability, $arguments);
+
+        return $callback($user, ...$arguments);
+    }
+
+    protected function callBeforeCallbacks($user, $ability, array $arguments)
+    {
+        $arguments = array_merge([$user, $ability], [$arguments]);
+
+        foreach ($this->beforeCallbacks as $before) {
+            if (! is_null($result = $before(...$arguments))) {
+                return $result;
+            }
+        }
+    }
+
+    protected function callAfterCallbacks($user, $ability, array $arguments, $result)
+    {
+        $arguments = array_merge([$user, $ability, $result], [$arguments]);
+
+        foreach ($this->afterCallbacks as $after) {
+            $after(...$arguments);
+        }
+    }
+
+    protected function resolveAuthCallback($user, $ability, array $arguments)
+    {
+        if (isset($arguments[0]) &&
+            ! is_null($policy = $this->getPolicyFor($arguments[0])) &&
+            $callback = $this->resolvePolicyCallback($user, $ability, $arguments, $policy)) {
+            return $callback;
+        }
+
+        return function () {
+            return false;
+        };
+    }
+
+    public function getPolicyFor($class)
+    {
+        if (is_object($class)) {
+            $class = get_class($class);
+        }
+
+        if (! is_string($class)) {
+            return;
+        }
+
+        if (isset($this->policies[$class])) {
+            return $this->resolvePolicy($this->policies[$class]);
+        }
+
+        foreach ($this->policies as $expected => $policy) {
+            if (is_subclass_of($class, $expected)) {
+                return $this->resolvePolicy($policy);
+            }
+        }
+    }
+
+    public function resolvePolicy($class)
+    {
+        return container($class);
+    }
+
+    protected function resolvePolicyCallback($user, $ability, array $arguments, $policy)
+    {
+        if (! is_callable([$policy, $this->formatAbilityToMethod($ability)])) {
+            return false;
+        }
+
+        return function () use ($user, $ability, $arguments, $policy) {
+
+            $result = $this->callPolicyBefore(
+                $policy, $user, $ability, $arguments
+            );
+
+            if (! is_null($result)) {
+                return $result;
+            }
+
+            $ability = $this->formatAbilityToMethod($ability);
+
+            if (isset($arguments[0]) && is_string($arguments[0])) {
+                array_shift($arguments);
+            }
+
+            return is_callable([$policy, $ability])
+                        ? $policy->{$ability}($user, ...$arguments)
+                        : false;
+        };
+    }
+
+    protected function callPolicyBefore($policy, $user, $ability, $arguments)
+    {
+        if (method_exists($policy, 'before')) {
+            return $policy->before($user, $ability, ...$arguments);
+        }
+    }
+
+    protected function formatAbilityToMethod($ability)
+    {
+        return strpos($ability, '-') !== false ? Str::camel($ability) : $ability;
+    }
+
+    public function policies()
+    {
+        return $this->policies;
+    }
+}

@@ -1,0 +1,95 @@
+{layout name="layout" /}
+<div class="row">
+  <div class="col-xs-12">
+    <div class="box">
+      <div class="box-header">
+        <i class="fa fa-plus-square pull-right add_pl"></i>
+       
+        <form>
+          <div class="pull-left">
+            <input class="form-control input-sm search" value="{$Think.get.name}" placeholder="请输入玩法名称/ID或赔率组名称" type="text" name="name" >
+          </div>        
+          <div class="has-feedback pull-left" style="margin-left:15px;">
+            <button type="submit" class="btn btn-block btn-default btn-sm filter">查询</button>
+          </div>
+        </form>
+    </div>
+      <!-- /.box-header -->
+      <div class="box-body table-responsive no-padding">
+        <table class="table table-hover">
+          <tr>
+            <th>#</th>
+            <th >值</th>
+            <th >赔率</th>            
+            <th >玩法分组ID</th>
+            <th >玩法分组</th>            
+            <th >玩法ID</th>
+            <th >玩法</th>
+            <th >赔率组ID</th>
+            <th >赔率组</th>
+            <th >操作</th>
+        </tr>
+        {if(!$list->isEmpty())}
+          {foreach $list as $item}
+           <tr>
+             <td>{$item->id}</td>
+              <td>
+                {eq name="$item->plgroup->mode" value="0"} {$item->value} {/eq}
+                {eq name="$item->plgroup->mode" value="1"} 只能是{$item->value}个号码为一注 {/eq} 
+                {eq name="$item->plgroup->mode" value="2"} {$item->value}个号码可以为一注 {/eq} 
+              </td>
+              <td>
+                {$item->pl}
+              </td>
+              <td>{$item->played->playedgroup->id}</td>
+              <td>{$item->played->playedgroup->groupName}</td>
+              <td>{$item->played->id}</td>
+              <td>{$item->played->name}</td>
+              <td>{$item->plgroup->id}</td>
+              <td>{$item->plgroup->name}</td>     
+              <td>
+                <i  data-id="{$item->id}" class="edit fa fa-pencil"></i>
+              </td>
+          </tr>
+          {/foreach}
+        {else}
+            <tr><td colspan="10" style="text-align:center;">暂无数据</td></tr>
+        {/if}
+        </table>
+        {$list->render()}
+      </div>
+      <!-- /.box-body -->
+    </div>
+    <!-- /.box -->
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){
+  $(".add_pl").click(function(){
+    $.get('/lottery/pl_edit',{},function(data){
+      layer.open({
+        type: 1,
+        title: '新增彩种',
+        maxmin: true, //开启最大化最小化按钮
+        area: ['900px', '600px'],
+        content: data
+      });
+    },'html');
+  });
+  
+  $(".edit").click(function(){
+    var id = $(this).attr('data-id');
+    $.get('/lottery/pl_edit',{id:id},function(data){
+      layer.open({
+        type: 1,
+        title: '修改彩种',
+        maxmin: true, //开启最大化最小化按钮
+        area: ['900px', '600px'],
+        content: data
+      });
+    },'html');
+  });
+
+});
+
+</script>

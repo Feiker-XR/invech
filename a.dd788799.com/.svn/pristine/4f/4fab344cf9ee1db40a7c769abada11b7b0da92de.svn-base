@@ -1,0 +1,41 @@
+<?php
+namespace app\common\model;
+use think\Model;
+use app\common\traits\model\Bank as BankTrait;
+
+class Member extends Base{
+
+	use BankTrait;
+
+    protected $table = 'gygy_member_bank';
+    protected $pk = 'id';
+
+    //当status字段值是1的时候,获取器返回1对应的'正常';
+    //先取字段值再调用获取器
+	/*public function getStatusAttr($value)
+    {
+        $status = [-1=>'删除',0=>'禁用',1=>'正常',2=>'待审核'];
+        return $status[$value];
+    }*/
+
+    public function setIdAttr($value){
+        return $this->data['id'] = $value;
+    }
+
+    public function getIdAttr($value)
+    {
+        return $this->data['id'];
+    }
+  
+    //----------------后台------------------
+
+    public static function getList(){
+    
+        $params = request()->param();
+        $query = self::order('id');
+        $where = [];
+        $data = $query->where($where)->paginate(10);
+        return $data;
+    }	
+    
+}

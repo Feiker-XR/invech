@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>提现</title>
+	</head>
+	<!--公用部分 css-->
+	<link rel="stylesheet" type="text/css" href="../public/css/public.css"/>
+	<link rel="stylesheet" href="../public/css/com.css" />
+	<!--提现和绑定银行卡 共用css-->
+	<link rel="stylesheet" href="css/comCard.css" />
+	<body>
+		<div class="com-wp">
+			<!--header-->
+			<div class="com-header">
+				<div class="logo-wp">
+					<img src="../public/images/logo.png" alt="" />
+				</div>
+				<div class="logo-title-wp">
+					<img src="../public/images/logo-title.png" alt="" />
+				</div>
+				<div class="hours-right">
+					<img src="../public/images/logo-huors.png" alt="" />
+				</div>
+			</div>
+			<!--main-->
+			<div class="main-wp">
+				<!--com-left-->
+				<div class="com-left">
+					<h3 class="com-left-title">
+						<img src="../public/images/person-info.png" alt="" />
+						<span>个人中心</span>
+					</h3>
+					<div class="com-left-nav">
+						<ul class="com-left-nav-list">
+							<li class="nav-bg">
+								<i class="nav-i">
+									<img src="../public/images/nav-1.png" alt="" />
+								</i>
+								<i class="nav-bg-i">
+									<img src="../public/images/nav-bg-1.png" alt="" />
+								</i>
+								<a href="javaScript:;" class="nav-cr">账户信息</a>
+								<span></span>
+							</li>
+							<li>
+								<i class="nav-i">
+									<img src="../public/images/nav-2.png" alt="" />
+								</i>
+								<i class="nav-bg-i">
+									<img src="../public/images/nav-bg-2.png" alt="" />
+								</i>
+								<a href="javaScript:;">充值</a>
+								<span></span>
+							</li>
+							<li>
+								<i class="nav-i">
+									<img src="../public/images/nav-3.png" alt="" />
+								</i>
+								<i class="nav-bg-i">
+									<img src="../public/images/nav-bg-3.png" alt="" />
+								</i>
+								<a href="javaScript:;">提现</a>
+								<span></span>
+							</li>
+							<li>
+								<i class="nav-i">
+									<img src="../public/images/nav-4.png" alt="" />
+								</i>
+								<i class="nav-bg-i">
+									<img src="../public/images/nav-bg-4.png" alt="" />
+								</i>
+								<a href="javaScript:;">往来记录</a>
+								<span></span>
+							</li>
+							<li>
+								<i class="nav-i">
+									<img src="../public/images/nav-5.png" alt="" />
+								</i>
+								<i class="nav-bg-i">
+									<img src="../public/images/nav-bg-5.png" alt="" />
+								</i>
+								<a href="javaScript:;">额度转换</a>
+								<span></span>
+							</li>
+							<li>
+								<i class="nav-i">
+									<img src="../public/images/nav-6.png" alt="" />
+								</i>
+								<i class="nav-bg-i">
+									<img src="../public/images/nav-bg-6.png" alt="" />
+								</i>
+								<a href="javaScript:;">注单管理</a>
+								<span></span>
+							</li>
+							<li>
+								<i class="nav-i"> 
+									<img src="../public/images/nav-7.png" alt="" />
+								</i>
+								<i class="nav-bg-i">
+									<img src="../public/images/nav-bg-7.png" alt="" />
+								</i>
+								<a href="javaScript:;">投注报表</a>
+								<span></span>
+							</li>
+							<li>
+								<i class="nav-i">
+									<img src="../public/images/nav-8.png" alt="" />
+								</i>
+								<i class="nav-bg-i">
+									<img src="../public/images/nav-bg-8.png" alt="" />
+								</i>
+								<a href="javaScript:;">公告信息</a>
+								<span></span>
+							</li>
+							<li>
+								<i class="nav-i">
+									<img src="../public/images/nav-9.png" alt="" />
+								</i>
+								<i class="nav-bg-i">
+									<img src="../public/images/nav-bg-9.png" alt="" />
+								</i>
+								<a href="javaScript:;">代理中心</a>
+								<span></span>
+							</li>
+						</ul>
+					</div>
+				</div>
+				<!--com right 跳转-->
+				<div class="com-right">
+					<form action="">
+						<div class="bond-bank-wp">
+							<div class="bond-bank bond-bank-color-blue">
+								<label for="">账户余额：</label>
+								<input type="text" placeholder="2000000.00"/>
+							</div>
+							<div class="bond-bank bond-bank-disabled">
+								<label for="">取款人：</label>
+								<input type="text" placeholder="张明明" disabled="disabled"/>
+							</div>
+							<div class="bond-bank bond-bank-disabled">
+								<label for="">银行信息：</label>
+								<input type="text" placeholder="工商银行"/>
+							</div>
+							<div class="bond-bank bond-bank-disabled">
+								<label for="">银行卡号：</label>
+								<input type="text" placeholder="6228888999900001258" disabled="disabled"/>
+							</div>
+							<div class="bond-bank bond-bank-disabled">
+								<label for="">开户行地址：</label>
+								<input type="text" placeholder="北京市朝阳区水锥子北里工商银行" disabled="disabled"/>
+							</div>
+							<div class="bond-bank">
+								<label for="">取款金额：</label>
+								<input type="text" placeholder="50000.00"/>
+							</div>
+							<div class="bond-bank input-pwd">
+								<label for="">开户行地址：</label>
+								<input type="password" class="passwordHide"/>
+								<input type="text" class="passwordShow"/>
+								<img src="imgs/open.png" class="open"/>
+							</div>
+							<div class="btn-submit">
+								<button>确&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;定</button>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+		<!--共用部分 js-->
+		<script src="../public/lib/jquery1.9.0.min.js"></script>
+		<script src="../public/lib/com.js"></script>
+		<!--本页面 私用 js-->
+		<script>
+			$(function(){
+				$('.open').click(function(){
+					$('.passwordHide').toggle();
+					$('.passwordShow').toggle();
+				})
+			})
+		</script>
+	</body>
+</html>

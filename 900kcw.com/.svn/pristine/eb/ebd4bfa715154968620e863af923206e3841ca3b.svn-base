@@ -1,0 +1,154 @@
+<html><!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<link rel="stylesheet" href="css/cqnc_video.css" />
+		<!--<link rel="stylesheet" href="css/fonts/fonts.css" />-->
+		<script src="js/jquery-1.11.3.js"></script>
+		<script src="js/index.js"></script>
+	</head>
+
+	<body>
+		<div id="videobox">
+			<div class="content">
+				<!--<div class="head">
+					重庆幸运农场开奖视频
+					<div class="btn">
+						<ul>
+							<li class="closevideo"><i class="iconfont"></i></li>
+							<li class="small">小屏</li>
+							<li class="big">中屏</li>
+						</ul>
+					</div>
+				</div>-->
+				<div class="animate">
+
+					<div class="cqncAnimate">
+						<div class="bodybg"><img src="img/cqnc_video.jpg" /></div>
+						<div class="loading">
+							<div class="loadtxt">
+								LOADING...
+							</div>
+						</div>
+						<div class="position">
+							<div class="current_code">
+								<span>第<span class="codeNow"></span>期</span>
+							</div>
+							<div class="kaiNum">
+								<ul>
+									<li class=""></li>
+									<li class=""></li>
+									<li class=""></li>
+									<li class=""></li>
+									<li class=""></li>
+									<li class=""></li>
+									<li class=""></li>
+									<li class=""></li>
+								</ul>
+								<span class="soundsIcon on"></span>
+							</div>
+						</div>
+						<div class="numCircle">
+							<ul class="circle_t">
+								<li class="roll_1 "></li>
+								<li class="roll_2"></li>
+								<li class="roll_3 "></li>
+								<li class="roll_4 "></li>
+								<li class="roll_5"></li>
+								<li class="roll_6"></li>
+								<li class="roll_7 "></li>
+							</ul>
+							<ul class="circle_r">
+								<li class="roll_8"></li>
+								<li class="roll_9 "></li>
+								<li class="roll_10"></li>
+							</ul>
+							<ul class="circle_d">
+								<li class="roll_11"></li>
+								<li class="roll_12"></li>
+								<li class="roll_13 "></li>
+								<li class="roll_14"></li>
+								<li class="roll_15"></li>
+								<li class="roll_16 "></li>
+								<li class="roll_17"></li>
+							</ul>
+							<ul class="circle_l">
+								<li class="roll_18"></li>
+								<li class="roll_19 "></li>
+								<li class="roll_20"></li>
+							</ul>
+						</div>
+						<div class="detail">
+							<div class="detail_l">
+								<div class="nowIssue">本期<span></span></div>
+								<ul class="numlist">
+									<li></li>
+									<li></li>
+									<li></li>
+									<li></li>
+									<li></li>
+									<li></li>
+									<li></li>
+									<li></li>
+								</ul>
+								<div class="sum">和值&nbsp;:&nbsp;<span></span></div>
+								<div class="longhu">
+									<span class="danxu"></span>
+									<span class="daxiao"></span>
+									<span class="weixiao"></span>
+									<!--<span>虎</span>-->
+								</div>
+							</div>
+							<div class="detail_r">
+								<span class="cutTime">开奖倒计时</span>
+								<span class="timeing">00：00：00</span>
+								<span class="startBtn">试试手气</span>
+								<p id="mnkai_text">即将开奖，禁止模拟</p>
+							</div>
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+		<div style="display: none;">
+			<audio id="bgsound" loop="loop">
+				<source src="sound/bg.mp3" type="audio/mpeg" loop="loop"/>
+			</audio>
+			<audio id="kaisound" loop="loop">
+				<source src="sound/kaijiin.mp3" type="audio/mpeg" />
+			</audio>
+			<audio id="emptsound" loop="loop">
+				<source src="sound/empt.mp3" type="audio/mpeg" />
+			</audio>
+		</div>
+		<!--<button id="btn">333</button>-->
+		<script type="text/javascript">
+			window.addEventListener('load',function (ev) {
+                console.log('asdfasdfdsdfasd');
+				setTimeout(function () {
+                    var _zoomIn = $(window.parent.document).find('iframe').eq(0).attr('zoomin')=='true'?true:false;  // 是否带了参数？zoomin=true;
+                    console.log( $(window.parent.document).find('iframe').eq(0).attr('zoomin'));
+                },501)
+
+
+				return;
+				//console.log(_zoomIn);
+                if(_zoomIn){
+                    setTimeout(function () {
+                        console.log('begin to tranform...');
+                        $(window.parent.document).find('.bodybox').height(0);
+                        $(window.parent.document).find('#videobox .content').eq(0).css({
+                            'transform-origin': '50% 63%',
+                            'transform': 'scale(0.53)',
+							'bottom': '58%'
+                        });
+                    },700)
+                }
+            })
+		</script>
+	</body>
+
+</html>

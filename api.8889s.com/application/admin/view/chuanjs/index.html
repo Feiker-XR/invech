@@ -1,0 +1,120 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>系统设置</title>
+<link href="../css/base.css" rel="stylesheet" type="text/css" />
+<link href="../css/admin.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="../js/jquery.js"></script>
+<script type="text/javascript" src="../js/jquery.tools.js"></script>
+<script type="text/javascript" src="../js/base.js"></script>
+<script language="javascript">
+function go(value){
+	location.href=value;
+}
+
+function windowopen(url){
+	window.open(url,"wx","width=300,height=300,left=50,top=100,scrollbars=no"); 
+}
+
+function check(){
+	if($("#tf_id").val().length > 3){
+		$("#status").val("4,0,1,2,3");
+	}
+	return true;
+}
+</script>
+<script language="JavaScript" src="/js/calendar.js"></script>
+</head>
+<body class="list">
+	<div class="bar">
+		手工结算串关
+	</div>
+	
+
+	<div class="body">
+<form name="form1" method="get" action="" onSubmit="return check();">
+<div class="listBar">查询类型{$Request.get.status}：<select name="status" id="status">
+            <option value="0" style="color:#FF9900;" 
+            {eq name="Request.get.status" value="0"} selected {/eq}
+            >未结算注单</option>
+            <option value="1" style="color:#FF0000;"
+            {eq name="Request.get.status" value="1"} selected {/eq}
+            >已赢注单</option>
+            <option value="2" style="color:#009900;"
+            {eq name="Request.get.status" value="2"} selected {/eq}
+            >已输注单</option>
+            <option value="3" style="color:#0000FF;"
+            {eq name="Request.get.status" value="3"} selected {/eq}
+            >和局或取消</option>
+            <option value="4,0,1,2,3"
+            {eq name="Request.get.status" value="4,0,1,2,3"} selected {/eq}
+            >全部注单</option>
+          </select>&nbsp;&nbsp;
+          会员：<input name="username" type="text" id="username" value="{$Request.get.username}" size="15">
+            &nbsp;&nbsp;日期：
+            <input name="s_time" type="text" id="s_time" value="{$Request.get.s_time}" onClick="new Calendar(2008,2020).show(this);" size="10" maxlength="10" readonly="readonly" />
+            ~
+            <input name="e_time" type="text" id="e_time" value="{$Request.get.e_time}" onClick="new Calendar(2008,2020).show(this);" size="10" maxlength="10" readonly="readonly" />&nbsp;&nbsp;注单号：
+            <input name="tf_id" type="text" id="tf_id" value="<?=@$_GET['tf_id']?>" size="22">
+            &nbsp;&nbsp;<input name="find" type="submit" id="find" value="查找" class="formButton"/></td>
+
+	</div>
+</form>
+
+<table id="listTables" class="listTables">
+
+				<tr>
+
+					<th>注单号</th>
+
+					<th>模式</th>
+
+					<th>结算详细信息</th>
+
+					<th>下注金额</th>
+					<th>已赢金额</th>
+					<th>可赢金额</th>
+					<th>投注时间</th>
+				  <th>投注会员</th>
+
+				  <th>操作</th>
+                </tr>
+{volist name='list' id='rows'}
+      <tr>
+        <td height="50" align="center"><?=$rows["gid"]?></td>
+        <td align="center"><?=$rows["cg_count"]?> 串 1</td>
+        <td align="center">已结算：<?=$yjs[$rows["gid"]]?>&nbsp;[<a href="{:url('chuanguan/chuan_info')}?gid=<?=$rows["gid"]?>">详细</a>]</td>
+        <td align="center"><?=$rows["bet_money"]?></td>
+        <td align="center"><?=$rows["win"]>0 ? '<span style="color:#FF0000">'.$rows["win"].'</span>' : $rows["win"]?></td>
+        <td align="center"><?=$rows["bet_win"]?></td>
+        <td align="center"><?=date("m-d H:i:s",strtotime($rows["bet_time"]))?></td>
+        <td align="center"><?=$rows["username"]?></td>
+        <td align="center">
+
+		{if $yjs[$rows["gid"]]==$rows["cg_count"] } 
+			{if ($rows["status"]==1 || $rows["status"]==3) }       
+				  已结算<br/>
+				  <a onClick="return confirm('所有该串关的注单都需要重新结算，确定要重新结算？')" href="{:url('chuanguan/setcg_qx')}?gid=<?=$rows["gid"]?>">重新结算</a>
+			{else/}
+				 <a onClick="return confirm('确定结算？')" href="{:url('chuanguan/set_cg')}?id=<?=$rows["gid"]?>&ok=1">结算</a>
+			{/if}
+		{else/}
+			  等待单式结算
+	    {/if}
+	    </td>
+      </tr>
+{/volist}
+
+    <tr>
+        	<td colspan="9" style="text-align:center; color:red;">
+            	下注金额: <?php echo round($bet_money,2);?>&nbsp;&nbsp;
+                已赢金额: <?php echo round($win,2);?>&nbsp;&nbsp;
+            </td>
+    </tr>
+
+  </table>
+{$list->render()}  
+	</div>
+</body>
+</html>    

@@ -1,0 +1,411 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Welcome</title>
+<meta http-equiv="Cache-Control" content="max-age=864000" />
+<script type="text/javascript" src="/setInterval.js"></script>
+<style type="text/css">
+/* CSS样式表 */
+ body{margin:0px;padding:0px;font-family: "宋体", Arial;color:#383838;background:#3d2f1e;position: relative;font-size:12px;}
+h1,h2,h3,h4,h5{padding:0;margin:0;font-size:25px;color:#900;}
+/*设立常用标签的外边距，内边距，边框为0，防止在排版时再重复定义和出现怪问题*/
+div,form,ul,ol,li,dl,dt,dd,p,span,img{margin: 0;padding: 0;border:0;}
+/*设立列表样式为无，这样列表前面不带点*/
+li,dl{list-style-type:none;}
+/*(设立默认全局样式超链接样式)*/
+a{text-decoration:none;color:#174B73;}
+a:hover{ text-decoration:underline;color:#900;}
+/*所有样式*/
+.clear {clear: both;}
+.line10{height:10px;}
+.line5{height:5px;overflow:hidden;}
+.main{margin-left: 8px; padding:5px; width:212px; background-color:#f1e3c6;margin-top: 10px;float: left;}
+.ds_z{float:left; width: 2px; height: 46px; background-image:url(/SanDs/div_left_03.gif);}
+.ds_r{float:left; width: 2px; height: 46px; background-image:url(/SanDs/div_left_07.gif);}
+.ds_1{float:left; width: 69px; height: 46px; cursor: pointer; background-image:url(/SanDs/div_left_05.gif); line-height:46px; text-align:center; color:#000;}
+.cg_1{float:left; width: 69px; height: 46px; cursor: pointer; background-image:url(/SanDs/div_left_04.gif); line-height:46px; text-align:center; color:#000;}
+.gq_1{float:left; width: 69px; height: 46px; cursor: pointer; background-image:url(/SanDs/div_left_04.gif); line-height:46px; text-align:center; color:#000;}
+.ds_2{float:left; width: 69px; height: 46px; cursor: pointer; background-image:url(/SanDs/div_left_04.gif); line-height:46px; text-align:center; color:#000;}
+.cg_2{float:left; width: 69px; height: 46px; cursor: pointer; background-image:url(/SanDs/div_left_05.gif); line-height:46px; text-align:center; color:#000;}
+.gq_2{float:left; width: 69px; height: 46px; cursor: pointer; background-image:url(/SanDs/div_left_04.gif); line-height:46px; text-align:center; color:#000;}
+.menulink_1{height:30px; line-height:30px; padding:0 10px; background: #423019;color:#FFF;cursor: pointer;width: 47px;padding-left: 35px;background: url(/sports/images/head_ball_bk.gif) no-repeat 10px 6px;float: left;}
+.menulink_2{height:30px; line-height:30px; padding:0 10px;cursor: pointer; color:#FFF;width: 55px;padding-left: 35px;background: url(/sports/images/head_ball_ft.gif) no-repeat 10px 6px;float: left;margin-left: 10px;}
+.menulink_3{height:30px; line-height:30px; padding:0 10px; background: #423019;color:#FFF;cursor: pointer;width: 83px;padding-left: 35px;background: url(/sports/images/head_ball_bk.gif) no-repeat 10px 6px;float: left;}
+.menulink_4{height:30px; line-height:30px; padding:0 10px;cursor: pointer; color:#FFF;width: 78px;padding-left: 35px;background: url(/sports/images/head_ball_ft.gif) no-repeat 10px 6px;float: left;margin-left: 10px;}
+.menulink_5{height:30px; line-height:30px; padding:0 10px; background: #423019;color:#FFF;cursor: pointer;width: 58px;padding-left: 35px;background: url(/sports/images/head_ball_bk.gif) no-repeat 10px 6px;float: left;}
+.menulink_6{height:30px; line-height:30px; padding:0 10px;cursor: pointer; color:#FFF;width: 58px;padding-left: 35px;background: url(/sports/images/head_ball_ft.gif) no-repeat 10px 6px;float: left;margin-left: 10px;}
+.menulink_7{height:30px; line-height:30px; padding:0 10px;cursor: pointer; color:#FFF;width: 55px;padding-left: 35px;background: url(/sports/images/head_ball_nf.gif) no-repeat 10px 6px;float: left;margin-left: 10px;}
+.menulink_8{height:30px; line-height:30px; padding:0 10px;cursor: pointer; color:#FFF;width: 55px;padding-left: 35px;background: url(/sports/images/head_ball_rl.gif) no-repeat 10px 6px;float: left;margin-left: 10px;}
+.menulink_9{height:30px; line-height:30px; padding:0 10px;cursor: pointer; color:#FFF;width: 55px;padding-left: 35px;background: url(/sports/images/head_ball_bq.gif) no-repeat 10px 6px;float: left;margin-left: 10px;}
+.menulink_0{height:30px; line-height:30px; padding:0 10px;cursor: pointer; color:#FFF;width: 55px;float: left;margin-left: 10px;}
+
+.betlink_1{height:28px;margin:0 auto; line-height:28px; padding:0 10px;border-bottom:1px #000000 solid;cursor: pointer;width: 60px;float: left;}
+.betlink_2{height:28px;margin:0 auto; background-color:#FFFFFF;line-height:28px; padding:0 10px;border-bottom:1px #000000 solid;cursor: pointer;}
+.betlink_3{height:28px;margin:0 auto; line-height:28px; padding:0 10px;border-bottom:1px #000000 solid;cursor: pointer;width: 140px;float: left;}
+.betlink_4{height:28px;margin:0 auto; line-height:28px; padding:0 10px;border-bottom:1px #000000 solid;cursor: pointer;width: 85px;float: left;}
+.betlink_5{height:28px;margin:0 auto; line-height:28px; padding:0 10px;border-bottom:1px #000000 solid;cursor: pointer;width: 85px;float: left;}
+.betlink_6{height:28px;margin:0 auto; line-height:28px; padding:0 10px;border-bottom:1px #000000 solid;cursor: pointer;width: 139px;float: left;}
+.betlink_7{height:28px;margin:0 auto; line-height:28px; padding:0 10px;border-bottom:1px #000000 solid;cursor: pointer;width: 115px;float: left;}
+.betlink_8{height:28px;margin:0 auto; line-height:28px; padding:0 10px;border-bottom:1px #000000 solid;cursor: pointer;width: 100px;float: left;}
+.betlink_9{height:28px;margin:0 auto; line-height:28px; padding:0 10px;border-bottom:1px #000000 solid;cursor: pointer;width: 135px;float: left;}
+.betlink_10{height:28px;margin:0 auto; line-height:28px; padding:0 10px;border-bottom:1px #000000 solid;cursor: pointer;width: 50px;float: left;}
+
+.f_right{ float:right;}
+.touzhu_3 {margin: 0px 0 0 20px;line-height:25px;}
+.touzhu_6 {height: auto;background-color:#FBEFE7;padding: 8px 0 10px 0;color:#000;}
+.touzhu_8 {height:60;background-color:#FBEFE7;padding: 10px 0 10px 0;color:#FFF;}
+.touzhu_4 {height:30px;background-image:url(/SanDs/div_left_10.gif);color:#FFF;line-height:30px;text-align:center;}
+.tou_input {width: 80px;border: 1px solid #9298A4;height:16px;}
+.touzhu_7 {width: 60px;float: left;padding: 0 10px 0 10px;}
+.quxiao{float:left;margin:0 0 0 10px; width:60px;}
+.queren{float:right;margin:0 15px 0 0; width:60px;}
+.toua_1 {background: url(/images/touzhu_2.jpg) no-repeat;width: 60px;height: 22px;border: 0px;cursor:pointer;}
+.toua_2 {background: url(/images/touzhu_3.jpg) no-repeat;width: 60px;height: 22px;border: 0px;cursor:pointer;}
+.match_msg{line-height:20px; padding:5px; height:auto; background-color:#FFF; border:1px #9C9895 solid; margin:5px 0px;}
+/*账户名称和交易状况,滚球，今日赛事，早盘*/
+.deal{width: 1000px;height: 60px;float: left;}
+.deal_left{width: 240px;height: 60px;background: #423019;float: left;}
+.deal_left span{display: block;float: left;width: 119px;height: 14px;text-align: center;line-height: 14px;margin-top: 10px;}
+.deal_left span:first-child{border-right: 1px solid #FFFFFF;}
+.deal_left span a{color: white;}
+
+.deal_left ul li{float: left;margin: 12px 0px 0px 15px;line-height: 25px;color: white;}
+.deal_left_refresh{display: block;width: 16px;height: 16px;overflow: hidden;background: url(/sports/images/head_credit_refresh.gif) no-repeat 0px 0px;margin-top: 5px;}
+
+.deal_right{width: 759px;height: 30px;float: left;}
+.deal_bottom{width: 758px;height: 30px;float: left;background: #260707;color: white;border: 1px solid #FFFFFF;border-right: none;}
+.deal_today{width: 758px;height: 30px;float: left;background: #260707;color: white;border: 1px solid #FFFFFF;border-right: none;}
+
+.deal_list_top{height: 30px;border: 1px solid #FFFFFF;color: white;border-top: none;border-right: none;background: #502d0a;}
+.deal_list_top div:hover{color: #f9c100;}
+
+.deal_list_top_2{height: 30px;border: 1px solid #FFFFFF;color: white;border-top: none;border-right: none;background: #502d0a;}
+.deal_list_top_2 div:hover{color: #f9c100;}
+
+.deal_list_top_3{height: 30px;border: 1px solid #FFFFFF;color: white;border-top: none;border-right: none;background: #502d0a;}
+.deal_list_top_3 div:hover{color: #f9c100;}
+
+.deal_list_bottom{height: 30px;border: 1px solid #FFFFFF;color: white;border-top: none;border-right: none;background: #260707;}
+.deal_list_bottom_1{height: 30px;border: 1px solid #FFFFFF;color: white;border-top: none;border-right: none;background: #260707;}
+.deal_list_bottom_2{height: 30px;border: 1px solid #FFFFFF;color: white;border-top: none;border-right: none;background: #260707;}
+.deal_list_bottom_3{width: 758px;height: 30px;float: left;background: #260707;color: white;border: 1px solid #FFFFFF;border-right: none;border-top: none;}
+.deal_list_bottom_4{height: 30px;border: 1px solid #FFFFFF;color: white;border-top: none;border-right: none;background: #260707;}
+.deal_list_bottom_5{height: 30px;border: 1px solid #FFFFFF;color: white;border-top: none;border-right: none;background: #260707;}
+.deal_list_bottom_6{height: 30px;border: 1px solid #FFFFFF;color: white;border-top: none;border-right: none;background: #260707;}
+.deal_list_bottom_7{height: 30px;border: 1px solid #FFFFFF;color: white;border-top: none;border-right: none;background: #260707;}
+.deal_list_bottom_jinri{width: 758px;height: 30px;float: left;background: #260707;color: white;border: 1px solid #FFFFFF;border-right: none;}
+
+
+#Label3{width: 200px;height: 30px;line-height: 30px;cursor: pointer;}
+#Label1{width: 758px;height: 30px;line-height: 30px;cursor: pointer;}
+
+/*用户登录状态及导航*/
+.admin_nav{width: 1000px;height: 70px;background: #a96206;border-top: 1px solid #FFFFFF;border-bottom: 1px solid #FFFFFF;}
+.admin_nav_left{width: 240px;height: 70px;float: left;}
+.admin_nav_left ul{margin-top: 30px;}
+.admin_nav_left li{text-align: center;line-height: 20px;color: white;}
+.admin_nav_right{width: 757px;height: 70px;float: left;}
+.admin_nav_right ul{margin-top: 32px;}
+.admin_nav_right li{float: left;margin-left: 5px;cursor: pointer;}
+.admin_nav_a,.admin_nav_b,.admin_nav_c,.admin_nav_d{display: block;width: 120px;height: 38px;text-align: center;background: #493218;color: #e7b565;font-size: 14px;line-height: 38px;border-top-left-radius: 4px;border-top-right-radius: 4px;}
+.admin_nav_a:link,.admin_nav_b:link,.admin_nav_c:link,.admin_nav_d:link{color: #e7b565;text-decoration: none;}
+.admin_nav_a:hover,.admin_nav_b:hover,.admin_nav_c:hover,.admin_nav_d:hover{background: #7b0b00;color: #e7b565;text-decoration: none;}
+
+.admin_nav_active{background: #7b0b00;color: #f8c100;border-top-left-radius: 4px;border-top-right-radius: 4px;}
+#leftFrame{position: relative;z-index: 7777;}
+#mainFrame{position: relative;z-index: 8888;}
+
+/*滚球左边页面*/
+.ball_menu{width: 210px;height: 91px;border: 1px solid #d4a45d;border-radius: 3px;}
+.ball_menu_h1{display:block;width: 210px;height: 30px;line-height: 30px;float: left;background: #493218;}
+.ball_menu_h1 h1{margin-left: 15px;font-size: 12px;color: #d4a45d;}
+
+.ball_menu_ul{width: 210px;height: auto;clear: both;float: left;}
+.ball_menu_footb{display: block;width: 210px;height: 30px;background: #e3cfaa;line-height: 30px;cursor: pointer;border-bottom: 1px solid #d4a45d;}
+.ball_menu_footb i{display: block;width: 16px;height: 16px;background: url(/sports/images/head_ball_ft.gif) no-repeat 0px 0px;float: left;margin-left: 15px;margin-top: 7px;margin-right: 10px;}
+.ball_menu_footb:hover{background: #ffd600;}
+
+.ball_menu_baskb{display: block;width: 210px;height: 30px;background: #e3cfaa;line-height: 30px;cursor: pointer;}
+.ball_menu_baskb i{display: block;width: 16px;height: 16px;background: url(/sports/images/head_ball_bk.gif) no-repeat 0px 0px;float: left;margin-left: 15px;margin-top: 5px;margin-right: 10px;}
+.ball_menu_baskb:hover{background: #ffd600;}
+
+.ball_notice{width: 210px;height: auto;clear: both;float: left;margin-top: 10px;}
+.ball_notice_h1{display:block;width: 210px;height: 30px;line-height: 30px;float: left;background: #493218;}
+.ball_notice_h1 h1{margin-left: 15px;font-size: 12px;color: #d4a45d;float: left;}
+.ball_notice_h1 a{float: right;color: white;margin-right: 10px;}
+
+/* 无缝上滚动公告 */
+.txtMarquee-top{width:210px;overflow:hidden; position:relative;border:1px solid #ccc;}
+.txtMarquee-top .bd{padding:10px;}
+.txtMarquee-top .infoList li{height:70px; line-height:24px;overflow: hidden;}
+.txtMarquee-top .infoList li .date{ float:right; color:#999;}
+.txtMarquee-top .infoList{height: 70px;}
+</style>
+</head>
+<script language="JavaScript">
+<!--
+window.onerror=function(){return true;}
+
+if(self==top){
+	//top.location='/';
+}
+
+function urlOnclick(url){
+	window.open(url,"mainFrame");  
+}
+function url(url){
+	window.open("rule/rule_"+url+'.html');  
+}
+
+-->
+</script>
+<body>
+<script type="text/javascript" src="/js/jquery.js"></script>
+<script>
+function changeMove(obj,type,k)
+{
+	if(type)
+	{
+		$(obj).addClass(k+"_1");
+	}
+	else
+	{
+		if ($("#"+k+"_01_bet").css("display")=="none")
+			$(obj).removeClass(k+"_1");
+	}
+}
+</script>
+<div class="main">
+<div id="button_chuanguan" style="display:none;"> </div>
+<div id="button_danshi" style="display:none;"></div>
+<div style="display:none"><span id="user_money">0.00</span></div>
+<div id="ds_01_bet">
+</div>
+<div id="cg_01_bet" style="display:none">
+</div>
+
+	<div id="xp" style="display:none;margin:0;margin-bottom: 10px;">
+	    <div id="left">
+	    <div class="touzhu_4" id="ds_msg" style="display:none;">以下为您要投注的赛事</div>
+	        <form action="{:Url('bet/index')}" name="form1" id="form1" method="post" onsubmit="if($('#cg_msg').css('display')!='none') {if (parseInt($('#cg_num').html(),10)>=3) {return check_bet();}else{alert('投注失败，请至少选择三场比赛后再进行投注！');return false;}}else{return check_bet();}" style="margin:0 0 0 0;">
+	        <input type="hidden" name="touzhutype" id="touzhutype" value="0" />
+	        <div class="touzhu_4" id="cg_msg" style="display:block;">已选择 <span id="cg_num" style="color:#FF0;"></span> 场赛事</div>
+	        <div id="touzhudiv" style="text-align:center;" ></div>
+	        <div class="touzhu_6">
+	        <div class="touzhu_3">交易金额：<input type="text" class="tou_input" name="bet_money" id="bet_money" autocomplete="off" maxlength="7" onkeypress="if((event.keyCode<48 || event.keyCode>57))event.returnValue=false"  onkeydown="if(event.keyCode==13)return check_bet();" onpaste="return false" oncontextmenu="return false" oncopy="return false" oncut="return false" size="8"/></div>
+	        <div class="touzhu_3">可赢金额：<span id="win_span" class="tou_red">0.00</span><input type="hidden" value="0" name="bet_win" id="bet_win"  /></div>
+	        <div class="touzhu_3">最低限额：50</div>
+	        <div class="touzhu_3">单注限额：<span id="max_ds_point_span">0</span></div>
+	        <div class="touzhu_3">单场最高：<span id="max_cg_point_span">0</span></div>
+				<div id="istz" style="display:none; color: #F00; text-align:center; line-height:25px;">
+					可赢金额：<span id="win_span1">0.00</span><br>是否确定交易？
+			    </div>
+	        </div><div class="touzhu_8">
+	        <div class="quxiao"><input class="toua_2" name="" type="button" onclick="quxiao_bet()" value=""/></div>
+	        <div class="queren"><input class="toua_1"  id="submit_from" name=""  type="submit" value=""/></div>
+	        <div class="clear"></div>
+	        </div>
+	        </form>
+	    </div>
+	</div>
+	
+	<div class="ball_menu">
+		<!--左侧滚球-->
+		<span class="ball_menu_h1">
+			<h1>滚球</h1>
+		</span>
+		<div class="ball_menu_ul">
+			<ul>
+				<li class="ball_menu_footb" onclick="urlOnclick('/sports/ft_1_0.html')">
+					<i></i>
+					<span id="menu_left_fb"></span>
+				</li>
+				<li class="ball_menu_baskb" onclick="urlOnclick('/sports/bk_1_0.html')">
+					<i></i>
+					<span id="menu_left_bb"></span>
+				</li>
+			</ul>
+		</div>
+		
+		<!--左侧公告-->
+		<div class="ball_notice">
+			<span class="ball_notice_h1">
+				<h1>公告</h1>
+				<a href="javascript:;">更多</a>
+			</span>	
+			<div class="ball_notice_contain">
+				<div class="txtMarquee-top">
+					<div class="bd">
+						<ul class="infoList">
+							{foreach $notice as $n}
+							<li>
+							{$n.msg}
+							</li>
+							{/foreach}
+							{if count($notice)==0}							
+							<li>
+							暂无公告和消息
+							</li>
+							{/if}
+						</ul>
+					</div>
+				</div>
+			</div>	
+		</div>		
+	</div>
+</div>
+<!-- <script src="https://cdn.bootcss.com/jquery/1.7.2/jquery.min.js"></script> -->
+<script type="text/javascript" src='js/jquery-1.7.2.min.js'></script>
+<script type="text/javascript" src="/js/js/jquery.SuperSlide.2.1.1.js" ></script>
+<script type="text/javascript" language="javascript" src="/js/left.js"></script>
+<script type="text/javascript" language="javascript" src="/js/touzhu.js"></script>
+<script type="text/javascript" language="javascript" src="/js/left_mouse.js"></script>
+
+</body>
+<script type="text/javascript">
+function loadTop(){
+	$.getJSON("/sport/leftdao.html?callback=?",function(json){
+				$("#s_zq").html("("+json.zq+")");
+				$("#s_zq_ds").html("("+json.zq_ds+")");
+				$("#s_zq_gq").html("("+json.zq_gq+")");
+				$("#menu_left_fb").html("滚球("+json.zq_gq+")");
+				$("#zuqiu_gun").html("滚球("+json.zq_gq+")");
+				$("#s_zq_bd").html("("+json.zq_bd+")");
+				$("#s_zq_rqs").html("("+json.zq_rqs+")");
+				$("#s_zq_bqc").html("("+json.zq_bqc+")");
+				$("#s_zq_jg").html("("+json.zq_jg+")");
+				$("#s_zqzc").html("("+json.zqzc+")");
+				$("#s_zqzc_ds").html("("+json.zqzc_ds+")");
+				$("#s_zqzc_bd").html("("+json.zqzc_bd+")");
+				$("#s_zqzc_rqs").html("("+json.zqzc_rqs+")");
+				$("#s_zqzc_bqc").html("("+json.zqzc_bqc+")");
+				$("#s_lm").html("("+json.lm_gq+")");
+				$("#menu_left_bb").html("滚球("+json.lm_gq+")");
+				$("#s_lm_ds").html("("+json.lm_ds+")");
+				$("#s_lm_gq").html("滚球("+json.lm_gq+")");
+				$("#s_lm_jg").html("("+json.lm_jg+")");
+				$("#s_lmzc").html("("+json.lmzc+")");
+				$("#s_lmzc_ds").html("("+json.lmzc_ds+")");
+				$("#s_wq").html("("+json.wq+")");
+				$("#s_wq_ds").html("("+json.wq_ds+")");
+				$("#s_wq_jg").html("("+json.wq_jg+")");
+				$("#s_pq").html("("+json.pq+")");
+				$("#s_pq_ds").html("("+json.pq_ds+")");
+				$("#s_pq_jg").html("("+json.pq_jg+")");
+				$("#s_bq").html("("+json.bq+")");
+				$("#s_bq_ds").html("("+json.bq_ds+")");
+				$("#s_bq_jg").html("("+json.bq_jg+")");
+				$("#s_gj").html("("+json.gj+")");
+				$("#s_gj_gj").html("("+json.gj_gj+")");
+				$("#s_gj_jg").html("("+json.gj_jg+")");
+				$("#f5").css("display","");
+				$("#tz_money").html(json.tz_money);
+				$("#user_money").html(json.user_money);
+				$("#user_num").html(json.user_num);
+				$("#cg_f").html("("+(parseInt(json.zq_ds)+parseInt(json.lm_ds))+")");
+				$("#cg_f1").html("("+(parseInt(json.zqzc_ds)+parseInt(json.lmzc_ds))+")");
+				$("#cg_f_0").html("("+json.zq_ds+")");
+				$("#cg_f_jinri").html("("+json.zq_ds+")");
+				$("#cg_f_2").html("("+json.lm_ds+")");
+				$("#s_jrlm").html("("+json.lm_ds+")");
+				$("#cg_f1_0").html("("+json.zqzc_ds+")");
+				$("#cg_f1_2").html("("+json.lmzc_ds+")");		
+		  }
+	);
+}
+$(function(){
+	setInterval('refershMoney()',2000);
+	setInterval('loadTop()',25000);
+	loadTop();
+})
+$(function(){
+	//点击滚球
+	$(".admin_nav_a").click(function(){
+		$(this).addClass("admin_nav_active");
+		$(".admin_nav_b,.admin_nav_c").removeClass("admin_nav_active");
+		$(".deal_list_top").show().siblings("div").hide();
+		
+		$(".deal_bottom").show();
+		$(".deal_today,.deal_list_bottom_jinri").hide();
+		
+	});
+	
+	//今日赛事
+	$(".admin_nav_b").click(function(){
+		$(this).addClass("admin_nav_active");
+		$(".admin_nav_a,.admin_nav_c").removeClass("admin_nav_active")
+		$(".deal_list_top_2").show().siblings("div").hide();
+		
+		$(".deal_today").show();
+		$(".deal_bottom,.deal_list_bottom_jinri").hide();
+		
+	});	
+	
+	//早盘
+	$(".admin_nav_c").click(function(){
+		$(this).addClass("admin_nav_active");
+		$(".admin_nav_a,.admin_nav_b").removeClass("admin_nav_active");
+		$(".deal_list_top_3").show().siblings("div").hide();
+
+		$(".deal_list_bottom_jinri").show();
+		$(".deal_bottom,.deal_today").hide();		
+
+	});	
+	
+	//点击第一行滚球获取index()
+	$(".deal_list_top div").click(function(){
+		var index = $(this).index();
+		$(".deal_bottom div").eq(index).show().siblings("div").hide();
+	});
+	
+	//点击第一行今日赛事获取index()
+	$(".deal_list_top_2 div").click(function(){
+		var index2 = $(this).index();
+		$(".deal_bottom,.deal_list_bottom_jinri").hide();
+
+		if (index2 == 0){
+			$(".deal_list_bottom_2").show().siblings("div").hide();
+		} else if(index2 == 1){
+			$(".deal_list_bottom_3").show().siblings("div").hide();
+		} else if(index2 == 2){
+			$(".deal_list_bottom_4").show().siblings("div").hide();
+		} else if(index2 == 3){
+			$(".deal_list_bottom_5").show().siblings("div").hide();
+		} else if(index2 == 4){
+			$(".deal_list_bottom_6").show().siblings("div").hide();
+		} else if(index2 == 5){
+			$(".deal_list_bottom_7").show().siblings("div").hide();
+		} else{}
+
+	});	
+
+	//点击第一行早盘获取index()
+	$(".deal_list_top_3 div").click(function(){
+		var index3 = $(this).index();
+		$(".deal_list_bottom_jinri").show();
+		$(".deal_bottom,.deal_toady").hide();
+		
+		if(index3 == 0){
+			$("#Label1").show();
+			$("#Label3").hide();
+		} else{
+			$("#Label3").show();
+			$("#Label1").hide();			
+		}
+		
+	});	
+	
+	//无缝上滚动
+	$(".txtMarquee-top").slide({mainCell:".bd ul",autoPlay:true,effect:"topMarquee",vis:1,interTime:50,trigger:"click"});	
+	
+	//点击变色
+	$(".deal_list_top div,.deal_list_top_2 div,.deal_list_top_3 div").click(function(){
+		$(this).css("color","#f9c100").siblings().css("color","#ffffff");
+	});
+
+})
+
+</script>
+</body>
+</html>

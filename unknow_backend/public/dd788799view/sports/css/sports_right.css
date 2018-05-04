@@ -1,0 +1,75 @@
+﻿body {
+	font-size:12px;
+	font-family: "Arial";
+	margin : 0;padding : 1px;
+	background-color:#fff;
+}
+/*设立常用标签的外边距，内边距，边框为0，防止在排版时再重复定义和出现怪问题*/
+div,form,ul,ol,li,dl,dt,dd,p,span,img,input
+ {
+	margin: 0;
+	padding: 0;
+	border:0;
+}
+/*设立列表样式为无，这样列表前面不带点*/
+li,dl{
+	list-style-type:none;
+}
+/*(设立默认全局样式超链接样式)*/
+a {font-size: 12px;color: #CC0000;font-weight: bold;text-decoration:none;}
+a:hover {text-decoration: none;color: #CC0000;}
+.red{ color:#F00}
+/*所有样式*/
+.top {height:40px; margin-bottom:2px; background-color:#5d370b; line-height:40px;}
+.box { width:100%; border:1px solid #000}
+.box th{ color:#fff; background-color:#86715c;line-height:20px; font-weight:100;}
+.box td{ border-top: 1px #fff solid; border-bottom: 1px #ddd solid;border-left: 1px #fff solid; border-right: 1px #ddd solid;}
+.box .bian_over{background-color:#E1E9FF;}
+.box .bian_out{background-color:#F5F5F5;}
+.box .zhu{ color:#000}
+.box .ke{ color:#000}
+.box .he{ color:#000}
+.box .ding{ vertical-align:top;}
+.box .zhong{ text-align:center;}
+.box .line{ line-height:16px;}
+.box .gq_shijians{ width:30px;}
+.box .gq_bifens{ width:30px;}
+.box .shijian{ width:50px;}
+.box .duiwu{ }
+.box .quanchang{ }
+.box .shangbanchang{ }
+.box .duying{ width:40px;}
+.box .rangqiu{ width:95px;}
+.box .daxiao{ width:95px;}
+.box .liansai{ background-color:#fcf9ce; line-height:22px; padding-left:10px;}
+.box .liansai a{color:#4a3b08;}
+.box .liansai a:hover{ color:#000}
+.box .bian_out{ background-color:#FFF;}
+.box .bian_over{ background-color:#FFE;}
+.box .rangqiu_odds{ line-height:16px; width:91px; padding:0 2px;}
+.box .rangqiu_odds .odds{ float:right; width:30px; text-align:right}
+.box .rangqiu_odds .pankou{ float:left; width:60px;}
+.box .ruqiushu{ width:70px;}
+.box .banquanchang{ width:50px;}
+.box .liansai_g{ text-align:left;}
+.box .liansai_g a{margin-left:5px; display:inline;color:#FFF;}
+.box .liansai_g a:hover{ color:#FFF}
+.box .liansai_g span{ float:right; margin-right:5px;}
+.box .saishi_g{ background-color:#FFE; line-height:22px; text-align:center; font-weight:bold;}
+.box .xiangmu_g {padding-left:5px;}
+.box .xiangmu_g span{margin-right:5px; float:right;}
+.page{cursor:pointer; float:left; color:#FFF; font-weight:bold; width:500px;}
+.page span{float:left; padding-left:10px;}
+.page ul{list-style-type: none; float:left}
+.page li {float:left;background:#fff;text-align:center; margin-left:5px; margin-top:10px;}
+.page li a {display:block;color:#002F4A;line-height:20px;font-weight:bold; width:20px;}
+.page li a:hover,.page li.i {background:#880000; font-weight:bold; color:#FFF;}
+.button_sx {width: 64px;height: 26px;margin: 5px 10px 0 0;background: url(../images/mem_refresh_btn.gif) no-repeat;float: right;cursor: hand;display:inline;border-radius: 4px;color: #f9c100;}
+.button_ls {width: 99px;height: 26px;margin: 5px 10px 0 0;background: url(../images/mem_league_btn.gif) no-repeat;float: left;cursor: hand;display:inline;border-radius: 4px;color: #f9c100;}
+
+.result_title{cursor:pointer; float:left; color:#FFF; font-weight:bold; width:600px}
+.result_title span{float:left; padding-left:10px;}
+.result_title ul{list-style-type: none; float:left}
+.result_title li {float:left;background:#fff;text-align:center; margin-left:5px; margin-top:10px;}
+.result_title li a {display:block;color:#002F4A;line-height:20px;font-weight:bold; padding:0 10px;}
+.result_title li a:hover,.result_title li.i {background:#024467; font-weight:bold; color:#FFF; padding:0 10px;line-height:20px}

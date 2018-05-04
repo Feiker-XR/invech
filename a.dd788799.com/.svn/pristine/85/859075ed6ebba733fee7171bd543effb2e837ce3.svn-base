@@ -1,0 +1,23 @@
+<?php
+namespace app\common\model;
+use think\Model;
+
+class Notice extends Base{
+
+    protected $table = 'gygy_content';
+	protected $table = 'gygy_money';
+    protected $createTime = 'created_at';
+    protected $updateTime = '';
+    protected $autoWriteTimestamp = 'datetime';
+
+    public static function getList($request){
+ 		$params = $request->param();
+		$query = self::order('id');
+		if($params['keywords']??0){
+            $query->where('title','like','%'.trim($params['keywords']).'%');
+        }
+		$data = $query->paginate();
+		return $data;
+    }
+
+}

@@ -1,0 +1,20 @@
+<?php
+namespace app\common\model;
+use think\Model;
+
+class Order extends Model{
+
+    protected $table = 'gygy_orders';
+    protected $createTime = 'created_at';
+    protected $updateTime = 'updated_at';
+    protected $autoWriteTimestamp = 'datetime';
+
+    protected $auto = ['status'=>0,];
+
+    public function money()
+    {
+        return $this->morphMany('Money',['type','item_id'],'recharge');
+        // db('money')->where('item_id' => $this->id , 'type'    => 第三参数??$this->modelName);
+    }
+
+}

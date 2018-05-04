@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>历史记录</title>
+<link rel="stylesheet" type="text/css" href="/css/general.css"/>
+<link rel="stylesheet" type="text/css" href="/Scripts/jquery-ui.css" />
+<link rel="stylesheet" type="text/css" href="/newview/css/theme/style.css?version=2.0.0" />
+<link rel="stylesheet" type="text/css" href="/newview/css/style.css" />
+<link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
+
+<link rel="stylesheet" href="/css/newstyle	/public.css">
+<link rel="stylesheet" href="/css/newstyle	/laydate.css">
+<link rel="stylesheet" href="/css/newstyle	/page_2.css">
+
+<script type="text/javascript" src="/Scripts/jquery.js"></script>
+<script type="text/javascript" src="/Scripts/member.js"></script>
+<script type="text/javascript" src="/js/main.js"></script>
+<script type="text/javascript" src="/Scripts/jquery-ui-datepicker.js"></script>
+<script type="text/javascript" src="/newview/js/main.js"></script>
+<script type="text/javascript">
+$(function(){
+	$("#S_date").datepicker({
+		minDate: -31,
+		maxDate: 0
+	});
+	$("#E_date").datepicker({
+		minDate: -31,
+		maxDate: 0
+	});
+setInterval(function() {
+	$.ajax({
+		type: "post",
+		url: "{:Url('index/home')}",
+		data:{'ajax':1,'get_money':'1'},
+		success:function(data) {
+			if (/^[\d\.]+$/.test(data)) {
+				$('#money,#money_2').text(data);
+			}
+		}
+	});
+},2000);
+});
+
+</script>
+
+<style type="text/css">
+body{background: white;}
+
+.ui-moneyBox a{color: #a69a8e;}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="head">
+	<!--欢迎-->
+	{include file='common/nav'}
+
+</div>
+
+<div class="block_0"></div>	
+
+	
+
+<div class="moneyBox_contain modify_wp">
+
+	<!--<div class="ui-header">
+
+		<div class="ui-headerBox">
+
+			&lt;!&ndash; logo &ndash;&gt;
+
+			<a class="ui-icon-logo ui-logo" id="Logo"></a>
+
+			&lt;!&ndash; 导航 &ndash;&gt;
+
+			<ul class="ui-nav">
+
+				<li id="Nav_0">
+
+					<a href="/user/userinfo.html" title="会员首页">
+
+						<span class="ui-icon ui-icon-home ui-icon-50"></span>
+
+					</a>
+
+				</li>
+
+				<li id="Nav_1">
+
+					<a href="/pay/member.html" title="财务管理">
+
+						<span class="ui-icon ui-icon-recharge ui-icon-50"></span>
+
+					</a>
+
+				</li>
+
+				<li id="Nav_2">
+
+					<a href="/user/record_ds.html" title="游戏记录">
+
+						<span class="ui-icon ui-icon-gameNote ui-icon-50"></span>
+
+					</a>
+
+				</li>
+
+				<li id="Nav_3" class="ui-header-active">
+
+					<a href="/user/report.html" title="历史记录">
+
+						<span class="ui-icon ui-icon-data ui-icon-50"></span>
+
+					</a>
+
+				</li>
+
+				<li id="Nav_4" >
+
+					<a href="/user/sms.html" title="站内短信">
+
+						<span class="ui-icon ui-icon-announce ui-icon-50"></span>
+
+					</a>
+
+				</li>
+
+       			 <li id="Nav_5">
+
+					<a href="/user/agent.html" title="代理中心">
+
+						<span class="ui-icon ui-icon-newActivity ui-icon-50"></span>
+
+					</a>
+
+				</li>
+
+        		<li style="display:none">
+
+					<a href="http://messenger.providesupport.com/messenger/1x5b67gp1rcy50kqxa0qpsa0jx.html" title="客服中心">
+
+						<span class="ui-icon ui-icon-online ui-icon-50"></span>
+
+					</a>
+
+				</li>
+
+			</ul>
+
+			<ul class="ui-function">
+
+				&lt;!&ndash;<li>
+
+					<a href="#">
+
+						<span class="ui-icon ui-icon-down ui-icon-20" id="Menu"></span>
+
+					</a>
+
+				</li>
+
+				<li>
+
+					<a href="#">
+
+						<span class="ui-icon ui-icon-min ui-icon-20"></span>
+
+					</a>
+
+				</li>
+
+				<li>
+
+					<a href="javascript:void(0)" id="Logout">
+
+						<span class="ui-icon ui-icon-max ui-icon-20"></span>
+
+					</a>
+
+				</li>&ndash;&gt;
+
+			</ul>
+
+		</div>
+
+	</div>	-->
+	<div class="modify_header">
+		<a href="/user/userinfo.html" class="nav_1">首页</a>
+		<a href="/pay/member.html" class="nav_2">财务管理</a>
+		<a href="/user/record_ds.html" class="nav_3">游戏记录</a>
+		<a href="/user/report.html" class="nav_4">历史记录</a>
+		<a href="/user/sms.html" class="nav_5">短信记录</a>
+		<a href="/user/agent.html" class="nav_6">代理中心</a>
+	</div>
+
+	
+
+	<!--<div class="ui-body">
+
+		<div class="ui-search" id="subjsshow3" style="display: block;"> 
+
+	        <span><i class="fas fa-user-circle" style="font-size: 30px"></i>历史记录</span>
+
+			<ul>
+
+	            <li class="ui-hover"><a href="/user/report.html"><i class="fas fa-shopping-cart" style="background-color: #F59A2F"></i>报表全览</a></li>
+
+			</ul>
+
+		</div>	
+
+	</div>-->
+	<div class="modify_main_btn">
+		<a href="javaScript:;" class="click_A">真人视讯</a>
+		<a href="javaScript:;">电子游艺</a>
+		<a href="javaScript:;">彩票游戏</a>
+		<a href="javaScript:;">bbin体育/记录</a>
+		<a href="javaScript:;">皇冠体育单式</a>
+		<a href="javaScript:;">皇冠体育串关</a>
+	</div>
+
+	<div class="date_pricker_wp">
+		<form class="data-pricker-form">
+			<div class="data-select">
+				<label class="data-select-label">平台：</label>
+				<select name="interest" class="data-select-option">
+					<option value="0">所有平台</option>
+					<option value="1">真人视频</option>
+				</select>
+			</div>
+			<div class="lottery_time">
+				<span>时间：</span>
+				<input type="text" class="start_time_input start_time">
+				<span>至</span>
+				<input type="text" class="start_time_input end_time">
+				<button class="search_time_btn">查询</button>
+			</div>
+			<div class="today-time">
+				<span>今日</span>
+				<span>昨日</span>
+				<span>上周</span>
+				<span>本周</span>
+			</div>
+		</form>
+	</div>
+	<div class="list_table_wp">
+		<div class="list_table_title">
+			<span>平台名称</span>
+			<span>总下注金额</span>
+			<span>总有效投注</span>
+			<span>总派彩金额</span>
+			<span>总输赢统计</span>
+			<span>详情</span>
+		</div>
+		<ul class="list_Tbody_wp">
+			{volist name="result" id="row"}
+			<li>
+                  <span>
+                      <em>AG</em>
+                  </span>
+				<span>
+                      <em>158</em>
+                      <a href="javaScript:;"></a>
+                  </span>
+				<span>
+                      <em>158</em>
+                      <a href="javaScript:;"></a>
+                  </span>
+				<span>
+                      <em>158</em>
+                      <a href="javaScript:;"></a>
+                  </span>
+				<span style="color:#fe403f">
+                      <em>185</em>
+                  </span>
+				<span>
+                      <b class="list_Tbody_totle">查看详情</b>
+                  </span>
+			</li>
+			{/volist}
+			<!--<li>
+                  <span>
+                    <em>AG</em>
+                  </span>
+				<span>
+                      <em>185</em>
+                      <a href="javaScript:;"></a>
+                  </span>
+				<span>
+                      <em>185</em>
+                      <a href="javaScript:;"></a>
+                  </span>
+				<span>
+                      <em>185</em>
+                      <a href="javaScript:;"></a>
+                  </span>
+				<span style="color:#fe403f">
+                      <em>185</em>
+                  </span>
+				<span>
+                      <b class="list_Tbody_totle">查看详情</b>
+                  </span>
+			</li>
+			<li>
+                  <span>
+                    <em>AG</em>
+                  </span>
+				<span>
+                      <em>0185</em>
+                      <a href="javaScript:;"></a>
+                  </span>
+				<span>
+                      <em>0.00</em>
+                      <a href="javaScript:;"></a>
+                  </span>
+				<span>
+                      <em>0.00</em>
+                      <a href="javaScript:;"></a>
+                  </span>
+				<span style="color:#fe403f">
+                      <em>123</em>
+                  </span>
+				<span>
+                      <b class="list_Tbody_totle">查看详情</b>
+                  </span>
+			</li>-->
+		</ul>
+		<div class="list_table_tfooter">
+			<span>小结</span>
+			<span>00.0<a href="javaScript:;">[详情]</a></span>
+			<span>00.0<a href="javaScript:;">[详情]</a></span>
+			<span>00.0<a href="javaScript:;">[详情]</a></span>
+			<span>00.0<a href="javaScript:;">[详情]</a></span>
+			<span><a href="javaScript:;">查看详情</a></span>
+		</div>
+	</div>
+
+	
+
+<!--	<div class="ui-moneyBox">
+
+		<ul style="margin-top:10px;">
+
+			<table width="100%" border="0" cellspacing="0" cellpadding="5">
+
+				<tr>
+
+					<th>日期时间</th>
+
+					<th>单式输赢</th>
+
+					<th>串关输赢</th>
+
+					<th>彩票输赢</th>
+
+					<th>总输赢</th>
+
+				</tr>
+
+				{volist name="result" id="row"}
+
+				<tr bgcolor="{$row.bgcolor}" align="center" onMouseOver="this.style.backgroundColor='#FFF9CD'" onMouseOut="this.style.backgroundColor='{$row.bgcolor}'" style="color:#000000;">
+
+					<td height="30" align="center">{$key}<br>星期{$row.name}</td>
+
+					<td align="center">
+
+						<a href="javascript:void(0);" onclick="Go('{:url('report_ds')}?riqi={$key}');return false" title="查看注单">
+
+							{if $row.ds>0}<span style="color:red">{$row.ds|abs|number_format=2}</span> {elseif $row.ds
+
+							<0}<span style="color:green">{$row.ds|abs|number_format=2}</span>
+
+								{else /}<span>{$row.ds|abs|number_format=2}</span> {/if} [详情]
+
+						</a>
+
+					</td>
+
+					<td align="center">
+
+						<a href="javascript:void(0);" onclick="Go('{:url('report_cg')}?riqi={$key}');return false" title="查看注单">
+
+							{if $row.cg>0}<span style="color:red">{$row.cg|abs|number_format=2}</span> {elseif $row.cg
+
+							<0}<span style="color:green">{$row.cg|abs|number_format=2}</span>
+
+								{else /}<span>{$row.cg|abs|number_format=2}</span> {/if} [详情]
+
+						</a>
+
+					</td>
+
+					<td align="center">
+
+						<a href="javascript:void(0);" onclick="Go('{:url('report_cp')}?riqi={$key}');return false" title="查看注单">
+
+							{if $row.cp>0}<span style="color:red">{$row.cp|abs|number_format=2}</span> {elseif $row.cp
+
+							<0}<span style="color:green">{$row.cp|abs|number_format=2}</span>
+
+								{else /}<span>{$row.cp|abs|number_format=2}</span> {/if} [详情]
+
+						</a>
+
+					</td>
+
+					&lt;!&ndash;新彩票
+
+	  <td align="center"><a href="javascript:void(0);" onclick="Go('/lottery/new/tzhistory.php?d={$key}&ed={$key}');return false" title="查看注单"><span style="color:red">&gt;0</span> <span style="color:green">&lt;0</span> [详情]</a></td>
+
+	   &ndash;&gt;
+
+					<td align="center"><span style="color:{if $row.sum>0}'#FF0000'{elseif $row.sum<0}'#000000'{else/ }'#0000FF'{/if};">{$row.sum|number_format=2}</span></td>
+
+				</tr>
+
+				{/volist}
+
+	
+
+				<tr height="30" align="center" bgcolor="#FFF9CD" style="color:#000000;">
+
+					<td align="center">小结</td>
+
+					<td align="center">{$sum.ds|number_format=2}</td>
+
+					<td align="center">{$sum.cg|number_format=2}</td>
+
+					<td align="center">{$sum.cp|number_format=2}</td>
+
+					<td align="center"><span style="color:{if $sum.sum>0}'#FF0000'{elseif $sum.sum<0}'#000000'{else/ }'#0000FF'{/if};">{$sum.sum|number_format=2}</span></td>
+
+				</tr>
+
+			</table>
+
+		</ul>
+
+	</div>-->
+
+</div>
+
+<script src="/js/jquery1.9.0.min.js"></script>
+<script src="/js/laydate.js"></script>
+<script type="text/javascript">
+    $(function(){
+        $(".modify_main_btn").find("a").click(function () {
+            $(this).addClass("click_A").siblings().removeClass("click_A");
+            var _index=$(this).index();
+            $(".modify_main_cont").find($(".modify_main_cont_font")).eq(_index).show().siblings().hide();
+        })
+    })
+    /**
+     *  日期选择
+     */
+    laydate.render({
+        elem: '.start_time'
+        ,value: '2018-01-01'
+    });
+    laydate.render({
+        elem: '.end_time'
+        ,value: '2018-01-01'
+    });
+    /**
+     * 时间选择
+     */
+    $(".search_time_btn").click(function () {
+        var start_time=$(".start_time").val();
+        var start=new Date(start_time.replace("-", "/").replace("-", "/"));
+        var end_time=$(".end_time").val();
+        var end=new Date(end_time.replace("-", "/").replace("-", "/"));
+        if(start_time!="" && end_time.length!=""){
+            if(end<start){
+                alert("选择开始日期不能大于结束日期哟");
+                return false
+            }else{
+                // $.ajax({
+                //     url:  "",
+                //     type: "post",
+                //     data: data,
+                //     success: function(data) {
+                //执行数据请求
+                var res_data={
+                    status:1,
+                    result:{
+                        time_data:"提交成功",
+                    }
+                }
+                if(res_data.status==1){
+                    alert(res_data.result.time_data)
+                }
+                //     },
+                //     error: function(data) {
+                //         alert("提交失败，请稍后再试！")
+                //     }
+                // });
+            }
+        }else{
+            alert("日期选择不能空哟！")
+        }
+    })
+
+
+    $(".list_Tbody_wp li:odd").css("background","#f8f8f6");
+    $(".list_Tbody_wp li:even").attr("bg","#fff");
+    $(".list_Tbody_wp li:odd").attr("bg","#f8f8f6");
+    $(".list_Tbody_wp li").mouseover(function(){
+        $(this).css({"background":"#fffcdf"});
+        $(this).addClass("li_add_border_d");
+        $(this).next().addClass("li_add_border_top");
+        $(this).find($(".list_Tbody_totle")).addClass("list_Tbody_totle_right");
+        $(this).find('span').css({'border-right':'1px solid transparent','width':16.55+'%'});
+        $(this).find($(".list_Tbody_totle")).css("border-right","1px dashed #ff7433");
+    })
+    $(".list_Tbody_wp li:last").css({'border-bottom':'1px solid #dbdbdb'});
+    $(".list_Tbody_wp li").mouseout(function(){
+        var bgc = $(this).attr("bg");
+        $(this).css("background",bgc);
+        $(this).removeClass("li_add_border_d");
+        $(this).next().removeClass("li_add_border_top");
+        $(this).find($(".list_Tbody_totle")).removeClass("list_Tbody_totle_right");
+        $(this).find('span').css('border-right','1px solid #dbdbdb');
+        $(this).find($(".list_Tbody_totle")).css("border-right","1px solid #dbdbdb");
+    })
+
+    $(".list_Tbody_wp li:last").mouseover(function(){
+        $(this).css({"background":"#fffcdf",'border-bottom':'1px dashed #ff7433'});
+        $(this).addClass("li_add_border_d");
+        $(this).find($(".list_Tbody_totle")).addClass("list_Tbody_totle_right")
+    })
+    $(".list_Tbody_wp li:last").mouseout(function(){
+        var bgc = $(this).attr("bg");
+        $(this).css({"background":bgc,'border-bottom':'1px solid #dbdbdb'});
+        $(this).removeClass("li_add_border_d");
+        $(this).find($(".list_Tbody_totle")).removeClass("list_Tbody_totle_right")
+    })
+
+
+    $(".paging_cont_page a").click(function () {
+        $(this).addClass("add_background_a").siblings().removeClass("add_background_a");
+    })
+
+    $(".today-time span").click(function(){
+        $(this).addClass("today-time-bg").siblings().removeClass("today-time-bg");
+    })
+</script>
+
+{include file='common/footer'} 
+
+</body>
+
+</html>

@@ -1,0 +1,12 @@
+<?php
+return [
+	'events'	=>	\app\service\EventDispatcher::class,
+	'broadcast'	=>	\app\broadcast\BroadcastManager::class,
+	'queue'		=>	\app\queue\QueueManager::class,
+	'hasher'	=>	\app\service\BcryptHasher::class,
+	'encrypter'	=>	\app\service\Encrypter::class,
+	'auth'		=>	\app\auth\AuthManager::class,
+	'policy'	=>	\app\auth\access\Policy::class,
+];
+
+

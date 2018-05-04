@@ -1,0 +1,73 @@
+<input type="hidden" name="playedGroup" value="<?=$groupId?>"/>
+<input type="hidden" name="playedId" value="<?=$playedId?>"/>
+<input type="hidden" name="type" value="<?=$type?>"/>
+<input type="hidden" name="playedName" value="<?=$played['name']?>"/>
+<!-- mobile 江苏快3_二不同号 -->
+<div id="sscContent">
+    <div class="lot-content clearfix">
+        <div class="fl main-left re-main-left">
+            <div class="table-common" id="table-common">
+                <script type="text/html" id="k3_2bt">
+                    <table width="100%" border="0" cellpadding="0" cellspacing="0" action="k3_2bt">
+                        <thead>
+                        <tr>
+                            <th colspan="6"><strong>二不同号@<span class="pl red" data-plid="{{pls[0].pls[0].id}}">{{pls[0].pls[0].pl}}</span></strong>(请选择2~6个号码)
+                            </th>
+                        </tr>
+                        <tr>
+                            <th>号码</th>
+                            <th>选择</th>
+                            <th>号码</th>
+                            <th>选择</th>
+                            <th>号码</th>
+                            <th>选择</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr  class="pp" min-len="2">
+                            <td><strong>1</strong></td>
+                            <td><input type="checkbox" data-name="{{pls[0].name}}-1" value="1"></td>
+                            <td><strong>2</strong></td>
+                            <td><input type="checkbox" data-name="{{pls[0].name}}-2" value="2"></td>
+                            <td><strong>3</strong></td>
+                            <td><input type="checkbox" data-name="{{pls[0].name}}-3" value="3"></td>
+                        </tr>
+                        <tr  class="pp" min-len="2">
+                            <td><strong>4</strong></td>
+                            <td><input type="checkbox" data-name="{{pls[0].name}}-4" value="4"></td>
+                            <td><strong>5</strong></td>
+                            <td><input type="checkbox" data-name="{{pls[0].name}}-5" value="5"></td>
+                            <td><strong>6</strong></td>
+                            <td><input type="checkbox" data-name="{{pls[0].name}}-6" value="6"></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </script>
+            </div>
+            <br/>
+            <div class="hd clearfix rehd tzgz" id="toptouzhu">
+                <div class="fl refl xzje">
+                    下注金额：<input type="text" class="txt" id="inputMoney">
+                </div>
+                <div class="kjanniu">
+                    <a href="javascript:void(0)" class="img-50" data-num="50"></a>
+                    <a href="javascript:void(0)" class="img-100" data-num="100"></a>
+                    <a href="javascript:void(0)" class="img-500" data-num="500"></a>
+                    <a href="javascript:void(0)" class="img-1000" data-num="1000"></a>
+                    <a href="javascript:void(0)" class="img-5000" data-num="5000"></a>
+                    <a href="javascript:void(0)" class="img-10000" data-num="10000"></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    $(function () {
+        var playedId = "<?=$playedId?>";
+        $.getJSON("/game/pl/playedId/" + playedId, function (data) {
+            pls = data;
+            var html = template("k3_2bt", {pls: pls});
+            $('.table-common').html(html);
+        });
+    });
+</script>

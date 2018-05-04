@@ -1,0 +1,194 @@
+<?php
+namespace app\admin\controller;
+use app\admin\Login;
+
+use app\common\model\Config as ConfigModel;
+use app\common\model\Notice as NoticeModel;
+
+use think\Hook;
+use app\common\model\Member as UserModel;
+use app\common\model\Money as MoneyModel;
+use app\common\model\ActionLog as LogModel;
+use app\service\UserAgent;
+use app\service\JsonExtra;
+use app\service\Sms;
+use app\service\CacheStorage;
+
+use Closure;
+use app\service\Pipeline;
+
+class System extends Login{
+    
+    public function config(){
+
+        $this->view->page_header = '参数列表';
+
+        $request = request();
+        $list = ConfigModel::getList($request);
+        $list->appends($request->param());
+        $this->assign('list',$list);
+
+        return $this->fetch();
+    }
+     public function config_form(){
+        $request = request();
+         $params = $request->param(); 
+         if(!empty($params['id'])){
+             $info =  ConfigModel::get(['id'=>$params['id']]);
+              $this->assign('info',$info);  
+         }
+          return view();
+    }
+     public function config_save(){
+        $request = request();
+        $params = $request->param();
+        $id =  !empty($params['id'])? $params['id']:'';
+        $name =  !empty($params['name'])? $params['name']:'';
+        $title =  !empty($params['title'])? $params['title']:'';
+        $value =  !empty($params['value'])? $params['value']:'';
+       
+        $data = [
+           
+            'name'      => $name,
+            'title'      => $title,
+            'value'      => $value,
+            
+        ];
+         $res = [];
+        if($id){
+           
+            $config = ConfigModel::get(intval($id));
+            $list = $config->validate('System.config')->save($data);
+            if($list){
+                LogModel::log(LogModel::BUSINESS_TYPE_EDIT,$config,LogModel::BUSINESS_TYPES[LogModel::BUSINESS_TYPE_EDIT]);
+               $res['msg'] = "操作成功";
+            }else{
+                $res['msg']= $config->getError();
+            }
+             echo json_encode($res);
+        }else{
+            
+            $config = new ConfigModel($data);
+            $list = $config->validate('System.config')->save($data);
+            if($list){
+               LogModel::log(LogModel::BUSINESS_TYPE_ADD,$config,LogModel::BUSINESS_TYPES[LogModel::BUSINESS_TYPE_ADD]);
+                $res['msg'] = "操作成功";
+            }else{
+                $res['msg']= $config->getError();
+             }
+             echo json_encode($res);
+        }
+    }
+
+    public function config_del(){
+        $request = request();
+        $params = $request->param();
+        $config = ConfigModel::get(intval($params['id']));
+
+        $list = $config->delete();
+        $res = [];
+        if($list){
+           LogModel::log(LogModel::BUSINESS_TYPE_DELE,$config,LogModel::BUSINESS_TYPES[LogModel::BUSINESS_TYPE_DELE]);
+           $res['msg'] = "操作成功";
+        }else{
+            $res['msg']= $config->getError();
+        }
+        echo json_encode($res);
+    }
+
+
+    public function notice(){
+        cache('a',1);
+        $a = cache('a');
+         $this->view->page_header = '公告列表';
+         $request = request();
+        $list = NoticeModel::getList($request);
+        $list->appends($request->param());
+        $this->assign('list',$list);
+
+        return $this->fetch();
+    }
+     public function notice_form(){
+        $request = request();
+         $params = $request->param(); 
+         if(!empty($params['id'])){
+             $info =  NoticeModel::get(['id'=>$params['id']]);
+              $this->assign('info',$info);  
+         }
+          return view();
+    }
+     public function notice_save(){
+        $request = request();
+        $params = $request->param();
+        $id =  !empty($params['id'])? $params['id']:'';
+        $content =  !empty($params['content'])? $params['content']:'';
+        $title =  !empty($params['title'])? $params['title']:'';
+        $enable =  !empty($params['enable'])? $params['enable']:'';
+       
+        $data = [
+           
+            'title'      => $title,
+            'content'    => $content,
+            'enable'     => $enable,
+            'addTime'    => time(),
+            
+        ];
+         $res = [];
+        if($id){
+           unset( $data['addTime']);
+            $notice = NoticeModel::get(intval($id));
+            $list = $notice->validate('System.notice')->save($data);
+            if($list){
+                LogModel::log(LogModel::BUSINESS_TYPE_EDIT,$notice,LogModel::BUSINESS_TYPES[LogModel::BUSINESS_TYPE_EDIT]);
+               $res['msg'] = "操作成功";
+            }else{
+                $res['msg']= $notice->getError();
+            }
+             echo json_encode($res);
+        }else{
+            
+            $notice = new NoticeModel($data);
+            $list = $notice->validate('System.notice')->save($data);
+            if($list){
+               LogModel::log(LogModel::BUSINESS_TYPE_ADD,$notice,LogModel::BUSINESS_TYPES[LogModel::BUSINESS_TYPE_ADD]);
+                $res['msg'] = "操作成功";
+            }else{
+                $res['msg']= $notice->getError();
+             }
+             echo json_encode($res);
+        }
+    }
+
+    public function notice_del(){
+        $request = request();
+        $params = $request->param();
+        $notice = NoticeModel::get(intval($params['id']));
+
+        $list = $notice->delete();
+        $res = [];
+        if($list){
+           LogModel::log(LogModel::BUSINESS_TYPE_DELE,$notice,LogModel::BUSINESS_TYPES[LogModel::BUSINESS_TYPE_DELE]);
+           $res['msg'] = "操作成功";
+        }else{
+            $res['msg']= $notice->getError();
+        }
+        echo json_encode($res);
+    }
+    
+    public function action_log(){
+
+        $request = request();
+        $list = LogModel::getList($request);
+        $list->appends($request->param());
+        $this->assign('list',$list);
+
+        $businesses = LogModel::BUSINESS_TYPES;
+        $this->assign('businesses',$businesses);
+        
+        $this->view->page_header = '操作日志';
+        return $this->fetch();
+    }
+
+}
+
+

@@ -1,0 +1,132 @@
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<!-- <link rel="stylesheet" href="fonts/fonts.css" /> -->
+		<link rel="stylesheet" href="css/cqnc_video.css" />
+		<script src="js/jquery-2.1.0.js"></script>
+		<script src="js/index.js?v=201712271451"></script>
+	</head>
+
+	<body>
+		<div id="videobox">
+			<div class="content">
+				<!--<div class="head">
+					福彩3D开奖视频
+					<div class="btn">
+						<ul>
+							<li class="closevideo"><i class="iconfont"></i></li>
+							<li class="small">小屏</li>
+							<li class="big">中屏</li>
+						</ul>
+					</div>
+				</div>-->
+				<div class="animate">
+					<div class="cqncAnimate">
+						<div class="bodybg"><img src="img/fc3d_bg.png" /></div>
+						<div class="loading">
+							<div class="loadtxt">
+								LOADING...
+							</div>
+						</div>
+						<div class="position">
+							<ul>
+								<li class="tcpl3_logo"></li>
+								<li class="issue">本期：<span id="issue">838601</span>&nbsp;期</li>
+								<li class="headCode">
+									<ul>
+										<li id="oneCode"><span>1</span></li>
+										<li id="twoCode"><span>2</span></li>
+										<li id="threeCode"><span>3</span></li>
+									</ul>
+								</li>
+								<li class="kaiTime">下期开奖：
+									<span id="kaiTime">17:00:00</span>
+								</li>
+								<li id="soundBth" class="soundsOn"></li>
+								<audio src="sound/3dbj2.mp3" id="audioidBg" loop="loop"></audio>
+								<audio src="sound/3d2.mp3" id="audioidKai" loop="loop"></audio>
+							</ul>
+						</div>
+						<div class="runCode">
+							<ul id="curNumUl">
+								<li class="firstBall">
+									<span>1</span>
+								</li>
+								<li class="secondBall">
+									<span>2</span>
+								</li>
+								<li class="thirdBall">
+									<span>6</span>
+								</li>
+							</ul>
+							<ul id="runNumUl">
+								<li class="parLi firstBallPip">
+									<ul class="leftUl">
+										<li></li>
+										<li></li>
+										<li></li>
+										<li></li>
+										<li></li>
+									</ul>
+									<ul class="rightUl">
+										<li></li>
+										<li></li>
+										<li></li>
+										<li></li>
+										<li></li>
+									</ul>
+								</li>
+								<li class="parLi secondBallPip">
+									<ul class="leftUl">
+										<li></li>
+										<li></li>
+										<li></li>
+										<li></li>
+										<li></li>
+									</ul>
+									<ul class="rightUl">
+										<li></li>
+										<li></li>
+										<li></li>
+										<li></li>
+										<li></li>
+									</ul>
+								</li>
+								<li class="parLi thirdBallPip">
+									<ul class="leftUl">
+										<li></li>
+										<li></li>
+										<li></li>
+										<li></li>
+										<li></li>
+									</ul>
+									<ul class="rightUl">
+										<li></li>
+										<li></li>
+										<li></li>
+										<li></li>
+										<li></li>
+									</ul>
+								</li>
+							</ul>
+						</div>
+						<div class="cutTime">
+							<div>
+								<span id="hourtxt">00:00:00</span>
+								<span id="opening">开奖中...</span>								
+							</div>
+						</div>
+						<div class="tryKai">
+							<span class="jzCheck" style="display: none;">开奖中，禁止模拟！</span>
+							<span id="tryBtn"></span>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+
+</html>

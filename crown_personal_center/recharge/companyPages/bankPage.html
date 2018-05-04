@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>公司入款（银行卡转账）</title>
+	</head>
+	<!--公用部分 css-->
+	<link rel="stylesheet" type="text/css" href="../../public/css/public.css"/>
+	<link rel="stylesheet" href="../../public/css/com.css" />
+	<!--私用css-->
+	<!--右侧导航 在线充值 公司入款 支付宝 css 共用 nav-->
+	<link rel="stylesheet" href="../css/com-right-nav.css" />
+	<!--在线充值单独css-->
+	<link rel="stylesheet" href="css/companyBank.css" />
+	<body>
+		<div class="com-wp">
+			<!--header-->
+			<div class="com-header">
+				<div class="logo-wp">
+					<img src="../../public/images/logo.png" alt="" />
+				</div>
+				<div class="logo-title-wp">
+					<img src="../../public/images/logo-title.png" alt="" />
+				</div>
+				<div class="hours-right">
+					<img src="../../public/images/logo-huors.png" alt="" />
+				</div>
+			</div>
+			<!--main-->
+			<div class="main-wp">
+				<!--com-left-->
+				<div class="com-left">
+					<h3 class="com-left-title">
+						<img src="../../public/images/person-info.png" alt="" />
+						<span>个人中心</span>
+					</h3>
+					<div class="com-left-nav">
+						<ul class="com-left-nav-list">
+							<li class="nav-bg">
+								<i class="nav-i">
+									<img src="../../public/images/nav-1.png" alt="" />
+								</i>
+								<i class="nav-bg-i">
+									<img src="../../public/images/nav-bg-1.png" alt="" />
+								</i>
+								<a href="javaScript:;" class="nav-cr">账户信息</a>
+								<span></span>
+							</li>
+							<li>
+								<i class="nav-i">
+									<img src="../../public/images/nav-2.png" alt="" />
+								</i>
+								<i class="nav-bg-i">
+									<img src="../../public/images/nav-bg-2.png" alt="" />
+								</i>
+								<a href="javaScript:;">充值</a>
+								<span></span>
+							</li>
+							<li>
+								<i class="nav-i">
+									<img src="../../public/images/nav-3.png" alt="" />
+								</i>
+								<i class="nav-bg-i">
+									<img src="../../public/images/nav-bg-3.png" alt="" />
+								</i>
+								<a href="javaScript:;">提现</a>
+								<span></span>
+							</li>
+							<li>
+								<i class="nav-i">
+									<img src="../../public/images/nav-4.png" alt="" />
+								</i>
+								<i class="nav-bg-i">
+									<img src="../../public/images/nav-bg-4.png" alt="" />
+								</i>
+								<a href="javaScript:;">往来记录</a>
+								<span></span>
+							</li>
+							<li>
+								<i class="nav-i">
+									<img src="../../public/images/nav-5.png" alt="" />
+								</i>
+								<i class="nav-bg-i">
+									<img src="../../public/images/nav-bg-5.png" alt="" />
+								</i>
+								<a href="javaScript:;">额度转换</a>
+								<span></span>
+							</li>
+							<li>
+								<i class="nav-i">
+									<img src="../../public/images/nav-6.png" alt="" />
+								</i>
+								<i class="nav-bg-i">
+									<img src="../../public/images/nav-bg-6.png" alt="" />
+								</i>
+								<a href="javaScript:;">注单管理</a>
+								<span></span>
+							</li>
+							<li>
+								<i class="nav-i"> 
+									<img src="../../public/images/nav-7.png" alt="" />
+								</i>
+								<i class="nav-bg-i">
+									<img src="../../public/images/nav-bg-7.png" alt="" />
+								</i>
+								<a href="javaScript:;">投注报表</a>
+								<span></span>
+							</li>
+							<li>
+								<i class="nav-i">
+									<img src="../../public/images/nav-8.png" alt="" />
+								</i>
+								<i class="nav-bg-i">
+									<img src="../../public/images/nav-bg-8.png" alt="" />
+								</i>
+								<a href="javaScript:;">公告信息</a>
+								<span></span>
+							</li>
+							<li>
+								<i class="nav-i">
+									<img src="../../public/images/nav-9.png" alt="" />
+								</i>
+								<i class="nav-bg-i">
+									<img src="../../public/images/nav-bg-9.png" alt="" />
+								</i>
+								<a href="javaScript:;">代理中心</a>
+								<span></span>
+							</li>
+						</ul>
+					</div>
+				</div>
+				<!--com right 跳转-->
+				<div class="com-right">
+					<!--充值 顶部导航-->
+					<div class="com-right-nav">
+						<ul class="com-right-nav-list">
+							<li>
+								<a href="../rechargeOnline.html" target="_blank" >在线充值</a>
+							</li>
+							<li>
+								<a href="../companyBankOne.html" target="_blank" class="currentBg">公司入款</a>
+							</li>
+							<li>
+								<a href="../alipay.html" target="_blank">支付宝</a>
+							</li>
+							<li>
+								<a href="../weChat.html" target="_blank" >微信</a>
+							</li>
+							<li>
+								<a href="../qqWallet.html" target="_blank" >qq钱包</a>
+							</li>
+							<li>
+								<a href="../jdWallet.html"  target="_blank">京东钱包</a>
+							</li>
+							<li>
+								<a href="javaScript:;">其他方式充值</a>
+							</li>
+						</ul>
+					</div>
+					<div class="payment-wp">
+						<div class="payment-first">
+							<h2>一、选择您要转入的账户<span>提醒您，同银行转账才能立即到账喔！</span></h2>
+							<div class="payment-first-cont">
+								<h4>开户银行：<em>工商银行</em></h4>
+								<p>收款姓名：<em>猫猫</em></p>
+								<p>开户地址：<em>北京市朝阳去水锥子北里工商银行北京市朝阳去水锥子北里工商银行</em></p>
+								<p>银行账号：<em>6230290013714155</em></p>
+							</div>
+						</div>
+						<div class="payment-first">
+							<h2>二、选择您所使用的账户<span>提醒您，同银行转账才能立即到账喔！</span></h2>
+							<form action="">
+								<div class="choose-label choose-label-top">
+									<label for="">使用账户：</label>
+									<select name="" id="">
+										<option value="">网银转账</option>
+										<option value="">支付宝转账</option>
+										<option value="">微信转账</option>
+										<option value="">qq支付</option>
+									</select>
+								</div>
+								<div class="choose-label">
+									<label for="">存款姓名：</label>
+									<input type="text" placeholder="*转账账号对应的姓名" />
+								</div>
+								<div class="choose-label">
+									<label for="">存款金额：</label>
+									<input type="text" placeholder="*如：500.77元，范围：10~500000" />
+								</div>
+								<div class="choose-label">
+									<label for="">存款时间：</label>
+									<input type="text" placeholder="*如：2018/01/01" />
+								</div>
+								<div class="btn">
+									<button class="prevClick prev">上一步</button>
+									<button>提交</button>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--共用部分 js-->
+		<script src="../../public/lib/jquery1.9.0.min.js"></script>
+		<script src="../../public/lib/com.js"></script>
+		<!-- nav 私用js部分-->
+		<script src="../js/com-right-nav.js"></script>
+		<!--本页面 私用 js-->
+		<script>
+			$(function(){
+				$(".prevClick").click(function(){
+					window.open('companyBankOne.html')
+				})
+			})
+		</script>
+	</body>
+</html>

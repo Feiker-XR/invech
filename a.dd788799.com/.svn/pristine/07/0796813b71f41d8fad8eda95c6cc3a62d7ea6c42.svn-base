@@ -1,0 +1,131 @@
+<?php
+namespace app\admin\controller;
+use think\Request;
+use app\admin\Login;
+use app\common\model\Help as HelpModel;
+use app\common\model\HelpCat as HelpCatModel;
+use app\common\model\ActionLog as LogModel;
+class Help extends Login{
+    
+    public function index(){
+
+        $this->view->page_header = '帮助中心';
+
+        $request = request();
+        $list = HelpModel::getList($request);
+        $list->appends($request->param());
+        $this->assign('list',$list);
+        $catlist = HelpCatModel::getAll();
+        $this->assign('catlist',$catlist);
+        return $this->fetch();
+    }
+
+  public function form(){
+        $request = request();
+         $params = $request->param(); 
+         if(!empty($params['id'])){
+             $info =  HelpModel::get(['id'=>$params['id']]);
+           
+              $this->assign('info',$info);  
+         }
+        $catlist = HelpCatModel::getAll();
+        $this->assign('catlist',$catlist);
+          return view();
+    }
+     public function save(){
+        $request = request();
+        $params = $request->param();
+        $id =  !empty($params['id'])? $params['id']:'';
+        $cat_id =  !empty($params['cat_id'])? $params['cat_id']:'';
+        $content =  !empty($params['content'])? $params['content']:'';
+        $title =  !empty($params['title'])? $params['title']:'';
+        $enable =  !empty($params['enable'])? $params['enable']:'';
+       
+        $data = [
+           
+            'title'      => $title,
+            'content'    => $content,
+            'enable'     => $enable,
+            'cat_id'     => $cat_id,
+            
+            
+        ];
+         $res = [];
+        if($id){
+            $help = HelpModel::get(intval($id));
+            $list = $help->validate('System.help')->save($data);
+            if($list){
+                LogModel::log(LogModel::BUSINESS_TYPE_EDIT,$help,LogModel::BUSINESS_TYPES[LogModel::BUSINESS_TYPE_EDIT]);
+               $res['msg'] = "操作成功";
+            }else{
+                $res['msg']= $help->getError();
+            }
+             echo json_encode($res);
+        }else{
+            
+            $help = new HelpModel($data);
+            $list = $help->validate('System.help')->save($data);
+            if($list){
+               LogModel::log(LogModel::BUSINESS_TYPE_ADD,$help,LogModel::BUSINESS_TYPES[LogModel::BUSINESS_TYPE_ADD]);
+                $res['msg'] = "操作成功";
+            }else{
+                $res['msg']= $help->getError();
+             }
+             echo json_encode($res);
+        }
+    }
+
+    public function del(){
+        $request = request();
+        $params = $request->param();
+        $help = HelpModel::get(intval($params['id']));
+
+        $list = $help->delete();
+        $res = [];
+        if($list){
+           LogModel::log(LogModel::BUSINESS_TYPE_DELE,$help,LogModel::BUSINESS_TYPES[LogModel::BUSINESS_TYPE_DELE]);
+           $res['msg'] = "操作成功";
+        }else{
+            $res['msg']= $help->getError();
+        }
+        echo json_encode($res);
+    }
+    public function edit($id=0,Request $request){
+        if($id==0){
+            $title = '编辑帮助文档';
+            $help = null;
+        }else{
+            $title = '添加帮助文档';
+            $help = HelpModel::find($id);
+        }
+        if($request->isPost()){
+            try{
+                $help->cat_id = input('cat_id');
+                $help->title = input('title');
+                $help->content = input('content');
+                $ret = $help->save();      
+                //$this->success('编辑成功!');//success抛出Http异常          
+            }catch(\Exception $e){                
+                $this->error('编辑失败!');
+            }
+            $this->success('编辑成功!',url('help/index'));//success抛出Http异常
+        }else{
+            //$cats = HelpCatModel::all(['enable'=>1])->order('id desc');
+            $cats = HelpCatModel::where('enable',1)->order('id')->select();
+            $this->assign('cats',$cats);
+            $this->assign('help',$help);
+            $this->view->page_header = $title;
+            return $this->fetch();            
+        }
+    }
+
+    public function action_log(){
+        $this->view->page_header = '操作日志';
+        $request = request();
+        $list = LogModel::getList($request);
+         $this->assign('list',$list);
+        $this->assign('business_type',LogModel::BUSINESS_TYPES);
+        return $this->fetch();
+    }
+
+}

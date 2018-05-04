@@ -1,0 +1,14 @@
+<?php
+namespace app\common\model;
+use think\Model;
+
+class Admin extends Model{
+
+    protected $table = 'gygy_admin';
+
+    public function setPasswordAttr($value,$data){
+        return $this->data['password'] = md5($value);
+    }
+
+    
+}

@@ -1,0 +1,80 @@
+*{
+	margin: 0;
+	padding: 0;
+}
+.clearfix:after{
+	content: "";
+	display: block;
+	visibility: hidden;
+	clear: both;
+}
+ul li{
+	list-style: none;
+}
+._prize_list{
+	width: 100%;
+	background-color: #F7F7F7;
+}
+._prize_item{
+	width: 100%;
+	padding: 10px 15px;
+	margin: 0 auto;
+	box-sizing: border-box;
+	border-bottom: 1px solid #ddd;
+}
+._prize_item>p{
+	font-size: 14px;
+	color: #666;
+	line-height: 1;
+	margin-bottom: 10px;
+}
+
+._prize_item ._code_list li{
+	width: 33px;
+	height: 33px;
+	font-size: 18px;
+	text-align: center;
+	border-radius: 50%;
+	background-color: #c91b1c;
+	color: #fff;
+	line-height: 33px;
+	float: left;
+	margin: 0 10px 10px 0;
+	font-weight: 600;
+}
+._kjtimes{
+	margin-left: 10px;
+}
+._suffix{
+	width: 100%;
+	margin-top: 10px;
+}
+._suffix ._title{
+	width: 80px;
+	font-size: 16px;
+}
+._suffix ._title span{
+	display: inline-block;
+	padding: 5px 10px;
+	background-color: #c91b1c;
+	color: #fff;
+	line-height: 1em;
+	border-radius: 3px;
+	float: left;
+}
+._suffix_list {
+	margin:0 0 0 80px;
+}
+._suffix_list li{
+	float: left;
+	font-size: 14px;
+	width: 50px;
+	height: 26px;
+	line-height: 26px;
+	text-align: center;
+	border-radius: 3px;
+	border: 1px solid #c91b1c;
+	box-sizing: border-box;
+	color: #666;
+	margin: 0 10px 10px 0;
+}

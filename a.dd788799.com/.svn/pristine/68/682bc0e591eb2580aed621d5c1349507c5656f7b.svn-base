@@ -1,0 +1,18 @@
+<?php
+namespace app\common\model;
+use think\Model;
+use app\common\traits\model\ApiToken;
+use app\auth\traits\Authenticatable;
+
+class Admin extends Base{
+
+	use ApiToken,Authenticatable;
+
+    protected $table = 'gygy_admin';
+
+    public function setPasswordAttr($value,$data){
+        return $this->data['password'] = md5($value);
+    }
+
+    
+}

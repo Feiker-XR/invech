@@ -1,0 +1,106 @@
+
+html,body{
+    width: 100%;
+    height: auto;
+    background: #ede7e4;
+}
+
+.play_options_choose_wp{
+    width: 100%;
+    height: auto;
+    background: #ede7e4;
+}
+
+    .play_options_choose_header{
+        height: 40px;
+        background: #e64e51;
+    }
+    .play_options_choose_header .edit{
+        font-size: 1rem;
+        color: #ffffff;
+        text-align: center;
+        line-height: 40px;
+        display: block;
+    }
+    .play_options_choose_main_wp{
+        height: auto;
+        padding: 0px 10px;
+        background: #ede7e4;
+    }
+    .play_options_choose_main{
+        height: auto;
+        width: 100%;
+        margin: 10px 0px 0px 0px;
+    }
+    .play_options_choose_main:first-child > .play_options_choose_main_bottom i{
+        color: #e2454b;
+    }
+    .play_options_choose_main:last-child{
+        padding-bottom: 10px;
+    }
+    .play_options_choose_main_top{
+        height: 35px;
+        background: #fdfcf9;
+        border-bottom: 1px solid #d6d3d2;
+        width: 100%;
+        border-top-left-radius: 5px;
+        border-top-right-radius: 5px;
+        box-shadow:    0px -0px 0px 0px #d6d3d2,   /*上边阴影  红色*/
+        -0px 0px 0px 0px #d6d3d2,   /*左边阴影  绿色*/
+        0px 0px 0px 0px #d6d3d2,    /*右边阴影  蓝色*/
+        0px 1px 5px 1px #ccc;    /*下边阴影  黄色*/
+    }
+    .play_options_choose_main_top span{
+        line-height: 35px;
+        color: #666666;
+        font-size: 1.4rem;
+        margin-left: 8px;
+    }
+    .play_options_choose_main_bottom{
+        height: auto;
+        background: #f7f3f2;
+        border-bottom-left-radius: 5px;
+        border-bottom-right-radius: 5px;
+        box-shadow:    0px -0px 0px 0px #d6d3d2,   /*上边阴影  红色*/
+        -0px 0px 0px 0px #d6d3d2,   /*左边阴影  绿色*/
+        0px 0px 0px 0px #d6d3d2,    /*右边阴影  蓝色*/
+        0px 1px 5px 1px #ccc;    /*下边阴影  黄色*/
+        overflow: hidden;
+    }
+    .play_options_choose_main_bottom div{
+        height: auto;
+    }
+    .play_options_choose_main_bottom div:first-child{
+        margin-top: 8px;
+    }
+        .list_options_p{
+            position: relative;
+            width: 30%;
+            height: 30px;
+            background: #e5dcd9;
+            border: 1px solid #cec6c3;
+            text-align: center;
+            line-height: 30px;
+            color: #666666;
+            border-radius: 20px;
+            font-size: 1rem;
+            margin: 8px 1.3%;
+            float: left;
+        }
+        .list_options_input{
+            position: absolute;
+            z-index: 2;
+            top: -11px;
+            right: -6px;
+            width: 2rem;
+            height: 2rem;
+            opacity: 0;
+        }
+        .list_options_i{
+            position: absolute;
+            top: -13px;
+            right: -4px;
+            font-size: 1.7rem;
+            color: #35af2c;;
+            display: none;
+        }

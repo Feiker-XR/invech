@@ -1,0 +1,83 @@
+{extend name="public/user_head"/}
+{block name="body"}
+<div class="container">
+    <header class="header">
+        <i class='left' onclick="javascript:history.back(-1);">返回</i>
+        <h1>安全中心</h1>
+         <i class="right wider">保存</i>
+      
+    </header>
+    <main class="inner_body">
+        <section class="charge_user ol_box security">
+            <ol>
+                <li>
+                    <span><i class="hide">占</i>用户名</span>
+                    <input type="text" disabled class="disabled" value="{$user->username}"/>
+                </li>
+                <li>
+                    <span class="phone"><i class="hide">站位</i>手机</span>
+                    <input type="text" id="mobile" class="disabled"  value="{$user.mobile|default=''}" placeholder="填写号码"/>
+                </li>
+               
+                <li>
+                    <span>邮件地址</span>
+                    <input type="text" id="email" class="disabled"  value="{$user.email|default=''}" placeholder="填写邮箱地址"/>
+                </li>
+                <li>
+                    <span>QQ号码</span><input type="text" id="qq_num" class="disabled" value="{$user.qq|default=''}"  placeholder="填写QQ号码"/>
+                </li>
+            </ol>
+        </section>
+
+        <section class="charge_user ol_box security margin">
+            <ol>
+                <li>
+                    <span><i class="hide">占</i>银行卡</span>
+                    {if(!empty($user->bank))}
+	                    <input type="text" disabled class="disabled" value="已绑定"/>
+	                    <a href="/user/bank">修改</a>
+                    {else}
+                    	<input type="text" disabled class="disabled" value="未绑定"/>
+	                    <a href="/user/bank">绑定</a>
+                    {/if}
+                </li>
+            </ol>
+        </section>
+
+        <section class="charge_user ol_box security margin">
+            <ol>
+                <li>
+                    <span>登录密码</span><input type="text" disabled class="disabled" value="******"/><a href="/user/save_password.html">修改</a>
+                </li>
+                <li>
+                    <span>提款密码</span><input type="text" disabled class="disabled" value="******"/><a href="change_withdraw_pwd.html">修改</a>
+                </li>
+            </ol>
+        </section>
+    </main>
+</div>
+<script type="text/javascript">
+    // 提交数据
+    $('.wider').click(function () {
+
+        //$(this).attr('disabled','disabled');
+        var obj = {
+            mobile:'',
+          	email:'',
+            qq:''
+        }
+        obj.mobile 	= $('#mobile').val();      // 手机
+        obj.email 	= $('#email').val();      // mail
+        obj.qq 		= $('#qq_num').val();      // qq
+        $.ajax({
+        	url: "/user/info",
+        	data:obj,
+            dataType:'json',//服务器返回json格式数据
+            type:'POST',//HTTP请求类型
+            success:function(data){
+             	mui.toast(data.msg,{ duration:'short', type:'div' }) 
+            },
+        });
+    })
+</script>
+{/block}

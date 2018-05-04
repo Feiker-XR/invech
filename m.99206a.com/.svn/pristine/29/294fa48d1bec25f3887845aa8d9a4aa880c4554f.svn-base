@@ -1,0 +1,3 @@
+update `vc_thirdcode` set `status` = 1 where id in(14,15,29,30,33,34,35,40,43,44,48,49,51,58,71,72);
+insert into `vc_thirdcode` (`id`, `setid`, `set_configid`, `thirdid`, `code`, `min`, `max`, `add_time`, `update_time`, `status`, `warntime`, `money_decimal`, `cashier`) values('108','8','24','10','ALIPAY','50','5000','1502035200','1502035200','0',NULL,'0','1');
+insert into `vc_thirdcode` (`id`, `setid`, `set_configid`, `thirdid`, `code`, `min`, `max`, `add_time`, `update_time`, `status`, `warntime`, `money_decimal`, `cashier`) values('109','8','25','10','WEIXIN','50','5000','1502035200','1502035200','0',NULL,'0','1');

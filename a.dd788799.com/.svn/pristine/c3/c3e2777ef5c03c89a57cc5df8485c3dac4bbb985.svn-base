@@ -1,0 +1,120 @@
+<?php
+// +----------------------------------------------------------------------
+// | FileName: user.php
+// +----------------------------------------------------------------------
+// | CreateDate: 2017年10月5日
+// +----------------------------------------------------------------------
+// | Author: xiaoluo
+// +----------------------------------------------------------------------
+namespace app\index\controller;
+use app\index\Login;
+use app\common\model\Type;
+class agent extends Login{
+
+	 //代理名下会员投注记录
+    public function bet_record(){        
+        $type = Type::getAll();
+        $this->assign('type',$type);
+        $request    = request();
+        $list       = $this->user->getBetList($request);
+       	$this->assign('list',$list);
+        return $this->fetch();
+    }
+     //代理名下会员日投注记录
+    public function bet_day_record(){  
+        $data = [];
+        $list = [];
+        $request    =   request();
+        $params     =   request()->param();
+        if($params['starttime']??0){
+            $query  =   $this->user->getBetDailyBuild($params['starttime']);
+            $list[$params['starttime']]['countTou'] = $query->sum('actionNum*mode*beiShu');
+            $list[$params['starttime']]['countFan'] = $query->sum('bonus*zjCount');
+            $list[$params['starttime']]['countYinli'] = bcsub($list[$params['starttime']]['countFan'],$list[$params['starttime']]['countTou'],2);
+
+        }else{
+            for($i=0;$i<=6;$i++){
+                $data[] =   date("Y-m-d",strtotime("-{$i} day"));
+            }
+            foreach($data as $v){
+                $query = $this->user->getBetDailyBuild();
+                $list[$v]['countTou'] = $query->sum('actionNum*mode*beiShu');
+                $list[$v]['countFan'] = $query->sum('bonus*zjCount');
+                $list[$v]['countYinli'] = bcsub($list[$v]['countFan'],$list[$v]['countTou'],2);
+            } 
+        }
+      
+        $this->assign('list',$list);
+        return $this->fetch();
+    }
+    
+    //充值记录
+    public function recharge_record(){
+
+        $request    =   request();
+        $list       =   $this->user->getDepositList($request);
+        $this->assign('list',$list);
+        return $this->fetch();
+    } 
+     //代理名下会员日充值记录
+    public function recharge_day_record(){  
+        $data = [];
+        $list = [];
+        $request    =   request();
+        $params     =   request()->param();
+        if($params['starttime']??0){
+            $query  =   $this->user->getDepositDailyBuild($params['starttime']);
+            $list[$params['starttime']]['CountAmount']       =   $query->sum('case when status ="1" then amount else 0 end');
+            $list[$params['starttime']]['countTime']          =   $query->where(['status'=>1])->count();
+            $list[$params['starttime']]['countPerson']        =   $query->where(['status'=>1])->distinct('uid')->count('uid');
+
+        }else{
+            for($i=0;$i<=6;$i++){
+                $data[] =   date("Y-m-d",strtotime("-{$i} day"));
+            }
+            foreach($data as $v){
+                $query = $this->user->getDepositDailyBuild();
+                $list[$v]['CountAmount']        =   $query->sum('case when status ="1" then amount else 0 end');
+                $list[$v]['countTime']          =   $query->where(['status'=>1])->count();
+                $list[$v]['countPerson']        =   $query->where(['status'=>1])->distinct('uid')->count('uid');
+            } 
+        }
+      
+        $this->assign('list',$list);
+        return $this->fetch();
+    }
+    //提现记录
+    public function withdraw_record(){
+        $request    =   request();
+        $list       =   $this->user->getWithdrawList($request);
+        $this->assign('list',$list);
+        return $this->fetch();
+    }
+     //代理名下会员日提现记录
+    public function withdraw_day_record(){  
+        $data = [];
+        $list = [];
+        $request    =   request();
+        $params     =   request()->param();
+        if($params['starttime']??0){
+            $query  =   $this->user->getWithdrawDailyBuild($params['starttime']);
+            $list[$params['starttime']]['CountAmount']  = $query->sum('amount');
+            $list[$params['starttime']]['countTime']    = $query->count();
+            $list[$params['starttime']]['countPerson']  = $query->distinct('uid')->count('uid');
+
+        }else{
+            for($i=0;$i<=6;$i++){
+                $data[] =   date("Y-m-d",strtotime("-{$i} day"));
+            }
+            foreach($data as $v){
+                $query = $this->user->getWithdrawDailyBuild();
+                $list[$v]['CountAmount']    =   $query->sum('amount');
+                $list[$v]['countTime']      =   $query->count();
+                $list[$v]['countPerson']    =   $query->distinct('uid')->count('uid');
+            } 
+        }
+      
+        $this->assign('list',$list);
+        return $this->fetch();
+    }
+}

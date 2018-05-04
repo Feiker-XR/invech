@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>澳门金沙官方网站!www.77158.com</title>
+<link rel="stylesheet" type="text/css" href="/css/style.css?2a"/>
+<script type="text/javascript" src="/js/main.js"></script>
+<script src='/js/jquery1.9.0.min.js'></script>
+<script type="text/javascript" src="/js/jquery.SuperSlide.2.1.1.js"></script>
+<!--<script src="/js/cookie.min.js"></script>-->
+<script src='/js/jquery.cookie.js'></script>
+<script src="/Scripts/swfobject_modified.js" type="text/javascript"></script>
+<script type="text/javascript" language="JavaScript" src="/js/layer.js"></script>
+<script type="text/javascript" src="/js/main.new.js?2a"></script>
+</head>
+<body onkeydown="keyLogin();">
+	<div class="head">
+		{include file='common/nav'}
+		<!--banner-->
+		<!--首页全屏轮播图-->
+		<div class="fullSlide">
+			<div class="bd">
+				<ul>
+					<li _src="url(/img/banner.png)" style="background:#E2025E center 0 no-repeat;"><a target="_blank" href="#"></a></li>
+					<li _src="url(/img/banner1.png)" style="background:#DED5A1 center 0 no-repeat;"><a target="_blank" href="#"></a></li>
+					<li _src="url(/img/banner3.png)" style="background:#B8CED1 center 0 no-repeat;"><a target="_blank" href="#"></a></li>
+				</ul>
+			</div>
+			<div class="hd"><ul></ul></div>
+			<!--<span class="prev"></span>-->
+			<!--<span class="next"></span>-->
+		</div>			
+		<div class="banner">
+			<div class="banner_contain">
+				<?php if(!$user){?>
+				<div class="banner_login">
+					<a href="{:Url('index/reg')}" style="display:block; width:230px; height:44px; margin-bottom:36px;"></a>
+					<h2 style="text-align:center;">会员登录</h2>
+					<input type="text" name="username" placeholder="请输入会员账号" id="username" style="margin-top:13px;"/>
+					<input type="password" name="password" placeholder="请输入会员密码" id="password"  style="margin-top:13px;"/>
+					<!--<input type="text" placeholder="验证码" class="yzminput"/><img src="yzm.php" height="34" style=" float:right; margin-top:5px; margin-right:18px;" />-->
+					<button onclick="Login()" id="logkey" style="margin-top:13px;">登录</button>
+					<a href="javascript:;" onclick="alert('请联系客服找回密码！')" style="display:block; margin:auto; margin-top:10px; float:right; margin-right:20px;">忘密码</a>
+				</div>
+				<?php }else{?>
+				<!--登陆后-->
+				<div class="banner_login_had">
+					<ul>
+						<li><i class="banner_login_had_1"></i><span>账户：<?php echo $user['username']?></span></li>
+						<li class="mt10"><i class="banner_login_had_2"></i>余额：<span id="money"><?php echo $user['money']?></span></li>
+					</ul>
+					<div class="banner_login_had_list">
+						<a href="javascript:void(0);" onclick="GoToMember(0,2);return false" class="banner_login_had_list_a banner_login_had_list_active">会员资料</a>
+						<a href="javascript:void(0);" onclick="GoToMember(3,0);return false" class="banner_login_had_list_a">账户历史</a>
+						<a href="javascript:void(0);" onclick="GoToMember(2,0);return false" class="banner_login_had_list_a">交易记录</a>
+						<a href="javascript:void(0);" onclick="GoToMember(0,2);return false" class="banner_login_had_list_a">财务中心</a>
+						<a href="javascript:void(0);" onclick="GoToMember(5,0);return false" class="banner_login_had_list_a">代理中心</a>
+						<a href="javascript:void(0);" onclick="GoToMember(1,0);return false" class="banner_login_had_list_a">会员存款</a>
+						<a href="javascript:void(0);" onclick="GoToMember(0,2);return false" class="banner_login_had_list_a">额度转换</a>
+						<a href="javascript:void(0);" onclick="GoToMember(1,1);return false" class="banner_login_had_list_a">会员提款</a>
+						<a href="javascript:GoTo('1','logout');" class="banner_login_had_list_a">安全退出</a>
+					</div>
+				</div>	
+				<?php }?>
+			</div>
+		</div>
+	</div>
+	<div class="block_0"></div>
+	<!--滚动公告-->
+	<div class="banner_bottom">
+		<div class="banner_notice txtMarquee-left">
+			<div class="bd">
+				<img src="/img/notice.png" class="fl"/>
+				<ul class="fl f14 ">
+					{volist id="notice" name="notice"}
+					<li>{$notice['msg']}</li>
+					{/volist}
+				</ul>
+			</div>
+		</div>
+	</div>	
+	<div class="block_0"></div>
+	<!--滚动榜单-->
+	<div class="jscenter">
+		<div class="jscenter_1">
+			<div class="jscenter_left fl">
+				<div class="jscenter_left_1">
+					<h2>中奖榜单</h2>
+					<div class="jscenter_left_name">
+						<span>VIP ID</span>
+						<span>金额</span>
+						<span>游戏名称</span>
+					</div>
+					<div class="txtMarquee-top">
+						<div class="bd">
+							<ul class="infoList">
+								<li>
+									<a href="javascript:;" target="_blank"><span>9k**Yp</span><span>5004.00</span><span>海洋剧场</span></a>
+								</li>
+								<li>
+									<a href="javascript:;" target="_blank"><span>Zw**9N</span><span>6799.00</span><span>圣兽传说</span></a>
+								</li>
+								<li>
+									<a href="javascript:;" target="_blank"><span>SX**ww</span><span>8271.00</span><span>圣兽传说</span></a>
+								</li>
+								<li>
+									<a href="javascript:;" target="_blank"><span>hM**ll</span><span>1709.00</span><span>海洋剧场</span></a>
+								</li>
+								<li>
+									<a href="javascript:;" target="_blank"><span>3H**dp</span><span>2958.00</span><span>足球之巅</span></a>
+								</li>
+								<li>
+									<a href="javascript:;" target="_blank"><span>gi**Ag</span><span>6770.00</span><span>寻访海豚</span></a>
+								</li>
+								<li>
+									<a href="javascript:;" target="_blank"><span>lt**Qp</span><span>7571.00</span><span>钻石列车</span></a>
+								</li>
+								<li>
+									<a href="javascript:;" target="_blank"><span>XG**yo</span><span>3687.00</span><span>小熊猫</span></a>
+								</li>
+								<li>
+									<a href="javascript:;" target="_blank"><span>qN**su</span><span>3834.00</span><span>水果拉霸</span></a>
+								</li>
+								<li>
+									<a href="javascript:;" target="_blank"><span>W9**09</span><span>1021.00</span><span>开心农场</span></a>
+								</li>
+								<li>
+									<a href="javascript:;" target="_blank"><span>VF**jw</span><span>8632.00</span><span>糖果碰碰乐</span></a>
+								</li>
+								<li>
+									<a href="javascript:;" target="_blank"><span>0o**I7</span><span>6986.00</span><span>数字大转轮</span></a>
+								</li>
+								<li>
+									<a href="javascript:;" target="_blank"><span>w9**ry</span><span>2638.00</span><span>钻石列车</span></a>
+								</li>
+								<li>
+									<a href="javascript:;" target="_blank"><span>Zq**nN</span><span>2542.00</span><span>海底派对</span></a>
+								</li>
+								<li>
+									<a href="javascript:;" target="_blank"><span>VG**L5</span><span>898.00</span><span>数字大转轮</span></a>
+								</li>
+								<li>
+									<a href="javascript:;" target="_blank"><span>BI**4O</span><span>2448.00</span><span>糖果碰碰乐</span></a>
+								</li>
+								<li>
+									<a href="javascript:;" target="_blank"><span>AE**Wc</span><span>6447.00</span><span>数字大转轮</span></a>
+								</li>
+								<li>
+									<a href="javascript:;" target="_blank"><span>6i**47</span><span>5985.00</span><span>钻石列车</span></a>
+								</li>
+								<li>
+									<a href="javascript:;" target="_blank"><span>hi**3K</span><span>6143.00</span><span>钻石列车</span></a>
+								</li>
+								<li>
+									<a href="javascript:;" target="_blank"><span>fq**yE</span><span>3639.00</span><span>寻访海豚</span></a>
+								</li>
+								<li>
+									<a href="javascript:;" target="_blank"><span>Tn**kr</span><span>3036.00</span><span>数字大转轮</span></a>
+								</li>
+								<li>
+									<a href="javascript:;" target="_blank"><span>ER**B4</span><span>1154.00</span><span>钻石列车</span></a>
+								</li>
+								<li>
+									<a href="javascript:;" target="_blank"><span>XA**OZ</span><span>8948.00</span><span>酷派狼人</span></a>
+								</li>
+								<li>
+									<a href="javascript:;" target="_blank"><span>vY**IF</span><span>2710.00</span><span>复古花园</span></a>
+								</li>
+								<li>
+									<a href="javascript:;" target="_blank"><span>uz**jZ</span><span>7202.00</span><span>寻访海豚</span></a>
+								</li>
+								<li>
+									<a href="javascript:;" target="_blank"><span>Ht**Kf</span><span>593.00</span><span>水果拉霸</span></a>
+								</li>
+								<li>
+									<a href="javascript:;" target="_blank"><span>S3**g3</span><span>4380.00</span><span>寻访海豚</span></a>
+								</li>
+								<li>
+									<a href="javascript:;" target="_blank"><span>ba**Lt</span><span>1212.00</span><span>斗大</span></a>
+								</li>
+								<li>
+									<a href="javascript:;" target="_blank"><span>3b**Rs</span><span>5183.00</span><span>上流社会</span></a>
+								</li>
+								<li>
+									<a href="javascript:;" target="_blank"><span>Vm**TU</span><span>8157.00</span><span>钻石列车</span></a>
+								</li>				
+							</ul>
+						</div>
+					</div>					
+				</div>
+				<ul class="jscenter_left_2">
+					<li class="mr4"><a href="http://www.77158.am" target="_BLANK"><i><img src="/img/url-logo.png"></i>备用网址</a></li>
+					<li><a href="/reg.php" target="index"><i><img src="/img/coorperative.png"></i><span>招募代理</span></a></li>
+					<li class="mr4"><a  href="/reg.php" target="index"><i><img src="/img/login-logo.png"></i><span>立即注册</span></a></li>
+					<li><a  href="http://www.77158.am" target="_BLANK"><i><img src="/img/information.png"></i><span>资讯站</span></a></li>					
+				</ul>
+			</div>
+			<!--游戏滑动门-->
+			<div class="jscenter_right">
+				<div class="jscenter_slider">
+					<a href="javascript:;"><span class="jscenter_slider_1 jscenter_slider_active">AG电子</span></a>
+					<a href="javascript:;"><span class="jscenter_slider_2">MG电子</span></a>
+					<a href="javascript:;"><span class="jscenter_slider_3">PT电子</span></a>
+					<a href="javascript:;"><span class="jscenter_slider_4">BBIN电子</span></a>
+					<a href="javascript:;"><span class="jscenter_slider_5">ISB电子</span></a>
+				</div>
+				<div class="jscenter_slider_list">
+					<!--AG电子list-->
+					<div class="jscenter_slider_contain">
+						{volist id="agHotGame" name="agHotGame"}
+						<div class="jscenter_slider_game">
+							<div class="jscenter_slider_img">
+								<img src="/images/agimg/{$agHotGame['imageurl']}" />
+								<div class="jscenter_slider_bg">
+									<a target="_blank" href="/aggame/dianzi.php?type={empty name="agHotGame['gameid2']"}{$agHotGame['gameid']}{else/}{$agHotGame['gameid2']}{/empty}">进入游戏</a>
+								</div>
+							</div>
+							<span class="jscenter_slider_span">{$agHotGame['gamename']}</span>
+						</div>			
+						{/volist}
+					</div>
+					<!--MG电子list-->
+					<div class="jscenter_slider_contain" style="display: none;">
+						{volist id="mgHotGame" name="mgHotGame"}
+						<div class="jscenter_slider_game">
+							<div class="jscenter_slider_img">
+								<img src="/images/mgimg/{$mgHotGame['imageurl']}" />
+								<div class="jscenter_slider_bg">
+									<a href="javascript:;">即将开启</a>
+								</div>
+							</div>
+							<span class="jscenter_slider_span">{$mgHotGame['gamename']}</span>
+						</div>			
+						{/volist}					
+					</div>					
+					<!--PT电子list-->
+					<div class="jscenter_slider_contain" style="display: none;">
+						{volist id="ptHotGame" name="ptHotGame"}
+						<div class="jscenter_slider_game">
+							<div class="jscenter_slider_img">
+								<img src="/images/ptimg/{$ptHotGame['imageurl']}" />
+								<div class="jscenter_slider_bg">
+									<a href="javascript:;">即将开启</a>
+								</div>
+							</div>
+							<span class="jscenter_slider_span">{$ptHotGame['gamename']}</span>
+						</div>			
+						{/volist}
+						
+					</div>						
+					<!--BBIN电子list-->
+					<div class="jscenter_slider_contain" style="display: none;">
+						{volist id="bbHotGame" name="bbHotGame"}
+						<div class="jscenter_slider_game">
+							<div class="jscenter_slider_img">
+								<img src="/images/bbimg/{$bbHotGame['imageurl']}" />
+								<div class="jscenter_slider_bg">
+									<a href="javascript:;">即将开启</a>
+								</div>
+							</div>
+							<span class="jscenter_slider_span">{$bbHotGame['gamename']}</span>
+						</div>			
+						{/volist}
+					</div>						
+					<!--ISB电子list-->
+					<div class="jscenter_slider_contain" style="display: none;">
+						<div class="jscenter_slider_game">
+							<div class="jscenter_slider_img">
+								<img src="/img/MG-1.png" />
+								<div class="jscenter_slider_bg"><a href="javascript:;">进入游戏</a></div>
+							</div>
+							<span class="jscenter_slider_span">44444</span>
+						</div>
+						<div class="jscenter_slider_game">
+							<div class="jscenter_slider_img">
+								<img src="/img/MG-1.png" />
+								<div class="jscenter_slider_bg"><a href="javascript:;">进入游戏</a></div>
+							</div>
+							<span class="jscenter_slider_span">斗鸡</span>
+						</div>					
+						<div class="jscenter_slider_game">
+							<div class="jscenter_slider_img">
+								<img src="/img/MG-1.png" />
+								<div class="jscenter_slider_bg"><a href="javascript:;">进入游戏</a></div>
+							</div>
+							<span class="jscenter_slider_span">连环夺宝</span>
+						</div>						
+						<div class="jscenter_slider_game">
+							<div class="jscenter_slider_img">
+								<img src="/img/MG-1.png" />
+								<div class="jscenter_slider_bg"><a href="javascript:;">进入游戏</a></div>
+							</div>
+							<span class="jscenter_slider_span">城市人生</span>
+						</div>		
+						<div class="jscenter_slider_game">
+							<div class="jscenter_slider_img">
+								<img src="/img/MG-1.png" />
+								<div class="jscenter_slider_bg"><a href="javascript:;">进入游戏</a></div>
+							</div>
+							<span class="jscenter_slider_span">喜福猴年</span>
+						</div>	
+						<div class="jscenter_slider_game">
+							<div class="jscenter_slider_img">
+								<img src="/img/MG-1.png" />
+								<div class="jscenter_slider_bg"><a href="javascript:;">进入游戏</a></div>
+							</div>
+							<span class="jscenter_slider_span">三国</span>
+						</div>		
+						<div class="jscenter_slider_game">
+							<div class="jscenter_slider_img">
+								<img src="/img/MG-1.png" />
+								<div class="jscenter_slider_bg"><a href="javascript:;">进入游戏</a></div>
+							</div>
+							<span class="jscenter_slider_span">圣兽传说</span>
+						</div>
+						<div class="jscenter_slider_game">
+							<div class="jscenter_slider_img">
+								<img src="/img/MG-1.png" />
+								<div class="jscenter_slider_bg"><a href="javascript:;">进入游戏</a></div>
+							</div>
+							<span class="jscenter_slider_span">星际争霸</span>
+						</div>
+					</div>						
+					
+				</div>
+			</div>			
+		</div>
+	</div>
+	<!--游戏流程-->
+	<div class="gameflow">
+		<div class="gameflow_center">
+			<div class="gameflow_left fl">
+				<h2 class="mt10">游戏流程</h2>
+				Gameflow
+			</div>
+			<div class="gameflow_right fr ml30">
+				<ul>
+					<li><span class="dsblock">开户</span>step1</li>
+					<li class="gameflow_right_1"></li>
+					<li><span class="dsblock">绑定</span>step2</li>
+					<li class="gameflow_right_1"></li>	
+					<li><span class="dsblock">存款</span>step3</li>
+					<li class="gameflow_right_1"></li>	
+					<li><span class="dsblock">游戏</span>step4</li>
+					<li class="gameflow_right_1"></li>	
+					<li><span class="dsblock">提款</span>step5</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<div class="block_30"></div>
+	<!--体育竞技真人游戏彩票-->
+	<div class="sport_game">
+		<div class="sport_game_1" id="sportpage">
+			<div class="sport_game_img">
+				<img src="/img/sport-football.png"/>
+			</div>
+			<div class="sport_game_middle">
+				<h2>体育竞技</h2>
+				<h5>Sport game</h5>
+			</div>
+			<p>亚太顶级体育投注平台 皇冠体育 BBIN体育<br />
+				更有实时无缝高清直播全球赛事
+			</p>
+		</div>
+		<div class="sport_game_1 ml7" id="livepage">
+			<div class="sport_game_img">			
+				<img src="/img/live.png"/>
+			</div>		
+			<div class="sport_game_middle">
+				<h2>真人视讯</h2>
+				<h5>Live casino</h5>
+			</div>
+			<p>汇聚全球顶尖视讯直播投注平台<br />
+				AG BBIN MG NA 太阳城
+			</p>
+		</div>
+		<div class="sport_game_1 ml7" id="lotterypage">
+			<div class="sport_game_img">
+				<img src="/img/lottery.png"/>
+			</div>
+			<div class="sport_game_middle">
+				<h2>彩票游戏</h2>
+				<h5>Lottery game</h5>
+			</div>
+			<p>大陆官方时时彩种，香港六合彩<br />
+				更高的赔率 更快派彩
+			</p>
+		</div>			
+	</div>
+	<div class="block_15"></div>
+	<div class="game_list">
+		<div class="game_list_1">
+			<span>
+				<a href="javascript:;">
+					<i class="game_bg_1"></i>足球
+				</a>
+			</span>
+			<span>
+				<a href="javascript:;">
+					<i class="game_bg_2"></i>篮球
+				</a>
+			</span>
+			<span>
+				<a href="javascript:;">
+					<i class="game_bg_3"></i>棒球
+				</a>
+			</span>
+			<span>
+				<a href="javascript:;">
+					<i class="game_bg_4"></i>网球
+				</a>
+			</span>
+			<span>
+				<a href="javascript:;">
+					<i class="game_bg_5"></i>高尔夫球
+				</a>
+			</span>	
+			<span>
+				<a href="javascript:;">
+					<i class="game_bg_6"></i>曲棍球
+				</a>
+			</span>
+			<span>
+				<a href="javascript:;">
+					<i class="game_bg_7"></i>羽毛球
+				</a>
+			</span>
+			<span>
+				<a href="javascript:;">
+					<i class="game_bg_8"></i>桌球
+				</a>
+			</span>	
+		</div>
+		<div class="game_list_2" style="display: none;">
+			<span>
+				<a href="/live.php">
+					<i class="game_bg_9"></i>百家乐
+				</a>
+			</span>
+			<span>
+				<a href="/live.php">
+					<i class="game_bg_10"></i>龙虎斗
+				</a>
+			</span>
+			<span>
+				<a href="/live.php">
+					<i class="game_bg_11"></i>骰宝
+				</a>
+			</span>
+			<span>
+				<a href="/live.php">
+					<i class="game_bg_12"></i>轮盘
+				</a>
+			</span>
+			<span>
+				<a href="/live.php">
+					<i class="game_bg_13"></i>牛牛
+				</a>
+			</span>	
+			<span>
+				<a href="/live.php">
+					<i class="game_bg_14"></i>温州牌九
+				</a>
+			</span>
+			<span>
+				<a href="/live.php">
+					<i class="game_bg_15"></i>德州扑克
+				</a>
+			</span>
+			<span>
+				<a href="/live.php">
+					<i class="game_bg_16"></i>二八杠
+				</a>
+			</span>	
+		</div>
+		<div class="game_list_3" style="display: none;">
+			<span>
+				<a href="javascript:;">
+					<i class="game_bg_17"></i>香港六合彩
+				</a>
+			</span>
+			<span>
+				<a href="javascript:;">
+					<i class="game_bg_18"></i>重庆时时彩
+				</a>
+			</span>
+			<span>
+				<a href="javascript:;">
+					<i class="game_bg_19"></i>幸运飞艇
+				</a>
+			</span>
+			<span>
+				<a href="javascript:;">
+					<i class="game_bg_20"></i>新疆时时彩
+				</a>
+			</span>
+			<span>
+				<a href="javascript:;">
+					<i class="game_bg_21"></i>重庆快乐十分
+				</a>
+			</span>	
+			<span>
+				<a href="javascript:;">
+					<i class="game_bg_22"></i>广东快乐十分
+				</a>
+			</span>
+			<span>
+				<a href="javascript:;">
+					<i class="game_bg_23"></i>北京PK拾
+				</a>
+			</span>
+			<span>
+				<a href="javascript:;">
+					<i class="game_bg_24"></i>江苏快三
+				</a>
+			</span>	
+			<span>
+				<a href="javascript:;">
+					<i class="game_bg_25"></i>广西快乐十分
+				</a>
+			</span>				
+		</div>			
+	</div>
+	
+	{include file='common/footer'}
+	
+	{include file='common/fix-left-right'}
+
+	
+	
+<!--主页弹窗-->
+{if $tanchuang.show eq 1}
+<div class="game_popup">
+	<h3>
+		<span>金沙娱乐场</span>
+		<a href="javascript:;" class="game_popup_c_t"></a>
+	</h3>
+	<div class="game_popup_img">
+		{$tanchuang.content}
+	</div>
+	<a href="javascript:;" class="game_popup_c_b">关闭</a>
+</div>
+{/if}
+</body>
+<!-- <script src="/jquery/1.9.0/jquery.min.js"></script> -->
+
+<script type="text/javascript">
+$(function(){
+	alert(1);
+	$("#sportpage").click(function(){
+		window.location.href='/sport/home';
+	});
+	$("#livepage").click(function(){
+		window.location.href='/live/index';
+	});
+	$("#lotterypage").click(function(){
+		window.location.href='/lottery/home';
+	});
+	
+	{if $tanchuang.show eq 1}
+	//主页弹窗
+	var popupWindowHeight = $(window).height();
+	$(".game_popup").css({
+		top : (popupWindowHeight - 518) / 2
+	});
+	$(".game_popup_c_t,.game_popup_c_b").click(function(){
+		$(".game_popup").hide();
+	});
+	//判断用户是否第一次登陆，不是不弹窗.
+	var gameCookie =  $.cookie("gamepopup_cookie");
+	if (gameCookie == null) {
+		//第一次访问
+        $(".game_popup").show();
+        $.cookie("gamepopup_cookie", "1",{expires:1});
+    }else{
+        //不是第一次访问
+        $(".game_popup").hide();
+    }	
+	{/if}
+	
+	$('#qian_dao .qian_dao').click(function(){
+		//window.open('qian_dao.php','qian_dao','menubar=no,status=yes,scrollbars=yes,top=150,left=400,toolbar=no,width=805,height=520');
+		$.ajax({
+			type: "post",
+			url: '{:url('activity/qiandao')}',
+			data:{'ajax':1},
+			success:function(data) {
+				alert(data);
+			}
+		});
+	});
+
+ 	setInterval(function() {
+		$.ajax({
+			type: "post",
+			url: "{:Url('index/home')}",
+			data:{'ajax':1,'get_money':'1'},
+			success:function(data) {
+				if (/^[\d\.]+$/.test(data)) {
+					$('#money').text(data);
+				}
+			}
+		});
+	},2000);
+
+	/* 首页全屏大幻灯片       控制左右按钮显示 */
+	$(".fullSlide").hover(function(){$(this).find(".prev,.next").stop(true,true).fadeTo("show",0.5)},function(){$(this).find(".prev,.next").fadeOut()});
+	/* 调用SuperSlide */
+	$(".fullSlide").slide({titCell:".hd ul", mainCell:".bd ul", effect:"fold",  autoPlay:true, autoPage:true, trigger:"click",
+		startFun:function(i){
+			var curLi = $(".fullSlide .bd li").eq(i); /* 当前大图的li */
+			if(!!curLi.attr("_src")){
+				curLi.css("background-image",curLi.attr("_src")).removeAttr("_src") /* 将_src地址赋予li背景，然后删除_src */
+			}
+		}
+	});
+}) 
+</script>
+</html>
+

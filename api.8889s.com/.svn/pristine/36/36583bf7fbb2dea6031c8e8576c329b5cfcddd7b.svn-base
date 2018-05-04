@@ -1,0 +1,99 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>系统设置</title>
+<link href="../css/base.css" rel="stylesheet" type="text/css" />
+<link href="../css/admin.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="../js/jquery.js"></script>
+<script type="text/javascript" src="../js/jquery.tools.js"></script>
+<script type="text/javascript" src="../js/base.js"></script>
+<script type="text/javascript">
+function check($v){
+	document.getElementById("hf_status").value = $v;
+	document.getElementById("form1").submit(); 
+}
+</script>
+</head>
+<body class="input">
+	<div class="bar">
+		会员汇款记录
+	</div>
+	
+
+<div class="body">
+<ul id="tab" class="tab">
+				<li>
+					<input type="button" value="汇款审核" class="current" hidefocus />
+				</li>
+  </ul>
+<form name="form1" id="form1" method="post" action="{:url('money/huikuan_ok')}?action=true">
+<table class="inputTable tabContent">
+	<tr>
+        <th align="center"><input name="hf_status" type="hidden" id="hf_status">
+      <input name="hf_id" type="hidden" id="hf_id" value="<?=$id?>"><input name="hf_money" type="hidden" id="hf_money" value="<?=$rs["money"]?>">
+      汇款流水号:</th>
+        <td align="left"><?=$rs["lsh"]?></td>
+      </tr>
+	<tr>
+	  <th align="center">汇款用户:</th>
+	  <td align="left"><?=$rs["username"]?></td>
+    </tr>
+	<tr>
+	  <th align="center">汇款金额:</th>
+	  <td align="left"><?=$rs["money"]?></td>
+    </tr>
+	<tr>
+	  <th align="center">汇款日期:</th>
+	  <td align="left"><?=$rs["date"]?></td>
+    </tr>
+	<tr>
+	  <th align="center">汇款银行:</th>
+	  <td align="left"><?=$rs["bank"]?></td>
+    </tr>
+	<tr>
+	  <th align="center">汇款方式:</th>
+	  <td align="left"><?=$rs["manner"]?></td>
+    </tr>
+	<tr>
+	  <th align="center">汇款地点:</th>
+	  <td align="left"><?=$rs["address"]?></td>
+    </tr>
+	<tr>
+	  <th align="center">提交时间:</th>
+	  <td align="left"><?=$rs["adddate"]?></td>
+    </tr>
+	<tr>
+	  <th align="center">当前状态:</th>
+	  <td align="left"><?php
+			  if($rs["status"]==1) echo "汇款成功";
+			  else if($rs["status"]==2) echo "汇款失败";
+			  else echo "审核中";
+			  ?></td>
+    </tr>
+	<tr>
+	  <th align="center">赠送手续费:</th>
+	  <td align="left"><?php
+			  if($rs['status']>0){
+			  	echo $rs['zsjr'].' 元';
+			  }else{
+			  ?>
+			  <label>
+	            <input name="is_zsjr" type="checkbox" id="is_zsjr" value="1" checked>
+	          勾选则赠送，不勾则不赠送。同城同行汇款不赠送</label>
+			  <?php }?></td>
+    </tr>
+	<tr>
+	  <th align="center">赠送金额:</th>
+	  <td align="left"><input name="hf_sxf" type="text" id="hf_sxf" value="<?php echo round($rs["money"]*$my_zengsong/100,2);?>" size="5" maxlength="5"/>（固定比例可在手工公司入款设置）</td>
+    </tr>
+  </table>
+  <div class="buttonArea">
+                <input name="Submit2" type="button" class="formButton" onClick="check('1');" value="充值成功">
+	             <input name="Submit3" type="button" class="formButton" onClick="check('2');" value="充值失败">　
+				<input type="button" class="formButton" onClick="window.location.href='{:url('main/info')}'" value="返  回" hidefocus />
+    </div>
+</form>
+	</div>
+</body>
+</html>

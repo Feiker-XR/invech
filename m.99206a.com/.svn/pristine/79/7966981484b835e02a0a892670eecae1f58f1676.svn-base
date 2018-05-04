@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="/css/theme/style.css" type="text/css" rel="stylesheet" />
+<script src='/js/jquery-1.7.2.min.js'></script>
+<script type="text/javascript" language="javascript" src="/Scripts/marquee.js"></script>
+<script type="text/javascript" language="javascript" src="/Scripts/kxbdMarquee.js"></script>
+<script type="text/javascript" src="/js/main.js"></script>
+<script type="text/javascript" src="/Scripts/member.js"></script>
+<script type="text/javascript" src="/newview/js/main.js"></script>
+<title>会员中心</title>
+<script type="text/javascript">
+$(document).ready(function () {
+	$("#scrollDiv").kxbdMarquee({isEqual:false,loop:0,scrollDelay:50});
+	
+setInterval(function() {
+	$.ajax({
+		type: "post",
+		url: "{:Url('index/home')}",
+		data:{'ajax':1,'get_money':'1'},
+		success:function(data) {
+			if (/^[\d\.]+$/.test(data)) {
+				$('#money,#money_2').text(data);
+			}
+		}
+	});
+},2000);	
+});
+$(function () {
+	
+	
+	$(".ui-search li a").click(function () {
+		var lang = $(this).attr("lang");
+		
+		if (!lang) {
+			return false;
+		}
+		
+		$("#MainFrameb").attr("src", lang);
+		$(".ui-search li").removeClass("ui-hover");
+		$(this).parent().addClass("ui-hover");
+		//var topBody = window.document.body;
+		//var rightBody = window.frames["MainFrameb"].document.body;
+		//var loadingDiv = $("#loading", rightBody);
+		/*
+		if (loadingDiv.length == 0) {
+			loadingDiv = $("<div id='loading'><img id='loadingImg' src='/member/images/loading.gif'/></div>");
+			loadingDiv.css("position", "absolute");
+			loadingDiv.css("z-index", "999");
+			loadingDiv.css("background", "#fff");
+			loadingBankDiv = $("<div id='bankDiv'></div>");
+			loadingBankDiv.width($(rightBody).width() + 120);
+			loadingBankDiv.height($(topBody).height() - 100);
+			loadingBankDiv.css("position", "absolute");
+			loadingBankDiv.css("z-index", "998");
+			loadingBankDiv.css("background-color", "#fff");
+			loadingBankDiv.css("filter", "alpha(opacity=90)");
+			loadingBankDiv.append(loadingDiv);
+			$(rightBody).append(loadingBankDiv);
+			loadingBankDiv.css("left", 0);
+			loadingBankDiv.css("top", 0);
+			loadingDiv.css("left", 70);
+			loadingDiv.css("top", ($(topBody).height() - 86) / 2 - 100);
+		}*/
+	});
+	var Args = getArgs();
+	$(".ui-nav li").eq(Args["Args1"]).click();
+	$(".ui-body .ui-search").eq(Args["Args1"]).find("li").eq(Args["Args2"]).find("a").click();
+});
+function changetab(id){
+   $(".ui-search").css("display","none");
+   $(".ui-nav li").removeClass();
+   $("#Nav_"+id).addClass("ui-header-active");
+   $("#subjsshow"+id).css("display","block");
+   $(".ui-body .ui-search").eq(id).find("li").eq(0).find("a").click();
+}
+function getArgs() {
+	var args = new Object();
+	var query = location.search.substring(1);     // Get query string
+	var pairs = query.split("&");                 // Break at ampersand
+	for (var i = 0; i < pairs.length; i++) {
+		var pos = pairs[i].indexOf('=');          // Look for "name=value"
+		if (pos == -1) continue;                  // If not found, skip
+		var argname = pairs[i].substring(0, pos);  // Extract the name
+		var value = pairs[i].substring(pos + 1);    // Extract the value
+		value = decodeURIComponent(value);        // Decode it, if needed
+		args[argname] = value;                    // Store as a property
+	}
+	return args;                                  // Return the object
+}
+</script>
+</head>
+<body>
+	<!-- 内容框 -->
+	<div class="ui-main">
+		<!-- 头部 -->
+		<div class="ui-header">
+			<div class="ui-headerBox">
+				<!-- logo -->
+				<a class="ui-icon-logo ui-logo" id="Logo"></a>
+				<!-- 导航 -->
+				<ul class="ui-nav">
+					<li id="Nav_0" onclick="changetab(0)">
+						<a href="javascript:void(0)" title="会员首页">
+							<span class="ui-icon ui-icon-home ui-icon-50"></span>
+						</a>
+					</li>
+					<li id="Nav_1" onclick="changetab(1)">
+						<a href="javascript:void(0)" title="财务管理">
+							<span class="ui-icon ui-icon-recharge ui-icon-50"></span>
+						</a>
+					</li>
+					<li id="Nav_2" onclick="changetab(2)">
+						<a href="javascript:void(0)" title="游戏记录">
+							<span class="ui-icon ui-icon-gameNote ui-icon-50"></span>
+						</a>
+					</li>
+					<li id="Nav_3" onclick="changetab(3)">
+						<a href="javascript:void(0)" title="历史记录">
+							<span class="ui-icon ui-icon-data ui-icon-50"></span>
+						</a>
+					</li>
+					<li id="Nav_4" onclick="changetab(4)">
+						<a href="javascript:void(0)" title="站内短信">
+							<span class="ui-icon ui-icon-announce ui-icon-50"></span>
+						</a>
+					</li>
+                    <li id="Nav_5" onclick="changetab(5)">
+						<a href="javascript:void(0)" title="代理中心">
+							<span class="ui-icon ui-icon-newActivity ui-icon-50"></span>
+						</a>
+					</li>
+                    <li style="display:none">
+						<a href="javascript:void(0)" onclick="OnlineService()" title="客服中心">
+							<span class="ui-icon ui-icon-online ui-icon-50"></span>
+						</a>
+					</li>
+				</ul>
+				<ul class="ui-function">
+					<!--<li>
+						<a href="#">
+							<span class="ui-icon ui-icon-down ui-icon-20" id="Menu"></span>
+						</a>
+					</li>
+					<li>
+						<a href="#">
+							<span class="ui-icon ui-icon-min ui-icon-20"></span>
+						</a>
+					</li>
+					<li>
+						<a href="javascript:void(0)" id="Logout">
+							<span class="ui-icon ui-icon-max ui-icon-20"></span>
+						</a>
+					</li>-->
+				</ul>
+			</div>
+		</div>
+		<!-- 中部 -->
+		<div class="ui-body">
+
+		<div class="ui-search" id="subjsshow0">
+        <span>会员首页</span>
+        	<ul>
+                <li><a href="javascript:void(0)" lang="/user/userinfo">账户全览</a></li>
+                <li><a href="javascript:void(0)" lang="/user/password">修改密码</a></li>
+			</ul>
+		</div>
+
+        <div class="ui-search" id="subjsshow1" style="display:none;"> 
+        <span>财务管理</span>
+			<ul>
+                <li><a href="javascript:void(0)" lang="/pay/member">账户充值</a></li>
+                <li><a href="javascript:void(0)" lang="/user/get_money">申请提款</a></li>
+                <li><a href="javascript:void(0)" lang="/user/userinfo">额度转换</a></li>
+                <li><a href="javascript:void(0)" lang="/user/data_money">充值记录</a></li>
+                <li><a href="javascript:void(0)" lang="/user/data_h_money">汇款记录</a></li>
+                <li><a href="javascript:void(0)" lang="/user/data_t_money">提现记录</a></li>
+                <li><a href="javascript:void(0)" lang="/user/zr_data_money">转换记录</a></li>   
+			</ul>
+		</div>
+
+        <div class="ui-search" id="subjsshow2" style="display:none;"> 
+        <span>游戏记录</span>
+			<ul>
+			    <!--<li><a href="javascript:void(0)" lang="record_na.php">Na真人</a></li>-->
+                <!--<li><a href="javascript:void(0)" lang="record_ds.php">BBIN体育</a></li>-->
+                <li><a href="javascript:void(0)" lang="/user/record_ds">皇冠体育单式</a></li>
+                <li><a href="javascript:void(0)" lang="/user/record_cg">皇冠体育串关</a></li>
+                <li><a href="javascript:void(0)" lang="/user/record_cp">彩票游戏</a></li>
+                <li><a href="javascript:void(0)" lang="/user/tzhistory">国家彩票游戏</a></li>
+                <li><a href="javascript:void(0)" id="openwindow">BBIN体育/记录</a></li>
+                <!--<li><a href="javascript:void(0)" lang="record_zr.php">真人视讯</a></li>-->
+			</ul>
+		</div>
+
+         <div class="ui-search" id="subjsshow3" style="display:none;"> 
+         <span>历史记录</span>
+			<ul>
+                <li><a href="javascript:void(0)" lang="/user/report">报表全览</a></li>
+			</ul>
+		</div>
+
+        <div class="ui-search" id="subjsshow4" style="display:none;"> 
+        <span>站内公告</span>
+			<ul>
+                <li><a href="javascript:void(0)" lang="/user/sms">站内短信</a></li>
+			</ul>
+		</div>
+		<div class="ui-search" id="subjsshow5" style="display:none;"> 
+        <span>代理中心</span>
+			<ul>
+        		<li><a href="javascript:void(0)" lang="/user/agent">推广网址</a></li>
+                <li><a href="javascript:void(0)" lang="/user/ag_user">下级列表</a></li>
+                <li><a href="javascript:void(0)" lang="/user/ag_data">报表统计</a></li>
+            </ul>			
+        </div>
+
+         <iframe id="MainFrameb" scrolling="auto" frameborder="0" width="100%" height="510" allowtransparency="true" ></iframe>
+		
+		<!--尾部 -->
+		<div class="ui-footer">
+			<span class="ui-icon ui-icon-announces ui-announces"></span>
+			<div id="scrollDiv" class="announce">
+			       <ul id="scroll">
+                       <li><span style="line-height:1.5;font-family:微软雅黑;">欢迎光临金沙娱乐场 77158.com！感谢您对金沙娱乐场的信任与支持，您的光临将是我们最大的动力，我们将为您提供全球最具实力的品牌价值，最具真实的游戏体验，最具优质的在线服务。金沙娱乐场，因梦想而生，为幸运而来！&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></li>
+                   </ul>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

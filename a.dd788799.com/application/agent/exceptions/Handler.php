@@ -1,0 +1,25 @@
+<?php
+
+namespace app\agent\exceptions;
+
+use Exception;
+use think\exception\Handle as ExceptionHandler;
+use think\exception\HttpResponseException;
+use bong\service\auth\AuthenticationException;
+
+class Handler extends ExceptionHandler
+{
+    use \traits\controller\Jump;
+
+    public function render(Exception $e)
+    {
+        if ($e instanceof HttpResponseException) {
+            return $e->getResponse();
+        } elseif ($e instanceof AuthenticationException) {
+            return $this->error('请先登录!',config('auth.redirect.auth_fail.'.MODULE));
+        }else {
+            //返回view或html类型的Response
+            return parent::render($e);
+        }
+    }
+}

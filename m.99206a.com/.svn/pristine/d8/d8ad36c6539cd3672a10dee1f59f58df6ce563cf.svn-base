@@ -1,0 +1,132 @@
+<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:84:"/mnt/wwwroot/www.dd788799.com/mobile/../application/index/mview/result/football.html";i:1505452696;}*/ ?>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>万丰国际</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+<link rel="stylesheet" href="/css/font-awesome.min.css">
+<link rel="stylesheet" href="/css/footable.core.min.css">
+<link href="/css/jquery_dialog.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" href="/styles/ucenter.css">
+<link rel="stylesheet" href="/styles/ezweb.css">
+<style type="text/css">
+.panel-body{padding: 5px;}
+</style>
+</head>
+<body>
+<input type="button" value="< 返回" class="ft_danshi_default ft_danshi_contain_yellow" onclick="$('#J_SportsIFrame',parent.document).attr('src','left.php');"><div class="h10"></div>
+<div class="panel panel-default">
+	<div class="panel-heading">
+		<h3 class="panel-title">足球结果 ></h3>
+	</div>
+	<div class="panel-body">
+		<ul class="pagination">
+		<?php
+		for($i=0;$i<7;$i++){
+		  $d  = date('Y-m-d',time()-$i*86400);
+		  $dd = date('m-d',time()-$i*86400);
+		  if($d==$date ){
+		?>
+    		<li class="active"><a href="#"><?=$dd?></a></li>
+        <?php }else{ ?>
+        	<li><a href="?ymd=<?=$d?>"><?=$dd?></a></li>
+        <?php } }?>
+		</ul>
+		<table class="table table-bordered table-hover">
+			<thead>
+				<tr class="success">
+					<th data-toggle="true">赛程<br>点击每行展开</th>
+					<th>开赛时间<br>主场/客场</th>
+					<th data-hide="phone,tablet">上半比分</th>
+					<th data-hide="phone,tablet">全场比分</th>
+				</tr>
+			</thead>
+			<tbody>
+				<?php if(empty($rows)): ?>
+				<tr><td height='100' colspan='4' align='center' bgcolor='#FFFFFF'>暂无任何赛果</td></tr>
+				<?php endif; foreach($rows as $row): ?>
+				<tr>
+					<td><strong><?php echo $row['match_name']; ?></strong></td>
+					<td class='zhong line'><span class="red"><?php echo $row['Match_MatchTime']; ?></span><br><span class="zhu"><?php echo $row['match_master']; ?></span>-<span class="ke"><?php echo $row['match_guest']; ?></span></td>
+					<td class='zhong line'> <span class="zhu">
+					<?php if(($row['MB_Inball_HR']<0)): ?>赛事无效<?php else: ?><?php echo $row['MB_Inball_HR']; endif; ?>
+					</span>-<span class="ke">
+					<?php if(($row['TG_Inball_HR']<0)): ?>赛事无效<?php else: ?><?php echo $row['TG_Inball_HR']; endif; ?>
+					</span>
+					</td>
+					<td class='zhong line'> <span class="zhu">
+					<?php if(($row['MB_Inball']<0)): ?>赛事无效<?php else: ?><?php echo $row['MB_Inball']; endif; ?>					
+					</span>-<span class="ke">
+					<?php if(($row['TG_Inball']<0)): ?>赛事无效<?php else: ?><?php echo $row['TG_Inball']; endif; ?>					
+					</span>
+					</td>
+				</tr>
+				<?php endforeach; ?>
+				<!--
+				<tr>
+					<td><strong>越南国家乙组联赛</strong></td>
+					<td class='zhong line'><span class="red">06-23 04:00a</span><br><span class="zhu">槟椥</span>-<span class="ke">隆安II队</span></td>
+					<td class='zhong line'> <span class="zhu">1</span>-<span class="ke">1</span>
+					</td>
+					<td class='zhong line'> <span class="zhu"></span>-<span class="ke"></span>
+					</td>
+				</tr>
+				<tr>
+					<td><strong>越南国家乙组联赛</strong></td>
+					<td class='zhong line'><span class="red">06-23 04:00a</span><br><span class="zhu">曼康斯西贡</span>-<span class="ke">前江</span></td>
+					<td class='zhong line'> <span class="zhu">2</span>-<span class="ke">0</span>
+					</td>
+					<td class='zhong line'> <span class="zhu"></span>-<span class="ke"></span>
+					</td>
+				</tr>
+				<tr>
+					<td><strong>澳洲维多利亚国家超级联赛U20</strong></td>
+					<td class='zhong line'><span class="red">06-23 04:30a</span><br><span class="zhu">墨尔本港鲨鱼U20</span>-<span class="ke">墨尔本骑士U20</span></td>
+					<td class='zhong line'> <span class="zhu">0</span>-<span class="ke">2</span>
+					</td>
+					<td class='zhong line'> <span class="zhu"></span>-<span class="ke"></span>
+					</td>
+				</tr>
+				<tr>
+					<td><strong>越南国家乙组联赛</strong></td>
+					<td class='zhong line'><span class="red">06-23 03:54a</span><br><span class="zhu">槟椥</span>-<span class="ke">隆安II队</span></td>
+					<td class='zhong line'> <span class="zhu">1</span>-<span class="ke">1</span>
+					</td>
+					<td class='zhong line'> <span class="zhu"></span>-<span class="ke"></span>
+					</td>
+				</tr>
+				<tr>
+					<td><strong>越南国家乙组联赛</strong></td>
+					<td class='zhong line'><span class="red">06-23 03:59a</span><br><span class="zhu">曼康斯西贡</span>-<span class="ke">前江</span></td>
+					<td class='zhong line'> <span class="zhu">2</span>-<span class="ke">0</span>
+					</td>
+					<td class='zhong line'> <span class="zhu"></span>-<span class="ke"></span>
+					</td>
+				</tr>
+				<tr>
+					<td><strong>澳洲维多利亚国家超级联赛U20</strong></td>
+					<td class='zhong line'><span class="red">06-23 04:30a</span><br><span class="zhu">墨尔本港鲨鱼U20</span>-<span class="ke">墨尔本骑士U20</span></td>
+					<td class='zhong line'> <span class="zhu">0</span>-<span class="ke">2</span>
+					</td>
+					<td class='zhong line'> <span class="zhu"></span>-<span class="ke"></span>
+					</td>
+				</tr>
+				-->
+			</tbody>
+		</table>
+	</div>
+</div>
+<script src="/assets/jquery.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/footable.min.js"></script>
+<script language="javascript" src="/js/mouse.js"></script>
+<script language="javascript" src="/js/ifsports.js"></script>
+<script type="text/javascript">
+$(function (){
+    $('.table').footable();
+});
+</script>
+</body>
+</html>

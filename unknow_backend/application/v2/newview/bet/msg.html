@@ -1,0 +1,24 @@
+<table width="100%" style="margin:0px;" cellspacing="0" border="0">
+  <tr>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td style="color:#FFFFFF; height:30px;" align="center"><font style="color:#FFFFFF; font-weight:bold"><?=$msg?></font></td>
+  </tr>
+<!--
+  <tr>
+    <td height="24" align="center"><a style="text-decoration:none; color:#FFF; font-size:14px;" href="{:url('sport/left')}">2秒后自动返回交易页</a></td>
+  </tr>
+-->  
+</table>
+<meta content="2;url={:Url('sport/left')}?<?=rand()?>" http-equiv="refresh" />
+<script language="javascript">
+<!--
+if(self==top){
+	top.location='/index.php';
+}
+-->
+</script>
+<!--<script type="text/javascript" language="javascript" src="/js/left_mouse.js"></script>-->
+</body>
+</html>

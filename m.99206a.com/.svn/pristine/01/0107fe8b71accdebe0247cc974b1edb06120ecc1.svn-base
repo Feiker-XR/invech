@@ -1,0 +1,197 @@
+<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:77:"/mnt/wwwroot/www.dd788799.com/houtai/../application/admin/view/main/left.html";i:1514785079;}*/ ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="/css/base.css" rel="stylesheet" type="text/css" />
+<link href="/css/admin.css" rel="stylesheet" type="text/css" />
+<style type="text/css">
+*{margin:0px; padding:0px;}
+body{font-family:"微软雅黑"; width:100%; height:100%;}
+.body dl dt{border-bottom:1px solid #546279; height:38px; line-height:38px; padding:0px; text-align:center; width:178px; margin:0px;}
+.body dl dd{border-bottom:1px solid #546279; height:38px; line-height:38px; font-size:14px; text-align: center; padding:0px; margin:0px; width:178px;}
+dt span.title {padding-left:30px; height:38px; line-height:38px; }
+dt span.sys{background:url(/images/xt.png) left no-repeat;}
+dt span.cw{background:url(/images/cw.png) left no-repeat;}
+dt span.dl{background:url(/images/dl.png) left no-repeat;}
+dt span.hy{background:url(/images/hy.png) left no-repeat;}
+dt span.ty{background:url(/images/ty.png) left no-repeat;}
+dt span.cp{background:url(/images/cp.png) left no-repeat;}
+dt span.zr{background:url(/images/zr.png) left no-repeat;}
+dt span.bb{background:url(/images/bb.png) left no-repeat;}
+dt span.fs{background:url(/images/fs.png) left no-repeat;}
+a{text-decoration:none; color:#FFF; }
+dd a{font-size:14px;}
+</style>
+<script type="text/javascript" src="/js/jquery.js"></script>
+<script type="text/javascript" src="/js/left.js"></script>
+</head>
+<body class="menu">
+	<div class="body" id="left_tab_1">
+			<dl>
+				<dt><span class="sys title" target="mainFrame">系统设置</span></dt>
+				<dd><a href="/config/fengpan/" target="mainFrame">游戏封盘管理</a></dd>
+				<dd><a href="/config/base/" target="mainFrame">系统全局设置</a></dd>
+                <dd><a href="/config/noticle/" target="mainFrame">前台公告管理</a></dd>
+                <dd><a href="/config/aboutus/" target="mainFrame">关于我们设置</a></dd>
+                <!--<dd><a href="/Config/Hot/" target="mainFrame">优惠活动管理</a></dd>-->
+                <dd><a href="/config/pingbi/" target="mainFrame">屏蔽地区设置</a></dd>
+				<dd><a href="/config/pingbi_ip/" target="mainFrame">屏蔽ip设置</a></dd>
+                <dd><a href="/config/manage/" target="mainFrame">后台用户管理</a></dd>
+                <dd><a href="/Config/addmanage/" target="mainFrame">后台用户添加</a></dd>
+				<dd><a href="/config/tycaiji/" target="mainFrame">体育采集设置</a></dd>
+				<dd><a href="/lottery/jilu/" target="mainFrame">管理员操作记录</a></dd>
+				<dd><a href="/zhudan/qianhuifu/" target="mainFrame">每日签到恢复</a></dd>
+				<dd><a href="/lunpanhuifu/clear/" target="mainFrame">每日轮盘恢复</a></dd>
+				<dd><a href="/member/vip_add_money/" target="mainFrame">每月VIP好运金</a></dd>
+				<dd><a href="/config/tanchuang/" target="mainFrame">弹窗管理</a></dd>
+				<dd><a href="/config/mg_addgame/" target="mainFrame">游戏管理</a></dd>
+			</dl>
+	</div>
+
+	<div class="body" id="left_tab_2">
+			<dl>
+				<dt><span class="cw title">财务管理</span></dt>
+				<dd><a href="/money/zhifu_api/" target="mainFrame">在线支付设置</a></dd>
+                <dd><a href="/money/huikuan_api/" target="mainFrame">公司入款设置</a></dd>
+                <dd><a href="/index.php/money/zhifu?status=1&type=1" target="mainFrame">在线支付记录</a></dd>
+                <dd><a href="/money/user/" target="mainFrame">会员赠款扣款</a></dd>
+                <dd><a href="/money/huikuan/" target="mainFrame">公司入款记录</a></dd>
+                <dd><a href="/money/huikuan2/" target="mainFrame">手工公司入款</a></dd>
+                <dd><a href="/money/tikuan/" target="mainFrame">提款申请记录</a></dd>
+
+                <!--<dd><a href="/Money/Trans/">真人额度转换</a></dd>-->
+			</dl>
+	</div>
+
+	<div class="body" id="left_tab_3">
+			<dl>
+				<dt><span class="title hy">会员管理</span></dt>
+				<dd><a href="<?php echo Url('level/index'); ?>" target="mainFrame">会员等级设置</a></dd>
+				<dd><a href="<?php echo Url('msg/index'); ?>" target="mainFrame">会员消息管理</a></dd>
+				<dd><a href="<?php echo Url('user/index'); ?>" target="mainFrame">全部会员列表</a></dd>
+                <dd><a href="/Member/HeCha/" target="mainFrame">会员资金审查</a></dd>
+				<dd><a href="/activity/todaysignin" target="mainFrame">每日签到管理</a></dd>
+				<dd><a href="/activity/todayzhuanpan" target="mainFrame">大转盘抽奖管理</a></dd>
+                <!--<dd><a href="/zhudan/c_bet_search/">异常注单查询</a></dd>-->
+			</dl>
+	</div>
+
+	<div class="body" id="left_tab_4">
+			<dl>
+				<dt><span class="title dl" target="mainFrame">代理管理</span></dt>
+				<dd><a href="/Agent/BiLi/" target="mainFrame">佣金比例设置</a></dd>
+                <dd><a href="/Agent/Reg/" target="mainFrame">代理申请审核</a></dd>
+                <dd><a href="/Agent/JieSuan/" target="mainFrame">代理佣金结算</a></dd>
+			</dl>
+	</div>
+
+	<div class="body" id="left_tab_5">
+			<dl>
+				<dt><span class="title ty" target="mainFrame">体育管理</span></dt>
+				<dd><a href="/Sports/ZuQiu/" target="mainFrame">体育比分管理</a></dd>
+				<dd><a href="/havebet/ZuQiu/" target="mainFrame">有注单足球赛</a></dd>
+				<dd><a href="/havebet/lanqiu/" target="mainFrame">有注单篮球赛</a></dd>
+                <dd><a href="/gunqiudan/index/" target="mainFrame">滚球未审注单</a></dd>
+                <dd><a href="/danshi/index/" target="mainFrame">体育注单列表</a></dd>
+                <dd><a href="/danshi/index/" target="mainFrame">体育结算单式</a></dd>
+                <dd><a href="/chuanjs/index/" target="mainFrame">体育结算串关</a></dd>
+                <dd><a href="/gunqiu/ft/" target="mainFrame">足球滚球隐藏/显示</a></dd>
+                <dd><a href="/gunqiu/bk/" target="mainFrame">篮球滚球隐藏/显示</a></dd>
+			</dl>
+	</div>
+
+	<div class="body" id="left_tab_6">
+			<dl>
+				<dt><span class="title cp">彩票管理</span></dt>
+				<dd><a href="/six/add/" target="mainFrame">六合彩开盘管理</a></dd>
+				<dd><a href="/six/index/" target="mainFrame">六合彩开奖管理</a></dd>
+                <dd><a href="/six/odds/" target="mainFrame">六合彩赔率管理</a></dd>
+                <dd><a href="/six/order/" target="mainFrame">六合彩注单列表</a></dd>
+				
+				<dd><a href="/lottery/csc_auto/" target="mainFrame">彩票开奖管理</a></dd>
+                <dd><a href="/lottery/odds/" target="mainFrame">彩票赔率管理</a></dd>
+                <dd><a href="/lottery/listzhudan/" target="mainFrame">彩票注单列表</a></dd>
+                <!--
+                <dd><a href="/lottery/new_odds/" target="mainFrame">新彩票赔率管理</a></dd>
+                <dd><a href="/lottery/new_order/" target="mainFrame">新彩票注单列表</a></dd>
+                <dd><a href="/lottery/new_order_zh/" target="mainFrame">新彩票追号注单</a></dd>
+                <dd><a href="/lottery/new_order_edit/" target="mainFrame">新彩票注单撤单</a></dd>
+            	-->
+               <!--- <dd><a href="/125yk/1fyk_add/">1分彩预开</a></dd>
+                <dd><a href="/125yk/2fyk_add/">2分彩预开</a></dd>
+                <dd><a href="/125yk/5fyk_add/">5分彩预开</a></dd>--->
+			</dl>
+	</div>
+    
+    <div class="body" id="left_tab_7">
+			<dl>
+				<dt><span class="title zr">真人管理</span></dt>
+				<dd><a href="/lottery/ed_shenhe/" target="mainFrame">异常转换核查</a></dd>
+				<dd><a href="/lottery/my_search/" target="mainFrame">平台余额查询</a></dd>
+				<!--<dd><a href="/lottery/my_search2_old/">(老)真人用户余额</a></dd>--->
+				<dd><a href="/lottery/my_search2/" target="mainFrame">平台额度记录</a></dd>
+				<dd><a href="/live/transfer/" target="mainFrame">用户转换记录</a></dd>
+				<dd><a href="/lottery/zrfs/" target="mainFrame">平台点数查询</a></dd>
+				<dt><span class="title zr" target="mainFrame">投注明细</span></dt>
+				<dd><a href="/lottery/game_betall/" target="mainFrame">输赢明细</a></dd>
+				<dd><a href="/live/aglist/" target="mainFrame">AG投注明细</a></dd>
+				<dd><a href="/live/bbin/" target="mainFrame">BB投注明细</a></dd>
+				<dd><a href="/live/oglist/" target="mainFrame">OG投注明细</a></dd>
+				<dd><a href="/live/mglist/" target="mainFrame">MG投注明细</a></dd>
+				<dd><a href="/live/ptlist/" target="mainFrame">PT投注明细</a></dd>
+			    <!---<dd><a href="/lottery/sunbet_transfer')">申博转账记录</a></dd>
+			    <dd><a href="/lottery/sunbet_history')">申博游戏记录</a></dd>---->
+			</dl>
+	</div>
+    
+    <div class="body" id="left_tab_8">
+			<dl>
+				<dt><span class="bb title">报表管理</span></dt>
+				<dd><a href="/report/quanju/" target="mainFrame">全局报表查看</a></dd>
+                <dd><a href="/report/money/" target="mainFrame">财务报表查看</a></dd>
+                <dd><a href="/report/sport/" target="mainFrame">体育报表查看</a></dd>
+                <dd><a href="/report/lottery/" target="mainFrame">彩票报表查看</a></dd>
+                <dd><a href="/report/newlottery/" target="mainFrame">新彩票报表查看</a></dd>
+                <!--<dd><a href="/Data/Game_Ag/">真人报表查看</a></dd>
+                <dd><a href="/Data/FanShui/">会员反水操作</a></dd>
+                <dd><a href="/Data/FanShui_Bl/">反水比例设置</a></dd>-->
+			</dl>
+	</div>
+    
+    <!--<div class="body" id="left_tab_9">
+			<dl>
+				<dt><span>数据维护</span></dt>
+				<dd><a href="/Tool/Log/">操作日志查看</a></dd>
+                <dd><a href="/Tool/Del/">数据批量删除</a></dd>
+			</dl>
+	</div>-->
+
+	    <div class="body" id="left_tab_9">
+			<dl>
+				<dt><span class="fs title">一键反水</span></dt>
+				<!--<dd><a href="/data/fanshui_old/">(旧)会员反水操作</a></dd>
+                <dd><a href="/data/fanshui/">会员反水操作</a></dd>
+                -->
+                <dd><a href="/data/ty/" target="mainFrame">体育反水操作</a></dd>
+                <dd><a href="/data/tyb/" target="mainFrame">体育(单式)反水操作</a></dd> 
+                <dd><a href="/data/tycg/" target="mainFrame">体育(串关)反水操作</a></dd>            
+                <dd><a href="/data/ag/" target="mainFrame">ag平台反水操作</a></dd>
+                <dd><a href="/data/cp/" target="mainFrame">彩票平台反水操作</a></dd>                
+                <dd><a href="/data/ag/" target="mainFrame">ag平台反水操作</a></dd>
+                <dd><a href="/data/mg/" target="mainFrame">mg平台反水操作</a></dd>
+                <dd><a href="/data/og/" target="mainFrame">og平台反水操作</a></dd>
+                <dd><a href="/data/bb/" target="mainFrame">波音平台反水操作</a></dd>
+                <dd><a href="/data/sb/" target="mainFrame">申博平台反水操作</a></dd>                                                                                            
+                <dd><a href="/data/fanshui_bl/" target="mainFrame">反水比例设置</a></dd>
+			</dl>
+	</div>
+
+<SCRIPT type="text/javascript">
+for(var i=1; i<=9; i++){
+	document.getElementById("left_tab_"+i).style.display='none';
+}
+document.getElementById("left_tab_1").style.display='';
+</script>
+</body>
+</html>

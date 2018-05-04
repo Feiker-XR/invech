@@ -1,0 +1,35 @@
+<?php
+namespace app\common\validate;
+use think\Validate;
+class Pay extends Validate
+{
+    protected $rule = [
+        'name'         => 'require',
+        'type'         => 'require',
+        'set_id'       => 'require',
+        'code'         => 'require',
+        'way_id'       => 'require', 
+        'third_id'     => 'require', 
+        'min'          => 'require|number',
+        'max'          => 'require|number', 
+     ];
+    protected $message = [
+        'name.require'              => '请输入名称',
+        'type.require'              => '请输入类型',
+        'set_id.require'            => '请选择通道分组',
+        'code.require'              => '请输入通道代码',
+        'way_id.require'            => '请输入通道代码',
+        'third_id.require'          => '请输入通道代码',
+        'min.require'               => '',
+        'min.number'                => '请输入通道代码',
+        'max.require'               => '请输入通道代码',
+        'max.number'                => '请输入通道代码',
+     ];
+    protected $scene = [
+        'set'       =>    ['name','type'],
+        'way'       =>    ['name','set_id','code'],
+        'third'     =>    ['name','type'],
+        'channel'   =>    ['set_id','way_id','third_id','code','min','max'],
+
+    ];
+}

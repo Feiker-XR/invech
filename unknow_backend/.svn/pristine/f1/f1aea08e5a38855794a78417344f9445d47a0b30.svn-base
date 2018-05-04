@@ -1,0 +1,91 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>系统设置</title>
+<link href="/css/base.css" rel="stylesheet" type="text/css" />
+<link href="/css/admin.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="/js/jquery.js"></script>
+<script type="text/javascript" src="/js/jquery.tools.js"></script>
+<script type="text/javascript" src="/js/base.js"></script>
+<script language="JavaScript" src="/js/calendar.js"></script>
+</head>
+<body class="list">
+	<div class="bar">真人数据查看</div>
+
+	<div class="body">
+		<form name="form1" method="post" action="{:Url('live/aglist')}">
+			<div class="listBar">
+			    注单号或局号： <input name="billNo" type="text" id="billNo"
+					value="{$billNo}" size="20" /> &nbsp;&nbsp;
+				会员账号： <input name="username" type="text" id="username"
+					value="{$username}" size="15" /> &nbsp;&nbsp;日期范围： <input
+					name="s" type="text" id="s_time" value="{$s}"
+					onClick="new Calendar(2008,2020).show(this);" size="10"
+					maxlength="10" readonly="readonly" /> ~ <input name="e" type="text"
+					id="e_time" value="{$e}"
+					onClick="new Calendar(2008,2020).show(this);" size="10"
+					maxlength="10" readonly="readonly" /> &nbsp;&nbsp;<input
+					name="find" type="submit" id="find" value="查看" class="formButton" />
+
+			</div>
+		</form>
+		<ul id="tab" class="tab">
+			<li><input type="button" value="真人投注详单" hidefocus class="current" /></li>
+		</ul>
+		<table id="listTable" class="listTable">
+			<tr>
+				<th>用户名</th>
+				<th>注单号</th>
+				<th>下注日期</th>
+				<th>玩家下注金额</th>
+				<th>有效投注金额</th>
+				<th>派奖金额</th>
+				<th>游戏名称</th>
+				<th>玩法</th>
+				<th>局号</th>
+				<th>桌号</th>
+				<th>结算状态</th>
+			</tr>
+			{foreach name='list' item='rows' key='k'}
+            <tr>
+                <td align="center"><?=$rows['username']?></td>
+                <td align="center"><?=$rows['billNo']?></td><!-- 注单号 -->
+                <td align="center"><?=$rows['betTime']?></td><!-- 下注时间 -->
+                <td align="center"><?=$rows['betAmount']?></td><!-- 玩家下注金额 -->
+                <td align="center"><font color="blue"><?=$rows['validBetAmount']?></font></td><!--有效投注额  -->
+                <td align="center"><font color="<?=$extral[$k]['moneycolor']?>"><?=$rows['netAmount']?></font></td> <!-- 派彩额度 -->
+                <td align="center"><?=$extral[$k]['gamename']?></td><!-- 游戏名称 -->
+                <td align="center"><font color='<?=$extral[$k]['typecolor']?>'><?=$extral[$k]['playtypename']?></font></td><!-- 玩法 -->
+                <td align="center"><?=$rows['gameCode']?></td>
+                <td align="center"><?=$rows['tableCode']?></td>
+                <td align="center"><?=$flag[$rows['flag']]?></td>  <!-- 结算状态 -->
+                <?php
+                	$result_xj['xjbet1'] += $rows['betAmount'];
+					$result_xj['xjbet'] += $rows['validBetAmount'];
+					$result_xj['xjwin'] += $rows['netAmount'];
+	 
+                ?>
+            </tr>
+            {/foreach}
+            <tr>
+                <td colspan="2"></td>
+                <td  align="center">小计:</td>
+                <td align="center"><?=$result_xj['xjbet1']?></td>
+                <td align="center"><?=$result_xj['xjbet']?></td>
+                <td align="center"><?=$result_xj['xjwin']?></td>
+                <td colspan="5"></td>
+            </tr>
+            <tr>
+                <td colspan="2" ></td>
+                <td align="center">总计:</td>
+                <td align="center"><?=$result_sum['bet1']?></td>
+                <td align="center"><?=$result_sum['bet']?></td>
+                <td align="center"><?=$result_sum['win']?></td>
+                <td colspan="5"></td>
+            </tr>
+</table>
+<div class="pagerBar">{$list->render()}</div>
+	</div>
+</body>
+</html>

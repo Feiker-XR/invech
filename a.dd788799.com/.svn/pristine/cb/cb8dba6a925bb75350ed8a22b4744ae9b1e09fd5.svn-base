@@ -1,0 +1,112 @@
+{layout name="layout" /}
+
+<div class="row">
+  <div class="col-xs-12">
+    <div class="box">
+      <div class="box-header">
+    <button class="btn btn-default pull-left add_config">新增</button>
+
+    <form>
+          <div class="has-feedback pull-right">
+            <button type="submit" class="btn btn-block btn-default btn-sm filter">查询</button>
+          </div>
+
+          <div class="pull-right" style="margin-left:15px;">
+            <input class="form-control input-sm search" value="{$Think.get.keywords}"  name="keywords" id="keywords"  placeholder="名称、标题、值" type="text"  style="width: 250px;">
+          </div> 
+
+        <div class="pull-right" style="margin-left:15px;">
+          <select class="form-control input-sm" name="group" aria-hidden="true">
+            <option value="" >全部分组</option>
+            {foreach($groups as $key => $group)}
+            <option value="{$key}" {if(is_numeric($Think.get.group)&&$Think.get.group==$key)} selected="selected" {/if}>{$group}</option>
+            {/foreach}
+          </select>
+        </div>
+
+     </form>
+
+      </div>
+      <!-- /.box-header -->
+      <div class="box-body table-responsive no-padding">
+        <table class="table table-hover">
+         <tr>
+            <th >#</th>
+            <th >名称</th>
+            <th >分组</th>
+            <th >标题</th>            
+            <th >值</th>
+            <th >操作</th>
+          </tr>
+           {foreach($list as $item)}
+          <tr>
+            <td>{$item->id}</td>
+            <td>{$item->name}</td>
+            <td>{$item->group}</td>
+            <td>{$item->title}</td>
+            <td>{$item->value}</td>
+            <td>
+                  <i  data-id="{$item->id}" class="edit fa fa-pencil"></i>&nbsp;&nbsp;
+                <i  data-id="{$item->id}" class="del fa fa-trash"></i>
+            </td>
+          </tr>
+          {/foreach}
+           </table>
+        {$list->render();}
+      </div>
+      <!-- /.box-body -->
+    </div>
+    <!-- /.box -->
+  </div>
+</div>
+
+<!-- AdminLTE App -->
+<script type="text/javascript">
+$(function(){
+ $(".add_config").click(function(){
+    $.get('/system/config_form.html',{},function(data){
+      layer.open({
+        type: 1,
+        title: '新增系统设置',
+        maxmin: true, //开启最大化最小化按钮
+        area: ['900px', '600px'],
+        content: data
+      });
+    },'html');
+  });
+  
+  $(".edit").click(function(){
+    var id = $(this).attr('data-id');
+    $.get('/system/config_form.html',{id:id},function(data){
+      layer.open({
+        type: 1,
+        title: '修改会员',
+        maxmin: true, //开启最大化最小化按钮
+        area: ['900px', '600px'],
+        content: data
+      });
+    },'html');
+  });
+  $(".del").click(function(){
+    var id = $(this).attr('data-id');
+    layer.confirm('确定删除?', {
+      btn: ['确定','取消'] //按钮
+    }, function(){
+      $.get('/system/config_del',{id:id},function(data){
+        layer.alert(data.msg, {
+              time: 20000,
+              skin: 'layui-layer-molv', //该皮肤由layer.seaning.com友情扩展。关于皮肤的扩展规则，去这里查阅
+              closeBtn: 0,
+              anim: 4
+            }, function(){
+               window.location.href = document.URL;
+            } )
+
+      },'json');
+    }, function(){
+    
+    });
+  });
+});
+
+</script>

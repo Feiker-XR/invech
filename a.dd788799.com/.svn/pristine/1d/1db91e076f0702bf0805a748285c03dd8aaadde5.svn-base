@@ -1,0 +1,15 @@
+<?php
+
+namespace app\events;
+use app\common\model\Data;
+
+class LotteryEvent
+{
+    public $obj;
+    
+    public function __construct(Data $obj)
+    {
+        $this->obj = $obj;
+    }
+
+}

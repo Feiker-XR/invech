@@ -1,0 +1,75 @@
+<div style="border:2px solid #FFDF42; width:155px; background-image:url(images/leftbg01.gif); position:absolute; left: 6px; top: 5px; color:#ffffff">
+	<form id="form1" name="form1" method="post" action="{:url('bet/index')}" style="margin:0 0 0 0;" onsubmit="javascript:document.getElementById('submit').disabled=true;">
+	<table width="155" border="0" align="center" cellspacing="0"  style="color:#ffffff">
+		  <tr>
+			<td colspan="2" align="center" valign="middle" style=" color:#ffffff;padding-left:5px; padding-top:10px; font-size:13px; color:#005481; font-weight:bold;">
+			<?=@$_POST["match_name"][$index]?></td>
+		  </tr>
+		  <tr>
+			<td colspan="2" align="center" valign="middle" style="color:#ffffff;padding-left:5px; padding-top:10px; font-size:13px; color:#007126;">
+				<?=$g_arr[0]?> <span style="color:#FF0000;">VS.</span> <span style="color:#890209;"><?=$g_arr[1]?></span>
+			</td>
+		  </tr>
+		  <tr>
+			<td colspan="2" align="left" valign="middle" style="color:#ffffff;padding-left:10px; padding-top:10px; font-size:13px;">当前<?=$msg?>已改变</td>
+		  </tr>
+		  <tr>
+			<td colspan="2" align="left" valign="middle" style="color:#ffffff;padding-left:10px; font-size:13px">最新<?=$msg?>：<span style="color:#FF0000; font-size:14px;"><?=$type?></span></td>
+		  </tr>
+		  <tr>
+			<td colspan="2" align="left" valign="middle" style="color:#ffffff;padding-left:10px; font-size:13px">是否继续交易？</td>
+		  </tr>
+		  <tr>
+			<td height="47" align="center" valign="middle">
+			  <input type="button" name="Submit2" style="background-image:url(images/button001.gif); color:#FFFFFF; border:0px; width:73px; height:23px; cursor:pointer;" value="取消交易" onclick="goleft();" /></td>
+			<td height="47" align="center" valign="middle"><input type="submit" name="submit" id="submit" style="background-image:url(images/button001.gif);  color:#FFFFFF; border:0px; width:73px; height:23px; cursor:pointer;" value="继续交易" /></td>
+		  </tr>
+		</table>
+		<input type="hidden" name="bet_money" value="<?=$_POST["bet_money"]?>" />
+		<input type="hidden" name="touzhutype" value="1" />
+		<?php
+			$sum	=	count($_POST["match_id"]);
+			for($i=0;$i<$sum;$i++){
+				if($i == $index){
+					$_POST["match_rgg"][$i]		=	$rgg;
+					$_POST["match_dxgg"][$i]	=	$dxgg;
+					$_POST["bet_point"][$i]		=	$pl;
+				}
+	?>
+				<input type="hidden" name="ball_sort[]" value="<?=$_POST["ball_sort"][$i]?>" />
+				<input type="hidden" name="point_column[]" value="<?=$_POST["point_column"][$i]?>" />
+				<input type="hidden" name="match_id[]" value="<?=$_POST["match_id"][$i]?>" />
+				<input type="hidden" name="match_name[]" value="<?=$_POST["match_name"][$i]?>"  />
+				<input type="hidden" name="match_showtype[]" value="<?=$_POST["match_showtype"][$i]?>"  />
+				<input type="hidden" name="match_rgg[]" value="<?=$_POST["match_rgg"][$i]?>" />
+				<input type="hidden" name="match_dxgg[]" value="<?=$_POST["match_dxgg"][$i]?>" />
+				<input type="hidden" name="match_nowscore[]"  value="<?=$_POST["match_nowscore"][$i]?>"  />
+				<input type="hidden" name="match_type[]"  value="<?=$_POST["match_type"][$i]?>"  />
+				<input type="hidden" name="master_guest[]"  value="<?=$_POST["master_guest"][$i]?>"/>
+				<input type="hidden" name="bet_info[]" value="<?=$_POST["bet_info"][$i]?>"/> 
+				<input type="hidden" name="bet_point[]" value="<?=$_POST["bet_point"][$i]?>"/>
+				<input type="hidden" name="match_time[]"  value="<?=$_POST["match_time"][$i]?>"/>
+				<input type="hidden" name="ben_add[]" value="<?=$_POST["ben_add"][$i]?>"/>
+				<input type="hidden" name="match_endtime[]"  value="<?=$_POST["match_endtime"][$i]?>"/>
+				<input type="hidden" name="is_lose"  value="<?=$_POST["is_lose"][$i]?>"/>
+		<?php
+		}
+		?>
+		</form>
+</div>
+	<script language="javascript">
+	<!--
+	if(self==top){
+		top.location='/index.php';
+	}
+	
+	function goleft(){
+		window.location.href="{:Url(sport/left)}";
+	}
+	
+	window.setInterval("goleft()",5000); //5秒未点击，自动退到left.php页面
+	-->
+	</script>
+<script type="text/javascript" language="javascript" src="/js/left_mouse.js"></script>
+</body>
+</html>

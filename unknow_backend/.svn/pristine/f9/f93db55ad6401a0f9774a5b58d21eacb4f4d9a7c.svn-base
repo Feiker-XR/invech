@@ -1,0 +1,303 @@
+{include file="pay:base"}
+
+<!-- page start -->
+<div class="content">
+    <div class="header">        
+        <h1 class="page-title">订单管理</h1>
+    </div>
+    <ul class="breadcrumb">
+        <li><a href="{:url('index')}">主页</a>  <span class="divider">/</span>
+        </li>
+        <li class="active">待处理订单</li>
+    </ul>
+    <div class="container-fluid">
+        <div class="row-fluid">
+              <div class="btn-toolbar" style="height:30px;">	
+
+					<form action="{:url('deal_list')}" method="post" class="form-search pull-right">
+                    <select name="pay_type" id="pay_type" class="span" style="width:140px;">
+						<option value='' selected>支付方式</option>
+						<?php foreach ($setcg as $v){?>
+						<option value='<?php echo $v['code']?>'><?php echo $v['name']?></option>
+						<?php }?>
+					</select>
+                    
+					<select name="pay_api" id="pay_api" class="span" style="width:140px;">
+                       <option value='' selected  >选择支付接口</option>
+                       <?php foreach ($thirdcg as $v){?>
+						<option value='<?php echo $v['name'];?>' ><?php echo $v['name'];?></option>
+						<?php }?>
+					</select>
+ 					  <label style="height:30px;line-height:30px;display: inline-block;vertical-align: middle;" >订单状态：</label>
+					  <select name="order_state" id="order_state" class="search-query" style="width:120px;margin-right:10px;">
+						<option value='all' selected>全部状态</option>
+						<option value='0'>未支付</option>
+						<option value='1'>成功/OK</option>
+					  </select>
+					  
+					  <input type="text" name="keywords" id="keywords"  placeholder="用户名、订单编号" class="search-query">
+					  <button type="submit" class="btn">搜索</button>
+					  
+						<label style="height:30px;line-height:30px;display: inline-block;vertical-align: middle;" >自动刷新：</label>
+					
+						<select ID="auto_refresh" name="auto_refresh" style="width:120px;margin-right:10px;">
+                        <option Value="2" {eq name="Think.session.auto_refresh" value="2"}selected{/eq}>关闭</option>
+						<option Value="1" {eq name="Think.session.auto_refresh" value="1"}selected{/eq}>开启</option>
+						</select>
+						
+						<label style="height:30px;line-height:30px;display: inline-block;vertical-align: middle;" >刷新间隔：</label>
+					
+						<select ID="interval" name="interval" style="width:120px;margin-right:10px;">
+						<option Value="5" >5秒</option>
+						<option Value="10" selected="selected">10秒</option>
+                        <option Value="15" >15秒</option>
+						<option Value="20" >20秒</option>
+						<option Value="30" >30秒</option>
+						<option Value="60" >60秒</option>
+						</select>&nbsp;&nbsp;
+					 
+					</form>
+				</div>				
+				
+				
+					<table class="table table-hover table-bordered">
+					  <thead>
+						<tr>
+                          <th><input type="checkbox" name="all" id="Checkbox2" onclick="switchAll('ids[]')" /> 全选/反选 </th>
+						  <th>#</th>
+						  <th>订单编号</th>
+						  <th>用户名</th>
+						  <th>支付方式</th>
+						  <th>订单金额</th>
+						  <th>订单时间</th>
+						  <th>订单来源</th>
+						  <th>订单状态</th>
+						  <th>处理状态</th>
+						  <th>备注</th>
+						  <th>操作</th>
+						</tr>
+					  </thead>
+                     <form action="" method="post" name='t2' id='t2'  class="form-search pull-right">
+					  <tbody>
+					  <?php 
+					  foreach($result as $item){						  
+					  ?>
+					  <tr>
+                        <th> <input name="ids[]"  class="ids" type="checkbox" value="<?php echo $item['id'];?>" /></th>
+						  <td><?php echo $item['id'];?></td>
+						  <td><?php echo $item['order_id'];?></td>
+						  
+						  <td><?php echo $item['user_name'];?></td>
+						  <td><font color='
+{switch name="item.setid" }
+{case value="1"}red{/case}
+{case value="2"}green{/case}
+{case value="3"}blue{/case}
+{default /}
+{/switch}
+'><?php echo $item['name'];?></font></td>
+						  <td><?php echo $item['order_money'];?></td>
+						  <td><?php echo date('Y-m-d H:i:s',$item['order_time']);?></td>
+						  
+						  <td>
+						  <?php if($item['pay_api']=='worth') :?>
+						  huashi
+						  <?php else:?>
+						  <?php echo $item['pay_api'];?>
+						  <?php endif;?></td>
+						  
+						  <td>
+						  {eq name="item.order_state" value="0"}<font color=blue>未支付</font>{/eq}
+						  {eq name="item.order_state" value="1"}<font color=green>支付成功</font>{/eq}
+						  </td>
+						  <td id="father_state<?php echo $item['id'];?>">  
+{switch name="item.state" }
+{case value="0"}<font>待处理</font>{/case}
+{case value="1"}<font color=green>已确认</font>{/case}
+{case value="2"}<font color=red>已取消</font>{/case}
+{case value="3"}<font color=brown>待确认</font>{/case}
+{case value="5"}<font color=blue>已锁定({$item.lock_id})</font>{/case}
+{default /}
+{/switch}
+						  </td>
+						  <td id="father_desc<?php echo $item['id'];?>"><?php echo $item['order_desc'];?><?php echo $item['order_msg'];?></td>
+						  <td>
+						  <?php 
+						  if($item['state'] == "0"){
+						  ?>
+						  <a title='锁定' onclick="confirmLock('?action=lock&id=<?php echo $item['id'];?>')" href='javascript:;'>锁定</a>
+						  <?php
+						  }
+						  ?>
+						  
+						  <?php 
+						  if($item['state'] == "5"){
+						  ?>
+						  <a title='解锁' onclick="confirmUnLock('?action=unlock&id=<?php echo $item['id'];?>')" href='javascript:;'>解锁</a>&nbsp;|&nbsp;<a title='编辑' data-toggle="modal" data-target="#myModal" href="order_edit.php?action=edit&id=<?php echo $item['id'];?>">更改状态</a>
+						  <?php
+						  }
+						  ?>						  
+						  </td>
+					  </tr>
+					  <?php
+					  }
+					  ?>
+						<tr><td colspan="12"> <input type="button"  id="d2" name='d2' value='批量锁定' /></td></tr>
+						 </form> 
+					  </tbody>
+					</table>				
+				{$datas->render()}				
+            <footer>
+                <hr>
+                <p class="pull-right">
+                    <a href="javascript:;">
+                        <?php echo $appSet[ 'app_name'];?>
+                    </a>
+                </p>
+                <p>&copy;
+                    <?php echo $appSet[ 'company_year'];?>
+                    <a href="<?php echo $appSet['company_url'];?>" title="<?php echo $appSet['company'];?>" target="_blank">
+                        <?php echo $appSet[ 'company'];?>
+                    </a>
+                </p>
+            </footer>
+        </div>
+    </div>
+</div>
+
+
+
+
+<script type="text/javascript">  
+  
+  
+        //复选框选择转换  
+        function switchAll(formvalue) {  
+            var roomids = document.getElementsByName(formvalue);  
+            for (var j = 0; j < roomids.length; j++) {  
+                roomids.item(j).checked = !roomids.item(j).checked;  
+            }  
+        }  
+    </script> 
+
+
+<!-- 弹出model -->
+<div id="myModal" class="modal hide fade in" style="display: none; ">
+<div class="modal-header">
+<a class="close" data-dismiss="modal">×</a>
+<h3>处理订单</h3>
+</div>
+<div class="modal-body"></div>
+</div>
+
+<!-- page end -->
+
+<audio id="music_win" src="zhong.mp3" >你的浏览器不支持audio标签。</audio>
+
+<script type="text/javascript">
+$(function(){
+	//判断
+	$("#d2").click(function(){
+	 
+	   if($("input[name='ids[]']:checked").length <= 0) {
+	     alert('请先选择订单');
+		 return false;
+	   } 
+	   $("#t2").submit();
+});
+	
+	
+	<?php 
+        
+		if($order_state!=""){
+		     echo '$("#order_state option[value=\''.$order_state.'\']").attr("selected", "selected");';  
+	    }
+		if($pay_type!=""){
+		     echo '$("#pay_type option[value=\''.$pay_type.'\']").attr("selected", "selected");';  
+	    }
+		if($pay_api!=""){
+		     echo '$("#pay_api option[value=\''.$pay_api.'\']").attr("selected", "selected");';  
+	    }
+        if(!empty($keywords)){
+             echo '$("#keywords").val("'.$keywords.'");';
+        }
+		
+		if($flag){
+			echo "document.getElementById('music_win').play();";
+		}
+
+		if($lock_ok){
+			echo "alert('锁定成功！');";
+		}
+		if($unlock_ok){
+			echo "alert('解锁成功！');";
+		}				
+		if($confirm_ok){
+			echo "alert('确认成功！');";
+		}		
+		if($all_lock_ok){			
+			echo "alert('锁定成功，共处理了".$tmp."条订单');";
+		}
+		if($all_unlock_ok){			
+			echo "alert('解锁成功，共处理了".$tmp."条订单');";
+		}
+		if($all_confirm_ok){			
+			echo "alert('确认成功，共处理了".$tmp."条订单');";
+		}	
+		
+		echo '$("#interval").val("'.$interval.'");';
+		
+		echo '$("#auto_refresh").val("'.$auto_refresh.'");';
+		
+    ?>
+
+	$("#client-menu").addClass('in');
+	
+	$('#myModal').on('hide.bs.modal', function () {
+		//关闭模态框
+		window.location.href = document.URL;
+	})
+	
+	<?php 
+	if($auto_refresh == '1'){
+	?>
+		setTimeout(refresh,<?php echo $interval*1000;?>);
+		
+	<?php
+	}
+	?>
+	
+	$('#interval').change(function(){
+		var interval = $('#interval').val();
+		window.location.href = '{:url('deal_list')}?act=set1&interval='+interval;
+	})
+		
+	$('#auto_refresh').change(function(){
+		var auto_refresh = $('#auto_refresh').val();
+		window.location.href = '{:url('deal_list')}?act=set2&auto_refresh='+auto_refresh;
+	})
+		
+})
+
+	function refresh(){
+		var auto_refresh = $('#auto_refresh').val();
+		if(auto_refresh == "1"){
+			window.location.href = '{:url('deal_list')}';
+		}
+	}
+</script>
+
+{eq name="warn" value="1"}
+<script src="/layer/layer.js"></script>
+<script type="text/javascript">
+layer.open({
+	  type: 1,
+	  title:'三方支付通道报警',
+	  skin: 'layui-layer-rim', //加上边框
+	  area: ['700px', '500px'], //宽高
+	  content: '<literal>{$warn_content}</literal>'
+});
+</script>
+{/eq}
+
+{include file="pay:foot"}

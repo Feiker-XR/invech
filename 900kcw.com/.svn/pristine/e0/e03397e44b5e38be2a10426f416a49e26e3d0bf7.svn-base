@@ -1,0 +1,84 @@
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport"
+	content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no,minimal-ui">
+<title>{$categoryInfo.name}-{$sys.site_title}</title>
+<meta name="keywords" content="{$sys.site_keywords}" />
+<meta name="distribution" content="{$sys.site_description}" />
+<meta name="format-detection" content="telephone=no" />
+<link rel="stylesheet" href="css/public.css" />
+<link rel="stylesheet" href="css/home.css" />
+<link rel="stylesheet" href="css/banner.css" />
+<script type="text/javascript" src="js/lib/jquery-1.9.1.js"></script>
+<script type="text/javascript" src="js/lib/jquery.event.drag-1.5.min.js"></script>
+<script type="text/javascript" src="js/lib/jquery.touchSlider.js"></script>
+<script type="text/javascript">
+	var publicUrl = "{$sys.site_statistics}/";
+</script>
+
+</head>
+
+<body class="bodybox">
+		<div class="pagediv">
+			<header class="headbox">
+				<div>
+					 <!--list{app="DuxCms" label="formList" table="kefu" limit=10 }-->
+			<img src="{$list.sjlogo}" >
+						<!--{/list}-->
+				</div>
+				<div id="menubtn">
+					<div id="btnimg">
+						<img src="img/menu.png"/>
+					</div>
+				</div>
+			</header>
+			<div class="bannerbox">
+				<div class="main_visual">
+					<div class="flicking_con">
+					</div>
+					<div class="main_image">
+						<ul>
+            <!--list{app="DuxCms" label="formList" table="sjlb" limit=3 order="data_id asc" }-->
+							<a target="_blank" href="">
+								<li>
+									<img src="{$list.tu}" />
+								</li>
+							</a>
+                         <!--{/list}-->
+
+						</ul>
+						
+					</div>
+				</div>
+			</div>
+			<div class="notice">
+            <!--list{app="DuxCms" label="formList" table="gg" limit=1 order="data_id asc" }-->
+				<span id="noticeT">{$list.gg}</span>
+			 <!--{/list}-->
+
+			</div>
+		<!--
+            	时间：2017-01-07
+            	描述：头部开奖
+            -->
+		<div class="aboutBox" id="aboutUs">
+			<div class="aboutContent">
+				<h1
+					style="margin-top: 10px; margin-right: 10px; margin-bottom: 10px; margin-left: 10px; text-indent: 0; padding: 0 0 0 0; text-align: center; line-height: 35px; background: rgb(255, 255, 255)">
+					<strong><span
+						style="letter-spacing: 0px; font-size: 18px; font-family: 微软雅黑;"></span></strong>
+				</h1>
+				{$categoryInfo.content}
+			</div>
+
+		</div>
+
+		<!--#include file="foot.html"-->
+		</div>
+		<script type="text/javascript" src="js/lib/date.js"></script>
+		<script type="text/javascript" src="js/lib/config.js"></script>
+		<script type="text/javascript" src="js/local/tools/tools.js"></script>
+		<script type="text/javascript" src="js/local/public/home.js"></script>
+	</body>
+</html>

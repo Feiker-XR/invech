@@ -1,0 +1,119 @@
+{layout name="layout" /}
+
+<div class="row">
+  <div class="col-xs-12">
+    <div class="box">
+      <div class="box-header">
+<form>
+
+
+    <div class="pull-left" style="margin-left:15px;">
+      <select class="form-control input-sm filterStatus" name="type">
+        <option value="">全部类别</option>
+        {foreach($types as $key=>$type)}
+          <option value="{$key}" {if($Think.get.type == $key)}selected{/if} >{$type}</option>
+        {/foreach}
+      </select>
+    </div>
+
+    <div class="pull-left" style="margin-left:15px;">
+      <select class="form-control input-sm filterStatus" name="is_kqwf">
+        <option value="">全部分类</option>        
+          <option value="0" {if($Think.get.is_kqwf === 0)}selected{/if} >官方玩法</option>
+          <option value="1" {if($Think.get.is_kqwf == 1)}selected{/if} >快钱玩法</option>
+      </select>
+    </div>
+
+    <div class="pull-left" style="margin-left:15px;">
+      <input class="form-control input-sm search" value="{$Think.get.name}" placeholder="请输入玩法名称" type="text" name="name" style="width: 250px;">
+    </div>        
+
+    <div class="has-feedback pull-right">
+      <button type="submit" class="btn btn-block btn-default btn-sm filter">查询</button>                  
+    </div>  
+ </form>
+      </div>
+      <!-- /.box-header -->
+      <div class="box-body table-responsive no-padding">
+        <table class="table table-hover">
+          <tr>
+            <th >ID</th>
+            <th >名称</th>
+            <th >类别</th>
+            <th >分类</th>
+            <th >标签</th>
+            <th >状态</th>            
+            <th >赔率</th>   
+            
+            <th >结算函数</th>
+            <th >随机函数</th>
+            <th >注数检查</th>
+            <th >内容检查</th>
+            <th >玩法模板</th>
+            
+            <th >混合模式</th>   
+            <th >任选模式</th>   
+            
+            <th >操作</th>
+          </tr>
+          {foreach($list as $item)}
+          <tr>
+            <td>{$item->id}</td>
+            <td>{$item->name}</td>
+            <td>{$types[$item->type]}</td>
+            <td>
+              {if($item->is_kqwf == 1)}
+              <span class="btn-success">快钱玩法
+              {else /}
+              <span class="btn-danger">官方玩法
+              {/if}       
+            </td>
+            <td>{$item->tag}</td>      
+            <td>
+              {if($item->enable == 1)}
+              <span class="btn-success">开启
+              {else /}
+              <span class="btn-danger">关闭
+              {/if}              
+            </td>
+            <td>
+              {if($item->is_kqwf == 1)}
+                <a href='{:url('lottery/plgroup',['pid'=>$item->id])}'>查看</a>
+              {else /}
+                {$item->bonusPropBase}-{$item->bonusProp}
+              {/if} 
+            </td>
+
+            <td>{$item->ruleFun}</td> 
+            <td>{$item->randomSscFun}</td> 
+            <td>{$item->betCountFun}</td> 
+            <td>{$item->betCheckFun}</td> 
+            <td>{$item->playedTpl}</td>
+
+            <td>
+              {if($item->is_mix == 1)}
+              <span class="btn-success">是
+              {/if}              
+            </td>
+            <td>
+              {if($item->rx_mode=='tpf')}通配符{/if}
+              {if($item->rx_mode=='wym')}位掩码{/if}
+            </td>
+            <td>编辑</td>
+          </tr>
+          {/foreach}
+        </table>
+        {$list->render()}
+      </div>
+      <!-- /.box-body -->
+    </div>
+    <!-- /.box -->
+  </div>
+</div>
+
+<script type="text/javascript">
+$('.datepicker').datepicker({
+    //startDate: '-3d',
+    format: 'yyyy-mm-dd',
+});
+</script>

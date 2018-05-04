@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>系统设置</title>
+<link href="/css/base.css" rel="stylesheet" type="text/css" />
+<link href="/css/admin.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="/js/jquery.js"></script>
+<script type="text/javascript" src="/js/jquery.tools.js"></script>
+<script type="text/javascript" src="/js/base.js"></script>
+<script language="javascript">
+function check_sub(){
+	var p1 = document.getElementById("password").value;
+	var p2 = document.getElementById("password2").value;
+	if(p1.length < 1){
+ 		alert('请输入密码');
+		document.getElementById("password").focus();
+		return false;
+	}
+ 
+	if(p1 != p2){
+ 		alert("两次密码输入不一致");
+		document.getElementById("password2").select();
+ 		return false;
+	} 
+	
+	return true;
+}
+ </script>
+</head>
+<body class="input">
+	<div class="bar">
+		修改后台用户
+	</div>
+	
+	<div class="body">
+	  <ul id="tab" class="tab">
+			<li>
+				<input type="button" value="修改后台用户" hidefocus class="current"/>
+			</li>
+	  </ul>
+			<form onSubmit="return check_sub();" action="?action=save&id=<?=$sysadmin['uid']?>" method="post" name="form1">
+			<table class="inputTable tabContent">
+				<tr>
+					<th>
+						登录账号: 
+					</th>
+					<td><?=$sysadmin['login_name']?></td>
+				</tr>
+				<tr>
+				  <th>新密码:</th>
+				  <td><input id="password" type="password" name="password" value="" class="formText"/></td>
+			  </tr>
+				<tr>
+				  <th>确认密码:</th>
+				  <td><input id="password2" type="password"  name="password2" value="" class="formText"/></td>
+			  </tr>
+			</table>
+			<div class="buttonArea">
+		      	<input type="submit" class="formButton" value="确  定" hidefocus />&nbsp;&nbsp;
+				<input type="button" class="formButton" onClick="window.location.href='{:Url('main/info')}'" value="返  回" hidefocus />
+		  	</div>
+		</form>
+	</div>
+</body>
+</html>

@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<link rel="stylesheet" href="css/cqnc_video.css" />
+		<script src="js/jquery-2.1.0.js"></script>
+		<script src="js/index.js"></script>
+	</head>
+
+	<body>
+		<div id="videobox">
+			<div class="content">
+				<!--<div class="head">
+					北京快乐8开奖视频
+					<div class="btn">
+						<ul>
+							<li class="closevideo"><i class="iconfont"></i></li>
+							<li class="small">小屏</li>
+							<li class="big">中屏</li>
+						</ul>
+					</div>
+				</div>-->
+				<div class="animate">
+					<div class="cqncAnimate">
+						<div class="bodybg"><img src="picture/bodybg.png" /></div>
+						<div class="loading">
+							<div class="loadtxt">
+								LOADING...
+							</div>
+						</div>
+						<div class="position">
+							<ul>
+								<li class="logo bjkl8_logo"><span></span></li>
+								<li class="issue">
+										<span class="qihao">期号：</span>
+										<span id="issue">838601</span>
+								</li>
+								<li id="cutTime">
+									<span id="hourtxt">00:00:00</span>
+									<div id="opening">开奖中...</div>
+								</li>
+								<li class="kaiTime">
+									<span class="nextKia">下期开奖：</span>
+									<span id="kaiTime">17:00:00</span></li>
+								<li id="soundBth" class="soundsOn"></li>
+								<audio src="sound/kl8bj.mp3" id="audioidBg" loop="loop"></audio>
+								<audio src="sound/kl8.mp3" id="audioidKai" loop="loop"></audio>
+							</ul>
+						</div>
+						<div class="numList">
+							<ul>
+								<li class="codeRed4"></li>
+								<li class="code77"></li>
+								<li class="code24"></li>
+								<li class="code25"></li>
+								<li class="code26"></li>
+								<li class="code27"></li>
+								<li class="code28"></li>
+								<li class="code29"></li>
+								<li class="code30"></li>
+								<li class="code31"></li>
+								<li class="code32"></li>
+								<li class="code33"></li>
+								<li class="code34"></li>
+								<li class="code35"></li>
+								<li class="code36"></li>
+								<li class="code37"></li>
+								<li class="code38"></li>
+								<li class="code39"></li>
+								<li class="code40"></li>
+								<li class="code41"></li>
+								<li class="code20"></li>
+							</ul>
+						</div>
+						<!--默认状态下显示的DIV开奖区界面-->
+						<div class="pipList" id="defaultDiv">
+							<ul class="paUl">
+								<li class="paLi">
+									<ul class="sonUl">
+										<!--<li class="numRed1"></li>
+										<li class="numRed1"></li>
+										<li class="numRed1"></li>
+										<li class="numRed1"></li>
+										<li class="numRed1"></li>-->
+									</ul>
+								</li>
+								<li class="paLi">
+									<ul class="sonUl">
+										<!--<li class="num01"></li>
+										<li class="num01"></li>
+										<li class="num07"></li>
+										<li class="num08"></li>
+										<li class="num07"></li>
+										<li class="num08"></li>-->
+									</ul>
+								</li>
+								<li class="paLi">
+									<ul class="sonUl">
+										
+									</ul>
+								</li>
+								<li class="paLi">
+									<ul class="sonUl">
+										
+									</ul>
+								</li>
+								<li class="paLi">
+									<ul class="sonUl">
+										
+									</ul></li>
+								<li class="paLi">
+									<ul class="sonUl">
+										
+									</ul>
+								</li>
+								<li class="paLi">
+									<ul class="sonUl">
+										
+									</ul>
+								</li>
+								<li class="paLi">
+									<ul class="sonUl">
+										
+									</ul>
+								</li>
+								<li class="paLi">
+									<ul class="sonUl">
+										
+									</ul>
+								</li>
+								<li class="paLi">
+									<ul class="sonUl">
+										
+									</ul>
+								</li>
+								<li class="paLi">
+									<ul class="sonUl">
+										
+									</ul>
+								</li>
+							</ul>
+						</div>
+						<div class="bottomBg">
+							<span class="jzCheck" style="display: none;">开奖中，禁止模拟！</span>
+							<span id="tryBtn">
+								
+							</span>
+						</div>
+						<!--正在开奖中DIV区界面-->
+						<div class="pipListKai" id="kaiDiv">
+							<ul class="paUl">
+								<li class="pipkai">
+									<ul class="sonUl">
+										<!--<li class="num02"></li>
+										<li class="num01"></li>-->
+									</ul>
+								</li>
+								<li class="pipkai">
+									<ul class="sonUl">
+										
+									</ul>
+								</li>
+								<li class="pipkai">
+									<ul class="sonUl">
+										
+									</ul>
+								</li>
+								<li class="pipkai">
+									<ul class="sonUl">
+										
+									</ul>
+								</li>
+								<li class="pipkai">
+									<ul class="sonUl">
+										
+									</ul>
+								</li>
+								<li class="pipkai">
+									<ul class="sonUl">
+										
+									</ul>
+								</li>
+								<li class="pipkai">
+									<ul class="sonUl">
+										
+									</ul>
+								</li>
+								<li class="pipkai">
+									<ul class="sonUl">
+										
+									</ul>
+								</li>
+								<li class="pipkai">
+									<ul class="sonUl">
+										
+									</ul>
+								</li>
+								<li class="pipkai">
+									<ul class="sonUl">
+										
+									</ul>
+								</li>
+								<li class="pipkai">
+									<ul class="sonUl">
+										
+									</ul>
+								</li>
+							</ul>
+							<!--<div class="bottomBg">
+								<span id="tryBtn">
+									
+								</span>
+							</div>-->
+							<!--旋转的十字架-->
+							<div class="crossRotary">
+								<div class="crossL">
+									<img id="crossL"  src="picture/cross.png" alt="" />
+								</div>
+								<div class="crossR">
+									<img id="crossR"  src="picture/cross.png" alt="" />
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+
+</html>

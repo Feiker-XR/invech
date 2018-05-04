@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>系统设置</title>
+<link href="/css/base.css" rel="stylesheet" type="text/css" />
+<link href="/css/admin.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="/js/jquery.js"></script>
+<script type="text/javascript" src="/js/jquery.tools.js"></script>
+<script type="text/javascript" src="/js/base.js"></script>
+<script language="JavaScript" src="/js/datePicker/calendar.js"></script>
+<script language="JavaScript" src="/js/calendar.js"></script>
+</head>
+<body class="list">
+	<div class="bar">
+		真人数据查看
+	</div>
+
+<div class="body">
+<form name="form1" method="get" action="">
+<div class="listBar">  会员账号：
+          <input name="username" type="text" id="username" value="{$Think.get.username??''}" size="15"/>
+            &nbsp;&nbsp;日期范围：
+            <input name="s_time" type="text" id="s_time" value="{$Think.get.s_time??''}" onClick="new Calendar(2008,2020).show(this);" size="10" maxlength="10" readonly="readonly" />
+            ~
+            <input name="e_time" type="text" id="e_time" value="{$Think.get.e_time??''}" onClick="new Calendar(2008,2020).show(this);" size="10" maxlength="10" readonly="readonly" />
+            &nbsp;&nbsp;<input name="find" type="submit" id="find" value="查看" class="formButton"/>
+
+	</div>
+</form>
+<ul id="tab" class="tab">
+                <li><input type="button" value="真人总投注查看" hidefocus class="current"/></li>
+			</ul>
+<table id="listTables" class="listTables">
+       <tr>
+            <th>AG总投注</th><th>AG总派彩</th><th>BB投注</th><th>BB总派彩</th>
+            <th>OG总投注</th><th>OG总派彩</th><th>MG投注</th><th>MG总派彩</th>
+            <th>PT投注</th><th>PT总派彩</th>
+       </tr>
+       <tr>
+          <td align="center"><a href="">{$agtz|round=2}</a></td>
+          <td align="center">{$agpc|round=2}</td>
+          <td align="center"><a href=""></a>{$bbtz|round=2}</td>
+          <td align="center">{$bbpc|round=2}</td>
+          <td align="center"><a href=""></a>{$ogtz|round=2}</td>
+          <td align="center">{$ogpc|round=2}</td>
+          <td align="center"><a href=""></a>{$mgtz|round=2}</td>
+          <td align="center">{$mgpc|round=2}</td>
+          <td align="center"><a href=""></a>{$pttz|round=2}</td>
+          <td align="center">{$ptpc|round=2}</td>  
+        </tr>
+  </table>
+
+  </div>
+
+  
+</body>
+</html>

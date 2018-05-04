@@ -1,0 +1,142 @@
+{extend name="public/user_head"/}
+{block name="body"}
+<header class="header">
+    <i class='left' onclick="javascript:history.back(-1);">返回</i>
+    <h1>投注记录</h1>
+</header>
+<style type="text/css">
+    ul.condition li:last-child span{
+        float: left;
+    }
+</style>
+<main class="inner_body">
+    <section class="fund_detail">
+         <ul class="condition">
+          <li>
+                <span>彩种筛选：</span>
+                <select id="_type" class="left">
+                    <option value="">所有类别</option>
+                    {foreach $type as $v}
+                        <option value="{$v.id}">{$v.title}</option>
+                    {/foreach}
+                </select>
+            </li>
+            <li><span>提现时间：</span><input type="date" value="" id="_date"/></li>
+        </ul>
+    </section>
+    <section class="table">
+       <table>
+            <thead>
+                <tr>
+                    <th>日期</th>
+                    <th>彩种</th>
+                    <th>玩法</th>
+                    <th>投注金额</th>
+                    <th>盈亏</th>
+               </tr>
+            </thead>
+            <tbody id="lists">
+                {if(!$list['list']->isEmpty())}
+                    {foreach $list['list'] as $v}
+                        <tr>
+                            <td>{$v->created_at}</td>
+                            <td>{$v->types->title}</td>
+                            <td>{$v->played->name}</td>
+                            <td>{$v->actionNum*$v->mode*$v->beiShu}</td>
+                            {if(!empty($v->lotteryNo))}
+                               {if($v->cha>0)}
+                                    <td><span style="color:red">{$v->cha}</span></td> 
+                                {else}
+                                    <td><span style="color:green">{$v->cha}</span></td>
+                                {/if}
+                            {else}
+                               <td><span style="color:green">未开奖</span></td>
+                            {/if}
+                           
+                        </tr>
+                    {/foreach}
+                {else}
+                    <tr><td colspan="5" styl="text-align:center;">暂无数据</td></tr>
+                {/if}
+            </tbody>
+        </table>
+    </section>
+    <div class="dropload-down"><div class="dropload-noData"></div></div>
+</main>
+<script type="text/javascript">
+    mui.init({
+        pullRefresh: {
+            container: '.inner_body',
+            up: {
+                contentrefresh: '正在加载...',
+                contentnomore:'没有更多数据了',
+                callback: pullupRefresh
+            }
+        }
+    });
+    var count = 0;
+    var page = 1;
+    /**
+     * 上拉加载具体业务实现
+     */
+    function pullupRefresh() {
+        setTimeout(function() {
+            page++;
+            var stime = $('#_date').val();
+            var type  = $('#_type').val();
+            mui.ajax('/user/bet_record?page='+page+'&startTime='+stime+'&type='+type,{
+                dataType:'json',//服务器返回json格式数据
+                type:'POST',//HTTP请求类型
+                timeout:10000,//超时时间设置为10秒；
+                headers:{'Content-Type':'application/json'},                  
+                success:function(data){
+                    var html = data.data;
+                    if(html){
+                        $('#lists').append(html);
+                        mui('.inner_body').pullRefresh().endPullupToRefresh(false);
+                    }else{
+                        mui('.inner_body').pullRefresh().endPullupToRefresh(true);
+                    }
+                },
+                error:function(xhr,type,errorThrown){
+                    //异常处理；
+                    console.log(type);
+                }
+            });
+    
+        }, 1500);
+    }
+
+    $('#_date').change(function(){
+        getChange();
+    });
+    $('#_type').change(function(){
+        getChange();
+    });
+    function getChange(){
+        var stime = $("#_date").val();
+        var type  = $('#_type').val();
+        mui.ajax('/user/bet_record?startTime='+stime+'&type='+type,{
+            dataType:'json',//服务器返回json格式数据
+            type:'POST',//HTTP请求类型
+            timeout:10000,//超时时间设置为10秒；
+            headers:{'Content-Type':'application/json'},                  
+            success:function(data){
+                var html = data.data;
+                var len  = (html.split("tr").length-1)/2;
+                if(html){
+                    if(len<15){
+                        mui('.table').pullRefresh().disablePullupToRefresh();
+                    }
+                    $('#lists').html(html);
+                }else{
+                     $('#lists').html('<tr><td colspan="5" styl="text-align:center;">暂无数据</td></tr>');
+                }
+                
+              
+            },
+        });
+    }
+   
+</script>
+{/block}

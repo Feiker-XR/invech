@@ -1,0 +1,146 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>系统设置</title>
+<link href="/css/base.css" rel="stylesheet" type="text/css" />
+<link href="/css/admin.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="/js/jquery.js"></script>
+<script type="text/javascript" src="/js/jquery.tools.js"></script>
+<script type="text/javascript" src="/js/base.js"></script>
+</head>
+<body class="input">
+	<div class="bar">
+		会员资料修改
+	</div>
+	
+
+<div class="body">
+<ul id="tab" class="tab">
+				<li>
+					<input type="button" value="会员修改" class="current" hidefocus />
+				</li>
+  </ul>
+<form action="{:url('user/save')}" method="post" name="form1" id="form1">
+<table class="inputTable tabContent">
+	<tr>
+    <th>用户名：</th>
+    <td>{$info['username']}</td>
+  </tr>
+  <tr>
+    <th>登录密码：</th>
+    <td><input name="pass" class="formText">
+    <font color="#FF0000">*不修改请留空</font></td>
+  </tr>
+  <tr>
+    <th>取款密码：</th>
+    <td><input name="pass1" class="formText">
+    <font color="#FF0000">*不修改请留空</font></td>
+  </tr>
+  <tr>
+    <th>账户余额：</th>
+    <td>{$info['money']}</td>
+  </tr>
+  <tr>
+    <th>注册所在地：</th>
+    <td>{$info['reg_address']}</td>
+  </tr>
+  <tr>
+    <th>密码问答：</th>
+    <td>
+      <select name="ask" id="ask">
+        <option value="" >---请选择密码问题---</option>
+        {volist id="list" name="questions"}
+        	<option value="{$list.id}" {if $info.ask eq $list.id}selected{/if}>{$list.question}</option>
+        {/volist}
+      </select>
+    </td>
+  </tr>
+  <tr>
+    <th>密码答案：</th>
+    <td><input type="text" name="answer" id="answer" value="{$info['answer']}" class="formText"></td>
+  </tr>
+    <tr>
+    <th>上级代理ID：</th>
+    <td><input type="text" name="top_uid" value="{$info['top_uid']}" class="formText"></td>
+  </tr>
+  <tr>
+    <th>手机号码：</th>
+    <td><input type="text" name="mobile" value="{$info['mobile']}" class="formText"></td>
+  </tr>
+  
+  <tr>
+    <th>QQ号码：</th>
+    <td><input type="text" name="qq" value="{$info['qq']}" class="formText"></td>
+  </tr>
+  
+  <tr>
+    <th>email：</th>
+    <td><input type="text" name="email" value="{$info['email']}" class="formText"></td>
+  </tr>
+  <tr>
+    <th>真实姓名：</th>
+    <td>{$info['pay_name']}<input type="hidden" name="pay_name" value="{$info['pay_name']}"></td>
+  </tr>
+  <tr>
+    <th>开户行：</th>
+    <td><input type="text" name="pay_card" value="{$info['pay_card']}" class="formText"></td>
+  </tr>
+  <tr>
+    <th>卡号：</th>
+    <td>
+	    <input type="text" name="pay_num" value="{$info['pay_num']}" class="formText">
+	    <input name="hf_pay_num" type="hidden" id="hf_pay_num" value="{$info['pay_num']}">
+    </td>
+  </tr>
+    <tr>
+    <th>开户地址：</th>
+    <td>
+    	<input type="text" name="pay_address" value="{$info['pay_address']}" class="formText">
+    	<input type="hidden" name="uid" id="uid" value="{$info['uid']}">
+    </td>
+  </tr>
+    <tr>
+    <th>所属会员组：</th>
+    <td><label>
+      <select name="gid" id="gid">
+      	{volist id="groups" name="groups"}
+      	<option value="{$groups.id}" {if $info['gid'] eq $groups.id}selected{/if}>{$groups.name}</option>
+      	{/volist}
+      </select>
+    </label></td>
+  </tr>
+  <tr>
+    <th>注册时间：</th>
+    <td>{$info['reg_date']}</td>
+  </tr>
+  <tr>
+    <th>注册IP：</th>
+    <td>{$info['reg_ip']}</td>
+  </tr>
+   <tr>
+    <th>最后登录时间：</th>
+    <td>{$info['login_time']}</td>
+  </tr>
+   <tr>
+     <th>最后登录IP：</th>
+     <td>{$info['login_ip']}</td>
+   </tr>
+   <tr>
+     <th>总登录次数：</th>
+     <td>{$info['lognum']}</td>
+   </tr>
+  <tr>
+    <th>备注：</th>
+    <td><textarea name="why" cols="80" rows="5" id="why" class="formTextarea">{$info['why']}</textarea></td>
+  </tr>
+  </table>
+  <div class="buttonArea">
+                <input name="Submit" type="submit" class="formButton" value="确认修改">
+				<input type="button" class="formButton" onClick="window.location.href='{:Url('user/index')}'" value="返  回" hidefocus />
+    </div>
+</form>
+	</div>
+</body>
+</html>

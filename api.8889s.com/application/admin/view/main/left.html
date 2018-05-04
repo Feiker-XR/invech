@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="/css/base.css" rel="stylesheet" type="text/css" />
+<link href="/css/admin.css" rel="stylesheet" type="text/css" />
+<style type="text/css">
+*{margin:0px; padding:0px;}
+body{font-family:"微软雅黑"; width:100%; height:100%;}
+.body dl dt{border-bottom:1px solid #546279; height:38px; line-height:38px; padding:0px; text-align:center; width:178px; margin:0px;}
+.body dl dd{border-bottom:1px solid #546279; height:38px; line-height:38px; font-size:14px; text-align: center; padding:0px; margin:0px; width:178px;}
+dt span.title {padding-left:30px; height:38px; line-height:38px; }
+dt span.sys{background:url(/images/xt.png) left no-repeat;}
+dt span.cw{background:url(/images/cw.png) left no-repeat;}
+dt span.dl{background:url(/images/dl.png) left no-repeat;}
+dt span.hy{background:url(/images/hy.png) left no-repeat;}
+dt span.ty{background:url(/images/ty.png) left no-repeat;}
+dt span.cp{background:url(/images/cp.png) left no-repeat;}
+dt span.zr{background:url(/images/zr.png) left no-repeat;}
+dt span.bb{background:url(/images/bb.png) left no-repeat;}
+dt span.fs{background:url(/images/fs.png) left no-repeat;}
+a{text-decoration:none; color:#FFF; }
+dd a{font-size:14px;}
+</style>
+<script type="text/javascript" src="/js/jquery.js"></script>
+<script type="text/javascript" src="/js/left.js"></script>
+</head>
+<body class="menu">
+	<div class="body" id="left_tab_1">
+			<dl>
+				<dt><span class="sys title">系统设置</span></dt>
+				<dd><a href="javascript:Url('config','fengpan');">游戏封盘管理</a></dd>
+				<dd><a href="javascript:Url('config','base');">系统全局设置</a></dd>
+                <dd><a href="javascript:Url('config','noticle');">前台公告管理</a></dd>
+                <dd><a href="javascript:Url('config','aboutus');">关于我们设置</a></dd>
+                <!--<dd><a href="javascript:Url('Config','Hot');">优惠活动管理</a></dd>-->
+                <dd><a href="javascript:Url('config','pingbi');">屏蔽地区设置</a></dd>
+				<dd><a href="javascript:Url('config','pingbi_ip');">屏蔽ip设置</a></dd>
+                <dd><a href="javascript:Url('config','manage');">后台用户管理</a></dd>
+                <dd><a href="javascript:Url('Config','addmanage');">后台用户添加</a></dd>
+				<dd><a href="javascript:Url('config','tycaiji');">体育采集设置</a></dd>
+				<dd><a href="javascript:Url('lottery','jilu');">管理员操作记录</a></dd>
+				<dd><a href="javascript:Url('zhudan','qianhuifu');">每日签到恢复</a></dd>
+				<dd><a href="javascript:Url('lunpanhuifu','clear');">每日轮盘恢复</a></dd>
+				<dd><a href="javascript:Url('member','vip_add_money');">每月VIP好运金</a></dd>
+				<dd><a href="javascript:Url('config','tanchuang');">弹窗管理</a></dd>
+				<dd><a href="javascript:Url('config','mg_addgame');">游戏管理</a></dd>
+			</dl>
+	</div>
+
+	<div class="body" id="left_tab_2">
+			<dl>
+				<dt><span class="cw title">财务管理</span></dt>
+				<dd><a href="javascript:Url('money','zhifu_api');">在线支付设置</a></dd>
+                <dd><a href="javascript:Url('money','huikuan_api');">公司入款设置</a></dd>
+                <dd><a href="/index.php/money/zhifu?status=1&type=1" target="mainFrame">在线支付记录</a></dd>
+                <dd><a href="javascript:Url('money','user');">会员赠款扣款</a></dd>
+                <dd><a href="javascript:Url('money','huikuan');">公司入款记录</a></dd>
+                <dd><a href="javascript:Url('money','huikuan2');">手工公司入款</a></dd>
+                <dd><a href="javascript:Url('money','tikuan');">提款申请记录</a></dd>
+
+                <!--<dd><a href="javascript:Url('Money','Trans');">真人额度转换</a></dd>-->
+			</dl>
+	</div>
+
+	<div class="body" id="left_tab_3">
+			<dl>
+				<dt><span class="title hy">会员管理</span></dt>
+				<dd><a href="{:Url('level/index')}" target="mainFrame">会员等级设置</a></dd>
+				<dd><a href="{:Url('msg/index')}" target="mainFrame">会员消息管理</a></dd>
+				<dd><a href="{:Url('user/index')}" target="mainFrame">全部会员列表</a></dd>
+                <dd><a href="javascript:Url('Member','HeCha');">会员资金审查</a></dd>
+				<dd><a href="javascript:Url('activty','todaysignin')">每日签到管理</a></dd>
+				<dd><a href="javascript:Url('activty','todayzhuanpan')">大转盘抽奖管理</a></dd>
+                <!--<dd><a href="javascript:Url('zhudan','c_bet_search');">异常注单查询</a></dd>-->
+			</dl>
+	</div>
+
+	<div class="body" id="left_tab_4">
+			<dl>
+				<dt><span class="title dl">代理管理</span></dt>
+				<dd><a href="javascript:Url('Agent','BiLi');">佣金比例设置</a></dd>
+                <dd><a href="javascript:Url('Agent','Reg');">代理申请审核</a></dd>
+                <dd><a href="javascript:Url('Agent','JieSuan');">代理佣金结算</a></dd>
+			</dl>
+	</div>
+
+	<div class="body" id="left_tab_5">
+			<dl>
+				<dt><span class="title ty">体育管理</span></dt>
+				<dd><a href="javascript:Url('Sports','ZuQiu');">体育比分管理</a></dd>
+				<dd><a href="javascript:Url('havebet','ZuQiu');">有注单足球赛</a></dd>
+				<dd><a href="javascript:Url('havebet','lanqiu');">有注单篮球赛</a></dd>
+                <dd><a href="javascript:Url('gunqiudan','index');">滚球未审注单</a></dd>
+                <dd><a href="javascript:Url('danshi','index');">体育注单列表</a></dd>
+                <dd><a href="javascript:Url('danshi','index');">体育结算单式</a></dd>
+                <dd><a href="javascript:Url('chuanjs','index');">体育结算串关</a></dd>
+                <dd><a href="javascript:Url('gunqiu','ft');">足球滚球隐藏/显示</a></dd>
+                <dd><a href="javascript:Url('gunqiu','bk');">篮球滚球隐藏/显示</a></dd>
+			</dl>
+	</div>
+
+	<div class="body" id="left_tab_6">
+			<dl>
+				<dt><span class="title cp">彩票管理</span></dt>
+
+				<dd><a href="javascript:Url('six','index');">六合彩开奖管理</a></dd>
+                <dd><a href="javascript:Url('six','odds');">六合彩赔率管理</a></dd>
+                <dd><a href="javascript:Url('six','order');">六合彩注单列表</a></dd>
+				<dd><a href="javascript:Url('lottery','csc_auto');">时时彩开奖管理</a></dd>
+                <dd><a href="javascript:Url('lottery','odds');">时时彩赔率管理</a></dd>
+                <dd><a href="javascript:Url('lottery','listzhudan');">时时彩注单列表</a></dd>
+                <dd><a href="javascript:Url('lottery','new_odds');">新彩票赔率管理</a></dd>
+                <dd><a href="javascript:Url('lottery','new_order');">新彩票注单列表</a></dd>
+                <dd><a href="javascript:Url('lottery','new_order_zh');">新彩票追号注单</a></dd>
+                <dd><a href="javascript:Url('lottery','new_order_edit');">新彩票注单撤单</a></dd>
+               <!--- <dd><a href="javascript:Url('125yk','1fyk_add');">1分彩预开</a></dd>
+                <dd><a href="javascript:Url('125yk','2fyk_add');">2分彩预开</a></dd>
+                <dd><a href="javascript:Url('125yk','5fyk_add');">5分彩预开</a></dd>--->
+			</dl>
+	</div>
+    
+    <div class="body" id="left_tab_7">
+			<dl>
+				<dt><span class="title zr">真人管理</span></dt>
+				<dd><a href="javascript:Url('lottery','ed_shenhe');">异常转换核查</a></dd>
+				<dd><a href="javascript:Url('lottery','my_search2');">平台余额查询</a></dd>
+				<!--<dd><a href="javascript:Url('lottery','my_search2_old');">(老)真人用户余额</a></dd>--->
+				<!--<dd><a href="javascript:Url('lottery','my_search2');">平台额度记录</a></dd>--->
+				<dd><a href="javascript:Url('live','transfer');">用户转换记录</a></dd>
+				<dd><a href="javascript:Url('lottery','zrfs');">平台点数查询</a></dd>
+				<dt><span class="title zr">投注明细</span></dt>
+				<dd><a href="javascript:Url('lottery','game_betall');">输赢明细</a></dd>
+				<dd><a href="javascript:Url('live','aglist');">AG投注明细</a></dd>
+				<dd><a href="javascript:Url('live','bbin');">BB投注明细</a></dd>
+				<dd><a href="javascript:Url('live','oglist');">OG投注明细</a></dd>
+				<dd><a href="javascript:Url('live','mglist');">MG投注明细</a></dd>
+				<dd><a href="javascript:Url('live','ptlist');">PT投注明细</a></dd>
+			    <!---<dd><a href="javascript:Url('lottery','sunbet_transfer')">申博转账记录</a></dd>
+			    <dd><a href="javascript:Url('lottery','sunbet_history')">申博游戏记录</a></dd>---->
+			</dl>
+	</div>
+    
+    <div class="body" id="left_tab_8">
+			<dl>
+				<dt><span class="bb title">报表管理</span></dt>
+				<dd><a href="javascript:Url('report','quanju');">全局报表查看</a></dd>
+                <dd><a href="javascript:Url('report','money');">财务报表查看</a></dd>
+                <dd><a href="javascript:Url('report','sport');">体育报表查看</a></dd>
+                <dd><a href="javascript:Url('report','lottery');">彩票报表查看</a></dd>
+                <dd><a href="javascript:Url('report','newlottery');">新彩票报表查看</a></dd>
+                <!--<dd><a href="javascript:Url('Data','Game_Ag');">真人报表查看</a></dd>
+                <dd><a href="javascript:Url('Data','FanShui');">会员反水操作</a></dd>
+                <dd><a href="javascript:Url('Data','FanShui_Bl');">反水比例设置</a></dd>-->
+			</dl>
+	</div>
+    
+    <!--<div class="body" id="left_tab_9">
+			<dl>
+				<dt><span>数据维护</span></dt>
+				<dd><a href="javascript:Url('Tool','Log');">操作日志查看</a></dd>
+                <dd><a href="javascript:Url('Tool','Del');">数据批量删除</a></dd>
+			</dl>
+	</div>-->
+
+	    <div class="body" id="left_tab_9">
+			<dl>
+				<dt><span class="fs title">一键反水</span></dt>
+				<!--<dd><a href="javascript:Url('data','fanshui_old');">(旧)会员反水操作</a></dd>
+                <dd><a href="javascript:Url('data','fanshui');">会员反水操作</a></dd>
+                -->
+                <dd><a href="javascript:Url('data','ty');">体育反水操作</a></dd>
+                <dd><a href="javascript:Url('data','tyb');">体育(单式)反水操作</a></dd> 
+                <dd><a href="javascript:Url('data','tycg');">体育(串关)反水操作</a></dd>            
+                <dd><a href="javascript:Url('data','ag');">ag平台反水操作</a></dd>
+                <dd><a href="javascript:Url('data','cp');">彩票平台反水操作</a></dd>                
+                <dd><a href="javascript:Url('data','ag');">ag平台反水操作</a></dd>
+                <dd><a href="javascript:Url('data','mg');">mg平台反水操作</a></dd>
+                <dd><a href="javascript:Url('data','og');">og平台反水操作</a></dd>
+                <dd><a href="javascript:Url('data','bb');">波音平台反水操作</a></dd>
+                <dd><a href="javascript:Url('data','sb');">申博平台反水操作</a></dd>                                                                                            
+                <dd><a href="javascript:Url('data','fanshui_bl');">反水比例设置</a></dd>
+			</dl>
+	</div>
+
+<SCRIPT type="text/javascript">
+for(var i=1; i<=9; i++){
+	document.getElementById("left_tab_"+i).style.display='none';
+}
+document.getElementById("left_tab_1").style.display='';
+</script>
+</body>
+</html>

@@ -1,0 +1,123 @@
+<?php
+//
+// _oo8oo_
+// o8888888o
+// 88" . "88
+// (| -_- |)
+// 0\ = /0
+// ___/'==='\___
+// .' \\| |// '.
+// / \\||| : |||// \
+// / _||||| -:- |||||_ \
+// | | \\\ - /// | |
+// | \_| ''\---/'' |_/ |
+// \ .-\__ '-' __/-. /
+// ___'. .' /--.--\ '. .'___
+// ."" '< '.___\_<|>_/___.' >' "".
+// | | : `- \`.:`\ _ /`:.`/ -` : | |
+// \ \ `-. \_ __\ /__ _/ .-` / /
+// =====`-.____`.___ \_____/ ___.`____.-`=====
+// `=---=`
+//
+//
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+//
+// 佛祖保佑 永不宕机/永无bug
+// +----------------------------------------------------------------------
+// | FileName: Getlivedata.php
+// +----------------------------------------------------------------------
+// | CreateDate: 2018年4月8日
+// +----------------------------------------------------------------------
+// | Author: xiaoluo
+// +----------------------------------------------------------------------
+namespace app\command;
+
+use think\console\Command;
+use think\console\Input;
+use think\console\Output;
+
+class Getlivedata extends Command
+{
+
+    protected function configure()
+    {
+        $this->setName('getlivedata')
+            ->setDescription('获取真人注单')
+            ->addArgument('gametype')
+            ->addArgument('begin')
+            ->addArgument('end');
+    }
+
+    protected function execute(Input $input, Output $output)
+    {
+        // 停机重启的情况
+        // 体育的注单
+        // 彩票的注单修改时间不一样
+        $args = $input->getArguments();
+        $gametype = $args['gametype'];
+        switch ($gametype) {
+            case 'bbdz':
+                $this->getBbindz($args);
+        }
+    }
+
+    protected function getAg()
+    {}
+
+    protected function getBbindz($args)
+    {
+        $bbin = Db('bbin_gameresult', 'mongo');
+        $begin = $args['begin'] ?? date('Y-m-d H:i:s', time() - 60);
+        $end = $args['end'] ?? date('Y-m-d H:i:s');
+        //while (1) {
+            $where['WagersDate'] = ['between',[$begin,$end]];
+            $where['suffix'] = 'hga';
+            /*$where['GameType'] = [
+                'in',
+                $gamecode
+            ];*/
+            $data = $bbin->where($where)->order('WagersDate',1)->select();
+            echo count($data);
+            $insertData = [];
+            $tmp = [];
+            foreach ($data as $k => $v) {
+                $str2 = substr($v['UserName'], 0, 2);
+                if ($str2 == 'jp') {
+                    $tmp['username'] = substr($v['UserName'], 2);
+                } else {
+                    $tmp['username'] = $v['UserName'];
+                }
+                $tmp['order_id'] = $v['WagersID'];
+                $tmp['platform'] = 'bbin';
+                $tmp['gamecode'] = $v['GameType'];
+                $tmp['betAmount'] = $v['BetAmount'];
+                if(!isset($v['Commissionable'])){
+                    if($v['Result'] == 'W' || $v['Result'] == 'L' ){
+                        $tmp['validBetAmount'] = $v['BetAmount'];
+                        $tmp['isFs'] = 1;
+                        $tmp['fsRate'] = 0;
+                        $tmp['fsMoney'] = 0;
+                    }
+                }else{
+                    $tmp['validBetAmount'] = $v['Commissionable'];
+                }
+                //$tmp['validBetAmount'] = isset($v['Commissionable']) ? $v['Commissionable']: 0;
+                $tmp['betTime'] = $v['WagersDate'];
+                $tmp['payOff'] = $v['Payoff'];
+                Db('live_data')->insert($tmp);
+                $tmp = [];
+            }
+            
+            sleep(10);
+        //}
+    }
+
+    protected function getMg()
+    {}
+
+    protected function getOg()
+    {}
+
+    protected function getPt()
+    {}
+}

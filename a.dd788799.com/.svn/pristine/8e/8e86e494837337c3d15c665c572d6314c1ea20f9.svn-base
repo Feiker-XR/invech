@@ -1,0 +1,121 @@
+{layout name="layout" /}
+
+<div class="row">
+  <div class="col-xs-12">
+    <div class="box">
+      <div class="box-header">
+
+
+<form>
+              <div class="pull-left" style="margin-left:15px;">
+                <select class="form-control input-sm filterStatus" name="direct">
+                  <option value="">全部状态</option>
+                  <option value="0">收入</option>
+                  <option value="1">支出</option>
+                </select>
+              </div>
+
+              <div class="pull-left" style="margin-left:15px;">
+                <select class="form-control input-sm filterStatus" name="type">
+                  <option value="">全部类型</option>
+                  <option value="recharge">充值会员</option>
+                  <option value="withdraw">充值取款</option>
+                  <option value="tranfer">充值转账</option>
+                  <option value="back_water">充值反水</option>
+                  <option value="bonus">红利</option>                                                                        
+                </select>
+              </div>
+
+              <div class="pull-left" style="margin-left:15px;">
+                <input class="form-control input-sm search" value="" placeholder="请输入用户昵称" type="text" name="nickname" style="width: 250px;"> 
+              </div>        
+
+              <div class="pull-left" style="margin-left:15px;">
+                <input class="datepicker" data-date-format="yyyy-mm-dd" value="" name="sdate">
+              </div> 
+              <div class="pull-left" style="margin-left:15px;">
+                ~
+              </div> 
+              <div class="pull-left" style="margin-left:15px;">
+                <input class="datepicker" data-date-format="yyyy-mm-dd" value="" name="edate">
+              </div>               
+
+              <div class="has-feedback pull-right">
+                <button type="submit" class="btn btn-block btn-default btn-sm filter">查询</button>                  
+              </div>  
+ </form>
+
+      </div>
+      <!-- /.box-header -->
+      <div class="box-body table-responsive no-padding">
+        <table class="table table-hover">
+          <tbody><tr>
+            <th>用户ID</th>
+            <th>用户昵称</th>
+            <th>流水金额</th>            
+            <th>之前金额</th>
+            <th>之后金额</th>
+            <th>收支类型</th>
+            <th>资金类型</th>
+            <th>备注</th>
+          </tr>
+                    <tr>
+            <td>2</td>
+            <td></td>
+            <td>0.62</td>
+            <td>0.00</td>
+            <td>0.62</td>
+            <td>
+                            <span class="btn-danger">收入
+                          </span></td>
+            <td>
+                                                            会员红利            </td>
+            <td>投注返水</td>
+          </tr>
+                    <tr>
+            <td>1</td>
+            <td>leon</td>
+            <td>0.62</td>
+            <td>101.52</td>
+            <td>102.14</td>
+            <td>
+                            <span class="btn-danger">收入
+                          </span></td>
+            <td>
+                                                            会员红利            </td>
+            <td>投注返水</td>
+          </tr>
+                    <tr>
+            <td>1</td>
+            <td>leon</td>
+            <td>1.52</td>
+            <td>100.00</td>
+            <td>101.52</td>
+            <td>
+                            <span class="btn-success">支出
+                          </span></td>
+            <td>
+                                                            会员红利            </td>
+            <td>投注返水</td>
+          </tr>
+                    <tr>
+            <td>1</td>
+            <td>leon</td>
+            <td>100.00</td>
+            <td>0.00</td>
+            <td>100.00</td>
+            <td>
+                            <span class="btn-success">支出
+                          </span></td>
+            <td>
+                                                            会员红利            </td>
+            <td>注册即送100</td>
+          </tr>
+                  </tbody></table>
+        
+      </div>
+      <!-- /.box-body -->
+    </div>
+    <!-- /.box -->
+  </div>
+</div>

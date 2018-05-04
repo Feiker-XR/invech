@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>系统设置</title>
+<link href="/css/base.css" rel="stylesheet" type="text/css" />
+<link href="/css/admin.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="/js/jquery.js"></script>
+<script type="text/javascript" src="/js/jquery.tools.js"></script>
+<script type="text/javascript" src="/js/base.js"></script>
+<script charset="utf-8" src="/kindeditor/kindeditor-all-min.js"></script>
+<script charset="utf-8" src="/kindeditor/lang/zh-CN.js"></script>
+<!-- script charset="utf-8" src="/edits/kindeditor-min.js"></script>
+<script charset="utf-8" src="/edits/lang/zh_CN.js"></script> -->
+<script>
+	KindEditor.ready(function(K) {
+		K.create('textarea[name="card_msg"]', {
+			filterMode : false,
+			allowFileManager : true,
+			uploadJson : '{:url('money/upload')}',
+		});
+		var editor = K.editor({
+			allowFileManager : true,
+			uploadJson : '{:url('money/upload')}',
+		});
+		K('#image1').click(function() {
+			editor.loadPlugin('image', function() {
+				editor.plugin.imageDialog({
+					imageUrl : K('#card_logo').val(),
+					
+					clickFn : function(url, title, width, height, border, align) {
+						K('#card_logo').val(url);
+						K('#imgct').html("<img src='"+url+"' />");
+						editor.hideDialog();
+					}
+				});
+			});
+		});
+		K('#image2').click(function() {
+			editor.loadPlugin('image', function() {
+				editor.plugin.imageDialog({
+					imageUrl : K('#card_qrcode').val(),
+					uploadJson : '{:url('money/upload')}',
+					clickFn : function(url, title, width, height, border, align) {
+						K('#card_qrcode').val(url);
+						//K('#imgct2').html("<img src='"+url+"' />");
+						editor.hideDialog();
+					}
+				});
+			});
+		});
+	});
+</script>
+
+</head>
+<body class="input">
+	<!--<div class="bar">
+		公司入款设置
+	</div>-->
+	<div class="body">
+		<ul id="tab" class="tab">
+			<li><input type="button" value="收款账号" hidefocus class="current" />
+			</li>
+		</ul>
+		<form action="{:url('money/huikuan_api')}?act={$act}" method="post" name="from1" id="from1"
+			onSubmit="return check();">
+			{notempty name='info'}
+				<input type="hidden" name="id" value="{$info.id}" />
+			{/notempty}
+			<table class="inputTable tabContent">
+				<tr>
+					<th>银行名称:</th>
+					<td>
+						<input name="card_bankName" type="text" id="card_bankName" class="formText" value="{notempty name='info'}{$info.card_bankName}{/notempty}" />
+					</td>
+					<td width="50%" align="center">入款信息<td>
+				</tr>
+				<tr>
+					<th>银行LOGO:</th>
+					<td>
+			  			<input name="card_logo" type="text" id="card_logo" class="formText" value="{notempty name='info'}{$info.card_logo}{/notempty}" />
+			  			<input type="button" id="image1" value="选择图片" class="formButton"/>
+			  			<span id="imgct">
+			  				{notempty name="info.card_logo"}<img src="{$info.card_logo}" height="50" width="50"/>{/notempty}
+						</span>
+			  		</td>
+			  		<td rowspan="6">
+			  			<textarea style="width:95%;height:235px;" name="card_msg">{notempty name='info'}{$info.card_msg}{/notempty}
+			  			</textarea>
+			  		</td>
+				</tr>
+				<tr>
+					<th>银行卡号:</th>
+					<td><input name="card_ID" type="text" id="card_ID"
+						class="formText" value="{notempty name='info'}{$info.card_ID}{/notempty}" /></td>
+				</tr>
+				<tr>
+					<th>开户名称:</th>
+					<td><input name="card_userName" type="text" id="card_userName"
+						class="formText" value="{notempty name='info'}{$info.card_userName}{/notempty}" /></td>
+				</tr>
+				<tr>
+					<th>开户地址:</th>
+					<td><input name="card_address" type="text" id="card_address"
+						class="formText" value="{notempty name='info'}{$info.card_address}{/notempty}" /></td>
+				</tr>
+				<tr>
+					<th>所属会员组:</th>
+					<td><select name="card_group" id="card_group">
+					<?php foreach($group as $k=>$v){?>
+							<option value="{$k}" {notempty name='info'}{if $k eq $info.card_group}selected="selected"{/if}{/notempty} >{$v}</option>
+					<?php }?>
+					</select></td>
+				</tr>
+				<tr>
+			  		<th>二维码:</th>
+			  		<td>
+			  			<input name="card_qrcode" readonly="readonly" type="text" id="card_qrcode" class="formText" value="{notempty name='info'}{$info.card_qrcode}{/notempty}" />
+			  			<input type="button" id="image2" value="选择图片" class="formButton"/>
+			  			
+			  		</td>
+			  	</tr>
+					
+			</table>
+			<div class="buttonArea">
+				<input type="submit" class="formButton" value="确  定" hidefocus />&nbsp;&nbsp;
+				<input type="button" class="formButton"
+					onClick="window.location.href='{:Url('main/info')}'" value="返  回" hidefocus />
+			</div>
+		</form>
+		<table class="inputTable tabContent">
+			<tr>
+				<td align="center" bgcolor="#EEF4F9">Logo</td>
+				<td align="center" bgcolor="#EEF4F9">银行名称</td>
+				<td align="center" bgcolor="#EEF4F9">银行卡号</td>
+				<td align="center" bgcolor="#EEF4F9">开户名</td>
+				<td align="center" bgcolor="#EEF4F9">二维码</td>
+				<td align="center" bgcolor="#EEF4F9">开户行地址</td>
+				<td width="100" align="center" bgcolor="#EEF4F9">操作</td>
+			</tr>
+			{volist name='list' id='vo'}
+			<tr>
+				<td align="center" colspan='7' valign="middle" bgcolor="#EEF4F9"><strong>{$vo.name}</strong></td>
+			</tr>
+			{volist name='vo.cards' id='card'}
+			<tr>
+				<td align="center" valign="middle">{notempty name='card.card_logo'}<img src="{$card['card_logo']}" width="50" height="50" />{/notempty}</td>
+				<td align="center" valign="middle">{$card['card_bankName']}</td>
+				<td align="center" valign="middle">{$card['card_ID']}</td>
+				<td align="center">{$card['card_userName']}</td>
+				<td align="center">{notempty name='card.card_qrcode'}<a href="{$card['card_qrcode']}" target="_blank">查看二维码</a>{/notempty}</td>
+				<td align="center">{$card['card_address']}</td>
+				<td align="center">
+					<a href="?act=edit&gid={$card.card_group}&id={$card.id}">编辑</a>&nbsp;&nbsp;
+					<a href="?act=del&gid={$card.card_group}&id={$card.id}" onClick="return confirm('您确定要删除吗?')">删除</a>
+				</td>
+				
+			</tr>
+			{/volist}
+			{/volist}
+		</table>
+	</div>
+</body>
+</html>

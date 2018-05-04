@@ -1,0 +1,298 @@
+* {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-family: "微软雅黑";
+}
+.content {
+  width: 1125px;
+  height: 780px;
+  margin: 0 auto;
+  transform-origin: left top;
+}
+.content .cqncAnimate {
+  position: relative;
+  width: 1125px;
+  height: 780px;
+}
+.content .cqncAnimate .bodybg {
+  width: 100%;
+  height: auto;
+}
+.content .cqncAnimate .bodybg img {
+  vertical-align: top;
+  width: 100%;
+  height: 100%;
+}
+.content .cqncAnimate .zhezao {
+  position: absolute;
+  top: 0px;
+  left: 99px;
+  width: 927px;
+  height: 180px;
+}
+.content .cqncAnimate .position {
+  position: absolute;
+  width: 899px;
+  height: 70px;
+  top: 0px;
+  width: 100%;
+  font-size: 30px;
+}
+.content .cqncAnimate .position .logo {
+  float: left;
+  width: 230px;
+  height: inherit;
+  line-height: 70px;
+}
+.content .cqncAnimate .position .logo img {
+  margin-left: 25px;
+}
+.content .cqncAnimate .position .kaiDiv {
+  float: left;
+  width: 653px;
+  height: inherit;
+}
+.content .cqncAnimate .position .kaiDiv ul {
+  width: 60%;
+  height: inherit;
+  margin-left: 32%;
+}
+.content .cqncAnimate .position .kaiDiv ul li {
+  float: left;
+  width: 42px;
+  height: 42px;
+  line-height: 50px;
+  text-align: center;
+  margin-top: 14px;
+  margin-left: 30px;
+  font-size: 28px;
+  font-weight: 800;
+  color: #ffea00;
+  background: url("../img/tmNum.png") no-repeat;
+}
+.content .cqncAnimate .position .defDiv {
+  float: right;
+  width: 242px;
+  height: 70px;
+  font-size: 16px;
+  color: #fff;
+  white-space: nowrap;
+}
+.content .cqncAnimate .position .defDiv .drawTimeDiv {
+  margin-top: 15px;
+  float: left;
+  width: 160px;
+}
+.content .cqncAnimate .position .defDiv #soundBth {
+  float: right;
+  margin-right: 30px;
+  margin-top: 10px;
+  display: block;
+  width: 50px;
+  height: 50px;
+}
+.content .cqncAnimate .position .defDiv .soundsOn {
+  background: url("../img/imgGroup.png") 0px -418px no-repeat;
+}
+.content .cqncAnimate .position .defDiv .soundsOff {
+  background: url("../img/imgGroup.png") 0px -487px no-repeat;
+}
+.content .cqncAnimate .cutTime {
+  position: absolute;
+  width: 100%;
+  height: 100px;
+  top: 150px;
+}
+.content .cqncAnimate .cutTime div {
+  width: 360px;
+  height: inherit;
+  margin: 0 auto;
+  line-height: 100px;
+  text-align: center;
+}
+.content .cqncAnimate .cutTime #hourtxt {
+  font-family: "DS-Digital";
+  padding: 0px;
+  font-size: 60px;
+  color: #ffea00;
+}
+.content .cqncAnimate .cutTime #opening {
+  display: none;
+  width: 180px;
+  height: 40px;
+  margin-top: 50px;
+  margin-left: 100px;
+  line-height: 40px;
+  text-align: center;
+  border-radius: 4px;
+  font-size: 30px;
+  font-weight: 800;
+  color: #D6AB00;
+}
+.content .cqncAnimate .kaiBox {
+  position: absolute;
+  width: 100%;
+  height: 300px;
+  top: 292px;
+}
+.content .cqncAnimate .kaiBox #kaiUl {
+  width: 100%;
+  height: 190px;
+}
+.content .cqncAnimate .kaiBox #kaiUl li {
+  float: left;
+  width: 225px;
+  height: 190px;
+  background: url("../img/imgGroup.png") 0px 0px no-repeat;
+}
+.content .cqncAnimate .kaiBox #kaiUl li span {
+  display: block;
+  width: 120px;
+  height: 122px;
+  margin-top: 48px;
+  margin-left: 52px;
+}
+.content .cqncAnimate .kaiBox #kaiUl li:first-child {
+  margin-left: 220px;
+  transition: margin-top 0.45s;
+}
+.content .cqncAnimate .kaiBox #kaiUl li:nth-child(2) {
+  margin-left: 5px;
+  transition: margin-top 0.23s;
+}
+.content .cqncAnimate .kaiBox #kaiUl li:nth-child(3) {
+  margin-left: 5px;
+  transition: margin-top 0.15s;
+}
+.content .cqncAnimate .lightBox {
+  position: absolute;
+  top: 470px;
+  width: 100%;
+  height: 58px;
+}
+.content .cqncAnimate .lightBox ul {
+  width: 100%;
+  height: 58px;
+}
+.content .cqncAnimate .lightBox ul li {
+  float: left;
+  width: 70px;
+  height: 58px;
+  background: url("../img/imgGroup.png") 0px -585px no-repeat;
+}
+.content .cqncAnimate .lightBox ul li:first-child {
+  margin-left: 297px;
+}
+.content .cqncAnimate .lightBox ul li:nth-child(2) {
+  margin-left: 162px;
+}
+.content .cqncAnimate .lightBox ul li:nth-child(3) {
+  margin-left: 160px;
+}
+.content .cqncAnimate .tryKai {
+  position: absolute;
+  width: 100%;
+  height: 50px;
+  top: 610px;
+}
+.content .cqncAnimate .tryKai .jzCheck {
+  position: absolute;
+  display: inline-block;
+  top: -30px;
+  width: 127px;
+  height: 30px;
+  line-height: 30px;
+  font-size: 14px;
+  border-radius: 4px;
+  background: rgba(0, 0, 0, 0.7);
+  color: rgba(250, 250, 250, 0.8);
+  margin-left: 500px;
+}
+.content .cqncAnimate .tryKai #tryBtn {
+  display: block;
+  font-size: 18px;
+  color: #fff;
+  width: 155px;
+  height: 45px;
+  line-height: 45px;
+  text-align: center;
+  margin: 0 auto;
+  border-radius: 25px;
+  cursor: pointer;
+  background: url(../img/imgGroup.png) 0px -707px no-repeat;
+}
+.num0 {
+  background: url("../img/imgGroup.png") -243px -8px no-repeat;
+}
+.num1 {
+  background: url("../img/imgGroup.png") -243px -136px no-repeat;
+}
+.num2 {
+  background: url("../img/imgGroup.png") -243px -264px no-repeat;
+}
+.num3 {
+  background: url("../img/imgGroup.png") -243px -392px no-repeat;
+}
+.num4 {
+  background: url("../img/imgGroup.png") -243px -520px no-repeat;
+}
+.num5 {
+  background: url("../img/imgGroup.png") -243px -647px no-repeat;
+}
+.num6 {
+  background: url("../img/imgGroup.png") -243px -775px no-repeat;
+}
+.num7 {
+  background: url("../img/imgGroup.png") -243px -903px no-repeat;
+}
+.num8 {
+  background: url("../img/imgGroup.png") -243px -1031px no-repeat;
+}
+.num9 {
+  background: url("../img/imgGroup.png") -243px -1159px no-repeat;
+}
+@-webkit-keyframes rotation {
+  from {
+    transform-style: preserve-3d;
+    transform: rotateY(0deg);
+    -webkit-transform: rotateY(0deg);
+    -ms-transform: rotateY(0deg);
+  }
+  to {
+    transform-style: preserve-3d;
+    transform: rotateY(360deg);
+    -webkit-transform: rotateY(360deg);
+    -ms-transform: rotateY(360deg);
+  }
+}
+@-ms-keyframes rotation {
+  from {
+    transform-style: preserve-3d;
+    transform: rotateY(0deg);
+    -webkit-transform: rotateY(0deg);
+    -ms-transform: rotateY(0deg);
+  }
+  to {
+    transform-style: preserve-3d;
+    transform: rotateY(360deg);
+    -webkit-transform: rotateY(360deg);
+    -ms-transform: rotateY(360deg);
+  }
+}
+.Rotation {
+  transform-style: preserve-3d;
+  -webkit-transform: rotateY(360deg);
+  animation: rotation .3s linear infinite;
+  -moz-animation: rotation .3s linear infinite;
+  -webkit-animation: rotation .3s linear infinite;
+  -o-animation: rotation .3s linear infinite;
+}
+.rotOnce {
+  transform-style: preserve-3d;
+  -webkit-transform: rotateY(360deg);
+  animation: rotation 1s;
+  -moz-animation: rotation 1s;
+  -webkit-animation: rotation 1s;
+  -o-animation: rotation 1s;
+}

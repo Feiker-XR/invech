@@ -1,0 +1,201 @@
+<?php
+namespace app\logic;
+use think\Db;
+
+class random {
+
+	//机选函数
+	public final function getLotteryRandom ($playid, $count = 1){
+
+		$playinfo = Db::table('gfwf_played')->where('id','eq',$playid)->find();
+         if ($playinfo) {
+            for ($i = 0; $i < $count; $i++) {
+                switch ($playinfo['type']) {
+                    case 1://时时彩
+                        $number[] = $this->getSSCRandom($playinfo['selectNum'], $playid);
+                       
+                        break;
+                    case 5://时时彩
+                        $number[] = $this->getSSCRandom($playinfo['selectNum'], $playid);
+                        break;
+                   
+                }
+            }
+
+        }
+
+         $n = $number[0]['number'];
+         $actionNum = $number[0]['count'];
+         $rel = array('actionData' => $n, 'actionNum' => (int)$actionNum);
+
+        return $rel ;
+	}
+
+	//	时时彩机选函数 $num：机选位数 ，$playid：玩法种类
+	public function getSSCRandom($num, $playid){
+		$number = "";
+        $zhixuan = array('2', '3', '6', '7', '10', '11','12','13','25','26','27','28');
+        $zuxuan120 = array('1002','1015','1017','1018','16','17','19','20','31','32','33','34');
+        $zuxuan60 = array('1003','1004','1005','1006','1007','1016');
+      	$lhh = array('1012');
+      	$zhdxds = array('1013');
+      	$bsd = array('1025','1032');
+        $hezhi = array('1020','1027','1033','1037');
+        $dxds = array('42', '43', '265', '266');
+        $start = 0;
+        $end = 0;
+        $count = 1;
+        if (in_array($playid, $zhixuan)) {
+             /*随机选号 位数 选号个数 起 止 是否可以相同 是否补0*/
+          $number = $this->getRandom($num, $num, 0, 9, 1, 0);
+
+        }else if(in_array($playid,$zuxuan120)){
+
+        	 $number = $this->getRandom($num, $num, 0, 9, 0, 0);
+        	 $number = str_replace(",","",$number);
+
+        } else if(in_array($playid, $zuxuan60 )){
+
+        	$number = $this->getRandom($num, $num, 0, 9, 0, 0);
+        	$number = str_replace(",","",$number);
+
+        	if($playid =='1004'){
+        		$number =substr_replace($number,",",2,0);
+        	}else{
+        		$number =substr_replace($number,",",1,0);
+        	}
+
+         }else if(in_array($playid,$lhh)){
+         	$number = $this->getRandomLH();
+		}else if(in_array($playid,$bsd)){
+			$number = $this->getRandom323();
+
+		}else if(in_array($playid,$zhdxds)){
+         	$number = $this->getRandomdxds();
+         } else if (in_array($playid, $hezhi)) {
+            if ($playid == '1033') {
+                $start = 0;
+                $end = 18;
+            } else if ($playid == '1037') {
+                $start = 1;
+                $end = 17;
+            } else if ($playid == '1020'|| $playid == '1027') {
+                $start = 0;
+                $end = 27;
+            } else if ($playid == '328' || $playid == '375') {
+                $start = 1;
+                $end = 26;
+            } else {
+                $start = 3;
+                $end = 24;
+            }
+            $number = $this->getRandom($num, $num, $start, $end, 0, 0);
+           // $count = intval($this->getCount($number, $playid));
+        } else if (in_array($playid, $dxds)) {
+            if ($playid == '42' || $playid == '43') {
+               // $number = implode(" ", $this->getRandomDXDS(2));
+            } else {
+               // $number = implode(" ", $this->getRandomDXDS(3));
+            }
+
+        } else {
+            $number = $this->getRandom($num, 1, 0, 9, 0, 0);
+            //$count = intval($this->getCount($number, $playid));
+        }
+
+        return array('number' => str_ireplace(" ", "", $number), 'count' => $count);
+
+	}
+
+	  /*随机选号 位数 选号个数 起止 是否可以相同 是否补0*/
+    public function getRandom($num, $row, $start, $end, $diff, $bu)
+    {
+        $number = "";
+        $array = array();
+        if ($bu == 0) {
+        	
+            $array = $this->getRandomNumber($num, $start, $end);
+        } else {
+           // $array = $this->get11x5RandomNumber($num, $start, $end);
+        }
+        if ($diff == 1) {
+            if ($row == $num) {
+
+                for ($i = 0; $i < $num; $i++) {
+                    $number .= rand($start, $end);
+                    if ($i != $num - 1) {
+                        $number .= ",";
+                    }
+                }
+
+            } else {
+                $number = implode(" ", $array);
+            }
+        } else {
+            if ($row == $num) {
+                $number = implode(",", $array);
+            } else {
+                $number = implode(" ", $array);
+            }
+        }
+
+        return $number;
+
+    }
+
+     /**获取ssc随机数*/
+    public function getRandomNumber($num, $start, $end)
+    {
+        $return = array();
+        $count = 0;
+      
+        while ($count < $num) {
+            $return[] = mt_rand($start, $end);
+
+            $return = array_flip(array_flip($return));
+
+            $count = count($return);
+        }
+
+        return $return;
+    }
+
+      /**获取龙虎随机数*/
+    public function getRandomLH()
+    {
+
+        $dxds = array('龙', '虎','和');
+        $return = $dxds[mt_rand(0, 1)];
+        return $return;
+    }
+
+    public function getRandomdxds()
+    {
+        $w = array('总和大', '总和小','总和单','总和双');
+        $wr = rand(0, 3);
+    	$return = $w[$wr];
+        return $return;
+    }
+
+     public function getRandom323()
+    {
+        $w = array('豹子', '顺子', '对子');
+        $wr = rand(0,2);
+       	$return = $w[$wr];
+        return $return;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ }

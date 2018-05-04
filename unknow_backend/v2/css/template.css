@@ -1,0 +1,391 @@
+/*共用*/
+input{
+	padding-left:6px;
+	padding-right:6px;
+}
+body{
+	background-color:#a47000;
+}
+.bodyStyle{
+	background-color:#000000;
+	padding:8px;
+}
+.skinbg{
+	background-color:#FBE9AC;
+}
+/*忘記密碼*/
+#forgetPwd{
+	width:300px;
+	margin:35px auto;
+	font-size:12px;
+	color:#000000;
+}
+#forgetPwd table{
+	background-color:#999999;
+}
+#forgetPwd table thead,
+#forgetPwd table tfoot{
+	color:#FFFFFF;
+	text-align:center;
+}
+#forgetPwd table tbody{
+	background-color:#FFFFFF;
+}
+#forgetPwd table td.style1{
+	text-align:left;
+	text-indent: 1em;
+}
+#bottom-text{
+	text-align:center;
+	color:#FFFFFF;
+}
+.error{
+	color:#FF0000;
+}
+
+/*修改密碼、修改帳號共用*/
+#memAccTable{
+	color:#FFFFFF;
+	border-collpase:collpase;
+	text-align:center;
+}
+#memAccTable table{
+	background-color:#999999;
+	border-collpase:collpase;
+	margin: 0 auto;
+	text-align:left;
+}
+#memAccTable table tr td{
+	border:1px solid #999999;
+	height:30px;
+}
+#memAccTable table thead,
+#memAccTable table tfoot{
+	font-weight:bolder;
+	color:#FFFFFF;
+	font-size:12px;
+	padding-left:59px;
+	height:37px;
+	text-align:center;
+}
+#memAccTable table thead td{
+	text-align:left;
+	padding-left:59px;
+}
+#memAccTable table tbody{
+	color:#000000;
+	background-color:#FFFFFF;
+	font-size:12px;	
+	text-align:left;
+}
+#memAccTable table .tipText{
+	width:50%;
+	text-align:right;
+	padding-right:5px;
+}
+#memAccTable table .tipDwText{
+    width:40%;
+    text-align:right;
+    padding-right:5px;
+}
+#memAccTable table .bottomTip{
+	font-size:11px;
+	text-align:center;
+	background-color:#C9CACA;
+	height:40px;
+}
+#memAccTable table  .modifyProfileTitle{
+	font-weight:normal;
+	font-size:12px;
+	text-align:center;
+	padding-left:0;
+}
+a.chg_passwd_flag {
+	color:#FFFFFF;
+	text-decoration:none;
+}
+/*額度轉換、會員資料*/
+#mainContent{
+    background: url("/images//bgodds.jpg") no-repeat scroll center top white;
+    padding-top:5px;
+    padding-bottom: 15px;
+    width: 780px;
+	font-size:12px;
+}
+#pageTitle{	
+	background: url("/images//subject01.jpg") no-repeat scroll center top transparent;
+    height: 24px;
+    line-height: 24px;
+    margin-right: 6px;
+    text-align: center;
+    width: 82px;
+    margin:10px 15px;
+}
+#tableWrap{
+	background-color:#656565;
+	margin:0px 15px;
+}
+.tableStyle01{
+	border:1px solid #000;
+	margin: 0px auto;
+	text-align:center;
+	width:100%;
+	color:#000;
+	width: 750px;
+}
+.tableStyle01 th{
+	background-color:#3D3D3D;
+	border:1px solid #656565;
+	color:#FFFFFF;
+	font-weight:normal;
+	text-align:center;
+	height: 23px;
+	line-height: 23px;
+}
+.tableStyle01 td{
+	background-color:#FFFFFF;
+	border:1px solid #656565;
+	padding:2px;
+}
+.tableStyle01 tr .gameLimit{
+	background-color: #FBE9AC;
+	color: #000000;
+}
+.za_button{
+	font-size:12px;
+}
+/*下注狀況*/
+.tableStyle01 .wagers th{
+	background-color:#F1EFEF;
+	text-align:center;
+}
+#pageTitle #pageTitleEx{
+	float:right;
+	color:#FF0000;
+}
+#pageTitle #pageTitleEx a{
+	color:#CC0000;
+	text-decoration:none;
+	font-weight:bold;
+}
+.tableStyle01 .b_rig .amountGold{
+	background-color:#CCCCCC;
+	text-align:right;
+}
+.tableStyle01 .b_rig .awinGold{
+	background-color:#990000;
+	color:#FFFFFF;
+	text-align:right;
+}
+.tableStyle01 .red_border {
+	border: 2px solid #FF0000;
+}
+.tableStyle01 .b_rig_mor {
+	background-color:#EDEDED;
+	text-align:right;
+}
+.tableStyle01 .b_rig_mor td{
+	background-color:#EDEDED;
+}
+.tableStyle01 .b_rig{
+	background-color:#FFFFFF;
+	text-align:right;
+}
+.b_cen{
+	background-color:#FFFFFF;
+	text-align:center;
+	height:70px;
+}
+
+/*往來紀錄*/
+#cashBookInput{
+	background-color:#FFFFFF;
+}
+#cashBookWrap{
+	border:3px solid #666666;
+	border-bottom:1px solid #666666;
+}
+.Wdate{
+	width: 80px;
+}
+.tableStyle02{
+	background-color:#FFFFFF;
+	padding:5px 2px 0;
+	text-align:left;
+	width:100%;
+	border-collapse:separate;
+	border-spacing:1px;
+	font-size:12px;
+	border-top:1px solid #666666;
+}
+#cashBookInput #t_title{
+	background-color:#999999;
+	color:#000000;
+	font-weight:normal;
+	padding:2px 0;
+}
+.tableStyle02 .cashBook td{
+	color: #000000;
+	height:22px;
+	border-width:1px;
+	border-style:solid;
+	border-color:#717171 #EFEFEF #EFEFEF #717171;
+}
+#foot{
+	text-align:left;
+	color:#000000;
+	font-size:12px;
+	padding-left:10px;
+}
+#foot a{
+	color:#CC0000;
+	font-weight:bold;
+	text-decoration:none;
+}
+/*線上存取款*/
+#bank_body{
+	margin:0px auto;
+	background-color: #333333;
+	/*
+	background:url(/images/bg.jpg) #FFCC33 top center repeat-x;
+	*/
+}
+#bank_header{
+	margin:0px auto;
+	width:800px;
+	height:100px;
+	background:url(/images/rule_bg.jpg) left top repeat-x;
+}
+#bank_logo{
+	width:250px;
+	height:100px;
+	background:url(/images/rule_logo.jpg) left top no-repeat;
+}
+#bank_content {
+    width:800px;
+    margin:0px auto;
+    background-color:#FFFFFF;
+}
+#bank_footer{
+	margin:0px auto;
+	width:800px;
+	height:30px;
+	color:#FFFFFF;
+	background-color:#000000;
+	font-size : 11px;
+	line-height:30px;
+	font-weight: normal;
+	font-family: Verdana, Arial, Sans-serif,taipei;
+}
+#bank_footer font{
+	color:#FFFFFF;
+}
+#pay_system_option a{
+	color:#FF0000;
+	text-decoration: none;
+}/*會員註冊*/
+#joinMember iframe{
+	float:left;
+    width: 730px;
+    height: 1000px;
+}
+#memCash_body{
+	float:left;
+	width:630px;
+	height:auto;
+	font-size: 12px;
+	line-height: 18px;
+	color: #000000;
+	text-decoration: none;
+	margin-left:10px;
+	background:transparent;
+	_background:url(/images/content_bg.jpg) top left no-repeat #fff;
+}
+#memCash_body .memCash_tit{
+
+}
+#memCash_body fieldset {
+    padding:10px;
+    margin:10px;
+    border:2px solid #999999;
+} 
+#memCash_body legend{
+    color: #999999;
+    font-size: 12px;
+    font-weight: bold;
+    letter-spacing:3px;
+}
+#memCash_body .star {
+    font-family: verdana, Helvetica, sans-serif;
+    font-size: 12px;
+    color: #FF0000;
+    font-weight: bold;
+    vertical-align: -2px;
+}
+#memCash_body a{
+    text-decoration: none;
+    color:#BF0F0F;
+}
+#memCash_body .memCash_text{
+    line-height: 15px;
+    height: auto;
+}
+#myFORM input[type=text], #myFORM input[type=password], #myFORM select{
+    border: 1px solid #ABADB3;
+    -moz-border-radius:3px;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+    box-shadow: 0 0 6px #CFD1D8;
+    -moz-box-shadow: 0 0 6px #CFD1D8;
+    -webkit-box-shadow: 0 0 6px #CFD1D8;
+}
+/*CL共用頁面*/
+body.TPL { background-color: #FFF; }
+.Tpl-table01 {
+    background-color: #FFFFFF;
+    border: 1px solid #CCC;
+    color: #000;
+    font-size: 12px;
+}
+table .Tpl-title01 th{
+    background-color: #0E0E0E;  
+    height: 24px;
+    text-align: center;
+    font-weight: bold;
+    color: #FFFFFF;
+    /* IE10 */ 
+    background: -ms-linear-gradient(top, #0E0E0E 0%, #333333 100%);
+    /* Mozilla Firefox */ 
+    background: -moz-linear-gradient(top, #0E0E0E 0%, #333333 100%);
+    /* Opera */ 
+    background: -o-linear-gradient(top, #0E0E0E 0%, #333333 100%);
+    /* Webkit (Chrome 11+) */ 
+    background: -webkit-linear-gradient(top, #0E0E0E 0%, #333333 100%);
+    /* IE6-9 */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#0E0E0E', endColorstr='#333333',GradientType=0 );
+    /* Proposed W3C Markup */ 
+    background: linear-gradient(top, #0E0E0E 0%, #333333 100%);
+}
+.Tpl-table01 th, .Tpl-table01 td {
+    height: 22px;
+    border: 1px solid #CCC;
+}
+tr.Tpl-trcolor1{
+    background: #FFFFFF;
+    /* IE10 */ 
+    background: -ms-linear-gradient(top, #FFFFFF 0%, #EEEEEE 100%);
+    /* Mozilla Firefox */ 
+    background: -moz-linear-gradient(top, #FFFFFF 0%, #EEEEEE 100%);
+    /* Opera */ 
+    background: -o-linear-gradient(top, #FFFFFF 0%, #EEEEEE 100%);
+    /* Webkit (Chrome 11+) */ 
+    background: -webkit-linear-gradient(top, #FFFFFF 0%, #EEEEEE 100%);
+    /* Proposed W3C Markup */ 
+    background: linear-gradient(top, #FFFFFF 0%, #EEEEEE 100%);
+}
+tr.Tpl-trcolor2{
+    background: #EEEEEE;
+}
+tr.Tpl-trmouseenter {
+    background: #DEF;
+}

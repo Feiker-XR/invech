@@ -1,0 +1,25 @@
+<input type="hidden" name="playedGroup" value="<?=$groupId?>" />
+<input type="hidden" name="playedId" value="<?=$playedId?>" />
+<input type="hidden" name="type" value="<?=$type?>" />
+<?php foreach(array('万','千','百','十','个') as $var){ ?>
+<div class="pp" action="tzDXDS" length="2" random="sscRandom">
+	<div class="title"><?=$var?></div>
+	&nbsp;
+	&nbsp;
+	<div class="pp-number">
+		<input type="button" value="大" class="code" />
+		<input type="button" value="小" class="code" />
+		<input type="button" value="单" class="code" />
+		<input type="button" value="双" class="code" />
+	</div>
+
+</div>
+<?php
+	}
+	//$maxPl=$getPl($type, $playedId);
+?>
+<script type="text/javascript">
+$(function(){
+	gameSetPl(<?=json_encode($maxPl)?>,false,<?=$user['fanDianBdw']?>);
+})
+</script>

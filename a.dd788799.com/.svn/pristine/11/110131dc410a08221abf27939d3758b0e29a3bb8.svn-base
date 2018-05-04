@@ -1,0 +1,92 @@
+<?php
+
+namespace app\api\controller;
+use app\api\Base;
+use app\common\model\PaySet as PaySetModel;
+use app\common\model\PayChannel as PayChannelModel;
+use think\Response;
+
+class pay extends Base{
+    
+    public function appcode(){
+        //$user = $this->request->user();
+        $data = PaySetModel::appSet();        
+        return $this->apiReturn([],$data);
+    }
+
+    /*
+     * 充值处理
+    */
+    public function pay(){
+
+        date_default_timezone_set('PRC');
+        $bankcode   =   $sccode     =   input('sccode');//set_config.code
+
+        $thirdtype  =   input('thirdtype');//thirdpay.type
+        $tcode      =   input('tcode');//thirdcode.code
+        $thirdid    =   input('thirdid');//thirdpay.id
+        $setconfigid = $scid        =   input('scid');
+        //$transamt = isset($_POST["coin"])? trim($_POST["coin"]):trim($_POST["money"]);
+        //$transamt = isset($_POST["coin"])? trim($_POST["coin"]):0;
+        $transamt = input("coin")??0;
+
+        $thirdpay = db('pay_third')->where('id',$thirdid)->find();
+
+        $thirdcode = db('pay_channel')
+        ->where(['set_configid'=>$setconfigid,'thirdid'=>$thirdid,])->find();
+
+        if(/*is_int($transamt)&&*/1==$thirdcode['money_decimal']){
+            $point = rand(1, 99);
+            $transamt += $point/100;
+        }
+        
+        if($transamt<$thirdcode['min']){
+            $msg = '参数错误:不能低于最低充值金额:'.$thirdcode['min'].'元';
+            return $this->apiReturn(CodeBase::$error,$msg);      
+        }
+        if($transamt>$thirdcode['max']){
+            $msg = '参数错误:不能高于最高充值金额:'.$thirdcode['max'].'元';
+            return $this->apiReturn(CodeBase::$error,$msg); 
+        }
+
+        $pay = pay($thirdtype);
+        $orderid = $pay->genOrderno();
+
+        $orderno = $orderid;        
+        $amount = $transamt;
+        $pay_type = $thirdtype;
+        $paycode = $tcode;
+        $local_code = $sccode;
+
+        $order = [
+                    'uid'       => $uid,
+                    //'username'  => $username, 
+                    'orderno'   => $orderno,
+                    'amount'    => $amount,
+                    //'business'  => $business,
+                    //'item_type'=> null,
+                    //'item_id'=> null,
+                    //'status'    => 0,
+                    'order_time' => date('Y-m-d H:i:s'),
+                    //'pay_time'  => null,                    
+                    'pay_name'  => $pay->getName(),
+                    'pay_type'  => $pay_type,
+                    'pay_code'  => $paycode,
+                    'local_code' => $local_code,
+                ];                
+        db('orders')->insert($order);
+
+        $params = compact('orderno','paycode','amount');
+        $ret = $pay->pay($params);
+
+        return $this->apiReturn([],$ret);
+    }
+
+    public function pay_content($order_id){
+        $order = db('vc_order')->where('order_id',$order_id)->find();
+        $html = $order['pay_content']? $order['pay_content']  : '';
+        //return view($html);
+        return Response::create($html, 'html');
+    }
+
+}

@@ -1,0 +1,588 @@
+<html>
+<head>
+<meta charset="utf-8">
+<title>选择存款方式</title>
+<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, width=device-width">
+<link rel="apple-touch-icon-precomposed" href="https://appdl.lqjcf.top/h3337/version/pkg/icon.png">
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+<link href="/pay/css/app.css" rel="stylesheet">
+<link rel="stylesheet" href="/css/font-awesome.min.css">
+<link rel="stylesheet" href="/css/ui-dialog.css">
+<link rel="stylesheet" href="/styles/ezweb.css">
+<link rel="stylesheet" type="text/css" href="/fonts-new/iconfont.css">
+<link rel="stylesheet" href="/css/500f_new_wap.css">
+<script type="text/javascript" src="/js/jquery1.8.0.min.js"></script>
+    <style>
+        .module-main.diy-scrollbar_padding .main-container{
+            width: 92%;
+            margin: 0 4%;
+            margin-top: 5px;
+            box-sizing: border-box;
+        }
+        .module-main.diy-scrollbar_padding .main-container .do-recharge-info{
+            font-size: 14px;
+            line-height: 22px;
+            margin-bottom: -3%;
+        }
+        .module-main.diy-scrollbar_padding .main-container .info-warning{
+            margin-top: -7%;
+            margin-bottom: 5%;
+            font-size: 12px;
+        }
+        .module-main.diy-scrollbar_padding .main-container .info-warning p{
+            line-height: 20px;
+        }
+
+    </style>
+</head>
+    <body class="common_style" style="padding-top: 10px; overflow: auto;">
+    {include file='common/cunkuan-nav'}
+    {include file='common/header'}
+    <div class="online_recharge_wp" style="margin-top:60px;">
+        <div id="wrapper">
+            <div id="scroller">
+                <div class="layout-main">
+                    <div class="member-module member-module-recharge">
+                        <div class="module-main diy-scrollbar">
+                            <div style="transition-property: transform; transform-origin: 0px 0px 0px; transform: translate(0px, 0px) translateZ(0px);">
+                                <div>
+                                    <div class="main-container">
+                                        <ul class="list-group">
+                                            <!--<li class="list-group-item payment kscz"><a href="javaScript:;" target="_blank"><span>快速充值</span></a></li>-->
+                                            <!--<li class="list-group-item payment epay"><a href="javaScript:;"><span>在线支付</span></a></li>-->
+                                            <li class="list-group-item payment bank"><a href="javaScript:;"><span>银行汇款</span></a></li>
+                                            <li class="list-group-item payment alipay"><a href="javaScript:;"><span>支付宝付款</span></a></li>
+                                            <li class="list-group-item payment weixin"><a href="javaScript:;"><span>微信付款</span></a></li>
+                                            <li class="list-group-item payment qqpay"><a href="javaScript:;"><span>QQ钱包</span></a></li>
+                                            <!--<li class="list-group-item payment tenpay"><a href="javaScript:;"><span>财付通转账</span></a></li>-->
+                                            <li class="list-group-item payment jdpay"><a href="javaScript:;"><span>京东钱包</span></a></li>
+                                            <li class="list-group-item payment ylpay"><a href="javaScript:;"><span>银联支付</span></a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="module-bottom"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<div id="box">
+<div class="online_recharge_wp" style="display: none">
+    <div id="wrapper" style="touch-action: none;">
+        <div id="scroller" style="transition-timing-function: cubic-bezier(0.1, 0.57, 0.1, 1); transition-duration: 0ms; transform: translate(0px, 0px) translateZ(0px);">
+            <div class="module-main diy-scrollbar diy-scrollbar_padding">
+                <div style="transition-property: transform; transform-origin: 0px 0px 0px; transform: translate(0px, -7px) scale(1) translateZ(0px);"><div>
+                    <div class="main-container">
+                        <div class="do-recharge-info" style="padding-top: 10px">
+                            <span>开户银行：{$huikuan['card_bankName']}</span>
+                            <span>开户名：{$huikuan['card_userName']}</span>
+                            <span>开户地址：{$huikuan['card_address']}</span>
+                            <span>银行卡号：{$huikuan['card_ID']}</span>
+                        </div>
+                        <form class="placeholder-fit" action="/user/hk_money_set.html?into=true" method="post">
+                        <input type="hidden" name="IntoBank" value="{$huikuan['card_bankName']}">
+                        <input type="hidden" name="v_site" value="">
+                            <div class="form-group">
+                                <label for="mdl-1_realname">存款人姓名</label>
+                                <input type="text" id="mdl-1_realname" name="v_Name" class="form-control" placeholder="转账账号对应的姓名">
+                            </div>
+                            <div class="form-group">
+                                <label for="mdl-1_amount">存款金额</label>
+                                <input type="number" id="mdl-1_amount" name="v_amount" class="form-control" placeholder="例如：500.77元，范围：10~500000">
+                            </div>
+                            <div class="form-group">
+                                <label for="mdl-1_rtime">存款时间</label>
+                                <input type="date" id="mdl-1_rtime" name="cn_date" value="2018-02-19" class="form-control fix_textindent"/>
+                            </div>
+                            <div class="form-group">
+                                <label for="mdl-1_way">存款方式</label>
+                                <select id="mdl-1_way" name="InType" class="form-control fix_textindent">
+                                    <option value="网银转账">网银转账</option>
+                                    <option value="ATM自动柜员机">ATM自动柜员机</option>
+                                    <option value="ATM现金入款">ATM现金入款</option>
+                                    <option value="银行柜台">银行柜台</option>
+                                    <option value="支付宝银行转账">支付宝银行转账</option>
+                                    <option value="微信银行转账">微信银行转账</option>
+                                </select>
+                            </div>
+                            <!--<div class="form-group">
+                                <label for="mdl-1_wantGift">彩金申请</label>
+                                <select id="mdl-1_wantGift" name="wantGift" class="form-control">
+                                    <option value="0">不申请</option>
+                                    <option value="1">申请</option>
+                                </select>
+                            </div>-->
+                            <div class="info-warning">
+                                <p>*存款步骤：先查看要入款的银行账号信息，然后通过网上银行、ATM、柜台或手机银行进行转账，转账成功后再如实提交转账信息，财务专员查收到信息后会及时添加您的款项。</p>
+                                <p>*请转账时务必增加小数（如：500.77元），以便财务查款。</p>
+                                <p>*请尽可能选择同行办理转账，可快速到账。</p>
+                                <p>*请保留好转账单据作为核对证明。</p>
+                            </div>
+                            <div class="form-group">
+                                <button class="btn btn-primary form-control submit-btn">提交</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="online_recharge_wp" style="display: none">
+    <div id="wrapper">
+        <div id="scroller">
+            <div class="module-main diy-scrollbar">
+                <div style="transition-property: transform; transform-origin: 0px 0px 0px; transform: translate(0px, 0px) translateZ(0px);">
+                    <div style="min-height: 564px;">
+                        <div class="main-container">
+                            <div class="payment-area">
+                                <button class="btn btn-lg btn-primary recharge-item" style="width:80%;" onclick="$(this).parents('.online_recharge_wp').hide();$('#alipay_rukuan').show()">
+                                    <!--<span class="glyphicon glyphicon-qrcode" aria-hidden="true"></span>-->
+                                    扫码转账&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                </button>
+                                <button class="btn btn-lg btn-default recharge-item" style="width:80%;" onclick="$(this).parents('.online_recharge_wp').hide();$('#alipay_third').show()">
+                                    <!--<span class="glyphicon glyphicon-qrcode" aria-hidden="true"></span>-->
+                                    在线扫码支付
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="online_recharge_wp" style="display: none">
+    <div id="wrapper">
+            <div id="scroller">
+                <div class="module-main diy-scrollbar">
+                    <div style="transition-property: transform; transform-origin: 0px 0px 0px; transform: translate(0px, 0px) translateZ(0px);">
+                        <div style="min-height: 564px;">
+                            <div class="main-container">
+                                <div class="payment-area">
+                                    <button class="btn btn-lg btn-primary recharge-item" style="width:80%;" onclick="$(this).parents('.online_recharge_wp').hide();$('#wechat_rukuan').show()">
+                                        <!--<span class="glyphicon glyphicon-qrcode" aria-hidden="true"></span>-->
+                                        扫码转账&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    </button>
+                                    <button class="btn btn-lg btn-default recharge-item" style="width:80%;" onclick="$(this).parents('.online_recharge_wp').hide();$('#wechat_third').show()">
+                                        <!--<span class="glyphicon glyphicon-qrcode" aria-hidden="true"></span>-->
+                                        在线扫码支付
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--QQ钱包-->
+<div class="online_recharge_wp" style="display: none">
+            <div id="wrapper">
+                <div id="scroller">
+                    <div class="layout-main"><div class="member-module member-module-showRechargeItem">
+                       <div class="module-main diy-scrollbar diy-scrollbar_padding">
+                           <div>
+                                <div class="main-container">
+                                <!--<div class="info-container">-->
+                                    <!--<div class="info" style="color:#333;">-->
+                                        <!--<a href="http://92711.com/" target="_blank" style="display:block; width:100%"><img src="img/shan.gif" style="width:100%;"></a>-->
+                                    <!--</div>-->
+                                <!--</div>-->
+                                <form class="recharge" action="/pay/pay.html" method="POST" target="_blank">
+                                    <div class="form-group">
+                                        <label for="mdl-28_channel">支付通道</label>
+                                        <select id="mdl-28_channel" class="form-control quick_pay_right_6_li fix_textindent">
+                                        {foreach name='qqpay_line' id='line'}
+                                         <option tid="{$line['thirdid']}" tcode="{$line['code']}" min="{$line['min']}" max="{$line['max']}" ttype="{$line['type']}"  setconfigid="{$line['set_configid']}" sccode="{$line['setconfigcode']}" cashier="{$line['cashier']}">{$line['name']}</option>
+                                         {/foreach}
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="mdl-28_amount">存款金额</label>
+                                        <input type="number" id="mdl-28_amount" name="coin" class="form-control m_value" placeholder="*范围10 ~ 3000">
+                                    </div>
+<input type="hidden" name="thirdid">
+                                    <input type="hidden" name="thirdtype">
+                                    <input type="hidden" name="tcode">
+                                    <input type="hidden" name="scid">
+                                    <input type="hidden" name="sccode">
+                                    <input type="hidden" name="cashier">
+                                    <div class="form-group">
+                                        <button class="btn btn-primary form-control submit-btn">提交</button>
+                                    </div>
+                                </form>
+                                <div class="info-container_code_img_wp">
+
+                                    <p>欢迎使用QQ支付</p>
+                                </div>
+                            </div>
+                           </div>
+                       </div>
+                    </div>
+                    </div>
+                </div>
+            </div>
+</div>
+    <!--京东钱包-->
+<div class="online_recharge_wp" style="display: none">
+            <div id="wrapper">
+                <div id="scroller">
+                    <div class="layout-main"><div class="member-module member-module-showRechargeItem">
+                       <div class="module-main diy-scrollbar diy-scrollbar_padding">
+                           <div>
+                                <div class="main-container">
+                                <!--<div class="info-container">-->
+                                    <!--<div class="info" style="color:#333;">-->
+                                        <!--<a href="http://92711.com/" target="_blank" style="display:block; width:100%"><img src="img/shan.gif" style="width:100%;"></a>-->
+                                    <!--</div>-->
+                                <!--</div>-->
+                                <form class="recharge" action="/pay/pay.html" method="POST" target="_blank">
+                                    <div class="form-group">
+                                        <label for="mdl-28_channel">支付通道</label>
+                                        <select id="mdl-28_channel" class="form-control quick_pay_right_6_li fix_textindent">
+                                           {foreach name='jdpay_line' id='line'}
+                                            <option tid="{$line['thirdid']}" tcode="{$line['code']}" min="{$line['min']}" max="{$line['max']}" ttype="{$line['type']}"  setconfigid="{$line['set_configid']}" sccode="{$line['setconfigcode']}" cashier="{$line['cashier']}">{$line['name']}</option>
+                                            {/foreach}
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="mdl-28_amount">存款金额</label>
+                                        <input type="number" id="mdl-28_amount" name="coin" class="form-control m_value" placeholder="*范围10 ~ 3000">
+                                    </div>
+<input type="hidden" name="thirdid">
+                                    <input type="hidden" name="thirdtype">
+                                    <input type="hidden" name="tcode">
+                                    <input type="hidden" name="scid">
+                                    <input type="hidden" name="sccode">
+                                    <input type="hidden" name="cashier">
+                                    <div class="form-group">
+                                        <button class="btn btn-primary form-control submit-btn">提交</button>
+                                    </div>
+                                </form>
+                            </div>
+                           </div>
+                       </div>
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <!--银联-->
+<div class="online_recharge_wp" style="display: none">
+            <div id="wrapper">
+                <div id="scroller">
+                    <div class="layout-main"><div class="member-module member-module-showRechargeItem">
+                       <div class="module-main diy-scrollbar diy-scrollbar_padding">
+                           <div>
+                                <div class="main-container">
+                                <!--<div class="info-container">-->
+                                    <!--<div class="info" style="color:#333;">-->
+                                        <!--<a href="http://92711.com/" target="_blank" style="display:block; width:100%"><img src="img/shan.gif" style="width:100%;"></a>-->
+                                    <!--</div>-->
+                                <!--</div>-->
+                                <form class="recharge" action="/pay/pay.html" method="POST" target="_blank">
+                                    <div class="form-group">
+                                        <label for="mdl-28_channel">支付通道</label>
+                                        <select id="mdl-28_channel" class="form-control quick_pay_right_6_li fix_textindent">
+                                           {foreach name='unionpay_line' id='line'}
+                                            <option tid="{$line['thirdid']}" tcode="{$line['code']}" min="{$line['min']}" max="{$line['max']}" ttype="{$line['type']}"  setconfigid="{$line['set_configid']}" sccode="{$line['setconfigcode']}" cashier="{$line['cashier']}">{$line['name']}</option>
+                                            {/foreach}
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="mdl-28_amount">存款金额</label>
+                                        <input type="number" id="mdl-28_amount" name="coin" class="form-control m_value" placeholder="*范围10 ~ 3000">
+                                    </div>
+<input type="hidden" name="thirdid">
+                                    <input type="hidden" name="thirdtype">
+                                    <input type="hidden" name="tcode">
+                                    <input type="hidden" name="scid">
+                                    <input type="hidden" name="sccode">
+                                    <input type="hidden" name="cashier">
+
+                                    <div class="form-group">
+                                        <button class="btn btn-primary form-control submit-btn">提交</button>
+                                    </div>
+                                </form>
+                            </div>
+                           </div>
+                       </div>
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+</div>
+
+<div id="alipay_rukuan" style="display: none" >
+    <div id="wrapper">
+        <div id="scroller">
+            <div class="module-main diy-scrollbar diy-scrollbar_padding">
+                <div>
+                    <div>
+                        <div class="main-container">
+                            <div class="info-container">
+                                <div class="info" style="color:#333;">
+                                    大额推荐：使用支付宝转账至（{$alipay['card_bankName']}：{$alipay['card_userName']}）即可快速到账！
+                                </div>
+                            </div>
+                            <div class="do-recharge-info">
+                                <span>开户银行：{$alipay['card_bankName']}</span>
+                                <span>开户名：{$alipay['card_userName']}</span>
+                                <span>开户地址：{$alipay['card_address']}</span>
+                                <span>银行卡号：{$alipay['card_ID']}</span>
+                                <span>扫描二维码付款：<br>
+                                <img src="{$alipay['card_qrcode']}" alt="二维码" style="max-width:50%;display:block;margin:0 auto;"></span>
+                            </div>
+                           <form action="/user/hk_money_set.html?into=true" method="post">
+                           <input type="hidden" name="IntoBank" value="{$alipay['card_bankName']}">
+                                                               <input type="hidden" name="InType" value="支付宝扫码转账">
+                                                               <input type="hidden" name="v_site" value="">
+                                 <div class="form-group">
+                                <label for="mdl-1_realname">支付户名</label>
+                                <input type="text" id="mdl-1_realname" name="card_userName" class="form-control" placeholder="例如：陈XX">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="mdl-1_amount">存款金额</label>
+                                <input type="number" id="mdl-1_amount" name="v_amount" class="form-control" placeholder="例如：500.77元">
+                            </div>
+                            <div class="form-group">
+                                <label for="mdl-1_rtime">存款时间</label>
+                                <input type="date" id="mdl-1_rtime" name="cn_date" value="2018-02-19" class="form-control fix_textindent setwidth">
+                            </div>
+                                <!--<div class="form-group">
+                                    <label for="mdl-1_wantGift">彩金申请</label>
+                                    <select id="mdl-1_wantGift" name="wantGift" class="form-control">
+                                        <option value="0">不申请</option>
+                                        <option value="1">申请</option>
+                                    </select>
+                                </div>-->
+                                <div class="info-warning">
+                                    <p>*存款步骤：先查看要入款的账号信息，然后进行转账，转账成功后再如实提交转账信息，财务专员查收到信息后会及时添加您的款项。</p>
+                                    <p>*请转账时务必增加小数（如：500.77元），以便财务查款。</p>
+                                    <p>*请保留好转账单据作为核对证明。</p>
+                                </div>
+                                <div class="form-group">
+                                    <button class="btn btn-primary form-control submit-btn">提交</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="alipay_third" style="display: none">
+
+            <div id="wrapper">
+                <div id="scroller">
+                    <div class="layout-main"><div class="member-module member-module-showRechargeItem">
+                       <div class="module-main diy-scrollbar diy-scrollbar_padding">
+                           <div>
+                                <div class="main-container">
+                                <!--<div class="info-container">-->
+                                    <!--<div class="info" style="color:#333;">-->
+                                        <!--<a href="http://92711.com/" target="_blank" style="display:block; width:100%"><img src="img/shan.gif" style="width:100%;"></a>-->
+                                    <!--</div>-->
+                                <!--</div>-->
+                                <form class="recharge" action="/pay/pay.html" method="POST" target="_blank">
+                                    <div class="form-group">
+                                        <label for="mdl-28_channel">支付通道</label>
+                                        <select id="mdl-28_channel" class="form-control quick_pay_right_6_li fix_textindent">
+                                           {foreach name='alipay_line' id='line'}
+                                            <option tid="{$line['thirdid']}" tcode="{$line['code']}" min="{$line['min']}" max="{$line['max']}" ttype="{$line['type']}"  setconfigid="{$line['set_configid']}" sccode="{$line['setconfigcode']}" cashier="{$line['cashier']}">{$line['name']}</option>
+                                            {/foreach}
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="mdl-28_amount">存款金额</label>
+                                        <input type="number" id="mdl-28_amount" name="coin" class="form-control m_value" placeholder="*范围10 ~ 3000">
+                                    </div>
+
+<input type="hidden" name="thirdid">
+                                    <input type="hidden" name="thirdtype">
+                                    <input type="hidden" name="tcode">
+                                    <input type="hidden" name="scid">
+                                    <input type="hidden" name="sccode">
+                                    <input type="hidden" name="cashier">
+                                    <div class="form-group">
+                                        <button class="btn btn-primary form-control submit-btn">提交</button>
+                                    </div>
+                                </form>
+                            </div>
+                           </div>
+                       </div>
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+<div id="wechat_rukuan" style="display: none" >
+            <div id="wrapper">
+                <div id="scroller">
+                    <div class="module-main diy-scrollbar diy-scrollbar_padding">
+                        <div>
+                            <div>
+                                <div class="main-container">
+                                    <div class="info-container">
+                                        <div class="info" style="color:#333;">
+                                            大额推荐：使用微信转账至（{$wechat['card_bankName']}：{$wechat['card_userName']}）即可快速到账！
+                                        </div>
+                                    </div>
+                                    <div class="do-recharge-info">
+                                        <span>开户银行：{$wechat['card_bankName']}</span>
+                                        <span>开户名：{$wechat['card_userName']}</span>
+                                        <span>开户地址：{$wechat['card_address']}</span>
+                                        <span>银行卡号：{$wechat['card_ID']}</span>
+                                        <span>扫描二维码付款：<br>
+                                        <img src="{$wechat['card_qrcode']}" alt="二维码" style="max-width:50%;display:block;margin:0 auto;"></span>
+                                    </div>
+                                    <form action="/user/hk_money_set.html?into=true" method="post">
+                                    <input type="hidden" name="IntoBank" value="{$wechat['card_bankName']}">
+                                    <input type="hidden" name="InType" value="微信银行转账">
+                                    <input type="hidden" name="v_site" value="">
+                                        <div class="form-group">
+                                            <label for="mdl-1_realname">支付户名</label>
+                                            <input type="text" id="mdl-1_realname" name="card_userName" class="form-control" placeholder="例如：陈XX">
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="mdl-1_amount">存款金额</label>
+                                            <input type="number" id="mdl-1_amount" name="v_amount" class="form-control" placeholder="例如：500.77元">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="mdl-1_rtime">存款时间</label>
+                                            <input type="date" id="mdl-1_rtime" name="cn_date" value="2018-02-19" class="form-control fix_textindent setwidth">
+                                        </div>
+                                        <!--<div class="form-group">
+                                            <label for="mdl-1_wantGift">彩金申请</label>
+                                            <select id="mdl-1_wantGift" name="wantGift" class="form-control">
+                                                <option value="0">不申请</option>
+                                                <option value="1">申请</option>
+                                            </select>
+                                        </div>-->
+                                        <div class="info-warning">
+                                            <p>*存款步骤：先查看要入款的账号信息，然后进行转账，转账成功后再如实提交转账信息，财务专员查收到信息后会及时添加您的款项。</p>
+                                            <p>*请转账时务必增加小数（如：500.77元），以便财务查款。</p>
+                                            <p>*请保留好转账单据作为核对证明。</p>
+                                        </div>
+                                        <div class="form-group">
+                                            <button class="btn btn-primary form-control submit-btn">提交</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="wechat_third" style="display: none">
+
+                    <div id="wrapper">
+                        <div id="scroller">
+                            <div class="layout-main"><div class="member-module member-module-showRechargeItem">
+                               <div class="module-main diy-scrollbar diy-scrollbar_padding">
+                                   <div>
+                                        <div class="main-container">
+                                        <!--<div class="info-container">-->
+                                            <!--<div class="info" style="color:#333;">-->
+                                                <!--<a href="http://92711.com/" target="_blank" style="display:block; width:100%"><img src="img/shan.gif" style="width:100%;"></a>-->
+                                            <!--</div>-->
+                                        <!--</div>-->
+                                        <form class="recharge" action="/pay/pay.html" method="POST" target="_blank">
+                                            <div class="form-group">
+                                                <label for="mdl-28_channel">支付通道</label>
+                                                <select id="mdl-28_channel" class="form-control quick_pay_right_6_li fix_textindent">
+                                                   {foreach name='wechat_line' id='line'}
+                                                    <option tid="{$line['thirdid']}" tcode="{$line['code']}" min="{$line['min']}" max="{$line['max']}" ttype="{$line['type']}"  setconfigid="{$line['set_configid']}" sccode="{$line['setconfigcode']}" cashier="{$line['cashier']}">{$line['name']}</option>
+                                                    {/foreach}
+                                                </select>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="mdl-28_amount">存款金额</label>
+                                                <input type="number" id="mdl-28_amount" name="coin" class="form-control m_value" placeholder="*范围10 ~ 3000">
+                                            </div>
+
+
+                                    <input type="hidden" name="thirdid">
+                                    <input type="hidden" name="thirdtype">
+                                    <input type="hidden" name="tcode">
+                                    <input type="hidden" name="scid">
+                                    <input type="hidden" name="sccode">
+                                    <input type="hidden" name="cashier">
+
+                                            <div class="form-group">
+                                                <button class="btn btn-primary form-control submit-btn">提交</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                   </div>
+                               </div>
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+</body>
+
+
+<script type="text/javascript">
+    var _w = window.innerWidth * (1-0.08);
+$('.list-group-item').live('click', function() {
+    var index = $(this).index();
+    $(this).parents('.online_recharge_wp').hide();
+    console.log(index);
+    $('#box .online_recharge_wp').eq(index).show();
+    // fix iphone input
+    $('input[name=cn_date]').css('width',$('input[name=v_amount]').width()+98+'px');
+    $('.fix_textindent').css('text-indent','84px');
+  });
+// fix iphone input date
+    $('.recharge-item').live('click',function(){
+        //$('.setwidth').css('width',$('.info-container').width()+'px');
+        $('.setwidth').css('width',_w+'px');
+
+    })
+
+
+
+  $('.quick_pay_right_6_li').live('change', function(){
+        var obj = $(this).children('option:selected');
+        var min = $(obj).attr("min");
+        var max = $(obj).attr("max");
+        if(min || max){
+          var MShow = "充值额度为" + min + "~" + max + "元";
+          $(".m_value").attr('placeholder', MShow);
+        }else{
+          var MShow = "充值额度为" + 10 + "~" + 5000 + "元";
+          $(".m_value").attr('placeholder', MShow);
+        }
+        var type = $(obj).attr("ttype");
+        var thirdid = $(obj).attr("tid");
+        var tcode = $(obj).attr("tcode");
+        var scid = $(obj).attr("setconfigid");
+        var sccode = $(obj).attr("sccode");
+        var cashier = $(obj).attr("cashier");
+
+        $(this).parents('form').find("[name='thirdid']").val(thirdid);
+        $(this).parents('form').find("[name='tcode']").val(tcode);
+        $(this).parents('form').find("[name='thirdtype']").val(type);
+        $(this).parents('form').find("[name='scid']").val(scid);
+        $(this).parents('form').find("[name='sccode']").val(sccode);
+        $(this).parents('form').find("[name='cashier']").val(cashier);
+   });
+  $('.quick_pay_right_6_li').change();
+
+
+</script>
+</html>

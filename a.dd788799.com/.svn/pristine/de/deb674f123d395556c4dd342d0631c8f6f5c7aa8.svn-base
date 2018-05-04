@@ -1,0 +1,107 @@
+{layout name="layout" /}
+
+<div class="row">
+  <div class="col-xs-12">
+    <div class="box">
+      <div class="box-header">
+        <i class="fa fa-plus-square pull-right add_member"></i>
+        <form>
+            <div class="pull-left">
+              <select class="form-control input-sm" name="set_id" aria-hidden="true">
+                 <option value="0" >全部支付类别</option>
+                 {foreach $setlist as $v}
+                      <option value="{$v.id}" {if($Think.get.set_id==$v.id)} selected="selected" {/if}>{$v.name}</option>
+                 {/foreach}
+              </select>
+            </div>
+            <div class="pull-left" style="margin-left:15px;">
+              <select class="form-control input-sm" name="third_id" aria-hidden="true">
+                 <option value="0" >全部第三方</option>
+                 {foreach $thirdlist as $v}
+                    <option value="{$v.id}" {if($Think.get.third_id==$v.id)} selected="selected" {/if}>{$v.name}</option>
+                 {/foreach}
+              </select>
+            </div>
+            <div class="has-feedback pull-left" style="margin-left:15px;">
+              <button type="submit" class="btn btn-block btn-default btn-sm filter">查询</button>
+            </div>
+        </form>
+      </div>
+      <!-- /.box-header -->
+      <div class="box-body table-responsive no-padding">
+        <table class="table table-hover">
+          <tr>
+            <th>#</th>
+            <th>分类名称</th>
+            <th>通道名称</th>
+            <th>第三方名称</th>
+            <th>通道代码</th>
+            <th>渠道代码</th>
+            <th>最低充值金额</th>
+            <th>最高充值金额</th>
+            <!--<th>报警时间(单位:分)</th>
+            <th>收银台/二维码</th>-->
+            <th>风控开关</th>         
+            <th>操作</th>
+          </tr>
+          {if(!$list->isEmpty())}
+            {foreach $list as $vo} 
+              <tr>        
+                <td>{$vo->id}</td>
+                <td>{$vo->paySet->name}</td>
+                <td>{$vo->payWay->name}</td>        
+                <td>{$vo->payThird->name}</td>    
+                <td>{$vo->local_code}</td>
+                <td>{$vo->code}</td>
+                <td>{$vo->min}</td>
+                <td>{$vo->max}</td>
+                <td>{eq name="$vo->status" value="0"}关闭{/eq}
+                    {eq name="$vo->status" value="1"}开启{/eq}
+                </td>
+                <td >
+                  <i  data-id="{$vo->id}" class="edit fa fa-pencil"></i>
+                </td>
+              </tr>
+            {/foreach}
+          {else}
+              <tr><td colspan="10" style="text-align:center;">暂无数据</td></tr>
+          {/if}
+        </table>
+        {$list->render();}
+      </div>
+      <!-- /.box-body -->
+    </div>
+    <!-- /.box -->
+  </div>
+</div>
+
+<!-- AdminLTE App -->
+<script type="text/javascript">
+$(function(){
+  $(".add_member").click(function(){
+    $.get('/pay/channel_edit.html',{},function(data){
+      layer.open({
+        type: 1,
+        title: '新增支付渠道',
+        maxmin: true, //开启最大化最小化按钮
+        area: ['900px', '600px'],
+        content: data
+      });
+    },'html');
+  });
+  
+  $(".edit").click(function(){
+    var id = $(this).attr('data-id');
+    $.get('/pay/channel_edit.html',{id:id},function(data){
+      layer.open({
+        type: 1,
+        title: '修改支付渠道',
+        maxmin: true, //开启最大化最小化按钮
+        area: ['900px', '600px'],
+        content: data
+      });
+    },'html');
+  });
+
+});
+</script>

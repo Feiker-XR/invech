@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>绑定银行卡</title>
+	</head>
+	<!--公用部分 css-->
+	<link rel="stylesheet" type="text/css" href="../public/css/public.css"/>
+	<link rel="stylesheet" href="../public/css/com.css" />
+	<link rel="stylesheet" type="text/css" href="css/styles.css"/>
+	<!--私用 css-->
+	<link rel="stylesheet" type="text/css" href="css/records.css"/>
+	
+	<body>
+		<div class="com-wp">
+			<!--header-->
+			<div class="com-header">
+				<div class="logo-wp">
+					<img src="../public/images/logo.png" alt="" />
+				</div>
+				<div class="logo-title-wp">
+					<img src="../public/images/logo-title.png" alt="" />
+				</div>
+				<div class="hours-right">
+					<img src="../public/images/logo-huors.png" alt="" />
+				</div>
+			</div>
+			<!--main-->
+			<div class="main-wp">
+				<!--com-left-->
+				<div class="com-left">
+					<h3 class="com-left-title">
+						<img src="../public/images/person-info.png" alt="" />
+						<span>个人中心</span>
+					</h3>
+					<div class="com-left-nav">
+						<ul class="com-left-nav-list">
+							<li class="nav-bg">
+								<i class="nav-i">
+									<img src="../public/images/nav-1.png" alt="" />
+								</i>
+								<i class="nav-bg-i">
+									<img src="../public/images/nav-bg-1.png" alt="" />
+								</i>
+								<a href="javaScript:;" class="nav-cr">账户信息</a>
+								<span></span>
+							</li>
+							<li>
+								<i class="nav-i">
+									<img src="../public/images/nav-2.png" alt="" />
+								</i>
+								<i class="nav-bg-i">
+									<img src="../public/images/nav-bg-2.png" alt="" />
+								</i>
+								<a href="javaScript:;">充值</a>
+								<span></span>
+							</li>
+							<li>
+								<i class="nav-i">
+									<img src="../public/images/nav-3.png" alt="" />
+								</i>
+								<i class="nav-bg-i">
+									<img src="../public/images/nav-bg-3.png" alt="" />
+								</i>
+								<a href="javaScript:;">提现</a>
+								<span></span>
+							</li>
+							<li>
+								<i class="nav-i">
+									<img src="../public/images/nav-4.png" alt="" />
+								</i>
+								<i class="nav-bg-i">
+									<img src="../public/images/nav-bg-4.png" alt="" />
+								</i>
+								<a href="javaScript:;">往来记录</a>
+								<span></span>
+							</li>
+							<li>
+								<i class="nav-i">
+									<img src="../public/images/nav-5.png" alt="" />
+								</i>
+								<i class="nav-bg-i">
+									<img src="../public/images/nav-bg-5.png" alt="" />
+								</i>
+								<a href="javaScript:;">额度转换</a>
+								<span></span>
+							</li>
+							<li>
+								<i class="nav-i">
+									<img src="../public/images/nav-6.png" alt="" />
+								</i>
+								<i class="nav-bg-i">
+									<img src="../public/images/nav-bg-6.png" alt="" />
+								</i>
+								<a href="javaScript:;">注单管理</a>
+								<span></span>
+							</li>
+							<li>
+								<i class="nav-i"> 
+									<img src="../public/images/nav-7.png" alt="" />
+								</i>
+								<i class="nav-bg-i">
+									<img src="../public/images/nav-bg-7.png" alt="" />
+								</i>
+								<a href="javaScript:;">投注报表</a>
+								<span></span>
+							</li>
+							<li>
+								<i class="nav-i">
+									<img src="../public/images/nav-8.png" alt="" />
+								</i>
+								<i class="nav-bg-i">
+									<img src="../public/images/nav-bg-8.png" alt="" />
+								</i>
+								<a href="javaScript:;">公告信息</a>
+								<span></span>
+							</li>
+							<li>
+								<i class="nav-i">
+									<img src="../public/images/nav-9.png" alt="" />
+								</i>
+								<i class="nav-bg-i">
+									<img src="../public/images/nav-bg-9.png" alt="" />
+								</i>
+								<a href="javaScript:;">代理中心</a>
+								<span></span>
+							</li>
+						</ul>
+					</div>
+				</div>
+				<!--com right 跳转-->
+				<div class="com-right">
+					<div class="com-choose-all">
+						<div class="iDate date data-time-pircter">
+							<input type="text">
+							<button type="button" class="addOn"></button>
+						</div>
+						<div class="and">~</div>
+						<div class="iDate date data-time-pircter">
+							<input type="text">
+							<button type="button" class="addOn"></button>
+						</div>
+						<!--类型-->
+						<div class="com-type-wp">
+							<div class="com-type-show type-show">
+								<span>类型</span>
+								<img src="imgs/san.png" alt="" />
+							</div>
+							<div class="com-type-options type-hide">
+								<span data-value='0'>PT转出</span>
+								<span data-value='1'>QQ扫码</span>
+								<span data-value='2'>微信钱包</span>
+							</div>
+						</div>
+						<!--分类-->
+						<div class="com-type-wp" id="com-type-wp">
+							<div class="com-type-show classification-show">
+								<span>分类</span>
+								<img src="imgs/san.png" alt="" />
+							</div>
+							<div class="com-type-options classification-hide">
+								<span data-value='0'>PT转出</span>
+								<span data-value='1'>QQ扫码</span>
+								<span data-value='2'>微信钱包</span>
+							</div>
+						</div>
+						<!--搜索-->
+						<div class="com-search">
+							<button>搜索</button>
+						</div>
+					</div>
+					<!--表格内容-->
+					<div class="tabel-wp">
+						<table border="1">
+						  <tr class="tHeader">
+						    <th>日期</th>
+						    <th>类型</th>
+						    <th>分类</th>
+						    <th>金额</th>
+						    <th>余额</th>
+						  </tr>
+						  <tr>
+						    <td>4月1日</td>
+						    <td>额度转换</td>
+						    <td>PT转出</td>
+						    <td>100.00</td>
+						    <td>300.00</td>
+						  </tr>
+						  <tr>
+						    <td>4月2日</td>
+						    <td>充值</td>
+						    <td>微信扫码</td>
+						    <td>100.00</td>
+						    <td>400.00</td>
+						  </tr>
+						</table>
+					</div>
+					<!--本页总计-->
+					<div class="totle-number">
+						<p>
+							<span class="totle-num">本页总计：</span>
+							<span class="totle-nums">1000.00</span>
+						</p>
+						<p>
+							<span  class="totle-num">总计：</span>
+							<span  class="totle-nums">15200.00</span>
+						</p>
+					</div>
+					<div class="totle-footer">
+						<div class="footer-left">
+							<span>每页显示</span>
+							<p>
+								<select name="">
+									<option value="">8条</option>
+									<option value="">7条</option>
+									<option value="">6条</option>
+									<option value="">5条</option>
+								</select>
+								<img src="imgs/san.png" alt="" />
+							</p>
+							<span>共<i>9</i>条</span>
+						</div>
+						<div class="footer-right">
+							<a href="javaScript:;" class="btnGO">
+								<img src="imgs/left.png" alt="" />
+							</a>
+							<span>2</span>
+							<a href="javaScript:;" class="btnGO">
+								<img src="imgs/right.png"/>
+							</a>
+							<input type="text" value="2"/>
+							<i>页</i>
+							<a href="javaScript:;" class="goPage">跳转</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--共用部分 js-->
+		<script src="../public/lib/jquery1.9.0.min.js"></script>
+		<script src="../public/lib/com.js"></script>
+		<!--本页面 私用 js-->
+		<script type="text/javascript" src="js/moment.js"></script>
+		<script type="text/javascript" src="js/bootstrap-datetimepicker.js"></script>
+		<script>
+			$(function(){
+				if($(".iDate.date").length>0){
+			        $(".iDate.date").datetimepicker({
+			            locale:"zh-cn",
+			            format:"YYYY-MM-DD",
+			            dayViewHeaderFormat:"YYYY年 MMMM"
+			        });
+			   }
+				
+				/**
+				 * 	类型
+				 */
+				$('.type-show').click(function(){
+					$(".type-hide").toggle();
+				})
+				$(".type-hide span").click(function(){
+					$(this).parent().toggle();
+					var font=$(this).text();
+					$(".type-show").find('span').text(font);
+				})	
+				/**
+				 * 	分类
+				 */
+				$('.classification-show').click(function(){
+					$(".classification-hide").toggle();
+				})
+				$(".classification-hide span").click(function(){
+					$(this).parent().toggle();
+					var font=$(this).text();
+					$(".classification-show").find('span').text(font);
+				})	
+				
+				$("tr:even").addClass('evenBg');
+				$("tr:odd").addClass('oddBg')
+			
+			
+			})
+		</script>
+	</body>
+</html>
++
+
+
+
+

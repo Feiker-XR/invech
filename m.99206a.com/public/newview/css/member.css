@@ -1,0 +1,588 @@
+
+.new_container_wp{
+    height: 655px;
+    margin: 0 auto;
+    background: #ede9e9;
+}
+.new_container_left_wp{
+    width: 190px;
+    float: left;
+    height: 100%;
+}
+/*左边内容*/
+.new_container_left_wp ul{
+    padding: 12px;
+}
+.new_container_left_wp ul li{
+    height: 48px;
+    margin-bottom: 10px;
+    position: relative;
+    border-radius: 8px;
+    background: #ffffff;
+    width: 100%;
+}
+.new_container_left_wp ul li a{
+    display: block;
+    height: 48px;
+    color: #333;
+    float: left;
+}
+.new_container_left_wp ul li.addLeft{
+    display: block;
+    height: 48px;
+    box-shadow: 4px 6px 8px #888;
+    left: 18px;
+    color: #fff;
+    background-color: rgb(91,91,91);
+}
+.new_container_left_wp ul li i{
+    border: 6px solid transparent;
+    position: absolute;
+    top: 20px;
+    right: -12px;
+    background: transparent;
+    width: 0px;
+    height: 0px;
+    border-left-color: rgb(91,91,91);
+    display: none;
+}
+.new_container_left_wp ul li a span{
+    display: block;
+    width: 34px;
+    float: left;
+    height: 35px;
+    margin-top: 8px;
+    margin-left: 18px;
+}
+.new_container_left_wp ul li a b{
+    color: #323232;
+    font-size: 16px;
+    line-height: 48px;
+    display: block;
+    float: right;
+    margin-right: 28px;
+    font-weight: normal;
+}
+/*右边内容*/
+.new_container_right_wp{
+    height: 630px;
+    float: right;
+    margin-top: 13px;
+    margin-right: 13px;
+    border-radius: 8px;
+    overflow: hidden;
+    background: #ffffff;
+}
+.new_container_right_cont{
+    overflow: hidden;
+    padding-top: 10px;
+}
+/*快速充值*/
+.Quick_recharge{
+    display: none;
+}
+/*在线支付*/
+.Pay_in_this_case{
+    display: block;
+}
+.web_left_width_wp{
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    margin: 10px auto;
+}
+.web_left_img_wp{
+    width: 720px;
+    height: 109px;
+    border-radius: 10px;
+    background: #F8F8F8;
+    border: 1px solid #ECE8E9;
+    margin: 25px auto;
+}
+.web_left_img_wp img{
+    display: block;
+    width: 698px;
+    height: 88px;
+    margin: 11px auto;
+}
+.web_left_cont_wp{
+    width: 740px;
+    margin: 0 auto;
+    padding: 10px;
+}
+.web_left_number_wp{
+    height: 35px;
+    clear: both;
+}
+.web_left_number_wp label{
+    color: #333333;
+    text-align: right;
+    width: 90px;
+    display: block;
+    font-size: 14px;
+    margin-right: 8px;
+    line-height: 35px;
+    float: left;
+    font-weight: bolder;
+}
+.web_left_number_wp input{
+    display: block;
+    float: left;
+    width: 609px;
+    height: 35px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    outline: none;
+    padding-left: 10px;
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+    -webkit-transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;
+    -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+    transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+    color: #333333;
+    font-size: 14px;
+}
+.web_left_back_wp{
+    width: 100%;
+    margin: 25px 0;
+}
+.web_left_back_font{
+    height: 100%;
+    color: #333333;
+    text-align: right;
+    width: 90px;
+    display: block;
+    font-size: 14px;
+    margin-right: 8px;
+    line-height: 35px;
+    float: left;
+    font-weight: bolder;
+}
+.web_left_back_img{
+    display: block;
+    float: left;
+    width: 609px;
+    height: 100%;
+}
+.web_left_back{
+    width: 107px;
+    height: 34px;
+    position: relative;
+    float: left;
+    margin-left: 10px;
+    margin-bottom: 10px;
+}
+.web_left_back input{
+    position: absolute;
+    z-index: 3;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    cursor: pointer;
+}
+.web_left_back img{
+    position:absolute;
+    z-index: 1;
+    width: 107px;
+    height: 34px;
+}
+.web_left_back span{
+    border: 2px solid #efefef;
+    display: block;
+    width: 107px;
+    height: 34px;
+}
+.web_left_back input:checked+span{
+    border: 2px solid #adadad;
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+.web_left_back input:checked+span::after{
+    content: '\00a0';
+    display: inline-block;
+    border: 3px solid #adadad;
+    border-top-width: 0;
+    border-right-width: 0;
+    width: 12px;
+    height: 6px;
+    -webkit-transform: rotate(-50deg);
+    position: absolute;
+    bottom: 3px;
+    right: 1px;
+    color: transparent;
+    opacity: 1;
+    z-index:2;
+}
+.web_left_back_button_wp{
+    clear: both;
+    padding-top: 15px;
+}
+.web_left_back_button{
+    display: block;
+    padding: 6px 12px;
+    margin-bottom: 0;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.42857143;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-image: none;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    width: 100%;
+    background-color: rgb(91,91,91) !important;
+    color: #ffffff;
+    outline: none;
+    margin-top: 10px;
+}
+/*银行汇款*/
+.Bank_transfer{
+    display: none;
+}
+.Bank_transfer_top_wp{
+    padding: 20px 70px;
+    border-radius: 10px;
+    border: 1px solid #F8F8F8;
+    margin: 10px auto;
+    background: #f7f7f7;
+}
+.Bank_transfer_top_wp div{
+    line-height: 30px;
+    font-size: 18px;
+    color: #333333;
+    margin-left: 18px;
+}
+.Bank_transfer_top_wp div:first-child{
+
+}
+.Bank_transfer_bottom_wp{
+    width: 720px;
+    margin-top: 30px;
+}
+.Bank_transfer_bottom_form{
+    height: 35px;
+    margin-bottom: 10px;
+}
+.Bank_transfer_bottom_form label{
+    display: block;
+    width: 140px;
+    text-align: right;
+    line-height: 35px;
+    font-weight: bolder;
+    font-size: 14px;
+    color: #333333;
+    float: left;
+}
+.Bank_transfer_bottom_form input{
+    width: 260px;
+    height: 35px;
+    border: 1px solid #ccc;
+    outline: none;
+    border-radius: 8px;
+    padding-left: 10px;
+    line-height: 35px;
+    display: block;
+    float: left;
+    margin: 0 30px;
+}
+.Bank_transfer_bottom_form span{
+    color: #888888;
+    line-height: 35px;
+}
+.Bank_transfer_bottom_form select{
+    width: 275px;
+    height: 35px;
+    border: 1px solid #ccc;
+    outline: none;
+    border-radius: 8px;
+    padding-left: 10px;
+    line-height: 35px;
+    display: block;
+    float: left;
+    margin: 0 30px;
+}
+.web_left_back_button.Bank_transfer_bottom_form_button{
+    width: 277px;
+    margin-left: 173px;
+}
+.Bank_transfer_bottom_form_ul{
+    margin-left: 70px;
+    margin-top: 30px;
+}
+.Bank_transfer_bottom_form_ul li{
+    margin-top: 2px;
+    color: #888888;
+    font-size: 14px;
+}
+input[type=date]::-webkit-inner-spin-button {
+    margin-top: 8px;
+}
+/*支付宝付款*/
+.Alipay_payment{
+    display: none;
+}
+.Alipay_payment_wp,.Wecaht_payment_wp{
+    width: 755px;
+    height: 596px;
+    margin: 0px auto;
+    border: 1px solid #ECE8E9;
+    background: #F8F8F8;
+    margin-top: 14px;
+    border-radius: 8px;
+}
+.Alipay_payment_btn_wp,.Wechat_payment_btn_wp,.QQ_payment_btn_wp{
+    width: 301px;
+    height: 45px;
+    margin: 0px auto;
+    border: 1px solid #ECE8E9;
+    background: #F8F8F8;
+    margin-top: -19px;
+    border-radius: 40px;
+}
+.Alipay_payment_btn_wp a,.Wechat_payment_btn_wp a,.QQ_payment_btn_wp a{
+    display: inline-block;
+    width: 49%;
+    text-align: center;
+    line-height: 45px;
+    font-size: 16px;
+    color: #333333;
+}
+.Alipay_payment_btn_wp a.addColor,.Wechat_payment_btn_wp a.addColor,.QQ_payment_btn_wp a.addColor{
+    color: #ec971f;
+}
+.Alipay_payment_btn_wp a:first-child,.Wechat_payment_btn_wp a:first-child,.QQ_payment_btn_wp a:first-child {
+    border-right:1px solid #ccc;
+}
+/**
+    切换
+ */
+.Alipay_payment_cont_wp{
+    width: 736px;
+    height: 544px;
+    margin: 0 auto;
+    margin-top: 5px;
+}
+.Alipay_payment_cont_title{
+    background-color: #F0EDE7;
+    border-color: #ECE8E9;
+    border-radius: 8px;
+    height: 35px;
+    line-height: 35px;
+    padding-left: 10px;
+    color: #333333;
+    margin-bottom: 2px;
+}
+.Alipay_payment_cont_mid{
+    height: 210px;
+    margin: 0 auto;
+}
+.Alipay_payment_cont_mid_one{
+    width: 180px;
+    float: left;
+}
+.Alipay_payment_cont_mid_one p{
+    text-align: center;
+    margin-top: 50px;
+    font-size: 14px;
+    font-weight: bolder;
+    color: #333333;
+}
+.Alipay_payment_cont_mid_one .Alipay_payment_cont_mid_one_line{
+    width: 30px;
+    height: 2px;
+    color: #bbb;
+    margin: 0 auto;
+    background: #bbb;
+    margin-top: 32px;
+}
+.Alipay_payment_cont_mid_one span{
+    display: block;
+    text-align: center;
+    color: #ec971f;
+    font-size: 14px;
+    margin-top: 30px;
+}
+.Alipay_payment_cont_mid_tow{
+    width: 279px;
+    float: left;
+}
+.Alipay_payment_cont_mid_tow img{
+    display: block;
+    margin: 0 auto;
+}
+.Alipay_payment_cont_mid_three{
+    width: 48px;
+    float: left;
+}
+.Alipay_payment_cont_mid_three p{
+    text-align: center;
+    margin-top: 50px;
+    font-size: 14px;
+    font-weight: bolder;
+    color: #333333;
+}
+.Alipay_payment_cont_mid_three .Alipay_payment_cont_mid_one_line{
+    width: 30px;
+    height: 2px;
+    color: #bbb;
+    margin: 0 auto;
+    background: #bbb;
+    margin-top: 32px;
+}
+.Alipay_payment_cont_mid_three span{
+    display: block;
+    text-align: center;
+    color: #ec971f;
+    font-size: 14px;
+    margin-top: 30px;
+}
+.Alipay_payment_form{
+    clear: both;
+}
+.Bank_transfer_bottom_form_ul_width{
+    width: 639px;
+    margin-left: 0px;
+}
+.Bank_transfer_bottom_form_ul_width li{
+    margin-left: 49px;
+}
+.Alipay_payment_cont_first{
+    display: block;
+}
+.Alipay_payment_cont_tow{
+    display: none;
+}
+.web_left_back_button.Bank_transfer_bottom_form_button.Alipay_payment_cont_tow_form_button{
+    width: 617px;
+    margin-left: 100px;
+    margin-top: 10px;
+}
+/**
+    微信支付
+ */
+.WeChat_payment{
+    display: none;
+}
+.WeChat_payment_img_wp{
+    padding-top: 100px;
+    padding-left: 40px;
+}
+.WeChat_payment_img_wp img{
+    display: block;
+    margin: 0 auto;
+    width: 160px;
+    height: 160px;
+}
+.WeChat_payment_img_wp p{
+    text-align: center;
+    line-height: 40px;
+    font-size: 16px;
+    color: #333333;
+}
+.WeChat_payment_font_wp{
+    width: 500px;
+    margin: 0 auto;
+    margin-top: 38px;
+}
+.WeChat_payment_font_wp li{
+    font-size: 14px;
+    color: #333333;
+    line-height: 25px;
+    margin-left: 59px;
+}
+/*QQ钱包*/
+.QQ_wallet{
+    display: none;
+}
+/*财付通转账*/
+.Tenpay_transfer{
+    display: none;
+}
+/*京东钱包*/
+.Jingdong_wallet{
+    display: none;
+}
+/**
+    银联扫码
+ */
+.CUP_scan_code{
+    display: none;
+}
+/**
+    不支持该支付方式的弹框内容
+ */
+.mask{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    background: url("../images/mask.png");
+    top: 0;
+    left: 0px;
+    display: none;
+}
+.mask_model_wp{
+    width: 302px;
+    height: 218px;
+    background: #ffffff;
+    border-radius: 8px;
+    position: fixed;
+    z-index: 5;
+    left: 50%;
+    top: 50%;
+    margin-left: -151px;
+    margin-top: -109px;
+    box-shadow: 0 5px 15px rgba(0,0,0,.5);
+    display: none;
+}
+.mask_model_title{
+    height: 54px;
+    line-height: 54px;
+    text-align: center;
+    color: #333333;
+    font-size: 18px;
+    border-bottom: 1px solid #e0d0ca;
+}
+.mask_model_cont{
+    height: 98px;
+    border-bottom: 1px solid #e0d0ca;
+}
+.mask_model_cont img{
+    width: 48px;
+    height: 48px;
+    display: block;
+    float: left;
+    margin-top: 27px;
+    margin-left: 52px;
+}
+.mask_model_cont span{
+    display: block;
+    float: left;
+    color: #666666;
+    font-size: 16px;
+    line-height: 98px;
+}
+.mask_model_btn{
+
+}
+.mask_model_btn button{
+    display: block;
+    margin: 15px auto;
+    width: 105px;
+    height: 35px;
+    background-color: rgb(91,91,91) !important;
+    text-align: center;
+    line-height: 35px;
+    cursor: pointer;
+    outline: none;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    color: #ffffff;
+}

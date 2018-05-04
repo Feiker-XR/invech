@@ -1,0 +1,313 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8"/>
+<meta http-equiv="Cache-Control" content="no-cache"/>
+<meta content="telephone=no" name="format-detection" />
+<meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=2.0"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no">
+<meta name="keywords" content="#" />
+<meta name="description" content="#" />
+<link rel="apple-touch-icon-precomposed" sizes="114x114" href="">
+<link rel="apple-touch-icon-precomposed" sizes="57x57" href="">
+<title>微信|支付宝快速充值（秒到账）</title>
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+<link href="/pay/css/style.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" href="/css/font-awesome.min.css">
+<link rel="stylesheet" href="/styles/ezweb.css">
+<link rel="stylesheet" type="text/css" href="/fonts-new/iconfont.css">	
+<link rel="stylesheet" href="/css/500f_new_wap.css">
+
+<script type="text/javascript" src="/pay/js/jquery.js"></script>
+<script type="text/javascript" src="/pay/js/swipe.tryine.min.js"></script>
+<script type="text/javascript" src="/pay/js/channel.min.js"></script>
+<script src="/pay/js/demo.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+	$(".scrollleft").imgscroll({
+		speed: 40,    //图片滚动速度
+		amount: 0,    //图片滚动过渡时间
+		width: 1,     //图片滚动步数
+		dir: "left"   // "left" 或 "up" 向左或向上滚动
+	});	
+});
+</script> 
+<style type="text/css">
+.form-group .input-group{width: 70%;margin: 0 auto;}	
+.swipe-wrap{margin-top: 50px;}
+.btn-block{width: 80%;margin: 0 auto;}
+</style>
+</head>
+
+<body>
+	<!--顶部固定nav-->
+	
+	
+{//include file='common/nav'}
+
+
+	<form method="post" id="pay" action="{:url('pay/pay')}">
+      
+	<div class="bod">
+		<!--焦点图 -->
+		
+        <div id="j_imgSwipe" class="swipe">
+	        <div class="swipe-wrap" data-sudaclick="imgswipe">
+	         <!--  <div class="swipe_pic"><a href="#"><img src="/pay/images/banner1.jpg" alt="banner"/> </a></div> -->
+	          <div class="swipe_pic"><a href="#"><img src="/pay/images/banner2.jpg" alt="banner"/> </a></div>
+			  <div class="swipe_pic"><a href="#"><img src="/pay/images/banner3.jpg" alt="banner"/> </a></div>
+	        </div>
+	        <ul class="swipe_num">
+	          <li class="active"></li>
+	          <!-- <li ></li> -->
+			  <li ></li>
+	        </ul>
+        </div>
+	    <!--焦点图 -->
+
+    <!--滚动条-->
+    <!-- 
+		<div class="td_f">
+	        <p class="so_p"><img src="/pay/images/pic_1.jpg" alt="" /></p>
+	        <a href="#" title="">
+	        <div class="scrollleft">
+	            <ul>
+	              <li>支付流程：输入并确认海洋之神正确的会员账号-输入充值金额-点击确认支付-付款成功后1-10秒自动到账！</li>
+	            </ul>
+	        </div>
+	        </a>
+	    </div>
+
+    <!--滚动条-->
+    {empty name="Think.session.username"}
+    <div class="m_at">
+    	<span>会员账号</span>
+        <input type="text" class="select_ipt" name="username" id="username" placeholder="(填写您的会员账号 )" onpaste="return false" onKeyUp="value=value.replace(/[^\w\.\/]/ig,'')" >
+    </div>
+    <div class="m_at">
+    	<span>确认账号</span>
+        <input type="text" class="select_ipt" name="rusername"  id="rusername" placeholder="(填写您的会员账号 )" onpaste="return false" onKeyUp="value=value.replace(/[^\w\.\/]/ig,'')">
+    </div>
+	{else/}
+		<input type="hidden" name="username" id="username" value="{$username}" />
+		<input type="hidden" name="rusername" id="rusername" value="{$username}" />
+	{/empty}
+    <style type="text/css">
+		.pay_online_1 {
+			display: block;
+		    float: left;
+		    width: 47%;
+		    color: white;
+		    background: #4cb4e2;
+		    height: 4rem;
+		    text-align: center;
+		    line-height: 4rem;
+		    font-size: 1.5rem;
+		    border-radius: 5px;
+		    margin: 0 2% 0;
+		}
+		.pay_online_2 {
+		    display: block;
+		    float: left;
+		    width: 47%;
+		    color: white;
+		    background: #ccc;
+		    height: 4rem;
+		    text-align: center;
+		    line-height: 4rem;
+		    font-size: 1.5rem;
+		    border-radius: 5px;
+		    margin: 0 0 2%;
+		}
+		</style>
+		<div class="pay_online">
+			<a href="{:url('pay/member')}" class="pay_online_1">在线支付</a>
+			<a href="{:url('user/huikuan_new')}" class="pay_online_2">公司入款</a>
+		</div>
+
+    <div class="m_at">
+    	<span>充值金额</span>
+        <input type="text" class="select_ipt" name="coin" id="coin" placeholder="扫码10-5000元" onKeyUp="value=this.value.replace(/\D+/g,'')">
+    </div>
+    <div class="f_ar">
+    	<div class="f_m1">支付类型</div>
+    	<div id="getset"></div>
+    	<input type="hidden" name="scid" id="scid" value=""> 
+        <input type="hidden" name="thirdid" id="thirdid" value=""> 
+	    <input type="hidden" name="thirdtype" id="thirdtype" value=""> 
+	    <input type="hidden" name="tcode" id="tcode" value=""> 
+	    <input type="hidden" name="sccode" id="sccode" value=""> 
+	    <input type="hidden" name="cashier" id="cashier" value=""> 	
+        <div class="f_m2_click"><button href="javascript:btnOK_zf_onclick();" class="f_m2_btn">确认支付</button></div>
+    </div>
+    </div>
+   </form>
+    <div class="sp_n">
+	        <span style="font-size: 18px;color: #403a38; display: inline-block;text-align: center; width: 100%;">温馨提示</span>
+	        <span>1、微信扫码，支付宝支付单笔5千元以内。</span><br>
+	        <span>2、为了避免掉单情况的发生，请您在支付完成后，等待"支付成功"页面跳转出来后再关闭页面，以免掉单。</span><br>
+	        <span>3、支付未到账？无法支付？请联系<a href="http://messengers.providesupport.net/messenger/1krx7tvqi0eyu08edbrhkbwl9h.html" target="_blank">【在线客服】</a></span>
+	</div>
+	
+	<div style="height: 7px;background-color: #eee; display: flex;"></div>   
+   <div class="foot">Copyright &copy; 皇冠娱乐城 版权所有</div>    
+   <div class="block_60"></div>
+</body>
+
+<style>
+	.f_m2 p img{width:initial}
+	.f_m2 input[type=radio]{float:right;margin-right: 31px;margin-top: 14px;}
+	.f_m_all2 .f_m4{width: 40%;text-align: center;border-bottom:1px solid #eeeeee}
+	.f_m_all2 .f_m4 span{margin-right:10px;}
+</style>
+
+<script type="text/javascript">
+$(function(){
+	$.ajax({
+		url:'{:url('pay/appopen')}',
+		dataType:'json',
+		type: 'GET',
+		success:function(obj){
+ 			var	num = obj.num; 				
+			str = "";
+			for(var i=0;i<num;i++){
+			  	str+="<div class='f_m2_all'>" + "</div>";
+			}		
+			$("#getset").html(str);
+			 for (i=0;i<obj.value.length;i++){					
+				var objId = obj.value[i].id,
+					objImg = obj.value[i].img,
+					objName = obj.value[i].name	
+				if(i == 0){
+					var html = "<div class='f_m2'><div class='f_m2_1'><img src='"+objImg+"' class='fl'/>"
+				       + "<span>"+objName+"</span>"
+				       + "<i class='f_m2_down'></i></div><div class='block_10'></div></div><div class='f_list' scid='"+objId+"'></div>";
+					$("#getset").find(".f_m2_all").eq(i).html(html);
+				}else{
+					var html = "<div class='f_m2'><div class='f_m2_1'><img src='"+objImg+"' class='fl'/>"
+				       + "<span>"+objName+"</span>"
+				       + "<i class='f_m2_down'></i></div><div class='block_10'></div></div><div class='f_list' scid='"+objId+"'></div>";
+					$("#getset").find(".f_m2_all").eq(i).html(html);
+				}
+			}	 
+		}
+	})
+ })	
+$(function(){	
+	$(document).on("click",".f_m2",function(){
+		Tthis = $(this);
+		fListDiv = Tthis.siblings(".f_list")
+		var scid = fListDiv.attr("scid");
+		$.post("{:url('pay/appcode')}",{
+				scid:scid
+			},function(obj){
+				if(obj.stat == 0){
+					var	num = obj.num; 				
+					str = "";
+					for(var i=0;i<num;i++){
+					  	str+="<div class='f_list_li'>" + "</div>";
+					}	
+					fListDiv.html(str);
+					for (i=0;i<obj.value.length;i++){
+						var objId = obj.value[i].id,
+							objName = obj.value[i].name,
+							objThirdid = obj.value[i].thirdid,
+							objSetid = obj.value[i].setid,
+							objSetconfigid = obj.value[i].set_configid,
+							objTcode = obj.value[i].code,
+							objType = obj.value[i].type,
+							objScode = obj.value[i].setconfigcode,
+							objMin = obj.value[i].min,
+							objMax = obj.value[i].max
+							objCashier = obj.value[i].cashier;
+						if(i == 0){
+							var html = "<div class='f_m2_show'>"
+								+ "<label><input type='radio' class='radio_class' name='radio_name' setid='"+objSetid+"' setcid='"+objSetconfigid+"' ttype='"+objType+"' tcode='"+objTcode+"' sccode='"+objScode+"' min='"+objMin+"' max='"+objMax+"' value='"+objThirdid+"' cashier='"+objCashier+"'>"+objName+"</label></div>";
+							fListDiv.find(".f_list_li").eq(i).html(html);
+						}else{
+							var html = "<div class='f_m2_show'>"
+								+ "<label><input type='radio' class='radio_class' name='radio_name' setid='"+objSetid+"' setcid='"+objSetconfigid+"' ttype='"+objType+"' tcode='"+objTcode+"' sccode='"+objScode+"' min='"+objMin+"' max='"+objMax+"' value='"+objThirdid+"' cashier='"+objCashier+"'>"+objName+"</label></div>";
+							fListDiv.find(".f_list_li").eq(i).html(html);							
+						}
+					}
+				}else if(obj.stat == 1){
+					alert(obj.msg);
+				}else{
+					alert(obj.msg);
+				}
+			},"json");
+			$(this).siblings(".f_list").show();
+			$(this).parent().siblings(".f_m2_all").find(".f_list").hide();
+			$(this).parent().next(".f_m2_all").find(".f_m2").css("border-top","1px solid #f1f1f1")
+	})
+})
+
+   $(function(){
+	   $(document).on("click",".radio_class",function(){
+		   var tcode  = $(this).attr("tcode");
+		   var type = $(this).attr('ttype');
+		   var sccode  = $(this).attr("sccode");
+		   var thirdid =  $(this).val();
+		   var scid = $(this).attr("setcid");
+		   var cashier = $(this).attr("cashier");
+		    $("#scid").val(scid);
+		   $("#tcode").val(tcode);
+		   $("#thirdtype").val(type);
+		   $("#sccode").val(sccode); 
+		   $("#thirdid").val(thirdid); 
+		   $("#cashier").val(cashier);
+	   })
+  })
+ 
+ function btnOK_zf_onclick(){
+	var username = $("#username").val();
+	var usern = /^[a-zA-Z0-9]{1,}$/;
+	 if(!usern.test(username)){
+		alert('会员帐号只能由数字、大小写字母组成!'); 
+		return false;
+	 }
+	  var rusername = $("#rusername").val();
+	  var coin = $("#coin").val();
+	   var bankck = $('input[name="bank_code"]:checked').val();  
+	  if(username==null ||username==""){
+	    alert("[提示]游戏账户不能为空！");
+   	  return false;
+   	}
+	  if(username != rusername){
+	   alert("[提示]两次输入的游戏账户不一致！");
+   	   return false;
+   	}
+  	if(isNaN(coin)){
+   		alert("[提示]充值金额非有效数字！");
+   		return false;
+   	}
+	
+   	if(coin<10){
+	     alert("[提示]10元以上才能充值！");
+   	   return false;
+   	}
+   	if(coin>5000){
+	     alert("[提示]充值金额不能超过5000！");
+   	   return false;
+   	}
+
+	if(rusername==null ||rusername=="" || rusername!=username ){
+      alert("[提示]2次用户输入不一致！");
+  	      return false;
+  	    }
+	$("#pay").submit();
+ }
+</script>
+  <script>
+$(function(){
+	//子页面传递高度给顶层iframe	
+	function changeFrameHeight(){
+		bodyClientH = document.body.clientHeight;
+		bodyClientW = document.body.clientWidth;
+		var iframeId = $(window.parent.document).find("#iframeid")
+		iframeId.css("height",bodyClientH+200 )
+	}	
+	changeFrameHeight()		
+})
+</script>
+</html>

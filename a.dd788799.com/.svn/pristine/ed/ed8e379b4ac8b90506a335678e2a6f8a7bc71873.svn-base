@@ -1,0 +1,52 @@
+<?php
+namespace app\admin\controller;
+use app\admin\Login;
+
+use app\common\model\Config as ConfigModel;
+use app\common\model\Notice as NoticeModel;
+
+use think\Hook;
+use app\common\model\Member as UserModel;
+
+//use app\service\UserAgent;
+//use app\service\JsonExtra;
+
+class System extends Login{
+    
+    public function config(){
+
+        $this->view->page_header = '参数列表';
+
+        $request = request();
+        $list = ConfigModel::getList($request);
+        $list->appends($request->param());
+        $this->assign('list',$list);
+
+        return $this->fetch();
+    }
+
+    public function notice(){
+/*
+    	$client = UserAgent::client();
+
+    	$jx = new JsonExtra('');
+    	$jx['a'] = 'a';
+    	$jx['b'] = 'b';
+    	$jx->toJson(); 
+*/
+    	$user = UserModel::get(321);
+    	$tid = 313;//推荐人
+    	$abc = 12;
+    	$extra = [$tid,$abc];
+    	$ret = Hook::listen('user.register',$user,$extra);
+
+        $this->view->page_header = '公告列表';
+
+        $request = request();
+        $list = NoticeModel::getList($request);
+        $list->appends($request->param());
+        $this->assign('list',$list);
+
+        return $this->fetch();
+    }
+}

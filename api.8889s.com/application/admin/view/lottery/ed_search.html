@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>系统设置</title>
+<link href="/css/base.css" rel="stylesheet" type="text/css" />
+<link href="/css/admin.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="/js/jquery.js"></script>
+<script type="text/javascript" src="/js/jquery.tools.js"></script>
+<script type="text/javascript" src="/js/base.js"></script>
+<script language="JavaScript" src="/js/datePicker/calendar.js"></script>
+</head>
+<body class="list">
+	<div class="bar">
+		用户转换记录
+	</div>
+
+<div class="body">
+<form name="form1" method="get" action="ed_search.php">
+<div class="listBar">
+          会员账号：
+          <input name="username" type="text" id="username" value="" size="15">
+            &nbsp;&nbsp;日期范围：
+            <input name="s_time" type="text" id="s_time" value="" onClick="new Calendar(2008,2020).show(this);" size="10" maxlength="10" readonly="readonly" />
+            ~
+            <input name="e_time" type="text" id="e_time" value="" onClick="new Calendar(2008,2020).show(this);" size="10" maxlength="10" readonly="readonly" />
+            &nbsp;&nbsp;<input name="find" type="submit" id="find" value="查看报表" class="formButton"/>
+
+	</div>
+</form>
+<ul id="tab" class="tab">
+                <li><input type="button" value="用户转换记录" hidefocus class="current"/></li>
+			</ul>
+<table id="listTables" class="listTables">
+
+				<tr>
+                	<th>转换时间</th>
+					<th>用户</th>
+                    <th>转前余额</th>
+					<th>转帐金额</th>
+					<th>转后余额</th>
+					<th>操作</th>
+                    <th>状态</th>
+                    <th>订单号</th>
+				</tr>
+
+      <tr>
+      	<td height="30" align="center" valign="middle"></td>
+        <td height="30" align="center" valign="middle"></td>
+        <td align="center" valign="middle"></td>
+        <td align="center" valign="middle"></td>
+        <td align="center" valign="middle"></td>
+        <td align="center" valign="middle"></td>
+        <td align="center" valign="middle"></td>
+        <td align="center" valign="middle"></td>
+      </tr>
+
+
+		<tr>
+        	<td colspan="6" style="text-align:center; color:red;">
+            		转入总计: &nbsp;&nbsp;
+                	转出总计: &nbsp;&nbsp;
+            </td>
+        </tr>
+  </table>
+  <!-- page -->
+  
+  <!-- page end -->
+  </div>
+  
+  
+</body>
+</html>

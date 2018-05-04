@@ -1,0 +1,53 @@
+<?php
+namespace app\common\model;
+use think\Model;
+
+class Order extends Base{
+
+    protected $table = 'gygy_orders';
+    protected $createTime = 'created_at';
+    protected $updateTime = 'updated_at';
+    protected $autoWriteTimestamp = 'datetime';
+
+    protected $auto = ['status'=>0,];
+
+    public function money()
+    {
+        return $this->morphMany('Money',['type','item_id'],'recharge');
+        // db('money')->where('item_id' => $this->id , 'type'    => 第三参数??$this->modelName);
+    }
+
+    public function user()
+    {
+        return $this->belongsTo('Member','uid','uid');
+    }
+
+     public static function getList($request){
+        $params = $request->param();
+        $query = self::alias('o')->field('o.*')->order('id desc');
+        $query->join('gygy_members u','u.uid = o.uid')->field('u.username');
+        $query->join('gygy_pay_way py','py.code = o.local_code')->field('py.name');
+        if($params['username']??0){
+            $query->where('u.username','like','%'.trim($params['username']).'%');
+        }
+
+        if($params['status']??0){
+           $query->where('o.status', $params['status']);
+        }
+
+        if($params['local_code']??0){
+           $query->where('o.local_code', $params['local_code']);
+        }
+
+        if($params['start_time']??0){            
+            $query->where('o.created_at', '>=', $params['sdate']);
+         }
+
+         if($param['end_time']??''){
+            $query->where('o.created_at', '>=', $params['end_time']);
+         }
+         $data = $query->paginate(10);
+     
+        return $data;
+    }   
+}

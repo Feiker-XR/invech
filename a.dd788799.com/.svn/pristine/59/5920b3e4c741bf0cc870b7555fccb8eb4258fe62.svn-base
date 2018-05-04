@@ -1,0 +1,43 @@
+<ul class="nav navbar-top-links pull-right">
+	<li id="dropdown-user" class="yue">
+	<a href="{:Url('user/info')}" target="pageframe" style="cursor:pointer;">
+	<img alt="" src="/__IMG__/frame/av7.png"><span id="user_nickname" style="color:#515151;">{$this->iff($user['nickname'],$user['nickname'],$user['username'])}</span>
+	</a>
+	</li>
+	<li class="jifen"><img alt="" src="/__IMG__/frame/10.png">余额：<span id="user_sscmoney" style="color:red;">{$user.coin}</span>元<span id="j-refresh" class="fa fa-refresh" style="cursor:pointer;"></span></li>
+	<li>
+	<a id="j-sign-out" href="javascript:;" style="display:block;" action="{:Url('user/logout')}"><i class="fa fa-power-off"></i>退出</a>
+	</li>
+</ul>
+
+<script src="/js/pusher.js"></script>
+  <script>
+
+    Pusher.logToConsole = true;
+
+    var pusher = new Pusher('{$pusher_app_key}', {
+      authEndpoint: '{:url('/broadcast/auth')}',
+      //authTransport: 'ajax',
+      cluster: '{$pusher_cluster}',
+      encrypted: true
+    });
+
+    var channel = pusher.subscribe('private-user.money.{$user.hashid}');
+    channel.bind('user.money', function(data) {
+      //alert(data.money);
+      $("#user_sscmoney").html(data.money);
+    });
+
+    $("#j-refresh").click(function () {
+        oldMoney =  parseFloat($("#user_sscmoney").html());
+        var url = '/user/ajaxGetMoney';
+        var data = {};
+        $.get(url,data,function (res) {
+            if (res == oldMoney){
+                alert('数据是最新数据')
+            }else{
+                $("#user_sscmoney").html(res);
+            }
+        })
+    })
+  </script>

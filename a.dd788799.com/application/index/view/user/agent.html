@@ -1,0 +1,36 @@
+<script type="text/javascript" src="/__JS__/user/jquery.min.js?v=2017"></script>
+<script type="text/javascript" src="/__JS__/layer/layer.js"></script>
+申请代理的其他资质; 代理模式默认为打码量;
+
+<form name="form" onsubmit="return false;">
+        <ul class="eveb_form eveb_setting_form">
+            <li>
+                <input type="radio" value="0" name="agent_mode" checked>打码量</input>  
+                <input type="radio" value="1" name="agent_mode">输赢值</input>  
+                <label>* 请选择代理模式</label>
+            </li>
+
+        </ul>
+        <div class="eveb_form_submit">
+            <input id='submit' type="submit" value="申请代理" class="button_medium button_1">
+        </div>
+    </form>
+
+
+<script>
+	$("#submit").click(function(){
+		var data = $("form").serialize();
+		$.post('/user/agent',data,function(json){
+			//console.log(json);
+	        layer.alert(json.msg, {
+	          time: 20000,
+	          skin: 'layui-layer-molv',
+	          closeBtn: 0,
+	          anim: 4
+	        });
+	        location.href = json.url;
+		},'json');		
+	});
+
+
+</script>

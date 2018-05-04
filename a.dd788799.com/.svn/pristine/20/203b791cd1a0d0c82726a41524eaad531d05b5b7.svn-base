@@ -1,0 +1,71 @@
+{layout name="layout" /}
+
+<div class="row">
+  <div class="col-xs-12">
+    <div class="box">
+      <div class="box-header">
+<form>
+
+    <div class="pull-left" style="margin-left:15px;">
+      <input class="form-control input-sm search" value="{$Think.get.name}" placeholder="请输入玩法名称/ID或赔率组名称/ID" type="text" name="name" style="width: 250px;">
+    </div>        
+
+    <div class="has-feedback pull-right">
+      <button type="submit" class="btn btn-block btn-default btn-sm filter">查询</button>                  
+    </div>  
+ </form>
+      </div>
+      <!-- /.box-header -->
+      <div class="box-body table-responsive no-padding">
+        <table class="table table-hover">
+          <tr>
+            <th >ID</th>
+            <th >值</th>
+            <th >赔率</th>            
+            <th >玩法分组ID</th>
+            <th >玩法分组</th>            
+            <th >玩法ID</th>
+            <th >玩法</th>
+            <th >赔率组ID</th>
+            <th >赔率组</th>
+            <th >操作</th>
+          </tr>
+          {foreach($list as $item)}
+          <tr>
+            <td>{$item->id}</td>
+            <td>
+              {switch name="item.plgroup.mode"}
+                  {case value="0"}{$item->value}{/case}
+                  {case value="1"}只能是{$item->value}个号码为一注{/case}
+                  {case value="2"}{$item->value}个号码可以为一注{/case}
+                  {default /}default
+              {/switch}
+            </td>
+            <td>
+              {$item->pl}
+            </td>
+            <td>{$item->played->playedgroup->id}</td>
+            <td>{$item->played->playedgroup->groupName}</td>
+            <td>{$item->played->id}</td>
+            <td>{$item->played->name}</td>
+            <td>{$item->plgroup->id}</td>
+            <td>{$item->plgroup->name}</td>
+
+            <td>编辑</td>
+          </tr>
+          {/foreach}
+        </table>
+        {$list->render()}
+      </div>
+      <!-- /.box-body -->
+    </div>
+    <!-- /.box -->
+  </div>
+</div>
+
+<script type="text/javascript">
+$('.datepicker').datepicker({
+    //startDate: '-3d',
+    format: 'yyyy-mm-dd',
+});
+</script>

@@ -1,0 +1,52 @@
+	<?php if(Session('uid') && Session('username')){?>
+	<!--登陆后-->
+
+		<header class="header wjkjData">
+		<!-- javascript:window.history.back(); -->
+			<a class="m-history-home" onclick="javascript:history.back(-1);"><i class="iconfont icon-zuojiantou"></i></a>
+			<div class="header_wf_all gfcss gf_text">
+				<a class="title_cq gf_title" href="/lotterygfwf/index/type/2.html">
+		            <span>传统</span>
+		            <span>玩法</span>
+		        </a>
+			</div>
+
+			<span class="btn-slide-bar"></span>
+			<div class="m-nav-lott-date">
+				<ul id="kaijiang"  style="width:100%" type="{{$type}}">
+				
+				<!--<span class="m-n-countdown" id="sur-times"> -- : -- : -- </span>-->
+				</ul>
+			</div>
+		</header>
+
+
+	<?php }else{?>
+	<!--登陆前-->
+
+		<header class="header wjkjData">
+		<!-- javascript:window.history.back(); -->
+			<a class="m-return-home" href="/index.php">返回大厅</a>
+			<div class="header_wf_all gfcss gf_text">
+				<a class="title_cq gf_title" href="/lotterygfwf/index/type/2.html">
+		            <span>传统</span>
+		            <span>玩法</span>
+		        </a>
+			</div>
+
+			<span class="btn-slide-bar"></span>
+			<div class="m-nav-lott-date">
+				<ul id="kaijiang"  style="width:100%" type="{{$type}}">
+				
+				<!--<span class="m-n-countdown" id="sur-times"> -- : -- : -- </span>-->
+				</ul>
+			</div>
+		</header>
+
+
+
+
+
+
+
+	<?php }?>

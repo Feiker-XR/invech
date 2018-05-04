@@ -1,0 +1,38 @@
+<div class="cash-modal">
+<form action="{:Url('Business/addRecharge')}" method="post" target="ajax" class="form-horizontal" >
+<table cellpadding="0" cellspacing="0" width="350" class="layout">
+	<tr>
+		<th>选择充值：</th>
+		<td><label>UserID<input type="radio" name="user" value="1" checked="checked" /></label> <label>用户名<input type="radio" name="user" value="2" /></label></td>
+	</tr>
+	<tr>
+		<th>用户名或UserID：</th>
+		<td><input type="text" name="uid" /></td>
+	</tr>
+	<tr>
+		<th>充值备注：</th>
+		<td><select name="info" style="width: 177.7px"> 
+				<option value="管理员充值">管理员充值</option>
+				<option value="活动赠送">活动赠送</option>
+				<option value="支付宝补充">支付宝补充</option>
+				<option value="网银补充">网银补充</option>
+			</select>
+		</td>
+	</tr>
+	<tr>
+		<th>充值金额：</th>
+		<td><input type="text" name="amount" min="100" />
+		<br><span style="color:#F00">负数为扣款！</span></td>
+	</tr>
+	<tr>
+		<th><span class="spn9">提示：</span></th>
+		<td><span class="spn9">填写用户名或者用户ID均可充值</span></td>
+	</tr>
+	<tr>
+		<th><span class="spn9"></span></th>
+		<!--<td><input type="submit" value="确认充值"/></td>-->
+	</tr>
+	
+</table>
+</form>
+</div>

@@ -1,0 +1,55 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>系统设置</title>
+<link href="../css/base.css" rel="stylesheet" type="text/css" />
+<link href="../css/admin.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="../js/jquery.js"></script>
+<script type="text/javascript" src="../js/jquery.tools.js"></script>
+<script type="text/javascript" src="../js/base.js"></script>
+</head>
+<body class="list">
+<div class="bar">输入比分</div>
+<div class="body">
+<form id="form1"  action="{:url('sports/do_zuqiu_score')}" method="post" name="form1">
+<input type="hidden" name="mid" value="<?=$mid?>" />
+<input name="type" type="hidden" id="type" value="{$Request.get.type}" />
+<ul id="tab" class="tab">
+<li><input type="button" value="输入比分" hidefocus class="current"/></li>
+</ul>
+<table id="listTables" class="listTables">
+
+				<tr>
+
+					<th><input name="hf_match_name" type="hidden" id="hf_match_name" value="{$m.match_name}" />
+      <input name="hf_Match_Master" type="hidden" id="hf_Match_Master" value="{$m.Match_Master}" />
+      <input name="hf_Match_Guest" type="hidden" id="hf_Match_Guest" value="{$m.Match_Guest}" />
+      <input name="hf_Match_Date" type="hidden" id="hf_Match_Date" value="{$m.Match_Date}" />      {$m.match_name}</th>
+
+					<th>上半场</th>
+
+					<th>全场</th>
+					<th>开赛时间</th>
+				</tr>
+      <tr>
+                  <td align="right">{$m["Match_Master"]}：</td>
+        <td align="center"><input  id="MB_Inball2" type="text" value="{$m["MB_Inball_HR"]}"  name="MB_Inball_HR" class="formText"/></td>
+        <td align="center"><input  id="MB_Inball" type="text" value="{$m["MB_Inball"]}"  name="MB_Inball" class="formText"/></td>
+                  <td align="center">{$m["Match_Date"]}</td>
+      </tr>
+      <tr>
+        <td align="right">{$m["Match_Guest"]}：</td>
+        <td align="center"><input id="TG_Inball2" type="text" value="{$m["TG_Inball_HR"]}"  name="TG_Inball_HR" class="formText"/></td>
+        <td align="center"><input id="TG_Inball" type="text" value="{$m["TG_Inball"]}"  name="TG_Inball" class="formText"/></td>
+        <td align="center">{$m["Match_Time"]}</td>
+      </tr>
+</table>
+<div class="buttonArea">
+				<input type="submit" class="formButton" value="确  定" hidefocus />&nbsp;&nbsp;
+				<input type="button" class="formButton" onClick="window.location.href='{:url('sports/zuqiu')}'" value="返  回" hidefocus />
+</div>
+</form>
+	</div>
+</body>
+</html>

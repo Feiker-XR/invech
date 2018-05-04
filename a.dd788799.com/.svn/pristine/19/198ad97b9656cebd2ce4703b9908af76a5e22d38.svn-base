@@ -1,0 +1,209 @@
+{extend name="common/base" /}
+
+{block name="body"}
+	<!-- 标题栏 -->
+	<div class="module">
+		<header><h3 class="tabs_involved">盈亏统计</h3></header>
+
+
+		<div class="stats_overview" style="margin:10px;">
+			{php} $data=$todayData;
+				  $jtTCount=number_format($data['betAmount']-$data['zjAmount']-$data['fanDianAmount']-$data['brokerageAmount'],2);
+				  $jtYKCount=number_format($data['betAmount'],2);
+				  if($jtTCount>0){
+					  $jtTCount="<span style='color:#F00'>".$jtTCount."</span>";
+					 }else if($jtTCount<0){
+					   $jtTCount="<span style='color:#060'>-".abs($jtTCount)."</span>";
+					 }else{
+					  $jtTCount=$jtTCount;
+				   }
+			 {/php}
+			<div class="overview_today">
+				<p class="overview_day">今日统计</p>
+				<p class="overview_count">{php} echo $jtTCount {/php}</p>
+				<p class="overview_type">盈亏</p>
+				<p class="overview_count">{php}echo  $jtYKCount; {/php}</p>
+				<p class="overview_type">投注额</p>
+			</div>
+			{php}
+				$data=$yestodayData;
+				$ztTCount=number_format($data['betAmount']-$data['zjAmount']-$data['fanDianAmount']-$data['brokerageAmount'],2);
+				$ztYKCount=number_format($data['betAmount'],2);
+				if($ztTCount>0){
+					$ztTCount="<span style='color:#F00'>".$ztTCount."</span>";
+					}else if($ztTCount<0){
+					$ztTCount="<span style='color:#060'>-".abs($ztTCount)."</span>";
+					}else{
+					$ztTCount=$ztTCount;
+			    }
+			{/php}
+			<div class="overview_previous">
+				<p class="overview_day">昨日统计</p>
+				<p class="overview_count">{php} echo $ztTCount{/php}</p>
+				<p class="overview_type">盈亏</p>
+				<p class="overview_count">{php} echo $ztYKCount{/php}</p>
+				<p class="overview_type">投注额</p>
+			</div>
+		</div>
+	</div>
+
+
+	<div class="module">
+		<header><h3 class="tabs_involved">彩种投注金额统计<span class="spn1">（彩种名称：投注金额）</span></h3></header>
+		<div class="module_content">
+			{php}
+				$data = array();
+				$list = model('bets')->where('lotteryNo','<>','')->field('type, sum(beiShu*mode*actionNum*(fpEnable+1)) amount')->group('type')->select()->toArray();
+				if($list) {
+					foreach($list as $var){
+						$data[$var['type']]=$var;
+					}
+				}
+				if($types){
+			       foreach($types as $var){
+					 if($var['isDelete']==0 && $var['enable']==1){
+						$title =  $var['title']  ; //彩种名称
+						$amount = (isset($data[$var['id']])) ? number_format($this->ifs($data[$var['id']]['amount'], 0),2) : '' ; //投注金额
+
+			{/php}
+			<div class="cztz"><span class="title">{php}echo $title {/php}</span><span class="spn2">￥{php}echo $amount {/php}</span></div>
+			{php} } } }{/php}
+		</div>
+	</div>
+
+<div class="module">
+		<header><h3 class="tabs_involved">玩法统计<span class="spn1">（玩法统计：投注金额 / 注数）</span></h3></header>
+		<div class="module_content">
+		{php}
+			$list=model('bets')->where( 'lotteryNo','<>','')->field('playedId, sum(beiShu*mode*actionNum*(fpEnable+1)) amount,sum(actionNum) actionNumA')->group('playedId')->select()->toArray();
+
+			$data=array();
+			if($list) {
+				foreach($list as $var){
+				$data[$var['playedId']]=$var;
+				}
+			}
+			if($playeds) {
+			 foreach($playeds as $var){
+				$name =  $var['name'] ; //玩法名称
+			    $amount = (isset($data[$var['id']])) ? number_format($this->ifs($data[$var['id']]['amount'], 0),2)  : '' ; //投注金额
+				$actionNumA  = (isset($data[$var['id']])) ? $this->ifs($data[$var['id']]['actionNumA'], 0) : '' ; //注数
+		{/php}
+			<div class="cztz"><span class="title">{php} echo $name{/php}</span><span class="spn2">￥{php} echo $amount{/php} / {php} $actionNumA {/php}注</span></div>
+		{php} } }{/php}
+		</div>
+	</div>
+
+	{php}
+	    $str = '';
+		$Members = model('members');
+		$date=strtotime(date("Y-m-d",time())." 00:00:00");
+		$data=$Members->where('isDelete',0)->field('count(uid) allUser, sum(regTime>='.$date.') todayReg, sum(type) dlCount, sum(type=0) memberCount, sum(coin+fcoin) amountCount')->find()->toArray();
+		$uids = $Members->where('admin',0)->field('uid')->select();
+		foreach($uids as $u)
+		{
+			$str = $str.$u['uid'].',';
+		}
+		$map = array();
+		$map['isOnLine']=1;
+		$map['uid'] = array('in',$str);
+		$map['accessTime'] = array('gt',time()-config('SESSION_TIME'));
+		$count = model('member_session')->where($map)->field('count(distinct uid) as count')->find();
+	{/php}
+	<div class="module">
+		<header><h3 class="tabs_involved">用户统计</h3></header>
+		<table class="tablesorter" cellspacing="0">
+		<thead>
+			<tr>
+				<th>用户总数</th>
+				<th>今日注册人数</th>
+				<th>代理人数</th>
+				<th>会员人数</th>
+				<th>当前在线人数</th>
+				<th>余额总数</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>{php} echo $data['allUser']; {/php}</td>
+				<td>{php} echo $data['todayReg']; {/php}</td>
+				<td>{php} echo $data['dlCount']; {/php}</td>
+				<td>{php} echo $data['memberCount']; {/php}</td>
+				<td>{php} echo $count['count']; {/php}</td>
+				<td>{php} echo number_format($data['amountCount']); {/php}</td>
+			</tr>
+		</tbody>
+		</table>
+	</div>
+{/block}
+
+{block name="script"}
+    
+{/block}
+
+{block name="style"}
+<style>
+.module {
+	border: 1px solid #9BA0AF;
+	margin: 20px 3% 0 3%;
+	margin-top: 20px;
+	background: #fff;
+	border-radius: 5px;
+	display:block;
+	height:100%;
+	overflow:hidden; 
+}
+
+.tabs_involved {
+	border: 1px solid #dddddd;
+	border-radius: 5px;
+	float: left;
+	line-height: 32px;
+	color: #1F1F20;
+	font-size: 13px;
+	margin: 0px 0px;
+	width:100%;
+	background: #eee;
+}
+
+.stats_overview {
+
+	float: right;
+	width: 60%;
+
+}
+
+.overview_today, .overview_previous {
+	width: 25%;
+	float: left;
+	display: block;
+}
+
+.stats_overview p.overview_count {
+	font-size: 22px;
+	font-weight: bold;
+	color: #333;
+}
+
+.module .module_content {
+	text-transform: none;
+	text-shadow: 0 1px 0 #fff;
+	margin: 38px 20px;
+	display:block;
+}
+
+.module .module_content .cztz {
+	width: 23%;
+	height: 32px;
+	line-height: 30px;
+	float: left;
+	display:block;
+}
+
+.tablesorter {
+	width: 95%;
+	margin: 0px 0 0 0;
+	text-align:center;
+}
+</style>
+{/block}

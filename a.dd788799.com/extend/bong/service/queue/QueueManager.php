@@ -1,0 +1,40 @@
+<?php
+
+namespace bong\service\queue;
+
+use app\common\Contracts\Factory as FactoryContract;
+
+class QueueManager implements FactoryContract
+{
+    protected $drivers = [];
+
+
+    public function __construct()
+    {
+    
+    }
+
+    public function driver($name = null)
+    {
+        $name = $name??config('queue.driver');
+
+        return isset($this->drivers[$name])
+                    ? $this->drivers[$name]
+                    : $this->drivers[$name] = $this->resolve($name);
+    }
+
+    protected function resolve($name)
+    {
+        $configs = config('queue.configs');
+        $config = $configs[$name];
+        $driver_name = "bong\\service\\queue\\Driver\\" . ucfirst($name) . 'Queue';
+        $driver = new $driver_name($config);
+        return $driver;
+    }
+
+    public function __call($method, $parameters)
+    {
+        return $this->driver()->{$method}(...$parameters);
+    }
+
+}

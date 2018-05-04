@@ -1,0 +1,41 @@
+<table class="tbl" id="tbtrace">
+<tbody>
+<tr>
+	<th>
+		编号
+	</th>
+	<th>
+		期号
+	</th>
+	<th>
+		状态
+	</th>
+</tr>
+
+<?php foreach($order_future as $var){ ?>
+<tr>
+	<td>
+		<a href="{:Url('/user/record_cp')}" title="查看投注详情" class="blue" rel="projectinfo">{$var.did|substr=10,8}</a>
+	</td>
+	<td>
+		{$var.qishu}
+	</td>
+	<td>
+		<?php
+			if($var['js']==0){
+				echo '<label class="gray">未开奖</label>';
+			}else{
+				if($var['zjCount']){
+					echo '<label class="red">已中奖</label>';
+				}else{
+					echo '<label class="red">未中奖</label>';
+				}			
+			}
+		?>
+	</td>
+</tr>
+<?php } ?>
+
+</tbody>
+</table>
+

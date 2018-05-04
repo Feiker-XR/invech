@@ -1,0 +1,69 @@
+<?php
+namespace app\common\model;
+use think\Model;
+use app\common\traits\model\Extra as ExtraTrait;
+
+class Apply extends Base{
+
+    use ExtraTrait;
+    protected $extra = 'params';
+
+    protected $table = 'gygy_apply';
+    protected $createTime = 'created_at';
+    protected $updateTime = 'updated_at';
+    protected $autoWriteTimestamp = 'datetime';
+
+    CONST STATUS_ = 0;
+    CONST STATUS_AGREE = 1;
+    CONST STATUS_DENY = -1;
+
+    CONST BUSINESS_AGENT = 'agent';//审核代理申请提案;
+
+    CONST BUSINESS_ARRAY = [self::BUSINESS_AGENT,];
+
+    public function user()
+    {
+        return $this->belongsTo('Member','uid','uid');
+    }
+
+    public function agree($remark,...$extra){
+        return $this->audit(self::STATUS_AGREE,$remark,...$extra);
+    }
+
+    public function deny($remark,...$extra){
+        return $this->audit(self::STATUS_DENY,$remark,...$extra);
+    }
+
+    private function audit($status,$remark,...$extra){
+
+        $money_model = transaction(function() use ($status,$remark,$extra){
+            
+            if(self::STATUS_AGREE == $status){
+                event('audit.'.$this->business,[$extra]);
+            }
+            
+            $this->status = $status;
+            $this->remark = $remark;
+            $this->audit_at = date('Y-m-d H:i:s');
+            $this->save();
+            
+        });
+        
+        return $this;        
+    }
+
+    public function auditAgent($extra){
+        //$uid = list($extra);
+        list($uid,$b) = $extra;
+        $a = 1;
+    }
+
+    public static function getList($request){
+
+    }
+
+
+
+
+
+}

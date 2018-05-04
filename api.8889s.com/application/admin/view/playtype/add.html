@@ -1,0 +1,70 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>系统设置</title>
+<link href="/css/base.css" rel="stylesheet" type="text/css" />
+<link href="/css/admin.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="/js/jquery.js"></script>
+<script type="text/javascript" src="/js/jquery.tools.js"></script>
+<script type="text/javascript" src="/js/base.js"></script>
+</head>
+<body class="input">
+	<!--<div class="bar">
+		会员资料修改
+	</div>-->
+	
+
+<div class="body">
+<ul>
+	<li>
+		<a href="{:Url('game/index')}">游戏列表</a> >> 
+		<a href="{:Url('gameball/index','gid='.$gameinfo.id)}">{$gameinfo['name']}玩法配置</a> >>
+		<a href="{:Url('playtype/index','gid='.$gameinfo.id.'&bid='.$ballinfo.id)}">{$ballinfo.ball_name}号码配置</a> >>
+		<a href="{:Url('playtype/index','gid='.$gameinfo.id.'&bid='.$ballinfo.id)}">号码添加</a>
+	</li>
+</ul>
+<ul id="tab" class="tab">
+	<li>
+		<input type="button" 
+		value="号码列表" hidefocus 
+		onClick="window.location.href='{:Url('playtype/add','gid='.$gameinfo.id.'&bid='.$ballinfo.id)}'" />
+	</li>
+	<li>
+		<input type="button" 
+		value="号码添加" hidefocus 
+		class="current" 
+		onClick="window.location.href='{:Url('playtype/add','gid='.$gameinfo.id.'&bid='.$ballinfo.id)}'" />
+	</li>
+</ul>
+<form name="form1" id="form1" method="post" action="{:Url('playtype/save','gid='.$gameinfo.id.'&bid='.$ballinfo.id)}" onSubmit="return check(this);">
+<table class="inputTable tabContent">
+<tr>
+	<th>号码名称：</th>
+	<td colspan="3">
+		<label>
+			<input name="type_name" type="text" id="type_name" value="" size="30" class="formText" maxlength="20">
+	    </label>
+    </td>
+</tr>
+<tr>
+	<th>赔率：</th>
+	<td colspan="3">
+		<label>
+			<input name="pl" type="text" id="pl" value="" size="30" class="formText" maxlength="20">
+	    </label>
+    </td>
+</tr>
+</table>
+<div class="buttonArea">
+	<input name="Submit" type="submit" class="formButton" value="确认修改">
+	<input type="button" class="formButton" 
+	onClick="window.location.href='{:Url('playtype/index','gid='.$gameinfo.id.'&bid='.$ballinfo.id)}'" 
+	value="取 消" hidefocus />
+</div>
+</form>
+</div>
+</body>
+</html>

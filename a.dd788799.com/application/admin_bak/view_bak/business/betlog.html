@@ -1,0 +1,163 @@
+{extend name="common/base" /}
+
+{block name="body"}
+	<!-- 标题栏 -->
+	<div class="main-title">
+		<h2>投注记录</h2>
+	</div>
+	{php} $mname=array('2.00'=>'元','0.20'=>'角','0.02'=>'分');{/php}
+	<!-- 高级搜索 -->
+	<form action="{:Url('betlog')}" method="post">
+		<div class="search-form fr cf">
+			<div class="sleft">
+				期号：<input style="width:100px" type="text" name="actionNo" class="search-input" value="{$actionNo?$actionNo:''}" placeholder="期号">
+			</div>
+			<div class="sleft">
+				单号：<input style="width:100px" type="text" name="wjorderId" class="search-input" value="{$wjorderId?$wjorderId:''}" placeholder="单号">
+			</div>
+			<div class="sleft">
+				用户名：<input style="width:100px" type="text" name="username" class="search-input" value="{$username?$username:''}" placeholder="用户名">
+			</div>
+			<div class="sleft">
+				<select style="width:100px;" name="type">
+					<option value="">全部彩种</option>
+					{php} if($types) {
+					      foreach ($types as $var){
+
+						if($var['enable'] && !$var['isDelete']){
+					{/php}
+						<option value="{php} echo $var['id'] {/php}" {php} echo ($var['id'] == $type) ? 'selected' : ''  {/php} title="{php}echo $var['title'] {/php}"> {php} echo $this->ifs($var['shortName'], $var['title']) {/php}</option>
+					{php} }} } {/php}
+				</select>		
+			</div>
+			<div class="sleft">
+				时间从：<input style="width:80px" type="text" name="fromTime" id="first" class="search-input" value="" placeholder="开始时间">
+			</div>
+			<div class="sleft">
+				到：<input style="width:80px" type="text" name="toTime" id="end" class="search-input" value="" placeholder="结束时间">
+			</div>
+			<div class="sbtn">
+				<button type="submit" class="btn" id="search">查 找</button>
+			</div>	
+		</div>
+	</form>
+	
+    <!-- 数据列表 -->
+    <div class="data-table table-striped">
+	<table class="">
+    <thead>
+        <tr>
+		<th>单号</th>
+		<th>用户名</th>
+		<th>投注时间</th>
+		<th>彩种</th>
+		<th>玩法</th>
+		<th>期号</th>
+		<th>倍数</th>
+		<th>模式</th>
+		<th>投注号码</th>
+		<th>投注金额</th>
+		<th>中奖金额</th>
+		<th>返点</th>
+		<th>抽水</th>
+		<th style="color:yellow">改单</th>
+		<th style="color:yellow">撤单</th>
+		</tr>
+    </thead>
+    <tbody>
+		{if condition="$_list"}
+		{volist name="_list" id="vo"}
+		<tr>
+			<td><a href="{:Url('business/betInfo?id='.$vo['id'])}" button="确定:defaultCloseModal" title="投注信息" width="800" target="modal">{php} echo $vo['wjorderId'] {/php}</a></td>
+			<td><a href="{:Url('betlog?username='.$vo['username'])}">{$vo.username} </a></td>
+			<td><?=date('m-d H:i:s', $vo['actionTime'])?></td>
+			<td><a href="{:Url('betlog?type='.$types[$vo['type']]['id'])}"> {php} echo $this->ifs($types[$vo['type']]['shortName'],$types[$vo['type']]['title']) {/php} </a></td>
+			<td>{php} echo $playeds[$vo['playedId']]['name'] {/php}</td>
+			<td>{php} echo $vo['actionNo'] {/php}</td>
+			<td>{php} echo $vo['beiShu'] {/php}</td>
+			<td>{php} echo (isset($mname[$vo['mode']]) ? $mname[$vo['mode']] : '') {/php}</td>
+			<td data-code="<?=$vo['actionData']?>">{php} echo $this->CsubStr($vo['actionData'],0,10) {/php}</td>
+			<td>{php} echo number_format($vo['mode'] * $vo['beiShu'] * $vo['actionNum'], 2){/php}</td>
+			<td>
+				{php}
+				if($vo['isDelete']==1){
+					echo '已撤单';
+				}else{
+					if($vo['lotteryNo']){
+						echo number_format($vo['zjCount'] * $vo['bonusProp'] * $vo['beiShu'] * $vo['mode']/2, 2);
+					}else{
+						echo '未开奖';
+					}
+				}
+				{/php}
+            </td>
+			<td>{php} echo number_format($vo['mode'] * $vo['beiShu'] * $vo['actionNum'] * $vo['fanDian']/100, 2) {/php}</td>
+			<td>{php} echo $vo['fanDianAmount'] {/php}</td>
+			<td><a href="{:Url('business/updateBet?id='.$vo['id'])}" button="修改:dataAddCode|取消:defaultCloseModal" title="修改投注信息" width="510" target="modal" modal="true">修改</a></td>
+			<td><a href="{:Url('business/deleteBet?id='.$vo['id'])}" title="是否确定撤单" width="510" target="ajax" method="get">撤单</a></td>
+		
+		</tr>
+		{/volist}
+		{else/}
+			<tr>
+				<td colspan="15" align="center">暂时没有投注记录。</td>
+			</tr>
+		{/if}
+	</tbody>
+    </table> 
+	</div>
+    <div class="page">
+        {$_page}
+    </div>
+{/block}
+
+{block name="script"}
+    <link href="__STATIC__/datetimepicker/css/datetimepicker.css" rel="stylesheet" type="text/css">
+	<link href="__STATIC__/datetimepicker/css/datetimepicker_blue.css" rel="stylesheet" type="text/css">
+	<link href="__STATIC__/datetimepicker/css/dropdown.css" rel="stylesheet" type="text/css">
+	<script type="text/javascript" src="__STATIC__/datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
+	<script type="text/javascript" src="__STATIC__/datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js" charset="UTF-8"></script>
+
+	<script>
+	$(function(){
+		$('#first,#end').datetimepicker({
+			format: 'yyyy-mm-dd',
+			language:"zh-CN",
+			minView:2,
+			autoclose:true
+		});
+		//showTab();
+	});
+	</script>
+	<script type="text/javascript">
+		//回车搜索
+		$("body").keyup(function(e){
+			if(e.keyCode === 13){
+				$("#search").click();
+				return false;
+			}
+		});
+		$('.side-sub-menu').find('a[href="{:Url('business/betlog')}"]').closest('li').addClass('current');
+	</script>
+{/block}
+
+{block name="style"}
+<style>
+.popupModal table tr{
+	border-bottom:#CCCCCC solid 1px;
+}
+
+.popupModal table tr td .tzdata {
+	border: #CCCCCC solid 1px;
+	margin-top: 5px;
+	padding: 5px;
+	word-wrap: break-word;
+	word-break: normal;
+	word-break: break-all;
+	width: 98%;
+	height: 80px;
+	overflow: scroll;
+}
+</style>
+
+{/block}

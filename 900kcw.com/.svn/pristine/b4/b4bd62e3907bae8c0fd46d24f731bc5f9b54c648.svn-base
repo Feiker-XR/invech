@@ -1,0 +1,215 @@
+<?php exit;?>0015505686268e4ae97eeff9c80b8dc06fdf913f5fcfs:9768:"a:2:{s:8:"template";s:9704:"<html><!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8" /><meta name="format-detection" content="telephone=no" />
+		<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE11" />
+	<title>【<?php echo $parentCategoryInfo["name"];?><?php echo $categoryInfo["name"];?>】<?php echo $parentCategoryInfo["name"];?>号码 开奖结果查询 - <?php echo $sys["site_title"];?></title>
+		<meta name="keywords" content="<?php echo $categoryInfo["keywords"];?>" />
+		<meta name="distribution" content="<?php echo $categoryInfo["description"];?>" />
+		<link rel="stylesheet" href="/themes/168pc/css/headorfood.css" />
+		<link rel="stylesheet" href="/themes/168pc/css/pk10kai.css" />
+		<link rel="stylesheet" href="/themes/168pc/css/calendar.css" />
+		<link rel="shortcut icon" href="/themes/168pc/img/icon/168favicon.ico/v=2017981058.html">
+		<link rel="stylesheet" href="/themes/168pc/css/user_adv.css" />
+		<script src="/themes/168pc/js/lib/bootstrap-3.3.0/js/tests/vendor/jquery.min.js"></script>
+		<script src="/themes/168pc/js/lib/bootstrap-3.3.0/dist/js/bootstrap.min.js"></script>
+
+		<script type="text/javascript" src="/themes/168pc/js/lib/jquery-1.7.2.min.js"></script>
+	</head>
+
+	<body>
+		<div class="bodybox pk10lzzhfxymbox mrcltj">
+					<?php $__Template->display("themes/168pc/head"); ?>
+			<div class="haomabox">
+				<div class="waring" id="waringbox">
+					<div class="flash"><i></i></div>
+					温馨提示：因网络问题，开奖结果会有延迟，所以您需要去喝杯咖啡等一会儿！
+				</div>
+				<div class="haomaqu" id="pk10">
+					<div class="haomaqubox">
+						<div class="haomaqul">
+							<div class="haomaline">
+								<div class="haomaimg">
+									<a href="<?php echo $parentCategoryInfo["urlname"];?>.html"><img src="<?php echo $parentCategoryInfo["image"];?>" /></a>
+								</div>
+								<div class="numberqu">
+									<div class="nuberqutit">
+										<div class="divl">
+											<a href="<?php echo $parentCategoryInfo["urlname"];?>.html"><span class="pk10tit">北京PK拾</span></a>第<span class="redfont preDrawIssue"></span>期&nbsp;开奖
+										</div>
+										<div class="divr">
+											全天<span class="totalCount">...</span>期，当前<span class="drawCount">...</span>期,剩<span class="sdrawCount">...</span>期
+										</div>
+									</div>
+									<div class="kajianhao">
+										<ul id="jnumber" class="numberbox">
+											<li class="nub02 "></li>
+											<li class="nub01 "></li>
+											<li class="nub10 "></li>
+											<li class="nub04 "></li>
+											<li class="nub03 "></li>
+											<li class="nub06 "></li>
+											<li class="nub07 "></li>
+											<li class="nub08 "></li>
+											<li class="nub05 "></li>
+											<li class="nub09 li_after"></li>
+										</ul>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="haomaqur">
+							<div class="line linetime" id="timebox">
+								<div class="opening opentyle">开奖中...</div>
+								<div class="clock cuttime">
+									距&nbsp;&nbsp;<span class="nextIssue"></span>&nbsp;&nbsp;期开奖仅有
+									<span class="bgtime hour">0</span>
+									<span class="hourtxt">时</span>
+									<span class="bgtime minute">0</span>
+									<span>分</span>
+									<span class="bgtime second">0</span>
+									<span>秒</span>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="hreflist">
+						<ul>
+						<li>
+								<a href="/<?php echo $parentCategoryInfo["urlname"];?>.html">即时开奖</a>
+							</li>
+							<?php $listList = service("duxcms","Label","categoryList",array( "app"=>"DuxCms", "label"=>"categoryList", "parent_id"=>4, "limit"=>100));  if(is_array($listList)) foreach($listList as $list){ ?>
+  <?php if ($list['class_id']==$categoryInfo['class_id']){ ?>
+    <li class="checked"><a href="<?php echo $list["curl"];?>" title="<?php echo $list["name"];?>">
+					<span class="n"><?php echo $list["name"];?></span></a></li>
+  <?php }else{ ?>
+  
+    <li><a href="<?php echo $list["curl"];?>" title="<?php echo $list["name"];?>"><i class="icon_global icon_<?php echo $list["i"];?>"></i>
+					<span class="n"><?php echo $list["name"];?></span></a></li>
+  <?php } ?>
+<?php } ?>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<div class="zhlzbox margt20">
+				<div class="listheadl" id="colorSet">
+					<input type="hidden" id="callFun" value="todaystatlist" time="2000">
+					<div id="colorSet">
+						<p>
+							<span id="sid1" class="param"><span class="sparam1">
+								参数设置1：当数值为&nbsp;
+								<input tty="0" class="input1" value="15" type="text" id="star1" pid="1" onkeyup="this.value=this.value.replace(/[^\d]/g,'')" onafterpaste="this.value=this.value.replace(/[^\d]/g,'')" maxlength="3">&nbsp;至&nbsp;
+								<input tty="0" class="input2"  value="30" type="text" id="end1" pid="1" onkeyup="this.value=this.value.replace(/[^\d]/g,'')" onafterpaste="this.value=this.value.replace(/[^\d]/g,'')" maxlength="3">&nbsp;时为&nbsp;</span>
+							<span class="spanbtn">
+								<i class="color_red"></i>
+								<i class="sparam2">色</i>
+								<a id="btn1" class="spanAdd2" pid="1" style=""></a>
+							</span>
+							</span>
+
+							<span id="sid2" class="param"><span class="sparam1">
+								参数设置2：当数值为
+								<input class="input1" tty="0" type="text" style="margin: 0 5px 0 5px;" value="31" id="star2" pid="2" onkeyup="this.value=this.value.replace(/[^\d]/g,'')" onafterpaste="this.value=this.value.replace(/[^\d]/g,'')" maxlength="3">&nbsp;至&nbsp;
+									<input tty="0" class="input2" type="text"  value="40" id="end2" pid="2" onkeyup="this.value=this.value.replace(/[^\d]/g,'')" onafterpaste="this.value=this.value.replace(/[^\d]/g,'')" maxlength="3">&nbsp;时为&nbsp;</span>
+									<span class="spanbtn">
+									<i class="color_blue"></i>
+									<span class="sparam2">色</span>
+									<a class="spanAdd2"  id="btn2"  style="display: block;"></a>
+									</span>
+							</span>
+
+							<span id="sid3" class="param"><span class="sparam1">
+								参数设置3：当数值为
+								<input class="input1" tty="0" type="text" style="margin: 0 5px 0 5px;" value="41" id="star3" pid="3" onkeyup="this.value=this.value.replace(/[^\d]/g,'')" onafterpaste="this.value=this.value.replace(/[^\d]/g,'')" maxlength="3">&nbsp;至&nbsp;
+									<input class="input2" tty="0" type="text"  value="50" id="end3" pid="3" onkeyup="this.value=this.value.replace(/[^\d]/g,'')" onafterpaste="this.value=this.value.replace(/[^\d]/g,'')" maxlength="3">&nbsp;时为&nbsp;</span>
+									<span class="spanbtn lastbtn">
+									<i class="color_green"></i><span class="sparam2">色</span>
+									<a class="spanAdd2 sa2" pid="3" style="display: none;"></a>
+									</span>
+							</span>
+							<a id="spAdd" class="spanAdd2" style="display: none;"></a>
+							<span  id="changedata" class="spanAdd">确认</span>
+						</p>
+					</div>
+				</div>
+				<div class="listbox">
+					<div class="listcontent nomargin">
+						<div class="box">
+							<div id="waitBox" class="bastren w1200">
+								<div id="chartLinediv" style="position:relative;*position:static;">
+									<table id="table_cltj" width="100%" border="0" cellpadding="0" cellspacing="0" style="display: table;">
+										<thead>
+											<tr>
+												<th rowspan="2">号码</th>
+												<th colspan="2" height="50">冠 军</th>
+												<th colspan="2">亚 军</th>
+												<th colspan="2">第三名</th>
+												<th colspan="2">第四名</th>
+												<th colspan="2">第五名</th>
+												<th colspan="2">第六名</th>
+												<th colspan="2">第七名</th>
+												<th colspan="2">第八名</th>
+												<th colspan="2">第九名</th>
+												<th colspan="2">第十名</th>
+											</tr>
+											<tr class="smth">
+												<th height="45">总开</th>
+												<th>未开</th>
+
+												<th>总开</th>
+												<th>未开</th>
+
+												<th>总开</th>
+												<th>未开</th>
+
+												<th>总开</th>
+												<th>未开</th>
+
+												<th>总开</th>
+												<th>未开</th>
+
+												<th>总开</th>
+												<th>未开</th>
+
+												<th>总开</th>
+												<th>未开</th>
+
+												<th>总开</th>
+												<th>未开</th>
+
+												<th>总开</th>
+												<th>未开</th>
+
+												<th>总开</th>
+												<th>未开</th>
+											</tr>
+										</thead>
+										<tbody>
+										</tbody>
+									</table>
+								</div>
+								<div id="chartbottom" style="display: none;">
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="listboxinfor">
+					<p class="pkjrhmtj_fp">使用说明：提供号码当日的开出次数及近期未开次数，使用参数设置可自定义关注遗漏范围，请根据个人需要手动设置，各参数的数值可设置范围是：2-500 </p>
+				</div>
+			</div>
+
+								<?php $__Template->display("themes/168pc/foot"); ?>
+
+
+		<script type="text/javascript" src="/themes/168pc/js/lib/calendar.js"></script>
+	</body>
+	<script type="text/javascript" src="/themes/168pc/js/lib/config.js"></script>
+	<script type="text/javascript" src="/themes/168pc/js/loacal/animate/animate.js"></script>
+	<script type="text/javascript" src="/themes/168pc/js/lib/GA.js"></script>
+	<script type="text/javascript" src="/themes/168pc/js/loacal/pk10/pk10_jinrihmtj.js"></script>
+	<script type="text/javascript" src="/themes/168pc/js/loacal/pk10/pk10_kai.js"></script>
+
+</html>";s:12:"compile_time";i:1519032626;}";

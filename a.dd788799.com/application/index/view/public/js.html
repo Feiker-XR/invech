@@ -1,0 +1,25 @@
+{block name="js"}
+<script src="/__JS__/jquery.min.js"></script>
+<script src="/__JS__/nifty.min.js"></script>
+<script src="/__JS__/switchery.min.js"></script>
+<script src="/__JS__/md5.min.js"></script>
+<script src="/__JS__/common.min.js"></script>
+<script src="/__JS__/dataTables.min.js"></script>
+<script src="/__JS__/dataTables.bootstrap.min.js"></script>
+<script src="/__JS__/dataTables.responsive.min.js"></script>
+<script src="/__JS__/bootbox.min.js"></script>
+<script src="/__JS__/jquery.nouislider.all.min.js"></script>
+
+<script type="text/javascript">
+	$(document).ready(function () {
+		$("body").click(
+		  function toggle() {
+			  $("div#demo-set", window.top.document).removeClass("open");
+			  $(".mega-dropdown", window.top.document).removeClass("open");
+			  $(".dropdown", window.top.document).removeClass("open");
+			  $(".lskj").fadeOut(200);
+		  }
+		);
+	});
+</script>
+{/block}

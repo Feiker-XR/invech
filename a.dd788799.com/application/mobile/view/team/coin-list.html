@@ -1,0 +1,73 @@
+{php}
+	$modeName=array('2.00'=>'元', '0.20'=>'角', '0.02'=>'分');
+	$liqTypeName=array(
+		1=>'充值',
+		2=>'返点',
+		//3=>'返点',//分红
+		//4=>'抽水金额',
+		5=>'停止追号',
+		6=>'中奖金额',
+		7=>'撤单',
+		8=>'提现失败返回冻结金额',
+		9=>'管理员充值',
+		10=>'解除抢庄冻结金额',
+		//11=>'收单金额',
+		12=>'下级转账',
+		13=>'上级充值成功扣款',
+		50=>'签到赠送',
+		51=>'首次绑定工行卡赠送',
+		52=>'充值佣金',
+		53=>'消费活动',
+		54=>'充值赠送',
+		55=>'注册佣金',
+		
+		100=>'抢庄冻结金额',
+		101=>'投注冻结金额',
+		102=>'追号投注',
+		103=>'抢庄返点金额',
+		//104=>'抢庄抽水金额',
+		105=>'抢庄赔付金额',
+		106=>'提现冻结',
+		107=>'提现成功扣除冻结金额',
+		108=>'开奖扣除冻结金额'
+	);
+{/php}
+
+<ul class="w-goodsList w-goodsList-l m-user-goodsList" data-pro="list">
+	{php} foreach($_list as $vo) {
+	{/php}
+	<li id="pro-view-8" class="w-goodsList-item">
+	<div class="w-goods w-goods-l w-goods-ing m-user-goods">
+		<div class="w-goods-info">
+			<p>
+				用户名：{$vo.username}
+			</p>
+			<p>
+				时间：{:date('m-d H:i:s',$vo['actionTime'])}
+			</p>
+			<p>
+				单号：{php} if($vo['extfield0'] && in_array($vo['liqType'], array(2,3,4,5,6,7,10,11,100,101,102,103,104,105,108))){ {/php}
+				<a class="link" href="javascript:void(0);" data-pro="mycode" data-data="{$vo.actionData?$vo.actionData:''}" url="{:Url('record/betInfo?id='.$vo['extfield0'])}">{$vo['wjorderId']?$vo['wjorderId']:''}</a>
+				{php} } else { echo $vo['extfield1'];} {/php}
+			</p>
+			<p>
+				类型：{$liqTypeName[$vo['liqType']]}
+			</p>
+			<p>
+				资金：{$vo['coin']}
+			</p>
+			<p>
+				余额：{$vo['userCoin']}
+			</p>
+			{php}
+			{/php}
+		</div>
+	</div>
+	</li>
+	{php} } if(!$_list) { {/php}
+	<div style="text-align:center">当前条件下没有记录，请更改条件后搜索</div>
+	{php} } {/php}
+</ul>
+<div class="page">
+	{$_page}
+</div>

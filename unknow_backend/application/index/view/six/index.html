@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>澳门博彩公司</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<!-- <script src="https://cdn.bootcss.com/jquery/1.7.2/jquery.min.js"></script>-->
+<script type="text/javascript" src='/js/jquery-1.7.2.min.js'></script>
+<link rel="stylesheet" type="text/css" href="/css/style.css" />
+<!-- <script type="text/javascript" src='/js/js/jquery1.42.min.js'>-->
+<script type="text/javascript" src='/js/js/jquery1.42.min.js'></script>
+<!-- <script src="https://cdn.bootcss.com/jquery/1.8.0/jquery-1.8.0.min.js"></script>-->
+<script src='/js/js/jquery-1.8.0.min.js'></script>
+<script type="text/javascript" src="/js/js/jquery.jslides.js"></script>
+<script type="text/javascript" src="/js/js/jquery.SuperSlide.2.1.1.js"></script>
+<script src="/Scripts/swfobject_modified.js" type="text/javascript"></script>
+<!--Self-->
+<script type="text/javascript" src="/js/main.js"></script>
+<script type="text/javascript" src="/js/main.new.js"></script>
+<script type="text/javascript" src="/js/layer.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){   
+  
+  $('li.mainlevel').mousemove(function(){
+  $(this).find('ul').slideDown();//you can give it a speed
+  });
+  $('li.mainlevel').mouseleave(function(){
+  $(this).find('ul').slideUp("fast");
+  });
+  
+});
+</script>
+<style type="text/css">
+/*menu*/
+#navs {margin:0 auto; width:996px; display:block; padding:0; background-color:#4D4D50; border-bottom:1px solid #000;border-top:1px solid #000;border-right:1px solid #000;}
+#navs .mainlevel {width: 82px;background:#4D4D50; float:left; border-left:1px solid #000; /*IE6 only*/ list-style:none}
+#navs .mainlevel a {color:#fff; text-decoration:none; line-height:32px; display:block; padding:0; width:82px;}
+#navs .mainlevel a:hover {color:#fff; text-decoration:none; background:#6A0002}
+#navs .mainlevel ul {display:none; position:absolute; padding:0; margin:0;}
+#navs .mainlevel li {border-bottom:1px solid #000;border-left:1px solid #000;border-right:1px solid #000; background:#4D4D50; width:82px;/*IE6 only*/ list-style:none; margin-left:-1px;}
+</style>
+<!--Self-->
+</head>
+<body>
+<div class="head">
+	
+{include file='common/markSix-nav'}	
+
+<script type="text/javascript">
+$(function(){
+	//顶部导航二级菜单
+	$(".nav_right_div").mouseenter(function(){
+		$(this).find("ul").show();
+	}).mouseleave(function(){
+		$(this).find("ul").hide();
+	})
+	
+})
+</script>
+</div>
+<div class="game_c_center">
+	<div class="game_l_login">
+		<?php if(!$user){?>
+		<div class="game_l_login_nav">
+			<h3>Vip会员登录</h3>
+			<ul>
+				<li class="game_l_login_nav_1"><input type="text" name="username" id="username" placeholder="输入用户名"></li>
+				<li class="game_l_login_nav_2"><input type="password" name="password" id="password" placeholder="输入密码"></li>
+				<li class="game_l_login_nav_3"><a href="javascript:;" onclick="alert('请联系在线客服!');return false;">忘记密码？</a></li>
+				<li class="game_l_login_nav_4"><button onclick="Login()" id="logkey">登录</button></li>
+				<li class="game_l_login_nav_5"><a class="button" href="{:Url('index/reg')}">立即开户</a></li>
+			</ul>
+		</div>
+		<?php }else{?>
+		<!--登陆后状态-->
+			<div class="game_l_login_nav game_hadlogin">
+				<h3>Vip会员登录</h3>
+				<span class="ml15 fl">账户：<i class="head_w_hadlogin_name"><?php echo $user['username']?></i></span>
+				<span class="ml15 fl">余额：<i class="head_w_hadlogin_count" id="money"><?php echo $user['money']?></i></span>
+				<ul class="fr">
+					<li><a href="javascript:void(0);" onclick="GoToMember(0,2);return false">会员资料</a></li>
+					<li><a href="javascript:void(0);" onclick="GoToMember(3,0);return false">账户历史</a></li>
+					<li><a href="javascript:void(0);" onclick="GoToMember(2,0);return false">交易记录</a></li>
+					<li><a href="javascript:void(0);" onclick="GoToMember(0,2);return false">财务中心</a></li>
+					<li><a href="javascript:void(0);" onclick="GoToMember(5,0);return false">代理中心</a></li>		
+					<li><a href="javascript:void(0);" onclick="GoToMember(1,0);return false">会员存款</a></li>
+					<li><a href="javascript:void(0);" onclick="GoToMember(0,2);return false">额度转换</a></li>
+					<li><a href="javascript:void(0);" onclick="GoToMember(1,1);return false">会员提款</a></li>
+					<li><a href="javascript:GoTo('1','logout');">安全退出</a></li>						
+				</ul>
+			</div>
+		<?php }?>
+		 <!--<div class="sports_Bgb"></div>-->
+		<div class="block_0"></div>
+	</div>
+<div class="big_my_content">
+<div class="big_my_content2">
+<div class="big_my_content_header"></div>
+<div class="big_my_content_cent">
+<div style="width: 1000px;margin: 20px auto;">
+ 
+ <table  border="0" align="center" cellpadding="0"  style="margin: 0 auto;" cellspacing="0" bgcolor="#333333">
+    <tr>
+	  <td align="center" valign="middle"><ul id="navs">
+    <li class="mainlevel" id="mainlevel_01"><a href="#">特别号码</a>
+    <ul id="sub_01">
+    <li><a href="{:Url('six/six_7_1')}" target="mainFrame">号码 & 两面</a></li>
+    <li><a href="{:Url('six/six_7_2')}" target="mainFrame">波色 & 生肖</a></li>
+    </ul>
+    </li>
+    
+    <li class="mainlevel" id="mainlevel_02"><a href="#">正码特</a>
+    <ul id="sub_02">
+    <li><a href="{:Url('six/six_1')}" target="mainFrame">正码一</a></li>
+    <li><a href="{:Url('six/six_2')}" target="mainFrame">正码二</a></li>
+    <li><a href="{:Url('six/six_3')}" target="mainFrame">正码三</a></li>
+    <li><a href="{:Url('six/six_4')}" target="mainFrame">正码四</a></li>
+    <li><a href="{:Url('six/six_5')}" target="mainFrame">正码五</a></li>
+    <li><a href="{:Url('six/six_6')}" target="mainFrame">正码六</a></li>
+    <li><a href="{:Url('six/six_1_6')}" target="mainFrame">两面 & 波色</a></li>
+    </ul>
+    </li>
+    
+    <li class="mainlevel" id="mainlevel_03"><a href="#">正码</a>
+    <ul id="sub_03">
+    <li><a href="{:Url('six/six_8_1')}" target="mainFrame">号码</a></li>
+    <li><a href="{:Url('six/six_8_2')}" target="mainFrame">过关</a></li>
+    </ul>
+    </li>
+    
+    <li class="mainlevel"><a href="{:Url('six/six_9')}" target="mainFrame">总和</a></li>
+    <li class="mainlevel"><a href="{:Url('six/six_10')}" target="mainFrame">一肖、尾数</a></li>
+    <li class="mainlevel"><a href="{:Url('six/six_11')}" target="mainFrame">连码</a></li>
+    <li class="mainlevel"><a href="{:Url('six/six_12')}" target="mainFrame">合肖</a></li>
+    <li class="mainlevel"><a href="{:Url('six/six_13')}" target="mainFrame">生肖连</a></li>
+    <li class="mainlevel"><a href="{:Url('six/six_14')}" target="mainFrame">尾数连</a></li>
+    <li class="mainlevel"><a href="{:Url('six/six_15')}" target="mainFrame">全不中</a></li>
+    <li class="mainlevel"><a href="{:Url('six/auto')}" target="mainFrame">开奖号码</a></li>
+    <li class="mainlevel"><a href="/rule/six" target="_blank">规则说明</a></li>
+<div class="lottery_clear"></div>
+</ul></td>
+	  </tr>
+	<tr>
+	  <td height="10" align="center" valign="middle"></td>
+	  </tr>
+	<tr>
+	  <td align="center" valign="middle"><iframe id="mainFrame" name="mainFrame" border="0" marginwidth="0" framespacing="0" src="Six_7_1" frameborder="0" noresize="noResize" width="980" scrolling="auto" height="600" vspale="0" allowtransparency="true" style="background-color=transparent"></iframe></td>
+	  </tr>
+	</table>
+ 
+</div>
+</div>
+</div>
+</div>
+</div>
+
+{include file='common/footer'}
+
+<script type="text/javascript">
+function open_new_888(url) {
+    window.open(url,'newwindow','height=640,width=600,top=150,left='+(screen.width-640)/2+',toolbar=no,menubar=no,scrollbars=no, resizable=no,location=no, status=no');
+}
+</script>
+
+{include file='common/fix-left-right'}
+	
+	
+<script>
+function goPay(){
+	if($("#payUsername").val() == ''){
+		alert("请登录后再进行冲值！");
+		return false;
+	}
+	//alert($("#payCoin").val() );
+	if( $("#payCoin").val() <= '50'){
+		//alert("冲值金额不能小于50");
+		//return false;
+	}
+	$("#payForm").submit();
+}
+$(function(){
+	
+	$('#qian_dao .qian_dao').click(function(){
+		//window.open('qian_dao.php','qian_dao','menubar=no,status=yes,scrollbars=yes,top=150,left=400,toolbar=no,width=805,height=520');
+			$.ajax({
+				type: "post",
+				url: '/qian_dao.php',
+				data:{'ajax':1},
+				success:function(data) {
+					alert(data);
+				}
+			});
+	});
+	
+	setInterval(function() {
+		$.ajax({
+			type: "post",
+			url: "{:Url('index/home')}",
+			data:{'ajax':1,'get_money':'1'},
+			success:function(data) {
+				if (/^[\d\.]+$/.test(data)) {
+					$('#money').text(data);
+				}
+			}
+		});
+	},2000);
+})
+
+</script>
+<div id="endtime"></div>
+<!-- <script type="text/javascript">loadinfo()</script> -->
+<IFRAME id="OrderFrame" name="OrderFrame" border=0 marginWidth=0 frameSpacing=0 src="" frameBorder=0 noResize width=0 scrolling=AUTO height=0 vspale="0" style="display:none"></IFRAME>
+<div style="display:none" id="look"></div>
+</body>
+</html>

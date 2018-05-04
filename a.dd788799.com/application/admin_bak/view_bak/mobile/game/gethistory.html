@@ -1,0 +1,21 @@
+<volist name="_list" id="vo">
+<li id="pro-view-13" class="w-record m-winRecord-revealed">
+<div class="w-goods w-goods-l w-goods-ing m-user-goods">
+	<div class="w-goods-info">
+		<p>
+			第 {$vo.number} 期 
+		</p>
+		<p>
+			<ul class="kjhao">
+			<php>
+				$kjHao=explode(',', $vo['data']);
+				foreach($kjHao as $var){</php>
+					<li>{$var}</li>									
+			<php>}</php>
+			</ul>
+		</p>
+	</div>
+</div>
+<script>lid="{$vo['id']}";</script>
+</li>
+</volist>

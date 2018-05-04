@@ -1,0 +1,21 @@
+<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:76:"/mnt/wwwroot/www.dd788799.com/public/../application/index/mview/live/ag.html";i:1506086731;}*/ ?>
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><title>
+	Asia Game VIP
+</title></head>
+<?php if(\think\Session::get('username') == ''): ?>
+<script>
+	alert("登陆失效，请重新登陆!");window.close();
+</script>
+<?php else: ?>
+<frameset rows="*,0,0" frameborder="NO" border="0" framespacing="0"  >
+<frame name="mem_index" src="<?php echo url('live/playag','type='.$type.'&actype=$actype'); ?>" >
+
+<noframes>
+<body bgcolor="#FFFFFF" text="#000000">
+</body>
+</noframes>
+<?php endif; ?>
+</html>

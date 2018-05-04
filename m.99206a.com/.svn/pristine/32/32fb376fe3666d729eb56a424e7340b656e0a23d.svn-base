@@ -1,0 +1,61 @@
+<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:78:"/mnt/wwwroot/www.dd788799.com/houtai/../application/admin/view/agent/bili.html";i:1505452682;}*/ ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>系统设置</title>
+<link href="/css/base.css" rel="stylesheet" type="text/css" />
+<link href="/css/admin.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="/js/jquery.js"></script>
+<script type="text/javascript" src="/js/jquery.tools.js"></script>
+<script type="text/javascript" src="/js/base.js"></script>
+</head>
+<body class="list">
+	<!--<div class="bar">
+		代理佣金比例设置
+	</div>-->
+	
+
+	<div class="body">
+<ul id="tab" class="tab">
+				<li>
+					<input type="button" value="代理佣金比例" hidefocus class="current" onClick="window.location.href='<?php echo url('agent/bili'); ?>'" />
+				</li>
+                <li>
+					<input type="button" value="添加佣金比例" hidefocus onClick="window.location.href='<?php echo url('agent/bilinew'); ?>'" />
+				</li>
+			</ul>
+
+<table id="listTable" class="listTable">
+
+				<tr>
+
+					<th>排序</th>
+
+					<th>会员数量</th>
+					<th>盈利金额</th>
+
+					<th>佣金比例</th>
+					<!--<th>彩票佣金比例</th>
+					<th>真人佣金比例</th>-->
+
+					<th>操作</th>
+				</tr>
+				<?php if(!(empty($rows) || (($rows instanceof \think\Collection || $rows instanceof \think\Paginator ) && $rows->isEmpty()))): if(is_array($rows) || $rows instanceof \think\Collection || $rows instanceof \think\Paginator): $i = 0; $__LIST__ = $rows;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?>
+				<tr>
+			        <td align="center"><?php echo $vo['px']; ?></td>
+			        <td align="center">最低有效会员 <?php echo $vo['ren']; ?> 人</td>
+			        <td align="center"><?php echo $vo['win']; ?> 元以上</td>
+			        <td align="center"><?php echo $vo['ty']; ?> %</td>
+			        <!--<td align="center"><?=$vo['cp']?> %</td>
+			        <td align="center"><?=$vo['zr']?> %</td>-->
+			        <td align="center">
+			        	<a href="<?php echo url('agent/biliedit','id='.$vo['id']); ?>" >修改</a> | 
+			        	<a href="<?php echo url('agent/bilidel','id='.$vo['id']); ?>">删除</a>
+			        </td>
+			      </tr>
+			    <?php endforeach; endif; else: echo "" ;endif; endif; ?>
+  </table>
+	</div>
+</body>
+</html>

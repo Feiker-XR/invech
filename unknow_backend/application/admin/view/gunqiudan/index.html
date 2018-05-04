@@ -1,0 +1,65 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>系统设置</title>
+<link href="/css/base.css" rel="stylesheet" type="text/css" />
+<link href="/css/admin.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="/js/jquery.js"></script>
+<script type="text/javascript" src="/js/jquery.tools.js"></script>
+<script type="text/javascript" src="/js/base.js"></script>
+</head>
+<body class="list">
+	<div class="bar">
+		滚球未审注单
+	</div>
+	
+
+	<div class="body">
+<ul id="tab" class="tab">
+				<li>
+					<input type="button" value="滚球未审注单" hidefocus class="current" />
+				</li>
+			</ul>
+
+<table id="listTables" class="listTables">
+
+				<tr>
+
+					<th>注单号/联赛名</th>
+
+					<th>主场/客场</th>
+
+					<th>投注信息</th>
+
+					<th>下注金额</th>
+					<th>可赢金额</th>
+				  <th>投注时间</th>
+
+				  <th>投注会员</th>
+                    <th>操作</th>
+
+				</tr>
+{volist name='list' id='rows'}
+      <tr>
+        <td align="center"><?=$rows["number"]?><br><?=$rows["match_name"]?></td>
+        <td align="center"><?php
+if(strpos($rows["master_guest"],'VS.')) echo str_replace("VS.","<br/>",$rows["master_guest"]);
+else  echo str_replace("VS","<br/>",$rows["master_guest"]);
+?></td>
+        <td align="center"><?=$rows["match_time"]?>' <font color="#0000FF"><?=str_replace("-","<br/>",$rows["bet_info"])?></font></td>
+        <td align="center"><?=$rows["bet_money"]?></td>
+        <td align="center"><?=$rows["bet_win"]?></td>
+        <td align="center"><?=date("m-d H:i:s",strtotime($rows["bet_time"]))?></td>
+        <td align="center"><?=$rows["username"]?></td>
+        <td align="center">
+        <a href="{:url('set_lose')}?bid={$rows.bid}&lose_ok=1">有效</a><br/>	
+		<a href="{:url('set_lose')}?bid={$rows.bid}&lose_ok=0&uid={$rows.uid}&status=6">进球无效</a><br/>
+	    <a href="{:url('set_lose')}?bid={$rows.bid}&lose_ok=0&uid={$rows.uid}&status=7">红卡无效</a><br/>
+	    <a href="{:url('set_lose')}?bid={$rows.bid}&lose_ok=0&uid={$rows.uid}&status=3">无效</a></td>
+      </tr>
+{/volist}
+  </table>
+	</div>
+</body>
+</html>

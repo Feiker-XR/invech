@@ -1,0 +1,208 @@
+{include file="/six/header" /}
+<body>
+<div class="content">
+<form name="orders" action="{:Url('lotterybet/six')}?type=0" method="post" target="OrderFrame">
+<div class="top">&nbsp;&nbsp;正码 => 号码</div>
+<table width="800" border="0" align="center" cellpadding="0" cellspacing="0" class="numberinfo">
+  <tr>
+    <td>&nbsp;&nbsp;第 <span id="open_qihao">0000000</span> 期
+  </td>
+    <td><div class="time-item">距离封盘：<span id="hour_show">0 时</span><span id="minute_show">0 分</span><span id="second_show">0 秒</span></div></td>
+    <td align="right"><div id="openNumber">开奖号码载入中...</div></td>
+  </tr>
+</table>
+<table border="0" align="center" cellpadding="0" cellspacing="1" class="bian" style="margin-top:10px;">
+  <tr>
+    <th>号码</th>
+    <th>赔率</th>
+    <th>金额</th>
+    <th>号码</th>
+    <th>赔率</th>
+    <th>金额</th>
+    <th>号码</th>
+    <th>赔率</th>
+    <th>金额</th>
+    <th>号码</th>
+    <th>赔率</th>
+    <th>金额</th>
+    <th>号码</th>
+    <th>赔率</th>
+    <th>金额</th>
+  </tr>
+  <tr>
+    <td id="ball_01">01</td>
+    <td class="bian_td_odds" id="ball_8_o1">-</td>
+    <td class="bian_td_inp" id="ball_8_m1">&nbsp;</td>
+    <td id="ball_11">11</td>
+    <td class="bian_td_odds" id="ball_8_o11">-</td>
+    <td class="bian_td_inp" id="ball_8_m11">&nbsp;</td>
+    <td id="ball_21">21</td>
+    <td class="bian_td_odds" id="ball_8_o21">-</td>
+    <td class="bian_td_inp" id="ball_8_m21">&nbsp;</td>
+    <td id="ball_31">31</td>
+    <td class="bian_td_odds" id="ball_8_o31">-</td>
+    <td class="bian_td_inp" id="ball_8_m31">&nbsp;</td>
+    <td id="ball_41">41</td>
+    <td class="bian_td_odds" id="ball_8_o41">-</td>
+    <td class="bian_td_inp" id="ball_8_m41">&nbsp;</td>
+  </tr>
+  <tr>
+    <td id="ball_02">02</td>
+    <td class="bian_td_odds" id="ball_8_o2">-</td>
+    <td class="bian_td_inp" id="ball_8_m2">&nbsp;</td>
+    <td id="ball_12">12</td>
+    <td class="bian_td_odds" id="ball_8_o12">-</td>
+    <td class="bian_td_inp" id="ball_8_m12">&nbsp;</td>
+    <td id="ball_22">22</td>
+    <td class="bian_td_odds" id="ball_8_o22">-</td>
+    <td class="bian_td_inp" id="ball_8_m22">&nbsp;</td>
+    <td id="ball_32">32</td>
+    <td class="bian_td_odds" id="ball_8_o32">-</td>
+    <td class="bian_td_inp" id="ball_8_m32">&nbsp;</td>
+    <td id="ball_42">42</td>
+    <td class="bian_td_odds" id="ball_8_o42">-</td>
+    <td class="bian_td_inp" id="ball_8_m42">&nbsp;</td>
+  </tr>
+  <tr>
+    <td id="ball_03">03</td>
+    <td class="bian_td_odds" id="ball_8_o3">-</td>
+    <td class="bian_td_inp" id="ball_8_m3">&nbsp;</td>
+    <td id="ball_13">13</td>
+    <td class="bian_td_odds" id="ball_8_o13">-</td>
+    <td class="bian_td_inp" id="ball_8_m13">&nbsp;</td>
+    <td id="ball_23">23</td>
+    <td class="bian_td_odds" id="ball_8_o23">-</td>
+    <td class="bian_td_inp" id="ball_8_m23">&nbsp;</td>
+    <td id="ball_33">33</td>
+    <td class="bian_td_odds" id="ball_8_o33">-</td>
+    <td class="bian_td_inp" id="ball_8_m33">&nbsp;</td>
+    <td id="ball_43">43</td>
+    <td class="bian_td_odds" id="ball_8_o43">-</td>
+    <td class="bian_td_inp" id="ball_8_m43">&nbsp;</td>
+  </tr>
+  <tr>
+    <td id="ball_04">04</td>
+    <td class="bian_td_odds" id="ball_8_o4">-</td>
+    <td class="bian_td_inp" id="ball_8_m4">&nbsp;</td>
+    <td id="ball_14">14</td>
+    <td class="bian_td_odds" id="ball_8_o14">-</td>
+    <td class="bian_td_inp" id="ball_8_m14">&nbsp;</td>
+    <td id="ball_24">24</td>
+    <td class="bian_td_odds" id="ball_8_o24">-</td>
+    <td class="bian_td_inp" id="ball_8_m24">&nbsp;</td>
+    <td id="ball_34">34</td>
+    <td class="bian_td_odds" id="ball_8_o34">-</td>
+    <td class="bian_td_inp" id="ball_8_m34">&nbsp;</td>
+    <td id="ball_44">44</td>
+    <td class="bian_td_odds" id="ball_8_o44">-</td>
+    <td class="bian_td_inp" id="ball_8_m44">&nbsp;</td>
+  </tr>
+  <tr>
+    <td id="ball_05">05</td>
+    <td class="bian_td_odds" id="ball_8_o5">-</td>
+    <td class="bian_td_inp" id="ball_8_m5">&nbsp;</td>
+    <td id="ball_15">15</td>
+    <td class="bian_td_odds" id="ball_8_o15">-</td>
+    <td class="bian_td_inp" id="ball_8_m15">&nbsp;</td>
+    <td id="ball_25">25</td>
+    <td class="bian_td_odds" id="ball_8_o25">-</td>
+    <td class="bian_td_inp" id="ball_8_m25">&nbsp;</td>
+    <td id="ball_35">35</td>
+    <td class="bian_td_odds" id="ball_8_o35">-</td>
+    <td class="bian_td_inp" id="ball_8_m35">&nbsp;</td>
+    <td id="ball_45">45</td>
+    <td class="bian_td_odds" id="ball_8_o45">-</td>
+    <td class="bian_td_inp" id="ball_8_m45">&nbsp;</td>
+  </tr>
+  <tr>
+    <td id="ball_06">06</td>
+    <td class="bian_td_odds" id="ball_8_o6">-</td>
+    <td class="bian_td_inp" id="ball_8_m6">&nbsp;</td>
+    <td id="ball_16">16</td>
+    <td class="bian_td_odds" id="ball_8_o16">-</td>
+    <td class="bian_td_inp" id="ball_8_m16">&nbsp;</td>
+    <td id="ball_26">26</td>
+    <td class="bian_td_odds" id="ball_8_o26">-</td>
+    <td class="bian_td_inp" id="ball_8_m26">&nbsp;</td>
+    <td id="ball_36">36</td>
+    <td class="bian_td_odds" id="ball_8_o36">-</td>
+    <td class="bian_td_inp" id="ball_8_m36">&nbsp;</td>
+    <td id="ball_46">46</td>
+    <td class="bian_td_odds" id="ball_8_o46">-</td>
+    <td class="bian_td_inp" id="ball_8_m46">&nbsp;</td>
+  </tr>
+  <tr>
+    <td id="ball_07">07</td>
+    <td class="bian_td_odds" id="ball_8_o7">-</td>
+    <td class="bian_td_inp" id="ball_8_m7">&nbsp;</td>
+    <td id="ball_17">17</td>
+    <td class="bian_td_odds" id="ball_8_o17">-</td>
+    <td class="bian_td_inp" id="ball_8_m17">&nbsp;</td>
+    <td id="ball_27">27</td>
+    <td class="bian_td_odds" id="ball_8_o27">-</td>
+    <td class="bian_td_inp" id="ball_8_m27">&nbsp;</td>
+    <td id="ball_37">37</td>
+    <td class="bian_td_odds" id="ball_8_o37">-</td>
+    <td class="bian_td_inp" id="ball_8_m37">&nbsp;</td>
+    <td id="ball_47">47</td>
+    <td class="bian_td_odds" id="ball_8_o47">-</td>
+    <td class="bian_td_inp" id="ball_8_m47">&nbsp;</td>
+  </tr>
+  <tr>
+    <td id="ball_08">08</td>
+    <td class="bian_td_odds" id="ball_8_o8">-</td>
+    <td class="bian_td_inp" id="ball_8_m8">&nbsp;</td>
+    <td id="ball_18">18</td>
+    <td class="bian_td_odds" id="ball_8_o18">-</td>
+    <td class="bian_td_inp" id="ball_8_m18">&nbsp;</td>
+    <td id="ball_28">28</td>
+    <td class="bian_td_odds" id="ball_8_o28">-</td>
+    <td class="bian_td_inp" id="ball_8_m28">&nbsp;</td>
+    <td id="ball_38">38</td>
+    <td class="bian_td_odds" id="ball_8_o38">-</td>
+    <td class="bian_td_inp" id="ball_8_m38">&nbsp;</td>
+    <td id="ball_48">48</td>
+    <td class="bian_td_odds" id="ball_8_o48">-</td>
+    <td class="bian_td_inp" id="ball_8_m48">&nbsp;</td>
+  </tr>
+  <tr>
+    <td id="ball_09">09</td>
+    <td class="bian_td_odds" id="ball_8_o9">-</td>
+    <td class="bian_td_inp" id="ball_8_m9">&nbsp;</td>
+    <td id="ball_19">19</td>
+    <td class="bian_td_odds" id="ball_8_o19">-</td>
+    <td class="bian_td_inp" id="ball_8_m19">&nbsp;</td>
+    <td id="ball_29">29</td>
+    <td class="bian_td_odds" id="ball_8_o29">-</td>
+    <td class="bian_td_inp" id="ball_8_m29">&nbsp;</td>
+    <td id="ball_39">39</td>
+    <td class="bian_td_odds" id="ball_8_o39">-</td>
+    <td class="bian_td_inp" id="ball_8_m39">&nbsp;</td>
+    <td id="ball_49">49</td>
+    <td class="bian_td_odds" id="ball_8_o49">-</td>
+    <td class="bian_td_inp" id="ball_8_m49">&nbsp;</td>
+  </tr>
+  <tr>
+    <td id="ball_10">10</td>
+    <td class="bian_td_odds" id="ball_8_o10">-</td>
+    <td class="bian_td_inp" id="ball_8_m10">&nbsp;</td>
+    <td id="ball_20">20</td>
+    <td class="bian_td_odds" id="ball_8_o20">-</td>
+    <td class="bian_td_inp" id="ball_8_m20">&nbsp;</td>
+    <td id="ball_30">30</td>
+    <td class="bian_td_odds" id="ball_8_o30">-</td>
+    <td class="bian_td_inp" id="ball_8_m30">&nbsp;</td>
+    <td id="ball_40">40</td>
+    <td class="bian_td_odds" id="ball_8_o40">-</td>
+    <td class="bian_td_inp" id="ball_8_m40">&nbsp;</td>
+    <td colspan="3" align="center" class="bian_td_no">&nbsp;</td>
+  </tr>
+</table>
+<div class="button_body"><a onclick="reset()" class="button again" title="重填"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="button submit" onclick="order();" title="下注"></a></div>
+</form>
+</div>
+<script src="/js/six/class_1.js" type="text/javascript"></script>
+<script type="text/javascript">$(function(){loadInfo(8);});</script>
+<IFRAME id="OrderFrame" name="OrderFrame" style="display:none"></IFRAME>
+</body>
+</html>

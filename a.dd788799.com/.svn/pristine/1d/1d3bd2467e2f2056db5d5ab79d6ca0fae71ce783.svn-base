@@ -1,0 +1,161 @@
+<?php
+
+namespace app\auth\Driver;
+
+use RuntimeException;
+use think\Cookie;
+use app\service\Str;
+use app\auth\Recaller;
+
+use app\auth\Contracts\Guard;
+use app\auth\Contracts\UserProvider as UserProviderContract;
+use app\auth\traits\GuardHelpers;
+use app\auth\traits\UserProvider;
+use app\auth\traits\AttemptLogin;
+
+class SessionGuard implements Guard,UserProviderContract
+{
+    use GuardHelpers,UserProvider,AttemptLogin;
+
+    protected $lastAttempted;
+
+    protected $viaRemember = false;
+
+    protected $loggedOut = false;
+
+    protected $recallAttempted = false;
+
+    public function __construct($model)
+    {
+        $this->setModel($model);
+    }
+
+    public function user()
+    {
+        if ($this->loggedOut) {
+            return;
+        }
+
+        if (! is_null($this->user)) {
+            return $this->user;
+        }
+
+        $id = session('uid');
+
+        if (! is_null($id)) {
+            if ($this->user = $this->retrieveById($id)) {
+  
+            }
+        }
+
+        $recaller = $this->recaller();
+
+        if (is_null($this->user) && ! is_null($recaller)) {
+            $this->user = $this->userFromRecaller($recaller);
+
+            if ($this->user) {
+                session('uid',$this->user->getAuthIdentifier());
+            }
+        }
+
+        return $this->user;
+    }
+
+    public function login($user, $remember = false)
+    {        
+        session('uid',$user->getAuthIdentifier());
+
+        if ($remember) {
+            if (empty($user->getRememberToken())) {
+                $user->freshRememberToken();
+            }
+            
+            //此时如何把cookie放入response中
+            $payload = $user->getAuthIdentifier().'|'.$user->getRememberToken();
+            $payload = container('encrypter')->encrypt($payload);
+            Cookie::forever($this->getRecallerName(), $payload);
+        }
+
+        $this->setUser($user);
+        //return $user;
+        return $user->getAuthIdentifier();
+    }
+
+    protected function userFromRecaller($recaller)
+    {
+        if (! $recaller->valid() || $this->recallAttempted) {
+            return;
+        }
+
+        $this->recallAttempted = true;
+
+        $this->viaRemember = ! is_null($user = $this->retrieveByToken(
+            $recaller->id(), $recaller->token()
+        ));
+
+        return $user;
+    }
+
+    protected function recaller()
+    {
+        if ($recaller = cookie($this->getRecallerName())) {
+            $recaller = container('encrypter')->decrypt($recaller);
+            return new Recaller($recaller);
+        }
+    }
+
+    public function id()
+    {
+        if ($this->loggedOut) {
+            return;
+        }
+
+        return ( $user = $this->user() )
+                    ? $user->getAuthIdentifier()
+                    : session('uid');
+    }
+
+    public function logout()
+    {
+        $user = $this->user();
+        
+        $this->clearUserDataFromStorage();
+        
+        $this->user = null;
+
+        $this->loggedOut = true;
+    }
+
+    protected function clearUserDataFromStorage()
+    {
+        session('uid', null);
+
+        if (! is_null($this->recaller())) {
+            Cookie::delete($this->getRecallerName());
+        }
+    }
+
+    public function getName()
+    {
+        return 'login_'.sha1(static::class);
+    }
+
+    public function getRecallerName()
+    {
+        return 'remember_'.sha1(static::class);
+    }
+
+    public function getUser()
+    {
+        return $this->user;
+    }
+
+    public function setUser($user)
+    {
+        $this->user = $user;
+
+        $this->loggedOut = false;
+
+        return $this;
+    }
+}

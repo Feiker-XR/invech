@@ -1,0 +1,15 @@
+/**
+ * 添加投注--随机一注
+ */
+function gameActionAddCode_random() {
+    // test wx
+    getRandomArr(5);
+}
+
+// 獲取隨機數組
+function getRandomArr(count){
+    for(var i=0;i<count;i++){
+        var ramdom = Math.floor(Math.random()*10);
+        $('.pp').eq(i).find('input[value='+ramdom+']').click();
+    }
+}

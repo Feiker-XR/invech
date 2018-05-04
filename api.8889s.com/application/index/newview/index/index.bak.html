@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>99206 首页</title>
+<link rel="stylesheet" type="text/css" href="/newview/css/style.css"/>
+</head>
+<body>
+<!--头部登陆-->	
+
+{include file='common/nav'}
+	
+<!--首页全屏带进度条大轮播图-->	
+<div class="index-main-box">
+	<div id="indexslider">
+		<div class="index-img">
+			<img src="/newview/img/banner.png" />
+			<img src="/images/banner/1.jpg" />
+			<img src="/images/banner/2.jpg" />
+			<img src="/images/banner/3.jpg" /><!-- 
+			<img src="/newview/img/3.jpg" />
+			<img src="/newview/img/4.jpg" />-->
+		</div>
+		<ul class="index-pagination">
+			<li><a><div><span></span></div></a></li>
+			<li><a><div><span></span></div></a></li>
+			<li><a><div><span></span></div></a></li>
+			<li><a><div><span></span></div></a></li>
+		</ul>
+	</div>
+	<!--公告-->
+	<div class="banner_bottom">
+		<div class="banner_notice txtMarquee-left">
+			<div class="bd">
+				<span class="f14 fl mr10">公告：</span>
+				<ul class="fl f14 ">
+					{volist id="vo" name="notice"}
+						<li class="mt7">{$vo['msg']}</li>
+					{/volist}
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>	
+<div class="block_0"></div>	
+<!--滚动  小轮播-->
+<div class="scrool_all">
+	<div class="ladyScroll">
+		<a class="prev" href="javascript:void(0)"></a>
+		<div class="scrollWrap">
+			<div class="dlList">
+				<dl>
+				  <dt><a href="#"><img src="/newview/img/slider-01.png"></a></dt>
+				</dl>
+				<dl>
+				  <dt><a href="#"><img src="/newview/img/slider-02.png"></a></dt>
+				</dl>
+				<dl>
+				  <dt><a href="#"><img src="/newview/img/slider-03.png"></a></dt>
+				</dl>
+				<dl>
+				  <dt><a href="#"><img src="/newview/img/slider-04.png"></a></dt>
+				</dl>
+				<dl>
+				  <dt><a href="#"><img src="/newview/img/slider-05.png"></a></dt>
+				</dl>	
+				<dl>
+				  <dt><a href="/about/index/id/1.html"><img src="/newview/img/slider-06.png"></a></dt>
+				</dl>				
+			</div>
+		</div>
+		<a class="next" href="javascript:void(0)"></a>
+	</div>	
+</div>
+<div class="block_0"></div>	
+<div class="tab">
+	<div class="tab_click">
+		<span>真人视讯</span>
+		<span>体育赛事</span>
+		<span>电子游艺</span>
+		<span>彩票游戏</span>
+		<span>优惠活动</span>
+	</div>
+	<div class="tab_arrow">
+		<span><img src="/newview/img/arrow-down.png" /></span>
+		<span><img src="/newview/img/arrow-down.png" /></span>
+		<span><img src="/newview/img/arrow-down.png" /></span>
+		<span><img src="/newview/img/arrow-down.png" /></span>
+		<span><img src="/newview/img/arrow-down.png" /></span>
+	</div>
+	<div class="tab_game">
+		<div class="tab_game_1">
+			<a href="{:Url('live/index')}">
+				<span>
+					<img src="/newview/img/tab-01.png" />
+				</span>
+			</a>
+			<ul>
+				<li>百家乐</li>
+				<li>龙虎斗</li>
+				<li>骰宝</li>
+				<li>轮盘</li>
+				<li>二八杠</li>
+				<li>温州牌九</li>
+				<li>德州扑克</li>
+				<li>色碟</li>
+			</ul>
+		</div>
+		<div class="tab_game_1">
+			<a href="{:Url('sport/index')}">
+				<span>
+					<img src="/newview/img/tab-02.png" />
+				</span>
+			</a>
+			<ul>
+				<li>足球</li>
+				<li>篮球</li>
+				<li>网球</li>
+				<li>排球</li>
+				<li>时时滚球</li>
+				<li>F1赛车</li>
+				<li>各式冠军赛事</li>
+			</ul>			
+		</div>		
+		<div class="tab_game_1">
+			<a href="{:Url('game/index')}">
+				<span>
+					<img src="/newview/img/tab-03.png" />
+				</span>
+			</a>	
+			<ul>
+				<li>3D</li>
+				<li>老虎机</li>
+				<li>电动扑克</li>
+				<li>大型电玩</li>
+				<li>桌上游戏</li>
+				<li>经典老虎机</li>
+			</ul>			
+		</div>
+		<div class="tab_game_1">
+			<a href="{:Url('/lottery/index/type/csc')}">
+				<span>
+					<img src="/newview/img/tab-04.png" />
+				</span>
+			</a>
+			<ul>
+				<li>重庆时时彩</li>
+				<li>北京PK拾</li>
+				<li>广东快乐十分</li>
+				<li>幸运飞艇 </li>
+				<li>六合彩</li>
+				
+			</ul>			
+		</div>
+		<div class="tab_game_1">
+			<a href="{:Url('promotions/index')}">
+				<span>
+					<img src="/newview/img/tab-05.png" />
+				</span>
+			</a>
+			<ul>
+				<li>新用户首存即送2888元 返点2.5无上限</li>
+			</ul>			
+		</div>		
+
+	</div>
+	<div class="block_50"></div>
+</div>	
+<div class="block_0"></div>
+<!--底部footer-->
+{include file='common/footer'}
+	
+</body>
+<script src="/newview/js/jquery1.9.0.min.js"></script>
+<script type="text/javascript" src="/newview/js/jquery.SuperSlide.2.1.1.js"></script>
+<script type="text/javascript" src="/newview/js/jquery.easing.1.3.js" ></script>
+<script type="text/javascript" src="/newview/js/slides.jquery.js" ></script>
+<script type="text/javascript" src="/newview/js/main.js"></script>
+<script type="text/javascript">
+$(function(){
+//首页全屏带进度条大轮播图
+$('#indexslider').slides({
+	effect: 'fade, fade',
+	crossfade: true,
+	container:'index-img',
+	paginationClass: 'index-pagination',
+	preloadImage: '',//loading 图片地址
+	play:6000,
+	fadeSpeed: 500,
+	pause:1,
+	generatePagination: false,
+	animationStart: function(current){
+		$('.index-pagination span').stop().animate({width:0}).hide();
+	},
+	animationComplete: function(current){
+		var leftw=(current-1)*34;
+		$('.index-pagination li').eq(current-1).find('span').show().animate({width:50},6000);
+	},
+	slidesLoaded: function(){
+		$('.index-pagination li').eq(0).find('span').animate({width:50},6000);
+	}
+});
+$(".slides_control").css({width : "100%"});
+
+//无缝左滚动
+$(".txtMarquee-left").slide({mainCell:".bd ul",autoPlay:true,effect:"leftMarquee",interTime:50,trigger:"click"});
+	
+/* 首页网站    小轮播图 */
+$(".ladyScroll").slide({ 
+	mainCell:".dlList", 
+	effect:"leftLoop",
+	vis:5, 
+	autoPlay:false
+});	
+	
+setInterval(function() {
+	$.ajax({
+		type: "post",
+		url: "{:Url('index/home')}",
+		data:{'ajax':1,'get_money':'1'},
+		success:function(data) {
+			if (/^[\d\.]+$/.test(data)) {
+				$('#money,#money_2').text(data);
+			}
+		}
+	});
+},2000);
+
+
+
+
+})
+</script>
+</html>

@@ -1,0 +1,107 @@
+	<?php if(Session('uid')!= '' && Session('username') != '') {?>
+	<!--登陆后-->
+		<!--底部nav固定-->
+		<div class="nav500_bottom">
+			<span>
+				<a href="/index.php" class="nav500_bottom_a ">
+					<i class="iconfont icon-zhuye"></i>首页
+				</a>
+			</span>
+			<span>
+				<a href="/promotions/index.html" class="nav500_bottom_a " >
+					<i class="iconfont icon-zhuanxianglibao" style="font-size: 25px;"></i>优惠
+				</a>
+			</span>
+			<span>
+				<a href="/index.php/pay/member.html" class="nav500_bottom_a nav500_bottom_active">
+					<i class="iconfont icon-tubiao207"></i>存款
+				</a>
+			</span>
+			<span>
+				<a href="http://messenger.providesupport.com/messenger/1x5b67gp1rcy50kqxa0qpsa0jx.html" class="nav500_bottom_a">
+					<i class="iconfont icon-kefu"></i>客服
+				</a>
+			</span>
+			<span>
+				<a href="{:Url('user/index')}" class="nav500_bottom_a">
+					<i class="iconfont icon-iconfontcolor19-copy"></i>个人
+				</a>
+			</span>
+		</div>
+		<script src="http://static.ydbimg.com/API/YdbOnline.js"></script>
+		<script>
+		var YDB = new YDBOBJ();
+		$(function(){
+			//点击底部固定导航条切换
+			$(".nav500_bottom_a").click(function(){
+				var navThis = $(this);
+				navThis.css("color","#d9901e")
+				navThis.parent().siblings("span").find("a").css("color","#999999")
+				navThis.find("i").addClass("nav500_b_active");
+				navThis.parent().siblings("span").find("i").removeClass("nav500_b_active");
+				navThis.addClass("nav500_bottom_active").parent().siblings("span").find("a").removeClass("nav500_bottom_active")
+			});
+			$(".nav500_left").click(function(){
+		 		YDB.ShowTopRightMenu();
+			});
+			$(".nav500_right").click(function(){
+		 		YDB.GoBack();
+			});
+			
+		})
+		
+		</script>	
+
+	<?php }else{?>
+	<!--登陆前-->
+		<!--底部nav固定-->
+		<div class="nav500_bottom">
+			<span>
+				<a href="/index.php" class="nav500_bottom_a ">
+					<i class="iconfont icon-zhuye"></i>首页
+				</a>
+			</span>
+			<span>
+				<a href="{:Url('promotions/index')}" class="nav500_bottom_a ">
+					<i class="iconfont icon-zhuanxianglibao" style="font-size: 25px;"></i>优惠
+				</a>
+			</span>
+			<span>
+				<a href="/cunkuan.php" class="nav500_bottom_a nav500_bottom_active">
+					<i class="iconfont icon-tubiao207"></i>存款
+				</a>
+			</span>
+			<span>
+				<a href="http://messenger.providesupport.com/messenger/1x5b67gp1rcy50kqxa0qpsa0jx.html" class="nav500_bottom_a">
+					<i class="iconfont icon-kefu"></i>客服
+				</a>
+			</span>
+			<span>
+				<a href="#" class="nav500_bottom_a" data-modal="#J_loginModal">
+					<i class="iconfont icon-iconfontcolor19-copy"></i>登录
+				</a>
+			</span>
+		</div>
+		<script src="http://static.ydbimg.com/API/YdbOnline.js"></script>
+		<script>
+		var YDB = new YDBOBJ();
+		$(function(){
+			//点击底部固定导航条切换
+			$(".nav500_bottom_a").click(function(){
+				var navThis = $(this);
+				navThis.css("color","#d9901e")
+				navThis.parent().siblings("span").find("a").css("color","#999999")
+				navThis.find("i").addClass("nav500_b_active");
+				navThis.parent().siblings("span").find("i").removeClass("nav500_b_active");
+				navThis.addClass("nav500_bottom_active").parent().siblings("span").find("a").removeClass("nav500_bottom_active")
+				
+			});
+			
+			$(".nav500_left").click(function(){
+		 		YDB.ShowTopRightMenu();
+			});
+			
+		})
+		</script>
+
+	<?php }?>

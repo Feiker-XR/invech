@@ -1,0 +1,34 @@
+<?php
+namespace app\common\model;
+use think\Model;
+
+class LhcTime extends Base{
+
+    protected $table = 'gygy_lhc_time';
+    //protected $createTime = 'created_at';
+    //protected $updateTime = 'updated_at';
+    //protected $autoWriteTimestamp = 'datetime';
+
+    public function lottery()
+    {        
+        return $this->belongsTo('Type','type');
+    }
+
+    //----------------后台------------------
+
+    public static function getList(){
+    
+        $params = request()->param();
+
+        $query = self::order('id');
+
+        if($params['type']??null){
+            $query->where('type',$params['type']);
+        }
+        
+        $data = $query->paginate(15);
+        
+        return $data;
+    }
+
+}

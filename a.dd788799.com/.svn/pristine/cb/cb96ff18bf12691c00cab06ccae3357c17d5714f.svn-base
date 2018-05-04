@@ -1,0 +1,225 @@
+<?php
+namespace app\index;
+use think\Db;
+//use think\Controller;
+use app\common\Controller\Base as Controller;
+use think\Cache;
+use app\classes\page;
+use think\view\driver\Think;
+use app\common\model\Type;
+
+class Base extends Controller{
+    
+    public $memberSessionName='session-name';
+    public $time;
+    public $settings;
+    public $prename;
+    public $user;
+    
+    public $types;
+    public $playeds;
+    public $groups;
+    
+    protected function _initialize()
+    {
+    	parent::_initialize();
+/*
+         $session=array(
+            'uid'=>'312',
+            'username'=>'aaa666',
+            'session_key'=>md5('hello,world'), //session_id(),
+            'loginTime'=>time(),
+            'accessTime'=>time(),
+            'loginIP'=>ip2long('118.99.60.16'),
+            'fanDian'=>4.4,
+            'fanDianBdw' => 0,
+            'admin' => 0,
+            'type'  => 1,
+            'grade' => 1,
+            'coinPassword' => '150ba83deb19f420b93a1cadc2a4dbaa',
+        );
+
+        session('user',null);
+        session('user',$session);
+*/
+        $user = db('members')->where('uid',312)->find(); 
+        session('user',$user);
+
+		$this->user = session('user');
+        $this->assign('user',$this->user);
+        
+        $this->time = time();
+        $this->time = intval($_SERVER['REQUEST_TIME']);
+        $this->assign('time', $this->time) ;
+
+        $this->prename = 'gygy_';
+        
+	
+		$settings = db('params')->cache(true,10*60,'xcache')->where(1)->select();
+		foreach($settings as $var){
+		    $this->settings[$var['name']]=$var['value'];
+		}
+		$this->assign('settings',$this->settings);
+
+		cache('WEB_NAME',$this->settings['webName'],15*60);
+
+		$switchWeb = $this->settings['switchWeb'];
+
+        if ($switchWeb && $switchWeb == '1') {
+
+        } else {
+            $this->error('站点已经关闭，请稍后访问~');
+        }
+
+        $this->types = db('type')->cache(true,10*60,'xcache')->where('isDelete',0)->order('sort')->select() ;     
+        foreach($this->types as $var){
+            $this->types[$var['id']] = $var ;
+        }
+        $this->assign('types',$this->types);
+
+	    $this->groups = db('played_group')->cache(true,10*60,'xcache')->where('enable',1)->order('sort,id')->select() ;
+	    foreach($this->groups as $var){
+	        $this->groups[$var['id']] = $var;
+	    }
+	    $this->assign('groups',$this->groups);
+	    
+	    $this->playeds = db('played')->cache(true,10*60,'xcache')->where('enable',1)->order('sort')->select() ;
+        foreach($this->playeds as $var) {
+            $data[$var['id']] = $var;
+        }
+        $this->assign('playeds',$this->playeds);
+
+        $domain = request()->host();
+        $parts = explode('.',$domain);	
+        if($parts[0] == 'm' || in_array($domain,config('mobile_domain'))){
+            $view_path = APP_PATH.$this->request->module().DS.'mview'.DS;
+            $this->view->config('view_path',$view_path);
+        }
+    }
+	
+    protected function doLogin($username,$pwd='',$remember=false){
+
+            if($pwd){
+                $pwd = md5($pwd);
+                $pwd = think_ucenter_md5($pwd, UC_AUTH_KEY) ;
+
+                $user = model('members')
+                ->where('username',$username)
+                ->where('password',$pwd)
+                ->find();
+
+            }else{//记住我
+                $user = model('members')
+                ->where('remember_token',$username)
+                ->find();
+            }
+
+            if(empty($user)){
+                return null;
+            }
+
+            session('uid',$user['uid']);
+            session('user',$user);
+
+            //只记住7天;
+            if ($remember) {
+                $remember_token = md5($user['username'].$user['password'].time());
+                cookie('remember', $remember_token, 24 * 3600 * 7);
+                db('members')->where('id',$user['uid'])->update(['remember_token'=>$remember_token,]);
+            }            
+
+            return $user;
+    }   
+
+    protected function isLogin(){
+        $uid = session('uid');
+        if(!$uid){
+            if (cookie('?remember')) {
+                $user = $this->doLogin(cookie('remember'));
+                if($user)return $user['id'];
+            }
+            return 0;
+        }else{
+            return $uid;
+        }
+    }    
+
+	//获取当期时间
+	protected function getGameActionTime($type,$old=0){
+	    $actionNo = Type::getGamePhase($type);
+	    
+	    if($type==1 && $actionNo['actionTime']=='00:00'){
+	        $actionTime=strtotime($actionNo['actionTime'])+24*3600;
+	    }else{
+	        $actionTime=strtotime($actionNo['actionTime']);
+	    }
+	    if(!$actionTime) $actionTime=$old;
+	    return $actionTime;
+	}/////
+	
+	//获取当期期数
+	protected function getGameActionNo($type){
+	    $actionNo = Type::getGamePhase($type);
+	    return $actionNo['actionNo'];
+	}/////
+	
+
+
+	/**
+	 * 用户资金变动
+	 *
+	 * 请在一个事务里使用
+	 */
+	protected function addCoin($log){
+
+	    if(!isset($log['uid'])) $log['uid']=$this->user['uid'];
+	    if(!isset($log['info'])) $log['info']='';
+	    if(!isset($log['coin'])) $log['coin']=0;
+	    if(!isset($log['type'])) $log['type']=0;
+	    if(!isset($log['fcoin'])) $log['fcoin']=0;
+	    if(!isset($log['extfield0'])) $log['extfield0']=0;
+	    if(!isset($log['extfield1'])) $log['extfield1']='';
+	    if(!isset($log['extfield2'])) $log['extfield2']='';
+	    
+	    $sql=" call setCoin({$log['coin']}, {$log['fcoin']}, {$log['uid']}, {$log['liqType']}, {$log['type']}, '{$log['info']}', {$log['extfield0']}, '{$log['extfield1']}', '{$log['extfield2']}')";
+	    
+	    //echo $sql;exit;
+	    
+	    if(Db::query($sql)===false)
+	        return false;
+	        else
+	            return true;
+	            return false;
+	}
+	
+	/**
+	 * 获取来访IP地址
+	 */
+	protected static final function ip($outFormatAsLong=false){
+	    $request= \think\Request::instance();
+	    return $request->ip(1);
+	}
+		
+	/**
+	 * 数据集分页
+	 * @param array $records 传入的数据集
+	 */
+	public function recordList($records , $count=15)
+    {
+        $request    =  request()->param() ;
+	    $total      =   $records? count($records) : 1 ;
+
+	    if ( isset($request['r']) ) {
+	        $listRows = (int)$request['r'];
+	    } else {
+            $listRows = config('paginate.list_rows') > 0 ? config('paginate.list_rows') : 10 ;
+	    }
+
+        $page       =  new page($total, $listRows, $request) ;
+	    $voList     =  array_slice($records, $page->firstRow, $page->listRows) ;
+	    $p			=  $page->show() ;
+	    $this->assign('data', $voList) ;
+	    $this->assign('_page', $p? $p: '') ;
+	}
+	
+}

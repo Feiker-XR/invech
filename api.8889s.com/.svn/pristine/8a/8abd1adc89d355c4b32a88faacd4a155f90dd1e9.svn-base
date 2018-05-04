@@ -1,0 +1,48 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>设置比分</title>
+<script language="javascript">
+function check_sub(){
+  var mb=document.getElementById("MB_Inball").value;
+  var tg=document.getElementById("TG_Inball").value;
+  if(mb.length < 1){
+    alert('请填主队进球');
+    return false;
+  }
+  if(tg.length < 1){
+    alert('请填客队进球');
+    return false;
+  }
+  return true;
+}
+</script>
+</head>
+<body>
+<form action="set_wpb_score.php" method="get" name="form1" id="form1" onsubmit="return check_sub();">
+<table width="500"  border="0" align="center" cellpadding="4" cellspacing="1" bgcolor="#E8DCC4">
+  <tr align="center">
+    <td colspan="2" style="background:#986032; color: #FFFFFF;font-weight: bold;">设置结算比分
+      <input name="mid" type="hidden" id="mid" value="<?=$mid?>" />
+  </tr>
+  <tr style="background: #C0AB58; color: #9C4945;font-weight: bold;">
+    <td colspan="2" align="center"><?=$rows["Match_Name"]?></td>
+    </tr>
+  <tr style="font-size:14px; text-align:center">
+    <td width="239" align="center"><?=$rows["Match_Master"]?></td>
+    <td width="239" align="center"><?=$rows["Match_Guest"]?></td>
+  </tr>
+  <tr style="font-size:14px; text-align:center">
+    <td align="center"><input  name="MB_Inball" type="text"  id="MB_Inball" value="<?=$rows["MB_Inball"]?>" size="10" maxlength="10"/></td>
+    <td align="center"><input  name="TG_Inball" type="text" id="TG_Inball" value="<?=$rows["TG_Inball"]?>" size="10" maxlength="10"/></td>
+  </tr>
+  <tr align="center">
+    <td colspan="2"><input type="submit" value="提交" />
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+       <input type="button" onclick="javascript:history.go(-1);" value="返回" /></td>
+  </tr>
+</table>
+</form>
+</body>
+</html>

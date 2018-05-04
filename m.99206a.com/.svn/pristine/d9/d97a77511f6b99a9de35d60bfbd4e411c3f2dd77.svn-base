@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>电子游艺 electric-game55</title>
+<!--<link rel="stylesheet" type="text/css" href="/css/style.css" />-->
+<link rel="stylesheet" href="/newview/css/pagination.css" />
+<link rel="stylesheet" type="text/css" href="/newview/css/style.css" />
+<script src="/js/jquery1.9.0.min.js"></script>
+
+<style>
+/*分页*/
+#htcList{
+	clear: both;
+	float: right;
+}
+
+#htcList li{
+	float: left;
+	margin: 20px 5px;
+	text-align: center;
+	background: white;
+	width: 25px;
+	height: 25px;
+	overflow: hidden;
+	color: #000;
+	line-height: 25px;
+	border-radius: 3px;
+	margin-bottom: 0;
+}
+#htcList li:hover{
+	cursor: pointer;
+	text-decoration: underline;
+}
+#htcList li.active{
+	background:#dfaf82;
+	color:#fff;
+}
+.game_screen.active{
+	color:#dfaf82
+}
+#Searchresult .game_list_group.show{display: block;}
+#Searchresult .game_list_group.hide{display: none;}
+/*.electric_slider_pic{width: 1000px;height: 1010px;overflow: hidden;position: relative;}
+#Searchresult{position: absolute;top: 0px;left: 0px;width: 1000px;height: auto;}
+.game_e_login_all{height: 1480px;}
+
+.list_contain_all{margin-top: -40px;clear: both;text-align:center;float: left;width: 100%}
+.list_contain{text-align: center;}
+.list_contain span{display: inline-block;width: 20px;height: 20px;text-align: center;line-height: 20px;font-size: 14px;border:1px solid #38f;background: white;}
+.list_contain span.on{background: #38f;border:1px solid #38f;}
+.list_contain span:first-child{background: #38f;border:1px solid #38f;}*/
+</style>
+</head>
+<body>
+<div class="head">
+	{include file='common/nav'}
+</div>
+<div class="block_0"></div>
+<!--电子游艺背景-->
+<div class="game_c_center">
+	<div class="game_l_login">
+
+		<div class="block_0"></div>
+		<div class="game_e_login_all fl">
+			<div class="focusBox" style="margin:0 auto">
+				<ul class="pic">
+					<li>
+						<a href="{:Url('game/index')}" target="index"><img src="/img/electr-slider-bg1.png" /></a>
+					</li>
+					<li>
+						<a href="{:Url('lottery/home')}" target="index"><img src="/img/game-slider-bg.png" /></a>
+					</li>
+					<li>
+						<a href="{:Url('live/index')}" target="index"><img src="/img/live-slider-bg.png" /></a>
+					</li>
+					<li>
+						<a href="{:Url('sport/index')}" target="index"><img src="/img/sport-bg1.png" /></a>
+					</li>
+				</ul>
+				<a class="prev" href="javascript:void(0)"></a>
+				<a class="next" href="javascript:void(0)"></a>
+				<ul class="hd">
+					<li></li>
+					<li></li>
+					<li></li>
+					<li></li>
+				</ul>
+			</div>
+			<div class="block_30"></div>
+			<div class="banner_notice txtMarquee-left">
+				<div class="bd">
+					<span class="f14 fl ml10 mr10">公告：</span>
+					<ul class="fl f14">
+						{volist id="vo" name="notice"}
+						<li class="mt7">{$vo['msg']}</li>
+						{/volist}
+					</ul>
+				</div>
+			</div>
+			<div class="block_20"></div>
+			<!--电子游艺栏目页滑动门-->
+			<div class="electric_slider_all">
+				<div class="electric_slider_nav">
+					<ul class="electric_slider_nav_ul">
+						<!-- 切换导航 -->
+						{volist name="dzplat" id="vo"}
+						<li class="electric_slider_nav_li {if $type eq $vo} electric_slider_nav_active{/if}">
+                            <a href="javascript:void(0)" class="TJGame" data-type="{$vo}" data-gametype=""><i>{$vo}</i>游戏厅</a>
+                        </li>
+						{/volist}
+					</ul>
+					<div class="electric_slider_bottom">
+
+					</div>
+
+                    <script type="text/html" id="test_ag">
+                        <ul {if $type eq $vo} style="display: none;" {/if}>
+                            <li class="color_red f16 mt10">推荐游戏</li>
+							<!---二级菜单-->
+                            {{each _types index}}
+                                <li class="mt15">
+                                    <a href="javascript:void(0)" class="game_screen">{{index}}</a>
+                                </li>
+                            {{/each}}
+                        </ul>
+                    </script>
+
+					<div class="block_20"></div>
+
+					<div class="electric_slider_pic">
+
+					</div>
+				<!-- 分页 -->
+                   <!-- <div id="Pagination" class="pagination">
+
+					</div>-->
+					<ul id="htcList">
+					</ul>
+					<script type="text/html" id="pagination">
+						{{each _pages vlaue index}}
+						<li class="{{index==0?'active':''}}">{{index+1}}</li>
+						{{/each}}
+					</script>
+
+                    <script type="text/html" id="test_pic">
+                        
+                        <ul id="Searchresult" style="display:block;">
+                            {{each _data index}}
+							<li data-type="{{index.gametype}}" data-hot = {{index.ishot}} class="game_list_group">
+                                <%if (index.platform != 'pt'){%>
+                                <img class="lazy" alt="" width="180" height="140" data-original="/images/{{index.platform}}img/{{index.imageurl}}" src="/images/{{index.platform}}img/{{index.imageurl}}"/>
+								<%}%>
+								<%if (index.platform == 'pt'){%>
+								<img class="lazy" alt="" width="180" height="140" data-original="/pt/image/{{index.gameid}}.png" src="/pt/image/{{index.gameid}}.png"/>
+                                <%}%>
+
+
+                                <h3>{{index.gamename}}</h3>
+                                        <div class="electric_slider_div">
+												<%if (index.platform == 'ag'){%>
+													<%if (index.gameid2 == '#N/A' || index.gameid2 == ''){%>
+														<a target="_blank" href="/live/ag/type/{{index.gameid}}/actype/1">开始游戏</a>
+														<a target="_blank" href="/live/ag/type/{{index.gameid}}/actype/0">立即试玩</a>
+													<%}else{%>
+														<a target="_blank" href="/live/ag/type/{{index.gameid2}}/actype/1">开始游戏</a>
+														<a target="_blank" href="/live/ag/type/{{index.gameid2}}/actype/0">立即试玩</a>
+													<%}%>
+												<%}%>
+												<%if (index.platform == 'bbin'){%>
+													<a target="_blank" href="/live/bb/type/{{index.gameid}}">开始游戏</a>
+												<%}%>
+												<%if (index.platform == 'mg'){%>
+													<a target="_blank" href="/live/mg/item_id/{{index.gameid}}/app_id/{{index.gameid2}}">开始游戏</a>
+													<a target="_blank" href="https://launch88.gameassists.co.uk/aurora/?theme=Launch98&usertype=0&sEXT1=demo&sEXT2=demo&serverid=3403&gameid={{index.gameid}}&ul=zh">立即试玩</a>
+												<%}%>
+												<%if (index.platform == 'pt'){%>
+													<a target="_blank" href="/live/pt/item_id/{{index.gameid}}">开始游戏</a>
+													<a target="_blank" href="http://cache.download.banner.blacktiger88.com/casinoclient.html?game={{index.gameid}}&language=zh-cn&mode=offline#{{index.gameid}}">立即试玩</a>
+												<%}%>
+												<%if (index.platform == 'sunbet'){%>
+													<a href="javascript:;">开始游戏</a>
+												<%}%>
+										</div>
+                                    <div class="electric_slider_mask"></div>
+                                </li>
+							{{/each}}
+                        </ul>
+                    </script>
+				</div>
+			</div>
+		</div>
+<!--         <div class="list_contain_all">
+            <div class="list_contain">
+                
+            </div>
+        </div> -->
+		<!-- <div class="game_e_login_all fl" id="page" style="padding-bottom:0px"></div> -->
+	</div>
+</div>
+<div class="block_0"></div>
+
+{include file='common/footer'}
+
+<div class="block_0"></div>
+
+<script type="text/javascript" src="/js/jquery.SuperSlide.2.1.1.js"></script>
+<script type="text/javascript" src="/newview/js/main.js"></script>
+<script type="text/javascript" src="/js/main.js"></script>
+<script type="text/javascript" src="/newview/js/jquery.lazyload.min.js"></script>
+
+<script type="text/javascript" src="/js/main.new.js"></script>
+<script src="/Scripts/swfobject_modified.js" type="text/javascript"></script>
+<script type="text/javascript" src="/js/layer.js"></script>
+<script type="text/javascript" src="/js/template-web.js"></script>
+<script type="text/javascript" src="/newview/js/jquery.pagination.js"></script>
+
+
+
+<script>
+$(function() {
+
+var num_entries;
+    // type ="{$Request.param.type}";
+// 请求游戏大厅数据
+    var dataJson = null;
+    // 点击Ag游戏厅
+$(document).on('click','.TJGame',function (e) {
+        var type = $(this).data('type');
+        gametype = $(this).data('gametype'),
+        url = "/game1/index",
+        data = {"type":type};
+
+    $.get(url,data,function (res) {
+        // 接受传回来的数据
+        dataJson = JSON.parse(res);
+      	//console.log(dataJson);
+        var _types = dataJson.type;
+      	// 对数据进行分组处理
+		dataJson.list = filterArray(dataJson.data,_types);
+
+        // var dataJsonLength = dataJson.data.length;
+        // 遍历推荐游戏列表  [子分类]
+        var html = template("test_ag", {_types: _types});
+        $('.electric_slider_bottom').html(html);
+        // 遍历游戏放到容器
+        var htmlPic = template("test_pic", {_data: dataJson.list.all[0]});
+        $('.electric_slider_pic').html(htmlPic);
+
+        // 分页
+        var _page = template("pagination", {_pages: dataJson.list.all});
+        $('#htcList').html(_page);
+
+    })
+    /*setTimeout(function(){
+        $("#Searchresult img.lazy").lazyload({
+         effect : "fadeIn"
+        });
+    },1000)*/
+});
+// 点击推荐分类
+    $(document).on('click','.game_screen',function () {
+        var _type = $(this).text();
+        $(this).addClass('active').parent().siblings().find('a').removeClass('active')
+        //$(this).css('color','#dfaf82').parent().siblings().find('a').css('color','#fff');
+        // 重新渲染
+        var htmlPic = template("test_pic", {_data: dataJson.list.category[_type][0]});
+        $('.electric_slider_pic').html(htmlPic);
+        // 重新分页
+        var _page = template("pagination", {_pages: dataJson.list.category[_type]});
+        $('#htcList').html(_page);
+    });
+
+// 分页按钮
+    $('#htcList').on('click','li',function () {
+        var _index = parseInt($(this).text())-1;
+		$(this).addClass('active').siblings().removeClass('active');
+		var _subcategory = $('.game_screen.active');
+		var __data = _subcategory.length == 1 ? dataJson.list.category[_subcategory.text()][_index]: dataJson.list.all[_index];
+		/*console.log(__data);*/
+        var htmlPic = template("test_pic", {_data: __data});
+        $('.electric_slider_pic').html(htmlPic);
+    })
+
+
+// 触发AG游戏初始化
+	$('.electric_slider_all').find('.electric_slider_nav_active').find('.TJGame').click();
+// $('.TJGame').eq(0).trigger('click');
+
+// 分页符
+function listPageFun(a,b){
+
+
+}
+
+
+function filterArray(arr, types){
+    var page_length = 20;
+	var obj = {
+	    all:[],
+		category:{
+		}
+	};
+	// 构建分类数组
+	types.forEach(function(value,index){
+	    obj.category[value] = [];
+	});
+	// 开始分类
+    var _arr = [];
+	arr.forEach(function (value,index) {
+		_arr.push(value);
+	    if((index+1) % page_length == 0 || ((index+1) % page_length != 0) && index == arr.length -1){
+			obj.all.push(_arr);
+			_arr = [];
+		}
+		if(obj.category[value.gametype].length > 0 && obj.category[value.gametype][obj.category[value.gametype].length-1].length <page_length){
+            obj.category[value.gametype][obj.category[value.gametype].length-1].push(value);
+		}else{
+            obj.category[value.gametype].push([value]);
+		}
+    });
+	return obj;
+}
+
+function goPay() {
+    if($("#payUsername").val() == '') {
+        alert("请登录后再进行冲值！");
+        return false;
+    }
+    //alert($("#payCoin").val() );
+    if($("#payCoin").val() <= '50') {
+        //alert("冲值金额不能小于50");
+        //return false;
+    }
+    $("#payForm").submit();
+}
+
+function open_new_888(url) {
+    window.open(url, 'newwindow', 'height=640,width=600,top=150,left=' + (screen.width - 640) / 2 + ',toolbar=no,menubar=no,scrollbars=no, resizable=no,location=no, status=no');
+}
+
+//无缝左滚动
+$(".txtMarquee-left").slide({mainCell:".bd ul",autoPlay:true,effect:"leftMarquee",interTime:50,trigger:"click"});
+$('#qian_dao .qian_dao').click(function() {
+    //window.open('qian_dao.php','qian_dao','menubar=no,status=yes,scrollbars=yes,top=150,left=400,toolbar=no,width=805,height=520');
+    $.ajax({
+        type: "post",
+        url: '/qian_dao.php',
+        data: {
+            'ajax': 1
+        },
+        success: function(data) {
+            alert(data);
+        }
+    });
+});
+
+setInterval(function() {
+    $.ajax({
+        type: "post",
+        url: "{:Url('index/home')}",
+        data: {
+            'ajax': 1,
+            'get_money': '1'
+        },
+        success: function(data) {
+            if(/^[\d\.]+$/.test(data)) {
+                $('#money,#money_2').text(data);
+            }
+        }
+    });
+}, 2000);
+
+$(".banner_notice .tempWrap").css({"width":"955px","height":"32px"});
+$(".banner_notice .tempWrap ul").css({"height":"32px"});
+//顶部导航二级菜单
+$(".nav_right_div").mouseenter(function() {
+    $(this).find("ul").show();
+}).mouseleave(function() {
+    $(this).find("ul").hide();
+});
+
+//电子游艺点击游戏厅切换滑动门
+$(".electric_slider_nav_ul li").click(function(){
+    var elecSliderThis = $(this);
+    var sliderIndex = $(this).index();
+    $(".electric_slider_bottom").children("ul").eq(sliderIndex).show().siblings("ul").hide();
+    $(".electric_slider_pic").children("ul").eq(sliderIndex).show().siblings("ul").hide();
+    elecSliderThis.addClass("electric_slider_nav_active").siblings("li").removeClass("electric_slider_nav_active");
+});
+
+
+});
+</script>
+</body>
+</html>

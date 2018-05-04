@@ -1,0 +1,131 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>系统设置</title>
+<link href="/css/base.css" rel="stylesheet" type="text/css" />
+<link href="/css/admin.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="/js/jquery.js"></script>
+<script type="text/javascript" src="/js/jquery.tools.js"></script>
+<script type="text/javascript" src="/js/base.js"></script>
+<script language="javascript">
+function $(_sId){
+	return document.getElementById(_sId);
+}
+
+function gopage(url)
+{
+location.href=url;
+}
+function re_load()
+{
+location.reload();
+}
+
+function check(){
+    var len = document.form1.elements.length;
+	var num = false;
+    for(var i=0;i<len;i++){
+		var e = document.form1.elements[i];
+        if(e.checked && e.name=='mid[]'){
+			num = true;
+			break;
+		}
+    }
+	if(num){
+		var action = $("s_action").value;
+		if(action=="0"){
+			alert("请您选择要执行的相关操作！");
+			return false;
+		}
+		if(action=="2") document.form1.action="ZuQiu_List.php?type=lq_match&php=LanQiu";
+		if(action=="3") document.form1.action="Set_Lq_Score.php";
+		if(action=="1") document.form1.action="Re_JieSuan.php?type=lq_match&php=LanQiu";
+	}else{
+        alert("您未选中任何复选框");
+        return false;
+    }
+}
+
+function ckall(){
+    for (var i=0;i<document.form1.elements.length;i++){
+	    var e = document.form1.elements[i];
+		if (e.name != 'checkall') e.checked = document.form1.checkall.checked;
+	}
+}
+
+</script>
+</head>
+<body class="list">
+	<div class="bar">
+		体育比分管理
+	</div>
+	
+
+	<div class="body">
+<form id="form1" name="form1" method="post" action="ZuQiu_List.php" onSubmit="return check();">
+<div class="listBar">选择日期：
+            <select id="DropDownList1" onChange="javascript:gopage(this.value)" name="DropDownList1"><?php
+for ($i=0;$i<=15;$i++){
+	$s		=	strtotime("-$i day");
+	$date	=	date("m-d",$s);
+?>
+        <option value="{:url('havebet/lanqiu_yes')}?date=<?=$date?>" <?=$page_date==$date ? 'selected' : ''?>><?=$date?></option>
+<?php
+}
+?>
+      </select></div>
+<ul id="tab" class="tab">
+<div style="float:right; margin-right:5px;"><span class="STYLE4">相关操作：</span>
+   <select name="s_action" id="s_action">
+        <option value="0" selected="selected">选择确认</option>
+        <option value="3">录入比分</option>
+        <option value="1">重新结算</option>
+        <option value="2">查看未结算注单</option>
+      </select>
+      <input type="submit" name="Submit2" value="执行" class="formButton"/>
+      <input type="button" name="Submit2" style="color:#F00" value="进入未结算" class="formButton" onClick="window.location.href='{:url('havebet/lanqiu')}'"/></div>
+                <li><input type="button" value="篮球比分" hidefocus class="current" /></ul>
+<table id="listTables" class="listTables">
+
+				<tr>
+
+					<th><?=$page_date?></th>
+					<th>主场队伍</th>
+					<th>全场分</th>
+
+					<th>客场队伍</th>
+					<th>第一节</th>
+					<th>第二节</th>
+				  <th>第三节</th>
+				  <th>第四节</th>
+				  <th>上半场</th>
+				  <th>下半场</th>
+				  <th>加时</th>
+				  <th>结算比分</th>
+				  <th>本期注单</th>
+				  <th><input name="checkall" type="checkbox" id="checkall" onClick="return ckall();"/></th>
+			    </tr>
+{volist name='list' id='rows'}
+      <tr>
+        <td align="center"><?=$rows["Match_Name"]?></td>
+        <td align="center"><?=$rows["Match_Master"]?></td>
+        <td align="center"><?=$rows["MB_Inball"]>=0 ? $rows["MB_Inball"] : '<span style="color:#FF0000;">无效</span>'?> : <?=$rows["TG_Inball"]>=0 ? $rows["TG_Inball"] : '<span style="color:#FF0000;">无效</span>'?></td>
+        <td align="center"><?=$rows["Match_Guest"]?></td>
+        <td align="center"><?=$rows["MB_Inball_1st"]?> : <?=$rows["TG_Inball_1st"]?></td>
+        <td align="center"><?=$rows["MB_Inball_2st"]?> : <?=$rows["TG_Inball_2st"]?></td>
+        <td align="center"><?=$rows["MB_Inball_3st"]?> : <?=$rows["TG_Inball_3st"]?></td>
+        <td align="center"><?=$rows["MB_Inball_4st"]?> : <?=$rows["TG_Inball_4st"]?></td>
+        <td align="center"><?=$rows["MB_Inball_HR"]?> : <?=$rows["TG_Inball_HR"]?></td>
+        <td align="center"><?=$rows["MB_Inball_ER"]?> : <?=$rows["TG_Inball_ER"]?></td>
+        <td align="center"><?php if ($rows["MB_Inball_Add"]>0) echo $rows["MB_Inball_Add"]; ?> : <?php if ($rows["TG_Inball_Add"]>0) echo $rows["TG_Inball_Add"];?></td>
+        <td align="center"><?=$rows["MB_Inball_OK"]?> : <?=$rows["TG_Inball_OK"]?></td>
+        <td align="center"><a href="{:url('havebet/lqmatchlist')}?matchid=<?=$rows['Match_ID']?>">查看本期注单</a></td>
+        <td align="center"><input name="mid[]" type="checkbox" id="mid[]" value="<?=$rows["Match_ID"]?>" /></td>
+      </tr>
+{/volist}
+  </table>
+</form>
+	</div>
+</body>
+</html>

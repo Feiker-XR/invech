@@ -1,0 +1,271 @@
+
+
+.tab-nav-wp{
+	width: 99%;
+	height: 454px;
+	border: 1px solid #e9e9e9;
+	position: relative;
+	margin-top: 40px;
+}
+.tab-nav{
+	position: absolute;
+	top:-28px;
+	left: 50%;
+	margin-left: -174px;
+	width: 348px;
+	height: 50px;
+	border: 1px solid #E9E9E9;
+	border-radius: 35px;
+	background: #fff;
+} 
+.tab-nav span{
+	display: block;
+	float: left;
+	line-height: 50px;
+	font-size: 16px;
+	color: #555555;
+	text-align: center;
+	width: 49%;
+	cursor: pointer;
+}
+.tab-nav span.right-border{
+	border-right: 1px solid #E9E9E9;
+}
+.tab-nav span.color{
+	color: #ff8400;
+	font-weight: bold;
+}
+
+
+.tab-cont-wp{
+	width: 100%;
+	margin-top:45px;
+}
+.tab-cont{
+	
+}
+.cont-com-title{
+	margin-left: 67px;
+	font-size: 16px;
+	color: #555555;
+	font-weight: bold;
+	clear: both;
+}
+.cont-com-title-tow{
+	padding-top: 28px;
+	padding-bottom: 10px;
+}
+.cont-com-title-tow span{
+	color: #ff0000;
+	font-size: 12px;
+}
+.cont-com-title span{
+	font-weight: normal;
+	font-size: 14px;
+}
+.tab-code-wp{
+	margin-left: 104px;
+	margin-top: 20px;
+}
+.tab-code-img{
+	width: 111px;
+	height: 111px;
+	float: left;
+}
+.tab-code-img img{
+	display: block;
+	width: 100%;
+	height: 100%;
+}
+.tab-font{
+	width: 332px;
+	height: 115px;
+	background: url(../../imgs/tab-font-bg.png) no-repeat center center;
+	margin-left: 10px;
+	float: left;
+}
+.tab-font.tab-font-bg{
+	background: url(../../imgs/tab-font-bg2.png) no-repeat center center;
+}
+.tab-font.tab-font-bg.tab-font-bg-three{
+	background: url(../../imgs/tab-font-bg3.png) no-repeat center center;
+}
+.tab-font h4{
+	width: 80%;
+	margin-left: 40px;
+	color: #FFFFFF;
+	font-size:16px;
+	font-weight: bold;
+	overflow: hidden;
+	text-overflow:ellipsis;
+	white-space: nowrap;
+	margin-top:14px;
+}
+.tab-font h4 em{
+	color: #FFFFFF;
+	font-size:16px;
+	font-style: normal;
+}
+.tab-font p{
+	width: 80%;
+	margin-left: 40px;
+	color: #FFFFFF;
+	font-size:14px;
+	overflow: hidden;
+	text-overflow:ellipsis;
+	white-space: nowrap;
+	margin-top: 3px;
+}
+.tab-font p em{
+	font-style: normal;
+}
+
+
+.form-cont{
+	margin-left: 102px;
+	margin-top: 10px;
+	height: 35px;
+}
+.form-cont label{
+	font-size: 14px;
+	color: #555555;
+	line-height: 35px;
+}
+.form-cont input{
+	height: 35px;
+	border: 1px solid #e9e9e9;
+	color: #555555;
+	outline: none;
+	border-radius: 8px;
+	width: 360px;
+	padding-left: 10px;
+}
+
+
+.btn{
+	width: 485px;
+    margin: 15px 0px;
+    margin-left: 80px;
+}
+.btn button.prev{
+	background: #b8b8b8;
+}
+.btn button{
+	width: 148px;
+	height: 30px;
+	outline: none;
+	border-radius: 15px;
+	border: none;
+	color: #FFFFFF;
+	margin-left: 40px;
+	cursor: pointer;
+	background: #515151;
+}
+.btn button:hover{
+	background: #ff6600;
+}
+
+
+
+.tab-pay{
+	padding-top: 40px;
+}
+.pay-amount{
+	width: 588px;
+	height: 70px;
+	background: #f7f7f7;
+	margin: 0 auto;
+	clear: both;
+}
+.pay-amount label{
+	float: left;
+	color: #555;
+	line-height: 70px;
+	font-size: 14px;
+	font-weight: bold;
+	margin-left: 16px;
+}
+.pay-amount div{
+	float: left;
+	width:386px;
+	height: 40px;
+	line-height: 40px;
+	border: 1px solid #e9e9e9;
+	margin-top: 14px;
+	background: #FFFFFF;
+	margin-left: 6px;
+	border-radius: 8px;
+}
+.pay-amount div input{
+	width: 334px;
+	margin-left: 8px;
+	height: 100%;
+	outline: none;
+	border: none;
+}
+.pay-amount div i{
+	color:#adadad ;
+}
+.pay-amount span{
+	color: #ff0000;
+	line-height: 70px;
+	display: block;
+	float: left;
+	margin-left: 5px;
+}
+.standBy{
+	width:588px;
+	margin: 0 auto;
+	margin-top: 10px;
+}
+.standBy span{
+	display: block;
+	float: left;
+	height: 40px;
+	color: #555555;
+	font-size: 14px;
+	font-weight: bold;
+	margin-left: 16px;
+	line-height: 40px;
+}
+.standBy a{
+	color: #555555;
+	display: block;
+	float: left;
+	width: 121px;
+	height: 39px;
+	border: 1px solid #ccc;
+	margin-left: 5px;
+	line-height: 40px;
+	text-align: center;
+}
+.standBy a.addbg{
+	background: url(../../imgs/addbg.png) no-repeat center center;
+	background-size: 121px 38px;
+	border: 1px solid #fff;
+	color:#ff6600 ;
+}
+.btn-submit{
+	width:588px;
+	margin: 0 auto;
+	clear: both;
+}
+.btn-submit button{
+	width: 148px;
+	height: 30px;
+	outline: none;
+	border-radius: 15px;
+	border: none;
+	color: #FFFFFF;
+	cursor: pointer;
+	background: #515151;
+	margin-left: 187px;
+    margin-top: 164px;
+}
+.btn-submit button:hover{
+	background: #ff6600;
+}
+
+.tab-cont-hide{
+	display: none;
+}

@@ -1,0 +1,202 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>系统设置</title>
+<link href="/css/base.css" rel="stylesheet" type="text/css" />
+<link href="/css/admin.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="/js/jquery.js"></script>
+<script type="text/javascript" src="/js/jquery.tools.js"></script>
+<script type="text/javascript" src="/js/base.js"></script>
+<script language="javascript">
+function gopage(url){
+	location.href = url;
+}
+
+function check(){
+    var len = document.form1.elements.length;
+	var num = false;
+    for(var i=0;i<len;i++){
+		var e = document.form1.elements[i];
+        if(e.checked && e.name=='mid[]'){
+			num = true;
+			break;
+		}
+    }
+	if(num){
+		var action = $("#s_action").val();
+		if(action=="0"){
+			alert("请您选择要执行的相关操作！");
+			return false;
+		}else{
+			if(action=="2") document.form1.action="{:url('sports/jiesuan_list')}?type=lq_match&php=ZuQiu";
+			if(action=="4") document.form1.action="{:url('sports/nullity_list')}?type=lq_match&php=ZuQiu";
+		}
+	}else{
+        alert("您未选中任何复选框");
+        return false;
+    }
+}
+
+function ckall(){
+    for (var i=0;i<document.form1.elements.length;i++){
+	    var e = document.form1.elements[i];
+		if (e.name != 'checkall') e.checked = document.form1.checkall.checked;
+	}
+}
+
+function zqlrbf(zqmid,fid){
+	var md = "<?=$page_date?>";
+	var a = "mi"+zqmid;
+	var b = "ti"+zqmid;
+	var m = $("#"+a).val();
+	var t = $("#"+b).val();
+	
+	if(m.length>0 && t.length>0){
+		$.post(
+			'{:url("danshi/lqlr")}',
+			{r:Math.random(),value:m+"|||"+t+"|||"+md+"|||"+zqmid},
+			function(date){
+				var date1	=	Array();
+				date1		=	date.split(",");
+				if(date1[0]==3){
+					alert("系统没有查找到您要结算的赛事！")
+				}else if(date1[0]==1){
+					ftbf(m,t,fid,date1[1],date1[2]);
+				}
+			}
+		);
+	}
+}
+
+function ftbf(m,t,p,d){
+	if(p == 1){     //////全场
+		var mid = document.getElementsByName("mi"+d)
+		var tid = document.getElementsByName("ti"+d)
+	}else{
+		var mid = document.getElementsByName("mh"+d)
+		var tid = document.getElementsByName("th"+d)
+	}
+	for(var i=0; i<mid.length; i++){
+		mid[i].value = m;
+		tid[i].value = t;
+	}
+}
+</script>
+</head>
+<body class="list">
+	<div class="bar">
+		体育比分管理
+	</div>
+	
+
+	<div class="body">
+<form id="form1" name="form1" method="post" action="ZuQiu_List.php" onSubmit="return check();">
+<div class="listBar">选择日期：
+            <select id="DropDownList1" onChange="javascript:gopage(this.value)" name="DropDownList1"><?php
+for ($i=0;$i<=15;$i++){
+	$s		=	strtotime("-$i day");
+	$date	=	date("m-d",$s);
+?>
+        <option value="{:url('havebet/lanqiu')}?date=<?=$date?>" <?=$page_date==$date ? 'selected' : ''?>><?=$date?></option>
+<?php
+}
+?>
+      </select></div>
+<ul id="tab" class="tab">
+<div style="float:right; margin-right:5px;"><span class="STYLE4">相关操作：</span>
+   <select name="s_action" id="s_action">
+        <option value="0" selected="selected">选择确认</option>
+        <option value="2">结算全场</option>
+        <option value="4" style="color:#FF0000;">设为无效</option>
+      </select>
+      <input type="submit" name="Submit2" value="执行" class="formButton"/>
+      <input type="button" name="Submit2" style="color:#F00" value="进入已结算" class="formButton" onClick="window.location.href='{:url('havebet/lanqiu_yes')}?date=<?=$page_date?>'"/></div>
+                <li><input type="button" value="篮球比分" hidefocus class="current" onClick="window.location.href='{:url('havebet/lanqiu')}?date=<?=$page_date?>'" /></li>
+
+			</ul>
+
+<table id="listTables" class="listTables">
+	<tr>
+		<th>比赛时间</th>
+		<th>比赛名称</th>
+		<th>主场队伍</th>
+		<th>全场比分</th>
+		<th>客场队伍</th>
+		<th>第一节</th>
+		<th>第二节</th>
+		<th>第三节</th>
+		<th>第四节</th>
+		<th>上半场</th>
+		<th>下半场</th>
+		<th>加时</th>
+		<th>结算比分</th>
+		<th>查看注单</th>
+		<th><input name="checkall" type="checkbox" id="checkall" onClick="return ckall();"/></th>
+	</tr>
+{volist name='list' id='rows'}
+<?php
+	
+		
+		$Match_Master = trim($rows['Match_Master']);
+		$Match_Guest = trim($rows['Match_Guest']);
+		$master_guest = $Match_Master.'VS'.$Match_Guest;
+		$master_guest1 = $Match_Master.'VS.'.$Match_Guest;
+		
+		$rows["Match_Name"]		=	trim($rows["Match_Name"]);
+		$rows["Match_Master"]	=	trim($rows["Match_Master"]);
+		$rows["Match_Guest"]	=	trim($rows["Match_Guest"]);
+
+		$ftid	=	$rows["Match_ID"];
+		
+	 ?>
+      <tr>
+      	<td align="center"><?=$rows["Match_Time"]?></td>
+        <td align="center"><?=$rows["Match_Name"]?></td>
+        <td align="center"><?=$rows["Match_Master"]?></td>
+        <td align="center">
+        	<span name="div<?=$ftid?>MB_Inball" id="div<?=$rows["Match_ID"]?>MB_Inball"><?=$rows["MB_Inball"]?></span> : 
+        	<span name="div<?=$ftid?>TG_Inball" id="div<?=$rows["Match_ID"]?>TG_Inball"><?=$rows["TG_Inball"]?></span>
+        </td>
+        <td align="center"><?=$rows["Match_Guest"]?></td>
+        <td align="center">
+        	<span name="div<?=$ftid?>MB_Inball_1st" id="div<?=$rows["Match_ID"]?>MB_Inball_1st"><?=$rows["MB_Inball_1st"]?></span> : 
+        	<span name="div<?=$ftid?>TG_Inball_1st" id="div<?=$rows["Match_ID"]?>TG_Inball_1st"><?=$rows["TG_Inball_1st"]?></span>
+        </td>
+        <td align="center">
+        	<span name="div<?=$ftid?>MB_Inball_2st" id="div<?=$rows["Match_ID"]?>MB_Inball_2st"><?=$rows["MB_Inball_2st"]?></span> : 
+        	<span name="div<?=$ftid?>TG_Inball_2st" id="div<?=$rows["Match_ID"]?>TG_Inball_2st"><?=$rows["TG_Inball_2st"]?></span>
+        </td>
+        <td align="center">
+        	<span name="div<?=$ftid?>MB_Inball_3st" id="div<?=$rows["Match_ID"]?>MB_Inball_3st"><?=$rows["MB_Inball_3st"]?></span> : 
+        	<span name="div<?=$ftid?>TG_Inball_3st" id="div<?=$rows["Match_ID"]?>TG_Inball_3st"><?=$rows["TG_Inball_3st"]?></span>
+        </td>
+        <td align="center">
+        	<span name="div<?=$ftid?>MB_Inball_4st" id="div<?=$rows["Match_ID"]?>MB_Inball_4st"><?=$rows["MB_Inball_4st"]?></span> : 
+        	<span name="div<?=$ftid?>TG_Inball_4st" id="div<?=$rows["Match_ID"]?>TG_Inball_4st"><?=$rows["TG_Inball_4st"]?></span>
+        </td>
+        <td align="center">
+        	<span name="div<?=$ftid?>MB_Inball_HR" id="div<?=$rows["Match_ID"]?>MB_Inball_HR"><?=$rows["MB_Inball_HR"]?></span> : 
+        	<span name="div<?=$ftid?>TG_Inball_HR" id="div<?=$rows["Match_ID"]?>TG_Inball_HR"><?=$rows["TG_Inball_HR"]?></span>
+        </td>
+        <td align="center">
+        	<span name="div<?=$ftid?>MB_Inball_ER" id="div<?=$rows["Match_ID"]?>MB_Inball_ER"><?=$rows["MB_Inball_ER"]?></span> : 
+        	<span name="div<?=$ftid?>TG_Inball_ER" id="div<?=$rows["Match_ID"]?>TG_Inball_ER"><?=$rows["TG_Inball_ER"]?></span>
+        </td>
+        <td align="center">
+        	<span name="div<?=$ftid?>MB_Inball_Add" id="div<?=$rows["Match_ID"]?>MB_Inball_Add"><?php if ($rows["MB_Inball_Add"]>0) echo $rows["MB_Inball_Add"]; ?></span> : 
+        	<span name="div<?=$ftid?>TG_Inball_Add" id="div<?=$rows["Match_ID"]?>TG_Inball_Add"><?php if ($rows["TG_Inball_Add"]>0) echo $rows["TG_Inball_Add"];?></span>
+        </td>
+        <td align="center">
+        	<input name="mi<?=$ftid?>" type="text" class="zqinput" id="mi<?=$rows["Match_ID"]?>" onChange="zqlrbf(<?=$rows["Match_ID"]?>,<?=$ftid?>)" value="<?=$rows["MB_Inball_OK"]?>" style="width:40px; text-align:center;" maxlength="3" />
+       &nbsp;&nbsp;
+      <input name="ti<?=$ftid?>" type="text" class="zqinput"  id="ti<?=$rows["Match_ID"]?>" onChange="zqlrbf(<?=$rows["Match_ID"]?>,<?=$ftid?>)" value="<?=$rows["TG_Inball_OK"]?>" style="width:40px; text-align:center;" maxlength="3" /></td>
+      <td align="center"><a href="{:url('havebet/lqmatchlist')}?matchid=<?=$rows["Match_ID"]?>">查看注单</a></td>
+      <td align="center"><input name="mid[]" type="checkbox" id="mid[]" value="<?=$rows["Match_ID"]?>" /></td>
+      </tr>
+	{/volist}
+  </table>
+</form>
+	</div>
+</body>
+</html>

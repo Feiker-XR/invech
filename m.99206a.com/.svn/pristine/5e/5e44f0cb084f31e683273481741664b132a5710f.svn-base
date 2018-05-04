@@ -1,0 +1,160 @@
+<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:78:"/mnt/wwwroot/www.dd788799.com/houtai/../application/admin/view/user/index.html";i:1513572740;}*/ ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>系统设置</title>
+<link href="/css/base.css" rel="stylesheet" type="text/css" />
+<link href="/css/admin.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="/js/jquery.js"></script>
+<script type="text/javascript" src="/js/jquery.tools.js"></script>
+<script type="text/javascript" src="/js/base.js"></script>
+<script>
+function ckall(){
+    for (var i=0;i<document.form2.elements.length;i++){
+	    var e = document.form2.elements[i];
+		if (e.name != 'checkall') e.checked = document.form2.checkall.checked;
+	}
+}
+
+function check(){
+    var len = document.form2.elements.length;
+	var num = false;
+    for(var i=0;i<len;i++){
+		var e = document.form2.elements[i];
+        if(e.checked && e.name=='uid[]'){
+			num = true;
+			break;
+		}
+    }
+	if(num){
+		var action = document.getElementById("s_action").value;
+		if(action=="0"){
+			alert("请您选择要执行的相关操作！");
+			return false;
+		}else{
+			if(action=="2") document.form2.action="<?php echo url('user/stop'); ?>?go=0&page=";
+			if(action=="1") document.form2.action="<?php echo url('user/stop'); ?>?go=1&page=";
+		}
+	}else{
+        alert("您未选中任何复选框");
+        return false;
+    }
+}
+
+function open_jump(url) {
+	window.open(url,'newwindow','height=550,width=1270,top=80,left='+(screen.width-1270)/2+',toolbar=no,menubar=no, resizable=no,location=no, status=no');
+}
+</script>
+
+
+</head>
+<body class="list">
+	<div class="bar">
+		会员列表
+	</div>
+	
+
+	<div class="body">
+<form name="form1" method="GET" action="" >
+<div class="listBar">查询关键字：
+  <input type="text" name="likevalue" value="<?php echo $likevalue; ?>"/>
+            &nbsp;&nbsp;查询类型：
+            <select name="selecttype" id="selecttype">
+            <option value="username" <?php if($selecttype == 'username'): ?>selected=selected<?php endif; ?> >用户名</option>
+            <option value="pay_name" <?php if($selecttype == 'pay_name'): ?>selected=selected<?php endif; ?> >真实姓名</option>
+            <option value="reg_ip" <?php if($selecttype == 'reg_ip'): ?>selected=selected<?php endif; ?> >注册IP</option>
+            <option value="login_ip" <?php if($selecttype == 'login_ip'): ?>selected=selected<?php endif; ?> >登录IP</option>
+            <option value="mobile" <?php if($selecttype == 'mobile'): ?>selected=selected<?php endif; ?> >手机号码</option>
+            </select>&nbsp;&nbsp;<input name="find" type="submit" id="find" value="查找" class="formButton"/></td>
+
+	</div>
+</form>
+<form name="form2" method="post" action="" onSubmit="return check();" style="margin:0 0 0 0;">
+<ul id="tab" class="tab">
+<div style="float:right;"><select name="s_action" id="s_action">
+      <option value="0" selected="selected">选择操作</option>
+      <option value="2">启用会员</option>
+      <option value="1">停用会员</option>
+      </select>
+      <input type="submit" name="Submit2" value="执行" class="formButton"/></div>
+				<li>
+					<input type="button" value="全部会员" hidefocus onClick="window.location.href='?mtype=all'" />
+				</li>
+                <li>
+					<input type="button" value="有效会员" hidefocus onClick="window.location.href='?mtype=youxiao'" />
+				</li>
+                <li>
+					<input type="button" value="停用会员" hidefocus  onClick="window.location.href='?mtype=stop'" />
+				</li>
+                <li>
+					<input type="button" value="在线会员 " onClick="window.location.href='?mtype=online'" />
+				</li>
+			</ul>
+
+<table id="listTable" class="listTable">
+
+				<tr>
+
+					<th>所属上级</th>
+
+					<th>会员账号</th>
+					<th>账户余额</th>
+					<th>限制转账</th>
+					<th>会员姓名</th>
+					<!-- <th>手机号码</th>
+                    <th>QQ号码</th> -->
+				  <th>注册时间</th>
+                  <th>最近登陆时间</th>  
+				  <th>注册IP</th>
+                  <th>登录IP</th>
+					<th>登陆网址</th>
+					<th>状态</th>
+					<th>核查</th>
+                    <th><input name="checkall" type="checkbox" id="checkall" onClick="return ckall();"/></th>
+                </tr>
+      <?php if(is_array($page) || $page instanceof \think\Collection || $page instanceof \think\Paginator): $i = 0; $__LIST__ = $page;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$list): $mod = ($i % 2 );++$i;?>
+      <tr>
+        <td align="center"><?php echo $list['topuser']; ?></td>
+        <td align="center"><a href="<?php echo Url('user/edit','id='.$list['uid']); ?>" style="color:#036"><?php echo $list['username']; ?></a></td>
+        <td align="center"><a href="<?php echo url('user/more_detail'); ?>?uid=<?php echo $list['uid']; ?>"><?php echo $list['money']; ?></a></td>
+        <td align="center"><?php if($list['stop_zr'] == '1'): ?><font color="red">是</font><?php else: ?>否<?php endif; ?></td>
+        <td align="center"><a href="<?php echo url('user/index'); ?>?likevalue=<?php echo $list['pay_name']; ?>&selecttype=pay_name "><?php echo $list['pay_name']; ?></a></td>
+       
+         
+        <td align="center"><?php echo $list['reg_date']; ?></td>
+        
+        <td align="center"><?php echo $list['login_time']; ?></td> 
+        
+        <td align="center">
+        	<a href="<?php echo url('user/index'); ?>?likevalue=<?php echo $list['reg_ip']; ?>&selecttype=reg_ip" title="<?php echo ip2addr($list['reg_ip']); ?>"> <?php echo $list['reg_ip']; ?></a>
+        </td>
+        <td align="center"><a href="<?php echo url('user/index'); ?>?likevalue=<?php echo $list['login_ip']; ?>&selecttype=login_ip" title="<?php echo ip2addr($list['login_ip']); ?>" ><?php echo $list['login_ip']; ?></a></td>
+		<td align="center"><?php echo $list['www']; ?></td>
+        <td align="center">
+        	<?php if($list['ul_type'] > 0): ?>
+        		<span style="color:#FF00FF;">在线</span>
+        	<?php else: ?>
+        		<span style="color:#999999;">离线</span>
+        	<?php endif; ?>
+        	 - 
+        	<?php if($list['is_stop'] == 1): ?>
+        		<span style="color: #FF0000;">停用</span>
+        	<?php else: ?>
+        		<span style="color:#006600;">正常</span>
+        	<?php endif; ?>
+        </td>
+        <td align="center">
+        	<a onclick="open_jump('<?php echo url('member/hecha'); ?>?username=<?php echo $list['username']; ?>')" href="javascript:;" style="color:#F00">核查</a>
+        	 - 
+        	 <a href="<?php echo url('member/ti'); ?>?uid=<?php echo $list['uid']; ?>">踢线</a>
+        </td>
+        <td align="center"><input name="uid[]" type="checkbox" id="uid[]" value="<?php echo $list['uid']; ?>" /></td>
+      </tr>
+      <?php endforeach; endif; else: echo "" ;endif; ?>
+  </table>
+<div class="pagerBar"><?php echo $page->render(); ?></div>
+</form>
+	</div>
+</body>
+</html>

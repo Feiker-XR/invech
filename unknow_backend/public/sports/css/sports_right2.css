@@ -1,0 +1,74 @@
+﻿body {
+	font-size:12px;
+	font-family: "Arial";
+	margin : 0;padding : 0;
+	border: 5px solid #CCCCCA;
+	background-color:#CCCCCA;
+}
+/*设立常用标签的外边距，内边距，边框为0，防止在排版时再重复定义和出现怪问题*/
+div,form,ul,ol,li,dl,dt,dd,p,span,img,input
+ {
+	margin: 0;
+	padding: 0;
+	border:0;
+}
+/*设立列表样式为无，这样列表前面不带点*/
+li,dl{
+	list-style-type:none;
+}
+/*(设立默认全局样式超链接样式)*/
+a {font-size: 12px;color: #F00;font-weight: bold;text-decoration:none;}
+a:hover {text-decoration: none;color: #F00;}
+.red{ color:#F00}
+/*所有样式*/
+.top {height:25px; border:1px #8F6D50 solid; margin-bottom:5px; background-color:#838383; line-height:25px; background-image:url(../Images/tz_tb02.png)}
+.box { width:100%;}
+.box th{ color:#000; background-color:#C6A770;line-height:20px; font-weight:100;}
+.box td{ background-color:#FFF;}
+.box .zhu{ color:#900407; font-weight:bold;}
+.box .ke{ color:#213884; font-weight:bold;}
+.box .he{ color:#666; font-weight:bold;}
+.box .ding{ vertical-align:top;}
+.box .zhong{ text-align:center;}
+.box .line{ line-height:16px;}
+.box .gq_shijians{ width:30px;}
+.box .gq_bifens{ width:30px;}
+.box .shijian{ width:50px;}
+.box .duiwu{ }
+.box .quanchang{ }
+.box .shangbanchang{ }
+.box .duying{ width:40px;}
+.box .rangqiu{ width:95px;}
+.box .daxiao{ width:95px;}
+.box .liansai{ background-color:#F6F2CF; line-height:18px; padding-left:10px;}
+.box .liansai a{color:#000;}
+.box .liansai a:hover{ color:#000}
+.box .bian_out{ background-color:#FFF;}
+.box .bian_over{ background-color:#FFE;}
+.box .rangqiu_odds{ line-height:16px; width:91px; padding:0 2px;}
+.box .rangqiu_odds .odds{ float:right; width:30px; text-align:right}
+.box .rangqiu_odds .pankou{ float:left; width:60px; color: #000; font-weight:bold;}
+.box .ruqiushu{ width:70px;}
+.box .banquanchang{ width:50px;}
+.box .liansai_g{ text-align:left;}
+.box .liansai_g a{margin-left:5px; display:inline;color:#FFF;}
+.box .liansai_g a:hover{ color:#FFF}
+.box .liansai_g span{ float:right; margin-right:5px;}
+.box .saishi_g{ background-color:#FFE; line-height:22px; text-align:center; font-weight:bold;}
+.box .xiangmu_g {padding-left:5px;}
+.box .xiangmu_g span{margin-right:5px; float:right;}
+.page{cursor:pointer; float:left; color:#FFF; font-weight:bold; width:500px;}
+.page span{float:left; padding-left:10px;}
+.page ul{list-style-type: none; float:left}
+.page li {float:left;background:#fff;text-align:center; margin-left:5px; margin-top:3px;}
+.page li a {display:block;color:#002F4A;line-height:20px;font-weight:bold; width:20px;}
+.page li a:hover,.page li.i {background:#024467; font-weight:bold; color:#FFF;}
+.button_sx {width: 80px;height: 20px;margin: 3px 0 0 5px;background: #fff;float: left;cursor: hand;display:inline;}
+.button_ls {width: 80px;height: 20px;margin: 3px 0 0 5px;background: #fff;float: left;cursor: hand;display:inline;}
+
+.result_title{cursor:pointer; float:left; color:#FFF; font-weight:bold; width:600px}
+.result_title span{float:left; padding-left:10px;}
+.result_title ul{list-style-type: none; float:left}
+.result_title li {float:left;background:#fff;text-align:center; margin-left:5px; margin-top:3px;}
+.result_title li a {display:block;color:#002F4A;line-height:20px;font-weight:bold; padding:0 10px;}
+.result_title li a:hover,.result_title li.i {background:#024467; font-weight:bold; color:#FFF; padding:0 10px;line-height:20px}

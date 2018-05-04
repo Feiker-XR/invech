@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>系统设置</title>
+<link href="/css/base.css" rel="stylesheet" type="text/css" />
+<link href="/css/admin.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="/js/jquery.js"></script>
+<script type="text/javascript" src="/js/jquery.tools.js"></script>
+<script type="text/javascript" src="/js/base.js"></script>
+<script type="text/javascript" src="/js/calendar.js"></script>
+
+<script type="text/javascript">
+
+function open_jump(url) {
+	window.open(url,'newwindow','height=550,width=1270,top=80,left='+(screen.width-1270)/2+',toolbar=no,menubar=no, resizable=no,location=no, status=no');
+}
+</script>
+</head>
+<body class="list">
+	<div class="bar">
+		会员提款记录
+	</div>
+	<div class="body">
+<form name="form1" method="GET" action="" >
+	<div class="listBar">
+		<select name="status" id="status">
+			<option value="2" {if $status eq '2'}selected{/if} style="color:#FF9900;">未处理</option>
+			<option value="0" {if $status eq '0'}selected{/if} style="color:#FF0000;">提款失败</option>
+			<option value="1" {if $status eq '1'}selected{/if} style="color:#006600;">提款成功</option>
+			<option value="3" {if $status eq '3'}selected{/if} >全部提款</option>
+		</select>&nbsp;&nbsp;
+		<select name="type" id="type">
+			<option value="11,12,120,255,900" {if $type eq '11,120'}selected{/if} >全部类型</option>
+			<option value="11" {if $type eq '11'}selected{/if} >会员提款</option>
+			<option value="120" {if $type eq '120'}selected{/if} >后台扣款</option>
+		</select>&nbsp;&nbsp;
+		<select name="order" id="order">
+			<option value="m_id" {if $order eq 'm_id'}selected{/if} >默认排序</option>
+			<option value="m_value" {if $order eq 'm_value'}selected{/if} >提款金额</option>
+			<option value="sxf" {if $order eq 'sxf'}selected{/if} >手续费</option>
+		</select>&nbsp;&nbsp;
+        	日期: <input name="stime" type="text" id="stime" value="{$stime}" onClick="new Calendar(2008,2020).show(this);" size="10" maxlength="10" readonly="readonly" />
+            ~
+            <input name="etime" type="text" id="etime" value="{$etime}" onClick="new Calendar(2008,2020).show(this);" si		ze="10" maxlength="10" readonly="readonly" />
+	          &nbsp;&nbsp;
+	          会员名称：<input name="username" type="text" id="username" value="{$username}" size="15" maxlength="20"/>&nbsp;&nbsp;<input name="find" type="submit" id="find" value="查找" class="formButton"/></td>
+	
+	</div>
+</form>
+
+<table id="listTable" class="listTable">
+	<tr>
+		<th align="center">编号</th>        
+		<th align="center">提款人姓名</th>
+		<th align="center">订单号</th>
+		<th align="center">提款金额</th>
+		<th align="center">手续费</th>
+		<!--<th align="center">申请时间（系统）</th>-->
+		<th align="center">申请时间</th>
+	    <th align="center">存款会员</th>
+	    <th align="center">核查会员</th>
+	    <!--<th align="center">财务核查</th>-->
+	    <th align="center">提款明细</th>
+		<th align="center">说明</th>
+	    <th align="center">操作</th>
+	</tr>
+	{volist name="list" id="rows"}
+	<tr>
+		<td align="center">{$rows.m_id}</td>
+		<td align="center">{$rows.pay_name}</td>
+		<td align="center">{$rows.m_order}</td>
+		<td align="center">{$rows.m_value|abs}</td>
+		<td align="center">{$rows.sxf}</td>
+		<!--<td align="center"></td>-->
+		<td align="center">{$rows.m_make_time}</td>
+		<td align="center">{$rows.username}</td>
+		<td align="center"><a href="javascript:;" onclick="open_jump('')" style="color:#F00" target="_blank">核查会员</a></td>
+		<!--<td align="center"><a href="" style="color:#F00" target="_blank">财务核查</a></td>-->
+		<td align="center"><font color="#0000FF">{$rows.m_make_time}</font></td>
+		<td align="center">{$rows.about}</td>
+		<td align="center">
+			{if $rows['status'] eq 0}
+				<span style="color:#FF0000;">提款失败</span>
+			{elseif $rows['status'] eq 1}
+				<span style="color:#006600;">提款成功</span>
+			{else}
+				<a href="{:url('money/tikuan_ok')}?order={$rows["m_order"]}">结算</a>
+			{/if}
+		</td>
+	</tr>
+	<?php $currentsum = $currentsum + abs($rows['m_value']);?>
+	<?php $currentzsjrsum = $currentzsjrsum + $rows['sxf']; ?>
+	{/volist}
+	{notempty name="list"}
+	<tr>
+		<td colspan="3" align="right">小计:</td>
+		<td align="center">{$currentsum}</td>
+		<td align="center">{$currentzsjrsum}</td>
+		<td colspan="6"></td>
+	</tr>
+	<tr>
+		<td colspan="3" align="right">总计:</td>
+		<td align="center">{$sum|abs}</td>
+		<td align="center">{$sumzsjr|abs}</td>
+		<td colspan="6"></td>
+	</tr>
+	<tr>
+		<td colspan="11" style="color:red; text-align:center;">{$list->render()}</td>
+	</tr>
+	{/notempty}
+</table>
+  <!-- page -->
+  
+  <!-- page end-->
+	</div>
+</body>
+</html>

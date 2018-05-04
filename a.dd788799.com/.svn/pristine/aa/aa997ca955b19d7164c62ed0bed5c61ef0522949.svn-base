@@ -1,0 +1,162 @@
+<?php
+namespace app\common\model;
+use think\Model;
+use app\common\traits\model\Bank as BankTrait;
+use app\common\traits\model\ApiToken;
+use app\auth\traits\Authenticatable;
+use app\service\Str;
+
+use app\events\UserMoneyEvent;
+
+class Member extends Base{
+
+    use BankTrait,ApiToken,Authenticatable;
+
+    protected $table = 'gygy_members';
+    protected $pk = 'uid';
+    protected $createTime = 'created_at';
+    protected $updateTime = 'updated_at';
+    protected $autoWriteTimestamp = 'datetime';
+    protected $fields = [
+        'uid','isDelete','enable','parentId','parents','admin','username','password',
+        'coinPassword','type','subCount','sex' ,'nickname','name', 
+        'regIP','created_at','updated_at','province' ,'city','address' ,'qq' ,
+        'msn','mobile','email','idCard','grade' ,'score' ,'scoreTotal','coin',
+        'fcoin','fanDian','fanDianBdw' ,'safepwd','safeEmail','regPath',
+        'bank','withdraw_remain_amount','api_token','remember_token','_pk' => 'uid', '_autoinc' => true
+    ];
+    CONST TYPE = [
+       '1' => '会员',
+       '2' => '代理',
+       
+    ];
+    CONST ENABLE = [
+        '1' => '开启',
+        '2' => '关闭',
+    ];
+    CONST SEX = [
+        '保密' => '保密',
+        '男' => '男',
+        '女' => '女',
+    ];
+
+    //当status字段值是1的时候,获取器返回1对应的'正常';
+    //先取字段值再调用获取器
+	/*public function getStatusAttr($value)
+    {
+        $status = [-1=>'删除',0=>'禁用',1=>'正常',2=>'待审核'];
+        return $status[$value];
+    }*/
+
+    public function setIdAttr($value){
+        return $this->data['uid'] = $value;
+    }
+
+    public function getIdAttr($value)
+    {
+        return $this->data['uid'];
+    }
+
+    public function incBalance($amount,$type,$item_id,$remark){
+        
+        $money_model = transaction(function() use ($amount,$type,$item_id,$remark){
+
+            if(!in_array($type, Money::TYPE_ARRAY)){
+                throw new \Exception('资金类型不合法!');
+            }
+
+            $old_balance = $this->coin;
+
+            $this->coin += $amount;
+            $this->save();
+
+            $data = [
+                'uid'       =>  $this->id,
+                'amount'    =>  $amount,
+                'f_balance' =>  $old_balance,
+                't_balance' =>  $this->coin,
+                //'direct'    =>  Money::DIRECT_IN,
+                'type'  =>  $type,
+                'item_id'   =>  $item_id,
+                'remark'    =>  $remark,
+            ];                        
+            $ret = Money::create($data);
+            return $ret;
+        });
+
+        event(new UserMoneyEvent($this));
+
+        return $this;
+    }
+
+    public function decBalance($amount,$type,$item_id,$remark){
+        
+        $money_model = transaction(function() use ($amount,$type,$item_id,$remark){
+
+            if(!in_array($type, Money::TYPE_ARRAY)){
+                throw new \Exception('资金类型不合法!');
+            }
+	    
+            $old_balance = $this->coin;
+
+            $this->coin -= $amount;
+            $this->save();//$this->update(); update不起作用;
+
+            $data = [
+                'uid'       =>  $this->id,
+                'amount'    =>  $amount,
+                'f_balance' =>  $old_balance,
+                't_balance' =>  $this->coin,
+                'direct'    =>  Money::DIRECT_OUT,
+                'type'  =>  $type,
+                'item_id'   =>  $item_id,
+                'remark'    =>  $remark,
+            ];
+            
+            
+            $ret = Money::create($data);                     
+            return $ret;
+        });
+
+        event(new UserMoneyEvent($this));
+
+        return $this;
+    }    
+
+    public function bet($code,$remark){        
+        unset($code['plid']);
+        $code['wjorderId'] = $code['type'] . $code['playedId'] . Str::random(8 - strlen($code['type'] . $code['playedId']));
+        $bet = Bet::create($code);
+
+        $money = $code['actionNum'] * $code['mode'] * $code['beiShu'];
+        $this->decBalance($money,'bet',$bet->id,$remark);        
+    }
+
+    //----------------后台------------------
+
+    public static function getList($request){
+    
+        $params = $request->param();
+         $query = self::order('uid');
+       
+        if($params['keywords']??''){
+             $query->where('username|nickname', 'like','%'.trim($params['keywords']).'%');
+         }
+        if($params['starttime']??''){
+            $query->where('regTime', '>=',strtotime($params['starttime']));
+        }
+        if($params['endtime']??''){
+            $query->where('regTime', '<=',strtotime($params['endtime']));
+         }
+        if($params['type']??''){
+            $query->where('type', $params['type']);
+        }
+        if($params['enable']??''){
+            $query->where('enable', $params['enable']);
+         }
+        $data = $query->paginate(10);
+     
+        return $data;
+    }	
+  
+}

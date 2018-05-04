@@ -1,0 +1,214 @@
+<?php
+namespace app\command;
+
+use think\console\Command;
+use think\console\Input;
+use think\console\Output;
+
+use app\common\model\Bet;
+use app\common\model\Order;
+use app\common\model\Withdraw;
+use app\common\model\Bonus;
+use app\common\model\BonusFlow;
+use app\common\model\ManualMoney;
+
+use app\common\model\DailyBet;
+use app\common\model\DailyDeposit;
+use app\common\model\DailyWithdraw;
+use app\common\model\DailyBonus;
+use app\common\model\DailyReport as DailyReportModel;
+
+class DailyReport extends Command
+{
+    CONST DAILY_TYPES = [
+        'all',/*'bet','deposit','withdraw','bonus','backwater',*/
+    ]; 
+
+    //php think daily_report
+    protected function configure()
+    {
+        $this->setName('daily_report')->setDescription('日报表')
+        ->addArgument('type')->addArgument('date');
+    }
+
+    protected function execute(Input $input, Output $output)
+    {    	
+        $args = $input->getArguments();
+
+        $date = $args['date']?:date('Y-m-d');
+        $type = $args['type']?:'all';
+        if(!in_array($type,self::DAILY_TYPES)){
+            $output->writeln("type is not valid!");exit;
+        }
+
+        $method = 'doDaily'.ucfirst($type);
+        return $this->{$method}($date);
+    }
+
+    //'bet','deposit','withdraw','bonus',
+
+    private function doDailyAll($date){
+
+        $last_day_time = strtotime("-1 days", strtotime($date));
+        $data_date = date('Y-m-d',$last_day_time);
+
+        $query = Bet::getDailyBuild($data_date);
+        $fields = [
+            'ifnull(sum(mode*beiShu*actionNum),0.00) as bet_amount',
+            'ifnull(sum(actionNum),0) as bet_count',
+            'ifnull(sum(bonus),0.00) as zj_amount',  
+            'ifnull(sum(zjCount),0) as zj_count',
+            //'ifnull(sum(mode*beiShu*actionNum)-sum(bonus),0.00) as win_amount',
+            //'ifnull(sum(case when lotteryNo !="" then actionNum*mode*beiShu-bonus else 0 end),0.00) as win_amount', 
+            'ifnull(sum(case when lotteryNo !="" then bonus-actionNum*mode*beiShu else 0 end),0.00) as win_amount', 
+            'ifnull(sum(fanDianAmount),0.00) as backwater_amount',            
+            ];     
+        $bet_ret = $query->field($fields)->find();
+        //当日无注单,$bet_ret数组存在,但$bet_ret['bet_amount']等元素都是null
+
+        $query = Order::getDailyBuild($data_date);
+        $deposit_amount = $query->sum('amount')??0;
+        $deposit_real_amount = $query->where('status',1)->sum('amount')??0;
+
+        $query = Withdraw::getDailyBuild($data_date);
+        $withdraw_amount = $query->sum('amount')??0;
+        $withdraw_real_amount = $query->sum('real_amount')??0;
+        $withdraw_debit_amount = $query->sum('debit_amount')??0;
+
+        $query = BonusFlow::getDailyBuild($data_date);
+        $bonus_amount = $query->sum('amount')??0;
+
+        //$query = ManualMoney::deposit()->getDailyBuild($data_date);
+        $query = ManualMoney::getDailyBuild($data_date,['bonus_id'=>0,]);
+        $manual_deposit = $query->sum('amount')??0;
+        //$query = ManualMoney::withdraw()->getDailyBuild($data_date);
+        $query = ManualMoney::getDailyBuild($data_date,['bonus_id'=>-1,]);
+        $manual_withdraw = $query->sum('amount')??0;
+
+        $dr = DailyReportModel::create([
+            'date' => $data_date,
+            'bet_amount' => $bet_ret['bet_amount'],
+            'bet_count' => $bet_ret['bet_count'],
+            'zj_amount' => $bet_ret['zj_amount'],
+            'zj_count' => $bet_ret['zj_count'],
+            'win_amount' => $bet_ret['win_amount'],
+            'backwater_amount' => $bet_ret['backwater_amount'],
+            'deposit_amount' => $deposit_amount,
+            'deposit_real_amount' => $deposit_real_amount,
+            'withdraw_amount' => $withdraw_amount,
+            'withdraw_real_amount' => $withdraw_real_amount,
+            'withdraw_debit_amount' => $withdraw_debit_amount,
+            'bonus_amount' => $bonus_amount,
+            'manual_deposit_amount' => $manual_deposit,
+            'manual_withdraw_amount' => $manual_withdraw,
+        ]);
+    }
+
+    private function doDailyBet($date){
+        $last_day_time = strtotime("-1 days", strtotime($date));
+
+        $query = Bet::getDailyBuild(date('Y-m-d',$last_day_time));
+
+        $fields = [
+            'ifnull(sum(mode*beiShu*actionNum),0.00) as bet_amount',
+            'ifnull(sum(bonus),0.00) as bonus_amount',  
+            //'sum(mode*beiShu*actionNum)-sum(bonus) as win_amount',
+            'ifnull(sum(case when lotteryNo !="" then bonus-actionNum*mode*beiShu else 0 end),0.00) as win_amount', 
+            'ifnull(sum(actionNum),0.00) as bet_num',
+            'ifnull(sum(zjCount),0.00) as zj_num',
+            'ifnull(sum(fanDianAmount),0.00) as backwater_amount',
+            ];     
+        $query->field($fields)->find();
+
+        return $daily = DailyBet::create([
+            'date'  =>  $date,
+            'bet_amount'    =>  $bet_amount,
+            'bonus_amount'  =>  $bonus_amount,
+            'win_amount'    =>  $win_amount,
+            'bet_num'       =>  $bet_num,
+            'zj_num'        =>  $zj_num,
+            'backwater_amount'  =>  $backwater_amount,
+        ]);
+    }
+    
+    private function doDailyDeposit($date){
+        $last_day_time = strtotime("-1 days", strtotime($date));
+
+        $query = Order::getDailyBuild(date('Y-m-d',$last_day_time));
+
+        $pre_amount = $query->sum('amount');
+        $suc_amount = $query->where('status',1)->sum('amount');
+        $suc_amount = $suc_amount??0;
+        return $daily = DailyDeposit::create([
+            'date'  =>  $date,
+            'pre_amount'    =>  $pre_amount,
+            'suc_amount'    =>  $suc_amount,
+        ]);
+    }
+    
+    private function doDailyWithdraw($date){
+        $last_day_time = strtotime("-1 days", strtotime($date));
+
+        $query = Withdraw::getDailyBuild(date('Y-m-d',$last_day_time));
+
+        $suc_amount = $query->sum('amount');
+        $suc_amount = $suc_amount??0;
+
+        $real_amount = $query->sum('real_amount');
+        $real_amount = $real_amount??0;
+
+        $debit_amount = $query->sum('debit_amount');
+        $debit_amount = $debit_amount??0;
+
+        return $daily = DailyWithdraw::create([
+            'date'  =>  $date,
+            'amount'    =>  $suc_amount,
+            'real_amount' => $real_amount,
+            'debit_amount' => $debit_amount,
+        ]);        
+    }
+    
+    private function doDailyBonus($date){
+        $last_day_time = strtotime("-1 days", strtotime($date));
+
+        //分组统计
+        $query = BonusFlow::getBonusDailyBuild(date('Y-m-d',$last_day_time));
+        $fields = [
+            'bonus_id',
+            'ifnull(sum(amount),0) as bonus_amount',
+            ];     
+        $dailys = $query->field($fields)->select();
+
+        $bonuses = Bonus::all();
+        foreach($bonuses as $bonus){
+            $bonus_amount = 0;
+            foreach($dailys as $daily){                
+                if($bonus->id == $daily['bonus_id']){
+                    $bonus_amount = $daily['bonus_amount'];
+                }
+            }
+            $daily = DailyBonus::create([
+                'date'  =>  $date,
+                'bonus_id'  =>  $bonus->id,
+                'suc_amount'    =>  $bonus_amount,
+            ]);            
+        }      
+    }
+
+    private function doDailyBackwater($date){
+        $last_day_time = strtotime("-1 days", strtotime($date));
+
+        //分组统计
+        $query = BackWater::getDailyBuild(date('Y-m-d',$last_day_time));
+
+        $amount = $query->sum('amount');
+        $amount = $amount??0;
+
+        return $daily = DailyBackWater::create([
+            'date'  =>  $date,
+            'amount'    =>  $amount,
+        ]);     
+    }    
+
+    
+}

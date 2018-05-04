@@ -1,0 +1,411 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+body,
+html {
+  height: 100%;
+  font-size: calc(100px);
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+  max-width: 1024px;
+  margin: 0 auto;
+  background: #efeff4;
+}
+@-webkit-keyframes animated_box1 {
+  from {
+    -webkit-transform: rotateY(0deg);
+    -moz-transform: rotateY(0deg);
+    -o-transform: rotateY(0deg);
+    -ms-transform: rotateY(0deg);
+    transform: rotateY(0deg);
+  }
+  to {
+    -webkit-transform: rotateY(720deg);
+    -moz-transform: rotateY(720deg);
+    -o-transform: rotateY(720deg);
+    -ms-transform: rotateY(720deg);
+    transform: rotateY(720deg);
+  }
+}
+@-webkit-keyframes animated_box2 {
+  from {
+    -webkit-transform: rotateZ(0deg);
+    -moz-transform: rotateZ(0deg);
+    -o-transform: rotateZ(0deg);
+    -ms-transform: rotateZ(0deg);
+    transform: rotateZ(0deg);
+  }
+  to {
+    -webkit-transform: rotateZ(720deg);
+    -moz-transform: rotateZ(720deg);
+    -o-transform: rotateZ(720deg);
+    -ms-transform: rotateZ(720deg);
+    transform: rotateZ(720deg);
+  }
+}
+.cqsscAnimate {
+  width: 100%;
+  max-width: 8.8rem;
+  height: auto;
+  overflow: hidden;
+  margin: 0 auto;
+  position: relative;
+}
+.cqsscAnimate .afterbg {
+  background: url("../img/cqssc/afterbg.png") no-repeat 0 0;
+}
+.cqsscAnimate .beforebg {
+  background: url("../img/cqssc/before.png") no-repeat 0 0;
+}
+.cqsscAnimate .bigbg {
+  background: url("../img/cqssc/big.png") no-repeat 0 0;
+}
+.cqsscAnimate .smallbg {
+  background: url("../img/cqssc/small.png") no-repeat 0 0;
+}
+.cqsscAnimate .singlebg {
+  background: url("../img/cqssc/single.png") no-repeat 0 0;
+}
+.cqsscAnimate .doublebg {
+  background: url("../img/cqssc/double.png") no-repeat 0 0;
+}
+.cqsscAnimate .num0 {
+  background: url("../img/cqssc/num/0.png") no-repeat 0 0;
+}
+.cqsscAnimate .num1 {
+  background: url("../img/cqssc/num/1.png") no-repeat 0 0;
+}
+.cqsscAnimate .num2 {
+  background: url("../img/cqssc/num/2.png") no-repeat 0 0;
+}
+.cqsscAnimate .num3 {
+  background: url("../img/cqssc/num/3.png") no-repeat 0 0;
+}
+.cqsscAnimate .num4 {
+  background: url("../img/cqssc/num/4.png") no-repeat 0 0;
+}
+.cqsscAnimate .num5 {
+  background: url("../img/cqssc/num/5.png") no-repeat 0 0;
+}
+.cqsscAnimate .num6 {
+  background: url("../img/cqssc/num/6.png") no-repeat 0 0;
+}
+.cqsscAnimate .num7 {
+  background: url("../img/cqssc/num/7.png") no-repeat 0 0;
+}
+.cqsscAnimate .num8 {
+  background: url("../img/cqssc/num/8.png") no-repeat 0 0;
+}
+.cqsscAnimate .num9 {
+  background: url("../img/cqssc/num/9.png") no-repeat 0 0;
+}
+.cqsscAnimate .perspectiveView .out {
+  display: none;
+}
+.cqsscAnimate .loading {
+  background: rgba(12, 12, 12, 0.99);
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  position: absolute;
+  min-height: 100px;
+  z-index: 6;
+  top: 0;
+  left: 0;
+}
+.cqsscAnimate .loading .loadtxt {
+  height: 80px;
+  width: 80px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-top: -40px;
+  margin-left: -40px;
+  color: #FFFFFF;
+  font-size: 18px;
+}
+.cqsscAnimate .bodybg {
+  width: 100%;
+  height: auto;
+  text-align: center;
+  position: relative;
+}
+.cqsscAnimate .bodybg img {
+  vertical-align: top;
+  width: 100%;
+  clear: both;
+}
+.cqsscAnimate .disnone {
+  display: none;
+}
+.cqsscAnimate .content {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+}
+.cqsscAnimate .content .nameLogo {
+  width: 26%;
+  margin-left: 23%;
+  height: 20%;
+}
+.cqsscAnimate .content .nameLogo_cq {
+  background: url("../img/cqssc/name.png") no-repeat;
+  background-size: 100%;
+}
+.cqsscAnimate .content .nameLogo_azxy5 {
+  background: url("../img/cqssc/azxy5_logo.png") no-repeat;
+  background-size: 100%;
+}
+.cqsscAnimate .content .nameLogo_jsssc {
+  background: url("../img/cqssc/jisussc_logo.png") no-repeat;
+  background-size: 100%;
+}
+.cqsscAnimate .content .nameLogo_xjssc {
+  background: url("../img/cqssc/xjssc_logo.png") no-repeat;
+  background-size: 100%;
+}
+.cqsscAnimate .content .nameLogo_tjssc {
+  background: url("../img/cqssc/tjssc_logo.png") no-repeat;
+  background-size: 100%;
+}
+.cqsscAnimate .content .coderbox {
+  width: 100%;
+  margin-top: 1%;
+  height: 50%;
+  border-sizing: border-box;
+  border: 1px solid transparent;
+}
+.cqsscAnimate .content .coderbox .codeboxl {
+  width: 46%;
+  margin-left: 13%;
+  margin-top: 1%;
+  height: 100%;
+  background-size: 100%;
+  display: inline-block;
+  float: left;
+}
+.cqsscAnimate .content .coderbox .codeboxl .line {
+  width: 100%;
+  height: 28%;
+  display: -webkit-flex;
+  display: flex;
+  display: -ms-flexbox;
+  flex-flow: row;
+  overflow: hidden;
+}
+.cqsscAnimate .content .coderbox .codeboxl .line .box {
+  flex: 1;
+  margin: 1%;
+  background-size: 97%;
+  width: 100%;
+}
+.cqsscAnimate .content .coderbox .codeboxl .line .box span {
+  display: inline-block;
+  width: 100%;
+  height: 100%;
+  vertical-align: top;
+  background-size: 100%;
+  font-weight: bold;
+  min-height: 200px;
+}
+.cqsscAnimate .content .coderbox .codeboxl .tl .box {
+  animation: animated_box1 1s 1;
+  -moz-animation: animated_box1 1s 1;
+  -webkit-animation: animated_box1 1s 1;
+  -o-animation: animated_box1 1s 1;
+}
+.cqsscAnimate .content .coderbox .codeboxl .ml {
+  margin-top: 5%;
+  text-align: center;
+  font-family: "微软雅黑";
+  font-size: 50%;
+}
+.cqsscAnimate .content .coderbox .codeboxl .ml .box {
+  animation: animated_box2 2s 1;
+  -moz-animation: animated_box2 2s 1;
+  -webkit-animation: animated_box2 2s 1;
+  -o-animation: animated_box2 2s 1;
+}
+.cqsscAnimate .content .coderbox .codeboxl .bl {
+  margin-top: 5%;
+}
+.cqsscAnimate .content .coderbox .codeboxl .bl .box {
+  animation: animated_box1 1s 1;
+  -moz-animation: animated_box1 1s 1;
+  -webkit-animation: animated_box1 1s 1;
+  -o-animation: animated_box1 1s 1;
+}
+.cqsscAnimate .content .coderbox .codeboxr {
+  width: 24%;
+  margin-top: 1%;
+  height: 100%;
+  float: left;
+  margin-left: 3%;
+  background-size: 100%;
+  display: inline-block;
+}
+.cqsscAnimate .content .coderbox .codeboxr .heiban {
+  width: 98%;
+  height: 56%;
+  font-size: 10px;
+  padding: 16% 13%;
+  box-sizing: border-box;
+}
+.cqsscAnimate .content .coderbox .codeboxr .heiban .redfont {
+  color: red;
+}
+.cqsscAnimate .content .coderbox .codeboxr .heiban .bluefont {
+  color: #0f81eb;
+  font-size: 25px;
+  vertical-align: bottom;
+  position: absolute;
+  left: 0%;
+  top: 14%;
+}
+.cqsscAnimate .content .coderbox .codeboxr .heiban .line1 {
+  text-align: center;
+  width: 100%;
+  height: 100%;
+  text-align: left;
+  display: -moz-box;
+  display: -webkit-flex;
+  display: flex;
+  display: -ms-flexbox;
+}
+.cqsscAnimate .content .coderbox .codeboxr .heiban .line1 .oping,
+.cqsscAnimate .content .coderbox .codeboxr .heiban .line1 .djs {
+  width: 100%;
+  height: auto;
+  display: none;
+  position: relative;
+}
+.cqsscAnimate .content .coderbox .codeboxr .heiban .line1 .oping {
+  color: #0f81eb;
+}
+.cqsscAnimate .content .coderbox .codeboxr .heiban .cuttimetitle {
+  position: absolute;
+  left: 0;
+  top: 42%;
+}
+.cqsscAnimate .content .coderbox .codeboxr .heibanb {
+  width: 98%;
+  height: 56%;
+  font-size: 12px;
+  box-sizing: border-box;
+  color: #FFFFFF;
+}
+.cqsscAnimate .content .coderbox .codeboxr .heibanb .line {
+  text-align: center;
+  width: 100%;
+  height: 27%;
+  text-align: left;
+  display: -moz-box;
+  display: -webkit-flex;
+  display: flex;
+  display: -ms-flexbox;
+}
+.cqsscAnimate .content .coderbox .codeboxr .heibanb .smallnum {
+  width: 100%;
+  display: -moz-box;
+  display: -webkit-flex;
+  display: flex;
+  display: -ms-flexbox;
+  height: 26%;
+  margin-top: 4%;
+}
+.cqsscAnimate .content .coderbox .codeboxr .heibanb .smallnum .box {
+  flex: 1;
+  margin: 1%;
+  background-size: 97%;
+  width: 100%;
+}
+.cqsscAnimate .content .coderbox .codeboxr .heibanb .smallnum .box span {
+  display: inline-block;
+  width: 100%;
+  height: 100%;
+  background-size: 100%;
+  vertical-align: top;
+  min-height: 100px;
+}
+.cqsscAnimate .content .coderbox .codeboxr .heibanb .smallnum .box .orbtn {
+  background-size: 100%;
+  background: #d88629;
+  line-height: 100%;
+  vertical-align: middle;
+  text-align: center;
+  padding: 18% 0;
+  border-radius: 10%;
+  -moz-border-radius: 10%;
+  -webkit-border-radius: 10%;
+}
+.cqsscAnimate .content .coderbox .codeboxr .heibanb .bckj {
+  font-size: 10px;
+  margin-top: 5%;
+}
+.cqsscAnimate .content .coderbox .codeboxr .heibanb .bckj span {
+  margin-right: 7%;
+  text-align: center;
+}
+.cqsscAnimate .content .coderbox .codeboxr .heibanb .bckj span:last-child {
+  margin-right: 0;
+}
+.cqsscAnimate .content .coderbox .codeboxr .heibanb .cuttimetitle {
+  padding-top: 9%;
+}
+.cqsscAnimate .content .menubox {
+  width: 100%;
+  margin-top: 1%;
+  height: 16%;
+}
+.cqsscAnimate .content .menubox .tyrbtn {
+  width: 16%;
+  height: 60%;
+  margin-left: 26%;
+  margin-top: 2%;
+  display: inline-block;
+  background: url(../img/cqssc/trybtn.png) no-repeat 0 0;
+  background-size: 100%;
+  float: left;
+  cursor: pointer;
+}
+.cqsscAnimate .content .menubox .soundbtn {
+  margin-left: 2%;
+  width: 10%;
+  height: 60%;
+  display: inline-block;
+  float: left;
+  margin-top: 2%;
+  background: url(../img/cqssc/vulebtn.png) no-repeat 0 8%;
+  background-size: 63%;
+  cursor: pointer;
+}
+.cqsscAnimate .content .menubox .closesoundbtn {
+  background-position-y: 80%;
+}
+.cqsscAnimate .content #numBig {
+  color: #333333;
+}
+@media screen and (min-width: 321px) and (max-width: 415px) {
+  #numBig {
+    font-size: 0.25rem;
+  }
+}
+@media screen and (min-width: 320px) and (max-width: 321px) {
+  #numBig {
+    font-size: 0.19rem;
+  }
+}
+@media screen and (min-width: 424px) {
+  #numBig {
+    font-size: 0.45rem;
+  }
+  .bckj {
+    font-size: 20px !important;
+  }
+  .bluefont {
+    font-size: 43px !important;
+  }
+}

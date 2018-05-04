@@ -1,0 +1,65 @@
+<?php
+
+namespace app\service;
+
+use SuperClosure\Serializer;
+
+class Util
+{
+    protected static $closureSerializer;
+
+    public static function vsprintf($template, array $data, \Closure $onError = null)
+    {
+        if (!is_string($template)) {
+            return '';
+        }
+        if ($template && !(empty($data))) {
+            try {
+                $template = vsprintf($template, $data);
+            } catch (\Exception $e) {
+                if ($onError) {
+                    call_user_func($onError, $e);
+                }
+            }
+        }
+
+        return $template;
+    }
+
+    public static function pathOfUrl($url, \Closure $onError = null)
+    {
+        $path = '';
+        if (!is_string($url)) {
+            return $path;
+        }
+        try {
+            $parsed = parse_url($url);
+            $path = $parsed['path'];
+        } catch (\Exception $e) {
+            if ($onError) {
+                call_user_func($onError, $e);
+            }
+        }
+
+        return $path;
+    }
+
+    public static function getClosureSerializer()
+    {
+        if (!self::$closureSerializer) {
+            self::$closureSerializer = new Serializer();
+        }
+
+        return self::$closureSerializer;
+    }
+
+    public static function serializeClosure(\Closure $closure)
+    {
+        return self::getClosureSerializer()->serialize($closure);
+    }
+
+    public static function unserializeClosure($serializedClosure)
+    {
+        return self::getClosureSerializer()->unserialize($serializedClosure);
+    }
+}

@@ -1,0 +1,99 @@
+<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:77:"/mnt/wwwroot/www.dd788799.com/mobile/../application/index/mview/user/sms.html";i:1507381222;}*/ ?>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8"> 
+<title>系统消息查询</title> 
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+<link rel="stylesheet" href="/css/font-awesome.min.css">
+<link rel="stylesheet" href="/styles/ucenter.css">
+<link rel="stylesheet" type="text/css" href="/fonts-new/iconfont.css">	
+<link rel="stylesheet" href="/styles/ezweb.css">
+<link rel="stylesheet" href="/css/500f_new_wap.css">	
+
+<script src="/assets/jquery.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<style type="text/css">
+.panel-body{padding: 0;}	
+</style>
+</head>
+<body class="body_msg">
+	
+
+	
+<div class="block_0"></div>
+<div class="ucenter">
+	<div class="container" style="margin: 60px 0px;">
+		<div class="row" style="margin: 0;">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h3 class="panel-title">未读信息</h3>
+				</div>
+				<div class="panel-body">
+					<div class="table-responsive">
+						<table class="table">
+							<tr>
+								<th>标题</th>
+								<th>时间</th>
+								<th>删除</th>
+							</tr>
+	     <?php if(!(empty($usermsg) || (($usermsg instanceof \think\Collection || $usermsg instanceof \think\Paginator ) && $usermsg->isEmpty()))): if(is_array($usermsg) || $usermsg instanceof \think\Collection || $usermsg instanceof \think\Paginator): $i = 0; $__LIST__ = $usermsg;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?>							
+							<tr>
+						    	<td><i class="fa fa-<?=$vo["islook"] ? 'folder-open-o' : 'envelope'?>"></i> <a href="<?php echo url('user/smsshow','id='.$vo['msg_id']); ?>"><?= strlen(trim($vo["msg_title"])) ? $vo["msg_title"] : '无标题信息' ?></a></td>
+						    	<td><?=date("Y-m-d",strtotime($vo["msg_time"]))?></td>	
+				     			<td align="center">
+				     				<a href="javascript:void(0);" onclick="url('<?php echo url('user/smsdel','id='.$vo['msg_id']); ?>');return false" style="color:#00F">
+				     				点击删除
+				     				</a>
+				     			</td>						    				
+							</tr>
+	     	<?php endforeach; endif; else: echo "" ;endif; endif; ?>							
+							<tr>
+								<td>
+									
+								</td>
+								<!--
+								<td>
+									<a href="sys_msg_del.php?id=-1" onclick="return confirm('您真的要删除全部消息吗？');" class="btn btn-danger">[删除全部]</a>
+								</td>
+								-->
+							</tr>
+						</table>
+					<?php echo $page?>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+
+<script>
+$(function(){
+	//点击底部固定导航条切换
+$(".nav500_bottom_a").click(function(){
+	var navThis = $(this);
+	navThis.css("color","#d9901e")
+	navThis.parent().siblings("span").find("a").css("color","#999999")
+	navThis.find("i").addClass("nav500_b_active");
+	navThis.parent().siblings("span").find("i").removeClass("nav500_b_active");
+	navThis.addClass("nav500_bottom_active").parent().siblings("span").find("a").removeClass("nav500_bottom_active")
+	});
+	
+})
+</script>
+<script type="text/javascript" language="javascript" src="/js/left_mouse.js"></script>
+<script type="text/javascript">
+//子页面传递高度给顶层iframe  
+function changeFrameHeight(){
+    bodyClientH = document.body.clientHeight;
+    bodyClientW = document.body.clientWidth;
+    var iframeId = $(window.parent.document).find("#iframeid")
+    iframeId.css("height",bodyClientH + 300)
+}   
+changeFrameHeight()		
+</script>
+</body> 
+</html>

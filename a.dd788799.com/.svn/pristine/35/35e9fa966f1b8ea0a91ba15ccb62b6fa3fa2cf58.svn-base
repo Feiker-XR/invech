@@ -1,0 +1,51 @@
+<?php
+namespace app\model;
+use think\Model;
+
+class Money extends Model{
+
+    protected $createTime = 'created_at';
+    protected $updateTime = 'updated_at';
+    protected $autoWriteTimestamp = 'datetime';
+
+    //$validate是数组或者验证器名
+    //validate函数设置$validate成员变量
+    //$validate = ['rule'=>[],'msg'=>[],];
+    //$validate = 'User.edit';    //User验证器的edit场景;
+            
+    //自动完成 $auto = $insert + $update
+    protected $auto = ['remark', 'direct'=>0,];
+    //先判断默认值,remark没有对应的value时,value为null;
+    //remark存在对应的set方法(修改器),还需要调用修改器;参数是remark对应的值;
+    protected $insert = []; 
+    protected $update = []; 
+
+    protected function setRemarkAttr($value)
+    {
+        return $value = '备注';
+    }
+
+
+    public static function getList($request){
+        //$this->create();
+        $map = array();
+        if(is_numeric($id)){ //通过ID查询
+            $map['id'] = $id;
+        } else { //通过标识查询
+            $map['name'] = $id;
+        }
+        return $this->field($field)->where($map)->find();
+    }
+
+    public function item()
+    {
+        return $this->morphTo(['type','item_id'],[
+            'recharge'  =>  'app\admin\model\Order',
+            'withdraw'  =>  'app\admin\model\Withdraw',
+            'bet'       =>  'app\admin\model\Bet',
+            'back_water'  =>  'app\admin\model\BackWater',
+            'bonus'     =>  'app\admin\model\Bonus',
+        ]);
+    }
+
+}

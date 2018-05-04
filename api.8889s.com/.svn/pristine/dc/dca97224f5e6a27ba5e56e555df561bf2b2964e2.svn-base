@@ -1,0 +1,417 @@
+{extend name="base/common"/}
+
+{block name="title"}<title>添加银行－{:cache('WEB_NAME')}</title>{/block}
+
+{block name="body"}
+<style type="text/css">
+        .form-horizontal .has-feedback .form-control-feedback {
+            top: 7px;
+            right: 10px;
+        }
+        .modal-footer button {
+            min-width: 100px;
+            font-size: 16px;
+            margin-left: 20px;
+            margin-right: 20px;
+        }
+        .range {
+            display: table;
+            width: 100%;
+            border-radius: 5px;
+            margin-top: 10px;
+            height: 30px;
+            box-shadow: 0px 2px 3px #ccc inset;
+            background-color: #ebebeb;
+        }
+            .range span {
+                display: table-cell;
+                width: 50px;
+                vertical-align: middle;
+                text-align: center;
+            }
+            .range > div {
+                padding: 0;
+            }
+        #demo-range-def-val {
+            color: #fc4c23;
+        }
+        #demo-range-def {
+            margin: 0;
+            margin-top: 10px;
+        }
+        .noUi-connect {
+            background: linear-gradient(to right,#fe9732, #f35a31);
+        }
+        .noUi-handle {
+            background: linear-gradient(#fe9732, #f35a31);
+            border: 1px #ed4f2a solid;
+            box-shadow: 0px 0px 3px #e94b26;
+        }
+        .formul {
+            width: 520px;
+            overflow: hidden;
+            padding-bottom: 10px;
+        }
+            .formul li {
+                list-style: none;
+                padding-top: 5px;
+            }
+                .formul li p {
+                    height: 36px;
+                    line-height: 36px;
+                    position: relative;
+                }
+                .formul li > span {
+                    display: block;
+                    padding-bottom: 10px;
+                }
+                .formul li p i {
+                    display: inline-block;
+                    width: 36px;
+                    height: 36px;
+                    text-align: center;
+                    font-size: 18px;
+                    line-height: 36px;
+                    color: #ccc;
+                    position: absolute;
+                    left: 0;
+                    top: 2px;
+                    padding: 0;
+                }
+                .formul li p input {
+                    border: 0;
+                    width: 100%;
+                    background-color: #fff;
+                    border: 1px #ddd solid;
+                    border-radius: 2px;
+                    box-sizing: border-box;
+                    padding-left: 40px;
+                    transition: border .5s;
+                }
+                    .formul li p input:focus {
+                        border: 1px #489aed solid;
+                        box-shadow: 0px 0px 5px #eee;
+                    }
+                .formul li p em {
+                    position: absolute;
+                    right: 10px;
+                    font-style: normal;
+                    color: #489aed;
+                }
+        .control-label {
+            line-height: 24px;
+        }
+        .form-checkbox.form-normal.form-primary:hover:before, .form-radio.form-normal.form-primary.active:before, .form-checkbox.form-normal.form-primary:not(.active):hover:after {
+            border-color: #f37032;
+        }
+        .form-checkbox.form-normal.form-primary.active:before, .form-radio.form-normal.form-primary.active:after {
+            background-color: #f37032;
+        }
+        .banklist {
+            margin-bottom: 10px;
+        }
+        .addbank {
+            background-color: #fef3f0;
+            border: 1px #ee744e dashed;
+        }
+            .addbank > a {
+                display: block;
+                text-align: center;
+                padding-top: 30px;
+            }
+                .addbank > a > i {
+                    display: inline-block;
+                    width: 48px;
+                    height: 48px;
+                    text-align: center;
+                    line-height: 48px;
+                    font-size: 20px;
+                    background-color: #ed6c44;
+                    border-radius: 50%;
+                    color: #fff;
+                    border: 3px #fff solid;
+                    box-shadow: 0px 2px 3px #ddd;
+                }
+                .addbank > a > span {
+                    display: block;
+                    text-align: center;
+                    font-size: 16px;
+                    color: #ed6c44;
+                    padding-top: 10px;
+                }
+                .addbank > a:hover span {
+                    color: #000;
+                }
+        .bankbox {
+            height: 145px;
+            position: relative;
+            border-radius: 5px;
+            box-shadow: 0px 0px 5px #eee;
+            margin-bottom: 10px;
+        }
+            .bankbox > div {
+                height: 90px;
+                color: #fff;
+                background-image: url('/images/bank/dot.png');
+                background-position: left bottom;
+                border-radius: 5px 5px 0px 0px;
+                background-repeat: repeat-x;
+                font-size: 16px;
+            }
+        .bank_3050000 {
+            background-color: #39b47b;
+        }
+        .bank_1050000 {
+            background-color: #3872d8;
+        }
+        .bank_1040000 {
+            background-color: #f85948;
+        }
+        .bank_1020000 {
+            background-color: #e53e38;
+        }
+        .bank_1030000 {
+            background-color: #00c8aa;
+        }
+        .bank_3080000 {
+            background-color: #eb2929;
+        }
+        .bank_3040000 {
+            background-color: #e83851;
+        }
+        .bank_3100000 {
+            background-color: #1a6fc1;
+        }
+        .bank_3090000 {
+            background-color: #1e5aca;
+        }
+        .bank_3070010 {
+            background-color: #ff7124;
+        }
+        .bank_3060000 {
+            background-color: #e91e3b;
+        }
+        .bank_3030000 {
+            background-color: #a641c5;
+        }
+        .bank_3020000 {
+            background-color: #d71820;
+        }
+        .bank_1000000 {
+            background-color: #25c36c;
+        }
+        .bank_3010000 {
+            background-color: #f25738;
+        }
+        .bankbox > div img {
+            float: left;
+            display: inline-block;
+            text-align: center;
+            width: 65px;
+            height: 65px;
+            margin: 10px;
+        }
+        .bankbox > div strong {
+            display: block;
+            padding-top: 18px;
+            font-size: 18px;
+            font-weight: normal;
+        }
+        .bankbox > div label {
+            color: rgba(255,255,255,.7);
+        }
+        .bankbox > div em {
+            position: absolute;
+            right: 15px;
+            top: 15px;
+            font-style: normal;
+        }
+        .bankbox > p {
+            color: #000;
+            font-size: 14px;
+            line-height: 50px;
+            padding-left: 15px;
+            border: 1px #ddd solid;
+            border-top: 0;
+            border-radius: 0px 0px 5px 5px;
+        }
+            .bankbox > p input {
+                float: right;
+                width: 36px;
+                height: 36px;
+                display: inline-block;
+                margin-top: 10px;
+                margin-right: 5px;
+                background-image: url('/images/bank/rx.png') !important;
+                background-color: transparent;
+                background-position: center center;
+                background-repeat: no-repeat;
+                border: 0;
+                cursor: pointer;
+            }
+                .bankbox > p input:hover {
+                    background-image: url('/images/bank/rx2.png') !important;
+                }
+        .mbk {
+            position: absolute;
+            right: -50px;
+            top: -50px;
+            width: 280px;
+            padding-bottom: 3px;
+            padding-top: 2px;
+            background-color: #999;
+            z-index: 99;
+            display: none;
+        }
+            .mbk p {
+                text-align: center;
+            }
+                .mbk p input {
+                    border: 0;
+                    background-color: #0067c6;
+                    border-radius: 5px;
+                    color: #fff;
+                    height: 30px;
+                    line-height: 30px;
+                    width: 90px;
+                    text-align: center;
+                    margin: auto;
+                }
+</style>
+<meta name="GENERATOR" content="MSHTML 11.00.9600.16428">
+</head>
+<body>
+<div class="effect mainnav-lg mainnav-fixed navbar-fixed footer-fixed" id="container">
+	<div id="page-content">
+		<div class="panel">
+			<div class="panel-heading">
+				<h3 class="panel-title"><img alt="img" src="/__IMG__/fei_game/card.png">我的银行卡</h3>
+			</div>
+			<form class="form-horizontal">
+				<div class="panel-body">
+					<div class="mminfo">
+						<div class="mminfohead">
+							<span><i class="fa fa-exclamation"></i>温馨提示</span>
+						</div>
+						<div class="mminfobox">
+							<div class="row">
+								<div class="col-md-4">
+									                            最多可添加
+									<font class="text-primary" style="font-size: 18px; font-weight: bold;">3 </font>张银行卡。
+								</div>
+								<div class="col-md-4">
+									                            当前还可以添加
+									<font class="text-danger" style="font-size: 18px; font-weight: bold;"><?=(3-count($mybank))?> </font>张银行卡。
+								</div>
+							</div>
+						</div>
+					</div>					
+					<div class="row banklist">
+						<div class="col-md-4">
+							<div class="bankbox addbank">
+								<a id="addBank" href="javascript:;" <?php if(count($mybank)>2) echo 'no="1"'; ?>><i class="fa fa-plus"></i><span id="addBankInfo">添加新的银行卡</span></a>
+							</div>
+						</div>
+						<?php foreach($mybank as $b){ ?>
+							<div class="col-md-4">
+								<div class="bankbox">
+									<div class="bank_1020000">
+										<img alt="" src="/__IMG__/fei_game/tx.jpg"><strong>{$banks[$b['bankId']]['name']}</strong>
+										<label>尾号<?=preg_replace('/^.*(\w{4})$/', '\1', $b['account'])?></label>
+										<em>持卡人：<?=mb_substr($b['username'],0,1,'utf-8').'**' ?></em>
+									</div>
+									<p>
+										绑定时间：{:date('Y/m/d H:i:s',$b['actionTime'])}
+									</p>
+								</div>
+							</div>
+						<?php } ?>
+					</div>					
+				</div>
+			</form>
+		</div>
+		<form id="addbankcard" role="form" action="/safety/bankmanage" method="post">
+			<input name="IsGA" id="IsGA" type="hidden" value="False" data-val-required="IsGA 字段是必需的。" data-val="true">
+			<input name="IsCard" id="IsCard" type="hidden" value="False" data-val-required="IsCard 字段是必需的。" data-val="true">
+			<input name="ValidateMode" id="ValidateMode" type="hidden" value="1" data-val-required="ValidateMode 字段是必需的。" data-val="true">
+			<div tabindex="-2" class="modal fade" id="add-modal" role="dialog" aria-hidden="true" aria-labelledby="add-modal">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button class="close" type="button" data-dismiss="modal"><span aria-hidden="true">×</span></button>
+							<h4 class="modal-title text-danger"><i class="fa fa-cc-discover fa-lg"></i>  
+添加银行卡
+							</h4>
+						</div>
+						<div class="modal-body">
+							<div class="row">
+								<div class="col-sm-5">									
+									<div id="j-validateFristRemark">
+										<br>
+										<br><br><br><br>
+										<a class="text-1x text-primary text-bold" href="{:Url('user/password')}">添加银行卡不需要验证。如资金密码没有设置，请点击我，直接进入资金密码设置。</a>
+									</div>
+								</div>
+								<div class="col-sm-7">									
+									<div id="addBankDiv" style="margin-left: 15px; display: block;">
+										<div class="form-group">
+											<label class="control-label text-bold">请输入持卡人</label>
+											<input name="Name" class="form-control" id="Name" style="width: 300px; height: 42px;" type="text" maxlength="50" autocomplete="off">
+										</div>
+										<div class="form-group">
+											<label class="control-label text-bold">请输入银行卡号</label>
+											<input name="KindId" id="KindId" type="hidden" data-val-required="KindId 字段是必需的。" data-val="true">
+											<input name="BankId" id="BankId" type="hidden">
+											<input name="Number" class="form-control" id="Number" style="width: 300px; height: 42px;" type="text" maxlength="23" autocomplete="off">
+											<span class="fa fa-cc-discover fa-lg form-control-feedback text-danger" id="BankIcon" style="margin-top: 125px; margin-right: 25px;"></span>
+										</div>
+										<div class="form-group">
+											<label class="control-label text-bold">开户银行地址 *</label><font style="font-weight: reg;">注意：必须是完整的开户银行地址</font>
+										</div>
+										<input type="text"  name="countname" style="width:220px" value="<?=@preg_replace('/^(\w{4}).*(\w{4})$/','\1***\2',$mybank['countname'])?>"  <?=$this->iff($flag, 'readonly')?>/>
+											<input name="KindId" id="KindId" type="hidden" data-val-required="KindId 字段是必需的。" data-val="true">
+											<input name="BankId" id="BankId" type="hidden">
+											<input name="Number" class="form-control" id="Number" style="width: 300px; height: 42px;" type="text" maxlength="23" autocomplete="off">
+											<span class="fa fa-cc-discover fa-lg form-control-feedback text-danger" id="BankIcon" style="margin-top: 125px; margin-right: 25px;"></span>
+										<div class="form-group" id="j-inputGAPwd">
+											<label class="control-label text-bold">请输入银行类型</label>
+											<select id="bankId" name="bankId" style="width: 300px; height: 42px;" >
+											<?php foreach($banks as $bank){ ?>
+												<option value="<?=$bank['id']?>"><?=$bank['name']?></option>
+											<?php } ?>
+											</select>
+											
+										</div>
+										<div class="form-group" id="j-inputFundsPwd">
+											<label class="control-label text-bold">请输入资金密码</label>
+											<input name="AddFundsPass" class="form-control" id="AddFundsPass" style="width: 300px; height: 42px;" type="password" maxlength="50" autocomplete="off">
+										</div>
+										<div class="form-group">
+											<div class="input-group">
+												<span class="text-danger text-bold" id="validateGAInfo"></span>
+											</div>
+										</div>
+										<div style="text-align: center;">
+											<input name="OperatType" id="OperatType" type="hidden" value="1" data-val-required="OperatType 字段是必需的。" data-val="true">
+											<button class="btn btn-primary btn-labeled fa fa-lg" id="submitBtn" style="width: 150px; height: 35px;" type="button" action="{:Url('user/setCBAccount')}">确    定</button>
+											<button class="btn btn-danger btn-labeled fa fa-lg" style="width: 150px; height: 35px;" type="button" data-dismiss="modal">返    
+回
+											</button>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<input name="__RequestVerificationToken" type="hidden" value="CfDJ8Ktgxm2FAlNEsoI7VoMQlWn0BqRylmAZfow4af6diR26wV1xla7ErMx2GvjCJUCaoJrK1lWk7idLtbtVoV3hit3MyF9f4N4zPU-s9fG2ySQLCrRewvjuOBxWk5Y2LzhF1B44rQP0lIK4F3Vj0k2mpT-rhGcmR8GShrTR_6qqyuDsQRmqLn1tm-9glgzHaI-OEw">
+		</form>
+		<input id="hdVC" type="hidden" value="71643a98dc3680701ad1ac0c4ff790bb">
+		<input id="hdNotVC" type="hidden" value="71643a98dc3680701ad1ac0c4ff790bb">
+	</div>
+</div>
+{/block}
+{block name="script"}
+<script src="/__JS__/bankmanage.min.js"></script>
+{/block}

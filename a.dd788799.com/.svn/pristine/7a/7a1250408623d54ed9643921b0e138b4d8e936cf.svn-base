@@ -1,0 +1,47 @@
+{extend name="base/common"/}
+{block name="title"}<title>个人中心－{$settings.webName}</title>{/block}
+{block name="style"}
+<link rel="stylesheet" type="text/css" href="/__CSS__/user.css">
+{/block}
+{block name="header"}{/block}
+{block name="body"}
+<div class="m-user" id="dvWrapper">
+	<div class="m-simpleHeader" id="dvHeader">
+		<a href="javascript:history.back(-1);" data-pro="back" data-back="true" class="m-simpleHeader-back"><i class="ico ico-back"></i></a>
+		<a href="{:Url('index/index')}" data-pro="ok" class="m-simpleHeader-ok" id="aHome"><i class="ico ico-home"></i></a>
+		<h1>个人中心</h1>
+	</div>
+	<div class="m-user-index">
+		<div class="m-user-summary">
+			<img class="bg" src="__IMG__/summary_bg.png" width="100%">
+			<div class="info">
+				<div class="m-user-avatar">
+					<img onerror="this.src='__IMG__/main/tx.jpg'" src="__IMG__/main/tx.jpg" height="50" width="50">
+				</div>
+				<div class="txt">
+					<div class="name">
+						{$user.username?$user.username:''}
+					</div>
+					<div class="money">
+						余额：{$user.coin?$user.coin:''}<span class="num"></span>元&nbsp;&nbsp;&nbsp;返点:{$user.fanDian?$user.fanDian:''}<a href="{:Url('user/recharge')}" style="display:none" class="w-button w-button-s m-user-summary-btn-normal">充值</a>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="m-user-bar">
+			<a href="{:Url('notice/notice')}" class="w-bar">系统公告<span class="w-bar-ext"><b class="ico-next"></b></span></a>
+			<a href="{:Url('user/recharge')}" class="w-bar">在线充值<span class="w-bar-ext"><b class="ico-next"></b></span></a>
+			<a href="{:Url('user/cash')}" class="w-bar">在线提款<span class="w-bar-ext"><b class="ico-next"></b></span></a>
+			<a href="{:Url('user/password')}" class="w-bar">登录密码<span class="w-bar-ext"><b class="ico-next"></b></span></a>
+			<a href="{:Url('user/coinpassword')}" class="w-bar">资金密码<span class="w-bar-ext"><b class="ico-next"></b></span></a>
+			<a href="{:Url('user/bank')}" class="w-bar">银行资料<span class="w-bar-ext"><b class="ico-next"></b></span></a>
+			<!--<a href="{// $settings['kefuGG'] //}" class="w-bar" target="_blank">在线客服<span class="w-bar-ext"><b class="ico-next"></b></span></a>-->
+			<a href="{:Url('user/logout')}" class="w-bar m-user-bar-margin m-user-bar-border" style="text-align:center;" id="btnLogout">退出登录</a>
+		</div>
+		<div class="m-user-bar">
+		</div>
+	</div>
+</div>
+{/block}
+{block name="footer"}{/block}

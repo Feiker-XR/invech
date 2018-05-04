@@ -1,0 +1,37 @@
+<?php
+namespace app\admin\controller;
+use app\admin\Login;
+use app\common\model\ManualMoney;
+use app\common\model\BonusFlow;
+use app\common\model\Bonus;
+use app\common\model\Member;
+
+class Manual extends Login{
+  
+    public function index(){
+	    $this->view->page_header = '人工存款扣款记录';
+	    $request = request();
+       	$list = ManualMoney::getList($request);
+      	$this->assign('list',$list);
+
+      	$bonuses = Bonus::all();
+      	$this->assign('bonuses',$bonuses);
+
+		return $this->fetch();
+    }
+
+    public function money(){
+        if(request()->isGet()){
+      		$bonuses = Bonus::all();
+      		$this->assign('bonuses',$bonuses);
+            return view();
+        }else{        	
+        	try{
+        		$this->user->manual_money();        		
+        	}catch(\Exception $e){
+        		return $this->error($e->getMessage());
+        	}
+        	return $this->success('操作成功');//success返回HttpResponseException
+        }  
+	}
+}

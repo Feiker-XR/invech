@@ -1,0 +1,874 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>快速充值中心</title>
+<link rel="stylesheet" type="text/css" href="/css/general.css"/>
+<link rel="stylesheet" type="text/css" href="/newview/css/theme/style.css?version=2.0.1" />
+<link rel="stylesheet" type="text/css" href="/newview/css/style.css" />
+<script src='/js/js/jquery-1.8.0.min.js'></script>
+<script type="text/javascript" src="/Scripts/member.js"></script>
+<script type="text/javascript" src="/js/main.js"></script>
+<script type="text/javascript" src="/newview/js/main.js"></script>
+<link rel="stylesheet" type="text/css" href="/skin/css/style.css"/>
+<link rel="stylesheet" type="text/css" href="/newview/css/member.css?V1" />
+<link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
+</head>
+<body style="background:#F5F5F5;">
+<div class="head">
+	<!--欢迎-->
+	{include file='common/nav'}
+</div>
+<div class="block_0"></div>
+<div class="moneyBox_contain">
+	<div class="ui-header">
+		<div class="ui-headerBox">
+			<!-- logo -->
+			<a class="ui-icon-logo ui-logo" id="Logo"></a>
+			<!-- 导航 -->
+			<ul class="ui-nav">
+				<li id="Nav_0">
+					<a href="/user/userinfo.html" title="会员首页">
+						<span class="ui-icon ui-icon-home ui-icon-50"></span>
+					</a>
+				</li>
+				<li id="Nav_1" class="ui-header-active">
+					<a href="/pay/member.html" title="财务管理">
+						<span class="ui-icon ui-icon-recharge ui-icon-50"></span>
+					</a>
+				</li>
+				<li id="Nav_2">
+					<a href="/user/record_ds.html" title="游戏记录">
+						<span class="ui-icon ui-icon-gameNote ui-icon-50"></span>
+					</a>
+				</li>
+				<li id="Nav_3">
+					<a href="/user/report.html" title="历史记录">
+						<span class="ui-icon ui-icon-data ui-icon-50"></span>
+					</a>
+				</li>
+				<li id="Nav_4" >
+					<a href="/user/sms.html" title="站内短信">
+						<span class="ui-icon ui-icon-announce ui-icon-50"></span>
+					</a>
+				</li>
+        <li id="Nav_5">
+					<a href="/user/agent.html" title="代理中心">
+						<span class="ui-icon ui-icon-newActivity ui-icon-50"></span>
+					</a>
+				</li>
+        <li style="display:none">
+					<a href="http://messenger.providesupport.com/messenger/1x5b67gp1rcy50kqxa0qpsa0jx.html" title="客服中心">
+						<span class="ui-icon ui-icon-online ui-icon-50"></span>
+					</a>
+				</li>
+			</ul>
+			<ul class="ui-function">
+				<!--<li>
+					<a href="#">
+						<span class="ui-icon ui-icon-down ui-icon-20" id="Menu"></span>
+					</a>
+				</li>
+				<li>
+					<a href="#">
+						<span class="ui-icon ui-icon-min ui-icon-20"></span>
+					</a>
+				</li>
+				<li>
+					<a href="javascript:void(0)" id="Logout">
+						<span class="ui-icon ui-icon-max ui-icon-20"></span>
+					</a>
+				</li>-->
+			</ul>
+		</div>
+	</div>
+	<div class="ui-body">
+    		<div class="ui-search" id="subjsshow1" style="display: block;">
+            <span><i class="fas fa-user-circle" style="font-size: 30px"></i>财务中心</span>
+    			<ul>
+            <li class="ui-hover"><a href="/pay/member.html"><i class="fas fa-shopping-cart" style="background-color: #F59A2F"></i>账户充值</a></li>
+            <li><a href="/user/get_money.html"><i class="fas fa-search" style="background-color: #F16346"></i>申请提款</a></li>
+            <li><a href="/user/userinfo.html"><i class="fas fa-heart" style="background-color: #F59A2F"></i>额度转换</a></li>
+            <li><a href="/user/data_money.html"><i class="fas fa-bars" style="background-color: #A95BEF"></i>充值记录</a></li>
+            <li><a href="/user/data_h_money.html"><i class="fas fa-list-alt" style="background-color: #2C7FE3"></i>汇款记录</a></li>
+            <li><a href="/user/data_t_money.html"><i class="fas fa-list" style="background-color: #F16346"></i>提现记录</a></li>
+            <li><a href="/user/zr_data_money.html"><i class="fas fa-th-list" style="background-color: #24C987"></i>转换记录</a></li>
+    			</ul>
+    		</div>
+    	</div>
+<div class="new_container_wp">
+        <div class="new_container_left_wp">
+            <ul class="new_container_left_ul_nav">
+                <li class="new_container_left_ul_nav_li_first">
+                    <a href="javaScript:;">
+                        <span><img src="/newview/images/pay/img_08.png" alt=""></span>
+                        <b>快速充值</b>
+                        <i></i>
+                    </a>
+                </li>
+                <li class="new_container_left_ul_nav_li addLeft">
+                    <a href="javaScript:;">
+                        <span><img src="/newview/images/pay/img_01.png" alt=""></span>
+                        <b>在线支付</b>
+                        <i style="display: block"></i>
+                    </a>
+                </li>
+                <li class="new_container_left_ul_nav_li">
+                    <a href="javaScript:;">
+                        <span><img src="/newview/images/pay/img_02.png" alt=""></span>
+                        <b>银行汇款</b>
+                        <i></i>
+                    </a>
+                </li>
+                <li class="new_container_left_ul_nav_li">
+                    <a href="javaScript:;">
+                        <span><img src="/newview/images/pay/img_03.png" alt=""></span>
+                        <b>支付宝支付</b>
+                        <i></i>
+                    </a>
+                </li>
+                <li class="new_container_left_ul_nav_li">
+                    <a href="javaScript:;">
+                        <span><img src="/newview/images/pay/img_04.png" alt=""></span>
+                        <b>微信支付</b>
+                        <i></i>
+                    </a>
+                </li>
+                <li class="new_container_left_ul_nav_li">
+                    <a href="javaScript:;">
+                        <span><img src="/newview/images/pay/img_06.png" alt=""></span>
+                        <b>QQ钱包</b>
+                        <i></i>
+                    </a>
+                </li>
+                <!--<li class="new_container_left_ul_nav_li">-->
+                    <!--<a href="javaScript:;">-->
+                        <!--<span><img src="/newview/images/pay/img_05.png" alt=""></span>-->
+                        <!--<b>财付通转账</b>-->
+                        <!--<i></i>-->
+                    <!--</a>-->
+                <!--</li>-->
+                <li class="new_container_left_ul_nav_li">
+                    <a href="javaScript:;">
+                        <span><img src="/newview/images/pay/img_09.png" alt=""></span>
+                        <b>京东钱包</b>
+                        <i></i>
+                    </a>
+                </li>
+                <li class="new_container_left_ul_nav_li">
+                    <a href="javaScript:;">
+                        <span><img src="/newview/images/pay/img_11.png" alt=""></span>
+                        <b>银联扫码</b>
+                        <i></i>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="new_container_right_wp">
+            <!--<div class="new_container_right_cont Quick_recharge"></div>-->
+            <div class="new_container_right_cont Pay_in_this_case">
+                    <!--<div class="web_left_img_wp">-->
+                        <!--<img src="/newview/images/pay/shan.gif" alt="闪闪图">-->
+                    <!--</div>-->
+                    <div class="web_left_cont_wp">
+                        <form action="/pay/pay.html" method="post">
+
+                            <div class="web_left_back_wp">
+                                <div class="web_left_back_font">
+                                    支付方式：
+                                </div>
+                                <div class="web_left_back_img">
+                                {foreach name='banks' id='bank'}
+                                    <div class="web_left_back" setconfigid="{$bank['id']}">
+                                        <input type="radio" name="checkBackName" value="{$bank['code']}">
+                                        <span>
+                                <img src="{$bank['img']}" alt="">
+                            </span>
+                                    </div>
+                                    {/foreach}
+                                </div>
+                            </div>
+                            <div class="third_bank">
+                                <div class="quick_pay_right_5">
+                                    <div class="web_left_back_font">
+                                        支付线路：
+                                    </div>
+                                    <div class="quick_pay_right_5_bank" style="color: #0a0a0b">
+                                        <ul class="bank_all_list">
+
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="web_left_number_wp">
+                                <label for="">存款金额：</label>
+                                <input type="number" min="1" placeholder="范围10~200000" name="coin" class="m_value">
+                            </div>
+                            <div class="web_left_back_button_wp">
+                                <input type="hidden" name="thirdid" id="thirdid">
+                                <input type="hidden" name="thirdtype" id="thirdtype">
+                                <input type="hidden" name="tcode" id="tcode">
+                                <input type="hidden" name="scid" id="scid">
+                                <input type="hidden" name="sccode" id="sccode">
+                                <input type="hidden" name="cashier" id="cashier">
+                                <button class="web_left_back_button">提交</button>
+                            </div>
+                        </form>
+                    </div>
+            </div>
+            <div class="new_container_right_cont Bank_transfer">
+                <div class="Bank_transfer_top_wp">
+                    <div>开户银行：<span>{$huikuan['card_bankName']}</span></div>
+                    <div>开户名：<span>{$huikuan['card_userName']}</span></div>
+                    <div>开户地址：<span>{$huikuan['card_address']}</span></div>
+                    <div>银行卡号：{$huikuan['card_ID']}</div>
+                </div>
+                <div class="Bank_transfer_bottom_wp">
+                    <form action="/user/hk_money_set.html?into=true" method="post">
+                        <input type="hidden" name="IntoBank" value="{$huikuan['card_bankName']}">
+                        <input type="hidden" name="v_site" value="">
+                        <div class="Bank_transfer_bottom_form">
+                            <label for="">存款人姓名：</label>
+                            <input type="text" name="v_Name">
+                            <span>* 转账账号对应的姓名</span>
+                        </div>
+                        <div class="Bank_transfer_bottom_form">
+                            <label for="">存款金额：</label>
+                            <input type="number" min="10" max="500000" name="v_amount">
+                            <span>* 如：500.77元，范围：10~500000</span>
+                        </div>
+                        <div class="Bank_transfer_bottom_form">
+                            <label for="">存款时间：</label>
+                            <input type="date"  name="cn_date" value="<?=date('Y-m-d');?>" class="form-control">
+                            <span>* 如：2018/01/01</span>
+                        </div>
+                        <div class="Bank_transfer_bottom_form">
+                            <label for="">存款方式：</label>
+                            <select id="" name="InType" class="form-control">
+                                <option value="网银转账">网银转账</option>
+                                <option value="ATM自动柜员机">ATM自动柜员机</option>
+                                <option value="ATM现金入款">ATM现金入款</option>
+                                <option value="银行柜台">银行柜台</option>
+                                <option value="支付宝银行转账">支付宝银行转账</option>
+                                <option value="微信银行转账">微信银行转账</option>
+                            </select>
+                        </div>
+                        <!--<div class="Bank_transfer_bottom_form">
+                            <label for="">是否申请彩金：</label>
+                            <select id="mdl-1_wantGift" name="wantGift" class="form-control">
+                                <option value="0">不申请</option>
+                                <option value="1">申请</option>
+                            </select>
+                        </div>-->
+                        <button class="web_left_back_button Bank_transfer_bottom_form_button">提交</button>
+                        <ul class="Bank_transfer_bottom_form_ul">
+                            <li>*存款步骤：先查看要入款的银行账号信息，然后通过网上银行、ATM、柜台或手机银行进行转账，转账成功后再如实提交转账信息，财务专员查收到信息后会及时添加您的款项。</li>
+                            <li>*请转账时务必增加小数（如：500.77元），以便财务查款。</li>
+                            <li>*请尽可能选择同行办理转账，可快速到账。</li>
+                            <li>*请保留好转账单据作为核对证明。</li>
+                        </ul>
+                    </form>
+                </div>
+            </div>
+            <!--支付宝支付-->
+            <div class="new_container_right_cont Alipay_payment">
+                <div class="Alipay_payment_wp">
+                    <div class="Alipay_payment_btn_wp">
+                        <a href="javaScript:;" class="addColor">扫码转账</a>
+                        <a href="javaScript:;">在线扫码支付</a>
+                    </div>
+                    <div class="Alipay_payment_cont_wp">
+                        <div class="Alipay_payment_cont Alipay_payment_cont_first">
+                            <div class="Alipay_payment_cont_title">
+                                大额推荐：使用支付宝转账至（{$alipay['card_bankName']}：{$alipay['card_userName']}）即可快速到账！
+                            </div>
+                            <div class="Alipay_payment_cont_mid">
+                                <div class="Alipay_payment_cont_mid_tow">
+                                    <img src="{$alipay['card_qrcode']}" alt="" width="253" height="204">
+                                </div>
+                                <div class="Bank_transfer_top_wp" style="float: left;padding: 0; margin-top: 30px">
+                                    <div>开户银行：<span>{$alipay['card_bankName']}</span></div>
+                                    <div>开户名：<span>{$alipay['card_userName']}</span></div>
+                                    <div>开户地址：<span>{$alipay['card_address']}</span></div>
+                                    <div>银行卡号：{$alipay['card_ID']}</div>
+                                </div>
+                            </div>
+                            <div class="Alipay_payment_form">
+                                <div class="Bank_transfer_bottom_wp">
+                                    <form action="/user/hk_money_set.html?into=true" method="post">
+                                    <input type="hidden" name="IntoBank" value="{$alipay['card_bankName']}">
+                                    <input type="hidden" name="InType" value="支付宝银行转账">
+                                    <input type="hidden" name="v_site" value="">
+                                        <div class="Bank_transfer_bottom_form">
+                                            <label for="">支付户名：</label>
+                                            <input type="text" name="card_userName">
+                                            <span>例如：陈XX</span>
+                                        </div>
+                                        <div class="Bank_transfer_bottom_form">
+                                            <label for="">存款金额：</label>
+                                            <input type="number" min="10" max="500000" name="v_amount">
+                                            <span>* 例如：500.77元</span>
+                                        </div>
+                                        <div class="Bank_transfer_bottom_form">
+                                            <label for="">存款时间：</label>
+                                            <input type="date"  name="cn_date" value="2018-02-18" class="form-control">
+                                            <span>* 例如：2018/02/18</span>
+                                        </div>
+                                        <!--<div class="Bank_transfer_bottom_form">
+                                            <label for="">是否申请彩金：</label>
+                                            <select id="mdl-1_way" name="way" class="form-control">
+                                                <option value="不申请">不申请</option>
+                                                <option value="申请">申请</option>
+                                            </select>
+                                        </div>-->
+                                        <button class="web_left_back_button Bank_transfer_bottom_form_button">提交</button>
+                                        <ul class="Bank_transfer_bottom_form_ul Bank_transfer_bottom_form_ul_width">
+                                            <li>*存款步骤：先查看要入款的账号信息，然后进行转账，转账成功后再如实提交转账信息，财务专员查收到信息后会及时添加您的款项。</li>
+                                            <li>*请转账时务必增加小数（如：500.77元），以便财务查款。</li>
+                                            <li>*请保留好转账单据作为核对证明。</li>
+                                        </ul>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="Alipay_payment_cont Alipay_payment_cont_tow">
+                            <!--<div class="web_left_img_wp">-->
+                            <!--<img src="/newview/images/pay/shan.gif" alt="闪闪图">-->
+                            <!--</div>-->
+                            <div class="Alipay_payment_cont_tow_form">
+                                <form action="/pay/pay.html" method="post" onsubmit="return btnOK_zf_onclick(this)">
+                                <div class="quick_pay_right_5">
+                                    <div class="web_left_back_font">
+                                        支付线路：
+                                    </div>
+                                    <div class="quick_pay_right_5_bank" style="color: #0a0a0b">
+                                        <ul class="new_all_list">
+                                            {foreach name='alipay_line' id='line'}
+                                                <li class="quick_pay_right_6_li" id="trird-{$line['thirdid']}" tid="{$line['thirdid']}" tcode="{$line['code']}" min="{$line['min']}" max="{$line['max']}" ttype="{$line['type']}"  setconfigid="{$line['set_configid']}" sccode="{$line['setconfigcode']}" cashier="{$line['cashier']}">
+                                                <i>{$line['name']}</i>
+                                                <img src="/skin/images/arrow.png" class="quick_pay_right_4_li_arrow">
+                                            </li>
+                                            {/foreach}
+                                        </ul>
+                                    </div>
+                                </div>
+                                    <div class="web_left_number_wp">
+                                        <label for="">存款金额：</label>
+                                        <input type="number" min="1" name="coin" class="m_value">
+                                    </div>
+                                    <input type="hidden" name="thirdid" id="thirdid">
+                                    <input type="hidden" name="thirdtype" id="thirdtype">
+                                    <input type="hidden" name="tcode" id="tcode">
+                                    <input type="hidden" name="scid" id="scid">
+                                    <input type="hidden" name="sccode" id="sccode">
+                                    <input type="hidden" name="cashier" id="cashier">
+                                    <button class="web_left_back_button  Bank_transfer_bottom_form_button Alipay_payment_cont_tow_form_button" >提交</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--微信支付-->
+            <div class="new_container_right_cont WeChat_payment">
+                            <div class="Alipay_payment_wp">
+                                <div class="Wechat_payment_btn_wp">
+                                    <a href="javaScript:;" class="addColor">扫码转账</a>
+                                    <a href="javaScript:;">在线扫码支付</a>
+                                </div>
+                                <div class="Alipay_payment_cont_wp">
+                                    <div class="Wechat_payment_cont Alipay_payment_cont_first">
+                                        <div class="Alipay_payment_cont_title">
+                                            大额推荐：使用微信转账至（{$wechat['card_bankName']}：{$wechat['card_userName']}）即可快速到账！
+                                        </div>
+                                        <div class="Alipay_payment_cont_mid">
+                                            <div class="Alipay_payment_cont_mid_tow">
+                                                <img src="{$wechat['card_qrcode']}" alt="" width="253" height="204">
+                                            </div>
+                                            <div class="Bank_transfer_top_wp" style="float: left;padding: 0; margin-top: 30px">
+                                                <div>开户银行：<span>{$wechat['card_bankName']}</span></div>
+                                                <div>开户名：<span>{$wechat['card_userName']}</span></div>
+                                                <div>开户地址：<span>{$wechat['card_address']}</span></div>
+                                                <div>银行卡号：{$wechat['card_ID']}</div>
+                                            </div>
+                                        </div>
+                                        <div class="Alipay_payment_form">
+                                            <div class="Bank_transfer_bottom_wp">
+                                                <form action="/user/hk_money_set.html?into=true" method="post">
+                                                <input type="hidden" name="IntoBank" value="{$wechat['card_bankName']}">
+                                                <input type="hidden" name="InType" value="微信银行转账">
+                                                <input type="hidden" name="v_site" value="">
+                                                    <div class="Bank_transfer_bottom_form">
+                                                        <label for="">支付户名：</label>
+                                                        <input type="text" name="card_userName">
+                                                        <span>例如：陈XX</span>
+                                                    </div>
+                                                    <div class="Bank_transfer_bottom_form">
+                                                        <label for="">存款金额：</label>
+                                                        <input type="number" min="10" max="500000" name="v_amount">
+                                                        <span>* 例如：500.77元</span>
+                                                    </div>
+                                                    <div class="Bank_transfer_bottom_form">
+                                                        <label for="">存款时间：</label>
+                                                        <input type="date"  name="cn_date" value="2018-02-18" class="form-control">
+                                                        <span>* 例如：2018/02/18</span>
+                                                    </div>
+                                                    <!--<div class="Bank_transfer_bottom_form">
+                                                        <label for="">是否申请彩金：</label>
+                                                        <select id="mdl-1_way" name="way" class="form-control">
+                                                            <option value="不申请">不申请</option>
+                                                            <option value="申请">申请</option>
+                                                        </select>
+                                                    </div>-->
+                                                    <button class="web_left_back_button Bank_transfer_bottom_form_button">提交</button>
+                                                    <ul class="Bank_transfer_bottom_form_ul Bank_transfer_bottom_form_ul_width">
+                                                        <li>*存款步骤：先查看要入款的账号信息，然后进行转账，转账成功后再如实提交转账信息，财务专员查收到信息后会及时添加您的款项。</li>
+                                                        <li>*请转账时务必增加小数（如：500.77元），以便财务查款。</li>
+                                                        <li>*请保留好转账单据作为核对证明。</li>
+                                                    </ul>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="Wechat_payment_cont Alipay_payment_cont_tow">
+                                        <!--<div class="web_left_img_wp">-->
+                                        <!--<img src="/newview/images/pay/shan.gif" alt="闪闪图">-->
+                                        <!--</div>-->
+                                        <div class="Alipay_payment_cont_tow_form">
+                                            <form action="/pay/pay.html" method="post" onsubmit="return btnOK_zf_onclick(this)">
+                                                <div class="quick_pay_right_5">
+                                                        <div class="web_left_back_font">
+                                                            支付线路：
+                                                        </div>
+                                                        <div class="quick_pay_right_5_bank" style="color: #0a0a0b">
+                                                            <ul class="new_all_list">
+                                                                {foreach name='wechat_line' id='line'}
+                                                                    <li class="quick_pay_right_6_li" id="trird-{$line['thirdid']}" tid="{$line['thirdid']}" tcode="{$line['code']}" min="{$line['min']}" max="{$line['max']}" ttype="{$line['type']}"  setconfigid="{$line['set_configid']}" sccode="{$line['setconfigcode']}" cashier="{$line['cashier']}">
+                                                                    <i>{$line['name']}</i>
+                                                                    <img src="/skin/images/arrow.png" class="quick_pay_right_4_li_arrow">
+                                                                </li>
+                                                                {/foreach}
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                    <div class="web_left_number_wp">
+                                                        <label for="">存款金额：</label>
+                                                        <input type="number" min="1"  name="coin" class="m_value" >
+                                                    </div>
+                                                    <input type="hidden" name="thirdid" id="thirdid">
+                                                    <input type="hidden" name="thirdtype" id="thirdtype">
+                                                    <input type="hidden" name="tcode" id="tcode">
+                                                    <input type="hidden" name="scid" id="scid">
+                                                    <input type="hidden" name="sccode" id="sccode">
+                                                    <input type="hidden" name="cashier" id="cashier">
+                                                    <button class="web_left_back_button  Bank_transfer_bottom_form_button Alipay_payment_cont_tow_form_button">提交</button>
+                                                </form>
+                                                <div class="WeChat_payment_img_wp">
+                                                    <p>欢迎使用微信支付</p>
+                                                </div>
+                                                <ul class="WeChat_payment_font_wp">
+                                                    <li>1、如支付失败，请扫描二维码添加收款微信号进行转账、发红包；</li>
+                                                    <li>2、微信专员收款后发送您的会员账号，即可为您添加；</li>
+                                                    <li>3、添加专员微信转账、发红包皆可享有2%入款返利。</li>
+                                                </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+            <!--QQ支付-->
+            <div class="new_container_right_cont QQ_wallet">
+                <div class="Alipay_payment_wp">
+                    <div class="QQ_payment_btn_wp">
+                        <a href="javaScript:;" class="addColor">扫码转账</a>
+                        <a href="javaScript:;">在线扫码支付</a>
+                    </div>
+                    <div class="Alipay_payment_cont_wp">
+                        <div class="QQ_payment_cont Alipay_payment_cont_first">
+                            <div class="Alipay_payment_cont_title">
+                                大额推荐：使用QQ转账至（{$qq['card_bankName']}：{$qq['card_userName']}）即可快速到账！
+                            </div>
+                            <div class="Alipay_payment_cont_mid">
+                                <div class="Alipay_payment_cont_mid_tow">
+                                    <img src="{$qq['card_qrcode']}" alt="" width="253" height="204">
+                                </div>
+                                <div class="Bank_transfer_top_wp" style="float: left;padding: 0; margin-top: 30px">
+                                    <div>开户银行：<span>{$qq['card_bankName']}</span></div>
+                                    <div>开户名：<span>{$qq['card_userName']}</span></div>
+                                    <div>开户地址：<span>{$qq['card_address']}</span></div>
+                                    <div>银行卡号：{$qq['card_ID']}</div>
+                                </div>
+                            </div>
+                            <div class="Alipay_payment_form">
+                                <div class="Bank_transfer_bottom_wp">
+                                    <form action="/user/hk_money_set.html?into=true" method="post">
+                                    <input type="hidden" name="IntoBank" value="{$qq['card_bankName']}">
+                                    <input type="hidden" name="InType" value="QQ银行转账">
+                                    <input type="hidden" name="v_site" value="">
+                                        <div class="Bank_transfer_bottom_form">
+                                            <label for="">支付户名：</label>
+                                            <input type="text" name="card_userName">
+                                            <span>例如：陈XX</span>
+                                        </div>
+                                        <div class="Bank_transfer_bottom_form">
+                                            <label for="">存款金额：</label>
+                                            <input type="number" min="10" max="500000" name="v_amount">
+                                            <span>* 例如：500.77元</span>
+                                        </div>
+                                        <div class="Bank_transfer_bottom_form">
+                                            <label for="">存款时间：</label>
+                                            <input type="date"  name="cn_date" value="2018-02-18" class="form-control">
+                                            <span>* 例如：2018/02/18</span>
+                                        </div>
+                                        <!--<div class="Bank_transfer_bottom_form">
+                                            <label for="">是否申请彩金：</label>
+                                            <select id="mdl-1_way" name="way" class="form-control">
+                                                <option value="不申请">不申请</option>
+                                                <option value="申请">申请</option>
+                                            </select>
+                                        </div>-->
+                                        <button class="web_left_back_button Bank_transfer_bottom_form_button">提交</button>
+                                        <ul class="Bank_transfer_bottom_form_ul Bank_transfer_bottom_form_ul_width">
+                                            <li>*存款步骤：先查看要入款的账号信息，然后进行转账，转账成功后再如实提交转账信息，财务专员查收到信息后会及时添加您的款项。</li>
+                                            <li>*请转账时务必增加小数（如：500.77元），以便财务查款。</li>
+                                            <li>*请保留好转账单据作为核对证明。</li>
+                                        </ul>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="QQ_payment_cont Alipay_payment_cont_tow">
+                            <!--<div class="web_left_img_wp">-->
+                            <!--<img src="/newview/images/pay/shan.gif" alt="闪闪图">-->
+                            <!--</div>-->
+                            <div class="Alipay_payment_cont_tow_form">
+                                <form action="/pay/pay.html" method="post" onsubmit="return btnOK_zf_onclick(this)">
+                                    <div class="quick_pay_right_5">
+                                            <div class="web_left_back_font">
+                                                支付线路：
+                                            </div>
+                                            <div class="quick_pay_right_5_bank" style="color: #0a0a0b">
+                                                <ul class="new_all_list">
+                                                    {foreach name='qqpay_line' id='line'}
+                                                        <li class="quick_pay_right_6_li" id="trird-{$line['thirdid']}" tid="{$line['thirdid']}" tcode="{$line['code']}" min="{$line['min']}" max="{$line['max']}" ttype="{$line['type']}"  setconfigid="{$line['set_configid']}" sccode="{$line['setconfigcode']}" cashier="{$line['cashier']}">
+                                                        <i>{$line['name']}</i>
+                                                        <img src="/skin/images/arrow.png" class="quick_pay_right_4_li_arrow">
+                                                    </li>
+                                                    {/foreach}
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="web_left_number_wp">
+                                            <label for="">存款金额：</label>
+                                            <input type="number" min="1"  name="coin" class="m_value" >
+                                        </div>
+                                        <input type="hidden" name="thirdid" id="thirdid">
+                                        <input type="hidden" name="thirdtype" id="thirdtype">
+                                        <input type="hidden" name="tcode" id="tcode">
+                                        <input type="hidden" name="scid" id="scid">
+                                        <input type="hidden" name="sccode" id="sccode">
+                                        <input type="hidden" name="cashier" id="cashier">
+                                        <button class="web_left_back_button  Bank_transfer_bottom_form_button Alipay_payment_cont_tow_form_button">提交</button>
+                                    </form>
+                                    <div class="WeChat_payment_img_wp">
+                                        <p>欢迎使用QQ支付</p>
+                                    </div>
+                                    <ul class="WeChat_payment_font_wp">
+                                        <li>1、如支付失败，请扫描二维码添加收款QQ号进行转账、发红包；</li>
+                                        <li>2、QQ专员收款后发送您的会员账号，即可为您添加；</li>
+                                        <li>3、添加专员QQ转账、发红包皆可享有2%入款返利。</li>
+                                    </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--财付通支付-->
+            <!--<div class="new_container_right_cont Tenpay_transfer"></div>-->
+            <div class="new_container_right_cont Jingdong_wallet">
+                <!--<div class="web_left_img_wp">-->
+                    <!--<img src="/newview/images/pay/shan.gif" alt="闪闪图">-->
+                <!--</div>-->
+                <form action="/pay/pay.html"  method="post" onsubmit="return btnOK_zf_onclick(this)">
+                <div class="quick_pay_right_5">
+                    <div class="web_left_back_font">
+                        支付线路：
+                    </div>
+                    <div class="quick_pay_right_5_bank" style="color: #0a0a0b">
+                        <ul class="new_all_list">
+                            {foreach name='jdpay_line' id='line'}
+                                <li class="quick_pay_right_6_li" id="trird-{$line['thirdid']}" tid="{$line['thirdid']}" tcode="{$line['code']}" min="{$line['min']}" max="{$line['max']}" ttype="{$line['type']}"  setconfigid="{$line['set_configid']}" sccode="{$line['setconfigcode']}" cashier="{$line['cashier']}">
+                                <i>{$line['name']}</i>
+                                <img src="/skin/images/arrow.png" class="quick_pay_right_4_li_arrow">
+                            </li>
+                            {/foreach}
+                        </ul>
+                    </div>
+                </div>
+                    <div class="web_left_number_wp">
+                        <label for="">存款金额：</label>
+                        <input type="number" min="1"  name="coin" class="m_value">
+                    </div>
+                    <input type="hidden" name="thirdid" id="thirdid">
+                                                    <input type="hidden" name="thirdtype" id="thirdtype">
+                                                    <input type="hidden" name="tcode" id="tcode">
+                                                    <input type="hidden" name="scid" id="scid">
+                                                    <input type="hidden" name="sccode" id="sccode">
+                                                    <input type="hidden" name="cashier" id="cashier">
+                    <button class="web_left_back_button  Bank_transfer_bottom_form_button Alipay_payment_cont_tow_form_button">提交</button>
+                </form>
+                <div class="WeChat_payment_img_wp">
+                    <p>欢迎使用京东钱包支付</p>
+                </div>
+            </div>
+            <div class="new_container_right_cont CUP_scan_code">
+                <!--<div class="web_left_img_wp">-->
+                    <!--<img src="/newview/images/pay/shan.gif" alt="闪闪图">-->
+                <!--</div>-->
+                <form action="/pay/pay.html" method="post" onsubmit="return btnOK_zf_onclick(this)">
+                <div class="quick_pay_right_5">
+                    <div class="web_left_back_font">
+                        支付线路：
+                    </div>
+                    <div class="quick_pay_right_5_bank" style="color: #0a0a0b">
+                        <ul class="new_all_list">
+                            {foreach name='unionpay_line' id='line'}
+                                <li class="quick_pay_right_6_li" id="trird-{$line['thirdid']}" tid="{$line['thirdid']}" tcode="{$line['code']}" min="{$line['min']}" max="{$line['max']}" ttype="{$line['type']}"  setconfigid="{$line['set_configid']}" sccode="{$line['setconfigcode']}" cashier="{$line['cashier']}">
+                                <i>{$line['name']}</i>
+                                <img src="/skin/images/arrow.png" class="quick_pay_right_4_li_arrow">
+                            </li>
+                            {/foreach}
+                        </ul>
+                    </div>
+                </div>
+                    <div class="web_left_number_wp">
+                        <label for="">存款金额：</label>
+                        <input type="number" min="1" name="coin" class="m_value">
+                    </div>
+                    <input type="hidden" name="thirdid" id="thirdid">
+                    <input type="hidden" name="thirdtype" id="thirdtype">
+                    <input type="hidden" name="tcode" id="tcode">
+                    <input type="hidden" name="scid" id="scid">
+                    <input type="hidden" name="sccode" id="sccode">
+                    <input type="hidden" name="cashier" id="cashier">
+                    <button class="web_left_back_button Bank_transfer_bottom_form_button Alipay_payment_cont_tow_form_button">提交</button>
+                </form>
+                <div class="WeChat_payment_img_wp">
+                    <p>银联扫码支付</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="mask"></div>
+    <div class="mask_model_wp">
+        <div class="mask_model_title">系统提示</div>
+        <div class="mask_model_cont">
+            <img src="/newview/images/pay/jinggao.jpg" alt="">
+            <span>暂不支持该支付方式</span>
+        </div>
+        <div class="mask_model_btn">
+            <button class="mask_model_sure">确定</button>
+        </div>
+    </div>
+    </div>
+{include file='common/footer'} 
+</body>
+<script type="text/javascript" src="/skin/js/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="/skin/js/main.js"></script>
+<script type="text/javascript" src="/skin/js/jquery.qrcode.js"></script>
+<script type="text/javascript" src="/skin/js/utf.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+
+    $(".new_container_left_ul_nav").find("li").click(function () {
+        if($(this).hasClass("new_container_left_ul_nav_li_first")){
+            window.open("http://pay99206.com/", '_blank');
+        }else{
+            var $index=$(this).index();
+            if($(".new_container_right_cont").eq($index).text()==""){
+                showModel();
+            }else {
+                hideModel();
+            }
+            $(this).addClass("addLeft").siblings().removeClass("addLeft");
+            $(this).find("i").show().parent('a').parent("li").siblings().find('i').hide();
+            $(".new_container_right_cont").hide().siblings().eq($index).show();
+        }
+    })
+
+
+
+    $(".Alipay_payment_btn_wp").find("a").click(function () {
+        var _index=$(this).index();
+        $(this).addClass("addColor").siblings().removeClass("addColor")
+        $(".Alipay_payment_cont").hide().siblings().eq(_index).show();
+    });
+    {if($gid == 1)}
+    $(".Alipay_payment_btn_wp").find("a").last().click();
+    {/if}
+
+    $(".Wechat_payment_btn_wp").find("a").click(function () {
+            var _index=$(this).index();
+            $(this).addClass("addColor").siblings().removeClass("addColor")
+            $(".Wechat_payment_cont").hide().siblings().eq(_index).show();
+        });
+    $(".QQ_payment_btn_wp").find("a").click(function () {
+            var _index=$(this).index();
+            $(this).addClass("addColor").siblings().removeClass("addColor")
+            $(".QQ_payment_cont").hide().siblings().eq(_index).show();
+        });
+
+    $('.quick_pay_right_6_li').live('click', function(){
+        //点击选择线路变色all
+        $(this).addClass("quick_pay_right_6_li_active").find(".quick_pay_right_4_li_arrow").css("right","0px")
+        $(this).siblings(".quick_pay_right_6_li").removeClass("quick_pay_right_6_li_active").find(".quick_pay_right_4_li_arrow").css("right","-17px")
+
+
+    		 $("#qrcode").empty();
+    	      var min = $(this).attr("min");
+    		  var max = $(this).attr("max");
+    		  if(min || max){
+    			var MShow = "充值额度为" + min + "~" + max + "元";
+    			$(".m_value").attr('placeholder', MShow);
+    		  }else{
+    			var MShow = "充值额度为" + 10 + "~" + 5000 + "元";
+    			$(".m_value").attr('placeholder', MShow);
+    		  }
+    		  var type = $(this).attr("ttype");
+    		  var thirdid = $(this).attr("tid");
+    		  var tcode = $(this).attr("tcode");
+    		  var scid = $(this).attr("setconfigid");
+    		  var sccode = $(this).attr("sccode");
+    		  var cashier = $(this).attr("cashier");
+//    		  if(sccode){
+//    			  var str = sccode.substring(2,0);
+//    			  if(str=='DK'){
+//    				var coin = sccode.replace(str,"");
+//    				$("#coin").val(coin).attr("disabled",true);
+//    				$("#money").val(coin);
+//    				var Show = "充值额度为" + coin + "元";
+//    				$(".quick_pay_right_6_name").text(Show);
+//    			  }else{
+//    				$("#coin").val("").attr("disabled",false);
+//    			  }
+//    		  }
+    		  $(this).parents('form').find("[name='thirdid']").val(thirdid);
+    		  $(this).parents('form').find("[name='tcode']").val(tcode);
+    		  $(this).parents('form').find("[name='thirdtype']").val(type);
+    		  $(this).parents('form').find("[name='scid']").val(scid);
+    		  $(this).parents('form').find("[name='sccode']").val(sccode);
+    		  $(this).parents('form').find("[name='cashier']").val(cashier);
+    	 });
+
+
+    $(document).on("click",".web_left_back",function(){
+		var setconfigid = $(this).attr("setconfigid");
+		$(this).children()[0].click();
+		$.post("{:url('pay/code_all')}",{
+			setconfigid:setconfigid,
+		},function(obj){
+			if(obj.stat == 0){
+			    var html = '';
+			    if(obj.value.length === 0){
+			        showModel();
+			        return false;
+			    }
+				for (var i=0;i<obj.value.length;i++){
+					var objSetConfigid = obj.value[i].set_configid,
+						objThirdid = obj.value[i].thirdid,
+						objName = obj.value[i].name,
+						objType = obj.value[i].type,
+						objcode = obj.value[i].code,
+						objMin = obj.value[i].min,
+						objMax = obj.value[i].max,
+						objSetConfigcode = obj.value[i].setconfigcode,
+						objImg = obj.value[i].img
+						objCashier = obj.value[i].cashier;
+					var tmpid = 'trird-'+objThirdid;
+					if(i == 0){
+					    html += '<li class="quick_pay_right_6_li quick_pay_right_6_li_active" id="'+tmpid+'" tid="'+objThirdid+'" tcode="'+objcode+'" min="'+objMin+'" max="'+objMax+'" ttype="'+objType+'" sccode="'+objSetConfigcode+'" setconfigid="'+objSetConfigid+'" cashier="'+objCashier+'">\n'+
+                                 '                                                <i>'+objName+'</i>\n'+
+                                 '                                                <img src="/skin/images/arrow.png" class="quick_pay_right_4_li_arrow" style="right: 0px;">\n'+
+                                 '                                            </li>';
+					}else{
+						html += '<li class="quick_pay_right_6_li" id="'+tmpid+'" tid="'+objThirdid+'" tcode="'+objcode+'" min="'+objMin+'" max="'+objMax+'" ttype="'+objType+'" sccode="'+objSetConfigcode+'" setconfigid="'+objSetConfigid+'" cashier="'+objCashier+'">\n'+
+                                 '                                                <i>'+objName+'</i>\n'+
+                                 '                                                <img src="/skin/images/arrow.png" class="quick_pay_right_4_li_arrow">\n'+
+                                 '                                            </li>';
+					}
+					if(i == 0){
+						$("#"+tmpid).trigger("click");
+					}
+				}
+
+				$('.bank_all_list').html(html);
+			}else if(obj.stat == 1){
+				alert(obj.msg);
+				$('.web_left_back').first().click().children('input').click();
+			}else{
+				alert(obj.msg);
+				$('.web_left_back').first().click().children('input').click();
+			}
+		},"json");
+	 });
+
+    $('.web_left_back').first().click().children('input').click();
+    $('.quick_pay_right_6_li').first().click();
+
+    $('.new_all_list').each(function() {
+      $(this).children('li').first().click();
+    });
+
+    function showModel() {
+        $(".mask").show();
+        $(".mask").css("height",$(document).height());
+        $(".mask").css("width",$(document).width());
+        $(".mask_model_wp").show();
+    }
+    function hideModel() {
+        $(".mask").hide();
+        $(".mask_model_wp").hide();
+    }
+    $(".mask_model_sure").click(function () {
+        $(".mask").hide();
+        $(".mask_model_wp").hide();
+    })
+    $(".mask").click(function () {
+        hideModel();
+    });
+});
+
+function btnOK_zf_onclick(obj) {
+        	   	var cashier = $(obj).find("#cashier").val();
+        	   	if(1 == cashier){
+        	   		$(obj).submit();
+        	   	}else{
+        	   		var data = $(obj).serialize();
+        	   		$.get('pay/pay.html',data,function(json){
+        	   			console.log(json);
+        	   			if(json.status === 'success'){
+        //	   			    $('#qrcode').qrcode({width: 200,height: 200,text: json.data}).show();
+        	   			    $('.WeChat_payment_img_wp').fadeIn();
+        	   			    //$('.qr_box h1').html('扫码支付: '+$('#coin').val()+'元');
+        	   			    if(json.type === 1){
+        	   			        $('.WeChat_payment_img_wp').qrcode({width: 200,height: 200,text: json.data});
+        	   			    }else if(json.type === 2){
+        	   			        $('.WeChat_payment_img_wp p').html('页面跳转中,请稍等...');
+        	   			        window.location.href = json.data;
+        	   			    }else{
+        	   			        $('.WeChat_payment_img_wp').prepend("<img src='"+json.data+"' width='200' height='200' />");
+        	   			    }
+
+                            //$('#paybtn').attr('disabled',"true").hide();
+                            orderid = json.orderid;
+                            setTimeout(return_url,5000)
+        	   			}else{
+        	   			    alert(json.msg);
+        	   			}
+        	   		},'json');
+        	   		return false;
+        	   	}
+        }
+
+</script>
+</html>

@@ -1,0 +1,21 @@
+<input type="hidden" name="playedGroup" value="<?=$groupId?>" />
+<input type="hidden" name="playedId" value="<?=$playedId?>" />
+<input type="hidden" name="type" value="<?=$type?>" />
+
+<div class="pp" action="tzAllSelect" length="1" random="sscRandom">
+    <div class="title"><?=$wfName?>大小</div>
+	<a href="javascript:void" type="button" value="大" class="code">大</a>
+	<a href="javascript:void" type="button" value="小" class="code">小</a>
+    <div class="clear"></div><div class="title"><?=$wfName?>单双</div>
+	<a href="javascript:void" type="button" value="单" class="code">单</a>
+	<a href="javascript:void" type="button" value="双" class="code">双</a>
+
+</div>
+<?php
+	//$maxPl=$getPl($type, $playedId);
+?>
+<script type="text/javascript">
+$(function(){
+	gameSetPl(<?=json_encode($maxPl)?>,false,<?=$user['fanDianBdw']?>);
+})
+</script>

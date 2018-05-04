@@ -1,0 +1,12 @@
+<input type="hidden" name="playedGroup" value="<?=$groupId?>" />
+<input type="hidden" name="playedId" value="<?=$playedId?>" />
+<input type="hidden" name="type" value="<?=$type?>" />
+<div class="pp" action="tzSscInput" length="4" random="sscRandom">
+	<textarea id="textarea-code"></textarea>
+</div>
+<?php //$maxPl=$getPl($type, $playedId); ?>
+<script type="text/javascript">
+$(function(){
+	gameSetPl(<?=json_encode($maxPl)?>);
+})
+</script>

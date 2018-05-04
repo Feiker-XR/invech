@@ -1,0 +1,24 @@
+<div class="well text-center bg-success" style="background-color: #dff0d8;">
+  <h3 class="text-danger"><?=$msg?></h3>
+  2秒后自动关闭交易页 <i class="fa fa-close"></i>
+</div>
+<script src="/assets/jquery.js"></script>
+<script language="javascript">
+
+//if(self==top){
+//  top.location='/index.php';
+//}
+$('#s_betiframe',parent.document).height($('body').height());
+function gobetiframe(){
+  $('#s_betiframe',parent.document).height(0);
+  window.location.href="/index.php/index/betiframe.html";
+}
+$(document).ready(function() {
+  $('.well').focus();
+  $('#s_betiframe',parent.window).focus();
+  setTimeout(function(){$('.well').fadeOut();gobetiframe();},2000);
+});
+
+</script>
+</body>
+</html>

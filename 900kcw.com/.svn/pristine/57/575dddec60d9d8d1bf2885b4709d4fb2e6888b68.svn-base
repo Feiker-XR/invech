@@ -1,0 +1,64 @@
+<?php
+namespace app\home\controller;
+use app\base\controller\BaseController;
+
+/**
+ *   开采网数据接口基类
+ */
+class DataController extends BaseController
+{
+    public  $link = null ;
+
+    //Memcache配置
+    public $config = [
+        'host' => '127.0.0.1',
+        'port' => 11211,
+    ] ;
+
+    /**
+     *  有新数据时清除缓存数据
+     *  保证数据的时效性
+     * @param bool $flag
+     */
+    protected  function cleanCache($key_prefix='')
+    {
+        if ($key_prefix) {
+            $key = $key_prefix.'_history' ;
+            $this->link->set($key,null,0,-1) ;
+        }
+    }
+
+    protected function create_link()
+    {
+      try{
+          if (empty($link)) {
+              $mem = new \Memcache();
+              $mem->connect($this->config['host'],$this->config['port']);
+              $this->link = $mem ;
+          }
+          return $this->link ;
+      }catch ( \Exception $e) {
+          throw new \Exception($e->getMessage()) ;
+      }
+    }
+
+    protected function getData($url){
+        $curl = curl_init(); // 启动一个CURL会话
+        curl_setopt($curl, CURLOPT_URL, $url);
+        curl_setopt($curl, CURLOPT_HEADER, 0);
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false); // 跳过证书检查
+        curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, true);  // 从证书中检查SSL加密算法是否存在
+        $tmpInfo = curl_exec($curl);     //返回api的json对象
+        //关闭URL请求
+        curl_close($curl);
+        return $tmpInfo;    //返回json对象
+    }
+
+    //析构方法
+    public function __destruct()
+    {
+        $this->link->close();
+    }
+
+}

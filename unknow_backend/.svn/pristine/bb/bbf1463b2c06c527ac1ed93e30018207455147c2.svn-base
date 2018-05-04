@@ -1,0 +1,127 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>系统设置</title>
+
+<link rel="stylesheet" type="text/css" href="http://112.121.172.86//statics/css/page.css" />
+<link href="/css/base.css" rel="stylesheet" type="text/css" />
+<link href="/css/admin.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="/js/jquery.js"></script>
+<script type="text/javascript" src="/js/jquery.tools.js"></script>
+<script type="text/javascript" src="/js/base.js"></script>
+<script type="text/javascript">
+$().ready(function() {
+	var $tab = $("#tab");
+
+	// Tab效果
+	$tab.tabs(".tabContent", {
+		tabs: "input"
+	});
+})
+</script>
+<script language="javascript">
+function refash()
+{
+var win = top.window;
+ try{// 刷新.
+  	if(win.opener)  win.opener.location.reload();
+ }catch(ex){
+  // 防止opener被关闭时代码异常。
+ }
+  window.close();
+}
+</script>
+</head>
+<?php
+
+?>
+<body class="input">
+	<div class="bar">
+		注单取消
+	</div>
+	
+
+	<div class="body">
+<form action="{:url('danshi/savebet3')}?action=save&bid=<?=$rows["bid"]?>&uid=<?=$rows["uid"]?>&new=<?=$_GET['new']?>" method="post" enctype="multipart/form-data" name="form1">
+			<ul id="tab" class="tab">
+				<li>
+					<input type="button" value="取消注单" hidefocus />
+				</li>
+			</ul>
+			<table class="inputTable tabContent">  
+				<tr>
+					<th>
+						联赛名称: 
+					</th>
+					<td><?=$rows["match_name"]?></td>
+				</tr>
+				<tr>
+					<th>主客队: 
+					</th>
+					<td><?=$rows["master_guest"]?></td>
+				</tr>
+				<tr>
+				  <th>投注详细信息: </th>
+				  <td><?=$rows["bet_info"]?></td>
+			  </tr>
+				<tr>
+					<th>
+						盘口赔率: 
+					</th>
+					<td><?=$rows["bet_point"]?></td>
+				</tr>
+				<tr>
+					<th>
+						投注金额: 
+					</th>
+					<td><?=$rows["bet_money"]?></td>
+				</tr>
+				<tr>
+					<th>最高可赢:</th>
+					<td><?=$rows["bet_win"]?></td>
+				</tr>
+				<tr>
+					<th>
+						联赛编号: 
+				  </th>
+					<td><?=$rows["match_id"]?></td>
+				</tr>
+				<tr>
+					<th>
+						联赛类别: 
+				  </th>
+					<td><?=$rows["ball_sort"]?></td>
+				</tr>
+				<tr>
+					<th>
+						下注时间: 
+				  </th>
+					<td><?=$rows["bet_time"]?></td>
+				</tr>
+								<tr>
+					<th>
+						是否退换投注金额 : 
+					</th>
+					<td><select name="back_bet_money">
+    <option value="1">退还投注金额</option>
+      <option value="0">不退还投注金额</option>
+    </select></td>
+				</tr>
+				<tr>
+					<th>
+						取消原因: 
+					</th>
+
+					<td><input name="bet_info" type="hidden" value="<?=$rows["bet_info"]?>">
+	<input name="master_guest" type="hidden" value="<?=$rows["master_guest"]?>"><textarea name="sys_about" id="sys_about" class="formTextarea"></textarea></td>
+				</tr>
+			</table>
+			<div class="buttonArea">
+				<input type="submit" class="formButton" value="确  定" hidefocus />&nbsp;&nbsp;
+				<input type="button" class="formButton" onClick="window.location.href='Order.php'" value="返  回" hidefocus />
+		  </div>
+		</form>
+	</div>
+</body>
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>系统设置</title>
+<link href="/css/base.css" rel="stylesheet" type="text/css" />
+<link href="/css/admin.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="/js/jquery.js"></script>
+<script type="text/javascript" src="/js/jquery.tools.js"></script>
+<script type="text/javascript" src="/js/base.js"></script>
+</head>
+<body class="input">
+
+<div class="body">
+<ul>
+	<li>
+		<a href="{:Url('game/index')}">游戏列表</a> >> 
+		<a href="{:Url('opentime/index','gid='.$gameinfo.id)}">{$gameinfo['name']}时间配置</a> >>
+		<a href="{:Url('opentime/add','gid='.$gameinfo.id.'&tid='.$info['id'])}">时间修改</a>
+	</li>
+</ul>
+<ul id="tab" class="tab">
+	<li>
+		<input type="button" value="时间列表" hidefocus onClick="window.location.href='{:Url('opentime/index','gid='.$gameinfo.id)}'" />
+	</li>
+	<li>
+		<input type="button" value="时间修改" hidefocus class="current" 
+		onClick="window.location.href='{:Url('opentime/edit','gid='.$gameinfo.id.'&tid='.$info['id'])}'" />
+	</li>
+</ul>
+<form name="form1" id="form1" method="post" action="{:Url('opentime/save','gid='.$gameinfo.id)}" onSubmit="return check(this);">
+<table class="inputTable tabContent">
+<tr>
+	<th>期数：</th>
+	<td colspan="3">
+		<label>
+			<input name="qishu" type="text" id="ball_name" value="{$info.qishu}" size="30" class="formText" maxlength="20">
+	    </label>
+    </td>
+</tr>
+<tr>
+	<th>开盘时间：</th>
+	<td colspan="3">
+		<label>
+			<input name="kaipan" type="text" id="kaipan" value="{$info.kaipan}" size="30" class="formText" maxlength="20">
+	    </label>
+    </td>
+</tr>
+<tr>
+	<th>封盘时间：</th>
+	<td colspan="3">
+		<label>
+			<input name="fengpan" type="text" id="fengpan" value="{$info.fengpan}" size="30" class="formText" maxlength="20">
+	    </label>
+    </td> 
+</tr>
+<tr>
+	<th>开奖时间：</th>
+	<td colspan="3">
+		<label>
+			<input name="kaijiang" type="text" id="kaijiang" value="{$info.kaijiang}" size="30" class="formText" maxlength="20">
+	    </label>
+    </td>
+</tr>
+</table>
+<div class="buttonArea">
+	<input name="Submit" type="submit" class="formButton" value="确认修改">
+	<input type="button" class="formButton" onClick="window.location.href='{:Url('opentime/index','gid='.$gameinfo.id)}'" value="取 消" hidefocus />
+</div>
+</form>
+</div>
+</body>
+</html>

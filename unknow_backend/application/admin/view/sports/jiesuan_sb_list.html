@@ -1,0 +1,126 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>系统设置</title>
+<link href="/css/base.css" rel="stylesheet" type="text/css" />
+<link href="/css/admin.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="/js/jquery.js"></script>
+<script type="text/javascript" src="/js/jquery.tools.js"></script>
+<script type="text/javascript" src="/js/base.js"></script>
+<script language="javascript">
+function go(value){
+	location.href=value;
+}
+
+function check(){
+    var save = $("#hf_save").val();
+	if(save == "0"){
+		alert("您有注单未保存比分结果");
+		return false;
+	}
+    if(confirm('确定结算')){
+	    $("#js").css({display:"none"});
+		$("#login").css({display:""});
+	    return true;
+	}else{
+	    return false;
+	}
+}
+</script>
+</head>
+<body class="list">
+	<div class="bar">
+		注单重新结算
+	</div>
+	<div class="body">
+<form action="{:url('sports/do_jiesuan_sb')}" method="post" name="form1" onSubmit="return check();">
+<input type="hidden" name="match_id" id="match_id" value="{$mid}" />
+<input name="type" type="hidden" id="type" value="{$Request.get.type}" />
+<ul id="tab" class="tab">
+                <li><input type="button" value="半场结算" hidefocus class="current"/></li>
+			</ul>
+
+<table id="listTables" class="listTables">
+
+				<tr>
+
+					<th>联赛名</th>
+
+					<th>主客队伍</th>
+
+					<th>投注详细信息</th>
+					<th>下注金额</th>
+					<th>输赢结果</th>
+				  <th>投注/开赛时间</th>
+				  <th>投注账号</th>
+
+			    </tr>
+{volist name='list2' id='rows'}
+    <tr>
+        <td align="center">{$rows["match_name"]}</td>
+        <td align="center">
+		{$rows["master_guest"]|str_replace="VS.","<br/>",###|str_replace="VS","<br/>",###}
+		</td>
+        <td align="center">
+        	{$rows["ball_sort"]}- 单式<br/>
+			{$rows["match_time"]}&nbsp;
+			<font style="color:#FF0033">
+				{$rows["bet_info"]|str_replace="-","<br/>",###}  
+			</font>
+			[{$rows["MB_Inball"]}:{$rows["TG_Inball"]}]
+		</td>
+        <td align="center">{$rows["bet_money"]}</a></td>
+        <td align="center">{$rows["win"]}
+		<input type="hidden" name="bid[]" value="{$rows["bid"]}"/>
+		<input type="hidden" name="win[]" value="{$rows['win']}" />
+		<input type="hidden" name="status[]" value="{$rows['t']["status"]}" /> 
+		<input type="hidden" name="mb_inball[]" value="{$rows['t']["mb_inball"]}" /> 
+		<input type="hidden" name="tg_inball[]" value="{$rows['t']["tg_inball"]}" /></td>
+        <td align="center">
+        {$rows["bet_time"]|substr=5}<br/>{$rows["match_endtime"]|substr=5}</td>
+        <td align="center">{$rows["username"]}</td>
+    </tr>
+{/volist}
+
+{volist name='list2_cg' id='rows'}
+     <tr>
+        <td align="center" >{$rows["match_name"]} </td>
+        <td align="center">
+			{$rows["master_guest"]|str_replace="VS.","<br/>",###|str_replace="VS","<br/>",###}
+		</td>
+        <td align="center">{$rows["ball_sort"]} - 串关<br/>
+			<font style="color:#FF0033">
+				{$rows["bet_info"]|str_replace="-","<br/>",###}
+			</font>
+			[{$rows["MB_Inball"]}:{$rows["TG_Inball"]}]
+		</td>
+        <td align="center">{$rows["bet_money"]}</td>
+	    <td align="center">{$rows['win']}
+            <input type="hidden" name="bid_cg[]" value="{$rows["bid"]}"/>
+            <input type="hidden" name="win_cg[]" value="{$rows['win']}" />
+            <input type="hidden" name="status_cg[]" value="{$rows['t']["status"]}" /> 
+            <input type="hidden" name="mb_inball_cg[]" value="{$rows['t']["mb_inball"]}" /> 
+            <input type="hidden" name="tg_inball_cg[]" value="{$rows['t']["tg_inball"]}" /></td>
+    	<td align="center">
+        	{$rows["bet_time"]|substr=5}<br/>{$rows["match_endtime"]|substr=5}</td>      
+        <td align="center"><?=$rows["username"]?></td>
+    </tr>
+{/volist}
+
+<tr>
+        <td colspan="3"  align="right" bgcolor="#F2F4F6" >结果统计：</td>
+              <td align="center" bgcolor="#F2F4F6"><font color="#FF0000">{$all_bet_money}</font></td>
+	          <td align="center" bgcolor="#F2F4F6"><font color="#FF0000">{$all_win}</font></td>
+              <td colspan="2" bgcolor="#F2F4F6"></td>
+    </tr>
+  </table>
+<div class="buttonArea" id="js">
+				<input type="submit" class="formButton" value="确  定" hidefocus />&nbsp;&nbsp;
+				<input type="button" class="formButton" onclick="javascript:window.history.go(-1);" value="返  回" hidefocus />
+</div>
+<div id="login" style="display:none; padding:10px 0; text-align:center;"><strong>系统重新结算中，请等待...</strong></div>
+</form>
+	</div>
+</body>
+</html>

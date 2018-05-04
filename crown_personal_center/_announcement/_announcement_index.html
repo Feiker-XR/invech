@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>修改取款密码</title>
+	</head>
+	<!--公用部分 css-->
+	<link rel="stylesheet" type="text/css" href="../public/css/public.css"/>
+	<link rel="stylesheet" href="../public/css/com.css" />
+	<!--私用 css-->
+	<link rel="stylesheet" href="css/c_annouce.css" />
+	<body>
+		<div class="com-wp">
+			<!--header-->
+			<div class="com-header">
+				<div class="logo-wp">
+					<img src="../public/images/logo.png" alt="" />
+				</div>
+				<div class="logo-title-wp">
+					<img src="../public/images/logo-title.png" alt="" />
+				</div>
+				<div class="hours-right">
+					<img src="../public/images/logo-huors.png" alt="" />
+				</div>
+			</div>
+			<!--main-->
+			<div class="main-wp">
+				<!--com-left-->
+				<div class="com-left">
+					<h3 class="com-left-title">
+						<img src="../public/images/person-info.png" alt="" />
+						<span>个人中心</span>
+					</h3>
+					<div class="com-left-nav">
+						<ul class="com-left-nav-list">
+							<li class="nav-bg">
+								<i class="nav-i">
+									<img src="../public/images/nav-1.png" alt="" />
+								</i>
+								<i class="nav-bg-i">
+									<img src="../public/images/nav-bg-1.png" alt="" />
+								</i>
+								<a href="javaScript:;" class="nav-cr">账户信息</a>
+								<span></span>
+							</li>
+							<li>
+								<i class="nav-i">
+									<img src="../public/images/nav-2.png" alt="" />
+								</i>
+								<i class="nav-bg-i">
+									<img src="../public/images/nav-bg-2.png" alt="" />
+								</i>
+								<a href="javaScript:;">充值</a>
+								<span></span>
+							</li>
+							<li>
+								<i class="nav-i">
+									<img src="../public/images/nav-3.png" alt="" />
+								</i>
+								<i class="nav-bg-i">
+									<img src="../public/images/nav-bg-3.png" alt="" />
+								</i>
+								<a href="javaScript:;">提现</a>
+								<span></span>
+							</li>
+							<li>
+								<i class="nav-i">
+									<img src="../public/images/nav-4.png" alt="" />
+								</i>
+								<i class="nav-bg-i">
+									<img src="../public/images/nav-bg-4.png" alt="" />
+								</i>
+								<a href="javaScript:;">往来记录</a>
+								<span></span>
+							</li>
+							<li>
+								<i class="nav-i">
+									<img src="../public/images/nav-5.png" alt="" />
+								</i>
+								<i class="nav-bg-i">
+									<img src="../public/images/nav-bg-5.png" alt="" />
+								</i>
+								<a href="javaScript:;">额度转换</a>
+								<span></span>
+							</li>
+							<li>
+								<i class="nav-i">
+									<img src="../public/images/nav-6.png" alt="" />
+								</i>
+								<i class="nav-bg-i">
+									<img src="../public/images/nav-bg-6.png" alt="" />
+								</i>
+								<a href="javaScript:;">注单管理</a>
+								<span></span>
+							</li>
+							<li>
+								<i class="nav-i"> 
+									<img src="../public/images/nav-7.png" alt="" />
+								</i>
+								<i class="nav-bg-i">
+									<img src="../public/images/nav-bg-7.png" alt="" />
+								</i>
+								<a href="javaScript:;">投注报表</a>
+								<span></span>
+							</li>
+							<li>
+								<i class="nav-i">
+									<img src="../public/images/nav-8.png" alt="" />
+								</i>
+								<i class="nav-bg-i">
+									<img src="../public/images/nav-bg-8.png" alt="" />
+								</i>
+								<a href="javaScript:;">公告信息</a>
+								<span></span>
+							</li>
+							<li>
+								<i class="nav-i">
+									<img src="../public/images/nav-9.png" alt="" />
+								</i>
+								<i class="nav-bg-i">
+									<img src="../public/images/nav-bg-9.png" alt="" />
+								</i>
+								<a href="javaScript:;">代理中心</a>
+								<span></span>
+							</li>
+						</ul>
+					</div>
+				</div>
+				<!--com right-->
+				<div class="com-right">
+					<div class="T-head">
+						<span class="text-left active">最新消息</span>
+						<span>个人信息</span>
+						<span class="text-right">游戏公告</span>
+					</div>
+
+					<!--最新消息-->
+					<ul class="public_news show">
+						<li data-type="1"><span>最新消息</span><i class="arrow"></i></li>
+						<li data-type="2"><span>历史讯息</span><i class="arrow"></i></li>
+					</ul>
+					<!--个人信息-->
+					<ul class="personal_news">
+						<li><span>个人信息</span><i class="arrow"></i></li>
+					</ul>
+					<!--游戏公告-->
+					<ul class="game_news">
+						<li><span>BB视讯</span><i class="arrow"></i></li>
+						<li class="sub_li">
+							<p>
+								<select id="_date">
+									<option value="">2018-4-19</option>
+									<option value="">2018-4-20</option>
+								</select>
+								<select id="_game">
+									<option value="">BB视讯</option>
+									<option value="">xxx</option>
+								</select>
+								<select id="_type">
+									<option value="">百家乐</option>
+									<option value="">xxx</option>
+								</select>
+								<select id="_oth">
+									<option value="">A</option>
+									<option value="">B</option>
+								</select>
+							</p>
+							<table cellspacing="0" cellpadding="0">
+								<thead>
+									<tr>
+										<th>日期</th>
+										<th>内容</th>
+									</tr>
+								</thead>
+								<tbody>
+										<tr>
+											<td>2018-04-19 00:06:22</td>
+											<td>足球：04月18日 瓜地联【 夏拉祖 vs. 萨纳拉特 】因比分未能确定，帐目
+												将会调至04月19日 计算. 造成不便敬请见谅!!</td>
+										</tr>
+										<tr>
+											<td>2018-04-19 00:06:22</td>
+											<td>足球：04月18日 瓜地联【 夏拉祖 vs. 萨纳拉特 】因比分未能确定，帐目
+												将会调至04月19日 计算. 造成不便敬请见谅!!</td>
+										</tr>
+								</tbody>
+							</table>
+						</li>
+						<li><span>BB体育</span><i class="arrow"></i></li>
+						<li class="sub_li">
+							<p>
+								<select id="_date">
+									<option value="">2018-4-19</option>
+									<option value="">2018-4-20</option>
+								</select>
+								<select id="_game">
+									<option value="">BB视讯</option>
+									<option value="">xxx</option>
+								</select>
+								<select id="_type">
+									<option value="">百家乐</option>
+									<option value="">xxx</option>
+								</select>
+								<select id="_oth">
+									<option value="">A</option>
+									<option value="">B</option>
+								</select>
+							</p>
+							<table cellspacing="0" cellpadding="0">
+								<thead>
+								<tr>
+									<th>日期</th>
+									<th>内容</th>
+								</tr>
+								</thead>
+								<tbody>
+								<tr>
+									<td>2018-04-19 00:06:22</td>
+									<td>足球：04月18日 瓜地联【 夏拉祖 vs. 萨纳拉特 】因比分未能确定，帐目
+										将会调至04月19日 计算. 造成不便敬请见谅!!</td>
+								</tr>
+								<tr>
+									<td>2018-04-19 00:06:22</td>
+									<td>足球：04月18日 瓜地联【 夏拉祖 vs. 萨纳拉特 】因比分未能确定，帐目
+										将会调至04月19日 计算. 造成不便敬请见谅!!</td>
+								</tr>
+								</tbody>
+							</table>
+						</li>
+						<li><span>NEW BB体育</span><i class="arrow"></i></li>
+						<li class="sub_li">
+							<p>
+								<select id="_date">
+									<option value="">2018-4-19</option>
+									<option value="">2018-4-20</option>
+								</select>
+								<select id="_game">
+									<option value="">BB视讯</option>
+									<option value="">xxx</option>
+								</select>
+								<select id="_type">
+									<option value="">百家乐</option>
+									<option value="">xxx</option>
+								</select>
+								<select id="_oth">
+									<option value="">A</option>
+									<option value="">B</option>
+								</select>
+							</p>
+							<table cellspacing="0" cellpadding="0">
+								<thead>
+								<tr>
+									<th>日期</th>
+									<th>内容</th>
+								</tr>
+								</thead>
+								<tbody>
+								<tr>
+									<td>2018-04-19 00:06:22</td>
+									<td>足球：04月18日 瓜地联【 夏拉祖 vs. 萨纳拉特 】因比分未能确定，帐目
+										将会调至04月19日 计算. 造成不便敬请见谅!!</td>
+								</tr>
+								<tr>
+									<td>2018-04-19 00:06:22</td>
+									<td>足球：04月18日 瓜地联【 夏拉祖 vs. 萨纳拉特 】因比分未能确定，帐目
+										将会调至04月19日 计算. 造成不便敬请见谅!!</td>
+								</tr>
+								</tbody>
+							</table>
+						</li>
+						<li><span>BB电子</span><i class="arrow"></i></li>
+						<li class="sub_li">
+							<p>
+								<select id="_date">
+									<option value="">2018-4-19</option>
+									<option value="">2018-4-20</option>
+								</select>
+								<select id="_game">
+									<option value="">BB视讯</option>
+									<option value="">xxx</option>
+								</select>
+								<select id="_type">
+									<option value="">百家乐</option>
+									<option value="">xxx</option>
+								</select>
+								<select id="_oth">
+									<option value="">A</option>
+									<option value="">B</option>
+								</select>
+							</p>
+							<table cellspacing="0" cellpadding="0">
+								<thead>
+								<tr>
+									<th>日期</th>
+									<th>内容</th>
+								</tr>
+								</thead>
+								<tbody>
+								<tr>
+									<td>2018-04-19 00:06:22</td>
+									<td>足球：04月18日 瓜地联【 夏拉祖 vs. 萨纳拉特 】因比分未能确定，帐目
+										将会调至04月19日 计算. 造成不便敬请见谅!!</td>
+								</tr>
+								<tr>
+									<td>2018-04-19 00:06:22</td>
+									<td>足球：04月18日 瓜地联【 夏拉祖 vs. 萨纳拉特 】因比分未能确定，帐目
+										将会调至04月19日 计算. 造成不便敬请见谅!!</td>
+								</tr>
+								</tbody>
+							</table>
+						</li>
+						<li><span>BB彩票</span><i class="arrow"></i></li>
+						<li class="sub_li">
+							<p>
+								<select id="_date">
+									<option value="">2018-4-19</option>
+									<option value="">2018-4-20</option>
+								</select>
+								<select id="_game">
+									<option value="">BB视讯</option>
+									<option value="">xxx</option>
+								</select>
+								<select id="_type">
+									<option value="">百家乐</option>
+									<option value="">xxx</option>
+								</select>
+								<select id="_oth">
+									<option value="">A</option>
+									<option value="">B</option>
+								</select>
+							</p>
+							<table cellspacing="0" cellpadding="0">
+								<thead>
+								<tr>
+									<th>日期</th>
+									<th>内容</th>
+								</tr>
+								</thead>
+								<tbody>
+								<tr>
+									<td>2018-04-19 00:06:22</td>
+									<td>足球：04月18日 瓜地联【 夏拉祖 vs. 萨纳拉特 】因比分未能确定，帐目
+										将会调至04月19日 计算. 造成不便敬请见谅!!</td>
+								</tr>
+								<tr>
+									<td>2018-04-19 00:06:22</td>
+									<td>足球：04月18日 瓜地联【 夏拉祖 vs. 萨纳拉特 】因比分未能确定，帐目
+										将会调至04月19日 计算. 造成不便敬请见谅!!</td>
+								</tr>
+								</tbody>
+							</table>
+						</li>
+					</ul>
+
+					<!--最新消息子页面-->
+					<div class='sub_news public_sub_news'>
+						<h2>历史信息</h2>
+						<table>
+							<thead>
+							<tr>
+								<th>日期</th>
+								<th>内容</th>
+							</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>2018-04-19 00:06:22</td>
+									<td>★积分快讯★积分商城【9599jf1.com】将于15点准时开启兑换，您在九五至尊I进行的存款，每一笔存款都将永久累计，并转换为积分积分可兑换现金券，做好兑换的准备吧！至尊优惠惊喜不断！</td>
+								</tr>
+								<tr>
+									<td>2018-04-19 00:06:22</td>
+									<td>★积分快讯★积分商城【9599jf1.com】将于15点准时开启兑换，您在九五至尊I进行的存款，每一笔存款都将永久累计，并转换为积分积分可兑换现金券，做好兑换的准备吧！至尊优惠惊喜不断！</td>
+								</tr>
+								<tr>
+									<td>2018-04-19 00:06:22</td>
+									<td>★积分快讯★积分商城【9599jf1.com】将于15点准时开启兑换，您在九五至尊I进行的存款，每一笔存款都将永久累计，并转换为积分积分可兑换现金券，做好兑换的准备吧！至尊优惠惊喜不断！</td>
+								</tr>
+							</tbody>
+						</table>
+						<div class="pagination">
+							<span><</span>
+							<ol>
+								<li class="active">1</li>
+								<li>2</li>
+								<li>3</li>
+							</ol>
+							<span>></span>
+						</div>
+
+					</div>
+
+					<!--个人消息子页面-->
+					<div class="sub_news personal_sub_news">
+						<table cellpadding="0" cellspacing="0">
+							<thead>
+								<tr>
+									<th>日期</th>
+									<th>内容</th>
+									<th>功能</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>2018-04-19 00:06:22</td>
+									<td>★劲爆来袭★</td>
+									<td><img src="../public/images/del.png" alt="delete" /></td>
+								</tr>
+								<tr class="_unvisible">
+									<td colspan="3">【ISB五一嘉年华】惊喜五重奏，投注以下一款或多款游戏: 现金骆驼, 黄金堆叠, 幸运3 & 重赏百万，换算
+										积分进行排行，获得名次赢取彩金！更有幸运抽奖随机抽取 100 名幸运会员，幸运会员将会获取 200元彩
+										金！奖池高达 120,200元！还等什么，ISB 奖金每天等您来拿！</td>
+								</tr>
+								<tr>
+									<td>2018-04-19 00:06:22</td>
+									<td>★劲爆来袭★</td>
+									<td><img src="../public/images/del.png" alt="delete" /></td>
+								</tr>
+								<tr class="_unvisible">
+									<td colspan="3">【ISB五一嘉年华】惊喜五重奏，投注以下一款或多款游戏: 现金骆驼, 黄金堆叠, 幸运3 & 重赏百万，换算
+										积分进行排行，获得名次赢取彩金！更有幸运抽奖随机抽取 100 名幸运会员，幸运会员将会获取 200元彩
+										金！奖池高达 120,200元！还等什么，ISB 奖金每天等您来拿！</td>
+								</tr>
+								<tr>
+									<td>2018-04-19 00:06:22</td>
+									<td>★劲爆来袭★</td>
+									<td><img src="../public/images/del.png" alt="delete" /></td>
+								</tr>
+								<tr class="_unvisible">
+									<td colspan="3">【ISB五一嘉年华】惊喜五重奏，投注以下一款或多款游戏: 现金骆驼, 黄金堆叠, 幸运3 & 重赏百万，换算
+										积分进行排行，获得名次赢取彩金！更有幸运抽奖随机抽取 100 名幸运会员，幸运会员将会获取 200元彩
+										金！奖池高达 120,200元！还等什么，ISB 奖金每天等您来拿！</td>
+								</tr>
+							</tbody>
+						</table>
+						<div class="pagination">
+							<span><</span>
+							<ol>
+								<li class="active">1</li>
+								<li>2</li>
+								<li>3</li>
+							</ol>
+							<span>></span>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--共用部分 js-->
+		<script src="../public/lib/jquery1.9.0.min.js"></script>
+		<script src="../public/lib/com.js"></script>
+		<!--私用js部分-->
+	<script type="text/javascript">
+		// 左边导航选中
+		$(function () {
+			$('ul.com-left-nav-list li:nth-last-child(2)').trigger('click');
+        });
+
+		// 上边导航切换
+		$('.T-head span').click(function () {
+		    $(this).addClass('active').siblings().removeClass('active');
+		    $('.com-right ul').removeClass('show');
+            $('.com-right ul').find('i').removeClass('down');
+		    $('.sub_news').hide();
+		    var _param = null;
+			if($(this).hasClass('text-left')){	// 最新消息
+                _param = 'public';
+			}else if($(this).hasClass('text-right')){	//游戏公告
+                _param = 'game';
+			}else{								// 个人消息
+                _param = 'personal';
+			}
+            $('.com-right ul.' + _param + '_news').addClass('show');
+        });
+
+		//最新消息子页面点击事件
+		$('.public_news li').click(function () {
+            $('.com-right ul').removeClass('show');
+            var _type = $(this).attr('data-type');
+            var _example = null;
+            if(_type == '1'){		// 最新消息
+                _example = '最新消息';
+			}else if(_type == '2'){	// 历史讯息
+                _example = '历史讯息';
+			}
+			// 在这里组装数据
+            $('.public_sub_news h2').text(_example);
+            $('.public_sub_news').show();
+        });
+
+		// 点击个人消息
+		$('.personal_news li').click(function () {
+		    $(this).find('i').toggleClass('down');
+			$('.personal_sub_news').toggle();
+        });
+		// 个人信息详细内容
+		$('.personal_sub_news table td:nth-child(2)').on('click',function(){
+            var _this = $(this);
+            _this.parent().next().siblings('._unvisible').hide();
+            _this.parent().next().toggle();
+		});
+
+		// 游戏公告点击
+		$('.game_news li').click(function () {
+		    var _this = $(this);
+			if(_this.hasClass('sub_li')){	// 下拉的li
+			    return;
+			}
+            _this.find('i').toggleClass('down');
+			_this.next('.sub_li').siblings('.sub_li').hide();
+            _this.siblings().find('i').removeClass('down');
+            _this.next('.sub_li').toggle();
+        });
+
+
+	</script>
+	</body>
+</html>

@@ -1,0 +1,89 @@
+<?php
+
+namespace app\service;
+
+use ArrayIterator;
+use IteratorAggregate;
+use ArrayAccess;
+use app\service\Arr;
+
+class JsonExtra implements ArrayAccess,IteratorAggregate
+{
+    protected $items = [];
+
+    public function __construct($json)
+    {        
+        //if(is_null($json))$json='';
+        $this->items = json_decode($json,true);
+    }
+
+    /*其他框架支持
+    public function toJson()
+    {        
+        return json_encode($this->items);
+    }
+    */
+
+    //tp支持
+    public function __toString()
+    {        
+        return json_encode($this->items);
+    }
+
+    public function has($key)
+    {
+        return Arr::has($this->items, $key);
+    }
+
+    public function get($key, $default = null)
+    {
+        return Arr::get($this->items, $key, $default);
+    }
+
+    public function set($key, $value = null)
+    {
+        Arr::set($this->items, $key, $value);
+    }
+
+    public function offsetExists($key)
+    {
+        return $this->has($key);
+    }
+
+    //[]操作支持
+    public function offsetGet($key)
+    {
+        return $this->get($key);
+    }
+
+    public function offsetSet($key, $value)
+    {
+        $this->set($key, $value);
+    }
+
+    public function offsetUnset($key)
+    {
+        $this->set($key, null);
+    }
+
+    public function getIterator()
+    {
+        return new ArrayIterator($this->items);
+    }
+
+    public function unset($key)
+    {
+        Arr::forget($this->items, $key);
+    }
+
+    //->操作支持
+    public function __get($key)
+    {
+        return Arr::get($this->items, $key, null);
+    }
+
+    public function __set($key, $value = null)
+    {
+        Arr::set($this->items, $key, $value);
+    }
+}

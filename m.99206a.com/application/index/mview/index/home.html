@@ -1,0 +1,1010 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>亚太娱乐</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+<link rel="stylesheet" href="/css/font-awesome.min.css">
+<link rel="stylesheet" href="/css/ui-dialog.css">
+<link rel="stylesheet" href="/styles/ezweb.css">
+<link rel="stylesheet" type="text/css" href="/fonts-new/iconfont.css">		
+<link rel="stylesheet" href="/css/500f_new_wap.css">
+<!--<link href="/css/swiper.min.css" rel="stylesheet">-->
+
+<!-- <script src="https://cdn.bootcss.com/jquery/2.2.0/jquery.min.js"></script>-->
+<script src="/js/jquery.1.9.1.min.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/dialog-min.js"></script>
+<script type="text/javascript" src="/js/top.js"></script>
+<script src="/js/common.js"></script>
+<script src="/js/zhuce.js"></script>
+<script src="/scripts/slider.js"></script>
+<!--<script src="/js/swiper.js"></script>-->	
+<script type="text/javascript">
+$(window).load(function(){
+	changeFrameHeight()	
+})
+function changeFrameHeight(){
+    var bodyClientH = screen.height;
+   	var bodyClientW = screen.width; 
+	var iframeId = $(window.top.document).find("#iframeid")
+	iframeId.height(bodyClientH)
+	iframeId.width(bodyClientW)
+	iframeId.show()
+}
+	
+
+$(document).ready(function() {
+
+});	
+
+</script>
+<style type="text/css">
+
+.flex-control-paging li a {width: 10px;height: 10px;border-radius: 50%;}
+.flex-control-paging li a.flex-active{ background:#8c2c2c;}
+.slides {overflow:hidden;}
+.slides li {float:left;display:none;}
+.slides li:nth-child(1) {display:block;}
+	
+html,body{width: 100%; height: 100%; overflow: hidden;}
+body{-webkit-overflow-scrolling:touch; overflow-y:scroll;}		
+
+
+.main .block_0{width:100%;clear:both;height:0px;overflow:hidden;*zoom:1;}
+.main .block_5{width:100%;clear:both;height:5px;overflow:hidden;*zoom:1;}
+.main .block_10{width:100%;clear:both;height:10px;overflow:hidden;*zoom:1;}
+.main .block_15{width:100%;clear:both;height:15px;overflow:hidden;*zoom:1;}
+.main .block_20{width:100%;clear:both;height:20px;overflow:hidden;*zoom:1;}
+.main .block_30{width:100%;clear:both;height:30px;overflow:hidden;*zoom:1;}
+.main .block_40{width:100%;clear:both;height:44px;overflow:hidden;*zoom:1;}
+.main .block_45{width:100%;clear:both;height:45px;overflow:hidden;*zoom:1;}
+.main .block_50{width:100%;clear:both;height:50px;overflow:hidden;*zoom:1;}
+.main .block_55{width:100%;clear:both;height:55px;overflow:hidden;*zoom:1;}
+.main .block_60{width:100%;clear:both;height:60px;overflow:hidden;*zoom:1;}
+
+.main .wap_index_h1{display: block;width: 100%;height: 50px;border-bottom: 1px solid #bfbfbf;line-height: 50px;padding-left: 10px;color: #666666;float: left;font-size: 18px;margin-top: 0px;}
+.main .wap_index_h1_2{display: block;width: 100%;height: 50px;border-bottom: 1px solid #bfbfbf;border-top: 1px solid #BFBFBF;line-height: 50px;padding-left: 10px;color: #666666;float: left;font-size: 18px;margin-bottom: 0px;}
+.main .wap_index_title{width: 100%;height: 38px;}
+.main .wap_index_title a{display: block;float: left;text-align: center;font-size: 16px;width: 33%;text-decoration: none;border-left: 1px solid #bfbfbf;color: #666666;line-height: 30px;}
+.main .wap_index_title a:hover{text-decoration: none;}
+.main .wap_index_title a:first-child{border-left: none;}
+.main .wap_index_title img{width:45px;height: 45px;}
+
+.main .wap_index_list{width: 100%;height: 64px;border-bottom: 1px solid #BFBFBF;}
+.main .wap_index_list a{display: block;float: left;text-align: center;font-size: 20px;width: 49.8%;text-decoration: none;border-left: 1px solid #bfbfbf;color: #666666;height: 44px;margin-top: 10px;}
+.main .wap_index_list a:hover{text-decoration: none;}
+.main .wap_index_list a:first-child{border: none;}
+.main .wap_index_list i{display: inline-block;width: 44px;height: 44px;margin-right: 2px;}
+
+.main .wap_index_list span{display: inline-block;text-align: left;margin-bottom: 0px;vertical-align: middle; width:8rem;}
+.main .wap_index_list span p:first-child{font-size: 14px;color: #555555;margin-top: -40px;}
+.main .wap_index_list span p{font-size: 12px;color: #999999;line-height: 30px;}
+.main .wap_index_list h5{margin: 0;font-weight: normal;font-size: 12px;}
+
+.main .wap_index_list_b{width: 100%;height: 64px;border-bottom: 1px solid #BFBFBF;}
+.main .wap_index_list_b a{display: block;float: left;text-align: center;font-size: 20px;width: 49.8%;text-decoration: none;border-left: 1px solid #bfbfbf;color: #666666;height: 44px;margin-top: 10px;}
+.main .wap_index_list_b a:hover{text-decoration: none;}
+.main .wap_index_list_b a:first-child{border: none;}
+.main .wap_index_list_b i{display: inline-block;width: 44px;height: 44px;margin-right: 2px;}
+
+.main .wap_index_list_b span{display: inline-block;text-align: left;margin-bottom: 0px;vertical-align: middle; width:8rem;}
+.main .wap_index_list_b span p:first-child{font-size: 14px;color: #555555;margin-top: -40px;}
+.main .wap_index_list_b span p{font-size: 12px;color: #999999;line-height: 30px;}
+.main .wap_index_list_b h5{margin: 0;font-weight: normal;font-size: 12px;}
+
+.main .wap_index_list_1{background: url(/img/m-game-4.png) no-repeat;}
+.main .wap_index_list_2{background: url(/img/m-game-5.png) no-repeat;}
+.main .wap_index_list_3{background: url(/img/m-game-6.png) no-repeat;}
+.main .wap_index_list_4{background: url(/img/m-game-7.png) no-repeat;}
+.main .wap_index_list_5{background: url(/img/m-game-8.png) no-repeat;}
+.main .wap_index_list_6{background: url(/img/m-game-9.png) no-repeat;}
+.main .wap_index_list_7{background: url(/img/m-game-10.png) no-repeat;}
+
+body .page-slide, html .page-slide{margin: 50px 0px 50px;}
+
+    .swiper-container {
+        width: 100%;
+        height: 100%;
+        
+    }
+    .swiper-slide {
+        text-align: center;
+        font-size: 18px;
+        background: #fff;
+        
+        /* Center slide text vertically */
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: -webkit-flex;
+        display: flex;
+        -webkit-box-pack: center;
+        -ms-flex-pack: center;
+        -webkit-justify-content: center;
+        justify-content: center;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        -webkit-align-items: center;
+        align-items: center;
+    }
+
+
+
+
+</style>
+</head>
+<body>
+	<!-- <iframe id="topFrame" name="topFrame" frameborder="0" scrolling="no" width="0" height="0" src="top.php" style="display:none"></iframe> -->
+
+
+	
+	<div class="page-slide">
+		<div id="J_p1" class="page active index-page">	
+		<div class="banner">	
+
+		<div id="show" class="flexslider">
+			<div class="flex-viewport" style="overflow: hidden; position: relative;">
+				<ul class="slides" style="width: 1200%; transition-duration: 0s; transform: translate3d(-375px, 0px, 0px);">
+					{foreach $banner as $row}
+					<li class="" style="width: 375px; float: left; display: block;">
+						<div class="img">
+							<a href="{$row['href']}"><img src="{$row['url']}" data-src="{$row['url']}" /></a>
+						</div>
+					</li>
+					{/foreach}
+				</ul>
+			</div>
+
+		</div>
+		    
+		   <!-- <div class="swiper-container">
+		        <div class="swiper-wrapper">
+		            <div class="swiper-slide"><a href="#"><img src="/images/flash/f1.jpg" data-src="/images/flash/f1.jpg" /></a></div>
+		            <div class="swiper-slide"><a href="#"><img src="/images/flash/f2.png" data-src="/images/flash/f2.png" /></a></div>
+		            <div class="swiper-slide"><a href="#"><img src="/images/flash/f3.png" data-src="/images/flash/f3.png" /></a></div>
+		        </div>
+		         Add Pagination 
+		        <div class="swiper-pagination"></div>
+		        
+		        <div class="swiper-button-next"></div>
+		        <div class="swiper-button-prev"></div>
+		    </div>		-->    
+		    
+		</div>		
+		
+		
+		<div class="clearfix"></div>
+		<script type="text/javascript">
+		//swiper 初始化	
+//	    var swiper = new Swiper('.swiper-container', {
+//	        pagination: '.swiper-pagination',
+//	        nextButton: '.swiper-button-next',
+//	        prevButton: '.swiper-button-prev',
+//	        paginationClickable: true,
+//	        spaceBetween: 30,
+//	        centeredSlides: true,
+//	        autoplay: 2500,
+//	        autoplayDisableOnInteraction: false
+//	    });
+			
+		$(document).ready(function(e) {
+			// var wb = $('.banner').find('img:first').height();
+			// if(wb>0){$('.banner').height(wb);}
+			$('#show').flexslider({
+				animation: "slide",
+				direction:"horizontal",
+				easing:"swing",
+				slidQeshowSpeed: 5000
+			});
+		});
+		
+		</script>  
+		<div class="notice">
+			<div class="broadcast"><i><img src="/img/notice-index.png" data-src="/img/notice-index.png"/></i></div>
+			<div id="J_broadcast" class="broadcast-content">
+				{volist id="notice" name="notice"}
+				<a title="{$notice['msg']}" class="active">{$notice['msg']}</a>
+				{/volist}
+			</div>
+		</div>
+
+		{empty name="Think.session.username"}
+		<div class="block_0"></div>
+		<div class="wap_500f_login_before" style="">
+			<a href="#" data-modal="#J_loginModal" id="J_loginModal_new">登录</a>
+			<a href="#" data-modal="#J_regModal" id="J_regModal_new">注册</a>
+			<a href="/promotions/index.html">优惠活动</a>
+			<a href="https://messenger.providesupport.com/messenger/0nye75kga3q931e9lwrn16k4q0.html" target="_blank">在线客服</a>
+			<!--<a href="/loadding.php" target="mem_index">在线客服</a>-->
+		</div>
+		<div class="block_0"></div>
+		{else /}
+		<!--登陆后-->
+		<div class="wap_500f_login_after">
+			<a href="/pay/member.html" target="mem_index">在线存款</a>
+			<a href="/user/report" target="mem_index">下注记录</a>
+			<a href="/promotions/index.html">优惠活动</a>
+			<a href="http://messenger.providesupport.com/messenger/1x5b67gp1rcy50kqxa0qpsa0jx.html" target="_PARENT">在线客服</a>
+			<!--<a href="/download.php" target="_parent">下载APP</a>-->
+		</div>
+		<!--登陆后显示-->
+		<div class="wap_500f_h1">
+			<h2>
+				<i><img src="/img/xunzhang-index.png" data-src="/img/xunzhang-index.png"></i>
+				个人信息
+			</h2>
+		</div>				
+		<div class="block_0"></div>
+		<div class="cqssc_user">
+			<div>会员名：<span>{$user.username}</span></div>
+			<div>账户余额：<span id="user_money"></span></div>
+		</div>
+		<div class="cqssc_qd_lt">
+			<div style="margin: 0 auto;float: none;width: 80%">
+				<span class="cqssc_index_qiandao" id="qian_dao">点击签到</span>
+			</div>
+<!-- 			<div>
+				<span class="cqssc_index_lottery" onclick="window.open('/activity/zhuanpan.html','自助充值')">幸运抽奖</span>
+			</div> -->
+		</div>			
+		{/empty}
+		<div class="block_0"></div>
+			<div class="main" style="background:#FFF;">
+				
+				<!--游戏分类-->	
+				<div class="wap_500f_h1">
+					<h2 style="border-left: 2px solid red;">游戏分类</h2>
+				</div>
+				<div class="block_0"></div>
+				<div class="wap_500f_game">
+					<div class="wap_500f_game_a">
+						<i><img src="/img/m-game-1.png" data-src="/img/m-game-1.png"></i>
+						<br>
+						<span>彩票游戏</span>
+					</div>
+					<div class="wap_500f_game_b wap_500f_game_all_link">
+						<i><img src="/img/m-game-2.png" data-src="/img/m-game-2.png"></i>
+						<br>
+						<span>真人视讯</span>
+					</div>
+					<!--<a href="#" data-slide="#J_p2" data-url="left.php" data-iframe="J_SportsIFrame">-->
+					<div class="wap_500f_game_c wap_500f_game_all_link">
+						<i><img src="/img/m-game-3.png" data-src="/img/m-game-3.png"></i>
+						<br>
+						<span>体育赛事</span>
+					</div>
+					<div class="wap_500f_game_d wap_500f_game_all_link">
+						<i><img src="/img/m-game-4.png" data-src="/img/m-game-4.png"></i>
+						<br>
+						<span>电子游艺</span>
+					</div>
+				</div>
+				<div class="block_0"></div>
+				<div class="wap_500f_all_game">
+					<!--热门彩票-->
+					<div class="wap_500f_lottery" style="display: block;">
+						<div class="wap_500f_lottery_h2">
+							<h2><i><img src="/img/fire-index.png" data-src="/img/fire-index.png" /></i>彩票游戏</h2>
+						</div>
+						<a href="" data-slide="#J_p4" data-iframe="J_HKIFrame">
+						<div class="wap_500f_lottery_1" style="border-top: 1px solid #E5E5E5;border-left: none;">
+							<div>
+								<img src="/img/m-game-11.png" data-src="/img/m-game-11.png"/>
+							</div>
+							<p>香港六合彩</p>
+						</div></a>
+						<a href="" data-url="/lottery/index/type/csc.html" data-slide="#J_p3" data-iframe="J_GamesFrame">
+						<div class="wap_500f_lottery_1" style="border-top: 1px solid #E5E5E5;">
+							<div>
+								<img src="/img/m-game-5.png" data-src="/img/m-game-5.png"/>
+							</div>
+							<p>重庆时时彩</p>
+						</div></a>
+						<a href="" data-url="/lottery/index/type/gsf.html" data-slide="#J_p3" data-iframe="J_GamesFrame">
+						<div class="wap_500f_lottery_1" style="border-top: 1px solid #E5E5E5;border-right: 1px solid #E5E5E5;">
+							<div>
+								<img src="/img/m-game-13.png" data-src="/img/m-game-13.png"/>
+							</div>
+							<p>广东快乐十分</p>
+						</div></a>
+						<a href="" data-url="/lottery/index/type/pk10.html" data-slide="#J_p3" data-iframe="J_GamesFrame">
+						<div class="wap_500f_lottery_1" style="border-top: 1px solid #E5E5E5;">
+							<div>
+								<img src="/img/m-game-7.png" data-src="/img/m-game-7.png"/>
+							</div>
+							<p>北京PK拾</p>
+						</div></a>
+						<a href="" data-url="/lottery/index/type/xyft.html" data-slide="#J_p3" data-iframe="J_GamesFrame">
+						<div class="wap_500f_lottery_1" style="border-left: none;">
+							<div>
+								<img src="/img/m-game-12.png" data-src="/img/m-game-12.png"/>
+							</div>
+							<p>幸运飞艇</p>
+						</div></a>
+						<a href="" data-url="/lottery/index/type/csf.html" data-slide="#J_p3" data-iframe="J_GamesFrame">
+						<div class="wap_500f_lottery_1">
+							<div>
+								<img src="/img/m-game-10.png" data-src="/img/m-game-10.png"/>
+							</div>
+							<p>重庆幸运农场</p>
+						</div></a>
+						<a href="" data-url="/lottery/index/type/xsc.html" data-slide="#J_p3" data-iframe="J_GamesFrame">
+						<div class="wap_500f_lottery_1" style="border-right: 1px solid #E5E5E5;border-left: none;">
+							<div>
+								<img src="/img/m-game-6.png" data-src="/img/m-game-6.png"/>
+							</div>
+							<p>新疆时时彩</p>
+						</div></a>
+						
+					</div>
+					
+					<!--真人视讯-->
+					<div class="wap_500f_live" style="display: none;">
+						<div class="wap_500f_lottery_h2" style="border-bottom: 1px solid #E5E5E5;">
+							<h2><i><img src="/img/fire-index.png" data-src="/img/fire-index.png" /></i>真人视讯</h2>
+						</div>		
+						
+						<a href="/live/ag/" target="_blank">
+						<div class="wap_500f_live_1" style="border-right: 1px solid #E5E5E5;border-left: none;">
+							<div>
+								<img src="/img/AG-game-1.png" data-src="/img/AG-game-1.png"/>
+							</div>
+						</div></a>
+						<a href="/live/bbin">
+						<div class="wap_500f_live_1" style="border-left: none;">
+							<div>
+								<img src="/img/AG-game-2.png" data-src="/img/AG-game-2.png"/>
+							</div>
+						</div></a>
+						<a href="/live/og">
+						<div class="wap_500f_live_1" style="border-right: 1px solid #E5E5E5;border-left: none;">
+							<div>
+								<img src="/img/AG-game-3.png" data-src="/img/AG-game-3.png"/>
+							</div>
+						</div></a>
+						<a href="/live/sunbet">
+						<div class="wap_500f_live_1" style="border-left: none;">
+							<div>
+								<img src="/img/AG-game-4.png" data-src="/img/AG-game-4.png"/>
+							</div>
+						</div></a>	
+						
+					</div>
+								
+					<!--体育赛事-->
+					<div class="wap_500f_sport" style="display: none;">
+						<div class="wap_500f_lottery_h2" style="border-bottom: 1px solid #E5E5E5;">
+							<h2><i><img src="/img/fire-index.png" data-src="/img/fire-index.png" /></i>体育赛事</h2>
+						</div>
+							
+						<div class="wap_500f_sport_1">
+							<!--<a href="/index/left.html">-->
+							<a href="#" data-slide="#J_p2" data-url="/index/left.html" data-iframe="J_SportsIFrame">
+								<img src="/img/sport-game-3.png" data-src="/img/sport-game-3.png"/>
+							</a>
+						</div>
+						<div class="block_10"></div>
+						<div class="wap_500f_sport_2">
+							<a href="#">
+								<img src="/img/sport-game-4.png" data-src="/img/sport-game-4.png"/>
+							</a>
+						</div>
+					
+					</div>	
+					<!--电子游艺-->
+					<div class="wap_500f_electric" style="display: none;margin-top: -1px;">
+						<div class="wap_500f_lottery_h2" style="border-top: 1px solid #E5E5E5;border-bottom: 1px solid #E5E5E5;">
+							<h2><i><img src="/img/fire-index.png" data-src="/img/fire-index.png" /></i>电子游艺</h2>
+						</div>	
+								
+						<a href="/live/lobby/type/pt">
+						<div class="wap_500f_electric_1" style="border-left: none;">
+							<div>
+								<img src="/img/electric-game-1.png" data-src="/img/electric-game-1.png"/>
+							</div>
+						</div></a>
+						<a href="/live/lobby/type/mg">
+						<div class="wap_500f_electric_1">
+							<div>
+								<img src="/img/electric-game-2.png" data-src="/img/electric-game-2.png"/>
+							</div>
+						</div></a>
+						<a href="/live/lobby/type/ag">
+						<div class="wap_500f_electric_1" style="border-left: 1px solid #E5E5E5;">
+							<div>
+								<img src="/img/electric-game-3.png" data-src="/img/electric-game-3.png"/>
+							</div>
+						</div></a>
+						<a href="/live/lobby/type/bbin">
+						<div class="wap_500f_electric_1" style="border-left: none;">
+							<div>
+								<img src="/img/electric-game-4.png" data-src="/img/electric-game-4.png"/>
+							</div>
+						</div></a>
+						<a href="/live/lobby/type/sb">
+						<div class="wap_500f_electric_1" style="border-left: none;border-right: 1px solid #E5E5E5;">
+							<div>
+								<img src="/img/electric-game-5.png" data-src="/img/electric-game-5.png"/>
+							</div>
+						</div></a>
+						
+					</div>
+				</div>
+				<div class="block_0"></div>
+				<div class="change_model" style="width: 100%;color: #d9901e;text-align: center;padding: 15px 0px 15px 0px;background: #f1f1f1;">
+					<a href="http://www.99206000.com" style="color:#d9901e;" target="_blank">切换电脑版</a>
+				</div>
+
+			</div>
+
+		</div><!-- page1 -->
+		
+		<div id="J_p2" class="page">
+			<div class="main dashboard sports">
+				<div class="container" style="margin: 10px 0px;">
+					<iframe class="topbet" id="s_betiframe" name="s_betiframe" src="{:Url('index/betiframe')}" frameborder="0" width="100%" height="0" scrolling="no"></iframe>
+					<iframe id="J_SportsIFrame" src="{:Url('index/left')}" frameborder="0" width="100%" height="100%" scrolling="no"></iframe>
+				</div>
+				<div class="bg2"></div>
+			</div>
+		</div><!-- page2 -->
+
+		<div id="J_p3" class="main page games-page">
+			<div class="container">
+				<div class="h10 clearfix"></div>
+				<iframe id="J_GamesFrame"  name="J_GamesFrame" src="{:Url('index/leftcp')}" frameborder="0" width="100%" height="100%" scrolling="no"></iframe>
+			</div>
+			<div class="bg2"></div>
+		</div>
+		
+		<div id="J_p3-2" class="page page-p3sub">
+			<div class="main dashboard games">
+				<div class="container">
+					<div class="pull-right">
+						<a href="#" data-slide="#J_p3">&lt;&lt; 返回</a>
+					</div>
+					<div class="breadcrumb">
+						<a href="#"><i class="ico-home"></i> 首页</a>
+						<span>&gt;</span>
+						<a href="#" data-slide="#J_p3" class="active">彩票游戏</a>
+					</div>
+					<div class="iframe-main-menu">
+						<iframe id="J_GamesFrame_Nav" name="J_GamesFrame_Nav" frameborder="0" width="100%" height="100%"></iframe>
+					</div>
+					<div class="content">
+						<iframe id="J_GamesFrame1" frameborder="0" width="100%" height="100%"></iframe>
+					</div>
+				</div>
+				<div class="bg2"></div>
+			</div>
+		</div>
+		
+		<div id="J_p4" class="page">
+			<div class="main dashboard hk">
+				<div class="container">
+					<div class="h10"></div>
+					<div class="h10 clearfix"></div>
+					<iframe id="J_HKIFrame"  name="J_HKIFrame" src="{:Url('six/index')}" frameborder="0" width="100%" height="100%" scrolling="no"></iframe>
+
+				</div>
+				<div class="bg2"></div>
+			</div>
+		</div>
+
+		<div id="J_p5" class="main page page-phone">
+			<div class="container">
+				<div class="breadcrumb">
+					<a href="#"><i class="ico-home"></i> 首页</a>
+					<span>&gt;</span>
+					<a href="#" class="active">手机下注</a>
+				</div>
+				<div class="content">
+					<div class="left"></div>
+					<div class="right">
+					</div>
+				</div>
+			</div>
+			<div class="bg2"></div>
+		</div><!-- page5 -->
+
+		<div id="J_p6" class="main page page-discount">
+			<div class="container">
+				<div id="J_p6Imgs" class="imgs row">
+					<div class="col-sm-12">
+						<a href="#">
+							<img data-src="/images/discount/1.jpg" alt="" class="img-responsive">
+							<div class="overlay">
+								<i class="icon"></i>
+							</div>
+						</a>
+					</div>
+					<div class="col-sm-12">
+						<a href="#">
+							<img data-src="/images/discount/2.jpg" alt="" class="img-responsive">
+							<div class="overlay">
+								<i class="icon"></i>
+							</div>
+						</a>
+					</div>
+					<div class="col-sm-12">
+						<a href="#">
+							<img data-src="/images/discount/3.jpg" alt="" class="img-responsive">
+							<div class="overlay">
+								<i class="icon"></i>
+							</div>
+						</a>
+					</div>
+					<div class="col-sm-12">
+						<a href="#">
+							<img data-src="/images/discount/4.jpg" alt="" class="img-responsive">
+							<div class="overlay">
+								<i class="icon"></i>
+							</div>
+						</a>
+					</div>
+					<div class="col-sm-12">
+						<a href="#">
+							<img data-src="/images/discount/5.jpg" alt="" class="img-responsive">
+							<div class="overlay">
+								<i class="icon"></i>
+							</div>
+						</a>
+					</div>
+					<div class="col-sm-12">
+						<a href="#">
+							<img data-src="/images/discount/6.jpg" alt="" class="img-responsive">
+							<div class="overlay">
+								<i class="icon"></i>
+							</div>
+						</a>
+					</div>
+					<div class="col-sm-12">
+						<a href="#">
+							<img data-src="/images/discount/7.jpg" alt="" class="img-responsive">
+							<div class="overlay">
+								<i class="icon"></i>
+							</div>
+						</a>
+					</div>
+					<div class="col-sm-12">
+						<a href="#">
+							<img data-src="/images/discount/8.jpg" alt="" class="img-responsive">
+							<div class="overlay">
+								<i class="icon"></i>
+							</div>
+						</a>
+					</div>
+					<div class="col-sm-12">
+						<a href="#">
+							<img data-src="/images/discount/9.jpg" alt="" class="img-responsive">
+							<div class="overlay">
+								<i class="icon"></i>
+							</div>
+						</a>
+					</div>
+					<div class="col-sm-12">
+						<a href="#">
+							<img data-src="/images/discount/10.jpg" alt="" class="img-responsive">
+							<div class="overlay">
+								<i class="icon"></i>
+							</div>
+						</a>
+					</div>
+				</div>
+			</div>
+			<div class="bg2"></div>
+		</div><!-- page6 -->
+		
+		<div id="J_p7" class="page">
+			<div class="main dashboard hk">
+				<div class="container">
+					<div class="breadcrumb">
+						<a href="#"><i class="ico-home"></i> 首页</a>
+						<span>&gt;</span>
+						<a href="#" class="active">帮助</a>	
+					</div>
+					<div class="iframe-main-menu">
+						<iframe id="J_HelpIFrame_Nav" frameborder="0" width="100%" height="100%"></iframe>
+					</div>
+					<div class="content">
+						<iframe id="J_HelpIFrame" frameborder="0" width="100%" height="100%"></iframe>
+					</div>
+				</div>
+				<div class="bg2"></div>
+			</div>
+		</div><!-- page7 -->
+		
+		<div id="J_p8" class="page">
+			<div class="main dashboard user">
+				<div class="container">
+					<iframe id="J_UserIFrame" frameborder="0" width="100%" height="100%" scrolling="no"></iframe>
+				</div>
+			</div>
+		</div><!-- page8 -->
+		
+	</div>
+
+	<div id="J_p6carousel" class="modal">
+		<div class="carousel2 inner">
+			<div class="close" onclick="this.parentNode.parentNode.style.display='none';document.body.style.overflow = 'auto';return false;">&times;</div>
+			<ol>
+				<li class="carousel-to-left">&lt;</li>
+				<li class="carousel-to-right">&gt;</li>
+			</ol>
+			<div class="carousel-toggles-wrapper">
+				
+			</div>
+		</div>
+	</div>
+	
+	<div id="J_loginModal" class="login-modal modal">
+		<div class="inner">
+			<div class="close" data-target="#J_loginModal"><i class="fa fa-close"></i></div>
+			<div class="wap_login_bg">
+				<img src="/img/logo.png" data-src="/img/logo.png">
+			</div>
+			
+			<form class="form-vertical" action="{:url('index/login')}" method="post" >
+			<input type="hidden" name="action" value="login">
+			<div class="form-group field-loginuser-username required">
+				<!--<label class="control-label" for="loginuser-username">用户名</label>-->
+				<div class="input-group">
+					<span class="wap_login_1">
+						<i><img src="/img/500f_login_2.png"></i>
+					</span>
+					<input type="text" id="username" class="form-control" name="username" placeholder="请输入会员账号">
+				</div>
+				<div class="help-block"></div>
+			</div>
+
+			<div class="form-group field-loginuser-password required">
+			<!--<label class="control-label" for="loginuser-password">密码</label>-->
+			<div class="input-group">
+				<span class="wap_login_1">
+					<i><img src="/img/500f_login_3.png"></i>
+				</span>
+				<input type="password" id="password" class="form-control" name="password" placeholder="******">
+			</div>
+			<div class="help-block"></div>
+			</div>
+			
+			{if $sysConfig['loginYzm'] eq 1}
+			<div class="form-group field-loginuser-username required">
+				<!--<label class="control-label" for="loginuser-username">验证码</label>-->
+				<div class="input-group">
+					<span class="wap_login_1">
+						<i><img src="/img/500f_login_4.png"></i>
+					</span>
+					<div class="row">
+						<div class="col-xs-9">
+							<input type="text" id="vlcodes" class="form-control" name="vlcodes" placeholder="验证码"  onblur="login_blur(this)" onfocus="login_focus(this)">
+						</div>
+						<div class="col-xs-3">
+							<img id="vPic" src="{:captcha_src()}" alt="(点选此处产生新验证码 )" title="点选此处产生新验证码 " onclick="this.src='{:captcha_src()}?d='+Math.random();" height="34">
+						</div>
+					</div>
+				</div>
+				<div class="help-block"></div>
+			</div>
+			{/if}
+			<div class="form-group wap_500_login_now">
+            	<a class="btn btn-green btn-lg btn-block" name="login-button" style="color: white;">立即登录</a>
+            </div>
+            <div class="wap_500_forget_psw">
+				<a href="javascript:void(0)" onclick="javascript:Go_forget_pwd();">忘记密码？</a>
+				<!--<input type="checkbox"> 下次自动登录-->
+			</div>
+			</form>
+		</div>
+	</div>
+	<div id="J_regModal" class="reg-modal modal">
+		<div class="inner container container_500F" style="padding-bottom:100px;padding: 0px 8px;">
+			<div class="close" data-target="#J_regModal">&times;</div>
+			<h1 class="container_500F_h1">————— 注册 —————</h1>
+			<p class="container_500F_p">——— REGISTER ———</p>
+			<form action="" id="register_form" class="form-horizontal">
+				<h2 class="register_form_bg_1">
+					会员登陆信息
+				</h2>
+				<div class="form-group">
+					<label for="" class="col-sm-2 control-label">登录账号：</label>
+					<div class="control-label-1">
+						<input type="text" name="zcname" id="zcusername" maxlength="9" class="form-control">
+					</div>
+					<div class="control-label-2">
+						<strong>*</strong>
+						<span>您在网站的登录账户，5-9个英文数字</span>
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="" class="col-sm-2 control-label">登录密码：</label>
+					<div class="control-label-1">
+						<input type="password" name="zcpwd1" id="zcpwd1" maxlength="12" onblur="pwStrength(this.value,0);"  class="form-control">
+					</div>
+					<div class="control-label-2">
+						<strong>*</strong>
+						<span>由6-12位任意字符组成</span>
+					</div>
+				</div>
+				<div class="form-group password-degree">
+					<label for="" class="col-sm-2 control-label">密码强度：</label>
+					<div class="control-label-1 mb10">
+						<div class="btn-group">
+						  <button id="strength_L0" type="button" class="btn btn-default">弱</button>
+						   <button id="strength_M0" type="button" class="btn btn-default">中</button>
+						   <button id="strength_H0" type="button" class="btn btn-default">强</button>
+						</div>
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="" class="col-sm-2 control-label">确认密码：</label>
+					<div class="control-label-1">
+						<input type="password" name="zcpwd2" id="zcpwd2" maxlength="12" class="form-control">
+					</div>
+					<div class="control-label-2">
+						<strong>*</strong>
+						<span>由6-12位任意字符组成</span>
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="" class="col-sm-2 control-label">使用货币：</label>
+					<div class="control-label-1">
+						<select name="currency" class="form-control"><option value="1">RMB</option></select>
+					</div>
+					<div class="control-label-2">
+						<strong>*</strong>
+						<span>由6-12位任意字符组成</span>
+					</div>
+				</div>
+				<h2 class="register_form_bg_2">会员个人信息</h2>
+				<div class="form-group">
+					<label for="" class="col-sm-2 control-label">真实姓名：</label>
+					<div class="control-label-1">
+						<input type="text" name="zcturename" id="zcturename" class="form-control"></div>
+					<div class="control-label-2">
+						<strong>*</strong>
+						<span>名字必须与您用于提款及存款的银行户口所用名字相同</span>
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="" class="col-sm-2 control-label">提款密码：</label>
+					<div class="control-label-1">
+						<input type="password" name="qkpwd1" id="qkpwd1" maxlength="12" onblur="pwStrength(this.value,1);" class="form-control">
+					</div>
+					<div class="control-label-2">
+						<strong>*</strong>
+						<span>由6-12位任意字符组成</span>
+					</div>
+				</div>
+				<div class="form-group password-degree">
+					<label for="" class="col-sm-2 control-label">密码强度：</label>
+					<div class="control-label-1 mb10">
+						<div class="btn-group">
+						    <button id="strength_L1" type="button" class="btn btn-default">弱</button>
+						    <button id="strength_M1" type="button" class="btn btn-default">中</button>
+						    <button id="strength_H1" type="button" class="btn btn-default">强</button>
+						</div>
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="" class="col-sm-2 control-label">确认密码：</label>
+					<div class="control-label-1">
+						<input type="password" name="qkpwd2" id="qkpwd2" maxlength="12" class="form-control">
+					</div>
+					<div class="control-label-2">
+						<strong>*</strong>
+						<span>由6-20位任意字符组成</span>
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="" class="col-sm-2 control-label">QQ/微信：</label>
+					<div class="control-label-1">
+						<input type="text" name="qq" id="qq" maxlength="12" class="form-control">
+					</div>
+					<div class="control-label-2">
+						<strong>*</strong>
+						<span>请务必填写真实</span>
+					</div>
+				</div>
+				
+				<h2 class="register_form_bg_3">会员密保信息</h2>
+				<div class="form-group">
+					<label for="" class="col-sm-2 control-label">密保问题：</label>
+					<div class="control-label-1">
+						<select name="zcquestion" id="zcquestion" class="form-control">
+							<option value="您的车牌号码是多少？">您的车牌号码是多少？</option>
+	                        <option value="您初中同桌的名字？">您初中同桌的名字？</option>
+	                        <option value="您就读的第一所学校的名称？">您就读的第一所学校的名称？</option>
+	                        <option value="您第一次亲吻的对象是谁？">您第一次亲吻的对象是谁？</option>
+	                        <option value="少年时代心目中的英雄是谁？">少年时代心目中的英雄是谁？</option>
+	                        <option value="您最喜欢的休闲运动是什么？">您最喜欢的休闲运动是什么？</option>
+	                        <option value="您最喜欢哪支运动队？">您最喜欢哪支运动队？</option>
+	                        <option value="您最喜欢的运动员是谁？">您最喜欢的运动员是谁？</option>
+	                        <option value="您的第一辆车是什么牌子？">您的第一辆车是什么牌子？</option>
+						</select>
+					</div>
+					<div class="control-label-2">
+						<strong>*</strong>
+						<span>请选择密保问题</span>
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="" class="col-sm-2 control-label">密保答案：</label>
+					<div class="control-label-1">
+						<input type="text" name="zcanswer" id="zcanswer" class="form-control">
+					</div>
+					<div class="control-label-2">
+						<strong>*</strong>
+						<span>请填写您的密保答案</span>
+					</div>
+				</div>
+				{if $sysConfig['regYzm'] eq 1}
+				<div class="form-group captcha-row">
+					<label for="" class="col-sm-2 control-label">验 证 码 ：</label>
+					<div class="control-label-1 control-label-a">
+						<div class="input-group">
+							<input type="text" name="zcyzm" id="zcyzm" class="form-control" style="height:36px;" maxlength="4">
+							<span class="input-group-addon" style="width:30%;">
+								<img src="{:captcha_src()}" alt="(点选此处产生新验证码 )" title="点选此处产生新验证码 " onclick="this.src='{:captcha_src()}?d='+Math.random();" name="zc_img" id="zc_img" style="cursor:pointer;" width="80" height="30" />
+							</span>
+						</div>
+					</div>
+				</div>
+				{/if}
+				<div class="form-group">
+					<label class="col-sm-4 col-sm-offset-2 mt20">
+					<input type="checkbox" name="zccheck" id="zccheck" value="1"> 我已届满合法博彩年龄﹐且同意各项开户条约。<a href="#" id="AGREEMENT" class="red">"开户协议"</a>
+					</label>
+				</div>
+				<div class="form-group form-action">
+					<div class="mt20 mb20">
+						<button id="register">提交开户</button>
+					</div>
+				</div>
+				<div class="h10"></div>
+			</form>
+		</div>
+	</div>
+	
+<script src="/scripts/base.js"></script>
+<script src="/scripts/page-slide.js"></script>
+<script src="/scripts/nav.js"></script>
+<script src="/scripts/common.js"></script>
+<script src="/scripts/iframe-menu.js"></script>
+<script type="text/javascript">
+function refresh_money(){
+$.ajax({
+	cache: false,
+	url: "/index/home.html",
+	method:'get',
+	data:{ajax:1,get_money:1},
+	success:function(data){
+		if(data==""){
+		}else{
+		 $("#money,#money_2,#user_money").html(data);
+		}
+	}
+});
+window.setTimeout("refresh_money();", 10000);
+}
+refresh_money();	
+	
+	
+$(document).ready(function() {
+	$('.page-discount .col-sm-12').click(function(event) {
+		event.preventDefault();
+		var ec = $('#J_p6carousel ul li').eq($('.page-discount .col-sm-12').index(this));
+		console.log(ec.html().replace(/[\r\n]/g,""));
+		var d = dialog({
+	    	title: '优惠活动',
+	    	content: ec.html(),
+	    	id:'sdialog'
+		});
+		d.showModal();
+	});
+});
+
+</script>
+</body>
+<script>
+$(function(){
+	$('[name="login-button"]').click(function(){
+		var data ={username:$('#username').val(), password:$('#password').val(),dlyzm:$('#vlcodes').val()};
+		$('[name="login-button"]').attr('disabled',true).css('background-color','grey');
+		$.post('{:url('index/login')}',data,function(json){
+			if('y'==json.status){
+//				$(window.top.document).find("#iframeid").attr('src', $('#iframeid').attr('src'));  
+				parent.location.reload()
+			}else if('n'==json.status){
+				alert(json.info);
+				$('[name="login-button"]').attr('disabled',false).css('background-color','#e53f50');				
+			}else{}
+			
+		},'json');
+		return false;
+	});
+
+
+
+	//彩票游戏分类点击切换图片及颜色
+$(document).on('click','.wap_500f_game div',function(){
+	var gameIndex = $(this).index()
+	$(this).removeClass("wap_500f_game_all_link").siblings("div").addClass("wap_500f_game_all_link");
+	$(".wap_500f_all_game").children("div").eq(gameIndex).show().siblings("div").hide()
+})
+
+  
+	$("#nav500_bottom_reg").click(function(){
+		$("#zc_img").trigger("click")
+	})
+	
+	$("#reg_user_show").click(function(){
+		$(".login-modal").hide();
+		$(".reg-modal").show();
+		$("#zc_img").trigger("click")
+	})
+	
+	
+	$("#nav500_bottom_a").click(function(){
+		var x = $("#J_loginModal")
+		x.show();
+		getKey()
+		$("#vPic").trigger("click")
+	})
+	$("#nav500_bottom_reg").click(function(){
+		var y = $("#J_regModal")
+		y.show();
+		getKey()
+	})	
+	$("#J_loginModal .close").click(function(){
+		$("#J_loginModal").hide()
+	})
+	$("#J_regModal .close").click(function(){
+		$("#J_regModal").hide()
+	})
+	$("#reg_user_show").click(function(){
+		$(".login-modal").hide();
+		$(".reg-modal").show();
+		$("#zc_img").trigger("click")
+	})	  
+
+
+	
+	$("#J_loginModal_new").click(function(){
+		$("#vPic").trigger("click")
+		
+	})	
+	$("#J_regModal_new").click(function(){
+		$("#zc_img").trigger("click")
+		
+	})
+		
+	$("#reg_user_show").click(function(){
+		$(".login-modal").hide();
+		$(".reg-modal").show();
+		$("#zc_img").trigger("click")
+	})
+	
+	$("#nav500_bottom_reg").click(function(){
+		$("#zc_img").trigger("click")
+		
+	})	
+
+	//签到
+	$('#qian_dao').click(function(){
+		//window.open('qian_dao.php','qian_dao','menubar=no,status=yes,scrollbars=yes,top=150,left=400,toolbar=no,width=805,height=520');
+		$.ajax({
+			type: "post",
+			url: '/activity/qiandao.html',
+			data:{'ajax':1},
+			success:function(data) {
+				alert(data);
+			}
+		});
+	});	
+
+});
+
+</script>
+</html>

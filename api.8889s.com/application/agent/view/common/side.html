@@ -1,0 +1,63 @@
+  <aside class="main-sidebar">
+
+    <!-- sidebar: style can be found in sidebar.less -->
+    <section class="sidebar">
+
+      <!-- Sidebar user panel (optional) -->
+      <div class="user-panel">
+        <div class="pull-left image">
+          <img src="/bower_components/AdminLTE/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+        </div>
+        <div class="pull-left info">
+<form id="logout-form" action="{:url('agent/logout')}" method="POST" style="display: none;">
+  <!--input type="hidden" name="_token" value="AwtKP53nFF5yFkqzjUCWa8Rx6fHfjXxoSgpQ4bQP"-->
+</form>
+          <p>{$Think.session.agent.username}</p>
+          <a>修改密码</a>
+          <a href="{:url('agent/logout')}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">退出登录</a>
+        </div>
+      </div>
+
+      <!-- search form (Optional) -->
+      <!--form action="#" method="get" class="sidebar-form">
+        <div class="input-group">
+          <input type="text" name="q" class="form-control" placeholder="Search...">
+              <span class="input-group-btn">
+                <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
+                </button>
+              </span>
+        </div>
+      </form-->
+      <!-- /.search form -->
+
+      <!-- Sidebar Menu -->
+      <ul class="sidebar-menu">
+        <!--li class="header">HEADER</li-->
+        {foreach($menu_list as $menu)}
+        {if($menu_group == $menu['group'])}
+        <li class="treeview menu-open active">
+        {else /}
+        <li class="treeview">
+        {/if}
+          <a href="#"><i class="fa fa-link"></i> <span>{$menu['name']}</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          {foreach($menu['sub_menu'] as $sub_menu)}
+          <ul class="treeview-menu">
+            {if($request_path == $sub_menu['link'])}
+            <li class="active"><a href="{$sub_menu['link']}">{$sub_menu['name']}</a></li>
+            {else /}
+            <li><a href="{$sub_menu['link']}">{$sub_menu['name']}</a></li>
+            {/if}
+            <!--li><a href="#">Link in level 2</a></li-->
+          </ul>
+          {/foreach}
+        </li>
+        {/foreach}
+      </ul>
+      <!-- /.sidebar-menu -->
+    </section>
+    <!-- /.sidebar -->
+  </aside>

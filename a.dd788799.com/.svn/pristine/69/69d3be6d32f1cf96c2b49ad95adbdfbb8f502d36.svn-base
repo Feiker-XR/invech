@@ -1,0 +1,87 @@
+{layout name="layout" /}
+
+<div class="row">
+  <div class="col-xs-12">
+    <div class="box">
+      <div class="box-header">
+       <form action="{:url('backup/restore')}" method="post">
+          <div class="pull-left" style="margin-left:20px;">
+             <select class="form-control input-sm filterStatus" name="table">
+                  {foreach($businesses as $key=>$business)}
+                  <option value="{$key}">{$business}</option>
+                  {/foreach}
+              </select>
+          </div>
+          <div class="pull-left" style="margin-left:20px;">
+             <select class="form-control input-sm filterStatus" name="date">
+              </select>
+          </div>
+          <div class="has-feedback pull-left" style="margin-left:20px;">
+              <button type="submit" class="btn btn-block btn-default btn-sm filter">恢复</button>
+          </div>        
+     </form>     
+      </div>
+      <!-- /.box-header -->
+      <div class="box-body table-responsive no-padding">
+        <table class="table table-hover">
+          <tr>
+            <th >业务流水名</th>
+            <th >恢复区的数据段</th>
+            <th >操作</th>
+          </tr>
+          {foreach($list as $table=>$item)}
+          <tr>
+            <td>{$item.business | default=''}</td>
+            <td>{$item.date | default=''}</td>
+            <td>
+              {if(isset($item.date))}
+              <a href="{:url('backup/clear',['table'=>$table])}" class="btn">
+                <i class="fa fa-edit"></i> 清空
+              </a>
+              {/if}
+            </td>
+          </tr>
+          {/foreach}
+     
+        </table>
+      </div>
+      <!-- /.box-body -->
+    </div>
+    <!-- /.box -->
+  </div>
+</div>
+
+<script type="text/javascript">
+  $(document).ready(function(){
+
+      $bs = $("[name='table']");
+      $ds = $("[name='date']");
+
+      $bs.change(function(){
+          var table = $(this).val();
+          $.get('/backup/getDates',{table:table},function(json){
+            if(json.data.length==0){
+              $("[type='submit']").attr("disabled",true);
+            }else{
+              $("[type='submit']").attr("disabled",false);
+              $ds.empty();
+              $.each(json.data,function(key,date){
+                var option = $("<option>").val(date).text(date);
+                $ds.append(option);                    
+              });              
+            }
+          },'json');
+      });
+
+      $bs.trigger('change');
+
+  });
+
+</script>>
+
+流水数据每月初进行备份,备份3个月之前的那个月的数据;
+备份的数据以压缩文件的形式存储;
+3个月之前的流水数据只能在备份中心中查询;
+具体操作是,先恢复某个业务某个时间段的流水数据到 数据库的恢复区;
+然后在恢复区查询;
+

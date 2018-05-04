@@ -1,0 +1,317 @@
+<?php
+namespace app\logic;
+use think\Db;
+
+class auto {
+    
+    public function auto(){
+    }
+    
+    public function auto_0(){
+        
+    }
+    
+    public function gsf(){
+        include_once APP_PATH .'../common/lottery/auto_class.php';
+        $rows = Db::name('c_auto_1') -> order('qishu desc') ->limit(3) ->select();
+        $hm = $hms = $hmlist = array();
+        $is = 1; 
+        $qishu = '';
+        foreach($rows as $rs){
+            if($is == 1){
+                $qishu		= $rs['qishu'];
+                $hm[]		= $this->BuLing($rs['ball_1']);
+                $hm[]		= $this->BuLing($rs['ball_2']);
+                $hm[]		= $this->BuLing($rs['ball_3']);
+                $hm[]		= $this->BuLing($rs['ball_4']);
+                $hm[]		= $this->BuLing($rs['ball_5']);
+                $hm[]		= $this->BuLing($rs['ball_6']);
+                $hm[]		= $this->BuLing($rs['ball_7']);
+                $hm[]		= $this->BuLing($rs['ball_8']);
+                $hms[]		= G10_Auto($hm,1);
+                $hms[]		= G10_Auto($hm,2);
+                $hms[]		= G10_Auto($hm,3);
+                $hms[]		= G10_Auto($hm,4);
+                $hms[]		= G10_Auto($hm,5);
+            }
+            $hmlist[$rs['qishu']][]	= $this->BuLing($rs['ball_1']).','.$this->BuLing($rs['ball_2']).','.$this->BuLing($rs['ball_3']).','.$this->BuLing($rs['ball_4']).'<br>'.$this->BuLing($rs['ball_5']).','.$this->BuLing($rs['ball_6']).','.$this->BuLing($rs['ball_7']).','.$this->BuLing($rs['ball_8']);
+            $is++;
+        }
+        $arr = array(
+            'numbers' => $qishu,
+            'hm' => $hm,
+            'hms' => $hms,
+            'hmlist' => $hmlist,
+        );
+        $json_string = json_encode($arr);
+        return $json_string;
+    }
+    
+    public function cqssc(){
+        include_once APP_PATH .'../common/lottery/auto_class.php';
+        $rows = Db::name('c_auto_2') -> order('qishu desc') ->limit(3) ->select();
+        $hm = $hms = $hmlist = array();
+        $is = 1;
+        $qishu = '';
+        foreach($rows as $rs){
+            if($is == 1){
+                $qishu		= $rs['qishu'];
+                $hm[]		= $rs['ball_1'];
+                $hm[]		= $rs['ball_2'];
+                $hm[]		= $rs['ball_3'];
+                $hm[]		= $rs['ball_4'];
+                $hm[]		= $rs['ball_5'];
+                $hms[]		= Ssc_Auto($hm,1);
+                $hms[]		= Ssc_Auto($hm,2);
+                $hms[]		= Ssc_Auto($hm,3);
+                $hms[]		= Ssc_Auto($hm,4);
+                $hms[]		= Ssc_Auto($hm,5);
+                $hms[]		= Ssc_Auto($hm,6);
+                $hms[]		= Ssc_Auto($hm,7);
+            }
+            $hmlist[$rs['qishu']][]	= $rs['ball_1'].','.$rs['ball_2'].','.$rs['ball_3'].','.$rs['ball_4'].','.$rs['ball_5'];
+            $is++;
+        }
+        $arr = array(
+            'numbers' => $qishu,
+            'hm' => $hm,
+            'hms' => $hms,
+            'hmlist' => $hmlist,
+        );
+        $json_string = json_encode($arr);
+        return $json_string;
+    }
+    
+    public function pk10(){
+        include_once APP_PATH .'../common/lottery/auto_class.php';
+        $rows = Db::name('c_auto_3') -> order('qishu desc') ->limit(3) -> select();
+        $hm = $hms = $hmlist = array();
+        $is = 1;
+        $qishu = '';
+        foreach($rows as $rs){
+            if($is == 1){
+                $qishu		= $rs['qishu'];
+        		$hm[]		= $rs['ball_1'];
+        		$hm[]		= $rs['ball_2'];
+        		$hm[]		= $rs['ball_3'];
+        		$hm[]		= $rs['ball_4'];
+        		$hm[]		= $rs['ball_5'];
+        		$hm[]		= $rs['ball_6'];
+        		$hm[]		= $rs['ball_7'];
+        		$hm[]		= $rs['ball_8'];
+        		$hm[]		= $rs['ball_9'];
+        		$hm[]		= $rs['ball_10'];
+        		$hms[]		= Pk10_Auto($hm,1);
+        		$hms[]		= Pk10_Auto($hm,2);
+        		$hms[]		= Pk10_Auto($hm,3);
+        		$hms[]		= Pk10_Auto($hm,4);
+        		$hms[]		= Pk10_Auto($hm,5);
+        		$hms[]		= Pk10_Auto($hm,6);
+        		$hms[]		= Pk10_Auto($hm,7);
+        		$hms[]		= Pk10_Auto($hm,8);
+            }
+            $hmlist[$rs['qishu']][]	= $this->BuLing($rs['ball_1']).','.$this->BuLing($rs['ball_2']).','.$this->BuLing($rs['ball_3']).','.$this->BuLing($rs['ball_4']).','.$this->BuLing($rs['ball_5']).'<br>'.$this->BuLing($rs['ball_6']).','.$this->BuLing($rs['ball_7']).','.$this->BuLing($rs['ball_8']).','.$this->BuLing($rs['ball_9']).','.$this->BuLing($rs['ball_10']);
+	       $is++;
+        }
+        $arr = array(
+            'numbers' => $qishu,
+            'hm' => $hm,
+            'hms' => $hms,
+            'hmlist' => $hmlist,
+        );
+        $json_string = json_encode($arr);
+        return $json_string;
+    }
+    
+    public function xyft(){
+        include_once APP_PATH .'../common/lottery/auto_class.php';
+        $rows = Db::name('c_auto_9') -> order('qishu desc') ->limit(3) -> select();
+        $hm = $hms = $hmlist = array();
+        $is = 1;
+        $qishu = '';
+        foreach($rows as $rs){
+            if($is == 1){
+                $qishu		= $rs['qishu'];
+                $hm[]		= $rs['ball_1'];
+                $hm[]		= $rs['ball_2'];
+                $hm[]		= $rs['ball_3'];
+                $hm[]		= $rs['ball_4'];
+                $hm[]		= $rs['ball_5'];
+                $hm[]		= $rs['ball_6'];
+                $hm[]		= $rs['ball_7'];
+                $hm[]		= $rs['ball_8'];
+                $hm[]		= $rs['ball_9'];
+                $hm[]		= $rs['ball_10'];
+                $hms[]		= Pk10_Auto($hm,1);
+                $hms[]		= Pk10_Auto($hm,2);
+                $hms[]		= Pk10_Auto($hm,3);
+                $hms[]		= Pk10_Auto($hm,4);
+                $hms[]		= Pk10_Auto($hm,5);
+                $hms[]		= Pk10_Auto($hm,6);
+                $hms[]		= Pk10_Auto($hm,7);
+                $hms[]		= Pk10_Auto($hm,8);
+            }
+            $hmlist[$rs['qishu']][]	= $this->BuLing($rs['ball_1']).','.$this->BuLing($rs['ball_2']).','.$this->BuLing($rs['ball_3']).','.$this->BuLing($rs['ball_4']).','.$this->BuLing($rs['ball_5']).'<br>'.$this->BuLing($rs['ball_6']).','.$this->BuLing($rs['ball_7']).','.$this->BuLing($rs['ball_8']).','.$this->BuLing($rs['ball_9']).','.$this->BuLing($rs['ball_10']);
+            $is++;
+        }
+        $arr = array(
+            'numbers' => $qishu,
+            'hm' => $hm,
+            'hms' => $hms,
+            'hmlist' => $hmlist,
+        );
+        $json_string = json_encode($arr);
+        return $json_string;
+    }
+    
+    public function xjssc(){
+        include_once APP_PATH .'../common/lottery/auto_class.php';
+        $rows = Db::name('c_auto_7') -> order('qishu desc') ->limit(3) -> select();
+        $hm = $hms = $hmlist = array();
+        $is = 1;
+        $qishu = '';
+        foreach($rows as $rs){
+            if($is == 1){
+                $qishu		= $rs['qishu'];
+                $hm[]		= $rs['ball_1'];
+                $hm[]		= $rs['ball_2'];
+                $hm[]		= $rs['ball_3'];
+                $hm[]		= $rs['ball_4'];
+                $hm[]		= $rs['ball_5'];
+                $hms[]		= Ssc_Auto($hm,1);
+                $hms[]		= Ssc_Auto($hm,2);
+                $hms[]		= Ssc_Auto($hm,3);
+                $hms[]		= Ssc_Auto($hm,4);
+                $hms[]		= Ssc_Auto($hm,5);
+                $hms[]		= Ssc_Auto($hm,6);
+                $hms[]		= Ssc_Auto($hm,7);
+            }
+            $hmlist[$rs['qishu']][]	= $rs['ball_1'].','.$rs['ball_2'].','.$rs['ball_3'].','.$rs['ball_4'].','.$rs['ball_5'];
+	        $is++;
+        }
+        $arr = array(
+            'numbers' => $qishu,
+            'hm' => $hm,
+            'hms' => $hms,
+            'hmlist' => $hmlist,
+        );
+        $json_string = json_encode($arr);
+        return $json_string;
+    }
+    
+    public function csf(){
+        include_once APP_PATH .'../common/lottery/auto_class.php';
+        $rows = Db::name('c_auto_4') -> order('qishu desc') ->limit(3) -> select();
+        $hm = $hms = $hmlist = array();
+        $is = 1;
+        $qishu = '';
+        foreach($rows as $rs){
+            if($is == 1){
+                $qishu		= $rs['qishu'];
+        		$hm[]		= $this->BuLing($rs['ball_1']);
+        		$hm[]		= $this->BuLing($rs['ball_2']);
+        		$hm[]		= $this->BuLing($rs['ball_3']);
+        		$hm[]		= $this->BuLing($rs['ball_4']);
+        		$hm[]		= $this->BuLing($rs['ball_5']);
+        		$hm[]		= $this->BuLing($rs['ball_6']);
+        		$hm[]		= $this->BuLing($rs['ball_7']);
+        		$hm[]		= $this->BuLing($rs['ball_8']);
+        		$hms[]		= G10_Auto($hm,1);
+        		$hms[]		= G10_Auto($hm,2);
+        		$hms[]		= G10_Auto($hm,3);
+        		$hms[]		= G10_Auto($hm,4);
+        		$hms[]		= G10_Auto($hm,5);
+            }
+            $hmlist[$rs['qishu']][]	= $this->BuLing($rs['ball_1']).','.$this->BuLing($rs['ball_2']).','.$this->BuLing($rs['ball_3']).','.$this->BuLing($rs['ball_4']).'<br>'.$this->BuLing($rs['ball_5']).','.$this->BuLing($rs['ball_6']).','.$this->BuLing($rs['ball_7']).','.$this->BuLing($rs['ball_8']);
+            $is++;
+        }
+        $arr = array(
+            'numbers' => $qishu,
+            'hm' => $hm,
+            'hms' => $hms,
+            'hmlist' => $hmlist,
+        );
+        $json_string = json_encode($arr);
+        return $json_string;
+    }
+    
+    public function gxsf(){
+        include_once APP_PATH .'../common/lottery/auto_class.php';
+        $rows = Db::name('c_auto_5') -> order('qishu desc') ->limit(3) -> select();
+        $hm = $hms = $hmlist = array();
+        $is = 1;
+        $qishu = '';
+        foreach($rows as $rs){
+            if($is == 1){
+                $qishu		= $rs['qishu'];
+                $hm[]		= $this->BuLing($rs['ball_1']);
+                $hm[]		= $this->BuLing($rs['ball_2']);
+                $hm[]		= $this->BuLing($rs['ball_3']);
+                $hm[]		= $this->BuLing($rs['ball_4']);
+                $hm[]		= $this->BuLing($rs['ball_5']);
+                $hms[]		= Gxsf_Auto($hm,1);
+        		$hms[]		= Gxsf_Auto($hm,2);
+        		$hms[]		= Gxsf_Auto($hm,3);
+        		$hms[]		= Gxsf_Auto($hm,4);
+        		$hms[]		= Gxsf_Auto($hm,5);
+        		$hms[]		= Gxsf_Auto($hm,6);
+        		$hms[]		= Gxsf_Auto($hm,7);
+            }
+            $hmlist[$rs['qishu']][]	= $this->BuLing($rs['ball_1']).','.$this->BuLing($rs['ball_2']).','.$this->BuLing($rs['ball_3']).','.$this->BuLing($rs['ball_4']).','.$this->BuLing($rs['ball_5']);
+            $is++;
+        }
+        $arr = array(
+            'numbers' => $qishu,
+            'hm' => $hm,
+            'hms' => $hms,
+            'hmlist' => $hmlist,
+        );
+        $json_string = json_encode($arr);
+        return $json_string;
+    }
+    
+    public function jsk3(){
+        include_once APP_PATH .'../common/lottery/auto_class.php';
+        $rows = Db::name('c_auto_6') -> order('qishu desc') ->limit(3) -> select();
+        $hm = $hms = $hmlist = array();
+        $is = 1;
+        $qishu = '';
+        foreach($rows as $rs){
+            if($is == 1){
+                $qishu		= $rs['qishu'];
+                $hm[]		= $this->BuLing($rs['ball_1']);
+                $hm[]		= $this->BuLing($rs['ball_2']);
+                $hm[]		= $this->BuLing($rs['ball_3']);
+                $hms[]		= Gxsf_Auto($hm,1);
+                $hms[]		= Gxsf_Auto($hm,2);
+                $hms[]		= Gxsf_Auto($hm,3);
+            }
+            $hmlist[$rs['qishu']][]	= $this->BuLing($rs['ball_1']).','.$this->BuLing($rs['ball_2']).','.$this->BuLing($rs['ball_3']);
+            $is++;
+        }
+        $arr = array(
+            'numbers' => $qishu,
+            'hm' => $hm,
+            'hms' => $hms,
+            'hmlist' => $hmlist,
+        );
+        $json_string = json_encode($arr);
+        return $json_string;
+    }
+    
+    public function auto_9(){
+    
+    }
+    
+    public function auto_10(){
+    
+    }
+    
+    private function BuLing ( $num ) {
+    	if ( $num<10 ) {
+    		$num = '0'.$num;
+    	}
+    	return $num;
+    }
+    
+}

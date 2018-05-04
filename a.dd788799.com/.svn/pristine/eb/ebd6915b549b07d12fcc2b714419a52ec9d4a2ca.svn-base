@@ -1,0 +1,102 @@
+<input type="hidden" name="playedGroup" value="<?=$groupId?>"/>
+<input type="hidden" name="playedId" value="<?=$playedId?>"/>
+<input type="hidden" name="type" value="<?=$type?>"/>
+<input type="hidden" name="playedName" value="<?=$played['name']?>"/>
+<!-- mobile 广东快乐十分_双面 -->
+<div id="sscContent">
+    <div class="lot-content clearfix">
+        <div class="fl main-left">
+            <div class="hd clearfix rehd retoptz" id="toptouzhu">
+                <div class="fl refl">
+                    快捷金额：<input type="text" class="txt" id="inputMoney">
+                </div>
+                <div class="kjanniu">
+                    <a href="javascript:void(0)" class="img-50" data-num="50"></a>
+                    <a href="javascript:void(0)" class="img-100" data-num="100"></a>
+                    <a href="javascript:void(0)" class="img-500" data-num="500"></a>
+                    <a href="javascript:void(0)" class="img-1000" data-num="1000"></a>
+                    <a href="javascript:void(0)" class="img-5000" data-num="5000"></a>
+                    <a href="javascript:void(0)" class="img-10000" data-num="10000"></a>
+                </div>
+            </div>
+            <div class="table-common clearfix reclearfix" id="table-common">
+                <script type="text/html" id="klsf_sm">
+                    <table width="100%" border="0" cellspacing="0" cellpadding="0" class="pp" action="klsf_sm">
+                        <thead>
+                        <tr>
+                            <th colspan="12">{{pls[8].name}}</th>
+                        </tr>
+                        <tr>
+                            <th>选项</th>
+                            <th>赔率</th>
+                            <th>金额</th>
+                            <th>选项</th>
+                            <th>赔率</th>
+                            <th>金额</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {{each pls[8].pls value index}}
+                        {{if index%2==0}}
+                        <tr>
+                            {{/if}}
+                            <td onclick="setQuickPick(this,true)"><strong>{{value.value}}</strong>
+                            </td>
+                            <td onclick="setQuickPick(this,true)"><strong class="color-red pl" data-plid="{{value.id}}">{{value.pl}}</strong>
+                            </td>
+                            <td><input type="text" oninput="checkAmount()" class="table-txt" data-name="{{pls[8].name}}-{{value.value}}"
+                                       data-plid="{{value.id}}" data-pl="{{value.pl}}"></td>
+                            {{/each}}
+                        </tbody>
+                        {{each pls.result value index}}
+                        <thead>
+                        <tr>
+                            {{each value _value _index}}
+                            <th colspan="3">{{_value.name}}</th>
+                            {{/each}}
+                        </thead>
+                        <tbody>
+                        {{each value[0].pls _value _index}}
+                        <tr>
+                            {{each value _v _i}}
+                            <td onclick="setQuickPick(this,true)">
+                                <strong>{{_v.pls[_index].value}}</strong></td>
+                            <td onclick="setQuickPick(this,true)"><strong class="color-red pl" data-plid="{{_v.pls[_index].id}}">{{_v.pls[_index].pl}}</strong>
+                            </td>
+                            <td><input type="text" oninput="checkAmount()" class="table-txt" data-name="{{_v.name}}-{{_v.pls[_index].value}}"
+                                       data-plid="{{_v.pls[_index].id}}" data-pl="{{_v.pls[_index].pl}}"></td>
+                            {{/each}}
+                        </tr>
+                        {{/each}}
+                        </tbody>
+                        {{/each}}
+                    </table>
+                </script>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $(function () {
+        var playedId = "<?=$playedId?>";
+        $.getJSON("/game/pl/playedId/" + playedId, function (data) {
+            pls = data;
+            var temp1 = [], temp2 = [], temp = [];
+            for (var i = 0; i < pls[8].pls.length; i++) {
+                i % 2 == 0 ? temp1.push(pls[8].pls[i]) : temp2.push(pls[8].pls[i]);
+            }
+            pls[8].pls = temp1.concat(temp2);
+            pls.result = [];
+            for (var j = 0; j < pls.length - 1; j += 2) {
+                temp.push(pls[j]);
+                temp.push(pls[j + 1]);
+               /* temp.push(pls[j + 2]);
+                temp.push(pls[j + 3]);*/
+                pls.result.push(temp);
+                temp = [];
+            }
+            var html = template("klsf_sm", {pls: pls});
+            $('.table-common').html(html);
+        });
+    });
+</script>

@@ -1,0 +1,185 @@
+<?php
+// 
+//                                  _oo8oo_
+//                                 o8888888o
+//                                 88" . "88
+//                                 (| -_- |)
+//                                 0\  =  /0
+//                               ___/'==='\___
+//                             .' \\|     |// '.
+//                            / \\|||  :  |||// \
+//                           / _||||| -:- |||||_ \
+//                          |   | \\\  -  /// |   |
+//                          | \_|  ''\---/''  |_/ |
+//                          \  .-\__  '-'  __/-.  /
+//                        ___'. .'  /--.--\  '. .'___
+//                     ."" '<  '.___\_<|>_/___.'  >' "".
+//                    | | :  `- \`.:`\ _ /`:.`/ -`  : | |
+//                    \  \ `-.   \_ __\ /__ _/   .-` /  /
+//                =====`-.____`.___ \_____/ ___.`____.-`=====
+//                                  `=---=`
+// 
+// 
+//               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+//
+//                          佛祖保佑         永不宕机/永无bug
+// +----------------------------------------------------------------------
+// | FileName: fktpay.php
+// +----------------------------------------------------------------------
+// | CreateDate: 2018年2月13日
+// +----------------------------------------------------------------------
+// | Author: xiaoluo
+// +----------------------------------------------------------------------
+
+namespace app\pay;
+/**
+ * Created by PhpStorm.
+ * User: Administrator
+ * Date: 2017/12/26 0026
+ * Time: 19:25
+ */
+
+class fktpay extends  basepay
+{
+    private  $data = [] ;
+    
+    public  function pay()
+    {
+        try {
+            $arr = $this->params ;
+            $this->data['input_charset'] = 'UTF-8';//参数字符集
+            $this->data['inform_url'] = $arr['hrefbackurl'];
+            $this->data['return_url'] = $arr['callbackurl'];
+            $this->data['pay_type'] = '1';//支付方式
+            $this->data['bank_code'] = $arr['tcode'];  //银行编码
+            $this->data['merchant_code'] = $arr['pid']; //商户ID
+            $this->data['order_no'] = $arr['order_id'] ; //订单ID
+            $this->data['order_amount'] = $this->cryptAES1();  //支付金额
+            $this->data['order_time'] = date('Y-m-d H:i:s',time());//商户订单时间
+            $this->data['customer_ip']     =$this->get_client_ip();//获取支付者ip
+            $this->data['sign']         = $this->create_sign() ;
+            $html = $this->form($this->data,$arr['purl']) ;
+            return $html ;
+        } catch (\Exception $e) {
+            echo '网络错误';
+        }
+    }
+    
+    /*
+     * 创建金额加密方法
+     */
+    
+    
+    public  function cryptAES1(){
+        try{
+            $arr   = $this->params;
+            $money = sprintf("%0.2f",$arr['order_money']);
+            $path  = dirname(__FILE__).'/AES.php' ;
+            $arr = require_once($path) ;
+            $aes   = new AES();
+            $aes->set_key($this->params['pkey']);
+            $aes->require_pkcs5();
+            $orderAmount  = $aes->encrypt($money);
+            return $orderAmount;
+        }catch (\Exception $e){
+            throw new \Exception($e->getMessage()) ;
+        }
+    }
+    
+    
+    /**
+     * 创建签名
+     */
+    public function create_sign()
+    {
+        $signStr ='';
+        ksort($this->data);
+        foreach($this->data as $k => $v){
+            if("" != $v && "sign" != $k){
+                $signStr .= "$k=$v&";     }
+        }
+        $signStr .= "key=".$this->params['pkey'];
+        
+        return md5($signStr);
+        
+    }
+    
+    /**
+     * 支付通知验证签名,参数在request中
+     */
+    public function check_sign()
+    {
+        $form = "<Form action='http://hg.dd788799.com/pay/notify/thirdtype/fktpay/' method='POST'>";
+        foreach ($_REQUEST as $k=>$v){
+            $form .= "<input name='$k' value='$v' />";
+        }
+        $form .='</form>';
+        file_put_contents(dirname(__FILE__).'/fktlog.html', $form."\r\n",FILE_APPEND);
+        $arr=[];
+        $arr['merchant_code'] = $_REQUEST["merchant_code"];
+        $arr['order_no']      = $_REQUEST["order_no"];
+        $arr['order_time']    = $_REQUEST["order_time"];
+        $arr['order_amount']  = $_REQUEST["order_amount"];
+        $arr['trade_status'] = $_REQUEST["trade_status"];
+        $arr['trade_no']      = $_REQUEST["trade_no"];
+        $arr['return_params'] = $_REQUEST["return_params"];
+        $sign        = $_REQUEST["sign"];
+        
+        $signStr = '';
+        ksort($arr);
+        foreach ($arr as $k => $v){
+            if($v != '' && $v != 'null'){
+                $signStr .= "$k=$v&";
+            }
+        }
+        $signStr .= "key=".$this->params['pkey'];
+        $mySign = md5($signStr);
+        return $mySign == $sign ;
+    }
+    
+    /**
+     * 支付通知的支付单号,参数在request中,参数名 视支付平台而定
+     */
+    public function transid()
+    {
+        return $_REQUEST['trade_no'] ;
+    }
+    
+    public function orderid()
+    {
+        return $_REQUEST['order_no'] ;
+    }
+    
+    /**
+     * 支付通知的支付状态判定,参数名以及判定条件 视支付平台而定
+     */
+    public function pay_ok()
+    {
+        return $_REQUEST['trade_status'] == 'success' ;
+    }
+    
+    public function success()
+    {
+        echo 'SUCCESS';
+    }
+    
+    /**
+     * 表单方式
+     */
+    protected function form($params, $gateway, $method = 'post', $charset = 'utf-8') {
+        header("Cache-Control: no-cache");
+        header("Pragma: no-cache");
+        header("Content-type:text/html;charset={$charset}");
+        $sHtml = "<form id='paysubmit' name='paysubmit' action='{$gateway}' method='{$method}'>";
+        
+        foreach ($params as $k => $v) {
+            $sHtml.= "<input type=\"hidden\" name=\"{$k}\" value=\"{$v}\" />\n";
+        }
+         //$sHtml .= "<input type='submit' />";
+        
+        $sHtml = $sHtml . "</form>正在跳转 ...";
+        
+        $sHtml = $sHtml . "<script>document.forms['paysubmit'].submit();</script>";
+        return $sHtml;
+    }
+}

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>系统设置</title>
+<link href="/css/base.css" rel="stylesheet" type="text/css" />
+<link href="/css/admin.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="/js/jquery.js"></script>
+<script type="text/javascript" src="/js/jquery.tools.js"></script>
+<script type="text/javascript" src="/js/base.js"></script>
+<script type="text/javascript">
+function loadmoney(username){
+	$.post("Load_Money.php", {username:username}, function(data)
+		{
+				<? if($web_site['agclose']==0){?>$("#Ag_Money").html(data.ag);<? }?>
+				<? if($web_site['bbclose']==0){?>$("#Bb_Money").html(data.bb);<? }?>
+				<? if($web_site['hgclose']==0){?>$("#Hg_Money").html(data.hg);<? }?>
+				<? if($web_site['vipclose']==0){?>$("#Vip_Money").html(data.vip);<? }?>
+				<? if($web_site['xtdclose']==0){?>$("#Xtd_Money").html(data.xtd);<? }?>
+		}, "json");
+}
+</script>
+</head>
+<body class="input">
+	<!--<div class="bar">
+		会员加款扣款
+	</div>-->
+	
+
+<div class="body">
+<ul id="tab" class="tab">
+				<li>
+					<input type="button" value="加款扣款" class="current" hidefocus />
+				</li>
+  </ul>
+<table class="inputTable tabContent">
+<form method="get" action="?action=select">
+	<tr>
+        <th align="center">查找会员:</th>
+        <td align="left"><input name="username" type="text" size="20" maxlength="20" value="{$username}" class="formText"/>&nbsp;&nbsp;<input name="find" type="submit" id="find" value="查找" class="formButton"/></td>
+      </tr>
+</form>
+<?php if($user){?>
+<form name="form1"  method="post" action="?action=save">
+	<tr>
+	  <th align="center">会员账号:</th>
+	  <td align="left"><font color="Red"><?=$user["username"]?></font><input  type="hidden" name="uid" value="<?=$user["uid"]?>"/>
+      <input name="username" type="hidden" id="username" value="<?=$user['username']?>" /></td>
+    </tr>
+	<tr>
+	  <th align="center">账户余额:</th>
+	  <td align="left"><font color="Red"><?=$user["money"]?></font></td>
+    </tr>
+	<tr>
+	  <th align="center">操作类型:</th>
+	  <td align="left"><select name="type" id="type" style="border:0; padding:0; margin:0;">
+	    <option value="">-----加钱-----</option>
+	    <option value="200" style="background-color:#900; color:#FFF">赠送红利</option>
+	    <!--<option value="2" style="background-color:#900; color:#FFF">赠送红利</option>
+	    <option value="3" style="background-color:#900; color:#FFF">投注反水</option>
+	    <option value="4" style="background-color:#900; color:#FFF">其他加钱</option>
+	    <option value="888" style="background-color:#900; color:#FFF">真人补钱</option>-->
+	    <option value="">-----扣钱-----</option>
+	    <option value="910" style="background-color:#060; color:#FFF">会员扣款</option>
+	    </select>
+	    * 此项功能为为指定帐号加款以及扣款使用！</td>
+	  </tr>
+	<tr>
+	  <th align="center">操作金额:</th>
+	  <td align="left"><input  onkeyup="this.value=this.value.replace(/\D/g,'')"  onafterpaste="this.value=this.value.replace(/\D/g,'')" name="m_value" type="text" size="10" maxlength="10" class="formText"/></td>
+    </tr>
+	<tr>
+	  <th align="center">操作原因:</th>
+	  <td align="left"><input name="about" type="text" size="40" maxlength="100" class="formText"/></td>
+    </tr>
+	<tr>
+	  <th align="center">&nbsp;</th>
+	  <td align="left"><input name="submit" type="submit" class="formButton" value="确认操作"/></td>
+	  </tr>
+</form>
+<?php }?>
+  </table>
+	</div>
+<?php
+if(isset($user["username"])){ 
+?>
+<script type="text/javascript">//loadmoney('<?=$user["username"]?>');</script>
+<?php
+}
+?>
+</body>
+</html>

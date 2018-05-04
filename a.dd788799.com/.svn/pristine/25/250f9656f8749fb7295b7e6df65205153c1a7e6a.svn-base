@@ -1,0 +1,23 @@
+<?php
+namespace app\common\model;
+use think\Model;
+
+/**
+ *  玩法赔率模型
+ * @author mack
+ */
+class PlayedPl extends Model {
+	//protected $table = 'gygy_played_pl';
+
+	public function played()
+	{
+		return $this->belongsTo('Played','playedId')->where('enable',1);
+	}
+
+	//public function pl_group() //不支持_
+	public function plgroup()
+	{
+		return $this->belongsTo('PlayedPlGroup','pl_group_id');
+	}
+
+}

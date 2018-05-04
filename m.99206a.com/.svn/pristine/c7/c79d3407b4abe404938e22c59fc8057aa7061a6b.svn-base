@@ -1,0 +1,733 @@
+<?php
+namespace app\v2\controller;
+use app\v2\Login;
+use think\Cache;
+use think\Db;
+use think\Config;
+use app\logic\bet_ds;
+class bet extends Login
+{
+    private $touzhutyep = '';
+    public function test(){
+        $rs = Db::query('select sum(money) from k_user');
+        echo $rs[0]['tp_sum'];
+    }
+    
+     public function index(){
+        $ip = $this->request->ip();
+        $isMobile = $this->request->isMobile();
+        $db = Db::connect('sportdb');
+        $uid            =   Session("uid");
+        $touzhutype     =   Input("touzhutype/d");
+        $this->touzhutype = $touzhutype;
+        $this->assign('touzhutype', $this->touzhutype);
+
+//        if(!session('check_action')){
+//            return $this->go("请勿使用软件投注<br>交易失败");
+//        }
+
+        $bet_money      =   trim($_POST["bet_money"]);
+        $arr_add        =   array('match_ho','match_ao','match_dxdpl','match_dxxpl','match_bho','match_bao','match_bdpl','match_bxpl','match_dfzdpl','match_dfzxpl','match_dfkdpl','match_dfkxpl');
+
+        if($this->investSZ($uid) > 2){
+            return $this->error("您的访问太过频繁");
+        };
+
+        if (is_numeric($bet_money)) {
+            include_once (CACHE_PATH."group_" . @Session('gid') . ".php"); // 加载权限组权限
+
+            $bet_money = doubleval($bet_money);
+            // 会员余额
+            $balance = 0;
+            $assets = 0;
+            $sql = "SELECT money FROM k_user where uid=$uid limit 1";
+            file_put_contents(LOG_PATH.'touzhu.log', $sql,FILE_APPEND);
+            $rs = Db::query($sql)[0];
+            if ($rs['money']) {
+                $assets = round($rs['money'], 2);
+                $balance = $assets - $bet_money;
+            }
+
+            if ($assets < $bet_money) { // 投注后，用户余额不能小于0
+                return $this->error("账户余额不足<br>交易失败");
+            }
+            if ($bet_money < 50) {
+                return $this->error("交易金额不能少于 50 RMB!");
+            }
+
+            // 判断当天限额，判断原因：用软件来投注，才会有此问题
+            $s_t = strftime("%Y-%m-%d", time()) . " 00:00:00";
+            $e_t = strftime("%Y-%m-%d", time()) . " 23:59:59";
+            /*
+             * if(investSZ($uid)>=1){
+             * go("操作频繁<br>交易失败");
+             * }
+             */
+
+            if ($touzhutype == 0) { // 单式
+                $ball_sort =  $_POST["ball_sort"][0] ?? '';
+                $column =  $_POST["point_column"][0] ?? '';
+                $match_id = $_POST["match_id"][0] ?? '';
+                $tid =  $_POST["tid"][0] ?? '';
+                $touzhuxiang = $_POST['touzhuxiang'][0] ?? '';
+                $bet_point = $_POST["bet_point"][0] ?? '';
+                $Match_HRedCard = $Match_GRedCard = 0;
+
+
+                // 限额判断
+                if ($ball_sort == "冠军" || $ball_sort == "金融") {
+                    $dz = @$dz_db["$ball_sort"];
+                    $dc = @$dc_db["$ball_sort"];
+                } else {
+                    $dz = @$dz_db["$ball_sort"]["$touzhuxiang"];
+                    $dc = @$dc_db["$ball_sort"]["$touzhuxiang"];
+                }
+                if (! $dz || $dz == "")
+                    $dz = $dz_db['未定义'];
+                if (! $dc || $dc == "")
+                    $dc = $dc_db['未定义'];
+
+                if ($bet_money > $dz) { // 判断单场限额，判断原因：用软件来投注，才会有此问题
+                    return $this->error("交易金额多于系统限额");
+                }
+
+                // 判断当天限额，判断原因：用软件来投注，才会有此问题
+                $s_t = strftime("%Y-%m-%d", time()) . " 00:00:00";
+                $e_t = strftime("%Y-%m-%d", time()) . " 23:59:59";
+
+                $sql = "select sum(bet_money) as s from `k_bet` where match_id=$match_id and uid=$uid and bet_time>='$s_t' and bet_time<='$e_t' and `status` not in(3,8) limit 1"; // 无效跟平手不当成投注
+                $rs = Db::name('k_bet')->where('match_id','=',$match_id)
+                    ->where('uid','=',$uid)->where('bet_time','>=',$s_t)
+                    ->where('bet_time','<=',$e_t)->whereNotIn('status',[3,8])
+                    ->sum('bet_money');
+                //$query = $mysqli->query($sql);
+                //$rs = $query->fetch_array(); // 取出单场总下注金额
+                if (! $rs || $rs == "null")
+                    $rs = 0;
+                if (($rs + $bet_money) > $dc) {
+                    return $this->error("交易金额多于系统限额");
+                }
+
+                if(!empty($tid) && $ball_sort=='冠军'){
+                    $match_info = guanjun::getmatch_info($tid);
+                    $match_name = $match_info['match_name'];
+                    $master_guest =  $match_info['team_name'];
+                    $match_showtype = '';
+                    $match_rgg = '';
+                    $match_dxgg = '';
+                    $match_nowscore = '';
+                    $match_endtime = $match_info["Match_CoverDate"];
+                    $match_type = 1;
+                    $match_time = $match_info["match_date"];
+                }else{
+                    $field = "Match_NowScore,Match_Type,Match_ID, Match_Date, Match_Time, Match_Master, Match_Guest, Match_Name, Match_IsLose, Match_ShowType,Match_CoverDate,Match_RGG,Match_DxGG,";
+                    switch ($ball_sort){
+                        case strstr($ball_sort, "足球"):$table = 'bet_match';
+                            $half_arr   =   array("match_bho","match_bao","match_bdpl","match_bxpl");
+                            if(in_array(strtolower($column),$half_arr)){ //上半场投注
+                                $field  =   "Match_Name,Match_Master,Match_Guest,Match_Date,Match_Time,Match_Type,Match_CoverDate,Match_NowScore,Match_Hr_ShowType as Match_ShowType,Match_BRpk as Match_RGG,Match_Bdxpk as Match_DxGG,Match_HRedCard,Match_GRedCard,";
+                            }else{
+                                $field  =   "Match_Name,Match_Master,Match_Guest,Match_Date,Match_Time,Match_Type,Match_CoverDate,Match_NowScore,Match_ShowType,Match_RGG,Match_DxGG,Match_HRedCard,Match_GRedCard,";
+                            }
+                            break;
+                        case strstr($ball_sort, "篮球"):$table = 'lq_match';break;
+                        case strstr($ball_sort, "网球"):$table = 'tennis_match';break;
+                        case strstr($ball_sort, "台球"):$table = 'billiards_match';break;
+                        case strstr($ball_sort, "羽毛球"):$table = 'badminton_match';break;
+                        case strstr($ball_sort, "排球"):$table = 'volleyball_match';break;
+                        case strstr($ball_sort, "其他"):$table = 'other_match';break;
+                        case strstr($ball_sort, "棒球"):$table = 'baseball_match';break;
+                        default:return $this->error('该体育类型投注暂不支持！');
+                    }
+                    $field .= $column;
+                    $match_info = $db->name($table)->field($field)->where('Match_ID',$match_id)->find();
+                    if(strstr($ball_sort, "足球")){
+                        $Match_HRedCard = $match_info['Match_HRedCard'];
+                        $Match_GRedCard = $match_info['Match_GRedCard'];
+                    }
+                    $match_name = $match_info['Match_Name'];
+                    $master_guest = $match_info['Match_Master'].'VS.'.$match_info['Match_Guest'];
+                    $match_showtype = $match_info["Match_ShowType"];
+                    $match_rgg = $match_info["Match_RGG"];
+                    $match_dxgg = $match_info['Match_DxGG'];
+                    $match_nowscore = $match_info["Match_NowScore"];
+                    $match_endtime = $match_info["Match_CoverDate"];
+                    $match_type = $match_info["Match_Type"];
+                    $match_time = $match_info["Match_Time"];
+                }
+
+                $now = time();
+//      if('127.0.0.1' == $this->request->server('REMOTE_ADDR')){
+//          $now = strtotime('2017-08-21 02:53:18');
+//      }
+
+                if ($now > strtotime($match_endtime) && ! strpos($ball_sort, "滚球")) { // 不是滚球，赛事已结束，无法投注
+                    return $this->error("赛事已结束<br>交易失败");
+                } elseif (strpos($master_guest, '先开球') && $now + 300 > strtotime($match_endtime)) { // 先開球提前 5 分钟关盘
+                    return $this->error("盘口已关闭<br>交易失败" . __LINE__);
+                }
+                $this->check_point($ball_sort, $column, $match_id, $bet_point, $match_rgg, $match_dxgg, $tid); // 验证水位是否变动同时保证赔率与服务端一致
+                $bet_add = 0;
+                if($column != 'match_gj'){
+                    if(in_array(strtolower($column), $arr_add)){
+                        $bet_add = 1;
+                    }
+                    $bet_point = $match_info[$column];          //使用服务端数据，避免出错
+                }else{
+                    $bet_point = $match_info['point'];
+                }
+                $bet_win = $bet_money * ($bet_point + $bet_add);
+
+                $is_lose = isset($_POST['is_lose']) ? $_POST['is_lose'] : '';
+                if ($is_lose == 1) { // 走地需要确认
+                    $lose_ok = 0;
+                    if ($ball_sort == "足球滚球") { // 足球滚球要记录红牌（赛事自动审核需要）
+                        $Match_HRedCard = $match_info["Match_HRedCard"];
+                        $Match_GRedCard = $match_info["Match_GRedCard"];
+                    }
+                } else { // 不是滚球不需要确认
+                    $lose_ok = 1;
+                }
+                if (! $match_type || $match_type == "" || !strstr($ball_sort,'滚球'))
+                    $match_type = '1'; // 为空统一为单式;(1：单式、2：滚球)
+                $bet_info = write_bet_info($ball_sort, $column, $master_guest, $bet_point, $match_showtype, $match_rgg, $match_dxgg, $match_nowscore, $tid);
+                if (bet_ds::dx_add($uid, $ball_sort, strtolower($column), $match_name, $master_guest, $match_id, $bet_info, $bet_money, $bet_point, $bet_add, $bet_win, $match_time, $match_endtime, $lose_ok, $match_showtype, $match_rgg, $match_dxgg, $match_nowscore, $match_type, $balance, $assets, $Match_HRedCard, $Match_GRedCard, $match_endtime)) {
+                    if ($is_lose == 1) {
+                        return $this->error("交易确认中");
+                    } else {
+                        return $this->success("交易成功");
+                    }
+                } else {
+                    return $this->error("交易失败");
+                }
+            } else {
+                // 限额判断
+                $dz = $dz_db["串关"];
+                $dc = $dc_db["串关"];
+                if (! $dz || $dz == "")
+                    $dz = $dz_db['未定义'];
+                if (! $dc || $dc == "")
+                    $dc = $dc_db['未定义'];
+                if ($bet_money > $dz) { // 目前只判断单场限额，判断原因：用软件来投注，才会有此问题
+                    return $this->error("交易金额多于系统限额");
+                }
+
+                // 判断当天限额，判断原因：用软件来投注，才会有此问题
+                $s_t = strftime("%Y-%m-%d", time()) . " 00:00:00";
+                $e_t = strftime("%Y-%m-%d", time()) . " 23:59:59";
+                $sql = "select sum(bet_money) as s from `k_bet_cg_group` where uid=" . $uid. " and bet_time>='$s_t' and bet_time<='$e_t' and `status` !=3 "; // 无效跟平手不当成投注
+                $rs = Db::name('k_bet_cg_group')
+                    ->where('uid','=',$uid)->where('bet_time','>=',$s_t)
+                    ->where('bet_time','<=',$e_t)->where('status','<>',3)
+                    ->sum('bet_money');
+
+                //$query = $mysqli->query($sql);
+                //$rs = $query->fetch_array(); // 取出串关当天总下注金额
+                if (! $rs || $rs == "null")
+                    $rs = 0;
+                if (($rs + $bet_money) > $dc) {
+                    $this->error("交易金额多于系统限额");
+                }
+                $name1 = ''; // 保存联赛名称
+                $guest1 = ''; // 保存队伍名称
+                $info1 = ''; // 保存交易信息
+                $bet_win = 0; // 可赢金额默认为0
+                $point = 1; // 水位默认为1
+                $ksTime = isset($_POST["match_endtime"][0]) ? $_POST["match_endtime"][0] : ''; // 赛事开赛时间,默认取第一个的日期时间
+                $total = count($_POST["match_id"]);
+                if($total < 3){
+                    return $this->error("串关投注最少投注三场赛事<br>交易失败");
+                }
+                for ($i = 0; $i < $total; $i ++) {
+                    $ball_sort = $_POST["ball_sort"][$i] ?? '';
+                    $column = strtolower($_POST["point_column"][$i] ?? '');
+                    $match_id = $_POST["match_id"][$i] ?? '';
+                    $bet_point = $_POST["bet_point"][$i] ?? '';
+                    if(!in_array($column, ['match_bzm','match_bzg','match_bzh','match_ho','match_ao','match_dxdpl','match_dxxpl','match_dsdpl','match_dsspl','match_bhdy',
+                            'match_bgdy','match_bmdy','match_bho','match_bao','match_bdpl','match_bxpl','match_dfzdpl','match_dfkdpl','match_dfzxpl','match_dfkxpl'])
+                        || strstr($ball_sort,'滚球')){
+                        return $this->error('包含不支持串关的投注类型'.$column.'<br>交易失败');
+                    }
+
+                    $field = "Match_NowScore,Match_Type,Match_ID, Match_Date, Match_Time, Match_Master, Match_Guest, Match_Name, Match_IsLose, Match_ShowType,Match_CoverDate,Match_RGG,Match_DxGG,";
+                    switch ($ball_sort){
+                        case strstr($ball_sort, "足球"):$table = 'bet_match';
+                            $half_arr   =   array("match_bho","match_bao","match_bdpl","match_bxpl");
+                            if(in_array(strtolower($column),$half_arr)){ //上半场投注
+                                $field  =   "Match_Name,Match_Master,Match_Guest,Match_Date,Match_Time,Match_Type,Match_CoverDate,Match_NowScore,Match_Hr_ShowType as Match_ShowType,Match_BRpk as Match_RGG,Match_Bdxpk as Match_DxGG,Match_HRedCard,Match_GRedCard,";
+                            }else{
+                                $field  =   "Match_Name,Match_Master,Match_Guest,Match_Date,Match_Time,Match_Type,Match_CoverDate,Match_NowScore,Match_ShowType,Match_RGG,Match_DxGG,Match_HRedCard,Match_GRedCard,";
+                            }
+                            break;
+                        case strstr($ball_sort, "篮球"):$table = 'lq_match';break;
+                        case strstr($ball_sort, "网球"):$table = 'tennis_match';break;
+                        case strstr($ball_sort, "台球"):$table = 'billiards_match';break;
+                        case strstr($ball_sort, "羽毛球"):$table = 'badminton_match';break;
+                        case strstr($ball_sort, "排球"):$table = 'volleyball_match';break;
+                        case strstr($ball_sort, "其他"):$table = 'other_match';break;
+                        default:return $this->error('该体育类型投注暂不支持！');
+                    }
+                    $field .= $column;
+                    $match_info = $db->name($table)->field($field)->where('Match_ID',$match_id)->find();
+                    $match_rgg = $match_info["Match_RGG"];
+                    $match_dxgg = $match_info['Match_DxGG'];
+
+                    $this->check_point($ball_sort, $column , $match_id, $bet_point,$match_rgg ,$match_dxgg , 0, $i);
+                    $bet_point = in_array(strtolower($column), $arr_add)?$match_info[$column]+1:$match_info[$column];          //使用服务端数据，避免出错
+
+                    if ($this->str_leng($name1) < $this->str_leng($_POST["match_name"][$i]))
+                        $name1 = $_POST["match_name"][$i];
+                    if ($this->str_leng($guest1) < $this->str_leng($_POST["master_guest"][$i]))
+                        $guest1 = $_POST["master_guest"][$i];
+                    if ($this->str_leng($info1) < $this-> str_leng($_POST["bet_info"][$i]))
+                        $info1 = $_POST["bet_info"][$i];
+                    if (strtotime($_POST["match_endtime"][$i]) > strtotime($ksTime))
+                        $ksTime = $_POST["match_endtime"][$i];
+                    $point *= $bet_point; // 串关水位为相乘
+                }
+
+                $cg_count = count($_POST["match_id"]); // 串关条数
+                $bet_win = $point * $bet_money; // 可赢金额=交易金额*水位
+                Db::startTrans();
+                try {
+                    $q3 = Db::name('k_user')->where('uid','=',$uid)
+                        ->where('money','>',$bet_money)
+                        ->update([
+                            'money'=>["exp","money-$bet_money"]
+                        ]);
+                    if(!$q3){
+                        Db::rollback();
+                    }
+                    $conf_www = $_SERVER['HTTP_HOST'];
+                    $data= [
+                        'uid'                => $uid,
+                        'cg_count'           => $cg_count,
+                        'bet_money'          => $bet_money,
+                        'bet_win'            => $bet_win,
+                        'balance'            => $balance,
+                        'assets'             => $assets,
+                        'www'                => $conf_www,
+                        'match_coverdate'    => $ksTime,
+                        'device'             => $isMobile ? 'MOBILE' : 'PC',
+                        'ip'                 => $ip,
+                        'saltCode'           => md5($uid.$cg_count.sprintf('%.2f',$bet_money).sprintf('%.2f',$bet_win).sprintf('%.2f',$balance).sprintf('%.2f',$assets).$conf_www.$ksTime),
+                    ];
+                    $cggid = Db::name('k_bet_cg_group')->insertGetId($data);
+                    $log = [];
+                    $log['m_order']   = 'KBET'.$cggid;
+                    $log['uid']     = Session('uid');
+                    $log['m_value'] = $bet_money;
+                    $log['q_qian']  = $assets;
+                    $log['h_qian']  = $balance;
+                    $log['status']  = '1';
+                    $log['m_make_time'] = date('Y-m-d H:i:s');
+                    $log['about'] = '体育投注,订单号:'.$cggid.',金额:'.$bet_money;
+                    $log['type'] = '310';
+                    Db::table('k_money') -> insert($log);
+                    if(!$cggid){
+                        Db::rollback();
+                        return $this->error("交易失败");
+                    }
+                    $data = [];
+                    for ($i = 0; $i < $cg_count; $i ++) {
+                        $ball_sort = $_POST["ball_sort"][$i] ?? '';
+                        $column = $_POST["point_column"][$i] ?? '';
+                        $match_id = $_POST["match_id"][$i] ?? '';
+                        $bet_point = $_POST["bet_point"][$i] ?? '';
+
+                        $field = "Match_NowScore,Match_Type,Match_ID, Match_Date, Match_Time, Match_Master, Match_Guest, Match_Name, Match_IsLose, Match_ShowType,Match_CoverDate,Match_RGG,Match_DxGG,";
+                        switch ($ball_sort){
+                            case strstr($ball_sort, "足球"):$table = 'bet_match';
+                                $half_arr   =   array("match_bho","match_bao","match_bdpl","match_bxpl");
+                                if(in_array(strtolower($column),$half_arr)){ //上半场投注
+                                    $field  =   "Match_Name,Match_Master,Match_Guest,Match_Date,Match_Time,Match_Type,Match_CoverDate,Match_NowScore,Match_Hr_ShowType as Match_ShowType,Match_BRpk as Match_RGG,Match_Bdxpk as Match_DxGG,Match_HRedCard,Match_GRedCard,";
+                                }else{
+                                    $field  =   "Match_Name,Match_Master,Match_Guest,Match_Date,Match_Time,Match_Type,Match_CoverDate,Match_NowScore,Match_ShowType,Match_RGG,Match_DxGG,Match_HRedCard,Match_GRedCard,";
+                                }
+                                break;
+                            case strstr($ball_sort, "篮球"):$table = 'lq_match';break;
+                            case strstr($ball_sort, "网球"):$table = 'tennis_match';break;
+                            case strstr($ball_sort, "台球"):$table = 'billiards_match';break;
+                            case strstr($ball_sort, "羽毛球"):$table = 'badminton_match';break;
+                            case strstr($ball_sort, "排球"):$table = 'volleyball_match';break;
+                            case strstr($ball_sort, "其他"):$table = 'other_match';break;
+                            default:return $this->error('该体育类型投注暂不支持！');
+                        }
+                        $field .= $column;
+                        $match_info = $db->name($table)->field($field)->where('Match_ID',$match_id)->find();
+                        $match_name = $match_info['Match_Name'];
+                        $master_guest = $match_info['Match_Master'].'VS.'.$match_info['Match_Guest'];
+                        $match_showtype = $match_info["Match_ShowType"];
+                        $match_rgg = $match_info["Match_RGG"];
+                        $match_dxgg = $match_info['Match_DxGG'];
+                        $match_nowscore = $match_info["Match_NowScore"];
+                        $match_endtime = $match_info["Match_CoverDate"];
+
+                        $this->check_point($ball_sort, $column , $match_id, $bet_point,$match_rgg ,$match_dxgg , 0, $i);
+                        $bet_add= 0;
+                        if(in_array(strtolower($column), $arr_add)){
+                            $bet_add = 1;
+                        }
+                        $bet_point = $match_info[$column];          //使用服务端数据，避免出错
+
+                        $bet_info = write_bet_info($ball_sort, $column, $master_guest, $bet_point, $match_showtype, $match_rgg, $match_dxgg, $match_nowscore);
+                        if(strpos($master_guest,'VS.')){
+                            $tmp = explode('VS.',$master_guest);
+                        }else{
+                            $tmp = explode('VS',$master_guest);
+                        }
+
+                        $master = $tmp[0];
+                        $guest = isset($tmp[1]) ? $tmp[1] : '';
+                        $bet_time = date('Y-m-d H:i:s');
+                        $data[] = [
+                            'uid'           => $uid,
+                            'gid'           => $cggid,
+                            'ball_sort'     => $ball_sort,
+                            'point_column'  => strtolower($column),
+                            'match_name'    => $match_name,
+                            'master_guest'  => $master_guest,
+                            'match_id'      => $match_id,
+                            'bet_info'      => $bet_info,
+                            'bet_money'     => $bet_money,
+                            'bet_point'     => $bet_point,
+                            'ben_add'       => $bet_add,
+                            'match_endtime' => $match_endtime,
+                            'match_showtype'=> $match_showtype,
+                            'match_rgg'     => $match_rgg,
+                            'match_dxgg'    => $match_dxgg,
+                            'match_nowscore'=> $match_nowscore,
+                            'bet_time'      => $bet_time,
+                            'master'        => $master,
+                            'guest'         => $guest,
+                            //'fs'            => 0,//这里需要修改,
+                            //'istongji'      => 1,//这里需要修改,
+                            'saltCode'      => md5($uid.$cggid.$ball_sort.$column.$match_name.$master_guest.$match_id.$bet_info.$bet_money.$bet_point.$bet_time),
+                        ];
+
+                    }
+                    $q2 = Db::name('k_bet_cg')->insertAll($data);
+                    //$q2 = Db::name('cg_list')->insertAll($data);
+                    if(!$q2){
+                        Db::rollback();
+                        return $this->error("交易失败");
+                    }
+                    Db::commit();
+                    return $this->error("交易成功");
+
+                } catch (\Exception $e) {
+                    Db::rollback(); // 数据回滚
+                    return $this->error("交易失败2");
+                }
+            }
+        } else {
+            return $this->error("交易金额有误<br>交易失败");
+        }
+    }
+    private function check_point($ballsort, $column, $match_id, $point, $rgg, $dxgg, $tid = 0, $index = 0)
+    {
+	error_reporting(E_ERROR | E_WARNING | E_PARSE);
+	
+        $pk = array(
+            "Match_Ho",
+            "Match_Ao",
+            "Match_DxDpl",
+            "Match_DxXpl",
+            "Match_BHo",
+            "Match_BAo",
+            "Match_Bdpl",
+            "Match_Bxpl"
+        ); // 让球大小盘口
+        $t = array(
+            array(
+                "cn" => "足球波胆",
+                "db_table" => "bet_match"
+            ),
+            array(
+                "cn" => "足球单式",
+                "db_table" => "bet_match"
+            ),
+            array(
+                "cn" => "足球上半场",
+                "db_table" => "bet_match"
+            ),
+            array(
+                "cn" => "足球早餐",
+                "db_table" => "bet_match"
+            ),
+            array(
+                "cn" => "足球滚球",
+                "db_table" => "zqgq_match"
+            ),
+            array(
+                "cn" => "篮球单式",
+                "db_table" => "lq_match"
+            ),
+            array(
+                "cn" => "篮球单节",
+                "db_table" => "lq_match"
+            ),
+            array(
+                "cn" => "篮球滚球",
+                "db_table" => "lqgq_match"
+            ),
+            array(
+                "cn" => "篮球早餐",
+                "db_table" => "lq_match"
+            ),
+            array(
+                "cn" => "排球单式",
+                "db_table" => "volleyball_match"
+            ),
+            array(
+                "cn" => "网球单式",
+                "db_table" => "tennis_match"
+            ),
+            array(
+                "cn" => "棒球单式",
+                "db_table" => "baseball_match"
+            ),
+            array(
+                "cn" => "冠军",
+                "db_table" => "t_guanjun_team"
+            ),
+            array(
+                "cn" => "金融",
+                "db_table" => "t_guanjun_team"
+            )
+        );
+        foreach ($t as $m) {
+            if ($m['cn'] == $ballsort) {
+                $db_table = $m['db_table'];
+            }
+        }
+        // 把水位和让球与大小盘口设为字符串形式，以便下面绝对判断
+        $rgg = "" . $rgg;
+        $dxgg = "" . $dxgg;
+        $point = "" . $point;
+        if ($db_table == "zqgq_match" || $db_table == "lqgq_match") { // 足球滚球、篮球滚球不验证数据库，直接验证缓存文件
+            if ($db_table == "zqgq_match") {
+                include_once APP_PATH."../common/function_cj1.php";
+                //include CACHE_PATH.'zqgq.php';
+                $zqgq = cache('zqgq');
+                if ((time() - $lasttime) > 5) { // 当时间超过了3秒，则重新采集，否则不采集
+                    if (zqgq_cj()) { // 不管怎样，重新采集一次
+                        //include CACHE_PATH."zqgq.php"; // 重新载入
+                        $zqgq = cache('zqgq');
+                    } else {
+                        $this -> go("网络异常,交易失败");
+                    }
+                }
+                for ($i = 0; $i < count($zqgq); $i ++) {
+                    if (@$zqgq[$i]['Match_ID'] == $match_id)
+                        break;
+                }
+                if ($zqgq[$i][$column] < 0.01) {
+                    $this -> go("盘口已关闭,交易失败");
+                }
+                if ($zqgq[$i][$column] === $point) {
+                    if (in_array($column, $pk)) { // 盘口
+                        if (($column == "Match_Ho" || $column == "Match_Ao") && $zqgq[$i]["Match_RGG"] !== $rgg) { // 全场让球盘口改已变
+                            if ($zqgq[$i]["Match_RGG"] == '') {
+                                $this -> go("盘口已关闭,交易失败");
+                            } else {
+                               $this -> confirm('盘口', $zqgq[$i]["Match_RGG"], $point, $zqgq[$i]["Match_RGG"], $zqgq[$i]["Match_DxGG"]);
+                            }
+                        } elseif (($column == "Match_BHo" || $column == "Match_BAo") && $zqgq[$i]["Match_BRpk"] !== $rgg) { // 上半场让球盘口改已变
+                            if ($zqgq[$i]["Match_BRpk"] == '') {
+                               $this -> go("盘口已关闭,交易失败");
+                            } else {
+                                $this -> confirm('盘口', $zqgq[$i]["Match_BRpk"], $point, $zqgq[$i]["Match_BRpk"], $zqgq[$i]["Match_Bdxpk"]);
+                            }
+                        } elseif (($column == "Match_DxDpl" || $column == "Match_DxXpl") && $zqgq[$i]["Match_DxGG"] !== $dxgg) { // 全场大小盘口改已变
+                            if ($zqgq[$i]["Match_DxGG"] == '') {
+                                $this -> go("盘口已关闭,交易失败");
+                            } else {
+                                $this -> confirm('盘口', $zqgq[$i]["Match_DxGG"], $point, $zqgq[$i]["Match_RGG"], $zqgq[$i]["Match_DxGG"]);
+                            }
+                        } elseif (($column == "Match_Bdpl" || $column == "Match_Bxpl") && $zqgq[$i]["Match_Bdxpk"] !== $dxgg) { // 上半场大小盘口改已变
+                            if ($zqgq[$i]["Match_Bdxpk"] == '') {
+                                $this -> go("盘口已关闭,交易失败");
+                            } else {
+                                $this -> confirm('盘口', $zqgq[$i]["Match_Bdxpk"], $point, $zqgq[$i]["Match_BRpk"], $zqgq[$i]["Match_Bdxpk"]);
+                            }
+                        }
+                    }
+                    return true;
+                } else { // 水位变动
+                    $this -> confirm('水位', $zqgq[$i][$column], $zqgq[$i][$column], $rgg, $dxgg);
+                }
+            } else {
+                include_once APP_PATH."../common/function_cj1.php";
+                if (lqgq_cj()) { // 重新采集一次，保证是最新的
+                    include (CACHE_PATH."lqgq.php"); // 重新载入
+                    $lqgq = cache('lqgq'); 
+                } else {
+                    $this -> go("网络异常,交易失败");
+                }
+                for ($i = 0; $i < count($lqgq); $i ++) {
+                    if (@$lqgq[$i]['Match_ID'] == $match_id)
+                        break;
+                }
+                if ($lqgq[$i][$column] < 0.01) {
+                    $this -> go("盘口已关闭,交易失败" . __LINE__);
+                }
+                if ($lqgq[$i][$column] === $point) {
+                    if (in_array($column, $pk)) { // 盘口
+                        if (($column == "Match_Ho" || $column == "Match_Ao") && $lqgq[$i]["Match_RGG"] !== $rgg) { // 全场让球盘口改已变
+                            if ($lqgq[$i]["Match_RGG"] == '' || $lqgq[$i]["Match_RGG"] == 0) {
+                                $this -> go("盘口已关闭,交易失败" . __LINE__);
+                            } else {
+                                $this -> confirm('盘口', $lqgq[$i]["Match_RGG"], $point, $lqgq[$i]["Match_RGG"], $lqgq[$i]["Match_DxGG"]);
+                            }
+                        } elseif (($column == "Match_DxDpl" || $column == "Match_DxXpl") && $lqgq[$i]["Match_DxGG"] !== $dxgg) { // 全场大小盘口改已变
+                            if ($lqgq[$i]["Match_DxGG"] == '' || $lqgq[$i]["Match_DxGG"] == 0) {
+                                $this -> go("盘口已关闭,交易失败" . __LINE__);
+                            } else {
+                                $this -> confirm('盘口', $lqgq[$i]["Match_DxGG"], $point, $lqgq[$i]["Match_RGG"], $lqgq[$i]["Match_DxGG"]);
+                            }
+                        }
+                    }
+                    return true;
+                } else { // 水位变动
+                    $this -> confirm('水位', $lqgq[$i][$column], $lqgq[$i][$column], $rgg, $dxgg);
+                }
+            }
+        } else {
+            global $mysqlis;
+            if ($db_table == "t_guanjun_team") {
+                if ($tid) {
+                   // $sql = "select t.point from t_guanjun_team t,t_guanjun g where t.tid=$tid and t.xid=g.x_id and g.Match_CoverDate>'" . date('Y-m-d H:i:s') . "' limit 1"; // 赛事未结束
+                   // $query = $mysqlis->query($sql);
+                    $rs = Db::name('t_guanjun_team') -> alias('t') -> join('t_guanjun g',["t.id = $tid",'t.xid=g.x_id',"g.Match_CoverDate>'" . date('Y-m-d H:i:s') .'"']) ->field(['t.point'])-> select(); 
+                    //$rs = $query->fetch_array();
+                    $newpoint = "" . sprintf("%.2f", $rs["point"]);
+                    if ($newpoint === $point) {
+                        return true;
+                    } else { // 水位变动
+                        if ($newpoint == 0) {
+                            $this -> go("盘口已关闭,交易失败");
+                        } else {
+                           $this -> confirm('水位', $newpoint, $newpoint);
+                        }
+                    }
+                }
+            } else {
+                $touzhutype = $this->touzhutyep;
+                $other = "";
+                if ($db_table == "bet_match")
+                    $other = ",Match_BRpk,Match_Bdxpk";
+                $sql = "select Match_RGG,Match_DxGG,$column $other from $db_table where match_id=$match_id and Match_CoverDate>'" . date('Y-m-d H:i:s') . "' limit 1"; // 赛事未结束
+                $field = ['Match_RGG','Match_DxGG'];
+                $columns = explode(',',$column);
+                $others = explode(',', $other);
+                $fields = array_merge($field,$columns,$others);
+                $tmp = [];
+                foreach ($fields as $v){
+                    if($v != ''){
+                        $tmp[] = $v;
+                    }
+                }
+                $fields = $tmp;
+                unset($tmp);
+		$datetime = date('Y-m-d H:i:s');		
+		if('127.0.0.1' == $this->request->server('REMOTE_ADDR')){
+		    $datetime = '2017-08-21 02:53:18';
+		}		
+                $rs = Db::connect(Config('sportdb'))->name($db_table)->where('match_id','=',$match_id)
+                ->where('Match_CoverDate','>',$datetime)->field($fields)->find();
+                $newpoint = "" . sprintf("%.2f", $rs["$column"]);
+                if ($newpoint === $point) {
+                    if (in_array($column, $pk)) { // 盘口
+                        if (($column == "Match_Ho" || $column == "Match_Ao") && $rs["Match_RGG"] !== $rgg) { // 全场让球盘口改已变
+                            if ($touzhutype == 1) { // 串关
+                                $this -> confirm_cg('盘口', $rs["Match_RGG"], $point, $rs["Match_RGG"], $rs["Match_DxGG"], $index);
+                            } else { // 单式
+                                $this -> confirm('盘口', $rs["Match_RGG"], $point, $rs["Match_RGG"], $rs["Match_DxGG"]);
+                            }
+                        } elseif (($column == "Match_DxDpl" || $column == "Match_DxXpl") && $rs["Match_DxGG"] !== $dxgg) { // 全场大小盘口改已变
+                            if ($touzhutype == 1) { // 串关
+                                $this -> confirm_cg('盘口', $rs["Match_DxGG"], $point, $rs["Match_RGG"], $rs["Match_DxGG"], $index);
+                            } else { // 单式
+                                $this -> confirm('盘口', $rs["Match_DxGG"], $point, $rs["Match_RGG"], $rs["Match_DxGG"]);
+                            }
+                        } elseif (($column == "Match_BHo" || $column == "Match_BAo") && $rs["Match_BRpk"] !== $rgg) { // 上半场让球盘口改已变
+                            if ($touzhutype == 1) { // 串关
+                                $this -> confirm_cg('盘口', $rs["Match_BRpk"], $point, $rs["Match_BRpk"], $rs["Match_Bdxpk"], $index);
+                            } else { // 单式
+                                $this -> confirm('盘口', $rs["Match_BRpk"], $point, $rs["Match_BRpk"], $rs["Match_Bdxpk"]);
+                            }
+                        } elseif (($column == "Match_Bdpl" || $column == "Match_Bxpl") && $rs["Match_Bdxpk"] !== $dxgg) { // 上半场大小盘口改已变
+                            if ($touzhutype == 1) { // 串关
+                                $this -> confirm_cg('盘口', $rs["Match_Bdxpk"], $point, $rs["Match_BRpk"], $rs["Match_Bdxpk"], $index);
+                            } else { // 单式
+                                $this -> confirm('盘口', $rs["Match_Bdxpk"], $point, $rs["Match_BRpk"], $rs["Match_Bdxpk"]);
+                            }
+                        }
+                    }
+                    
+                    return true;
+                } else { // 水位变动
+                    if ($newpoint == 0) {
+                        $this -> go("盘口已关闭,交易失败" . __LINE__);
+                    } else {
+                        if ($touzhutype == 1) { // 串关
+                            $this -> confirm_cg('水位', $newpoint, $newpoint, $rgg, $dxgg, $index);
+                        } else { // 单式
+                            $this -> confirm('水位', $newpoint, $newpoint, $rgg, $dxgg);
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    private function go($msg)
+    {
+        $this->assign('msg', $msg);
+        echo $this->fetch('msg');
+    }
+
+    private function confirm($msg, $type, $pl, $rgg = 0, $dxgg = 0)
+    {
+        $this->assign('msg', $msg);
+        $this->assign('type', $type);
+        $this->assign('pl', $pl);
+        $this->assign('rgg', $rgg);
+        $this->assign('dxgg', $dxgg);
+        echo $this->fetch('confirm');
+    }
+
+    private function confirm_cg($msg, $type, $pl, $rgg = 0, $dxgg = 0, $index)
+    {
+        $g_arr = explode('VS.', $_POST["master_guest"][$index]);
+        $this->assign('g_arr', $g_arr);
+        echo $this->fetch('confirm_cg');
+    }
+
+    private function str_leng($str)
+    {
+        mb_internal_encoding("UTF-8");
+        return mb_strlen($str) * 12;
+    }
+    
+    private function investSZ($uid='') {
+        if(!Session('investValue')){
+            Session('investValue',0);
+            Session('investTime',time( ));
+        }
+        $time = time() - Session("investTime");
+        if($time>='5'){
+            Session('investValue',0);
+            Session('investTime',time());
+        }
+        if(Session('investValue') <= 2){
+            Session('investValue',Session('investValue') + 1) ;
+            return Session('investValue');
+        }else{
+            Session('investTime',time());
+            return Session('investValue');
+        }
+    }
+    
+}

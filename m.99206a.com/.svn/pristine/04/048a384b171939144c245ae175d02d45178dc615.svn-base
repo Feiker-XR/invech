@@ -1,0 +1,122 @@
+<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:88:"/mnt/wwwroot/www.dd788799.com/houtai/../application/admin/view/data/fanshui_bl_edit.html";i:1505452684;}*/ ?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>系统设置</title>
+<link href="../css/base.css" rel="stylesheet" type="text/css" />
+<link href="../css/admin.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="../js/jquery.js"></script>
+<script type="text/javascript" src="../js/jquery.tools.js"></script>
+<script type="text/javascript" src="../js/base.js"></script>
+</head>
+
+<body class="input">
+<!--	<div class="bar">
+		会员反水比例设置
+	</div>
+	-->
+
+<div class="body">
+	<ul id="tab" class="tab">
+		<li>
+			<input type="button" value="会员反水比例" hidefocus onClick="window.location.href='<?php echo url('fanshui_bl'); ?>'" />
+		</li>
+		<li>
+			<input type="button" value="添加反水比例" hidefocus class="current" onClick="window.location.href='<?php echo url('fanshui_bl_edit'); ?>'" />
+		</li>
+	</ul>
+	<form name="form1" id="form1" method="post" action="">
+		<table class="inputTable tabContent">
+			<tr>
+				<th>会员组：</th>
+				<td><label>
+					<select name='gid'>
+						<?php if(is_array($groups) || $groups instanceof \think\Collection || $groups instanceof \think\Paginator): $i = 0; $__LIST__ = $groups;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$group): $mod = ($i % 2 );++$i;if($group['id'] == $bl['id']): ?>								
+								<option value='<?php echo $group['id']; ?>' selected='selected'><?php echo $group['name']; ?></option>
+							<?php else: ?>
+								<option value='<?php echo $group['id']; ?>'><?php echo $group['name']; ?></option>
+							<?php endif; endforeach; endif; else: echo "" ;endif; ?>
+					</select>
+				</label></td>
+			</tr>
+			<tr>
+				<th>排序：</th>
+				<td><label>
+					<input name="px" type="text" id="px" value="<?php echo $bl['px']; ?>" size="20" class="formText" maxlength="10">
+				</label></td>
+			</tr>
+
+	        <tr>
+				<th>体育有效投注额：</th>
+				<td><input name="tz_ty" type="text" value="<?php echo $bl['tz_ty']; ?>" size="20" class="formText" maxlength="10"></td>
+			</tr>
+	        <tr>
+				<th>体育反水比例：</th>
+				<td><input name="ty" type="text" value="<?php echo $bl['ty']; ?>" size="20" class="formText" maxlength="10"></td>
+			</tr>
+			
+	        <tr>
+				<th>彩票有效投注额：</th>
+				<td><input name="tz_cp" type="text" value="<?php echo $bl['tz_cp']; ?>" size="20" class="formText" maxlength="10"></td>
+			</tr>
+	        <tr>
+				<th>彩票反水比例：</th>
+				<td><input name="cp" type="text" value="<?php echo $bl['cp']; ?>" size="20" class="formText" maxlength="10"></td>
+			</tr>
+			
+	        <tr>
+				<th>AG有效投注额：</th>
+				<td><input name="tz_ag" type="text" value="<?php echo $bl['tz_ag']; ?>" size="20" class="formText" maxlength="10"></td>
+			</tr>
+	        <tr>
+				<th>AG反水比例：</th>
+				<td><input name="ag" type="text" value="<?php echo $bl['ag']; ?>" size="20" class="formText" maxlength="10"></td>
+			</tr>			
+			
+	        <tr>
+				<th>MG有效投注额：</th>
+				<td><input name="tz_mg" type="text" value="<?php echo $bl['tz_mg']; ?>" size="20" class="formText" maxlength="10"></td>
+			</tr>
+	        <tr>
+				<th>MG反水比例：</th>
+				<td><input name="mg" type="text" value="<?php echo $bl['mg']; ?>" size="20" class="formText" maxlength="10"></td>
+			</tr>
+			
+	        <tr>
+				<th>OG有效投注额：</th>
+				<td><input name="tz_og" type="text" value="<?php echo $bl['tz_og']; ?>" size="20" class="formText" maxlength="10"></td>
+			</tr>
+	        <tr>
+				<th>OG反水比例：</th>
+				<td><input name="og" type="text" value="<?php echo $bl['og']; ?>" size="20" class="formText" maxlength="10"></td>
+			</tr>
+			
+	        <tr>
+				<th>BB有效投注额：</th>
+				<td><input name="tz_bb" type="text" value="<?php echo $bl['tz_bb']; ?>" size="20" class="formText" maxlength="10"></td>
+			</tr>
+	        <tr>
+				<th>BB反水比例：</th>
+				<td><input name="bb" type="text" value="<?php echo $bl['bb']; ?>" size="20" class="formText" maxlength="10"></td>
+			</tr>			
+			
+	        <tr>
+				<th>SB有效投注额：</th>
+				<td><input name="tz_sb" type="text" value="<?php echo $bl['tz_sb']; ?>" size="20" class="formText" maxlength="10"></td>
+			</tr>
+	        <tr>
+				<th>SB反水比例：</th>
+				<td><input name="sb" type="text" value="<?php echo $bl['sb']; ?>" size="20" class="formText" maxlength="10"></td>
+			</tr>				
+		</table>
+		<div class="buttonArea">
+			<input name="id" type="hidden" id="id" value="<?php echo $bl['id']; ?>"></th>
+			<input name="submit" type="submit" class="formButton" value="确认修改">
+			<input type="button" class="formButton" onClick="window.location.href='<?php echo url('fanshui_bl'); ?>'" value="取 消" hidefocus />
+		</div>
+	</form>
+	</div>
+</body>
+</html>

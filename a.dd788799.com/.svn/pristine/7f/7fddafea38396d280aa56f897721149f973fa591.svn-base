@@ -1,0 +1,154 @@
+<input type="hidden" name="playedGroup" value="<?=$groupId?>"/>
+<input type="hidden" name="playedId" value="<?=$playedId?>"/>
+<input type="hidden" name="type" value="<?=$type?>"/>
+<input type="hidden" name="playedName" value="<?=$played['name']?>"/>
+<!-- mobile 福彩3d_组合-->
+<div id="sscContent">
+    <div class="lot-content clearfix">
+        <div class="fl main-left">
+            <div class="fr">
+                <div class="T-tab clearfix f-tab f-bottom">
+                    <a href="javascript:void(0)" onclick="changeTab(this)">一字组合</a>
+                    <a href="javascript:void(0)" onclick="changeTab(this)">二字组合</a>
+                    <a href="javascript:void(0)" onclick="changeTab(this)">三字组合</a>
+                </div>
+            </div>
+            <br/>
+            <br/>
+            <div class="table-common" id="table-common">
+                <script type="text/html" id="fc3d_zx">
+                    {{if plg.pls.length > 1}}
+                    <table width="100%" border="0" cellspacing="0" cellpadding="0" class="pp" action="fc3d_zx">
+                        <thead>
+                        <tr>
+                            <th>号码</th>
+                            <th>赔率</th>
+                            <th>金额</th>
+                            <th>号码</th>
+                            <th>赔率</th>
+                            <th>金额</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {{each plg.pls value index}}
+                        {{if index%2==0}}
+                        <tr>
+                            {{/if}}
+                            <td onclick="setQuickPick(this,true)"><strong>{{value.value}}</strong>
+                            </td>
+                            <td onclick="setQuickPick(this,true)"><strong class="color-red pl"
+                                                                                              data-plid="{{value.id}}">{{value.pl}}</strong>
+                            </td>
+                            <td><input type="text" oninput="checkAmount()" class="table-txt" data-name="{{plg.name}}-{{value.value}}"
+                                       data-plid="{{value.id}}" data-pl="{{value.pl}}"></td>
+                            {{/each}}
+                        </tbody>
+                    </table>
+                    {{else}}
+                    <table width="100%" border="0" cellpadding="0" cellspacing="0" class="pp" action="fc3d_checkbox_zx"
+                           length="{{plg.tables.length+1}}">
+                        <thead>
+                        <tr>
+                            <th colspan="10">{{plg.name}}@<span class="pl red" data-plid="{{plg.data.id}}">{{plg.data.pl}}</span>
+                            </th>
+                        </tr>
+                        <tr>
+                            <th colspan="10">第一个投注码</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            {{each plg.data.nums.slice(0,5) value index}}
+                            <td><strong>{{value}}</strong></td>
+                            <td><input type="checkbox" value="{{value}}" data-name="{{value}}" data-group="num1"></td>
+                            {{/each}}
+                        </tr>
+                        <tr>
+                            {{each plg.data.nums.slice(5) value index}}
+                            <td><strong>{{value}}</strong></td>
+                            <td><input type="checkbox" value="{{value}}" data-name="{{value}}" data-group="num1"></td>
+                            {{/each}}
+                        </tr>
+                        </tbody>
+                    </table>
+                    <br/>
+                    {{each plg.tables _value _index}}
+                    <table width="100%" border="0" cellpadding="0" cellspacing="0" class="pp" action="fc3d_checkbox_zx"
+                           length="{{plg.tables.length+1}}">
+                        <thead>
+                        <tr>
+                            <th colspan="10">第{{_value}}个投注码</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            {{each plg.data.nums.slice(0,5) value index}}
+                            <td><strong>{{value}}</strong></td>
+                            <td><input type="checkbox" value="{{value}}" data-name="{{value}}"
+                                       data-group="num{{_value}}"></td>
+                            {{/each}}
+                        </tr>
+                        <tr>
+                            {{each plg.data.nums.slice(5) value index}}
+                            <td><strong>{{value}}</strong></td>
+                            <td><input type="checkbox" value="{{value}}" data-name="{{value}}"
+                                       data-group="num{{_value}}"></td>
+                            {{/each}}
+                        </tr>
+                        </tbody>
+                    </table>
+                    <br/>
+                    {{/each}}
+                    {{/if}}
+                </script>
+            </div>
+            <br/>
+
+            <div class="hd clearfix rehd" id="toptouzhu">
+                <div class="fl refl">
+                    快捷金额：<input type="text" class="txt" id="inputMoney">
+                </div>
+                <div class="kjanniu">
+                    <a href="javascript:void(0)" class="img-50" data-num="50"></a>
+                    <a href="javascript:void(0)" class="img-100" data-num="100"></a>
+                    <a href="javascript:void(0)" class="img-500" data-num="500"></a>
+                    <a href="javascript:void(0)" class="img-1000" data-num="1000"></a>
+                    <a href="javascript:void(0)" class="img-5000" data-num="5000"></a>
+                    <a href="javascript:void(0)" class="img-10000" data-num="10000"></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    //var pls;//玩法的所有赔率
+    //var plg;//当前赔率组
+    function changeTab(self) {
+        $(self).siblings().removeClass('active');
+        $(self).addClass('active');
+        var $tabs = $(self).parent().children();
+        var index = $tabs.index(self);
+        plg = pls[index];
+        if (index > 0) {
+            plg.data = plg.pls[0];
+            plg.data.value = 2;
+            plg.data.nums = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+            plg.tables = ['二'];
+            if (index == 2) {
+                plg.data.value = 3;
+                plg.tables.push('三');
+            }
+        }
+        var html = template("fc3d_zx", {plg: plg});
+        $('.table-common').html(html);
+    }
+
+    $(function () {
+        var playedId = "<?=$playedId?>";
+        $.getJSON("/game/pl/playedId/" + playedId, function (data) {
+            pls = data;
+            console.log(data);
+            $('.T-tab.clearfix').children().eq(0).click();
+        });
+    });
+</script>

@@ -1,0 +1,69 @@
+.czrow {
+	margin-top: 15px; margin-bottom: 15px; display: table;
+}
+.czrow > div {
+	vertical-align: middle; display: table-cell;
+}
+div.czlabel {
+	text-align: right; padding-right: 10px; font-size: 14px; font-weight: bold; white-space: nowrap;
+}
+div.cztxt {
+	
+}
+div.cztxt strong {
+	color: rgb(255, 0, 0); padding-right: 20px; font-weight: normal;
+}
+div.cztxt a {
+	color: rgb(53, 146, 233); padding-left: 30px;
+}
+div.cztxt a:hover {
+	color: rgb(255, 0, 0);
+}
+.jinebox {
+	margin: auto; padding: 0px; width: 340px; height: 49px; text-align: left; font-size: 18px; display: inline-block;
+}
+.jinebox input {
+	border-radius: 4px; border: 1px solid rgb(238, 238, 238); transition:border-color 0.5s; border-image: none; width: 173px; height: 49px; text-align: center; font-size: 18px; box-sizing: border-box;
+}
+.jinebox input:focus {
+	border-color: rgb(72, 154, 237); box-shadow: 0px 0px 5px #e5e5e5;
+}
+ul.bankboxlist {
+	margin: 0px; padding: 0px; width: 100%; overflow: hidden; clear: both;
+}
+ul.bankboxlist li {
+	list-style: none; margin-top: 5px; margin-right: 20px; margin-bottom: 10px; float: left;
+}
+.bankbox {
+	background-position: 270px; margin: auto; border: 1px solid rgb(204, 204, 204); transition:0.4s ease-in-out; border-image: none; width: 330px; height: 80px; line-height: 75px; overflow: hidden; display: inline-block; position: relative; cursor: pointer; box-sizing: border-box; box-shadow: 0px 0px 5px #ccc; background-image: url("img/radio.png"); background-repeat: no-repeat; background-color: rgb(255, 255, 255);
+}
+.bankbox img:last-child {
+	left: 240px; top: 0px; position: absolute;
+}
+.bankbox img:first-child {
+	margin-left: 30px; max-height: 50px; max-width: 169px;
+}
+.thisbank {
+	border: 1px solid rgb(237, 108, 68); border-image: none; background-image: url("img/radiothis.png");
+}
+.bankbox > span {
+	transition:color 0.5s; padding-left: 10px; font-size: 16px;
+}
+.thisbank > span {
+	color: rgb(247, 87, 37);
+}
+.czbox {
+	padding: 0px 50px 50px;
+}
+.czfoot {
+	text-align: center; padding-bottom: 20px;
+}
+.czfoot button {
+	width: 180px; height: 50px; font-size: 16px;
+}
+.graybg {
+	border-radius: 10px; padding-top: 20px; padding-bottom: 5px; padding-left: 20px; background-color: rgb(245, 246, 247);
+}
+.chongzhibox {
+	padding-top: 10px;
+}

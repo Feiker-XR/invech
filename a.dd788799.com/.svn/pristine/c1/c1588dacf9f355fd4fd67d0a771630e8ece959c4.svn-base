@@ -1,0 +1,1085 @@
+<link rel="stylesheet" type="text/css" href="/__CSS__/user/reset.css?v=20170715">
+<link rel="stylesheet" type="text/css" href="/__CSS__/user/hpn-common.css">
+<link rel="stylesheet" type="text/css" href="/__CSS__/user/index.css?v=20171117">
+<link rel="stylesheet" type="text/css" href="/__CSS__/user/global.css">
+<style>
+
+    .reResulttBg{background: #f42023;}
+    .process .layout .monty ul li,.process .layout .list_tems .date:after,.list ul li .slide p.acti,.headmemberbg{background: #f42023;}
+    .process .layout .list_tems .date span, .process .layout .list_tems .date h3,.eveb_amount span,.color-e77c3c,.eveb_setting_table a,.xieyiCss，.gcdtgd{color: #f42023!important;}
+    .eveb_sub_nav_type a:hover, .eveb_sub_nav_type li.on a:link, .eveb_sub_nav_type li.on a:visited{color: #f42023!important;font-weight: 700;border-bottom-color: #e1e1e1;background: #f8f8f8;}
+    .list ul li .slide p:hover,.letterbtn-bg{background: #f42023!important;color: white;}
+    .list h3 a{background: #f42023;border-bottom: 3px solid #a92309; height: 47px; line-height: 47px;}
+    .help_l_menu li .t.sli{border-left: 5px solid #f42023;}
+    .withdraw-bg-input{border: 2px solid #f42023!important;}
+    .clearBet_template .l span i{background: #f42023 url(/static/theme/memberTheme/theme1/img/tm-mdl-icon.png) no-repeat!important; border-radius: 50%;background-position: 0 41%!important;}
+
+    .eveb_nav_sub .on,.button_1, .button_1:link, .button_1:visited,.alert_col h5,.onlineService,.layui-layer-popup .layui-layer-title,.xzqd,.xzqdlskj,.game_name .box2_stage p span i.acti,.Betting,.Single,.list_ject ul li .Result p a.acti,.list_ject ul li .Result p a.acti:hover,.top{background:#f42023!important}
+    .eveb_nav_sub .on a,.bankInfo .name,.help_l_menu .title p .sum,.help_r_main .light,.game_name .box2_stage p span i,.game_name .box1_name  p i,.Account p a.red{color:#f42023!important}
+    .eveb_nav_sub .on,.game_name .box2_stage p span{border:1px solid #f42023!important;}
+    .eveb_nav_sub .on,.game_name .box2_stage p span i.acti{color:#fff!important;}
+    .eveb_nav_sub .on a{border-top:1px #f42023 solid!important;}
+    .eveb_nav_sub ul{border-bottom:1px #f42023 solid!important;}
+    #apptop{background: #f42023}
+    .alert_col div::-webkit-scrollbar-thumb {background-color: #f42023!important;}
+    .head div h5,.Betting .tabs ul li,.top .nav h1{background:#d51910!important}
+    .jf_box .url a,.eveb_form label.error,.eveb_transfer_box .center_wallet .money,.eveb_transfer_box .wallet_list li p{color:#d51910!important}
+    .Betting .tabs ul li.acti{background:#fff!important}
+    .button_1, .button_1:link, .button_1:visited{border:1px solid #d51910!important;}
+</style>
+
+<link type="text/css" rel="stylesheet" href="/__CSS__/user/laydate.css">
+<link rel="stylesheet" href="/__CSS__/user/layer.css?v=3.0.11110">
+<div class="help_r_main">
+    <div class="eveb_content">
+        <div class="eveb_nav_sub">
+            <ul class="clearfix">
+                <li><a href="/user/recharge_record">充值记录</a></li>
+                <li><a href="/user/withdraw_record">提现记录</a></li>
+                <li><a href="/user/money_record">资金流水</a></li>
+                <li class="on"><a href="/user/bet_record">投注记录</a></li>
+            </ul>
+        </div><h2>
+        <div class="eveb_search eveb_search_h2">
+            <input type="hidden" name="pageIndex" value="1">
+            彩种：
+            <select name="playGroupId" id="playGroupId">
+                <option value="">所有</option>
+                <option value="1">重庆时时彩</option>
+                <option value="2">天津时时彩</option>
+                <option value="3">新疆时时彩</option>
+                <option value="4">体彩排列3</option>
+                <option value="5">福彩3D</option>
+                <option value="6">六合彩</option>
+                <option value="7">北京28</option>
+                <option value="8">北京快乐8</option>
+                <option value="9">北京PK10</option>
+                <option value="10">重庆幸运农场</option>
+                <option value="11">广东快乐十分</option>
+                <option value="12">双色球</option>
+                <option value="14">幸运飞艇</option>
+                <option value="15">分分时时彩</option>
+                <option value="13">三分时时彩</option>
+                <option value="16">二分时时彩</option>
+                <option value="17">五分时时彩</option>
+                <option value="18">江苏快3</option>
+                <option value="19">湖北快3</option>
+                <option value="20">安徽快3</option>
+                <option value="21">吉林快3</option>
+                <option value="22">10分六合彩</option>
+                <option value="23">极速PK10</option>
+                <option value="24">广东11选5</option>
+                <option value="25">海南七星彩</option>
+            </select>
+            模式：
+            <select id="typeId">
+                <option value="">所有</option>
+                <option value="1">传统玩法</option>
+                <option value="2">官方玩法</option>
+            </select>
+            玩法：
+            <select name="playId" id="playId"><option value="">所有</option><option value="216">双面</option><option value="217">数字盘</option><option value="218">一字定位</option><option value="219">二字定位</option><option value="220">三字定位</option><option value="221">一字组合</option><option value="222">二字组合</option><option value="223">二字和数</option><option value="224">组选三</option><option value="225">组选六</option><option value="226">跨度</option><option value="227">龙虎</option><option value="228">双面</option><option value="229">数字盘</option><option value="230">一字定位</option><option value="231">二字定位</option><option value="232">三字定位</option><option value="233">一字组合</option><option value="234">二字组合</option><option value="235">二字和数</option><option value="236">组选三</option><option value="237">组选六</option><option value="238">跨度</option><option value="239">龙虎</option><option value="240">双面</option><option value="241">数字盘</option><option value="242">一字定位</option><option value="243">二字定位</option><option value="244">三字定位</option><option value="245">一字组合</option><option value="246">二字组合</option><option value="247">二字和数</option><option value="248">组选三</option><option value="249">组选六</option><option value="250">跨度</option><option value="251">龙虎</option><option value="287">定位</option><option value="288">组合</option><option value="289">和数</option><option value="290">组选三</option><option value="291">组选六</option><option value="292">跨度</option><option value="252">定位</option><option value="253">组合</option><option value="254">和数</option><option value="255">组选三</option><option value="256">组选六</option><option value="257">跨度</option><option value="204">特码</option><option value="205">正码</option><option value="206">正特码</option><option value="207">正码1-6</option><option value="208">连码</option><option value="209">半波</option><option value="210">一肖/尾数</option><option value="211">特肖</option><option value="212">合肖</option><option value="213">连肖</option><option value="214">尾数连</option><option value="215">全不中</option><option value="293">和值</option><option value="657">混合</option><option value="658">特码包三</option><option value="271">选5</option><option value="272">选4</option><option value="273">选3</option><option value="274">选2</option><option value="275">选1</option><option value="276">其他</option><option value="258">双面</option><option value="259">数字盘</option><option value="260">冠军</option><option value="261">亚军</option><option value="262">季军</option><option value="263">第四名</option><option value="264">第五名</option><option value="265">第六名</option><option value="266">第七名</option><option value="267">第八名</option><option value="268">第九名</option><option value="269">第十名</option><option value="270">冠亚和</option><option value="294">双面</option><option value="295">第一球</option><option value="296">第二球</option><option value="297">第三球</option><option value="298">第四球</option><option value="299">第五球</option><option value="300">第六球</option><option value="301">第七球</option><option value="302">第八球</option><option value="303">龙虎</option><option value="277">双面</option><option value="278">第一球</option><option value="279">第二球</option><option value="280">第三球</option><option value="281">第四球</option><option value="282">第五球</option><option value="283">第六球</option><option value="284">第七球</option><option value="285">第八球</option><option value="286">龙虎</option><option value="304">单式</option><option value="305">幸运选号</option><option value="306">胆拖</option><option value="1035">红码</option><option value="1036">蓝码</option><option value="1037">红码定位</option><option value="1038">双面</option><option value="1039">红蓝配</option><option value="331">二字组合</option><option value="332">双面</option><option value="333">一字定位</option><option value="334">三字定位</option><option value="335">组选六</option><option value="336">龙虎</option><option value="337">数字盘</option><option value="338">二字和数</option><option value="339">一字组合</option><option value="340">二字定位</option><option value="341">组选三</option><option value="342">跨度</option><option value="318">双面</option><option value="319">冠亚和</option><option value="330">排名1~10</option><option value="379">组选六</option><option value="380">数字盘</option><option value="381">三字定位</option><option value="382">二字和数</option><option value="383">一字定位</option><option value="384">二字组合</option><option value="385">跨度</option><option value="386">组选三</option><option value="387">一字组合</option><option value="388">二字定位</option><option value="389">双面</option><option value="390">龙虎</option><option value="391">组选六</option><option value="392">数字盘</option><option value="393">三字定位</option><option value="394">二字和数</option><option value="395">一字定位</option><option value="396">二字组合</option><option value="397">跨度</option><option value="398">组选三</option><option value="399">一字组合</option><option value="400">二字定位</option><option value="401">双面</option><option value="402">龙虎</option><option value="403">组选六</option><option value="404">数字盘</option><option value="405">三字定位</option><option value="406">二字和数</option><option value="407">一字定位</option><option value="408">二字组合</option><option value="409">跨度</option><option value="410">组选三</option><option value="411">一字组合</option><option value="412">二字定位</option><option value="413">双面</option><option value="414">龙虎</option><option value="437">和值</option><option value="438">通选</option><option value="439">三同号单选</option><option value="440">三不同</option><option value="441">二同号复选</option><option value="442">二同号单选</option><option value="443">二不同号</option><option value="444">猜必出</option><option value="445">猜必不出</option><option value="446">三同号单选</option><option value="447">二同号复选</option><option value="448">猜必不出</option><option value="449">二不同号</option><option value="450">通选</option><option value="451">三不同</option><option value="452">猜必出</option><option value="453">二同号单选</option><option value="454">和值</option><option value="455">三同号单选</option><option value="456">二同号复选</option><option value="457">猜必不出</option><option value="458">二不同号</option><option value="459">通选</option><option value="460">三不同</option><option value="461">猜必出</option><option value="462">二同号单选</option><option value="463">和值</option><option value="464">三同号单选</option><option value="465">二同号复选</option><option value="466">猜必不出</option><option value="467">二不同号</option><option value="468">通选</option><option value="469">三不同</option><option value="470">猜必出</option><option value="471">二同号单选</option><option value="472">和值</option><option value="473">正特码</option><option value="474">连码</option><option value="475">连肖</option><option value="476">合肖</option><option value="477">全不中</option><option value="478">一肖/尾</option><option value="479">正码</option><option value="480">正码1-6</option><option value="481">尾数连</option><option value="491">特肖</option><option value="492">半波</option><option value="493">特码</option><option value="494">双面</option><option value="495">冠亚和</option><option value="496">排名1~10</option><option value="497">五星直选-复式</option><option value="498">五星直选-单式</option><option value="499">四星直选-复式</option><option value="500">四星直选-单式</option><option value="502">后三直选-复式</option><option value="503">后三直选-单式</option><option value="504">后三直选-组合</option><option value="505">后三直选-和值</option><option value="506">后三直选-跨度</option><option value="507">后三组选-组三复式</option><option value="508">后三组选-组三单式</option><option value="509">后三组选-组六复式</option><option value="510">后三组选-组六单式</option><option value="511">后三组选-混合组选</option><option value="512">后三组选-组选和值</option><option value="513">后三组选-组选包胆</option><option value="514">后三其它-和值尾数</option><option value="515">后三其它-特殊号</option><option value="516">前三直选-复式</option><option value="517">前三直选-单式</option><option value="518">前三直选-组合</option><option value="519">前三直选-和值</option><option value="520">前三直选-跨度</option><option value="521">前三组选-组三复式</option><option value="522">前三组选-组三单式</option><option value="523">前三组选-组六复式</option><option value="524">前三组选-组六单式</option><option value="526">前三组选-混合组选</option><option value="528">前三组选-组选和值</option><option value="529">前三组选-组选包胆</option><option value="531">前三其它-和值尾数</option><option value="534">前三其它-特殊号</option><option value="535">前二直选-复式</option><option value="536">前二直选-单式</option><option value="537">前二直选-和值</option><option value="538">前二直选-跨度</option><option value="539">前二组选-组选复式</option><option value="540">前二组选-组选单式</option><option value="541">前二组选-和值</option><option value="542">前二组选-组选包胆</option><option value="543">定位胆</option><option value="544">不定位-前三一码</option><option value="545">不定位-前三二码</option><option value="546">不定位-后三一码</option><option value="547">不定位-后三二码</option><option value="548">不定位-前四一码</option><option value="549">不定位-前四二码</option><option value="550">不定位-后四一码</option><option value="551">不定位-后四二码</option><option value="552">不定位-五星一码</option><option value="553">不定位-五星二码</option><option value="554">不定位-五星三码</option><option value="555">大小单双-前2</option><option value="556">大小单双-后2</option><option value="557">大小单双-前3</option><option value="558">大小单双-后3</option><option value="559">任选2-直选复式</option><option value="560">任选2-直选单式</option><option value="561">任选2-直选和值</option><option value="562">任选2-组选复式</option><option value="563">任选2-组选单式</option><option value="564">任选2-组选和值</option><option value="565">任选3-直选复式</option><option value="566">任选3-直选单式</option><option value="567">任选3-直选和值</option><option value="568">任选3-组三复式</option><option value="569">任选3-组三单式</option><option value="570">任选3-组六复式</option><option value="571">任选3-组六单式</option><option value="572">任选3-混合组选</option><option value="573">任选3-组选和值</option><option value="574">任选4-直选复式</option><option value="575">任选4-直选单式</option><option value="576">任选4-组选24</option><option value="577">任选4-组选12</option><option value="578">任选4-组选6</option><option value="579">任选4-组选4</option><option value="673">不定位-五星一码</option><option value="674">不定位-五星三码</option><option value="675">不定位-五星二码</option><option value="676">不定位-前三一码</option><option value="677">不定位-前三二码</option><option value="678">不定位-前四一码</option><option value="679">不定位-前四二码</option><option value="680">不定位-后三一码</option><option value="681">不定位-后三二码</option><option value="682">不定位-后四一码</option><option value="683">不定位-后四二码</option><option value="684">五星直选-单式</option><option value="685">五星直选-复式</option><option value="686">任选2-直选单式</option><option value="687">任选2-直选和值</option><option value="688">任选2-直选复式</option><option value="689">任选2-组选单式</option><option value="690">任选2-组选和值</option><option value="691">任选2-组选复式</option><option value="692">任选3-混合组选</option><option value="693">任选3-直选单式</option><option value="694">任选3-直选和值</option><option value="695">任选3-直选复式</option><option value="696">任选3-组三单式</option><option value="697">任选3-组三复式</option><option value="698">任选3-组六单式</option><option value="699">任选3-组六复式</option><option value="700">任选3-组选和值</option><option value="701">任选4-直选单式</option><option value="702">任选4-直选复式</option><option value="703">任选4-组选12</option><option value="704">任选4-组选24</option><option value="705">任选4-组选4</option><option value="706">任选4-组选6</option><option value="707">前三其它-和值尾数</option><option value="708">前三其它-特殊号</option><option value="709">前三直选-单式</option><option value="710">前三直选-和值</option><option value="711">前三直选-复式</option><option value="712">前三直选-组合</option><option value="713">前三直选-跨度</option><option value="714">前三组选-混合组选</option><option value="715">前三组选-组三单式</option><option value="716">前三组选-组三复式</option><option value="717">前三组选-组六单式</option><option value="718">前三组选-组六复式</option><option value="719">前三组选-组选包胆</option><option value="720">前三组选-组选和值</option><option value="721">前二直选-单式</option><option value="722">前二直选-和值</option><option value="723">前二直选-复式</option><option value="724">前二直选-跨度</option><option value="725">前二组选-和值</option><option value="726">前二组选-组选包胆</option><option value="727">前二组选-组选单式</option><option value="728">前二组选-组选复式</option><option value="729">后三其它-和值尾数</option><option value="730">后三其它-特殊号</option><option value="731">后三直选-单式</option><option value="732">后三直选-和值</option><option value="733">后三直选-复式</option><option value="734">后三直选-组合</option><option value="735">后三直选-跨度</option><option value="736">后三组选-混合组选</option><option value="737">后三组选-组三单式</option><option value="738">后三组选-组三复式</option><option value="739">后三组选-组六单式</option><option value="740">后三组选-组六复式</option><option value="741">后三组选-组选包胆</option><option value="742">后三组选-组选和值</option><option value="743">四星直选-单式</option><option value="744">四星直选-复式</option><option value="745">大小单双-前2</option><option value="746">大小单双-前3</option><option value="747">大小单双-后2</option><option value="748">大小单双-后3</option><option value="749">定位胆</option><option value="802">不定位-五星一码</option><option value="803">不定位-五星三码</option><option value="804">不定位-五星二码</option><option value="805">不定位-前三一码</option><option value="806">不定位-前三二码</option><option value="807">不定位-前四一码</option><option value="808">不定位-前四二码</option><option value="809">不定位-后三一码</option><option value="810">不定位-后三二码</option><option value="811">不定位-后四一码</option><option value="812">不定位-后四二码</option><option value="813">五星直选-单式</option><option value="814">五星直选-复式</option><option value="815">任选2-直选单式</option><option value="816">任选2-直选和值</option><option value="817">任选2-直选复式</option><option value="818">任选2-组选单式</option><option value="819">任选2-组选和值</option><option value="820">任选2-组选复式</option><option value="821">任选3-混合组选</option><option value="822">任选3-直选单式</option><option value="823">任选3-直选和值</option><option value="824">任选3-直选复式</option><option value="825">任选3-组三单式</option><option value="826">任选3-组三复式</option><option value="827">任选3-组六单式</option><option value="828">任选3-组六复式</option><option value="829">任选3-组选和值</option><option value="830">任选4-直选单式</option><option value="831">任选4-直选复式</option><option value="832">任选4-组选12</option><option value="833">任选4-组选24</option><option value="834">任选4-组选4</option><option value="835">任选4-组选6</option><option value="836">前三其它-和值尾数</option><option value="837">前三其它-特殊号</option><option value="838">前三直选-单式</option><option value="839">前三直选-和值</option><option value="840">前三直选-复式</option><option value="841">前三直选-组合</option><option value="842">前三直选-跨度</option><option value="843">前三组选-混合组选</option><option value="844">前三组选-组三单式</option><option value="845">前三组选-组三复式</option><option value="846">前三组选-组六单式</option><option value="847">前三组选-组六复式</option><option value="848">前三组选-组选包胆</option><option value="849">前三组选-组选和值</option><option value="850">前二直选-单式</option><option value="851">前二直选-和值</option><option value="852">前二直选-复式</option><option value="853">前二直选-跨度</option><option value="854">前二组选-和值</option><option value="855">前二组选-组选包胆</option><option value="856">前二组选-组选单式</option><option value="857">前二组选-组选复式</option><option value="858">后三其它-和值尾数</option><option value="859">后三其它-特殊号</option><option value="860">后三直选-单式</option><option value="861">后三直选-和值</option><option value="862">后三直选-复式</option><option value="863">后三直选-组合</option><option value="864">后三直选-跨度</option><option value="865">后三组选-混合组选</option><option value="866">后三组选-组三单式</option><option value="867">后三组选-组三复式</option><option value="868">后三组选-组六单式</option><option value="869">后三组选-组六复式</option><option value="870">后三组选-组选包胆</option><option value="871">后三组选-组选和值</option><option value="872">四星直选-单式</option><option value="873">四星直选-复式</option><option value="874">大小单双-前2</option><option value="875">大小单双-前3</option><option value="876">大小单双-后2</option><option value="877">大小单双-后3</option><option value="878">定位胆</option><option value="659">前一-复式</option><option value="660">前一-单式</option><option value="661">前二-复式</option><option value="662">前二-单式</option><option value="663">前三-复式</option><option value="664">前三-单式</option><option value="665">定位胆</option><option value="1033">红蓝直选复式</option><option value="1034">红蓝直选单式</option><option value="956">不定位-五星一码</option><option value="957">不定位-五星三码</option><option value="958">不定位-五星二码</option><option value="959">不定位-前三一码</option><option value="960">不定位-前三二码</option><option value="961">不定位-前四一码</option><option value="962">不定位-前四二码</option><option value="963">不定位-后三一码</option><option value="964">不定位-后三二码</option><option value="965">不定位-后四一码</option><option value="966">不定位-后四二码</option><option value="967">五星直选-单式</option><option value="968">五星直选-复式</option><option value="969">任选2-直选单式</option><option value="970">任选2-直选和值</option><option value="971">任选2-直选复式</option><option value="972">任选2-组选单式</option><option value="973">任选2-组选和值</option><option value="974">任选2-组选复式</option><option value="975">任选3-混合组选</option><option value="976">任选3-直选单式</option><option value="977">任选3-直选和值</option><option value="978">任选3-直选复式</option><option value="979">任选3-组三单式</option><option value="980">任选3-组三复式</option><option value="981">任选3-组六单式</option><option value="982">任选3-组六复式</option><option value="983">任选3-组选和值</option><option value="984">任选4-直选单式</option><option value="985">任选4-直选复式</option><option value="986">任选4-组选12</option><option value="987">任选4-组选24</option><option value="988">任选4-组选4</option><option value="989">任选4-组选6</option><option value="990">前三其它-和值尾数</option><option value="991">前三其它-特殊号</option><option value="992">前三直选-单式</option><option value="993">前三直选-和值</option><option value="994">前三直选-复式</option><option value="995">前三直选-组合</option><option value="996">前三直选-跨度</option><option value="997">前三组选-混合组选</option><option value="998">前三组选-组三单式</option><option value="999">前三组选-组三复式</option><option value="1000">前三组选-组六单式</option><option value="1001">前三组选-组六复式</option><option value="1002">前三组选-组选包胆</option><option value="1003">前三组选-组选和值</option><option value="1004">前二直选-单式</option><option value="1005">前二直选-和值</option><option value="1006">前二直选-复式</option><option value="1007">前二直选-跨度</option><option value="1008">前二组选-和值</option><option value="1009">前二组选-组选包胆</option><option value="1010">前二组选-组选单式</option><option value="1011">前二组选-组选复式</option><option value="1012">后三其它-和值尾数</option><option value="1013">后三其它-特殊号</option><option value="1014">后三直选-单式</option><option value="1015">后三直选-和值</option><option value="1016">后三直选-复式</option><option value="1017">后三直选-组合</option><option value="1018">后三直选-跨度</option><option value="1019">后三组选-混合组选</option><option value="1020">后三组选-组三单式</option><option value="1021">后三组选-组三复式</option><option value="1022">后三组选-组六单式</option><option value="1023">后三组选-组六复式</option><option value="1024">后三组选-组选包胆</option><option value="1025">后三组选-组选和值</option><option value="1026">四星直选-单式</option><option value="1027">四星直选-复式</option><option value="1028">大小单双-前2</option><option value="1029">大小单双-前3</option><option value="1030">大小单双-后2</option><option value="1031">大小单双-后3</option><option value="1032">定位胆</option><option value="1040">前一-单式</option><option value="1041">前一-复式</option><option value="1042">前三-单式</option><option value="1043">前三-复式</option><option value="1044">前二-单式</option><option value="1045">前二-复式</option><option value="1046">定位胆</option><option value="580">任选4-组选4</option><option value="581">任选4-组选6</option><option value="582">任选4-组选12</option><option value="583">任选4-组选24</option><option value="584">任选4-直选单式</option><option value="585">任选4-直选复式</option><option value="586">任选3-组选和值</option><option value="587">任选3-混合组选</option><option value="588">任选3-组六单式</option><option value="589">任选3-组六复式</option><option value="590">任选3-组三单式</option><option value="591">任选3-组三复式</option><option value="592">任选3-直选和值</option><option value="593">任选3-直选单式</option><option value="594">任选3-直选复式</option><option value="595">任选2-组选和值</option><option value="596">任选2-组选单式</option><option value="597">任选2-组选复式</option><option value="598">任选2-直选和值</option><option value="599">任选2-直选单式</option><option value="600">任选2-直选复式</option><option value="601">大小单双-后3</option><option value="602">大小单双-前3</option><option value="603">大小单双-后2</option><option value="604">大小单双-前2</option><option value="605">不定位-五星三码</option><option value="606">不定位-五星二码</option><option value="607">不定位-五星一码</option><option value="608">不定位-后四二码</option><option value="609">不定位-后四一码</option><option value="610">不定位-前四二码</option><option value="611">不定位-前四一码</option><option value="612">不定位-后三二码</option><option value="613">不定位-后三一码</option><option value="614">不定位-前三二码</option><option value="615">不定位-前三一码</option><option value="616">定位胆</option><option value="617">前二组选-组选包胆</option><option value="618">前二组选-和值</option><option value="619">前二组选-组选单式</option><option value="620">前二组选-组选复式</option><option value="621">前二直选-跨度</option><option value="622">前二直选-和值</option><option value="623">前二直选-单式</option><option value="624">前二直选-复式</option><option value="625">前三其它-特殊号</option><option value="626">前三其它-和值尾数</option><option value="627">前三组选-组选包胆</option><option value="628">前三组选-组选和值</option><option value="629">前三组选-混合组选</option><option value="630">前三组选-组六单式</option><option value="631">前三组选-组六复式</option><option value="632">前三组选-组三单式</option><option value="633">前三组选-组三复式</option><option value="634">前三直选-跨度</option><option value="635">前三直选-和值</option><option value="636">前三直选-组合</option><option value="637">前三直选-单式</option><option value="638">前三直选-复式</option><option value="639">后三其它-特殊号</option><option value="640">后三其它-和值尾数</option><option value="641">后三组选-组选包胆</option><option value="642">后三组选-组选和值</option><option value="643">后三组选-混合组选</option><option value="644">后三组选-组六单式</option><option value="645">后三组选-组六复式</option><option value="646">后三组选-组三单式</option><option value="647">后三组选-组三复式</option><option value="648">后三直选-跨度</option><option value="649">后三直选-和值</option><option value="650">后三直选-组合</option><option value="651">后三直选-单式</option><option value="652">后三直选-复式</option><option value="653">四星直选-单式</option><option value="654">四星直选-复式</option><option value="655">五星直选-单式</option><option value="656">五星直选-复式</option><option value="879">不定位-五星一码</option><option value="880">不定位-五星三码</option><option value="881">不定位-五星二码</option><option value="882">不定位-前三一码</option><option value="883">不定位-前三二码</option><option value="884">不定位-前四一码</option><option value="885">不定位-前四二码</option><option value="886">不定位-后三一码</option><option value="887">不定位-后三二码</option><option value="888">不定位-后四一码</option><option value="889">不定位-后四二码</option><option value="890">五星直选-单式</option><option value="891">五星直选-复式</option><option value="892">任选2-直选单式</option><option value="893">任选2-直选和值</option><option value="894">任选2-直选复式</option><option value="895">任选2-组选单式</option><option value="896">任选2-组选和值</option><option value="897">任选2-组选复式</option><option value="898">任选3-混合组选</option><option value="899">任选3-直选单式</option><option value="900">任选3-直选和值</option><option value="901">任选3-直选复式</option><option value="902">任选3-组三单式</option><option value="903">任选3-组三复式</option><option value="904">任选3-组六单式</option><option value="905">任选3-组六复式</option><option value="906">任选3-组选和值</option><option value="907">任选4-直选单式</option><option value="908">任选4-直选复式</option><option value="909">任选4-组选12</option><option value="910">任选4-组选24</option><option value="911">任选4-组选4</option><option value="912">任选4-组选6</option><option value="913">前三其它-和值尾数</option><option value="914">前三其它-特殊号</option><option value="915">前三直选-单式</option><option value="916">前三直选-和值</option><option value="917">前三直选-复式</option><option value="918">前三直选-组合</option><option value="919">前三直选-跨度</option><option value="920">前三组选-混合组选</option><option value="921">前三组选-组三单式</option><option value="922">前三组选-组三复式</option><option value="923">前三组选-组六单式</option><option value="924">前三组选-组六复式</option><option value="925">前三组选-组选包胆</option><option value="926">前三组选-组选和值</option><option value="927">前二直选-单式</option><option value="928">前二直选-和值</option><option value="929">前二直选-复式</option><option value="930">前二直选-跨度</option><option value="931">前二组选-和值</option><option value="932">前二组选-组选包胆</option><option value="933">前二组选-组选单式</option><option value="934">前二组选-组选复式</option><option value="935">后三其它-和值尾数</option><option value="936">后三其它-特殊号</option><option value="937">后三直选-单式</option><option value="938">后三直选-和值</option><option value="939">后三直选-复式</option><option value="940">后三直选-组合</option><option value="941">后三直选-跨度</option><option value="942">后三组选-混合组选</option><option value="943">后三组选-组三单式</option><option value="944">后三组选-组三复式</option><option value="945">后三组选-组六单式</option><option value="946">后三组选-组六复式</option><option value="947">后三组选-组选包胆</option><option value="948">后三组选-组选和值</option><option value="949">四星直选-单式</option><option value="950">四星直选-复式</option><option value="951">大小单双-前2</option><option value="952">大小单双-前3</option><option value="953">大小单双-后2</option><option value="954">大小单双-后3</option><option value="955">定位胆</option><option value="666">前一-复式</option><option value="667">前一-单式</option><option value="668">前二-复式</option><option value="669">前二-单式</option><option value="670">前三-复式</option><option value="671">前三-单式</option><option value="672">定位胆</option><option value="750">中三组选复式</option><option value="751">任选复式-7中5</option><option value="752">后二组选单式</option><option value="753">定位胆</option><option value="754">任选单式-7中5</option><option value="755">任选单式-5中5</option><option value="756">任选单式-3中3</option><option value="757">后三组选复式</option><option value="758">任选单式-1中1</option><option value="759">后三直选复式</option><option value="760">后三组选胆拖</option><option value="761">后三组选单式</option><option value="762">中三直选复式</option><option value="763">中三组选胆拖</option><option value="764">前二组选单式</option><option value="765">前二直选复式</option><option value="766">前二组选胆拖</option><option value="767">任选复式-3中3</option><option value="768">任选胆拖-8中5</option><option value="769">后二直选复式</option><option value="770">后二组选胆拖</option><option value="771">任选胆拖-6中5</option><option value="772">前三组选复式</option><option value="773">任选胆拖-4中4</option><option value="774">任选复式-5中5</option><option value="775">任选胆拖-2中2</option><option value="776">前三直选复式</option><option value="777">前三组选胆拖</option><option value="778">任选复式-1中1</option><option value="779">不定位-后三</option><option value="780">中三组选单式</option><option value="781">任选复式-8中5</option><option value="782">任选复式-6中5</option><option value="783">后二组选复式</option><option value="784">任选单式-6中5</option><option value="785">不定位-前三</option><option value="786">任选单式-4中4</option><option value="787">任选单式-2中2</option><option value="788">中三直选单式</option><option value="789">不定位-中三</option><option value="790">后三直选单式</option><option value="791">前二直选单式</option><option value="792">前二组选复式</option><option value="793">任选单式-8中5</option><option value="794">后二直选单式</option><option value="795">任选胆拖-7中5</option><option value="796">任选胆拖-5中5</option><option value="797">任选复式-2中2</option><option value="798">前三组选单式</option><option value="799">任选胆拖-3中3</option><option value="800">任选复式-4中4</option><option value="801">前三直选单式</option></select>
+            状态：
+            <select name="status" id="status">
+                <option value="">所有</option>
+                <option value="0">未结算</option>
+                <option value="1">已结算</option>
+            </select>
+            　起止时间：
+            <input name="starttime" id="starttime" value="2018-04-02 00:00" type="text" size="11" class="suminp" onclick="laydate({istime: true,format: 'YYYY-MM-DD hh:mm'})"> -
+            <input name="endtime" id="endtime" type="text" size="11" value="2018-04-03 00:00" class="suminp" onclick="laydate({istime: true,format: 'YYYY-MM-DD hh:mm'})">
+            <a href="javascript:void(0)" class="button_small button_1" onclick="shaixuan()">筛选</a>
+        </div>
+    </h2>
+        <table class="eveb_box eveb_table" id="dataTable">
+            <thead>
+            <tr>
+                <th>编号</th>
+                <th>注单号</th>
+                <th>时间</th>
+                <th>彩种</th>
+                <th>玩法</th>
+                <th>赔率</th>
+                <th>期号</th>
+                <th>投注内容</th>
+                <th>注数</th>
+                <th>投注金额</th>
+                <th>中奖金额</th>
+                <th>盈亏</th>
+                <th>状态</th>
+            </tr>
+            </thead>
+            <tbody><tr><td colspan="13" styl="text-align:center;">暂无数据</td></tr></tbody>
+        </table>
+        <div class="eveb_amount fl">当前小计<span id="pageMoney">0</span>元，总计<span id="totalMoney">0</span>元，当前盈亏<span id="pageWinOrLoseMoney">0</span>元，总盈亏<span id="totalWinOrLoseMoney">0</span>元</div>
+        <div class="eveb_page fr"></div>
+    </div>
+</div>
+<script src="/__JS__/jquery.min.js"></script>
+<script src="/__JS__/jquery.validate.min.js"></script>
+<script src="/__JS__/user/validate.js"></script>
+<script src="/__JS__/user/global.js"></script>
+<script src="/__JS__/jquery.form.min.js"></script>
+<script src="/__JS__/md5.min.js"></script>
+<script src="/__JS__/index2/layer.js"></script>
+<script src="/__JS__/index2/jquery.nicescroll.js"></script>
+<script src="/__JS__/clipboard.min.js"></script>
+<script src="/__JS__/index2/dateFormat.js"></script>
+<script src="/__JS__/index2/template.js"></script>
+<script src="/__JS__/index2/jquery.cookie.js"></script>
+<script src="/__JS__/bootstrap.min.js"></script>
+<script src="/__JS__/nifty.min.js"></script>
+<script src="/__JS__/common.min.js"></script>
+<script src="/__JS__/fastdata.js"></script>
+<script src="/__JS__/jquery.jplayer.min.js"></script>
+<script src="/__JS__/user/laydate.js"></script>
+<script>
+
+    // 传统玩法
+    var ctwfPlayList = [
+        [1,216,'双面'],
+        [1,217,'数字盘'],
+        [1,218,'一字定位'],
+        [1,219,'二字定位'],
+        [1,220,'三字定位'],
+        [1,221,'一字组合'],
+        [1,222,'二字组合'],
+        [1,223,'二字和数'],
+        [1,224,'组选三'],
+        [1,225,'组选六'],
+        [1,226,'跨度'],
+        [1,227,'龙虎'],
+        [2,228,'双面'],
+        [2,229,'数字盘'],
+        [2,230,'一字定位'],
+        [2,231,'二字定位'],
+        [2,232,'三字定位'],
+        [2,233,'一字组合'],
+        [2,234,'二字组合'],
+        [2,235,'二字和数'],
+        [2,236,'组选三'],
+        [2,237,'组选六'],
+        [2,238,'跨度'],
+        [2,239,'龙虎'],
+        [3,240,'双面'],
+        [3,241,'数字盘'],
+        [3,242,'一字定位'],
+        [3,243,'二字定位'],
+        [3,244,'三字定位'],
+        [3,245,'一字组合'],
+        [3,246,'二字组合'],
+        [3,247,'二字和数'],
+        [3,248,'组选三'],
+        [3,249,'组选六'],
+        [3,250,'跨度'],
+        [3,251,'龙虎'],
+        [4,287,'定位'],
+        [4,288,'组合'],
+        [4,289,'和数'],
+        [4,290,'组选三'],
+        [4,291,'组选六'],
+        [4,292,'跨度'],
+        [5,252,'定位'],
+        [5,253,'组合'],
+        [5,254,'和数'],
+        [5,255,'组选三'],
+        [5,256,'组选六'],
+        [5,257,'跨度'],
+        [6,204,'特码'],
+        [6,205,'正码'],
+        [6,206,'正特码'],
+        [6,207,'正码1-6'],
+        [6,208,'连码'],
+        [6,209,'半波'],
+        [6,210,'一肖/尾数'],
+        [6,211,'特肖'],
+        [6,212,'合肖'],
+        [6,213,'连肖'],
+        [6,214,'尾数连'],
+        [6,215,'全不中'],
+        [7,293,'和值'],
+        [7,657,'混合'],
+        [7,658,'特码包三'],
+        [8,271,'选5'],
+        [8,272,'选4'],
+        [8,273,'选3'],
+        [8,274,'选2'],
+        [8,275,'选1'],
+        [8,276,'其他'],
+        [9,258,'双面'],
+        [9,259,'数字盘'],
+        [9,260,'冠军'],
+        [9,261,'亚军'],
+        [9,262,'季军'],
+        [9,263,'第四名'],
+        [9,264,'第五名'],
+        [9,265,'第六名'],
+        [9,266,'第七名'],
+        [9,267,'第八名'],
+        [9,268,'第九名'],
+        [9,269,'第十名'],
+        [9,270,'冠亚和'],
+        [10,294,'双面'],
+        [10,295,'第一球'],
+        [10,296,'第二球'],
+        [10,297,'第三球'],
+        [10,298,'第四球'],
+        [10,299,'第五球'],
+        [10,300,'第六球'],
+        [10,301,'第七球'],
+        [10,302,'第八球'],
+        [10,303,'龙虎'],
+        [11,277,'双面'],
+        [11,278,'第一球'],
+        [11,279,'第二球'],
+        [11,280,'第三球'],
+        [11,281,'第四球'],
+        [11,282,'第五球'],
+        [11,283,'第六球'],
+        [11,284,'第七球'],
+        [11,285,'第八球'],
+        [11,286,'龙虎'],
+        [12,304,'单式'],
+        [12,305,'幸运选号'],
+        [12,306,'胆拖'],
+        [12,1035,'红码'],
+        [12,1036,'蓝码'],
+        [12,1037,'红码定位'],
+        [12,1038,'双面'],
+        [12,1039,'红蓝配'],
+        [13,331,'二字组合'],
+        [13,332,'双面'],
+        [13,333,'一字定位'],
+        [13,334,'三字定位'],
+        [13,335,'组选六'],
+        [13,336,'龙虎'],
+        [13,337,'数字盘'],
+        [13,338,'二字和数'],
+        [13,339,'一字组合'],
+        [13,340,'二字定位'],
+        [13,341,'组选三'],
+        [13,342,'跨度'],
+        [14,318,'双面'],
+        [14,319,'冠亚和'],
+        [14,330,'排名1~10'],
+        [15,379,'组选六'],
+        [15,380,'数字盘'],
+        [15,381,'三字定位'],
+        [15,382,'二字和数'],
+        [15,383,'一字定位'],
+        [15,384,'二字组合'],
+        [15,385,'跨度'],
+        [15,386,'组选三'],
+        [15,387,'一字组合'],
+        [15,388,'二字定位'],
+        [15,389,'双面'],
+        [15,390,'龙虎'],
+        [16,391,'组选六'],
+        [16,392,'数字盘'],
+        [16,393,'三字定位'],
+        [16,394,'二字和数'],
+        [16,395,'一字定位'],
+        [16,396,'二字组合'],
+        [16,397,'跨度'],
+        [16,398,'组选三'],
+        [16,399,'一字组合'],
+        [16,400,'二字定位'],
+        [16,401,'双面'],
+        [16,402,'龙虎'],
+        [17,403,'组选六'],
+        [17,404,'数字盘'],
+        [17,405,'三字定位'],
+        [17,406,'二字和数'],
+        [17,407,'一字定位'],
+        [17,408,'二字组合'],
+        [17,409,'跨度'],
+        [17,410,'组选三'],
+        [17,411,'一字组合'],
+        [17,412,'二字定位'],
+        [17,413,'双面'],
+        [17,414,'龙虎'],
+        [18,437,'和值'],
+        [18,438,'通选'],
+        [18,439,'三同号单选'],
+        [18,440,'三不同'],
+        [18,441,'二同号复选'],
+        [18,442,'二同号单选'],
+        [18,443,'二不同号'],
+        [18,444,'猜必出'],
+        [18,445,'猜必不出'],
+        [19,446,'三同号单选'],
+        [19,447,'二同号复选'],
+        [19,448,'猜必不出'],
+        [19,449,'二不同号'],
+        [19,450,'通选'],
+        [19,451,'三不同'],
+        [19,452,'猜必出'],
+        [19,453,'二同号单选'],
+        [19,454,'和值'],
+        [20,455,'三同号单选'],
+        [20,456,'二同号复选'],
+        [20,457,'猜必不出'],
+        [20,458,'二不同号'],
+        [20,459,'通选'],
+        [20,460,'三不同'],
+        [20,461,'猜必出'],
+        [20,462,'二同号单选'],
+        [20,463,'和值'],
+        [21,464,'三同号单选'],
+        [21,465,'二同号复选'],
+        [21,466,'猜必不出'],
+        [21,467,'二不同号'],
+        [21,468,'通选'],
+        [21,469,'三不同'],
+        [21,470,'猜必出'],
+        [21,471,'二同号单选'],
+        [21,472,'和值'],
+        [22,473,'正特码'],
+        [22,474,'连码'],
+        [22,475,'连肖'],
+        [22,476,'合肖'],
+        [22,477,'全不中'],
+        [22,478,'一肖/尾'],
+        [22,479,'正码'],
+        [22,480,'正码1-6'],
+        [22,481,'尾数连'],
+        [22,491,'特肖'],
+        [22,492,'半波'],
+        [22,493,'特码'],
+        [23,494,'双面'],
+        [23,495,'冠亚和'],
+        [23,496,'排名1~10']
+    ];
+    // 官方玩法
+    var gfwfPlayList = [
+        [1,497,'五星直选-复式'],
+        [1,498,'五星直选-单式'],
+        [1,499,'四星直选-复式'],
+        [1,500,'四星直选-单式'],
+        [1,502,'后三直选-复式'],
+        [1,503,'后三直选-单式'],
+        [1,504,'后三直选-组合'],
+        [1,505,'后三直选-和值'],
+        [1,506,'后三直选-跨度'],
+        [1,507,'后三组选-组三复式'],
+        [1,508,'后三组选-组三单式'],
+        [1,509,'后三组选-组六复式'],
+        [1,510,'后三组选-组六单式'],
+        [1,511,'后三组选-混合组选'],
+        [1,512,'后三组选-组选和值'],
+        [1,513,'后三组选-组选包胆'],
+        [1,514,'后三其它-和值尾数'],
+        [1,515,'后三其它-特殊号'],
+        [1,516,'前三直选-复式'],
+        [1,517,'前三直选-单式'],
+        [1,518,'前三直选-组合'],
+        [1,519,'前三直选-和值'],
+        [1,520,'前三直选-跨度'],
+        [1,521,'前三组选-组三复式'],
+        [1,522,'前三组选-组三单式'],
+        [1,523,'前三组选-组六复式'],
+        [1,524,'前三组选-组六单式'],
+        [1,526,'前三组选-混合组选'],
+        [1,528,'前三组选-组选和值'],
+        [1,529,'前三组选-组选包胆'],
+        [1,531,'前三其它-和值尾数'],
+        [1,534,'前三其它-特殊号'],
+        [1,535,'前二直选-复式'],
+        [1,536,'前二直选-单式'],
+        [1,537,'前二直选-和值'],
+        [1,538,'前二直选-跨度'],
+        [1,539,'前二组选-组选复式'],
+        [1,540,'前二组选-组选单式'],
+        [1,541,'前二组选-和值'],
+        [1,542,'前二组选-组选包胆'],
+        [1,543,'定位胆'],
+        [1,544,'不定位-前三一码'],
+        [1,545,'不定位-前三二码'],
+        [1,546,'不定位-后三一码'],
+        [1,547,'不定位-后三二码'],
+        [1,548,'不定位-前四一码'],
+        [1,549,'不定位-前四二码'],
+        [1,550,'不定位-后四一码'],
+        [1,551,'不定位-后四二码'],
+        [1,552,'不定位-五星一码'],
+        [1,553,'不定位-五星二码'],
+        [1,554,'不定位-五星三码'],
+        [1,555,'大小单双-前2'],
+        [1,556,'大小单双-后2'],
+        [1,557,'大小单双-前3'],
+        [1,558,'大小单双-后3'],
+        [1,559,'任选2-直选复式'],
+        [1,560,'任选2-直选单式'],
+        [1,561,'任选2-直选和值'],
+        [1,562,'任选2-组选复式'],
+        [1,563,'任选2-组选单式'],
+        [1,564,'任选2-组选和值'],
+        [1,565,'任选3-直选复式'],
+        [1,566,'任选3-直选单式'],
+        [1,567,'任选3-直选和值'],
+        [1,568,'任选3-组三复式'],
+        [1,569,'任选3-组三单式'],
+        [1,570,'任选3-组六复式'],
+        [1,571,'任选3-组六单式'],
+        [1,572,'任选3-混合组选'],
+        [1,573,'任选3-组选和值'],
+        [1,574,'任选4-直选复式'],
+        [1,575,'任选4-直选单式'],
+        [1,576,'任选4-组选24'],
+        [1,577,'任选4-组选12'],
+        [1,578,'任选4-组选6'],
+        [1,579,'任选4-组选4'],
+        [2,673,'不定位-五星一码'],
+        [2,674,'不定位-五星三码'],
+        [2,675,'不定位-五星二码'],
+        [2,676,'不定位-前三一码'],
+        [2,677,'不定位-前三二码'],
+        [2,678,'不定位-前四一码'],
+        [2,679,'不定位-前四二码'],
+        [2,680,'不定位-后三一码'],
+        [2,681,'不定位-后三二码'],
+        [2,682,'不定位-后四一码'],
+        [2,683,'不定位-后四二码'],
+        [2,684,'五星直选-单式'],
+        [2,685,'五星直选-复式'],
+        [2,686,'任选2-直选单式'],
+        [2,687,'任选2-直选和值'],
+        [2,688,'任选2-直选复式'],
+        [2,689,'任选2-组选单式'],
+        [2,690,'任选2-组选和值'],
+        [2,691,'任选2-组选复式'],
+        [2,692,'任选3-混合组选'],
+        [2,693,'任选3-直选单式'],
+        [2,694,'任选3-直选和值'],
+        [2,695,'任选3-直选复式'],
+        [2,696,'任选3-组三单式'],
+        [2,697,'任选3-组三复式'],
+        [2,698,'任选3-组六单式'],
+        [2,699,'任选3-组六复式'],
+        [2,700,'任选3-组选和值'],
+        [2,701,'任选4-直选单式'],
+        [2,702,'任选4-直选复式'],
+        [2,703,'任选4-组选12'],
+        [2,704,'任选4-组选24'],
+        [2,705,'任选4-组选4'],
+        [2,706,'任选4-组选6'],
+        [2,707,'前三其它-和值尾数'],
+        [2,708,'前三其它-特殊号'],
+        [2,709,'前三直选-单式'],
+        [2,710,'前三直选-和值'],
+        [2,711,'前三直选-复式'],
+        [2,712,'前三直选-组合'],
+        [2,713,'前三直选-跨度'],
+        [2,714,'前三组选-混合组选'],
+        [2,715,'前三组选-组三单式'],
+        [2,716,'前三组选-组三复式'],
+        [2,717,'前三组选-组六单式'],
+        [2,718,'前三组选-组六复式'],
+        [2,719,'前三组选-组选包胆'],
+        [2,720,'前三组选-组选和值'],
+        [2,721,'前二直选-单式'],
+        [2,722,'前二直选-和值'],
+        [2,723,'前二直选-复式'],
+        [2,724,'前二直选-跨度'],
+        [2,725,'前二组选-和值'],
+        [2,726,'前二组选-组选包胆'],
+        [2,727,'前二组选-组选单式'],
+        [2,728,'前二组选-组选复式'],
+        [2,729,'后三其它-和值尾数'],
+        [2,730,'后三其它-特殊号'],
+        [2,731,'后三直选-单式'],
+        [2,732,'后三直选-和值'],
+        [2,733,'后三直选-复式'],
+        [2,734,'后三直选-组合'],
+        [2,735,'后三直选-跨度'],
+        [2,736,'后三组选-混合组选'],
+        [2,737,'后三组选-组三单式'],
+        [2,738,'后三组选-组三复式'],
+        [2,739,'后三组选-组六单式'],
+        [2,740,'后三组选-组六复式'],
+        [2,741,'后三组选-组选包胆'],
+        [2,742,'后三组选-组选和值'],
+        [2,743,'四星直选-单式'],
+        [2,744,'四星直选-复式'],
+        [2,745,'大小单双-前2'],
+        [2,746,'大小单双-前3'],
+        [2,747,'大小单双-后2'],
+        [2,748,'大小单双-后3'],
+        [2,749,'定位胆'],
+        [3,802,'不定位-五星一码'],
+        [3,803,'不定位-五星三码'],
+        [3,804,'不定位-五星二码'],
+        [3,805,'不定位-前三一码'],
+        [3,806,'不定位-前三二码'],
+        [3,807,'不定位-前四一码'],
+        [3,808,'不定位-前四二码'],
+        [3,809,'不定位-后三一码'],
+        [3,810,'不定位-后三二码'],
+        [3,811,'不定位-后四一码'],
+        [3,812,'不定位-后四二码'],
+        [3,813,'五星直选-单式'],
+        [3,814,'五星直选-复式'],
+        [3,815,'任选2-直选单式'],
+        [3,816,'任选2-直选和值'],
+        [3,817,'任选2-直选复式'],
+        [3,818,'任选2-组选单式'],
+        [3,819,'任选2-组选和值'],
+        [3,820,'任选2-组选复式'],
+        [3,821,'任选3-混合组选'],
+        [3,822,'任选3-直选单式'],
+        [3,823,'任选3-直选和值'],
+        [3,824,'任选3-直选复式'],
+        [3,825,'任选3-组三单式'],
+        [3,826,'任选3-组三复式'],
+        [3,827,'任选3-组六单式'],
+        [3,828,'任选3-组六复式'],
+        [3,829,'任选3-组选和值'],
+        [3,830,'任选4-直选单式'],
+        [3,831,'任选4-直选复式'],
+        [3,832,'任选4-组选12'],
+        [3,833,'任选4-组选24'],
+        [3,834,'任选4-组选4'],
+        [3,835,'任选4-组选6'],
+        [3,836,'前三其它-和值尾数'],
+        [3,837,'前三其它-特殊号'],
+        [3,838,'前三直选-单式'],
+        [3,839,'前三直选-和值'],
+        [3,840,'前三直选-复式'],
+        [3,841,'前三直选-组合'],
+        [3,842,'前三直选-跨度'],
+        [3,843,'前三组选-混合组选'],
+        [3,844,'前三组选-组三单式'],
+        [3,845,'前三组选-组三复式'],
+        [3,846,'前三组选-组六单式'],
+        [3,847,'前三组选-组六复式'],
+        [3,848,'前三组选-组选包胆'],
+        [3,849,'前三组选-组选和值'],
+        [3,850,'前二直选-单式'],
+        [3,851,'前二直选-和值'],
+        [3,852,'前二直选-复式'],
+        [3,853,'前二直选-跨度'],
+        [3,854,'前二组选-和值'],
+        [3,855,'前二组选-组选包胆'],
+        [3,856,'前二组选-组选单式'],
+        [3,857,'前二组选-组选复式'],
+        [3,858,'后三其它-和值尾数'],
+        [3,859,'后三其它-特殊号'],
+        [3,860,'后三直选-单式'],
+        [3,861,'后三直选-和值'],
+        [3,862,'后三直选-复式'],
+        [3,863,'后三直选-组合'],
+        [3,864,'后三直选-跨度'],
+        [3,865,'后三组选-混合组选'],
+        [3,866,'后三组选-组三单式'],
+        [3,867,'后三组选-组三复式'],
+        [3,868,'后三组选-组六单式'],
+        [3,869,'后三组选-组六复式'],
+        [3,870,'后三组选-组选包胆'],
+        [3,871,'后三组选-组选和值'],
+        [3,872,'四星直选-单式'],
+        [3,873,'四星直选-复式'],
+        [3,874,'大小单双-前2'],
+        [3,875,'大小单双-前3'],
+        [3,876,'大小单双-后2'],
+        [3,877,'大小单双-后3'],
+        [3,878,'定位胆'],
+        [9,659,'前一-复式'],
+        [9,660,'前一-单式'],
+        [9,661,'前二-复式'],
+        [9,662,'前二-单式'],
+        [9,663,'前三-复式'],
+        [9,664,'前三-单式'],
+        [9,665,'定位胆'],
+        [12,1033,'红蓝直选复式'],
+        [12,1034,'红蓝直选单式'],
+        [13,956,'不定位-五星一码'],
+        [13,957,'不定位-五星三码'],
+        [13,958,'不定位-五星二码'],
+        [13,959,'不定位-前三一码'],
+        [13,960,'不定位-前三二码'],
+        [13,961,'不定位-前四一码'],
+        [13,962,'不定位-前四二码'],
+        [13,963,'不定位-后三一码'],
+        [13,964,'不定位-后三二码'],
+        [13,965,'不定位-后四一码'],
+        [13,966,'不定位-后四二码'],
+        [13,967,'五星直选-单式'],
+        [13,968,'五星直选-复式'],
+        [13,969,'任选2-直选单式'],
+        [13,970,'任选2-直选和值'],
+        [13,971,'任选2-直选复式'],
+        [13,972,'任选2-组选单式'],
+        [13,973,'任选2-组选和值'],
+        [13,974,'任选2-组选复式'],
+        [13,975,'任选3-混合组选'],
+        [13,976,'任选3-直选单式'],
+        [13,977,'任选3-直选和值'],
+        [13,978,'任选3-直选复式'],
+        [13,979,'任选3-组三单式'],
+        [13,980,'任选3-组三复式'],
+        [13,981,'任选3-组六单式'],
+        [13,982,'任选3-组六复式'],
+        [13,983,'任选3-组选和值'],
+        [13,984,'任选4-直选单式'],
+        [13,985,'任选4-直选复式'],
+        [13,986,'任选4-组选12'],
+        [13,987,'任选4-组选24'],
+        [13,988,'任选4-组选4'],
+        [13,989,'任选4-组选6'],
+        [13,990,'前三其它-和值尾数'],
+        [13,991,'前三其它-特殊号'],
+        [13,992,'前三直选-单式'],
+        [13,993,'前三直选-和值'],
+        [13,994,'前三直选-复式'],
+        [13,995,'前三直选-组合'],
+        [13,996,'前三直选-跨度'],
+        [13,997,'前三组选-混合组选'],
+        [13,998,'前三组选-组三单式'],
+        [13,999,'前三组选-组三复式'],
+        [13,1000,'前三组选-组六单式'],
+        [13,1001,'前三组选-组六复式'],
+        [13,1002,'前三组选-组选包胆'],
+        [13,1003,'前三组选-组选和值'],
+        [13,1004,'前二直选-单式'],
+        [13,1005,'前二直选-和值'],
+        [13,1006,'前二直选-复式'],
+        [13,1007,'前二直选-跨度'],
+        [13,1008,'前二组选-和值'],
+        [13,1009,'前二组选-组选包胆'],
+        [13,1010,'前二组选-组选单式'],
+        [13,1011,'前二组选-组选复式'],
+        [13,1012,'后三其它-和值尾数'],
+        [13,1013,'后三其它-特殊号'],
+        [13,1014,'后三直选-单式'],
+        [13,1015,'后三直选-和值'],
+        [13,1016,'后三直选-复式'],
+        [13,1017,'后三直选-组合'],
+        [13,1018,'后三直选-跨度'],
+        [13,1019,'后三组选-混合组选'],
+        [13,1020,'后三组选-组三单式'],
+        [13,1021,'后三组选-组三复式'],
+        [13,1022,'后三组选-组六单式'],
+        [13,1023,'后三组选-组六复式'],
+        [13,1024,'后三组选-组选包胆'],
+        [13,1025,'后三组选-组选和值'],
+        [13,1026,'四星直选-单式'],
+        [13,1027,'四星直选-复式'],
+        [13,1028,'大小单双-前2'],
+        [13,1029,'大小单双-前3'],
+        [13,1030,'大小单双-后2'],
+        [13,1031,'大小单双-后3'],
+        [13,1032,'定位胆'],
+        [14,1040,'前一-单式'],
+        [14,1041,'前一-复式'],
+        [14,1042,'前三-单式'],
+        [14,1043,'前三-复式'],
+        [14,1044,'前二-单式'],
+        [14,1045,'前二-复式'],
+        [14,1046,'定位胆'],
+        [15,580,'任选4-组选4'],
+        [15,581,'任选4-组选6'],
+        [15,582,'任选4-组选12'],
+        [15,583,'任选4-组选24'],
+        [15,584,'任选4-直选单式'],
+        [15,585,'任选4-直选复式'],
+        [15,586,'任选3-组选和值'],
+        [15,587,'任选3-混合组选'],
+        [15,588,'任选3-组六单式'],
+        [15,589,'任选3-组六复式'],
+        [15,590,'任选3-组三单式'],
+        [15,591,'任选3-组三复式'],
+        [15,592,'任选3-直选和值'],
+        [15,593,'任选3-直选单式'],
+        [15,594,'任选3-直选复式'],
+        [15,595,'任选2-组选和值'],
+        [15,596,'任选2-组选单式'],
+        [15,597,'任选2-组选复式'],
+        [15,598,'任选2-直选和值'],
+        [15,599,'任选2-直选单式'],
+        [15,600,'任选2-直选复式'],
+        [15,601,'大小单双-后3'],
+        [15,602,'大小单双-前3'],
+        [15,603,'大小单双-后2'],
+        [15,604,'大小单双-前2'],
+        [15,605,'不定位-五星三码'],
+        [15,606,'不定位-五星二码'],
+        [15,607,'不定位-五星一码'],
+        [15,608,'不定位-后四二码'],
+        [15,609,'不定位-后四一码'],
+        [15,610,'不定位-前四二码'],
+        [15,611,'不定位-前四一码'],
+        [15,612,'不定位-后三二码'],
+        [15,613,'不定位-后三一码'],
+        [15,614,'不定位-前三二码'],
+        [15,615,'不定位-前三一码'],
+        [15,616,'定位胆'],
+        [15,617,'前二组选-组选包胆'],
+        [15,618,'前二组选-和值'],
+        [15,619,'前二组选-组选单式'],
+        [15,620,'前二组选-组选复式'],
+        [15,621,'前二直选-跨度'],
+        [15,622,'前二直选-和值'],
+        [15,623,'前二直选-单式'],
+        [15,624,'前二直选-复式'],
+        [15,625,'前三其它-特殊号'],
+        [15,626,'前三其它-和值尾数'],
+        [15,627,'前三组选-组选包胆'],
+        [15,628,'前三组选-组选和值'],
+        [15,629,'前三组选-混合组选'],
+        [15,630,'前三组选-组六单式'],
+        [15,631,'前三组选-组六复式'],
+        [15,632,'前三组选-组三单式'],
+        [15,633,'前三组选-组三复式'],
+        [15,634,'前三直选-跨度'],
+        [15,635,'前三直选-和值'],
+        [15,636,'前三直选-组合'],
+        [15,637,'前三直选-单式'],
+        [15,638,'前三直选-复式'],
+        [15,639,'后三其它-特殊号'],
+        [15,640,'后三其它-和值尾数'],
+        [15,641,'后三组选-组选包胆'],
+        [15,642,'后三组选-组选和值'],
+        [15,643,'后三组选-混合组选'],
+        [15,644,'后三组选-组六单式'],
+        [15,645,'后三组选-组六复式'],
+        [15,646,'后三组选-组三单式'],
+        [15,647,'后三组选-组三复式'],
+        [15,648,'后三直选-跨度'],
+        [15,649,'后三直选-和值'],
+        [15,650,'后三直选-组合'],
+        [15,651,'后三直选-单式'],
+        [15,652,'后三直选-复式'],
+        [15,653,'四星直选-单式'],
+        [15,654,'四星直选-复式'],
+        [15,655,'五星直选-单式'],
+        [15,656,'五星直选-复式'],
+        [16,879,'不定位-五星一码'],
+        [16,880,'不定位-五星三码'],
+        [16,881,'不定位-五星二码'],
+        [16,882,'不定位-前三一码'],
+        [16,883,'不定位-前三二码'],
+        [16,884,'不定位-前四一码'],
+        [16,885,'不定位-前四二码'],
+        [16,886,'不定位-后三一码'],
+        [16,887,'不定位-后三二码'],
+        [16,888,'不定位-后四一码'],
+        [16,889,'不定位-后四二码'],
+        [16,890,'五星直选-单式'],
+        [16,891,'五星直选-复式'],
+        [16,892,'任选2-直选单式'],
+        [16,893,'任选2-直选和值'],
+        [16,894,'任选2-直选复式'],
+        [16,895,'任选2-组选单式'],
+        [16,896,'任选2-组选和值'],
+        [16,897,'任选2-组选复式'],
+        [16,898,'任选3-混合组选'],
+        [16,899,'任选3-直选单式'],
+        [16,900,'任选3-直选和值'],
+        [16,901,'任选3-直选复式'],
+        [16,902,'任选3-组三单式'],
+        [16,903,'任选3-组三复式'],
+        [16,904,'任选3-组六单式'],
+        [16,905,'任选3-组六复式'],
+        [16,906,'任选3-组选和值'],
+        [16,907,'任选4-直选单式'],
+        [16,908,'任选4-直选复式'],
+        [16,909,'任选4-组选12'],
+        [16,910,'任选4-组选24'],
+        [16,911,'任选4-组选4'],
+        [16,912,'任选4-组选6'],
+        [16,913,'前三其它-和值尾数'],
+        [16,914,'前三其它-特殊号'],
+        [16,915,'前三直选-单式'],
+        [16,916,'前三直选-和值'],
+        [16,917,'前三直选-复式'],
+        [16,918,'前三直选-组合'],
+        [16,919,'前三直选-跨度'],
+        [16,920,'前三组选-混合组选'],
+        [16,921,'前三组选-组三单式'],
+        [16,922,'前三组选-组三复式'],
+        [16,923,'前三组选-组六单式'],
+        [16,924,'前三组选-组六复式'],
+        [16,925,'前三组选-组选包胆'],
+        [16,926,'前三组选-组选和值'],
+        [16,927,'前二直选-单式'],
+        [16,928,'前二直选-和值'],
+        [16,929,'前二直选-复式'],
+        [16,930,'前二直选-跨度'],
+        [16,931,'前二组选-和值'],
+        [16,932,'前二组选-组选包胆'],
+        [16,933,'前二组选-组选单式'],
+        [16,934,'前二组选-组选复式'],
+        [16,935,'后三其它-和值尾数'],
+        [16,936,'后三其它-特殊号'],
+        [16,937,'后三直选-单式'],
+        [16,938,'后三直选-和值'],
+        [16,939,'后三直选-复式'],
+        [16,940,'后三直选-组合'],
+        [16,941,'后三直选-跨度'],
+        [16,942,'后三组选-混合组选'],
+        [16,943,'后三组选-组三单式'],
+        [16,944,'后三组选-组三复式'],
+        [16,945,'后三组选-组六单式'],
+        [16,946,'后三组选-组六复式'],
+        [16,947,'后三组选-组选包胆'],
+        [16,948,'后三组选-组选和值'],
+        [16,949,'四星直选-单式'],
+        [16,950,'四星直选-复式'],
+        [16,951,'大小单双-前2'],
+        [16,952,'大小单双-前3'],
+        [16,953,'大小单双-后2'],
+        [16,954,'大小单双-后3'],
+        [16,955,'定位胆'],
+        [23,666,'前一-复式'],
+        [23,667,'前一-单式'],
+        [23,668,'前二-复式'],
+        [23,669,'前二-单式'],
+        [23,670,'前三-复式'],
+        [23,671,'前三-单式'],
+        [23,672,'定位胆'],
+        [24,750,'中三组选复式'],
+        [24,751,'任选复式-7中5'],
+        [24,752,'后二组选单式'],
+        [24,753,'定位胆'],
+        [24,754,'任选单式-7中5'],
+        [24,755,'任选单式-5中5'],
+        [24,756,'任选单式-3中3'],
+        [24,757,'后三组选复式'],
+        [24,758,'任选单式-1中1'],
+        [24,759,'后三直选复式'],
+        [24,760,'后三组选胆拖'],
+        [24,761,'后三组选单式'],
+        [24,762,'中三直选复式'],
+        [24,763,'中三组选胆拖'],
+        [24,764,'前二组选单式'],
+        [24,765,'前二直选复式'],
+        [24,766,'前二组选胆拖'],
+        [24,767,'任选复式-3中3'],
+        [24,768,'任选胆拖-8中5'],
+        [24,769,'后二直选复式'],
+        [24,770,'后二组选胆拖'],
+        [24,771,'任选胆拖-6中5'],
+        [24,772,'前三组选复式'],
+        [24,773,'任选胆拖-4中4'],
+        [24,774,'任选复式-5中5'],
+        [24,775,'任选胆拖-2中2'],
+        [24,776,'前三直选复式'],
+        [24,777,'前三组选胆拖'],
+        [24,778,'任选复式-1中1'],
+        [24,779,'不定位-后三'],
+        [24,780,'中三组选单式'],
+        [24,781,'任选复式-8中5'],
+        [24,782,'任选复式-6中5'],
+        [24,783,'后二组选复式'],
+        [24,784,'任选单式-6中5'],
+        [24,785,'不定位-前三'],
+        [24,786,'任选单式-4中4'],
+        [24,787,'任选单式-2中2'],
+        [24,788,'中三直选单式'],
+        [24,789,'不定位-中三'],
+        [24,790,'后三直选单式'],
+        [24,791,'前二直选单式'],
+        [24,792,'前二组选复式'],
+        [24,793,'任选单式-8中5'],
+        [24,794,'后二直选单式'],
+        [24,795,'任选胆拖-7中5'],
+        [24,796,'任选胆拖-5中5'],
+        [24,797,'任选复式-2中2'],
+        [24,798,'前三组选单式'],
+        [24,799,'任选胆拖-3中3'],
+        [24,800,'任选复式-4中4'],
+        [24,801,'前三直选单式']
+    ];
+
+    // 渲染玩法选择
+    function renderPlay() {
+        var playGroupId = $("#playGroupId").find("option:selected").val(); // 彩种
+        var typeId = $("#typeId").find("option:selected").val();    // 模式，1-传统，2-官方
+
+        // 所有彩种
+        var dataList = [];
+        if (playGroupId == "") {
+            if (typeId == "") { // 所有模式
+                for (var i = 0; i < ctwfPlayList.length; ++i) {
+                    var obj = ctwfPlayList[i];
+                    dataList.push(obj);
+                }
+                for (var i = 0; i < gfwfPlayList.length; ++i) {
+                    var obj = gfwfPlayList[i];
+                    dataList.push(obj);
+                }
+            } else if (typeId == 1) {   // 传统模式
+                for (var i = 0; i < ctwfPlayList.length; ++i) {
+                    var obj = ctwfPlayList[i];
+                    dataList.push(obj);
+                }
+            } else if (typeId == 2) {   // 官方模式
+                for (var i = 0; i < gfwfPlayList.length; ++i) {
+                    var obj = gfwfPlayList[i];
+                    dataList.push(obj);
+                }
+            }
+        } else {    // 某个彩种
+            if (typeId == "") { // 所有模式
+                for (var i = 0; i < ctwfPlayList.length; ++i) {
+                    var obj = ctwfPlayList[i];
+                    if (obj[0] == playGroupId) {
+                        dataList.push(obj);
+                    }
+                }
+                for (var i = 0; i < gfwfPlayList.length; ++i) {
+                    var obj = gfwfPlayList[i];
+                    if (obj[0] == playGroupId) {
+                        dataList.push(obj);
+                    }
+                }
+            } else if (typeId == 1) {   // 传统模式
+                for (var i = 0; i < ctwfPlayList.length; ++i) {
+                    var obj = ctwfPlayList[i];
+                    if (obj[0] == playGroupId) {
+                        dataList.push(obj);
+                    }
+                }
+            } else if (typeId == 2) {   // 官方模式
+                for (var i = 0; i < gfwfPlayList.length; ++i) {
+                    var obj = gfwfPlayList[i];
+                    if (obj[0] == playGroupId) {
+                        dataList.push(obj);
+                    }
+                }
+            }
+        }
+
+        var html = "";
+        html += '<option value="">所有</option>';
+        $.each(dataList, function(index, value) {
+            html += '<option value="' + value[1] + '">' + value[2] + '</option>';
+        });
+        $("#playId").html(html);
+    }
+
+    $(function () {
+        renderPlay();
+        $("#typeId").change(function(){
+            renderPlay();
+        });
+        $("#playGroupId").change(function(){
+            renderPlay();
+        });
+
+        shaixuan();
+    });
+
+    function goPage(pageIndex) {
+        $("input[name='pageIndex']").val(pageIndex);
+        getTzjlData();
+    }
+    function shaixuan() {
+        $("input[name='pageIndex']").val(1);
+        getTzjlData();
+    }
+    function getTzjlData(typeid) {
+        console.log(typeid);
+        $.ajax({
+            url: "/member/ajaxGetTzjl.json",
+            data: {
+                pageIndex: $("input[name='pageIndex']").val(),
+                startTime: $("input[name='starttime']").val(),
+                endTime: $("input[name='endtime']").val(),
+                pageSize: "6",
+                playGroupId: $("select[name='playGroupId']").val(),
+                playId: $("select[name='playId']").val(),
+                status: $("select[name='status']").val()
+            },
+            beforeSend: function () {
+                $("#dataTable tbody").html('<tr><td colspan="13" styl="text-align:center;"><img src="/static/theme/memberTheme/theme1/img/base_loading.gif"/></td></tr>');
+                $("#pageMoney").html(0);
+                $("#totalMoney").html(0);
+                $("#pageWinOrLoseMoney").html(0);
+                $("#totalWinOrLoseMoney").html(0);
+
+                $(".eveb_page").html('');
+            },
+            success: function (json) {
+                if (json.result != 1) {
+                    return;
+                }
+
+                if (json.sscBetsList.length == 0) {
+                    $("#dataTable tbody").html('<tr><td colspan="13" styl="text-align:center;">暂无数据</td></tr>');
+                    return;
+                }
+
+                $("input[name='pageIndex']").val(json.pageNum);
+
+                // 数据
+                var str = '';
+                $.each(json.sscBetsList,function (index,value) {
+                    var currentPageNum = (json.pageNum - 1) * json.pageSize;
+                    str += '<tr>';
+                    str += '<td>' + (index + currentPageNum + 1) + '</td>';
+                    str += '<td>' + value.orderNumber + '</td>';
+                    str += '<td>' + Tools.formatDate(value.createTime) + '</td>';
+                    str += '<td>' + value.playGroupName + '</td>';
+                    str += '<td>' + value.playName + '</td>';
+                    str += '<td>' + value.playPl + '</td>';
+                    str += '<td>' + value.number + '</td>';
+                    str += '<td class="content-tzjl">' + value.content + '</td>';
+                    str += '<td>' + value.zhushu + '</td>';
+                    str += '<td>' + value.totalMoney + '</td>';
+                    str += '<td>' + value.zjMoney + '</td>';
+                    str += '<td>';
+                    if (value.status == 1) {
+                        var tmp = parseFloat(value.winOrLose);
+                        if (tmp > 0) {
+                            str += '<font style="color:green">+' + tmp + '</font>'
+                        } else if (tmp < 0) {
+                            str += '<font style="color:red">' + tmp + '</font>'
+                        } else {
+                            str += '<font>' + tmp + '</font>'
+                        }
+                    } else {
+                        str += '0';
+                    }
+                    str += '</td>';
+                    str += '<td>';
+                    if (value.status == 0) {
+                        str += '未结算';
+                    } else if (value.status == 1) {
+                        str += '已结算';
+                    } else if (value.status == 2) {
+                        str += '已撤单';
+                    }
+                    str += '</td>';
+                    str += '</tr>';
+                });
+                $("#dataTable tbody").html(str);
+                // 分页
+                str = '';
+                str += '<span style="margin:0 3px;float:left;width:auto;padding:0 5px;height:25px;line-height:25px;">总共' + (Math.ceil(json.total / json.pageSize)) + '页，' + json.total + '条，当前第' + json.pageNum + '页</span>';
+                if (json.hasPreviousPage) {
+                    str += '<a href="javascript:void(0)" onclick="goPage(' + (json.prePage) + ')" style="margin:0 3px;float:left;width:auto;padding:0 5px;">上一页</a>';
+                } else {
+                    str += '<a href="javascript:void(0)" style="margin:0 3px;float:left;width:auto;padding:0 5px;">上一页</a>';
+                }
+                str += '<span style="margin:0 3px;float:left;width:auto;padding:0 5px;height:25px;line-height:25px;">跳转到</span>';
+                str += '<input type="text" id="pageNum" style="margin:0 3px;float:left;border:1px solid #eee;width:30px;line-height:25px;height:25px;" value="' + json.pageNum + '" />';
+                str += '<button onclick="goPage(document.getElementById(\'pageNum\').value)" type="text" style="margin:0 3px;float:left;border:1px solid #eee;width:30px;line-height:25px;height:25px;background:#fa6200;padding:0 5px;width:auto;color:#fff;font-size:14px;" value="0">确定</button>';
+                if (json.hasNextPage) {
+                    str += '<a href="javascript:void(0)" onclick="goPage(' + (json.nextPage) + ')" style="margin:0 3px;float:left;width:auto;padding:0 5px;">下一页</a>';
+                } else {
+                    str += '<a href="javascript:void(0)" style="margin:0 3px;float:left;width:auto;padding:0 5px;">下一页</a>';
+                }
+                $(".eveb_page").html(str);
+
+                $("#pageMoney").html(json.pageMoney);
+                $("#totalMoney").html(json.totalMoney);
+                $("#pageWinOrLoseMoney").html(json.pageWinOrLoseMoney);
+                $("#totalWinOrLoseMoney").html(json.totalWinOrLoseMoney);
+            }
+
+        });
+
+    }
+
+</script>

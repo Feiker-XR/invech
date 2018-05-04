@@ -1,0 +1,529 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>系统设置</title>
+<link href="/css/base.css" rel="stylesheet" type="text/css" />
+<link href="/css/admin.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="/js/jquery.js"></script>
+<script type="text/javascript" src="/js/jquery.tools.js"></script>
+<script type="text/javascript" src="/js/base.js"></script>
+<script language="JavaScript" src="/js/calendar.js"></script>
+<script language="JavaScript">
+function queren_location(url) {
+	if (confirm('你确定要重新结算吗？')) {
+		location.href = url;
+	}
+}
+</script>
+
+</head>
+<body class="list">
+  <div class="bar">
+    高频彩注单查看
+  </div>
+
+<div class="body">
+<form name="form1" method="get" action="<?=$_SERVER["REQUEST_URI"]?>" onSubmit="return check();">
+<div class="listBar">
+<select name="type" id="type">
+            <option value="重庆时时彩" style="color:#FF9900;" {if $type eq '重庆时时彩'}selected{/if}>重庆时时彩</option>
+            <option value="新疆时时彩" style="color:#FF9900;" {if $type eq '新疆时时彩'}selected{/if}>新疆时时彩</option>
+            <option value="重庆快乐十分" style="color:#FF9900;" {if $type eq '重庆快乐十分'}selected{/if}>重庆快乐十分</option>
+            <option value="广东快乐十分" style="color:#FF9900;" {if $type eq '广东快乐十分'}selected{/if}>广东快乐十分</option>
+            <option value="北京PK拾" style="color:#FF9900;" {if $type eq '北京PK拾'}selected{/if}>北京PK拾</option>
+            <option value="广西快乐十分" style="color:#FF9900;" {if $type eq '广西快乐十分'}selected{/if}>广西快乐十分</option>
+            <option value="江苏快3" style="color:#FF9900;" {if $type eq '江苏快3' }selected{/if}>江苏快3</option>
+            <option value="幸运飞艇" style="color:#FF9900;" {if $type eq '幸运飞艇' }selected{/if}>幸运飞艇</option>
+            <option value="" {if $type eq ''}selected{/if}>全部彩种</option>
+      </select>&nbsp;&nbsp;
+      <select name="js" id="js">
+            <option value="0" style="color:#FF9900;" {if $js eq '0'}selected{/if}>未结算注单</option>
+            <option value="1" style="color:#FF0000;" {if $js eq '1'}selected{/if}>已结算注单</option>
+            <option value="" {if $js eq ''}selected{/if}>全部注单</option>
+      </select>
+  &nbsp;&nbsp;
+          会员账号：
+          <input name="username" type="text" id="username" value="{$username}" size="15">
+            &nbsp;&nbsp;日期范围：
+            <input name="s_time" type="text" id="s_time" value="{$s_time}" onClick="new Calendar(2008,2020).show(this);" size="10" maxlength="10" readonly="readonly" />
+            ~
+            <input name="e_time" type="text" id="e_time" value="{$e_time}" onClick="new Calendar(2008,2020).show(this);" size="10" maxlength="10" readonly="readonly" />&nbsp;&nbsp;注单号：
+            <input name="tf_id" type="text" id="tf_id" value="{$tf_id}" size="22">
+            &nbsp;&nbsp;<input name="find" type="submit" id="find" value="查看报表" class="formButton"/></td>
+
+  </div>
+</form>
+<ul id="tab" class="tab">
+                <li><input type="button" value="高频彩注单" hidefocus class="current"/></li>
+      </ul>
+<table id="listTables" class="listTables">
+
+        <tr>
+
+          <th>所属彩种</th>
+
+          <th>注单号码</th>
+          <th>投注期号</th>
+          <th>投注玩法</th>
+          <th>投注内容</th>
+          <th>投注前余额</th>
+          <th>投注金额</th>
+          <th>投注后余额</th>
+          <th>赔率</th>
+
+          <th>输赢结果</th>
+
+          <th>投注时间</th>
+          <th>投注账号</th>
+          <th>投注来源</th>
+          <th>状态</th>
+          <th>操作</th>
+        </tr>
+        {volist name='list' id='vo'}
+      <tr>
+        <td height="30" align="center" valign="middle">{$vo.type}</td>
+        <td align="center" valign="middle">{$vo.id}</td>
+        <td align="center" valign="middle">第 {$vo.qishu} 期</td>
+        <td align="center" valign="middle" onclick="order_edit_layer(this,'{$vo.id}','{$vo.type}','{$vo.mingxi_1}','{$vo.mingxi_2}')">
+        	{$vo.mingxi_1}
+       	</td>
+        <td align="center" valign="middle">{$vo.mingxi_2}</td>
+        <td align="center" valign="middle">{$vo.q_qian}</td>
+        <td align="center" valign="middle">{$vo.money}</td>
+        <td align="center" valign="middle">{$vo.h_qian}</td>
+        <td align="center" valign="middle">{$vo.odds}</td>
+        <td align="center" valign="middle">
+        	{if $vo.js eq 0}<font color="#0000FF">未结算</font>{else}
+        		{$vo['win']}
+        	{/if}
+        </td>
+        <td align="center" valign="middle">{$vo.addtime}</td>
+        <td align="center" valign="middle">{$vo.username}</td>
+        <td align="center" valign="middle"><?php if(strpos($vo['did'], 'WAP') !== false){?>手机投注<?php }elseif(strpos($vo['did'], 'PC') !== false){?>PC投注<?php }else{?>未能判断<?php }?></td>
+        <td align="center" valign="middle">
+		{if $vo.js eq 0}
+			{switch name="$vo.type"}
+        		{case value='重庆时时彩'}
+        			<a href="{:url('lottery/csc_auto','qishu='.$vo.qishu)}"><font color="#0000FF">点击开奖</font></a>
+        		{/case}
+        		{case value='新疆时时彩'}
+        			<a href="{:url('lottery/xsc_auto','qishu='.$vo.qishu)}"><font color="#0000FF">点击开奖</font></a>
+        		{/case}
+        		{case value='重庆快乐十分'}
+        			<a href="{:url('lottery/csf_auto','qishu='.$vo.qishu)}"><font color="#0000FF">点击开奖</font></a>
+        		{/case}
+        		{case value='广东快乐十分'}
+        			<a href="{:url('lottery/gsf_auto','qishu='.$vo.qishu)}"><font color="#0000FF">点击开奖</font></a>
+        		{/case}
+        		{case value='北京PK拾'}
+        			<a href="{:url('lottery/pk10_auto','qishu='.$vo.qishu)}"><font color="#0000FF">点击开奖</font></a>
+        		{/case}
+        		{case value='广西快乐十分'}
+        			<a href="{:url('lottery/gxsf_auto','qishu='.$vo.qishu)}"><font color="#0000FF">点击开奖</font></a>
+        		{/case}
+        		{case value='江苏快3'}
+        			<a href="{:url('lottery/jsk3_auto','qishu='.$vo.qishu)}"><font color="#0000FF">点击开奖</font></a>
+        		{/case}
+        		{case value='幸运飞艇'}
+        			<a href="{:url('lottery/xyft_auto','qishu='.$vo.qishu)}"><font color="#0000FF">点击开奖</font></a>
+        		{/case}
+        	{/switch}
+          
+        {/if}
+        {if $vo.js eq 1}
+        	{switch name="$vo.type"}
+        		{case value='重庆时时彩'}
+        			<a href="javascript:queren_location('cqssc')"><font color="#FF0000">已结算(重算)</font></a>
+        		{/case}
+        		{case value='新疆时时彩'}
+        			<a href="javascript:queren_location('xjssc')"><font color="#FF0000">已结算(重算)</font></a>
+        		{/case}
+        		{case value='重庆快乐十分'}
+        			<a href="javascript:queren_location('cqklsf')"><font color="#FF0000">已结算(重算)</font></a>
+        		{/case}
+        		{case value='广东快乐十分'}
+        			<a href="javascript:queren_location('gdklsf')"><font color="#FF0000">已结算(重算)</font></a>
+        		{/case}
+        		{case value='北京PK拾'}
+        			<a href="javascript:queren_location('bjpk10')"><font color="#FF0000">已结算(重算)</font></a>
+        		{/case}
+        		{case value='广西快乐十分'}
+        			<a href="javascript:queren_location('gxklsf')"><font color="#FF0000">已结算(重算)</font></a>
+        		{/case}
+        		{case value='江苏快3'}
+        			<a href="javascript:queren_location('jsk3')"><font color="#FF0000">已结算(重算)</font></a>
+        		{/case}
+        		{case value='幸运飞艇'}
+        			<a href="javascript:queren_location('xyft')"><font color="#FF0000">已结算(重算)</font></a>
+        		{/case}
+        	{/switch}
+        {/if}
+        {if $vo.js eq 2}
+          <font color="#0000FF">已取消</font>
+        {/if}
+        </td>
+        <td align="center" valign="middle">
+        	{if $vo.js eq 0}<a href="{:url('lottery/danzhuquxiao','id='.$vo.id)}" target="_blank">取消</a>{else}已结算{/if}</td>
+      </tr>
+      	<?php
+      		$cbet = $vo['money'] + $cbet;
+			if($vo['js'] == 1){
+				$cwin = $vo['win'] + $cwin;
+			}elseif($vo['js'] == 0){
+				$cwjs = $vo['money'] + $cwjs;
+			}
+      	?>
+      {/volist}
+      	<tr>
+        	<td colspan="15" style="text-align:center; color:red;">
+            	当页小计:下注金额: {$cbet}&nbsp;&nbsp;
+            	未结算金额: {$cwjs}&nbsp;&nbsp;
+            	已赢金额: {$cwin}&nbsp;&nbsp;
+            </td>
+        </tr>
+  		<tr>
+        	<td colspan="15" style="text-align:center; color:red;">
+            	总计:下注金额: {$bet_money}&nbsp;&nbsp;
+            	未结算金额: {$weijiesuan}&nbsp;&nbsp;
+            	已赢金额: {$win}&nbsp;&nbsp;
+            </td>
+        </tr>
+
+  </table>
+  <div class="pagerBar">{$list->render()}</div>
+  </div>
+  <style>
+    #order_edit_layer{position:fixed; width:0px; height:0px; left:0; top:0; overflow:hidden; z-index:999; font-size: 12px;}
+    #order_edit_layer .centerdot{position:absolute; left:50%; top:50%; width:0; height:0;}
+    #order_edit_layer .centerdot #p-layer{position:absolute; width:280px; height:180px; padding:10px; background:#999; left:-150px; top:-100px; border-radius:3px;}
+    #order_edit_layer .centerdot #s-layer{width:280px; height:180px; background:#fff;}
+    #order_edit_layer .centerdot #s-layer .opt_{height: 30px; padding: 5px; line-height: 30px;}
+    #order_edit_layer .centerdot #s-layer select{border:1px solid #ccc; width: 180px;}
+  </style>
+  <div id="order_edit_layer">
+    <div class="centerdot">
+    <div id="p-layer">
+    <div id="s-layer">
+        <div class="opt_" id="oel_type"></div>
+      <div class="opt_">投注玩法<select onchange="oel_wanfa_cg()" name="oel_wanfa"></select></div>
+    <div class="opt_">投注内容<select name="oel_neirong"></select></div>
+        <div class="opt_">
+        	<input type="button" onclick="submit_oel()" value="确定修改">&nbsp;&nbsp;&nbsp;
+        	<input type="button" onclick="cancel_oel()" value="取消修改">
+        </div>
+    </div>
+    </div>
+    </div>
+  </div>
+  <script>
+    var oel = {obj:null,id:0,type:0,mingxi1:'',mingxi2:''};
+      function order_edit_layer(obj,id,type,mingxi1,mingxi2){
+          
+          var width = $(window).width();
+          var height = $(window).height();
+          type = getoeltypeid(type);
+          oel.obj = obj;
+          oel.id = id;
+          oel.type = type;
+          oel.mingxi1 = mingxi1;
+          oel.mingxi2 = mingxi2;
+
+          var oeltype = getoeltype(type);
+          $("#oel_type").html(oeltype);
+
+          var mx1list = getmingxi(oel.type);
+
+          $("select[name=oel_wanfa]").html("");
+          $(mx1list).each(function(k,item){
+
+              var selected = '';
+              if(item == mingxi1)  selected = ' selected ';
+              var opt = '<option value="'+item+'"'+selected+'>'+item+'</option>';
+              $("select[name=oel_wanfa]").append(opt);
+
+          });
+
+          var mx2list = getmingxi2(oel.type,mingxi1);
+          $("select[name=oel_neirong]").html("");
+          $(mx2list).each(function(k,item){
+
+              var selected = '';
+              if(item == mingxi2)  selected = ' selected ';
+              var opt = '<option value="'+item+'"'+selected+'>'+item+'</option>';
+              $("select[name=oel_neirong]").append(opt);
+
+          });
+
+          $("#order_edit_layer").css({width:width,height:height});
+      
+        }
+
+        function oel_wanfa_cg(){
+
+          var mingxi1 = $("select[name=oel_wanfa]").val();
+          oel.mingxi1 = mingxi1;
+          var mx2list = getmingxi2(oel.type,mingxi1);
+          $("select[name=oel_neirong]").html("");
+          $(mx2list).each(function(k,item){
+
+              var selected = '';
+              if(item == oel.mingxi2)  selected = ' selected ';
+              var opt = '<option value="'+item+'"'+selected+'>'+item+'</option>';
+              $("select[name=oel_neirong]").append(opt);
+
+          });
+
+
+        }
+
+       function submit_oel(){
+
+          var id = oel.id;
+          var type = oel.type;
+          var mingxi1 = $("select[name=oel_wanfa]").val();
+          var mingxi2 = $("select[name=oel_neirong]").val();
+
+          $.post("order_edit.php", {id:id,type:type,mingxi1:mingxi1,mingxi2:mingxi2}, function(data)
+          {
+              if($.trim(data) == "修改成功"){
+                $(oel.obj).html(mingxi1);
+                $(oel.obj).next("td").html(mingxi2);
+              }
+              
+              alert($.trim(data));
+              
+                cancel_oel();
+
+          });
+      }
+
+        function cancel_oel(){
+          $("select[name=oel_wanfa]").html("");
+          $("select[name=oel_neirong]").html("");
+          $("#order_edit_layer").css({width:0,height:0});
+        }
+
+        
+        function getoeltypeid($type){
+
+          if($type=="广东快乐十分"){
+            return 1;
+          }
+
+          if($type=='重庆时时彩'){
+
+            return 2;
+          }
+
+          if($type=='北京PK拾'){
+
+            return 3;
+          }
+
+          if($type=='重庆快乐十分'){
+
+            return 4;
+          }
+
+          if($type=='广西快乐十分'){
+
+            return 5;
+          }
+
+          if($type=='江苏快3'){
+
+            return 6;
+          }
+
+          if($type=='新疆时时彩'){
+
+            return 7;
+          }
+
+          if($type=='幸运飞艇'){
+
+              return 9;
+            }
+
+        }
+      
+        function getoeltype(type){
+
+          if(type==1){
+            return '广东快乐十分注单修改';
+          }
+
+          if(type==2){
+
+            return '重庆时时彩注单修改';
+          }
+
+          if(type==3){
+
+            return '北京PK拾注单修改';
+          }
+
+          if(type==4){
+
+            return '重庆快乐十分注单修改';
+          }
+
+          if(type==5){
+
+            return '广西快乐十分注单修改';
+          }
+
+          if(type==6){
+
+            return '江苏快3注单修改';
+          }
+
+          if(type==7){
+
+            return '新疆时时彩注单修改';
+          }
+
+          if(type==9){
+
+              return '幸运飞艇注单修改';
+            }
+
+        }
+
+        function getmingxi($type){
+          if($type==1){
+            return ['第一球','第二球','第三球','第四球','第五球','第六球','第七球','第八球','总和、龙虎'];
+          }
+
+          if($type==2){
+
+            return ['第一球','第二球','第三球','第四球','第五球','总和、龙虎和','前三','中三','后三'];
+          }
+
+          if($type==3){
+
+            return ['冠军','亚军','第三名','第四名','第五名','第六名','第七名','第八名','第九名','第十名','冠亚军和'];
+          }
+
+          if($type==4){
+
+            return ['第一球','第二球','第三球','第四球','第五球','第六球','第七球','第八球','总和、龙虎'];
+          }
+
+          if($type==5){
+
+            return ['第一球','第二球','第三球','第四球','第五球','总和、龙虎和','前三','中三','后三'];
+          }
+
+          if($type==6){
+
+            return ['点数','双面','三军','围骰','长牌','短牌'];
+          }
+
+          if($type==7){
+
+            return ['第一球','第二球','第三球','第四球','第五球','总和、龙虎和','前三','中三','后三'];
+          }
+
+          if($type==9){
+
+              return ['冠军','亚军','第三名','第四名','第五名','第六名','第七名','第八名','第九名','第十名','冠亚军和'];
+            }
+ 
+        }
+
+        function getmingxi2($type,$mingxi1){
+            if($type == 1){
+              if($mingxi1 == "第一球" || $mingxi1 == "第二球" || $mingxi1 == "第三球" || $mingxi1 == "第四球" || $mingxi1 == "第五球" || $mingxi1 == "第六球" || $mingxi1 == "第七球" || $mingxi1 == "第八球"){
+                return [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,'大','小','单','双','尾大','尾小','合数单','合数双','东','西','南','北','中','发','白'];
+              }else if($mingxi1 == "总和、龙虎"){
+                return ['总和大','总和小','总和单','总和双','总和尾大','总和尾小','龙','虎'];
+              }
+            }
+
+            if($type == 2){
+              if($mingxi1 == "第一球" || $mingxi1 == "第二球" || $mingxi1 == "第三球" || $mingxi1 == "第四球" || $mingxi1 == "第五球"){
+                return [0,1,2,3,4,5,6,7,8,9,'大','小','单','双'];
+              }else if($mingxi1 == "总和、龙虎和"){
+                return ['总和大','总和小','总和单','总和双','龙','虎','和'];
+              }else if($mingxi1 == "前三" || $mingxi1 == "中三" || $mingxi1 == "后三"){
+                return ['豹子','顺子','对子','半顺','杂六'];
+              }
+
+            }
+
+
+            if($type == 3){
+              if($mingxi1 == "冠军" || $mingxi1 == "亚军" || $mingxi1 == "第三名" || $mingxi1 == "第四名" || $mingxi1 == "第五名"){
+                return [1,2,3,4,5,6,7,8,9,10,'大','小','单','双','龙','虎'];
+              }else if($mingxi1 == "第六名" || $mingxi1 == "第七名" || $mingxi1 == "第八名" || $mingxi1 == "第九名" || $mingxi1 == "第十名"){
+                return [1,2,3,4,5,6,7,8,9,10,'大','小','单','双'];
+              }else if($mingxi1 == "冠亚军和"){
+                return  [3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,'冠亚大','冠亚小','冠亚单','冠亚双'];
+              }
+
+            }
+
+            if($type == 4){
+              if($mingxi1 == "第一球" || $mingxi1 == "第二球" || $mingxi1 == "第三球" || $mingxi1 == "第四球" || $mingxi1 == "第五球" || $mingxi1 == "第六球" || $mingxi1 == "第七球" || $mingxi1 == "第八球"){
+                return [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,'大','小','单','双','尾大','尾小','合数单','合数双','东','西','南','北','中','发','白'];
+              }else if($mingxi1 == "总和、龙虎"){
+                return ['总和大','总和小','总和单','总和双','总和尾大','总和尾小','龙','虎'];
+              }
+            }
+            
+            if($type == 5){
+              if($mingxi1 == "第一球" || $mingxi1 == "第二球" || $mingxi1 == "第三球" || $mingxi1 == "第四球" || $mingxi1 == "第五球"){
+                return [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,'大','小','单','双'];
+              }else if($mingxi1 == "总和、龙虎和"){
+                return ['总和大','总和小','总和单','总和双','龙','虎','和'];
+              }else if($mingxi1 == "前三" || $mingxi1 == "中三" || $mingxi1 == "后三"){
+                return ['顺子','半顺','杂六'];
+              }
+
+            }
+            
+            if($type == 6){
+              if($mingxi1 == "点数"){
+                return [4,5,6,7,8,9,10,11,12,13,14,15,16,17];
+              }else if($mingxi1 == "双面"){
+                return ['点数大','点数小','点数单','点数双'];
+              }else if($mingxi1 == "三军"){
+                return ['01','02','03','04','05','06'];
+              }else if($mingxi1 == "围骰"){
+                return ['010101','020202','030303','040404','050505','060606'];
+              }else if($mingxi1 == "长牌"){
+                return ['0102','0103','0104','0105','0106','0203','0204','0205','0206','0304','0305','0306','0405','0406','0506'];
+              }else if($mingxi1 == "短牌"){
+                return ['0101','0202','0303','0404','0505','0606'];
+              }
+
+            }
+
+            if($type == 7){
+              if($mingxi1 == "第一球" || $mingxi1 == "第二球" || $mingxi1 == "第三球" || $mingxi1 == "第四球" || $mingxi1 == "第五球"){
+                return [0,1,2,3,4,5,6,7,8,9,'大','小','单','双'];
+              }else if($mingxi1 == "总和、龙虎和"){
+                return ['总和大','总和小','总和单','总和双','龙','虎','和'];
+              }else if($mingxi1 == "前三" || $mingxi1 == "中三" || $mingxi1 == "后三"){
+                return ['豹子','顺子','对子','半顺','杂六'];
+              }
+
+            }
+
+            if($type == 9){
+                if($mingxi1 == "冠军" || $mingxi1 == "亚军" || $mingxi1 == "第三名" || $mingxi1 == "第四名" || $mingxi1 == "第五名"){
+                  return [1,2,3,4,5,6,7,8,9,10,'大','小','单','双','龙','虎'];
+                }else if($mingxi1 == "第六名" || $mingxi1 == "第七名" || $mingxi1 == "第八名" || $mingxi1 == "第九名" || $mingxi1 == "第十名"){
+                  return [1,2,3,4,5,6,7,8,9,10,'大','小','单','双'];
+                }else if($mingxi1 == "冠亚军和"){
+                  return  [3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,'冠亚大','冠亚小','冠亚单','冠亚双'];
+                }
+
+              }
+
+        }
+  </script>
+</body>
+</html>

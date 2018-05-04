@@ -1,0 +1,37 @@
+<?php
+namespace app\common\validate;
+use think\Validate;
+class Admin extends Validate
+{
+    protected $rule = [
+        'group_name'  =>  'require|unique:admin_group',
+        'username'    =>  'require|unique:admin',
+        'password'    =>  'require|min:6',
+        'name'        =>  'require',
+        'pid'         =>  'require',
+        'email'       =>  'email',
+        'url'         =>  'require',
+    ];
+
+    protected $message = [
+        'username.require'    =>  '请输入名称',
+        'username.unique'     =>  '用户已存在',
+        'email.email'         =>  '邮箱格式不正确',
+        'password.require'    =>  '请输入密码',
+        'password.min'        =>  '密码长度需大于6',
+        'group_name.require'  =>  '请输入名称',
+        'group_name.unique'   =>  '角色已存在',
+        'name.require'        =>  '请输入名称',
+        'pid.require'         =>  '请选择父级ID',
+        'url.require'         =>  '请输入权限路由',
+     ];
+
+    protected $scene = [
+       'admin_add'  => ['username','password','email'],
+       'admin_edit' => ['username'=>'require|unique:admin,username=username','email'],
+       'group_add'  => ['group_name'],
+       'group_edit' => ['group_name'=>'require|unique:admin_group,group_name=group_name',],
+       'pem_fid'    => ['name','pid'],
+       'pem_cid'    => ['name','pid','url'],
+    ];
+}

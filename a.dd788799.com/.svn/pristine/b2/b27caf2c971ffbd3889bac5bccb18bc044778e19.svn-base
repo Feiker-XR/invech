@@ -1,0 +1,167 @@
+var util = {
+    getRand: function (num, max, norepeat) {        // 获取随机数 num-个数, max-最大值,norepeat-是否允许重复
+        var arr = [];
+        while (arr.length != num) {
+            var random = Math.floor(Math.random() * max);
+            if (norepeat) {
+                if (arr.indexOf(random) == -1) {   // 说明不存在
+                    arr.push(random);
+                }
+            } else {
+                arr.push(random);
+            }
+        }
+        return arr;
+    },
+    multiArr: function (x, y) {                         // 生成多维不重复数组
+        var arr1 = util.getRand(x, 10, true);
+        var arr2 = util.getRand(y, 10, true);
+        while(util.isSubRepeat(arr1,arr2)){
+            arr1 = util.getRand(x, 10, true);
+            arr2 = util.getRand(y, 10, true);
+        }
+        return [arr1, arr2];
+    },
+    isSubRepeat:function(a,b){                      // 多维不重复
+        a.sort();
+        b.sort();
+        for(var i=0;i<b.length;i++){
+            for(var j=0; j<a.length; j++){
+                if(b[i] == a[j]){
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+}
+
+
+/**
+ * 添加投注--随机一注
+ */
+
+function gameActionAddCode_random() {
+    // test wx
+    $('.pp input.checked').removeClass('checked');
+    var _type = $('input[name=playedId]').val()   // 玩法
+    var len = $('.pp').attr('length');      //选取的长度
+    console.log(_type,len);
+    switch (_type) {
+        case '2':                 // 五星直選
+        case '1001':               // 五星组合
+        case '6':                  // 四星后四复式
+        case '1014':              // 四星组合
+        case '10':              // 前三直选复式
+        case '1019':              // 前三组合
+        case '12':              // 后三直选复式
+        case '1026':              // 后三组合
+            handleZX(len, 10);
+            break;
+        case '3':               // 五星单式
+        case '7':
+        case '11':
+        case '18':
+        case '13':
+        case '21':
+            handleDS(len, 10);
+            break;
+        case '1002':             // 五星组选120
+        case '1015':             // 四星组选24
+            handleZX(len, 10, 'zh');
+            break;
+        case '1003':            // 五星组选60
+            handleCA(1, 3);
+            break;
+        case '1004':            // 五星组选30
+            handleCA(2, 1);
+            break;
+        case '1005':            // 五星组选20
+        case '1016':            // 四星组选12
+            handleCA(1, 2);
+            break;
+        case '1006':            // 五星组选10
+        case '1007':            // 四星组选12
+        case '1018':            // 四星组选4
+            handleCA(1, 1);
+            break;
+        case '1008':            // 五星一帆风顺
+        case '1009':            // 五星好事成双
+        case '1010':            // 五星三星报喜
+        case '1011':            // 五星四季发财
+        case '1020':            // 前三直选和值
+        case '1021':            // 前三直选跨度
+        case '1022':            // 前三组选和值
+        case '1023':            // 前三组选包胆
+        case '1024':            // 前三和值尾数
+        case '1027':            // 后三直选和值
+        case '1028':            // 后三直选跨度
+        case '1029':            // 后三组选和值
+        case '1030':            // 后三组选包胆
+        case '1031':            // 后三和值尾数
+            handleZX(1, $('input.code').length);
+            break;
+        case '1012':            // 五星龙虎
+            handleLHDX('lh')
+            break;
+        case '1013':            // 五星大小单双
+            handleLHDX('dxds')
+            break;
+        case '1025':            // 前三特殊号
+        case '1032':            // 后三特殊号
+            handleLHDX('tsh')
+            break;
+        case '1017':            // 四星组选6
+        case '16':            // 前三组三复式
+        case '17':            // 前三组六复式
+        case '19':            // 后三组三复式
+        case '20':            // 后三组六复式
+            handleCA(len, 0);
+            break;
+    }
+}
+
+// 直选系列 _num-数组个数,_max-数组最大值, zh-组合
+function handleZX(_num, _max, zh) {
+    var arr = zh ? util.getRand(_num, _max, true) : util.getRand(_num, _max);
+    //console.log(arr);
+    for (var i = 0; i < arr.length; i++) {
+        var dom = zh ? $('.pp') : $('.pp').eq(i);
+        dom.find('input.code[value=' + arr[i] + ']').click();
+    }
+}
+
+// 单式系列
+function handleDS(_num, _max) {
+    var arr = util.getRand(_num, _max);
+    $('#textarea-code').val(arr.join(''));
+    gameMsgAutoTip()
+}
+
+//组合
+function handleCA(x, y) {
+    var arr = util.multiArr(x, y);
+    //console.log(arr);
+    for (var i = 0; i < arr[0].length; i++) {
+        $('.pp').eq(0).find('input.code[value=' + arr[0][i] + ']').click();
+    }
+    for (var i = 0; i < arr[1].length; i++) {
+        $('.pp').eq(1).find('input.code[value=' + arr[1][i] + ']').click();
+    }
+}
+//龙虎和大小单双
+function handleLHDX(type){
+    var _index = 0;
+    var arr = [];
+    if(type == 'lh'){
+        arr = ['龙','虎','和'];
+        _index = Math.floor(Math.random()*3);
+    }else if(type == 'dxds'){
+         arr = ['总和大','总和小','总和单','总和双'];
+        _index = Math.floor(Math.random()*4);
+    }else if(type == 'tsh'){
+        arr = ['豹子','顺子','对子'];
+        _index = Math.floor(Math.random()*3);
+    }
+    $('.pp').find('input.code[value='+arr[_index]+']').click();
+}

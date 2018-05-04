@@ -1,0 +1,187 @@
+<form class="form-horizontal" id="plgroup_add" method="post" enctype="multipart/form-data">
+  <div class="box-body">
+    <div class="form-group">
+        <label for="inputEmail3" class="col-sm-2 control-label">名称</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control"  name="name" placeholder="名称" {if(!empty($info['name']))} value="{$info['name']}" {/if}>
+        </div>
+    </div>
+     <div class="form-group">
+        <label for="inputPassword3" class="col-sm-2 control-label">类别</label>
+        <div class="col-sm-10">
+          <select class="form-control select2 select2-hidden-accessible tabindex="-1"  id="type" aria-hidden="true">
+                 <option value="">请选择类别</option>
+               {foreach($types as $key=>$types)}
+                  <option value="{$key}" {if(!empty($typeinfo) && $typeinfo == $key)} selected {/if} >{$types}</option>
+                {/foreach}
+           </select>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="inputPassword3" class="col-sm-2 control-label">玩法分组</label>
+        <div class="col-sm-10">
+          <select class="form-control select2 select2-hidden-accessible"  id="groupId"  aria-hidden="true">
+               <option value="">请先选择类别</option>
+            </select>
+        </div>
+    </div>
+
+
+      <div class="form-group">
+        <label for="inputPassword3" class="col-sm-2 control-label">玩法</label>
+        <div class="col-sm-10">
+          <select class="form-control select2 select2-hidden-accessible"  id="playedId" name="playedId" aria-hidden="true">
+                 <option value="">请先选择玩法</option>
+              </select>
+         
+        </div>
+    </div>
+
+     <div class="form-group">
+        <label for="inputPassword3" class="col-sm-2 control-label">赔率组模式</label>
+        <div class="col-sm-10">
+          <select class="form-control select2 select2-hidden-accessible tabindex="-1"  name="mode" aria-hidden="true">
+             <option value="0" {if(isset($info['mode']) && $info['mode'] =='0')} selected {/if}>值模式</option>
+             <option value="1" {if(isset($info['mode']) && $info['mode'] =='1')} selected {/if}>定长组合模式</option>
+             <option value="2" {if(isset($info['mode']) && $info['mode'] =='2')} selected {/if}>变长组合模式</option>
+          </select>
+        </div>
+    </div>
+
+  <div class="form-group">
+          <label for="inputEmail3" class="col-sm-2 control-label">排序</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control"  name="sort" placeholder="排序" {if(!empty($info['sort']))} value="{$info['sort']}" {/if}>
+          </div>
+      </div>
+
+     <input type="hidden" name="id" {if(!empty($info['id']))} value="{$info['id']}" {/if} >
+    <div class="col-sm-offset-2 col-sm-10">
+        <button id="btnajax" class="btn btn-danger">提交</button>
+    </div>
+  </div>
+</form>
+
+<script type="text/javascript">
+$(function(){
+    $.ajaxSetup({async : false}); 
+  {if(!empty($typeinfo))} 
+       var typeinfo = "{$typeinfo}";
+        if(typeinfo){
+          getGroupByid();
+       }
+
+  {/if}
+
+  {if(!empty($groupid))} 
+       var groupidinfo = '{$groupid}';
+        if(groupidinfo){
+          getPlayedByid();
+        }
+
+  {/if}
+  $("#type").change(function(){
+        getGroupByid();
+    });
+    $("#groupId").change(function(){
+      getPlayedByid();
+    });
+
+    $("#btnajax").click(function () {
+
+    var options = {
+       url: "{:url('plgroup_edit')}",
+      // type : 'POST',
+     dataType : 'json',
+      success : function(data) {
+        $(".layui-layer-close").click();
+
+       layer.alert(data.msg, {
+          time: 20000,
+          skin: 'layui-layer-molv', //该皮肤由layer.seaning.com友情扩展。关于皮肤的扩展规则，去这里查阅
+          closeBtn: 0,
+          anim: 4
+        }, function(){
+           window.location.href = document.URL;
+        })
+      },
+      error: function(data) {
+         $(".layui-layer-close").click();
+        layer.alert(data.msg, {
+          time: 20000,
+          skin: 'layui-layer-molv', //该皮肤由layer.seaning.com友情扩展。关于皮肤的扩展规则，去这里查阅
+          closeBtn: 0,
+          anim: 4
+        }, function(){
+           window.location.href = document.URL;
+        })
+      }
+    };
+      $("#plgroup_add").ajaxForm(options);
+   })
+});
+function getGroupByid(){
+   var types = $("#type").val();
+    $.get('/lottery/getGroupByid',{type:types},function(data){
+          var html ='';
+          {if(!empty($groupid))} 
+                var groupid ='{$groupid}';
+           {else}
+              var groupid ='';
+           {/if}
+           
+          if(data){
+              html += '<option value="">请选择</option>';
+              $.each(data, function(k, val) {
+                 if(groupid){
+                    if(groupid == val.id){
+                      html += '<option value="'+val.id+'" selected >'+val.groupName+'</option>';
+                    }else{
+                       html += '<option value="'+val.id+'">'+val.groupName+'</option>';
+                    }
+                  }else{
+                     html += '<option value="'+val.id+'">'+val.groupName+'</option>';  
+                  }
+            }); 
+          }else{
+             html += '<option value="">请先选择类别</option>';
+          }
+          
+           $("#groupId").html(html);
+    },'json');
+}
+
+function getPlayedByid(){
+   var types = $("#type").val();
+   var groupId = $("#groupId").val();
+  $.get('/lottery/getPlayedByid',{type:types,groupId:groupId},function(data){
+          var html ='';
+           {if(!empty($playid))} 
+                var playid ='{$playid}';
+           {else}
+              var playid ='';
+           {/if}
+          if(data){
+
+               html += '<option value="">请选择</option>';
+              $.each(data, function(k, val) {
+                if(playid){
+                    if(playid == val.id){
+                      html += '<option value="'+val.id+'" selected>'+val.name+'</option>';
+                    }else{
+                       html += '<option value="'+val.id+'">'+val.name+'</option>';
+                    }
+                }else{
+                    html += '<option value="'+val.id+'">'+val.name+'</option>';
+                }
+              
+            }); 
+          }else{
+             html += '<option value="">请先选择玩法分组</option>';
+          }
+          
+           $("#playedId").html(html);
+    },'json');
+}
+</script>

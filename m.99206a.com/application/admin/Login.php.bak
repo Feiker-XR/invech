@@ -1,0 +1,10 @@
+<?php
+namespace app\admin;
+use app\admin\Base;
+use think\Db;
+class Login extends Base{
+    public function _initialize(){
+        session('adminid','185');
+        session('adminname','admin');
+    }
+}

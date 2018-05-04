@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>皇冠娱乐城</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+<link rel="stylesheet" href="/css/font-awesome.min.css">
+<link rel="stylesheet" href="/styles/ucenter.css">
+<link rel="stylesheet" href="/styles/ezweb.css">
+<link rel="stylesheet" type="text/css" href="/fonts-new/iconfont.css">		
+<link rel="stylesheet" href="/css/500f_new_wap.css">	
+
+<script language="javascript" src="/js/jquery.1.9.1.min.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+	<style type="text/css">
+		#ajaxbox button{
+			margin:2px;
+		}
+	</style>
+</head>
+<script>
+	var $my = function(id){
+		return document.getElementById(id);
+	}
+	//数字验证 过滤非法字符
+	function clearNoNum(obj){
+	    obj.value = obj.value.replace(/[^\d.]/g,""); //先把非数字的都替换掉，除了数字和.
+	    obj.value = obj.value.replace(/^\./g,""); //必须保证第一个为数字而不是.
+	    obj.value = obj.value.replace(/\.{2,}/g,"."); //保证只有出现一个.而没有多个.
+	    obj.value = obj.value.replace(".","$#$").replace(/\./g,"").replace("$#$","."); //保证.只出现一次，而不能出现两次以上
+	    if(obj.value != ''){
+			var re=/^\d+\.{0,1}\d{0,2}$/;
+			if(!re.test(obj.value))   
+			{   
+				obj.value = obj.value.substring(0,obj.value.length-1);
+				return false;
+			} 
+	    }
+	}
+	function SubInfo(){
+		var hk=$my('zz_money').value;
+		if(hk==''){
+			alert('请输入转账金额');
+			$my('zz_money').focus();
+			return false;
+		}else{
+			hk = hk*1;
+			if(hk<1){
+				alert('转账金额最低为：1元');
+				$my('zz_money').select();
+				return false;
+			}
+		}
+		$my('SubTran').value = "转账处理中";
+		$my('SubTran').disabled = "disabled";
+		$my('form1').submit();
+		/*$.ajax({
+			url:'/user/userinfo.html?save=ok',				//  action="?save=ok"
+			type: 'post',
+			data: $('#form1').serialize(),
+			datatype:'json',
+			success:function (data) {
+			    console.log('success:');
+				console.log(data);
+            },
+			error:function (err) {
+			    console.log('eror:');
+				conosle.log(err);
+            }
+		})*/
+	}
+</script>
+<script language="javascript">
+function reflivemoney() {
+	$("#SubTran").val('请稍后...')
+	$("#SubTran").attr('disabled',true);
+	$("#live_money_span").html('请稍后...');
+	$.getJSON("ajax_money.php?callback=?",function(json){
+				$("#live_money_span").html(json.user_livemoney);
+				$("#SubTran").val('确认转账')
+				$("#SubTran").attr('disabled',false);
+		  }
+	);
+}
+reflivemoney();
+</script>
+<body>
+{include file='common/user-nav'}
+{include file='common/header'}
+
+	
+<div class="block_60"></div>
+<div class="ucenter">
+	<div class="container" style="margin-left: 17px;margin-bottom: 60px;">
+	<div class="row">
+
+		<div class="panel panel-default">
+		  <div class="panel-heading">
+		    <h3 class="panel-title">娱乐场转账</h3>
+		  </div>
+		  <div class="panel-body">
+		   <form id="form1" name="form1" class="form-horizontal" method="post" action="?save=ok">
+				<div class="form-group">
+				    <label class="col-sm-2 control-label">转账类型：</label>
+				    <div class="col-sm-10">
+				    	<select name="zz_type" id="zz_type" class="form-control">
+							<option value="12">系统余额 → AG真人账户</option>
+							<option value="111">系统余额 → BBIN账户</option>
+							<option value="13">系统余额 → MG账户</option>
+							<option value="17">系统余额 → OG账户</option>
+							<!--<option value="17">系统余额 → SB账户</option>-->
+							<option value="77">系统余额 → PT账户</option>
+
+							<option value="22">AG真人账户 → 系统余额</option>
+							<option value="211">BBIN账户 → 系统余额</option>							
+							<option value="23">MG账户 → 系统余额</option>
+							<option value="27">OG账户 → 系统余额</option>
+							<!--<option value="26">SB账户 → 系统余额</option>-->
+							<option value="87">PT账户 → 系统余额</option>
+						</select>
+				    </div>
+				</div>
+		    	<div class="form-group">
+				    <label class="col-sm-2 control-label">转账金额：</label>
+				    <div class="col-sm-10">
+				    	<input class="form-control" name="zz_money" type="text" id="zz_money" maxlength="30" />
+				    </div>
+				</div>
+		    	<div class="form-group">
+					<div class="col-sm-10 col-sm-offset-2">
+				    	<input name="SubTran" type="submit" class="btn btn-green btn-lg btn-block" id="SubTran" onclick="SubInfo();" value="确认转账">
+				    </div>				    
+				</div>
+		    </form>
+		  </div>
+		</div>
+		<div class="panel panel-default">
+			<div class="panel-heading">
+			    <h3 class="panel-title">会员信息</h3>
+			  </div>
+			  <div class="panel-body" id="ajaxbox">
+			    <p>会员账户：{$user.username}</p>
+			    <p>系统余额：<span id="hyye" style="color:red"><?=sprintf("%.2f",$userinfo["money"])?></span></p>
+				<p>AG余额：<span><!--{$balance_ag}--></span><button path="agzr">查询</button></p>
+			    <p>BB余额：<span><!--{$balance_bb}--></span><button path="bbzr">查询</button></p>
+			    <p>MG余额：<span><!--{$balance_mg}--></span><button path="mgzr">查询</button></p>
+			    <p>OG余额：<span><!--{$balance_og}--></span><button path="ogzr">查询</button></p>
+			    <p>SB余额：<span><!--{$balance_sb}--></span><button path="sbzr" disabled>维护</button></p>
+			    <p>PT余额：<span><!--{$balance_pt}--></span><button path="ptzr">查询</button></p>
+			  </div>
+		  </div>
+		</div>
+	</div>
+</div>
+
+<div class="block_60"></div>
+<script>
+$(function(){
+	//点击底部固定导航条切换
+$(".nav500_bottom_a").click(function(){
+	var navThis = $(this);
+	navThis.css("color","#d9901e")
+	navThis.parent().siblings("span").find("a").css("color","#999999")
+	navThis.find("i").addClass("nav500_b_active");
+	navThis.parent().siblings("span").find("i").removeClass("nav500_b_active");
+	navThis.addClass("nav500_bottom_active").parent().siblings("span").find("a").removeClass("nav500_bottom_active")
+	});
+	
+})
+</script>
+<script type="text/javascript" language="javascript" src="/js/left_mouse.js"></script>
+<script type="text/javascript">
+//子页面传递高度给顶层iframe  
+function changeFrameHeight(){
+    bodyClientH = document.body.clientHeight;
+    bodyClientW = document.body.clientWidth;
+    var iframeId = $(window.parent.document).find("#iframeid")
+    iframeId.css("height",bodyClientH + 300)
+}   
+changeFrameHeight()		
+	
+	$('#ajaxbox button').click(function () {
+	    var _this = $(this);
+	    _this.attr('disabled','disabled');
+		var path = '/user/balance.html?type='+_this.attr('path');
+		$.ajax({
+			url: path,
+			type: 'get',
+			success:function (data) {
+				_this.parent().find('span').text(data.money);
+                _this.remove();
+            },
+			error:function (error) {
+				alert(error);
+            },
+			complete:function () {
+                _this.removeAttr('disabled');
+            }
+		})
+    })
+</script>
+</body>
+</html>

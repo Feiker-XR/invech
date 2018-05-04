@@ -1,0 +1,78 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>系统设置</title>
+<link href="/css/base.css" rel="stylesheet" type="text/css" />
+<link href="/css/admin.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="/js/jquery.js"></script>
+<script type="text/javascript" src="/js/jquery.tools.js"></script>
+<script type="text/javascript" src="/js/base.js"></script>
+<script language="JavaScript" src="/js/calendar.js"></script>
+<script language="javascript">
+function check_submit(){
+	if($("#date_s").val()==""){
+		alert("请选择开始日期");
+		$("#date_s").focus();
+		return false;
+	}
+	if($("#date_e").val()==""){
+		alert("请选择结束日期");
+		$("#date_e").focus();
+		return false;
+	}
+	return true;
+}
+</script>
+</head>
+<body class="list">
+	<div class="bar">
+		彩票报表查看
+	</div>
+<div class="body">
+<form name="form1" method="get" action="{:url('report/lottery')}" onSubmit="return check();">
+<div class="listBar">时间范围：
+     <input name="date_s" type="text" id="date_s" value="<?=$date_s?>" onClick="new Calendar(2008,2020).show(this);" size="10" maxlength="10" readonly="readonly" />
+           ~
+           <input name="date_e" type="text" id="date_e" value="<?=$date_e?>" onClick="new Calendar(2008,2020).show(this);" size="10" maxlength="10" readonly="readonly" />
+           &nbsp;&nbsp;
+           &nbsp;&nbsp;<input name="find" type="submit" id="find" value="查看报表" class="formButton"/></td>
+
+</div>
+</form>
+<ul id="tab" class="tab">
+	<li><input type="button" value="全局报表" hidefocus onClick="window.location.href='{:url('report/quanju',"date_s=$date_s&date_e=$date_e")}'" /></li>
+	<li><input type="button" value="财务报表" hidefocus onClick="window.location.href='{:url('report/money',"date_s=$date_s&date_e=$date_e")}'" /></li>
+	<li><input type="button" value="体育报表" hidefocus onClick="window.location.href='{:url('report/sport',"date_s=$date_s&date_e=$date_e")}'" /></li>
+	<li><input type="button" value="彩票报表" hidefocus class="current" onClick="window.location.href='{:url('report/lottery',"date_s=$date_s&date_e=$date_e")}'" /></li>
+	<li><input type="button" value="新彩票报表" hidefocus onClick="window.location.href='{:url('report/newlottery',"date_s=$date_s&date_e=$date_e")}'" /></li>
+	<!--<li><input type="button" value="真人报表" hidefocus onClick="window.location.href='Game_Ag.php?date_s=<?=$date_s?>&date_e=<?=$date_e?>'" /></li>-->
+</ul>
+<table id="listTables" class="listTables">
+	<tr>
+		<th>会员账号</th>
+		<th>注单数量</th>
+		<th>总投注额</th>
+		<th>输赢结果</th>
+		<th>注单记录</th>
+	</tr>
+	{volist name='info' id='rows'}
+	<tr>
+		<td height="30" align="center" valign="middle"><?=$rows[0]['username']?></td>
+		<td align="center" valign="middle"><?=$rows[0]['num']?> 笔</td>
+		<td align="center" valign="middle"><?=round($rows[0]['money'],2)?> 元</td>
+		<td align="center" valign="middle"><?=$rows[0]['win']?> 元</td>
+		<td align="center" valign="middle"><a href="/lottery/listzhudan?username=<?=$rows[0]['username']?>">注单记录</a></td>		
+	</tr>
+	{/volist}
+	<tr>
+		<td align="center" bgcolor="#F2F4F6">总计</td>
+		<td align="center" bgcolor="#F2F4F6"><?=$num_z?> 笔</td>
+		<td align="center" bgcolor="#F2F4F6"><?=$money_z?> 元</td>
+		<td align="center" bgcolor="#F2F4F6"><?=$win_z?> 元</td>
+		<td align="center" bgcolor="#F2F4F6">&nbsp;</td>
+	</tr>
+</table>
+</div>
+</body>
+</html>

@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no,minimal-ui">
+		<meta name="format-detection" content="telephone=no" />
+		<link rel="stylesheet" href="css/animate_index.css" />
+		<title></title>
+	</head>
+	<body>
+		<div class="min">
+			<div class="loading">loading...</div>
+			<div class="animat">
+				<div class="animate_min">
+					<div class="btn_box">
+						<ul>
+							<li>
+								<a id="try" href="#"></a>
+							</li>
+							<li>
+								<a id="kaihistory" href="../html/kaihistory.html" target="_blank"></a>
+							</li>
+							<li>
+								<a id="style_hot" href="../html/style_hot.html" target="_blank"></a>
+							</li>
+							<li id="sound" class="on">
+								<a href="#"></a>
+							</li>
+						</ul>
+					</div>
+				</div>
+				<div class="animate_date">
+					<b id="data_b"></b> <span>第</span><b id="issue_b"></b><span>期</span>
+				</div>
+				<div class="view_box status"></div>
+				<div class="view_box each"></div>
+				<div class="view_box" id="die">
+					<div class="ball">
+						<!--<span class="one_ball"></span>
+						<span class="two_ball green"></span>
+						<span class="three_ball blue"></span>
+						<span class="four_ball"></span>
+						<span class="five_ball"></span>
+						<span class="six_ball"></span>
+						<span class="seven_ball "></span>
+						<span class="vall" id="boll"></span>-->
+						<span></span>
+						<span></span>
+						<span></span>
+						<span></span>
+						<span></span>
+						<span></span>
+						<span></span>
+					</div>
+					<div class="crust">
+						<div class="number_box">
+							<div class="number">
+								<ul>
+									<!--<li class="red">06</li>
+			    					<li class="blue">29</li>
+			    					<li class="blue">17</li>
+			    					<li class="red">23</li>
+			    					<li class="blue">01</li>
+			    					<li class="red">49</li>
+			    					<li class="green lastLi">22</li>-->
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+				<p id="nextTime"></p>
+			</div>
+			<div class="loadcolor">
+				<!--<span class="red"></span>
+				<span class="blue"></span>
+				<span class="green"></span>-->
+				<img src="img/ball_blue.png" alt="" />
+				<img src="img/ball_green.png" alt="" />
+				<img src="img/ball_red.png" alt="" />
+				<img src="img/liuhe_v0.png" alt="" />
+				<img src="img/liuhe_v1.png" alt="" />
+				<img src="img/liuhe_v2.png" alt="" />
+			</div>
+			<!--<p class="p"></p>-->
+			<audio id="bgSound" src="sound/bgsound.mp3" loop="loop"></audio>
+			<!-- controls="controls" 显示控件-->
+			<audio id="numSound" src="sound/empt.mp3"></audio>
+			<div class="num_sound">
+				<audio id="numSound1" src="sound/1.mp3"></audio>
+				<audio id="numSound2" src="sound/2.mp3"></audio>
+				<audio id="numSound3" src="sound/3.mp3"></audio>
+				<audio id="numSound4" src="sound/4.mp3"></audio>
+				<audio id="numSound5" src="sound/5.mp3"></audio>
+				<audio id="numSound6" src="sound/6.mp3"></audio>
+				<audio id="numSound7" src="sound/7.mp3"></audio>
+				<audio id="numSound8" src="sound/8.mp3"></audio>
+				<audio id="numSound9" src="sound/9.mp3"></audio>
+				<audio id="numSound10" src="sound/10.mp3"></audio>
+				<audio id="numSound11" src="sound/11.mp3"></audio>
+				<audio id="numSound12" src="sound/12.mp3"></audio>
+				<audio id="numSound13" src="sound/13.mp3"></audio>
+				<audio id="numSound14" src="sound/14.mp3"></audio>
+				<audio id="numSound15" src="sound/15.mp3"></audio>
+				<audio id="numSound16" src="sound/16.mp3"></audio>
+				<audio id="numSound17" src="sound/17.mp3"></audio>
+				<audio id="numSound18" src="sound/18.mp3"></audio>
+				<audio id="numSound19" src="sound/19.mp3"></audio>
+				<audio id="numSound20" src="sound/20.mp3"></audio>
+				<audio id="numSound21" src="sound/21.mp3"></audio>
+				<audio id="numSound22" src="sound/22.mp3"></audio>
+				<audio id="numSound23" src="sound/23.mp3"></audio>
+				<audio id="numSound24" src="sound/24.mp3"></audio>
+				<audio id="numSound25" src="sound/25.mp3"></audio>
+				<audio id="numSound26" src="sound/26.mp3"></audio>
+				<audio id="numSound27" src="sound/27.mp3"></audio>
+				<audio id="numSound28" src="sound/28.mp3"></audio>
+				<audio id="numSound29" src="sound/29.mp3"></audio>
+				<audio id="numSound30" src="sound/30.mp3"></audio>
+				<audio id="numSound31" src="sound/31.mp3"></audio>
+				<audio id="numSound32" src="sound/32.mp3"></audio>
+				<audio id="numSound33" src="sound/33.mp3"></audio>
+				<audio id="numSound34" src="sound/34.mp3"></audio>
+				<audio id="numSound35" src="sound/35.mp3"></audio>
+				<audio id="numSound36" src="sound/36.mp3"></audio>
+				<audio id="numSound37" src="sound/37.mp3"></audio>
+				<audio id="numSound38" src="sound/38.mp3"></audio>
+				<audio id="numSound39" src="sound/39.mp3"></audio>
+				<audio id="numSound40" src="sound/40.mp3"></audio>
+				<audio id="numSound41" src="sound/41.mp3"></audio>
+				<audio id="numSound42" src="sound/42.mp3"></audio>
+				<audio id="numSound43" src="sound/43.mp3"></audio>
+				<audio id="numSound44" src="sound/44.mp3"></audio>
+				<audio id="numSound45" src="sound/45.mp3"></audio>
+				<audio id="numSound46" src="sound/46.mp3"></audio>
+				<audio id="numSound47" src="sound/47.mp3"></audio>
+				<audio id="numSound48" src="sound/48.mp3"></audio>
+				<audio id="numSound49" src="sound/49.mp3"></audio>
+
+			</div>
+			<div class="count_sound">
+				<audio id="numSound_one" src="sound/one.mp3"></audio>
+				<audio id="numSound_two" src="sound/two.mp3"></audio>
+				<audio id="numSound_three" src="sound/three.mp3"></audio>
+				<audio id="numSound_four" src="sound/four.mp3"></audio>
+				<audio id="numSound_five" src="sound/five.mp3"></audio>
+				<audio id="numSound_six" src="sound/six.mp3"></audio>
+				<audio id="numSound_seven" src="sound/seven.mp3"></audio>
+			</div>
+		</div>
+		<!--<div class="btn">11211</div>-->
+		<!--<div id="target" class="target"></div>-->
+	</body>
+	<script type="text/javascript" src="js/jquery-1.11.3.js"></script>
+	<script type="text/javascript" src="js/index.js"></script>
+
+</html>

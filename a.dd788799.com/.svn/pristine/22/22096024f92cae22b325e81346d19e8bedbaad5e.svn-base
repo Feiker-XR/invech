@@ -1,0 +1,87 @@
+<link rel="stylesheet" type="text/css" href="/__CSS__/user/reset.css?v=20170715">
+<link rel="stylesheet" type="text/css" href="/__CSS__/user/hpn-common.css">
+<link rel="stylesheet" type="text/css" href="/__CSS__/user/index.css?v=20171117">
+<link rel="stylesheet" type="text/css" href="/__CSS__/user/global.css">
+<style>
+
+	.reResulttBg{background: #f42023;}
+	.process .layout .monty ul li,.process .layout .list_tems .date:after,.list ul li .slide p.acti,.headmemberbg{background: #f42023;}
+	.process .layout .list_tems .date span, .process .layout .list_tems .date h3,.eveb_amount span,.color-e77c3c,.eveb_setting_table a,.xieyiCss，.gcdtgd{color: #f42023!important;}
+	.eveb_sub_nav_type a:hover, .eveb_sub_nav_type li.on a:link, .eveb_sub_nav_type li.on a:visited{color: #f42023!important;font-weight: 700;border-bottom-color: #e1e1e1;background: #f8f8f8;}
+	.list ul li .slide p:hover,.letterbtn-bg{background: #f42023!important;color: white;}
+	.list h3 a{background: #f42023;border-bottom: 3px solid #a92309; height: 47px; line-height: 47px;}
+	.help_l_menu li .t.sli{border-left: 5px solid #f42023;}
+	.withdraw-bg-input{border: 2px solid #f42023!important;}
+	.clearBet_template .l span i{background: #f42023 url(/static/theme/memberTheme/theme1/img/tm-mdl-icon.png) no-repeat!important; border-radius: 50%;background-position: 0 41%!important;}
+
+	.eveb_nav_sub .on,.button_1, .button_1:link, .button_1:visited,.alert_col h5,.onlineService,.layui-layer-popup .layui-layer-title,.xzqd,.xzqdlskj,.game_name .box2_stage p span i.acti,.Betting,.Single,.list_ject ul li .Result p a.acti,.list_ject ul li .Result p a.acti:hover,.top{background:#f42023!important}
+	.eveb_nav_sub .on a,.bankInfo .name,.help_l_menu .title p .sum,.help_r_main .light,.game_name .box2_stage p span i,.game_name .box1_name  p i,.Account p a.red{color:#f42023!important}
+	.eveb_nav_sub .on,.game_name .box2_stage p span{border:1px solid #f42023!important;}
+	.eveb_nav_sub .on,.game_name .box2_stage p span i.acti{color:#fff!important;}
+	.eveb_nav_sub .on a{border-top:1px #f42023 solid!important;}
+	.eveb_nav_sub ul{border-bottom:1px #f42023 solid!important;}
+	#apptop{background: #f42023}
+	.alert_col div::-webkit-scrollbar-thumb {background-color: #f42023!important;}
+	.head div h5,.Betting .tabs ul li,.top .nav h1{background:#d51910!important}
+	.jf_box .url a,.eveb_form label.error,.eveb_transfer_box .center_wallet .money,.eveb_transfer_box .wallet_list li p{color:#d51910!important}
+	.Betting .tabs ul li.acti{background:#fff!important}
+	.button_1, .button_1:link, .button_1:visited{border:1px solid #d51910!important;}
+</style>
+
+<link type="text/css" rel="stylesheet" href="/__CSS__/user/laydate.css">
+<link rel="stylesheet" href="/__CSS__/user/layer.css?v=3.0.11110">
+<div class="help_r_main">
+	<div class="eveb_content">
+		<div class="eveb_transfer_box mb20 clearfix" style="overflow: visible;">
+			<div class="center_wallet fl rel">
+				<span>账户总余额</span>
+				<p class="money"><strong id="wallet" class="money">0.000</strong>元</p>
+				<div class="abs Res" onclick="refreshMoney()"><i class="icon resIcon"></i></div>
+			</div>
+			<ul class="wallet_list wallet_list2 fl">
+				<li><span>可提款总额</span>
+					<p id="wallet_1" class="money">0.000</p></li>
+				<!--<li class="rel">
+                    <a href="javascript:void(0)" class="color-df3c31">资金归集</a>
+                    <p><i class="icon tipIcon"></i></p>
+                    <div class="tipBox abs">
+                        <span class="caret abs"></span>
+                        可将各个平台零钱全部转入中心钱包，方便取款
+                    </div>
+                </li>-->
+			</ul>
+		</div>
+		<form name="withdrawForm" novalidate="novalidate" onsubmit="return false;">
+			<!--<ul class="eveb_form management_bank">
+				<div class="mb10 color-888"><font color="#999999">您还未绑定银行卡 请绑定银行卡，</font><a href="javascript:void(0)" onclick="parent.goSubUrl('/member/zhsz.html?module=yhkgl')" style="color:#ff7800">点击前往&gt;&gt;</a></div>
+			</ul>-->
+			<ul class="eveb_form management_bank">
+				<div class="mb10 color-888">转到银行卡：<label for="id" class="error" style="display: none;"></label></div>
+				<li>
+					<div class="item w106"><input type="radio" name="id" checked="checked" value="103268" class="valid"></div>
+					<div class="item w125 color-e77c3c" style="width:30px">默认</div>
+					<div class="item w105">中国工商银行</div>
+					<div class="item w105">里奥</div>
+					<div class="item w205 accountSubStr" data-bank="6227545758686589">6227 **** **** ****  6589</div>
+					<div class="item w230">杭州分行营业部</div>
+					<div class="item">
+						<a href="javascript:void(0)" class="mr10 color-c4463c" onclick="setDefault(103268)">设为默认</a>
+						<a href="javascript:void(0)" class="icon deleteIcon2" onclick="ajaxDel(103268)"></a>
+					</div>
+				</li>
+			</ul>
+			<ul class="eveb_form eveb_withdraw">
+				<li>
+					<span>提款金额：</span>
+					<input id="money" class="withdraw-bg-input error" name="money" type="text" placeholder="请输入转账金额" style="border: 2px solid #f49c42;background: #faf9f9;height: 28px; padding-left:5px">
+					<label for="money" class="error">* 请输入金额</label>
+				</li>
+
+			</ul>
+			<div class="eveb_form_submit">
+				<input type="submit" id="btnSubmit" value="提交" class="button_medium button_1">
+				<input type="reset" value="重置" class="ml_10 button_medium button_1 button_3" style="color: white;">
+			</div>
+		</form>
+	</div>
+</div>

@@ -1,0 +1,94 @@
+<div class="form-horizontal">
+  <div class="box-body">
+    <div class="form-group">
+      <label for="inputPassword3" class="col-sm-2 control-label">提案类型</label>
+      <div class="col-sm-10" style="width:200px">
+           <span class="form-control">
+              {eq name="$info->business" value="agent"}代理提案{/eq}
+              {eq name="$info->business" value="withdraw"}提现提案{/eq}
+           </span>
+        
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="inputPassword3" class="col-sm-2 control-label">稽核量</label>
+      <div class="col-sm-10" style="width:200px">
+           <span class="form-control">{$info->user->audit_flow}</span>
+        
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="inputPassword3" class="col-sm-2 control-label">稽核量阈值</label>
+      <div class="col-sm-10" style="width:200px">
+           <span class="form-control">{$auditLimit} </span>
+      </div>提示:(当稽核量<稽核量阈值才可以操作提款)
+    </div>
+    <div class="form-group">
+      <label for="inputPassword3" class="col-sm-2 control-label">审核操作</label>
+      <div class="col-sm-10" style="width:200px">
+        <select class="form-control select2 select2-hidden-accessible" id="agree" aria-hidden="true">
+            
+            <option value="0">拒绝</option>
+            {if($info->user->audit_flow < $auditLimit)}
+              <option value="1">同意</option>
+            {/if}
+        </select>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="inputPassword3" class="col-sm-2 control-label">备注</label>
+      <div class="col-sm-10">
+        <textarea class="form-control" rows="3" id="remark" placeholder="备注"></textarea>
+      </div>
+    </div>
+    <input type="hidden" id="tid"  value="{$info->id}">
+    <div class="col-sm-offset-2 col-sm-10">
+        <button id="btnajax" class="btn btn-danger">提交</button>
+         {if($info->user->audit_flow > $auditLimit)}
+            <button id="change" class="btn btn-success" style="margin-left:20px">稽核清零</button>
+            <span style="color:red">
+                提示:(点击稽核清零后,该用户的打码量奖是满足提款要求.)
+            </span>
+         {/if}
+    </div>
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){
+  $("#btnajax").click(function () {
+      var id = $("#tid").val();
+      var remark = $("#remark").val();
+      var agree  = $("#agree").val();
+      $.get('/apply/audit',{id:id,remark:remark,agree:agree},function(data){
+        $(".layui-layer-close").click();
+        layer.alert(data.msg, {
+            time: 20000,
+            skin: 'layui-layer-molv', //该皮肤由layer.seaning.com友情扩展。关于皮肤的扩展规则，去这里查阅
+            closeBtn: 0,
+            anim: 4
+        }, function(){
+             window.location.href = document.URL;
+        })
+      },'json');  
+   })
+
+  $("#change").click(function () {
+      var id  = $("#tid").val();
+     
+      $.get('/apply/chage_audit',{id:id},function(data){
+        $(".layui-layer-close").click();
+        layer.alert(data.msg, {
+            time: 20000,
+            skin: 'layui-layer-molv', //该皮肤由layer.seaning.com友情扩展。关于皮肤的扩展规则，去这里查阅
+            closeBtn: 0,
+            anim: 4
+        }, function(){
+             window.location.href = document.URL;
+        })
+      },'json');  
+   })
+
+});
+</script>

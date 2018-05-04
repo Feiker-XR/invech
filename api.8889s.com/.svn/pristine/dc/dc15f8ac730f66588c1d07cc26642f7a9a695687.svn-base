@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Welcome</title>
+<link rel="stylesheet" type="text/css" href="/css/general.css"/>
+<link rel="stylesheet" type="text/css" href="/Scripts/jquery-ui.css" />
+<script src='/js/js/jquery-1.8.0.min.js'></script>
+<script type="text/javascript" src="/Scripts/member.js"></script>
+<script type="text/javascript" src="/Scripts/jquery-ui-datepicker.js"></script>
+<script type="text/javascript">
+$(function(){
+	$("#S_date").datepicker({
+		minDate: -31,
+		maxDate: 0
+	});
+	$("#E_date").datepicker({
+		minDate: -31,
+		maxDate: 0
+	});
+});
+</script>
+</head>
+<body>
+  <div class="ui-moneyBox">
+    <ul style="margin-top:10px;">
+        <table width="100%" border="0" cellspacing="0" cellpadding="5" id="thetable">
+            <tr>
+              <th>存款时间</th>
+              <th>订单号</th><th>存款金额</th>
+              <th>说明</td>
+              <th>入款状态</th>
+            </tr>
+	  <tr>
+	<?php if($money){?>
+	<?php foreach ($money as $v){?>
+	<?php 
+		if(($v['m_id']%2)=='0'){
+			$bgcolor="#FFFFFF";
+		}else{
+			$bgcolor="#F5F5F5";
+		}	    
+	?>
+	<tr bgcolor="{$bgcolor}" align="center" onMouseOver="this.style.backgroundColor='#FFFFCC'" onMouseOut="this.style.backgroundColor='{$bgcolor}'" >
+      <td align="center">{$v['m_make_time']}</td>
+	  <td align="center">{$v['m_order']}</td>
+	  <td align="center">{$v['m_value']}</td>
+	  <?php $style='<font color="#990000">赠送/红利</font>'?>
+	  <td align="center"><?php if($v['about']){?> <?php echo $v['about'];?> <?php }else{?><?php echo $style;?><?php }?></td>
+	  <td align="center"><?php if($v['status']==1){?><font color="#FF0000">已处理</font><?php }else if($v['status']==2){?><font color="#006600">未处理</font><?php }else if($v['status']==0){?><font color="#000000">失败</font><?php }?></td>
+	 </tr>
+	 <?php }?> 
+	 <?php }?> 
+	  </tr>
+    </table>
+    </ul>
+  </div>
+   	<!-- page -->
+ 	<div class="page_list">
+  	<?php echo $page?>
+	</div>
+	<!-- page end -->
+<script language="javascript">bianse("thetable","#F5F5F5","#FFFFFF","#FFFFCC","#FFFFCC");</script> 
+</body>
+</html>

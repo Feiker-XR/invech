@@ -1,0 +1,94 @@
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,input,p,blockquote
+{margin:0;padding:0;}
+h1,h2,h3,h4,h5,h6
+{font-size:100%}
+ol,ul
+{list-style:none;}
+address,caption,cite,code,dfn,em,strong,th,var
+{font-style:normal; font-weight:normal;}
+fieldset,img
+{border:0;}
+/***占位***/
+.block_0{width:100%;clear:both;height:0px;overflow:hidden;*zoom:1;}
+.block_5{width:100%;clear:both;height:5px;overflow:hidden;*zoom:1;}
+.block_10{width:100%;clear:both;height:10px;overflow:hidden;*zoom:1;}
+.block_15{width:100%;clear:both;height:15px;overflow:hidden;*zoom:1;}
+.block_20{width:100%;clear:both;height:20px;overflow:hidden;*zoom:1;}
+.block_30{width:100%;clear:both;height:30px;overflow:hidden;*zoom:1;}
+.block_40{width:100%;clear:both;height:44px;overflow:hidden;*zoom:1;}
+.block_45{width:100%;clear:both;height:45px;overflow:hidden;*zoom:1;}
+.block_50{width:100%;clear:both;height:50px;overflow:hidden;*zoom:1;}
+.block_55{width:100%;clear:both;height:55px;overflow:hidden;*zoom:1;}
+.block_60{width:100%;clear:both;height:60px;overflow:hidden;*zoom:1;}
+
+.lottery_clear{ clear:both; height:0; width:0;}
+/*左侧菜单CSS*/
+.left{ width:100%; margin:0 auto; font-size:12px;}
+.left ul#menu, ul#menu ul {list-style-type:none;margin: 0;padding: 0; width: 100%;}
+.left ul#menu a {display: block;text-decoration: none;	}
+.left ul#menu li {margin-top: 1px;}
+.left ul#menu li a {background: #333;color: #fff;padding: 0.5em;border-left: 5px  #900 solid;}
+.left ul#menu li a:hover,#menu li.current{background: #000;}
+.left ul#menu li a .hover {background: #000;border-left: 5px  #900 solid;}
+.left ul#menu li ul li a {background: #ccc;color: #000;padding-left: 20px;}
+.left ul#menu li ul li a:hover {background: #aaa;border-left: 5px #000 solid;padding-left: 15px;}
+/*投注页面CSS*/
+.content{ width:100%; margin:0 auto;}
+.content .top{background: #efedea;font-size:12px; color:#7d7d7c; line-height:76px;width: 216px;float: right;height: 76px;border: 1px solid #d28c41;border-radius: 5px;text-align: center;font-size: 16px;}
+.content .left{ float:left; width:610px;}
+.content .right{ float:right; width:188px; margin-top:10px; border:1px solid #000; height:410px; background-color:#4D4D50;}
+.content .right .title{width:188px;color:#FFF; background-color:#4D4D50; height:30px; line-height:30px; background-image:url(/Images/six/th_bg.jpg); text-align:center; font-size:12px; border-bottom:1px solid #000}
+.content .right #zuhe{width:166px; height:356px;color:#FFF; background-color:#000; line-height:22px; text-align:left; font-size:14px; border:1px solid #000; margin:5px auto 0 auto;overflow-y: scroll; padding:5px;}
+.content .right #zuhe span{ color: #F90; font-weight:bold; display:block;}
+.content .right #zuhe strong{ color:#F00}
+.content .bian{width:96%;background-color:#a7a7a7; font-size:12px; color:#FFF; text-align:center}
+.content .bian th{color:#FFF; background-color:#dd8946; height:30px; line-height:30px; background-image:url(/Images/six/th_bg.jpg);}
+.content .bian .ball_txt{height:32px; width:34px; color:#000; background-color:#fff}
+.content .bian .bian_td_odds{line-height: 32px;text-align:center; color:#dd8946; font-family:Verdana, Geneva, sans-serif; font-size:14px; font-weight:bold; width:50px;background-color:#fff}
+.content .bian .bian_td_odds_15{line-height: 32px;text-align:center; color:#F9E101; font-family:Verdana, Geneva, sans-serif; font-size:14px; font-weight:bold; background-color:#4D4D50}
+.content .bian .bian_td_inp{line-height: 32px;text-align:center;color: #000; background-color:#fff;}
+.content .bian .bian_td_no{line-height: 32px;text-align:center;color: #666666; background-color:#fff;}
+.content .bian .bian_td_no_15{line-height: 32px;text-align:center;color: #fff; background-color:#4D4D50; width:60px;}
+.content .bian .bian_td_gg{line-height: 50px;text-align:center;color: #fff; background-color:#4D4D50; height:50px; font-size:14px;}
+.content .bian .inp1, .inp1m{border:1px solid #a7a7a7;height:22px;padding-top:1px;padding-left:1px!important;padding-left:2px;color:#000;text-align:center;}
+.content .bian .inp1{color:#333; width:80px;height:20px;text-align:center; background-color:#fff;}
+.content .bian .inp1m{width:80px;height:20px;border:1px solid #000;color:#F00;background:#FFF;}
+.content .bian .inp1s, .inp1ms{border:1px solid #000;height:22px;padding-top:1px;padding-left:1px!important;padding-left:2px;color:#000;text-align:center; line-height:22px; font-size:14px}
+.content .bian .inp1s{color:#fff; width:100px;height:22px;text-align:center; background-color:#78787F;}
+.content .bian .inp1ms{width:100px;height:22px;border:1px solid #000;color:#F00;background:#FFF;}
+.content .bian .h_odds{line-height: 32px;text-align:center; color:#F9E101; font-family:Verdana, Geneva, sans-serif; font-size:14px; font-weight:bold; background-color:#4D4D50;}
+.content .bian .h_inp{}
+.content .bian #ball_01,#ball_02,#ball_07,#ball_08,#ball_12,#ball_13,#ball_18,#ball_19,#ball_23,#ball_24,#ball_29,#ball_30,#ball_34,#ball_35,#ball_40,#ball_45,#ball_46{background-image:url(/dd788799view/images/six/BallBg_3.png); background-position: 1px 0px;color:#fff;font-family:"Microsoft YaHei";font-size: 16px; height:32px; width:34px;background-color:#fff; overflow:hidden;}
+.content .bian #ball_03,#ball_04,#ball_09,#ball_10,#ball_14,#ball_15,#ball_20,#ball_25,#ball_26,#ball_31,#ball_36,#ball_37,#ball_41,#ball_42,#ball_47,#ball_48{background-image:url(/dd788799view/images/six/BallBg_3.png); background-position: 1px 64px;color:#fff;font-family:"Microsoft YaHei";font-size: 16px; height:32px; width:34px;background-color:#fff}
+.content .bian #ball_05,#ball_06,#ball_11,#ball_16,#ball_17,#ball_21,#ball_22,#ball_27,#ball_28,#ball_32,#ball_33,#ball_38,#ball_39,#ball_43,#ball_44,#ball_49{background-image:url(/dd788799view/images/six/BallBg_3.png); background-position: 1px 32px;color:#fff;font-family:"Microsoft YaHei";font-size: 16px; height:32px; width:34px;background-color:#fff}
+.content .bian .ball_01,.ball_02,.ball_07,.ball_08,.ball_12,.ball_13,.ball_18,.ball_19,.ball_23,.ball_24,.ball_29,.ball_30,.ball_34,.ball_35,.ball_40,.ball_45,.ball_46{background-image:url(/dd788799view/images/six/BallBg_3.png); background-position: 1px 0px;color:#fff;font-family:"Microsoft YaHei";font-size: 16px; height:32px; width:32px;background-color:#fff; float:left;}
+.content .bian .ball_03,.ball_04,.ball_09,.ball_10,.ball_14,.ball_15,.ball_20,.ball_25,.ball_26,.ball_31,.ball_36,.ball_37,.ball_41,.ball_42,.ball_47,.ball_48{background-image:url(/dd788799view/images/six/BallBg_3.png); background-position: 1px 64px;color:#fff;font-family:"Microsoft YaHei";font-size: 16px; height:32px; width:32px;background-color:#fff; float:left;}
+.content .bian .ball_05,.ball_06,.ball_11,.ball_16,.ball_17,.ball_21,.ball_22,.ball_27,.ball_28,.ball_32,.ball_33,.ball_38,.ball_39,.ball_43,.ball_44,.ball_49{background-image:url(/dd788799view/images/six/BallBg_3.png); background-position: 1px 32px;color:#fff;font-family:"Microsoft YaHei";font-size: 16px; height:32px; width:32px;background-color:#fff; float:left;}
+.content .bian .ball_00{color:#fff;font-family:"Microsoft YaHei";font-size: 16px; height:32px; width:32px;background-color:#fff; float:left;}
+.content .bian .ball_c_01,.ball_c_02,.ball_c_07,.ball_c_08,.ball_c_12,.ball_c_13,.ball_c_18,.ball_c_19,.ball_c_23,.ball_c_24,.ball_c_29,.ball_c_30,.ball_c_34,.ball_c_35,.ball_c_40,.ball_c_45,.ball_c_46{background-image:url(/dd788799view/images/six/BallBg_3.png); background-position: 1px 0px;color:#fff;font-family:"Microsoft YaHei";font-size: 16px; height:32px; width:32px;background-color:#fff; margin:0 auto;}
+.content .bian .ball_c_03,.ball_c_04,.ball_c_09,.ball_c_10,.ball_c_14,.ball_c_15,.ball_c_20,.ball_c_25,.ball_c_26,.ball_c_31,.ball_c_36,.ball_c_37,.ball_c_41,.ball_c_42,.ball_c_47,.ball_c_48{background-image:url(/dd788799view/images/six/BallBg_3.png); background-position: 1px 64px;color:#fff;font-family:"Microsoft YaHei";font-size: 16px; height:32px; width:32px;background-color:#fff; margin:0 auto;}
+.content .bian .ball_c_05,.ball_c_06,.ball_c_11,.ball_c_16,.ball_c_17,.ball_c_21,.ball_c_22,.ball_c_27,.ball_c_28,.ball_c_32,.ball_c_33,.ball_c_38,.ball_c_39,.ball_c_43,.ball_c_44,.ball_c_49{background-image:url(/dd788799view/images/six/BallBg_3.png); background-position: 1px 32px;color:#fff;font-family:"Microsoft YaHei";font-size: 16px; height:32px; width:32px;background-color:#fff; margin:0 auto;}
+.content .button_body { width:96%; text-align:center; margin-top:20px; height:50px;background: #907c67;margin: 0 auto;}
+.content .button_body a.submit {background-position: 0 -37px;background: #d24319;color: white;}
+.content .button_body a.again{background: #585658;color: white;}
+.content .button {display: inline-block;width: 65px;height: 30px;line-height: 30px;margin-top: 10px;}
+.content .numberinfo{width:96%;background-color:#fff; font-size:14px; height:40px;color:#FFF; text-align:left;}
+.content .numberinfo #open_01,#open_02,#open_07,#open_08,#open_12,#open_13,#open_18,#open_19,#open_23,#open_24,#open_29,#open_30,#open_34,#open_35,#open_40,#open_45,#open_46{background-image:url(/dd788799view/images/six/BallBg_3.png); background-position: 1px 0px;color:#fff;font-family:"Microsoft YaHei";font-size: 16px; height:32px; width:32px;}
+.content .numberinfo #open_03,#open_04,#open_09,#open_10,#open_14,#open_15,#open_20,#open_25,#open_26,#open_31,#open_36,#open_37,#open_41,#open_42,#open_47,#open_48{background-image:url(/dd788799view/images/six/BallBg_3.png); background-position: 1px 64px;color:#fff;font-family:"Microsoft YaHei";font-size: 16px; height:32px; width:32px;}
+.content .numberinfo #open_05,#open_06,#open_11,#open_16,#open_17,#open_21,#open_22,#open_27,#open_28,#open_32,#open_33,#open_38,#open_39,#open_43,#open_44,#open_49{background-image:url(/dd788799view/images/six/BallBg_3.png); background-position: 1px 32px;color:#fff;font-family:"Microsoft YaHei";font-size: 16px; height:32px; width:34px;}
+.content .numberinfo .time-item span{background: #900;color:#fff;font-size:14px;font-family:Arial; font-weight:bold;padding:0 5px;margin-right:5px;}
+.content .numberinfo .time-item-all{width: 235px;height: 76px;border:1px solid #d28c41;background: #efedea;border-radius: 5px;color: #666666;}
+
+.content .numberinfo #open_qihao{color:#ee9043;font-size:14px;font-family:Arial; font-weight:bold;padding:0 5px;margin-right:5px;}
+.content .numberinfo #openNumber{width: 500px;height: 76px;border:1px solid #d28c41;background: #efedea;border-radius: 5px;color: #666666;}
+.content .numberinfo #openNumber div span{color: #ee9043;}
+.content .numberinfo .time-item #hour_show{display: inline-block;width: 50px;height: 35px;border:1px solid #d28c41;background: #fff;border-radius: 5px;color: #666666;font-size: 16px;margin-left: 5px;line-height: 35px;text-align: center;}
+.time-item-all .time-item-num{text-align: center;height: 30px;line-height: 30px;}
+.content .numberinfo .time-item #minute_show{display: inline-block;width: 50px;height: 35px;border:1px solid #d28c41;background: #fff;border-radius: 5px;color: #666666;font-size: 16px;line-height: 35px;text-align: center;}
+.content .numberinfo .time-item #second_show{display: inline-block;width: 50px;height: 35px;border:1px solid #d28c41;background: #fff;border-radius: 5px;color: #666666;font-size: 16px;line-height: 35px;text-align: center;}
+
+/*投注页面CSS*/
+.order_div{ width:598px; margin:0 auto;max-height:600px;_height:expression((document.documentElement.clientHeight||document.body.clientHeight)<600?"600px":""); overflow:hidden; padding:1px 0; overflow-y:auto;}
+.order_list{ width:100%; font-size:12px; background-color:#000}
+.order_list th{color:#FFF; background-color:#4D4D50; height:30px; line-height:30px; background-image:url(/Images/six/th_bg.jpg);}
+.order_list td{color:#000; background-color:#FFF; height:22px; line-height:22px; text-align:center;}

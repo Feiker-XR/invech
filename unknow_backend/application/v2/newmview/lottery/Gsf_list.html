@@ -1,0 +1,79 @@
+<!DOCTYPE HTML>
+<HTML>
+<head>
+<meta charset="UTF-8">
+<title>广东快乐十分开奖结果</title>
+<meta http-equiv="Cache-Control" content="max-age=864000" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+<link rel="stylesheet" href="/css/font-awesome.min.css">
+<link rel="stylesheet" type="text/css" href="/fonts-new/iconfont.css">
+<link rel="stylesheet" href="/styles/ucenter.css">
+<link rel="stylesheet" href="/styles/ezweb.css">
+<script src="/assets/jquery.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+</head>
+<style type='text/css'>
+body{}
+.line_list{font-size:12px;padding:0px 0px 0px 0px;}
+.table{float:left;margin-top:0px;}
+.img{padding-top:4px;}
+.pull-right {font-size: 14px; color: #920000; font-weight:500;}
+.btn-success {margin-right:-3px}
+.btn-default {margin-right:-3px}
+</style>
+<body>
+{include file='common/nav'}
+{include file='common/header'}
+<div class="panel panel-default" style="margin-top:60px;">
+  <div class="panel-heading">
+    <h3 class="panel-title">广东快乐十分开奖结果 <span class="pull-right" ><a href="#" onClick="url('/lottery/index/type/gsf.html');">返回投注</a></span></h3>
+  </div>
+  </div>
+
+ <a href="javascript:;" class="btn <?=$t==1 ?  'btn-successc' : 'btn-default';?>"onClick="url('?t=1')">
+ <?=date("Y-m-d",$lottery_time);?></a> 
+ <a href="javascript:;" class="btn <?=$t==2 ?  'btn-successc' : 'btn-default';?>" onClick="url('?t=2')">
+  <?=date("Y-m-d",$lottery_time-1*24*3600);?></a>
+<a href="javascript:;" class="btn <?=$t==3 ?  'btn-successc' : 'btn-default';?>" onClick="url('?t=3')">
+  <?=date("Y-m-d",$lottery_time-2*24*3600);?></a>
+<a href="javascript:;" class="btn <?=$t==4 ?  'btn-successc' : 'btn-default';?>" onClick="url('?t=4')">
+  <?=date("Y-m-d",$lottery_time-3*24*3600);?></a>
+<a href="javascript:;" class="btn <?=$t==5 ?  'btn-successc' : 'btn-default';?>" onClick="url('?t=5')">
+  <?=date("Y-m-d",$lottery_time-4*24*3600);?></a>
+<a href="javascript:;" class="btn <?=$t==6 ?  'btn-successc' : 'btn-default';?>" onClick="url('?t=6')">
+  <?=date("Y-m-d",$lottery_time-5*24*3600);?></a> 
+
+      
+<div class="table-responsive" style="margin-bottom:60px;">
+<table class="table"> 
+    <tr align="center" style="color:#FFF;background: #920000;font-size:13px; font-weight:bold;">
+      <th height="24">期数</th>
+      <th>开奖号码</th>
+      <th>和值</th>
+    </tr>
+  {foreach $rows as $row}
+    <tr align="left" bgcolor="#FFFFFF" style="color:#030" class="line_list" onMouseOver="this.style.backgroundColor='#FFFF99'" onMouseOut="this.style.backgroundColor='#FFFFFF'"> 
+            <td><font color="#871100"><?=$row['qishu']?></font></td>
+            <td><font color="641515"><b>{$row.hm}</b></font></td>
+            <td><font color="#2c6c28">{$row.hms[0]}  </font>
+            <font color=red>{$row.hms[1]}</font>                {$row.hms[2]}
+            <font color=red>{$row.hms[3]}</font>                            {$row.hms[4]}</td>
+  </tr>   
+{/foreach}              
+</table>
+</div>    
+</body>
+<!--<script>
+var wb = $(top.window).width()-10;
+$('.table-responsive').width(wb);
+if(self==top){
+  //top.location='/';
+}
+function url(u){
+  window.location.href=u;
+}
+</script>
+<script type="text/javascript" language="javascript" src="/js/left_mouse.js"></script>
+<script type="text/javascript" language="javascript" src="/js/ifcp.js"></script>-->
+</html>

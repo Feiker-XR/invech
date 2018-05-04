@@ -1,0 +1,37 @@
+<?php
+namespace app\common\model;
+use think\Model;
+class Slide extends Base{
+
+	
+    protected $table = 'gygy_slide';
+    protected $pk = 'id';
+
+
+    public function setIdAttr($value){
+        return $this->data['id'] = $value;
+    }
+
+    public function getIdAttr($value)
+    {
+        return $this->data['id'];
+    }
+
+    //----------------后台------------------
+
+    public static function getList($request){
+    
+        $params = $request->param();
+        $query = self::order('id');
+        if($params['name']??''){
+             $query->where('name','like','%'.trim($params['name']).'%');
+		}
+		if($params['enable']??''){
+             $query->where('enable','=',trim($params['enable']));
+		}
+        $data = $query->paginate(10);
+     
+        return $data;
+    }	
+    
+}

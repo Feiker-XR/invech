@@ -1,0 +1,67 @@
+<?php
+return [
+	//api每个客户每分钟允许最多请求60次;
+	'throttle_times'	=>	60,
+	'throttle_minutes'	=>	1,
+    'cache'                  => [
+        // 驱动方式
+        'type'   => 'redis',
+    ],
+    'app_debug'	=> 1,
+
+    'app_shenhe' => [
+        'default' => [
+            'shenHeUrl'=>'www.审核的H5Url.com',
+            'showUrl'=>'www.自己的h5的url.com',
+            'tiaoZhuanUrl'=>'www.跳转的url.com',
+            'showImageUrl'=>'点击跳转的图片地址',
+            'shenHeAppStatus'=>'1表示审核中，2表示通过审核',
+            'appStatus'=>'1表示正常使用，2表示不允许使用',
+        ],
+        '900扫描' => [
+            'shenHeUrl'=>'',
+            'showUrl'=>'http://m.api.dd788799.com',
+            'tiaoZhuanUrl'=>'',
+            'showImageUrl'=>'',
+            'shenHeAppStatus'=>'1',
+            'appStatus'=>'1',
+        ],
+
+        '900彩大消除' => [
+            'shenHeUrl'=>'http://h5game2.xiaofei.ga',
+            'showUrl'=>'http://m.api.dd788799.com',
+            'tiaoZhuanUrl'=>'',
+            'showImageUrl'=>'',
+            'shenHeAppStatus'=>'1',
+            'appStatus'=>'1',
+        ],
+
+        '900万太空小仓鼠' => [
+            'shenHeUrl'=>'http://h5game3.xiaofei.ga',
+            'showUrl'=>'http://m.api.dd788799.com',
+            'tiaoZhuanUrl'=>'',
+            'showImageUrl'=>'',
+            'shenHeAppStatus'=>'1',
+            'appStatus'=>'1',
+        ],
+
+        '900W指尖上的钢琴' => [
+            'shenHeUrl'=>'http://h5game4.xiaofei.ga',
+            'showUrl'=>'http://m.api.dd788799.com',
+            'tiaoZhuanUrl'=>'',
+            'showImageUrl'=>'',
+            'shenHeAppStatus'=>'1',
+            'appStatus'=>'1',
+        ],
+
+        '900球球连' => [
+            'shenHeUrl'=>'http://h5game7.xiaofei.ga',
+            'showUrl'=>'http://m.api.dd788799.com',
+            'tiaoZhuanUrl'=>'',
+            'showImageUrl'=>'',
+            'shenHeAppStatus'=>'1',
+            'appStatus'=>'1',
+        ],
+    ],
+    
+];

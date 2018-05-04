@@ -1,0 +1,84 @@
+<?php exit;?>001549715752834ddebbb7a025e0fc12d945871d5483s:3465:"a:2:{s:8:"template";s:3401:"<style type="text/css">
+    .auto{max-height: 500px;overflow: auto;}
+</style>
+<div class="panel dux-box  active dux-form form-auto">
+    <div class="panel-head">
+        <strong>生成sitemap</strong>
+    </div>
+    <div class="panel-body">
+
+        <div class="form-group">
+            <div class="label">
+                <label>请选择要生成sitemap的栏目</label>
+            </div>
+            <div class="field">
+               <div class="button-group border-main checkbox">
+                  <label class="button active"><input name="sitemap" id="sitemap" value="category" type="checkbox" checked="checked">顶级栏目</label>
+                  <label class="button"><input name="sitemap" id="sitemap" value="content" type="checkbox">新闻列表</label>
+                  <label class="button"><input name="sitemap" id="sitemap" value="tag" type="checkbox">Tag标签</label>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="field">
+            <blockquote>
+                    <div class="msg auto">
+                    <p><a href="javascript:;"><?php echo $text;?></a></p>
+                   </div>
+             </blockquote>
+                <p style="margin-top:20px;">
+                    <button class="button bg-main" type="button" id="check"><span class=""></span> 生成sitemap</button>
+                </p>
+                
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    //开启检测按钮
+    function onUpdateBtn(){
+        $('#check  span').removeClass('icon-spinner rotate');
+        $('#check').removeAttr('disabled');
+    }
+    //禁用检测按钮
+    function offUpdateBtn(){
+        $('#check  span').addClass('icon-spinner rotate');
+        $('#check').attr('disabled','disabled');
+    }
+    //开始生成sitemap
+    $('#check').click(function(){
+        offUpdateBtn();
+        var chk_value =[];//定义一个数组
+            $('input[name="sitemap"]:checked').each(function(){//遍历每一个名字为interest的复选框，其中选中的执行函数
+            chk_value.push($(this).val());//将选中的值添加到数组chk_value中
+            });
+        $.ajax({
+             type: "POST",
+             url: '/admin.php?r=duxcms/Sitemap/sitemap',
+             data: {sitemap:chk_value, time:$('input[name="time"]:checked').val()},
+             dataType: "json",
+             success: function(data){
+              if(data.status==true){
+              $('.msg').html('');
+                var mm="";
+                var value=data.info;
+                 for(var i in value){
+                    var title=value[i].title;
+                    var curl=value[i].curl;
+                    var app=value[i].app;
+                    mm="<p>模块："+app+'----名称：'+title+"----网址："+curl+"   生成成功！</p>";
+                  $('.msg').append(mm);
+                }
+                 onUpdateBtn();
+              }else{
+                 Do.ready('form', 'dialog', function () {
+                   layer.alert(data.info, 0, function () {
+                        window.location.reload();
+                    });
+                 });
+              }
+              }
+        });
+    });
+</script>";s:12:"compile_time";i:1518179752;}";

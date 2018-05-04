@@ -1,0 +1,65 @@
+<?php
+namespace app\admin\controller;
+use think\Request;
+use app\admin\Login;
+use app\common\model\Help as HelpModel;
+use app\common\model\HelpCat as HelpCatModel;
+use app\common\model\ActionLog as LogModel;
+class Help extends Login{
+    
+    public function index(){
+        $this->view->page_header = '帮助中心';
+        $request = request();
+        $list = HelpModel::getList($request);
+        $this->assign('list',$list);
+        $catlist = HelpCatModel::getAll();
+        $this->assign('catlist',$catlist);
+        return $this->fetch();
+    }
+
+    public function edit(){
+        $request = request();
+        $params = $request->param();
+        if(request()->isGet()){
+            $this->view->page_header = "添加帮助文档";
+            if(!empty($params['id'])){
+                $info =  HelpModel::get(['id'=>$params['id']]);
+                $this->assign('info',$info);  
+                $this->view->page_header = "编辑帮助文档";
+            }
+            $catlist = HelpCatModel::getAll();
+            $this->assign('catlist',$catlist);
+            return $this->fetch();
+        }else{
+            $id =  !empty($params['id'])? $params['id']:''; 
+            if($id){
+                $help = HelpModel::get(intval($id));
+            }else{
+                $help = new HelpModel($params);
+            }
+            $list = $help->validate('System.help')->save($params);
+            if($list){
+                LogModel::log(LogModel::BUSINESS_TYPE_EDIT,$help,LogModel::BUSINESS_TYPES[LogModel::BUSINESS_TYPE_EDIT]);
+                return $this->success('操作成功',"/help/index");
+            }else{
+                return $this->error($help->getError(),"/help/index");
+            }
+        }
+    }
+    
+    public function del(){
+        $request    = request();
+        $params     = $request->param();
+        $help       = HelpModel::get(intval($params['id']));
+        $list       = $help->delete();
+        if($list){
+            LogModel::log(LogModel::BUSINESS_TYPE_DELE,$help,LogModel::BUSINESS_TYPES[LogModel::BUSINESS_TYPE_DELE]);
+            return $this->success('操作成功');
+        }else{
+            return $this->error($help->getError());
+        }
+    }
+
+    
+
+}

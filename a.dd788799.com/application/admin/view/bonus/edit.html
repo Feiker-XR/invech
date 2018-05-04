@@ -1,0 +1,110 @@
+<form class="form-horizontal" id="bonus_add" method="post" enctype="multipart/form-data">
+  <div class="box-body">
+
+    <div class="form-group">
+        <label for="inputEmail3" class="col-sm-2 control-label">名称</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control"  name="name" placeholder="名称" {if(!empty($info['name']))} value="{$info['name']}" {/if}>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="inputEmail3" class="col-sm-2 control-label">事件</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control"  name="event" placeholder="事件" {if(!empty($info['event']))} value="{$info['event']}" {/if}>
+        </div>
+    </div>
+    
+    <div class="form-group">
+        <label for="inputEmail3" class="col-sm-2 control-label">业务</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control"  name="business" placeholder="业务" {if(!empty($info['business']))} value="{$info['business']}" {/if}>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="inputEmail3" class="col-sm-2 control-label">额外参数</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control"  name="extra" placeholder="额外参数" {if(!empty($info['extra']))} value="{$info['extra']}" {/if}>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="inputPassword3" class="col-sm-2 control-label">打码量开关</label>
+        <div class="col-sm-10">
+          <select class="form-control"  name="is_audit" aria-hidden="true">
+              <option value="0" {if(!empty($info['is_audit']) && $info['is_audit']=='0')} selected="selected"{/if}>关闭</option>
+              <option value="1" {if(!empty($info['is_audit']) && $info['is_audit']=='1')} selected="selected"{/if}>开启</option>
+           </select>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="inputEmail3" class="col-sm-2 control-label">打码量倍数</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control"  name="betFlowRate" placeholder="打码量倍数" {if(!empty($info['betFlowRate']))} value="{$info['betFlowRate']}" {/if}>
+        </div>
+    </div>
+
+     <div class="form-group">
+        <label for="inputPassword3" class="col-sm-2 control-label">状态</label>
+        <div class="col-sm-10">
+          <select class="form-control"  name="enable" aria-hidden="true">
+              <option value="0" {if(!empty($info['enable']) && $info['enable']=='0')} selected="selected"{/if}>关闭</option>
+              <option value="1" {if(!empty($info['enable']) && $info['enable']=='1')} selected="selected"{/if}>开启</option>
+           </select>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="inputPassword3" class="col-sm-2 control-label">描述</label>
+        <div class="col-sm-10">
+          <textarea class="form-control" rows="3" name="desc" placeholder="描述 ...">{if(!empty($info['desc']))} {$info['desc']}{/if}</textarea>
+        </div>
+    </div>
+
+    <input type="hidden" name="id" {if(!empty($info['id']))} value="{$info['id']}" {/if} >
+    <div class="col-sm-offset-2 col-sm-10">
+        <button id="btnajax" class="btn btn-danger">提交</button>
+    </div>
+  </div>
+</form>
+
+<script type="text/javascript">
+$(function(){
+
+    $("#btnajax").click(function () {
+
+    var options = {
+       url: "{:url('edit')}",
+      // type : 'POST',
+     dataType : 'json',
+      success : function(data) {
+        $(".layui-layer-close").click();
+
+       layer.alert(data.msg, {
+          time: 20000,
+          skin: 'layui-layer-molv', //该皮肤由layer.seaning.com友情扩展。关于皮肤的扩展规则，去这里查阅
+          closeBtn: 0,
+          anim: 4
+        }, function(){
+           window.location.href = document.URL;
+        })
+      },
+      error: function(data) {
+         $(".layui-layer-close").click();
+        layer.alert(data.msg, {
+          time: 20000,
+          skin: 'layui-layer-molv', //该皮肤由layer.seaning.com友情扩展。关于皮肤的扩展规则，去这里查阅
+          closeBtn: 0,
+          anim: 4
+        }, function(){
+           window.location.href = document.URL;
+        })
+      }
+    };
+      $("#bonus_add").ajaxForm(options);
+   })
+});
+
+</script>

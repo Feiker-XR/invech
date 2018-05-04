@@ -1,0 +1,57 @@
+<?php
+namespace app\admin\controller;
+use app\admin\Login;
+use app\common\model\Apply as ApplyModel; 
+
+class Apply extends Login{
+
+    public function _initialize(){
+
+        parent::_initialize();
+
+        $classname = ApplyModel::class;
+        foreach (ApplyModel::BUSINESS_ARRAY as $business) {
+            $event = 'audit.'.$business;
+            $handle = $classname . '@audit' . ucfirst($business);
+            container('events')->listen($event,$handle); 
+        }
+        
+    }    
+
+    public function agent(){
+        $this->view->page_header = '代理申请';
+        $list = ApplyModel::agent()->paginate();
+        $this->assign('list',$list);
+        return $this->fetch();        
+    }
+
+    public function withdraw(){
+        $this->view->page_header = '提现申请';
+        $list = ApplyModel::withdraw()->paginate();
+        $this->assign('list',$list);
+        return $this->fetch();        
+    }
+
+    public function detail($id){
+        $this->view->page_header = '提案详情';
+        $apply = ApplyModel::get($id);   
+        $this->assign('id',$id); 
+        //$apply->bank_account    
+        return view('apply/detail_'.$apply->business);
+    }
+
+
+    public function audit(){
+
+        $apply = ApplyModel::get(input('id/i'));
+        $agree = input('agree/i');
+        $remark = input('remark');
+        if($agree){
+            $this->user->agree_audit($apply,$remark); 
+        }else{
+           $this->user->deny_audit($apply,$remark);  
+        }        
+    }
+
+    
+}
