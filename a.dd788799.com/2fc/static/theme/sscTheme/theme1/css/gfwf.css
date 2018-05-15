@@ -1,0 +1,144 @@
+/*官方玩法*/
+.Playmethod .respan span{
+    width: 61px!important;
+}
+.btn_fu_zhi span.acti{
+    border: none;border-bottom: 2px solid #a92309;background: #f02800;padding: 0 1px;
+}
+#zhudanList .re_touzhu_tem{
+    height: auto;
+    max-height: 60px;
+    padding-left: 5px;
+}
+.head-name{
+    width: 100%;
+    height: 20px;
+}
+.head-name span{
+    display: block;
+    line-height: 20px;
+}
+.content-jiang{
+    position: relative;
+    width: 530px;
+    height: auto;
+    max-height: 35px;
+}
+.content-jiang .neirong{
+    display: block;
+    width: 300px;
+    max-width: 300px;
+    line-height:18px;
+    word-break: normal; /*正常无变化(默认处理方式.文本自动处理换行.假如抵达容器边界内容会转到下一行)*/
+    white-space: pre-wrap; /*同pre属性,但是遇到超出容器范围的时候会自动换行 */
+}
+.content-jiang .span1,.content-jiang .span2,.content-jiang .span3{
+    line-height: 18px;
+}
+.content-jiang .span1{
+    padding-right: 5px;
+    padding-left: 5px;
+    width: auto;
+    max-width: 60px;
+}
+.content-jiang .span2{
+    width: 80px;
+}
+.content-jiang .span3{
+    width: auto;
+    max-width: 80px;
+    color: green;
+}
+.content-jiang .span4 a img{
+    position: absolute;
+    right: 5px;
+    top: 0;
+}
+/*默认隐藏手动输入号码区域*/
+.content_jiang{
+    position: relative;
+    width:680px;
+    height: 180px;
+    padding-left: 30px;
+}
+
+.content_jiang .con_j_end{
+    position: absolute;
+    right: -160px;
+    top:0;
+}
+.con_j_end ul li{
+    width: 120px;
+    height: 28px;
+    background: #FF6100;
+    color: #fff;
+    text-align: center;
+    font-size: 12px;
+    line-height: 30px;
+    border-bottom: 2px solid #a92309;
+    border-radius: 3px;
+    cursor: pointer;
+}
+.con_j_end ul li a {
+    color:#FFF;
+}
+.content_jiang textarea{
+    width: inherit;
+    height: inherit;
+    font: 12.3px Arial;
+    padding-top: 10px;
+    margin-bottom: 10px;
+}
+.rep1_zhushi{
+    height: 20px;
+    font-size: 12px;
+    margin-left: 25px;
+    margin-top: 30px;
+}
+.hide_flag{
+    display: none!important;
+}
+/*后三---后三组合*/
+.li1012_hezhi b,.li1005_hezhi b{
+  display: block;
+  height: 80px;
+}
+.li1005_hezhi{
+    width: 880px!important;
+}
+.li1012_hezhi{
+    width: 825px!important;
+}
+.li1012_hezhi span,.li1005_hezhi span{
+    height: 45px!important;
+}
+/*和值尾数*/
+.cl-1015-tsh ul .tsh_li b i,.cl-1014-hzws ul .hzws_li b i{
+    width: 68px!important;
+    background: url(../img/ico55re.png)!important;
+}
+.cl-1015-tsh ul .tsh_li b,.cl-1014-hzws ul .hzws_li b{
+    width: 68px!important;
+}
+/*特殊号*/
+.tsh_li span{
+    float: left;
+    height: 33px;
+    border-radius: 33px;
+    background: #fff;
+    border: 1px #ccc solid;
+    box-shadow: 1px 1px 2px #ccc;
+    font-size: 18px;
+    line-height: 33px;
+    text-align: center;
+    color: #8f8f8f;
+    font-weight: 500;
+    margin-left: 20px;
+    cursor: pointer;
+    width: 100px!important;
+}
+/*豹子顺子对子*/
+.acti_tsh{
+    background: #e84f31!important;
+    color: #FFF!important;
+}

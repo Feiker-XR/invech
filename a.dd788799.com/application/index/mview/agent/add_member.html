@@ -1,0 +1,106 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+    <title>添加会员</title>
+    <link type="text/css" rel="stylesheet" href="/css/personal.css">
+    <link type="text/css" rel="stylesheet" href="/css/auth.css">
+    <link type="text/css" rel="stylesheet" href="/css/agent.css">
+</head>
+<body style="background: #fff;">
+<div class="container">
+    <main>
+        <header class="header add">
+            <i class='left' onclick="javascript:history.back(-1);">返回</i>
+            <h1>添加会员</h1>
+        </header>
+        <ul class="login">
+            <li><img src="../images/auth/uname.png" alt="uname"><input type="text" id="username" placeholder="请输入用户名" minlength="3" maxlength="8"> </li>
+            <li><img src="../images/auth/yzm.png" alt="realname"><input type="text" id="realname" placeholder="用户姓名" maxlength="6"></li>
+            <li><img src="../images/auth/pwd.png" alt="pwd"><input type="password" id="password" placeholder="输入密码" minlength="6" maxlength="20"> </li>
+            <li><img src="../images/auth/pwd.png" alt="pwd"><input type="password" id="password_confirm" placeholder="确认密码"> </li>
+            <input type="hidden" id="agent_id" value="{$user->id}">
+        </ul>
+        <button id="submit" class="submit">确认添加</button>
+        <div class="tip" style="top:11.2rem;"><span></span></div>
+        <div class="loading"><img src="/images/loading.gif" alt="loading"/> </div>
+    </main>
+</div>
+<script type="text/javascript" src="/js/jquery-1.8.0.min.js"></script>
+<script type="text/javascript" src="/js/show.js"></script>
+<script type="text/javascript">
+    var _timeout = null,_tip = null;
+    $(function () {
+        _tip = $('.tip').remove();     //保存提示信息
+
+    });
+    // 更新验证码
+   /* $("#captcha").click(function(){
+        $(this).attr('src',"{:url('indexcaptcha/get_captcha?id=register')}");
+    });*/
+    // 提交数据
+    $('#submit').click(function(){
+        var _this = $(this);
+        var _user = {
+            username:'',
+            realname:'',
+            password:'',
+            password_confirm:'',
+            agent_id:''
+        };
+        _user.username  = $('#username').val();
+        _user.realname  = $('#realname').val();
+        _user.password   = $('#password').val();
+        _user.password_confirm   = $('#password_confirm').val();
+        _user.agent_id   = $('#agent_id').val();
+
+        if(_user.username == ''){
+            getErrorMsg('用户名不为空');
+            return;
+        }else if(_user.username.length < 3 || _user.username.length >8){
+            getErrorMsg('用户名必须为6-8位');
+            return;
+        }else if(_user.realname == ''){
+            getErrorMsg('真实姓名不为空');
+            return;
+        }else if(_user.password == ''){
+            getErrorMsg('密码不为空');
+            return;
+        }else if(_user.password.length < 6 || _user.password.length > 20){
+            getErrorMsg('密码必须为6-20位');
+            return;
+        }else if(_user.password_confirm == ''){
+            getErrorMsg('确认密码不为空');
+            return;
+        }else if(_user.password != _user.password_confirm){
+            getErrorMsg('两次密码不一致');
+            return;
+        } else{
+            _this.attr('disabled','disabled');
+            _this.addClass('disabled');
+            $('.loading').show();
+        }
+
+        //换链接啊
+        $.ajax({
+            url: "/agent/add_member",
+            data:_user,
+            dataType:'json',
+            type:'POST',
+            success:function(data){
+                getErrorMsg(data.msg);
+            },
+            error:function (err) {
+                alert('ajax出错了！');
+            },
+            complete:function () {
+                _this.removeAttr('disabled');
+                _this.removeClass('disabled');
+                $('.loading').hide();
+            }
+        });
+    });
+</script>
+</body>
+</html>

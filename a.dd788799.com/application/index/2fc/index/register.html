@@ -1,0 +1,656 @@
+{include file="common/header" /}
+<div class="main login_main">
+    <div class="container login_nr">
+        <div class="login_nr_t clearfix">
+            <div class="left login_nr_t_lf">
+                账号注册
+            </div>
+            <div class="right">
+                已有账号?<a href="/login.html">立即登录</a>
+            </div>
+        </div>
+        <form id="myform" >
+            <div class="login_nr_b">
+                <div class="clearfix login_nr_gp">
+			    		<span class="left login_nr_name">
+			    			<span class="star">
+			    				*
+			    			</span>
+			    			用户名:
+			    		</span>
+                    <div class="login_nr_gp_rt clearfix">
+                        <input type="text" name="username" id="inputyhm" class="inputStr left" placeholder="请输入用户名">
+                        <div class="left erro">
+                        <span class="yhm">
+                             <span id="yesyhm" class="sl-correct-verifycode hideRegImage"> <img src="/__IMG__/lvgou.png" style="width: 20px;"> </span> <span id="noyhm" class="sl-error-verifycode hideRegImage"><img src="/__IMG__/hongcha.png" style="width: 20px;"></span>
+                            <span class="info">字母开头的6-12位字母数字组成的用户名</span>
+                            <span class="bitianyhm" style="color: red">&nbsp;&nbsp;&nbsp;必填</span>
+                            <span class="error red hide"></span>
+                        </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="clearfix login_nr_gp">
+			    		<span class="left login_nr_name">
+			    			<span class="star">
+			    				*
+			    			</span>
+			    			密码:
+			    		</span>
+                    <div class="login_nr_gp_rt clearfix">
+                        <input type="password" name="password" id="inputPassword" class="inputStr left" placeholder="请输入密码">
+                        <div class="left erro">
+                        <span class="mm">
+                             <span id="yes" class="sl-correct-verifycode hideRegImage"> <img src="/__IMG__/lvgou.png" style="width: 20px;"> </span> <span id="no" class="sl-error-verifycode hideRegImage"><img src="/__IMG__/hongcha.png" style="width: 20px;"></span>
+                            <span class="info">输入6-12位字母、数字的密码</span>
+                            <span class="bitianmm" style="color: red">&nbsp;&nbsp;&nbsp;必填</span>
+                            <span class="error red hide"></span>
+                        </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="clearfix login_nr_gp">
+			    		<span class="left login_nr_name">
+			    			<span class="star">
+			    				*
+			    			</span>
+			    			确认密码:
+			    		</span>
+                    <div class="login_nr_gp_rt clearfix">
+                        <input type="password" name="password_confirm" id="inputconfirmPassword" class="inputStr left" placeholder="确认密码">
+                        <div class="left erro">
+                        <span class="qmm">
+                            <span id="yesqmm" class="sl-correct-verifycode hideRegImage"> <img src="/__IMG__/lvgou.png" style="width: 20px;"> </span><span id="noqmm" class="sl-error-verifycode hideRegImage"><img src="/__IMG__/hongcha.png" style="width: 20px;"></span>
+                            <span class="info">与上面输入密码必须保持一致</span>
+                            <span class="bitianqmm" style="color: red">&nbsp;&nbsp;&nbsp;必填</span>
+                            <span class="error red hide"></span>
+                        </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="clearfix login_nr_gp">
+			    		<span class="left login_nr_name">
+			    			<span class="star">
+			    				*
+			    			</span>
+			    			姓名:
+			    		</span>
+                    <div class="login_nr_gp_rt clearfix">
+                        <input type="text" name="name" id="inputxm" class="inputStr left" placeholder="请输入姓名">
+                        <div class="left erro">
+                        <span class="name">
+                             <span id="yesxm" class="sl-correct-verifycode hideRegImage"> <img src="/__IMG__/lvgou.png" style="width: 20px;"></span><span id="noxm" class="sl-error-verifycode hideRegImage"><img src="/__IMG__/hongcha.png" style="width: 20px;"></span>
+                            <span class="info">姓名必须和绑定的银行卡户名一致</span>
+                            <span class="bitianxm" style="color: red">&nbsp;&nbsp;&nbsp;必填</span>
+                            <span class="error red hide"></span>
+                        </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="clearfix login_nr_gp">
+			    		<span class="left login_nr_name">
+                            	<span class="star">
+			    				*
+			    			</span>
+			    			验证码:
+			    		</span>
+                    <div class="login_nr_gp_rt clearfix">
+                        <input type="text" name="yzm" id="VerificationCode" class="inputStr left" placeholder="请输入验证码">
+                        <div class="left erro">
+                        <span class="yzm">
+                             <img id="captcha" style= "width:70px; height: 25px" src="{:url('indexcaptcha/get_captcha?id=register')}">
+                             <span class="bitianyzm" style="color: red">&nbsp;&nbsp;&nbsp;必填</span>
+                             <span class="error red hide"></span>
+                        </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="clearfix login_nr_gp">
+			    		<span class="left login_nr_name">
+			    			推荐人:
+			    		</span>
+                    <div class="login_nr_gp_rt clearfix">
+                        <input type="text" name="name" id="inputtjr" class="inputStr left" placeholder="请输入推荐人">
+                        <div class="left erro">
+                        <span class="name">
+                            <!-- <span id="yesxm" class="sl-correct-verifycode hideRegImage"> <img src="/__IMG__/lvgou.png" style="width: 20px;"></span><span id="noxm" class="sl-error-verifycode hideRegImage"><img src="/__IMG__/hongcha.png" style="width: 20px;"></span>-->
+                            <span class="info">选填</span>
+                            <!--<span class="bitianxm" style="color: red">&nbsp;&nbsp;&nbsp;必填</span>
+                            <span class="error red hide"></span>-->
+                        </span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="clearfix login_nr_gp" style="padding-left: 40px;">
+                    <span class="left login_nr_name"></span>
+                    <div class="login_nr_gp_rt clearfix">
+                        <input type="checkbox" class="left" checked="checked" style="width:30px;"><span>注册即表示同意<a href="javascript:void(0)" onclick="showKhxy()" class="xieyiCss">《400万彩票网（400w.com)服务使用协议》</a></span>
+                    </div>
+                </div>
+                <div class="login_b">
+                    <p>
+                        <input type="button" class="mfkh" value="免费开户" id="btn-register">
+                        <input type="reset" class="mfkh" value="重置" onclick="restbtn()">
+                    </p>
+                </div>
+
+                <div class="login_b_link" style="padding-left: 75px;">
+                    <a href="https://f18.livechatvalue.com/chat/chatClient/chatbox.jsp?companyID=881265&amp;configID=73958&amp;jid=4674187711&amp;s=1">忘记密码?</a>
+                    <span>|</span>
+                    <a href="https://f18.livechatvalue.com/chat/chatClient/chatbox.jsp?companyID=881265&amp;configID=73958&amp;jid=4674187711&amp;s=1" target="_blank">在线客服</a>
+                </div>
+            </div></form>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $("#captcha").click(function(){
+        $('#captcha').attr('src',"{:url('indexcaptcha/get_captcha?id=register')}");
+    })
+</script>
+
+
+<script type="text/html" id="template_khxy">
+    KHXY_400w
+</script>
+
+<script>
+    function showKhxy() {
+        //自定页
+        layer.open({
+            type: 1,
+            skin: 'layui-layer-popup', //样式类名
+            closeBtn: 2, //显示关闭按钮
+            anim: 2,
+            title: '开户协议',
+            shadeClose: true, //开启遮罩关闭
+            content: $("#template_khxy").html()
+        });
+    }
+
+    function refreshYzm(obj) {
+        var src = $(obj).attr("src");
+        var params = getRequest(src);
+
+        src = "/code/yzm?timestamp=" + (new Date()).getTime();
+        $.each(params, function (index, value) {
+            src += '&' + value.key + '=' + value.value;
+        });
+        $(obj).attr("src", src);
+    }
+
+    function restbtn(){
+        window.location.href ="/index/register.html";
+    }
+
+    var qqCheck = false;
+    var iphoneCheck = false;
+    var emailCheck = false;
+    $(function () {
+
+
+        var flagiphone= false
+        var flageamil= false
+        var flagqq= false
+        var isiphone= false
+        var isqq=false
+        var isemail= false
+        var isyzm=false
+        var isczk=false
+
+        var account = $("input[name='account']").val(); // 账号
+        var password = $("input[name='password']").val();   // 密码
+        var phone = $("input[name='phoneName']").val();  // 手机号码
+        var email = $("input[name='email']").val();   // 邮箱号码
+        var qq = $("input[name='qq']").val();   // QQ
+        var yzm = $("input[name='yzm']").val();   // 验证码
+        var czk = $("input[name='czk']").val();
+        //验证码
+
+        if (isyzm) {
+            $(".bitian").html("必填").css("color", "red");
+            $("#registerLoginYzm").keyup(function () {
+                var yzm = $("input[name='yzm']").val(); // yzm
+                ajaxRequest({
+                    url: "/member/ajaxChekeCode.json",
+                    data: {
+                        yzm: yzm
+                    },
+                    success: function (obj) {
+                        if(obj){
+                            $("#btn-register").attr("disabled", false)
+                            $('#yesyzm').show();
+                            $('#noyzm').hide();
+                            $(".yzm").find(".info").hide();
+                            $(".bitian").hide();
+                            $(".yzm").find(".error").html("请输入验证码").hide();
+                            $(".bitianyzm").hide();
+                        }else{
+                            $("#btn-register").attr("disabled", true)
+                            $(".yzm").find(".info").hide();
+                            $('#yesyzm').hide();
+                            $('#noyzm').show();
+                            $(".yzm").find(".error").html("验证码错误，请刷新重新输入").show();
+
+                        }
+                    }
+
+                });
+
+            });
+        }
+
+        $("#inputyhm").blur(function(){
+            var username = $("input[name='username']").val(); // 账号
+            if (!username) {
+                $(".yhm").find(".info").hide();
+                $('#yesyhm').hide();
+                $('#noyhm').show();
+                $(".yhm").find(".error").html("请输入用户名").show();
+            }else if (!username.match(/^[a-zA-Z][0-9a-zA-Z]{5,11}$/)) {
+                $(".yhm").find(".info").hide();
+                $('#yesyhm').hide();
+                $('#noyhm').show();
+                $(".yhm").find(".error").html("请输入以字母开头的6-12位字母、数字组成的用户名").show();
+            }else{
+                $(".yhm").find(".info").hide();
+                $('#yesyhm').show();
+                $('#noyhm').hide();
+                $(".yhm").find(".error").html("请输入以字母开头的6-12位字母、数字组成的用户名").hide();
+                $(".yhm").find(".bitianyhm").hide();
+            }
+        });
+
+
+        $("#inputPassword").blur(function () {
+            var password = $("input[name='password']").val();   // 密码
+            if (!password) {
+                $(".mm").find(".info").hide();
+                $('#yes').hide();
+                $('#no').show();
+                $(".mm").find(".error").html("请输入密码").show();
+            } else if (!password.match(/^(?![A-Z]+$)(?![a-z]+$)(?!\d+$)(?![\W_]+$)\S{6,16}$/)) {
+                $(".mm").find(".info").hide();
+                $('#yes').hide();
+                $('#no').show();
+                $(".mm").find(".error").html("请输入6-12位、区分大小写的字母和数字组合的密码").show();
+            } else {
+                $('#yes').show();
+                $('#no').hide();
+                $(".mm").find(".info").hide();
+                $(".mm").find(".error").html("请输入6-12位字母、数字的密码").hide();
+                $(".mm").find(".error").html("请输入密码").hide();
+                $(".bitianmm").hide();
+            }
+
+        });
+
+
+        $("#inputconfirmPassword").blur(function(){
+            var confirmPassword = $("input[name='password_confirm']").val(); // 确认密码
+            var password = $("input[name='password']").val();   // 密码
+            if (!confirmPassword) {
+
+                $(".qmm").find(".info").hide();
+                $('#yesqmm').hide();
+                $('#noqmm').show();
+                $(".qmm").find(".error").html("请请输入确认密码").show();
+            }else if (confirmPassword != password) {
+                $(".qmm").find(".info").hide();
+                $('#yesqmm').hide();
+                $('#noqmm').show();
+                $(".qmm").find(".error").html("确认密码不正确").show();
+            }else{
+                $('#yesqmm').show();
+                $('#noqmm').hide();
+                $(".qmm").find(".info").hide();
+                $(".qmm").find(".error").html("与上面输入密码必须保持一致").hide();
+                $(".qmm").find(".error").html("请请输入确认密码").hide();
+                $(".bitianqmm").hide();
+            }
+
+        });
+
+        $("#inputxm").blur(function(){
+            var name = $("input[name='name']").val();   // 姓名
+            if (!name) {
+                $(".name").find(".info").hide();
+                $('#yesxm').hide();
+                $('#noxm').show();
+                $(".name").find(".error").html("请请输入姓名").show();
+            }else  if (!name.match(/^[\u4e00-\u9fa5]+$/)) {
+                $(".name").find(".info").hide();
+                $('#yesxm').hide();
+                $('#noxm').show();
+                $(".name").find(".error").html("姓名只能是汉字").show();
+            }else{
+                $('#yesxm').show();
+                $('#noxm').hide();
+                $(".name").find(".info").hide();
+                $(".name").find(".error").html("姓名只能是汉字").hide();
+                $(".name").find(".error").html("请请输入确认密码").hide();
+                $(".bitianxm").hide();
+            }
+
+        });
+
+        $("#VerificationCode").blur(function(){
+            var yzm = $("input[name='yzm']").val();   // 姓名
+            if (!yzm) {
+                $(".yzm").find(".info").hide();
+                $('#yesyzm').hide();
+                $('#noyzm').show();
+                $(".yzm").find(".error").html("请输入验证码").show();
+            }else{
+                $('#yesyzm').show();
+                $('#noyzm').hide();
+                $(".yzm").find(".info").hide();
+                $(".yzm").find(".error").html("姓名只能是汉字").hide();
+                $(".yzm").find(".error").html("请请输入确认密码").hide();
+                $(".bitianyzm").hide();
+            }
+
+        });
+
+
+
+        if(isiphone){
+            if (!flagiphone) {
+                $(".bitianIphone").html("选填").css("color", "#AAAAAA");
+                $("#inputsj").blur(function () {
+                    var phone = $("input[name='phoneName']").val();
+                    if (!(phone.match(/^0?(13[0-9]|15[012356789]|17[012345678]|18[012356789]|147)[0-9]{8}$/) != null || phone.match(/^0?[5689][0-9]{7}$/) != null) && phone) {
+                        $(".sj").find(".info").hide();
+                        $('#yessj').hide();
+                        $('#nosj').show();
+                        $(".sj").find(".error").html("请输入正确手机号").show();
+                    }else {
+                        if(!phone){
+                            $(".bitianIphone").html("选填").css("color", "#AAAAAA");
+                            $('#nosj').hide();
+                            $(".sj").find(".error").html("请输入正确手机号").hide();
+                        }else {
+                            $('#yessj').show();
+                            $('#nosj').hide();
+                            $(".sj").find(".info").hide();
+                            $(".sj").find(".error").html("请输入正确手机号").hide();
+                            $(".bitianIphone").hide();
+                        }
+
+                    }
+
+                });
+            } else {
+                $(".bitianIphone").html("&nbsp;&nbsp;&nbsp;必填");
+                $("#inputsj").blur(function () {
+                    var phone = $("input[name='phoneName']").val();   // 姓名
+                    if (!phone) {
+                        $(".sj").find(".info").hide();
+                        $('#yessj').hide();
+                        $('#nosj').show();
+                        $(".sj").find(".error").html("请输入手机").show();
+                        return;
+                    } else if (!(phone.match(/^0?(13[0-9]|15[012356789]|17[012345678]|18[02356789]|147)[0-9]{8}$/) != null || phone.match(/^0?[5689][0-9]{7}$/) != null)) {
+                        $(".sj").find(".info").hide();
+                        $('#yessj').hide();
+                        $('#nosj').show();
+                        $(".sj").find(".error").html("请输入正确手机号").show();
+                    } else {
+                        $('#yessj').show();
+                        $('#nosj').hide();
+                        $(".sj").find(".info").hide();
+                        $(".sj").find(".error").html("请输入正确手机号").hide();
+                        $(".sj").find(".error").html("请输入手机").hide();
+                        $(".bitianIphone").hide();
+                    }
+
+                });
+            }
+        }
+        if(isqq){
+            if(!flagqq){
+                $(".bitianqq").html("选填").css("color","#AAAAAA");
+                $("#inputqq").blur(function(){
+                    var qq = $("input[name='qq']").val();
+                    if (!qq.match(/^\d{5,10}$/) && qq) {
+                        $(".qq").find(".info").hide();
+                        $('#yesqq').hide();
+                        $('#noqq').show();
+                        $(".qq").find(".error").html("请输入正确的QQ").show();
+                    }else{
+                        if(!qq){
+                            $(".bitianqq").html("选填").css("color","#AAAAAA");
+                            $('#noqq').hide();
+                            $(".qq").find(".error").html("请输入正确的QQ").hide();
+                        }else {
+                            $('#yesqq').show();
+                            $('#noqq').hide();
+                            $(".qq").find(".info").hide();
+                            $(".qq").find(".error").html("请输入正确的QQ").hide();
+                            $(".qq").find(".error").html("请输入QQ").hide();
+                            $(".bitianqq").hide();
+                        }
+                    }
+                });
+            }else {
+
+                $(".bitianqq").html("&nbsp;&nbsp;&nbsp;必填");
+                $("#inputqq").blur(function(){
+                    var qq = $("input[name='qq']").val();
+                    if (!qq) {
+                        $(".qq").find(".info").hide();
+                        $('#yesqq').hide();
+                        $('#noqq').show();
+                        $(".qq").find(".error").html("请输入QQ").show();
+                        return;
+                    } else  if (!qq.match(/^\d{5,10}$/)) {
+                        $(".qq").find(".info").hide();
+                        $('#yesqq').hide();
+                        $('#noqq').show();
+                        $(".qq").find(".error").html("请输入正确的QQ").show();
+                    }else{
+                        $('#yesqq').show();
+                        $('#noqq').hide();
+                        $(".qq").find(".info").hide();
+                        $(".qq").find(".error").html("请输入正确的QQ").hide();
+                        $(".qq").find(".error").html("请输入QQ").hide();
+                        $(".bitianqq").hide();
+                    }
+                });
+
+            }
+        }
+
+        if(isemail){
+            if(flageamil){
+                console.log(flageamil);
+                $(".bitianemail").html("&nbsp;&nbsp;&nbsp;必填");
+                $("#inputyx").blur(function(){
+                    var email = $("input[name='email']").val();
+                    if (!email) {
+                        $(".yx").find(".info").hide();
+                        $('#yesyx').hide();
+                        $('#noyx').show();
+                        $(".yx").find(".error").html("请输入邮箱").show();
+                        return;
+                    } else  if (!email.match(/^(\w)+(\.\w+)*@(\w)+((\.\w{2,3}){1,3})$/ )) {
+                        $(".yx").find(".info").hide();
+                        $('#yesyx').hide();
+                        $('#noyx').show();
+                        $(".yx").find(".error").html("请输入正确的邮箱").show();
+                    }else{
+                        $('#yesyx').show();
+                        $('#noyx').hide();
+                        $(".yx").find(".info").hide();
+                        $(".yx").find(".error").html("请输入正确的邮箱").hide();
+                        $(".yx").find(".error").html("请输入邮箱").hide();
+                        $(".bitianemail").hide();
+                    }
+                });
+            }else {
+                $(".bitianemail").html("选填").css("color","#AAAAAA");
+                $("#inputyx").blur(function(){
+                    var email = $("input[name='email']").val();
+                    if (!email.match(/^(\w)+(\.\w+)*@(\w)+((\.\w{2,3}){1,3})$/ )&& email) {
+                        $(".yx").find(".info").hide();
+                        $('#yesyx').hide();
+                        $('#noyx').show();
+                        $(".yx").find(".error").html("请输入正确的邮箱").show();
+                    }else{
+                        if(!email){
+                            $(".bitianemail").html("选填").css("color","#AAAAAA");
+                            $('#noyx').hide();
+                            $(".yx").find(".error").html("请输入正确的邮箱").hide();
+                        }else {
+                            $('#yesyx').show();
+                            $('#noyx').hide();
+                            $(".yx").find(".info").hide();
+                            $(".yx").find(".error").html("请输入正确的邮箱").hide();
+                            $(".yx").find(".error").html("请输入邮箱").hide();
+                            $(".bitianemail").hide();
+                        }
+
+                    }
+                });
+            }
+        }
+
+
+        $(".login_nr_b .login_nr_gp .login_nr_gp_rt input.inputStr").keypress(function (e) {
+            if(e.which == 13){
+                var inputs = $(".login_nr_b").find(".inputStr");
+                var idx = inputs.index(this);
+                if(idx == inputs.length - 1){
+                    if(confirm("最后一个输入框已经输入,是否提交?")){
+                        $("#btn-register").trigger("click");
+                    }
+                }else{
+                    inputs[idx + 1].focus(); // 设置焦点
+                    inputs[idx + 1].select(); // 选中文字
+                }
+                return false;// 取消默认的提交行为
+            }
+        });
+
+        $("#btn-register").click(function () {
+            var username = $("input[name='username']").val(); // 账号
+            var password = $("input[name='password']").val();   // 密码
+            var phone = $("input[name='phoneName']").val();  // 手机号码
+            var email = $("input[name='email']").val();   // 邮箱号码
+            var qq = $("input[name='qq']").val();   // QQ
+            var yzm = $("#VerificationCode").val();   // 验证码
+            var confirmPassword = $("input[name='password_confirm']").val(); // 确认密码
+            
+            var name = $("input[name='name']").val();   // 姓名
+            var inputtjr = $("#inputtjr").val();  //上級推荐
+            if (!username) {
+                $(".yhm").find(".info").hide();
+                $(".yhm").find(".error").html("请输入用户名").show();
+                return;
+            }
+
+            if (!username.match(/^[a-zA-Z][0-9a-zA-Z]{5,11}$/)) {
+                $(".yhm").find(".info").hide();
+                $(".yhm").find(".error").html("请输入以字母开头的6-12位字母、数字组成的用户名").show();
+                return;
+            }
+
+            if (!password) {
+                $(".mm").find(".info").hide();
+                $(".mm").find(".error").html("请输入密码").show();
+                return;
+            }
+
+//          if (!password.match(/^[0-9a-zA-Z]{6,12}$/))
+            if (!password.match(/^(?![A-Z]+$)(?![a-z]+$)(?!\d+$)(?![\W_]+$)\S{6,16}$/))
+            {
+                $(".mm").find(".info").hide();
+                $(".mm").find(".error").html("请输入6-12位、区分大小写的字母和数字组合的密码").show();
+                return;
+            }
+
+            if (!confirmPassword) {
+                $(".qmm").find(".info").hide();
+                $(".qmm").find(".error").html("请请输入确认密码").show();
+                return;
+            }
+
+            if (confirmPassword != password) {
+                $(".qmm").find(".info").hide();
+                $(".qmm").find(".error").html("确认密码不正确").show();
+                return;
+            }
+
+            if (!name) {
+                $(".name").find(".info").hide();
+                $(".name").find(".error").html("请输入姓名").show();
+                return;
+            }
+            if (!yzm) {
+                $("#VerificationCode").find(".info").hide();
+                $("#VerificationCode").find(".error").html("请输入验证码").show();
+                return;
+            }
+            /*
+            if (!name.match(/^[\u4e00-\u9fa5]+$/)) {
+                $(".name").find(".info").hide();
+                $(".name").find(".error").html("姓名只能是汉字").show();
+                return;
+            }
+            */
+
+            $(".erro .info").hide();
+            $(".erro .error").hide();
+
+            ajaxRequest({
+                url: "/index/register",
+                data: {
+                    username: username,
+                    password: password,
+                    password_confirm: confirmPassword,
+                    code: yzm,
+                    name: name,
+                    agent_id:inputtjr
+                },
+                beforeSend: function () {
+                    showLoading();
+                },
+                success: function (json) {
+                    console.log(json);
+                    if (json.code == 1) {
+                        Tools.toast("注册成功");
+                        zclogin(username,password)
+                    } else {
+                        // refreshYzm(document.getElementById('registerYzmImg2'));
+                        Tools.toast("注册失败：" + json.msg);
+                    }
+                },
+                complete: function () {
+                    hideLoading();
+                }
+            });
+        });
+    });
+
+    function zclogin(zcusername,zcpassword) {
+        var data = {username: zcusername,password: zcpassword,auth:1,code:0};
+        $.post('/index/login',data,function(json){
+            if(json.code==1){
+                location.href = json.url;
+            }else{
+                alert(json.msg);
+            }
+        },'json');
+    }
+    function showLoading() {
+        layer.load(2, {
+            shade: [0.1, '#000'] //0.1透明度的白色背景
+        })
+    }
+    function hideLoading() {
+        layer.closeAll();
+    }
+</script>
+
+{include file="common/footer" /}

@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset='utf-8'>
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+    <title>充值</title>
+    <link type="text/css" rel="stylesheet" href="/css/personal.css">
+    <script type="text/javascript" src="/js/jquery-1.8.0.min.js"></script>
+    <script type="text/javascript" src="/js/show.js"></script>
+</head>
+<body>
+
+    <div class="container">
+        <header class="header">
+            <i class='left'>返回</i>
+            <h1>充值</h1>
+        </header>
+        <main class="inner_body">
+            <section class="charge_marquee">
+                <marquee>性能暴增！余承东称华为将有重大技术突破，网友：要有新系统了？</marquee>
+            </section>
+
+            <section class="charge_user">
+                <p>当前用户：<span>{$user->nickname}</span></p>
+                <p>当前余额：<span>{$user->coin}</span>元</p>
+            </section>
+
+            <section class="charge_amount">
+                <p>请输入充值金额:</p>
+                <p><input type="text" placeholder="每次充值不少于50元,最多5000元"></p>
+                <ul>
+                    <li>50元</li>
+                    <li>100元</li>
+                    <li>300元</li>
+                    <li>500元</li>
+                    <li>800元</li>
+                    <li>1000元</li>
+                </ul>
+            </section>
+            <section class="charge_payWay">
+                <p>支付方式</p>
+                <ul id="paylist">
+                   
+                </ul>
+            </section>
+            <section class="charge_pay">
+                <input type="hidden" name="money" id="money" value="">
+                <input type="hidden" name="local_code" id="local_code" value="">
+                <input type="hidden" name="tname" id="tname" value="">
+                <input type="hidden" name="pay_code" id="pay_code" value="">
+                <input type="hidden" name="third_id" id="third_id" value="">
+                <input type="hidden" name="third_type" id="third_type" value="">
+                <input type="hidden" name="way_id" id="way_id" value="">
+                <button>立即支付</button>
+            </section>
+        </main>
+    </div>
+
+    <script type="text/javascript">
+        var payData = null;
+        $(function(){
+            $.ajax({
+                url: '/pay/code',
+                dataType: 'json',
+                type: 'GET',
+                success: function (obj, set) {
+                    console.log(obj);
+                    if(obj.code == 1){
+                        payData = obj.data[0].pay_ways;
+                    }
+                      console.log(payData);
+                    var str = '';
+                    $.each(payData,function(index,value){
+                        str   += "<li sid='" + value.id + "'>";
+                        str   += "<div><img src='/images/charge/"+value.local_code+".png'/>";
+                        str   += "<strong>" + value.name + "</strong>";
+                        if(index==0){
+                            str   += "<i  class='checked'></i>";
+                        }else{
+                            str   += "<i></i>";
+                        }
+                        str   += "</div></li>";
+                        
+                        
+                    });
+                    $("#paylist").html(str);
+                    $('.charge_payWay ul li').trigger("click");
+                }
+            })
+        })
+        // 快捷金额
+       $('.charge_amount ul li').click(function(){
+           $(this).addClass('active').siblings().removeClass('active');
+           var _amount = parseInt($(this).text().replace(/元/,''));
+           $('.charge_amount input').val(_amount);
+       });
+       //选择支付方式
+        $('.charge_payWay ul li').click(function(){
+            var current = $(this).find('i');
+            if(current.hasClass('checked')){
+                return;
+            }else{
+                $('.charge_payWay ul li i').removeClass('checked');
+                current.addClass('checked');
+            }
+        });
+        // 提交数据
+        $('.charge_pay button').click(function () {
+            //$(this).attr('disabled','disabled');
+            var _amount = $('.charge_amount input').val();      // 金额
+            var pay_way = $('.charge_payWay ul li i.checked').attr('way');  // 方式
+            console.log(_amount,pay_way)
+        })
+
+
+    </script>
+</body>
+</html>

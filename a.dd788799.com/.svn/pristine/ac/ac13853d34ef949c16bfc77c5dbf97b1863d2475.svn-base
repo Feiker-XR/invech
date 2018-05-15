@@ -1,0 +1,266 @@
+{extend name="public/user_head"/}
+{block name="body"}
+<style type="text/css">
+    #_date{
+        width:.6rem;
+        height: .88rem;
+        position:absolute;
+        right:.4rem;
+        top:0;
+        opacity: 0;
+    }
+    ul.condition{
+        font-size:.12rem;
+        text-align: center;
+    }
+    ul.condition li span{
+        font-weight: bold;
+    }
+    ul.condition li select{
+        float: none;
+        width: 65%;
+    }
+    ul.condition li select.left{
+        float: none;
+    }
+    ul.condition li{
+        width: 33%;
+
+    }
+    ul.condition li:last-child span{
+        margin-left:0;
+    }
+</style>
+<header class="header">
+    <i class='left' onclick="javascript:history.back(-1);">返回</i>
+    <h1>投注记录</h1>
+     <i class="right wider">日期检索</i>
+    <input type="date" id="_date"/>
+</header>
+<main class="inner_body">
+    <section class="fund_detail">
+        <ul class="condition">
+            <li>
+                <span>彩种：</span>
+                <select id="_type" class="left">
+                    {foreach $type as $v}
+                        <option value="{$v.id}">{$v.title}</option>
+                    {/foreach}
+                </select>
+            </li>
+            <li>
+                <span>组别：</span>
+                <select id="_type_group" class="left">
+
+                </select>
+            </li>
+            <li>
+                <span>玩法：</span>
+                <select id="_type_method" class="left">
+                    <option>所有玩法</option>
+                    <option value="0">xx</option>
+                    <option value="1">xxx</option>
+                    <option value="2">xxx</option>
+                    <option value="3">xxx</option>
+                </select>
+
+            </li>
+        </ul>
+    </section>
+    <section class="table">
+        <div id="pullrefresh" class="mui-content mui-scroll-wrapper">
+            <div class="mui-scroll">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>日期</th>
+                            <th>彩种</th>
+                            <th>玩法</th>
+                            <th>投注金额</th>
+                            <th>盈亏</th>
+                       </tr>
+                    </thead>
+                    <tbody id="lists">
+                        {if(!$list['list']->isEmpty())}
+                            {foreach $list['list'] as $v}
+                                <tr>
+                                    <td>{$v->created_at}</td>
+                                    <td>{$v->types->title}</td>
+                                    <td>{$v->played->name}</td>
+                                    <td>{$v->actionNum*$v->mode*$v->beiShu}</td>
+                                    {if(!empty($v->lotteryNo))}
+                                       {if($v->cha>0)}
+                                            <td><span style="color:red">{$v->cha}</span></td> 
+                                        {else}
+                                            <td><span style="color:green">{$v->cha}</span></td>
+                                        {/if}
+                                    {else}
+                                       <td><span style="color:green">未开奖</span></td>
+                                    {/if}
+                                   
+                                </tr>
+                            {/foreach}
+                        {else}
+                            <tr><td colspan="5" styl="text-align:center;">暂无数据</td></tr>
+                        {/if}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <input type="hidden" id="startTime" value=""/>
+        <input type="hidden" id="endTime" value=""/>
+    </section>
+    <div class="bet_detail_container">
+        <div class="content">
+            <div class="head">注单详情</div>
+            <table border="0" cellpadding="0" cellspacing="0">
+                <tbody>
+                    <tr>
+                        <td>时间</td>
+                        <td>2018.04.02 18:36:59</td>
+                    </tr>
+                    <tr>
+                        <td>彩种</td>
+                        <td>重庆时时彩</td>
+                    </tr>
+                    <tr>
+                        <td>玩法组</td>
+                        <td>五星</td>
+                    </tr>
+                    <tr>
+                        <td>玩法</td>
+                        <td>五星复式</td>
+                    </tr>
+                    <tr>
+                        <td>金额</td>
+                        <td>50</td>
+                    </tr>
+                    <tr>
+                        <td>投注内容</td>
+                        <td>125365868658</td>
+                    </tr>
+                    <tr>
+                        <td>赔率</td>
+                        <td>1700</td>
+                    </tr>
+                    <tr>
+                        <td>返点</td>
+                        <td>0</td>
+                    </tr>
+                    <tr>
+                        <td>状态</td>
+                        <td class="not-aimed aimed">已中奖/未中奖</td>
+                    </tr>
+                    <tr>
+                        <td>盈亏</td>
+                        <td class="not-aimed aimed" aimed>+300 -50</td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="foot"><button>X</button></div>
+        </div>
+    </div>
+</main>
+<script type="text/javascript">
+    var base_url = '/user/bet_record';
+    var page = 1;
+    $(function () {
+        // 设置容器高度
+         $('section.table').height($('main').height()-$('ul.condition').height() - $('section.table table tr td').height());
+         // 设置默认日期
+        $('#_date').val(formatDate(new Date()).split(' ')[0]);
+        /*var __date = formatDate(new Date()).split(' ')[0];
+        console.log(__date);
+        $('#startTime').val(__date)
+        $('#endTime').val(__date)*/
+        $("#_type").trigger('change');
+    });
+    // 彩种
+    $("#_type").change(function(){
+        var typeId = $(this).val();
+        mui.ajax('/user/getGroupByid?typeId='+typeId,{
+            dataType:'json',
+            type:'POST',
+            timeout:10000,
+            headers:{'Content-Type':'application/json'},                  
+            success:function(data){
+                console.log('type changed');
+                console.log(data.data);
+                var _ops = "";
+                $.each(data.data,function(key,val){
+                    _ops += "<option value='"+val.id+"'>"+val.groupName+"</option>";
+                });
+                $('#_type_group').text('');
+                $('#_type_group').append(_ops);
+                $("#_type_group").trigger('change');
+            },
+            error:function (error) {
+                console.log(error);
+                alert('ajax error');
+            }
+        });
+    });
+    // 组别
+    $("#_type_group").change(function(){
+        console.log('group changed');
+        var groupId = $(this).val();
+        mui.ajax('/user/getPlayedByid?groupId='+groupId,{
+            dataType:'json',
+            type:'POST',
+            timeout:10000,
+            headers:{'Content-Type':'application/json'},                  
+            success:function(data){
+                var _ops = "";
+                $.each(data.data,function(key,val){
+                    _ops += "<option value='"+val.id+"'>"+val.name+"</option>";
+                });
+                console.log(data);
+                $('#_type_method').text('');
+                $('#_type_method').append(_ops);
+                $("#_type_method").trigger('change');
+            },
+            error:function (error) {
+                console.log(error);
+                alert('ajax error');
+            }
+        });
+    });
+    // 玩法
+    $("#_type_method").change(function(){
+        console.log('method changed');
+        var playedId = $(this).val();
+        var stime = $("#_date").val();
+        var endTime = stime + " 23:59:59";
+        stime = stime+" 00:00:00";
+        $('#startTime').val(stime);
+        $('#endTime').val(endTime);
+        var _url = base_url + '?startTime='+stime+'&endTime='+endTime+'&playedId='+playedId;
+        page = 1;
+        loadMore(_url);
+    });
+
+
+    // 搜寻日期
+    $('#_date').change(function(){
+        var stime = $("#_date").val();
+        var endTime = stime + " 23:59:59";
+            stime = stime+" 00:00:00";
+        var playedId = $("#_type_method").val();
+        $('#startTime').val(stime);
+        $('#endTime').val(endTime);
+        var _url = base_url + '?startTime='+stime+'&endTime='+endTime+'&playedId='+playedId;
+        page = 1;
+       loadMore(_url);
+    });
+
+    // 点击取消
+    $('.foot').click(function () {
+        $('.bet_detail_container').hide();
+    });
+    // 点击每行
+    mui('body').on('tap','#lists tr',function(){
+        console.log(1);
+        $('.bet_detail_container').show();
+    });
+</script>
+{/block}

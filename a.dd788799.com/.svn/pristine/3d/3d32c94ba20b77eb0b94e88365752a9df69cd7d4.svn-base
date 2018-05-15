@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="zh-cn">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>会员中心</title>
+    <link rel="stylesheet" type="text/css" href="/static/theme/memberTheme/theme1/member/css/reset.css?v=20170715">
+    <link rel="stylesheet" type="text/css" href="/static/theme/memberTheme/theme1/member/css/hpn-common.css">
+    <link rel="stylesheet" type="text/css" href="/static/theme/memberTheme/theme1/member/css/index.css?v=20171117">
+    <link rel="stylesheet" type="text/css" href="/static/theme/memberTheme/theme1/member/css/global.css">
+    <script>
+        <!--
+//        window.onerror=function(){return true;}
+        // -->
+    </script>
+    <script>
+    <!--
+    // 屏蔽JS错误
+//    window.onerror = function(){return true;}
+    // -->
+    var CONFIG = {
+        BASEURL: "/",    // 根路径
+        RESURL: "/static/theme/memberTheme/theme1/"         // 资源路径
+    };
+</script>
+<script src="/static/theme/memberTheme/theme1/js/mobile-detect.min.js"></script><script>
+    var fengge1 = 'f42023';
+</script>
+<style>
+
+        .reResulttBg{background: #f42023;} 
+        .process .layout .monty ul li,.process .layout .list_tems .date:after,.list ul li .slide p.acti,.headmemberbg{background: #f42023;}
+        .process .layout .list_tems .date span, .process .layout .list_tems .date h3,.eveb_amount span,.color-e77c3c,.eveb_setting_table a,.xieyiCss，.gcdtgd{color: #f42023!important;}
+        .eveb_sub_nav_type a:hover, .eveb_sub_nav_type li.on a:link, .eveb_sub_nav_type li.on a:visited{color: #f42023!important;font-weight: 700;border-bottom-color: #e1e1e1;background: #f8f8f8;}
+        .list ul li .slide p:hover,.letterbtn-bg{background: #f42023!important;color: white;}
+        .list h3 a{background: #f42023;border-bottom: 3px solid #a92309; height: 47px; line-height: 47px;}
+        .help_l_menu li .t.sli{border-left: 5px solid #f42023;}
+        .withdraw-bg-input{border: 2px solid #f42023!important;}
+        .clearBet_template .l span i{background: #f42023 url(/static/theme/memberTheme/theme1//img/tm-mdl-icon.png) no-repeat!important; border-radius: 50%;background-position: 0 41%!important;}
+
+
+
+        .eveb_nav_sub .on,.button_1, .button_1:link, .button_1:visited,.alert_col h5,.onlineService,.layui-layer-popup .layui-layer-title,.xzqd,.xzqdlskj,.game_name .box2_stage p span i.acti,.Betting,.Single,.list_ject ul li .Result p a.acti,.list_ject ul li .Result p a.acti:hover,.top{background:#f42023!important}
+        .eveb_nav_sub .on a,.bankInfo .name,.help_l_menu .title p .sum,.help_r_main .light,.game_name .box2_stage p span i,.game_name
+        .box1_name  p i,.Account p a.red{color:#f42023!important}
+        .eveb_nav_sub .on,.game_name .box2_stage p span{border:1px solid #f42023!important;}
+        .eveb_nav_sub .on,.game_name .box2_stage p span i.acti{color:#fff!important;}
+        .eveb_nav_sub .on a{border-top:1px #f42023 solid!important;}
+        .eveb_nav_sub ul{border-bottom:1px #f42023 solid!important;}
+        #apptop{background: #f42023}
+        .alert_col div::-webkit-scrollbar-thumb {background-color: #f42023!important;}
+
+    </style>
+<style>
+
+
+        .head div h5,.Betting .tabs ul li,.top .nav h1{background:#d51910!important}
+        .jf_box .url a,.eveb_form label.error,.eveb_transfer_box .center_wallet .money,.eveb_transfer_box .wallet_list li p{color:#d51910!important}
+        .Betting .tabs ul li.acti{background:#fff!important}
+        .button_1, .button_1:link, .button_1:visited{border:1px solid #d51910!important;}
+    </style>
+</head>
+<body><div class="help_r_main">
+    <div class="eveb_content" style="width: 938px;">
+        <table class="eveb_box eveb_table">
+            <tbody>
+            <tr>
+                <th>上次游戏</th>
+                <th>上次登录时间</th>
+                <th>上周有效投注</th>
+                <th>本周有效投注</th>
+                <th>最近一次存款</th>
+                <th>最近一次取款</th>
+            </tr>
+            <?php
+			    foreach($login as $var){
+			?>
+				<tr>
+					<td>
+						上次游戏
+					</td>
+					<td>
+						<?php echo date("Y/m/d H:i:s",$var['loginTime']) ?>
+					</td>
+					<td>
+						上周有效投注
+					</td>
+					<td>
+						本周有效投注
+					</td>
+					<td>
+			            最近一次存款
+					</td>
+					<td>
+					最近一次去看
+					</td>
+				</tr>
+			<?php
+				}
+			?>
+            </tbody>
+        </table>
+        <div class="eveb_box_3">
+            <div class="eveb_box mr_10">
+                <h4>绑定状态</h4>
+                <ul class="eveb_index_validation">
+                    <li><a href="javascript:void(0)" onclick="parent.goSubUrl('/pay/index.html')" title="在线充值"><i class="icon_cunqu icon_validation_email"></i><p>在线充值</p></a></li>
+                    <li><a href="javascript:void(0)" onclick="parent.goSubUrl('/user/withdraw.html')" data-url="/member/withdraw.html" title="快速提现"><i class="icon_cunqu icon_validation_phone"></i><p>快速提现</p></a></li>
+                    <li><a href="javascript:void(0)" onclick="parent.goSubUrl('/user/bank.html')"><i class="icon_big icon_validation_card_no"></i><p>绑定银行卡</p></a></li>
+                        </ul>
+            </div>
+        </div>
+
+        <div class="eveb_box_3">
+            <div class="eveb_box ml_10 mr_10">
+                <ul class="eveb_index_money">
+                    <li>
+                        <span class="t">会员名</span>
+
+                        <span>{$userData.username}</span>
+                    </li>
+                    <li><span class="t">真实姓名</span><span>{$userData.name}</span></li>
+                    <li><span class="t">账户余额</span><span><em class="light">{$userData.coin}</em> 元</span></li>
+                    <li>
+                                <span class="t">账户等级</span>
+                                <span title="普通会员" class="icon_level icon_level_1"></span>
+                            </li>
+                        <li>
+                        <span class="t">我的佣金</span>
+                        <span><em class="light">0.000</em> 元</span>
+                        <span>（0.000%）</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="eveb_box_3">
+            <div class="eveb_box ml_10">
+                <h4><span><a href="#letter" onclick="parent.goSubUrl('inbox')" class="more">MORE</a></span>站内信</h4>
+                <ul class="eveb_index_letter">
+                {if(!$messageList['list']->isEmpty())}
+                	{foreach $messageList['list'] as $v}
+                		<li>
+                			<a href='' style='float:left;width:100%; {if($v->status==0)}color:red;{/if}'><span style='float:left;{if($v->status==0)}color:red;{/if}' >{$v->message->title}</span><span style='float:right;{if($v->status==0)}color:red;{/if}'>{$v->created_at}</span></a>
+                		</li>
+                	{/foreach}
+                {/if}
+                </ul>
+            </div>
+        </div>
+        <div class="activity">
+            <h5>优惠活动</h5>
+            <ul>
+            {foreach $bonusList as $v}
+            	<li>
+            		<a onclick='showContent(this)' data-name="{$v['name']}" data-time="{$v['created_at']}" data-content="{$v['content']|htmlentities}" ><img src="{$v['img']}"/></a>
+            	</li>
+            {/foreach}
+            </ul>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="/static/theme/memberTheme/theme1/js/jquery.min.js"></script>
+<script type="text/javascript" src="/static/theme/memberTheme/theme1/member/framework/jquery.validate.min.js"></script>
+<script type="text/javascript" src="/static/theme/memberTheme/theme1/member/laydate/laydate.js"></script>
+<script type="text/javascript" src="/static/theme/memberTheme/theme1/member/js/validate.js"></script>
+<script type="text/javascript" src="/static/theme/memberTheme/theme1/member/js/global.js"></script>
+<script type="text/javascript" src="/static/theme/memberTheme/theme1/member/js/jquery.form.min.js"></script>
+<script type="text/javascript" src="/static/theme/memberTheme/theme1/member/js/jquery.md5.js"></script>
+<script type="text/javascript" src="/static/theme/memberTheme/theme1/js/global.js?v=3.0"></script>
+<script type="text/javascript" src="/static/theme/memberTheme/theme1/layer/layer.js"></script>
+<script type="text/javascript" src="/static/theme/memberTheme/theme1/js/jquery.nicescroll.js"></script>
+<script type="text/javascript" src="/static/theme/memberTheme/theme1/member/js/clipboard.min.js"></script>
+<script src="/static/theme/memberTheme/theme1/js/dateFormat.js"></script>
+<script src="/static/theme/memberTheme/theme1/js/template.js"></script>
+<script src="/static/theme/memberTheme/theme1/js/jquery.cookie.js"></script><!--自定义封装函数-->
+<script src="/static/theme/memberTheme/theme1/js/jquery.md5.js"></script><!--自定义封装函数-->
+<script>
+    $(function() {
+        // 底部信息调用
+        function ajaxGetDbxx() {
+            ajaxRequest({
+                url: CONFIG.BASEURL + "ajaxGetWebInfo.json",
+                success: function (json) {
+                    if (json.result != 1) {
+                        return;
+                    }
+                    $(".webDbxx").html(json.webDbxx);
+                }
+            });
+        }
+
+        if ($(".webDbxx").length > 0) {
+            ajaxGetDbxx();
+        }
+    });
+</script><script>
+    $(function() {
+        parent.hideLoading();
+    });
+</script><script type="text/javascript" src="/static/theme/memberTheme/theme1/member/js/main.js?v=1.0"></script>
+</body>
+</html>

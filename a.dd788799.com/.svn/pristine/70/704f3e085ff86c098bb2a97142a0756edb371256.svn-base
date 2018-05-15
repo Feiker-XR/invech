@@ -1,0 +1,1446 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>注册</title>
+    <link rel="stylesheet" href="/__CSS__/help/cabel-v1.css?v=20170206" type="text/css">
+    <link rel="stylesheet" href="/__CSS__/help/style.css?v=20170819" type="text/css"><!--页面CSS-->
+    <link rel="stylesheet" href="/__CSS__/help/animate.min.css?v=20170206" type="text/css"><!--CSS3动画-->
+    <link rel="stylesheet" href="/__CSS__/help/lottery.css?v=20170206" type="text/css"><!--页面CSS-->
+    <link rel="stylesheet" href="/__CSS__/help/liMarquee.css?v=20170206" type="text/css"><!--页面CSS-->
+    <link rel="stylesheet" href="/__CSS__/help/jquery.range.css?v=20170402" type="text/css">
+    <link rel="stylesheet" href="/__CSS__/help/global.css?v=20170706" type="text/css"><!--页面CSS-->
+    <link rel="stylesheet" href="/__CSS__/help/other.css?v=20170428" type="text/css"><!--页面CSS-->
+    <link rel="stylesheet" href="/__CSS__/help/gfwf.css?v=20170502" type="text/css"><!--页面CSS-->
+    <link rel="stylesheet" href="/__CSS__/help/index.css?v=20170726" type="text/css"><!--页面CSS-->
+    <link rel="stylesheet" href="/__CSS__/help/login.css?v=20170823" type="text/css"><!--页面CSS-->
+    <link rel="stylesheet" href="/__CSS__/help/index-allmenu.css?v=20170707" type="text/css"><!--页面CSS-->
+    <link rel="stylesheet" href="/__CSS__/help/register.css?v=20170502" type="text/css"><!--页面CSS-->
+
+    <script src="/__JS__/help/FancyZoom.js" language="JavaScript" type="text/javascript"></script>
+    <script src="/__JS__/help/FancyZoomHTML.js" language="JavaScript" type="text/javascript"></script>
+    <script src="/__JS__/help/jquery-1.7.2.js" language="JavaScript" type="text/javascript"></script>
+    <script type="text/javascript" src="/__JS__/index2/jquery.min.js?v=2017"></script><!--jQuery库-->
+    <script type="text/javascript" src="/__JS__/index2/scrollanim.min.js?v=2017"></script> <!--"动画库"-->
+    <script src="/__JS__/index2/type.js?v=2017"></script><!--自定义封装函数-->
+    <script src="/__JS__/index2/global.js?v=20170505"></script><!--自定义封装函数-->
+    <script src="/__JS__/index2/jquery.cookie.js?v=2017"></script><!--自定义封装函数-->
+    <script src="/__JS__/index2/jquery.md5.js?v=2017"></script><!--自定义封装函数-->
+    <script src="/__JS__/index2/layer.js?v=2017"></script>
+    <script src="/__JS__/index2/jquery.nicescroll.js?v=2017"></script>
+    <script src="/__JS__/index2/dateFormat.js?v=2017"></script>
+    <script src="/__JS__/index2/template.js?v=2017"></script>
+    <script src="/__JS__/index2/swfobject.js?v=2017"></script>
+    <script src="/__JS__/index2/jquery.liMarquee.js?v=2017"></script>
+    <script src="/__JS__/index2/placeholders.jquery.min.js?v=2017"></script>
+    <script src="/__JS__/index2/jquery.flexslider-min.js?v=20170707"></script><!--轮播插件封装函数-->
+
+
+
+    <script>
+        <!--
+        // 屏蔽JS错误
+        //    window.onerror = function(){return true;}
+        // -->
+    </script>
+    <script>
+        var CONFIG = {
+            BASEURL: "/",    // 根路径
+            RESURL: "/static/theme/mainTheme/400w/"         // 资源路径
+        };
+    </script>
+    <script src="/__JS__/index2/mobile-detect.min.js"></script><script>
+    var fengge1 = 'f42023';
+</script>
+    <style>
+
+        .reResulttBg{background: #f42023;}
+        .process .layout .monty ul li,.process .layout .list_tems .date:after,.list ul li .slide p.acti,.headmemberbg{background: #f42023;}
+        .process .layout .list_tems .date span, .process .layout .list_tems .date h3,.eveb_amount span,.color-e77c3c,.eveb_setting_table a,.xieyiCss，.gcdtgd{color: #f42023!important;}
+        .eveb_sub_nav_type a:hover, .eveb_sub_nav_type li.on a:link, .eveb_sub_nav_type li.on a:visited{color: #f42023!important;font-weight: 700;border-bottom-color: #e1e1e1;background: #f8f8f8;}
+        .list ul li .slide p:hover,.letterbtn-bg{background: #f42023!important;color: white;}
+        .list h3 a{background: #f42023;border-bottom: 3px solid #a92309; height: 47px; line-height: 47px;}
+        .help_l_menu li .t.sli{border-left: 5px solid #f42023;}
+        .withdraw-bg-input{border: 2px solid #f42023!important;}
+        .clearBet_template .l span i{background: #f42023 url(/static/theme/mainTheme/400w//img/tm-mdl-icon.png) no-repeat!important; border-radius: 50%;background-position: 0 41%!important;}
+
+
+
+        .eveb_nav_sub .on,.button_1, .button_1:link, .button_1:visited,.alert_col h5,.onlineService,.layui-layer-popup .layui-layer-title,.xzqd,.xzqdlskj,.game_name .box2_stage p span i.acti,.Betting,.Single,.list_ject ul li .Result p a.acti,.list_ject ul li .Result p a.acti:hover,.top{background:#f42023!important}
+        .eveb_nav_sub .on a,.bankInfo .name,.help_l_menu .title p .sum,.help_r_main .light,.game_name .box2_stage p span i,.game_name .box1_name  p i,.Account p a.red{color:#f42023!important}
+        .eveb_nav_sub .on,.game_name .box2_stage p span{border:1px solid #f42023!important;}
+        .eveb_nav_sub .on,.game_name .box2_stage p span i.acti{color:#fff!important;}
+        .eveb_nav_sub .on a{border-top:1px #f42023 solid!important;}
+        .eveb_nav_sub ul{border-bottom:1px #f42023 solid!important;}
+        #apptop{background: #f42023}
+        .alert_col div::-webkit-scrollbar-thumb {background-color: #f42023!important;}
+
+
+        /* .men_list{background-color: #f42023!important;}
+         .main_layout .left_layout h1{background-color: #f42023!important;}
+         .men_list .nav_list ul li:after{background-color: #f42023!important;}
+         .main_layout .right_layotu .right_wrap .login ul li button{background-color: #f42023!important;border-bottom: 2px solid #f42023!important;}
+         .main_layout .right_layotu .right_wrap .down_file{background-color: #f42023!important;}
+         .main_layout .right_layotu .left_wrap .Bettingbag .num_bett .val_add p.fr a.a1{background-color: #f42023!important;border-bottom: 2px solid #f42023!important;}
+         .main_layout .right_layotu .chart .title h2{background-color: #f42023!important;border-bottom: 2px solid #f42023!important;}
+         .main_layout .right_layotu .chart .title{border-bottom: 1px solid #f42023!important;}
+         .main_layout .right_layotu .chart .title a{color: #f42023!important;}
+         .main_layout .right_layotu .left_wrap .tabs_cg ul li.acti i{border-left: 1px solid #f42023!important;  border-right: 1px solid #f42023!important;}
+         .main_layout .right_layotu .left_wrap .tabs_cg ul li.acti{border-top: 3px solid #f42023!important;}
+         .main_layout .right_layotu .left_wrap .tabs_cg{border-bottom: 1px solid #f42023!important;}
+         .main_layout .left_layout ul li i.i0{background-color: #f42023!important;}
+         .main_layout .left_layout ul li i.i0:after{border-right: 8px solid #f42023!important;}
+         .main_layout .right_layotu .right_wrap .Notice b{color: #f42023!important;}
+         .main_layout .right_layotu .right_wrap .login h2 p{border-bottom: 2px solid #f42023!important;}
+         .main_layout .right_layotu .right_wrap .login h2{border-bottom: 1px solid #f42023!important;}
+         .record{border-top: 2px solid #f42023!important;}*/
+
+
+
+    </style>
+    <style>
+
+
+        .head div h5,.Betting .tabs ul li,.top .nav h1{background:#d51910!important}
+        .jf_box .url a,.eveb_form label.error,.eveb_transfer_box .center_wallet .money,.eveb_transfer_box .wallet_list li p{color:#d51910!important}
+        .Betting .tabs ul li.acti{background:#fff!important}
+        .button_1, .button_1:link, .button_1:visited{border:1px solid #d51910!important;}
+    </style>
+    <style>
+        a:hover{
+            color: red;
+        }
+        a:active{
+            color:deepskyblue;
+        }
+        div, dl, dt, dd, ul, li, h1, h2, h3, h4, h5, h6, pre, form, fieldset, input, textarea, blockquote, p {
+            padding: 0;
+            margin: 0;
+        }
+    </style>
+    <link rel="stylesheet" href="https://www.400w.am/static/theme/mainTheme/400w/layer/skin/default/layer.css?v=3.0.11110" id="layuicss-skinlayercss"></head>
+    <style></style>
+</head>
+<body marginwidth="0" marginheight="0">
+
+<div style="width:100%; height: 80px; background: blue;">
+    header
+</div>
+<!--<div class="head_top">
+    <div class="container clearfix">
+        <div class="left head_top_lf">
+            <marquee scrollamount="3" scrolldelay="100" direction="left" onmouseover="this.stop();" onmouseout="this.start();" onclick="HotNewsHistory();">
+            </marquee>
+        </div>
+        <div class="right head_top_rt clearfix">
+            <a href="/main.html" class="left">首页</a>
+            <a href="javascript:void(0)" class="loginbtn left blink" data-color="#ff4800|#333" style="color: rgb(250, 98, 0);">登录</a>
+            <a href="/register.html" class="left head_top_reg">免费注册</a>
+            <span class="left">|</span>
+            <a href="javascript:void(0)" class="left head_top_lottery">我的彩票</a>
+            <span class="left">|</span>
+            <a href="javascript:void(0)" onclick="shiwan()" class="left head_top_reg">免费试玩</a>
+        </div>
+    </div>
+</div>
+<div class="head_middle">
+    <div class="container clearfix">
+        <a href="/main.html" class="left logo">
+
+            <img src="/images/logo.png" style="max-height: 60px">
+        </a>
+        <div class="left head_middle_yuye">
+            <a href="javascript:void(0);">
+                <img src="/static/theme/mainTheme/400w/images/index_14.png" style="max-height: 60px">
+            </a>
+        </div>
+        <div class="right clearfix">
+            <a href="https://f18.livechatvalue.com/chat/chatClient/chatbox.jsp?companyID=881265&amp;configID=73958&amp;jid=4674187711&amp;s=1" target="_blank" class="left head_middle_kf">
+                <img src="/static/theme/mainTheme/400w/images/index_20.png">
+                联系客服
+            </a>
+        </div>
+    </div>
+</div>-->
+<div class="menu">
+    <div class="container clearfix">
+        <div class="left all_fenlei clearfix">
+            <span class="left all_fenlei_tl">全部彩种</span>
+            <img src="/__IMG__/index2/index_30.png" class="right all_fenlei_img">
+            <div class="all_fenlei_yin" style="display: none;">
+                <a href="javascript:void(0)" onclick="openGcdt('gcdt/ffssc')" class="all_fenlei_yin_list clearfix">
+                    <div class="left">
+                        <img src="/__IMG__/index2/index_39.png">
+                    </div>
+                    <div class="all_fenlei_yin_list_rt">
+                        分分时时彩
+                    </div>
+                </a>
+                <a href="javascript:void(0)" onclick="openGcdt('gcdt/cqssc')" class="all_fenlei_yin_list clearfix">
+
+                    <div class="left">
+                        <img src="/__IMG__/index2/index1_6.png">
+                    </div>
+                    <div class="all_fenlei_yin_list_rt">
+                        重庆时时彩
+                    </div>
+                </a>
+                <a href="javascript:void(0)" onclick="openGcdt('gcdt/jspk10')" class="all_fenlei_yin_list clearfix">
+                    <div class="left">
+                        <img src="/__IMG__/index2/index_42.png">
+                    </div>
+                    <div class="all_fenlei_yin_list_rt">
+                        极速PK拾
+                    </div>
+                </a>
+                <a href="javascript:void(0)" onclick="openGcdt('gcdt/pk10')" class="all_fenlei_yin_list clearfix">
+                    <div class="left">
+                        <img src="/__IMG__/index2/index_49.png">
+                    </div>
+                    <div class="all_fenlei_yin_list_rt">
+                        北京PK拾
+                    </div>
+                </a>
+                <a href="javascript:void(0)" onclick="openGcdt('gcdt/lhc')" class="all_fenlei_yin_list clearfix">
+                    <div class="left">
+                        <img src="/__IMG__/index2/index51-17.png">
+                    </div>
+                    <div class="all_fenlei_yin_list_rt">
+                        香港六合彩
+                    </div>
+                </a>
+                <a href="javascript:void(0)" onclick="openGcdt('gcdt/xyft')" class="all_fenlei_yin_list clearfix">
+                    <div class="left">
+                        <img src="/__IMG__/index2/index1_11.png">
+                    </div>
+                    <div class="all_fenlei_yin_list_rt">
+                        幸运飞艇
+                    </div>
+                </a>
+                <a href="javascript:void(0)" onclick="openGcdt('gcdt/ahk3')" class="all_fenlei_yin_list clearfix">
+                    <div class="left">
+                        <img src="/__IMG__/index2/index1_15.png">
+                    </div>
+                    <div class="all_fenlei_yin_list_rt">
+                        安徽快3
+                    </div>
+                </a>
+
+                <div class="all_fenlei_b">
+                    <div class="all_fenlei_b_gp clearfix">
+                        <div class="left all_fenlei_b_name" style="background: #ffcdcd;border: 1px solid #ffcdcd;color: #ff4444;">
+                            高频彩
+                        </div>
+                        <div class="all_fenlei_b_gp_rt clearfix">
+                            <ul class="all_fenlei_b_gp_rt_ul_lf clearfix">
+                                <li>
+                                    <a href="javascript:void(0)" onclick="openGcdt('gcdt/ffssc')">分分时时彩</a>
+                                </li>
+                                <li>
+                                    <a href="javascript:void(0)" onclick="openGcdt('gcdt/jspk10')">极速PK10</a>
+                                </li>
+                                <li>
+                                    <a href="javascript:void(0)" onclick="openGcdt('gcdt/cqssc')">重庆时时彩</a>
+                                </li>
+                                <li>
+                                    <a href="javascript:void(0)" onclick="openGcdt('gcdt/pk10')">北京PK10</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="all_fenlei_b_yin">
+                            <p class="all_fenlei_b_yin_tl">高频彩</p>
+                            <div class="clearfix all_fenlei_b_yin_a">
+                                <a href="javascript:void(0)" onclick="openGcdt('gcdt/cqssc')">重庆时时彩</a>
+                                <a href="javascript:void(0)" onclick="openGcdt('gcdt/tjssc')">天津时时彩</a>
+                                <a href="javascript:void(0)" onclick="openGcdt('gcdt/xjssc')">新疆时时彩</a>
+                                <a href="javascript:void(0)" onclick="openGcdt('gcdt/ffssc')">分分时时彩</a>
+                                <a href="javascript:void(0)" onclick="openGcdt('gcdt/efssc')">两分时时彩</a>
+                                <a href="javascript:void(0)" onclick="openGcdt('gcdt/sfssc')">三分时时彩</a>
+                                <a href="javascript:void(0)" onclick="openGcdt('gcdt/wfssc')">五分时时彩</a>
+                                <a href="javascript:void(0)" onclick="openGcdt('gcdt/pk10')">北京PK10</a>
+                                <a href="javascript:void(0)" onclick="openGcdt('gcdt/jspk10')">极速PK10</a>
+                                <a href="javascript:void(0)" onclick="openGcdt('gcdt/xyft')">幸运飞艇</a>
+                                <a href="javascript:void(0)" onclick="openGcdt('gcdt/lhc')">香港六合彩</a>
+                                <a href="javascript:void(0)" onclick="openGcdt('gcdt/jsk3')">江苏快3</a>
+                                <a href="javascript:void(0)" onclick="openGcdt('gcdt/hbk3')">湖北快3</a>
+                                <a href="javascript:void(0)" onclick="openGcdt('gcdt/ahk3')">安徽快3</a>
+                                <a href="javascript:void(0)" onclick="openGcdt('gcdt/jlk3')">吉林快3</a>
+                                <a href="javascript:void(0)" onclick="openGcdt('gcdt/klsf')">快乐十分</a>
+                                <a href="javascript:void(0)" onclick="openGcdt('gcdt/xync')">幸运农场</a>
+                                <a href="javascript:void(0)" onclick="openGcdt('gcdt/kl8')">北京快乐8</a>
+                                <a href="javascript:void(0)" onclick="openGcdt('gcdt/fc3d')">福彩3D</a>
+                                <a href="javascript:void(0)" onclick="openGcdt('gcdt/pl3')">体彩排列3</a>
+                                <a href="javascript:void(0)" onclick="openGcdt('gcdt/bj28')">北京28</a>
+                                <a href="javascript:void(0)" onclick="openGcdt('gcdt/gd11x5')">广东11选5</a>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="all_fenlei_b_gp clearfix">
+                        <div class="left all_fenlei_b_name" style="background: #c3cbf6;border: 1px solid #a7bdfd;color: #4041d0;">
+                            低频彩
+                        </div>
+                        <div class="all_fenlei_b_gp_rt clearfix">
+                            <ul class="all_fenlei_b_gp_rt_ul_lf clearfix">
+                                <li>
+                                    <a href="javascript:void(0)" onclick="openGcdt('gcdt/lhc')">香港六合彩</a>
+                                </li>
+                                <li>
+                                    <a href="javascript:void(0)" onclick="openGcdt('gcdt/fc3d')">福彩3D</a>
+                                </li>
+                                <li>
+                                    <a href="javascript:void(0)" onclick="openGcdt('gcdt/pl3')">体彩排列3</a>
+                                </li>
+                                <li>
+                                    <a href="javascript:void(0)" onclick="openGcdt('gcdt/ssq')">双色球</a>
+                                </li>
+
+                            </ul>
+                        </div>
+                        <div class="all_fenlei_b_yin">
+                            <p class="all_fenlei_b_yin_tl">低频彩</p>
+                            <div class="clearfix all_fenlei_b_yin_a">
+
+                                <a href="javascript:void(0)" onclick="openGcdt('gcdt/lhc')">香港六合彩</a>
+                                <a href="javascript:void(0)" onclick="openGcdt('gcdt/fc3d')">福彩3D</a>
+                                <a href="javascript:void(0)" onclick="openGcdt('gcdt/pl3')">体彩排列3</a>
+                                <a href="javascript:void(0)" onclick="openGcdt('gcdt/ssq')">双色球</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="all_fenlei_b_gp clearfix">
+                        <div class="left all_fenlei_b_name" style="background: #d9f9df;border: 1px solid #c5f4cf;color: #005d19;padding-top: 11px;height: 47px;">
+                            全部
+                        </div>
+                        <div class="all_fenlei_b_gp_rt clearfix">
+                            <ul class="all_fenlei_b_gp_rt_ul_lf clearfix">
+                                <li>
+                                    <a href="javascript:void(0)" onclick="openGcdt('gcdt/ffssc')">分分时时彩</a>
+                                </li>
+                                <li>
+                                    <a href="javascript:void(0)" onclick="openGcdt('gcdt/jspk10')">极速PK10</a>
+                                </li>
+                                <li>
+                                    <a href="javascript:void(0)" onclick="openGcdt('gcdt/cqssc')">重庆时时彩</a>
+                                </li>
+                                <li>
+                                    <a href="javascript:void(0)" onclick="openGcdt('gcdt/pk10')">北京PK10</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="all_fenlei_b_yin">
+                            <p class="all_fenlei_b_yin_tl">全部</p>
+                            <div class="clearfix all_fenlei_b_yin_a">
+
+                                <a href="javascript:void(0)" onclick="openGcdt('gcdt/cqssc')">重庆时时彩</a>
+                                <a href="javascript:void(0)" onclick="openGcdt('gcdt/tjssc')">天津时时彩</a>
+                                <a href="javascript:void(0)" onclick="openGcdt('gcdt/xjssc')">新疆时时彩</a>
+                                <a href="javascript:void(0)" onclick="openGcdt('gcdt/ffssc')">分分时时彩</a>
+                                <a href="javascript:void(0)" onclick="openGcdt('gcdt/efssc')">两分时时彩</a>
+                                <a href="javascript:void(0)" onclick="openGcdt('gcdt/sfssc')">三分时时彩</a>
+                                <a href="javascript:void(0)" onclick="openGcdt('gcdt/wfssc')">五分时时彩</a>
+                                <a href="javascript:void(0)" onclick="openGcdt('gcdt/pk10')">北京PK10</a>
+                                <a href="javascript:void(0)" onclick="openGcdt('gcdt/jspk10')">极速PK10</a>
+                                <a href="javascript:void(0)" onclick="openGcdt('gcdt/xyft')">幸运飞艇</a>
+                                <a href="javascript:void(0)" onclick="openGcdt('gcdt/lhc')">香港六合彩</a>
+                                <a href="javascript:void(0)" onclick="openGcdt('gcdt/jsk3')">江苏快3</a>
+                                <a href="javascript:void(0)" onclick="openGcdt('gcdt/hbk3')">湖北快3</a>
+                                <a href="javascript:void(0)" onclick="openGcdt('gcdt/ahk3')">安徽快3</a>
+                                <a href="javascript:void(0)" onclick="openGcdt('gcdt/jlk3')">吉林快3</a>
+                                <a href="javascript:void(0)" onclick="openGcdt('gcdt/klsf')">快乐十分</a>
+                                <a href="javascript:void(0)" onclick="openGcdt('gcdt/xync')">幸运农场</a>
+                                <a href="javascript:void(0)" onclick="openGcdt('gcdt/kl8')">北京快乐8</a>
+                                <a href="javascript:void(0)" onclick="openGcdt('gcdt/fc3d')">福彩3D</a>
+                                <a href="javascript:void(0)" onclick="openGcdt('gcdt/pl3')">体彩排列3</a>
+                                <a href="javascript:void(0)" onclick="openGcdt('gcdt/bj28')">北京28</a>
+                                <a href="javascript:void(0)" onclick="openGcdt('gcdt/gd11x5')">广东11选5</a>
+                                <a href="javascript:void(0)" onclick="openGcdt('gcdt/ssq')">双色球</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="menu_main clearfix left">
+            <a href="/main.html" class="ahover">
+                首页
+            </a>
+            <a href="JavaScript:void(0)" onclick="openGcdt('gcdt')" target="_blank">
+                购彩大厅
+            </a>
+
+
+            <a href="/yhhd.html">
+                优惠活动
+            </a>
+            <a href="/kjjg.html">
+                开奖公告
+            </a>
+            <a href="/ssc/index.html?module=zstIndex" target="_blank">
+                走势图表
+            </a>
+            <a href="http://m.400w.am" target="_blank">
+                <em class="hot"></em>
+                <img src="/__IMG__/index2/index30.png" class="menu_a_img">
+                手机购买
+            </a>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $('.type_top .left .left_div .log,.type_top .left .left_div .alert_log').hover(function () {
+            $('.type_top .left .left_div .alert_log').show();
+            $('.type_top .left .left_div .alert_par').hide();
+        })
+        $('.type_top').hover(function () {
+        }, function () {
+            $('.type_top .left .left_div .alert_log').hide();
+            $('.type_top .left .left_div .alert_par').hide();
+        })
+        $('.type_top .right ul li.l').hover(function () {
+            $(this).addClass('sli');
+            $(this).find('div').show();
+        })
+        $('.type_top .right ul li').hover(function () {
+
+        }, function () {
+            $(this).removeClass('sli');
+            $(this).find('div').hide();
+        })
+        $('.type_top .left .left_div a.par').hover(function () {
+            $('.type_top .left .left_div .alert_par').show();
+            $('.type_top .left .left_div .alert_log').hide();
+        })
+    });
+
+    function registerLogin() {
+        var loginAccount = $.trim($("#registerLoginAccount").val());
+        var loginPassword = $.trim($("#registerLoginPassword").val());
+        var yzm = $.trim($("#registerLoginYzm").val());
+
+        if (!loginAccount) {
+            alert("请输入账号");
+            return;
+        }
+        if (!loginPassword) {
+            alert("请输入密码");
+            return;
+        }
+        if (!yzm) {
+            alert("请输入验证码");
+            return;
+        }
+
+        ajaxRequest({
+            url: "/member/ajaxLogin.json",
+            data: {
+                yzm: yzm,
+                account: loginAccount,
+                password: $.md5(loginPassword)
+            },
+            beforeSend: function() {
+                showLoading();
+            },
+            success: function(json) {
+                if (json.result == 1) {
+                    $.cookie("uid", json.userId, {path: "/"});
+                    $.cookie("token", json.token, {path: "/"});
+                    window.location.href = "/main.html";
+                } else {
+                    refreshYzm(document.getElementById('registerYzmImg2'));
+                    Tools.toast("登录失败：" + json.description);
+                }
+                hideLoading();
+            }
+        });
+    }
+
+    function showLoading() {
+        layer.load(2, {
+            shade: [0.1,'#000'] //0.1透明度的白色背景
+        })
+    }
+    function hideLoading() {
+        layer.closeAll();
+    }
+    function refreshYzm(obj) {
+        var src = $(obj).attr("src");
+        var params = getRequest(src);
+
+        src = "/code/yzm?timestamp=" + (new Date()).getTime();
+        $.each(params, function(index, value) {
+            src += '&' + value.key + '=' + value.value;
+        });
+        console.log(src);
+        $(obj).attr("src", src);
+    }
+    $(window).resize(function(){
+        ate();
+    });
+
+    $(function() {
+        ate();
+        $(".alert_log_col h5 i").click(function(){
+            $(".two2").fadeOut();
+        });
+        autobox(".Customerservice",1,1180,0);
+        tabs_cg(".Resultt .latyout .tabs_ce ul li","","hover","acti","","");
+        click_addname(".Resultt .latyout .wrap_select a","acti","click");
+        $('.reg_rt h5 span').click(function(){
+            $('.two2').fadeIn();
+        })
+    });
+
+    function ate(){
+        var hei=$(window).height();
+        $(".back").css("height",hei-27+"px");
+    }
+
+    function openGcdt(module) {
+//        if (typeof module == 'undefined') {
+//            module = '';
+//        }
+
+        var subUrl = "";
+        if (module) {
+            subUrl = "#" + CONFIG.BASEURL + "ssc/" +module + ".html";
+        }
+        windowOpenBlank(CONFIG.BASEURL + 'ssc/index.html' + subUrl);
+    }
+
+    function openGcdt(module) {
+//        if (typeof module == 'undefined') {
+//            module = '';
+//        }
+
+        var subUrl = "";
+        if (module) {
+            subUrl = "#" + CONFIG.BASEURL + "ssc/" +module + ".html";
+        }
+        windowOpenBlank(CONFIG.BASEURL + 'ssc/index.html' + subUrl);
+    }
+</script>
+<div class="main login_main">
+    <div class="container login_nr">
+        <div class="login_nr_t clearfix">
+            <div class="left login_nr_t_lf">
+                账号注册
+            </div>
+            <div class="right">
+                已有账号?<a href="/login.html">立即登录</a>
+            </div>
+        </div>
+        <form id="myform">
+            <div class="login_nr_b">
+                <div class="clearfix login_nr_gp">
+			    		<span class="left login_nr_name">
+			    			<span class="star">
+			    				*
+			    			</span>
+			    			用户名:
+			    		</span>
+                    <div class="login_nr_gp_rt clearfix">
+                        <input type="text" name="username" id="inputyhm" class="inputStr left" placeholder="请输入用户名">
+                        <div class="left erro">
+                        <span class="yhm">
+                             <span id="yesyhm" class="sl-correct-verifycode hideRegImage"> <img src="/__IMG__/lvgou.png" style="width: 20px;"> </span> <span id="noyhm" class="sl-error-verifycode hideRegImage"><img src="/__IMG__/hongcha.png" style="width: 20px;"></span>
+                            <span class="info">字母开头的6-12位字母数字组成的用户名</span>
+                            <span class="bitianyhm" style="color: red">&nbsp;&nbsp;&nbsp;必填</span>
+                            <span class="error red hide"></span>
+                        </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="clearfix login_nr_gp">
+			    		<span class="left login_nr_name">
+			    			<span class="star">
+			    				*
+			    			</span>
+			    			密码:
+			    		</span>
+                    <div class="login_nr_gp_rt clearfix">
+                        <input type="password" name="password" id="inputPassword" class="inputStr left" placeholder="请输入密码">
+                        <div class="left erro">
+                        <span class="mm">
+                             <span id="yes" class="sl-correct-verifycode hideRegImage"> <img src="/__IMG__/lvgou.png" style="width: 20px;"> </span> <span id="no" class="sl-error-verifycode hideRegImage"><img src="/__IMG__/hongcha.png" style="width: 20px;"></span>
+                            <span class="info">输入6-12位字母、数字的密码</span>
+                            <span class="bitianmm" style="color: red">&nbsp;&nbsp;&nbsp;必填</span>
+                            <span class="error red hide"></span>
+                        </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="clearfix login_nr_gp">
+			    		<span class="left login_nr_name">
+			    			<span class="star">
+			    				*
+			    			</span>
+			    			确认密码:
+			    		</span>
+                    <div class="login_nr_gp_rt clearfix">
+                        <input type="password" name="password_confirm" id="inputconfirmPassword" class="inputStr left" placeholder="确认密码">
+                        <div class="left erro">
+                        <span class="qmm">
+                            <span id="yesqmm" class="sl-correct-verifycode hideRegImage"> <img src="/__IMG__/lvgou.png" style="width: 20px;"> </span><span id="noqmm" class="sl-error-verifycode hideRegImage"><img src="/__IMG__/hongcha.png" style="width: 20px;"></span>
+                            <span class="info">与上面输入密码必须保持一致</span>
+                            <span class="bitianqmm" style="color: red">&nbsp;&nbsp;&nbsp;必填</span>
+                            <span class="error red hide"></span>
+                        </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="clearfix login_nr_gp">
+			    		<span class="left login_nr_name">
+			    			<span class="star">
+			    				*
+			    			</span>
+			    			姓名:
+			    		</span>
+                    <div class="login_nr_gp_rt clearfix">
+                        <input type="text" name="name" id="inputxm" class="inputStr left" placeholder="请输入姓名">
+                        <div class="left erro">
+                        <span class="name">
+                             <span id="yesxm" class="sl-correct-verifycode hideRegImage"> <img src="/__IMG__/lvgou.png" style="width: 20px;"></span><span id="noxm" class="sl-error-verifycode hideRegImage"><img src="/__IMG__/hongcha.png" style="width: 20px;"></span>
+                            <span class="info">姓名必须和绑定的银行卡户名一致</span>
+                            <span class="bitianxm" style="color: red">&nbsp;&nbsp;&nbsp;必填</span>
+                            <span class="error red hide"></span>
+                        </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="clearfix login_nr_gp">
+			    		<span class="left login_nr_name">
+                            	<span class="star">
+			    				*
+			    			</span>
+			    			验证码:
+			    		</span>
+                    <div class="login_nr_gp_rt clearfix">
+                        <input type="text" name="yzm" id="VerificationCode" class="inputStr left" placeholder="请输入验证码">
+                        <div class="left erro">
+                        <span class="name">
+                             <img id="captcha" style= "width:70px; height: 25px" src="{:url('indexcaptcha/get_captcha?id=login')}">
+                             <span class="bitianxm" style="color: red">&nbsp;&nbsp;&nbsp;必填</span>
+                             <span class="error red hide"></span>
+                        </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="clearfix login_nr_gp">
+			    		<span class="left login_nr_name">
+			    			推荐人:
+			    		</span>
+                    <div class="login_nr_gp_rt clearfix">
+                        <input type="text" name="name" id="inputtjr" class="inputStr left" placeholder="请输入推荐人">
+                        <div class="left erro">
+                        <span class="name">
+                            <!-- <span id="yesxm" class="sl-correct-verifycode hideRegImage"> <img src="/__IMG__/lvgou.png" style="width: 20px;"></span><span id="noxm" class="sl-error-verifycode hideRegImage"><img src="/__IMG__/hongcha.png" style="width: 20px;"></span>-->
+                            <span class="info">选填</span>
+                            <!--<span class="bitianxm" style="color: red">&nbsp;&nbsp;&nbsp;必填</span>
+                            <span class="error red hide"></span>-->
+                        </span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="clearfix login_nr_gp" style="padding-left: 40px;">
+                    <span class="left login_nr_name"></span>
+                    <div class="login_nr_gp_rt clearfix">
+                        <input type="checkbox" class="left" checked="checked" style="width:30px;"><span>注册即表示同意<a href="javascript:void(0)" onclick="showKhxy()" class="xieyiCss">《400万彩票网（400w.com)服务使用协议》</a></span>
+                    </div>
+                </div>
+                <div class="login_b">
+                    <p>
+                        <input type="button" class="mfkh" value="免费开户" id="btn-register">
+                        <input type="reset" class="mfkh" value="重置" onclick="restbtn()">
+                    </p>
+                </div>
+
+                <div class="login_b_link" style="padding-left: 75px;">
+                    <a href="https://f18.livechatvalue.com/chat/chatClient/chatbox.jsp?companyID=881265&amp;configID=73958&amp;jid=4674187711&amp;s=1">忘记密码?</a>
+                    <span>|</span>
+                    <a href="https://f18.livechatvalue.com/chat/chatClient/chatbox.jsp?companyID=881265&amp;configID=73958&amp;jid=4674187711&amp;s=1" target="_blank">在线客服</a>
+                </div>
+            </div></form>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $("#captcha,#btn-register").click(function(){
+        $('#captcha').attr('src',"{:url('indexcaptcha/get_captcha?id=register')}");
+    })
+</script>
+<div style="width: 100%; height: 80px; background: red; margin-top:20px;position: absolute; bottom: 0;">
+    footer
+</div>
+<script type="text/html" id="template_khxy">
+    KHXY_400w
+</script>
+
+<!--<script type="text/javascript" src="/static/theme/mainTheme/400w/js/jquery.min.js?v=2017"></script>&lt;!&ndash;jQuery库&ndash;&gt;
+<script type="text/javascript" src="/static/theme/mainTheme/400w/js/scrollanim.min.js?v=2017"></script> &lt;!&ndash;"动画库"&ndash;&gt;
+<script src="/static/theme/mainTheme/400w/js/type.js?v=2017"></script>&lt;!&ndash;自定义封装函数&ndash;&gt;
+<script src="/static/theme/mainTheme/400w/js/global.js?v=20170821"></script>&lt;!&ndash;自定义封装函数&ndash;&gt;
+<script src="/static/theme/mainTheme/400w/js/jquery.cookie.js?v=2017"></script>&lt;!&ndash;自定义封装函数&ndash;&gt;
+<script src="/static/theme/mainTheme/400w/js/jquery.md5.js?v=2017"></script>&lt;!&ndash;自定义封装函数&ndash;&gt;
+<script src="/static/theme/mainTheme/400w/layer/layer.js?v=2017"></script>
+<script src="/static/theme/mainTheme/400w/js/jquery.nicescroll.js?v=2017"></script>
+<script src="/static/theme/mainTheme/400w/js/dateFormat.js?v=2017"></script>
+<script src="/static/theme/mainTheme/400w/js/template.js?v=2017"></script>
+<script src="/static/theme/mainTheme/400w/js/swfobject/swfobject.js?v=2017"></script>
+<script src="/static/theme/mainTheme/400w/js/jquery.liMarquee.js?v=2017"></script>
+<script src="/static/theme/mainTheme/400w/js/placeholders.jquery.min.js?v=2017"></script>
+<script src="/static/theme/mainTheme/400w/jRange/jquery.range-min.js?v=2017"></script>-->
+<script>
+    // 闪烁
+    var blinkColorArr = "#fa6200|#0f3f94".split("|");
+    $(".blink").each(function() {
+        var obj = $(this);
+        setInterval(function() {
+            var tmpColor = blinkColorArr[parseInt(Math.random() * blinkColorArr.length)];
+            $(obj).css("color", tmpColor);
+        },200);
+    });
+
+
+
+    $(function() {
+        // 底部信息调用
+        function ajaxGetDbxx() {
+            ajaxRequest({
+                url: CONFIG.BASEURL + "ajaxGetWebInfo.json",
+                success: function (json) {
+                    if (json.result != 1) {
+                        return;
+                    }
+                    $(".webDbxx").html(json.webDbxx);
+                }
+            });
+        }
+
+        if ($(".webDbxx").length > 0) {
+            ajaxGetDbxx();
+        }
+    });
+
+
+</script><script>
+    function openHyzx(module) {
+        if (typeof module == 'undefined') {
+            module = '';
+        }
+        if (typeof $.cookie("uid") == 'undefined' || typeof $.cookie("token") == 'undefined') {
+            alert("请先登录");
+            if ($("#loginAccount1").length > 0) {
+                $("#loginAccount1").focus();
+                return;
+            }
+            window.location.href = "/main.html";
+            return;
+        }
+        windowOpen('/member/index.html?module=' + module, '会员中心', 1250, 834);
+    }
+
+    function openGcdt(module) {
+        if (typeof module == 'undefined') {
+            module = '';
+        }
+        windowOpenBlank('/ssc/index.html?module=' + module);
+
+    }
+
+    function goZst(url) {
+        window.open('/ssc/'+ url +'.html?type=1');
+    }
+
+    function openZstIndex(module) {
+        if (typeof module == 'undefined') {
+            module = '';
+        }
+        windowOpenBlank('/ssc/index.html?module=' + module);
+
+    }
+    function refreshYzm(obj) {
+        var src = $(obj).attr("src");
+        var params = getRequest(src);
+
+        src = "/code/yzm?timestamp=" + (new Date()).getTime();
+        $.each(params, function(index, value) {
+            src += '&' + value.key + '=' + value.value;
+        });
+        $(obj).attr("src", src);
+    }
+
+    function showLoading() {
+        layer.load(2, {
+            shade: [0.1,'#000'] //0.1透明度的白色背景
+        })
+    }
+    function hideLoading() {
+        layer.closeAll();
+    }
+</script>
+<script>
+    function showKhxy() {
+        //自定页
+        layer.open({
+            type: 1,
+            skin: 'layui-layer-popup', //样式类名
+            closeBtn: 2, //显示关闭按钮
+            anim: 2,
+            title: '开户协议',
+            shadeClose: true, //开启遮罩关闭
+            content: $("#template_khxy").html()
+        });
+    }
+
+    function refreshYzm(obj) {
+        var src = $(obj).attr("src");
+        var params = getRequest(src);
+
+        src = "/code/yzm?timestamp=" + (new Date()).getTime();
+        $.each(params, function (index, value) {
+            src += '&' + value.key + '=' + value.value;
+        });
+        $(obj).attr("src", src);
+    }
+
+    function restbtn(){
+        window.location.href ="/register.html";
+    }
+
+    var qqCheck = false;
+    var iphoneCheck = false;
+    var emailCheck = false;
+    $(function () {
+
+
+        var flagiphone= false
+        var flageamil= false
+        var flagqq= false
+        var isiphone= false
+        var isqq=false
+        var isemail= false
+        var isyzm=false
+        var isczk=false
+
+        var account = $("input[name='account']").val(); // 账号
+        var password = $("input[name='password']").val();   // 密码
+        var phone = $("input[name='phoneName']").val();  // 手机号码
+        var email = $("input[name='email']").val();   // 邮箱号码
+        var qq = $("input[name='qq']").val();   // QQ
+        var yzm = $("input[name='yzm']").val();   // 验证码
+        var czk = $("input[name='czk']").val();
+        //验证码
+
+        if (isyzm) {
+            $(".bitian").html("必填").css("color", "red");
+            $("#registerLoginYzm").keyup(function () {
+                var yzm = $("input[name='yzm']").val(); // yzm
+                ajaxRequest({
+                    url: "/member/ajaxChekeCode.json",
+                    data: {
+                        yzm: yzm
+                    },
+                    success: function (obj) {
+                        if(obj){
+                            $("#btn-register").attr("disabled", false)
+                            $('#yesyzm').show();
+                            $('#noyzm').hide();
+                            $(".yzm").find(".info").hide();
+                            $(".bitian").hide();
+                            $(".yzm").find(".error").html("请输入验证码").hide();
+                            $(".bitianyzm").hide();
+                        }else{
+                            $("#btn-register").attr("disabled", true)
+                            $(".yzm").find(".info").hide();
+                            $('#yesyzm').hide();
+                            $('#noyzm').show();
+                            $(".yzm").find(".error").html("验证码错误，请刷新重新输入").show();
+
+                        }
+                    }
+
+                });
+
+            });
+        }
+
+        $("#inputyhm").blur(function(){
+            var username = $("input[name='username']").val(); // 账号
+            if (!username) {
+                $(".yhm").find(".info").hide();
+                $('#yesyhm').hide();
+                $('#noyhm').show();
+                $(".yhm").find(".error").html("请输入用户名").show();
+            }else if (!username.match(/^[a-zA-Z][0-9a-zA-Z]{5,11}$/)) {
+                $(".yhm").find(".info").hide();
+                $('#yesyhm').hide();
+                $('#noyhm').show();
+                $(".yhm").find(".error").html("请输入以字母开头的6-12位字母、数字组成的用户名").show();
+
+            }
+
+        });
+
+
+        $("#inputPassword").blur(function () {
+            var password = $("input[name='password']").val();   // 密码
+            if (!password) {
+                $(".mm").find(".info").hide();
+                $('#yes').hide();
+                $('#no').show();
+                $(".mm").find(".error").html("请输入密码").show();
+            } else if (!password.match(/^(?![A-Z]+$)(?![a-z]+$)(?!\d+$)(?![\W_]+$)\S{6,16}$/)) {
+                $(".mm").find(".info").hide();
+                $('#yes').hide();
+                $('#no').show();
+                $(".mm").find(".error").html("请输入6-12位、区分大小写的字母和数字组合的密码").show();
+            } else {
+                $('#yes').show();
+                $('#no').hide();
+                $(".mm").find(".info").hide();
+                $(".mm").find(".error").html("请输入6-12位字母、数字的密码").hide();
+                $(".mm").find(".error").html("请输入密码").hide();
+                $(".bitianmm").hide();
+            }
+
+        });
+
+
+        $("#inputconfirmPassword").blur(function(){
+            var confirmPassword = $("input[name='password_confirm']").val(); // 确认密码
+            var password = $("input[name='password']").val();   // 密码
+            if (!confirmPassword) {
+
+                $(".qmm").find(".info").hide();
+                $('#yesqmm').hide();
+                $('#noqmm').show();
+                $(".qmm").find(".error").html("请请输入确认密码").show();
+            }else if (confirmPassword != password) {
+                $(".qmm").find(".info").hide();
+                $('#yesqmm').hide();
+                $('#noqmm').show();
+                $(".qmm").find(".error").html("确认密码不正确").show();
+            }else{
+                $('#yesqmm').show();
+                $('#noqmm').hide();
+                $(".qmm").find(".info").hide();
+                $(".qmm").find(".error").html("与上面输入密码必须保持一致").hide();
+                $(".qmm").find(".error").html("请请输入确认密码").hide();
+                $(".bitianqmm").hide();
+            }
+
+        });
+
+        $("#inputxm").blur(function(){
+            var name = $("input[name='name']").val();   // 姓名
+            if (!name) {
+                $(".name").find(".info").hide();
+                $('#yesxm').hide();
+                $('#noxm').show();
+                $(".name").find(".error").html("请请输入姓名").show();
+            }else  if (!name.match(/^[\u4e00-\u9fa5]+$/)) {
+                $(".name").find(".info").hide();
+                $('#yesxm').hide();
+                $('#noxm').show();
+                $(".name").find(".error").html("姓名只能是汉字").show();
+            }else{
+                $('#yesxm').show();
+                $('#noxm').hide();
+                $(".name").find(".info").hide();
+                $(".name").find(".error").html("姓名只能是汉字").hide();
+                $(".name").find(".error").html("请请输入确认密码").hide();
+                $(".bitianxm").hide();
+            }
+
+        });
+
+
+
+        if(isiphone){
+            if (!flagiphone) {
+                $(".bitianIphone").html("选填").css("color", "#AAAAAA");
+                $("#inputsj").blur(function () {
+                    var phone = $("input[name='phoneName']").val();
+                    if (!(phone.match(/^0?(13[0-9]|15[012356789]|17[012345678]|18[012356789]|147)[0-9]{8}$/) != null || phone.match(/^0?[5689][0-9]{7}$/) != null) && phone) {
+                        $(".sj").find(".info").hide();
+                        $('#yessj').hide();
+                        $('#nosj').show();
+                        $(".sj").find(".error").html("请输入正确手机号").show();
+                    }else {
+                        if(!phone){
+                            $(".bitianIphone").html("选填").css("color", "#AAAAAA");
+                            $('#nosj').hide();
+                            $(".sj").find(".error").html("请输入正确手机号").hide();
+                        }else {
+                            $('#yessj').show();
+                            $('#nosj').hide();
+                            $(".sj").find(".info").hide();
+                            $(".sj").find(".error").html("请输入正确手机号").hide();
+                            $(".bitianIphone").hide();
+                        }
+
+                    }
+
+                });
+            } else {
+                $(".bitianIphone").html("&nbsp;&nbsp;&nbsp;必填");
+                $("#inputsj").blur(function () {
+                    var phone = $("input[name='phoneName']").val();   // 姓名
+                    if (!phone) {
+                        $(".sj").find(".info").hide();
+                        $('#yessj').hide();
+                        $('#nosj').show();
+                        $(".sj").find(".error").html("请输入手机").show();
+                        return;
+                    } else if (!(phone.match(/^0?(13[0-9]|15[012356789]|17[012345678]|18[02356789]|147)[0-9]{8}$/) != null || phone.match(/^0?[5689][0-9]{7}$/) != null)) {
+                        $(".sj").find(".info").hide();
+                        $('#yessj').hide();
+                        $('#nosj').show();
+                        $(".sj").find(".error").html("请输入正确手机号").show();
+                    } else {
+                        $('#yessj').show();
+                        $('#nosj').hide();
+                        $(".sj").find(".info").hide();
+                        $(".sj").find(".error").html("请输入正确手机号").hide();
+                        $(".sj").find(".error").html("请输入手机").hide();
+                        $(".bitianIphone").hide();
+                    }
+
+                });
+            }
+        }
+        if(isqq){
+            if(!flagqq){
+                $(".bitianqq").html("选填").css("color","#AAAAAA");
+                $("#inputqq").blur(function(){
+                    var qq = $("input[name='qq']").val();
+                    if (!qq.match(/^\d{5,10}$/) && qq) {
+                        $(".qq").find(".info").hide();
+                        $('#yesqq').hide();
+                        $('#noqq').show();
+                        $(".qq").find(".error").html("请输入正确的QQ").show();
+                    }else{
+                        if(!qq){
+                            $(".bitianqq").html("选填").css("color","#AAAAAA");
+                            $('#noqq').hide();
+                            $(".qq").find(".error").html("请输入正确的QQ").hide();
+                        }else {
+                            $('#yesqq').show();
+                            $('#noqq').hide();
+                            $(".qq").find(".info").hide();
+                            $(".qq").find(".error").html("请输入正确的QQ").hide();
+                            $(".qq").find(".error").html("请输入QQ").hide();
+                            $(".bitianqq").hide();
+                        }
+                    }
+                });
+            }else {
+
+                $(".bitianqq").html("&nbsp;&nbsp;&nbsp;必填");
+                $("#inputqq").blur(function(){
+                    var qq = $("input[name='qq']").val();
+                    if (!qq) {
+                        $(".qq").find(".info").hide();
+                        $('#yesqq').hide();
+                        $('#noqq').show();
+                        $(".qq").find(".error").html("请输入QQ").show();
+                        return;
+                    } else  if (!qq.match(/^\d{5,10}$/)) {
+                        $(".qq").find(".info").hide();
+                        $('#yesqq').hide();
+                        $('#noqq').show();
+                        $(".qq").find(".error").html("请输入正确的QQ").show();
+                    }else{
+                        $('#yesqq').show();
+                        $('#noqq').hide();
+                        $(".qq").find(".info").hide();
+                        $(".qq").find(".error").html("请输入正确的QQ").hide();
+                        $(".qq").find(".error").html("请输入QQ").hide();
+                        $(".bitianqq").hide();
+                    }
+                });
+
+            }
+        }
+
+        if(isemail){
+            if(flageamil){
+                console.log(flageamil);
+                $(".bitianemail").html("&nbsp;&nbsp;&nbsp;必填");
+                $("#inputyx").blur(function(){
+                    var email = $("input[name='email']").val();
+                    if (!email) {
+                        $(".yx").find(".info").hide();
+                        $('#yesyx').hide();
+                        $('#noyx').show();
+                        $(".yx").find(".error").html("请输入邮箱").show();
+                        return;
+                    } else  if (!email.match(/^(\w)+(\.\w+)*@(\w)+((\.\w{2,3}){1,3})$/ )) {
+                        $(".yx").find(".info").hide();
+                        $('#yesyx').hide();
+                        $('#noyx').show();
+                        $(".yx").find(".error").html("请输入正确的邮箱").show();
+                    }else{
+                        $('#yesyx').show();
+                        $('#noyx').hide();
+                        $(".yx").find(".info").hide();
+                        $(".yx").find(".error").html("请输入正确的邮箱").hide();
+                        $(".yx").find(".error").html("请输入邮箱").hide();
+                        $(".bitianemail").hide();
+                    }
+                });
+            }else {
+                $(".bitianemail").html("选填").css("color","#AAAAAA");
+                $("#inputyx").blur(function(){
+                    var email = $("input[name='email']").val();
+                    if (!email.match(/^(\w)+(\.\w+)*@(\w)+((\.\w{2,3}){1,3})$/ )&& email) {
+                        $(".yx").find(".info").hide();
+                        $('#yesyx').hide();
+                        $('#noyx').show();
+                        $(".yx").find(".error").html("请输入正确的邮箱").show();
+                    }else{
+                        if(!email){
+                            $(".bitianemail").html("选填").css("color","#AAAAAA");
+                            $('#noyx').hide();
+                            $(".yx").find(".error").html("请输入正确的邮箱").hide();
+                        }else {
+                            $('#yesyx').show();
+                            $('#noyx').hide();
+                            $(".yx").find(".info").hide();
+                            $(".yx").find(".error").html("请输入正确的邮箱").hide();
+                            $(".yx").find(".error").html("请输入邮箱").hide();
+                            $(".bitianemail").hide();
+                        }
+
+                    }
+                });
+            }
+        }
+
+
+        $(".login_nr_b .login_nr_gp .login_nr_gp_rt input.inputStr").keypress(function (e) {
+            if(e.which == 13){
+                var inputs = $(".login_nr_b").find(".inputStr");
+                var idx = inputs.index(this);
+                if(idx == inputs.length - 1){
+                    if(confirm("最后一个输入框已经输入,是否提交?")){
+                        $("#btn-register").trigger("click");
+                    }
+                }else{
+                    inputs[idx + 1].focus(); // 设置焦点
+                    inputs[idx + 1].select(); // 选中文字
+                }
+                return false;// 取消默认的提交行为
+            }
+        });
+
+
+
+        $("#btn-register").click(function () {
+        	alert('regclicked');
+            var username = $("input[name='username']").val(); // 账号
+            var password = $("input[name='password']").val();   // 密码
+            var phone = $("input[name='phoneName']").val();  // 手机号码
+            var email = $("input[name='email']").val();   // 邮箱号码
+            var qq = $("input[name='qq']").val();   // QQ
+            var yzm = $("#VerificationCode").val();   // 验证码
+            var confirmPassword = $("input[name='password_confirm']").val(); // 确认密码
+            //var name = $("input[name='name']").val();   // 姓名
+            var inputtjr = $("#inputtjr").val();  //上級推荐
+            if (!username) {
+                $(".yhm").find(".info").hide();
+                $(".yhm").find(".error").html("请输入用户名").show();
+                return;
+            }
+
+            if (!username.match(/^[a-zA-Z][0-9a-zA-Z]{5,11}$/)) {
+                $(".yhm").find(".info").hide();
+                $(".yhm").find(".error").html("请输入以字母开头的6-12位字母、数字组成的用户名").show();
+                return;
+            }
+
+            if (!password) {
+                $(".mm").find(".info").hide();
+                $(".mm").find(".error").html("请输入密码").show();
+                return;
+            }
+
+//          if (!password.match(/^[0-9a-zA-Z]{6,12}$/))
+            if (!password.match(/^(?![A-Z]+$)(?![a-z]+$)(?!\d+$)(?![\W_]+$)\S{6,16}$/))
+            {
+                $(".mm").find(".info").hide();
+                $(".mm").find(".error").html("请输入6-12位、区分大小写的字母和数字组合的密码").show();
+                return;
+            }
+
+            if (!confirmPassword) {
+                $(".qmm").find(".info").hide();
+                $(".qmm").find(".error").html("请请输入确认密码").show();
+                return;
+            }
+
+            if (confirmPassword != password) {
+                $(".qmm").find(".info").hide();
+                $(".qmm").find(".error").html("确认密码不正确").show();
+                return;
+            }
+
+            if (!name) {
+                $(".name").find(".info").hide();
+                $(".name").find(".error").html("请输入姓名").show();
+                return;
+            }
+            if (!yzm) {
+                $("#VerificationCode").find(".info").hide();
+                $("#VerificationCode").find(".error").html("请输入验证码").show();
+                return;
+            }
+            /*
+            if (!name.match(/^[\u4e00-\u9fa5]+$/)) {
+                $(".name").find(".info").hide();
+                $(".name").find(".error").html("姓名只能是汉字").show();
+                return;
+            }
+            */
+
+            $(".erro .info").hide();
+            $(".erro .error").hide();
+            ajaxRequest({
+                url: "/index/register",
+                data: {
+                    username: username,
+                    password: password,
+                    password_confirm: confirmPassword,
+                    code: yzm,
+                    name: name,
+                    agent_id:inputtjr,
+                    //phone: phone,
+                    //email: email,
+                    //agentId: $.cookie("agentId"),
+                    //qq: qq,
+                    //czk: czk,
+                    //clientType:1,
+                },
+                beforeSend: function () {
+                	alert('rund');
+                    showLoading();
+                },
+                success: function (json) {
+                    if (json.code == 1) {
+                        Tools.toast("注册成功");
+                        zclogin(account,password)
+                    } else {
+                        // refreshYzm(document.getElementById('registerYzmImg2'));
+                        Tools.toast("注册失败：" + json.msg);
+                    }
+                },
+                complete: function () {
+                    hideLoading();
+                }
+            });
+        });
+    });
+
+    function zclogin(zcusername,zcpassword) {
+        var data = {username: zcusername,password: zcpassword,auth:1,code:0};
+        $.post('/index/login',data,function(json){
+            if(json.code==1){
+                location.href = json.url;
+            }else{
+                alert(json.msg);
+            }
+        },'json');
+    }
+    function showLoading() {
+        layer.load(2, {
+            shade: [0.1, '#000'] //0.1透明度的白色背景
+        })
+    }
+    function hideLoading() {
+        layer.closeAll();
+    }
+</script>
+
+
+
+
+
+
+<!--<script>
+    // 闪烁
+    var blinkColorArr = "#fa6200|#0f3f94".split("|");
+    $(".blink").each(function() {
+        var obj = $(this);
+        setInterval(function() {
+            var tmpColor = blinkColorArr[parseInt(Math.random() * blinkColorArr.length)];
+            $(obj).css("color", tmpColor);
+        },200);
+    });
+
+
+
+    $(function() {
+        // 底部信息调用
+        function ajaxGetDbxx() {
+            ajaxRequest({
+                url: CONFIG.BASEURL + "ajaxGetWebInfo.json",
+                success: function (json) {
+                    if (json.result != 1) {
+                        return;
+                    }
+                    $(".webDbxx").html(json.webDbxx);
+                }
+            });
+        }
+
+        if ($(".webDbxx").length > 0) {
+            ajaxGetDbxx();
+        }
+    });
+
+
+</script>--><!--弹窗-->
+<div class="bg"></div>
+<div class="login_alert">
+    <div class="login_alert_tl clearfix">
+        <span class="left spans">400w.com 彩票网登录</span>
+        <a href="javascript:void(0);" class="cha right"></a>
+    </div>
+    <form>
+        <div class="login_alert_b">
+            <div class="login_alert_gp">
+                <img src="/static/theme/mainTheme/400w/images/alert2.png" class="login_alert_ico">
+                <input type="text" id="registerLoginAccountAlert" name="registerLoginAccountAlert" placeholder="手机号/用户名">
+            </div>
+            <div class="login_alert_gp">
+                <img src="/static/theme/mainTheme/400w/images/alert3.png" class="login_alert_ico">
+                <input type="password" id="registerLoginPasswordAlert" name="registerLoginPasswordAlert" placeholder="密码">
+            </div>
+
+            <div class=" banner_shuru_gp">
+                <input type="text" id="registerLoginYzmAlert" class="banner_shuru_alertinput" placeholder="验证码">
+
+                <a href="javascript:void(0);" class="banner_alertyz">
+                    <img id="registerYzmImg2" onclick="refreshYzm(this)" src="/code/yzm?imgWidth=113&amp;imgHeight=43&amp;imgFontHeight=40&amp;imgCodeY=35&amp;imgCodeX=2">
+                </a>
+            </div>
+
+            <input type="button" class="btn_red login_alertbtn" onclick="login()" value="立即登录">
+            <div class="login_alert_link">
+                <a href="https://f18.livechatvalue.com/chat/chatClient/chatbox.jsp?companyID=881265&amp;configID=73958&amp;jid=4674187711&amp;s=1" target="_blank">忘记密码</a>
+                <span>&nbsp;&nbsp;|&nbsp;&nbsp;</span>
+                <a href="/register.html">立即注册</a>
+            </div>
+        </div>
+    </form>
+</div>
+
+<script>
+    $(function () {
+        // 首页弹框登录按钮
+        $('.loginbtn').click(function(){
+            $(".bg").show();
+            $(".login_alert").show();
+        });
+        $('.bg').click(function(){
+            $(".bg").hide();
+            $(".login_alert").hide();
+        });
+        $('.cha').click(function(){
+            $(".bg").hide();
+            $(".login_alert").hide();
+        });
+    });
+
+    function goZst(url) {
+        window.open('/ssc/'+ url +'.html?type=1');
+    }
+
+    function wjmm(url) {
+        $(".spans").html("请联系在线客服");
+        $(".spans").css("color","red");
+    }
+
+    function login() {
+        var loginAccount = $("#registerLoginAccountAlert").val();
+        var loginPassword = $("#registerLoginPasswordAlert").val();
+        var yzm = $("#registerLoginYzmAlert").val();
+
+        if (!loginAccount) {
+            $(".yhm").html("请输入用户名3-15个英文、数字");
+            $(".yhm").css("color","red");
+            $("#mm").empty();
+            $(".yzm").empty();
+            return;
+        }
+        if (!loginPassword) {
+            $("#mm").html("请输入密码");
+            $("#mm").css("color","red");
+            $("#mm").empty();
+            $(".yzm").empty();
+            return;
+        }
+        if (!yzm) {
+            $("#yzm").html("请输入验证码");
+            $("#yzm").css("color","red");
+            $("#mm").empty();
+            $(".yhm").empty();
+            return;
+        }
+
+        ajaxRequest({
+            url: "/member/ajaxLogin.json",
+            data: {
+                yzm: yzm,
+                account: loginAccount,
+                password: $.md5(loginPassword)
+            },
+            beforeSend: function () {
+                showLoading();
+            },
+            success: function (json) {
+                if (json.result == 1) {
+                    $.cookie("uid", json.userId, {path: "/"});
+                    $.cookie("token", json.token, {path: "/"});
+                    window.location.href = "/main.html";
+                } else {
+                    refreshYzm(document.getElementById('registerYzmImg2'));
+                    Tools.toast("登录失败：" + json.description);
+                }
+                hideLoading();
+            }
+        });
+    }
+
+    function showLoading() {
+        layer.load(2, {
+            shade: [0.1, '#000'] //0.1透明度的白色背景
+        })
+    }
+    function hideLoading() {
+        layer.closeAll();
+    }
+    function refreshYzm(obj) {
+        var src = $(obj).attr("src");
+        var params = getRequest(src);
+
+        src = "/code/yzm?timestamp=" + (new Date()).getTime();
+        $.each(params, function (index, value) {
+            src += '&' + value.key + '=' + value.value;
+        });
+        console.log(src);
+        $(obj).attr("src", src);
+    }
+</script>
+
+
+
+
+</body>
+</html>

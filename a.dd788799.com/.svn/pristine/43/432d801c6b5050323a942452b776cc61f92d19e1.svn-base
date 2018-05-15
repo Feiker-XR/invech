@@ -1,0 +1,349 @@
+<?php
+namespace app\index\controller;
+use think\Db;
+use think\Validate;
+use app\index\Base;
+use app\classes\iplocation;
+use app\common\model\Type;
+use app\common\model\Notice;
+use app\common\model\Slide;
+use app\common\model\News as NewsModel;
+use app\common\model\Member as UserModel;
+use bong\service\auth\traits\ThrottlesLogins;
+//use bong\service\Mycaptcha;
+use bong\service\CaptchaService;
+
+class Index extends Base{
+
+    use ThrottlesLogins;
+
+    public function index() {
+        $types  =   Type::getAll();
+        $list   =   [];
+        $list   =   array_chunk($types,8);
+        $noticeList = Notice::getList(); //消息列表
+        $slide  =   Slide::getApiList();
+        $news   =   NewsModel::news_list();
+        $this->assign('slide',$slide);
+        $this->assign('list',$list);
+        $this->assign('news',$news);
+        $this->assign('noticeList',$noticeList) ;
+        $this->assign('types',[1=>"中奖资讯",2=>'活动公告']) ;
+        return $this->fetch();
+    }
+    public function main(){  
+        $types = Type::getAll();
+        $open_codes= Type::getLastAllLotteyPhase();
+        $open_codes = array_slice($open_codes,0,5);
+        foreach ($open_codes as &$row){
+            $row['result_info']['data'] = str_replace(',', ' ', $row['result_info']['data']);
+        }
+
+        $bonus = model('bets')->getBetsByBonusGt(1000);
+        foreach ($bonus as &$row){
+            $row['nickname'] = mb_substr($row['nickname'],0,2).'**'.mb_substr($row['nickname'],4);
+        }
+        $this->assign('type',$types);
+        $this->assign('bonus',$bonus);
+        $this->assign('open_code',$open_codes);
+        $this->assign('news',model('news')->news_list());
+        $this->assign('news_types',[1=>"中奖资讯",2=>'活动公告']) ;
+        return $this->fetch();
+    }
+    
+    public function login(){
+
+        if(request()->isGet()){        
+            return $this->fetch("login");   
+        }else{
+            $remember = false;
+            // 判断是否注册登陆 auth=1注册登陆
+            $auth = !empty($_POST['auth'])?$_POST['auth']:0;
+            if (!$auth){
+                //$Mycaptcha = new Mycaptcha();
+                $Mycaptcha = new CaptchaService();
+                $params = $this->request->param();
+                $rel =  $Mycaptcha->check_verify($params['code'],'login');
+                if(!$rel){
+                    return $this->error('验证码错误');
+                }
+            }
+            if($uid = $this->doLogin($this->request,$remember)){
+                $user = request()->user();
+                event('user.login',[$user]);
+                $url = config('auth.redirect.auth_ok.'.MODULE);             
+                return $this->success('成功',$url);
+            }else{
+                $url = config('auth.redirect.auth_fail.'.MODULE); 
+                return $this->error('错误',$url);    
+            }                
+        }
+    }
+    
+    public function customer(){
+         return $this->fetch();  
+    }
+
+
+   /* public final function getLastKjData()
+    {
+        //$types = model('type')->allTypes();
+        $types = Type::getAll();
+        $type = input('type');
+        if(!$type){
+            //echo json_encode('');return;
+            return json('');
+        }
+        $lottery = $types[$type]??null;
+        if(!$lottery){
+            //echo json_encode('');return;
+            return json('');
+        }
+        
+        
+        //上期开奖结果
+        //$lastNo = $this->getGameLastNo($type);
+        //$lastNo = Type::getLastGamePhase($type);
+        $lastNo = $lottery->getLastGamePhase();
+        if(!$lastNo) $this->error('查找最后开奖期号出错');
+        //格式化开奖期号
+        $lastNo['actionNo'] = $this->formatActionNo($lastNo['actionNo'],$type) ; 
+        $data = db('data')->where(array('type'=>$type, 'number'=>$lastNo['actionNo']))->field('data')->find() ;
+        
+        $data = $lottery->getLastGameData();
+        if(!$data){
+            //echo json_encode('');return;
+            return json('');
+        }
+        $lastNo['data'] = $data['data'];
+
+        //本期期号以及倒计时
+        //$thisNo = $this->getGameNo($type);
+        //$thisNo = Type::getGamePhase($type);
+        $thisNo = $lottery->getGamePhase();
+        $lastNo['actionName'] = $lottery['title'];
+        $lastNo['thisNo']     = $thisNo['actionNo'];
+        $lastNo['diffTime']   = strtotime($thisNo['actionTime'])-$this->time;
+        //$lastNo['kjdTime']    = $this->getTypeFtime($type);
+        //$lastNo['kjdTime']    = Type::getFtime($type);
+        $lastNo['kjdTime'] = $lottery->data_ftime;
+        //echo json_encode($lastNo);exit();
+        return json($lastNo);
+    }*/
+
+    private  function  formatActionNo($actionNo,$type)
+    {
+       if ($actionNo && $type) {
+            if ($type == 12) {
+                //新疆时时彩处理, 期号类似这样2017-60
+                //而数据库中的期号是2017060 这样子, 所以要把期号格式化一致,方便下一步准确找到数据
+                $tmp      = explode('-',$actionNo) ;
+                $tmp[1]   = (strlen($tmp[1])==2) ? '0'.$tmp[1] : $tmp[1] ;
+                $actionNo = $tmp[0].$tmp[1] ;
+            } else {
+                //普通处理
+                $actionNo = str_replace('-','',$actionNo) ;
+            }
+       }
+       return $actionNo ;
+    }
+
+ /*   public final function getQiHao()
+    {
+        $types = Type::getAll();
+        $type = input('type');
+        if(!$type){
+            //echo json_encode('');return;
+            return json('');
+        }
+        $lottery = $types[$type]??null;
+        if(!$lottery){
+            //echo json_encode('');return;
+            return json('');
+        }
+
+        //$thisNo=$this->getGameNo($this);
+        //$lastNo = Type::getLastGamePhase($type);
+        //$thisNo = Type::getGamePhase($type);
+        $lastNo = $lottery->getLastGamePhase();
+        $thisNo = $lottery->getGamePhase();
+        $type   = input('type','','intval') ;
+        //$thisNo = $this->getGameNo($type) ; //下一期的期号数据
+        $data   = array(
+            //'lastNo'    => $this->getGameLastNo($type),
+            //'thisNo'    => $this->getGameNo($type),
+            'lastNo'    => $lastNo,
+            'thisNo'    => $thisNo,
+            'diffTime'  => strtotime($thisNo['actionTime'])-$this->time,
+            'validTime' => $thisNo['actionTime'],
+            //'kjdTime'   => $this->getTypeFtime($type)
+            //'kjdTime'   => Type::getFtime($type)
+            'kjdTime'   => $lottery->data_ftime
+        );
+        //dump($data);
+        //echo json_encode($data);exit();
+        //return $data;
+        return json($data);
+    }*/
+
+    public final function getHistoryData()
+    {
+        $this->type=input('type','','intval');
+        $history = db('data')->where(array('type'=>$this->type))->order('number desc,time desc')->limit(10)->field('time,number,data')->select();
+        $this->assign('type',$this->type) ;
+        $this->assign('history',$history) ;
+        echo  $this->fetch('/game/inc_game_history') ; exit();
+    }
+
+    public  function register(){
+        if(IS_GET){
+            return $this->fetch();
+        }else{
+            $request = request();
+            $Mycaptcha = new CaptchaService();
+            $params = $this->request->param();
+            $rel =  $Mycaptcha->check_verify($params['code'],'register');
+            if(!$rel){
+               return $this->error('验证码错误');
+            }
+            $UserModel = new UserModel();
+            $rel =  $UserModel->register();
+            if($rel){
+                return $this->success('注册成功');
+            }else{
+                //return $this->error(validate('Member')->getError());
+                return $this->error($UserModel->getError());
+            }    
+        }
+    }
+
+    //投注期号和投注倒计时
+    public function getBetQiHao(){
+        $types = Type::getAll();
+        $type = input('type');
+        if(!$type){
+            return json('');
+        }
+        $lottery = $types[$type]??null;
+        if(!$lottery){
+            return json('');
+        }
+
+        $phase = $lottery->getBetPhase();
+
+       /* $fptime = strtotime($phase['actionTime']) - time() - $lottery->data_ftime;*/
+        $fptime = strtotime($phase['actionTime']) - time();
+        $future_phases = $lottery->future_phases($phase['actionNo']);
+
+        $data = [
+            'fptime'=>$fptime,
+            'phase'=>$phase['actionNo'],
+            'future_phases'=> $future_phases,
+        ];
+
+        return json($data);
+    }
+
+    //开奖期号,开奖倒计时;
+    public function getLotteryQiHao(){
+        $types = Type::getAll();
+        $type = input('type');
+        if(!$type){
+            return json('');
+        }
+        $lottery = $types[$type]??null;
+        if(!$lottery){
+            return json('');
+        }
+        
+        $phase = $lottery->getGamePhase();
+        $last_phase = $lottery->getLastGamePhase();
+        $ld = $lottery->getLastGameData();
+      
+        $parse = '';
+        if($ld){
+            $parse = $ld->parse();
+        }
+        $kjtime = strtotime($phase['actionTime']) - time();
+        $data = [
+            'kjtime'=>$kjtime,
+            'phase'=>$last_phase['actionNo'],
+            'data'=>$ld->data??'',
+            'parse'=> $parse,
+        ];
+        return json($data);
+    }
+
+    public function getAllLotteyPhase(){
+        $playGroupId = request()->param('playGroupId','');
+        $info = [];
+        $info['result'] = 1;
+        $data = Type::getAllLotteyPhase();
+        $sscTimeList = [];
+        foreach($data as $k => $v){
+            $sscTimeList[$k]['name'] = $v['lottery_info']['name'];
+            $sscTimeList[$k]['enable'] = true;
+            $sscTimeList[$k]['leftTime'] =  $v['bet_info']['fptime'];  //封盘时间
+            $sscTimeList[$k]['nextOpenTime'] =  strtotime($v['actionTime'])*1000;   //下期时间
+            $sscTimeList[$k]['number'] =  $v['bet_info']['phase'];
+            if(isset($v['result_info'])){
+//                $sscTimeList[$k]['lastOpenTime'] =  strtotime($v['actionTime']);
+                $sscTimeList[$k]['lastOpenData'] =  $v['result_info']['data'];
+                $sscTimeList[$k]['lastOpenNumber'] =  $v['result_info']['phase'];
+            }
+            $sscTimeList[$k]['openTime'] =  strtotime($v['actionTime'])*1000; //下期时间
+            $sscTimeList[$k]['playGroupId'] = $v['lottery_info']['id'];
+            if($v['lottery_info']['id'] == $playGroupId){
+                $arr = [];
+                if($v['bet_info']['fptime'] <= 0 ){
+                    $arr['isFengpan'] = 0;
+                    $arr['leftTime'] =  '';
+                }
+                return $sscTimeList[$k];
+            }
+        }
+        $info['sscTimeList'] = $sscTimeList;
+        return json($info);
+    }
+
+    public function getTrendLotteyData(){
+        
+        $type = request()->param('type');
+        $pagesize = request()->param('pageSize');
+        $lottery = Type::getLotteryFormRequest();
+        if(!$lottery){
+            return json('彩种不合法!');
+        }
+        $data = $lottery->getTrendLotteyData();
+        $tmp = [];
+        foreach ($data as $k => $v){
+            if($pagesize && $k >= $pagesize){
+                break;
+            }
+            $tmp[$k]['playGroupName'] = '';
+            $tmp[$k]['playGroupId'] = intval($type);
+            $tmp[$k]['number'] = $v['phase'];
+            $tmp[$k]['openCode'] = $v['data'];
+            $tmp[$k]['openTime'] = strtotime($v['created_at']) * 1000;
+            $tmp[$k]['date'] = date('Y-m-d',strtotime($v['created_at']));
+            
+        }
+        //{"result":1,"sscHistoryList":[{}]}
+        $return['result'] = 1;
+        $return['sscHistoryList'] =$tmp;
+        return json($return);
+    }
+
+    public function hashid($id=312){
+        echo hashid($id);
+    }
+    public function dehashid($id='p0aAO0'){
+        $ret = dehashid($id);
+        echo (string)$ret;
+    }
+
+    public function app(){
+        return $this->fetch();
+    }
+
+}

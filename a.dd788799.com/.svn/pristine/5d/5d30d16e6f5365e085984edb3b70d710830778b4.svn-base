@@ -1,0 +1,154 @@
+{extend name="public/user_head"/}
+{block name="body"}
+    <style type="text/css">
+        section.msg_list ul li{
+            background: #fff;
+        }
+        section.msg_list ul li h2{
+            margin:0;
+        }
+        section.msg_list ul a{
+            display: inline-block;
+        }
+        section.msg_list ul li button{
+            padding:0;
+            margin-top:-1.35rem;
+            height: 1rem;
+            line-height: 1rem;
+        }
+        section.charge_pay{
+            z-index: 2;
+        }
+    </style>
+    <div class="container">
+        <header class="header">
+            <i class='left' onclick="javascript:history.back(-1);">返回</i>
+            <h1>我的消息</h1>
+        </header>
+        <main class="inner_body">
+            <section class="msg_list">
+                <div id="pullrefresh" class="mui-content mui-scroll-wrapper">
+                    <div class="mui-scroll">
+                {if(!$list['list']->isEmpty())}
+                    <ul id="msg">
+                        {foreach $list['list'] as $v}
+                        <!--<a href="/user/inbox_detail?id={$v.id}">-->
+                            <li data-url="/user/inbox_detail?id={$v.id}">
+                                <h2 {if($v.status==1)} class="read" {/if}>{$v->message->title}</h2>
+                                <p>{$v->created_at}</p>
+                                <button data-id="{$v->id}">删除</button>
+                            </li>
+                        <!--</a>-->
+                        {/foreach}
+                    </ul>
+                {else}
+                    <div id="loading" style="">
+                        <p style="text-align:center;padding:15px 0">暂无数据</p>
+                    </div>
+                {/if}
+                    </div>
+                </div>
+            </section>
+            <section class="charge_pay">
+                <button class="smaller">写邮件</button>
+            </section>
+        </main>
+    </div>
+<script type="text/javascript">
+       var base_url = '/user/inbox';
+       var page = 1;
+
+        /**
+         * 上拉加载具体业务实现
+         */
+        function pullupRefresh() {
+            setTimeout(function() {
+                page++;
+                mui.ajax('/user/inbox?page='+page,{
+                    dataType:'json',
+                    type:'POST',
+                    timeout:10000,
+                    headers:{'Content-Type':'application/json'},                  
+                    success:function(data){
+                        var html = data.data;
+                        if(html){
+                            $('#msg').append(html);
+                            mui('.msg_list').pullRefresh().endPullupToRefresh(false);
+                        }else{
+                            mui('.msg_list').pullRefresh().endPullupToRefresh(true);
+                        }
+                    },
+                    error:function (error) {
+                        console.log(error);
+                        alert('ajax error');
+                    }
+                });
+        
+            }, 1500);
+        }
+        
+    // 划入或划出删除按钮
+    var _touchstart = null;
+    $('.msg_list ul li').on('touchstart',function(e){
+        _touchstart = e.originalEvent.touches[0].clientX;
+    });
+    $('.msg_list ul li').on('touchend',function(e){
+        var _touchend = e.originalEvent.changedTouches[0].clientX;
+        var _flag = $(this).find('button').css('right');
+        if(_touchend - _touchstart <= -60){
+            _flag = 0;
+        }else if(_touchend - _touchstart >= 60){
+            _flag = '-1.88rem';
+        }
+        $(this).find('button').animate({
+            right: _flag
+        },300);
+        _touchstart = null;
+    });
+    /*// 跳转到具体页面
+       $('.msg_list ul li').unbind('click').bind('click',function () {
+           console.log(111);
+           var _url = $(this).attr("data-url");
+           location.href = _url;
+       })*/
+    document.querySelectorAll('li').addEventListener('click',function () {
+        alert(2);
+    },false)
+       /*$('.msg_list ul li').live('click','li',function(){
+           alert(1);
+       })*/
+    
+    // 删除
+    $('.msg_list ul li button').click(function(e){
+        e.stopPropagation();
+        var _this = $(this);
+        var _index = _this.attr('data-id');    // 删除哪条
+        $.ajax({
+            url: "/user/inbox_del",
+            data:{ids:[_index]},
+            dataType:'json',
+            type:'POST',
+            success:function (data) {
+                mui.toast(data.msg);
+                if(data.code == '1'){
+                     _this.parent('li').animate({
+                           height:0
+                    },300,function () {
+                           $(this).remove()
+                    });    
+                }
+            },
+            error:function (error) {
+                console.log(error);
+                alert('ajax error');
+            }
+        })
+    });
+
+    // 写邮件
+    $('.charge_pay button').click(function(){
+        location.href = 'msg_send.html';
+    })
+
+</script>
+{/block}

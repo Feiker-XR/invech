@@ -1,0 +1,62 @@
+<?php
+
+return $config = [
+    //log目录
+    'logPath'           => RUNTIME_PATH . '/swoole-jobs/log',
+    'logSaveFileApp'    => 'application.log', //默认log存储名字
+    'logSaveFileWorker' => 'crontab.log', // 进程启动相关log存储名字
+    'pidPath'           => RUNTIME_PATH . '/swoole-jobs/log',
+    'sleep'             => 2, // 队列没消息时，暂停秒数
+    'maxPopNum'         => 1,
+    'processName'       => ':swooleTopicQueueTp5', // 设置进程名, 方便管理, 默认值 swooleTopicQueue
+    //job任务相关
+    'job'         => [
+        'topics'  => [
+            
+            //测试队列
+            //['name'=>'test2', 'workerMinNum'=>1, 'workerMaxNum'=>1,],
+            //['name'=>'admin_action','workerMinNum'=>1, 'workerMaxNum'=>1,]
+
+            //userinfo队列,user.money,user.order等用户信息推送
+            //['name'=>'userinfo', 'workerMinNum'=>1, 'workerMaxNum'=>1,],
+            //lrange "queues:userinfo" 0 10 
+                        
+            //'test2'和app\queue的队列名一致;            
+            ['name'=>'lottery', 'workerMinNum'=>1, 'workerMaxNum'=>1],
+        ],
+        // redis
+        'queue'   => [
+            //'class'    => '\Kcloze\Jobs\Queue\RedisTopicQueue',
+            'class'    => 'bong\service\queue\Driver\RedisQueue',
+            'host'     => '127.0.0.1',
+            'port'     => 6379,
+            //'password'=> 'pwd',
+        ],
+
+        // rabbitmq
+        // 'queue'   => [
+        //     'class'         => '\Kcloze\Jobs\Queue\RabbitmqTopicQueue',
+        //     'host'          => '192.168.9.24',
+        //     'user'          => 'phpadmin',
+        //     'pass'          => 'phpadmin',
+        //     'port'          => '5671',
+        //     'vhost'         => 'php',
+        //     'exchange'      => 'php.amqp.ext',
+        // ],
+
+   ],
+   //框架类型及装载类
+   'framework' => [
+       //可以自定义，但是该类必须继承\Kcloze\Jobs\Action\BaseAction
+       //'class'=> '\Kcloze\Jobs\Action\ThinkPHP5Action',
+      'class'    => 'bong\service\queue\SwooleJobAction',    
+   ],
+
+   //阿里巴巴钉钉接口,用于积压队列提醒
+   /*
+   'message'=> [
+       'class'  => '\Kcloze\Jobs\Message\DingMessage',
+       'token'  => '***your-dingding-token***',
+   ],
+    */
+];

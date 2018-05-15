@@ -1,0 +1,851 @@
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title></title>
+    <link rel="stylesheet" href="/static/theme/sscTheme/theme1/css/cabel-v1.css?v=20170206" type="text/css">
+    <link rel="stylesheet" href="/static/theme/sscTheme/theme1/css/style.css?v=201709061" type="text/css"><!--页面CSS-->
+    <link rel="stylesheet" href="/static/theme/sscTheme/theme1/css/animate.min.css?v=20170206" type="text/css"><!--CSS3动画-->
+    <link rel="stylesheet" href="/static/theme/sscTheme/theme1/css/lottery.css?v=2017091266" type="text/css"><!--页面CSS-->
+    <link rel="stylesheet" href="/static/theme/sscTheme/theme1/css/liMarquee.css?v=20170206" type="text/css"><!--页面CSS-->
+    <link rel="stylesheet" href="/static/theme/sscTheme/theme1/jRange/jquery.range.css?v=20170402" type="text/css">
+    <link rel="stylesheet" href="/static/theme/sscTheme/theme1/css/global.css?v=2.0" type="text/css"><!--页面CSS-->
+    <link rel="stylesheet" href="/static/theme/sscTheme/theme1/css/other.css?v=20170817" type="text/css"><!--页面CSS-->
+    <link rel="stylesheet" href="/static/theme/sscTheme/theme1/css/gfwf.css?v=201709021" type="text/css"><!--页面CSS-->
+   <script>
+    <!--
+    // 屏蔽JS错误
+//    window.onerror = function(){return true;}
+    // -->
+</script>
+<script>
+    var CONFIG = {
+        BASEURL: "/",    // 根路径
+        RESURL: "/static/theme/sscTheme/theme1/"         // 资源路径
+    };
+</script>
+<script src="/static/theme/sscTheme/theme1/js/mobile-detect.min.js"></script><style>
+        a:hover{
+            color: red;
+
+        }
+        a:active{
+            color:deepskyblue;
+        }
+    </style>
+    <script>
+    var fengge1 = 'f42023';
+</script>
+<style>
+
+        .reResulttBg{background: #f42023;} 
+        .process .layout .monty ul li,.process .layout .list_tems .date:after,.list ul li .slide p.acti,.headmemberbg{background: #f42023;}
+        .process .layout .list_tems .date span, .process .layout .list_tems .date h3,.eveb_amount span,.color-e77c3c,.eveb_setting_table a,.xieyiCss，.gcdtgd{color: #f42023!important;}
+        .eveb_sub_nav_type a:hover, .eveb_sub_nav_type li.on a:link, .eveb_sub_nav_type li.on a:visited{color: #f42023!important;font-weight: 700;border-bottom-color: #e1e1e1;background: #f8f8f8;}
+        .list ul li .slide p:hover,.letterbtn-bg{background: #f42023!important;color: white;}
+        .list h3 a{background: #f42023;border-bottom: 3px solid #a92309; height: 47px; line-height: 47px;}
+        .help_l_menu li .t.sli{border-left: 5px solid #f42023;}
+        .withdraw-bg-input{border: 2px solid #f42023!important;}
+        .clearBet_template .l span i{background: #f42023 url(/static/theme/sscTheme/theme1//img/tm-mdl-icon.png) no-repeat!important; border-radius: 50%;background-position: 0 41%!important;}
+
+
+
+        .eveb_nav_sub .on,.button_1, .button_1:link, .button_1:visited,.alert_col h5,.onlineService,.layui-layer-popup .layui-layer-title,.xzqd,.xzqdlskj,.game_name .box2_stage p span i.acti,.Betting,.Single,.list_ject ul li .Result p a.acti,.list_ject ul li .Result p a.acti:hover,.top{background:#f42023!important}
+        .eveb_nav_sub .on a,.bankInfo .name,.help_l_menu .title p .sum,.help_r_main .light,.game_name .box2_stage p span i,.game_name .box1_name  p i,.Account p a.red{color:#f42023!important}
+        .eveb_nav_sub .on,.game_name .box2_stage p span{border:1px solid #f42023!important;}
+        .eveb_nav_sub .on,.game_name .box2_stage p span i.acti{color:#fff!important;}
+        .eveb_nav_sub .on a{border-top:1px #f42023 solid!important;}
+        .eveb_nav_sub ul{border-bottom:1px #f42023 solid!important;}
+        #apptop{background: #f42023}
+        .alert_col div::-webkit-scrollbar-thumb {background-color: #f42023!important;}
+    </style>
+<style>
+
+
+        .head div h5,.Betting .tabs ul li,.top .nav h1{background:#d51910!important}
+        .jf_box .url a,.eveb_form label.error,.eveb_transfer_box .center_wallet .money,.eveb_transfer_box .wallet_list li p{color:#d51910!important}
+        .Betting .tabs ul li.acti{background:#fff!important}
+        .button_1, .button_1:link, .button_1:visited{border:1px solid #d51910!important;}
+    </style>
+</head>
+<body>
+<style>body {overflow: hidden;}</style>
+<style>
+    .menu_left .list_menu ul li  .down a{
+        /*display:none*/
+        padding-left: 20px;
+    }
+
+    .lottery-dis {
+        cursor: not-allowed;
+    }
+    
+    .playGroupId_6{display:block!important}
+    
+    .playGroupId_5{display:block!important}
+    
+    .playGroupId_4{display:block!important}
+    
+    .playGroupId_9{display:block!important}
+    
+    .playGroupId_23{display:block!important}
+    
+    .playGroupId_14{display:block!important}
+    
+    .playGroupId_1{display:block!important}
+    
+    .playGroupId_3{display:block!important}
+    
+    .playGroupId_19{display:block!important}
+    
+    .playGroupId_10{display:block!important}
+    
+    .playGroupId_11{display:block!important}
+    
+    .playGroupId_7{display:block!important}
+    
+    .playGroupId_8{display:block!important}
+    
+    .playGroupId_15{display:block!important}
+    
+    .playGroupId_16{display:block!important}
+    
+    .playGroupId_13{display:block!important}
+    
+    .playGroupId_17{display:block!important}
+    
+    .playGroupId_24{display:block!important}
+    </style>
+<div class="menu_left">
+    <div class="logo">
+        <img src="/images/861" onclick="window.location.href='/'"  class="gcdt_img" style="cursor:pointer">
+        <a href="javascript:void(0)"></a>
+    </div>
+    <div class="list_menu">
+        <ul>
+            <li class="show">
+                <h2><a href="javascript:void(0)" onclick="getPageNew('/ssc/gcdt.html')"><span><div
+                        class="pict"><var><img src="/static/theme/sscTheme/theme1/img/ico3.png"></var></div></span><b>购彩大厅</b></a>
+                </h2>
+                <a class="Refresh"></a>
+            </li>
+            <li class="show">
+                <h2 class="open"><span><div class="pict"><var><img src="/static/theme/sscTheme/theme1/img/ico5.png"></var></div></span><b>热门彩种</b><i class="show"></i></h2>
+                <div class="down hot-lottery" style="display: block;">
+                    <div class="inner-menu">
+                        {foreach($lotteryType as $ltKey => $ltValue)}
+                        <h3 class="head-ssc"><img src="/static/theme/sscTheme/theme1/img/lottery_type_{$ltKey}.png"><var>{$ltValue}</var><i></i></h3>
+                        <div class="xl-down xHide">
+                            {if(array_key_exists($ltKey, $hotLottery))}
+                                {foreach($hotLottery[$ltKey] as $hlItem)}
+                            <a class="playGroupId_{$hlItem['id']}" href="javascript:void(0)" onclick="getSscPage('{$hlItem.id}')"><img src="/images/game/{$hlItem['id']}.png"><var>{$hlItem['title']}</var></a>
+                                {/foreach}
+                            {else}
+                            <a class="lottery-dis" href="javascript:void(0)"><img src="/static/theme/sscTheme/theme1/img/ffssc.png"><var>该彩票类正在维护中...</var></a>
+                            {/if}
+                        </div>
+                        {/foreach}
+                    </div>
+                </div>
+            </li>
+            <li class="show">
+                <h2><span><div class="pict"><var><img src="/static/theme/sscTheme/theme1/img/ico8.png"></var></div></span><b>高频彩</b><i></i></h2>
+                <div class="down">
+                    <a class="playGroupId_9" href="javascript:void(0)" onclick="getSscPage('pk10')"><img src="/static/theme/sscTheme/theme1/img/ico18.png"><var>北京PK10</var></a>
+                    <a class="playGroupId_23" href="javascript:void(0)" onclick="getSscPage('jspk10')"><img src="/static/theme/sscTheme/theme1/img/jspk10.png"><var>极速PK10</var></a>
+                    <a class="playGroupId_14" href="javascript:void(0)" onclick="getSscPage('xyft')"><img src="/static/theme/sscTheme/theme1/img/xyft.png"><var>幸运飞艇</var></a>
+                    <a class="playGroupId_15" href="javascript:void(0)" onclick="getSscPage('ffssc')"><img src="/static/theme/sscTheme/theme1/img/ffssc.png"><var>分分时时彩</var></a>
+                    <a class="playGroupId_1" href="javascript:void(0)" onclick="getSscPage('cqssc')"><img src="/static/theme/sscTheme/theme1/img/ico16.png"><var>重庆时时彩</var></a>
+                    <a class="playGroupId_2" href="javascript:void(0)" onclick="getSscPage('tjssc')"><img src="/static/theme/sscTheme/theme1/img/ico27.png"><var>天津时时彩</var></a>
+                    <a class="playGroupId_3" href="javascript:void(0)" onclick="getSscPage('xjssc')"><img src="/static/theme/sscTheme/theme1/img/ico28.png"><var>新疆时时彩</var></a>
+                    <a class="playGroupId_18" href="javascript:void(0)" onclick="getSscPage('jsk3')"><img src="/static/theme/sscTheme/theme1/img/jsk3.png"><var>江苏快3</var></a>
+                    <a class="playGroupId_19" href="javascript:void(0)" onclick="getSscPage('hbk3')"><img src="/static/theme/sscTheme/theme1/img/hbk3.png"><var>湖北快3</var></a>
+                    <a class="playGroupId_20" href="javascript:void(0)" onclick="getSscPage('ahk3')"><img src="/static/theme/sscTheme/theme1/img/ahk3.png"><var>安徽快3</var></a>
+                    <a class="playGroupId_21" href="javascript:void(0)" onclick="getSscPage('jlk3')"><img src="/static/theme/sscTheme/theme1/img/jlk3.png"><var>吉林快3</var></a>
+                    <a class="playGroupId_10" href="javascript:void(0)" onclick="getSscPage('xync')"><img src="/static/theme/sscTheme/theme1/img/ico29.png"><var>重庆幸运农场</var></a>
+                    <a class="playGroupId_11" href="javascript:void(0)" onclick="getSscPage('klsf')"><img src="/static/theme/sscTheme/theme1/img/ico26.png"><var>广东快乐十分</var></a>
+                    <a class="playGroupId_7" href="javascript:void(0)" onclick="getSscPage('bj28')"><img src="/static/theme/sscTheme/theme1/img/ico30.png"><var>北京28</var></a>
+                    <a class="playGroupId_8" href="javascript:void(0)" onclick="getSscPage('kl8')"><img src="/static/theme/sscTheme/theme1/img/ico25.png"><var>北京快乐8</var></a>
+                    <a class="playGroupId_16" href="javascript:void(0)" onclick="getSscPage('efssc')"><img src="/static/theme/sscTheme/theme1/img/efssc.png"><var>两分时时彩</var></a>
+                    <a class="playGroupId_13" href="javascript:void(0)" onclick="getSscPage('sfssc')"><img src="/static/theme/sscTheme/theme1/img/sfssc.png"><var>三分时时彩</var></a>
+                    <a class="playGroupId_17" href="javascript:void(0)" onclick="getSscPage('wfssc')"><img src="/static/theme/sscTheme/theme1/img/wfssc.png"><var>五分时时彩</var></a>
+                    <a class="playGroupId_24" href="javascript:void(0)" onclick="getSscPage('gd11x5')"><img src="/static/theme/sscTheme/theme1/img/gd11x5.png"><var>广东11选5</var></a>
+                    <!--<a href="javascript:void(0)" onclick="getSscPage('sflhc')"><img src="/static/theme/sscTheme/theme1/img/sflhc.png"><var>十分六合彩</var></a>-->
+                </div>
+            </li>
+            <li class="show">
+                <h2><span><div class="pict"><var><img src="/static/theme/sscTheme/theme1/img/ico9.png"></var></div></span><b>低频彩</b><i></i></h2>
+                <div class="down">
+                    <a class="playGroupId_6" href="javascript:void(0)" onclick="getSscPage('lhc')"><img src="/static/theme/sscTheme/theme1/img/ico17.png"><var>香港六合彩</var></a>
+                    <a class="playGroupId_5" href="javascript:void(0)" onclick="getSscPage('fc3d')"><img src="/static/theme/sscTheme/theme1/img/ico24.png"><var>福彩3D</var></a>
+                    <a class="playGroupId_4" href="javascript:void(0)" onclick="getSscPage('pl3')"><img src="/static/theme/sscTheme/theme1/img/ico20.png"><var>体彩排列3</var></a>
+                    <a class="playGroupId_12" href="javascript:void(0)" onclick="getSscPage('ssq')"><img src="/static/theme/sscTheme/theme1/img/ico01.png"><var>双色球</var></a>
+                </div>
+            </li>
+            <li>
+                <h2><a href="/?u=/kjjg.html" target="_blank"><span><div class="pict"><var><img
+                        src="/static/theme/sscTheme/theme1/img/ico10.png"></var></div></span><b>开奖结果</b><i></i></a></h2>
+            </li>
+            <li>
+                <h2><a href="javascript:void(0)" onclick="getZstPage()"><span><div class="pict"><var><img
+                        src="/static/theme/sscTheme/theme1/img/ico12.png"></var></div></span><b>走势图表</b><i></i></a></h2>
+            </li>
+            <li>
+                <h2><a href="https://m.400w.am" target="_blank"><span><div class="pict"><var><img src="/static/theme/sscTheme/theme1/img/ico15.png"></var></div></span><b>手机购彩</b><i></i></a></h2>
+            </li>
+
+        </ul>
+    </div>
+</div>
+<!--menu_left-->
+<div class="con_right">
+    <div class="top">
+        <div class="news">
+            <img src="/static/theme/sscTheme/theme1/img/ico1.png">
+            <ul>
+                <li><a onclick="showGonggao(1)" href="javascript:void(0)">银行卡转账账户变更通知</a></li>
+                <li><a onclick="showGonggao(2)" href="javascript:void(0)">银行卡转账账户变更通知</a></li>
+                <li><a onclick="showGonggao(3)" href="javascript:void(0)">公告</a></li>
+                </ul>
+        </div>
+        <div class="nav">
+            <h1>网址导航<i></i></h1>
+            <div class="downte">
+                <ul>
+                    <li>
+                        <h2><a href="https://f18.livechatvalue.com/chat/chatClient/chatbox.jsp?companyID=881265&configID=73958&jid=4674187711&s=1" target="_blank">在线客服</a></h2>
+                        <p>
+                            <a href="/index/register" target="_blank" class="a0">免费注册</a>
+                            <a href="javascript:void(0)" onclick="openHyzx('#/pay/index')" target="_blank">账户充值</a>
+                            <a href="javascript:void(0)" onclick="getPage('/ssc/gcdt.html')">彩票购买</a>
+                        </p>
+                    </li>
+                    <li>
+                        <h2><a href="/?u=/help/index.html" target="_blank">帮助中心</a></h2>
+                        <p>
+                            <a href="/?u=/help/index.html?module=rule/cqssc" target="_blank">彩种介绍</a>
+                            <a href="/?u=/help/index.html?module=question"
+                               target="_blank">功能指引</a>
+                            <a href="/?u=/help/index.html?module=question"
+                               target="_blank">常见问题</a>
+                            <a href="/?u=/help/index.html?module=question"
+                               target="_blank">热点问题</a>
+                            <a href="/?u=/help/index.html?module=question"
+                               target="_blank">兑奖/领奖</a>
+                        </p>
+                    </li>
+                    <li>
+                        <h2><a href="javascript:void(0)" onclick="openHyzx('#/user/main')" target="_blank">会员中心</a></h2>
+                        <p>
+                            <a href="javascript:void(0)" onclick="openHyzx('#/pay/index')" target="_blank">账户充值</a>
+                            <a href="javascript:void(0)" onclick="openHyzx('#/user/withdraw')" target="_blank">快速提款</a>
+                            <a href="javascript:void(0)" onclick="openHyzx('#/user/withdraw_record')" target="_blank">记录查询</a>
+                            <a href="javascript:void(0)" onclick="openHyzx('#/user/info')" target="_blank">账户设置</a>
+                            <a href="javascript:void(0)" onclick="openHyzx('#/user/agent')" target="_blank">我的推广</a>
+                        </p>
+                    </li>
+                    <li>
+                        <h2><a href="/" target="_blank">首页</a></h2>
+                        <p>
+                            <a href="javascript:void(0)" onclick="getPageNew('/ssc/gcdt.html')">购彩大厅</a>
+                            <a href="/?u=/kjjg.html" target="_blank">开奖结果</a>
+                            <a href="javascript:void(0)" onclick="getZstPage()">走势图表</a>
+                            <a href="/?u=/yhhd.html" target="_blank">优惠活动</a>
+                            <a href="https://m.400w.am" target="_blank">手机购彩</a>
+                        </p>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+    <div class="Account">
+    	{if($user)}
+    		<p>账号：<i class="i0">{$user->nickname}</i>
+        	<span>余额：<i class="i1">￥{$user->coin}</i></span>
+        	<span><a href="javascript:void(0)" onclick="openHyzx('#/pay/index')">充值提现</a>  |  <a href="javascript:void(0)" onclick="openHyzx('#/user/main')" target="_blank">会员中心</a>  |  <a href="javascript:void(0)" onclick="openHyzx('#/user/bet_record')">投注记录</a>  |  <a href="https://f18.livechatvalue.com/chat/chatClient/chatbox.jsp?companyID=881265&configID=73958&jid=4674187711&s=1" target="_blank">在线客服</a>  |  <a href="javascript:void(0)"  onclick="openHyzx('#/user/inbox')">最新消息</a>  |  <a href="javascript:void(0)" onclick="window.location='/user/logout'" class="red">退出登录</a>  |</span></p>
+    	{else}
+    		<div class="state">
+			    <form id="loginForm" onsubmit="ajaxLogin();return false;">
+					<ul>
+			            <li><input type="text" placeholder="会员名" name="account"></li>	
+			            <li><input type="password" placeholder="密码" name="password"></li>	
+			        	<li><input type="text" placeholder="验证码" onfocus="refreshYzm(document.getElementById(\'yzmImg\'))" name="yzm" class="short"><img id="yzmImg" width="45px" height="20px" onclick="refreshYzm(this)" src="/indexcaptcha/get_captcha/id/login.html"></li>	
+			        	</ul>	
+			        <div class="buton">	
+			        	<button type="submit">登录</button>
+			        	<p>	
+			        	<a href="/?u=/register.html" target="_blank">会员注册</a>|	
+			        	<a href="https://f18.livechatvalue.com/chat/chatClient/chatbox.jsp?companyID=881265&configID=73958&jid=4674187711&s=1" target="_blank">忘记密码？</a>	
+			        	</p>
+			      	</div>
+			      </form>		
+        	</div>	
+    	{/if}
+    </div>
+    <iframe id="rightContent" src="" frameborder="0" marginheight="0" marginwidth="0" frameborder="0" scrolling="auto" name="ifm" width="100%" style="overflow-x:hidden;"></iframe>
+</div>
+<div class="alert hide" id="gonggao_1">
+        <div class="alert_col">
+            <h5><span>公告</span><i>×</i></h5>
+            <h2>银行卡转账账户变更通知</h2>
+            <div>尊敬的会员玩家，您好！公司的入款账号：建设银行-【张杨超】，已停用，无法查收玩家的款项，请您入款时查看最新的公司入款账号进行入款，以免造成不必要的损失及误解，给您带来不便，请您多多谅解哦，谢谢</div>
+            <h4></h4>
+            <h4 style="margin-top:15px">2018-01-30 15:24:54</h4>
+        </div>
+    </div>
+<div class="alert hide" id="gonggao_2">
+        <div class="alert_col">
+            <h5><span>公告</span><i>×</i></h5>
+            <h2>银行卡转账账户变更通知</h2>
+            <div>尊敬的会员玩家，您好！公司的入款账号：建设银行-【余精灵】，已停用，无法查收玩家的款项，请您入款时查看最新的公司入款账号进行入款，以免造成不必要的损失及误解，给您带来不便，请您多多谅解哦，谢谢</div>
+            <h4></h4>
+            <h4 style="margin-top:15px">2018-01-27 12:16:01</h4>
+        </div>
+    </div>
+<div class="alert hide" id="gonggao_3">
+        <div class="alert_col">
+            <h5><span>公告</span><i>×</i></h5>
+            <h2>公告</h2>
+            <div>敬请会员留意！目前【微信/支付宝】扫码付款已恢复存款；单笔最高50000；感谢您长期以来的大力支持与肯定！烦请互相转告通知！
+</div>
+            <h4></h4>
+            <h4 style="margin-top:15px">2017-08-16 15:06:27</h4>
+        </div>
+    </div>
+<script type="text/javascript" src="/static/theme/sscTheme/theme1/js/jquery.min.js?v=2017"></script><!--jQuery库-->
+<script type="text/javascript" src="/static/theme/sscTheme/theme1/js/scrollanim.min.js?v=2017"></script> <!--"动画库"-->
+<script src="/static/theme/sscTheme/theme1/js/type.js?v=2017"></script><!--自定义封装函数-->
+<script src="/static/theme/sscTheme/theme1/js/global.js?v=201801026"></script><!--自定义封装函数-->
+<script src="/static/theme/sscTheme/theme1/js/jquery.cookie.js?v=2017"></script><!--自定义封装函数-->
+<script src="/static/theme/sscTheme/theme1/js/jquery.md5.js?v=2017"></script><!--自定义封装函数-->
+<script src="/static/theme/sscTheme/theme1/layer/layer.js?v=2017"></script>
+<script src="/static/theme/sscTheme/theme1/js/jquery.nicescroll.js?v=2017"></script>
+<script src="/static/theme/sscTheme/theme1/js/dateFormat.js?v=2017"></script>
+<script src="/static/theme/sscTheme/theme1/js/template.js?v=2017"></script>
+<script src="/static/theme/sscTheme/theme1/js/swfobject/swfobject.js?v=2017"></script>
+<script src="/static/theme/sscTheme/theme1/js/jquery.liMarquee.js?v=2017"></script>
+<script src="/static/theme/sscTheme/theme1/js/placeholders.jquery.min.js?v=2017"></script>
+<script src="/static/theme/sscTheme/theme1/jRange/jquery.range-min.js?v=2017"></script>
+<script>
+    // 生肖号码计算
+    var json = [{"name":"鼠","numList":[11,23,35,47]},{"name":"鸡","numList":[2,14,26,38]},{"name":"猴","numList":[3,15,27,39]},{"name":"龙","numList":[7,19,31,43]},{"name":"兔","numList":[8,20,32,44]},{"name":"马","numList":[5,17,29,41]},{"name":"狗","numList":[1,13,25,37,49]},{"name":"猪","numList":[12,24,36,48]},{"name":"羊","numList":[4,16,28,40]},{"name":"牛","numList":[10,22,34,46]},{"name":"蛇","numList":[6,18,30,42]},{"name":"虎","numList":[9,21,33,45]}];
+    var sxArr = [];
+    for (var i = 0; i < json.length; ++i) {
+        var o = json[i];
+        sxArr.push({
+            name: o.name,
+            number: o.numList
+        });
+    }
+</script>
+<script>
+    // 闪烁
+    var blinkColorArr = "#fa6200|#0f3f94".split("|");
+    $(".blink").each(function() {
+        var obj = $(this);
+        setInterval(function() {
+            var tmpColor = blinkColorArr[parseInt(Math.random() * blinkColorArr.length)];
+            $(obj).css("color", tmpColor);
+        },200);
+    });
+
+
+
+    $(function() {
+        // 底部信息调用
+        function ajaxGetDbxx() {
+            ajaxRequest({
+                url: CONFIG.BASEURL + "ajaxGetWebInfo.json",
+                success: function (json) {
+                    if (json.result != 1) {
+                        return;
+                    }
+                    $(".webDbxx").html(json.webDbxx);
+                }
+            });
+        }
+
+        if ($(".webDbxx").length > 0) {
+            ajaxGetDbxx();
+        }
+    });
+
+
+</script><script>
+    function getZstPage(module){
+        if (typeof module == 'undefined') {
+            module = 'index';
+        }
+        windowOpenBlank('/ssc/index.html?module=zst/' + module);
+    }
+
+    function showGonggao(id) {
+        $("#gonggao_" + id).show();
+    }
+
+    $(function () {
+        $('.alert_col h5 i').click(function () {
+            $('.alert').hide();
+        });
+
+        newRoll(".top .news ul li");
+
+        var module = 'null';
+        var navIndex = '';
+        var nums = '';
+        var caizhong = '';
+        var type = '';
+        var money = '';
+
+        if (typeof module == 'undefined' || module == 'null' || !module || module == '') {
+            var u = parent.urlGcdt;
+            if (typeof u == 'undefined' || null == u || u == 'undefined') {
+                u = '/ssc/gcdt.html';
+            } else {
+                u = parent.urlGcdt;
+            }
+            getPageNew(u);
+        } else if (module == 'zstIndex') {
+            getPage('/ssc/zst/index.html');
+        } else if (module == 'xyxh') {
+            getPage('/ssc/gcdt/' + caizhong + '.html?navIndex=' + navIndex + '&nums=' + nums + '&money=' + money);
+        } else if (module == 'xyxh_shou') {
+            getPage('/ssc/gcdt/' + caizhong + '.html?navIndex=' + navIndex);
+        } else {
+            getPage('/ssc/' + module + '.html');
+        }
+    });
+    function resize() {
+        dropmove(".Single .layout .add_spot .left .sopt_wrap .slide_sp p var", ".Single .layout .add_spot .left .sopt_wrap .slide_sp p")
+    }
+    function dropmove(down, move) {
+        $(down).mousedown(function () {
+            $(move).mousemove(function (e) {
+                var t = $(this).offset().left;
+
+                if (e.pageX - t <= $(move).width() - 8) {
+                    var tee = e.pageX - t - 10;
+                    $(this).find("span").css("width", tee + "px");
+                    $(this).find("var").css("left", tee + "px");
+                    $(".Single .layout .add_spot .left .sopt_wrap .slide_sp i var").text((190989.6235 * tee).toFixed(2));
+                    $(move).unbind("hover");
+                }
+            })
+        });
+        $(move).mouseup(function () {
+            $(move).unbind("mousemove");
+        });
+        $(down).mouseup(function () {
+            $(move).unbind("mousemove");
+        });
+        $(move).hover(function () {
+
+        }, function () {
+            $(move).unbind("mousemove");
+        });
+
+        numadd(".Single .layout .add_spot .left .sopt_wrap .reduce a", ".Single .layout .add_spot .left .sopt_wrap .reduce a.fl", ".Single .layout .add_spot .left .sopt_wrap .reduce a.fr")
+        down_drop(".Single .layout .add_spot .left .sopt_wrap .down .down_menu i", ".Single .layout .add_spot .left .sopt_wrap .down span", ".down_menu");
+        tabs_cg(".Betting .tabs ul li", ".Betting .list_wrap", "click", "acti", "", "");
+
+        var hei = document.height;
+
+
+        autow();
+    }
+    $(window).resize(function () {
+        resize(false);
+    });
+    function resize(isAnimate) {
+        autoHeight();
+        var winWidth = $(window).width();
+        var leftWidth, rightWidth;
+        if ($(window).width() < 1250) {
+            leftWidth = 40;
+            rightWidth = winWidth - leftWidth;
+        } else {
+            leftWidth = 250;
+            rightWidth = winWidth - leftWidth;
+        }
+        if (rightWidth < 1000) {
+            rightWidth = 1000;
+        }
+        bodyResize(leftWidth, rightWidth);
+        if (leftWidth <= 40) {
+            minLeftMenu(leftWidth, isAnimate);
+        } else {
+            maxLeftMenu(leftWidth, isAnimate);
+        }
+        rightResize(rightWidth, isAnimate);
+    }
+    $(function () {
+        resize();
+        getUserSession();
+
+//        $("#rightContent").niceScroll({
+//            cursorcolor:"#3f3f3f",
+//            cursoropacitymax:1,
+//            touchbehavior:false,
+//            cursorwidth:"10px",
+//            cursorborder:"0",
+//            cursorborderradius:"10px",
+//            autohidemode:false
+//        });
+//
+        $(".menu_left").niceScroll({
+            cursorcolor: "#3f3f3f",
+            cursoropacitymax: 1,
+            touchbehavior: false,
+            cursorwidth: "0px",
+            cursorborder: "0",
+            cursorborderradius: "0px",
+            autohidemode: false
+        });
+
+        $(".menu_left .list_menu ul li.show h2").click(function () {
+            if ($(this).hasClass("open")) {
+                $(this).removeClass("open");
+                $(this).parent().find('.down').slideUp();
+                $(this).find("i").removeClass("show");
+                return;
+            }
+
+            $(".menu_left .list_menu ul li.show h2.open i.show").removeClass("show");
+            $(".menu_left .list_menu ul li.show h2.open").parent().find(".down").slideUp();
+            $(".menu_left .list_menu ul li.show h2.open").removeClass("open");
+
+            $(this).addClass("open");
+            $(this).find("i").addClass("show");
+            $(this).parent().find('.down').slideDown();
+        });
+
+
+        $(".menu_left .list_menu ul li .inner-menu h3").click(function () {
+            if ($(this).hasClass("open")) {
+                $(this).removeClass("open");
+                $(this).next().slideUp();
+                $(this).find("i").removeClass("reshow");
+                return;
+            }
+
+            $(".menu_left .list_menu ul li .inner-menu h3.open i").removeClass("reshow");
+            $(".menu_left .list_menu ul li .inner-menu h3.open").next().slideUp();
+            $(".menu_left .list_menu ul li .inner-menu h3.open").removeClass("open");
+
+            $(this).addClass("open");
+            $(this).find("i").addClass("reshow");
+            $(this).next().slideDown();
+        });
+
+        // 点击菜单收缩按钮
+        $(".menu_left .logo a").click(function () {
+            if ($(this).attr("opent") == "1") {
+                // 开
+                var winWidth = $(window).width();
+                var leftWidth, rightWidth;
+                leftWidth = 250;
+                rightWidth = winWidth - leftWidth;
+                if (rightWidth < 1000) {
+                    rightWidth = 1000;
+                }
+                maxLeftMenu(leftWidth, true);
+                rightResize(rightWidth, true);
+                $(this).attr("opent", "0");
+                bodyResize(leftWidth, rightWidth);
+                // 给二级菜单里面的 标签减padding
+                setTimeout(function(){
+                    $(' .menu_left .list_menu ul li  .down a').css({paddingLeft: '20px'})
+                }, 400)
+            } else {
+                // 关
+                var winWidth = $(window).width();
+                var leftWidth, rightWidth;
+                leftWidth = 40;
+                rightWidth = winWidth - leftWidth;
+                if (rightWidth < 1000) {
+                    rightWidth = 1000;
+                }
+                minLeftMenu(leftWidth, true);
+                rightResize(rightWidth, true);
+                $(this).attr("opent", "1");
+                // 给二级菜单里面的 标签加padding
+                setTimeout(function(){
+                    $(' .menu_left .list_menu ul li  .down a').css({paddingLeft: '0'})
+                }, 400)
+            }
+        })
+    });
+
+
+
+    function autoHeight() {
+        var rightContentHeight = $(window).height() - 100;
+        $("#rightContent").css("height", rightContentHeight + "px");
+        var leftContentHeight = $(window).height();
+        $(".menu_left").css("height", leftContentHeight + "px");
+    }
+    function bodyResize(leftWidth, rightWidth) {
+        $("body").css("width", leftWidth + rightWidth + "px");
+    }
+    function rightResize(rightWidth, isAnimate) {
+        if (rightWidth < 1000) {
+            rightWidth = 1000;
+            isAnimate = false;
+        }
+
+        if (isAnimate) {
+            $(".con_right, #rightContent, .con_right .top, .con_right .Account").animate({"width": rightWidth + "px"}, 400, function () {
+            });
+        } else {
+            $(".con_right, #rightContent, .con_right .top, .con_right .Account").css("width", rightWidth + "px");
+        }
+    }
+    function minLeftMenu(leftWidth, isAnimate) {
+        $(".menu_left .logo img").hide();
+        $(".menu_left .list_menu ul li a.Refresh").hide();
+        //热门菜单中的子菜单
+        $(".menu_left .list_menu ul li .inner-menu h3 i").hide();
+        $(".menu_left .list_menu ul li .inner-menu h3 var").hide();
+        $(".menu_left .list_menu ul li .inner-menu h3 img").addClass('menusuox');
+        $(".menu_left .list_menu ul li .inner-menu h3").addClass('menusuox-h3');
+
+
+        $(".menu_left").addClass("add_menu");
+        if (isAnimate) {
+            $(".menu_left").animate({"width": leftWidth + "px"}, 400, function () {
+            });
+        } else {
+            $(".menu_left").css("width", leftWidth + "px");
+        }
+        $(".menu_left .logo a").attr("opent", "1");
+    }
+    function maxLeftMenu(leftWidth, isAnimate) {
+        if (isAnimate) {
+            $(".menu_left").animate({"width": leftWidth + "px"}, 400, function () {
+                $(".menu_left .logo img").show();
+                $(".menu_left").removeClass("add_menu");
+                $(".menu_left .list_menu ul li a.Refresh").show();
+
+                $(".menu_left .list_menu ul li .inner-menu h3 i").show();
+                $(".menu_left .list_menu ul li .inner-menu h3 var").show();
+                $(".menu_left .list_menu ul li .inner-menu h3 img").removeClass('menusuox');
+                $(".menu_left .list_menu ul li .inner-menu h3").removeClass('menusuox-h3');
+            });
+        } else {
+            $(".menu_left").css("width", leftWidth + "px");
+            $(".menu_left .logo img").show();
+            $(".menu_left").removeClass("add_menu");
+            $(".menu_left .list_menu ul li a.Refresh").show();
+
+            $(".menu_left .list_menu ul li .inner-menu h3 i").show();
+            $(".menu_left .list_menu ul li .inner-menu h3 var").show();
+            $(".menu_left .list_menu ul li .inner-menu h3 img").removeClass('menusuox');
+            $(".menu_left .list_menu ul li .inner-menu h3").removeClass('menusuox-h3');
+        }
+        $(".menu_left .logo a").attr("opent", "0");
+    }
+    function autow(tee, isAnimal) {
+        var leftWidth = tee ? tee : Tools.parseInt($(".menu_left").width());
+        var rightWidth = $(window).width() - leftWidth;
+        if (rightWidth < 1000) {
+            rightWidth = 1000;
+        }
+        $(".con_right").css("height", $(window).height() + "px");
+        if (isAnimal) {
+            $(".con_right, #rightContent, .con_right .top, .con_right .Account").animate({"width": rightWidth + "px"}, 400, function () {
+            });
+            console.log(isAnimal);
+        } else {
+            $(".con_right, #rightContent, .con_right .top, .con_right .Account").css("width", rightWidth + "px");
+            console.log('w');
+        }
+
+    }//结束
+
+    function showLoading() {
+        layer.load(2, {
+            shade: [0.1, '#000'] //0.1透明度的白色背景
+        })
+    }
+
+    function hideLoading() {
+        layer.closeAll();
+    }
+
+    function getPage(url) {
+//        showLoading();
+        $("#rightContent").attr("src", url);
+    }
+
+    function getPageNew(url) {
+        goSubUrl(url);
+    }
+
+    function getSscPage(url) {
+        
+        var urlStr = "/game/game/type/" + url + "/groupId/1.html";
+        goSubUrl(urlStr);
+    }
+
+    function goSubUrl(urlS) {
+        //父级窗口改变当前地址栏状态
+        top.location.href = CONFIG.BASEURL + "ssc/index.html#" + urlS;
+        //获取当前连接页面
+        getPage(urlS);
+    }
+
+    
+
+	
+    function getUserSession() {
+    	/*
+        ajaxRequest({
+            url: '/member/getUserSession.json',
+            beforeSend: function () {
+                $(".Account").html('<img src="/static/theme/sscTheme/theme1/img/base_loading.gif" style="display: block;text-align: center;margin: auto;padding-top: 25px;">');
+            },
+            success: function (json) {
+                if (json.result == 1) {
+                    showLogin(json);
+                } else {
+                    showNotLogin();
+                }
+            }
+        });
+    	*/
+    }
+    
+    function ajaxLogin() {
+        var account = $.trim($("#loginForm input[name='account']").val());
+        var password = $.trim($("#loginForm input[name='password']").val());
+        var yzm = $.trim($("#loginForm input[name='yzm']").val());
+
+        if (!account) {
+            layer.msg("请填写账号", {icon: 2});
+            $("#loginForm input[name='account']").focus();
+            return;
+        }
+
+        if (!password) {
+            layer.msg("请填写密码", {icon: 2});
+            $("#loginForm input[name='password']").focus();
+            return;
+        }
+
+        if (!yzm) {
+            layer.msg("请填写验证码", {icon: 2});
+            $("#loginForm input[name='yzm']").focus();
+            return;
+        }
+
+        ajaxRequest({
+            url: '/index/login',
+            data: {
+                username: account,
+                password: $.md5(password),
+                code: yzm
+            },
+            beforeSend: function () {
+                $(".Account").html('<img src="/static/theme/sscTheme/theme1/img/base_loading.gif" style="display: block;text-align: center;margin: auto;margin-top: 20px;">');
+            },
+            success: function (json) {
+                if (json.result == 1) {
+                    $.cookie("uid", json.userId, {path: "/"});
+                    $.cookie("token", json.token, {path: "/"});
+                    getUserSession();
+                    ifm.window.location.reload();
+                } else {
+                    layer.msg(json.description, {icon: 2});
+                    showNotLogin();
+
+                    // 刷新我的投注
+                    if (typeof document.getElementById('rightContent').contentWindow.getBetDetails == 'function') {
+                        document.getElementById('rightContent').contentWindow.getBetDetails(document.getElementById('rightContent').contentWindow.playGroupId);
+                    }
+                }
+            }
+        });
+    }
+
+    function showLogin(user) {
+        var str = '';
+        str += '<p>账号：<i class="i0">' + user.nickname + '</i>';
+        str += '<span>余额：<i class="i1">￥' + user.coin + '</i></span>';
+        str += '<span><a href="javascript:void(0)" onclick="openHyzx(\'member/zhcz.html?module=yhzz\')">充值提现</a>  |  <a href="javascript:void(0)" onclick="openHyzx(\'member/main.html\')" target="_blank">会员中心</a>  |  <a href="javascript:void(0)" onclick="openHyzx(\'member/lsjl.html?module=tzjl\')">投注记录</a>  |  '
+            + '<a href="https://f18.livechatvalue.com/chat/chatClient/chatbox.jsp?companyID=881265&configID=73958&jid=4674187711&s=1"'
+            +'target="_blank">在线客服</a>  |  <a href="javascript:void(0)"  onclick="openHyzx(\'member/letter.html\')">最新消息</a>  |  <a href="javascript:void(0)" onclick="sigout()" class="red">退出登录</a>  |</span></p>';
+        $(".Account").html(str);
+    }
+
+    function showNotLogin() {
+        var str = '';
+        str += '<div class="state">';
+        str += '<form id="loginForm" onsubmit="ajaxLogin();return false;">';
+        str += '<ul>';
+        str += '<li><input type="text" placeholder="会员名" name="account"></li>';
+        str += '<li><input type="password" placeholder="密码" name="password"></li>';
+        str += '<li><input type="text" placeholder="验证码" onfocus="refreshYzm(document.getElementById(\'yzmImg\'))" name="yzm" class="short"><img id="yzmImg" onclick="refreshYzm(this)" src="/code/yzm?imgWidth=45&imgHeight=20&imgFontHeight=20&imgCodeY=16"></li>';
+        str += '</ul>';
+        str += '<div class="buton">';
+        str += '<button type="submit">登录</button>';
+        str += '</form>';
+        str += '<p>';
+        str += '<a href="/?u=/register.html" target="_blank">会员注册</a>|';
+        str += '<a href="https://f18.livechatvalue.com/chat/chatClient/chatbox.jsp?companyID=881265&configID=73958&jid=4674187711&s=1" target="_blank">忘记密码？</a>';
+        str += '</p>';
+        str += '</div>';
+        str += '</div>';
+        $(".Account").html(str);
+    }
+    function refreshYzm(obj) {
+        var src = $(obj).attr("src");
+        var params = getRequest(src);
+
+        src = '/indexcaptcha/get_captcha/id/login.html/' + (new Date()).getTime();
+        $.each(params, function (index, value) {
+            src += '&' + value.key + '=' + value.value;
+        });
+        $(obj).attr("src", src);
+    }
+    function sigout() {
+        ajaxRequest({
+            url: '/member/ajaxSigout.json',
+            data: {},
+            beforeSend: function () {
+                $(".Account").html('<img src="/static/theme/sscTheme/theme1/img/base_loading.gif" style="display: block;text-align: center;margin: auto;margin-top: 20px;">');
+            },
+            success: function (json) {
+                if (json.result == 1) {
+                    $.cookie("uid", '', {path: "/", expires: -1});
+                    $.cookie("token", '', {path: "/", expires: -1});
+                }
+                getUserSession();
+            }
+        });
+    }
+
+    function openHyzx(module) {
+        if (typeof module == 'undefined') {
+            module = '';
+        }
+        if (typeof $.cookie("uid") == 'undefined' || typeof $.cookie("token") == 'undefined') {
+            alert("请先登录");
+            if ($("#loginAccount1").length > 0) {
+                $("#loginAccount1").focus();
+                return;
+            }
+            window.location.href = "/index/main.html";
+            return;
+        }
+        var subUrl = "";
+        if (module) {
+			subUrl =  '/user/index/m/'+ module;
+        }
+        windowOpen(subUrl, '会员中心', 1250, 834);
+    }
+</script>
+</body>
+</html>

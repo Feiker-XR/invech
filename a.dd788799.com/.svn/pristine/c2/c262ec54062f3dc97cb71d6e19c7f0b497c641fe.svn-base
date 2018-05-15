@@ -1,0 +1,90 @@
+{extend name="public/user_head"/}
+{block name="body"}
+<style type="text/css">
+    ul.condition{font-size:.12rem;}
+    ul.condition li select{float: none; width: 50%; text-indent: 5%}
+</style>
+<header class="header">
+    <i class='left' onclick="javascript:history.back(-1);">返回</i>
+    <h1>账变明细</h1>
+</header>
+<main class="inner_body">
+    <section class="fund_detail">
+         <ul class="condition">
+            <li><span>日期选择：</span><input type="date" value="" id="_date"/></li>
+            <li>
+                <select id="_type">
+                <option value="">所有类别</option>
+                {foreach  $type as $k=>$v}
+                    <option value="{$k}">{$v}</option>
+                {/foreach}
+            </select>
+                <span>资金类别：</span>
+            </li>
+        </ul>
+    </section>
+    <section class="table">
+        <div id="pullrefresh" class="mui-content mui-scroll-wrapper">
+            <div class="mui-scroll">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>日期</th>
+                            <th>资金类别</th>
+                            <th>变更金额</th>
+                            <th>之前金额</th>
+                            <th>之后金额</th>
+                       </tr>
+                    </thead>
+                    <tbody id="lists">
+                          {if(!$list->isEmpty())}
+                            {foreach $list as $v}
+                                <tr>
+                                    <td>{$v->created_at}</td>
+                                    <td>{$type[$v->type]}</td>
+                                    <td>{$v->amount}</td>
+                                    <td>{$v->f_balance}</td>
+                                    <td>{$v->t_balance}</td>
+                                </tr>
+                            {/foreach}
+                        {else}
+                            <tr><td colspan="6" styl="text-align:center;">暂无数据</td></tr>
+                        {/if}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <input type="hidden" id="startTime" value=""/>
+        <input type="hidden" id="endTime" value=""/>
+    </section>
+</main>
+<script type="text/javascript">
+    var base_url = '/user/money_record';
+    var page = 1;
+    $(function () {
+        // 设置容器高度
+         $('section.table').height($('main').height()-$('ul.condition').height() - $('section.table table tr td').height());
+         // 设置默认日期
+        //$('#_date').val(formatDate(new Date()).split(' ')[0]);
+    });
+
+    // 搜寻日期
+    $('#_date').change(function(){
+        var stime = $("#_date").val();
+        var endTime = stime + " 23:59:59";
+            stime = stime+" 00:00:00";
+        $('#startTime').val(stime);
+        $('#endTime').val(endTime);
+        var _url = base_url + '?startTime='+stime+'&endTime='+endTime;
+        page = 1;
+       loadMore(_url);
+    });
+    $('#_type').change(function () {
+        var _type = $("#_type").val();
+        console.log(_type);
+        var _url = base_url + '?_type='+type;
+        page = 1;
+        loadMore(_url);
+    })
+</script>
+{/block}

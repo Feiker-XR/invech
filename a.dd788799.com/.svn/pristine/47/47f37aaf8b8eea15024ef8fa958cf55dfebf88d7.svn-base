@@ -1,0 +1,247 @@
+<?php
+
+namespace bong\service\queue\Driver;
+
+use Redis;
+use think\Cache;
+
+class RedisClient
+{
+
+    protected $handler;
+
+    public function __construct($config)
+    {
+        $cache_type = config('cache.type')??'';        
+        if('redis' == $cache_type){
+            $this->handler = Cache::init()->handler();
+  
+        }else{
+            //$this->handler = Cache::init(['type'=>'cache'])->handler();       
+            
+            $handler = new Redis();
+
+            $handler->{($config['persistent'] ?? false) === true ? 'pconnect' : 'connect'}(
+                $config['host']??'127.0.0.1', $config['port']??6379, $config['timeout']??0
+            );
+
+            if (! empty($config['password'])) {
+                $handler->auth($config['password']);
+            }
+
+            if (! empty($config['select'])) {
+                $handler->select($config['select']);
+            }
+
+            if (! empty($config['prefix'])) {
+                $handler->setOption(Redis::OPT_PREFIX, $config['prefix']);
+            }
+
+            if (! empty($config['read_timeout'])) {
+                $handler->setOption(Redis::OPT_READ_TIMEOUT, $config['read_timeout']);
+            }
+
+            $this->handler = $handler;      
+        }
+    }
+
+    public function get($key)
+    {
+        $result = $this->handler->get($key);
+
+        return $result !== false ? $result : null;
+    }
+
+    public function mget(array $keys)
+    {
+        return array_map(function ($value) {
+            return $value !== false ? $value : null;
+        }, $this->handler->mget($keys));
+    }
+
+    public function exists(...$keys)
+    {
+        $keys = collect($keys)->map(function ($key) {
+            return $this->applyPrefix($key);
+        })->all();
+
+        return $this->executeRaw(array_merge(['exists'], $keys));
+    }
+
+    public function set($key, $value, $expireResolution = null, $expireTTL = null, $flag = null)
+    {
+        return $this->command('set', [
+            $key,
+            $value,
+            $expireResolution ? [$flag, $expireResolution => $expireTTL] : null,
+        ]);
+    }
+
+    public function setnx($key, $value)
+    {
+        return (int) $this->handler->setnx($key, $value);
+    }
+
+    public function hmget($key, ...$dictionary)
+    {
+        if (count($dictionary) == 1) {
+            $dictionary = $dictionary[0];
+        }
+
+        return array_values($this->command('hmget', [$key, $dictionary]));
+    }
+
+    public function hmset($key, ...$dictionary)
+    {
+        if (count($dictionary) == 1) {
+            $dictionary = $dictionary[0];
+        } else {
+            $input = collect($dictionary);
+
+            $dictionary = $input->nth(2)->combine($input->nth(2, 1))->toArray();
+        }
+
+        return $this->command('hmset', [$key, $dictionary]);
+    }
+
+    public function hsetnx($hash, $key, $value)
+    {
+        return (int) $this->handler->hsetnx($hash, $key, $value);
+    }
+
+    public function lrem($key, $count, $value)
+    {
+        return $this->command('lrem', [$key, $value, $count]);
+    }
+
+    public function spop($key, $count = null)
+    {
+        return $this->command('spop', [$key]);
+    }
+
+    public function zadd($key, ...$dictionary)
+    {
+        if (is_array(end($dictionary))) {
+            foreach (array_pop($dictionary) as $member => $score) {
+                $dictionary[] = $score;
+                $dictionary[] = $member;
+            }
+        }
+
+        $key = $this->applyPrefix($key);
+
+        return $this->executeRaw(array_merge(['zadd', $key], $dictionary));
+    }
+
+    public function zrangebyscore($key, $min, $max, $options = [])
+    {
+        if (isset($options['limit'])) {
+            $options['limit'] = [
+                $options['limit']['offset'],
+                $options['limit']['count'],
+            ];
+        }
+
+        return $this->command('zRangeByScore', [$key, $min, $max, $options]);
+    }
+
+    public function zrevrangebyscore($key, $min, $max, $options = [])
+    {
+        if (isset($options['limit'])) {
+            $options['limit'] = [
+                $options['limit']['offset'],
+                $options['limit']['count'],
+            ];
+        }
+
+        return $this->command('zRevRangeByScore', [$key, $min, $max, $options]);
+    }
+
+    public function zinterstore($output, $keys, $options = [])
+    {
+        return $this->zInter($output, $keys,
+            $options['weights'] ?? null,
+            $options['aggregate'] ?? 'sum'
+        );
+    }
+
+    public function zunionstore($output, $keys, $options = [])
+    {
+        return $this->zUnion($output, $keys,
+            $options['weights'] ?? null,
+            $options['aggregate'] ?? 'sum'
+        );
+    }
+
+    public function pipeline(callable $callback = null)
+    {
+        $pipeline = $this->handler()->pipeline();
+
+        return is_null($callback)
+            ? $pipeline
+            : tap($pipeline, $callback)->exec();
+    }
+
+    public function transaction(callable $callback = null)
+    {
+        $transaction = $this->handler()->multi();
+
+        return is_null($callback)
+            ? $transaction
+            : tap($transaction, $callback)->exec();
+    }
+
+    public function evalsha($script, $numkeys, ...$arguments)
+    {
+        return $this->command('evalsha', [
+            $this->script('load', $script), $arguments, $numkeys,
+        ]);
+    }
+
+    public function eval($script, $numberOfKeys, ...$arguments)
+    {
+        return $this->handler->eval($script, $arguments, $numberOfKeys);
+    }
+
+    public function subscribe($channels, Closure $callback)
+    {
+        $this->handler->subscribe((array) $channels, function ($redis, $channel, $message) use ($callback) {
+            $callback($message, $channel);
+        });
+    }
+
+    public function psubscribe($channels, Closure $callback)
+    {
+        $this->handler->psubscribe((array) $channels, function ($redis, $pattern, $channel, $message) use ($callback) {
+            $callback($message, $channel);
+        });
+    }
+
+    public function executeRaw(array $parameters)
+    {
+        return $this->command('rawCommand', $parameters);
+    }
+
+    public function disconnect()
+    {
+        $this->handler->close();
+    }
+
+    private function applyPrefix($key)
+    {
+        $prefix = (string) $this->handler->getOption(Redis::OPT_PREFIX);
+
+        return $prefix.$key;
+    }
+
+    public function command($method, array $parameters = [])
+    {
+        return $this->handler->{$method}(...$parameters);
+    }
+
+    public function __call($method, $parameters)
+    {
+        $method = strtolower($method);
+        return $this->command($method, $parameters);
+    } 
+}

@@ -1,0 +1,3066 @@
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title></title>
+    <link rel="stylesheet" href="/static/theme/mainTheme/400w/css/cabel-v1.css?v=20170206" type="text/css">
+    <link rel="stylesheet" href="/static/theme/mainTheme/400w/css/style.css?v=20170819" type="text/css"><!--页面CSS-->
+    <link rel="stylesheet" href="/static/theme/mainTheme/400w/css/animate.min.css?v=20170206" type="text/css"><!--CSS3动画-->
+    <link rel="stylesheet" href="/static/theme/mainTheme/400w/css/lottery.css?v=20170206" type="text/css"><!--页面CSS-->
+    <link rel="stylesheet" href="/static/theme/mainTheme/400w/css/liMarquee.css?v=20170206" type="text/css"><!--页面CSS-->
+    <link rel="stylesheet" href="/static/theme/mainTheme/400w/jRange/jquery.range.css?v=20170402" type="text/css">
+    <link rel="stylesheet" href="/static/theme/mainTheme/400w/css/global.css?v=20170706" type="text/css"><!--页面CSS-->
+    <link rel="stylesheet" href="/static/theme/mainTheme/400w/css/other.css?v=20170428" type="text/css"><!--页面CSS-->
+    <link rel="stylesheet" href="/static/theme/mainTheme/400w/css/gfwf.css?v=20170502" type="text/css"><!--页面CSS-->
+    <link rel="stylesheet" href="/static/theme/mainTheme/400w/css/index.css?v=20170726" type="text/css"><!--页面CSS-->
+    <link rel="stylesheet" href="/static/theme/mainTheme/400w/css/login.css?v=20170823" type="text/css"><!--页面CSS-->
+    <link rel="stylesheet" href="/static/theme/mainTheme/400w/css/index-allmenu.css?v=20170707" type="text/css"><!--页面CSS-->
+    <link rel="stylesheet" href="/static/theme/mainTheme/400w/css/register.css?v=20170502" type="text/css"><!--页面CSS-->
+    <script src="/static/theme/mainTheme/400w/js/FancyZoom.js" language="JavaScript" type="text/javascript"></script>
+    <script src="/static/theme/mainTheme/400w/js/FancyZoomHTML.js" language="JavaScript" type="text/javascript"></script>
+    <script src="/static/theme/mainTheme/400w/js/flexslider/jquery-1.7.2.js" language="JavaScript" type="text/javascript"></script>
+    <script>
+    <!--
+    // 屏蔽JS错误
+//    window.onerror = function(){return true;}
+    // -->
+</script>
+<script>
+    var CONFIG = {
+        BASEURL: "/",    // 根路径
+        RESURL: "/static/theme/mainTheme/400w/"         // 资源路径
+    };
+</script>
+<script src="/static/theme/mainTheme/400w/js/mobile-detect.min.js"></script><script>
+    var fengge1 = 'f42023';
+</script>
+<style>
+
+        .reResulttBg{background: #f42023;} 
+        .process .layout .monty ul li,.process .layout .list_tems .date:after,.list ul li .slide p.acti,.headmemberbg{background: #f42023;}
+        .process .layout .list_tems .date span, .process .layout .list_tems .date h3,.eveb_amount span,.color-e77c3c,.eveb_setting_table a,.xieyiCss，.gcdtgd{color: #f42023!important;}
+        .eveb_sub_nav_type a:hover, .eveb_sub_nav_type li.on a:link, .eveb_sub_nav_type li.on a:visited{color: #f42023!important;font-weight: 700;border-bottom-color: #e1e1e1;background: #f8f8f8;}
+        .list ul li .slide p:hover,.letterbtn-bg{background: #f42023!important;color: white;}
+        .list h3 a{background: #f42023;border-bottom: 3px solid #a92309; height: 47px; line-height: 47px;}
+        .help_l_menu li .t.sli{border-left: 5px solid #f42023;}
+        .withdraw-bg-input{border: 2px solid #f42023!important;}
+        .clearBet_template .l span i{background: #f42023 url(/static/theme/mainTheme/400w//img/tm-mdl-icon.png) no-repeat!important; border-radius: 50%;background-position: 0 41%!important;}
+
+
+
+        .eveb_nav_sub .on,.button_1, .button_1:link, .button_1:visited,.alert_col h5,.onlineService,.layui-layer-popup .layui-layer-title,.xzqd,.xzqdlskj,.game_name .box2_stage p span i.acti,.Betting,.Single,.list_ject ul li .Result p a.acti,.list_ject ul li .Result p a.acti:hover,.top{background:#f42023!important}
+        .eveb_nav_sub .on a,.bankInfo .name,.help_l_menu .title p .sum,.help_r_main .light,.game_name .box2_stage p span i,.game_name .box1_name  p i,.Account p a.red{color:#f42023!important}
+        .eveb_nav_sub .on,.game_name .box2_stage p span{border:1px solid #f42023!important;}
+        .eveb_nav_sub .on,.game_name .box2_stage p span i.acti{color:#fff!important;}
+        .eveb_nav_sub .on a{border-top:1px #f42023 solid!important;}
+        .eveb_nav_sub ul{border-bottom:1px #f42023 solid!important;}
+        #apptop{background: #f42023}
+        .alert_col div::-webkit-scrollbar-thumb {background-color: #f42023!important;}
+
+        
+       /* .men_list{background-color: #f42023!important;}
+        .main_layout .left_layout h1{background-color: #f42023!important;}
+        .men_list .nav_list ul li:after{background-color: #f42023!important;}
+        .main_layout .right_layotu .right_wrap .login ul li button{background-color: #f42023!important;border-bottom: 2px solid #f42023!important;}
+        .main_layout .right_layotu .right_wrap .down_file{background-color: #f42023!important;}
+        .main_layout .right_layotu .left_wrap .Bettingbag .num_bett .val_add p.fr a.a1{background-color: #f42023!important;border-bottom: 2px solid #f42023!important;}
+        .main_layout .right_layotu .chart .title h2{background-color: #f42023!important;border-bottom: 2px solid #f42023!important;}
+        .main_layout .right_layotu .chart .title{border-bottom: 1px solid #f42023!important;}
+        .main_layout .right_layotu .chart .title a{color: #f42023!important;}
+        .main_layout .right_layotu .left_wrap .tabs_cg ul li.acti i{border-left: 1px solid #f42023!important;  border-right: 1px solid #f42023!important;}
+        .main_layout .right_layotu .left_wrap .tabs_cg ul li.acti{border-top: 3px solid #f42023!important;}
+        .main_layout .right_layotu .left_wrap .tabs_cg{border-bottom: 1px solid #f42023!important;}
+        .main_layout .left_layout ul li i.i0{background-color: #f42023!important;}
+        .main_layout .left_layout ul li i.i0:after{border-right: 8px solid #f42023!important;}
+        .main_layout .right_layotu .right_wrap .Notice b{color: #f42023!important;}
+        .main_layout .right_layotu .right_wrap .login h2 p{border-bottom: 2px solid #f42023!important;}
+        .main_layout .right_layotu .right_wrap .login h2{border-bottom: 1px solid #f42023!important;}
+        .record{border-top: 2px solid #f42023!important;}*/
+
+
+
+    </style>
+<style>
+
+
+        .head div h5,.Betting .tabs ul li,.top .nav h1{background:#d51910!important}
+        .jf_box .url a,.eveb_form label.error,.eveb_transfer_box .center_wallet .money,.eveb_transfer_box .wallet_list li p{color:#d51910!important}
+        .Betting .tabs ul li.acti{background:#fff!important}
+        .button_1, .button_1:link, .button_1:visited{border:1px solid #d51910!important;}
+    </style>
+<style>
+        a:hover{
+            color: red;
+        }
+        a:active{
+            color:deepskyblue;
+        }
+        div, dl, dt, dd, ul, li, h1, h2, h3, h4, h5, h6, pre, form, fieldset, input, textarea, blockquote, p {
+            padding: 0;
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+<div class="head_top">
+    <div class="container clearfix">
+        <div class="left head_top_lf">
+            <marquee scrollamount="3" scrolldelay="100" direction="left" onmouseover="this.stop();"
+                     onmouseout="this.start();" onclick="HotNewsHistory();">
+                银行卡转账账户变更通知：尊敬的会员玩家，您好！公司的入款账号：建设银行-【张杨超】，已停用，无法查收玩家的款项，请您入款时查看最新的公司入款账号进行入款，以免造成不必要的损失及误解，给您带来不便，请您多多谅解哦，谢谢&nbsp;&nbsp;&nbsp;&nbsp;
+                银行卡转账账户变更通知：尊敬的会员玩家，您好！公司的入款账号：建设银行-【余精灵】，已停用，无法查收玩家的款项，请您入款时查看最新的公司入款账号进行入款，以免造成不必要的损失及误解，给您带来不便，请您多多谅解哦，谢谢&nbsp;&nbsp;&nbsp;&nbsp;
+                公告：敬请会员留意！目前【微信/支付宝】扫码付款已恢复存款；单笔最高50000；感谢您长期以来的大力支持与肯定！烦请互相转告通知！
+&nbsp;&nbsp;&nbsp;&nbsp;
+                </marquee>
+        </div>
+        <div class="right head_top_rt clearfix">
+                    <a href="/main.html" class="left">首页</a>
+                    <a href="javascript:void(0)" class="loginbtn left blink" data-color="#ff4800|#333">登录</a>
+                    <a href="/register.html" class="left head_top_reg">免费注册</a>
+                    <span class="left">|</span>
+                    <a href="javascript:void(0)" class="left head_top_lottery">我的彩票</a>
+                    <span class="left">|</span>
+					<a href="javascript:void(0)" onclick="shiwan()" class="left head_top_reg">免费试玩</a>
+                </div>
+            </div>
+</div>
+<div class="men_lists">
+    <div class="wid2">
+        <div class="head_middle">
+    <div class="container clearfix">
+        <a href="/main.html" class="left logo">
+
+            <img src="/images/logo.png" style="max-height: 60px"/>
+        </a>
+        <div class="left head_middle_yuye">
+            <a href="javascript:void(0);">
+                <img src="/static/theme/mainTheme/400w/images/index_14.png" style="max-height: 60px"/>
+            </a>
+        </div>
+     <div class="right clearfix">
+         <a href="https://f18.livechatvalue.com/chat/chatClient/chatbox.jsp?companyID=881265&configID=73958&jid=4674187711&s=1" target="_blank" class="left head_middle_kf">
+                <img src="/static/theme/mainTheme/400w/images/index_20.png" />
+                联系客服
+            </a>
+        </div>
+    </div>
+</div>
+<div class="menu">
+    <div class="container clearfix">
+        <div class="left all_fenlei clearfix">
+            <span class="left all_fenlei_tl">全部彩种</span>
+            <img src="/static/theme/mainTheme/400w/images/index_30.png" class="right all_fenlei_img" />
+            <div class="all_fenlei_yin" style="display:none">
+                <a href="javascript:void(0)" onclick="openGcdt('gcdt/ffssc')" class="all_fenlei_yin_list clearfix">
+                    <div class="left">
+                        <img src="/static/theme/mainTheme/400w/images/index_39.png"/>
+                    </div>
+                    <div class="all_fenlei_yin_list_rt">
+                        分分时时彩
+                    </div>
+                </a>
+                <a href="javascript:void(0)" onclick="openGcdt('gcdt/cqssc')" class="all_fenlei_yin_list clearfix">
+
+                    <div class="left">
+                        <img src="/static/theme/mainTheme/400w/images/index1_6.png"/>
+                    </div>
+                    <div class="all_fenlei_yin_list_rt">
+                        重庆时时彩
+                    </div>
+                </a>
+                <a href="javascript:void(0)" onclick="openGcdt('gcdt/jspk10')" class="all_fenlei_yin_list clearfix">
+                    <div class="left">
+                        <img src="/static/theme/mainTheme/400w/images/index_42.png"/>
+                    </div>
+                    <div class="all_fenlei_yin_list_rt">
+                        极速PK拾
+                    </div>
+                </a>
+                <a href="javascript:void(0)" onclick="openGcdt('gcdt/pk10')" class="all_fenlei_yin_list clearfix">
+                    <div class="left">
+                        <img src="/static/theme/mainTheme/400w/images/index_49.png"/>
+                    </div>
+                    <div class="all_fenlei_yin_list_rt">
+                        北京PK拾
+                    </div>
+                </a>
+                <a href="javascript:void(0)" onclick="openGcdt('gcdt/lhc')" class="all_fenlei_yin_list clearfix">
+                    <div class="left">
+                        <img src="/static/theme/mainTheme/400w/images/index51-17.png"/>
+                    </div>
+                    <div class="all_fenlei_yin_list_rt">
+                        香港六合彩
+                    </div>
+                </a>
+                <a href="javascript:void(0)" onclick="openGcdt('gcdt/xyft')"  class="all_fenlei_yin_list clearfix">
+                    <div class="left">
+                        <img src="/static/theme/mainTheme/400w/images/index1_11.png"/>
+                    </div>
+                    <div class="all_fenlei_yin_list_rt">
+                        幸运飞艇
+                    </div>
+                </a>
+                <a href="javascript:void(0)" onclick="openGcdt('gcdt/ahk3')" class="all_fenlei_yin_list clearfix" >
+                    <div class="left">
+                        <img src="/static/theme/mainTheme/400w/images/index1_15.png"/>
+                    </div>
+                    <div class="all_fenlei_yin_list_rt">
+                        安徽快3
+                    </div>
+                </a>
+
+                <div class="all_fenlei_b">
+                    <div class="all_fenlei_b_gp clearfix">
+                        <div class="left all_fenlei_b_name" style="background: #ffcdcd;border: 1px solid #ffcdcd;color: #ff4444;">
+                            高频彩
+                        </div>
+                        <div class="all_fenlei_b_gp_rt clearfix">
+                            <ul class="all_fenlei_b_gp_rt_ul_lf clearfix">
+                                <li>
+                                    <a href="javascript:void(0)" onclick="openGcdt('gcdt/ffssc')">分分时时彩</a>
+                                </li>
+                                <li>
+                                    <a href="javascript:void(0)" onclick="openGcdt('gcdt/jspk10')" >极速PK10</a>
+                                </li>
+                                <li>
+                                    <a href="javascript:void(0)" onclick="openGcdt('gcdt/cqssc')">重庆时时彩</a>
+                                </li>
+                                <li>
+                                    <a href="javascript:void(0)" onclick="openGcdt('gcdt/pk10')">北京PK10</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="all_fenlei_b_yin">
+                            <p class="all_fenlei_b_yin_tl">高频彩</p>
+                            <div class="clearfix all_fenlei_b_yin_a">
+                                <a href="javascript:void(0)" onclick="openGcdt('gcdt/cqssc')">重庆时时彩</a>
+                                <a href="javascript:void(0)" onclick="openGcdt('gcdt/tjssc')">天津时时彩</a>
+                                <a href="javascript:void(0)" onclick="openGcdt('gcdt/xjssc')">新疆时时彩</a>
+                                <a href="javascript:void(0)" onclick="openGcdt('gcdt/ffssc')">分分时时彩</a>
+                                <a href="javascript:void(0)" onclick="openGcdt('gcdt/efssc')">两分时时彩</a>
+                                <a href="javascript:void(0)" onclick="openGcdt('gcdt/sfssc')">三分时时彩</a>
+                                <a href="javascript:void(0)" onclick="openGcdt('gcdt/wfssc')">五分时时彩</a>
+                                <a href="javascript:void(0)" onclick="openGcdt('gcdt/pk10')">北京PK10</a>
+                                <a href="javascript:void(0)" onclick="openGcdt('gcdt/jspk10')">极速PK10</a>
+                                <a href="javascript:void(0)" onclick="openGcdt('gcdt/xyft')">幸运飞艇</a>
+                                <a href="javascript:void(0)" onclick="openGcdt('gcdt/lhc')">香港六合彩</a>
+                                <a href="javascript:void(0)" onclick="openGcdt('gcdt/jsk3')">江苏快3</a>
+                                <a href="javascript:void(0)" onclick="openGcdt('gcdt/hbk3')">湖北快3</a>
+                                <a href="javascript:void(0)" onclick="openGcdt('gcdt/ahk3')">安徽快3</a>
+                                <a href="javascript:void(0)" onclick="openGcdt('gcdt/jlk3')">吉林快3</a>
+                                <a href="javascript:void(0)" onclick="openGcdt('gcdt/klsf')">快乐十分</a>
+                                <a href="javascript:void(0)" onclick="openGcdt('gcdt/xync')">幸运农场</a>
+                                <a href="javascript:void(0)" onclick="openGcdt('gcdt/kl8')">北京快乐8</a>
+                                <a href="javascript:void(0)" onclick="openGcdt('gcdt/fc3d')">福彩3D</a>
+                                <a href="javascript:void(0)" onclick="openGcdt('gcdt/pl3')">体彩排列3</a>
+                                <a href="javascript:void(0)" onclick="openGcdt('gcdt/bj28')">北京28</a>
+                                <a href="javascript:void(0)" onclick="openGcdt('gcdt/gd11x5')">广东11选5</a>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="all_fenlei_b_gp clearfix">
+                        <div class="left all_fenlei_b_name" style="background: #c3cbf6;border: 1px solid #a7bdfd;color: #4041d0;">
+                            低频彩
+                        </div>
+                        <div class="all_fenlei_b_gp_rt clearfix">
+                            <ul class="all_fenlei_b_gp_rt_ul_lf clearfix">
+                                <li>
+                                    <a href="javascript:void(0)" onclick="openGcdt('gcdt/lhc')">香港六合彩</a>
+                                </li>
+                                <li>
+                                    <a href="javascript:void(0)" onclick="openGcdt('gcdt/fc3d')">福彩3D</a>
+                                </li>
+                                <li>
+                                    <a href="javascript:void(0)" onclick="openGcdt('gcdt/pl3')">体彩排列3</a>
+                                </li>
+                                <li>
+                                    <a href="javascript:void(0)" onclick="openGcdt('gcdt/ssq')">双色球</a>
+                                </li>
+
+                            </ul>
+                        </div>
+                        <div class="all_fenlei_b_yin">
+                            <p class="all_fenlei_b_yin_tl">低频彩</p>
+                            <div class="clearfix all_fenlei_b_yin_a">
+
+                                <a href="javascript:void(0)" onclick="openGcdt('gcdt/lhc')">香港六合彩</a>
+                                <a href="javascript:void(0)" onclick="openGcdt('gcdt/fc3d')">福彩3D</a>
+                                <a href="javascript:void(0)" onclick="openGcdt('gcdt/pl3')">体彩排列3</a>
+                                <a href="javascript:void(0)" onclick="openGcdt('gcdt/ssq')">双色球</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="all_fenlei_b_gp clearfix">
+                        <div class="left all_fenlei_b_name" style="background: #d9f9df;border: 1px solid #c5f4cf;color: #005d19;padding-top: 11px;height: 47px;">
+                            全部
+                        </div>
+                        <div class="all_fenlei_b_gp_rt clearfix">
+                            <ul class="all_fenlei_b_gp_rt_ul_lf clearfix">
+                                <li>
+                                    <a href="javascript:void(0)" onclick="openGcdt('gcdt/ffssc')">分分时时彩</a>
+                                </li>
+                                <li>
+                                    <a href="javascript:void(0)" onclick="openGcdt('gcdt/jspk10')">极速PK10</a>
+                                </li>
+                                <li>
+                                    <a href="javascript:void(0)" onclick="openGcdt('gcdt/cqssc')">重庆时时彩</a>
+                                </li>
+                                <li>
+                                    <a href="javascript:void(0)" onclick="openGcdt('gcdt/pk10')">北京PK10</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="all_fenlei_b_yin">
+                            <p class="all_fenlei_b_yin_tl">全部</p>
+                            <div class="clearfix all_fenlei_b_yin_a">
+
+                                <a href="javascript:void(0)" onclick="openGcdt('gcdt/cqssc')">重庆时时彩</a>
+                                <a href="javascript:void(0)" onclick="openGcdt('gcdt/tjssc')">天津时时彩</a>
+                                <a href="javascript:void(0)" onclick="openGcdt('gcdt/xjssc')">新疆时时彩</a>
+                                <a href="javascript:void(0)" onclick="openGcdt('gcdt/ffssc')">分分时时彩</a>
+                                <a href="javascript:void(0)" onclick="openGcdt('gcdt/efssc')">两分时时彩</a>
+                                <a href="javascript:void(0)" onclick="openGcdt('gcdt/sfssc')">三分时时彩</a>
+                                <a href="javascript:void(0)" onclick="openGcdt('gcdt/wfssc')">五分时时彩</a>
+                                <a href="javascript:void(0)" onclick="openGcdt('gcdt/pk10')">北京PK10</a>
+                                <a href="javascript:void(0)" onclick="openGcdt('gcdt/jspk10')">极速PK10</a>
+                                <a href="javascript:void(0)" onclick="openGcdt('gcdt/xyft')">幸运飞艇</a>
+                                <a href="javascript:void(0)" onclick="openGcdt('gcdt/lhc')">香港六合彩</a>
+                                <a href="javascript:void(0)" onclick="openGcdt('gcdt/jsk3')">江苏快3</a>
+                                <a href="javascript:void(0)" onclick="openGcdt('gcdt/hbk3')">湖北快3</a>
+                                <a href="javascript:void(0)" onclick="openGcdt('gcdt/ahk3')">安徽快3</a>
+                                <a href="javascript:void(0)" onclick="openGcdt('gcdt/jlk3')">吉林快3</a>
+                                <a href="javascript:void(0)" onclick="openGcdt('gcdt/klsf')">快乐十分</a>
+                                <a href="javascript:void(0)" onclick="openGcdt('gcdt/xync')">幸运农场</a>
+                                <a href="javascript:void(0)" onclick="openGcdt('gcdt/kl8')">北京快乐8</a>
+                                <a href="javascript:void(0)" onclick="openGcdt('gcdt/fc3d')">福彩3D</a>
+                                <a href="javascript:void(0)" onclick="openGcdt('gcdt/pl3')">体彩排列3</a>
+                                <a href="javascript:void(0)" onclick="openGcdt('gcdt/bj28')">北京28</a>
+                                <a href="javascript:void(0)" onclick="openGcdt('gcdt/gd11x5')">广东11选5</a>
+                                <a href="javascript:void(0)" onclick="openGcdt('gcdt/ssq')">双色球</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="menu_main clearfix left">
+            <a href="/main.html">
+                        首页
+                    </a>
+                <a href="JavaScript:void(0)" onclick="openGcdt('gcdt')"  target="_blank">
+                购彩大厅
+            </a>
+
+
+            <a href="/yhhd.html">
+                        优惠活动
+                    </a>
+                <a href="/kjjg.html" class="ahover">
+                        开奖公告
+                    </a>
+                <a href="/ssc/index.html?module=zstIndex" target="_blank">
+                走势图表
+            </a>
+            <a href="https://m.400w.am" target="_blank">
+                <em class="hot"></em>
+                <img src="/static/theme/mainTheme/400w/images/index30.png" class="menu_a_img" />
+                手机购买
+            </a>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $('.type_top .left .left_div .log,.type_top .left .left_div .alert_log').hover(function () {
+            $('.type_top .left .left_div .alert_log').show();
+            $('.type_top .left .left_div .alert_par').hide();
+        })
+        $('.type_top').hover(function () {
+        }, function () {
+            $('.type_top .left .left_div .alert_log').hide();
+            $('.type_top .left .left_div .alert_par').hide();
+        })
+        $('.type_top .right ul li.l').hover(function () {
+            $(this).addClass('sli');
+            $(this).find('div').show();
+        })
+        $('.type_top .right ul li').hover(function () {
+
+        }, function () {
+            $(this).removeClass('sli');
+            $(this).find('div').hide();
+        })
+        $('.type_top .left .left_div a.par').hover(function () {
+            $('.type_top .left .left_div .alert_par').show();
+            $('.type_top .left .left_div .alert_log').hide();
+        })
+    });
+
+    function registerLogin() {
+        var loginAccount = $.trim($("#registerLoginAccount").val());
+        var loginPassword = $.trim($("#registerLoginPassword").val());
+        var yzm = $.trim($("#registerLoginYzm").val());
+
+        if (!loginAccount) {
+            alert("请输入账号");
+            return;
+        }
+        if (!loginPassword) {
+            alert("请输入密码");
+            return;
+        }
+        if (!yzm) {
+            alert("请输入验证码");
+            return;
+        }
+
+        ajaxRequest({
+            url: "/member/ajaxLogin.json",
+            data: {
+                yzm: yzm,
+                account: loginAccount,
+                password: $.md5(loginPassword)
+            },
+            beforeSend: function() {
+                showLoading();
+            },
+            success: function(json) {
+                if (json.result == 1) {
+                    $.cookie("uid", json.userId, {path: "/"});
+                    $.cookie("token", json.token, {path: "/"});
+                    window.location.href = "/main.html";
+                } else {
+                    refreshYzm(document.getElementById('registerYzmImg2'));
+                    Tools.toast("登录失败：" + json.description);
+                }
+                hideLoading();
+            }
+        });
+    }
+
+    function showLoading() {
+        layer.load(2, {
+            shade: [0.1,'#000'] //0.1透明度的白色背景
+        })
+    }
+    function hideLoading() {
+        layer.closeAll();
+    }
+    function refreshYzm(obj) {
+        var src = $(obj).attr("src");
+        var params = getRequest(src);
+
+        src = "/code/yzm?timestamp=" + (new Date()).getTime();
+        $.each(params, function(index, value) {
+            src += '&' + value.key + '=' + value.value;
+        });
+        console.log(src);
+        $(obj).attr("src", src);
+    }
+    $(window).resize(function(){
+        ate();
+    });
+
+    $(function() {
+        ate();
+        $(".alert_log_col h5 i").click(function(){
+            $(".two2").fadeOut();
+        });
+        autobox(".Customerservice",1,1180,0);
+        tabs_cg(".Resultt .latyout .tabs_ce ul li","","hover","acti","","");
+        click_addname(".Resultt .latyout .wrap_select a","acti","click");
+        $('.reg_rt h5 span').click(function(){
+            $('.two2').fadeIn();
+        })
+    });
+
+    function ate(){
+        var hei=$(window).height();
+        $(".back").css("height",hei-27+"px");
+    }
+
+    function openGcdt(module) {
+//        if (typeof module == 'undefined') {
+//            module = '';
+//        }
+        
+        var subUrl = "";
+        if (module) {
+            subUrl = "#" + CONFIG.BASEURL + "ssc/" +module + ".html";
+        }
+        windowOpenBlank(CONFIG.BASEURL + 'ssc/index.html' + subUrl);
+    }
+
+    function openGcdt(module) {
+//        if (typeof module == 'undefined') {
+//            module = '';
+//        }
+        
+        var subUrl = "";
+        if (module) {
+            subUrl = "#" + CONFIG.BASEURL + "ssc/" +module + ".html";
+        }
+        windowOpenBlank(CONFIG.BASEURL + 'ssc/index.html' + subUrl);
+    }
+</script></div>
+</div>
+
+<div class="process">
+    <div class="wid1">
+        <div class="Resultt reResulttBg">
+            <i class="it0"><img src="/static/theme/mainTheme/400w/img/ico46.png" alt=""></i>
+            <i class="it1"><img src="/static/theme/mainTheme/400w/img/ico46.png" alt=""></i>
+            <h1><img src="/static/theme/mainTheme/400w/img/ico71.png" alt=""></h1>
+            <div class="latyout at">
+                <div class="tabs_ce at">
+                    <ul>
+                        <li class="acti nob" data-subnav="1" name="top"><a href="javascript:void(0)">全部彩种</a></li>
+                        <li data-subnav="2"><a href="javascript:void(0)">高频彩</a></li>
+                        <li data-subnav="3"><a href="javascript:void(0)">低频彩</a></li>
+                        <li data-subnav="4"><a href="javascript:void(0)">全国彩种开奖</a></li>
+                        <li data-subnav="5"><a href="javascript:void(0)">地方彩种开奖</a></li>
+                        <li data-subnav="6"><a href="javascript:void(0)">境外彩种开奖</a></li>
+                        <li data-subnav="7"><a href="javascript:void(0)">本站品牌</a></li>
+                        <li data-subnav="8"><a href="javascript:void(0)">开奖搜索</a></li>
+                    </ul>
+                </div>
+                <div class="wrap_select at corl1 kjjg_hz_style" id="subNav_1">
+                    <div>
+                        <a class="acti" href="javascript:void(0)">汇总</a>
+                        <a href="javascript:void(0)" data-playgroupid="6">六合彩</a>
+                        <a href="javascript:void(0)" data-playgroupid="9">北京PK10</a>
+                        <a href="javascript:void(0)" data-playgroupid="23">极速PK10</a>
+                        <a href="javascript:void(0)" data-playgroupid="14">幸运飞艇</a>
+                        <a href="javascript:void(0)" data-playgroupid="15">分分时时彩</a>
+                        <a href="javascript:void(0)" data-playgroupid="1">重庆时时彩</a>
+                        <a href="javascript:void(0)" data-playgroupid="2">天津时时彩</a>
+                        <a href="javascript:void(0)" data-playgroupid="3">新疆时时彩</a>
+                        <a href="javascript:void(0)" data-playgroupid="13">三分时时彩</a>
+                        <a href="javascript:void(0)" data-playgroupid="16">两分时时彩</a>
+                        <a href="javascript:void(0)" data-playgroupid="17">五分时时彩</a>
+                        <a href="javascript:void(0)" data-playgroupid="18">江苏快3</a>
+                        <a href="javascript:void(0)" data-playgroupid="19">湖北快3</a>
+                        <a href="javascript:void(0)" data-playgroupid="20">安徽快3</a>
+                        <a href="javascript:void(0)" data-playgroupid="21">吉林快3</a>
+                        <a href="javascript:void(0)" data-playgroupid="10">重庆幸运农场</a>
+                        <a href="javascript:void(0)" data-playgroupid="11">广东快乐十分</a>
+                        <a href="javascript:void(0)" data-playgroupid="4">体彩排列3</a>
+                        <a href="javascript:void(0)" data-playgroupid="5">福彩3D</a>
+                        <a href="javascript:void(0)" data-playgroupid="7">北京28</a>
+                        <a href="javascript:void(0)" data-playgroupid="8">北京快乐8</a>
+                        <a href="javascript:void(0)" data-playgroupid="24">广东11选5</a>
+                        <a href="javascript:void(0)" data-playgroupid="12" class="last">双色球</a>
+                    </div>
+                </div>
+                <div class="wrap_select at corl1 hide kjjg_hz_style" id="subNav_2">
+                    <div>
+                        <a href="javascript:void(0)" data-playgroupid="9">北京PK10</a>
+                        <a href="javascript:void(0)" data-playgroupid="23">极速PK10</a>
+                        <a href="javascript:void(0)" data-playgroupid="14">幸运飞艇</a>
+                        <a href="javascript:void(0)" data-playgroupid="15">分分时时彩</a>
+                        <a href="javascript:void(0)" data-playgroupid="1">重庆时时彩</a>
+                        <a href="javascript:void(0)" data-playgroupid="2">天津时时彩</a>
+                        <a href="javascript:void(0)" data-playgroupid="3">新疆时时彩</a>
+                        <a href="javascript:void(0)" data-playgroupid="16">两分时时彩</a>
+                        <a href="javascript:void(0)" data-playgroupid="13">三分时时彩</a>
+                        <a href="javascript:void(0)" data-playgroupid="17">五分时时彩</a>
+                        <a href="javascript:void(0)" data-playgroupid="18">江苏快3</a>
+                        <a href="javascript:void(0)" data-playgroupid="19">湖北快3</a>
+                        <a href="javascript:void(0)" data-playgroupid="20">安徽快3</a>
+                        <a href="javascript:void(0)" data-playgroupid="21">吉林快3</a>
+                        <a href="javascript:void(0)" data-playgroupid="10">重庆幸运农场</a>
+                        <a href="javascript:void(0)" data-playgroupid="11">广东快乐十分</a>
+                        <a href="javascript:void(0)" data-playgroupid="7">北京28</a>
+                        <a href="javascript:void(0)" data-playgroupid="8">北京快乐8</a>
+                        <a href="javascript:void(0)" data-playgroupid="24">广东11选5</a>
+                    </div>
+                </div>
+                <div class="wrap_select at corl1 hide kjjg_hz_style" id="subNav_3">
+                    <div>
+                        <a href="javascript:void(0)" data-playgroupid="6">六合彩</a>
+                        <a href="javascript:void(0)" data-playgroupid="4">体彩排列3</a>
+                        <a href="javascript:void(0)" data-playgroupid="5">福彩3D</a>
+                        <a href="javascript:void(0)" data-playgroupid="12">双色球</a>
+                    </div>
+                </div>
+                <div class="wrap_select at corl1 hide kjjg_hz_style" id="subNav_4">
+                    <div>
+                        <a href="javascript:void(0)" data-playgroupid="6">六合彩</a>
+                        <a href="javascript:void(0)" data-playgroupid="4">体彩排列3</a>
+                        <a href="javascript:void(0)" data-playgroupid="5">福彩3D</a>
+                        <a href="javascript:void(0)" data-playgroupid="7">北京28</a>
+                        <a href="javascript:void(0)" data-playgroupid="12">双色球</a>
+                    </div>
+                </div>
+                <div class="wrap_select at corl1 hide kjjg_hz_style" id="subNav_5">
+                    <div>
+                        <a href="javascript:void(0)" data-playgroupid="9">北京PK10</a>
+                        <a href="javascript:void(0)" data-playgroupid="1">重庆时时彩</a>
+                        <a href="javascript:void(0)" data-playgroupid="2">天津时时彩</a>
+                        <a href="javascript:void(0)" data-playgroupid="3">新疆时时彩</a>
+                        <a href="javascript:void(0)" data-playgroupid="18">江苏快3</a>
+                        <a href="javascript:void(0)" data-playgroupid="19">湖北快3</a>
+                        <a href="javascript:void(0)" data-playgroupid="20">安徽快3</a>
+                        <a href="javascript:void(0)" data-playgroupid="21">吉林快3</a>
+                        <a href="javascript:void(0)" data-playgroupid="10">重庆幸运农场</a>
+                        <a href="javascript:void(0)" data-playgroupid="11">广东快乐十分</a>
+                        <a href="javascript:void(0)" data-playgroupid="8">北京快乐8</a>
+                        <a href="javascript:void(0)" data-playgroupid="24" class="last">广东11选5</a>
+                    </div>
+                </div>
+                <div class="wrap_select at corl1 hide kjjg_hz_style" id="subNav_6">
+                    <div>
+                        <a href="javascript:void(0)" data-playgroupid="14">幸运飞艇</a>
+                        <a href="javascript:void(0)" data-playgroupid="6">香港六合彩</a>
+                    </div>
+                </div>
+                <div class="wrap_select at corl1 hide kjjg_hz_style" id="subNav_7">
+                    <div>
+                        <a href="javascript:void(0)" data-playgroupid="23">极速PK10</a>
+                        <a href="javascript:void(0)" data-playgroupid="15">分分时时彩</a>
+                        <a href="javascript:void(0)" data-playgroupid="16">两分时时彩</a>
+                        <a href="javascript:void(0)" data-playgroupid="13">三分时时彩</a>
+                        <a href="javascript:void(0)" data-playgroupid="17">五分时时彩</a>
+                    </div>
+                </div>
+                <div class="wrap_select at corl1 hide" id="subNav_8">
+                    <div class="zx" style="display:block;">
+                        <p>精确搜索：</p>
+                        <select class="kjTime">
+                            <option value="t1">今天开奖</option>
+                            <option value="t2">昨天开奖</option>
+                            <option value="t3">三天内开奖</option>
+                        </select>
+                        <select class="kjCz">
+                            <option value="6">香港六合彩</option>
+                            <option value="9">北京PK10</option>
+                            <option value="23">极速PK10</option>
+                            <option value="14">幸运飞艇</option>
+                            <option value="15">分分时时彩</option>
+                            <option value="1">重庆时时彩</option>
+                            <option value="2">天津时时彩</option>
+                            <option value="3">新疆时时彩</option>
+                            <option value="16">两分时时彩</option>
+                            <option value="13">三分时时彩</option>
+                            <option value="17">五分时时彩</option>
+                            <option value="18">江苏快3</option>
+                            <option value="19">湖北快3</option>
+                            <option value="20">安徽快3</option>
+                            <option value="21">吉林快3</option>
+                            <option value="10">重庆幸运农场</option>
+                            <option value="11">广东快乐十分</option>
+                            <option value="4">体育排列3</option>
+                            <option value="5">福彩3D</option>
+                            <option value="7">北京28</option>
+                            <option value="8">北京快乐8</option>
+                            <option value="24">广东11选5</option>
+                            <option value="12">双色球</option>
+                        </select>
+                        <input class="inp1" type="text" name="qihao" placeholder="输入期数"/>
+                        <input class="inp2" type="submit" onclick="sousuokjhm()" value="搜索" name=""/>
+                    </div>
+                </div>
+
+                <div class="Thelottery">
+
+                </div>
+                <div class="Color_type"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    function openHyzx(module) {
+        if (typeof module == 'undefined') {
+            module = '';
+        }
+        if (typeof $.cookie("uid") == 'undefined' || typeof $.cookie("token") == 'undefined') {
+            alert("请先登录");
+            if ($("#loginAccount1").length > 0) {
+                $("#loginAccount1").focus();
+                return;
+            }
+            window.location.href = "/main.html";
+            return;
+        }
+        windowOpen('/member/index.html?module=' + module, '会员中心', 1250, 834);
+    }
+
+    function openGcdt(module) {
+        if (typeof module == 'undefined') {
+            module = '';
+        }
+        windowOpenBlank('/ssc/index.html?module=' + module);
+        
+    }
+
+    function goZst(url) {
+        window.open('/ssc/'+ url +'.html?type=1');
+    }
+
+    function openZstIndex(module) {
+        if (typeof module == 'undefined') {
+            module = '';
+        }
+        windowOpenBlank('/ssc/index.html?module=' + module);
+        
+    }
+    function refreshYzm(obj) {
+        var src = $(obj).attr("src");
+        var params = getRequest(src);
+
+        src = "/code/yzm?timestamp=" + (new Date()).getTime();
+        $.each(params, function(index, value) {
+            src += '&' + value.key + '=' + value.value;
+        });
+        $(obj).attr("src", src);
+    }
+
+    function showLoading() {
+        layer.load(2, {
+            shade: [0.1,'#000'] //0.1透明度的白色背景
+        })
+    }
+    function hideLoading() {
+        layer.closeAll();
+    }
+</script><script type="text/javascript" src="/static/theme/mainTheme/400w/js/jquery.min.js?v=2017"></script><!--jQuery库-->
+<script type="text/javascript" src="/static/theme/mainTheme/400w/js/scrollanim.min.js?v=2017"></script> <!--"动画库"-->
+<script src="/static/theme/mainTheme/400w/js/type.js?v=2017"></script><!--自定义封装函数-->
+<script src="/static/theme/mainTheme/400w/js/global.js?v=20170821"></script><!--自定义封装函数-->
+<script src="/static/theme/mainTheme/400w/js/jquery.cookie.js?v=2017"></script><!--自定义封装函数-->
+<script src="/static/theme/mainTheme/400w/js/jquery.md5.js?v=2017"></script><!--自定义封装函数-->
+<script src="/static/theme/mainTheme/400w/layer/layer.js?v=2017"></script>
+<script src="/static/theme/mainTheme/400w/js/jquery.nicescroll.js?v=2017"></script>
+<script src="/static/theme/mainTheme/400w/js/dateFormat.js?v=2017"></script>
+<script src="/static/theme/mainTheme/400w/js/template.js?v=2017"></script>
+<script src="/static/theme/mainTheme/400w/js/swfobject/swfobject.js?v=2017"></script>
+<script src="/static/theme/mainTheme/400w/js/jquery.liMarquee.js?v=2017"></script>
+<script src="/static/theme/mainTheme/400w/js/placeholders.jquery.min.js?v=2017"></script>
+<script src="/static/theme/mainTheme/400w/jRange/jquery.range-min.js?v=2017"></script>
+<script>
+    // 闪烁
+    var blinkColorArr = "#fa6200|#0f3f94".split("|");
+    $(".blink").each(function() {
+        var obj = $(this);
+        setInterval(function() {
+            var tmpColor = blinkColorArr[parseInt(Math.random() * blinkColorArr.length)];
+            $(obj).css("color", tmpColor);
+        },200);
+    });
+
+
+
+    $(function() {
+        // 底部信息调用
+        function ajaxGetDbxx() {
+            ajaxRequest({
+                url: CONFIG.BASEURL + "ajaxGetWebInfo.json",
+                success: function (json) {
+                    if (json.result != 1) {
+                        return;
+                    }
+                    $(".webDbxx").html(json.webDbxx);
+                }
+            });
+        }
+
+        if ($(".webDbxx").length > 0) {
+            ajaxGetDbxx();
+        }
+    });
+
+
+</script>
+<script>
+    $(function () {
+        var caiZhong;
+        var date = new Date();
+        var year = date.getFullYear();   //返回一个表示年份的 4 位数字
+        var month = date.getMonth() + 1;   //返回表示月份的数字。返回值是 0（一月） 到 11（十二月） 之间的一个整数
+        var pageSize = 30;
+        var startTime = null;
+        var endTime = null;
+
+        $(".latyout .tabs_ce ul li").click(function () {
+            $(".Resultt .latyout .wrap_select").hide();
+            var id = $(this).data("subnav");
+            $(this).parent().find(".acti").removeClass("acti");
+            $(this).parent().find(".nob").removeClass("nob");
+            $(this).addClass("acti").addClass("nob");
+            $("#subNav_" + id).show();
+        });
+
+        $(".Resultt .latyout .wrap_select a").click(function () {
+            $(".Resultt .latyout .wrap_select a.acti").removeClass("acti");
+            $(this).addClass("acti");
+            var playGroupId = $(this).data("playgroupid");
+            getData(playGroupId);
+        });
+        caiZhong = '';
+
+        if (typeof caiZhong == 'undefined' || !caiZhong) {
+            getData();
+        } else {
+            getData(Tools.parseInt(caiZhong));
+            $("#subNav_1 div a[data-playgroupid='" + Tools.parseInt(caiZhong) + "']").trigger("click");
+        }
+    });
+
+    function sousuokjhm() {
+        var strTi = $(".zx .kjTime").find("option:selected").val();
+        var strCz = $(".zx .kjCz").find("option:selected").val();
+        var strQihao = $("input[name='qihao']").val();
+        getSouData(strCz, strTi, strQihao);
+    }
+
+    function showLoading() {
+        layer.load(2, {
+            shade: [0.1, '#000'] //0.1透明度的白色背景
+        });
+        $(".layui-layer-loading").css({"width": "auto", "left": "50%"});
+    }
+
+    function hideLoading() {
+        layer.closeAll();
+    }
+
+    function getSouData(playGroupId, startT, qiHao) {
+        ajaxRequest({
+            url: "/ssc/ajaxGetHistory.json",
+            data: {
+                playGroupId: playGroupId,
+                pageIndex: 1,
+                number: qiHao,
+                startT: startT,
+                pageSize: 120
+            },
+            beforeSend: function () {
+                showLoading();
+            },
+            success: function (json) {
+                if (json.result != 1) {
+                    return;
+                }
+                renderData(json.sscHistoryList);
+            },
+            complete: function () {
+                hideLoading();
+            }
+        });
+    }
+
+    function getData(playGroupId) {
+        if (typeof playGroupId == 'undefined' || playGroupId == null) {
+            var type = 0;
+            ajaxRequest({
+                
+                url: "/ssc/getAllDataHistory.json",
+                data: {
+                    type: type
+                },
+                beforeSend: function () {
+                    showLoading();
+                },
+                success: function (json) {
+                    if (json.result != 1) {
+                        return;
+                    }
+                    renderAllData(json.sscHistoryList);
+                },
+                complete: function () {
+                    hideLoading();
+                }
+            });
+        } else {
+            ajaxRequest({
+                url: "/ssc/ajaxGetHistory.json",
+                data: {
+                    playGroupId: playGroupId,
+                    pageIndex: 1,
+                    pageSize: 30
+                },
+                beforeSend: function () {
+                    showLoading();
+                },
+                success: function (json) {
+                    if (json.result != 1) {
+                        return;
+                    }
+                    renderData(json.sscHistoryList);
+                },
+                complete: function () {
+                    hideLoading();
+                }
+            });
+        }
+    }
+
+    var html_sflhc = '';
+
+    function renderAllData(data) {
+        var str = '';
+        str += '<ul>';
+
+        var date = new Date();
+        var now = date.getTime();  //getTime() 返回距 1970 年 1 月 1 日之间的毫秒数
+        date.setDate(date.getDate() + 1); //setDate() 用于设置一个月的某一天，getDate()可返回月份的某一天
+        var todayEnd = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate() + " 0:0:0";
+        todayEnd = (new Date(todayEnd)).getTime();
+        var leftTime = Math.floor((todayEnd - now) / 1000);
+
+        $.each(data, function (index, value) {
+            var playGroupId = Tools.parseInt(value.playGroupId);
+            if ($.inArray(playGroupId, [1, 2, 3, 13, 15, 16, 17, 24]) >= 0) {
+                var obj = {};
+
+                obj.playGroupId = playGroupId;
+                obj.number = value.number;
+
+                var timeCha = value.openTime - leftTime;
+                obj.isToday = !isNaN(timeCha) && timeCha <= 0 ? true : false;
+
+                var numArr = value.openCode.split(",");
+                var num1 = Tools.parseInt(numArr[0]);
+                var num2 = Tools.parseInt(numArr[1]);
+                var num3 = Tools.parseInt(numArr[2]);
+                var num4 = Tools.parseInt(numArr[3]);
+                var num5 = Tools.parseInt(numArr[4]);
+
+                if (playGroupId == 24) {
+                    num1 = parseInt(num1) >= 10 ? num1 : ('0' + num1);
+                    num2 = parseInt(num2) >= 10 ? num2 : ('0' + num2);
+                    num3 = parseInt(num3) >= 10 ? num3 : ('0' + num3);
+                    num4 = parseInt(num4) >= 10 ? num4 : ('0' + num4);
+                    num5 = parseInt(num5) >= 10 ? num5 : ('0' + num5);
+                }
+
+                obj.num1 = num1;
+                obj.num2 = num2;
+                obj.num3 = num3;
+                obj.num4 = num4;
+                obj.num5 = num5;
+                var sum = num1 + num2 + num3 + num4 + num5;
+
+                obj.sum = sum;
+
+                obj.ds = sum % 2 == 0 ? '双' : '单';
+                obj.dx = 0 <= sum && sum <= 22 ? '小' : '大';
+                var cha = num1 - num5;
+                obj.lh = cha == 0 ? '和' : (cha > 0 ? '龙' : '虎');
+                var html = template("template_" + playGroupId, obj);
+                str += html;
+            } else if ($.inArray(playGroupId, [12]) >= 0) {
+                var obj = {};
+
+                obj.openTime = value.openTime;
+                obj.playGroupId = playGroupId;
+                obj.number = value.number;
+
+                var numArr = value.openCode.split(",");
+                var num1 = Tools.parseInt(numArr[0]);
+                var num2 = Tools.parseInt(numArr[1]);
+                var num3 = Tools.parseInt(numArr[2]);
+                var num4 = Tools.parseInt(numArr[3]);
+                var num5 = Tools.parseInt(numArr[4]);
+                var num6 = Tools.parseInt(numArr[5]);
+                var num7 = Tools.parseInt(numArr[6]);
+
+
+                num1 = parseInt(num1) >= 10 ? num1 : ('0' + num1);
+                num2 = parseInt(num2) >= 10 ? num2 : ('0' + num2);
+                num3 = parseInt(num3) >= 10 ? num3 : ('0' + num3);
+                num4 = parseInt(num4) >= 10 ? num4 : ('0' + num4);
+                num5 = parseInt(num5) >= 10 ? num5 : ('0' + num5);
+                num6 = parseInt(num6) >= 10 ? num6 : ('0' + num6);
+                num7 = parseInt(num7) >= 10 ? num7 : ('0' + num7);
+
+
+                obj.num1 = num1;
+                obj.num2 = num2;
+                obj.num3 = num3;
+                obj.num4 = num4;
+                obj.num5 = num5;
+                obj.num6 = num6;
+                obj.num7 = num7;
+
+                var html = template("template_" + playGroupId, obj);
+                str += html;
+            } else if ($.inArray(playGroupId, [4, 5, 18, 19, 20, 21]) >= 0) {
+                var obj = {};
+
+                obj.playGroupId = playGroupId;
+                obj.number = value.number;
+
+                var timeCha = value.openTime - leftTime;
+                obj.isToday = !isNaN(timeCha) && timeCha <= 0 ? true : false;
+
+                var numArr = value.openCode.split(",");
+                var num1 = Tools.parseInt(numArr[0]);
+                var num2 = Tools.parseInt(numArr[1]);
+                var num3 = Tools.parseInt(numArr[2]);
+
+                if (playGroupId == 18 || playGroupId == 19 || playGroupId == 20 || playGroupId == 21) {
+                    var hezhi = num1 + num2 + num3;
+                    obj.danS = hezhi % 2 == 0 ? '双' : '单';
+                    obj.daX = hezhi <= 10 ? '小' : '大';
+                    obj.hezhi = hezhi;
+                }
+
+                obj.num1 = num1;
+                obj.num2 = num2;
+                obj.num3 = num3;
+
+                var html = template("template_" + playGroupId, obj);
+
+                if (playGroupId == 5) {
+                    str += html;
+                    str += '<span class="sflhc_str"></span>';
+                } else {
+                    str += html;
+                }
+            } else if ($.inArray(playGroupId, [6]) >= 0) {
+                var obj = {};
+
+                obj.playGroupId = playGroupId;
+                obj.number = value.number;
+
+                var timeCha = value.openTime - leftTime;
+                obj.isToday = !isNaN(timeCha) && timeCha <= 0 ? true : false;
+
+                var numArr = value.openCode.split(",");
+                var num1 = Tools.parseInt(numArr[0]);
+                var num2 = Tools.parseInt(numArr[1]);
+                var num3 = Tools.parseInt(numArr[2]);
+                var num4 = Tools.parseInt(numArr[3]);
+                var num5 = Tools.parseInt(numArr[4]);
+                var num6 = Tools.parseInt(numArr[5]);
+                var num7 = Tools.parseInt(numArr[6]);
+
+                obj.num1 = num1;
+                obj.num2 = num2;
+                obj.num3 = num3;
+                obj.num4 = num4;
+                obj.num5 = num5;
+                obj.num6 = num6;
+                obj.num7 = num7;
+
+                obj.sx1 = getSxName(num1);
+
+                obj.sx2 = getSxName(num2);
+                obj.sx3 = getSxName(num3);
+                obj.sx4 = getSxName(num4);
+                obj.sx5 = getSxName(num5);
+                obj.sx6 = getSxName(num6);
+                obj.sx7 = getSxName(num7);
+                obj.bose1 = getBose(num1);
+                obj.bose2 = getBose(num2);
+                obj.bose3 = getBose(num3);
+                obj.bose4 = getBose(num4);
+                obj.bose5 = getBose(num5);
+                obj.bose6 = getBose(num6);
+                obj.bose7 = getBose(num7);
+
+                var html = template("template_" + playGroupId, obj)
+                if (playGroupId == 22) {
+                    html_sflhc = html;
+                } else {
+                    str += html;
+                }
+            } else if ($.inArray(playGroupId, [7]) >= 0) {
+                var obj = {};
+
+                obj.playGroupId = playGroupId;
+                obj.number = value.number;
+
+                var timeCha = value.openTime - leftTime;
+                obj.isToday = !isNaN(timeCha) && timeCha <= 0 ? true : false;
+
+                var numArr = value.openCode.split(",");
+                var num1 = Tools.parseInt(numArr[0]);
+                var num2 = Tools.parseInt(numArr[1]);
+                var num3 = Tools.parseInt(numArr[2]);
+
+                obj.num1 = num1;
+                obj.num2 = num2;
+                obj.num3 = num3;
+
+                var html = template("template_" + playGroupId, obj);
+                str += html;
+            } else if ($.inArray(playGroupId, [8]) >= 0) {
+                var obj = {};
+
+                obj.playGroupId = playGroupId;
+                obj.number = value.number;
+
+                var timeCha = value.openTime - leftTime;
+                obj.isToday = !isNaN(timeCha) && timeCha <= 0 ? true : false;
+
+                var numArr = value.openCode.split(",");
+                var num1 = Tools.parseInt(numArr[0]);
+                var num2 = Tools.parseInt(numArr[1]);
+                var num3 = Tools.parseInt(numArr[2]);
+                var num4 = Tools.parseInt(numArr[3]);
+                var num5 = Tools.parseInt(numArr[4]);
+                var num6 = Tools.parseInt(numArr[5]);
+                var num7 = Tools.parseInt(numArr[6]);
+                var num8 = Tools.parseInt(numArr[7]);
+                var num9 = Tools.parseInt(numArr[8]);
+                var num10 = Tools.parseInt(numArr[9]);
+                var num11 = Tools.parseInt(numArr[10]);
+                var num12 = Tools.parseInt(numArr[11]);
+                var num13 = Tools.parseInt(numArr[12]);
+                var num14 = Tools.parseInt(numArr[13]);
+                var num15 = Tools.parseInt(numArr[14]);
+                var num16 = Tools.parseInt(numArr[15]);
+                var num17 = Tools.parseInt(numArr[16]);
+                var num18 = Tools.parseInt(numArr[17]);
+                var num19 = Tools.parseInt(numArr[18]);
+                var num20 = Tools.parseInt(numArr[19]);
+
+                obj.num1 = num1;
+                obj.num2 = num2;
+                obj.num3 = num3;
+                obj.num4 = num4;
+                obj.num5 = num5;
+                obj.num6 = num6;
+                obj.num7 = num7;
+                obj.num8 = num8;
+                obj.num9 = num9;
+                obj.num10 = num10;
+                obj.num11 = num11;
+                obj.num12 = num12;
+                obj.num13 = num13;
+                obj.num14 = num14;
+                obj.num15 = num15;
+                obj.num16 = num16;
+                obj.num17 = num17;
+                obj.num18 = num18;
+                obj.num19 = num19;
+                obj.num20 = num20;
+
+                var html = template("template_" + playGroupId, obj);
+                str += html;
+            } else if ($.inArray(playGroupId, [9, 14, 23]) >= 0) {
+                var obj = {};
+
+                obj.playGroupId = playGroupId;
+                obj.number = value.number;
+
+                var timeCha = value.openTime - leftTime;
+                obj.isToday = !isNaN(timeCha) && timeCha <= 0 ? true : false;
+
+                var numArr = value.openCode.split(",");
+                var num1 = Tools.parseInt(numArr[0]);
+                var num2 = Tools.parseInt(numArr[1]);
+                var num3 = Tools.parseInt(numArr[2]);
+                var num4 = Tools.parseInt(numArr[3]);
+                var num5 = Tools.parseInt(numArr[4]);
+                var num6 = Tools.parseInt(numArr[5]);
+                var num7 = Tools.parseInt(numArr[6]);
+                var num8 = Tools.parseInt(numArr[7]);
+                var num9 = Tools.parseInt(numArr[8]);
+                var num10 = Tools.parseInt(numArr[9]);
+
+                obj.num1 = num1;
+                obj.num2 = num2;
+                obj.num3 = num3;
+                obj.num4 = num4;
+                obj.num5 = num5;
+                obj.num6 = num6;
+                obj.num7 = num7;
+                obj.num8 = num8;
+                obj.num9 = num9;
+                obj.num10 = num10;
+
+                var html = template("template_" + playGroupId, obj);
+                str += html;
+            } else if ($.inArray(playGroupId, [10, 11]) >= 0) {
+                var obj = {};
+
+                obj.playGroupId = playGroupId;
+                obj.number = value.number;
+
+                var timeCha = value.openTime - leftTime;
+                obj.isToday = !isNaN(timeCha) && timeCha <= 0 ? true : false;
+
+                var numArr = value.openCode.split(",");
+                var num1 = Tools.parseInt(numArr[0]);
+                var num2 = Tools.parseInt(numArr[1]);
+                var num3 = Tools.parseInt(numArr[2]);
+                var num4 = Tools.parseInt(numArr[3]);
+                var num5 = Tools.parseInt(numArr[4]);
+                var num6 = Tools.parseInt(numArr[5]);
+                var num7 = Tools.parseInt(numArr[6]);
+                var num8 = Tools.parseInt(numArr[7]);
+
+                obj.num1 = num1;
+                obj.num2 = num2;
+                obj.num3 = num3;
+                obj.num4 = num4;
+                obj.num5 = num5;
+                obj.num6 = num6;
+                obj.num7 = num7;
+                obj.num8 = num8;
+
+                var sum = num1 + num2 + num3 + num4 + num5 + num6 + num7 + num8;
+                obj.sum = sum;
+
+                obj.str1 = sum;
+                obj.str2 = sum % 2 == 0 ? '双' : '单';
+                obj.str3 = sum == 84 ? '和' : (sum < 84 ? '小' : '大');
+                obj.str4 = (sum % 10) >= 5 ? '尾大' : '尾小';
+                var cha = num1 - num8;
+                obj.str5 = cha == 0 ? '和' : (cha > 0 ? '龙' : '虎');
+
+                var html = template("template_" + playGroupId, obj);
+                str += html;
+            }
+        });
+        str += '</ul>';
+        $('.Color_type').hide();
+        $(".Thelottery").html(str).show();
+        $(".Thelottery .sflhc_str").html(html_sflhc);
+    }
+
+    function renderData(data) {
+        var str = '';
+        str += '<ul>';
+        str += '<li class="head"><span class="sp1">彩种</span><span class="sp2">期号</span><span class="sp3">开奖时间</span><span class="sp4">开奖号码</span><span class="sp5">期数（每天）</span><span class="sp6">开奖频率</span><span class="sp8">走势</span><span class="sp9">购彩</span></li>';
+        $.each(data, function (index, value) {
+            var playGroupId = Tools.parseInt(value.playGroupId);
+
+            if ($.inArray(playGroupId, [1, 2, 3, 13, 15, 16, 17, 24]) >= 0) {
+                var obj = {};
+                obj.playGroupId = playGroupId;
+                obj.number = value.number;
+                obj.openTime = Tools.formatDate(value.openTime);
+
+                var numArr = value.openCode.split(",");
+                var num1 = Tools.parseInt(numArr[0]);
+                var num2 = Tools.parseInt(numArr[1]);
+                var num3 = Tools.parseInt(numArr[2]);
+                var num4 = Tools.parseInt(numArr[3]);
+                var num5 = Tools.parseInt(numArr[4])
+
+                if (playGroupId == 24) {
+                    num1 = parseInt(num1) >= 10 ? num1 : ('0' + num1);
+                    num2 = parseInt(num2) >= 10 ? num2 : ('0' + num2);
+                    num3 = parseInt(num3) >= 10 ? num3 : ('0' + num3);
+                    num4 = parseInt(num4) >= 10 ? num4 : ('0' + num4);
+                    num5 = parseInt(num5) >= 10 ? num5 : ('0' + num5);
+                }
+
+                obj.num1 = num1;
+                obj.num2 = num2;
+                obj.num3 = num3;
+                obj.num4 = num4;
+                obj.num5 = num5;
+
+                var sum = num1 + num2 + num3 + num4 + num5;
+                obj.sum = sum;
+
+                obj.ds = sum % 2 == 0 ? '双' : '单';
+                obj.dx = 0 <= sum && sum <= 22 ? '小' : '大';
+                var cha = num1 - num2;
+                obj.lh = cha == 0 ? '和' : (cha > 0 ? '龙' : '虎');
+                var html = template("template_single_" + playGroupId, obj);
+                str += html;
+            } else if ($.inArray(playGroupId, [12]) >= 0) {
+                var obj = {};
+
+                obj.openTime = value.openTime;
+                obj.playGroupId = playGroupId;
+                obj.number = value.number;
+
+                var numArr = value.openCode.split(",");
+                var num1 = Tools.parseInt(numArr[0]);
+                var num2 = Tools.parseInt(numArr[1]);
+                var num3 = Tools.parseInt(numArr[2]);
+                var num4 = Tools.parseInt(numArr[3]);
+                var num5 = Tools.parseInt(numArr[4]);
+                var num6 = Tools.parseInt(numArr[5]);
+                var num7 = Tools.parseInt(numArr[6]);
+
+
+                num1 = parseInt(num1) >= 10 ? num1 : ('0' + num1);
+                num2 = parseInt(num2) >= 10 ? num2 : ('0' + num2);
+                num3 = parseInt(num3) >= 10 ? num3 : ('0' + num3);
+                num4 = parseInt(num4) >= 10 ? num4 : ('0' + num4);
+                num5 = parseInt(num5) >= 10 ? num5 : ('0' + num5);
+                num6 = parseInt(num6) >= 10 ? num6 : ('0' + num6);
+                num7 = parseInt(num7) >= 10 ? num7 : ('0' + num7);
+
+
+                obj.num1 = num1;
+                obj.num2 = num2;
+                obj.num3 = num3;
+                obj.num4 = num4;
+                obj.num5 = num5;
+                obj.num6 = num6;
+                obj.num7 = num7;
+
+                var html = template("template_single_" + playGroupId, obj);
+                str += html;
+            } else if ($.inArray(playGroupId, [4, 5, 18, 19, 20, 21]) >= 0) {
+                var obj = {};
+
+                obj.playGroupId = playGroupId;
+                obj.number = value.number;
+                obj.openTime = Tools.formatDate(value.openTime);
+
+                var numArr = value.openCode.split(",");
+                var num1 = Tools.parseInt(numArr[0]);
+                var num2 = Tools.parseInt(numArr[1]);
+                var num3 = Tools.parseInt(numArr[2]);
+
+                obj.num1 = num1;
+                obj.num2 = num2;
+                obj.num3 = num3;
+
+                var html = template("template_single_" + playGroupId, obj);
+                str += html;
+            } else if ($.inArray(playGroupId, [6, 22]) >= 0) {
+                var obj = {};
+                obj.playGroupId = playGroupId;
+                obj.number = value.number;
+                obj.openTime = Tools.formatDate(value.openTime);
+                var numArr = value.openCode.split(",");
+
+                var num1 = Tools.parseInt(numArr[0]);
+                var num2 = Tools.parseInt(numArr[1]);
+                var num3 = Tools.parseInt(numArr[2]);
+                var num4 = Tools.parseInt(numArr[3]);
+                var num5 = Tools.parseInt(numArr[4]);
+                var num6 = Tools.parseInt(numArr[5]);
+                var num7 = Tools.parseInt(numArr[6]);
+                obj.num1 = num1;
+                obj.num2 = num2;
+                obj.num3 = num3;
+                obj.num4 = num4;
+                obj.num5 = num5;
+                obj.num6 = num6;
+                obj.num7 = num7;
+
+                obj.sx1 = getSxName(num1);
+
+                obj.sx2 = getSxName(num2);
+                obj.sx3 = getSxName(num3);
+                obj.sx4 = getSxName(num4);
+                obj.sx5 = getSxName(num5);
+                obj.sx6 = getSxName(num6);
+                obj.sx7 = getSxName(num7);
+                obj.bose1 = getBose(num1);
+                obj.bose2 = getBose(num2);
+                obj.bose3 = getBose(num3);
+                obj.bose4 = getBose(num4);
+                obj.bose5 = getBose(num5);
+                obj.bose6 = getBose(num6);
+                obj.bose7 = getBose(num7);
+
+                var html = template("template_single_" + playGroupId, obj);
+                str += html;
+            } else if ($.inArray(playGroupId, [7]) >= 0) {
+                var obj = {};
+
+                obj.playGroupId = playGroupId;
+                obj.number = value.number;
+                obj.openTime = Tools.formatDate(value.openTime);
+                var numArr = value.openCode.split(",");
+
+                var num1 = Tools.parseInt(numArr[0]);
+                var num2 = Tools.parseInt(numArr[1]);
+                var num3 = Tools.parseInt(numArr[2]);
+
+                obj.num1 = num1;
+                obj.num2 = num2;
+                obj.num3 = num3;
+
+                var html = template("template_single_" + playGroupId, obj);
+                str += html;
+            } else if ($.inArray(playGroupId, [8]) >= 0) {
+                var obj = {};
+
+                obj.playGroupId = playGroupId;
+                obj.number = value.number;
+                obj.openTime = Tools.formatDate(value.openTime);
+                var numArr = value.openCode.split(",");
+
+                var num1 = Tools.parseInt(numArr[0]);
+                var num2 = Tools.parseInt(numArr[1]);
+                var num3 = Tools.parseInt(numArr[2]);
+                var num4 = Tools.parseInt(numArr[3]);
+                var num5 = Tools.parseInt(numArr[4]);
+                var num6 = Tools.parseInt(numArr[5]);
+                var num7 = Tools.parseInt(numArr[6]);
+                var num8 = Tools.parseInt(numArr[7]);
+                var num9 = Tools.parseInt(numArr[8]);
+                var num10 = Tools.parseInt(numArr[9]);
+                var num11 = Tools.parseInt(numArr[10]);
+                var num12 = Tools.parseInt(numArr[11]);
+                var num13 = Tools.parseInt(numArr[12]);
+                var num14 = Tools.parseInt(numArr[13]);
+                var num15 = Tools.parseInt(numArr[14]);
+                var num16 = Tools.parseInt(numArr[15]);
+                var num17 = Tools.parseInt(numArr[16]);
+                var num18 = Tools.parseInt(numArr[17]);
+                var num19 = Tools.parseInt(numArr[18]);
+                var num20 = Tools.parseInt(numArr[19]);
+
+                obj.num1 = num1;
+                obj.num2 = num2;
+                obj.num3 = num3;
+                obj.num4 = num4;
+                obj.num5 = num5;
+                obj.num6 = num6;
+                obj.num7 = num7;
+                obj.num8 = num8;
+                obj.num9 = num9;
+                obj.num10 = num10;
+                obj.num11 = num11;
+                obj.num12 = num12;
+                obj.num13 = num13;
+                obj.num14 = num14;
+                obj.num15 = num15;
+                obj.num16 = num16;
+                obj.num17 = num17;
+                obj.num18 = num18;
+                obj.num19 = num19;
+                obj.num20 = num20;
+
+                var html = template("template_single_" + playGroupId, obj);
+                str += html;
+            } else if ($.inArray(playGroupId, [9, 14, 23]) >= 0) {
+                var obj = {};
+
+                obj.playGroupId = playGroupId;
+                obj.number = value.number;
+                obj.openTime = Tools.formatDate(value.openTime);
+                var numArr = value.openCode.split(",");
+
+                var num1 = Tools.parseInt(numArr[0]);
+                var num2 = Tools.parseInt(numArr[1]);
+                var num3 = Tools.parseInt(numArr[2]);
+                var num4 = Tools.parseInt(numArr[3]);
+                var num5 = Tools.parseInt(numArr[4]);
+                var num6 = Tools.parseInt(numArr[5]);
+                var num7 = Tools.parseInt(numArr[6]);
+                var num8 = Tools.parseInt(numArr[7]);
+                var num9 = Tools.parseInt(numArr[8]);
+                var num10 = Tools.parseInt(numArr[9]);
+
+                obj.num1 = num1;
+                obj.num2 = num2;
+                obj.num3 = num3;
+                obj.num4 = num4;
+                obj.num5 = num5;
+                obj.num6 = num6;
+                obj.num7 = num7;
+                obj.num8 = num8;
+                obj.num9 = num9;
+                obj.num10 = num10;
+
+                var html = template("template_single_" + playGroupId, obj);
+                str += html;
+            } else if ($.inArray(playGroupId, [10, 11]) >= 0) {
+                var obj = {};
+
+                obj.playGroupId = playGroupId;
+                obj.number = value.number;
+                obj.openTime = Tools.formatDate(value.openTime);
+                var numArr = value.openCode.split(",");
+
+                var num1 = Tools.parseInt(numArr[0]);
+                var num2 = Tools.parseInt(numArr[1]);
+                var num3 = Tools.parseInt(numArr[2]);
+                var num4 = Tools.parseInt(numArr[3]);
+                var num5 = Tools.parseInt(numArr[4]);
+                var num6 = Tools.parseInt(numArr[5]);
+                var num7 = Tools.parseInt(numArr[6]);
+                var num8 = Tools.parseInt(numArr[7]);
+
+                obj.num1 = num1;
+                obj.num2 = num2;
+                obj.num3 = num3;
+                obj.num4 = num4;
+                obj.num5 = num5;
+                obj.num6 = num6;
+                obj.num7 = num7;
+                obj.num8 = num8;
+
+                var sum = num1 + num2 + num3 + num4 + num5 + num6 + num7 + num8;
+                obj.sum = sum;
+
+                obj.str1 = sum;
+                obj.str2 = sum % 2 == 0 ? '双' : '单';
+                obj.str3 = sum == 84 ? '和' : (sum < 84 ? '小' : '大');
+                obj.str4 = (sum % 10) >= 5 ? '尾大' : '尾小';
+                var cha = num1 - num8;
+                obj.str5 = cha == 0 ? '和' : (cha > 0 ? '龙' : '虎');
+
+                var html = template("template_single_" + playGroupId, obj);
+                str += html;
+            }
+        });
+        str += '</ul>';
+        $('.Thelottery').hide();
+        $(".Color_type").html(str).show();
+
+    }
+
+    function clickxuan() {
+        var show = $('.men_list .left_layout').css('display');
+        if (show == 'none') {
+            $('.men_list .left_layout').slideDown(300);
+            $(".men_list .logo a h1 i").removeClass("acti1");
+        } else {
+            $('.men_list .left_layout').slideUp(300);
+            $(".men_list .logo a h1 i").addClass("acti1");
+        }
+    }
+
+    $(function () {
+        autobox(".Customerservice", 1, 1180, 0);
+        click_addname(".Resultt .latyout .wrap_select a", "acti", "click");
+        // slide_nav(".men_list .logo", ".left_layout", "acti");
+    });
+</script>
+{literal}
+<script type="text/html" id="template_9">
+    <li class="pk10">
+        <div class="box1">
+            {{if isToday}}
+            <var>今日开奖</var>
+            {{else}}
+            <var class="no"></var>
+            {{/if}}
+            <div class="text">
+                <h3>北京PK10<span>第{{number}}期</span></h3>
+                <p>每天180期</p>
+            </div>
+        </div>
+        <div class="box2">
+            <div class="box_num">
+                <span class="bg-{{num1}}">{{num1}}</span>
+                <span class="bg-{{num2}}">{{num2}}</span>
+                <span class="bg-{{num3}}">{{num3}}</span>
+                <span class="bg-{{num4}}">{{num4}}</span>
+                <span class="bg-{{num5}}">{{num5}}</span>
+                <span class="bg-{{num6}}">{{num6}}</span>
+                <span class="bg-{{num7}}">{{num7}}</span>
+                <span class="bg-{{num8}}">{{num8}}</span>
+                <span class="bg-{{num9}}">{{num9}}</span>
+                <span class="bg-{{num10}}">{{num10}}</span>
+                <a href="javascript:void(0)" class="a1" onclick="openGcdt('gcdt/pk10')">详情</a>
+            </div>
+            <p>
+            </p>
+        </div>
+        <div class="box3">
+            <a href="/kjjg.html?playGroupId=9">历史开奖</a>
+            <a href="/ssc/zst/pk10.html" target="_blank">走势图表</a>
+        </div>
+        <div class="box4">
+            <a href="javascript:void(0)" class="a1" onclick="openGcdt('gcdt/pk10')">购买</a>
+        </div>
+    </li>
+</script>
+<script type="text/html" id="template_1">
+    <li>
+        <div class="box1">
+            {{if isToday}}
+            <var>今日开奖</var>
+            {{else}}
+            <var class="no"></var>
+            {{/if}}
+            <div class="text">
+                <h3>重庆时时彩<span>第{{number}}期</span></h3>
+                <p>每天120期</p>
+            </div>
+        </div>
+        <div class="box2">
+            <div class="box_num">
+                <span>{{num1}}</span>
+                <span>{{num2}}</span>
+                <span>{{num3}}</span>
+                <span>{{num4}}</span>
+                <span>{{num5}}</span>
+                <a href="javascript:void(0)" class="a1" onclick="openGcdt('gcdt/cqssc')">详情</a>
+            </div>
+            <p>
+                <i>{{sum}}</i>
+                <i>{{ds}}</i>
+                <i>{{dx}}</i>
+                <i>{{lh}}</i>
+            </p>
+        </div>
+        <div class="box3">
+            <a href="/kjjg.html?playGroupId=1">历史开奖</a>
+            <a href="/ssc/zst/cqssc.html" target="_blank">走势图表</a>
+        </div>
+        <div class="box4">
+            <a href="javascript:void(0)" class="a1" onclick="openGcdt('gcdt/cqssc')">购买</a>
+        </div>
+    </li>
+</script>
+<script type="text/html" id="template_2">
+    <li>
+        <div class="box1">
+            {{if isToday}}
+            <var>今日开奖</var>
+            {{else}}
+            <var class="no"></var>
+            {{/if}}
+            <div class="text">
+                <h3>天津时时彩<span>第{{number}}期</span></h3>
+                <p>每天84期</p>
+            </div>
+        </div>
+        <div class="box2">
+            <div class="box_num">
+                <span>{{num1}}</span>
+                <span>{{num2}}</span>
+                <span>{{num3}}</span>
+                <span>{{num4}}</span>
+                <span>{{num5}}</span>
+                <a href="javascript:void(0)" class="a1" onclick="openGcdt('gcdt/tjssc')">详情</a>
+            </div>
+            <p>
+                <i>{{sum}}</i>
+                <i>{{ds}}</i>
+                <i>{{dx}}</i>
+                <i>{{lh}}</i>
+            </p>
+        </div>
+        <div class="box3">
+            <a href="/kjjg.html?playGroupId=2">历史开奖</a>
+            <a href="/ssc/zst/tjssc.html" target="_blank">走势图表</a>
+        </div>
+        <div class="box4">
+            <a href="javascript:void(0)" class="a1" onclick="openGcdt('gcdt/tjssc')">购买</a>
+        </div>
+    </li>
+</script>
+<script type="text/html" id="template_3">
+    <li>
+        <div class="box1">
+            {{if isToday}}
+            <var>今日开奖</var>
+            {{else}}
+            <var class="no"></var>
+            {{/if}}
+            <div class="text">
+                <h3>新疆时时彩<span>第{{number}}期</span></h3>
+                <p>每天96期</p>
+            </div>
+        </div>
+        <div class="box2">
+            <div class="box_num">
+                <span>{{num1}}</span>
+                <span>{{num2}}</span>
+                <span>{{num3}}</span>
+                <span>{{num4}}</span>
+                <span>{{num5}}</span>
+                <a href="javascript:void(0)" class="a1" onclick="openGcdt('gcdt/xjssc')">详情</a>
+            </div>
+            <p>
+                <i>{{sum}}</i>
+                <i>{{ds}}</i>
+                <i>{{dx}}</i>
+                <i>{{lh}}</i>
+            </p>
+        </div>
+        <div class="box3">
+            <a href="/kjjg.html?playGroupId=3">历史开奖</a>
+            <a href="/ssc/zst/xjssc.html" target="_blank">走势图表</a>
+        </div>
+        <div class="box4">
+            <a href="javascript:void(0)" class="a1" onclick="openGcdt('gcdt/xjssc')">购买</a>
+        </div>
+    </li>
+</script>
+<script type="text/html" id="template_4">
+    <li>
+        <div class="box1">
+            {{if isToday}}
+            <var>今日开奖</var>
+            {{else}}
+            <var class="no"></var>
+            {{/if}}
+            <div class="text">
+                <h3>体彩排列3<span>第{{number}}期</span></h3>
+                <p>每天1期</p>
+            </div>
+        </div>
+        <div class="box2">
+            <div class="box_num">
+                <span>{{num1}}</span>
+                <span>{{num2}}</span>
+                <span>{{num3}}</span>
+                <a href="javascript:void(0)" class="a1" onclick="openGcdt('gcdt/pl3')">详情</a>
+            </div>
+            <p>
+            </p>
+        </div>
+        <div class="box3">
+            <a href="/kjjg.html?playGroupId=4">历史开奖</a>
+            <a href="/ssc/zst/pl3.html" target="_blank">走势图表</a>
+        </div>
+        <div class="box4">
+            <a href="javascript:void(0)" class="a1" onclick="openGcdt('gcdt/pl3')">购买</a>
+        </div>
+    </li>
+</script>
+<script type="text/html" id="template_5">
+    <li>
+        <div class="box1">
+            {{if isToday}}
+            <var>今日开奖</var>
+            {{else}}
+            <var class="no"></var>
+            {{/if}}
+            <div class="text">
+                <h3>福彩3D<span>第{{number}}期</span></h3>
+                <p>每天1期</p>
+            </div>
+        </div>
+        <div class="box2">
+            <div class="box_num">
+                <span>{{num1}}</span>
+                <span>{{num2}}</span>
+                <span>{{num3}}</span>
+                <a href="javascript:void(0)" class="a1" onclick="openGcdt('gcdt/fc3d')">详情</a>
+            </div>
+            <p>
+            </p>
+        </div>
+        <div class="box3">
+            <a href="/kjjg.html?playGroupId=5">历史开奖</a>
+            <a href="/ssc/zst/fc3d.html" target="_blank">走势图表</a>
+        </div>
+        <div class="box4">
+            <a href="javascript:void(0)" class="a1" onclick="openGcdt('gcdt/fc3d')">购买</a>
+        </div>
+    </li>
+</script>
+<script type="text/html" id="template_6">
+    <li>
+        <div class="box1">
+            {{if isToday}}
+            <var>今日开奖</var>
+            {{else}}
+            <var class="no"></var>
+            {{/if}}
+            <div class="text">
+                <h3>六合彩<span>第{{number}}期</span></h3>
+                <p>每周二、四、六 21:30开奖</p>
+            </div>
+        </div>
+        <div class="box2">
+            <div class="box_num">
+                <span class="{{if bose1 == 1}}col0{{else if bose1 == 2}}col1{{/if}}">{{num1}}</span>
+                <span class="{{if bose2 == 1}}col0{{else if bose2 == 2}}col1{{/if}}">{{num2}}</span>
+                <span class="{{if bose3 == 1}}col0{{else if bose3 == 2}}col1{{/if}}">{{num3}}</span>
+                <span class="{{if bose4 == 1}}col0{{else if bose4 == 2}}col1{{/if}}">{{num4}}</span>
+                <span class="{{if bose5 == 1}}col0{{else if bose5 == 2}}col1{{/if}}">{{num5}}</span>
+                <span class="{{if bose6 == 1}}col0{{else if bose6 == 2}}col1{{/if}}">{{num6}}</span>
+                <span class="{{if bose7 == 1}}col0{{else if bose7 == 2}}col1{{/if}}">{{num7}}</span>
+                <a href="javascript:void(0)" class="a1" onclick="openGcdt('gcdt/lhc')">详情</a>
+            </div>
+            <p>
+                <i>{{sx1}}</i>
+                <i>{{sx2}}</i>
+                <i>{{sx3}}</i>
+                <i>{{sx4}}</i>
+                <i>{{sx5}}</i>
+                <i>{{sx6}}</i>
+                <i>{{sx7}}</i>
+            </p>
+        </div>
+        <div class="box3">
+            <a href="/kjjg.html?playGroupId=6">历史开奖</a>
+            <a href="/ssc/zst/lhc.html" target="_blank">走势图表</a>
+        </div>
+        <div class="box4">
+            <a href="javascript:void(0)" class="a1" onclick="openGcdt('gcdt/lhc')">购买</a>
+        </div>
+    </li>
+</script>
+<script type="text/html" id="template_7">
+    <li>
+        <div class="box1">
+            {{if isToday}}
+            <var>今日开奖</var>
+            {{else}}
+            <var class="no"></var>
+            {{/if}}
+            <div class="text">
+                <h3>北京28<span>第{{number}}期</span></h3>
+                <p>每天120期</p>
+            </div>
+        </div>
+        <div class="box2">
+            <div class="box_num">
+                <span>{{num1}}</span>
+                <span>{{num2}}</span>
+                <span>{{num3}}</span>
+                <a href="javascript:void(0)" class="a1" onclick="openGcdt('gcdt/bj28')">详情</a>
+            </div>
+            <p>
+            </p>
+        </div>
+        <div class="box3">
+            <a href="/kjjg.html?playGroupId=7">历史开奖</a>
+            <a href="/ssc/zst/bj28.html" target="_blank">走势图表</a>
+        </div>
+        <div class="box4">
+            <a href="javascript:void(0)" class="a1" onclick="openGcdt('gcdt/bj28')">购买</a>
+        </div>
+    </li>
+</script>
+<script type="text/html" id="template_8">
+    <li class="kl8">
+        <div class="box1">
+            {{if isToday}}
+            <var>今日开奖</var>
+            {{else}}
+            <var class="no"></var>
+            {{/if}}
+            <div class="text">
+                <h3>快乐8<span>第{{number}}期</span></h3>
+                <p>每天178期</p>
+            </div>
+        </div>
+        <div class="box2">
+            <div class="box_num box_num_klb">
+                <span>{{num1}}</span>
+                <span>{{num2}}</span>
+                <span>{{num3}}</span>
+                <span>{{num4}}</span>
+                <span>{{num5}}</span>
+                <span>{{num6}}</span>
+                <span>{{num7}}</span>
+                <span>{{num8}}</span>
+                <span>{{num9}}</span>
+                <span>{{num10}}</span>
+                <span>{{num11}}</span>
+                <span>{{num12}}</span>
+                <span>{{num13}}</span>
+                <span>{{num14}}</span>
+                <span>{{num15}}</span>
+                <span>{{num16}}</span>
+                <span>{{num17}}</span>
+                <span>{{num18}}</span>
+                <span>{{num19}}</span>
+                <span>{{num20}}</span>
+                <a href="javascript:void(0)" class="a1 kl8" onclick="openGcdt('gcdt/kl8')">详情</a>
+            </div>
+            <p>
+            </p>
+        </div>
+        <div class="box3">
+            <a href="/kjjg.html?playGroupId=8">历史开奖</a>
+            <a href="/ssc/zst/kl8.html" target="_blank">走势图表</a>
+        </div>
+        <div class="box4">
+            <a href="javascript:void(0)" class="a1" onclick="openGcdt('gcdt/kl8')">购买</a>
+        </div>
+    </li>
+</script>
+<script type="text/html" id="template_10">
+    <li>
+        <div class="box1">
+            {{if isToday}}
+            <var>今日开奖</var>
+            {{else}}
+            <var class="no"></var>
+            {{/if}}
+            <div class="text">
+                <h3>幸运农场<span>第{{number}}期</span></h3>
+                <p>每天96期</p>
+            </div>
+        </div>
+        <div class="box2">
+            <div class="box_num">
+                <span>{{num1}}</span>
+                <span>{{num2}}</span>
+                <span>{{num3}}</span>
+                <span>{{num4}}</span>
+                <span>{{num5}}</span>
+                <span>{{num6}}</span>
+                <span>{{num7}}</span>
+                <span>{{num8}}</span>
+                <a href="javascript:void(0)" class="a1" onclick="openGcdt('gcdt/xync')">详情</a>
+            </div>
+            <p>
+                <i>{{str1}}</i>
+                <i>{{str2}}</i>
+                <i>{{str3}}</i>
+                <i>{{str4}}</i>
+                <i style="margin-left: -4px;">{{str5}}</i>
+            </p>
+        </div>
+        <div class="box3">
+            <a href="/kjjg.html?playGroupId=10">历史开奖</a>
+            <a href="/ssc/zst/xync.html" target="_blank">走势图表</a>
+        </div>
+        <div class="box4">
+            <a href="javascript:void(0)" class="a1" onclick="openGcdt('gcdt/xync')">购买</a>
+        </div>
+    </li>
+</script>
+<script type="text/html" id="template_11">
+    <li>
+        <div class="box1">
+            {{if isToday}}
+            <var>今日开奖</var>
+            {{else}}
+            <var class="no"></var>
+            {{/if}}
+            <div class="text">
+                <h3>快乐十分<span>第{{number}}期</span></h3>
+                <p>每天84期</p>
+            </div>
+        </div>
+        <div class="box2">
+            <div class="box_num">
+                <span>{{num1}}</span>
+                <span>{{num2}}</span>
+                <span>{{num3}}</span>
+                <span>{{num4}}</span>
+                <span>{{num5}}</span>
+                <span>{{num6}}</span>
+                <span>{{num7}}</span>
+                <span>{{num8}}</span>
+                <a href="javascript:void(0)" class="a1" onclick="openGcdt('gcdt/klsf')">详情</a>
+            </div>
+            <p>
+                <i>{{str1}}</i>
+                <i>{{str2}}</i>
+                <i>{{str3}}</i>
+                <i>{{str4}}</i>
+                <i style="margin-left: -4px;">{{str5}}</i>
+            </p>
+        </div>
+        <div class="box3">
+            <a href="/kjjg.html?playGroupId=11">历史开奖</a>
+            <a href="/ssc/zst/klsf.html" target="_blank">走势图表</a>
+        </div>
+        <div class="box4">
+            <a href="javascript:void(0)" class="a1" onclick="openGcdt('gcdt/klsf')">购买</a>
+        </div>
+    </li>
+</script>
+<script type="text/html" id="template_12">
+    <li>
+        <div class="box1">
+            {{if isToday}}
+            <var>今日开奖</var>
+            {{else}}
+            <var class="no"></var>
+            {{/if}}
+            <div class="text">
+                <h3>双色球<span>第{{number}}期</span></h3>
+                <p>每周二、四、日 21:20开奖</p>
+            </div>
+        </div>
+        <div class="box2">
+            <div class="box_num">
+                <span>{{num1}}</span>
+                <span>{{num2}}</span>
+                <span>{{num3}}</span>
+                <span>{{num4}}</span>
+                <span>{{num5}}</span>
+                <span>{{num6}}</span>
+                <span class="col0">{{num7}}</span>
+                <a href="javascript:void(0)" class="a1" onclick="openGcdt('gcdt/ssq')">详情</a>
+            </div>
+        </div>
+        <div class="box3">
+            <a href="/kjjg.html?playGroupId=12">历史开奖</a>
+            <a href="/ssc/zst/ssq.html" target="_blank">走势图表</a>
+        </div>
+        <div class="box4">
+            <a href="javascript:void(0)" class="a1" onclick="openGcdt('gcdt/ssq')">购买</a>
+        </div>
+    </li>
+</script>
+<script type="text/html" id="template_13">
+    <li>
+        <div class="box1">
+            {{if isToday}}
+            <var>今日开奖</var>
+            {{else}}
+            <var class="no"></var>
+            {{/if}}
+            <div class="text">
+                <h3>三分时时彩<span>第{{number}}期</span></h3>
+                <p>每天480期</p>
+            </div>
+        </div>
+        <div class="box2">
+            <div class="box_num">
+                <span>{{num1}}</span>
+                <span>{{num2}}</span>
+                <span>{{num3}}</span>
+                <span>{{num4}}</span>
+                <span>{{num5}}</span>
+                <a href="javascript:void(0)" class="a1" onclick="openGcdt('gcdt/sfssc')">详情</a>
+            </div>
+            <p>
+                <i>{{sum}}</i>
+                <i>{{ds}}</i>
+                <i>{{dx}}</i>
+                <i>{{lh}}</i>
+            </p>
+        </div>
+        <div class="box3">
+            <a href="/kjjg.html?playGroupId=13">历史开奖</a>
+            <a href="/ssc/zst/sfssc.html" target="_blank">走势图表</a>
+        </div>
+        <div class="box4">
+            <a href="javascript:void(0)" class="a1" onclick="openGcdt('gcdt/sfssc')">购买</a>
+        </div>
+    </li>
+</script>
+<script type="text/html" id="template_14">
+    <li class="pk10">
+        <div class="box1">
+            {{if isToday}}
+            <var>今日开奖</var>
+            {{else}}
+            <var class="no"></var>
+            {{/if}}
+            <div class="text">
+                <h3>幸运飞艇<span>第{{number}}期</span></h3>
+                <p>每天180期</p>
+            </div>
+        </div>
+        <div class="box2">
+            <div class="box_num">
+                <span class="bg-{{num1}}">{{num1}}</span>
+                <span class="bg-{{num2}}">{{num2}}</span>
+                <span class="bg-{{num3}}">{{num3}}</span>
+                <span class="bg-{{num4}}">{{num4}}</span>
+                <span class="bg-{{num5}}">{{num5}}</span>
+                <span class="bg-{{num6}}">{{num6}}</span>
+                <span class="bg-{{num7}}">{{num7}}</span>
+                <span class="bg-{{num8}}">{{num8}}</span>
+                <span class="bg-{{num9}}">{{num9}}</span>
+                <span class="bg-{{num10}}">{{num10}}</span>
+                <a href="javascript:void(0)" class="a1" onclick="openGcdt('gcdt/xyft')">详情</a>
+            </div>
+            <p>
+            </p>
+        </div>
+        <div class="box3">
+            <a href="/kjjg.html?playGroupId=14">历史开奖</a>
+            <a href="/ssc/zst/xyft.html" target="_blank">走势图表</a>
+        </div>
+        <div class="box4">
+            <a href="javascript:void(0)" class="a1" onclick="openGcdt('gcdt/xyft')">购买</a>
+        </div>
+    </li>
+</script>
+<script type="text/html" id="template_15">
+    <li>
+        <div class="box1">
+            {{if isToday}}
+            <var>今日开奖</var>
+            {{else}}
+            <var class="no"></var>
+            {{/if}}
+            <div class="text">
+                <h3>分分时时彩<span>第{{number}}期</span></h3>
+                <p>每天1440期</p>
+            </div>
+        </div>
+        <div class="box2">
+            <div class="box_num">
+                <span>{{num1}}</span>
+                <span>{{num2}}</span>
+                <span>{{num3}}</span>
+                <span>{{num4}}</span>
+                <span>{{num5}}</span>
+                <a href="javascript:void(0)" class="a1" onclick="openGcdt('gcdt/ffssc')">详情</a>
+            </div>
+            <p>
+                <i>{{sum}}</i>
+                <i>{{ds}}</i>
+                <i>{{dx}}</i>
+                <i>{{lh}}</i>
+            </p>
+        </div>
+        <div class="box3">
+            <a href="/kjjg.html?playGroupId=15">历史开奖</a>
+            <a href="/ssc/zst/ffssc.html" target="_blank">走势图表</a>
+        </div>
+        <div class="box4">
+            <a href="javascript:void(0)" class="a1" onclick="openGcdt('gcdt/ffssc')">购买</a>
+        </div>
+    </li>
+</script>
+<script type="text/html" id="template_16">
+    <li>
+        <div class="box1">
+            {{if isToday}}
+            <var>今日开奖</var>
+            {{else}}
+            <var class="no"></var>
+            {{/if}}
+            <div class="text">
+                <h3>两分时时彩<span>第{{number}}期</span></h3>
+                <p>每天720期</p>
+            </div>
+        </div>
+        <div class="box2">
+            <div class="box_num">
+                <span>{{num1}}</span>
+                <span>{{num2}}</span>
+                <span>{{num3}}</span>
+                <span>{{num4}}</span>
+                <span>{{num5}}</span>
+                <a href="javascript:void(0)" class="a1" onclick="openGcdt('gcdt/efssc')">详情</a>
+            </div>
+            <p>
+                <i>{{sum}}</i>
+                <i>{{ds}}</i>
+                <i>{{dx}}</i>
+                <i>{{lh}}</i>
+            </p>
+        </div>
+        <div class="box3">
+            <a href="/kjjg.html?playGroupId=16">历史开奖</a>
+            <a href="/ssc/zst/efssc.html" target="_blank">走势图表</a>
+        </div>
+        <div class="box4">
+            <a href="javascript:void(0)" class="a1" onclick="openGcdt('gcdt/efssc')">购买</a>
+        </div>
+    </li>
+</script>
+<script type="text/html" id="template_17">
+    <li>
+        <div class="box1">
+            {{if isToday}}
+            <var>今日开奖</var>
+            {{else}}
+            <var class="no"></var>
+            {{/if}}
+            <div class="text">
+                <h3>五分时时彩<span>第{{number}}期</span></h3>
+                <p>每天288期</p>
+            </div>
+        </div>
+        <div class="box2">
+            <div class="box_num">
+                <span>{{num1}}</span>
+                <span>{{num2}}</span>
+                <span>{{num3}}</span>
+                <span>{{num4}}</span>
+                <span>{{num5}}</span>
+                <a href="javascript:void(0)" class="a1" onclick="openGcdt('gcdt/wfssc')">详情</a>
+            </div>
+            <p>
+                <i>{{sum}}</i>
+                <i>{{ds}}</i>
+                <i>{{dx}}</i>
+                <i>{{lh}}</i>
+            </p>
+        </div>
+        <div class="box3">
+            <a href="/kjjg.html?playGroupId=17">历史开奖</a>
+            <a href="/ssc/zst/wfssc.html" target="_blank">走势图表</a>
+        </div>
+        <div class="box4">
+            <a href="javascript:void(0)" class="a1" onclick="openGcdt('gcdt/wfssc')">购买</a>
+        </div>
+    </li>
+</script>
+<script type="text/html" id="template_18">
+    <li>
+        <div class="box1">
+            {{if isToday}}
+            <var>今日开奖</var>
+            {{else}}
+            <var class="no"></var>
+            {{/if}}
+            <div class="text">
+                <h3>江苏快3<span>第{{number}}期</span></h3>
+                <p>每天82期</p>
+            </div>
+        </div>
+        <div class="box2">
+            <div class="box_num">
+                <span>{{num1}}</span>
+                <span>{{num2}}</span>
+                <span>{{num3}}</span>
+                <a href="javascript:void(0)" class="a1" onclick="openGcdt('gcdt/jsk3')">详情</a>
+            </div>
+            <p>
+                <i>{{hezhi}}</i>
+                <i>{{danS}}</i>
+                <i>{{daX}}</i>
+            </p>
+        </div>
+        <div class="box3">
+            <a href="/kjjg.html?playGroupId=18">历史开奖</a>
+            <a href="/ssc/zst/jsk3.html" target="_blank">走势图表</a>
+        </div>
+        <div class="box4">
+            <a href="javascript:void(0)" class="a1" onclick="openGcdt('gcdt/jsk3')">购买</a>
+        </div>
+    </li>
+</script>
+<script type="text/html" id="template_19">
+    <li>
+        <div class="box1">
+            {{if isToday}}
+            <var>今日开奖</var>
+            {{else}}
+            <var class="no"></var>
+            {{/if}}
+            <div class="text">
+                <h3>湖北快3<span>第{{number}}期</span></h3>
+                <p>每天82期</p>
+            </div>
+        </div>
+        <div class="box2">
+            <div class="box_num">
+                <span>{{num1}}</span>
+                <span>{{num2}}</span>
+                <span>{{num3}}</span>
+                <a href="javascript:void(0)" class="a1" onclick="openGcdt('gcdt/hbk3')">详情</a>
+            </div>
+            <p>
+                <i>{{hezhi}}</i>
+                <i>{{danS}}</i>
+                <i>{{daX}}</i>
+            </p>
+        </div>
+        <div class="box3">
+            <a href="/kjjg.html?playGroupId=19">历史开奖</a>
+            <a href="/ssc/zst/hbk3.html" target="_blank">走势图表</a>
+        </div>
+        <div class="box4">
+            <a href="javascript:void(0)" class="a1" onclick="openGcdt('gcdt/hbk3')">购买</a>
+        </div>
+    </li>
+</script>
+<script type="text/html" id="template_20">
+    <li>
+        <div class="box1">
+            {{if isToday}}
+            <var>今日开奖</var>
+            {{else}}
+            <var class="no"></var>
+            {{/if}}
+            <div class="text">
+                <h3>安徽快3<span>第{{number}}期</span></h3>
+                <p>每天82期</p>
+            </div>
+        </div>
+        <div class="box2">
+            <div class="box_num">
+                <span>{{num1}}</span>
+                <span>{{num2}}</span>
+                <span>{{num3}}</span>
+                <a href="javascript:void(0)" class="a1" onclick="openGcdt('gcdt/ahk3')">详情</a>
+            </div>
+            <p>
+                <i>{{hezhi}}</i>
+                <i>{{danS}}</i>
+                <i>{{daX}}</i>
+            </p>
+        </div>
+        <div class="box3">
+            <a href="/kjjg.html?playGroupId=20">历史开奖</a>
+            <a href="/ssc/zst/ahk3.html" target="_blank">走势图表</a>
+        </div>
+        <div class="box4">
+            <a href="javascript:void(0)" class="a1" onclick="openGcdt('gcdt/ahk3')">购买</a>
+        </div>
+    </li>
+</script>
+<script type="text/html" id="template_21">
+    <li>
+        <div class="box1">
+            {{if isToday}}
+            <var>今日开奖</var>
+            {{else}}
+            <var class="no"></var>
+            {{/if}}
+            <div class="text">
+                <h3>吉林快3<span>第{{number}}期</span></h3>
+                <p>每天82期</p>
+            </div>
+        </div>
+        <div class="box2">
+            <div class="box_num">
+                <span>{{num1}}</span>
+                <span>{{num2}}</span>
+                <span>{{num3}}</span>
+                <a href="javascript:void(0)" class="a1" onclick="openGcdt('gcdt/jlk3')">详情</a>
+            </div>
+            <p>
+                <i>{{hezhi}}</i>
+                <i>{{danS}}</i>
+                <i>{{daX}}</i>
+            </p>
+        </div>
+        <div class="box3">
+            <a href="/kjjg.html?playGroupId=21">历史开奖</a>
+            <a href="/ssc/zst/jlk3.html" target="_blank">走势图表</a>
+        </div>
+        <div class="box4">
+            <a href="javascript:void(0)" class="a1" onclick="openGcdt('gcdt/jlk3')">购买</a>
+        </div>
+    </li>
+</script>
+<script type="text/html" id="template_22">
+    <li>
+        <div class="box1">
+            {{if isToday}}
+            <var>今日开奖</var>
+            {{else}}
+            <var class="no"></var>
+            {{/if}}
+            <div class="text">
+                <h3>十分六合彩<span>第{{number}}期</span></h3>
+                <p>每天144期</p>
+            </div>
+        </div>
+        <div class="box2">
+            <div class="box_num">
+                <span class="{{if bose1 == 1}}col0{{else if bose1 == 2}}col1{{/if}}">{{num1}}</span>
+                <span class="{{if bose2 == 1}}col0{{else if bose2 == 2}}col1{{/if}}">{{num2}}</span>
+                <span class="{{if bose3 == 1}}col0{{else if bose3 == 2}}col1{{/if}}">{{num3}}</span>
+                <span class="{{if bose4 == 1}}col0{{else if bose4 == 2}}col1{{/if}}">{{num4}}</span>
+                <span class="{{if bose5 == 1}}col0{{else if bose5 == 2}}col1{{/if}}">{{num5}}</span>
+                <span class="{{if bose6 == 1}}col0{{else if bose6 == 2}}col1{{/if}}">{{num6}}</span>
+                <span class="{{if bose7 == 1}}col0{{else if bose7 == 2}}col1{{/if}}">{{num7}}</span>
+                <a href="javascript:void(0)" class="a1" onclick="openGcdt('gcdt/sflhc')">详情</a>
+            </div>
+            <p>
+                <i>{{sx1}}</i>
+                <i>{{sx2}}</i>
+                <i>{{sx3}}</i>
+                <i>{{sx4}}</i>
+                <i>{{sx5}}</i>
+                <i>{{sx6}}</i>
+                <i>{{sx7}}</i>
+            </p>
+        </div>
+        <div class="box3">
+            <a href="/kjjg.html?playGroupId=22">历史开奖</a>
+            <a href="/ssc/zst/sflhc.html" target="_blank">走势图表</a>
+        </div>
+        <div class="box4">
+            <a href="javascript:void(0)" class="a1" onclick="openGcdt('gcdt/sflhc')">购买</a>
+        </div>
+    </li>
+</script>
+<script type="text/html" id="template_23">
+    <li class="pk10">
+        <div class="box1">
+            {{if isToday}}
+            <var>今日开奖</var>
+            {{else}}
+            <var class="no"></var>
+            {{/if}}
+            <div class="text">
+                <h3>极速PK10<span>第{{number}}期</span></h3>
+                <p>每天1440期</p>
+            </div>
+        </div>
+        <div class="box2">
+            <div class="box_num">
+                <span class="bg-{{num1}}">{{num1}}</span>
+                <span class="bg-{{num2}}">{{num2}}</span>
+                <span class="bg-{{num3}}">{{num3}}</span>
+                <span class="bg-{{num4}}">{{num4}}</span>
+                <span class="bg-{{num5}}">{{num5}}</span>
+                <span class="bg-{{num6}}">{{num6}}</span>
+                <span class="bg-{{num7}}">{{num7}}</span>
+                <span class="bg-{{num8}}">{{num8}}</span>
+                <span class="bg-{{num9}}">{{num9}}</span>
+                <span class="bg-{{num10}}">{{num10}}</span>
+                <a href="javascript:void(0)" class="a1" onclick="openGcdt('gcdt/jspk10')">详情</a>
+            </div>
+            <p>
+            </p>
+        </div>
+        <div class="box3">
+            <a href="/kjjg.html?playGroupId=23">历史开奖</a>
+            <a href="/ssc/zst/jspk10.html" target="_blank">走势图表</a>
+        </div>
+        <div class="box4">
+            <a href="javascript:void(0)" class="a1" onclick="openGcdt('gcdt/jspk10')">购买</a>
+        </div>
+    </li>
+</script>
+<script type="text/html" id="template_24">
+    <li class="gd11x5">
+        <div class="box1">
+            {{if isToday}}
+            <var>今日开奖</var>
+            {{else}}
+            <var class="no"></var>
+            {{/if}}
+            <div class="text">
+                <h3>广东11选5<span>第{{number}}期</span></h3>
+                <p>每天79期</p>
+            </div>
+        </div>
+        <div class="box2">
+            <div class="box_num">
+                <span>{{num1}}</span>
+                <span>{{num2}}</span>
+                <span>{{num3}}</span>
+                <span>{{num4}}</span>
+                <span>{{num5}}</span>
+                <a href="javascript:void(0)" class="a1 gd11x5" onclick="openGcdt('gcdt/gd11x5.jsp')">详情</a>
+            </div>
+            <p>
+            </p>
+        </div>
+        <div class="box3">
+            <a href="/kjjg.html?playGroupId=24">历史开奖</a>
+            <a href="/ssc/zst/gd11x5.html" target="_blank">走势图表</a>
+        </div>
+        <div class="box4">
+            <a href="javascript:void(0)" class="a1" onclick="openGcdt('gcdt/gd11x5')">购买</a>
+        </div>
+    </li>
+</script>
+
+<script type="text/html" id="template_single_1">
+    <li>
+        <span class="sp1">重庆时时彩</span>
+        <span class="sp2">{{number}}</span>
+        <span class="sp3">{{openTime}}</span>
+        <span class="sp4">
+            <i>{{num1}}</i>
+            <i>{{num2}}</i>
+            <i>{{num3}}</i>
+            <i>{{num4}}</i>
+            <i>{{num5}}</i>
+        </span>
+        <span class="sp5">120期</span>
+        <span class="sp6">5分钟-10分钟</span>
+        <span class="sp8"><a href="javascript:void(0)"><img src="/static/theme/mainTheme/400w/img/ico73.png" alt=""
+                                                            onclick="goZst('zst/cqssc')"></a></span>
+        <span class="sp9"><a href="javascript:void(0)" class="a1" onclick="openGcdt('gcdt/cqssc')">立即购彩</a></span>
+    </li>
+</script>
+<script type="text/html" id="template_single_2">
+    <li>
+        <span class="sp1">天津时时彩</span>
+        <span class="sp2">{{number}}</span>
+
+        <span class="sp3">{{openTime}}</span>
+        <span class="sp4">
+            <i>{{num1}}</i>
+            <i>{{num2}}</i>
+            <i>{{num3}}</i>
+            <i>{{num4}}</i>
+            <i>{{num5}}</i>
+        </span>
+        <span class="sp5">84期</span>
+        <span class="sp6">10分钟</span>
+        <span class="sp8"><a href="javascript:void(0)"><img src="/static/theme/mainTheme/400w/img/ico73.png" alt=""
+                                                            onclick="goZst('zst/tjssc')"></a></span>
+        <span class="sp9"><a href="javascript:void(0)" class="a1" onclick="openGcdt('gcdt/tjssc')">立即购彩</a></span>
+    </li>
+</script>
+<script type="text/html" id="template_single_3">
+    <li>
+        <span class="sp1">新疆时时彩</span>
+        <span class="sp2">{{number}}</span>
+        <span class="sp3">{{openTime}}</span>
+        <span class="sp4">
+            <i>{{num1}}</i>
+            <i>{{num2}}</i>
+            <i>{{num3}}</i>
+            <i>{{num4}}</i>
+            <i>{{num5}}</i>
+        </span>
+        <span class="sp5">96期</span>
+        <span class="sp6">10分钟</span>
+        <span class="sp8"><a href="javascript:void(0)"><img src="/static/theme/mainTheme/400w/img/ico73.png" alt=""
+                                                            onclick="goZst('zst/xjssc')"></a></span>
+        <span class="sp9"><a href="javascript:void(0)" class="a1" onclick="openGcdt('gcdt/xjssc')">立即购彩</a></span>
+    </li>
+</script>
+<script type="text/html" id="template_single_4">
+    <li>
+        <span class="sp1">体彩排列3</span>
+        <span class="sp2">{{number}}</span>
+        <span class="sp3">{{openTime}}</span>
+        <span class="sp4">
+            <i>{{num1}}</i>
+            <i>{{num2}}</i>
+            <i>{{num3}}</i>
+        </span>
+        <span class="sp5">1期</span>
+        <span class="sp6">每天一次</span>
+        <span class="sp8"><a href="javascript:void(0)"><img src="/static/theme/mainTheme/400w/img/ico73.png" alt=""
+                                                            onclick="goZst('zst/pl3')"></a></span>
+        <span class="sp9"><a href="javascript:void(0)" class="a1" onclick="openGcdt('gcdt/pl3')">立即购彩</a></span>
+    </li>
+</script>
+<script type="text/html" id="template_single_5">
+    <li>
+        <span class="sp1">福彩3D</span>
+        <span class="sp2">{{number}}</span>
+        <span class="sp3">{{openTime}}</span>
+        <span class="sp4">
+            <i>{{num1}}</i>
+            <i>{{num2}}</i>
+            <i>{{num3}}</i>
+        </span>
+        <span class="sp5">1期</span>
+        <span class="sp6">每天一次 </span>
+        <span class="sp8"><a href="javascript:void(0)"><img src="/static/theme/mainTheme/400w/img/ico73.png" alt=""
+                                                            onclick="goZst('zst/fc3d')"></a></span>
+        <span class="sp9"><a href="javascript:void(0)" class="a1" onclick="openGcdt('gcdt/fc3d')">立即购彩</a></span>
+    </li>
+</script>
+<script type="text/html" id="template_single_6">
+    <li>
+        <span class="sp1">六合彩</span>
+        <span class="sp2">{{number}}</span>
+        <span class="sp3">{{openTime}}</span>
+        <span class="sp4">
+            <i class="{{if bose1 == 1}}lan{{else if bose1 == 2}}lv{{/if}}">{{num1}}</i>
+            <i class="{{if bose2 == 1}}lan{{else if bose2 == 2}}lv{{/if}}">{{num2}}</i>
+            <i class="{{if bose3 == 1}}lan{{else if bose3 == 2}}lv{{/if}}">{{num3}}</i>
+            <i class="{{if bose4 == 1}}lan{{else if bose4 == 2}}lv{{/if}}">{{num4}}</i>
+            <i class="{{if bose5 == 1}}lan{{else if bose5 == 2}}lv{{/if}}">{{num5}}</i>
+            <i class="{{if bose6 == 1}}lan{{else if bose6 == 2}}lv{{/if}}">{{num6}}</i>
+            <i class="{{if bose7 == 1}}lan{{else if bose7 == 2}}lv{{/if}}">{{num7}}</i>
+        </span>
+        <span class="sp5">两天一期</span>
+        <span class="sp6">两天一次</span>
+        <span class="sp8"><a href="javascript:void(0)"><img src="/static/theme/mainTheme/400w/img/ico73.png" alt=""
+                                                            onclick="goZst('zst/lhc')"></a></span>
+        <span class="sp9"><a href="javascript:void(0)" class="a1" onclick="openGcdt('gcdt/lhc')">立即购彩</a></span>
+    </li>
+</script>
+<script type="text/html" id="template_single_7">
+    <li>
+        <span class="sp1">北京28</span>
+        <span class="sp2">{{number}}</span>
+        <span class="sp3">{{openTime}}</span>
+        <span class="sp4">
+            <i>{{num1}}</i>
+            <i>{{num2}}</i>
+            <i>{{num3}}</i>
+        </span>
+        <span class="sp5">120期</span>
+        <span class="sp6">5分钟</span>
+        <span class="sp8"><a href="javascript:void(0)"><img src="/static/theme/mainTheme/400w/img/ico73.png" alt=""
+                                                            onclick="goZst('zst/bj28')"></a></span>
+        <span class="sp9"><a href="javascript:void(0)" class="a1" onclick="openGcdt('gcdt/bj28')">立即购彩</a></span>
+    </li>
+</script>
+<script type="text/html" id="template_single_8">
+    <li style="height:50px;">
+        <span class="sp1">北京快乐8</span>
+        <span class="sp2">{{number}}</span>
+        <span class="sp3">{{openTime}}</span>
+        <span class="sp4 bjklb">
+            <i>{{num1}}</i>
+            <i>{{num2}}</i>
+            <i>{{num3}}</i>
+            <i>{{num4}}</i>
+            <i>{{num5}}</i>
+            <i>{{num6}}</i>
+            <i>{{num7}}</i>
+            <i>{{num8}}</i>
+            <i>{{num9}}</i>
+            <i>{{num10}}</i>
+            <i>{{num11}}</i>
+            <i>{{num12}}</i>
+            <i>{{num13}}</i>
+            <i>{{num14}}</i>
+            <i>{{num15}}</i>
+            <i>{{num16}}</i>
+            <i>{{num17}}</i>
+            <i>{{num18}}</i>
+            <i>{{num19}}</i>
+            <i>{{num20}}</i>
+        </span>
+        <span class="sp5">178期</span>
+        <span class="sp6">5分钟</span>
+        <span class="sp8"><a href="javascript:void(0)"><img src="/static/theme/mainTheme/400w/img/ico73.png" alt=""
+                                                            onclick="goZst('zst/kl8')"></a></span>
+        <span class="sp9"><a href="javascript:void(0)" class="a1" onclick="openGcdt('gcdt/kl8')">立即购彩</a></span>
+    </li>
+</script>
+<script type="text/html" id="template_single_9">
+    <li>
+        <span class="sp1">北京PK10</span>
+        <span class="sp2">{{number}}</span>
+        <span class="sp3">{{openTime}}</span>
+        <span class="sp4">
+            <i class="bg-{{num1}}">{{num1}}</i>
+            <i class="bg-{{num2}}">{{num2}}</i>
+            <i class="bg-{{num3}}">{{num3}}</i>
+            <i class="bg-{{num4}}">{{num4}}</i>
+            <i class="bg-{{num5}}">{{num5}}</i>
+            <i class="bg-{{num6}}">{{num6}}</i>
+            <i class="bg-{{num7}}">{{num7}}</i>
+            <i class="bg-{{num8}}">{{num8}}</i>
+            <i class="bg-{{num9}}">{{num9}}</i>
+            <i class="bg-{{num10}}">{{num10}}</i>
+        </span>
+        <span class="sp5">180期</span>
+        <span class="sp6">5分钟</span>
+        <span class="sp8"><a href="javascript:void(0)"><img src="/static/theme/mainTheme/400w/img/ico73.png" alt=""
+                                                            onclick="goZst('zst/pk10')"></a></span>
+        <span class="sp9"><a href="javascript:void(0)" class="a1" onclick="openGcdt('gcdt/pk10')">立即购彩</a></span>
+    </li>
+</script>
+<script type="text/html" id="template_single_10">
+    <li>
+        <span class="sp1">重庆幸运农场</span>
+        <span class="sp2">{{number}}</span>
+        <span class="sp3">{{openTime}}</span>
+        <span class="sp4">
+            <i>{{num1}}</i>
+            <i>{{num2}}</i>
+            <i>{{num3}}</i>
+            <i>{{num4}}</i>
+            <i>{{num5}}</i>
+            <i>{{num6}}</i>
+            <i>{{num7}}</i>
+            <i>{{num8}}</i>
+        </span>
+        <span class="sp5">96期</span>
+        <span class="sp6">10分钟</span>
+        <span class="sp8"><a href="javascript:void(0)"><img src="/static/theme/mainTheme/400w/img/ico73.png" alt=""
+                                                            onclick="goZst('zst/xync')"></a></span>
+        <span class="sp9"><a href="javascript:void(0)" class="a1" onclick="openGcdt('gcdt/xync')">立即购彩</a></span>
+    </li>
+</script>
+<script type="text/html" id="template_single_11">
+    <li>
+        <span class="sp1">广东快乐十分</span>
+        <span class="sp2">{{number}}</span>
+        <span class="sp3">{{openTime}}</span>
+        <span class="sp4">
+            <i>{{num1}}</i>
+            <i>{{num2}}</i>
+            <i>{{num3}}</i>
+            <i>{{num4}}</i>
+            <i>{{num5}}</i>
+            <i>{{num6}}</i>
+            <i>{{num7}}</i>
+            <i>{{num8}}</i>
+        </span>
+        <span class="sp5">84期</span>
+        <span class="sp6">10分钟</span>
+        <span class="sp8"><a href="javascript:void(0)"><img src="/static/theme/mainTheme/400w/img/ico73.png" alt=""
+                                                            onclick="goZst('zst/klsf')"></a></span>
+        <span class="sp9"><a href="javascript:void(0)" class="a1" onclick="openGcdt('gcdt/klsf')">立即购彩</a></span>
+    </li>
+</script>
+<script type="text/html" id="template_single_12">
+    <li>
+        <span class="sp1">双色球</span>
+        <span class="sp2">{{number}}</span>
+        <span class="sp3">{{openTime}}</span>
+        <span class="sp4">
+            <i>{{num1}}</i>
+            <i>{{num2}}</i>
+            <i>{{num3}}</i>
+            <i>{{num4}}</i>
+            <i>{{num5}}</i>
+            <i>{{num6}}</i>
+            <i class="lan">{{num7}}</i>
+        </span>
+        <span class="sp5">一周三期</span>
+        <span class="sp6">一周三次</span>
+        <span class="sp8"><a href="javascript:void(0)"><img src="/static/theme/mainTheme/400w/img/ico73.png" alt=""
+                                                            onclick="goZst('zst/ssq')"></a></span>
+        <span class="sp9"><a href="javascript:void(0)" class="a1" onclick="openGcdt('gcdt/ssq')">立即购彩</a></span>
+    </li>
+</script>
+<script type="text/html" id="template_single_13">
+    <li>
+        <span class="sp1">三分时时彩</span>
+        <span class="sp2">{{number}}</span>
+        <span class="sp3">{{openTime}}</span>
+        <span class="sp4">
+            <i>{{num1}}</i>
+            <i>{{num2}}</i>
+            <i>{{num3}}</i>
+            <i>{{num4}}</i>
+            <i>{{num5}}</i>
+        </span>
+        <span class="sp5">480期</span>
+        <span class="sp6">3分钟</span>
+        <span class="sp8"><a href="javascript:void(0)"><img src="/static/theme/mainTheme/400w/img/ico73.png" alt=""
+                                                            onclick="goZst('zst/sfssc')"></a></span>
+        <span class="sp9"><a href="javascript:void(0)" class="a1" onclick="openGcdt('gcdt/sfssc')">立即购彩</a></span>
+    </li>
+</script>
+<script type="text/html" id="template_single_14">
+    <li>
+        <span class="sp1">幸运飞艇</span>
+        <span class="sp2">{{number}}</span>
+        <span class="sp3">{{openTime}}</span>
+        <span class="sp4">
+            <i class="bg-{{num1}}">{{num1}}</i>
+            <i class="bg-{{num2}}">{{num2}}</i>
+            <i class="bg-{{num3}}">{{num3}}</i>
+            <i class="bg-{{num4}}">{{num4}}</i>
+            <i class="bg-{{num5}}">{{num5}}</i>
+            <i class="bg-{{num6}}">{{num6}}</i>
+            <i class="bg-{{num7}}">{{num7}}</i>
+            <i class="bg-{{num8}}">{{num8}}</i>
+            <i class="bg-{{num9}}">{{num9}}</i>
+            <i class="bg-{{num10}}">{{num10}}</i>
+        </span>
+        <span class="sp5">180期</span>
+        <span class="sp6">5分钟</span>
+        <span class="sp8"><a href="javascript:void(0)"><img src="/static/theme/mainTheme/400w/img/ico73.png" alt=""
+                                                            onclick="goZst('zst/xyft')"></a></span>
+        <span class="sp9"><a href="javascript:void(0)" class="a1" onclick="openGcdt('gcdt/xyft')">立即购彩</a></span>
+    </li>
+</script>
+<script type="text/html" id="template_single_15">
+    <li>
+        <span class="sp1">分分时时彩</span>
+        <span class="sp2">{{number}}</span>
+        <span class="sp3">{{openTime}}</span>
+        <span class="sp4">
+            <i>{{num1}}</i>
+            <i>{{num2}}</i>
+            <i>{{num3}}</i>
+            <i>{{num4}}</i>
+            <i>{{num5}}</i>
+        </span>
+        <span class="sp5">1440期</span>
+        <span class="sp6">1分钟</span>
+        <span class="sp8"><a href="javascript:void(0)"><img src="/static/theme/mainTheme/400w/img/ico73.png" alt=""
+                                                            onclick="goZst('zst/ffssc')"></a></span>
+        <span class="sp9"><a href="javascript:void(0)" class="a1" onclick="openGcdt('gcdt/ffssc')">立即购彩</a></span>
+    </li>
+</script>
+<script type="text/html" id="template_single_16">
+    <li>
+        <span class="sp1">两分时时彩</span>
+        <span class="sp2">{{number}}</span>
+        <span class="sp3">{{openTime}}</span>
+        <span class="sp4">
+            <i>{{num1}}</i>
+            <i>{{num2}}</i>
+            <i>{{num3}}</i>
+            <i>{{num4}}</i>
+            <i>{{num5}}</i>
+        </span>
+        <span class="sp5">720期</span>
+        <span class="sp6">2分钟</span>
+        <span class="sp8"><a href="javascript:void(0)"><img src="/static/theme/mainTheme/400w/img/ico73.png" alt=""
+                                                            onclick="goZst('zst/efssc')"></a></span>
+        <span class="sp9"><a href="javascript:void(0)" class="a1" onclick="openGcdt('gcdt/efssc')">立即购彩</a></span>
+    </li>
+</script>
+<script type="text/html" id="template_single_17">
+    <li>
+        <span class="sp1">五分时时彩</span>
+        <span class="sp2">{{number}}</span>
+        <span class="sp3">{{openTime}}</span>
+        <span class="sp4">
+            <i>{{num1}}</i>
+            <i>{{num2}}</i>
+            <i>{{num3}}</i>
+            <i>{{num4}}</i>
+            <i>{{num5}}</i>
+        </span>
+        <span class="sp5">288期</span>
+        <span class="sp6">5分钟</span>
+        <span class="sp8"><a href="javascript:void(0)"><img src="/static/theme/mainTheme/400w/img/ico73.png" alt=""
+                                                            onclick="goZst('zst/wfssc')"></a></span>
+        <span class="sp9"><a href="javascript:void(0)" class="a1" onclick="openGcdt('gcdt/wfssc')">立即购彩</a></span>
+    </li>
+</script>
+<script type="text/html" id="template_single_18">
+    <li>
+        <span class="sp1">江苏快3</span>
+        <span class="sp2">{{number}}</span>
+        <span class="sp3">{{openTime}}</span>
+        <span class="sp4">
+            <i>{{num1}}</i>
+            <i>{{num2}}</i>
+            <i>{{num3}}</i>
+        </span>
+        <span class="sp5">82期</span>
+        <span class="sp6">每10分钟一期 </span>
+        <span class="sp8"><a href="javascript:void(0)"><img src="/static/theme/mainTheme/400w/img/ico73.png" alt=""
+                                                            onclick="goZst('zst/jsk3')"></a></span>
+        <span class="sp9"><a href="javascript:void(0)" class="a1" onclick="openGcdt('gcdt/jsk3')">立即购彩</a></span>
+    </li>
+</script>
+<script type="text/html" id="template_single_19">
+    <li>
+        <span class="sp1">湖北快3</span>
+        <span class="sp2">{{number}}</span>
+        <span class="sp3">{{openTime}}</span>
+        <span class="sp4">
+            <i>{{num1}}</i>
+            <i>{{num2}}</i>
+            <i>{{num3}}</i>
+        </span>
+        <span class="sp5">82期</span>
+        <span class="sp6">每10分钟一期 </span>
+        <span class="sp8"><a href="javascript:void(0)"><img src="/static/theme/mainTheme/400w/img/ico73.png" alt=""
+                                                            onclick="goZst('zst/hbk3')"></a></span>
+        <span class="sp9"><a href="javascript:void(0)" class="a1" onclick="openGcdt('gcdt/hbk3')">立即购彩</a></span>
+    </li>
+</script>
+<script type="text/html" id="template_single_20">
+    <li>
+        <span class="sp1">安徽快3</span>
+        <span class="sp2">{{number}}</span>
+        <span class="sp3">{{openTime}}</span>
+        <span class="sp4">
+            <i>{{num1}}</i>
+            <i>{{num2}}</i>
+            <i>{{num3}}</i>
+        </span>
+        <span class="sp5">82期</span>
+        <span class="sp6">每10分钟一期 </span>
+        <span class="sp8"><a href="javascript:void(0)"><img src="/static/theme/mainTheme/400w/img/ico73.png" alt=""
+                                                            onclick="goZst('zst/ahk3')"></a></span>
+        <span class="sp9"><a href="javascript:void(0)" class="a1" onclick="openGcdt('gcdt/ahk3')">立即购彩</a></span>
+    </li>
+</script>
+<script type="text/html" id="template_single_21">
+    <li>
+        <span class="sp1">吉林快3</span>
+        <span class="sp2">{{number}}</span>
+        <span class="sp3">{{openTime}}</span>
+        <span class="sp4">
+            <i>{{num1}}</i>
+            <i>{{num2}}</i>
+            <i>{{num3}}</i>
+        </span>
+        <span class="sp5">82期</span>
+        <span class="sp6">每10分钟一期 </span>
+        <span class="sp8"><a href="javascript:void(0)"><img src="/static/theme/mainTheme/400w/img/ico73.png" alt=""
+                                                            onclick="goZst('zst/jlk3')"></a></span>
+        <span class="sp9"><a href="javascript:void(0)" class="a1" onclick="openGcdt('gcdt/jlk3')">立即购彩</a></span>
+    </li>
+</script>
+<script type="text/html" id="template_single_22">
+    <li>
+        <span class="sp1">十分六合彩</span>
+        <span class="sp2">{{number}}</span>
+        <span class="sp3">{{openTime}}</span>
+        <span class="sp4">
+            <i class="{{if bose1 == 1}}lan{{else if bose1 == 2}}lv{{/if}}">{{num1}}</i>
+            <i class="{{if bose2 == 1}}lan{{else if bose2 == 2}}lv{{/if}}">{{num2}}</i>
+            <i class="{{if bose3 == 1}}lan{{else if bose3 == 2}}lv{{/if}}">{{num3}}</i>
+            <i class="{{if bose4 == 1}}lan{{else if bose4 == 2}}lv{{/if}}">{{num4}}</i>
+            <i class="{{if bose5 == 1}}lan{{else if bose5 == 2}}lv{{/if}}">{{num5}}</i>
+            <i class="{{if bose6 == 1}}lan{{else if bose6 == 2}}lv{{/if}}">{{num6}}</i>
+            <i class="{{if bose7 == 1}}lan{{else if bose7 == 2}}lv{{/if}}">{{num7}}</i>
+        </span>
+        <span class="sp5">每天144期</span>
+        <span class="sp6">10分钟一期</span>
+        <span class="sp8"><a href="javascript:void(0)"><img src="/static/theme/mainTheme/400w/img/ico73.png" alt=""
+                                                            onclick="goZst('zst/sflhc')"></a></span>
+        <span class="sp9"><a href="javascript:void(0)" class="a1" onclick="openGcdt('gcdt/sflhc')">立即购彩</a></span>
+    </li>
+</script>
+<script type="text/html" id="template_single_23">
+    <li>
+        <span class="sp1">极速PK10</span>
+        <span class="sp2">{{number}}</span>
+        <span class="sp3">{{openTime}}</span>
+        <span class="sp4">
+            <i class="bg-{{num1}}">{{num1}}</i>
+            <i class="bg-{{num2}}">{{num2}}</i>
+            <i class="bg-{{num3}}">{{num3}}</i>
+            <i class="bg-{{num4}}">{{num4}}</i>
+            <i class="bg-{{num5}}">{{num5}}</i>
+            <i class="bg-{{num6}}">{{num6}}</i>
+            <i class="bg-{{num7}}">{{num7}}</i>
+            <i class="bg-{{num8}}">{{num8}}</i>
+            <i class="bg-{{num9}}">{{num9}}</i>
+            <i class="bg-{{num10}}">{{num10}}</i>
+        </span>
+        <span class="sp5">1440期</span>
+        <span class="sp6">1分钟</span>
+        <span class="sp8"><a href="javascript:void(0)"><img src="/static/theme/mainTheme/400w/img/ico73.png" alt=""
+                                                            onclick="goZst('zst/jspk10')"></a></span>
+        <span class="sp9"><a href="javascript:void(0)" class="a1" onclick="openGcdt('gcdt/jspk10')">立即购彩</a></span>
+    </li>
+</script>
+<script type="text/html" id="template_single_24">
+    <li>
+        <span class="sp1">广东11选5</span>
+        <span class="sp2">{{number}}</span>
+        <span class="sp3">{{openTime}}</span>
+        <span class="sp4">
+            <i>{{num1}}</i>
+            <i>{{num2}}</i>
+            <i>{{num3}}</i>
+            <i>{{num4}}</i>
+            <i>{{num5}}</i>
+        </span>
+        <span class="sp5">79期</span>
+        <span class="sp6">10分钟</span>
+        <span class="sp8"><a href="javascript:void(0)"><img src="/static/theme/mainTheme/400w/img/ico73.png" alt=""
+                                                            onclick="goZst('zst/gd11x5')"></a></span>
+        <span class="sp9"><a href="javascript:void(0)" class="a1" onclick="openGcdt('gcdt/gd11x5')">立即购彩</a></span>
+    </li>
+</script>
+{/literal}
+<div class="footer">
+    <div class="footer_t">
+        <div class="container clearfix">
+            <div class="left footer_t1">
+                <img src="/static/theme/mainTheme/400w/images/index_78.png?v=0.0.1" class="footer_t1_1" />
+                <p>
+                    <img src="/static/theme/mainTheme/400w/images/index5.png?v=0.001"  class="footer_t1_2" />
+                </p>
+                <p>
+                    扫一扫 手机购彩更方便
+                </p>
+            </div>
+            <div class="footer_menu_main clearfix">
+                <div class="footer_menu left">
+                    <p class="footer_menu_t">
+                        <img src="/static/theme/mainTheme/400w/images/common/index84.png" />
+                        平台优势
+                    </p>
+                    <ul>
+                        <li>
+                            <a href="javascript:void(0);">
+                                <img src="/static/theme/mainTheme/400w/images/common/index_93.png" />
+                                账户安全
+                            </a>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0);">
+                                <img src="/static/theme/mainTheme/400w/images/common/index-36.png" />
+                                购彩简单
+                            </a>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0);">
+                                <img src="/static/theme/mainTheme/400w/images/common/index2_92.png" />
+                                领奖方便
+                            </a>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0);">
+                                <img src="/static/theme/mainTheme/400w/images/common/index_135.png" />
+                                提款快速
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="footer_menu left">
+                    <p class="footer_menu_t">
+                        <img src="/static/theme/mainTheme/400w/images/common/index81.png" />
+                        账户相关
+                    </p>
+                    <ul class="footer_menu_2">
+                        <li>
+                            <a href="/help/question/zc_1.html">
+                                如何注册账号
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/help/question/mima_3.html">
+                                怎么找回登录密码
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/help/question/mima_1.html">
+                                如何修改手机号码
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/help/question/zc_5.html">
+                                如何修改真实姓名
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="footer_menu left">
+                    <p class="footer_menu_t">
+                        <img src="/static/theme/mainTheme/400w/images/common/index_87.png" />
+                        充值购彩
+                    </p>
+                    <ul class="footer_menu_2">
+                        <li>
+                            <a href="/help/question/cz_1.html">
+                                如何进行充值
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/help/question/mima_2.html">
+                                如何购买彩票
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/help/question/tk_10.html">
+                                如何查询购彩记录
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/help/question/aq.html">
+                                在本站购彩安全吗
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="footer_menu left">
+                    <p class="footer_menu_t">
+                        <img src="/static/theme/mainTheme/400w/images/common/index-31.png" />
+                        兑奖提款
+                    </p>
+                    <ul class="footer_menu_2">
+                        <li>
+                            <a href="/help/question/tk_1.html">
+                                怎样进行兑奖
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/help/question/tk_5.html">
+                                如何进行提款
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/help/question/tk_6.html">
+                                提款是否收手续费
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/help/question/tk_9.html">
+                                提款不成功怎么办
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="footer_b">
+        <div class="container">
+            <img src="/static/theme/mainTheme/400w/images/index112.png" />
+            <p class="webDbxx"></p>
+            <p class="mt30"><span>400w.am&nbsp;&nbsp; 郑重提示：彩票有风险，投注需谨慎</span> 不向未满18周岁的青少年出售彩票</p>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,27 @@
+<?php
+namespace app\index\controller;
+use app\index\Base;
+use app\common\model\Bonus as b;
+class Bonus extends Base{
+
+    //红利列表
+    public function index()
+    {
+        $bonus = new b();
+        $list = $bonus->getList()->toArray();
+        foreach ($list['data'] as $k => $v){
+            $list['data'][$k]['month'] = date('Y-m-d',strtotime($v['created_at']));
+        }
+        var_dump($list);
+        return $this->fetch('index');
+    }
+    
+    public function turntable()
+    {        
+        if(IS_GET){
+            return $this->fetch();    
+        }else{
+            
+        }        
+    }                        
+}

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset='utf-8'>
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+    <title>新邮件</title>
+    <link type="text/css" rel="stylesheet" href="/css/personal.css">
+</head>
+<body>
+<div class="container">
+    <header class="header">
+        <i class='left'>返回</i>
+        <h1>新邮件</h1>
+    </header>
+    <main class="inner_body">
+        <section class="msg_detail">
+            <h1><span>收件人：</span><input type="text" id="receive"/>  </h1>
+            <h1><span>主<i style="visibility: hidden">占</i>题：</span><input type="text" id="subject"/>  </h1>
+            <div>
+                <textarea placeholder="请输入发件内容" id="content"></textarea>
+            </div>
+            <p>发件人 铁观音</p>
+        </section>
+        <section class="charge_pay">
+            <button class="smaller">发送</button>
+        </section>
+    </main>
+</div>
+<script type="text/javascript" src="/js/jquery-1.8.0.min.js"></script>
+<script type="text/javascript" src="/js/show.js"></script>
+<script type="text/javascript">
+    $('.charge_pay button').click(function(){
+        var _data = {
+            receive: $('#receive').val(),
+            subject: $('#subject').val(),
+            content: $('#content').val()
+        }
+        console.log(_data);
+    })
+</script>
+</body>
+</html>

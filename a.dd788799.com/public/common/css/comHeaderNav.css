@@ -1,0 +1,149 @@
+
+.common-header-wrapper{
+	width: 100%;
+	height: 92px;
+	background: #fff;
+}
+/*welcome*/
+.welcome-wrapper{
+	height: 30px;
+	width: 100%;
+	background: #fbfbfb;
+}
+.welcome{
+	width: 1000px;
+	height: 30px;
+	margin: 0 auto;
+	clear: both;
+}
+.welcome span{
+	display: block;
+	float: left;
+	font-size: 12px;
+	color:#9b9b9b;
+	line-height: 30px;
+	margin-left: 14px;
+}
+.help-about-me{
+	float: right;
+	margin-right: 5px;
+}
+.help-about-me a{
+	display: block;
+	float: left;
+	margin-left: 15px;
+	font-size: 12px;
+	color:#9b9b9b;
+	line-height: 30px;
+}
+.help-about-me a:hover{
+	color: #ff6600;
+}
+/*user info*/
+.common-user-info{
+	width: 1000px;
+	height: 62px;
+	margin: 0 auto;
+	background: #fff;
+	clear: both;
+}
+.user-logo{
+	display: block;
+	width: 155px;
+	height: 23px;
+	float: left;
+	margin-left: 38px;
+	margin-top: 20px;
+}
+.user-logo img{
+	display: block;
+	width: 100%;
+	height: 100%;
+}
+.infomation{
+	display: block;
+	float: right;
+	margin-top: 18px;
+}
+.info-person{
+	float: left;
+	width: 126px;
+	height: 30px;
+	border: 1px solid #f0f0f0;
+	border-radius: 4px;
+	margin-left: 8px;
+}
+.info-person i{
+	display: inline-block;
+	width: 30px;
+	height: 30px;
+	border-right: 1px solid #F0F0F0;
+}
+.info-person i img{
+	display: block;
+	margin: 6px auto 5px auto;
+}
+.info-person input{
+	width: 80px;
+	height: 26px;
+	padding-left: 8px;
+	outline: none;
+	border: none;
+	display: block;
+	float: right;
+	margin-right: 5px;
+	font-size: 12px;
+	line-height: 28px;
+	margin-top: 1px;
+	padding-top: 2px;
+}
+.info-code i{
+	width: 52px;
+	height: 28px;
+}
+.info-code i img{
+	display: block;
+	width: 50px;
+	height: 28px;
+	margin: 1px 0px 0px 1px;
+	cursor: pointer;
+}
+.info-code input{
+	width: 58px;
+}
+/*提示语变红色*/
+.info-person input::-webkit-input-placeholder{
+    color:#9f9f9f;
+    line-height: 26px;
+}
+.info-btn-wrapper{
+	float: left;
+	margin-right: 2px;
+}
+.info-btn-wrapper button{
+	margin-left: 15px;
+	width: 62px;
+	height: 30px;
+	text-align: center;
+	border: none;
+	border-radius: 8px;
+	cursor: pointer;
+	color: #555555;
+	font-size: 12px;
+	outline: none;
+}
+.info-btn-wrapper button.bg{
+	background: #ff6600;
+	color: #F0F0F0;
+}
+/*common nav*/
+.common-nav-wrapper{
+	width: 100%;
+	height: 50px;
+	background: #4aa1e2;
+}
+.common-nav{
+	width: 1000px;
+	height: 50px;
+	margin: 0 auto;
+}

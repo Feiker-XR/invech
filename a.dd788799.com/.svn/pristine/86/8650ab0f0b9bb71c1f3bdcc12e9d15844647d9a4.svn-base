@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>走势图</title>
+    <link rel="stylesheet" href="/static/theme/zstTheme/theme1/zst/css/app.css">
+    <link rel="stylesheet" href="/static/theme/zstTheme/theme1/css/global.css">
+    <link rel="stylesheet" href="/static/theme/zstTheme/theme1/zst/css/zst.css">
+    <link rel="stylesheet" href="/static/theme/zstTheme/theme1/css/lottery.css">
+    <link rel="stylesheet" href="/static/theme/zstTheme/theme1/zst/css/other.css?v=20170821" type="text/css"><!--走势图页面CSS-->
+    <style>
+        .zst_loading{display:block;width:100%;min-height:500px;line-height:500px;text-align:center;font-size:30px;}
+    </style>
+</head>
+
+<body>
+<script type="text/javascript" src="/static/theme/zstTheme/theme1/js/jquery.min.js?v=2017"></script><!--jQuery库-->
+<script type="text/javascript" src="/static/theme/zstTheme/theme1/js/scrollanim.min.js?v=2017"></script> <!--"动画库"-->
+<script src="/static/theme/zstTheme/theme1/js/type.js?v=2017"></script><!--自定义封装函数-->
+<script src="/static/theme/zstTheme/theme1/js/global.js?v=20170821"></script><!--自定义封装函数-->
+<script src="/static/theme/zstTheme/theme1/js/jquery.cookie.js?v=2017"></script><!--自定义封装函数-->
+<script src="/static/theme/zstTheme/theme1/js/jquery.md5.js?v=2017"></script><!--自定义封装函数-->
+<script src="/static/theme/zstTheme/theme1/layer/layer.js?v=2017"></script>
+<script src="/static/theme/zstTheme/theme1/js/jquery.nicescroll.js?v=2017"></script>
+<script src="/static/theme/zstTheme/theme1/js/dateFormat.js?v=2017"></script>
+<script src="/static/theme/zstTheme/theme1/js/template.js?v=2017"></script>
+<script src="/static/theme/zstTheme/theme1/js/swfobject/swfobject.js?v=2017"></script>
+<script src="/static/theme/zstTheme/theme1/js/jquery.liMarquee.js?v=2017"></script>
+<script src="/static/theme/zstTheme/theme1/js/placeholders.jquery.min.js?v=2017"></script>
+<script src="/static/theme/zstTheme/theme1/jRange/jquery.range-min.js?v=2017"></script>
+<script>
+    // 闪烁
+    var blinkColorArr = "#fa6200|#0f3f94".split("|");
+    $(".blink").each(function() {
+        var obj = $(this);
+        setInterval(function() {
+            var tmpColor = blinkColorArr[parseInt(Math.random() * blinkColorArr.length)];
+            $(obj).css("color", tmpColor);
+        },200);
+    });
+
+
+
+    $(function() {
+        // 底部信息调用
+        function ajaxGetDbxx() {
+            ajaxRequest({
+                url: CONFIG.BASEURL + "ajaxGetWebInfo.json",
+                success: function (json) {
+                    if (json.result != 1) {
+                        return;
+                    }
+                    $(".webDbxx").html(json.webDbxx);
+                }
+            });
+        }
+
+        if ($(".webDbxx").length > 0) {
+            ajaxGetDbxx();
+        }
+    });
+
+
+</script>

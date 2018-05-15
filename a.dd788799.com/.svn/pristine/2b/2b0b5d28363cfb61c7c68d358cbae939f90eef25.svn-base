@@ -1,0 +1,23 @@
+<?php 
+namespace app\index\controller;
+use app\index\Base;
+
+class Ssc extends Base{
+    
+    public function index(){
+        return $this->fetch();
+    }
+    
+    public function main(){
+        return $this->fetch();
+    }
+    
+    public function gcdt(){
+        return $this->fetch();
+    }
+    
+    public function zsIndex(){
+        return $this->fetch();
+    }
+}
+

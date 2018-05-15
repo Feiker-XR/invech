@@ -1,0 +1,70 @@
+{extend name="public/user_head_new"/}
+{block name="body"}
+<style type="text/css">
+    section.table{
+        position: static;
+    }
+    section.table table tr td:last-child{
+        color: #FF4200;
+    }
+</style>
+<div class="container">
+    <header class="header">
+        <i class='left' onclick="javascript:history.back(-1);">返回</i>
+        <h1>未结注单</h1>
+    </header>
+    <main class="inner_body">
+        <section class="table">
+            <div id="pullrefresh" class="mui-content mui-scroll-wrapper">
+                <div class="mui-scroll">
+                    <table>
+                        <thead>
+                        <tr>
+                            <th>日期</th>
+                            <th>彩种</th>
+                            <th>玩法</th>
+                            <th>投注金额</th>
+                        </tr>
+                        </thead>
+                        <tbody id="lists">
+                        <tr>
+                            <td>2018.04.02 18:25:12</td>
+                            <td>重庆时时彩</td>
+                            <td>五星直选复式</td>
+                            <td>50</td>
+                        </tr>
+                        <tr>
+                            <td>2018.04.02 18:25:12</td>
+                            <td>重庆时时彩</td>
+                            <td>五星直选复式</td>
+                            <td>50</td>
+                        </tr>
+                        <tr>
+                            <td>2018.04.02 18:25:12</td>
+                            <td>重庆时时彩</td>
+                            <td>五星直选复式</td>
+                            <td>50</td>
+                        </tr>
+                        <tr>
+                            <td>2018.04.02 18:25:12</td>
+                            <td>重庆时时彩</td>
+                            <td>五星直选复式</td>
+                            <td>50</td>
+                        </tr>
+
+                        <!--<tr><td colspan="2" styl="text-align:center;">暂无数据</td></tr>-->
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+    </main>
+</div>
+<script type="text/javascript">
+    var base_url = '/user/xxx';
+    var page = 1;
+
+
+</script>
+{/block}

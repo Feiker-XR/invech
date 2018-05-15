@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>电子游艺</title>
+    <link rel="stylesheet" type="text/css" href="/newview/css/style.css"/>
+    <!--<link rel="stylesheet" href="/fishingKing/css/reset.css" />-->
+    <link rel="stylesheet" href="/fishingKing/css/game.css"/>
+    <script src="/js/jquery1.9.0.min.js"></script>
+    <script type="text/javascript" src="/js/jquery.SuperSlide.2.1.1.js"></script>
+    <script type="text/javascript" src="/newview/js/main.js"></script>
+    <script type="text/javascript" src="/js/main.new.js?123"></script>
+</head>
+<body>
+<div class="head">
+    <!--欢迎-->
+    {include file='common/nav'}
+</div>
+<div class="block_0"></div>
+<!--真人视讯背景-->
+<div class="game_l_center">
+    <div class="game_l_login">
+        <div class="block_0"></div>
+        <div class="game_l_login_all" style="height:740px;">
+            <div class="focusBox" style="margin:0 auto">
+                <ul class="pic">
+                    <li>
+                        <a href="{:Url('game/index')}" target="index"><img src="/img/electr-slider-bg1.png"/></a>
+                    </li>
+                    <li>
+                        <a href="{:Url('lottery/home')}" target="index"><img src="/img/game-slider-bg.png"/></a>
+                    </li>
+                    <li>
+                        <a href="{:Url('live/index')}" target="index"><img src="/img/live-slider-bg.png"/></a>
+                    </li>
+                    <li>
+                        <a href="{:Url('sport/index')}" target="index"><img src="/img/sport-bg1.png"/></a>
+                    </li>
+                </ul>
+                <a class="prev" href="javascript:void(0)"></a>
+                <a class="next" href="javascript:void(0)"></a>
+                <ul class="hd">
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                </ul>
+            </div>
+            <div class="block_30"></div>
+            <div class="banner_notice txtMarquee-left">
+                <div class="bd">
+                    <img src="/img/notice.png" class="fl"/>
+                    <ul class="fl f14 ">
+                        <li></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="block_30"></div>
+            <div class="game_l_login_show1">
+                <div class="game-main1">
+                    {volist name="fishKing" id="data"}
+                    <div class="game-fish game-fish-one"
+                         style="background-image: url('/images/bbinimg/{$data.imageurl}')">
+                        {eq name="data.platform" value="bbin"}
+                        <a target="_self" href="/live/bb/type/{$data.gameid}"></a>
+                        {else/}
+                        <a target="_self" href="/live/ag/type/{$data.gameid}/actype/1"></a>
+                        {/eq}
+                    </div>
+                    {/volist}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="block_30"></div>
+    {include file='common/footer'}
+        {include file='common/fix-left-right'}

@@ -1,0 +1,368 @@
+<?php
+namespace app\common\model\member;
+
+use app\common\model\Bet;
+use app\common\model\Order;
+use app\common\model\Withdraw;
+use app\common\model\Config;
+use app\common\model\Commission;
+
+use bong\foundation\QueryWrapper;
+use think\Log;
+
+trait AgentTrait
+{
+    //------------------基础函数-----------------
+
+    //代理登录,auth服务
+    /*
+    public function scopeAgent($query){
+        return $query->where('is_agent',1);
+    }
+    */
+
+    public function scopeAgentScope($query){
+        return $query->where('is_agent',1);
+    }
+
+    public function agent(){
+        return $this->belongsTo('Member','agent_id','uid');
+    }
+
+    //下线,parentId,parents,admin三个字段丢弃,改用agent_id
+    public function subMembers(){
+        return $this->hasMany('Member','agent_id','uid');
+    }
+
+    public function isAgent(){
+        return $this->is_agent;
+    }
+
+    //代理策略
+    public function isAgentOf($member){
+        return $this->isAgent() && $this->uid == $member->agent_id;
+    }
+
+    //获取所有上层代理-递归
+    public function getAgents(){
+        if(!$this->agent){
+            return collection([]);
+        }
+        $collection = collection([$this->agent]);
+        $agents = $collection->merge($this->agent->getAgents());
+        return $agents;
+    }
+
+    //获取所有下层会员-递归
+    public function getSubMembers($include_root = false){
+        if($include_root){            
+            $collection = collection([$this]);
+        }else{
+            $collection = collection([]);
+        }                
+        $subs = $this->sub_members->reduce(function ($carry, $sub_member){
+            if(!$sub_member->isAgent()){
+                return $carry->merge(collection([$sub_member]));
+            }else{
+                return $carry->merge($sub_member->getSubMembers());    
+            }            
+        }, $collection);  
+        return $subs;
+    }
+
+    //---------------------代理后台---------------------
+
+    public function scopeMembers($query){
+        if(!$this->isAgent()){
+            throw new \Exception('非代理不能查询子会员!');
+        }
+        return $query->where('agent_id',$this->uid);
+    }
+
+    //暂定为投注过的为有效会员
+    public function scopeAvailMembers($query){
+        if(!$this->isAgent()){
+            throw new \Exception('非代理不能查询子会员!');
+        }        
+        //return $query->where('agent_id',$this->uid)->join();
+        return $query->where('agent_id',$this->uid)->where('uid','in',function($query){ 
+            //$query->table((new Bet)->getTable())->column('uid');
+            //query执行查询后option和table等信息置空;
+            //tp只需要设置查询选项,再通过buildSql构造完整的where子句;
+            $query->table((new Bet)->getTable())->distinct(true)->field('uid');
+        });
+    }
+
+
+    //------------------代理后台会员列表------------------
+    public function getMembers(){
+        $query = $this->members()->getListBuild(['is_agent']);
+        $data = $query->paginate();
+        return $data;
+    }     
+
+    public function getAvailMembers(){
+        $query = $this->availMembers()->getListBuild(['is_agent']);
+        return $query->paginate();
+    }
+
+    public function __call($method, $args)
+    {
+        //用户的注单列表,Bet::getQlist
+        //代理中心的列表函数
+        $agent_center = ['getBetList','getDepositList','getWithdrawList',
+                        //'getBetDaily','getDepositDaily','getWithdrawDaily',
+                        ];
+        if(in_array($method,$agent_center)){
+            $build_method = $method.'Build';
+            $query = call_user_func_array([$this, $build_method], $args);   
+            return $data = $query->paginate();
+        }
+      
+        return parent::__call($method, $args);
+    }
+
+    public function attachToAgent(&$query,$field_uid='uid'){
+        if(!$this->isAgent()){
+            throw new \Exception('非代理无权操作!');
+        }        
+        $query->where($field_uid,'in',$this->agentSubQuery());
+    }
+
+    private function agentSubQuery(){
+        return function($query){
+            $query->table($this->getTable())
+            ->where('agent_id',$this->uid)
+            ->field('uid');
+        };
+    }
+
+    //----------------列表------------------------
+
+    private function getBetListBuild(){
+        $model = (new Bet);
+        $query = $model->db(true,false);
+        $model->attachToRequest($query);
+        $this->attachToAgent($query,'x.uid');
+        $query->with('user,types,played');
+        return $query->order('created_at desc')->field('x.*');
+    }
+
+    private function getDepositListBuild(){
+        $model = (new Order);
+        $query = $model->db(true,false);
+        $model->attachToRequest($query);
+        $this->attachToAgent($query,'x.uid');
+        $query->with('user,way');
+        return $query->where('status','1')->order('created_at desc')->field('x.*');
+    }
+
+    private function getWithdrawListBuild(){
+        $model = (new Withdraw);
+        $query = $model->db(true,false);
+        $model->attachToRequest($query);    
+        $this->attachToAgent($query,'x.uid');  
+        $query->with('user'); 
+        return $query->order('created_at desc')->field('x.*');        
+    }
+
+    //旧版日报表,输入一天得到改天统计数据;
+/*
+    private function attachToDaily(&$query,$date=null){
+        $query->where('uid','in',function($query){
+            $this->attachToAgent($query);
+        });
+        if(!$date){
+            $date = date('Y-m-d');
+        }
+        $query->where('created_at','between',[$date.' 00:00:00',$date.' 23:59:59',]);
+    }
+    public function getBetDailyBuild($date=null){
+        //$query = (new Bet)->db(true,false);
+        $query = (new Bet)->db(true,true);
+        $this->attachToDaily($query,$date);
+        return $query;
+    }
+    public function getDepositDailyBuild($date=null){
+        $query = (new Order)->db(true,false);
+        $this->attachToDaily($query,$date);
+        //return new QueryWrapper($query);
+        return $query;
+    }
+    public function getWithdrawDailyBuild($date=null){
+        $query = (new Withdraw)->db(true,false);
+        $this->attachToDaily($query,$date);     
+        return $query;
+    }
+*/
+
+    //新版日报表,输入时间段,按天分组统计 每日数据
+    private function getGroupPaginate($query,$fields=[]){
+
+        $this->attachToGroup($query,$fields);
+        $this->attachToDailyAll($query);
+        $this->attachToAgent($query);
+
+        $sub_query = $query->buildSql();
+        
+        //$query_new = db($sub_query.' s')->order('day');//error
+        $query_new = db()->table($sub_query.' s')->order('day');
+
+        return $query_new;
+    }
+
+    private function attachToGroup($query,$fields=[]){
+        $field = "DATE_FORMAT(created_at,'%Y-%m-%d') AS day";        
+        $query->field($field)->group('day');
+        //$this->attachToDailyAll($query);
+
+        $query->field($fields);        
+    }
+
+    private function attachToDailyAll(&$query){
+/*
+        $query->where('uid','in',function($query){
+            $this->attachToAgent($query);
+        });
+*/
+        $params = request()->param();
+        if($params['startTime']??0){            
+            $query->where('created_at', '>=', $params['startTime']);
+        }
+
+        if($params['endTime']??0){
+            $query->where('created_at', '<=', $params['endTime'].' 23:59:59');
+        }
+    }
+
+    //投注日报表-升级版
+    public function getBetDailyAllBuild(){
+        $query = (new Bet)->db(true,false);
+
+        $fields = [
+            'ifnull(sum(mode*beiShu*actionNum),0.00) as bet_amount',
+            'ifnull(sum(actionNum),0) as bet_count',
+            'ifnull(sum(bonus),0.00) as zj_amount',  
+            'ifnull(sum(zjCount),0) as zj_count',
+            //'ifnull(sum(case when lotteryNo !="" then actionNum*mode*beiShu-bonus else 0 end),0.00) as win_amount',
+            'ifnull(sum(case when lotteryNo !="" then bonus-actionNum*mode*beiShu else 0 end),0.00) as win_amount',
+            'ifnull(sum(fanDianAmount),0.00) as backwater_amount',                    
+            ];        
+
+        $query_new = $this->getGroupPaginate($query,$fields);
+
+        return $query_new;
+    }
+
+    public function getDepositDailyAllBuild(){
+        $query = (new Order)->db(true,false)->where('status',1);
+
+        $fields = [
+            'sum(amount) as deposit_amount',
+            'count(*) as deposit_num',  
+            'count(distinct uid) as deposit_person_num',           
+            ];
+        
+        $query_new = $this->getGroupPaginate($query,$fields);
+  
+        return $query_new;
+    }
+
+    public function getWithdrawDailyAllBuild(){
+        $query = (new Withdraw)->db(true,false);
+
+        $fields = [
+            'sum(amount) as withdraw_amount',
+            'count(*) as withdraw_num',  
+            'count(distinct uid) as withdraw_person_num',           
+            ];
+        
+        $query_new = $this->getGroupPaginate($query,$fields);
+  
+        return $query_new;
+    }
+
+//----------------计划任务之月结佣金-----------------
+    public function getMemberBetStat($date){
+
+        //$date_s = date("Y-m-1", strtotime("-1 months", strtotime($date)));
+        //$date_e = date("Y-m-t", strtotime("-1 months", strtotime($date)));
+        $date_s = date("Y-m-1", strtotime($date));
+        $date_e = date("Y-m-t", strtotime($date));
+
+        $time_s = strtotime($date_s.' 00:00:00');
+        $time_e = strtotime($date_e.' 23:59:59');
+
+        $perPage = 100;
+        $bet_money=0;
+        $bet_bonus=0;
+
+        $this->members()->chunk($perPage, function($members) use ($bet_money,$bet_bonus,$time_s,$time_e){
+            $perPage = 1000;
+            $ids = $members->column('uid');            
+            Bet::where('uid','in',$ids)
+            ->where('kjTime','between',[$time_s,$time_e])
+            //->where('lotteryNo','not null')
+            //->where('lotteryNo','!=','')
+            ->where('lotteryNo !=""')
+            ->chunk($perPage, function($bets) use ($bet_money,$bet_bonus){
+                foreach ($bets as $bet) {
+                    $bet_money += $bet->bet_money;
+                    $bet_bonus += $bet->bonus;
+                }
+            });
+        });
+        return [$bet_money,$bet_bonus,];
+    }
+
+    //月结佣金的事件处理
+    //event('user.bet.commission',[$agent,$date]);
+    public function commission($date=null){
+
+        $com = Commission::where('date_month',$date)->where('uid',$this->uid)->find();
+        if($com){
+            Log::write('代理'.$this->uid.'已经发放过当月'.$date.'佣金,请勿重新发放!','notice');
+            //return false; 事件的后续监听器无法执行;且false无法返回给上层;
+            return;
+        }
+
+        transaction(function() use ($date){
+
+            //将日期转为第一天,数据库中1日0时0分0秒的时间戳表示某个月;
+            $date = is_null($date)?date('Y-m-1'):date("Y-m-1", strtotime($date));
+
+            list($bet_money,$bet_bonus) = $this->getMemberBetStat($date);
+
+            if($this->agent_mode == self::AGENT_MODE_FLOW){
+                $agent_rate = Config::getByName('CommissionRate1');
+                $commission = $bet_money *  $agent_rate/ 100 - $bet_bonus;
+                if($commission<0){
+                    $commission = 0;
+                }
+            }else{
+                $agent_rate = Config::getByName('CommissionRate2');
+                $amount = ($bet_money - $bet_bonus);
+                if($amount<0){
+                    $amount = 0;
+                }
+                $commission = $amount *  $agent_rate/ 100;
+            }
+            $commission = round($commission,2);
+
+            $com = Commission::create([
+                'uid'   =>  $this->uid,
+                'month' =>  strtotime($date),
+                'date_month' => $date,
+                'amount' => $commission,
+                'agent_mode' => $this->agent_mode,
+                'agent_rate' => $agent_rate,
+                'bet_money' => $bet_money,
+                'bet_bonus' => $bet_bonus,
+            ]);
+
+            $this->incBalance($commission,'commission',$com->id,'代理佣金月结');
+            return true;
+        });
+    }
+
+}

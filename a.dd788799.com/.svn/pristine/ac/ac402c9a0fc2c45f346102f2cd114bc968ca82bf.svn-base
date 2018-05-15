@@ -1,0 +1,539 @@
+{include file="common/header" /}
+<style>
+    .banner_shuru_main{margin:0;}
+    .banner_shuru{position:relative;height:0;}
+    .block_home_slider,.flexslider .slides li{width:100%;}
+</style>
+<div class="bannernew" style="height:320px;overflow:hidden;">
+    <div class="block_home_slider" style="height:320px;position:absolute;">
+        <div id="home_slider" class="flexslider">
+            <ul class="slides">
+                <li>
+                                <a href="javascript:void(0)" class="banner_main" style="background: url(/images/890.png) no-repeat center;background-size: cover;"></a>
+                                </li>
+                        <li>
+                                <a href="javascript:void(0)" class="banner_main" style="background: url(/images/1394.png) no-repeat center;background-size: cover;"></a>
+                                </li>
+                        <li>
+                                <a href="javascript:void(0)" class="banner_main" style="background: url(/images/1395.png) no-repeat center;background-size: cover;"></a>
+                                </li>
+                        <li>
+                                <a href="javascript:void(0)" class="banner_main" style="background: url(/images/1393.png) no-repeat center;background-size: cover;"></a>
+                                </li>
+                        </ul>
+        </div>
+    </div>
+    <div class="banner_shuru container" style="height: 1px;">
+                {if($user)}
+		            <div class="banner_shuru_main right">
+		                        <div class="banner_shuru_main_tl">
+		                            <span>欢迎登录</span>
+		                        </div>
+		                        <div class="login_after">
+		                            <div class="login_after1">
+		                                <script>
+		                                    var hour = (new Date()).getHours();
+		                                    if (hour < 6) {
+		                                        hour = '凌晨好！';
+		                                    } else if (hour < 12) {
+		                                        hour = '上午好！';
+		                                    } else if (hour < 14) {
+		                                        hour = '中午好！';
+		                                    } else if (hour < 18) {
+		                                        hour = '下午好！';
+		                                    } else if (hour < 24) {
+		                                        hour = '晚上好！'
+		                                    }
+		                                    document.write(hour);
+		                                </script>
+		                                <span onclick="openHyzx('/user/index')" style="color: #247fdd; cursor: pointer;">{$user->username}</span><br>
+		                                余额：<span class="color_red">{$user->coin}</span>
+		                            </div>
+		                            <div class="login_after2">
+		                                <a href="javascript:void(0);" onclick="openHyzx('#/pay/index')">存款 </a>
+		                                <span>&nbsp;|&nbsp;</span>
+		                                <a href="javascript:void(0);" onclick="openHyzx('#/user/withdraw')">取款</a>
+		                                <span>&nbsp;|&nbsp;</span>
+		                                <a href="javascript:void(0);" onclick="openHyzx('#/user/inbox')">站内信 </a>
+		                                <span>&nbsp;|&nbsp;</span>
+		                                <a href="javascript:void(0);" onclick="openHyzx('#/user/bet_record')">投注记录 </a>
+		                                <span>&nbsp;|&nbsp;</span>
+		                                <a href="javascript:void(0);" onclick="openHyzx('#/user/withdraw_record')">提款记录</a>
+		                                <span>&nbsp;|&nbsp;</span>
+		                                <a href="javascript:void(0);" onclick="openHyzx('#/user/main')">会员中心</a>
+		                                <span>&nbsp;|&nbsp;</span>
+		                            </div>
+		                            <div class="login_afterbtn">
+		                                <a href="/user/logout.html" class="btn_red">
+		                                    退出
+		                                </a>
+		                            </div>
+		                        </div>
+		            </div>
+		            {else/}
+		            <div class="banner_shuru_main right">
+		                <div class="banner_shuru_main_tl">
+		                    <span>欢迎登录</span>
+		                </div>
+		                <form onsubmit="registerLogin();return false;">
+		                    <div class=" banner_shuru_gp">
+		                        <input type="text" id="registerLoginAccount" class="banner_shuru_input" placeholder="会员名">
+		                    </div>
+		                    <div class=" banner_shuru_gp">
+		                        <input type="password" id="registerLoginPassword" class="banner_shuru_input" placeholder="密码">
+		                        <a href="https://f18.livechatvalue.com/chat/chatClient/chatbox.jsp?companyID=881265&amp;configID=73958&amp;jid=4674187711&amp;s=1" class="banner_wp">忘记?</a>
+		                    </div>
+		                    <div class=" banner_shuru_gp">
+		                        <input type="text" id="registerLoginYzm"  class="banner_shuru_input" placeholder="验证码">
+		
+		                        <a href="javascript:void(0);" class="banner_yz">
+		                            <img id="captcha" style= "width:70px; height: 25px" src="{:url('indexcaptcha/get_captcha?id=login')}">
+		                        </a>
+		                    </div>
+		                    <script type="text/javascript">
+		                        $("#captcha").click(function(){
+		                            $(this).attr('src',"{:url('indexcaptcha/get_captcha?id=login')}");
+		
+		                        })
+		                    </script>
+		                    <div class="clearfix banner_shuru_btn">
+		                        <input type="submit" class="left btn_red" value="登录">
+		                        <a href="/index/register.html" class="left">立即注册</a>
+		                    </div>
+		                </form>
+		            </div>
+		            {/if}
+            </div>
+        </div>
+
+<div class="main container index_main clearfix">
+    <div class="left kaijiang">
+        <div class="kaijiang_tl">
+            开奖公告
+        </div>
+        <div class="kaijiang_main">
+            <ul id="apend">
+                </ul>
+        </div>
+    </div>
+    <div class="left index_main_midlle">
+        <div class="touzhu">
+            <div class="touzhu_t clearfix">
+		    			<span class="left touzhu_t_name">
+		    				快速投注
+		    			</span>
+                <div class="left touzhu_t_qht clearfix">
+                    <a href="javascript:void(0);" class="ahover">
+                        重庆时时彩
+                    </a>
+                    <a href="javascript:void(0);">
+                        安徽快3
+                    </a>
+                    <a href="javascript:void(0);">
+                        香港六合彩
+                    </a>
+                    <a href="javascript:void(0);">
+                        排列三
+                    </a>
+                </div>
+            </div>
+            <div class="touzhu_b">
+                <div class="touzhu_b_main active" id="ssc_id_1">
+                    <div class="clearfix touzhu1">
+                        <div class="left">
+                            第<var class="qishu">00</var>期截止：<span class="time time1"><span class="hour">00</span>时<span
+                                class="mini">00</span>分<span class="sec">00</span>秒</span>
+                        </div>
+                        <div class="right touzhu1_rt">
+                            <a href="javascript:void(0)" onclick="openGcdt('gcdt/cqssc')">手动选号</a>
+                            <a href="/ssc/zst/cqssc.html" target="_blank" class="sp0">走势图</a>
+                        </div>
+                    </div>
+                    <div class="touzhu2 retouzhu2 clearfix" id="xyxhContents_1">
+                        <div class="kai_qiu_main left">
+		    	    				<span class="s0">
+
+		    	    				</span>
+                        </div>
+                        <div class="kai_qiu_main left">
+		    	    				<span class="s0">
+
+		    	    				</span>
+                        </div>
+                        <div class="kai_qiu_main left">
+		    	    				<span class="s0">
+
+		    	    				</span>
+                        </div>
+                        <div class="kai_qiu_main left">
+		    	    				<span class="s0">
+
+		    	    				</span>
+                        </div>
+                        <div class="kai_qiu_main left">
+		    	    				<span class="s0">
+		    	    				</span>
+                        </div>
+                    </div>
+                    <div class="clearfix touzhu3">
+                        <div class="clearfix sum left">
+                            <button class="add left" onclick="xyxhAdd(1, 2)">+</button>
+                            <input class="text_box left" id="xyxhInput_1" value="1" type="text"
+                                   onkeyup="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')} checkValue(1, 5);"
+                                   onafterpaste="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}"
+                                   disabled="disabled"/>
+
+                            <button class="min left" onclick="xyxhMinute(1, 2)">-</button>
+                        </div>
+                        <div class="left sum_text">
+                            倍，共 <span id="xyxhMoney_1" class="xyxhMoney_1 color_red">2</span>元
+                        </div>
+                        <div class="right clearfix">
+                            <a href="javascript:void(0)" class="shuaxin" onclick="xyxh(this,1)">
+                                换一注
+                            </a>
+                            <a href="javascript:void(0)" class="a1 btn_red touzhubtn" onclick="openXyxh(1)">
+                                立即投注
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="touzhu_b_main hideContent" id="ssc_id_20">
+                    <div class="clearfix touzhu1">
+                        <div class="left">
+                            第<var class="qishu">00</var>期截止：<span class="time time2"><span class="hour">00</span>时<span
+                                class="mini">00</span>分<span class="sec">00</span>秒</span>
+                        </div>
+                        <div class="right touzhu1_rt">
+                            <a href="javascript:void(0);" onclick="openGcdt('gcdt/ahk3')">手动选号</a>
+                            <a href="/ssc/zst/ahk3.html" target="_blank">走势图</a>
+                        </div>
+                    </div>
+                    <div class="touzhu2 retouzhu3 clearfix" id="xyxhContents_20">
+                        <div class="kai_qiu_main left">
+		    	    				<span class="s0">
+
+		    	    				</span>
+                        </div>
+                        <div class="kai_qiu_main left">
+		    	    				<span class="s0">
+
+		    	    				</span>
+                        </div>
+                        <div class="kai_qiu_main left">
+		    	    				<span class="s0">
+
+		    	    				</span>
+                        </div>
+                    </div>
+                    <div class="clearfix touzhu3">
+                        <div class="clearfix sum left">
+                            <button class="add left" onclick="xyxhAdd(20, 2)">+</button>
+                            <input class="text_box left" id="xyxhInput_20" value="1" type="text"
+                                   onkeyup="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')} checkValue(1, 5);"
+                                   onafterpaste="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}"
+                                   disabled="disabled"/>
+
+                            <button class="min left" onclick="xyxhMinute(20, 2)">-</button>
+                        </div>
+                        <div class="left sum_text">
+                            倍，共 <span id="xyxhMoney_20" class="color_red">2</span>元
+                        </div>
+                        <div class="right clearfix">
+                            <a href="javascript:void(0);" class="shuaxin" onclick="xyxh(this,20)">
+                                换一注
+                            </a>
+                            <a href="javascript:void(0)" onclick="openXyxh(20)" class="btn_red touzhubtn">
+                                立即投注
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="touzhu_b_main hideContent" id="ssc_id_6">
+                    <div class="clearfix touzhu1">
+                        <div class="left">
+                            第<var class="qishu">00</var>期截止：<span class="time time3"><span class="hour">00</span>时<span
+                                class="mini">00</span>分<span class="sec">00</span>秒</span>
+                        </div>
+                        <div class="right touzhu1_rt">
+                            <a href="javascript:void(0)" onclick="openGcdt('gcdt/lhc')">手动选号</a>
+                            <a href="/ssc/zst/lhc.html" target="_blank">走势图</a>
+                        </div>
+                    </div>
+                    <div class="touzhu2 clearfix" style="padding-top: 5px;height: 65px;" id="xyxhContents_6">
+                        <div class="left">
+		    	    		<span class="qiu">
+		    	    			12
+		    	    		</span>
+                            <p class="biaoqian">
+		    	    			<span>
+		    	    				鸡
+		    	    			</span>
+                            </p>
+                        </div>
+                        <div class="left">
+		    	    				<span class="qiu">
+		    	    					10
+		    	    				</span>
+                            <p class="biaoqian">
+		    	    					<span>
+		    	    						鼠
+		    	    					</span>
+                            </p>
+                        </div>
+                        <div class="left">
+		    	    				<span class="qiu">
+		    	    					34
+		    	    				</span>
+                            <p class="biaoqian">
+		    	    					<span>
+		    	    						鼠
+		    	    					</span>
+                            </p>
+                        </div>
+                        <div class="left">
+		    	    				<span class="qiu">
+		    	    					11
+		    	    				</span>
+                            <p class="biaoqian">
+		    	    					<span>
+		    	    						猪
+		    	    					</span>
+                            </p>
+                        </div>
+                        <div class="left">
+		    	    				<span class="qiu">
+		    	    					19
+		    	    				</span>
+                            <p class="biaoqian">
+		    	    					<span>
+		    	    						兔
+		    	    					</span>
+                            </p>
+                        </div>
+                        <div class="left">
+		    	    				<span class="qiu">
+		    	    					25
+		    	    				</span>
+                            <p class="biaoqian">
+		    	    					<span>
+		    	    						鸡
+		    	    					</span>
+                            </p>
+                        </div>
+                        <div class="left">
+		    	    				<span class="qiu">
+		    	    					41
+		    	    				</span>
+                            <p class="biaoqian">
+		    	    					<span>
+		    	    						蛇
+		    	    					</span>
+                            </p>
+                        </div>
+
+                    </div>
+                    <div class="clearfix touzhu3">
+                        <div class="clearfix sum left">
+                            <button class="add left" onclick="xyxhAdd(6, 2)">+</button>
+                            <input class="text_box left" id="xyxhInput_6" value="1" type="text"
+                                   onkeyup="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')} checkValue(1, 5);"
+                                   onafterpaste="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}"
+                                   disabled="disabled"/>
+
+                            <button class="min left" onclick="xyxhMinute(6, 2)">-</button>
+                        </div>
+                        <div class="left sum_text">
+                            倍，共 <span id="xyxhMoney_6" class="color_red">2</span>元
+                        </div>
+                        <div class="right clearfix">
+                            <a href="javascript:void(0);" class="shuaxin" onclick="xyxh(this,6)">
+                                换一注
+                            </a>
+                            <a href="javascript:void(0);" onclick="openXyxh(6)" class="btn_red touzhubtn">
+                                立即投注
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="touzhu_b_main hideContent" id="ssc_id_4">
+                    <div class="clearfix touzhu1">
+                        <div class="left">
+                            第<var class="qishu">00</var>期截止：<span class="time time4"><span class="hour">00</span>时<span
+                                class="mini">00</span>分<span class="sec">00</span>秒</span>
+                        </div>
+                        <div class="right touzhu1_rt">
+                            <a href="javascript:void(0);" onclick="openGcdt('gcdt/lhc')">手动选号</a>
+                            <a href="/ssc/zst/pl3.html" target="_blank">走势图</a>
+                        </div>
+                    </div>
+                    <div class="touzhu2 retouzhu3 clearfix" id="xyxhContents_4">
+                        <div class="kai_qiu_main left">
+		    	    				<span class="s0">
+
+		    	    				</span>
+                        </div>
+                        <div class="kai_qiu_main left">
+		    	    				<span class="s0">
+
+		    	    				</span>
+                        </div>
+                        <div class="kai_qiu_main left">
+		    	    				<span class="s0">
+
+		    	    				</span>
+                        </div>
+                    </div>
+                    <div class="clearfix touzhu4">
+                        <div class="clearfix sum left">
+                            <button class="add left" onclick="xyxhAdd(4, 2)">+</button>
+                            <input class="text_box left" id="xyxhInput_4" value="1" type="text"
+                                   onkeyup="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')} checkValue(1, 5);"
+                                   onafterpaste="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}"
+                                   disabled="disabled"/>
+
+                            <button class="min left" onclick="xyxhMinute(4, 2)">-</button>
+                        </div>
+                        <div class="left sum_text">
+                            倍，共 <span id="xyxhMoney_4" class="color_red">2</span>元
+                        </div>
+                        <div class="right clearfix">
+                            <a href="javascript:void(0);" class="shuaxin" onclick="xyxh(this,4)">
+                                换一注
+                            </a>
+                            <a href="javascript:void(0);" onclick="openXyxh(4)" class="btn_red touzhubtn">
+                                立即投注
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="index_zixun">
+            <div class="index_zixun_t">
+                <img src="/static/theme/mainTheme/400w/images/common/index_97.png"/>
+                资讯信息
+            </div>
+            <ul class="index_zixun_ul" id="zxxx">
+                </ul>
+        </div>
+    </div>
+    <div class="right index_main_rt">
+        <div class="index_main_rt1">
+            <div class="index_zixun_t">
+                <img src="/static/theme/mainTheme/400w/images/common/index_65.png"/>
+                手机客户端下载
+            </div>
+            <div class="index_main_rt1_1 clearfix">
+                <img src="/images/ewm.png" class="left index_main_erw" alt="">
+                <div class="right index_main_rt1_1_rt">
+                    <p class="down_a">
+                        <a href="">
+                            <img src="/static/theme/mainTheme/400w/images/common/index_72.png"/>
+                            Iphone 版
+                        </a>
+                    </p>
+                    <p class="down_a">
+                        <a href="">
+                            <img src="/static/theme/mainTheme/400w/images/common/index_77.png"/>
+                            Android 版
+                        </a>
+                    </p>
+                    <p class="index_main_erw_more">
+                        <a href="javascript:void(0);">更多方式</a>
+                    </p>
+                </div>
+            </div>
+            <div class="index_main_rt1_2">
+                <div class="index_main_rt1_2t clearfix">
+                    <a href="javascript:void(0);" class="ahover">
+                        网站公告
+                    </a>
+                    <a href="javascript:void(0);">新手指导</a>
+                </div>
+                <div class="ndex_main_rt1_2b_main">
+                    <div class="index_main_rt1_2b roll_rt1_2b active">
+                        <div id="wrap" class="rewrap">
+                            <ul class="index_notice_ul">
+                                <li><a onclick="showGonggao(0)" href="javascript:void(0)">银行卡转账账户变更通知</a></li>
+                                <li><a onclick="showGonggao(1)" href="javascript:void(0)">银行卡转账账户变更通知</a></li>
+                                <li><a onclick="showGonggao(2)" href="javascript:void(0)">公告</a></li>
+                                </ul>
+                            <ul id="box2"></ul>
+                        </div>
+                    </div>
+                    <div class="index_main_rt1_2b index-content-help">
+                        <ul class="index_notice_ul_new">
+                            <marquee behavior="scroll" scrolldelay="1"  direction="up"
+                                     onstart="this.firstChild.innerHTML+=this.firstChild.innerHTML;" scrollamount="2"
+                                     height="44"  onmouseover="this.stop();" onmouseout="this.start();">
+                                <div style="margin: 10px">
+                                <p>
+                                    <a href="/help/question/zc.html">关于注册</a>
+                                </p>
+                                </div>
+                                <div style="margin: 10px">
+                                <p>
+                                    <a href="/help/question/cz.html" style="">关于充值</a>
+                                </p>
+                                </div>
+                                <div style="margin: 10px">
+                                <p>
+                                    <a href="/help/question/tk.html">关于提款</a>
+                                </p>
+                                </div>
+                                <div style="margin: 10px">
+                                <p>
+                                    <a href="/help/index.html">彩种介绍</a>
+                                </p>
+                                </div>
+                                <div style="margin: 10px">
+                                    <p>
+                                        <a href="/help/question/cz.html">充值介绍</a>
+                                    </p>
+                                </div>
+                                <div style="margin: 10px">
+                                    <p>
+                                        <a href="/help/question/cz_1.html">网银充值</a>
+                                    </p>
+                                </div>
+                                <div style="margin: 10px">
+                                    <p>
+                                        <a href="/help/question/cz_2.html">支付宝</a>
+                                    </p>
+                                </div>
+                                <div style="margin: 10px">
+                                    <p>
+                                        <a href="/help/question/cz_1.html">网银充值</a>
+                                    </p>
+                                </div>
+
+                        </marquee>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="zhongjiang">
+            <div class="zhongjiang_t">
+                <p class="zhongjiang_t1">
+                    本站累计中奖
+                </p>
+                <div class="zhongjiang_t2">
+                    <span>3</span>亿<span>5230</span>万<span>8020</span>元
+                </div>
+            </div>
+
+            <div class="zhongjiang_ul">
+                <ul  class="zj_marquee_class" id="zj_info_marquee">
+                    </ul>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $('.all_fenlei_yin').show()
+</script>
+{include file="common/footer" /}

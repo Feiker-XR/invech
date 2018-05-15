@@ -1,0 +1,1144 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="renderer" content="webkit">
+    <meta name="viewport" content="width=device-width">
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+    <title>{$types[$type]['title']}</title>
+    <meta content="no-cache" http-equiv="Pragma">
+    <link href="/static/theme/sscTheme/theme1/css/jquery-ui-1.8.21.custom.css" rel="stylesheet" type="text/css">
+    <link href="/static/theme/sscTheme/theme1/css/jquery.range.css" rel="stylesheet" type="text/css">
+
+    <?php if($type==20||$type==43){ ?>
+    <!--<link href="/__CSS__/play_pk10.min.css?<?php echo time();?>" rel="stylesheet" type="text/css">-->
+    <?php } ?>
+    <?php if($type==24){ ?>
+    <!--<link href="/__CSS__/k8.min.css?<?php echo time();?>" rel="stylesheet" type="text/css">-->
+    <?php }
+?>
+    <style type="text/css">
+        .compressprogroupmask {
+            display: none;
+        }
+
+        .compressprogroup {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            margin-left: -230px;
+            height: 180px;
+            margin-top: -90px;
+        }
+
+        #tabbar-div-s2 {
+            display: inline-block;
+            height: 40px;
+        }
+
+        #tabbar-div-s4 {
+            display: inline-block;
+            /*height: 40px;*/
+            /*margin-top: -15px;*/
+        }
+
+        #played-span {
+            display: block;
+        }
+
+        #tabCon {
+            display: inline-block;
+            border-bottom: 1px #ece2e0 solid;
+            width: 100%;
+        }
+    </style>
+    <script type="text/javascript" src="/static/theme/sscTheme/theme1/js/jquery-1.8.0.min.js"></script>
+    <script type="text/javascript" src="/static/theme/sscTheme/theme1/js/chinese-lunar.js"></script>
+    <script type="text/javascript" src="/static/theme/sscTheme/theme1/js/template-web.js"></script>
+    <script type="text/javascript" src="/static/theme/sscTheme/theme1/js/function.js"></script>
+    <script type="text/javascript" src="/static/theme/sscTheme/theme1/js/kqwf.js"></script>
+    <script type="text/javascript" src="/static/theme/sscTheme/theme1/js/game.js?ver=20160902"></script>
+    <script type="text/javascript" src="/static/theme/sscTheme/theme1/js/jquery-ui-1.8.23.custom.min.js"></script>
+    <script type="text/javascript" src="/static/theme/sscTheme/theme1/js/jquery.simplemodal.src.js"></script>
+    <script type="text/javascript" src="/static/theme/sscTheme/theme1/js/jquery.range-min.js"></script>
+    <script type="text/javascript" src="/static/theme/sscTheme/theme1/js/global.js"></script>
+
+    <!--</script><script src="/static/theme/sscTheme/theme1/js/ssc/gcdt/gfwf.js?v=201709101"></script>-->
+    <!--<script src="/static/theme/sscTheme/theme1/js/ssc/gcdt/ssc.js?v=201709178"></script>-->
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title></title>
+    <link rel="stylesheet" href="/static/theme/sscTheme/theme1/css/cabel-v1.css" type="text/css">
+    <link rel="stylesheet" href="/static/theme/sscTheme/theme1/css/style.css" type="text/css"><!--页面CSS-->
+    <link rel="stylesheet" href="/static/theme/sscTheme/theme1/css/animate.min.css" type="text/css"><!--CSS3动画-->
+    <link rel="stylesheet" href="/static/theme/sscTheme/theme1/css/lottery.css" type="text/css"><!--页面CSS-->
+    <link rel="stylesheet" href="/static/theme/sscTheme/theme1/css/liMarquee.css" type="text/css"><!--页面CSS-->
+    <link rel="stylesheet" href="/static/theme/sscTheme/theme1/css/jquery.range.css" type="text/css">
+    <link rel="stylesheet" href="/static/theme/sscTheme/theme1/css/global.css" type="text/css"><!--页面CSS-->
+    <link rel="stylesheet" href="/static/theme/sscTheme/theme1/css/other.css" type="text/css"><!--页面CSS-->
+    <script>
+        <!--
+        // 屏蔽JS错误
+        //    window.onerror = function(){return true;}
+        // -->
+
+        var CONFIG = {
+            BASEURL: "/",    // 根路径
+            RESURL: "/static/theme/sscTheme/theme1/"         // 资源路径
+        };
+
+        var fengge1 = 'f42023';
+    </script>
+    <script src="/static/theme/sscTheme/theme1/css/mobile-detect.min.js"></script>
+
+    <style>
+        a:hover {
+            color: red;
+        }
+
+        a:active {
+            color: deepskyblue;
+        }
+
+        .reResulttBg {
+            background: #f42023;
+        }
+
+        .process .layout .monty ul li, .process .layout .list_tems .date:after, .list ul li .slide p.acti, .headmemberbg {
+            background: #f42023;
+        }
+
+        .process .layout .list_tems .date span, .process .layout .list_tems .date h3, .eveb_amount span, .color-e77c3c, .eveb_setting_table a, .xieyiCss，.gcdtgd {
+            color: #f42023 !important;
+        }
+
+        .eveb_sub_nav_type a:hover, .eveb_sub_nav_type li.on a:link, .eveb_sub_nav_type li.on a:visited {
+            color: #f42023 !important;
+            font-weight: 700;
+            border-bottom-color: #e1e1e1;
+            background: #f8f8f8;
+        }
+
+        .list ul li .slide p:hover, .letterbtn-bg {
+            background: #f42023 !important;
+            color: white;
+        }
+
+        .list h3 a {
+            background: #f42023;
+            border-bottom: 3px solid #a92309;
+            height: 47px;
+            line-height: 47px;
+        }
+
+        .help_l_menu li .t.sli {
+            border-left: 5px solid #f42023;
+        }
+
+        .withdraw-bg-input {
+            border: 2px solid #f42023 !important;
+        }
+
+        .clearBet_template .l span i {
+            background: #f42023 url("/static/theme/sscTheme/theme1//img/tm-mdl-icon.png") no-repeat !important;
+            border-radius: 50%;
+            background-position: 0 41% !important;
+        }
+
+        .eveb_nav_sub .on, .button_1, .button_1:link, .button_1:visited, .alert_col h5, .onlineService, .layui-layer-popup .layui-layer-title, .xzqd, .xzqdlskj, .game_name .box2_stage p span i.acti, .Betting, .Single, .list_ject ul li .Result p a.acti, .list_ject ul li .Result p a.acti:hover, .top {
+            background: #f42023 !important
+        }
+
+        .eveb_nav_sub .on a, .bankInfo .name, .help_l_menu .title p .sum, .help_r_main .light, .game_name .box2_stage p span i, .game_name .box1_name p i, .Account p a.red {
+            color: #f42023 !important
+        }
+
+        .eveb_nav_sub .on, .game_name .box2_stage p span {
+            border: 1px solid #f42023 !important;
+        }
+
+        .eveb_nav_sub .on, .game_name .box2_stage p span i.acti {
+            color: #fff !important;
+        }
+
+        .eveb_nav_sub .on a {
+            border-top: 1px #f42023 solid !important;
+        }
+
+        .eveb_nav_sub ul {
+            border-bottom: 1px #f42023 solid !important;
+        }
+
+        #apptop {
+            background: #f42023
+        }
+
+        .alert_col div::-webkit-scrollbar-thumb {
+            background-color: #f42023 !important;
+        }
+
+        .head div h5, .Betting .tabs ul li, .top .nav h1 {
+            background: #d51910 !important
+        }
+
+        .jf_box .url a, .eveb_form label.error, .eveb_transfer_box .center_wallet .money, .eveb_transfer_box .wallet_list li p {
+            color: #d51910 !important
+        }
+
+        .Betting .tabs ul li.acti {
+            background: #fff !important
+        }
+
+        .button_1, .button_1:link, .button_1:visited {
+            border: 1px solid #d51910 !important;
+        }
+    </style>
+
+    <script src="/static/theme/sscTheme/theme1/layer/layer.js?v=2017"></script>
+    <link rel="stylesheet" href="/static/theme/sscTheme/theme1/css/layer.css" id="layuicss-skinlayercss">
+    <meta name="chromesniffer" id="chromesniffer_meta"
+          content="{&quot;jQuery&quot;:&quot;1.9.1&quot;,&quot;SWFObject&quot;:-1}">
+    <script type="text/javascript" src="chrome-extension://fhhdlnnepfjhlhilgmeepgkhjmhhhjkh/js/detector.js"></script>
+
+    <!--<link rel="stylesheet" href="/static/theme/sscTheme/theme1/css/gfwf1.css" type="text/css">&lt;!&ndash;页面CSS&ndash;&gt;-->
+
+
+    <link href="/static/theme/sscTheme/theme1/css/play.css?<?php echo time();?>" rel="stylesheet" type="text/css">
+    <link href="/static/theme/sscTheme/theme1/css/play_pk10.min.css?<?php echo time();?>" rel="stylesheet" type="text/css">
+
+</head>
+<body>
+<style>
+    .Single .layout .Playmethod ul li.cl-a102, .Single .layout .Playmethod ul li.cl-a103, .Detailedlist {
+        display: none
+    }
+
+    .Single .layout .Playmethod ul li.cl-a102 {
+        display: block !important
+    }
+
+    .Detailedlist, .Single .layout .Playmethod ul li.cl-a103 {
+        display: block
+    }
+
+    .game_name .box2_stage .number span {
+        width: 25px;
+        height: 25px;
+        line-height: 25px;
+        font-size: 16px;
+    }
+
+    .Single .layout .Pick ul li b i {
+        margin: 12px 0;
+    }
+
+    .clear {
+        clear: none;
+    }
+
+    #rightcon {
+        background: #fff;
+    }
+
+    .game_rc {
+        margin-top: 10px;
+        background: #f42023 !important;
+        border-radius: 10px;
+        padding-top: 10px;
+        border-bottom: 3px solid #a43f20;
+        display: table;
+        padding-bottom: 18px;
+    }
+
+    .layout1 {
+        background: #FFFFFF;
+        border: 1px solid #dadada;
+        -webkit-border-radius: 10px;
+        -moz-border-radius: 10px;
+        border-radius: 10px;
+        width: 98%;
+        border-top: 1px solid #dadada;
+        border-bottom: none;
+        position: relative;
+        display: table;
+        margin: 0 9px;
+    }
+
+    #tabbar-div-s2 {
+        margin-top: 2px;
+    }
+
+    .u_tab_div {
+        margin-bottom: 16px;
+    }
+
+    .tz_body .u_tab_div .tab_list_title.on .content {
+        display: inline-block;
+        width: 118px;
+        height: 39px;
+        background: url('/static/theme/sscTheme/theme1/img/ico49-1.png') -2px 0;
+        color: #fff;
+        font-weight: bold;
+    }
+
+    .tz_body .u_tab_div .tab_list_title .content {
+        width: 118px;
+        height: 35px;
+        background: url(/static/theme/sscTheme/theme1/img/ico49.png);
+        display: block;
+        text-align: center;
+        line-height: 35px;
+        font-size: 16px;
+        color: #333333;
+        float: left;
+
+    }
+
+    .unit_title .u_tab_div .paly-span {
+        border: 1px solid #dcdcdc;
+        background: url('/static/theme/sscTheme/theme1/img/line5.png');
+        -webkit-border-radius: 4px;
+        -moz-border-radius: 4px;
+        border-radius: 4px;
+        height: 30px;
+        float: left;
+        text-align: center;
+        line-height: 30px;
+        margin-left: 4px;
+        margin-top: 4px;
+    }
+
+    .unit_title .u_tab_div .paly-span .tab-front {
+        background: #f02800;
+        color: #fff;
+        border: none;
+        border-bottom: 2px solid #a92309;
+        padding: 0px 1px;
+        height: 30px;
+        line-height: 30px;
+    }
+
+    .tz_body .u_tab_div .tab-front .content {
+    }
+
+    .unit_title .u_tab_div {
+    }
+
+
+</style>
+
+<!--- 投注首页(官方和快钱公用) -->
+<div class="compressprogroupmask"
+     style="background-color:rgba(0,0,0,.7);position:fixed;left:0;top:0;width:100%;height:100%; z-index:99999999">
+    <div id="j-progress-div1" class="compressprogroup"
+         style="width:460px; height:160px;color:#ed6c44;font-size:20px; text-align:center;background-color:#f4efec;border-radius:10px; padding-top:20px;box-shadow:0px 0px 10px rgba(0,0,0,.6)">
+        <img src="/__IMG__/game/ling.gif" style="margin-right:10px;">
+        <p style="padding-top:10px;">
+            超大文本正在压缩上传中(进度：<span id="j-show-progress">0</span>%)
+        </p>
+    </div>
+    <div id="j-progress-div2" class="compressprogroup"
+         style="width:460px; height:160px;color:#999;font-size:20px; text-align:center;background-color:#f4efec;border-radius:10px; padding-top:20px;box-shadow:0px 0px 10px rgba(0,0,0,.6)">
+        <img src="/__IMG__/game/ok.png" style="margin-right:10px; height:85px"> →
+        <img src="/__IMG__/game/ling.gif" style="margin-left:10px;">
+        <p style="padding-top:10px; color:#ed6c44;font-size:24px;">
+            压缩完成，正在上传服务器。
+        </p>
+    </div>
+</div>
+<div id="gameContent">
+    <!--顶部-->
+    <div class="game_name">
+        <div class="wid1">
+            <div class="box1_name">
+                <h2>{$types[$type]['title']}</h2>
+                <p>Lottery results</p>
+                <p class="p1">第<i id="number">{$actionNo['actionNo']}</i>期</p>
+            </div>
+            <div class="box2_stage">
+                <p><span><i class="acti">近一期</i><i class="jrkj">近五期</i></span>
+                    <font id="lastNumber"><a href="/game/zoushitu/id/20/issuecount/30.html" target="_blank" class="gcdtgd"
+                                             style="color: rgb(244, 32, 35);">更多</a>&nbsp;&nbsp;第<var id="last_issue">{$lastNo['actionNo']}</var>期</font>
+                </p>
+
+                <!--历史开奖111-->
+                <div class="lskj animated flipInY" id="historylot" style="display: none;position: inherit">
+                    {include file="game/inc_game_history" /}
+                </div>
+
+                <div class="number pt10 pk10" id="lastOpenCode" style="display: block;">
+                    <?php if($type==43){ //6lc ?>
+                    <div id="showcodebox" class="gct_r_nub6" ctype="6lc">
+                        <div class="gr_c gr_c{$kjHao[0]?$kjHao[0]:''}" flag="normal"></div>
+                        <div class="gr_c gr_c{$kjHao[1]?$kjHao[1]:''}" flag="normal"></div>
+                        <div class="gr_c gr_c{$kjHao[2]?$kjHao[2]:''}" flag="normal"></div>
+                        <div class="gr_c gr_c{$kjHao[3]?$kjHao[3]:''}" flag="normal"></div>
+                        <div class="gr_c gr_c{$kjHao[4]?$kjHao[4]:''}" flag="normal"></div>
+                        <div class="gr_c gr_c{$kjHao[5]?$kjHao[5]:''}" flag="normal"></div>
+                        <div class="gr_c gr_c{$kjHao[6]?$kjHao[6]:''}" flag="normal"></div>
+                    </div>
+                    <?php }else if($type==20){ //pk10 ?>
+                    <div id="showcodebox" class="gct_r_nub6" ctype="pk10">
+                        <div class="gr_c gr_c{$kjHao[0]?$kjHao[0]:''}" flag="normal"></div>
+                        <div class="gr_c gr_c{$kjHao[1]?$kjHao[1]:''}" flag="normal"></div>
+                        <div class="gr_c gr_c{$kjHao[2]?$kjHao[2]:''}" flag="normal"></div>
+                        <div class="gr_c gr_c{$kjHao[3]?$kjHao[3]:''}" flag="normal"></div>
+                        <div class="gr_c gr_c{$kjHao[4]?$kjHao[4]:''}" flag="normal"></div>
+                        <div class="gr_c gr_c{$kjHao[5]?$kjHao[5]:''}" flag="normal"></div>
+                        <div class="gr_c gr_c{$kjHao[6]?$kjHao[6]:''}" flag="normal"></div>
+                        <div class="gr_c gr_c{$kjHao[7]?$kjHao[7]:''}" flag="normal"></div>
+                        <div class="gr_c gr_c{$kjHao[8]?$kjHao[8]:''}" flag="normal"></div>
+                        <div class="gr_c gr_c{$kjHao[9]?$kjHao[9]:''}" flag="normal"></div>
+                    </div>
+                    <?php }else if($type==24){ //北京快乐8 ?>
+                    <div id="showcodebox" class="gct_r_nub" ctype="k8">
+                        <div class="gr_s gr_s020" flag="normal">{$kjHao[0]?$kjHao[0]:''}</div>
+                        <div class="gr_s gr_s020" flag="normal">{$kjHao[1]?$kjHao[1]:''}</div>
+                        <div class="gr_s gr_s020" flag="normal">{$kjHao[2]?$kjHao[2]:''}</div>
+                        <div class="gr_s gr_s020" flag="normal">{$kjHao[3]?$kjHao[3]:''}</div>
+                        <div class="gr_s gr_s020" flag="normal">{$kjHao[4]?$kjHao[4]:''}</div>
+                        <div class="gr_s gr_s020" flag="normal">{$kjHao[5]?$kjHao[5]:''}</div>
+                        <div class="gr_s gr_s020" flag="normal">{$kjHao[6]?$kjHao[6]:''}</div>
+                        <div class="gr_s gr_s020" flag="normal">{$kjHao[7]?$kjHao[7]:''}</div>
+                        <div class="gr_s gr_s020" flag="normal">{$kjHao[8]?$kjHao[8]:''}</div>
+                        <div class="gr_s gr_s020" flag="normal">{$kjHao[9]?$kjHao[9]:''}</div>
+                        <div class="gr_s gr_s020" flag="normal">{$kjHao[10]?$kjHao[10]:''}</div>
+                        <div class="gr_s gr_s020" flag="normal">{$kjHao[11]?$kjHao[11]:''}</div>
+                        <div class="gr_s gr_s020" flag="normal">{$kjHao[12]?$kjHao[12]:''}</div>
+                        <div class="gr_s gr_s020" flag="normal">{$kjHao[13]?$kjHao[13]:''}</div>
+                        <div class="gr_s gr_s020" flag="normal">{$kjHao[14]?$kjHao[14]:''}</div>
+                        <div class="gr_s gr_s020" flag="normal">{$kjHao[15]?$kjHao[15]:''}</div>
+                        <div class="gr_s gr_s020" flag="normal">{$kjHao[16]?$kjHao[16]:''}</div>
+                        <div class="gr_s gr_s020" flag="normal">{$kjHao[17]?$kjHao[17]:''}</div>
+                        <div class="gr_s gr_s020" flag="normal">{$kjHao[18]?$kjHao[18]:''}</div>
+                        <div class="gr_s gr_s020" flag="normal">{$kjHao[19]?$kjHao[19]:''}</div>
+                    </div>
+                    <?php }else if($type==9||$type==10||$type==25){ //福彩3D,排列三,江苏快三 ?>
+                    <div id="showcodebox" class="gct_r_nub">
+                        <div class="gr_s gr_s{$kjHao[0]?$kjHao[0]:''}" flag="normal">
+                        </div>
+                        <div class="gr_s gr_s{$kjHao[1]?$kjHao[1]:''}" flag="normal">
+                        </div>
+                        <div class="gr_s gr_s{$kjHao[2]?$kjHao[2]:''}" flag="normal">
+                        </div>
+                    </div>
+                    <?php } else { ?>
+                    <div id="showcodebox" class="gct_r_nub">
+                        <div class="gr_s gr_s{$kjHao[0]}" flag="normal">
+                        </div>
+                        <div class="gr_s gr_s{$kjHao[1]}" flag="normal">
+                        </div>
+                        <div class="gr_s gr_s{$kjHao[2]}" flag="normal">
+                        </div>
+                        <div class="gr_s gr_s{$kjHao[3]}" flag="normal">
+                        </div>
+                        <div class="gr_s gr_s{$kjHao[4]}" flag="normal">
+                        </div>
+                    </div>
+                    <?php } ?>
+                </div>
+                <div class="number" id="lastOpenCodeList" style="display: none;">
+                    <ul>
+                        <li>
+                            <p>第680874期</p>
+
+
+                            <i class="fang bg-6">06</i>
+
+                            <i class="fang bg-2">02</i>
+
+                            <i class="fang bg-7">07</i>
+
+                            <i class="fang bg-4">04</i>
+
+                            <i class="fang bg-8">08</i>
+
+                            <i class="fang bg-10">10</i>
+
+                            <i class="fang bg-9">09</i>
+
+                            <i class="fang bg-3">03</i>
+
+                            <i class="fang bg-1">01</i>
+
+                            <i class="fang bg-5">05</i>
+
+
+                        </li>
+                        <li>
+                            <p>第680873期</p>
+
+
+                            <i class="fang bg-3">03</i>
+
+                            <i class="fang bg-5">05</i>
+
+                            <i class="fang bg-7">07</i>
+
+                            <i class="fang bg-6">06</i>
+
+                            <i class="fang bg-4">04</i>
+
+                            <i class="fang bg-2">02</i>
+
+                            <i class="fang bg-9">09</i>
+
+                            <i class="fang bg-8">08</i>
+
+                            <i class="fang bg-10">10</i>
+
+                            <i class="fang bg-1">01</i>
+
+
+                        </li>
+                        <li>
+                            <p>第680872期</p>
+
+
+                            <i class="fang bg-7">07</i>
+
+                            <i class="fang bg-6">06</i>
+
+                            <i class="fang bg-10">10</i>
+
+                            <i class="fang bg-2">02</i>
+
+                            <i class="fang bg-1">01</i>
+
+                            <i class="fang bg-8">08</i>
+
+                            <i class="fang bg-3">03</i>
+
+                            <i class="fang bg-4">04</i>
+
+                            <i class="fang bg-5">05</i>
+
+                            <i class="fang bg-9">09</i>
+
+
+                        </li>
+                        <li>
+                            <p>第680871期</p>
+
+
+                            <i class="fang bg-10">10</i>
+
+                            <i class="fang bg-9">09</i>
+
+                            <i class="fang bg-2">02</i>
+
+                            <i class="fang bg-6">06</i>
+
+                            <i class="fang bg-7">07</i>
+
+                            <i class="fang bg-3">03</i>
+
+                            <i class="fang bg-8">08</i>
+
+                            <i class="fang bg-5">05</i>
+
+                            <i class="fang bg-4">04</i>
+
+                            <i class="fang bg-1">01</i>
+
+
+                        </li>
+                        <li>
+                            <p>第680870期</p>
+
+
+                            <i class="fang bg-9">09</i>
+
+                            <i class="fang bg-3">03</i>
+
+                            <i class="fang bg-8">08</i>
+
+                            <i class="fang bg-1">01</i>
+
+                            <i class="fang bg-2">02</i>
+
+                            <i class="fang bg-7">07</i>
+
+                            <i class="fang bg-4">04</i>
+
+                            <i class="fang bg-10">10</i>
+
+                            <i class="fang bg-6">06</i>
+
+                            <i class="fang bg-5">05</i>
+
+
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="box3_timer">
+                <p id=""><span id="tip">{$actionNo['actionNo']}</span>期已开盘，欢迎投注。距离下一期还有:</p>
+                <div class="timer_wrap" id="leftTime">
+                    <ol class="s"><span class="sp1">0</span><span class="sp2">0</span></ol>
+                    <ol class="f"><span class="sp1">0</span><span class="sp2">0</span></ol>
+                    <ol class="m"><span class="sp1">0</span><span class="sp2">0</span></ol>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="rightcon">
+    <!--头部-->
+    <!--<div class="linfo">-->
+        <!--<div class="linfoleft animated flipInY">-->
+            <!--<img alt="" src="/__IMG__/game/{$types[$type]['id']}.png">-->
+            <!--<div>{$types[$type]['title']}</div>-->
+        <!--</div>-->
+        <!--<div class="linfomiddle animated flipInY">-->
+            <!--<span><strong><span id="current_issue">{$actionNo['actionNo']}</span></strong>期 <label>投注剩余时间</label></span>-->
+            <!--<span id="count_down">00&nbsp;00&nbsp;00</span>-->
+        <!--</div>-->
+
+        <!--<div class="linforight animated flipInY">-->
+            <!--<div class="lskj animated flipInY" id="historylot" style="display: none;">-->
+                <!--{include file="game/inc_game_history" /}-->
+            <!--</div>-->
+            <!--<div>-->
+                <!--<strong>第-->
+                    <!--<small id="last_issue1">{$lastNo['actionNo']}</small>-->
+                    <!--期</strong>开奖号码-->
+            <!--</div>-->
+            <!--<div class="number pt10 pk10" id="lastOpenCode">-->
+                <!--<?php if($type==43){ //6lc ?>-->
+                <!--<div id="showcodebox" class="gct_r_nub6" ctype="6lc">-->
+                    <!--<div class="gr_c gr_c{$kjHao[0]?$kjHao[0]:''}" flag="normal"></div>-->
+                    <!--<div class="gr_c gr_c{$kjHao[1]?$kjHao[1]:''}" flag="normal"></div>-->
+                    <!--<div class="gr_c gr_c{$kjHao[2]?$kjHao[2]:''}" flag="normal"></div>-->
+                    <!--<div class="gr_c gr_c{$kjHao[3]?$kjHao[3]:''}" flag="normal"></div>-->
+                    <!--<div class="gr_c gr_c{$kjHao[4]?$kjHao[4]:''}" flag="normal"></div>-->
+                    <!--<div class="gr_c gr_c{$kjHao[5]?$kjHao[5]:''}" flag="normal"></div>-->
+                    <!--<div class="gr_c gr_c{$kjHao[6]?$kjHao[6]:''}" flag="normal"></div>-->
+                <!--</div>-->
+                <!--<?php }else if($type==20){ //pk10 ?>-->
+                <!--<div id="showcodebox1" class="gct_r_nub6" ctype="pk10">-->
+                    <!--<div class="gr_c gr_c{$kjHao[0]?$kjHao[0]:''}" flag="normal"></div>-->
+                    <!--<div class="gr_c gr_c{$kjHao[1]?$kjHao[1]:''}" flag="normal"></div>-->
+                    <!--<div class="gr_c gr_c{$kjHao[2]?$kjHao[2]:''}" flag="normal"></div>-->
+                    <!--<div class="gr_c gr_c{$kjHao[3]?$kjHao[3]:''}" flag="normal"></div>-->
+                    <!--<div class="gr_c gr_c{$kjHao[4]?$kjHao[4]:''}" flag="normal"></div>-->
+                    <!--<div class="gr_c gr_c{$kjHao[5]?$kjHao[5]:''}" flag="normal"></div>-->
+                    <!--<div class="gr_c gr_c{$kjHao[6]?$kjHao[6]:''}" flag="normal"></div>-->
+                    <!--<div class="gr_c gr_c{$kjHao[7]?$kjHao[7]:''}" flag="normal"></div>-->
+                    <!--<div class="gr_c gr_c{$kjHao[8]?$kjHao[8]:''}" flag="normal"></div>-->
+                    <!--<div class="gr_c gr_c{$kjHao[9]?$kjHao[9]:''}" flag="normal"></div>-->
+                <!--</div>-->
+                <!--<?php }else if($type==24){ //北京快乐8 ?>-->
+                <!--<div id="showcodebox" class="gct_r_nub" ctype="k8">-->
+                    <!--<div class="gr_s gr_s020" flag="normal">{$kjHao[0]?$kjHao[0]:''}</div>-->
+                    <!--<div class="gr_s gr_s020" flag="normal">{$kjHao[1]?$kjHao[1]:''}</div>-->
+                    <!--<div class="gr_s gr_s020" flag="normal">{$kjHao[2]?$kjHao[2]:''}</div>-->
+                    <!--<div class="gr_s gr_s020" flag="normal">{$kjHao[3]?$kjHao[3]:''}</div>-->
+                    <!--<div class="gr_s gr_s020" flag="normal">{$kjHao[4]?$kjHao[4]:''}</div>-->
+                    <!--<div class="gr_s gr_s020" flag="normal">{$kjHao[5]?$kjHao[5]:''}</div>-->
+                    <!--<div class="gr_s gr_s020" flag="normal">{$kjHao[6]?$kjHao[6]:''}</div>-->
+                    <!--<div class="gr_s gr_s020" flag="normal">{$kjHao[7]?$kjHao[7]:''}</div>-->
+                    <!--<div class="gr_s gr_s020" flag="normal">{$kjHao[8]?$kjHao[8]:''}</div>-->
+                    <!--<div class="gr_s gr_s020" flag="normal">{$kjHao[9]?$kjHao[9]:''}</div>-->
+                    <!--<div class="gr_s gr_s020" flag="normal">{$kjHao[10]?$kjHao[10]:''}</div>-->
+                    <!--<div class="gr_s gr_s020" flag="normal">{$kjHao[11]?$kjHao[11]:''}</div>-->
+                    <!--<div class="gr_s gr_s020" flag="normal">{$kjHao[12]?$kjHao[12]:''}</div>-->
+                    <!--<div class="gr_s gr_s020" flag="normal">{$kjHao[13]?$kjHao[13]:''}</div>-->
+                    <!--<div class="gr_s gr_s020" flag="normal">{$kjHao[14]?$kjHao[14]:''}</div>-->
+                    <!--<div class="gr_s gr_s020" flag="normal">{$kjHao[15]?$kjHao[15]:''}</div>-->
+                    <!--<div class="gr_s gr_s020" flag="normal">{$kjHao[16]?$kjHao[16]:''}</div>-->
+                    <!--<div class="gr_s gr_s020" flag="normal">{$kjHao[17]?$kjHao[17]:''}</div>-->
+                    <!--<div class="gr_s gr_s020" flag="normal">{$kjHao[18]?$kjHao[18]:''}</div>-->
+                    <!--<div class="gr_s gr_s020" flag="normal">{$kjHao[19]?$kjHao[19]:''}</div>-->
+                <!--</div>-->
+                <!--<?php }else if($type==9||$type==10||$type==25){ //福彩3D,排列三,江苏快三 ?>-->
+                <!--<div id="showcodebox" class="gct_r_nub">-->
+                    <!--<div class="gr_s gr_s{$kjHao[0]?$kjHao[0]:''}" flag="normal">-->
+                    <!--</div>-->
+                    <!--<div class="gr_s gr_s{$kjHao[1]?$kjHao[1]:''}" flag="normal">-->
+                    <!--</div>-->
+                    <!--<div class="gr_s gr_s{$kjHao[2]?$kjHao[2]:''}" flag="normal">-->
+                    <!--</div>-->
+                <!--</div>-->
+                <!--<?php } else { ?>-->
+                <!--<div id="showcodebox" class="gct_r_nub">-->
+                    <!--<div class="gr_s gr_s{$kjHao[0]}" flag="normal">-->
+                    <!--</div>-->
+                    <!--<div class="gr_s gr_s{$kjHao[1]}" flag="normal">-->
+                    <!--</div>-->
+                    <!--<div class="gr_s gr_s{$kjHao[2]}" flag="normal">-->
+                    <!--</div>-->
+                    <!--<div class="gr_s gr_s{$kjHao[3]}" flag="normal">-->
+                    <!--</div>-->
+                    <!--<div class="gr_s gr_s{$kjHao[4]}" flag="normal">-->
+                    <!--</div>-->
+                <!--</div>-->
+                <!--<?php } ?>-->
+            <!--</div>-->
+            <!--<div>-->
+                <!--<?php if($type==6 || $type==15 || $type==16) { ?>-->
+                <!--<a href="{:Url('game/zoushitu_11x5?id='.$type.'&issuecount=30')}" class="hmzs" target="_blank"><img-->
+                        <!--alt="" src="/__IMG__/game/zs.png">号码走势</a>-->
+                <!--<?php } else { ?>-->
+                <!--<a href="{:Url('game/zoushitu?id='.$type.'&issuecount=30')}" class="hmzs" target="_blank"><img alt=""-->
+                                                                                                               <!--src="/__IMG__/game/zs.png">号码走势</a>-->
+                <!--<?php } ?>-->
+                <!--<a href="javascript:void(0)" class="jrkj"><img alt="" src="/__IMG__/game/ls.png">历史开奖</a>-->
+            <!--</div>-->
+        <!--</div>-->
+    <!--</div>-->
+    <!--中部-->
+<form>
+    <div class="game_rc">
+        <div class="layout1 at">
+            <div class="gm_con">
+            <div class="gm_con_to">
+                    <div class="tz_body">
+                        <div class="unit">
+                            <div class="unit_title"
+                                 style="height: {$gfwf_groups AND $kqwf_groups ? '110px' : '55px'};">
+                                <div class="ut_l"></div>
+                                {if($gfwf_groups)}
+                                <div id="tabbar-div-s2" class="u_tab_div">
+                                <span class="tab-back tab_list_title on">
+                                    <span class="tabbar-left"></span>
+                                    <span class="content">官方玩法</span>
+                                    <span class="tabbar-right"></span>
+                                </span>
+                                    {foreach($gfwf_groups as $gp)}
+                                    <span data="{:Url('game/group?type='.$type.'&groupId='.$gp['id'])}"
+                                          onclick="selectGroup(this)"
+                                          class="paly-span <?php  if($gp['id']==$groupId) echo 'tab-front';else echo 'tab-back'; ?>">
+                                    <span class="tabbar-left"></span><span class="content">{$gp['groupName']}</span>
+                                    <span class="tabbar-right"></span>
+                                </span>
+                                    {/foreach}
+                                </div>
+                                {/if}
+
+                                <div class="block_0"></div>
+
+                                {if($kqwf_groups)}
+                                <div id="tabbar-div-s4" class="u_tab_div kqwf"
+                                     style="margin-top:{$gfwf_groups?'-15px':'-3px'}">
+                                <span class="tab-back tab_list_title">
+                                    <span class="tabbar-left"></span>
+                                    <span class="content">快钱玩法</span>
+                                    <span class="tabbar-right"></span>
+                                </span>
+                                    {foreach($kqwf_groups as $gp)}
+                                    <span data="{:Url('game/group?type='.$type.'&groupId='.$gp['id'])}"
+                                          onclick="selectGroup(this)"
+                                          class="paly-span <?php  if($gp['id']==$groupId) echo 'tab-front';else echo 'tab-back'; ?>">
+                                        <span class="tabbar-left"></span>
+                                        <span class="content">{$gp['groupName']}</span>
+                                        <span class="tabbar-right"></span>
+                                    </span>
+                                    {/foreach}
+                                </div>
+                                {/if}
+
+                                <div class="ut_r"></div>
+                            </div>
+                            <span id="played-span">
+                            <!--加载玩法模板-->
+                            {include file="game/inc_game_played" /}
+                            </span>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                    <div class="clear"> </div>
+                    <div class="tzn_body">
+                        <div class="tzn_b_n">
+
+                            <div class="tbn_b_top">
+
+                                <div class="tbn_bt_sel" <?= ($group['is_kqwf']) ? 'style="display:none"' : '' ?> >
+                                    <span id="lt_sel_prize"><!--奖金:--></span>
+                                    <select name="lt_sel_dyprize" id="lt_sel_dyprize"
+                                        maxfd="<?=$settings['fanDianMax']?>" fan-dian="{$user.fanDian}"
+                                        style="visibility: hidden;display: none;">
+                                        <option selected="selected" value="1950-0">1950</option>
+                                    </select>
+
+                                    <div class="slide_sp dxds-i">
+                                        奖金/返点
+                                        <div class="cl-1003">
+                                            <div class="cl-1004">
+                                                <input type="hidden" class="slider-input" value="0.00"
+                                                       style="display: none;">
+                                            </div>
+                                        </div>
+                                        <i>
+                                            <var class="jiangjin-change" id="jiangjin-change">98000.00</var>
+                                            <var>/</var>
+                                            <var class="fandian-bfb" id="fandian-bfb">0.0%</var>
+                                        </i>
+                                    </div>
+                                    <div class="note-multiples">
+                                        <span id="reducetime" class="" title="减少1倍">－</span>
+                                        <input id="lt_sel_times" class="bei" name="lt_sel_times" size="4"
+                                               type="TEXT" value="1">
+                                        <span id="plustime" class="" title="增加1倍">＋</span>
+                                        <span class="beia">倍</span>
+                                    </div>
+                                    <select name="lt_sel_modes" id="lt_sel_modes">
+                                        <?php if($settings['yuan_mode']) echo '<option value="2">2元</option>';?>
+                                        <?php if($settings['jiao_mode']) echo '<option value="0.2">2角</option>';?>
+                                        <?php if($settings['fen_mode']) echo '<option value="0.02">2分</option>';?>
+                                        <?php if($settings['li_mode']) echo '<option value="0.002">2厘</option>';?>
+                                    </select>
+
+                                    <div class="bet-info">
+                                        您选择了
+                                        <strong>
+                                            <span id="lt_sel_nums" class="n">0</span>
+                                        </strong>
+                                        注, 投注
+                                        <strong>
+                                            <span id="lt_sel_money" class="n">0.00</span>
+                                        </strong>
+                                        元。
+                                    </div>
+
+                            </div>
+
+                            <div id="lt_sel_insert" class="g_submit waves-effect"
+                                 onclick="gameActionAddCode(<?= ($group['is_kqwf'])? '3' : '2'; ?>)" style="margin-left: 10px;">
+                                    <span><img src="/static/theme/sscTheme/theme1/img/ico65.png" alt="">添加注单</span>
+                            </div>
+
+                        </div>
+                    </div>
+                    </div>
+            </div>
+            </div>
+        <i class="it0 left_it0"><img src="/static/theme/sscTheme/theme1/img/ico46.png" alt=""></i>
+        <i class="it1 right_it1"><img src="/static/theme/sscTheme/theme1/img/ico46.png" alt=""></i>
+        </div>
+    </div>
+
+    <!--底部-->
+    <div class="bottom1 ">
+        <div class="layout at">
+            <h1 class="at">投注清单</h1>
+            <div class="boxt reboxt">
+                <div class="reboxleft" >
+                    <table id="lt_cf_content" class="tz_tab_list" cellspacing="0" cellpadding="0" border="0" width="100%">
+                        <tbody>
+                        <tr class="nr">
+                            <td class="tl_li_l" width="4">
+                            </td>
+                            <td class="noinfo" colspan="6">
+                                暂无投注项
+                            </td>
+                            <td class="tl_li_rn" width="4">
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+                <div class="reboxright">
+                    <ul>
+                        <li style="display: none"><a class="suiji1" href="javascript:void(0)" onclick="getSuiji(1)">随机一注</a></li>
+                        <li style="display: none;"><a class="suiji5" href="javascript:void(0)" onclick="getSuiji(5)">随机五注</a></li>
+                        <li class="clearLiZhudanbtn" sp="0" id="lt_trace_if2"><a id="zhbtn" class="wdzhli" href="javascript:void(0)" ><span class="imgZh"></span>我要追号</a></li>
+                        <li id="lt_cf_clear"><a href="javascript:void(0)" onclick="clearZhudan()"><img src="/static/theme/sscTheme/theme1/img/ico52.png" style="padding-right: 7px;margin-top: -3px;" alt="">清空注单</a></li>
+                    </ul>
+                    <div class="zongtouInfo">
+                        总投注项:
+                        <span id="lt_cf_count" class="r">0</span>
+                        项，
+                        总注数:
+                        <span id="lt_cf_nums" class="r">0</span>
+                        注，
+                        总金额:
+                        <span id="lt_cf_money" class="r">0</span>
+                        元。
+                    </div>
+                    <a href="javascript:void(0)" class="ok" id="lt_buy" ><img src="/static/theme/sscTheme/theme1/img/ico54.png" alt="">确认投注</a>
+                </div>
+            </div>
+
+            <div class="tz_tab_list_box">
+
+            </div>
+            <!--<div id="lt_bet_immediate" class="g_submit waves-effect "-->
+                 <!--style="margin-left:10px;background-color:#f37032">-->
+                <!--<span>一键投注</span>-->
+            <!--</div>-->
+            <!--<div class="tbn_bot">-->
+                <!--<div class="newtab">-->
+                    <!--<div class="wrap">-->
+                        <!--<ul id="tab_t">-->
+                            <!--<li class="act">我的方案</li>-->
+                            <!--<li>我的追号</li>-->
+                        <!--</ul>-->
+                        <!--<div id="tab_c">-->
+                            <!--<div id="order-history">-->
+                                <!--{include file="game/inc_game_order" /}-->
+                            <!--</div>-->
+                            <!--<div class="hide">-->
+                                <!--<table class="tbl" id="tbtrace">-->
+                                    <!--<tbody>-->
+                                    <!--<tr>-->
+                                        <!--<th>-->
+                                            <!--编号-->
+                                        <!--</th>-->
+                                        <!--<th>-->
+                                            <!--未/已完期-->
+                                        <!--</th>-->
+                                        <!--<th>-->
+                                            <!--状态-->
+                                        <!--</th>-->
+                                    <!--</tr>-->
+                                    <!--</tbody>-->
+                                <!--</table>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                <!--</div>-->
+                <!--<div class="tbn_b_bot">-->
+                    <!--&lt;!&ndash;<div class="tbn_bb_l">&ndash;&gt;-->
+                        <!--&lt;!&ndash;<div class="tbn_bb_ln">&ndash;&gt;-->
+                            <!--&lt;!&ndash;<h4>&ndash;&gt;-->
+                                <!--&lt;!&ndash;<input id="lt_cf_clear" class="tbn_clear" name=""&ndash;&gt;-->
+                                       <!--&lt;!&ndash;value="清空全部" type="button">&ndash;&gt;-->
+                                <!--&lt;!&ndash;<span id="lt_cf_help"&ndash;&gt;-->
+                                      <!--&lt;!&ndash;class="icons_q1">&nbsp;&nbsp;&nbsp;</span>&ndash;&gt;-->
+                                <!--&lt;!&ndash;投注项:&ndash;&gt;-->
+                                <!--&lt;!&ndash;<span id="lt_cf_count">0</span>&ndash;&gt;-->
+                            <!--&lt;!&ndash;</h4>&ndash;&gt;-->
+                        <!--&lt;!&ndash;</div>&ndash;&gt;-->
+                    <!--&lt;!&ndash;</div>&ndash;&gt;-->
+                    <!--<div class="tbn_bb_r">-->
+                        <!--<div class="sub_txt">-->
+                            <!--<p>-->
+                                <!--未来期:-->
+                                <!--<span id="lt_issues">-->
+                                                        <!--<select name="lt_issue_start" id="lt_issue_start">-->
+                                                            <!--<option value=""></option>-->
+                                                        <!--</select>-->
+                                                        <!--<input name="lt_total_nums" id="lt_total_nums" value="0"-->
+                                                               <!--type="hidden"><input name="lt_total_money"-->
+                                                                                    <!--id="lt_total_money" value="0"-->
+                                                                                    <!--type="hidden">-->
+                                                    <!--</span>-->
+                            <!--</p>-->
+                        <!--</div>-->
+                        <!--<div id="lt_buy" class="g_submit waves-effect ">-->
+                            <!--<span>马上投注</span>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                    <!--<div class="clear">-->
+                    <!--</div>-->
+                <!--</div>-->
+            <!--</div>-->
+            <!--<table class="czinfotbl">-->
+                <!--<tbody>-->
+                <!--<tr>-->
+                    <!--<td style="width: 300px;">-->
+                        <!--总注数:-->
+                        <!--<span id="lt_cf_nums" class="r">0</span>-->
+                        <!--注-->
+                        <!--总金额:-->
+                        <!--<span id="lt_cf_money" class="r">0</span>-->
+                        <!--元-->
+                    <!--</td>-->
+                    <!--&lt;!&ndash;<td style="text-align:right;">&ndash;&gt;-->
+                        <!--&lt;!&ndash;<input id="lt_trace_if" autocomplete="off" name="lt_trace_if"&ndash;&gt;-->
+                               <!--&lt;!&ndash;value="yes" type="checkbox"><span&ndash;&gt;-->
+                            <!--&lt;!&ndash;id="lt_trace_if2">我要追号</span>&ndash;&gt;-->
+                    <!--&lt;!&ndash;</td>&ndash;&gt;-->
+                <!--</tr>-->
+                <!--</tbody>-->
+            <!--</table>-->
+            <div id="upload-file" style="display:none;">
+                <input name="lottery-file" id="lottery-file" type="file">
+            </div>
+        </div>
+    </div>
+</form>
+    <div id="lt_trace_box" class="trace_box animated" style="display: none">
+    <div class="tabcon_n animated zoomIn" id="zh">
+        <div class="zhtitle">
+            追号设置
+        </div>
+        <div class="nl_lt">
+        </div>
+        <div class="nl_rt">
+        </div>
+        <div class="nl_lb">
+        </div>
+        <div class="nl_rb">
+        </div>
+        <div class="unit1">
+            <div class="unit_title2">
+                <div id="tab02" class="u_tab_div">
+                    <div class="bd">
+                        <div id="general_txt_100" class="bd2">
+                            <table class="tabbar-div-s3" width="100%">
+                                <tbody>
+
+                                </tbody>
+                            </table>
+                            <div class="bl3p">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="clear">
+                </div>
+            </div>
+            <div class="clear">
+            </div>
+            <div class="zhgen">
+                <table width="100%" border="0" cellpadding="0" cellspacing="0">
+                    <tbody>
+                    <tr>
+                        <td>
+                            <p>
+                                追号期数：
+                                <select id="lt_trace_qissueno" autocomplete="off">
+                                    <option value="">全部</option>
+                                    <option value="5">5期</option>
+                                    <option value="10" selected="selected">10期</option>
+                                    <option value="15">15期</option>
+                                    <option value="20">20期</option>
+                                    <option value="25">25期</option>
+                                </select>
+                                &nbsp;&nbsp;
+                                <span style="display:none">
+									<input name="lt_trace_stop" id="lt_trace_stop" value="yes" type="checkbox"><span>中奖后停止追号</span>
+								</span>
+                            </p>
+                            <p>
+                                追号计划：
+                                <span id="lt_trace_labelhtml">
+								<span id="lt_margin_html">起始倍数&nbsp;<input autocomplete="off"
+                                                                           name="lt_trace_times_margin"
+                                                                           id="lt_trace_times_margin" value="1" size="3"
+                                                                           type="text">&nbsp;&nbsp;</span><span
+                                        id="lt_sametime_html" style="display:none;">起始倍数&nbsp;<input
+                                        name="lt_trace_times_same" id="lt_trace_times_same" value="1" size="3"
+                                        type="text"></span><span id="lt_difftime_html"
+                                                                 style="display:none;">隔&nbsp;<input
+                                        name="lt_trace_diff" id="lt_trace_diff" value="1" size="3" type="text">&nbsp;期&nbsp;&nbsp;倍 × <input
+                                        name="lt_trace_times_diff" id="lt_trace_times_diff" value="2" size="3"
+                                        type="text"></span>&nbsp;&nbsp;追号期数&nbsp;<input autocomplete="off"
+                                                                                        name="lt_trace_count_input"
+                                                                                        id="lt_trace_count_input"
+                                                                                        style="width:36px" value="10"
+                                                                                        size="3" type="text"><input
+                                        id="lt_trace_money" name="lt_trace_money" value="0" type="hidden"><input
+                                        value="120" id="lt_trace_alcount" type="hidden"></span>
+                            </p>
+                        </td>
+                        <td rowspan="2" valign="bottom" align="right">
+                            <div id="lt_trace_ok" class="jihuabtn">
+                                <span>生成计划</span>
+                            </div>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div id="lt_trace_issues" class="zhlist">
+                <table id="lt_trace_issues_table" width="100%" border="0" cellpadding="0" cellspacing="0">
+                    <tbody>
+
+                    </tbody>
+                </table>
+            </div>
+            <div class="zhbottom">
+                <div id="qxzh" class="g_submit qxzh waves-effect ">
+                    <span onclick="javascript: $('#lt_trace_box').css('display', 'none');">关闭</span>
+                </div>
+                <div id="lt_buy_trace" class="g_submit waves-effect ">
+                    <span>马上投注</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+<div id="wanjinDialog"></div>
+<script type="text/javascript">
+    var game={type:<?=json_encode($type)?>,	played:<?=json_encode($played)?>,groupId:<?=json_encode($groupId)?>
+    },user="{$user.username}",aflag=<?=json_encode($user->admin==1)?>;
+    var maxFandian = <?=$settings['fanDianMax']?>;
+    var gfwf_pls_pair;
+
+    $(function(){
+        $("body").click(
+            function toggle() {
+                $("div#demo-set", window.top.document).removeClass("open");
+                $(".mega-dropdown", window.top.document).removeClass("open");
+                $(".dropdown", window.top.document).removeClass("open");
+                $(".lskj").fadeOut(200);
+            }
+        );
+
+        console.log(gfwf_pls_pair)
+        $('.slider-input').jRange({
+            from: 0,
+            to: maxFandian, // 最大返点
+            step: 0.1,  // 每步
+            format: '%s',
+            width: $(".cl-1004").width(),   // 滚动条总长度
+            theme: 'theme-green my-slide-theme',
+            showLabels: false,
+            showScale: false,
+            snap: true,
+            onstatechange: function () {
+                // 返点比例
+                var fandianBili = parseFloat($(".slider-input").val()).toFixed(1); // 当前滚动条移动的比例
+                $("#fandian-bfb").data("value", fandianBili);
+                $("#fandian-bfb").html(fandianBili + "%");    // 渲染界面中百分比部分
+
+                $('#lt_sel_dyprize').attr('fan-dian',fandianBili);
+
+                var convertBlMoneys = [];
+                var pls = [];
+                $.each(gfwf_pls_pair,function(key,pair){
+                    var prop = parseFloat(pair.bonusProp);
+                    var base = parseFloat(pair.bonusPropBase);
+                    var convertBlMoney = (prop - base) / maxFandian;
+                    //convertBlMoneys.push(fandian);
+
+                    // 赔率 = 最大配率 - 返点比例 * 转换比例
+                    var pl = (prop - fandianBili * convertBlMoney).toFixed(3);
+                    pls.push(pl);
+                });
+                var plStr = pls.join('|');
+                $("#jiangjin-change").data("value",plStr);
+
+                // 渲染界面中赔率部分
+                $("#jiangjin-change").html(plStr);
+                $("#jiangjin-change").data("plStr",plStr);
+                $('#lt_sel_dyprize').attr('maxfd',plStr);
+                $('#lt_sel_dyprize option').val(plStr+'-'+fandianBili+'%');
+
+            }
+        });
+
+
+
+        //开奖倒计时
+        setTimeout(gameKanJiangDataC, 1000, <?=$fptime?>);
+    <?php if(!$kjHao){?> /*loadKjData();*/<?php } ?>
+        loadKjData();
+        //未来期
+        //futureNo('{$actionNo['actionNo']}','{$type}');
+        futureNo({$future_phases});
+    });
+
+
+
+
+</script>
+
+
+</body>
+</html>

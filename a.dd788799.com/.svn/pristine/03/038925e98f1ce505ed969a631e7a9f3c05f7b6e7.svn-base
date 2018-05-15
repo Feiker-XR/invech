@@ -1,0 +1,217 @@
+<?php
+
+namespace bong\service\queue\Driver;
+
+use bong\service\queue\Queue;
+use bong\service\queue\Contracts\Queue as QueueContract;
+
+use bong\service\queue\Driver\RedisClient;
+use bong\service\queue\LuaScripts;
+use bong\service\queue\Jobs\RedisJob;
+use bong\foundation\Str;
+
+use bong\service\queue\traits\TopicQueue;
+use Kcloze\Jobs\Queue\TopicQueueInterface;
+use think\Cache;
+use \Redis;
+use think\Exception;
+
+class RedisQueue extends Queue implements QueueContract ,TopicQueueInterface
+{
+    use TopicQueue;
+
+    protected $queue;//队列名
+    protected $client;
+    protected $retryAfter;
+    protected $config;
+    protected $handler;
+
+    public function __construct($config)
+    {
+        $this->config = $config;
+        $this->queue = $config['queue']??'default';        
+        $this->client = new RedisClient($config);
+        $this->retryAfter = $config['retry_after']??60;
+
+        $this->connect();
+    }
+
+    protected function connect(){
+        if(!empty($this->handler) && $this->handler->ping() == '+PONG'){
+            try{
+                $this->handler->ping();
+                return true;
+            }catch (\Exception $exception){
+                file_put_contents(LOG_PATH.'/redis_connection',date('Y-m-d H:i:s:')."Redis 连接丢失，正在重新连接:".$exception->getMessage()."\n", FILE_APPEND);
+            }
+        }
+
+        $config = $this->config;
+        $cache_type = config('cache.type')??'';
+//        if('redis' == $cache_type){
+//            $this->handler = Cache::init()->handler();
+//        }else{
+            //$this->handler = Cache::init(['type'=>'cache'])->handler();
+        if(empty($this->handler)){
+            $handler = new Redis();
+        }else{
+            $handler = $this->handler;
+        }
+
+            $handler->{($config['persistent'] ?? false) === true ? 'pconnect' : 'connect'}(
+                $config['host']??'127.0.0.1', $config['port']??6379, $config['timeout']??0
+            );
+            if (! empty($config['password'])) {
+                $handler->auth($config['password']);
+            }
+            if (! empty($config['select'])) {
+                $handler->select($config['select']);
+            }
+            if (! empty($config['prefix'])) {
+                $handler->setOption(Redis::OPT_PREFIX, $config['prefix']);
+            }
+            if (! empty($config['read_timeout'])) {
+                $handler->setOption(Redis::OPT_READ_TIMEOUT, $config['read_timeout']);
+            }
+            $this->handler = $handler;
+//        }
+    }
+
+    protected function createPayloadArray($job, $data = '')
+    {
+        return array_merge(parent::createPayloadArray($job, $data), [
+            'id' => $this->getRandomId(),
+            'attempts' => 0,
+        ]);
+    }
+
+    public function size($queue = null)
+    {
+        $this->connect();
+        $queue = $this->getQueue($queue);
+
+
+//        $size = $this->client->eval(
+//            LuaScripts::size(), 3, $queue, $queue.':delayed', $queue.':reserved'
+//        );
+        $length = $this->handler->lLen($queue);
+        $delayed = $this->handler->zCard($queue.':delayed');
+        $reserved = $this->handler->zCard($queue.':reserved');
+        $size = $length + $delayed + $reserved;
+        if(!is_int($size)){
+            file_put_contents(LOG_PATH.'/get_size_error', date('Y-m-d H:i:s').":error_{$queue}: {$length},{$delayed},{$reserved}\n", FILE_APPEND);
+            $size = 0;
+        }
+        return $size;
+    }
+
+    public function push($job, $data = '', $queue = null)
+    {
+        return $this->pushRaw($this->createPayload($job, $data), $queue);
+    }
+
+    public function pushRaw($payload, $queue = null, array $options = [])
+    {
+        $this->client->rpush($this->getQueue($queue), $payload);
+
+        return json_decode($payload, true)['id'] ?? null;
+    }
+
+    /*
+    public function later($delay, $job, $data = '', $queue = null)
+    {
+        return $this->laterRaw($delay, $this->createPayload($job, $data), $queue);
+    }
+    protected function laterRaw($delay, $payload, $queue = null)
+    {
+        $this->client->zadd(
+            $this->getQueue($queue).':delayed', $this->availableAt($delay), $payload
+        );
+
+        return json_decode($payload, true)['id'] ?? null;
+    }       
+    */  
+
+    public function pop($queue = null)
+    {
+        $this->migrate($prefixed = $this->getQueue($queue));
+
+        $res = $this->retrieveNextJob($prefixed);
+        list($job, $reserved) = $res;
+
+        file_put_contents(LOG_PATH.'/next_job', json_encode($res)."\n\n", FILE_APPEND);
+        if ($reserved) {
+            return new RedisJob(
+                $this, $job,
+                $reserved, $queue ?: $this->default
+            );
+        }
+    }
+
+    protected function migrate($queue)
+    {
+        $this->migrateExpiredJobs($queue.':delayed', $queue);
+
+        if (! is_null($this->retryAfter)) {
+            $this->migrateExpiredJobs($queue.':reserved', $queue);
+        }
+    }
+
+    public function migrateExpiredJobs($from, $to)
+    {
+//        $val = $this->handler->zRangeByScore($from,  '-inf', time());
+        //If we have values in the array, we will remove them from the first queue
+        //and add them onto the destination queue in chunks of 100, which moves
+        //all of the appropriate jobs onto the destination queue very safely.
+//        if(next($val) != null){
+//            $this->handler->zRangeByScore($from,  '-inf', $val-1);
+//            for($i = 1; $i<100; $i++){
+//                $this->handler->rpush($to, $val[$i]);
+//            }
+//        }
+//        return $val;
+        $this->connect();
+        return $this->client->eval(
+            LuaScripts::migrateExpiredJobs(), 2, $from, $to, time()
+        );
+    }
+
+    protected function retrieveNextJob($queue)
+    {
+        $this->connect();
+        $job = $this->handler->lPop($queue);
+        $reserved = json_decode($job, true);
+        if($reserved){
+            // Increment the attempt count and place job on the reserved queue...
+            $reserved['attempts'] = $reserved['attempts'] + 1;
+            $reserved = json_encode($reserved);
+            $this->handler->zAdd($queue.':reserved',$this->availableAt($this->retryAfter),$reserved);
+        }else{
+            $reserved = false;
+        }
+
+        return [$job, $reserved];
+//        $test = $this->client->eval(
+//            LuaScripts::pop(), 2, $queue, $queue.':reserved',
+//            $this->availableAt($this->retryAfter)
+//        );
+    }
+
+    public function deleteReserved($queue, $job)
+    {
+        $this->client->zrem($this->getQueue($queue).':reserved', $job->getReservedJob());
+    }
+
+    protected function getRandomId()
+    {
+        return Str::random(32);
+    }
+
+    public function getQueue($queue)
+    {
+        return 'queues:'.($queue ?: $this->default);
+    }
+
+
+
+}

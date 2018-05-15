@@ -1,0 +1,379 @@
+<script src="/static/theme/zstTheme/theme1/zst/js/point.js"></script>
+<script src="/static/theme/zstTheme/theme1/zst/js/echarts.min.js"></script>
+<script>
+    var CONFIG = {
+        BASEURL: "/",    // 根路径
+        RESURL: "/static/theme/zstTheme/theme1/"         // 资源路径
+    };
+    
+    var pageSize=30;
+    $(function() {
+        var date = new Date();
+        var year=date.getFullYear();   //返回一个表示年份的 4 位数字
+        var month=date.getMonth()+1;   //返回表示月份的数字。返回值是 0（一月） 到 11（十二月） 之间的一个整数
+        var startT=null;
+        var endT=null;
+
+        $(".search-right .qi a").click(function () {
+            $(".search-right .qi.xuan").removeClass("xuan");    //方法从被选元素移除一个或多个类.
+            $(this).parent().addClass("xuan");   //addClass向被选元素添加一个或多个类 //parent)_返回被选元素的直接父元素。
+            var flag = $(this).html();   //html()返回或设置被选元素的内容
+            if (flag == "近30期") {
+                pageSize = 30;
+                ajaxGetData(playGroupId, pageSize, null, null);
+            } else if (flag == "近50期") {
+                pageSize = 50;
+                ajaxGetData(playGroupId, pageSize, null, null);
+            } else if (flag == "近100期") {
+                pageSize = 100;
+                ajaxGetData(playGroupId, pageSize, null, null);
+            } else if (flag == "近150期") {
+                pageSize = 150;
+                ajaxGetData(playGroupId, pageSize, null, null);
+            } else if (flag == "近200期") {
+                pageSize = 200;
+                ajaxGetData(playGroupId, pageSize, null, null);
+            }
+//            else if (flag == "今天") {
+//                pageSize = null;
+//                startT = 't1';
+//                ajaxGetData(playGroupId, pageSize, startT, endT);
+//            } else if (flag = "近三天") {
+//                pageSize = null;
+//                startT = 't3';
+//                ajaxGetData(playGroupId, pageSize, startT, endT);
+//            }
+        });
+    });
+
+    // ZST用
+    var isFirst = true;
+    function showLoading() {
+        if (isFirst) {
+            isFirst = false;
+            return;
+        }
+        layer.load(2, {
+            shade: [0.1,'#000'] //0.1透明度的白色背景
+        })
+//        var h = $("#zhexianData").height();
+//        var html = '<span class="zst_loading" style="height:' + h + 'px;line-height:\' + h + \'px">数据加载中. . . . . .</span>';
+//        $("#zhexianData").html(html);
+    }
+    function hideLoading() {
+        layer.closeAll();
+    }
+
+    $(function() {
+        parent.hideLoading();
+    });
+
+    $(function(){
+        //悬停
+        $(".czqh").hover(function(){
+            $(".min").show()
+        },function(){
+            $(".min").hide()
+        });
+
+        //点击绘图工具
+        $(".kuang1 .div").click(function(){
+            $(".kuang1 .btn-box").show();
+            $("#canvas,#canvas2").css("z-index","10000");
+        });
+
+        $(".btn-cos").click(function(){
+            $(".kuang1 .btn-box").hide();
+            $("#canvas,#canvas2").css("z-index","-10");
+            clear_canvas()
+        });
+
+    });
+
+    function getDataNumber(playGroupId) {
+        ajaxRequest({
+        	url: "/index/getAllLotteyPhase",
+            data: {
+                type: playGroupId,
+                isData: false
+            },
+            success: function(json) {
+                if (json.result != 1) {
+                    var objNum = $("#number").parent();
+                    var objLeft = $(".jiezhi h3");
+                    objNum.html("&nbsp;");
+                    objLeft.html("未开盘");
+                    objLeft.css("color","gray");
+                    return;
+                }
+                var obj = [];
+                $("#number").html(json.number);
+                var strNumber = json.number;
+                var tempNum = '';
+                $("#openDate").html(dateFormat(json.openDataTime, "mm月dd日"));
+                if (json.opening) {
+                    if(playGroupId == 4 || playGroupId == 5 || playGroupId == 6){
+                       tempNum = strNumber.substr(4);
+                    }else if(playGroupId == 7 || playGroupId == 8 || playGroupId == 9){
+                       tempNum = strNumber;
+                    }else{
+                       tempNum = strNumber.substr(8);
+                    }
+                    $("#tip").html( tempNum + '期已开盘，距离下一期还有:');
+                    $("#leftTime").data("time", json.leftTime);
+                    $("#tip").data("opening", true);
+                } else {
+                    $("#tip").html('已封盘，距离开奖还有:');
+                    $("#leftTime").data("time", json.leftOpenTime);
+                    $("#tip").data("opening", false);
+                }
+            }
+        });
+    }
+    $(function () {
+
+        getDataNumber(playGroupId);
+        setInterval(function () {
+            getDataNumber(playGroupId);
+        }, 10000);
+
+        setInterval(function() {
+            var time = $("#leftTime").data("time");
+            if (isNaN(time) || time < 0) {
+                return;
+            }
+            --time;
+
+            var str = '';
+            var tmp = time;
+            var hour = Math.floor(tmp / 60 / 60);
+            if (hour > 0) {
+                str += hour + '时';
+            }
+            tmp = tmp - hour * 60 * 60;
+            var minute = Math.floor(tmp / 60);
+            str += minute + '分';
+            tmp = tmp - minute * 60;
+            var second = tmp;
+            str += second + '秒';
+            $("#leftTime").html(str);
+
+            $("#leftTime").data("time", time);
+        }, 1000);
+    });
+    function clearHuatu() {
+        $("#canvas,#canvas2").attr("height","0");
+        $("#canvas,#canvas2").attr("width","0");
+    }
+
+    function initHuatu(id) {
+        //canvas高
+        $("#canvas,#canvas2").attr("height",$("#"+id+"").height()+"px");
+        $("#canvas,#canvas2").attr("width",$("#"+id+"").width()+"px");
+        $("#canvas,#canvas2").css("top",$("#"+id+"").offset().top+"px");
+        $("#canvas,#canvas2").css("left",$("#"+id+"").offset().left+"px");
+    }
+
+    //走势图页面
+    function getZstPage(url) {
+        if (typeof url == 'undefined') {
+            url = 'index';
+        }
+        window.location.href = "/zst/" + url + ".html?type=1";
+    }
+
+    //购彩页面
+    function getSscPage(module) {
+        if (typeof module == 'undefined') {
+            module = '';
+        }
+
+       // module -- 字符串例子：gcdt/cqssc
+      // var caizhong = module.toString().split("/");
+        window.location.href ='/ssc/index.html#/game/game/type/'+module+'/groupId/1.html';
+    }
+
+
+    $(function () {
+        var right_w = $(".shuoming .shuomingright").outerWidth();
+        var right_h = $(".shuoming .shuomingright").outerHeight();
+        var left_h = $(".shuoming .shuomingleft").outerHeight();
+        if(right_h > left_h){
+            $(".shuoming .shuomingleft").css("height",right_h);
+        }
+        var zong_w = $(".shuoming").outerWidth();
+        var left_w = zong_w - right_w - 5;
+        $(".shuoming .shuomingleft").css("width",left_w);
+    });
+
+    var playGroupId = {$id};
+    {IN name='id'  value="1,3,6,12,14,16,34,35,40,41,42"}
+    $(function () {
+        $(".btn-navs li").click(function () {
+            if($(this).data("id") == 'shuju2'){   //显示shuju2，隐藏shuju1
+                $("#box .main-li").hide();
+                $("#box .qhbox_title ").removeClass("qhbox_title");
+            }
+            else if($(this).data("id") == 'shuju1'){  //显示shuju1，隐藏shuju2
+                $("#box .main-li").show();
+                $("#box .chart-nav2").parent().addClass("qhbox_title");
+            }
+        });
+
+    });
+    $(function () {
+        $(".btn-navs li").click(function () {
+            if($(this).data("id") == 'shuju3'){   //显示shuju3，隐藏shuju2
+                $("#box .chart-nav2").parent().addClass("qhbox_title");
+                $("#box .qhbox_title2").removeClass("qhbox_title2");
+            }
+            else if($(this).data("id") == 'shuju2'){  //显示shuju2，隐藏shuju3
+                $("#box .chart-nav3").parent().addClass("qhbox_title2");
+                $("#box .qhbox_title2").parent().addClass("qhbox_title");
+            }
+        });
+    });
+    $(function () {
+        $(".btn-navs li").click(function () {
+            if($(this).data("id") == 'shuju1'){     //显示shuju1，隐藏shuju3
+                $("#box .main-li").show();
+                $("#box .chart-nav3").parent().addClass("qhbox_title2");
+            }
+            else if($(this).data("id") == 'shuju3'){     //显示shuju3，隐藏shuju1
+                $("#box .main-li").hide();
+                $("#box .chart-nav3").removeClass("qhbox_title2");
+            }
+        });
+    });
+	{/IN}
+    $(function() {
+        $(".btn-navs li").click(function(e) {
+            $(".shuju").hide();
+            $("#" + $(this).data("id")).show();    //data() 方法向被选元素附加数据，或者从被选元素获取数据
+            $(this).attr("class", "fff").siblings().removeClass(); //attr()设置或返回被选元素的属性和值 //siblings()返回被选元素的所有同级元素
+            if($(this).data("id") == 'shuju1' || $(this).data("id") == 'shuju2' || $(this).data("id") == 'shuju3') {
+            	//时时彩类型 和 11选5类型需要有此处
+            	{IN name='id'  value="1,3,6,12,14,16,34,35,40,41,42"}
+                if($(this).data("id") == 'shuju1'){
+                    $(".search").css("display","block");
+                    $(".main-ul-box li a.active").removeClass('active');
+                    $(".main-ul-box .main-ul-1 li:first-child a").addClass('active');
+                }
+                {/IN}
+                initHuatu($(this).data("contentid"));
+            } else {
+                clearHuatu();
+                
+            }
+        });
+
+        $(".main-ul-box li a").click(function () {
+            $(".search").css("display","block");
+            $(".shuju").hide();
+            var smzsStr = $(this).data("id");    //data() 方法向被选元素附加数据，或者从被选元素获取数据
+            if(smzsStr == 'smzs'){
+                $("#shuju6").show();
+            }else if(smzsStr == 'clzs'){
+                $("#shuju7").show();
+                $(".search").css("display","none");
+            }else if(smzsStr == 'hmzs'){
+                $("#shuju1").show();
+            }
+            $(".main-ul-box li a.active").removeClass('active');
+            $(this).addClass('active');
+            if($(this).data("id") == 'hmzs') {
+                initHuatu($(this).data("contentid"));
+            }else if($(this).data("id") == 'smzs'){
+                initHuatu('canvasHeiht');
+            } else {
+                clearHuatu();
+            }
+        });
+
+        var type = '{$type}';
+        if(typeof type == 'undefined' || type == '' || isNaN(type)) {  //isNaN() 函数用于检查其参数是否是非数字值
+            type = 1;
+        } else {
+            type = Tools.parseInt(type);
+        }
+        $("[data-id='shuju" + type + "']").trigger("click"); //trigger() 方法触发被选元素上指定的事件以及事件的默认行为
+        $(".search-right .qi a").eq(0).trigger("click");  //eq() 方法返回带有被选元素的指定索引号的元素
+    });
+
+    function ajaxGetData(playGroupId, pageSize, startT, endT) {
+        var data = {};
+        data.pageIndex = 1;
+        if(null != playGroupId) {
+            data.type = playGroupId;
+        }
+        if(null != pageSize) {
+            data.pageSize = pageSize;
+        }
+        if(null != startT) {
+            data.startT = startT;
+        }
+        if(null != endT) {
+            data.endT = endT;
+        }
+        ajaxRequest({
+        	url: "/index/getTrendLotteyData",
+            data: data,
+            beforeSend: function() {
+                parent.showLoading();
+            },
+            success: function(json) {
+                if(json.result != 1) {
+                    return;
+                }
+                var data = json.sscHistoryList;
+                data.reverse();
+                // 折线
+                zhexian(data);
+                {IN name="id" value="1,3,12,14,34,35,40,41,42"}
+	              //折线下-双面走势
+	                zhexianSm(data);
+                {/IN}
+                // k线
+                kxian(data);
+                // 直方图
+                zhifang(data);
+                // 历史数据
+                lssj(data);
+                parent.hideLoading();
+
+                $(".btn-navs li").each(function() {
+                    if($(this).hasClass("fff")) {
+                        initHuatu($(this).data("contentid"));
+                        return;
+                    }
+                });
+            }
+        });
+    }
+    
+    $(function() {
+        $("#checkboxZhexian").change(function() { //当元素的值发生改变时，会发生 change 事件。该事件仅适用于文本域（text field），以及 textarea 和 select 元素。hange() 函数触发 change 事件，或规定当发生 change 事件时运行的函数。
+            if($(this).is(":checked")) {
+                $(".zhexian").show();
+            } else {
+                $(".zhexian").hide();
+            }
+        });
+
+        $("#checkboxYlsj").change(function() {
+            if($(this).is(":checked")) {
+                $(".transparent").addClass("not-transparent");
+            } else {
+                $(".transparent").removeClass("not-transparent");
+            }
+        });
+
+        $("#checkboxYlfc").change(function() {
+            if($(this).is(":checked")) {
+                $(".ylfc").addClass("ylfc-bg");
+            } else {
+                $(".ylfc").removeClass("ylfc-bg");
+            }
+        });
+    });
+</script>

@@ -1,0 +1,50 @@
+<?php 
+namespace app\index\controller;
+use app\index\Base;
+
+use app\common\model\Type;
+
+class Ssc extends Base{
+    
+    public function index(){
+        return $this->fetch();
+    }
+    
+    public function main(){
+    	// 所有的可用彩种
+		$lotterys = collection(Type::getAll())->toArray();
+
+		// 彩种类型
+    	$lotteryType = Type::TYPE_ARRAY;
+
+    	// 热门彩种
+		$hotLottery = [];
+		foreach($lotterys as $lItem){
+			$hotLottery[$lItem['type']][] = $lItem;
+		}
+
+		$this->assign('lotterys', $lotterys);
+		$this->assign('lotteryType', $lotteryType);
+		$this->assign('hotLottery', $hotLottery);
+
+		return $this->fetch();
+    }
+    
+    public function gcdt(){
+        return $this->fetch();
+    }
+    
+    public function zsIndex(){
+        return $this->fetch();
+    }
+    
+    public function kjjg(){
+        return $this->fetch();
+    }
+
+    //{"result":1,"sscHistoryList":[{"number":"201805140777","openCode":"","playGroupId":null,"openTime":1526273760000}]}
+    public function getPlanOpenDataHistory(){
+        $types = Type::getAll();
+    }
+}
+

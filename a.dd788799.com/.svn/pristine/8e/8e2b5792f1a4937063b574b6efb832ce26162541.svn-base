@@ -1,0 +1,21 @@
+<input type="hidden" name="playedGroup" value="<?=$groupId?>" />
+<input type="hidden" name="playedId" value="<?=$playedId?>" />
+<input type="hidden" name="type" value="<?=$type?>" />
+<?php foreach(array('龙虎和') as $var){ ?>
+<div class="pp ssc5xlhh" action="tzCombineSelect" length="1" random="sscRandom">
+	<div class="title"><?=$var?></div>
+	&nbsp;
+	<div class="butButton">
+		<input type="button" value="龙" class="code min s" />
+		<input type="button" value="虎" class="code min d" />
+		<input type="button" value="和" class="code min s" />
+	</div>
+</div>
+<?php
+	}
+?>
+<script type="text/javascript">
+$(function(){
+	gameSetPl(<?=json_encode($maxPl)?>);
+})
+</script>

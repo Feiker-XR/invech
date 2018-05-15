@@ -1,0 +1,63 @@
+﻿body,p,h1,h2,h3,h4,h5,li,span,i,ul,img,a,strong,input,button,textarea,dd,dl,dt{margin:0;padding:0; }
+body{font-family:"microsoft yahei";font-size:14px;line-height: 1;}
+*{-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-box-sizing: border-box;-moz-box-sizing: border-box;box-sizing: border-box;}
+li{list-style-type:none;float:left;}
+table{border-collapse:collapse;border-spacing:0;}
+a,area{text-decoration:none;outline:none;color: #000;}
+img{border:none;vertical-align:middle;}
+i,var,em{font-style:normal;}
+button{font-family:"microsoft yahei";outline:none;cursor: pointer;}
+iframe{border: none;}
+input,select,textarea{outline:none;font-family:"microsoft yahei";}
+textarea{resize:none;overflow-y:auto;}
+.at{margin:0 auto;}
+.fl{float: left;}
+.fr{float: right;}
+.clear{clear:both;}
+.dt{display: table;width: 100%;}
+.fl-w{float: left;width: 100%;}
+.hide{display: none;}
+
+.wid{width:1000px;margin:0 auto;}
+
+
+.top{height: 100px;}
+.top .logo{float: left;margin-top:22px;}
+
+.top .notice{width: 350px;height: 24px;line-height: 24px;text-indent: 24px;float: left;border-left: 0px solid #d5d5d5;padding-left: 15px;margin-top:30px;margin-left: 20px;background-image: url(../img/ico0.png);font-size: 12px;color: #fff;}
+.top .customer{float: right;margin-top:25px;}
+
+.banner{height: 517px;background: url(../img/img1.jpg) center;}
+.banner .wid{position: relative;height: 100%;}
+.banner .pict{left: 0;bottom:-79px;position: absolute;position: relative;float: left;}
+.banner .pict .iphone-pic{position: absolute;left:155px;top:55px;width: 223px;height: 394px;}
+.banner .text{float: right;margin-top: 80px;margin-right: 42px;}
+.banner .text h2{color: #fff;font-size: 36px;font-weight: normal;padding-left:98px;}
+.banner .text h2 i{color: #fffc00;}
+.banner .text h2 span{background: #ff8a00;font-size:24px;padding:5px 15px;display: inline-block;margin-left: 15px;position: relative;vertical-align: middle;margin-top: -8px;}
+.banner .text h2 span::after{ content:""; position:absolute; top:8px; left:-8px; width:0px;height:0px;border-bottom:8px solid transparent;border-right: 8px solid #ff8a00 ; border-top:8px solid transparent;
+}
+.banner .text ul{margin-top: 51px;margin-left: -62px;}
+.banner .text ul li{margin-left: 98px;}
+.banner .text ul li .code{width: 181px;height: 182px;background-image: url(../img/ico19.png);text-align: center;}
+.banner .text ul li .code img{margin-top: 11px;width: 158px;height: 158px;}
+.banner .text ul li a{width: 180px;height: 58px;border-radius:4px;margin-top: 40px;float: left;}
+.banner .text ul li img{float: left;margin-left:15px;margin-top: 10px;}
+.banner .text ul li p{float: left;color: #fff;margin-left: 10px;margin-top: 14px;}
+.banner .text ul li p span{display: block;font-size: 12px;color: #fffd78;margin-top:3px;}
+.banner .text ul li .ios{background: #fa6200;display: block;}
+.banner .text ul li .android{background: #8fc31f;}
+
+
+.hot-games{margin-top: 100px;}
+.hot-games h2{border-bottom: 1px solid #d6d6d6;text-align: center;}
+.hot-games h2 span{padding: 0 15px;display: inline-block;position: relative;top:30px;background: #fff;font-size: 36px;color: #484848;}
+.hot-games h2 span var{display: block;text-transform: uppercase;color: #dbdbdb;font-size: 20px;font-weight: normal;margin-top: 5px;}
+.hot-games ul{margin-top:30px;}
+.hot-games ul li{text-align: center;width: 16.66%;text-align: center;margin-top:42px;}
+.hot-games ul li .pict{height: 100px;}
+.hot-games ul li p{font-size: 18px;color: #666;margin-top: 12px;}
+
+.footer{border-top: 2px solid #ff8f4c;background: #f1f1f1;padding-top: 50px;padding-bottom: 40px;margin-top: 68px;}
+.footer p{text-align: center;color: #7d7d7d;font-size: 12px;line-height:2;}
+.footer img{margin-top: 40px;}

@@ -1,0 +1,71 @@
+<link rel="stylesheet" href="/400w-public/css/global.css" />
+<link rel="stylesheet" href="/400w-public/css/other.css" />
+<link rel="stylesheet" href="/400w-public/css/style.css" />
+<link rel="stylesheet" href="/400w-public/css/lottery.css" />
+
+<input type="hidden" name="playedGroup" value="<?=$groupId?>" />
+<input type="hidden" name="playedId" value="<?=$playedId?>" />
+<input type="hidden" name="type" value="<?=$type?>" />
+<input type="hidden" name="playedName" value="<?=$played['name']?>" />
+
+<div id="sscContent"><!-- content -->
+<div class="lot-content clearfix">
+    <div class="fl main-left">
+        <div class="hd clearfix rehd tzgz" id="toptouzhu">
+        <div class="fl refl">
+                快捷金额：
+                <input type="text" class="txt" id="inputMoney">
+            </div>
+        <div class="kjanniu">
+            <a href="javascript:void(0)" class="img-50" data-num="50"></a>
+            <a href="javascript:void(0)" class="img-100" data-num="100"></a>
+            <a href="javascript:void(0)" class="img-500" data-num="500"></a>
+            <a href="javascript:void(0)" class="img-1000" data-num="1000"></a>
+            <a href="javascript:void(0)" class="img-5000" data-num="5000"></a>
+            <a href="javascript:void(0)" class="img-10000" data-num="10000"></a>
+        </div>
+        </div>
+        <div class="table-common">
+
+        </div>
+    </div>
+
+</div>
+</div>
+
+<script type="text/html" id="pk10_sz">
+<table width="140" border="1" class="pp" action="pk10_sz">
+    <thead>
+    <tr>
+        <th colspan="3">{{plg.name}}</th>
+      </tr>
+    </thead>
+    <tbody>
+        {{each plg.pls pl}}
+    <tr>
+        <td width="30" style="cursor: pointer;" onclick="setQuickPick(this)"><strong>{{pl.value}}</strong></td>
+        <td style="cursor: pointer;" onclick="setQuickPick(this)"><strong class="color-red pl">{{pl.pl}}</strong></td>
+        <td><input type="text" class="table-txt" data-name="{{plg.name}}-{{pl.value}}" data-plid="{{pl.id}}" data-pl="{{pl.pl}}"></td>
+    </tr>
+        {{/each}}
+    </tbody>
+</table>
+</script>    
+
+<script>
+//var pls;//玩法的所有赔率
+//var plg;//当前赔率组
+
+$(function(){
+    //循环表格放到table-common    
+    var playedId = "<?=$playedId?>";
+    $.getJSON("/game/pl/playedId/"+playedId,function(data){
+        console.log(data);
+        pls = data;
+        $.each(pls,function(i,plg){
+            var html = template("pk10_sz",{plg:plg});    
+            $('.table-common').append(html);
+        });
+    });
+});
+</script>

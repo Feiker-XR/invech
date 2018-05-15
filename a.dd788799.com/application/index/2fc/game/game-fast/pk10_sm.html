@@ -1,0 +1,90 @@
+<link rel="stylesheet" href="/400w-public/css/global.css"/>
+<link rel="stylesheet" href="/400w-public/css/other.css"/>
+<link rel="stylesheet" href="/400w-public/css/style.css"/>
+<link rel="stylesheet" href="/400w-public/css/lottery.css"/>
+
+<input type="hidden" name="playedGroup" value="<?=$groupId?>"/>
+<input type="hidden" name="playedId" value="<?=$playedId?>"/>
+<input type="hidden" name="type" value="<?=$type?>"/>
+<input type="hidden" name="playedName" value="<?=$played['name']?>"/>
+
+<div id="sscContent"><!-- content -->
+    <div class="lot-content clearfix">
+        <div class="fl main-left">
+            <div class="hd clearfix rehd tzgz" id="toptouzhu">
+                <div class="fl refl">
+                    快捷金额：
+                    <input type="text" class="txt" id="inputMoney">
+                </div>
+                <div class="kjanniu">
+                    <a href="javascript:void(0)" class="img-50" data-num="50"></a>
+                    <a href="javascript:void(0)" class="img-100" data-num="100"></a>
+                    <a href="javascript:void(0)" class="img-500" data-num="500"></a>
+                    <a href="javascript:void(0)" class="img-1000" data-num="1000"></a>
+                    <a href="javascript:void(0)" class="img-5000" data-num="5000"></a>
+                    <a href="javascript:void(0)" class="img-10000" data-num="10000"></a>
+                </div>
+            </div>
+            <div class="table-common">
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/html" id="pk10_sm">
+    <table width="100%" border="1" class="pp" action="pk10_sm">
+        <thead>
+        <tr>
+            <th>&nbsp;</th>
+            <th colspan="2">大</th>
+            <th colspan="2">小</th>
+            <th colspan="2">单</th>
+            <th colspan="2">双</th>
+            <th colspan="2">龙</th>
+            <th colspan="2">虎</th>
+        </tr>
+        </thead>
+        <tbody>
+        {{each pls plg }}
+        <tr>
+            <td style="cursor: pointer;"><strong>{{plg.name}}</strong></td>
+            {{each plg.pls pl }}
+            <td style="cursor: pointer;" onclick="pk10_quick(this)"><strong class="color-red pl">{{pl.pl}}</strong></td>
+            <td><input type="text" class="table-txt" data-name="{{plg.name}}-{{pl.value}}" data-plid="{{pl.id}}"
+                       data-pl="{{pl.pl}}"></td>
+            {{/each}}
+        </tr>
+        {{/each}}
+        </tbody>
+    </table>
+</script>
+
+<script>
+    //var pls;//玩法的所有赔率
+    //var plg;//当前赔率组
+
+    $(function () {
+        //循环表格放到table-common
+        var playedId = "<?=$playedId?>";
+        $.getJSON("/game/pl/playedId/" + playedId, function (data) {
+            pls = data;
+            var html = template("pk10_sm", {pls: pls});
+            $('.table-common').html(html);
+        });
+    });
+
+    function pk10_quick(self){
+        var $this = $(self);
+        var _next = $this.next().find('input');
+        if($this.hasClass('picked')){
+            $this.removeClass('picked');
+            $this.css('background','white');
+            _next.val('');
+        }else{
+            $this.addClass('picked');
+            $this.css('background','yellow');
+            _next.val($('#inputMoney').val());
+        }
+    }
+</script>

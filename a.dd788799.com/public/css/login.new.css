@@ -1,0 +1,178 @@
+
+body{
+	background: #fff;
+}
+
+/*主体部分 main*/
+.register-main-wrapper{
+	width: 100%;
+	height: 420px;
+	background: url(../images/login/login-bg.gif) no-repeat ;	
+	background-size: 100% 100%;
+	overflow: hidden;
+}
+.register-main{
+	width: 1000px;
+	height: 385px;
+	margin: 0 auto;
+	background: #FFFFFF;
+}
+.register-title{
+	width: 100%;
+	height: 46px;
+	background: #f4faff;
+	border-bottom: 1px solid #f3f6f6;
+	margin-top: 18px;
+}
+.register-user-login{
+	float: left;
+	margin-left: 55px;
+}
+.register-user-login img{
+	display: block;
+	float: left;
+	width: 21px;
+	height: 19px;
+	padding-top: 15px;
+}
+.register-user-login span{
+	color: #1a80cc;
+	font-size: 16px;
+	line-height: 46px;
+	margin-left: 9px;
+}
+.hava-login{
+	float: right;
+	color: #1a80cc;
+	font-size: 16px;
+	line-height: 46px;
+	margin-right: 16px;
+}
+.hava-login a{
+	color: #999999;
+	font-size: 14px;
+}
+/*表单部分*/
+.register-context{
+	margin-top: 42px;
+}
+.register-info{
+	width: 454px;
+	height: 40px;
+	margin: 0px auto;
+	margin-top: 10px;
+	clear: both;
+}
+.register-info label{
+	display: block;
+	float: left;
+	width: 92px;
+	text-align: right;	
+	font-size: 14px;
+	color: #525252;
+	height: 40px;
+	line-height: 40px;
+}
+.register-info input{
+	display: block;
+	float: left;
+	width: 328px;
+	height: 38px;
+	border: 1px solid #eee;
+	padding-left: 12px;
+	font-size: 14px;
+	outline: none;
+	color: #525252;
+}
+.register-info select{
+	border: 1px solid #eee;
+	color: #525252;
+	width: 82px;
+	height: 38px;
+	outline: none;
+	text-align: center;
+	padding-left: 20px;
+	color:#a9a9a9;
+}
+.register-info select option{
+	text-align: center;
+}
+.register-info input::-webkit-input-placeholder{
+    color:#d7d7d7;
+}
+.register-info input::-moz-placeholder{   /* Mozilla Firefox 19+ */
+    color:#d7d7d7;
+}
+.register-info input:-moz-placeholder{    /* Mozilla Firefox 4 to 18 */
+    color:#d7d7d7;
+}
+.register-info input:-ms-input-placeholder{  /* Internet Explorer 10-11 */ 
+    color:#d7d7d7;
+}
+.register-info-code input{
+	width: 196px;
+}
+.register-info-code i{
+	display: block;
+	float: left;
+	width: 99px;
+	height: 40px;
+	margin-left: 2px;
+}
+.register-info-code i img{
+	width: 99px;
+	height: 40px;
+	display: block;
+}
+.register-info-code a{
+	display: inline-block;
+	line-height: 40px;
+	color: #0054ff ;
+	font-size: 14px;
+	margin-left: 2px;
+}
+/*同意约定*/
+.agree-wrapper{
+	width: 545px;
+	margin: 0 auto;
+	margin: 40px 0px 0px 377px;
+}
+.agree-wrapper i{
+	display: block;
+	width: 14px;
+	height: 14px;
+	float: left;
+	background: url(../images/registeredImgs/checkout.png) no-repeat;
+	margin-top: 11px;
+	cursor: pointer;
+}
+.agree-wrapper i.bg{
+	background: url(../images/registeredImgs/checkouted.png) no-repeat;
+}
+.agree-wrapper span{
+	display: block;
+	float: left;
+	font-size: 14px;
+	line-height: 35px;
+	margin-left: 8px;
+	color: #4b4b4b;
+}
+.agree-wrapper span a{
+	color:#0054ff ;
+}
+.agree-wrapper button{
+	width: 100px;
+	height: 35px;
+	background: #999999;
+	outline: none;
+	border-radius: 8px;
+	border:none;
+	cursor: pointer;
+	color: #FFFFFF;
+	font-size: 14px;
+	margin-right: 8px;
+}
+.agree-wrapper button.submit{
+	background: #ff6600;
+	margin-left: 21px;
+}

@@ -1,0 +1,71 @@
+{extend name="public/user_head_new"/}
+{block name="body"}
+<style type="text/css">
+    section.msg_list ul li{background: #fff;width: 100%;padding-left: 0px;}
+    section.msg_list ul li h2{margin:0;}
+    .container section.msg_list ul li a{width: 100%;height: 100%;display: block;padding-left: .6rem;}
+    section.msg_list ul li button{padding:0;margin-top:-1.35rem;height: 1rem;line-height: 1rem;}
+    section.charge_pay{z-index: 2;}
+    .mui-scroll{z-index: 3;}
+</style>
+<div class="container">
+    <header class="header">
+        <i class='left' onclick="javascript:history.back(-1);">返回</i>
+        <h1>我的消息</h1>
+    </header>
+    <main class="inner_body">
+        <section class="table">
+            <div id="pullrefresh" class="mui-content mui-scroll-wrapper">
+                <div class="mui-scroll">
+                    <table>
+                        <thead>
+                        <tr>
+                            <th>日期</th>
+                            <th>彩种</th>
+                            <th>玩法</th>
+                            <th>投注金额</th>
+                            <th>盈亏</th>
+                        </tr>
+                        </thead>
+                        <tbody id="lists">
+                        {if(!$list['list']->isEmpty())}
+                        {foreach $list['list'] as $v}
+                        <tr>
+                            <td>{$v->created_at}</td>
+                            <td>{$v->types->title}</td>
+                            <td>{$v->played->name}</td>
+                            <td>{$v->actionNum*$v->mode*$v->beiShu}</td>
+                            {if(!empty($v->lotteryNo))}
+                            {if($v->cha>0)}
+                            <td><span style="color:red">{$v->cha}</span></td>
+                            {else}
+                            <td><span style="color:green">{$v->cha}</span></td>
+                            {/if}
+                            {else}
+                            <td><span style="color:green">未开奖</span></td>
+                            {/if}
+
+                        </tr>
+                        {/foreach}
+                        {else}
+                        <tr><td colspan="5" styl="text-align:center;">暂无数据</td></tr>
+                        {/if}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </section>
+    </main>
+</div>
+<script type="text/javascript">
+    var base_url = '/user/inbox';
+    var page = 1;
+
+    // 重新打开mui的A链接默认属性
+    mui('body').on('tap','table tr',function(){
+        console.log(11);
+    });
+
+</script>
+{/block}

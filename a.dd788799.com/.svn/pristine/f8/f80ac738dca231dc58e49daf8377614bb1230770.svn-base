@@ -1,0 +1,15 @@
+<?php
+namespace app\index\model;
+use think\Model;
+
+/**
+ *  投注表模型
+ * @author mack
+ */
+class  Bets  extends Model
+{
+    protected $table = 'gygy_bets';
+    public function getBetsByBonusGt($bonus = 0, $limit = 100){
+        return $this->alias('a')->join('members b','a.uid = b.uid')->where(['bonus'=>['gt',$bonus]])->order('a.created_at','desc')->limit($limit)->select();
+    }
+}

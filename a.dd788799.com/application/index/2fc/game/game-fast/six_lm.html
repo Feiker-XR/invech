@@ -1,0 +1,120 @@
+<link rel="stylesheet" href="/400w-public/css/cabel-v1.css" />
+<link rel="stylesheet" href="/400w-public/css/style.css" />
+<link rel="stylesheet" href="/400w-public/css/animate.min.css" />
+<link rel="stylesheet" href="/400w-public/css/lottery.css" />
+<link rel="stylesheet" href="/400w-public/css/liMarquee.css" />
+<link rel="stylesheet" href="/400w-public/css/jquery.range.css" />
+<link rel="stylesheet" href="/400w-public/css/global.css" />
+<link rel="stylesheet" href="/400w-public/css/other.css" />
+<link rel="stylesheet" href="/400w-public/css/gfwf.css" />
+<link rel="stylesheet" href="/400w-public/css/layer.css" />
+
+<!-- 六合彩-连码 -->
+
+<input type="hidden" name="playedGroup" value="<?=$groupId?>" />
+<input type="hidden" name="playedId" value="<?=$playedId?>" />
+<input type="hidden" name="type" value="<?=$type?>" />
+<input type="hidden" name="playedName" value="<?=$played['name']?>" />
+
+<div id="sscContent"><div class="lot-content clearfix">
+    <div class="fl main-left">
+        <div class="hd clearfix">
+            <div class="fr" style="margin-bottom:10px;">
+                <div class="T-tab clearfix" style="margin-top: 4.4px; ">
+                    <a href="javascript:void(0)" onclick="changeTab(this)">四全中</a>
+                    <a href="javascript:void(0)" onclick="changeTab(this)">四中一</a>
+                    <a href="javascript:void(0)" onclick="changeTab(this)">三全中</a>
+                    <a href="javascript:void(0)" onclick="changeTab(this)">三中二</a>
+                    <a href="javascript:void(0)" onclick="changeTab(this)">二全中</a>
+                    <a href="javascript:void(0)" onclick="changeTab(this)">二中特</a>
+                    <a href="javascript:void(0)" onclick="changeTab(this)">特串</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="table-common table-common-left" style="margin-left:10px;">
+
+        </div>
+    </div>
+
+    </div>
+</div>
+
+<script type="text/html" id="six_lm">
+    {{set pl = plg.pls[0]}}
+    <table width="100%" border="1" class='pp' action='six_lm' style="overflow: auto">
+        <thead>
+        <tr>
+            <th width="47">号码</th>
+            <th width="56">赔率</th>
+            <th width="47">勾选</th>
+            <th width="47">号码</th>
+            <th width="56">赔率</th>
+            <th width="47">勾选</th>
+            <th width="47">号码</th>
+            <th width="56">赔率</th>
+            <th width="47">勾选</th>
+            <th width="47">号码</th>
+            <th width="56">赔率</th>
+            <th width="47">勾选</th>
+            <th width="47">号码</th>
+            <th width="56">赔率</th>
+            <th width="47">勾选</th>
+        </tr>
+        </thead>
+
+        <tbody>
+            {{each nums line index1}}
+            <tr>
+                {{each line num index2}}
+
+                <td style="cursor: pointer;"><span class="ball-icon ball-{{num | number}}"></span></td>
+                <td style="cursor: pointer;"><strong class="color-red color-333 pl">{{pl.pl}}</strong></td>
+                <td><input type="checkbox" value="{{num}}"></td>
+
+                {{/each}}
+            </tr>    
+            {{/each}}
+        </tbody>
+    </table>
+    <div class="hd clearfix rehd tzgz" id="toptouzhu" style="margin: 10px 0;">
+        <div class="fl refl xzje">
+            下注金额：<input type="text" class="txt" id="inputMoney">
+        </div>
+        <div class="kjanniu">
+            <a href="javascript:void(0)" class="img-50" data-num="50"></a>
+            <a href="javascript:void(0)" class="img-100" data-num="100"></a>
+            <a href="javascript:void(0)" class="img-500" data-num="500"></a>
+            <a href="javascript:void(0)" class="img-1000" data-num="1000"></a>
+            <a href="javascript:void(0)" class="img-5000" data-num="5000"></a>
+            <a href="javascript:void(0)" class="img-10000" data-num="10000"></a>
+        </div>
+    </div>
+</script>
+
+<script>
+//var pls;//玩法的所有赔率
+//var plg;//当前赔率组
+
+function changeTab(self){
+    $(self).siblings().removeClass('active');
+    $(self).addClass('active');
+    var $tabs = $(self).parent().children();
+
+    var index = $tabs.index(self);
+    plg = pls[index];
+
+    var html = template("six_lm",{plg:plg,nums:six_nums});    
+    $('.table-common').html(html);
+}
+
+$(function(){
+    //循环表格放到table-common    
+    var playedId = "<?=$playedId?>";
+    $.getJSON("/game/pl/playedId/"+playedId,function(data){
+        console.log(data);
+        pls = data;
+        $('.T-tab.clearfix').children().eq(0).click();
+    });
+});
+</script>    

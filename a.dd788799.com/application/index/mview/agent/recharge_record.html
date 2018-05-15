@@ -1,0 +1,82 @@
+{extend name="public/user_head"/}
+{block name="body"}
+<style type="text/css">
+    ul.condition li select{
+        padding: 0;
+    }
+    ul.condition li select.left{
+        width: 60%;
+    }
+</style>
+<link type="text/css" rel="stylesheet" href="/css/agent.css">
+<header class="header">
+    <i class='left' onclick="javascript:history.back(-1);">返回</i>
+    <h1>存款记录</h1>
+</header>
+<main class="inner_body">
+    <section class="fund_detail">
+        <img src="/__IMG__/agent/search.png" alt="search" class="search"/>
+        <ul class="condition agent">
+            <li>
+               用户名：<input type="text" id="username" placeholder="请输入用户名"/>
+            </li>
+            <li>
+                时间：<input type="date" id="_date"/>
+            </li>
+        </ul>
+        <button class="check">查询</button>
+    </section>
+     <section class="table">
+        <div id="pullrefresh" class="mui-content mui-scroll-wrapper">
+            <div class="mui-scroll">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>用户名</th>
+                            <th>存款金额</th>
+                            <th>存款日期</th>
+                        </tr>
+                    </thead>
+                    <tbody id="lists">
+                         {if(!$list->isEmpty())}
+                            {foreach $list as $v}
+                                <tr>
+                                    <td>{if(!empty($v->user->username))}{$v->user->username}{/if}</td>
+                                    <td>{$v->amount}</td>
+                                    <td>{$v->created_at}</td>
+                                </tr>
+                            {/foreach}
+                        {else}
+                            <tr><td colspan="3" styl="text-align:center;">暂无数据</td></tr>
+                        {/if}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>  
+</main>
+<script type="text/javascript">
+    var base_url = '/agent/recharge_record';
+    var page = 1;
+    $(function () {
+        // 设置容器高度
+         $('section.table').height($('main').height()-$('ul.condition').height() - $('section.table table tr td').height());
+         // 设置默认日期
+        //$('#_date').val(formatDate(new Date()).split(' ')[0]);
+    });
+    // 搜寻日期
+     // 搜寻日期
+    $('.check').click(function(){
+        var stime = $("#_date").val();
+        var endTime = '';
+        if(stime){
+            endTime = stime + " 23:59:59";
+            stime = stime+" 00:00:00";
+        }
+        var username = $("#username").val();
+        var _url = base_url + '?startTime='+stime+'&endTime='+endTime+'&username='+username;
+        page = 1;
+        loadMore(_url);
+    });
+</script>
+{/block}

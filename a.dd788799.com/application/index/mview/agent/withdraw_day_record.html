@@ -1,0 +1,71 @@
+{extend name="public/user_head"/}
+{block name="body"}
+<header class="header">
+    <i class='left' onclick="javascript:history.back(-1);">返回</i>
+    <h1>提现记录</h1>
+</header>
+<link type="text/css" rel="stylesheet" href="/css/agent.css">
+<main class="inner_body">
+    <section class="fund_detail">
+        <img src="/__IMG__/agent/search.png" alt="search" class="search"/>
+        <ul class="condition agent">
+           <li>
+                时间：<input type="date" id="_date"/>
+            </li>
+        </ul>
+        <button class="check">查询</button>
+    </section>
+    <section class="table">
+        <div id="pullrefresh" class="mui-content mui-scroll-wrapper">
+            <div class="mui-scroll">
+                <table>
+                    <thead>
+                    <tr>
+                        <th>时间日期</th>
+                        <th>提款金额</th>
+                        <th>提款次数</th>
+                        <th>提款人数</th>
+                    </tr>
+                    </thead>
+                    <tbody id="lists">
+                         {if(!$list->isEmpty())}
+                            {foreach $list as $k=>$v}
+                                <tr>
+                                    <td>{$v.day}</td>
+                                    <td>{$v.withdraw_amount}</td>
+                                    <td>{$v.withdraw_num}</td>
+                                    <td>{$v.withdraw_person_num}</td>
+                                </tr>
+                            {/foreach}
+                        {else}
+                            <tr><td colspan="4" styl="text-align:center;">暂无数据</td></tr>
+                        {/if}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+</main>
+<script type="text/javascript">
+    var base_url = '/agent/withdraw_day_record';
+    var page = 1;
+    $(function () {
+        // 设置容器高度
+         $('section.table').height($('main').height()-$('ul.condition').height() - $('section.table table tr td').height());
+         // 设置默认日期
+        //$('#_date').val(formatDate(new Date()).split(' ')[0]);
+    });
+    // 搜寻日期
+    $('.check').click(function(){
+        var stime = $("#_date").val();
+        var endTime = '';
+        if(stime){
+            endTime = stime + " 23:59:59";
+            stime = stime+" 00:00:00";
+        }
+        var _url = base_url + '?startTime='+stime+'&endTime='+endTime;
+        page = 1;
+       loadMore(_url);
+    });
+</script>
+{/block}

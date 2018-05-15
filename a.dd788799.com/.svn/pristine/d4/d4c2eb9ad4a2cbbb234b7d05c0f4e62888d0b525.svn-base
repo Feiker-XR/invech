@@ -1,0 +1,112 @@
+{extend name="public/user_head"/}
+{block name="body"}
+<style type="text/css">
+    #_date{
+        width:.6rem;
+        height: .88rem;
+        position:absolute;
+        right:.4rem;
+        top:0;
+        opacity: 0;
+    }
+    ul.condition{
+        font-size:.12rem;
+        text-align: center;
+    }
+    ul.condition li span{
+        font-weight: bold;
+    }
+    ul.condition li select{
+        float: none;
+        width: 65%;
+    }
+    ul.condition li select.left{
+        float: none;
+    }
+    ul.condition li{
+        width: 33%;
+
+    }
+    ul.condition li:last-child span{
+        margin-left:0;
+    }
+</style>
+<header class="header">
+    <i class='left' onclick="javascript:history.back(-1);">返回</i>
+    <h1>投注记录</h1>
+     <i class="right wider">日期检索</i>
+    <input type="date" id="_date"/>
+</header>
+<main class="inner_body">
+    <section class="fund_detail">
+        <ul class="condition">
+            <li>
+               
+            </li>
+         
+        </ul>
+    </section>
+    <section class="table">
+        <div id="pullrefresh" class="mui-content mui-scroll-wrapper">
+            <div class="mui-scroll">
+                <table>
+                    <thead>
+                        <tr>
+                            
+                            <th>时间</th>
+                            <th>投注金额</th>
+                            <th>派奖金额</th>
+                            <th>盈亏</th>
+                       </tr>
+                    </thead>
+                    <tbody id="lists">
+                         {if(!$list->isEmpty())}
+                            {foreach $list as $v}
+                                <tr>
+                                    <td>{$v.day}</td>
+                                    <td>{$v.bet_amount}</td>
+                                    <td>{$v.zj_amount}</td>
+                                    <td>
+                                        {if($v.win_amount >= 0)} 
+                                            <span style="color:red">{$v.win_amount}</span>
+                                        {else}
+                                            <span style="color:green">{$v.win_amount}</span>
+                                        {/if}
+                                    </td>  
+                                </tr>
+                            {/foreach}
+                        {else}
+                            <tr><td colspan="5" styl="text-align:center;">暂无数据</td></tr>
+                        {/if}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <input type="hidden" id="startTime" value=""/>
+        <input type="hidden" id="endTime" value=""/>
+    </section>
+</main>
+<script type="text/javascript">
+    var base_url = '/agent/bet_day_record';
+    var page = 1;
+    $(function () {
+        // 设置容器高度
+         $('section.table').height($('main').height()-$('ul.condition').height() - $('section.table table tr td').height());
+         // 设置默认日期
+        //$('#_date').val(formatDate(new Date()).split(' ')[0]);
+        $("#_type").trigger('change');
+    });
+    // 搜寻日期
+    $('#_date').change(function(){
+        var stime = $("#_date").val();
+        var endTime = stime + " 23:59:59";
+            stime = stime+" 00:00:00";
+        var playedId = $("#_type_method").val();
+        $('#startTime').val(stime);
+        $('#endTime').val(endTime);
+        var _url = base_url + '?startTime='+stime+'&endTime='+endTime+'&playedId='+playedId;
+        page = 1;
+       loadMore(_url);
+    });
+</script>
+{/block}

@@ -1,0 +1,246 @@
+{extend name="public/user_head"/}
+{block name="body"}
+<style type="text/css">
+    #_date{
+        width:.6rem;
+        height: .88rem;
+        position:absolute;
+        right:.4rem;
+        top:0;
+        opacity: 0;
+    }
+    ul.condition{
+        font-size:.12rem;
+        padding:0 1%;
+    }
+    ul.condition li select{
+        float: none;
+    }
+    ul.condition li select.left{
+        float: none;
+    }
+    ul.condition li{
+        width: 33%;
+
+    }
+    ul.condition li:last-child span{
+        margin-left:0;
+    }
+</style>
+<header class="header">
+    <i class='left' onclick="javascript:history.back(-1);">返回</i>
+    <h1>投注记录</h1>
+     <i class="right wider">日期检索</i>
+    <input type="date" id="_date"/>
+</header>
+<script type="text/javascript" src="/js/vue.js"></script>
+<main class="inner_body">
+    <section class="fund_detail">
+        <ul class="condition">
+            <li>
+                <span>彩种：</span>
+                <select id="_type" class="left">
+                    {foreach $type as $v}
+                        <option value="{$v.id}">{$v.title}</option>
+                    {/foreach}
+                </select>
+            </li>
+            <li>
+                <span>组别：</span>
+                <select id="_type_group" class="left">
+                    <option>所有组别</option>
+                </select>
+
+            </li>
+            <li>
+                <span>玩法：</span>
+                <select id="_type_method" class="left">
+                    <option>所有玩法</option>
+                    <option value="0">xx</option>
+                    <option value="1">xxx</option>
+                    <option value="2">xxx</option>
+                    <option value="3">xxx</option>
+                </select>
+
+            </li>
+        </ul>
+    </section>
+    <section class="table">
+        <div id="pullrefresh" class="mui-content mui-scroll-wrapper">
+            <div class="mui-scroll">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>日期</th>
+                            <th>彩种</th>
+                            <th>玩法</th>
+                            <th>投注金额</th>
+                            <th>盈亏</th>
+                       </tr>
+                    </thead>
+                    <tbody id="lists">
+                        {if(!$list['list']->isEmpty())}
+                            {foreach $list['list'] as $v}
+                                <tr>
+                                    <td>{$v->created_at}</td>
+                                    <td>{$v->types->title}</td>
+                                    <td>{$v->played->name}</td>
+                                    <td>{$v->actionNum*$v->mode*$v->beiShu}</td>
+                                    {if(!empty($v->lotteryNo))}
+                                       {if($v->cha>0)}
+                                            <td><span style="color:red">{$v->cha}</span></td> 
+                                        {else}
+                                            <td><span style="color:green">{$v->cha}</span></td>
+                                        {/if}
+                                    {else}
+                                       <td><span style="color:green">未开奖</span></td>
+                                    {/if}
+                                   
+                                </tr>
+                            {/foreach}
+                        {else}
+                            <tr><td colspan="5" styl="text-align:center;">暂无数据</td></tr>
+                        {/if}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <input type="hidden" id="startTime" value=""/>
+        <input type="hidden" id="endTime" value=""/>
+    </section>
+</main>
+<script type="text/javascript">
+
+   /* var Vue = new Vue({
+        el:'.condition',
+        data:function (){
+
+        },
+        created:function(){
+
+        },
+
+    })*/
+   console.log(Vue);
+
+
+    $(function () {
+        // 设置容器高度
+         $('section.table').height($('main').height()-$('ul.condition').height() - $('section.table table tr td').height());
+         // 设置默认日期
+        //$('#_date').val(formatDate(new Date()).split(' ')[0]);
+    });
+    $("#_type").change(function(){
+        var typeId = $(this).val();
+        mui.ajax('/user/getGroupByid?typeId='+typeId,{
+            dataType:'json',//服务器返回json格式数据
+            type:'POST',//HTTP请求类型
+            timeout:10000,//超时时间设置为10秒；
+            headers:{'Content-Type':'application/json'},                  
+            success:function(data){
+                $.each(data.data,function(key,val){
+                   
+                })
+            },
+        });
+    })
+    $("#_type_group").change(function(){
+        var groupId = $(this).val();
+        mui.ajax('/user/getPlayedByid?groupId='+groupId,{
+            dataType:'json',//服务器返回json格式数据
+            type:'POST',//HTTP请求类型
+            timeout:10000,//超时时间设置为10秒；
+            headers:{'Content-Type':'application/json'},                  
+            success:function(data){
+                
+            },
+        });
+    })
+    mui.init({
+        pullRefresh: {
+            container: '#pullrefresh',
+            up: {
+                contentrefresh: '正在加载...',
+                contentnomore:'没有更多数据了',
+                callback: pullupRefresh
+            }
+        }
+    });
+    var page = 1;
+    /**
+     * 上拉加载具体业务实现
+     */
+    function pullupRefresh() {
+        //setTimeout(function() {
+            page++;
+            var stime   = $('#startTime').val();
+            var endTime = $("#endTime").val();
+            loadMore(stime,endTime,page)
+   }
+    // 搜寻日期
+    $('#_date').change(function(){
+        var stime = $("#_date").val();
+            stime = stime+" 00:00:00";
+        var endTime = stime.split(' ')[0] + " 59:59:59";
+        $('#startTime').val(stime);
+        $('#endTime').val(endTime);  
+       loadMore(stime,endTime);
+    });
+    // 加载数据
+    function loadMore(_startTime,_endTime,withpage){
+        var _url = '/user/bet_record';
+        if(withpage){
+            _url += '?page='+withpage+'&startTime='+_startTime+'&endTime='+_endTime;
+        }else{
+            _url += '?startTime='+_startTime+'&endTime='+_endTime;
+            page = 1;
+        }
+        mui.ajax(_url,{
+            dataType:'json',
+            type:'POST',
+            timeout:10000,
+            headers:{'Content-Type':'application/json'},
+            success:function(data){
+                var html = data.data;
+                var len  = (html.split("tr").length-1)/2;
+                console.log(len,page);
+
+                if(page>1){ // 下拉
+                    //console.log('下拉触发...');
+                    $('#lists').append(html);
+                }else{      // 点击
+                    //console.log('点击触发...');
+                    $('#lists').html(html);
+                    mui('#pullrefresh').pullRefresh().refresh(true);
+                    if(len == 0){
+                        $('#lists').html('<tr><td colspan="5" style="text-align:center;">暂无数据</td></tr>');
+                        mui('#pullrefresh').pullRefresh().disablePullupToRefresh();
+                    }
+                }
+                if(len<15){
+                    mui('#pullrefresh').pullRefresh().endPullupToRefresh(true);
+                }else{
+                    mui('#pullrefresh').pullRefresh().endPullupToRefresh(false);
+                }
+            },
+            error:function (error) {
+                console.log(error);
+                alert('ajax error');
+            }
+        });
+    }
+
+    // 时间改变
+    $('#_date').change(function () {
+        console.log($(this).val());
+    });
+    // 彩种改变
+    $('#_type').change(function () {
+        console.log($(this).val());
+    });
+    // 玩法改变
+    $('#_type_method').change(function () {
+        console.log($(this).val());
+    });
+</script>
+{/block}

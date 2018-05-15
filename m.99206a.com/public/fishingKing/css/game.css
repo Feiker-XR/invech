@@ -1,0 +1,42 @@
+.game-main{
+	width: 1037px;
+	height: auto;
+	margin: 0 -15px;
+	/*background: #1c1c1c;*/
+	border-radius: 8px;
+	/*padding:15px 0px;*/
+}
+.game-fish{
+	display: inline-block;
+	width: 321px;
+	height: 361px;
+	border-radius: 8px;
+	background: #fff;
+	margin-left: 15.5px;
+	position: relative;
+	margin-bottom: 15px;
+}
+.game-fish-one{
+	background: url(/images/game-1.png) no-repeat;
+	background-size: 100% 100%;
+}
+.game-fish-tow{
+	background: url(/images/game-2.png) no-repeat;
+	background-size: 100% 100%;
+}
+.game-fish-three{
+	background: url(/images/game-3.png) no-repeat;
+	background-size: 100% 100%;
+}
+.game-fish a{
+	position: absolute;
+	bottom: 14px;
+	background: url(/images/btn-go.png) no-repeat;
+	width: 153px;
+	height: 48px;
+	left: 50%;
+	margin-left: -76px;
+}
+.game-fish a:hover{
+	background: url(/images/btn-go-hover.png) no-repeat;
+}

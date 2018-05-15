@@ -1,0 +1,128 @@
+.all_fenlei_yin {
+    position: absolute;
+    top: 44px;
+    width: 246px;
+    border: 2px solid #d51910;
+    left: 0;
+    z-index: 1001;
+    background: #fff;
+    padding: 5px 0 0 0;
+}
+
+.menu a {
+    color: #fff;
+}
+
+.all_fenlei_yin_list {
+    padding: 2px 15px;
+    display: block;
+    border-bottom: 1px #ddd dashed;
+}
+
+.all_fenlei_yin_list img {
+    width: 42px;
+    height: 42px;
+    vertical-align: middle;
+    border-radius: 50%;
+}
+
+.all_fenlei_yin_list_rt {
+    padding-left: 5px;
+    line-height: 42px;
+    height: 42px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: #333;
+}
+
+.all_fenlei_b {
+    position: relative;
+    margin-top: 7px;
+}
+
+.all_fenlei_b_gp {
+    padding: 5px 10px;
+    line-height: 18px;
+}
+
+.all_fenlei_b_name {
+    width: 24px;
+    height: 56px;
+    text-align: center;
+    font-size: 16px;
+    border-radius: 5px;
+    padding-top: 2px;
+}
+
+.all_fenlei_b_gp_rt {
+    padding-left: 38px;
+    background: url(../images/index_70.png) no-repeat right center;
+    padding-right: 14px;
+}
+
+.all_fenlei_b_gp_rt ul{
+    list-style: none;
+}
+
+.all_fenlei_b_gp_rt_ul_lf li {
+    float: left;
+    width: 47%;
+    margin: 5px 0;
+    height: 16px;
+    margin-right: 3%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    list-style: none;
+    vertical-align: bottom;
+}
+
+.all_fenlei_b_gp_rt_ul_lf li a {
+    color: #666666;
+    font-size: 14px;
+}
+
+.all_fenlei_b_yin {
+    position: absolute;
+    left: 246px;
+    top: 0;
+    z-index: 1001;
+    background: #fafafa;
+    min-height: 210px;
+    width: 520px;
+    padding: 0 50px;
+    color: #666;
+    display: none;
+}
+
+.all_fenlei_b_yin_tl {
+    font-size: 16px;
+    margin-top: 20px;
+    margin-bottom: 5px;
+    color: #f42023;
+}
+
+.all_fenlei_b_yin_a a {
+    width: 120px;
+    display: inline-block;
+    margin-top: 6px;
+    font-size: 14px;
+    color: #666;
+    height: 18px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-right: 5px;
+}
+
+.clearfix:after {
+    visibility: hidden;
+    display: block;
+    font-size: 0;
+    content: " ";
+    clear: both;
+    height: 0;
+}
+
+

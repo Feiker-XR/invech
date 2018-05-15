@@ -1,0 +1,862 @@
+body { }
+.floatL { float: left; }
+.orange { color: #ff632c; }
+
+/*a:hover { color: #ff632c; }*/
+.new { background: url(/gfwf/images/nsc/home/ico-new.png) no-repeat; width: 13px; height: 13px; display: inline-block; vertical-align: middle; }
+
+/*容器*/
+.lotteryBody { }
+
+/*左侧布局*/
+.lotteryLeft { }
+
+/*彩种导航*/
+.m-lott-methodBox { padding: 0.571429rem 0.357143rem; background: #eaeaea; }
+.m-lott-methodBox .nfdprize_text { display: inline-block; padding: 0rem 0.785714rem 0.3rem; color: #fff; border-radius: 3px; font-size: 0.86rem; background-color: #ff632c; }
+.nfdprize_text b { display: inline-block; width: 12px; height: 16px; position: relative; left: 0.357143rem; background-image: url(/gfwf/images/nsc_m/lott/arrow-down1.png); background-position: 0px  4px; background-repeat: no-repeat; background-size: 100%; top: 0.2rem; transition: all .2s; }
+.nfdprize_text b.cur { transform: rotate(180deg); top: 0.45rem; }
+.m-lott-methodBox .fandian { color: #494949; display: inline-block; float: right; padding-top: 0.1rem; }
+.m-lott-methodBox .fandian select { border: 1px solid #bbb; padding: 0.2rem 0.1rem; border-radius: 0.3rem; font-size: 0.8rem; color: #624982; }
+.m-lott-methodBox-list {	/*display: none;*/
+background: #372f50; width: 100%; height: 0px; overflow: hidden; position: relative; }
+.m-lott-methodBox-list:before { content: ''; height: 2.8rem; width: 1.4rem; text-align: left; color: #fff; z-index: 2; position: absolute; right: 0; background-image: -webkit-linear-gradient(left, rgba(55, 47, 80, 0) 0%, rgb(55, 47, 80) 100%); background-image: -moz-linear-gradient(left, rgba(55, 47, 80, 0) 0%, rgba(55, 47, 80) 100%); background-image: -o-linear-gradient(left, rgba(55, 47, 80, 0) 0%, rgba(55, 47, 80) 100%); background-image: linear-gradient(left, rgba(55, 47, 80, 0) 0%, rgba(55, 47, 80) 100%); }
+.lotteryGroup { height: 3.0rem; overflow: scroll; position: relative; }
+.lotteryGroup ul { display: block; overflow-y: scroll; height: 3.0rem;    /*width: 657px; */ }
+.lotteryGroup ul li { cursor: pointer; font-size: 1.1rem; color: #b5aac8; display: inline-block; float: left; height: 2.857143rem; line-height: 2.857143rem; padding: 0px 0.928571rem; position: relative; }
+
+/*.lotteryGroup ul li:hover { color:#ff632c; font-weight:bold;}*/
+
+.lotteryGroup ul li a.took { border-bottom: 2px solid #ff632c; font-weight: bold; color: #ff632c; }
+
+.lotteryGroup .ren { padding-right: 1.071429rem; display: inline; float: right; height: 2.857143rem; line-height: 2.857143rem; display: none; }
+.lotteryGroup .ren a { background: url(/gfwf/images/nsc/lottery/ren.png) no-repeat left center; display: block; padding-left: 1.285714rem; font-size: 1.0rem; color: #2e2b2b; }
+
+/*.lotteryGroup .ren a:hover {color:#ff632c; font-weight:bold;}*/
+.lottery_btn_pk10 { position: absolute; top: 0; right: 0; background: url(/gfwf/images/nsc/lottery/btn_lottery_pkdh.png) no-repeat; width: 6.428571rem; height: 2.071429rem; cursor: pointer; text-indent: -9999px; display: none; }
+.lotteryMember { border-bottom: 1px solid #f3f3f3; padding: 0.357143rem 0; z-index: 200; }
+.lotteryMember dl { overflow: hidden; line-height: 1.428571rem; margin: 0.357143rem 0; text-align: center; }
+.lotteryMember dl .posChoose { position: relative; top: 2px; left: -2px }
+.lotteryMember dl dt { display: inline; float: left; line-height: 1.714286rem; font-size: 0.928571rem; color: #969696; margin-right: 0.714286rem; margin-left: 0.714286rem; }
+.lotteryMember dl dd {margin: 0px 0.714286rem 0.357143rem 0px;display: inline;float: left;line-height: 1.785714rem;min-width: 23%;font-size: 0.928571rem;color: #FFF;padding: 0 0.357143rem;background: #6e5086;border-radius: 0.214286rem;}
+.lotteryMember dl dd.hover { -moz-border-radius: 3px; -webkit-border-radius: 3px; background-color: #ff632c; border-radius: 3px; }
+.playf_dl { line-height: 1.571429rem; padding: 0.714286rem 0; border-bottom: 1px solid #f3f3f3; overflow: hidden; width: 96%; margin: 0 auto; }
+.playf_dl span {	/*display: inline; float: left;*/ }
+.playf_dl .m_playf_dl_box { float: left; width: 72%; }
+.playf_dl .m_playf_dl_box:last-child { float: right; width: 28%; }
+.playf_dl .m_playf_dl_box:nth-child(1) { display: flex; flex-flow: center; display: -webkit-box; }
+.playf_dl .m_playf_dl_box:nth-child(1) span { flex: 3; }
+.playf_dl .m_playf_dl_box:nth-child(1) span:last-child { flex: 7; }
+.playf_dl span.help_con { max-width: 30.0rem; }
+.lotteryMember .fandian { color: #ff632c; font-size: 0.857143rem; top: 0.857143rem; right: 0.714286rem; }
+.lotteryMember select { font-size: 0.857143rem; border: 1px solid #BFBABA; padding: 0.214286rem 0.142857rem; color: #666; -moz-border-radius: 3px; -webkit-border-radius: 3px; border-radius: 3px; }
+.wfsm { width: 1.571429rem; height: 1.571429rem; background: url(/images/nsc/lottery/bangzhu.png) no-repeat center; text-indent: -9999px; display: inline-block; background-size: 1.142857rem }
+.help_con { color: #c5afa7; font-size: 0.857143rem; }
+.help_exp,
+.help_help { float: right; color: #8d8d8d; font-size: 1.0rem; margin-right: 0.2rem; padding: 0px 0.571429rem; background-color: #eaeaea; border-radius: 0.357143rem }
+.help_help { float: right; }
+#lt_example_div,
+#lt_help_div { background: #fff; border: 1px solid #ddd; color: #777; display: none; font-size: 0.928571rem; line-height: 1.428571rem; margin: 0.714286rem 0 0; overflow: hidden; padding: 0.571429rem 0.714286rem; position: absolute; text-align: left; width: 21.428571rem }
+.m-t-lottery_numBox { margin: 0.357143rem 0; position: relative; overflow: hidden; }
+.louhao { background: url(/images/nsc/lottery/louhao.png) no-repeat left center; padding-left: 1.5rem; display: inline-block; line-height: 1.428571rem; height: 1.428571rem; float: right; }
+.louhao a { color: #504a5f; }
+
+/*.louhao a:hover { color: #ff632c; }*/
+.luzhi { float: left; margin-left: 1rem; background: url(/images/nsc/lottery/pk10_luzhi_icon.gif) no-repeat; font-size: 1.0rem; line-height: 1.428571rem; width: 4.5rem; height: 1.2rem; text-indent: -9999px; }
+.luzhi a { color: #ff632c; display: block; width: 3.785714rem; height: 1.071429rem; }
+
+/*.luzhi a:hover { color: #ff632c; }*/
+
+/*.yx_help { background: url(/images/nsc/lottery/help.png) no-repeat left center; padding-left: 20px; position: absolute; right: 12px; top:22px; line-height: 20px; width: 50px; height: 20px; }
+.yx_help a { color: #504a5f; }*/
+
+.lotteryView { overflow: hidden; background: #fff; padding: 0.357143rem .5rem; border-bottom: 1px solid #f3f3f3; }
+.lotteryView .each { overflow: hidden; border-bottom: 1px solid #d9d9d9; }
+.lotteryView .each:last-child { border-bottom: 0px; padding-top: 0.7rem }
+.lotteryView ul { display: inline; float: left; }
+.lottery_num_box ul.lhc { }
+.lotteryView_k3 ul { width: 100% }
+.lotteryView h3.noname { height: 1.071429rem; }
+.lotteryView ul li { cursor: pointer; }
+.lotteryView h3 { display: inline; float: left; overflow: hidden; padding-right: 0.5rem; height: 2.857143rem; line-height: 2.857143rem; text-align: left; color: #ff632c; font-size: 1.2rem; font-weight: bold; margin-left: 0.4rem; }
+.lotteryView .nList li { margin-right: 1.1rem; margin-bottom: 0.714286rem; display: inline-block; background: url(/images/nsc_m/lott/m_yuan_1.png) no-repeat center; background-size: 100%; width: 2.7rem; height: 2.8rem; line-height: 2.8rem; color: #7b7b7b; font-size: 1.4rem; text-align: center }
+
+/*@media only screen and (max-width: 310px){
+.lotteryView .nList li{margin-right: 1.2rem;}
+}*/
+.lotteryView .nList li:nth-child(7n) { margin-right: 0; }
+.lotteryView .nList li.hover { background: url(/images/nsc_m/lott/m_yuan2.png) no-repeat center; color: #fff; border: 0px; background-size: 100%; width: 2.7rem; height: 2.8rem; }
+.lotteryView .quwei { text-align: center; width: 100%; }
+.lotteryView .quwei li { background: #fff; height: 2.857143rem; line-height: 2.857143rem; width: auto; border: 2px solid #c0c0c0; -moz-border-radius: 4px; -webkit-border-radius: 4px; border-radius: 4px; padding: 0 0.714286rem; }
+
+/*趣味*/
+
+/*.lotteryView .quwei li:hover { border: 2px solid #ff632c; background:none;}*/
+.lotteryView .quwei li.hover { background: #ff632c; width: auto; color: #fff; border: 2px solid #ff632c; }
+.lotteryView .cList {	/*width: 180px;*/ float: right; padding-right: .7rem }
+.lotteryView .cList li { display: inline-block; width: 1.571429rem; height: 2.714286rem; line-height: 2.714286rem; color: #6f6f6f; font-size: 1.1rem; text-align: center; margin-right: 1.071429rem }
+.lotteryView .cList li:last-child { color: #BABABA; margin-right: 0px }
+.lotteryView .cList li.hover { color: #ff632c; font-weight: bold; }
+
+/*北京快乐8*/
+.lotteryView .each_k8 h3 { width: 2.5rem; height: 2.1rem; line-height: 2.1rem; color: #ff632c; font-size: 1rem; margin-left: 0.5rem; }
+.lotteryView .each_k8 h3.noname { display: none; }
+.lotteryView .each_k8 { overflow: hidden; }
+.lotteryView .each_k8 .nList {	/*width:660px;*/ }
+.lotteryView .each_k8 .nList li { margin-right: 0.3rem; width: 2.2rem; height: 2.2rem; font-size: 1.2rem; line-height: 2.2rem; }
+.lotteryView .each_k8 .nList li:nth-child(10n) { margin-right: 0px; }
+
+/*.lotteryView .each_k8 .nList li:hover { background: url(/images/nsc/lottery/yuan32.png) no-repeat 0 -64px; }*/
+.lotteryView .each_k8 .nList li.hover { }
+.lotteryView .sp li { background: #fff; border: 2px solid #c0c0c0; -moz-border-radius: 4px; -webkit-border-radius: 4px; border-radius: 4px; padding: 0 9px; width: auto; }
+
+/*趣味*/
+
+/*.lotteryView .sp li:hover { border: 2px solid #ff632c; background:none;}*/
+.lotteryView .sp li.hover { background: #ff632c; color: #fff; border: 2px solid #ff632c; width: auto; }
+.lotteryView .sp li .codedesc { }
+.lotteryView .sp2 li.hover { background: #ff632c; color: #fff; border: 2px solid #ff632c; width: 90px; line-height: 20px; height: auto; }
+.lotteryView .sp2 li { line-height: 20px; font-size: 14px; width: 90px; height: auto; }
+
+/*pk10*/
+.pk10_left { height: 14.785714rem; display: inline; float: left; background-image: url(/images/nsc_m/lott/lottery_jswf_box-bg.jpg); background-repeat: no-repeat; background-size: 100%; background-position: 0px 29px; }
+.lotteryView .pk10_left h3.noname { display: none; }
+.lotteryView .pk10_car { margin-top: 0.928571rem; height: 5.357143rem; }
+.lotteryView .pk10_car .nList li { margin: 0px; display: inline; float: left; width: 20%; height: 32px; line-height: 32px; text-indent: -9999px; background-size: 80%; }
+.lotteryView .pk10_car .nList li.car_01 { background-image: url("/images/nsc_m/lott/m_c_01.png") }
+.lotteryView .pk10_car .nList li.car_02 { background-image: url("/images/nsc_m/lott/m_c_02.png") }
+.lotteryView .pk10_car .nList li.car_03 { background-image: url("/images/nsc_m/lott/m_c_03.png") }
+.lotteryView .pk10_car .nList li.car_04 { background-image: url("/images/nsc_m/lott/m_c_04.png") }
+.lotteryView .pk10_car .nList li.car_05 { background-image: url("/images/nsc_m/lott/m_c_05.png") }
+.lotteryView .pk10_car .nList li.car_06 { background-image: url("/images/nsc_m/lott/m_c_06.png") }
+.lotteryView .pk10_car .nList li.car_07 { background-image: url("/images/nsc_m/lott/m_c_07.png") }
+.lotteryView .pk10_car .nList li.car_08 { background-image: url("/images/nsc_m/lott/m_c_08.png") }
+.lotteryView .pk10_car .nList li.car_09 { background-image: url("/images/nsc_m/lott/m_c_09.png") }
+.lotteryView .pk10_car .nList li.car_10 { background-image: url("/images/nsc_m/lott/m_c_10.png") }
+
+/*.lotteryView .pk10_car .nList li:hover { background-position-y: -32px; }*/
+.lotteryView .pk10_car .nList li.disable { opacity: .5 }
+.lotteryView .pk10_ball ,.lotteryView .jssm_ball{ position: relative; height: 2.5rem; overflow: inherit; }
+/*急速赛马*/
+.lotteryView .jssm_ball .nList li.num_01{background: #8B8B8B; }
+.lotteryView .jssm_ball .nList li.num_02{background: #B7B725; }
+.lotteryView .jssm_ball .nList li.num_03{background: #EF710B; }
+.lotteryView .jssm_ball .nList li.num_04{background: #4BA40F; }
+.lotteryView .jssm_ball .nList li.num_05{background: #7030A0; }
+.lotteryView .jssm_ball .nList li.num_06{background: #2B83D3; }
+.lotteryView .jssm_ball .nList li.num_07{background: #C33030; }
+.lotteryView .jssm_ball .nList li.num_08{background: #484848; }
+.lotteryView .jssm_ball .nList li.num_09{background: #833C0C; }
+.lotteryView .jssm_ball .nList li.num_10{background: #B642B6; }
+/*急速赛马------*/
+.lotteryView .pk10_fast { margin-top: 0.2rem; margin-left: 4.0rem; }
+.lotteryView .pk10_slow { margin-top: 2.071429rem; margin-left: 4.0rem; }
+.lotteryView .pk10_ball .nList ,.lotteryView .jssm_ball .nList { overflow: visible; position: absolute; }
+.lotteryView .pk10_ball .nList li , .lotteryView .jssm_ball .nList li { margin: 0px 0.8rem; width: 2.5rem; height: 2.5rem; line-height: 2.5rem; float: left; font-weight: bold; font-size: 16px; display: none; cursor: default; border-radius: 50%; color: #fff; }
+.lotteryView .pk10_ball .nList li.num_01 {background: #FFDA39; }
+.lotteryView .pk10_ball .nList li.num_02 {background: #4C90C5; }
+.lotteryView .pk10_ball .nList li.num_03 {background: #666666; }
+.lotteryView .pk10_ball .nList li.num_04 {background: #CB4800; }
+.lotteryView .pk10_ball .nList li.num_05 {background: #1BAEC5; }
+.lotteryView .pk10_ball .nList li.num_06 {background: #1C3EA6; }
+.lotteryView .pk10_ball .nList li.num_07 {background: #DDDDDD; }
+.lotteryView .pk10_ball .nList li.num_08 {background: #E60C5E; }
+.lotteryView .pk10_ball .nList li.num_09 {background: #8F2929; }
+.lotteryView .pk10_ball .nList li.num_10 {background: #09C508; }
+.lotteryView .pk10_clean .nList li { font-size: 1.0rem; float: left;	/*background-color: red;*/ color: #ccc; background: none; width: 2.5rem; height: 2.5rem; border: 0; margin: 0px 0.8rem; }
+.pk10_right { width: 65px; float: left; }
+.pk10_right .cAll { text-indent: -9999px; margin-left: 5px; width: 2.85rem; height: 2.0rem; display: inline-block; background-image: url(/images/nsc_m/lott/lottery_jswf_btn-clear.png); background-repeat: no-repeat; background-size: 100%; }
+
+/*.pk10_right .cAll:hover { background-position: 0px -51px; }*/
+
+/*快3*/
+.lotteryView_k3 { padding: 0.357143rem .5rem; }
+.lotteryView_k3 .h65 { overflow: hidden; }
+.lotteryView_k3 .h100 { overflow: hidden; }
+.lotteryView_k3 .each { overflow: hidden; }
+.lotteryView_k3 .h150 { overflow: hidden; margin: 0 auto; }
+.lotteryView_k3 h3,
+.lotteryView_k3 ul { overflow: hidden; }
+.lotteryView_k3 h3 { height: 50px; line-height: 55px; text-align: center; color: #FF632C; font-size: 16px; }
+.lotteryView_k3 ul { padding: 5px 0px; }
+.lotteryView_k3 ul li { cursor: pointer; float: left; display: inline; margin: 0px; }
+.lotteryView_k3 ul li.single { padding: 0 26px; }
+.lotteryView_k3 ul li em { display: none; }
+.lotteryView_k3 ul li span { display: inline-block; width: 40px; height: 40px; text-indent: -9999px; }
+.lotteryView_k3 ul li span.mar { display: block; margin: 0 auto; }
+.lotteryView_k3 ul li span { background-image: url(/images/nsc/lottery/yuan_k3.png); background-repeat: no-repeat; background-size: 287px; }
+.lotteryView_k3 ul li span.s1 { background-position: 0px -1px; }
+.lotteryView_k3 ul li span.s2 { background-position: -41px top; }
+.lotteryView_k3 ul li span.s3 { background-position: -84px top }
+.lotteryView_k3 ul li span.s4 { background-position: -123px top; }
+.lotteryView_k3 ul li span.s5 { background-position: -164px top; }
+.lotteryView_k3 ul li span.s6 { background-position: -205px top; }
+.lotteryView_k3 ul li span.s7 { background-position: -248px top; }
+.lotteryView_k3 ul li.hover span.s1 { background-position: 0px -40px; }
+.lotteryView_k3 ul li.hover span.s2 { background-position: -41px -40px; }
+.lotteryView_k3 ul li.hover span.s3 { background-position: -83px  -40px; }
+.lotteryView_k3 ul li.hover span.s4 { background-position: -123px -40px; }
+.lotteryView_k3 ul li.hover span.s5 { background-position: -164px -40px; }
+.lotteryView_k3 ul li.hover span.s6 { background-position: -205px -40px; }
+.lotteryView_k3 ul li.hover span.s7 { background-position: -247px -40px; }
+.lotteryView_k3 ul li.double,
+.lotteryView_k3 ul li.triple,
+.lotteryView_k3 ul li div.triple { width: 33%; text-align: center; }
+.lotteryView_k3 .triple { margin: 5px 0px; }
+.lotteryView_k3 ul li div.triple { display: inline; }
+.lotteryView_k3 ul li div.triple p { text-align: center; font-size: 18px; color: #4f4f4f; padding-top: 5px; }
+.lotteryView_k3 ul li.w800 { width: 33%; text-align: center; }
+.lotteryView_k3 ul li.w800 em { display: none; }
+.lotteryView_k3 ul li.double p { text-align: center; font-size: 18px; color: #4f4f4f; padding-top: 5px; }
+.lotteryView_k3 ul li.triple p { text-align: center; font-size: 18px; color: #4f4f4f; padding-top: 5px; }
+.lotteryView_k3 .each ul li { margin-right: 1.3rem; margin-bottom: 0.714286rem; display: inline-block; background-color: #efefef; border-radius: 50%; border: 2px solid #e0e0e0; width: 2.5rem; height: 2.5rem; line-height: 2.285714rem; color: #7b7b7b; font-size: 1.285714rem; text-align: center; }
+.lotteryView_k3 .each ul li:nth-child(7n) { margin-right: 0px; }
+.lotteryView_k3 .each ul li.hover { background: url(/images/nsc_m/lott/m-yuan.png) no-repeat bottom; color: #fff; border: 0px; background-size: 100%; width: 2.5rem; line-height: 2.5rem; }
+.lotteryView_k3 .each ul li.clean { display: inline-block; background: none; color: #A2A1A1; font-size: 15px; text-align: center; }
+
+/*.lotteryView_k3 .each ul li.clean:hover { color:#ff632c;}*/
+
+/*六合彩*/
+.lotteryView_lhc { padding: 0px; }
+.lotteryView_lhc .lhcBox { width: 100%; overflow: hidden; border-top: 1px solid #e0e0e0; }
+.lotteryView_lhc .lhcBox dl { width: 33.3%; display: inline; float: left; border-right: 1px solid #e0e0e0; }
+.lotteryView_lhc .lhcBox dl.nobd { border: 0px; }
+.lotteryView_lhc .lhcBox dl dt { height: 38px; line-height: 38px; text-align: center; color: #989797; font-size: 14px; background: #f6f6f6; border-bottom: 1px solid #e0e0e0; overflow: hidden; }
+.lotteryView_lhc .lhcBox dl dt span { width: 33%; display: inline; float: left; }
+.lotteryView_lhc .lhcBox .m_vico_lhcListNb li { width: 33.33%; height: 38px; overflow: hidden; padding: 5px 0px; float: left; border-bottom: 1px solid #ECECEC; border-right: 1px solid #ECECEC; }
+.lotteryView_lhc .lhcBox .m_vico_lhcListNb li:nth-child(3n) { border-right: 0; }
+.lotteryView_lhc .lhcBox .m_vico_lhcListNb li span { color: #694d85; font-size: 1.0rem; display: inline; background-size: 100%; float: left; background-repeat: no-repeat; }
+.lotteryView_lhc .lhcBox .m_vico_lhcListNb li span.red { margin-left: 5px; background-image: url(/images/nsc_m/lott/m_vico_lhc1.png); width: 2rem; height: 2.0rem; line-height: 2.0rem; color: #fff; text-align: center; font-size: 14px; }
+.lotteryView_lhc .lhcBox .m_vico_lhcListNb li span.green { margin-left: 5px; background-image: url(/images/nsc_m/lott/m_vico_lhc2.png); width: 2.0rem; height: 2.0rem; line-height: 2.0rem; color: #fff; text-align: center; font-size: 14px; }
+.lotteryView_lhc .lhcBox .m_vico_lhcListNb li span.blue { margin-left: 5px; background-image: url(/images/nsc_m/lott/m_vico_lhc3.png); width: 2.0rem; height: 2.0rem; line-height: 2.0rem; color: #fff; text-align: center; font-size: 14px; }
+.lotteryView_lhc .lhcBox .m_vico_lhcListNb li span { width: 33.33%; text-align: center; }
+.lotteryView_lhc .lhcBox .m_vico_lhcListNb li span.num { text-align: center; height: 2.0rem; line-height: 2.0rem; }
+.lotteryView_lhc .lhcBox .m_vico_lhcListNb li span.input { }
+.lotteryView_lhc .lhcBox .m_vico_lhcListNb li span input { width: 2.15rem; height: 1.5rem; border: 1px solid #694d85; padding: 2px; text-align: center; margin-top: 2px; }
+.m_lhc_box { float: right; }
+.m_lhc_box p:nth-child(2) { float: left; }
+
+/*六合彩开奖结果*/
+.lotteryView_lhc #Contentbox_1 .lhcBox ul { height: 48px; line-height: 48px; border-bottom: 1px solid #e0e0e0; width: 100%; }
+.lotteryView_lhc #Contentbox_1 .lhcBox ul.nobd { border: 0px; }
+.lotteryView_lhc #Contentbox_1 .lhcBox ul li { text-align: center; font-size: 12px; color: #989797; display: inline; float: left; height: 48px; overflow: hidden; cursor: default; }
+.lotteryView_lhc #Contentbox_1 .lhcBox .title { height: 29px; line-height: 29px; background: #f6f6f6; font-size: 14px; color: #989797; overflow: hidden; width: 100%; margin: 0px; }
+.lotteryView_lhc #Contentbox_1 .lhcBox .title li { height: 29px; line-height: 29px; overflow: hidden; font-size: 14px; }
+.lotteryView_lhc #Contentbox_1 .lhcBox ul li.s-1 { width: 15%; }
+.lotteryView_lhc #Contentbox_1 .lhcBox ul li.s-2 { width: 20%; }
+.lotteryView_lhc #Contentbox_1 .lhcBox ul li.s-3 { width: 64%; }
+.lotteryView_lhc #Contentbox_1 .lhcBox ul li.s-3 span { background-repeat: no-repeat; height: 1.64rem; width: 1.64rem; line-height: 1.64rem; background-size: 100%; display: inline-block; font-size: 0.928571rem; color: #fff; }
+.lotteryView_lhc #Contentbox_1 .lhcBox ul li.s-3 .red { background-image: url(/images/nsc_m/lott/m_vico_lhc1.png); }
+.lotteryView_lhc #Contentbox_1 .lhcBox ul li.s-3 .green { background-image: url(/images/nsc_m/lott/m_vico_lhc2.png); }
+.lotteryView_lhc #Contentbox_1 .lhcBox ul li.s-3 .blue { background-image: url(/images/nsc_m/lott/m_vico_lhc3.png); }
+.lotteryView_lhc #Contentbox_1 .lhcBox ul li.s-3 .and { background-image: url(/images/nsc/lottery/lhc.png); background-repeat: no-repeat; vertical-align: middle; width: 1.142857rem; height: 1.214286rem; background-size: 100% }
+.lotteryView_lhc #Contentbox_1 .lhcBox ul li.s-4 { width: 120px; }
+.lotteryView_lhc #Contentbox_1 .lhcBox ul li.s-5 { width: 40px; }
+.lotteryView_lhc #Contentbox_1 .lhcBox ul li.s-6 { width: 40px; }
+.lotteryView_lhc #Contentbox_1 .lhcBox ul li.s-7 { width: 40px; }
+.lotteryView_lhc #Contentbox_1 .lhcBox ul li.s-8 { width: 40px; }
+.lotteryView_lhc #Contentbox_1 .lhcBox ul li.s-9 { width: 40px; }
+.lotteryView_lhc #Contentbox_1 .lhcBox ul li.s-10 { width: 40px; }
+.lotteryView_lhc #Contentbox_1 .lhcBox ul li.s-11 { width: 40px; }
+.lotteryView_lhc #Contentbox_1 .lhcBox ul li.s-12 { width: 40px; }
+.lotteryView_lhc #Contentbox_1 .lhcBox ul li.s-6 span,
+.lotteryView_lhc .lhcBox ul li.s-7 span,
+.lotteryView_lhc .lhcBox ul li.s-8 span,
+.lotteryView_lhc .lhcBox ul li.s-9 span,
+.lotteryView_lhc .lhcBox ul li.s-11 span,
+.lotteryView_lhc .lhcBox ul li.s-12 span { background: url(/images/nsc/lottery/lhc_yuan.png) no-repeat; width: 26px; height: 26px; line-height: 26px; display: block; margin-top: 15px; color: #fff; margin-left: 7px; }
+.lotteryView_lhc .lhcPageBox { height: 65px; background: #fff; padding: 5px; color: #989797; }
+.lotteryView_lhc .lhcPageBox .refresh { width: 62px; height: 27px; display: inline-block; line-height: 28px; background-image: url(/images/nsc/lottery/refresh.png); background-repeat: no-repeat; background-size: 100%; padding-left: 30px; font-size: 14px; color: #989797; }
+.lotteryView_lhc .lhcPageBox .pageBox { margin: 0px auto; text-align: center; vertical-align: middle; height: 40px; line-height: 40px; }
+.lotteryView_lhc .lhcPageBox .pageBox .lhcBtnBox { display: inline; }
+
+/*.lotteryView_lhc .lhcPageBox .pageBox .lhcBtnBox a,.lotteryView_lhc .lhcPageBox .pageBox .lhcBtnBox a:hover { display:inline-block; width:27px; height:27px; vertical-align: -6px; margin-left:3px;}*/
+.lotteryView_lhc .lhcPageBox .pageBox .lhcBtnBox a.first { background: url(/images/nsc/lottery/first.jpg) no-repeat; }
+.lotteryView_lhc .lhcPageBox .pageBox .lhcBtnBox a.prev { background: url(/images/nsc/lottery/prev.jpg) no-repeat; }
+.lotteryView_lhc .lhcPageBox .pageBox .lhcBtnBox a.next { background: url(/images/nsc/lottery/next.jpg) no-repeat; }
+.lotteryView_lhc .lhcPageBox .pageBox .lhcBtnBox a.last { background: url(/images/nsc/lottery/last.jpg) no-repeat; }
+.lotteryView_lhc .lhcPageBox .lhcSelBox { float: right; }
+.lotteryView_lhc .lhcPageBox .lhcSelBox select { height: 25px; border: 1px solid #c5c9da; font-size: 14px; color: #989797; cursor: pointer; margin-top: 5px; padding: 0px; }
+
+/*机选按钮*/
+.jixuan { padding-left: 10px; width: 100px; display: none; }
+.jixuan .jx_button_90x26 { width: 90px; height: 26px; margin-bottom: 5px; border: 1px solid #D8D8D8; background: #fff; -moz-border-radius: 3px; -webkit-border-radius: 3px; border-radius: 3px; }
+
+/*单式*/
+.grayContent { overflow: hidden; margin: 0 auto; }
+.textareaLong { height: 5.714286rem; width: 100%; font-family: 'microsoft yahei'; padding: 0.357143rem; border: 1px solid #d8d8d8; resize: vertical; }
+.m-mixing input:last-child { margin-right: 0px; }
+.grayContent .formWord { width: 6.428571rem; height: 1.857143rem; margin: 0.428571rem 3.1rem 0.428571rem 0px; border: 1px solid #D8D8D8; background: #fff; -moz-border-radius: 3px; -webkit-border-radius: 3px; border-radius: 3px; cursor: pointer }
+.grayContent .formWord:last-child { margin-right: 0; float: right; }
+.inputdesc { text-align: center; color: #666; }
+.addOrderBox { padding: 1.071429rem 0.714286rem; overflow: hidden; font-family: 'Microsoft Yahei'; }
+.m_funding_box { overflow: hidden; }
+.addOrderBox .funding { margin-top: 2px; display: inline; float: left; }
+.addOrderBox .funding span { font-size: 0.857143rem; color: #737373; display: inline-block; width: 1.785714rem; height: 1.785714rem; line-height: 1.785714rem; border-radius: 5px; text-align: center; background-color: #E2E1E1; margin-right: 0.428571rem; cursor: pointer; }
+.addOrderBox .funding span.hover { color: #fff; background-color: #FF632C; }
+.addOrderBox .multipleBox { width: 7.857143rem; margin-left: -2.642857remrem; display: inline; /* float: left; */     width: 46.857143rem;
+	margin-left: -2.642857remrem;
+	display: inline;
+	/* float: left; */
+	/* background: red; */
+	left: -40%;
+	position: absolute;}
+.multipleCon { width: 6.214286rem; height: 2.1rem; display: inline; }
+.multipleCon input { width: 5.0rem; height: 2.1rem; line-height: 2.1rem; color: #000; font-weight: bold; text-align: center; font-size: 1.0rem; border-radius: 5px; border: 1px solid #ccc; }
+.multipleCon .reduce { width: 2.428571rem; height: 1.0rem; line-height: 1.0rem; position: absolute; right: 0px; bottom: 0px; background: url(/images/nsc/lottery/bei.png) no-repeat; }
+.multipleCon .add { width: 34px; height: 1.071429rem; line-height: 1.071429rem; position: absolute; right: 0px; top: 0px; background: url(/images/nsc/lottery/bei.png) no-repeat; }
+.multipleCon .reduce,
+.multipleCon .add { color: #989898; font-size: 1.142857rem; text-align: center; cursor: pointer; }
+.multipleBox .bei { font-size: 1.0rem; color: #ff632c; }
+.addOrderBox .fandian { width: 13.214286rem; overflow: hidden; margin-left: 1.428571rem; }
+.addOrderBox .fandian select { display: none; }
+.fandianlist li { font-size: 0.857143rem; color: #504a5f; font-weight: bold; }
+.fandianlist li.hover { color: #ff632c; }
+.switchBtn { background: url(/images/nsc/lottery/wfd_bg.png) no-repeat; width: 4.214286rem; height: 2.071429rem; margin-left: 0.714286rem; }
+.switchBtn span { background: url(/images/nsc/lottery/wfd_yuan.png) no-repeat; left: 0px; top: 1px; width: 1.785714rem; height: 1.785714rem; cursor: pointer; }
+.chooseMsg { color: #b5aac8; font-size: 1.0rem; text-align: center; margin-bottom: 0.714286rem; }
+.chooseMsg p { display: inline-block; margin-left: 0.357143rem; }
+.chooseMsg p span { color: #ff632c; }
+#lt_sel_money { color: #ff0000; font-weight: bold; }
+.addOrderBox .addBtn {
+	float: right;
+	background: url(/gfwf/images/nsc/lottery/sure_touzhu.png) no-repeat;
+	border-radius: 5px;
+	border: none;
+	cursor: pointer;
+	text-align: center
+	font-size: 1.142857rem;
+	color: #fff;
+	font-family: 'Microsoft Yahei';
+	width: 94px;
+	height: 42px;
+	background-size: 100% 100%;
+	top: 5px;
+	position: absolute;
+	rigt: 5px;
+	z-index: 502;
+	right: 5px;
+	text-align: center;
+	padding-bottom: 5px;
+	font-size: 1.1rem;
+}
+.addOrderBox .addBtnDisabled { background: #C7C7C7; cursor: default; color: #fff; font-family: 'Microsoft Yahei'; }
+
+/*正常高度与625高度*/
+.addOrderLeft { }
+
+/*.addOrderLeft625 { width: 380px; float: left; display: inline; }*/
+
+/*.addOrderLeft625 .funding { width: 43px; margin-top: 5px; }*/
+
+/*.addOrderLeft625 .funding a { position: absolute; }*/
+
+/*.addOrderLeft625 .funding a:hover span { display: block; }*/
+
+/*.addOrderLeft625 .funding a:hover span.hover {  background:#eb5f2e url(/images/nsc/lottery/yjf_625.png?123) no-repeat left bottom; text-indent: 0px; color: #fff; }*/
+
+/*.addOrderLeft625 .funding span { background:#fff url(/images/nsc/lottery/yjf_625.png?123) no-repeat left bottom; width: 43px; height: 28px; display: none; }*/
+
+/*.addOrderLeft625 .funding span.hover { background:#fff url(/images/nsc/lottery/yjf_625.png?123) no-repeat; width: 43px; height: 28px; color: #737373; text-indent:-16px; display: block; }*/
+
+/*.addOrderLeft625 .multipleBox { margin-left: 5px; margin-top: 3px; }*/
+
+/*.addOrderLeft625 .chooseMsg { width: 115px; margin: 0px; margin-right: 5px; }*/
+
+/*.addOrderLeft625 .chooseMsg p { margin: 0px; display: block; }*/
+
+/*.addOrderLeft625 .addBtn { margin-right: 0px; margin-top:5px;}*/
+
+/*.addOrderRight625 { width: 360px; float: right; display: inline; position: relative; }*/
+
+/*.addOrderRight625 .sendChoose { float: left; display: inline; margin: 0px; margin-left: 3px; margin-top:5px; }*/
+
+/*.addOrderRight625 .sendChoose a {  background: url(/images/nsc/lottery/tjtz.png) no-repeat; width: 98px; line-height: 32px; height: 32px; border: none; cursor: pointer; text-align: center; font-size: 16px; color: #fff; font-weight: bold; }*/
+
+/*.addOrderRight625 .sendChoose a:hover { background: url(/images/nsc/lottery/tjtz.png) no-repeat; width: 98px; line-height: 32px; height: 32px; font-size: 16px; }*/
+
+/*.addOrderRight625 .sendChoose a.sendBtnDisabled,.addOrderRight625 .sendChoose a.sendBtnDisabled:hover { background: url(/images/nsc/lottery/tjtz_disabled.png) no-repeat; cursor: default; }*/
+
+/*.addOrderRight625 .chooseAllMsg { float: right; width: 190px; display: inline; margin: 0px; margin-right: 65px; }*/
+
+/*.addOrderRight625 .chooseAllMsg span { font-size: 14px; }*/
+
+/*.addOrderRight625 .fqzhBox { position: absolute; top:0px; right: 0px; margin: 0px; }*/
+
+/*.addOrderRight625 .qxzhBox { position: absolute; top:20px; right: 0px; margin: 0px; overflow: hidden; }*/
+
+/*.addOrderRight625 .checkZhui .fq { background: none; overflow: hidden; height: 32px; line-height: 28px; margin: 0px; margin-top: -6px; font-weight: normal; display: inline-block; }*/
+
+/*.addOrderRight625 .checkZhui .fq:hover { color:#898989;}*/
+
+/*右侧布局*/
+#m_vi_recLott { position: absolute; width: 100%; text-align: center; z-index: 3; }
+.lotteryRight { width: 210px; }
+.lotteryRight .noMarB { margin-bottom: 0px; }
+.recentBox { background: #F3F3F3; padding: 0.7rem 0px; margin-bottom: 0.7rem; -moz-box-shadow: 0px 2px 5px #ddd; -webkit-box-shadow: 0px 2px 5px #ddd; box-shadow: 0px 2px 5px #ddd; position: relative; }
+.recentBox h3 { color: #9d9d9d; font-size: 1.0rem; width: 94%;    /* height: 19px; */ position: relative; margin: 0px auto; z-index: 2; }
+.recentBox h3:before { content: ''; height: 1px; width: 100%; background: #E0E0E0; position: absolute; z-index: 1; left: 0; top: 50%; }
+#m_more_lott_list { color: #8C5A8E; font-size: 1.0rem; display: inline-block; border-radius: 3px; border: 1px solid #8F638E; padding: 3px 1.4rem; margin: 0.57rem 0.43rem; }
+.recentBox h3 span { font-weight: bold; background-color: #F3F3F3; position: relative; z-index: 2; padding: 0 0.7rem; }
+.recentBox ul li { line-height: 29px; font-size: 1.0rem; color: #828282; overflow: hidden; padding-right: 0.6rem; }
+.recentBox ul li .issue { display: inline; float: left; padding: 0 0 0 15px; }
+.recentBox ul li .num { display: inline; float: right; text-align: center; max-width: 80%; font-size: 1.0rem; letter-spacing: 1px; color: #828282; }
+.recentBox ul li .num_k8 {	/*line-height: 1.57rem;*/ }
+.m_li_K8 ul li { padding-bottom: 0.5rem; line-height: 1.57rem; }
+.recentBox ul li .issue_k8 { font-size: 1rem;line-height:1.785714rem;    /* padding: 0 0 0 15px; */ float: left;   text-align: center; width: 23%; }
+.recentBox ul li .num_k8 { float: right; max-width: 15.0rem; padding: 0 0%;margin-right: 0.5rem; text-align: right; position: relative; font-size: 1rem; }
+@media only screen and (max-width:600px){
+	.recentBox ul li .num_k8 {/* max-width:15rem; */}
+}
+@media only screen and (max-width: 550px){
+	.recentBox ul li .num_k8 {/* max-width: 14rem; */}
+}
+@media only screen and (max-width: 520px){
+	.recentBox ul li .num_k8 {/* max-width: 13rem; */}
+}
+@media only screen and (max-width: 500px){
+	.recentBox ul li .num_k8 {/* max-width: 13rem; *//* word-wrap: break-word; */}
+}
+@media only screen and (max-width: 360px){
+	.recentBox ul li .num_k8 {max-width: 15rem;}
+}
+@media only screen and (max-width: 320px){
+	.recentBox ul li .num_k8 {max-width: 13rem;}
+}
+
+
+.recentBox ul.pk10_kjul li .num_k8{max-width: none;margin-right: 0px;width: 67%;}
+.recentBox ul.pk10_kjul{float: none; margin-right: 0;}       
+.recentBox ul.pk10_kjul li { }
+.recentBox ul.pk10_kjul li .issue_k8{font-size: 1rem;
+     line-height: 2.5rem; 
+    float: left;
+    text-align: center;
+    width: 30%;}
+
+
+.recentBox ul li.hover .issue,
+.recentBox ul li.hover .num,
+.recentBox ul li.hover .num_k8,
+.recentBox ul li.hover .issue_11,
+.recentBox ul li.hover .num_11,
+.recentBox ul li.hover .issue_k8 { color: #eb4308; }
+.recentBox ul li .num_k8 .more { margin-top: 0px; padding-right: 0px; cursor: pointer; }
+.recentBox ul li.issue_li { height: 2rem; line-height: 2rem; font-size: 1.0rem; color: #828282; margin: 0px 15px; overflow: hidden; }
+.recentBox ul li .issue_11 { font-size: 12px; padding: 0 0 0 15px; float: left; }
+.recentBox ul li .num_11 { float: right; padding: 0 15px 0 0; }
+.recentBox ul li.lhc { padding-left: 20px; font-size: 1.0rem; }
+.recentBox ul li.lhc span { color: #4c4b4b; font-size: 1.0rem }
+.recentBox ul li.lhc a { color: #828282; text-decoration: underline; }
+
+/*.recentBox ul li.lhc a:hover { color: #828282; text-decoration: underline; }*/
+.recentBox .next,
+.recentBox .noEvent { margin-top: 10px; cursor: pointer; margin: 0px auto; text-align: center; height: 17px; }
+.recentBox .noEvent { cursor: default; }
+
+/*.recentBox .next a,.recentBox .next a:hover { width: 17px; height: 17px; background: url(/images/nsc/lottery/next.png) no-repeat center center; display: inline-block; }*/
+.recentBox .more { margin-top: 10px; text-align: right; padding-right: 20px; }
+.recentBox .more a { font-size: 14px; color: #908f8d; }
+.recentCon {	/*height: 174px; */overflow: hidden; z-index: 1; }
+.recentCon ul { width: 100%; }
+.recentBox .seeMore { background: #fff; border: 1px solid #eb4308; padding: 8px; width: 255px; top: 10px; right: 0px; z-index: 251; display: none; }
+.recentBox .seeMore span { display: inline-block; background: #eb4308; width: 21px; height: 21px; line-height: 21px; margin-left: 4px; text-align: center; color: #fff; margin-bottom: 2px; -moz-border-radius: 10px; -webkit-border-radius: 10px; border-radius: 10px; }
+.recentConGG ul { overflow: hidden; }
+.recentConGG ul li { padding-left: 10px; width: 195px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; height: 28px; line-height: 28px; }
+.recentConGG ul li a { color: #828282; font-size: 12px; width: 191px; }
+
+/*.recentConGG ul li a:hover { color: #ff632c; }*/
+.pk10_kjul li { }
+.pk10_kjul li .num_k8 { }
+
+/*选购列表*/
+.lotteryBottom .addList { }
+.lotteryBottom { margin-top: 15px;}
+.lotteryList,
+.cleanall { padding: 0.428571rem 0.357143rem; min-height: 5.142857rem; max-height: 13.714286rem; overflow: auto; background: #efefef; border-radius: 5px; width: 96%; margin: 0 auto; margin-bottom: 0.642857rem; text-align: center; font-size: 1.071429rem; line-height: 5.142857rem; color: #949494; }
+.lotteryList table tr th { height: 2.285714rem; background: #a96b94; color: #fff; font-size: 1.0rem; text-align: center; font-weight: normal; }
+
+/*.lotteryList table tr th .deleteAll,.lotteryList table tr th .deleteAll:hover {color: #fff; font-size: 1.0rem; background: url(/images/nsc/lottery/delete_all.png) no-repeat right center; display: inline-block; padding-right: 1.071429rem; }*/
+.lotteryList table tr td.orange { color: #ff632c; }
+.lotteryList table tr td,
+.lotteryList table tr.lottery th { background: #efefef; height: 2.142857rem; font-size: 0.857143rem; color: #a4a4a4; line-height: 2.142857rem; }
+.lotteryList .m_lotter_list_nub { display: inline-block; width: 14.5rem; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; color: #6f5d8f; padding-right: 0.357143rem; font-weight: normal; float: left; }
+.lotteryList .m_lotter_details { float: left; width: 15%; text-align: center; color: #6f5d8f; }
+.lotteryList .lottery { margin-bottom: 0.642857rem; }
+.lotteryList table tr.lottery th { border: none; border-top: 1px dashed #e2e1df; text-align: left; text-indent: 1.428571rem; }
+.lotteryList table tr td a.del { display: inline-block; width: 1.0rem; height: 1.0rem; background: url(/images/nsc/lottery/delete_one.png) no-repeat right center; background-size: 88%; }
+.lotteryList table tr.cleanall {	/*display: none*/ }
+.lotteryList table tr.lottery th .more { position: absolute; width: 31.428571rem; margin: 0.357143rem 0px 0.714286rem 0px; z-index: 999; }
+.lotteryList table tr.lottery th .close { position: absolute; top: 0; right: -41px; text-indent: -9999px; background: #ddd url(/images/nsc/lottery/close_icon.png) no-repeat 0.285714rem 0.285714rem; width: 1.428571rem; height: 1.428571rem; display: block; }
+.lotteryList table tr.lottery th .code { font-family: Microsoft Yahei; width: 30.0rem; padding: 0.357143rem 0.714286rem; font-size: 1.0rem; color: #aaa; border: 1px solid #ddd; resize: vertical; }
+.lotteryList table tr.lotteryBg th,
+.lotteryList table tr.lotteryBg td { }
+
+/*六合彩*/
+.m_vico_lhc .cleanall {	/*line-height: 2.142857rem;*/ }
+.m_vico_lhc .addList {	/*	max-height: 200px;
+				    overflow-x: scroll;*/ }
+	.m_vico_lhc .lotteryList {	/*padding: 0;*/ }
+
+	/*.m_vico_lhc .cleanall{
+	padding: 2px 7px;
+	font-size: 12px;
+	}*/
+
+	/*立即投注区域*/
+	.orderNow { overflow: hidden; padding: 0.5rem 0.5rem 0; background: #fff; }
+	.m_total_amout { padding: 1.285714rem 0; font-size: 1.285714rem; text-align: center; }
+	.chooseAllMsg { font-size: 1.0rem; color: #b5aac8; }
+	.chooseAllMsg .num { font-weight: bold; font-size: 1.285714rem; color: #ff632c; }
+	.chooseAllMsg .orange { color: #ff632c; }
+	.chooseAllMsg p { display: inline-block; margin-right: 1.071429rem; }
+	.sendChoose { width: 100%; }
+	.sendChoose a { background: #FF632C; margin: 0 auto; border-radius: 5px; display: block; width: 100%; height: 3.285714rem; line-height: 3.285714rem; text-align: center; color: #fff; font-size: 1.285714rem; }
+	.sendChoose a.sendBtnDisabled { background: #C7C7C7; }
+	.checkZhui { color: #ff632c; font-size: 0.928571rem; }
+	.fqzhBox,
+	.qxzhBox { margin: 0.357143rem 0px 0 1.071429rem; float: right; display: inline; }
+	.qxzhBox { cursor: pointer; color: #CAA396; }
+
+	/*.qxzhBox:hover { color:#999;}*/
+	.checkZhui span { display: inline-block; width: 13px; height: 13px; margin-right: 0.142857rem; cursor: pointer; background: url(/images/nsc/lottery/checkbox.png) no-repeat; vertical-align: -0.2rem; }
+	.checkZhui span.uncheck { background: url(/images/nsc/lottery/checkbox.png) left -13px no-repeat; background-size: 100% }
+	.checkZhui input,
+	.close_zhbox,
+	.zhBox { display: none; }
+	.checkZhui b { font-weight: normal; cursor: pointer; }
+
+	/*.checkZhui b:hover { color:#898989;}*/
+
+	/*查看更多*/
+	.m_see_more { display: block; padding: 0.5rem 0.714286rem 0.5rem 0.714286rem; border: 1px solid #b5aac8; color: #b5aac8; border-radius: 5px; margin: 1.5rem auto; width: 9.9rem; background-image: url(/images/nsc_m/lott/iconfont-2jilu.png); background-position: 1.214286rem center; background-repeat: no-repeat; padding-left: 2.928571rem; background-size: 1.214286rem; }
+
+	/*底部标注*/
+	.m_footer_annotation { text-align: center; font-size: 0.857143rem; color: #c2c2c2; background: #f3f3f3; padding: 0.857143rem 0;	/*height: 7.142857rem;*/	/*margin-bottom: 2.857143rem;*/
+	position: relative; }
+	.padding_fot_b20 { height: 2.5rem; }
+
+	/*追号容器*/
+	.zhBox { -moz-user-select: -moz-none; background-color: #fff; position: fixed; top: 0.714286rem; left: 0px; width: 100%; -webkit-user-select: none; display: none; z-index: 998; }
+	.zhBox .checkZhui { float: left; margin: 0.3rem 0 0 0; color: #a96b94; font-size: 0.857143rem; text-align: center; }
+	.zhBox .checkZhui span { display: inline-block; width: 1.2rem; height: 1.2rem; margin-top: 0; margin-right: 0.357143rem; cursor: pointer; }
+	.zhBox .checkZhui span.check { background: url(/images/nsc/lottery/checked.png) no-repeat; background-size: 100%; vertical-align: -0.2rem; }
+	.zhBox .checkZhui span.uncheck { background: url(/images/nsc/lottery/unchecked.png) no-repeat; background-size: 100%; vertical-align: -0.2rem; }
+	.zhBox .checkZhui input { display: none; }
+	.zTab { background: #f8f8f8 url(/images/nsc/lottery/sc_zuihao_tit_xian.png) repeat-x 0 bottom; overflow: hidden; }
+	.zTab ul { }
+	.zTab ul li { float: left; display: inline; width: 33.3%; text-align: center; height: 3.642857rem; font-size: 1.1rem; line-height: 3.857143rem; border-right: 1px solid #e5e5e5; }
+	.zTab ul li.hover { background: #a96b94; /* background:#fff url("/images/nsc/lottery/sc_zuihao_tit-currentbg.png") repeat-x top left;*/ font-weight: bold; }
+	.zTab ul li.hover a { color: #fff; }
+	.zTab ul li a { color: #333; cursor: pointer; display: block; }
+	.zCon { overflow: hidden; background: #fff; width: 100%; margin: 0 auto; padding: 1rem 0 0.8rem 1rem; border-bottom: 1px solid #e6e6e6; }
+	.cLeft { overflow: hidden; }
+	.cLeft .group { display: inline; float: left; margin: 0 0.2rem 0.2rem 0; }
+	.cLeft .group span { color: #666; font-size: 0.8rem; float: left; display: inline; margin-top: 0.2rem; }
+	.cLeft .group .tools { float: left; display: inline; overflow: hidden; width: auto; height: 1.8rem; margin: 0 0.2rem; border: 1px solid #a7a6ac; -moz-border-radius: 4px; -webkit-border-radius: 4px; border-radius: 0.4rem; }
+	.cLeft .group .tools span { float: left; display: inline; cursor: pointer; font-weight: normal; margin-top: 0px; margin-right: 0px; }
+	.cLeft .group .tools .reduce { background: url(/images/nsc/lottery/reduceBtn.jpg) no-repeat; width: 1.5rem; height: 2.0rem; border-right: 1px solid #a7a6ac; }
+	.cLeft .group .tools .add { background: url(/images/nsc/lottery/addBtn.jpg) no-repeat; width: 1.5rem; height: 2.0rem; border-left: 1px solid #a7a6ac; }
+	.cLeft .group .tools input { width: 3rem; height: 1.8rem; border: 0px; float: left; display: inline; text-align: center; font-size: 1.0rem; color: #333; }
+	.cRight { text-align: center; margin-top: 0.6rem; }
+	.cRight input { float: right; background: #a96b94; color: #fff; width: 10rem; margin-right: 1.8rem; height: 2.2rem; line-height: 2.2rem; font-size: 1.1rem; border-radius: 1rem; text-align: center; border: 0; }
+	.zList .f_header { overflow: hidden; zoom: 1; width: 100%; color: #666; font-size: 0.928571rem; background: #fff; }
+	.zList .f_header b { font-size: 1.428571rem; font-weight: bold; }
+	.zList .f_header .text_zh { padding: 0.8rem 0; padding-top: 0; display: block; text-align: center; overflow: hidden; }
+	.zList .f_header .text_zh .red { color: #ff632c; }
+	.zList .f_header .cancel_zh { background-color: #C7C7C7; border-radius: 1rem; width: 6rem; height: 2.285714rem; line-height: 2.285714rem; font-size: 1.0rem; margin-left: 0.357143rem; text-align: center; color: #fff; display: inline-block; }
+	.zList .f_header .save_zh { background-color: #EA5D2C; border-radius: 1rem; letter-spacing: 0.1rem; width: 10rem; height: 2.285714rem; line-height: 2.285714rem; margin: 0 0.5rem; text-align: center; color: #fff; font-size: 1.2rem; display: inline-block; }
+	.zList .f_header #lt_trace_count { margin-right: 1.285714rem; color: #666; }
+	.zList .f_header .f_had_btton { overflow: hidden; text-align: center; padding-bottom: 0.8rem; position: relative; }
+	.zList .tableBox { height: 21rem; overflow: scroll; overflow-x: hidden; background: #fff; }
+	.close_zhbox { position: absolute; top: 0.6rem; right: 1rem; color: #888; font-size: 0.9rem; display: inline-block; }
+	.zList table { font-size: 0.857143rem; color: #494949; }
+	.zList table th { border-top: 1px solid #e6e6e6; border-bottom: 2px solid #e6e6e6; border-right: 1px solid #e6e6e6; text-align: center; background: #f7f7f4; font-size: 0.9rem; line-height: 1rem; padding: 0.5rem 0; }
+	.zList table th.nobd { border: 0px; }
+	.zList table .zh_th01 { width: 5%; }
+	.zList table .zh_th02 { width: 10%; }
+	.zList table .zh_th03 { width: 30%; }
+	.zList table .zh_th04 { width: 20%; }
+	.zList table .zh_th05 { width: 20%; }
+	.zList table .zh_th06 { width: 15%; }
+	.zList table td { border-bottom: 1px solid #e6e6e6; font-size: 0.8rem; border-right: 1px solid #e6e6e6; text-align: center; background: #fff; padding: 0.4rem 0; }
+	.zList table td .input { width: 2.5rem; height: 1.8rem; line-height: 1.8rem; text-align: center; border: 1px solid #dddddd; border-radius: 0.2rem; background: #f5f5f5; margin-right: 0.3rem; }
+	.zList table td .red { font-size: 0.9rem; color: #ff632c; }
+	.time_width { width: 5.6rem; display: inline-block; word-break: break-all; }
+
+	/*投注记录*/
+	.lotteryMember .playf_dl .btn_bet-record { background: #EC7F5C url(/images/scblue/skin/blue_skin/lottery/tzjl_icon.png) no-repeat 12px -91px; display: block; float: right; padding: 0 15px 0 35px; font-size: 14px; color: #fff; -moz-border-radius: 4px; -webkit-border-radius: 4px; border-radius: 4px; margin: 0 12px 0 0; }
+
+	/*.lotteryMember .playf_dl .btn_bet-record:hover { background:#F15B12 url(/images/scblue/skin/blue_skin/lottery/tzjl_icon.png) no-repeat 12px -91px; color:#fff;}*/
+
+	/*开奖官网*/
+	.lotteryMember .playf_dl .draw_web_f { background-color: #a96b94; display: block; float: right; padding: 0 7px; font-size: 14px; color: #fff; -moz-border-radius: 4px; -webkit-border-radius: 4px; border-radius: 4px; margin: 0 12px 0 0; }
+
+	/*.lotteryMember .playf_dl .draw_web_f:hover { background-color:#F15B12; color:#fff; }*/
+
+	/*新玩法标签*/
+	#lotteryType li em { background: url(/images/nsc/home/ico-new.png) no-repeat; width: 13px; height: 13px; position: absolute; top: 2px; right: 2px; }
+
+	/*固定下面余额*/
+	.m_fx_footer { width: 100%; height: 2.5rem; background: #2e263d; position: fixed; bottom: -1px; overflow: hidden; }
+	.m_fx_footer .v-moeny .you-money .show-money,
+	.m_fx_footer .v-moeny .you-money .hide-money { line-height: 2.5rem; float: left; }
+	.m_fx_footer .v-moeny .you-money b { color: #FF632C; font-size: 1rem; }
+	.m_fx_footer .v-moeny  .chongzhi { float: right; font-size: 1rem; color: #fff; }
+	.m_fx_footer .v-moeny  .chongzhi a { width: auto; font-size: 1.142857rem; line-height: 2.45rem; color: #ff632c; text-decoration: underline; background-color: #2E263D; }
+	
+	.recentCon:first ul li  { color: red; }
+	.addOrderBox .addtz {
+    /* float: right; */
+    /* background: #FF632C; */
+    /* border-radius: 5px; */
+    /* width: 7.357143rem; */
+    /* height: 2.142857rem; */
+    /* border: none; */
+    /* cursor: pointer; */
+    /* text-align: center; */
+    /* font-size: 1.142857rem; */
+    /* color: #fff; */
+    /* font-family: 'Microsoft Yahei'; */
+    background: #FF632C;
+    margin: 0 auto;
+    border-radius: 5px;
+    display: block;
+    width: 100%;
+    height: 3.285714rem;
+    line-height: 3.285714rem;
+    text-align: center;
+    color: #fff;
+    border-style: none;
+    font-size: 1.285714rem;
+   
+}
+
+.recentBox ul li .num_pk10 {
+    line-height: 2.5rem;
+    width: 67%;
+    float: right;
+    max-width: 15.0rem;
+    padding: 0 0%;
+    margin-right: 0.7rem;
+    text-align: right;
+    position: relative;
+    font-size: 1rem;
+}
+
+.louhao{
+
+	background: none;
+}
+.louhao a{
+		color: #ec2829;
+		font-size: 1rem;
+}
+
+.zhushou{
+	background: url(/gfwf/images/nsc_m/lott/top_you_anniu_01.png) no-repeat right center !important;
+	background-size: 51px 44px !important;  
+  top: 6px;
+  right: 0;
+	width: 60px;
+	height: 3rem;
+	position: fixed;
+	padding-right: 0.4rem;
+	margin-right: 0.4rem;
+}
+.funcList{
+	position: fixed;
+	top: 3.1rem;
+	right: 0;
+	width: 100px;
+	border: 1px solid #ec2829;
+	background-color: #fff;
+	z-index: 101;
+	display: none;
+}
+.funcList:after{
+	content: '';
+	display: block;
+	position: absolute;
+	border-top: 1px solid #ec2829;
+	border-right: 1px solid #ec2829;
+	background-color: #fff;
+	transform: rotateZ(-45deg);
+	width: 10px;
+	height: 10px;
+	top: -6px;
+	right: 20px;
+	
+	/*box-shadow: 0px -1px 0 1px #F00000;*/
+}
+.funcList li{
+	padding: 0 !important;
+	width: 100%;
+	line-height: 2.5rem;
+	height: 2.5rem;
+	text-align: center;
+   border-bottom: 1px solid #eee;
+}
+/*.louhao a{
+	color: #fff;
+	
+}*/
+.recentBox ul li{
+	padding: 0 15px;
+}
+.recentBox ul li .issue_k8{
+	display: block;
+	float: left;
+	color: #666;
+	text-align: left;
+	font-size: 14px;
+	width: 30% !important;
+}
+.recentBox ul li .num_k8{
+	float: left;
+	display: block;
+	text-align: left;
+	max-width: none !important;
+	margin: 0 !important;
+	width: 70% !important;
+}
+
+.m_fx_footer{
+	left: 0 !important;
+	float: none;
+}
+
+.footerNew{
+	position: fixed;
+	left: 0;
+	right: 0;
+	height: 50px;
+	background-color: #252525;
+	z-index: 500;
+	bottom: 0;
+}
+.tzResult{
+	position: fixed;
+	bottom: 0;
+	left: 10px;
+	right: 100px;
+z-index: 501;
+height: 50px;
+color: #fff !important;
+line-height: 50px;
+
+}
+.tzResult p{
+	padding: 0 !important;
+	font-size: 16px !important;
+	margin-right: 5px ;
+	margin-left: 3px;
+}
+.tzResult p:first-child span{
+	color: #d7373d !important;
+	font-weight: bolder;
+	font-size: 18px;
+}
+
+._shark{
+	height: 50px;
+	width: 150px;
+	background: url(/gfwf/images/nsc_m/lott/yaoyiyao.png) no-repeat left center;
+	float: left;
+	background-size: auto 47px; 
+	margin-left: -10px;
+}
+.tzTrans-wrapper{
+	position: fixed;z-index:505;top:100%;	left: 0;right: 0; height: 100%;background-color: #F3F3F3;
+	transition: all .5s linear;
+	-webkit-transition: all .5s linear;
+	padding-bottom: 50px;
+	overflow-y: auto;
+}
+._back{
+	height: 40px;
+	width: 100%;
+	text-align: center;
+	line-height: 40px;
+	background-color: #ec2829;
+}
+._back ._back-btn{
+	display: inline-block;
+	height: 20px;
+	width: 20px;
+	border-top: 2px solid #fff;
+	border-right: 2px solid #fff;
+	transform: rotateZ(135deg);
+	-webkit-transform: rotateZ(135deg);
+	margin-left: 10px;
+	margin-top: 3px;
+}
+.m-lott-methodBox-list{
+	display: none;
+}
+
+.gf_text{width: -webkit-max-content;width: -moz-max-content;width: max-content;height: 1.8rem;margin: 0 auto;}
+.gf_text .gf_title{
+	display: block;
+	width: 66px;
+	height: 28px;
+	line-height: 28px;
+	border: 1px solid white;
+	border-radius: 3px;
+	font-size: 6px;
+	margin-top: 10px;
+	float: left;
+	padding-top: 5px;
+	text-align: center;
+}
+.gf_text .gf_title span {
+	display: block;
+	height: 15px;
+	line-height: 15px;
+	color: white;
+	font-size: 13px;
+}
+.gf_text .gf_title:first-child{
+	border-top-right-radius: 0;
+	border-bottom-right-radius: 0;
+}
+.gf_text .gf_title:last-child{
+	border-top-left-radius: 0;
+	border-bottom-left-radius: 0;
+}
+.gf_text .gf_title.active{
+	background: #fff;
+
+}
+.gf_text .gf_title.active span{
+	color:#FF4200;
+}
+
+/****overwrite by feiker***/
+._shark{
+	background: none;
+	width: 100%;
+	line-height: 55px;
+	margin-left: 10px;
+	font-size: 10px;
+	color: #999;
+}
+
+.tz_work{
+	background: none;
+}
+.num-table .pp, .num-table .bp{
+	background: none;
+	border-bottom: none;
+}
+
+
+
+
+
+
+
+
+
+
+

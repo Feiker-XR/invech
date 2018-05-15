@@ -1,0 +1,63 @@
+<?php
+namespace app\index\controller;
+use app\index\Base;
+use app\common\model\Type;
+class agent extends Base{
+    //代理中心
+    public function main(){
+      return $this->fetch();
+    }
+    //推广
+    public function spread(){
+      return $this->fetch();
+    }
+    //  添加会员
+    public function add_member(){
+      return $this->fetch();
+    }
+    public function member_list(){
+      return $this->fetch();
+    }
+	 //代理名下会员投注记录
+    public function bet_record(){        
+        $request    = request();
+        $list       = $this->user->getBetList();
+       	$this->assign('list',$list);
+        return $this->fetch();
+    }
+     //代理名下会员日投注记录
+    public function bet_day_record(){  
+        $list    =   $this->user->getBetDailyAllBuild()->paginate();
+        $this->assign('list',$list);
+        return $this->fetch();
+    }
+    
+    //充值记录
+    public function recharge_record(){
+
+        $request    =   request();
+        $list       =   $this->user->getDepositList();
+        $this->assign('list',$list);
+        return $this->fetch();
+    } 
+     //代理名下会员日充值记录
+    public function recharge_day_record(){  
+       
+        $list    =   $this->user->getDepositDailyAllBuild()->paginate();
+        $this->assign('list',$list);
+        return $this->fetch();
+    }
+    //提现记录
+    public function withdraw_record(){
+        $request    =   request();
+        $list       =   $this->user->getWithdrawList();
+        $this->assign('list',$list);
+        return $this->fetch();
+    }
+     //代理名下会员日提现记录
+    public function withdraw_day_record(){  
+        $list    =   $this->user->getWithdrawDailyAllBuild()->paginate();
+        $this->assign('list',$list);
+        return $this->fetch();
+    }
+}

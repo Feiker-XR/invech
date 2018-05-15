@@ -1,0 +1,691 @@
+<html xmlns="http://www.w3.org/1999/xhtml" style="font-size: 12px;"><head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width,height=device-height,initial-scale=1.0,user-scalable=no,maximum-scale=1.0">
+<meta name="format-detection" content="telephone=no">
+<meta name="screen-orientation" content="portrait">
+<meta name="x5-orientation" content="portrait">
+<title>{$types[$type]['title']}</title>
+<meta name="keywords" content="">
+<meta nam="description" content="">
+
+<link href="/gfwf/__CSS__/newcss/style.css?v=1.0" rel="stylesheet" type="text/css"/>
+<link href="/gfwf/__CSS__/newcss/add.css?v=1.0" type="text/css" rel="stylesheet"/>
+<link type="text/css" rel="stylesheet" href="/gfwf/__SKIN__/js/jqueryui/jquery-ui-1.8.23.custom.css" />
+<link href="/gfwf/__CSS__/nsc/plugin/dialogUI/dialogUI.css" />
+<script type="text/javascript" src="/gfwf/__JS__/nsc/jquery-1.7.min.js?v=1.16.12.12"></script>
+<link rel="stylesheet" href="/gfwf/__CSS__/nsc_m/res.css?v=1.16.12.13">
+<link href="/gfwf/__CSS__/nsc_m/m-reset.css?v=1.16.12.12" rel="stylesheet" type="text/css">
+<link href="/gfwf/__CSS__/nsc_m/m-warp.css?v=1.16.12.13" rel="stylesheet" type="text/css">
+<link href="/gfwf/__CSS__/nsc_m/m-lottery.css?v=1.16.12.13" rel="stylesheet" type="text/css">
+<link href="/gfwf/__JS__/common/nouislider.css" rel="stylesheet"/>
+<link href="/gfwf/__CSS__/nsc/lottery.css?v=1.0" rel="stylesheet" type="text/css" />
+<link href="/gfwf/__JS__/nsc_m/need/layer.css?2.0" type="text/css" rel="styleSheet" id="layermcss">
+	<!-- <link href="/__ICONFONT__/demo.css" rel="stylesheet" type="text/css"/> -->
+<link href="/gfwf/iconfont/iconfont.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="/gfwf/__JS__/nsc_m/layer.js?v=1.16.12.12"></script>
+<script type="text/javascript" src="/gfwf/__JS__/nsc/common.js?v=1.16.12.12"></script>
+<script type="text/javascript" src="/gfwf/__SKIN__/js/jquery.cookie.js"></script>
+<script type="text/javascript" src="/__JS__/vue.js"></script>
+
+<script>var TIP=true;</script>
+<script type="text/javascript" src="/gfwf/__SKIN__/js/template-web.js"></script>
+	<script type="text/javascript" src="/gfwf/__SKIN__/js/chinese-lunar.js"></script>
+<script type="text/javascript" src="/gfwf/__SKIN__/js/jquery.SuperSlide.2.1.1.js"></script>
+<script type="text/javascript" src="/gfwf/__SKIN__/js/onload.js"></script>
+<script type="text/javascript" src="/gfwf/__SKIN__/js/function.js?v=1.0"></script>
+<script type="text/javascript" src="/gfwf/__SKIN__/js/jqueryui/jquery-ui-1.8.23.custom.min.js"></script>
+<script type="text/javascript" src="/gfwf/__SKIN__/js/game.js?v5.1"></script>
+	<script type="text/javascript" src="/gfwf/__SKIN__/js/kqwf.js?v6.1"></script>
+
+<!--<script type="text/javascript" src="/gfwf/__JS__/nsc/hklhc.js"></script>-->
+<script type="text/javascript" src="/gfwf/__JS__/nsc/dialogUI/jquery.dialogUI.js"></script>
+<script src="/gfwf/__JS__/common/nouislider.js"></script>
+<style type="text/css">
+.noUi-base{width: 80%;margin: 15px auto;height: 11px;border:1px solid #BDBDBD;border-radius: 20px;background-color: #a68e86;}
+.noUi-origin {position: absolute;left: 0;right: -1px;bottom: -1px;top: -1px;border: 1px solid #BDBDBD;height: initial !important;width: initial !important;background-color: #fff;border-radius: 30px;}
+.noUi-target{border: none;}
+.noUi-horizontal .noUi-handle{height: 40px;width: 40px;border-radius: 50%;background-color: #f8f5f4;top: -16px;box-shadow: 1px 0 5px #dbc0b6;}
+.noUi-horizontal .noUi-handle:before{display: none;}
+.noUi-horizontal .noUi-handle:after{display: none;}
+#submenu .ball_list{display: none !important;}
+#playList .tz_xz{display: none !important;}
+.tzResult p{display: inline-block;}
+.touzhu-cont{}
+.touzhu-cont>table{}
+.touzhu-cont>table tr{}
+.touzhu-cont td{background: #f7f3f2;color: #827875;border-bottom: 1px solid #d1c8c6;font-weight: bolder;height: 36px;}
+</style>
+</head>
+<body >
+<!--导航栏-->
+
+<div id="body">
+
+<header class="header wjkjData">
+	<a class="m-return-home" href="/index.php">返回大厅</a>
+	<!--<span class="nfdprize_text tz-type" id="m-lott-listContent"><em>玩法选择</em><b class="cur"></b></span>-->
+	<div class="assistant">
+		<div class="zhushou">
+			<!--<a href="#">近期开奖</a>-->
+			<ul class="funcList">
+				<li class="louhao"  id="m_recen_v"><a href="javascript:;">近期开奖</a></li>
+				<li class="louhao"  id="m_recen_v1"><a href="/index.php/index/yxjl" button="关闭:defaultModalCloase" width="100%" target="modal">投注记录</a></li>
+                <li class="louhao"  id="m_recen_v2"><a href="/zst/zst.php?typeid=<?=$type?>&g=1">走势图</a></li>
+			</ul>
+		</div>
+	</div>
+	<div class="header_wf_all gfcss gf_text">
+		<a class="title_cq gf_title" href="javascript:void(0)">
+			<span>快钱玩法</span>
+		</a>
+		<a class="title_cq gf_title" href="javascript:void(0)">
+			<span>官方玩法</span>
+		</a>
+	</div>
+
+	<span class="btn-slide-bar"></span>
+	<div class="m-nav-lott-date">
+		<ul id="kaijiang"  style="width:100%" type="{{$type}}">
+		<!--<span class="m-n-countdown" id="sur-times"> -- : -- : -- </span>-->
+		</ul>
+	</div>
+	<!-- <h1 class="page-title">header</h1> -->
+</header>
+
+<!--
+	新增内容区域 当前玩法
+-->
+
+	<section class="current_play_wp">
+		<div class="current_play_btn_wp">
+			<p><span>20180330041</span>期开奖：<strong>9 小 单 虎 龙 龙 龙 龙</strong></p>
+			<ul>
+				{for start="0" end="$kjHaoLengh"}
+					<li></li>
+				{/for}
+			</ul>
+			<button>>></button>
+		</div>
+		<div class="current_play_time_wp">
+			<section class="current_play_time_left">
+				<h3>
+					<span id="dqqihao">{$actionNo['actionNo']}期</span>
+					<span class="feidanstr">封盘：</span>
+					<span id="count_down">00:00:00</span>
+					
+				</h3>
+				<p>玩法选择：<span></span><button>V</button></p>
+			</section>
+
+			<!--<section class="current_play_time_right">
+				<i class="icon iconfont icon-visit-time"></i>
+				<h4>开奖记录</h4>
+			</section>-->
+		</div>
+		<div class="current_lottery_record_wp">
+			<div class="current_lottery_record" id="histokj">
+				
+				{foreach($history as $item)}
+					<div>
+						<b>第</b>
+						<span>{$item.number}</span>
+						<b>期&nbsp;&nbsp;&nbsp;</b>
+						<em>
+							{php} $val = explode(',',$item['data']); {/php}
+							{foreach($val as $v)}
+							<i class="lottery_record_i">{$v}</i>
+							{/foreach}
+						</em>
+					</div>
+				{/foreach}
+			</div>
+		</div>
+
+	
+		<div class="current_play_btn_mask"></div>
+
+	</section>
+<!--侧导航 -->
+		<!--<section class="slide-bar" style="display: none;">
+			<ul class="tree">
+				<li class="tree_list"><h3 class="one_nav_list home"><a href="/?index.php">首页</a></h3>
+					<div class="m_nav_line"></div>
+				</li>
+				<li class="tree_list">
+	                <h3 class="one_nav_list uc_icon_r"><a href="/user/index.html">用户中心</a></h3>
+	                <div class="m_nav_line"></div>
+				</li>
+				<li class="tree_box tree_list">
+					<h3 class="one_nav_list  game_icon tree_box">彩票游戏<i class="lnstruction-top"></i></h3>
+					<ul class="tree_one" style="display:block">
+						<li class="lotter_list_game">
+						<div class="m_nav_line"></div>
+							<dl>
+								<dt>高频彩</dt>
+								<dd>
+									<ul class="lot_list">
+										<li><a href="/index.php/index/game/1/2/12">重庆时时彩<i>H</i></a> </li>
+										<li><a href="/index.php/index/game/12/2/12">新疆时时彩</a> </li>
+										<li><a href="/index.php/index/game/60/2/12">天津时时彩</a> </li>
+										<li>&lt;!&ndash;<a href="/index.php/index/game/61/59/193">澳门时时彩<i>H</i>&ndash;&gt;</a> </li>
+										<li>&lt;!&ndash;<a href="/index.php/index/game/62/59/193">台湾时时彩<i>H</i>&ndash;&gt;</a> </li>
+										<li><a href="/index.php/index/game/5/59/193">河内1分彩<i>H</i></a> </li>
+										<li>&lt;!&ndash;<a href="/index.php/index/game/26/59/193">河内2分彩<i>H</i>&ndash;&gt;</a> </li>
+										<li><a href="/index.php/index/game/14/59/193">河内五分彩<i>H</i></a></li>
+										<li>&lt;!&ndash;<a href="/index.php/index/game/76/59/193">巴西1.5分彩<i>H</i>&ndash;&gt;</a></li>
+										<li>&lt;!&ndash;<a href="/index.php/index/game/75/59/193">巴西快乐彩<i>H</i>&ndash;&gt;</a></li>
+										
+										&lt;!&ndash; comingsoon();  如果需要禁用用这个函数即可&ndash;&gt;
+									</ul>
+								</dd>
+							</dl>
+							<dl>
+							<dt>PK拾</dt>
+								<dd>
+									<ul class="lot_list">
+										<li><a href="/index.php/index/game/20">北京PK拾<i class="m-yellow">N</i></a> </li>
+										<li><a href="/index.php/index/game/85">三分PK拾<i class="m-yellow">N</i></a> </li>
+										<li>&lt;!&ndash;<a href="/index.php/index/game/66">台湾PK拾<i class="m-yellow">N</i>&ndash;&gt;</a> </li>
+									</ul>
+								</dd>
+							</dl>
+							<dl>
+							<dt>&lt;!&ndash;快3&ndash;&gt;</dt>
+								<dd>
+									<ul class="lot_list">
+										<li>&lt;!&ndash;<a href="/index.php/index/game/79">江苏快三<i>H</i></a></li>
+										<li><a href="/index.php/index/game/63">澳门快三</a></li>
+										<li><a href="/index.php/index/game/64">台湾快三</a></li>&ndash;&gt;
+									</ul>
+								</dd>
+							</dl>
+							<dl>
+							<dt>11选5</dt>
+								<dd>
+									<ul class="lot_list">
+										<li><a href="/index.php/index/game/6">广东11选5<i>H</i></a></li>
+										<li><a href="/index.php/index/game/16">江西11选5</a></li>
+										<li><a href="/index.php/index/game/7">山东11选5</a></li>
+										<li>&lt;!&ndash;<a href="/index.php/index/game/15">上海11选5&ndash;&gt;</a></li>
+										<li>&lt;!&ndash;<a href="/index.php/index/game/67">澳门11选5<i>H</i>&ndash;&gt;</a></li>
+										<li>&lt;!&ndash;<a href="/index.php/index/game/68">台湾11选5&ndash;&gt;</a></li>
+									</ul>
+								</dd>
+							</dl>
+							<dl>
+							<dt>快乐8</dt>
+								<dd>
+									<ul class="lot_list">
+										<li><a href="/index.php/index/game/78">北京快乐8<i>H</i></a></li>
+										<li>&lt;!&ndash;<a href="/index.php/index/game/74">韩国快乐8<i>H</i>&ndash;&gt;</a></li>
+										<li>&lt;!&ndash;<a href="/index.php/index/game/73">澳门快乐8&ndash;&gt;</a></li>
+									</ul>
+								</dd>
+							</dl>
+							<dl>
+								<dt>&lt;!&ndash;3D-排列3&ndash;&gt;</dt>
+								<dd>
+									<ul class="lot_list">
+										<li>&lt;!&ndash;<a href="/index.php/index/game/9">福彩3D<i>H</i></a></li>
+										<li><a href="/index.php/index/game/69">澳门3D</a></li>
+										<li><a href="/index.php/index/game/70">台湾3D</a></li>
+										<li><a href="/index.php/index/game/10">排列3</a></li>&ndash;&gt;
+									</ul>
+								</dd>
+							</dl>
+						</li> 
+					</ul>
+					<div class="m_nav_line"></div>
+				</li>
+				
+				<li class="tree_box tree_list">
+					<h3 class="one_nav_list account_icon">账户管理<i class="lnstruction-top"></i></h3>
+					<ul class="tree_one">
+						<li class="lotter_list_game">
+							<div class="m_nav_line"></div>
+								<dl class="lnstruction">
+									<dd>
+										<ul class="lot_list">
+											<li class="tree_list"> <a href="/index.php/record/search">投注记录</a></li>
+											<li class="tree_list"> <a href="/index.php/report/coin">帐变记录</a></li>
+											<li class="tree_list"> <a href="/index.php/report/count">盈亏报表</a></li>
+											<li class="tree_list"><a href="/index.php/safe/info">绑定卡号 </a></li>
+											<li class="tree_list"><a href="/index.php/safe/loginpasswd">登入密码</a></li>
+											<li class="tree_list"><a href="/index.php/safe/passwd">提款密码</a></li>
+										</ul>
+									</dd>
+								</dl>
+						</li>
+					</ul>
+					<div class="m_nav_line"></div>
+				</li>
+				<li class="tree_box tree_list">
+					<h3 class="one_nav_list account_icon">充值提现<i class="lnstruction-top"></i></h3>
+					<ul class="tree_one">
+						<li class="lotter_list_game">
+							<div class="m_nav_line"></div>
+								<dl class="lnstruction">
+									<dd>
+										<ul class="lot_list">
+											<li class="tree_list"> <a href="/index.php/cash/recharge">充值</a></li>
+											<li class="tree_list"> <a href="/index.php/cash/toCash">提现</a></li>
+											<li class="tree_list"> <a href="/index.php/cash/rechargeLog">充值记录</a></li>
+											<li class="tree_list"><a href="/index.php/cash/toCashLog">提现记录 </a></li>
+										</ul>
+									</dd>
+								</dl>
+						</li>
+					</ul>
+					<div class="m_nav_line"></div>
+				</li>
+				<li class="tree_box tree_list">
+					<h3 class="one_nav_list activity_icon">优惠活动<i class="lnstruction-top"></i></h3>
+					<ul class="tree_one">
+						<li class="lotter_list_game">
+							<div class="m_nav_line"></div>
+								<dl class="lnstruction">
+									<dd>
+										<ul class="lot_list">
+											<li class="tree_list"><a href="/index.php/score/lucky">幸运抽奖</a></li>
+											<li class="tree_list"><a href="/index.php/cash/card">卡密充值</a></li>
+											<li class="tree_list"><a href="/index.php/lottery/hemai">合买中心</a></li>
+											<li class="tree_list"><a class="notice" href="/index.php/notice/info">系统公告</a></li>
+										</ul>
+									</dd>
+								</dl>
+						</li>
+					</ul>
+					<div class="m_nav_line"></div>
+				</li>			
+			</ul>
+		</section>-->
+		<!--<div class="home_b">
+			<div class="m_nav_line"></div>
+				<a class="one_nav_list conpt_icon" href="/?v=2">电脑版</a>
+				<a class="one_nav_list retreat_icon" href="javascript:m_loginout()">安全退出</a>
+		</div>
+		<div class="shady"></div>-->
+	<!--玩法组选择-->
+	<div class="play_group">
+		<ul>
+
+		</ul>
+		<ul>
+
+		</ul>
+	</div>
+
+	<!--开奖历史-->
+	<div class="history_nums">
+		{for start="0" end="5"}
+		<p>20180330-036期开奖</p>
+		<ul>
+			{for start="0" end="$kjHaoLengh"}
+			<li>1</li>
+			{/for}
+		</ul>
+		{/for}
+	</div>
+
+<section class="wraper-page">
+	
+	<div class="tz_change kkkk">
+		<div class="tz_change_mask" style="display: none;"></div>
+		<div class="warp lotteryBox">
+			<div class="lotteryBody">
+			
+				<div id="nfdprize-text" class="m-lott-methodBox">
+					<!--<div class="_shark" onclick="gameActionAddCode_random()"></div>-->
+					<div class="_shark">当前：<span>{$types[$type]['title']}</span>,<span></span></div>
+	    		</div>
+    	
+			<div class="lotteryLeft _lottery_menu" style="min-height: auto;margin-top: -2px;">
+                <div class="m-lott-methodBox-list" style="height: auto;border-width: 2px;margin-top: 6px;">
+                    <div class="lotteryGroup">
+                        <ul id="groupList" style="width: 1004.18px;">
+                        	{foreach($groups as $gp)}
+                    		<li><a href="#" tourl="{:Url('game/group?type='.$type.'&groupId='.$gp['id'])}" <?= ($gp['id']==$groupId) ? ' class="took"' : '' ?>     onclick="showx(<?= $gp['id'] ?>)" ><?= $gp['groupName'] ?></a></li>
+                    		{/foreach}
+						</ul>
+            		</div>
+	            	<fieldset style="border-width: 1px 0 0 0;">
+	            		<legend align="center" class="morePlay" style="font-size: 16px;padding:0 10px ;">更多玩法</legend>
+	            		<div id="submenu">
+	            			{include file="game/inc_game_played" /}
+						</div>
+					</fieldset>
+				</div>
+			</div>
+			<script>
+				$(".morePlay").text($("#groupList li").eq(0).find("a").text());
+			</script>
+			</div>
+		</div>
+		<div class="block_0"></div>
+		<!--玩法选择-->
+		<div class="tz_change">
+			<!--彩票中间的主题部分内容区域-->
+			<div class="tz_work _cus" id="playList">
+				
+			</div>
+		
+			<div class="addOrderBox">
+				<div class="footerNew" style="z-index: 510;">
+					<div class="tzResult" style="z-index: 600;">
+						<i class="icon iconfont icon-gouwuchetianjia"></i>
+	            		<p class="zushu"><!--总投注数-->注数：<span id="all-count" class="num">0</span></p>
+					    <p class="m_total_amout"><!--总金额 -->金额：<span id="all-amount" class="num orange">0.00</span></p>
+	            	</div>
+					<input type="button" class="addBtn" id="lt_sel_insert" onclick="gameActionAddCode()" value="确定投注">
+				</div>
+				<div class="tzTrans-wrapper" style="padding-bottom: 60px;">
+
+	                <div class="addOrderLeft">
+						<div class="_back"><span class="_back-btn"></span></div>
+	                    <div class="chooseMsg" style="width: 98% !important; text-align: center;margin: 0 auto 10px !important;background-color: #fff;">
+	                    </div>
+
+	                    <div class="m_funding_box" style="text-align: center; border: 1px solid #d1c8c6;border-radius: 5px;width: 98%; margin: 0 auto; background-color: #ede7e4;">
+	                        <div class="jiangjin" id="game-dom">
+	                			<b value="2.000" data-max-fan-dian="" class="danwei dwon" onclick="chargeMode(1)" style="color: #ede7e4">元</b>
+								<input type="hidden" value="0.000" data-max-fan-dian="" class="danwei" onclick="chargeMode(0.0)">
+								<input type="hidden" value="0.000" data-max-fan-dian="" class="danwei" onclick="chargeMode(0.00)">
+								<input type="hidden" value="0.000" data-max-fan-dian="" class="danwei" onclick="chargeMode(0.000)">
+
+		                        <div class="multipleBox">
+		                            <span class="bei">每注</span>
+		                            <div class="multipleCon re">
+		                                <input onchange="chargeBeiShu()"  id="beishu" value="1" class="text"/>
+		                            </div>
+		                           <span class="bei">倍</span>
+		                        </div>
+
+	                        	<!--拖动-->
+	                    		<div class="tz_work" style="width: 100%;box-sizing:border-box;background-color: #ede7e4;padding: 10px ;">
+									<div class="ball_write">
+										<div class="write_bg">
+											<div class="jiangjin" id="game-dom">
+												<div class="fandian-k fl" >
+													<input type="button" class="min" value="" step="-0.1"/>
+													<input type="button" class="max" value="" step="0.1"/>
+													<span id="fandian-value" data-pl="" class="fdmoney" style=" color: #000 !important;">--</span>
+													<div id="slider-range-min" class="tiao slider fandian-box" value="0" data-bet-count="" data-bet-zj-amount="" max="" game-fan-dian="" fan-dian="" game-fan-dian-bdw="" fan-dian-bdw="" min="0" step="1" slideCallBack="gameSetFanDian"></div>
+												</div>
+												<strong>赔率：</strong>
+												<select name="lt_sel_dyprize" id="lt_sel_dyprize" maxfd="{$settings.fanDianMax}" fan-dian="{$user.fanDian}">
+													<option selected="selected" value="1950-0">1950</option>
+												</select>
+											</div>
+										</div>
+									</div>
+								</div>
+								<!--拖动-->
+	                    	</div>
+	                	</div>
+
+		                <div class="addOrderRight">
+		                </div>
+	            	</div>
+
+					<div class="lotteryBottom">
+	    				<div class="touzhu-cont"  style="width: 98%;">
+		  					<table width="100%" cellpadding="0" cellspacing="0"></table>
+						</div>
+				        <div class="orderNow">
+				            <div class="chooseAllMsg clearfix">
+	                			<div class="checkZhui fqzhBox">
+					        		<label  name="lt_trace_if" >
+						        		<input name="zhuiHao" value="1" type="checkbox">
+			                			<b class="fq">发起追号</b>
+		                			</label>
+	            				</div>
+<!-- 	               				<div class="hemai" style="height: 41px;">
+	               					<label>
+	               						<input type="checkbox" class="is_combine" value="1" id="cannel_chckbox"/><b class="fq">发起合买</b>
+	               					</label>
+					        	</div> -->
+	            			</div>
+
+	                		<div class="sendChoose">
+	                			<input type="button" class="addtz" id="btnPostBet"  value="确认投注">
+	                		</div>
+	        			</div>
+	    			</div>
+				</div>
+    		</div>
+
+			<!--<div class="m_footer_annotation" style="padding-bottom: 30px;">
+			    未满18周岁禁止购买<br>Copyright © SinCai  彩38 版权所有
+			</div>-->
+
+			<div class="padding_fot_b20 "></div>
+
+        </div>
+	</div>
+</section>
+</div><!--body-->
+
+<div id="wanjinDialog"></div>
+<!--<script type="text/javascript" src="/gfwf/__JS__/nsc_m/res.js?v=1.16.12.4"></script>-->
+<script type="text/javascript" src="/gfwf/__SKIN__/js/selected.js"></script>
+<script src="/gfwf/__JS__/common/shake.js"></script>
+
+<script type="text/javascript">
+    /**************************************/
+	/********这里是写php变量的地方************/
+    /**************************************/
+    var game={
+    		check1:null,
+            check2:null,
+            type:{$type},
+            played:{$playedId},
+            groupId:{$groupId},
+
+        },
+        user="{$user.username}",
+        aflag=1;
+    var _group = <?php echo json_encode($groups)?>;				// 玩法组菜单
+    var _played = <?php echo json_encode($played)?>;			// 当前玩法组
+	var _kqwf_groups = <?php echo json_encode($kqwf_groups)?>;	// 快钱玩法组
+	var _gfwf_groups = <?php echo json_encode($gfwf_groups)?>;  // 官方玩法组
+    var fptime = {$fptime};										// 剩余倒计时时间
+    var _index = _played.is_kqwf + ''; 							// 1表示快钱玩法,0表示官方玩法
+    var _type = game.type;	
+    var _typeName = "{$typeName}";									// 类型
+    console.log(_group);
+	console.log(_played);
+</script>
+<script type="text/javascript">
+    $(".current_play_time_right").click(function (event) {
+        event.stopPropagation();
+        $(".current_lottery_record_wp").toggle();
+    });
+	// 默认玩法
+    handlePlay(_played.type,_played.id,true);
+
+    // 选择玩法
+	$('.current_play_time_left button').click(function () {
+        var _li = '';
+        $.each(_group,function (index,value) {
+            if(_played.groupId == index){
+                _li += '<li class="active" onclick="chooseToPlay('+index+')">'+value.groupName+'</li>'
+			}else{
+                _li += '<li onclick="chooseToPlay('+index+')">'+value.groupName+'</li>'
+			}
+        });
+        $('.play_group ul:first-child').html(_li);
+        if($('.play_group').is(":hidden")){
+            $('.play_group').show();
+            chooseToPlay(_played.groupId);
+            $('body').css('overflow','hidden');
+		}else{
+            $('.play_group').hide();
+            $('body').css('overflow','auto');
+		}
+    });
+
+	// 遮罩隐藏
+    $(document).on('click','.current_play_btn_mask,.current_play_btn_tip i.iconfont,.current_play_btn_tip a',function(){
+        $('.current_play_btn_tip,.current_play_btn_mask').hide();
+    });
+
+    // 开奖历史
+	$('.current_play_btn_wp button').click(function () {
+	    if($('.history_nums').is(":hidden")){
+            $('.history_nums').show();
+            $('body').css('overflow','hidden');
+            $.ajax({
+                url:'/game/getHistory/name/'+_typeName,
+                dataType:'json',
+                success:function (data) {
+                    console.log(data);
+                }
+            })
+		}else{
+            $('.history_nums').hide();
+            $('body').css('overflow','auto');
+		}
+
+    });
+
+
+    function showx(x){
+        if(x==82){$('.ball_write').hide();}else{$('.ball_write').show();}
+    }
+    // 官网玩法快亲钱玩法切换
+    $('.title_cq.gf_title').click(function () {
+        if($(this).hasClass('active')){
+            return;
+        }else{
+            var groudID,_gk;
+            if(_index == '1'){
+                _gk = _gfwf_groups;
+            }else{
+                _gk = _kqwf_groups;
+            }
+            if(JSON.stringify(_gk) == '{}' || JSON.stringify(_gk) == '[]'){
+                alert('该玩法不存在'+(_index == "1" ? '官方' : '快钱')+'玩法!');
+                return;
+            }
+            $.each(_gk,function (key,val) {
+                groudID = key;
+            });
+            location.href ="/game/game/type/"+_type+"/groupId/"+groudID+".html";
+        }
+    });
+
+    // 右侧子菜单
+    $(".zhushou").click(function(){
+        $(".funcList").toggle();
+    });
+    //投注界面返回顶部按钮
+    $("._back-btn").click(function(){
+        $(".tzTrans-wrapper").css("top",'100%');
+        $('.footerNew').show();
+        $('#all-count').text('0');
+        $('#all-amount').text('0.00');
+    });
+	// 玩法切换
+    function chooseToPlay(plays){
+        $(event.target).addClass('active').siblings().removeClass('active');
+        var _li = "";
+        $.each(_group[plays].playeds,function (index,value) {
+            if(index != 'tags'){
+                if(_played.id == index){
+                    _li += "<li class='active' onclick='handlePlay("+value.type+ "," +value.id+")'>"+ value.name+"</li>"
+				}else{
+                    _li += "<li onclick='handlePlay("+value.type+ "," +value.id+")'>"+ value.name+"</li>"
+				}
+			}
+        });
+        $('.play_group ul:last-child').html(_li);
+	}
+	function handlePlay(type,playedId,flag){
+        if(!flag){
+			var _groupid = $('.play_group ul:first-child li.active').attr('onclick');
+			_groupid = _groupid.substring(_groupid.indexOf("(")+1,_groupid.indexOf(")"))
+			//console.log(_groupid,playedId);
+            _played = _group[_groupid].playeds[playedId];
+            $('.current_play_time_left p span').text($(event.target).text());
+            $($(event.target)).addClass('active').siblings().removeClass('active');
+            setTimeout(function () {
+				$('.play_group').hide();
+            },200)
+        }
+        $('._shark span:last-child').text(_played.tag+'-'+_played.name);
+     	$.ajax({
+        	url: "/game/played/type/"+type+"/playedId/"+playedId,
+            dataType:'html',
+            type:'POST',
+            success:function(data){
+              $("#playList").html(data);
+            }
+        });
+	}
+$(function(){
+    // 设置玩法框或开奖历史的高度
+    $('.play_group,.history_nums').height(window.innerHeight-$('header').height() - $('.current_play_wp').height())
+	// 设置默认玩法
+	$('.current_play_time_left p span').text(_played.name);
+   // 快钱或者官方title样式
+   if(_index == '1'){
+        $('.title_cq.gf_title').eq(0).addClass('active').siblings().removeClass('active');
+    }else{
+        $('.title_cq.gf_title').eq(1).addClass('active').siblings().removeClass('active');
+    }
+
+
+    // 为开奖号码添加样式
+	var _className = '';
+   switch (_type){
+	   case '43':			// 香港六合彩
+       case '20':			// pk10
+		   _className = 'gr_c';
+		   break;
+	  /* case '24':			// 北京快乐8
+
+		   break;
+	   case '9':			// 福彩3d
+	   case '10':			// 排列三
+	   case '25':			// 江苏快三
+		   break;*/
+	   default:				// 其他
+           _className = 'gr_s';
+
+   }
+    $('.current_play_btn_wp ul li').addClass(_className);
+   $('.current_play_btn_wp ul li').each(function (index,value) {
+		var _v = $(value).text();
+		$(value).addClass(_className+_v);
+   });
+
+	// 时间倒数
+	gameKanJiangDataC(fptime);
+    // 获取开奖
+	loadKjData();
+	
+    /*$(".nfdprize_text").click(function(){
+        if(riable==0){
+            riable=1;
+            $(".nfdprize_text b").addClass('cur')
+        }else{
+            riable =0;
+            $(".nfdprize_text b").removeClass('cur')
+        }
+        $(".m-lott-methodBox-list").toggle();
+    });*/
+});
+// 摇一摇
+window.onload = function() {
+	var myShakeEvent = new Shake({
+		threshold: 15
+	});
+	myShakeEvent.start();
+	window.addEventListener('shake', shakeEventDidOccur, false);
+	function shakeEventDidOccur() {
+	   gameActionAddCode_random();
+	}
+};
+</script>
+</body>
+</html>

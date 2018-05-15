@@ -1,0 +1,428 @@
+{include file='common/header'}
+<div class="process">
+    <div class="wid1">
+        <div class="layout">
+            <div class="monty">
+                <ul>
+                    <li class="acti">全部</li>
+                    <script>
+                        for (var i = 0; i < 3; ++i) {
+                            var tmp = new Date();
+                            tmp.setMonth(tmp.getMonth() - 1 * i);
+                            var startMonth = tmp.getFullYear() + "-" + (tmp.getMonth() + 1) + '-1 0:0:0';
+                            tmp.setMonth(tmp.getMonth() + 1);
+                            var endMonth = tmp.getFullYear() + "-" + (tmp.getMonth() + 1) + '-1 0:0:0';
+                            document.write('<li class="monthnum" data-starttime="' + startMonth + '" data-endtime="' + endMonth + '">' + ((startMonth.split("-")[1])) + '月</li>');
+                        }
+                        var tmp = new Date();
+                        tmp.setMonth(tmp.getMonth() - 2);
+                        var endMonth = tmp.getFullYear() + "-" + (tmp.getMonth() + 1) + '-1 0:0:0';
+                        document.write('<li class="monthnum" data-endtime="' + endMonth + '">其他</li>');
+                    </script>
+                </ul>
+            </div>
+            <div class="monthdetail">
+            </div>
+        </div>
+    </div>
+    <div class="Customerservice" style="right: 462px;">
+        <ul>
+            <li><div class="pict"><a href="https://f18.livechatvalue.com/chat/chatClient/chatbox.jsp?companyID=881265&configID=73958&jid=4674187711&s=1" target="_blank"><img src="/static/theme/mainTheme/400w/img/ico68.png" alt=""></a></div></li>
+            <li><div class="pict"><a href="javascript:void(0)"><img src="/static/theme/mainTheme/400w/img/ico69.png" alt=""></a></div></li>
+        </ul>
+    </div>
+</div>
+{include file='common/footer'}
+<script>
+    // 闪烁
+    var blinkColorArr = "#fa6200|#0f3f94".split("|");
+    $(".blink").each(function() {
+        var obj = $(this);
+        setInterval(function() {
+            var tmpColor = blinkColorArr[parseInt(Math.random() * blinkColorArr.length)];
+            $(obj).css("color", tmpColor);
+        },200);
+    });
+
+
+
+    $(function() {
+        // 底部信息调用
+        function ajaxGetDbxx() {
+            ajaxRequest({
+                url: CONFIG.BASEURL + "ajaxGetWebInfo.json",
+                success: function (json) {
+                    if (json.result != 1) {
+                        return;
+                    }
+                    $(".webDbxx").html(json.webDbxx);
+                }
+            });
+        }
+
+        if ($(".webDbxx").length > 0) {
+            ajaxGetDbxx();
+        }
+    });
+
+
+</script><script>
+    function openHyzx(module) {
+        if (typeof module == 'undefined') {
+            module = '';
+        }
+        if (typeof $.cookie("uid") == 'undefined' || typeof $.cookie("token") == 'undefined') {
+            alert("请先登录");
+            if ($("#loginAccount1").length > 0) {
+                $("#loginAccount1").focus();
+                return;
+            }
+            window.location.href = "/main.html";
+            return;
+        }
+        windowOpen('/member/index.html?module=' + module, '会员中心', 1250, 834);
+    }
+
+    function openGcdt(module) {
+        if (typeof module == 'undefined') {
+            module = '';
+        }
+        windowOpenBlank('/ssc/index.html?module=' + module);
+        
+    }
+
+    function goZst(url) {
+        window.open('/ssc/'+ url +'.html?type=1');
+    }
+
+    function openZstIndex(module) {
+        if (typeof module == 'undefined') {
+            module = '';
+        }
+        windowOpenBlank('/ssc/index.html?module=' + module);
+        
+    }
+    function refreshYzm(obj) {
+        var src = $(obj).attr("src");
+        var params = getRequest(src);
+
+        src = "/code/yzm?timestamp=" + (new Date()).getTime();
+        $.each(params, function(index, value) {
+            src += '&' + value.key + '=' + value.value;
+        });
+        $(obj).attr("src", src);
+    }
+
+    function showLoading() {
+        layer.load(2, {
+            shade: [0.1,'#000'] //0.1透明度的白色背景
+        })
+    }
+    function hideLoading() {
+        layer.closeAll();
+    }
+</script><script>
+    tabs_cg(".process .layout .monty ul li", "", "click", "acti", "", "", 1);
+    autobox(".Customerservice", 1, 1140, 0);
+
+    $(function () {
+        getData(null, null);
+
+        $('.monty ul li').click(function () {
+            var startTime = $(this).data("starttime");
+            var endTime = $(this).data("endtime");
+            getData(startTime, endTime);
+            //console.log(startTime);
+        });
+    });
+
+    function getData(startTime, endTime) {
+        ajaxRequest({
+            url: "/promotion/getList.json",
+            data: {
+                startTime: startTime,
+                endTime: endTime
+            },
+            beforeSend: function () {
+                showLoading();
+            },
+            success: function (json) {
+                if (json.result != 1) {
+                    return;
+                }
+
+                var str = '';
+
+                var isFirst = true;
+                var lastDate = '';
+                $.each(json.promotionList, function (index, value) {
+                    var date = dateFormat(value.createTime, "yyyy-MM-dd");
+                    if (date != lastDate) {
+                        isFirst = true;
+                    } else {
+                        isFirst = false;
+                    }
+                    lastDate = date;
+
+                    var obj = [];
+                    obj.year = dateFormat(value.createTime, "yyyy");
+                    obj.month = dateFormat(value.createTime, "mm");
+                    obj.day = dateFormat(value.createTime, "dd");
+                    obj.isFirst = isFirst;
+                    obj.title = value.title;
+                    obj.content = value.content;
+                    obj.title = value.name;
+                    obj.imageData = value.bigImageData;
+                    obj.bigImageId = value.bigImageId;
+                    obj.startTime = dateFormat(value.startTime, "yyyy-mm-dd HH:MM:ss");
+                    obj.endTime = dateFormat(value.endTime, "yyyy-mm-dd HH:MM:ss");
+                    obj.createTime = dateFormat(value.createTime, "yyyy-mm-dd HH:MM:ss");
+                    var html = template("template", obj);
+                    str += html;
+                });
+
+                $(".monthdetail").html(str);
+
+                var arrsT = [], arreT = [];
+                $('.monthdetail .list_tems .text .startTi').each(function () {
+                    arrsT.push($(this).html());
+                });
+                $('.monthdetail .list_tems .text .endTi').each(function () {
+                    arreT.push($(this).html());
+                });
+
+//                var myDate = new Date();//获取系统当前时间
+//                var currentT = dateFormat(myDate.getTime(), "yyyy-mm-dd hh:MM:ss");
+//
+//                for (var i = 0; i < arrsT.length; i++) {
+//                    var sT = dateFormat(arrsT[i], "yyyy-mm-dd hh:MM:ss");
+//                    var eT = dateFormat(arrsT[i], "yyyy-mm-dd hh:MM:ss");
+//                    if (sT == currentT && eT == currentT) {
+//                        $('.monthdetail .list_tems:eq(' + i + ') .text .hdsj').html('活动时间： 永久有效');
+//                    }
+//                }
+
+            },
+            complete: function () {
+                shoutext(".process .layout .list_tems .pict", ".down");
+                shoutext(".process .layout .list_tems .text a", ".down");
+                hideLoading();
+            }
+        });
+    }
+    function showLoading() {
+        layer.load(2, {
+            shade: [0.1, '#000'] //0.1透明度的白色背景
+        })
+    }
+    function hideLoading() {
+        layer.closeAll();
+    }
+</script>
+{literal}
+<script type="text/html" id="template">
+    <div class="list_tems">
+        {{if isFirst}}
+        <div class="date">
+            {{if (startTime == null && endTime == null) || (startTime == endTime)}}
+            <span style="font-weight: bolder;">进行中</span>
+            {{else}}
+            <span>{{year}}</span>
+            <h3>{{month}}.{{day}}</h3>
+            {{/if}}
+        </div>
+        {{/if}}
+        <h2>{{title}}<p>发布时间：
+            {{if (startTime == null && endTime == null) || (startTime == endTime)}}
+            最新
+            {{else}}
+            {{createTime}}
+            {{/if}}
+        </p></h2>
+        <div class="pict repict">
+            <img src="/images/{{bigImageId}}" alt="">
+        </div>
+        <div class="text">
+            <p class="hdsj">活动时间：
+                {{if (startTime == null && endTime == null) || (startTime == endTime)}}
+                永久有效
+                {{else}}
+                <span class="startTi">{{startTime}}</span> 至 <span class="endTi">{{endTime}}</span>
+                {{/if}}
+            </p>
+            <div class="down" style="display: none;">
+                {{#content}}
+            </div>
+            <a>查看活动内容&gt;&gt;</a>
+        </div>
+    </div>
+</script>
+{/literal}
+<script>
+    // 闪烁
+    var blinkColorArr = "#fa6200|#0f3f94".split("|");
+    $(".blink").each(function() {
+        var obj = $(this);
+        setInterval(function() {
+            var tmpColor = blinkColorArr[parseInt(Math.random() * blinkColorArr.length)];
+            $(obj).css("color", tmpColor);
+        },200);
+    });
+
+
+
+    $(function() {
+        // 底部信息调用
+        function ajaxGetDbxx() {
+            ajaxRequest({
+                url: CONFIG.BASEURL + "ajaxGetWebInfo.json",
+                success: function (json) {
+                    if (json.result != 1) {
+                        return;
+                    }
+                    $(".webDbxx").html(json.webDbxx);
+                }
+            });
+        }
+
+        if ($(".webDbxx").length > 0) {
+            ajaxGetDbxx();
+        }
+    });
+
+
+</script><!--弹窗-->
+<div class="bg"></div>
+<div class="login_alert">
+    <div class="login_alert_tl clearfix">
+        <span class="left spans">登录</span>
+        <a href="javascript:void(0);" class="cha right"></a>
+    </div>
+    <form >
+        <div class="login_alert_b">
+            <div class="login_alert_gp">
+                <img src="/static/theme/mainTheme/400w/images/alert2.png" class="login_alert_ico" />
+                <input type="text" id="registerLoginAccountAlert" name="registerLoginAccountAlert" placeholder="手机号/用户名" />
+            </div>
+            <div class="login_alert_gp">
+                <img src="/static/theme/mainTheme/400w/images/alert3.png" class="login_alert_ico" />
+                <input type="password" id="registerLoginPasswordAlert"  name="registerLoginPasswordAlert" placeholder="密码" />
+            </div>
+
+            <div class=" banner_shuru_gp">
+                <input type="text" id="registerLoginYzmAlert" class="banner_shuru_alertinput" placeholder="验证码"/>
+
+                <a href="javascript:void(0);" class="banner_alertyz">
+                    <img id="registerYzmImg2" onclick="refreshYzm(this)"
+                         src="/code/yzm?imgWidth=113&imgHeight=43&imgFontHeight=40&imgCodeY=35&imgCodeX=2"/>
+                </a>
+            </div>
+
+            <input type="button" class="btn_red login_alertbtn" onclick="login()"  value="立即登录" />
+            <div class="login_alert_link">
+                <a href="https://f18.livechatvalue.com/chat/chatClient/chatbox.jsp?companyID=881265&configID=73958&jid=4674187711&s=1" target="_blank">忘记密码</a>
+                <span>&nbsp;&nbsp;|&nbsp;&nbsp;</span>
+                <a href="/register.html">立即注册</a>
+            </div>
+        </div>
+    </form>
+</div>
+
+<script>
+    $(function () {
+        // 首页弹框登录按钮
+        $('.loginbtn').click(function(){
+            $(".bg").show();
+            $(".login_alert").show();
+        });
+        $('.bg').click(function(){
+            $(".bg").hide();
+            $(".login_alert").hide();
+        });
+        $('.cha').click(function(){
+            $(".bg").hide();
+            $(".login_alert").hide();
+        });
+    });
+
+    function goZst(url) {
+        window.open('/ssc/'+ url +'.html?type=1');
+    }
+    
+    function wjmm(url) {
+        $(".spans").html("请联系在线客服");
+        $(".spans").css("color","red");
+    }
+
+    function login() {
+        var loginAccount = $("#registerLoginAccountAlert").val();
+        var loginPassword = $("#registerLoginPasswordAlert").val();
+        var yzm = $("#registerLoginYzmAlert").val();
+
+        if (!loginAccount) {
+            $(".yhm").html("请输入用户名3-15个英文、数字");
+            $(".yhm").css("color","red");
+            $("#mm").empty();
+            $(".yzm").empty();
+            return;
+        }
+        if (!loginPassword) {
+            $("#mm").html("请输入密码");
+            $("#mm").css("color","red");
+            $("#mm").empty();
+            $(".yzm").empty();
+            return;
+        }
+        if (!yzm) {
+            $("#yzm").html("请输入验证码");
+            $("#yzm").css("color","red");
+            $("#mm").empty();
+            $(".yhm").empty();
+            return;
+        }
+
+        ajaxRequest({
+            url: "/member/ajaxLogin.json",
+            data: {
+                yzm: yzm,
+                account: loginAccount,
+                password: $.md5(loginPassword)
+            },
+            beforeSend: function () {
+                showLoading();
+            },
+            success: function (json) {
+                if (json.result == 1) {
+                    $.cookie("uid", json.userId, {path: "/"});
+                    $.cookie("token", json.token, {path: "/"});
+                    window.location.href = "/main.html";
+                } else {
+                    refreshYzm(document.getElementById('registerYzmImg2'));
+                    Tools.toast("登录失败：" + json.description);
+                }
+                hideLoading();
+            }
+        });
+    }
+
+    function showLoading() {
+        layer.load(2, {
+            shade: [0.1, '#000'] //0.1透明度的白色背景
+        })
+    }
+    function hideLoading() {
+        layer.closeAll();
+    }
+    function refreshYzm(obj) {
+        var src = $(obj).attr("src");
+        var params = getRequest(src);
+
+        src = "/code/yzm?timestamp=" + (new Date()).getTime();
+        $.each(params, function (index, value) {
+            src += '&' + value.key + '=' + value.value;
+        });
+        console.log(src);
+        $(obj).attr("src", src);
+    }
+</script></body>
+</html>

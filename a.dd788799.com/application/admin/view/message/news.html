@@ -1,0 +1,118 @@
+{layout name="layout" /}
+<div class="row">
+  <div class="col-xs-12">
+    <div class="box">
+      <div class="box-header">
+      <i class="fa fa-plus-square pull-right add"></i>
+          <form>
+              <div class="pull-left" >
+                <select class="form-control input-sm" name="status" aria-hidden="true">
+                   <option value="" >全部状态</option>
+                   <option value="0" >显示</option>
+                   <option value="1" >隐藏</option>
+                </select>
+              </div>
+              <div class="has-feedback pull-left" style="margin-left:15px;">
+                <button type="submit" class="btn btn-block btn-info btn-sm filter">查询</button>
+              </div>
+          </form>
+
+      </div>
+      <!-- /.box-header -->
+      <div class="box-body table-responsive no-padding">
+        <table class="table table-bordered table-striped dataTable">
+          <tr>
+              <th>类型</th>
+              <th>标题</th>
+              <th>发布时间</th>
+              <th>过期时间</th>
+              <th>状态</th>
+              <th>操作</th>
+            </tr>
+          {foreach $list as $vo} 
+             <tr>
+                <td>{$types[$vo.type]}</td>
+                <td><a href="javascript:;" class="view" data-id={$vo.id}>{$vo.title}</a></td>
+                <td>{$vo.created_at}</td>
+                <td>{$vo.overdue_at}</td>
+                <td>{eq name="$vo.status" value="0"} <span class="btn-success">显示</span>{/eq}
+                    {eq name="$vo.status" value="1"} <span class="btn-danger">隐藏</span>{/eq}
+                </td>
+                <td>
+                    <i data-id="{$vo.id}" class="edit fa fa-pencil"></i>&nbsp;&nbsp;
+                    <i data-id="{$vo.id}" class="del fa fa-trash"></i>
+                </td>
+              </tr>
+             {/foreach}
+          </table>
+        {$list->render()}
+      </div>
+      <!-- /.box-body -->
+    </div>
+    <!-- /.box -->
+  </div>
+</div>
+
+<!-- AdminLTE App -->
+<script type="text/javascript">
+$(function(){
+    $(".add").click(function(){
+    $.get('/message/news_add.html',{},function(data){
+      layer.open({
+        type: 1,
+        title: '添加新闻',
+        maxmin: true, //开启最大化最小化按钮
+        area: ['1200px', '800px'],
+        content: data
+      });
+    },'html');
+  });
+	$(".del").click(function(){
+		var id = $(this).attr('data-id');
+		layer.confirm('确定删除?', {
+		  btn: ['确定','取消'] //按钮
+		}, function(){
+			$.get('/message/news_del',{id:id},function(data){
+				layer.alert(data.msg, {
+		          time: 20000,
+		          skin: 'layui-layer-molv', //该皮肤由layer.seaning.com友情扩展。关于皮肤的扩展规则，去这里查阅
+		          closeBtn: 0,
+		          anim: 4
+		        }, function(){
+		           window.location.href = document.URL;
+		        } )
+
+			},'json');
+		}, function(){
+
+		});
+	});
+
+
+    $(".edit").click(function(){
+    $.get('/message/news_edit.html?id='+$(this).attr('data-id'),{},function(data){
+      layer.open({
+        type: 1,
+        title: '编辑新闻',
+        maxmin: true, //开启最大化最小化按钮
+        area: ['1200px', '800px'],
+        content: data
+      });
+    },'html');
+  });
+
+  $(".view").click(function(){
+    var id = $(this).attr('data-id');
+    $.get('/message/news_detail.html',{id:id},function(data){
+      layer.open({
+        type: 1,
+        title: '查看新闻',
+        maxmin: true, //开启最大化最小化按钮
+        area: ['1000px', '700px'],
+        content: data
+      });
+    },'html');
+  });
+});
+
+</script>

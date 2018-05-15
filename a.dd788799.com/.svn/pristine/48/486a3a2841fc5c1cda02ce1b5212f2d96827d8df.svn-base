@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="zh-cn">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>会员中心</title>
+    <link rel="stylesheet" type="text/css" href="/static/theme/memberTheme/theme1/member/css/reset.css?v=20170715">
+    <link rel="stylesheet" type="text/css" href="/static/theme/memberTheme/theme1/member/css/hpn-common.css">
+    <link rel="stylesheet" type="text/css" href="/static/theme/memberTheme/theme1/member/css/index.css?v=20171117">
+    <link rel="stylesheet" type="text/css" href="/static/theme/memberTheme/theme1/member/css/global.css">
+    <link rel="stylesheet" href="/__JS__/datepicker/datepicker3.css">
+    <script>
+        <!--
+//        window.onerror=function(){return true;}
+        // -->
+    </script>
+    <script>
+    <!--
+    // 屏蔽JS错误
+//    window.onerror = function(){return true;}
+    // -->
+</script>
+<script>
+    var CONFIG = {
+        BASEURL: "/",    // 根路径
+        RESURL: "/static/theme/memberTheme/theme1/"         // 资源路径
+    };
+</script>
+<script src="/static/theme/memberTheme/theme1/js/mobile-detect.min.js"></script><script>
+    var fengge1 = 'f42023';
+</script>
+<style>
+
+        .reResulttBg{background: #f42023;} 
+        .process .layout .monty ul li,.process .layout .list_tems .date:after,.list ul li .slide p.acti,.headmemberbg{background: #f42023;}
+        .process .layout .list_tems .date span, .process .layout .list_tems .date h3,.eveb_amount span,.color-e77c3c,.eveb_setting_table a,.xieyiCss，.gcdtgd{color: #f42023!important;}
+        .eveb_sub_nav_type a:hover, .eveb_sub_nav_type li.on a:link, .eveb_sub_nav_type li.on a:visited{color: #f42023!important;font-weight: 700;border-bottom-color: #e1e1e1;background: #f8f8f8;}
+        .list ul li .slide p:hover,.letterbtn-bg{background: #f42023!important;color: white;}
+        .list h3 a{background: #f42023;border-bottom: 3px solid #a92309; height: 47px; line-height: 47px;}
+        .help_l_menu li .t.sli{border-left: 5px solid #f42023;}
+        .withdraw-bg-input{border: 2px solid #f42023!important;}
+        .clearBet_template .l span i{background: #f42023 url(/static/theme/memberTheme/theme1//img/tm-mdl-icon.png) no-repeat!important; border-radius: 50%;background-position: 0 41%!important;}
+
+
+
+        .eveb_nav_sub .on,.button_1, .button_1:link, .button_1:visited,.alert_col h5,.onlineService,.layui-layer-popup .layui-layer-title,.xzqd,.xzqdlskj,.game_name .box2_stage p span i.acti,.Betting,.Single,.list_ject ul li .Result p a.acti,.list_ject ul li .Result p a.acti:hover,.top{background:#f42023!important}
+        .eveb_nav_sub .on a,.bankInfo .name,.help_l_menu .title p .sum,.help_r_main .light,.game_name .box2_stage p span i,.game_name .box1_name  p i,.Account p a.red{color:#f42023!important}
+        .eveb_nav_sub .on,.game_name .box2_stage p span{border:1px solid #f42023!important;}
+        .eveb_nav_sub .on,.game_name .box2_stage p span i.acti{color:#fff!important;}
+        .eveb_nav_sub .on a{border-top:1px #f42023 solid!important;}
+        .eveb_nav_sub ul{border-bottom:1px #f42023 solid!important;}
+        #apptop{background: #f42023}
+        .alert_col div::-webkit-scrollbar-thumb {background-color: #f42023!important;}
+
+        
+       /* .men_list{background-color: #f42023!important;}
+        .main_layout .left_layout h1{background-color: #f42023!important;}
+        .men_list .nav_list ul li:after{background-color: #f42023!important;}
+        .main_layout .right_layotu .right_wrap .login ul li button{background-color: #f42023!important;border-bottom: 2px solid #f42023!important;}
+        .main_layout .right_layotu .right_wrap .down_file{background-color: #f42023!important;}
+        .main_layout .right_layotu .left_wrap .Bettingbag .num_bett .val_add p.fr a.a1{background-color: #f42023!important;border-bottom: 2px solid #f42023!important;}
+        .main_layout .right_layotu .chart .title h2{background-color: #f42023!important;border-bottom: 2px solid #f42023!important;}
+        .main_layout .right_layotu .chart .title{border-bottom: 1px solid #f42023!important;}
+        .main_layout .right_layotu .chart .title a{color: #f42023!important;}
+        .main_layout .right_layotu .left_wrap .tabs_cg ul li.acti i{border-left: 1px solid #f42023!important;  border-right: 1px solid #f42023!important;}
+        .main_layout .right_layotu .left_wrap .tabs_cg ul li.acti{border-top: 3px solid #f42023!important;}
+        .main_layout .right_layotu .left_wrap .tabs_cg{border-bottom: 1px solid #f42023!important;}
+        .main_layout .left_layout ul li i.i0{background-color: #f42023!important;}
+        .main_layout .left_layout ul li i.i0:after{border-right: 8px solid #f42023!important;}
+        .main_layout .right_layotu .right_wrap .Notice b{color: #f42023!important;}
+        .main_layout .right_layotu .right_wrap .login h2 p{border-bottom: 2px solid #f42023!important;}
+        .main_layout .right_layotu .right_wrap .login h2{border-bottom: 1px solid #f42023!important;}
+        .record{border-top: 2px solid #f42023!important;}*/
+
+
+
+    </style>
+<style>
+
+
+        .head div h5,.Betting .tabs ul li,.top .nav h1{background:#d51910!important}
+        .jf_box .url a,.eveb_form label.error,.eveb_transfer_box .center_wallet .money,.eveb_transfer_box .wallet_list li p{color:#d51910!important}
+        .Betting .tabs ul li.acti{background:#fff!important}
+        .button_1, .button_1:link, .button_1:visited{border:1px solid #d51910!important;}
+    </style>
+</head>
+<body>
+<style>body{width:100%;}</style>
+<div class="help_r_main">
+    <div class="eveb_content">
+        <div class="eveb_nav_sub">
+            <ul class="clearfix">
+                <li ><a href="/user/recharge_record">充值记录</a></li>
+                <li ><a href="/user/withdraw_record">提现记录</a></li>
+                <li><a href="/user/money_record">资金流水</a></li>
+                <li class="on"><a href="/user/bet_record">投注记录</a></li>
+                <li><a href="/user/backwater_record">返水记录</a></li>
+            </ul>
+        </div>
+        <h2>
+            <div class="eveb_search eveb_search_h2">
+                <form>
+                    <label style="margin-left:10px">彩种：</label>
+                    <select  name="type">
+                        <option value="">全部彩种</option>
+                        {foreach $type as $v}
+                            <option value="{$v.id}" {if($Think.get.type == $v.id)} selected {/if} >{$v.title}</option>
+                        {/foreach}
+                    </select>
+                    <label style="margin-left:10px">起止时间：</label>
+                    <input name="startTime" id="datepicker1"   value="{$Think.get.startTime}" placeholder="开始时间" type="text"> -
+                    <input name="endTime"   id="datepicker2"   value="{$Think.get.endTime}" placeholder="结束时间" type="text">
+                    <input type="submit" class="button_small button_1" value="筛选">
+                </form>
+            </div>
+        </h2>
+        <table class="eveb_box eveb_table" id="dataTable">
+            <thead>
+                <tr>
+                    <th>期号</th>
+                    <th>注单号</th>
+                    <th>时间</th>
+                    <th>彩种</th>
+                    <th>玩法</th>
+                    <th>赔率</th>
+                    <th>返点</th>
+                    <th>内容</th>
+                    <th>注数</th>
+                    <th>金额</th>
+                    <th>倍数</th>
+                    <th>中奖金额</th>
+                    <th>中奖注数</th>
+                    <th>盈亏</th>
+                </tr>
+            </thead>
+            <tbody>
+                {if(!$list['list']->isEmpty())}
+                    {foreach $list['list'] as $v}
+                        <tr>
+                            <td>{$v->actionNo}</td>
+                            <td>{$v->orderId}</td>
+                            <td>{$v->created_at}</td>
+                            <td>{$v->types->title}</td>
+                            <td>
+                                {eq name="$v->played->is_kqwf" value="0"}官方玩法-- {$v->played->name}{/eq}
+                                {eq name="$v->played->is_kqwf" value="1"}快钱玩法-- {$v->played->name}{/eq}
+                            </td>
+                            <td>{$v->bonusProp}</td>
+                            <td>{$v->fanDian}</td>
+                            <td>{$v->actionData}</td>
+                            <td>{$v->actionNum}</td>
+                            <td>{$v->mode}</td>
+                            <td>{$v->beiShu}</td>
+                            {if(!empty($v->lotteryNo))}
+                                <td>{$v->bonus}</td>
+                                <td>{$v->zjCount}</td>
+                                {if($v->cha>0)}
+                                    <td><span style="color:red">{$v->cha}</span></td> 
+                                {else}
+                                    <td><span style="color:green">{$v->cha}</span></td>
+                                {/if}
+                            {else}
+                                <td><span style="color:green">未开奖</span></td>
+                                <td><span style="color:green">未开奖</span></td>
+                                <td><span style="color:green">未开奖</span></td>
+                            {/if}
+                        </tr>
+                    {/foreach}
+                {else}
+                    <tr><td colspan="14" styl="text-align:center;">暂无数据</td></tr>
+                {/if}
+            </tbody>
+         </table>
+        <div class="eveb_amount fl">
+            当前投注<span id="pageMoney">{$list['Pagetz']}</span>元，
+            总投注<span id="totalMoney">{$list['tz']}</span>元，
+            当前盈亏<span id="pageWinOrLoseMoney">{$list['Pagecha']}</span>元，
+            总盈亏<span id="totalWinOrLoseMoney">{$list['cha']}</span>元
+        </div>
+        <div class="eveb_page fr"> {$list['list']->render();}</div>
+    </div>
+</div>
+
+<script type="text/javascript" src="/static/theme/memberTheme/theme1/js/jquery.min.js"></script>
+<script type="text/javascript" src="/static/theme/memberTheme/theme1/member/framework/jquery.validate.min.js"></script>
+<script type="text/javascript" src="/static/theme/memberTheme/theme1/member/laydate/laydate.js"></script>
+<script type="text/javascript" src="/static/theme/memberTheme/theme1/member/js/validate.js"></script>
+<script type="text/javascript" src="/static/theme/memberTheme/theme1/member/js/global.js"></script>
+<script type="text/javascript" src="/static/theme/memberTheme/theme1/member/js/jquery.form.min.js"></script>
+<script type="text/javascript" src="/static/theme/memberTheme/theme1/member/js/jquery.md5.js"></script>
+<script type="text/javascript" src="/static/theme/memberTheme/theme1/js/global.js?v=3.0"></script>
+<script type="text/javascript" src="/static/theme/memberTheme/theme1/layer/layer.js"></script>
+<script type="text/javascript" src="/static/theme/memberTheme/theme1/js/jquery.nicescroll.js"></script>
+<script type="text/javascript" src="/static/theme/memberTheme/theme1/member/js/clipboard.min.js"></script>
+<script src="/static/theme/memberTheme/theme1/js/dateFormat.js"></script>
+<script src="/static/theme/memberTheme/theme1/js/template.js"></script>
+<script src="/static/theme/memberTheme/theme1/js/jquery.cookie.js"></script><!--自定义封装函数-->
+<script src="/static/theme/memberTheme/theme1/js/jquery.md5.js"></script><!--自定义封装函数-->
+<script src="/__JS__/datepicker/bootstrap-datepicker.js"></script>
+<script src="/__JS__/datepicker/bootstrap-datepicker.zh-CN.js"></script>
+<script type="text/javascript">
+$(function(){
+        var obj = {
+                autoclose: true,
+                todayHighlight: true,
+                language:"zh-CN", 
+                format:"yyyy-mm-dd" 
+           };
+    $("#datepicker1").datepicker(obj)
+    $("#datepicker2").datepicker(obj);
+});
+
+</script>
+<script>
+    $(function() {
+        parent.hideLoading();
+    });
+</script>
+</body>
+</html>

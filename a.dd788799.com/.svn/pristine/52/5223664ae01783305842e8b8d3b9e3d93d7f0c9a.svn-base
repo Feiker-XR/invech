@@ -1,0 +1,349 @@
+<?php
+namespace app\common\model;
+
+use app\common\traits\model\MyTable;
+
+class LotteryData extends Base{
+
+    use MyTable;
+
+    protected $createTime = 'created_at';
+    protected $updateTime = '';
+    protected $autoWriteTimestamp = 'datetime';
+
+    protected $table = 'gygy_lottery_data';
+
+    protected static $id_table = 'gygy_lottery_data_id';    
+    protected $prefix = 'gygy_lottery_data';
+    protected $prefix_db = 'lottery_data';
+
+    //      phase,data
+    //code ,number,data,
+
+    public function getNumberAttr($value)
+    {
+        return $this->data['phase'];
+    }
+
+    public function setNumberAttr($value,$data)
+    {
+        return $this->data['phase'] = $value;
+    }
+
+    public function getQishuAttr($value)
+    {
+        return $this->data['phase'];
+    }
+
+    public function setQishuAttr($value,$data)
+    {
+        return $this->data['phase'] = $value;
+    }    
+
+    public function getDataAttr($value)
+    {
+        //07,10,12,14,17,23,26,28,33,34,36,40,42,43,47,49,60,71,75,77+01
+        $code = $this->data['code'];
+        $method = 'format_'.$code;
+        
+        if(method_exists($this,$method)){
+            return $this->$method();
+        }
+
+        return $this->data['data'];
+    }    
+
+    private function format_bjkl8(){
+        $data = $this->data['data'];
+        return strstr($data, '+', true);
+    }
+
+    public static function getByCodeAndPeriod($code,$period){
+        $query = (new static)->db(true,false);
+        
+        $query->where('code',$code)->where('phase',$period);
+        return $query->find();
+    }
+
+    public static function getRecentByCode($code){
+        $query = (new static)->db(true,false);
+        
+        $query->where('code',$code)->order('id desc');
+   
+        return $query->find();
+    }
+
+    public static function getCachedTrendByCode($code){
+        $trend_cache_size = config('trend_cache_size')??200;
+        $cache_key = 'trend_' . $code;
+        $data = cache($cache_key);
+        if(!$data){
+            $query = (new static)->db(true,false);
+            $data = $query->where('code',$code)->order('id desc')
+            ->limit($trend_cache_size)->select();
+            cache($cache_key,$data);
+        }
+        return $data;
+    }
+
+    public function rmCachedTrend(){
+        $code = $this->data['code'];
+        $cache_key = 'trend_' . $code;
+        cache($cache_key,null);
+    }
+
+    public static function addApiData($lottery){
+        
+        if( !( isset($lottery['type']) && isset($lottery['period']) && isset($lottery['number']) ) ){
+            throw new \Exception('API数据格式有误!');
+        }
+        
+        $data = [
+            'code'  =>  $lottery['type'],
+            'phase' =>  $lottery['period'],
+            'data'  =>  $lottery['number'],
+        ];
+
+        return self::create($data);
+    }
+
+    public function getBetBuild(){
+        
+        $types = Type::nameMaps();
+        $type = $types[$this->code];//彩种对象,不用动态属性避免查询
+
+        $query = Bet::where('type',$type->id)
+                ->where('actionNo',$this->number)
+                ->where('lotteryNo','');
+        return $query;
+    }
+
+    //开奖接口
+    public static function getDataForApi($code){
+        if( !in_array($code,['lg5fc','lg2fc','lg1fc',]) ){
+            throw new \Exception('code not valid!');
+        }
+        $datas = self::where('code',$code)
+        ->order('id desc')
+        ->limit(5)->select();
+
+        $ret = [];
+        foreach ($datas as $data) {
+            $arr = [
+                'type'      =>  $code,
+                'period'    =>  $data->phase,
+                'number'    =>  $data->data,
+                'dateline'  =>  $data->created_at,
+            ];
+            $ret[] = $arr;
+        }
+        return $ret;
+    }
+     public function TypeName(){
+
+        return $this->belongsTo('Type','code','name');
+    }
+    //---------------api---------------------------
+    public static function getHistory($code){
+        
+        return self::where('code',$code)->order('phase DESC')->paginate();
+    }
+    //----------------后台------------------
+    public static function getList($params){
+        $query  =   self::order('id desc');
+        if($params['code']??null){
+            $query->where('code',$params['code']);
+        }
+        if($params['phase']??null){
+            $query->where('phase','like','%'.$params['phase'].'%');
+        }
+        $query->with('TypeName');
+        return $query->paginate();
+    }
+
+    public function parse(){
+        if(empty($this->data['data'])){
+            throw new \Exception("data is empty");            
+        }
+        $code = $this->data['code'];
+        require_once(ROOT_PATH.'swoole/kqwf_algo.php');
+        return $this->{'parse_'.$code}();                  
+    }
+
+    public function parse_cqssc(){
+
+        $data = $this->data['data'];
+        $data = _arr($data);
+        $sum = array_sum($data);
+        $res = [
+            '总和' => [$sum,ssc_zhds($sum),ssc_zhdx($sum),],
+        ];
+
+        $ds = [];
+        $dx = [];
+        $zh = [];
+
+        foreach($data as $ball){
+            $ssc_ds =   ssc_ds($ball);
+            $ssc_dx =   ssc_dx($ball);
+            $ssc_zh =   ssc_zh($ball);
+            $ds = array_merge($ds,[$ssc_ds]);
+            $dx = array_merge($dx,[$ssc_dx]);
+            $zh = array_merge($zh,[$ssc_zh]);
+        }
+
+        $res = array_merge($res,[
+            '1-5大小' =>  $dx,
+            '1-5单双' =>  $ds,
+            '1-5质合' =>  $zh,
+        ]);
+
+        return $res;
+    }
+
+    //暂无快钱玩法;168上也没有
+    public function parse_bjkl8(){
+        return [];
+    }
+
+    public function parse_bjpk10(){
+
+        $data = $this->data['data'];
+        $data = _arr($data);
+        //$sum = array_sum($data);
+
+        $gyh = $data[0] + $data[1];
+        $res = [
+            '总和' => [$sum,pk10_gyh_ds($gyh),pk10_gyh_dx($gyh),],
+        ];
+
+        $lh = [];
+
+        //pk10_dx,pk10_ds
+        foreach($data as $key=>$ball){
+            if($key<5){
+                $pk10_lh = pk10_lh($data,$key+1);
+                $lh = array_merge($lh,[$pk10_lh]);
+            }
+
+        }
+
+        $res = array_merge($res,[
+            '1-5龙虎' =>  $lh,
+        ]);
+
+        return $res;
+    }
+
+    public function parse_cqklsf(){
+
+        $data = $this->data['data'];
+        $data = _arr($data);
+        $sum = array_sum($data);
+        $res = [
+            '总和' => [$sum,klsf_zhds($sum),klsf_zhdx($sum),klsf_wszwdx($sum)],
+        ];
+
+        $lh = [];
+        foreach($data as $key=>$ball){
+            if($key<4){
+                $klsf_kjlh = klsf_kjlh($data,$key+1);
+                $lh = array_merge($lh,[$klsf_kjlh]);
+            }
+        }
+
+        $res = array_merge($res,[
+            '1-4龙虎' =>  $lh,
+        ]);
+
+        return $res;
+    }
+
+    public function parse_djssc(){
+        return $this->parse_cqssc();
+    }
+
+    public function parse_fc3d(){
+        $data   = $this->data['data'];
+        $data   = _arr($data);
+        $sum    = array_sum($data);
+        $bshz   = intval($data[0])+intval($data[1]);//百十和值
+        $bghz   = intval($data[0])+intval($data[2]);//百个和值
+        $sghz   = intval($data[1])+intval($data[2]);//十个和值
+        $res    = [
+            '佰拾和' => [$bshz,fc3d_ds($bshz),fc3d_wszwdx($bshz)],
+            '佰个和' => [$bghz,fc3d_ds($bghz),fc3d_wszwdx($bghz)],
+            '拾个和' => [$sghz,fc3d_ds($sghz),fc3d_wszwdx($sghz)],
+            '总和'   => [$sum,fc3d_ds($sum),fc3d_dx3($sum)],
+        ];
+        return $res;
+    }
+
+    public function parse_gd11x5(){
+       
+    }
+
+    public function parse_gdklsf(){
+        return $this->parse_cqklsf();
+    }
+
+    public function parse_hgssc(){
+        return $this->parse_cqssc();
+    }
+
+    public function parse_jsk3(){
+        $data   = $this->data['data'];
+        $data   = _arr($data);
+        $sum    = array_sum($data);
+        $res    = [
+            '总和'   => [$sum,k3_dx($sum),k3_ds($sum)],
+        ];
+        return $res;
+    }
+
+    public function parse_jx11x5(){
+
+    }
+
+    public function parse_lg1fc(){
+        return $this->parse_cqssc();
+    }
+
+    public function parse_2g1fc(){
+        return $this->parse_cqssc();
+    }
+
+    public function parse_5g1fc(){
+        return $this->parse_cqssc();
+    }    
+    public function parse_mlaft(){
+        return $this->parse_bjpk10();
+    }
+
+    public function parse_pl3(){
+        return $this->parse_fc3d();
+    }
+
+    public function parse_tjssc(){
+        return $this->parse_cqssc();
+    }
+
+    public function parse_txssc(){
+        return $this->parse_cqssc();
+    }
+
+    public function parse_xjssc(){
+        return $this->parse_cqssc();
+    }
+
+    public function parse_xy28(){
+        $data   = $this->data['data'];
+        $data   = _arr($data);
+        $sum    = array_sum($data);
+        $res    = [
+            '总和'   => [$sum,xy28_dx($sum),xy28_ds($sum)],
+        ];
+        return $res;
+    }  
+
+}

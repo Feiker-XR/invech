@@ -1,0 +1,67 @@
+{extend name="public/user_head"/}
+{block name="body"}
+<header class="header">
+    <i class='left' onclick="javascript:history.back(-1);">返回</i>
+    <h1>提现记录</h1>
+</header>
+<main class="inner_body">
+    <section class="fund_detail">
+         <ul class="condition">
+            <li><span>提现时间：</span><input type="date" value="" id="_date"/></li>
+        </ul>
+    </section>
+    <section class="table">
+        <div id="pullrefresh" class="mui-content mui-scroll-wrapper">
+            <div class="mui-scroll">
+                <table>
+                    <thead>
+                    <tr>
+                        <th>用户名</th>
+                        <th>提款金额</th>
+                        <th>申请时间</th>
+                        <th>到账金额</th>
+                    </tr>
+                    </thead>
+                    <tbody id="lists">
+                        {if(!$list->isEmpty())}
+                            {foreach $list as $v}
+                                <tr>
+                                    <td>{if(!empty($v->user->username))}{$v->user->username}{/if}</td>
+                                    <td>{$v->amount}</td>
+                                    <td>{$v->created_at}</td>
+                                    <td>{$v->real_amount}</td>
+                                </tr>
+                            {/foreach}
+                        {else}
+                            <tr><td colspan="4" styl="text-align:center;">暂无数据</td></tr>
+                        {/if}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <input type="hidden" id="startTime" value=""/>
+        <input type="hidden" id="endTime" value=""/>
+    </section>
+</main>
+<script type="text/javascript">
+    var base_url = '/agent/withdraw_record';
+    var page = 1;
+    $(function () {
+        // 设置容器高度
+         $('section.table').height($('main').height()-$('ul.condition').height() - $('section.table table tr td').height());
+         // 设置默认日期
+        //$('#_date').val(formatDate(new Date()).split(' ')[0]);
+    });
+    // 搜寻日期
+    $('#_date').change(function(){
+        var stime = $("#_date").val();
+        var endTime = stime + " 23:59:59";
+            stime = stime+" 00:00:00";
+        $('#startTime').val(stime);
+        $('#endTime').val(endTime);
+        var _url = base_url + '?startTime='+stime+'&endTime='+endTime;
+        page = 1;
+       loadMore(_url);
+    });
+</script>
+{/block}

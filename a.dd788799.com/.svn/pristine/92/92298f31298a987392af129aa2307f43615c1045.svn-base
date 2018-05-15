@@ -1,0 +1,120 @@
+section.info div ul li strong, section.charge div ul li strong, section.records div ul li strong, section.security div ul li strong{
+    font-size:.24rem;
+    top: -0.02rem;
+    color:#666;
+    font-weight: normal;
+}
+section.info ul li span{
+    display: inline-block;
+    width: 100%;
+    font-size:.3rem;
+    color:#ff4200;
+    text-align: center;
+    font-weight: bold;
+}
+section.info div ol li strong{
+    color:#ff4200;
+}
+section.info div ol li:nth-child(2) strong{
+    color:#ff8400;
+}
+section.charge{
+    height: 1.57rem;
+}
+section.charge div ul{
+    height: 1.28rem;
+}
+section.charge div ul li{
+    width:33.3333%;
+    text-align: center;
+    height: 1.28rem;
+    padding-left: 0;
+}
+section.charge div ul li img{
+    width: .56rem;
+    height: .56rem;
+    display: inline-block;
+    margin-top: .1rem;
+    margin-bottom: 0.05rem;
+}
+section.charge div ul li strong{
+    display: block;
+    width: 100%;
+}
+
+/**推广链接**/
+.charge_user.ol_box.links{
+    background: none;
+}
+.charge_user.ol_box.links ol li{
+    width:100%;
+    height: 1.3rem;
+    margin-bottom:.2rem;
+    background: #fff;
+    border:none;
+    margin-left:0;
+}
+.charge_user.ol_box.links ol li p{
+    text-align: left;
+    width: 80%;
+    height: .33rem;
+    border-left: .03rem solid #ff4200;
+    float: left;
+    font-size: .28rem;
+    color: #333;
+    margin-top: .48rem;
+    line-height: .28rem;
+    margin-left: .2rem;
+    border-top-left-radius: 2px;
+    border-bottom-left-radius: 2px;
+    padding-left: .2rem;
+}
+.charge_user.ol_box.links ol li button,.check{
+    display: inline-block;
+    border:1px solid #ff4200;
+    border-radius: 15px;
+    color:#ff4200;
+    text-align: center;
+    float: right;
+    width: .9rem;
+    height: .4rem;
+    line-height: .4rem;
+    font-size:.24rem;
+    background: none;
+    outline: none;
+    margin-top: .45rem;
+    margin-right: .2rem;
+}
+/***添加会员**/
+.header.add{
+    top:0;
+}
+
+.container main ul.login{
+    margin-top: .0rem;
+    background: #fff;
+    width: 100%;
+    margin-left: 0;
+}
+.container main ul.login li{
+    width:90%;
+    margin-left:5%;
+}
+#submit.submit{
+    background:#ff4200;
+}
+
+/** search header **/
+.search{
+    width:.33rem;
+    height: .33rem;
+}
+.condition.agent{
+
+}
+.condition.agent li{
+
+}
+.condition.agent li input{
+
+}

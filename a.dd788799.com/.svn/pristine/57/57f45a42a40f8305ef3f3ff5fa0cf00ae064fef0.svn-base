@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title></title>
+    <link rel="stylesheet" href="/static/theme/zstTheme/theme1/css/cabel-v1.css?v=20170206" type="text/css">
+    <link rel="stylesheet" href="/static/theme/zstTheme/theme1/css/style.css?v=201709061" type="text/css"><!--页面CSS-->
+    <link rel="stylesheet" href="/static/theme/zstTheme/theme1/css/animate.min.css?v=20170206" type="text/css"><!--CSS3动画-->
+    <link rel="stylesheet" href="/static/theme/zstTheme/theme1/css/lottery.css?v=20170912" type="text/css"><!--页面CSS-->
+    <link rel="stylesheet" href="/static/theme/zstTheme/theme1/css/liMarquee.css?v=20170206" type="text/css"><!--页面CSS-->
+    <link rel="stylesheet" href="/static/theme/zstTheme/theme1/jRange/jquery.range.css?v=20170402" type="text/css">
+    <link rel="stylesheet" href="/static/theme/zstTheme/theme1/css/global.css?v=2.0" type="text/css"><!--页面CSS-->
+    <link rel="stylesheet" href="/static/theme/zstTheme/theme1/css/other.css?v=20170817" type="text/css"><!--页面CSS-->
+    <link rel="stylesheet" href="/static/theme/zstTheme/theme1/css/gfwf.css?v=201709021" type="text/css"><!--页面CSS-->
+    <script>
+    <!--
+    // 屏蔽JS错误
+//    window.onerror = function(){return true;}
+    // -->
+</script>
+<script>
+    var CONFIG = {
+        BASEURL: "/",    // 根路径
+        RESURL: "/static/theme/zstTheme/theme1/"         // 资源路径
+    };
+</script>
+<script src="/static/theme/zstTheme/theme1/js/mobile-detect.min.js"></script><script>
+    var fengge1 = 'f42023';
+</script>
+<style>
+
+        .reResulttBg{background: #f42023;} 
+        .process .layout .monty ul li,.process .layout .list_tems .date:after,.list ul li .slide p.acti,.headmemberbg{background: #f42023;}
+        .process .layout .list_tems .date span, .process .layout .list_tems .date h3,.eveb_amount span,.color-e77c3c,.eveb_setting_table a,.xieyiCss，.gcdtgd{color: #f42023!important;}
+        .eveb_sub_nav_type a:hover, .eveb_sub_nav_type li.on a:link, .eveb_sub_nav_type li.on a:visited{color: #f42023!important;font-weight: 700;border-bottom-color: #e1e1e1;background: #f8f8f8;}
+        .list ul li .slide p:hover,.letterbtn-bg{background: #f42023!important;color: white;}
+        .list h3 a{background: #f42023;border-bottom: 3px solid #a92309; height: 47px; line-height: 47px;}
+        .help_l_menu li .t.sli{border-left: 5px solid #f42023;}
+        .withdraw-bg-input{border: 2px solid #f42023!important;}
+        .clearBet_template .l span i{background: #f42023 url(/static/theme/zstTheme/theme1//img/tm-mdl-icon.png) no-repeat!important; border-radius: 50%;background-position: 0 41%!important;}
+
+
+
+        .eveb_nav_sub .on,.button_1, .button_1:link, .button_1:visited,.alert_col h5,.onlineService,.layui-layer-popup .layui-layer-title,.xzqd,.xzqdlskj,.game_name .box2_stage p span i.acti,.Betting,.Single,.list_ject ul li .Result p a.acti,.list_ject ul li .Result p a.acti:hover,.top{background:#f42023!important}
+        .eveb_nav_sub .on a,.bankInfo .name,.help_l_menu .title p .sum,.help_r_main .light,.game_name .box2_stage p span i,.game_name .box1_name  p i,.Account p a.red{color:#f42023!important}
+        .eveb_nav_sub .on,.game_name .box2_stage p span{border:1px solid #f42023!important;}
+        .eveb_nav_sub .on,.game_name .box2_stage p span i.acti{color:#fff!important;}
+        .eveb_nav_sub .on a{border-top:1px #f42023 solid!important;}
+        .eveb_nav_sub ul{border-bottom:1px #f42023 solid!important;}
+        #apptop{background: #f42023}
+        .alert_col div::-webkit-scrollbar-thumb {background-color: #f42023!important;}
+
+        
+       /* .men_list{background-color: #f42023!important;}
+        .main_layout .left_layout h1{background-color: #f42023!important;}
+        .men_list .nav_list ul li:after{background-color: #f42023!important;}
+        .main_layout .right_layotu .right_wrap .login ul li button{background-color: #f42023!important;border-bottom: 2px solid #f42023!important;}
+        .main_layout .right_layotu .right_wrap .down_file{background-color: #f42023!important;}
+        .main_layout .right_layotu .left_wrap .Bettingbag .num_bett .val_add p.fr a.a1{background-color: #f42023!important;border-bottom: 2px solid #f42023!important;}
+        .main_layout .right_layotu .chart .title h2{background-color: #f42023!important;border-bottom: 2px solid #f42023!important;}
+        .main_layout .right_layotu .chart .title{border-bottom: 1px solid #f42023!important;}
+        .main_layout .right_layotu .chart .title a{color: #f42023!important;}
+        .main_layout .right_layotu .left_wrap .tabs_cg ul li.acti i{border-left: 1px solid #f42023!important;  border-right: 1px solid #f42023!important;}
+        .main_layout .right_layotu .left_wrap .tabs_cg ul li.acti{border-top: 3px solid #f42023!important;}
+        .main_layout .right_layotu .left_wrap .tabs_cg{border-bottom: 1px solid #f42023!important;}
+        .main_layout .left_layout ul li i.i0{background-color: #f42023!important;}
+        .main_layout .left_layout ul li i.i0:after{border-right: 8px solid #f42023!important;}
+        .main_layout .right_layotu .right_wrap .Notice b{color: #f42023!important;}
+        .main_layout .right_layotu .right_wrap .login h2 p{border-bottom: 2px solid #f42023!important;}
+        .main_layout .right_layotu .right_wrap .login h2{border-bottom: 1px solid #f42023!important;}
+        .record{border-top: 2px solid #f42023!important;}*/
+
+
+
+    </style>
+<style>
+
+
+        .head div h5,.Betting .tabs ul li,.top .nav h1{background:#d51910!important}
+        .jf_box .url a,.eveb_form label.error,.eveb_transfer_box .center_wallet .money,.eveb_transfer_box .wallet_list li p{color:#d51910!important}
+        .Betting .tabs ul li.acti{background:#fff!important}
+        .button_1, .button_1:link, .button_1:visited{border:1px solid #d51910!important;}
+    </style>
+<style>
+        a:hover{
+            color: red;
+
+        }
+        a:active{
+            color:deepskyblue;
+        }
+    </style>
+</head>
+<body>
+<div class="zs_list">
+    <h2>高频彩</h2>
+    <ul>
+        <li>
+            <div class="p-img fl"><img src="/static/theme/zstTheme/theme1/img/p3.png"></div>
+            <div class="p-url fl">
+                <h3>北京PK10</h3>
+                <a href="javascript:void(0)" onclick="goZst('/ssc/zst/pk10.html?type=1')">基本走势</a>
+                <a href="javascript:void(0)" onclick="goZst('/ssc/zst/pk10.html?type=2')">K线图</a>
+                <a href="javascript:void(0)" onclick="goZst('/ssc/zst/pk10.html?type=3')">直方图</a>
+                <a href="javascript:void(0)" onclick="goZst('/ssc/zst/pk10.html?type=4')">统计遗漏</a>
+                <a href="javascript:void(0)" onclick="goZst('/ssc/zst/pk10.html?type=5')">历史开奖数据</a>
+            </div>
+        </li>
+        <li>
+            <div class="p-img fl"><img src="/static/theme/zstTheme/theme1/img/jspk10.png"></div>
+            <div class="p-url fl">
+                <h3>极速PK10</h3>
+                <a href="javascript:void(0)" onclick="goZst('/ssc/zst/jspk10.html?type=1')">基本走势</a>
+                <a href="javascript:void(0)" onclick="goZst('/ssc/zst/jspk10.html?type=2')">K线图</a>
+                <a href="javascript:void(0)" onclick="goZst('/ssc/zst/jspk10.html?type=3')">直方图</a>
+                <a href="javascript:void(0)" onclick="goZst('/ssc/zst/jspk10.html?type=4')">统计遗漏</a>
+                <a href="javascript:void(0)" onclick="goZst('/ssc/zst/jspk10.html?type=5')">历史开奖数据</a>
+            </div>
+        </li>
+        <li>
+            <div class="p-img fl"><img src="/static/theme/zstTheme/theme1/img/xyft.png"></div>
+            <div class="p-url fl">
+                <h3>幸运飞艇</h3>
+                <a href="javascript:void(0)" onclick="goZst('/ssc/zst/xyft.html?type=1')">基本走势</a>
+                <a href="javascript:void(0)" onclick="goZst('/ssc/zst/xyft.html?type=2')">K线图</a>
+                <a href="javascript:void(0)" onclick="goZst('/ssc/zst/xyft.html?type=3')">直方图</a>
+                <a href="javascript:void(0)" onclick="goZst('/ssc/zst/xyft.html?type=4')">统计遗漏</a>
+                <a href="javascript:void(0)" onclick="goZst('/ssc/zst/xyft.html?type=5')">历史开奖数据</a>
+            </div>
+        </li>
+        <li>
+            <div class="p-img fl"><img src="/static/theme/zstTheme/theme1/img/ffssc.png"></div>
+            <div class="p-url fl">
+                <h3>分分时时彩</h3>
+                <a href="javascript:void(0)" onclick="goZst('/ssc/zst/ffssc.html?type=1')">基本走势</a>
+                <a href="javascript:void(0)" onclick="goZst('/ssc/zst/ffssc.html?type=2')">K线图</a>
+                <a href="javascript:void(0)" onclick="goZst('/ssc/zst/ffssc.html?type=3')">直方图</a>
+                <a href="javascript:void(0)" onclick="goZst('/ssc/zst/ffssc.html?type=4')">统计遗漏</a>
+                <a href="javascript:void(0)" onclick="goZst('/ssc/zst/ffssc.html?type=5')">历史开奖数据</a>
+            </div>
+        </li>
+        <li>
+            <div class="p-img fl"><img src="/static/theme/zstTheme/theme1/img/p1.png"></div>
+            <div class="p-url fl">
+                <h3>重庆时时彩</h3>
+                <a href="javascript:void(0)" onclick="goZst('/ssc/zst/cqssc.html?type=1')">基本走势</a>
+                <a href="javascript:void(0)" onclick="goZst('/ssc/zst/cqssc.html?type=2')">K线图</a>
+                <a href="javascript:void(0)" onclick="goZst('/ssc/zst/cqssc.html?type=3')">直方图</a>
+                <a href="javascript:void(0)" onclick="goZst('/ssc/zst/cqssc.html?type=4')">统计遗漏</a>
+                <a href="javascript:void(0)" onclick="goZst('/ssc/zst/cqssc.html?type=5')">历史开奖数据</a>
+            </div>
+        </li>
+        <li>
+            <div class="p-img fl"><img src="/static/theme/zstTheme/theme1/img/p8.png"></div>
+            <div class="p-url fl">
+                <h3>天津时时彩</h3>
+                <a href="javascript:void(0)" onclick="goZst('/ssc/zst/tjssc.html?type=1')">基本走势</a>
+                <a href="javascript:void(0)" onclick="goZst('/ssc/zst/tjssc.html?type=2')">K线图</a>
+                <a href="javascript:void(0)" onclick="goZst('/ssc/zst/tjssc.html?type=3')">直方图</a>
+                <a href="javascript:void(0)" onclick="goZst('/ssc/zst/tjssc.html?type=4')">统计遗漏</a>
+                <a href="javascript:void(0)" onclick="goZst('/ssc/zst/tjssc.html?type=5')">历史开奖数据</a>
+            </div>
+        </li>
+        <li>
+            <div class="p-img fl"><img src="/static/theme/zstTheme/theme1/img/p9.png"></div>
+            <div class="p-url fl">
+                <h3>新疆时时彩</h3>
+                <a href="javascript:void(0)" onclick="goZst('/ssc/zst/xjssc.html?type=1')">基本走势</a>
+                <a href="javascript:void(0)" onclick="goZst('/ssc/zst/xjssc.html?type=2')">K线图</a>
+                <a href="javascript:void(0)" onclick="goZst('/ssc/zst/xjssc.html?type=3')">直方图</a>
+                <a href="javascript:void(0)" onclick="goZst('/ssc/zst/xjssc.html?type=4')">统计遗漏</a>
+                <a href="javascript:void(0)" onclick="goZst('/ssc/zst/xjssc.html?type=5')">历史开奖数据</a>
+            </div>
+        </li>
+        <li>
+            <div class="p-img fl"><img src="/static/theme/zstTheme/theme1/img/efssc.png"></div>
+            <div class="p-url fl">
+                <h3>两分时时彩</h3>
+                <a href="javascript:void(0)" onclick="goZst('/ssc/zst/efssc.html?type=1')">基本走势</a>
+                <a href="javascript:void(0)" onclick="goZst('/ssc/zst/efssc.html?type=2')">K线图</a>
+                <a href="javascript:void(0)" onclick="goZst('/ssc/zst/efssc.html?type=3')">直方图</a>
+                <a href="javascript:void(0)" onclick="goZst('/ssc/zst/efssc.html?type=4')">统计遗漏</a>
+                <a href="javascript:void(0)" onclick="goZst('/ssc/zst/efssc.html?type=5')">历史开奖数据</a>
+            </div>
+        </li>
+        <li>
+            <div class="p-img fl"><img src="/static/theme/zstTheme/theme1/img/sfssc.png"></div>
+            <div class="p-url fl">
+                <h3>三分时时彩</h3>
+                <a href="javascript:void(0)" onclick="goZst('/ssc/zst/sfssc.html?type=1')">基本走势</a>
+                <a href="javascript:void(0)" onclick="goZst('/ssc/zst/sfssc.html?type=2')">K线图</a>
+                <a href="javascript:void(0)" onclick="goZst('/ssc/zst/sfssc.html?type=3')">直方图</a>
+                <a href="javascript:void(0)" onclick="goZst('/ssc/zst/sfssc.html?type=4')">统计遗漏</a>
+                <a href="javascript:void(0)" onclick="goZst('/ssc/zst/sfssc.html?type=5')">历史开奖数据</a>
+            </div>
+        </li>
+        <li>
+            <div class="p-img fl"><img src="/static/theme/zstTheme/theme1/img/wfssc.png"></div>
+            <div class="p-url fl">
+                <h3>五分时时彩</h3>
+                <a href="javascript:void(0)" onclick="goZst('/ssc/zst/wfssc.html?type=1')">基本走势</a>
+                <a href="javascript:void(0)" onclick="goZst('/ssc/zst/wfssc.html?type=2')">K线图</a>
+                <a href="javascript:void(0)" onclick="goZst('/ssc/zst/wfssc.html?type=3')">直方图</a>
+                <a href="javascript:void(0)" onclick="goZst('/ssc/zst/wfssc.html?type=4')">统计遗漏</a>
+                <a href="javascript:void(0)" onclick="goZst('/ssc/zst/wfssc.html?type=5')">历史开奖数据</a>
+            </div>
+        </li>
+        <li>
+            <div class="p-img fl"><img src="/static/theme/zstTheme/theme1/img/jsk3.png"></div>
+            <div class="p-url fl">
+                <h3>江苏快3</h3>
+                <a href="javascript:void(0)" onclick="goZst('/ssc/zst/jsk3.html?type=1')">基本走势</a>
+                <a href="javascript:void(0)" onclick="goZst('/ssc/zst/jsk3.html?type=2')">K线图</a>
+                <a href="javascript:void(0)" onclick="goZst('/ssc/zst/jsk3.html?type=3')">直方图</a>
+                <a href="javascript:void(0)" onclick="goZst('/ssc/zst/jsk3.html?type=4')">统计遗漏</a>
+                <a href="javascript:void(0)" onclick="goZst('/ssc/zst/jsk3.html?type=5')">历史开奖数据</a>
+            </div>
+        </li>
+        <li>
+            <div class="p-img fl"><img src="/static/theme/zstTheme/theme1/img/hbk3.png"></div>
+            <div class="p-url fl">
+                <h3>湖北快3</h3>
+                <a href="javascript:void(0)" onclick="goZst('/ssc/zst/hbk3.html?type=1')">基本走势</a>
+                <a href="javascript:void(0)" onclick="goZst('/ssc/zst/hbk3.html?type=2')">K线图</a>
+                <a href="javascript:void(0)" onclick="goZst('/ssc/zst/hbk3.html?type=3')">直方图</a>
+                <a href="javascript:void(0)" onclick="goZst('/ssc/zst/hbk3.html?type=4')">统计遗漏</a>
+                <a href="javascript:void(0)" onclick="goZst('/ssc/zst/hbk3.html?type=5')">历史开奖数据</a>
+            </div>
+        </li>
+        <li>
+            <div class="p-img fl"><img src="/static/theme/zstTheme/theme1/img/ahk3.png"></div>
+            <div class="p-url fl">
+                <h3>安徽快3</h3>
+                <a href="javascript:void(0)" onclick="goZst('/ssc/zst/ahk3.html?type=1')">基本走势</a>
+                <a href="javascript:void(0)" onclick="goZst('/ssc/zst/ahk3.html?type=2')">K线图</a>
+                <a href="javascript:void(0)" onclick="goZst('/ssc/zst/ahk3.html?type=3')">直方图</a>
+                <a href="javascript:void(0)" onclick="goZst('/ssc/zst/ahk3.html?type=4')">统计遗漏</a>
+                <a href="javascript:void(0)" onclick="goZst('/ssc/zst/ahk3.html?type=5')">历史开奖数据</a>
+            </div>
+        </li>
+        <li>
+            <div class="p-img fl"><img src="/static/theme/zstTheme/theme1/img/jlk3.png"></div>
+            <div class="p-url fl">
+                <h3>吉林快3</h3>
+                <a href="javascript:void(0)" onclick="goZst('/ssc/zst/jlk3.html?type=1')">基本走势</a>
+                <a href="javascript:void(0)" onclick="goZst('/ssc/zst/jlk3.html?type=2')">K线图</a>
+                <a href="javascript:void(0)" onclick="goZst('/ssc/zst/jlk3.html?type=3')">直方图</a>
+                <a href="javascript:void(0)" onclick="goZst('/ssc/zst/jlk3.html?type=4')">统计遗漏</a>
+                <a href="javascript:void(0)" onclick="goZst('/ssc/zst/jlk3.html?type=5')">历史开奖数据</a>
+            </div>
+        </li>
+        <li>
+            <div class="p-img fl"><img src="/static/theme/zstTheme/theme1/img/p10.png"></div>
+            <div class="p-url fl">
+                <h3>重庆幸运农场</h3>
+                <a href="javascript:void(0)" onclick="goZst('/ssc/zst/xync.html?type=1')">基本走势</a>
+                <a href="javascript:void(0)" onclick="goZst('/ssc/zst/xync.html?type=2')">K线图</a>
+                <a href="javascript:void(0)" onclick="goZst('/ssc/zst/xync.html?type=3')">直方图</a>
+                <a href="javascript:void(0)" onclick="goZst('/ssc/zst/xync.html?type=4')">统计遗漏</a>
+                <a href="javascript:void(0)" onclick="goZst('/ssc/zst/xync.html?type=5')">历史开奖数据</a>
+            </div>
+        </li>
+        <li>
+            <div class="p-img fl"><img src="/static/theme/zstTheme/theme1/img/p7.png"></div>
+            <div class="p-url fl">
+                <h3>广东快乐十分</h3>
+                <a href="javascript:void(0)" onclick="goZst('/ssc/zst/klsf.html?type=1')">基本走势</a>
+                <a href="javascript:void(0)" onclick="goZst('/ssc/zst/klsf.html?type=2')">K线图</a>
+                <a href="javascript:void(0)" onclick="goZst('/ssc/zst/klsf.html?type=3')">直方图</a>
+                <a href="javascript:void(0)" onclick="goZst('/ssc/zst/klsf.html?type=4')">统计遗漏</a>
+                <a href="javascript:void(0)" onclick="goZst('/ssc/zst/klsf.html?type=5')">历史开奖数据</a>
+            </div>
+        </li>
+        <li>
+            <div class="p-img fl"><img src="/static/theme/zstTheme/theme1/img/p6.png"></div>
+            <div class="p-url fl">
+                <h3>北京快乐8</h3>
+                <a href="javascript:void(0)" onclick="goZst('/ssc/zst/kl8.html?type=1')">基本走势</a>
+                <a href="javascript:void(0)" onclick="goZst('/ssc/zst/kl8.html?type=2')">K线图</a>
+                <a href="javascript:void(0)" onclick="goZst('/ssc/zst/kl8.html?type=3')">直方图</a>
+                <a href="javascript:void(0)" onclick="goZst('/ssc/zst/kl8.html?type=4')">统计遗漏</a>
+                <a href="javascript:void(0)" onclick="goZst('/ssc/zst/kl8.html?type=5')">历史开奖数据</a>
+            </div>
+        </li>
+        <li>
+            <div class="p-img fl"><img src="/static/theme/zstTheme/theme1/img/jspk10.png"></div>
+            <div class="p-url fl">
+                <h3>极速PK10</h3>
+                <a href="javascript:void(0)" onclick="goZst('/ssc/zst/jspk10.html?type=1')">基本走势</a>
+                <a href="javascript:void(0)" onclick="goZst('/ssc/zst/jspk10.html?type=2')">K线图</a>
+                <a href="javascript:void(0)" onclick="goZst('/ssc/zst/jspk10.html?type=3')">直方图</a>
+                <a href="javascript:void(0)" onclick="goZst('/ssc/zst/jspk10.html?type=4')">统计遗漏</a>
+                <a href="javascript:void(0)" onclick="goZst('/ssc/zst/jspk10.html?type=5')">历史开奖数据</a>
+            </div>
+        </li>
+
+        <li>
+            <div class="p-img fl"><img src="/static/theme/zstTheme/theme1/img/gd11x5.png"></div>
+            <div class="p-url fl">
+                <h3>广东11选5</h3>
+                <a href="javascript:void(0)" onclick="goZst('/ssc/zst/gd11x5.html?type=1')">基本走势</a>
+                <a href="javascript:void(0)" onclick="goZst('/ssc/zst/gd11x5.html?type=2')">K线图</a>
+                <a href="javascript:void(0)" onclick="goZst('/ssc/zst/gd11x5.html?type=3')">直方图</a>
+                <a href="javascript:void(0)" onclick="goZst('/ssc/zst/gd11x5.html?type=4')">统计遗漏</a>
+                <a href="javascript:void(0)" onclick="goZst('/ssc/zst/gd11x5.html?type=5')">历史开奖数据</a>
+            </div>
+        </li>
+
+        <!--
+        <li>
+            <div class="p-img fl"><img src="/static/theme/zstTheme/theme1/img/sflhc.png"></div>
+            <div class="p-url fl">
+                <h3>十分六合彩</h3>
+                <a href="javascript:void(0)" onclick="goZst('/ssc/zst/sflhc.html?type=1')">基本走势</a>
+                <a href="javascript:void(0)" onclick="goZst('/ssc/zst/sflhc.html?type=2')">K线图</a>
+                <a href="javascript:void(0)" onclick="goZst('/ssc/zst/sflhc.html?type=3')">直方图</a>
+                <a href="javascript:void(0)" onclick="goZst('/ssc/zst/sflhc.html?type=4')">统计遗漏</a>
+                <a href="javascript:void(0)" onclick="goZst('/ssc/zst/sflhc.html?type=5')">历史开奖数据</a>
+            </div>
+        </li>-->
+    </ul>
+</div>
+<div class="clear"></div>
+<div class="zs_list" style="margin-top:0px;">
+    <h2>低频彩</h2>
+    <ul>
+        <li>
+            <div class="p-img fl"><img src="/static/theme/zstTheme/theme1/img/p2.png"></div>
+            <div class="p-url fl">
+                <h3>香港六合彩</h3>
+                <a href="javascript:void(0)" onclick="goZst('/ssc/zst/lhc.html?type=1')">基本走势</a>
+                <a href="javascript:void(0)" onclick="goZst('/ssc/zst/lhc.html?type=2')">K线图</a>
+                <a href="javascript:void(0)" onclick="goZst('/ssc/zst/lhc.html?type=3')">直方图</a>
+                <a href="javascript:void(0)" onclick="goZst('/ssc/zst/lhc.html?type=4')">统计遗漏</a>
+                <a href="javascript:void(0)" onclick="goZst('/ssc/zst/lhc.html?type=5')">历史开奖数据</a>
+            </div>
+        </li>
+        <li>
+            <div class="p-img fl"><img src="/static/theme/zstTheme/theme1/img/p5.png"></div>
+            <div class="p-url fl">
+                <h3>福彩3D</h3>
+                <a href="javascript:void(0)" onclick="goZst('/ssc/zst/fc3d.html?type=1')">基本走势</a>
+                <a href="javascript:void(0)" onclick="goZst('/ssc/zst/fc3d.html?type=2')">K线图</a>
+                <a href="javascript:void(0)" onclick="goZst('/ssc/zst/fc3d.html?type=3')">直方图</a>
+                <a href="javascript:void(0)" onclick="goZst('/ssc/zst/fc3d.html?type=4')">统计遗漏</a>
+                <a href="javascript:void(0)" onclick="goZst('/ssc/zst/fc3d.html?type=5')">历史开奖数据</a>
+            </div>
+        </li>
+        <li>
+            <div class="p-img fl"><img src="/static/theme/zstTheme/theme1/img/p4.png"></div>
+            <div class="p-url fl">
+                <h3>体彩排列3</h3>
+                <a href="javascript:void(0)" onclick="goZst('/ssc/zst/pl3.html?type=1')">基本走势</a>
+                <a href="javascript:void(0)" onclick="goZst('/ssc/zst/pl3.html?type=2')">K线图</a>
+                <a href="javascript:void(0)" onclick="goZst('/ssc/zst/pl3.html?type=3')">直方图</a>
+                <a href="javascript:void(0)" onclick="goZst('/ssc/zst/pl3.html?type=4')">统计遗漏</a>
+                <a href="javascript:void(0)" onclick="goZst('/ssc/zst/pl3.html?type=5')">历史开奖数据</a>
+            </div>
+        </li>
+        <li>
+            <div class="p-img fl"><img src="/static/theme/zstTheme/theme1/img/p_01.png"></div>
+            <div class="p-url fl">
+                <h3>双色球</h3>
+                <a href="javascript:void(0)" onclick="goZst('/ssc/zst/ssq.html?type=1')">基本走势</a>
+                <a href="javascript:void(0)" onclick="goZst('/ssc/zst/ssq.html?type=2')">K线图</a>
+                <a href="javascript:void(0)" onclick="goZst('/ssc/zst/ssq.html?type=3')">直方图</a>
+                <a href="javascript:void(0)" onclick="goZst('/ssc/zst/ssq.html?type=4')">统计遗漏</a>
+                <a href="javascript:void(0)" onclick="goZst('/ssc/zst/ssq.html?type=5')">历史开奖数据</a>
+            </div>
+        </li>
+    </ul>
+</div>
+<script type="text/javascript" src="/static/theme/zstTheme/theme1/js/jquery.min.js?v=2017"></script><!--jQuery库-->
+<script type="text/javascript" src="/static/theme/zstTheme/theme1/js/scrollanim.min.js?v=2017"></script> <!--"动画库"-->
+<script src="/static/theme/zstTheme/theme1/js/type.js?v=2017"></script><!--自定义封装函数-->
+<script src="/static/theme/zstTheme/theme1/js/global.js?v=20170821"></script><!--自定义封装函数-->
+<script src="/static/theme/zstTheme/theme1/js/jquery.cookie.js?v=2017"></script><!--自定义封装函数-->
+<script src="/static/theme/zstTheme/theme1/js/jquery.md5.js?v=2017"></script><!--自定义封装函数-->
+<script src="/static/theme/zstTheme/theme1/layer/layer.js?v=2017"></script>
+<script src="/static/theme/zstTheme/theme1/js/jquery.nicescroll.js?v=2017"></script>
+<script src="/static/theme/zstTheme/theme1/js/dateFormat.js?v=2017"></script>
+<script src="/static/theme/zstTheme/theme1/js/template.js?v=2017"></script>
+<script src="/static/theme/zstTheme/theme1/js/swfobject/swfobject.js?v=2017"></script>
+<script src="/static/theme/zstTheme/theme1/js/jquery.liMarquee.js?v=2017"></script>
+<script src="/static/theme/zstTheme/theme1/js/placeholders.jquery.min.js?v=2017"></script>
+<script src="/static/theme/zstTheme/theme1/jRange/jquery.range-min.js?v=2017"></script>
+<script>
+    // 闪烁
+    var blinkColorArr = "#fa6200|#0f3f94".split("|");
+    $(".blink").each(function() {
+        var obj = $(this);
+        setInterval(function() {
+            var tmpColor = blinkColorArr[parseInt(Math.random() * blinkColorArr.length)];
+            $(obj).css("color", tmpColor);
+        },200);
+    });
+
+
+
+    $(function() {
+        // 底部信息调用
+        function ajaxGetDbxx() {
+            ajaxRequest({
+                url: CONFIG.BASEURL + "ajaxGetWebInfo.json",
+                success: function (json) {
+                    if (json.result != 1) {
+                        return;
+                    }
+                    $(".webDbxx").html(json.webDbxx);
+                }
+            });
+        }
+
+        if ($(".webDbxx").length > 0) {
+            ajaxGetDbxx();
+        }
+    });
+
+
+</script><script>
+    var str1 = location.href;
+
+    $(function() {
+        parent.hideLoading();
+    });
+
+    function goZst(url) {
+        window.open(url);
+    }
+</script>
+</body>
+</html>
