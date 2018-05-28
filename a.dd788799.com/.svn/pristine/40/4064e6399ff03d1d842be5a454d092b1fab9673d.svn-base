@@ -1,0 +1,13 @@
+<?php
+ return [
+	'mobile_domain' => ['am.dd788799.com'],
+	 //分页配置
+    'paginate'               => [
+        'type'      => 'pay',
+        'var_page'  => 'page',
+        'list_rows' => 15,
+    ],
+    'dispatch_success_tmpl'  => APP_PATH . 'index' . DS . 'mview/base/error.html',
+    'dispatch_error_tmpl'    => APP_PATH . 'index' . DS . 'mview/base/error.html',
+];
+

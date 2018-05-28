@@ -1,0 +1,57 @@
+<div class='pp' action='pick_dw' length="1"></div>
+<input type="hidden" name="playedGroup" value="<?=$groupId?>"/>
+<input type="hidden" name="playedId" value="<?=$playedId?>"/>
+<input type="hidden" name="type" value="<?=$type?>"/>
+<input type="hidden" name="playedName" value="<?=$played['name']?>"/>
+<!-- mobile 时时彩_快钱_双面 -->
+<div class="fl main-left">
+<!--     <div class="hd clearfix rehd tzgz" id="toptouzhu">
+        <div class="fl refl">
+            快捷金额：
+            <input type="text" class="txt" id="kj_input">
+        </div>
+        <div class="kjanniu">
+            <a href="javascript:void(0)" class="img-50" data-num="50"></a>
+            <a href="javascript:void(0)" class="img-100" data-num="100"></a>
+            <a href="javascript:void(0)" class="img-500" data-num="500"></a>
+            <a href="javascript:void(0)" class="img-1000" data-num="1000"></a>
+            <a href="javascript:void(0)" class="img-5000" data-num="5000"></a>
+            <a href="javascript:void(0)" class="img-10000" data-num="10000"></a>
+        </div>
+    </div> -->
+    <div class="table-common">
+    </div>
+</div>
+<script>
+    $(function () {
+        // get interface
+        var playedId = "<?=$playedId?>";
+        $.getJSON("/game/pl/playedId/" + playedId, function (data) {
+            console.log(data);
+            var htmls = '';
+            var dataObj = data;
+            $.each(dataObj, function (n1, value) {
+                var htmls = '',
+                    dataObj = data;
+                $.each(dataObj, function (n1, value) {
+                    htmls += "<table width='100%' border='0' cellpadding='0' cellspacing='0'><thead><tr>" + "<th colspan='6'><div class='kq_sm_h1'>" + dataObj[n1].name + "</div><div class='kq_sm_h2'></div></th></tr><tr><td colspan='6'></td></tr></thead><tbody><tr><td colspan='6'><div class='kq_sm_all'>";
+                    for (var j = 0; j < dataObj[n1].pls.length; j++) {
+                        htmls += "<div class='kq_sm'><ul><li class='kq_sm_1'>" + dataObj[n1].pls[j].value + "</li>";
+                        htmls += "<li class='kq_sm_2'>" + dataObj[n1].pls[j].pl + "</li>";
+                        htmls += "<li class='kq_sm_3'>" + "<input type='text' oninput='checkAmount()' class='table-txt' data-name='" + dataObj[n1].name + "-" + dataObj[n1].pls[j].value + "' data-plid='" + dataObj[n1].pls[j].id + "' data-pl='" + dataObj[n1].pls[j].pl + "'></li></ul></div>";
+                    }
+                    htmls += "</div></td></tr></tbody></table>";
+                });
+                $('.table-common').html(htmls);
+            });
+            // 点击选中
+            kqQuick(true);
+            // 只能输入整数
+            $(document).on('keyup', 'input.table-txt', function () {
+                digitOnly($(this));
+            });
+        });
+        
+    });
+
+</script>

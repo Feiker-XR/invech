@@ -1,0 +1,91 @@
+<?php
+namespace app\common\model\report;
+
+use app\common\model\Bet;
+use app\common\model\Order;
+use app\common\model\Withdraw;
+use app\common\model\ManualMoney;
+use app\common\model\BonusFlow;
+
+use bong\foundation\QueryWrapper;
+use think\Model;
+
+/**
+ * Trait CommonForFlowTrait
+ * @package app\common\model\report
+ * 用户流水
+ */
+trait CommonForFlowTrait
+{
+    /**
+     * @param Model $query
+     * @param array $fields
+     * @param array $where
+     * 设置查询的字段和where条件
+     */
+    private static function attachToFieldAndWhere(Model $query,$fields=[],$where=[]){
+        if(!empty($where)){
+            $query->where($where);
+        }
+        $query->field($fields);
+    }
+
+    /**
+     * @param Model $query
+     * @param string $mode 排序
+     * @return Model
+     * 传入子查询model和排序依据
+     */
+    public static function makeWrapperForPaginate(Model $query,$mode='uid'){
+        $sub_query = $query->buildSql();
+        
+        //$query_new = db()->table($sub_query.' s')->order($mode.' desc');
+        $query_new = (new static)->db(false,true);
+        $query_new->table($sub_query.' s')->order($mode.' desc');
+
+        return $query_new; 
+    }
+
+    /**
+     * @param Model $query
+     * @param array $fields
+     * @return Model
+     * 传入子查询model和想要的父查询字段
+     */
+    public static function makeWrapperForSum(Model $query,$fields=[]){
+        $sub_query = $query->buildSql();
+        
+        //$query_new = db()->table($sub_query.' s');
+        $query_new = (new static)->db(false,true);
+        $query_new->table($sub_query.' s');
+
+        $query_new->field($fields);
+
+        return $query_new; 
+
+        //return new QueryWrapper($query_new);
+    }
+
+    /**
+     * @param Model $query
+     * @param array $fields
+     * @param string $mode
+     * @return array
+     * 返回列表和统计总和
+     */
+    public static function makeWrapperForPaginateAndSum(Model $query,$fields=[],$mode='uid'){
+
+        $sub_query = $query->buildSql();//options已清空
+
+        $query_page = (new static)->db(false,true);
+        $query_page->table($sub_query.' s');
+        $query_page->order($mode.' desc');
+
+ 
+        $query_sum = (new static)->db(false,true);
+        $query_sum->table($sub_query.' s');
+        $query_sum->field($fields);
+
+        return [$query_page,$query_sum];
+    }       
+}

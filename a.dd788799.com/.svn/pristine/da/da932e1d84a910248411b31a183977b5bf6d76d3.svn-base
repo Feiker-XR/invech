@@ -1,0 +1,234 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset='utf-8'>
+	<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+	<title>个人中心</title>
+	<link type="text/css" rel="stylesheet" href="/css/personal.css">
+</head>
+<body>
+<div class="container">
+	<header class="header">
+		<a href="/user/logout"><i class='right'>退出</i></a>
+		<h1>会员中心</h1>
+	</header>
+	<main class="inner_body">
+		<section class="profile">
+			<div class="center_box">
+				<div>
+					<img src="/images/center/avator.png" alt="avator"/>
+				</div>
+				<div>
+					<h2>姓名: 	<span>{$user->nickname}</span></h2>
+					<h2>用户名: <span>{$user->username}</span></h2>
+				</div>
+				<div id="signIn">
+					<span>立即签到</span>
+					<span>+10积分</span>
+				</div>
+			</div>
+		</section>
+
+		<section class="info">
+			<div>
+				<ul>
+					{if($user->is_agent == 1)}
+						<li id="agent" data-url="/agent/main.html">
+							<img src="/images/center/agent.png" alt="代理中心"/>
+							<strong>代理中心</strong>
+						</li>
+					{else}
+						<li id="agent" data-url="/user/inbox.html">
+							<img src="/images/center/agent.png" alt="申请代理"/>
+							<strong>申请代理</strong>
+						</li>
+					{/if}
+					<li id="message" data-url="/user/inbox.html">
+						<img src="/images/center/msg.png" alt="我的消息"/>
+						<strong>我的消息<span>{$stat['message_unread_num']}</span></strong>
+					</li>
+				</ul>
+			</div>
+			<div>
+				<ol>
+					<li>
+						<strong>{$user->coin}</strong>
+						<span>余额</span>
+					</li>
+					<li>
+						<strong>{$stat['deposit_amount']|default='0'}</strong>
+						<span>充值</span>
+					</li>
+					<li>
+						<strong>{$stat['withdraw_amount']|default='0'}</strong>
+						<span>提现</span>
+					</li>
+				</ol>
+			</div>
+		</section>
+		<section class="charge">
+			<div>
+				<ul>
+					<li id="pay" data-url="/pay/index.html">
+						<img src="/images/center/charge.png" alt="充值"/>
+						<strong>充值</strong>
+						
+					</li>
+					<li id="withdraw">
+						<img src="/images/center/withdraw.png" alt="提现"/>
+						<strong>提现</strong>
+					</li>
+				</ul>
+			</div>
+		</section>
+		<section class="records">
+			<div>
+				<ul>
+					<li data-url="/user/recharge_record">
+						<img src="/images/center/charge_record.png" alt="充值记录"/>
+						<strong>充值记录</strong>
+						<span>查看全部充值</span>
+						
+					</li>
+					<li data-url="/user/withdraw_record">
+						<img src="/images/center/withdraw_record.png" alt="提现记录"/>
+						<strong>提现记录</strong>
+						<span>查看全部提现</span>
+						
+					</li>
+				</ul>
+			</div>
+			<div>
+				<ul>
+					<li data-url="/user/bet_record">
+						<img src="/images/center/bet_record.png" alt="投注记录"/>
+						<strong>投注记录</strong>
+						<span>查看全部订单</span>
+					</li>
+					<li data-url="/user/backwater_record">
+						<img src="/images/center/return_record.png" alt="返水记录"/>
+						<strong>返水记录</strong>
+						<span>查看返水记录</span>
+					</li>
+				</ul>
+			</div>
+		</section>
+		<section class="security" style="margin-top:.2rem;">
+			<div>
+				<ul>
+					<li data-url="/user/money_record">
+						<img src="/images/center/money_change.png" alt="账变明细"/>
+						<strong>账变明细</strong>
+						<span>查看资金流向</span>
+					</li>
+					<li data-url="/user/info">
+						<img src="/images/center/security.png" alt="安全中心"/>
+						<strong>安全中心</strong>
+						<span>修改绑定信息</span>
+						
+					</li>
+				</ul>
+			</div>
+		</section>
+
+		<section class="security" style="margin-top:.2rem;">
+			<div>
+				<ul>
+					<li data-url="/user/bet_record_miss">
+						<img src="/images/center/undo.png" alt="账变明细"/>
+						<strong>未结注单</strong>
+						<span>查看未结算注单</span>
+					</li>
+					<li>
+						<!--<img src="/images/center/security.png" alt="安全中心"/>
+						<strong>安全中心</strong>
+						<span>修改绑定信息</span>
+-->
+					</li>
+				</ul>
+			</div>
+		</section>
+	</main>
+	
+	<div class="g-footer">
+		<div class="g-wrap">
+			<ul class="m-state f-clear">
+				<li><a href="/index/index"><img src="/__IMG__/icon_home.png" alt="home"/> </i>首页</a></li>
+				<li><a href="/index/main"><img src="/__IMG__/icon_hall.png" alt="hall"/>购彩大厅</a></li>
+				<li><a href="/bonus/index"><img src="/__IMG__/icon_discount.png" alt="discount"/>最新优惠</a></li>
+				<li><a href="/index/customer"><img src="/__IMG__/icon_contact.png" alt="contact"/>联系客服</a></li>
+				<li class="last active"><a href="/user/main"><img src="/__IMG__/icon_profile_active.png" alt="profile"/>个人</a></li>
+			</ul>
+		</div>
+	</div>
+</div>
+<script type="text/javascript" src="/js/jquery-1.8.0.min.js"></script>
+<script type="text/javascript" src="/js/show.js"></script>
+<script type="text/javascript">
+	$(function () {
+        $('main').height(window.innerHeight-$('header').height()*2);  // 设置内容区高度
+    })
+    // 签到
+    $('#signIn').click(function (evt) {
+        $.ajax({
+            url:'签到',
+            success:function (data) {
+                alert(data.msg);
+            },
+            error:function (error) {
+                alert('ajax error');
+
+            }
+        })
+    });
+	$('.records ul li').click(function(){
+	    var _url = $(this).attr('data-url');
+	    location.href = _url;
+	});
+	$('.security ul li').click(function(){
+	    var _url = $(this).attr('data-url');
+	    if(_url){
+            location.href = _url;
+		}
+	});
+	$('#pay').click(function(){
+	    var _url = $(this).attr('data-url');
+	    location.href = _url;
+	});
+	$('#message').click(function(){
+	    var _url = $(this).attr('data-url');
+	    location.href = _url;
+	});
+	$('#agent').click(function(){
+	    var _url = $(this).attr('data-url');
+	    location.href = _url;
+	});
+    // 提现
+    $('#withdraw').click(function(){
+        $.ajax({
+            url: "/user/is_bank",
+            dataType:'json',
+            type:'POST',
+            success:function (data) {
+                var _url = null;
+                if(data.code == '1'){
+                    _url = "/user/withdraw";
+                }else{
+                    _url = "/user/bank";
+                    alert('尚未绑定银行卡，前往绑定？');
+                }
+                setTimeout(function () {
+					location.href = _url;
+                },200);
+            },
+			error:function () {
+              
+				alert('ajax error');
+            }
+
+        })
+
+    })
+</script>
+</body>
+</html>

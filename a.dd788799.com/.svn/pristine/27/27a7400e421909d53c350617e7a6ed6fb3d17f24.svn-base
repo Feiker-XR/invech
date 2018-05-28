@@ -1,0 +1,125 @@
+{layout name="layout" /}
+
+<div class="row">
+  <div class="col-xs-12">
+    <div class="box">
+      <div class="box-header">
+       
+       <form>
+          <div class="pull-left">
+             <input class="form-control input-sm search" value="{$Think.get.username}" placeholder="请输入用户昵称" type="text" name="username" > 
+          </div> 
+
+          <div class="pull-left" style="margin-left:15px;">
+              <select class="form-control input-sm" name="type" aria-hidden="true">
+                  <option value="" >全部类别</option>
+                    {foreach($types as $key=>$type)}
+                      <option value="{$key}" {if($Think.get.type == $key)} selected {/if} >{$type.title}</option>
+                    {/foreach}
+                </select>
+          </div> 
+
+          <div class="pull-left" style="margin-left:15px;">
+             <input class="form-control input-sm search" value="{$Think.get.phase}" placeholder="请输入开奖期数" type="text" name="phase" > 
+          </div> 
+
+          <div class="pull-left" style="margin-left:20px;">
+              <input type="text" name="startTime"  value="{$Think.get.startTime}" placeholder="开始时间" class="form-control input-sm" id="datepicker1">
+          </div>
+
+          <div class="pull-left">
+                ~
+          </div> 
+
+          <div class="pull-left">
+            <input type="text" name="endTime"  value="{$Think.get.endTime}" placeholder="结束时间" class="form-control input-sm" id="datepicker2">
+          </div> 
+
+          <div class="pull-left" style="margin-left:20px;">
+             <select class="form-control input-sm filterStatus" name="status">
+                  <option value="">全部状态</option>
+                  <option value="0" {if(is_numeric($Think.get.status)&&$Think.get.status==0)}selected{/if}>正常</option>
+                  <option value="1" {if(is_numeric($Think.get.status)&&$Think.get.status==0)}selected{/if}>已撤销</option>
+              </select>
+          </div>
+          <div class="has-feedback pull-left" style="margin-left:20px;">
+              <button type="submit" class="btn btn-block btn-default btn-sm filter">查询</button>
+          </div>
+     </form>
+
+      </div>
+
+      <div class="box-body table-responsive no-padding">
+        <table class="table table-hover">
+          <tr>
+            <th>#</th>
+            <th >用户ID</th>
+            <th >用户名称</th>
+
+            <th >彩种</th>
+            <th >开奖期数</th>
+            <th >开奖结果</th>
+
+            <th >投注内容</th>
+            <th >中奖次数</th>
+            <th >派奖金额</th>
+            <th >派奖时间</th>
+
+            <th >派奖状态</th>                       
+          </tr>
+          {foreach($list as $item)}
+          <tr>
+            <td>{$item->id}</td>
+            <td>{$item->uid}</td>
+            <td>{$item->user->username}</td>
+
+            <td>{$item->bet->lottery->title}</td>
+            <td>{$item->bet->actionNo}</td>
+            <td>{$item->lottery_data}</td>
+
+            <td>{$item->bet->actionData}</td>
+            <td>{$item->zjCount}</td>
+            <td>{$item->zjAmount}</td>
+            <td>{$item->created_at}</td>
+
+
+            <td>
+              {if(empty($item->deleted_at))}  
+                <span class="btn-success">
+                  正常
+              {else/}
+                <span class="btn-danger">
+                  撤销于{$item->deleted_at}
+              {/if}
+              </span>
+            </td>
+
+          </tr>
+          {/foreach}
+     
+        </table>
+        {$list->render();}
+      </div>
+
+    </div>
+    <!-- /.box -->
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){
+  var obj = {
+                autoclose: true,
+                todayHighlight: true,
+                language:"zh-CN", 
+                format:"yyyy-mm-dd" 
+           };
+  $("#datepicker1").datepicker(obj)
+  $("#datepicker2").datepicker(obj);
+});
+
+</script>
+
+
+
+  
+

@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>错误提示</title>
+    <style type="text/css">
+        *{margin:0; padding:0;}
+        body{background: url("/__IMG__/error.png") repeat-y top center;background-size: 100%; display: none;}
+        .tip{
+            width: 100%;
+            height: 200px;
+            background: #f6f6f6;
+            position: absolute;
+            top: 270px;
+            color: #797f88;
+            font-size: 16px;
+        }
+        #tip_text{
+            width: 80%;
+            margin: 10px auto;
+            font-size: 16px;
+            font-weight: normal;
+            text-align: center;
+            margin-top:50px;
+        }
+        #jump{
+            width: 100%;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="tip">
+        <h6 id="tip_text"></h6>
+        <p id="jump"><span>3</span>秒页面自动跳转</p>
+    </div>
+    <script type="text/javascript">
+        var msg = '{$msg}';
+        var url = '{$url}';
+        var interval,tip_text,jspan,t = 3;
+        window.onload = function (ev) {
+            tip_text = document.querySelector('#tip_text');
+            jspan = document.querySelector('#jump span');
+            tip_text.innerText = '矮油！' + msg;
+            document.body.style.display = 'block';
+            interval = setInterval(function () {
+                jspan.innerText = t;
+                if(t == 0){
+                    clearInterval(interval);
+                    location.href = url;
+                }
+                t--;
+            },1000);
+        }
+
+    </script>
+</body>
+</html>    

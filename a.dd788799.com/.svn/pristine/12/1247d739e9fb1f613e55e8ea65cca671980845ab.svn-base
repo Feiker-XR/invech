@@ -1,0 +1,473 @@
+<html xmlns="http://www.w3.org/1999/xhtml" style="font-size: 12px;"><head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width,height=device-height,initial-scale=1.0,user-scalable=no,maximum-scale=1.0">
+<meta name="format-detection" content="telephone=no">
+<meta name="screen-orientation" content="portrait">
+<meta name="x5-orientation" content="portrait">
+<title>{$types[$type]['title']}</title>
+<meta name="keywords" content="">
+<meta nam="description" content="">
+
+<link href="/gfwf/__CSS__/newcss/style.css?v=1.0" rel="stylesheet" type="text/css"/>
+<link href="/gfwf/__CSS__/newcss/add.css?v=1.0" type="text/css" rel="stylesheet"/>
+<link type="text/css" rel="stylesheet" href="/gfwf/__SKIN__/js/jqueryui/jquery-ui-1.8.23.custom.css" />
+<link href="/gfwf/__CSS__/nsc/plugin/dialogUI/dialogUI.css" />
+<script type="text/javascript" src="/gfwf/__JS__/nsc/jquery-1.7.min.js?v=1.16.12.12"></script>
+<link rel="stylesheet" href="/gfwf/__CSS__/nsc_m/res.css?v=1.16.12.13">
+<link href="/gfwf/__CSS__/nsc_m/m-reset.css?v=1.16.12.12" rel="stylesheet" type="text/css">
+<link href="/gfwf/__CSS__/nsc_m/m-warp.css?v=1.16.12.13" rel="stylesheet" type="text/css">
+<link href="/gfwf/__CSS__/nsc_m/m-lottery.css?v=1.16.12.13" rel="stylesheet" type="text/css">
+<link href="/gfwf/__JS__/common/nouislider.css" rel="stylesheet"/>
+<link href="/gfwf/__CSS__/nsc/lottery.css?v=1.0" rel="stylesheet" type="text/css" />
+<link href="/gfwf/__JS__/nsc_m/need/layer.css?2.0" type="text/css" rel="styleSheet" id="layermcss">
+<link href="/gfwf/__JS__/nsc_m/need/jquery.range.css" type="text/css" rel="styleSheet">
+	<!-- <link href="/__ICONFONT__/demo.css" rel="stylesheet" type="text/css"/> -->
+<link href="/gfwf/iconfont/iconfont.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="/gfwf/__JS__/nsc_m/layer.js?v=1.16.12.12"></script>
+<script type="text/javascript" src="/gfwf/__JS__/nsc/common.js?v=1.16.12.12"></script>
+<script type="text/javascript" src="/gfwf/__SKIN__/js/jquery.cookie.js"></script>
+<script type="text/javascript" src="/__JS__/vue.js"></script>
+
+<script>var TIP=true;</script>
+<script type="text/javascript" src="/gfwf/__SKIN__/js/template-web.js"></script>
+	<script type="text/javascript" src="/gfwf/__SKIN__/js/chinese-lunar.js"></script>
+<script type="text/javascript" src="/gfwf/__SKIN__/js/jquery.SuperSlide.2.1.1.js"></script>
+<script type="text/javascript" src="/gfwf/__SKIN__/js/onload.js"></script>
+<script type="text/javascript" src="/gfwf/__SKIN__/js/function.js?v=1.0"></script>
+<script type="text/javascript" src="/gfwf/__SKIN__/js/jqueryui/jquery-ui-1.8.23.custom.min.js"></script>
+<script type="text/javascript" src="/gfwf/__SKIN__/js/game.js?v5.1"></script>
+	<script type="text/javascript" src="/gfwf/__SKIN__/js/kqwf.js?v6.1"></script>
+	<script type="text/javascript" src="/gfwf/__SKIN__/js/jquery.range-min.js"></script>
+
+<!--<script type="text/javascript" src="/gfwf/__JS__/nsc/hklhc.js"></script>-->
+<script type="text/javascript" src="/gfwf/__JS__/nsc/dialogUI/jquery.dialogUI.js"></script>
+<script src="/gfwf/__JS__/common/nouislider.js"></script>
+<style type="text/css">
+.noUi-base{width: 80%;margin: 15px auto;height: 11px;border:1px solid #BDBDBD;border-radius: 20px;background-color: #a68e86;}
+.noUi-origin {position: absolute;left: 0;right: -1px;bottom: -1px;top: -1px;border: 1px solid #BDBDBD;height: initial !important;width: initial !important;background-color: #fff;border-radius: 30px;}
+.noUi-target{border: none;}
+.noUi-horizontal .noUi-handle{height: 40px;width: 40px;border-radius: 50%;background-color: #f8f5f4;top: -16px;box-shadow: 1px 0 5px #dbc0b6;}
+.noUi-horizontal .noUi-handle:before{display: none;}
+.noUi-horizontal .noUi-handle:after{display: none;}
+#submenu .ball_list{display: none !important;}
+#playList .tz_xz{display: none !important;}
+.tzResult p{display: inline-block;}
+.touzhu-cont{}
+.touzhu-cont>table{}
+.touzhu-cont>table tr{}
+.touzhu-cont td{background: #f7f3f2;color: #827875;border-bottom: 1px solid #d1c8c6;font-weight: bolder;height: 36px;}
+</style>
+</head>
+<body >
+<div id="body">
+<!--顶部导航栏-->
+<header class="header wjkjData">
+	<a class="m-return-home" href="/index.php">返回大厅</a>
+	<div class="assistant">
+		<div class="zhushou">
+			<ul class="funcList">
+				<li class="louhao"  id="m_recen_v"><a href="javascript:;">近期开奖</a></li>
+				<li class="louhao"  id="m_recen_v1"><a href="/index.php/index/yxjl" button="关闭:defaultModalCloase" width="100%" target="modal">投注记录</a></li>
+                <li class="louhao"  id="m_recen_v2"><a href="/zst/zst.php?typeid=<?=$type?>&g=1">走势图</a></li>
+			</ul>
+		</div>
+	</div>
+	<div class="header_wf_all gfcss gf_text">
+		<a class="title_cq gf_title" href="javascript:void(0)">
+			<span>快钱玩法</span>
+		</a>
+		<a class="title_cq gf_title" href="javascript:void(0)">
+			<span>官方玩法</span>
+		</a>
+	</div>
+</header>
+
+<!---头部开奖及倒计时区-->
+	<section class="current_play_wp">
+		<div class="current_play_btn_wp">
+			<p><span>20180330041</span>期开奖：<strong>9 小 单 虎 龙 龙 龙 龙</strong></p>
+			<ul>
+				{for start="0" end="$kjHaoLengh"}
+					<li>-</li>
+				{/for}
+			</ul>
+			<button>>></button>
+		</div>
+		<div class="current_play_time_wp">
+			<section class="current_play_time_left">
+				<h3>
+					<span id="dqqihao">{$actionNo['actionNo']}期</span>
+					<span class="feidanstr">封盘：</span>
+					<span id="count_down">00:00:00</span>
+				</h3>
+				<p>玩法选择：<span></span><button>V</button></p>
+			</section>
+		</div>
+		<!--<div class="current_lottery_record_wp">
+			<div class="current_lottery_record" id="histokj">
+				{foreach($history as $item)}
+					<div>
+						<b>第</b>
+						<span>{$item.number}</span>
+						<b>期&nbsp;&nbsp;&nbsp;</b>
+						<em>
+							{php} $val = explode(',',$item['data']); {/php}
+							{foreach($val as $v)}
+							<i class="lottery_record_i">{$v}</i>
+							{/foreach}
+						</em>
+					</div>
+				{/foreach}
+			</div>
+		</div>-->
+		<div class="current_play_btn_mask"></div>
+	</section>
+
+	<!--玩法组选择-->
+	<div class="play_group">
+		<ul></ul>
+		<ul></ul>
+	</div>
+
+	<!--开奖历史-->
+	<div class="history_nums">
+		{for start="0" end="$kjHaoLengh"}
+			<?php $lengh[] = $i; ?>
+		{/for}
+		{for start="0" end="5"}
+			<p>-----------期开奖:</p>
+			<ul>
+				{foreach $lengh as $v}
+					<li>-</li>
+				{/foreach}
+			</ul>
+		{/for}
+	</div>
+<!--- 投注区 --->
+<section class="wraper-page">
+	<div class="tz_change kkkk">
+		<div class="warp lotteryBox">
+			<div class="lotteryBody">
+				<div id="nfdprize-text" class="m-lott-methodBox">
+					<!--<div class="_shark" onclick="gameActionAddCode_random()"></div>-->
+					<div class="_shark" onclick="gameActionAddCode_random()">当前：<span>{$types[$type]['title']}</span>,<span></span></div>
+	    		</div>
+    	
+			<div class="lotteryLeft _lottery_menu" style="min-height: auto;margin-top: -2px;">
+                <div class="m-lott-methodBox-list" style="height: auto;border-width: 2px;margin-top: 6px;">
+                    <!--<div class="lotteryGroup">
+                        <ul id="groupList" style="width: 1004.18px;">
+                        	{foreach($groups as $gp)}
+                    		<li><a href="#" tourl="{:Url('game/group?type='.$type.'&groupId='.$gp['id'])}" <?= ($gp['id']==$groupId) ? ' class="took"' : '' ?>     onclick="showx(<?= $gp['id'] ?>)" ><?= $gp['groupName'] ?></a></li>
+                    		{/foreach}
+						</ul>
+            		</div>-->
+	            	<fieldset style="border-width: 1px 0 0 0;">
+	            		<legend align="center" class="morePlay" style="font-size: 16px;padding:0 10px ;">更多玩法</legend>
+	            		<div id="submenu">
+	            			{include file="game/inc_game_played" /}
+						</div>
+					</fieldset>
+				</div>
+			</div>
+			<script>
+				$(".morePlay").text($("#groupList li").eq(0).find("a").text());
+			</script>
+			</div>
+		</div>
+		<div class="block_0"></div>
+		<!--玩法选择-->
+		<div class="tz_change">
+			<!--彩票中间的主题部分内容区域-->
+			<div class="tz_work _cus" id="playList"></div>
+			<div class="addOrderBox">
+				<div class="footerUp">
+					<p>
+						<span>添加号码</span>
+						<span>投注未来</span>
+						<span>我要追号</span>
+						<span>历史投注</span>
+					</p>
+					<ul>
+						<li><i>1,2,3,3,3</i><button>删除</button></li>
+						<li><i>1,2,3,3,3</i><button>删除</button></li>
+						<li><i>1,2,3,3,3</i><button>删除</button></li>
+						<li><i>1,2,3,3,3</i><button>删除</button></li>
+						<li><i>1,2,3,3,3</i><button>删除</button></li>
+					</ul>
+				</div>
+				<div class="footerNew" style="z-index: 510;">
+					<div class="tzResult" style="z-index: 600;">
+						<i class="icon iconfont icon-gouwuchetianjia"></i>
+	            		<p class="zushu">已选中<span id="all-count" class="num">0</span>注</p>
+					    <p class="m_total_amout">输入金额：<input id="all-amount" class="num orange" value="1000"></p>
+	            	</div>
+					<input type="button" class="lt_reset" value="重置">
+					<input type="button" class="addBtn" id="lt_sel_insert" onclick="gameActionAddCode()" value="确定投注">
+				</div>
+				<div class="tzTrans-wrapper" style="padding-bottom: 60px;">
+
+	                <div class="addOrderLeft">
+						<div class="_back"><span class="_back-btn"></span></div>
+	                    <div class="chooseMsg" style="width: 98% !important; text-align: center;margin: 0 auto 10px !important;background-color: #fff;">
+	                    </div>
+
+	                    <div class="m_funding_box" style="text-align: center; border: 1px solid #d1c8c6;border-radius: 5px;width: 98%; margin: 0 auto; background-color: #ede7e4;">
+	                        <div class="jiangjin" id="game-dom">
+	                			<b value="2.000" data-max-fan-dian="" class="danwei dwon" onclick="chargeMode(1)" style="color: #ede7e4">元</b>
+								<input type="hidden" value="0.000" data-max-fan-dian="" class="danwei" onclick="chargeMode(0.0)">
+								<input type="hidden" value="0.000" data-max-fan-dian="" class="danwei" onclick="chargeMode(0.00)">
+								<input type="hidden" value="0.000" data-max-fan-dian="" class="danwei" onclick="chargeMode(0.000)">
+
+		                        <div class="multipleBox">
+		                            <span class="bei">每注</span>
+		                            <div class="multipleCon re">
+		                                <input onchange="chargeBeiShu()"  id="beishu" value="1" class="text"/>
+		                            </div>
+		                           <span class="bei">倍</span>
+		                        </div>
+
+	                        	<!--拖动-->
+	                    		<div class="tz_work" style="width: 100%;box-sizing:border-box;background-color: #ede7e4;padding: 10px ;">
+									<div class="ball_write">
+										<div class="write_bg">
+											<div class="jiangjin" id="game-dom">
+												<div class="fandian-k fl" >
+													<input type="button" class="min" value="" step="-0.1"/>
+													<input type="button" class="max" value="" step="0.1"/>
+													<span id="fandian-value" data-pl="" class="fdmoney" style=" color: #000 !important;">--</span>
+													<div id="slider-range-min" class="tiao slider fandian-box" value="0" data-bet-count="" data-bet-zj-amount="" max="" game-fan-dian="" fan-dian="" game-fan-dian-bdw="" fan-dian-bdw="" min="0" step="1" slideCallBack="gameSetFanDian"></div>
+												</div>
+												<strong>赔率：</strong>
+												<select name="lt_sel_dyprize" id="lt_sel_dyprize" maxfd="{$settings.fanDianMax}" fan-dian="{$user.fanDian}">
+													<option selected="selected" value="1950-0">1950</option>
+												</select>
+											</div>
+										</div>
+									</div>
+								</div>
+								<!--拖动-->
+	                    	</div>
+	                	</div>
+
+		                <div class="addOrderRight">
+		                </div>
+	            	</div>
+
+					<div class="lotteryBottom">
+	    				<div class="touzhu-cont"  style="width: 98%;">
+		  					<table width="100%" cellpadding="0" cellspacing="0"></table>
+						</div>
+				        <div class="orderNow">
+				            <div class="chooseAllMsg clearfix">
+	                			<div class="checkZhui fqzhBox">
+					        		<label  name="lt_trace_if" >
+						        		<input name="zhuiHao" value="1" type="checkbox">
+			                			<b class="fq">发起追号</b>
+		                			</label>
+	            				</div>
+<!-- 	               				<div class="hemai" style="height: 41px;">
+	               					<label>
+	               						<input type="checkbox" class="is_combine" value="1" id="cannel_chckbox"/><b class="fq">发起合买</b>
+	               					</label>
+					        	</div> -->
+	            			</div>
+
+	                		<div class="sendChoose">
+	                			<input type="button" class="addtz" id="btnPostBet"  value="确认投注">
+	                		</div>
+	        			</div>
+	    			</div>
+				</div>
+    		</div>
+			<div class="padding_fot_b20 "></div>
+        </div>
+	</div>
+</section>
+
+<!--- 弹框区 -->
+	<!--投注详情/投注未来-->
+<div class="cover_all" id="bet_cover" style="display: block">
+	<div class="content">
+		<i class="close">x</i>
+		<h3>投注未来</h3>
+		<p>
+			<span>奖金：</span>
+			<h5 class="range">
+				<input type="hidden" class="single-slider" value="5" />
+			</h5>
+			<strong>t</strong>
+		</p>
+		<p>
+			<span>未来：</span>
+			<select id="term">
+				<option>0123456789</option>
+				<option>0123456789</option>
+			</select>
+		</p>
+		<p>
+			<span>倍数：</span>
+			<select id="times">
+				<option>1倍</option>
+				<option>2倍</option>
+			</select>
+			<span class="last">模式：</span>
+			<select id="model">
+				<option>元</option>
+				<option>角</option>
+			</select>
+		</p>
+		<div class="bet_detail">
+			<table border="0" cellspacing="0" cellpadding="0" width="100%">
+				<thead>
+					<tr>
+						<th>注单</th>
+						<th>注数</th>
+						<th>金额</th>
+					</tr>
+				</thead>
+				<tbody>
+				<tr>
+					<td>2,3,3,6,7</td>
+					<td>12注</td>
+					<td>30.00元</td>
+				</tr>
+				<tr>
+					<td>2,3,3,6,7</td>
+					<td>12注</td>
+					<td>30.00元</td>
+				</tr>
+				<tr>
+					<td>2,3,3,6,7</td>
+					<td>12注</td>
+					<td>30.00元</td>
+				</tr>
+				<tr>
+					<td>2,3,3,6,7</td>
+					<td>12注</td>
+					<td>30.00元</td>
+				</tr>
+				<tr>
+					<td>2,3,3,6,7</td>
+					<td>12注</td>
+					<td>30.00元</td>
+				</tr>
+				<tr>
+					<td>2,3,3,6,7</td>
+					<td>12注</td>
+					<td>30.00元</td>
+				</tr>
+				</tbody>
+			</table>
+		</div>
+		<div class="sum"><span>注数：</span><strong>15</strong><span class="last">金额：</span><strong>30.00</strong></div>
+		<button>确认投注</button>
+	</div>
+</div>
+	<!--追号-->
+<div class="cover_all" id="future_nums">
+	<div class="content">
+		<p>
+			<span>追号期数：</span>
+			<select id="terms">
+				<option>5</option>
+				<option>10</option>
+				<option>15</option>
+				<option>20</option>
+				<option>25</option>
+			</select>
+		</p>
+		<p>
+			<span>起始倍数：</span>
+			<input type="text" id="startTimes" value="1"/>
+			<span>追号期数：</span>
+			<input type="text" id="future_terms" value="5"/>
+		</p>
+		<p>
+			<small>距离20160116067期开奖：03分40秒</small>
+			<button>生成计划</button>
+		</p>
+		<div class="plans">
+			<table border="0" cellpadding="0" cellspacing="0">
+				<thead>
+					<tr>
+						<th>期号</th>
+						<th>倍数</th>
+						<th>金额</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td><input type="checkbox" value="1">20180116074</td>
+						<td><input type="text"></td>
+						<td>2.00</td>
+					</tr>
+					<tr>
+						<td><input type="checkbox" value="1">20180116074</td>
+						<td><input type="text"></td>
+						<td>2.00</td>
+					</tr>
+					<tr>
+						<td><input type="checkbox" value="1">20180116074</td>
+						<td><input type="text"></td>
+						<td>2.00</td>
+					</tr>
+					<tr>
+						<td><input type="checkbox" value="1">20180116074</td>
+						<td><input type="text"></td>
+						<td>2.00</td>
+					</tr>
+					<tr>
+						<td><input type="checkbox" value="1">20180116074</td>
+						<td><input type="text"></td>
+						<td>2.00</td>
+					</tr>
+					<tr>
+						<td><input type="checkbox" value="1">20180116074</td>
+						<td><input type="text"></td>
+						<td>2.00</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<div class="bottom">
+		<input type="checkbox" value="0">全选
+		<button id="future_bet">立即下注</button>
+		<button>重置</button>
+	</div>
+</div>
+</div>
+<!--body-->
+
+<script type="text/javascript" src="/gfwf/__SKIN__/js/selected.js"></script>
+<script src="/gfwf/__JS__/common/shake.js"></script>
+
+<script type="text/javascript">
+    /**************************************/
+	/********这里是写php变量的地方************/
+    /**************************************/
+    var game={
+    		check1:null,
+            check2:null,
+            type:{$type},
+            played:{$playedId},
+            groupId:{$groupId},
+        },
+        user="{$user.username}",
+        aflag=1;
+    var _group = <?php echo json_encode($groups)?>;				// 玩法组菜单
+    var _played = <?php echo json_encode($played)?>;			// 当前玩法组
+	var _kqwf_groups = <?php echo json_encode($kqwf_groups)?>;	// 快钱玩法组
+	var _gfwf_groups = <?php echo json_encode($gfwf_groups)?>;  // 官方玩法组
+    var fptime = {$fptime};										// 剩余倒计时时间
+    var _index = _played.is_kqwf + ''; 							// 1表示快钱玩法,0表示官方玩法
+    var _type = game.type;										// 类型
+    var _typeName = "{$typeName}";								// 彩种别名(查询开奖历史)
+    console.log(_group);
+	console.log(_played);
+</script>
+<script type="text/javascript" src="/gfwf/__SKIN__/js/other.js"></script>
+
+</body>
+</html>

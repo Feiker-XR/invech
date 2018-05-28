@@ -1,0 +1,69 @@
+<input type="hidden" name="playedGroup" value="<?=$groupId?>"/>
+<input type="hidden" name="playedId" value="<?=$playedId?>"/>
+<input type="hidden" name="type" value="<?=$type?>"/>
+<input type="hidden" name="playedName" value="<?=$played['name']?>"/>
+<!-- PK拾_冠亚和 -->
+<div id="sscContent">
+    <div class="lot-content clearfix">
+        <div class="fl main-left">
+            <div class="table-common table-common-reset" id="table-common">
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/html" id="pk10_gyh">
+    <table width="100%" cellspacing="0" cellpadding="0" border="0" class="pp" action="pk10_gyh" length="1">
+        <thead>
+        <tr>
+            <th colspan="6"><i>{{plg.name}}</i></th>
+        </tr>
+        </thead>
+        <tbody>
+        {{each plg.sz.lines line index1}}
+        <tr>
+            {{each line pl index2}}
+            <td onclick="setQuickPick(this,true)"><strong>{{pl.value}}<br/><span class="color-red pl">{{pl.pl}}</span></strong></td>
+            <td onclick="setQuickPick(this,true)" style="display: none;"><strong
+                    class="color-red pl">{{pl.pl}}</strong></td>
+            <td  style="display: none;"><input type="text" oninput="checkAmount()" class="table-txt" data-name="{{plg.name}}-{{pl.value}}"
+                       data-plid="{{pl.id}}"
+                       data-pl="{{pl.pl}}"></td>
+            {{/each}}
+        </tr>
+        {{/each}}
+        </tbody>
+    </table>
+    <table width="100%" cellspacing="0" cellpadding="0" border="0" class="pp" action="pk10_gyh" length="1" style="margin-top:5px;">
+        <thead></thead>
+        <tbody>
+        {{each plg.sm pl}}
+        <tr>
+            {{each pl _pl}}
+            <td onclick="setQuickPick(this,true)"><strong>{{_pl.value}}<br/><span class="color-red pl">{{_pl.pl}}</span></strong></td>
+            <td onclick="setQuickPick(this,true)" style="display: none;"><strong class="color-red pl">{{_pl.pl}}</strong>
+            </td>
+            <td style="display: none;"><input type="text" oninput="checkAmount()" class="table-txt" data-name="{{plg.name}}-{{_pl.value}}" data-plid="{{_pl.id}}"
+                                              data-pl="{{_pl.pl}}"></td>
+            {{/each}}
+        </tr>
+        {{/each}}
+        </tbody>
+    </table>
+</script>
+<script>
+    //var pls;//玩法的所有赔率
+    //var plg;//当前赔率组
+    $(function () {
+        var playedId = "<?=$playedId?>";
+        $.getJSON("/game/pl/playedId/" + playedId, function (data) {
+            pls = data;
+            plg = pls[0];
+            plg.sz = plg.pls.slice(0, 5);      // 数字盘
+            plg.sz.lines = group(plg.sz, 5);
+            plg.sm = plg.pls.slice(5);         // 大小单双盘
+            plg.sm = group(plg.sm, 4);
+            var html = template("pk10_gyh", {plg: plg});
+            $('.table-common').html(html);
+        });
+    });
+</script>    

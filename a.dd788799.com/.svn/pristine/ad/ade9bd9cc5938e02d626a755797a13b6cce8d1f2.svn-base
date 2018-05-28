@@ -1,0 +1,43 @@
+<input type="hidden" name="playedGroup" value="<?=$groupId?>"/>
+<input type="hidden" name="playedId" value="<?=$playedId?>"/>
+<input type="hidden" name="type" value="<?=$type?>"/>
+<input type="hidden" name="playedName" value="<?=$played['name']?>"/>
+<!-- mobile 江苏快3_二不同号 -->
+<div id="sscContent">
+    <div class="lot-content clearfix">
+        <div class="fl main-left re-main-left">
+            <div class="table-common table-common-reset" id="table-common">
+                <script type="text/html" id="k3_2bt">
+                    <table width="100%" border="0" cellpadding="0" cellspacing="0">
+                        <thead>
+                        <tr>
+                            <th colspan="6"><i>二不同号</i><strong>@<span class="pl red" data-plid="{{pls[0].pls[0].id}}">{{pls[0].pls[0].pl}}</span></strong>(请选择2~6个号码)
+                            </th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {{each pls[0].arr val idx}}
+                        <tr  class="pp" min-len="2" action="k3_2bt">
+                            {{each val value index}}
+                                <td><strong style="line-height: 26px;">{{value}}</strong></td>
+                                <td><input type="checkbox" data-name="{{pls[0].name}}-{{value}}" value="{{value}}"></td>
+                            {{/each}}
+                        {{/each}}
+                        </tbody>
+                    </table>
+                </script>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    $(function () {
+        var playedId = "<?=$playedId?>";
+        $.getJSON("/game/pl/playedId/" + playedId, function (data) {
+            pls = data;
+            pls[0].arr = [[1,2],[3,4],[5,6]];
+            var html = template("k3_2bt", {pls: pls});
+            $('.table-common').html(html);
+        });
+    });
+</script>

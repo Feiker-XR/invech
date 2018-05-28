@@ -1,0 +1,87 @@
+<?php
+
+namespace app\common\traits\model;
+
+trait UserFlow
+{
+    public function user()
+    {
+        return $this->belongsTo('Member','uid','uid');
+    }    	
+    public function getUserNameAttr($value,$data){
+        return $this->user->username;
+    } 
+    public function getNickNameAttr($value,$data){
+        return $this->user->nickname;
+    }
+    public function getRealNameAttr($value,$data){
+        return $this->user->getAttr('name');
+    }
+
+    //如果需要的不仅仅是分页对象,比如会员的资金记录,
+    //需要额外的统计 收入总金额,每页收入总金额,支出总金额,等等,
+    //多次使用getListBuild得到查询对象即可,然后由交互层(控制层)统计
+    public static function getList(){
+        //$query = self::getListBuild();
+        $model = (new static);
+        $query = $model->getListBuild();
+        return $query->paginate(15);
+    }
+
+    //getListBuild支持流水模型, 非流水模型,比如member,pay_third, 需要自行定义;
+    //attachToRequest     流水模型通用   请求参数,流水模型 统一支持 用户名,时间段,id
+    //attachToSelfRequest 流水模型自定义 请求参数;
+    public function getListBuild($ignore = []){
+        
+        //$model = (new static);
+
+        $query = $this->db(true,false);
+        
+        $params = get_where_params($ignore);
+
+        //trait中的请求参数
+        if(method_exists($this,'attachToRequest')){
+           self::attachToRequest($query,$params);
+        }
+
+        //分组查询 已经有自己的field 和 order了; 从attachToRequest中拿出来
+        $query->field('x.*')->order('id desc');
+        
+        return $query;
+    }
+
+    public static function attachToRequest(&$query,$params=[]){
+        
+        if(empty($params)){
+            $params = request()->param();    
+        }   
+        
+        $query->alias('x');
+
+        if($params['username']??''){
+            
+            $subsql = db()->table('gygy_members')
+                    ->field('uid,username,nickname')->buildSql();
+            $query->join([$subsql=> 'u'], 'u.uid = x.uid')
+            ->where('nickname|username','like','%'.trim($params['username']).'%');           
+        }
+
+        if($params['startTime']??''){
+            $query->where('x.created_at', '>=',$params['startTime']);
+        }
+        if($params['endTime']??''){
+            $query->where('x.created_at', '<=',$params['endTime']);
+         }
+
+        if(!empty($params['id']??'')){
+            $query->where('x.id', $params['id']);
+        }
+
+        $class_name = get_class();
+        if(method_exists($class_name,'attachToSelfRequest')){
+           self::attachToSelfRequest($query,$params);
+        }       
+
+        $query->with('user'); 
+    }    
+}

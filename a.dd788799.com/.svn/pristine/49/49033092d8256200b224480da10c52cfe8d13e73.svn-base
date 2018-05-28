@@ -1,0 +1,99 @@
+<input type="hidden" name="playedGroup" value="<?=$groupId?>"/>
+<input type="hidden" name="playedId" value="<?=$playedId?>"/>
+<input type="hidden" name="type" value="<?=$type?>"/>
+<input type="hidden" name="playedName" value="<?=$played['name']?>"/>
+<!-- mobile 江苏快3_二同号单选 -->
+<div id="sscContent">
+    <div class="lot-content clearfix">
+        <div class="fl main-left re-main-left">
+            <div class="table-common table-common-reset" id="table-common">
+                <script type="text/html" id="k3_2dx">
+                    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                        <thead>
+                        <tr>
+                            <th colspan="6"><i>二同号单选</i><strong>@<span class="pl red" data-plid="{{pls[0].pls[0].id}}">{{pls[0].pls[0].pl}}</span></strong>
+                            </th>
+                        </tr>
+                        </thead>
+                        <tbody class="tr_check pp" action="k3_2dx" length="2">
+                        {{each pls[0].arr val idx}}
+                            <tr>
+                                {{each val value index}}
+                                <td><strong style="line-height: 26px;">{{value}}{{value}}</strong></td>
+                                <td  style="display: none;"><input type="checkbox" data-name="{{pls[0].name}}-{{value}}{{value}}" value="{{value}}{{value}}" idx="{{value-1}}"></td>
+                                {{/each}}
+                            </tr>
+                        {{/each}}
+                        </tbody>
+                       <!-- <tr>
+                            <td><strong>11</strong></td>
+                            <td><input type="checkbox" data-name="{{pls[0].name}}-11" value="11" idx="0"></td>
+                            <td><strong>22</strong></td>
+                            <td><input type="checkbox" data-name="{{pls[0].name}}-22" value="22" idx="1"></td>
+                            <td><strong>33</strong></td>
+                            <td><input type="checkbox" data-name="{{pls[0].name}}-33" value="33" idx="2"></td>
+                        </tr>
+                        <tr>
+                            <td><strong>44</strong></td>
+                            <td><input type="checkbox" data-name="{{pls[0].name}}-44" value="44" idx="3"></td>
+                            <td><strong>55</strong></td>
+                            <td><input type="checkbox" data-name="{{pls[0].name}}-55" value="55" idx="4"></td>
+                            <td><strong>66</strong></td>
+                            <td><input type="checkbox" data-name="{{pls[0].name}}-66" value="66" idx="5"></td>
+                        </tr>
+                        </tbody>
+                        <tbody class="tr_check pp" action="k3_2dx" length="2">
+                        <tr>
+                            <td><strong>1</strong></td>
+                            <td><input type="checkbox" data-name="{{pls[0].name}}-1" value="1" idx="0"></td>
+                            <td><strong>2</strong></td>
+                            <td><input type="checkbox" data-name="{{pls[0].name}}-2" value="2" idx="1"></td>
+                            <td><strong>3</strong></td>
+                            <td><input type="checkbox" data-name="{{pls[0].name}}-3" value="3" idx="2"></td>
+                        </tr>
+                        <tr>
+                            <td><strong>4</strong></td>
+                            <td><input type="checkbox" data-name="{{pls[0].name}}-4" value="4" idx="3"></td>
+                            <td><strong>5</strong></td>
+                            <td><input type="checkbox" data-name="{{pls[0].name}}-5" value="5" idx="4"></td>
+                            <td><strong>6</strong></td>
+                            <td><input type="checkbox" data-name="{{pls[0].name}}-6" value="6" idx="5"></td>
+                        </tr>-->
+                    </table>
+                    <table width="100%" border="0" cellspacing="0" cellpadding="0" style="margin-top:25px;">
+                        <tbody class="tr_check pp" action="k3_2dx" length="2">
+                        {{each pls[0].arr val idx}}
+                        <tr>
+                            {{each val value index}}
+                            <td><strong style="line-height: 26px;">{{value}}</strong></td>
+                            <td style="display: none;"><input type="checkbox" data-name="{{pls[0].name}}-{{value}}" value="{{value}}{{value}}" idx="{{value}}"></td>
+                            {{/each}}
+                        </tr>
+                        {{/each}}
+                        </tbody>
+                    </table>
+                </script>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    $(function () {
+        var playedId = "<?=$playedId?>";
+        $.getJSON("/game/pl/playedId/" + playedId, function (data) {
+            pls = data;
+            pls[0].arr = [[1,2],[3,4],[5,6]];
+            console.log(pls);
+            var html = template("k3_2dx", {pls: pls});
+            $('.table-common').html(html);
+        });
+    });
+    // checkbox can not the same at same place of td.
+    $('.table-common table td input:checkbox').live('click', function (evt) {
+        var index = $(this).attr('idx');
+        var _sibling = $(this).closest('tbody').siblings().find('input[idx=' + index + ']');
+        if ($(this).attr('checked') && _sibling.attr('checked') == 'checked') {
+            _sibling.removeAttr('checked');
+        }
+    })
+</script>

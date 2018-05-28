@@ -1,0 +1,106 @@
+{layout name="layout" /}
+
+<div class="row">
+  <div class="col-xs-12">
+    <div class="box">
+      	<div class="box-header">
+      		<i class="fa fa-plus-square pull-right add_level"></i>
+		
+		</div>
+      <!-- /.box-header -->
+	    <div class="box-body table-responsive no-padding">
+	        <table class="table table-hover">
+	         	<tr>
+				  <th>#</th>
+				  <th>入款方式</th>
+				  <th>入款配置</th>
+				  <th>状态</th>
+				  <th>创建时间</th>
+				  <th>操作</th>
+				</tr>
+				{if(!$list->isEmpty())}
+					{foreach $list as $v}
+						<tr>
+							<td>{$v->id}</td>
+							<td>
+								{$types[$v->type]}
+                  			</td>
+                  			{if($v->type=='1')}
+								<td>
+									收款人：{$v->bank_username}&nbsp;&nbsp; 收款银行：{$v->bank_name}&nbsp;&nbsp;收款卡号：{$v->bank_account}&nbsp;&nbsp; 开卡地址：{$v->bank_address}
+								</td>
+							{else}
+								<td><img src="{$v->qrcode}" width="100px" height="100"/></td>
+							{/if}
+							<td>{eq name="$v->enable" value="1"}开启{/eq}
+                  				{eq name="$v->enable" value="0"}关闭{/eq}
+                  			</td>
+							<td>{$v->created_at}</td>
+							<td>
+								<i  data-id="{$v.id}" class="edit fa fa-pencil"></i>&nbsp;&nbsp;
+								<i  data-id="{$v.id}" class="del fa fa-trash"></i>
+			              	</td>
+						</tr>
+					{/foreach}
+				{else}
+				 		<tr><td colspan="5" style="text-align:center;">暂无数据</td></tr>
+				{/if}
+	        </table>
+	        {$list->render();}
+	    </div>
+      <!-- /.box-body -->
+    </div>
+    <!-- /.box -->
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){
+	$(".add_level").click(function(){
+		$.get('/company/set_edit.html',{},function(data){
+			layer.open({
+				type: 1,
+				title: '新增收款方式',
+				maxmin: true, //开启最大化最小化按钮
+				area: ['900px', '500px'],
+				content: data
+			});
+		},'html');
+	});
+	
+	$(".edit").click(function(){
+		var id = $(this).attr('data-id');
+		$.get('/company/set_edit.html',{id:id},function(data){
+			layer.open({
+				type: 1,
+				title: '修改收款方式',
+				maxmin: true, //开启最大化最小化按钮
+				area: ['900px', '500px'],
+				content: data
+			});
+		},'html');
+	});
+	$(".del").click(function(){
+		var id = $(this).attr('data-id');
+		layer.confirm('确定删除?', {
+		  btn: ['确定','取消'] //按钮
+		}, function(){
+			$.get('/company/set_del',{id:id},function(data){
+				layer.alert(data.msg, {
+		          time: 20000,
+		          skin: 'layui-layer-molv', //该皮肤由layer.seaning.com友情扩展。关于皮肤的扩展规则，去这里查阅
+		          closeBtn: 0,
+		          anim: 4
+		        }, function(){
+		           window.location.href = document.URL;
+		        })
+
+			},'json');
+		}, function(){
+		
+		});
+	});
+});
+
+</script>
+
+

@@ -1,0 +1,267 @@
+<?php
+namespace app\common\model\member;
+
+use bong\foundation\Str;
+
+use app\common\model\Bet as BetModel;
+use app\common\model\Config;
+
+use app\common\model\Type;
+use app\common\model\PlayedPl;
+use app\classes\bet;
+use app\classes\betC;
+
+trait BetTrait
+{
+    //-------------前台----------------
+    public function bet($code,$remark){        
+        unset($code['plid']);
+        $code['wjorderId'] = $code['type'] . $code['playedId'] . Str::random(8 - strlen($code['type'] . $code['playedId']));
+        $bet = BetModel::create($code);
+
+        $money = $code['actionNum'] * $code['mode'] * $code['beiShu'];
+        $this->decBalance($money,'bet',$bet->id,$remark);
+
+        $betFlowRate = Config::getByName('betFlowRate');
+        $audit = $betFlowRate * $money;
+        $this->decAuditFlow($audit);   
+    }
+
+    public function bets(){
+
+        try{
+
+            $this->settings = Config::getAll();
+
+            $codes   = input('code/a');
+            $para    = input('para/a');
+
+            /*
+            if (!container('auth')->check())
+                throw new \Exception('投注失败：请您先登录！');
+            */
+            if ($this->settings['switchBet'] == 0)
+                throw new \Exception('本平台已经停止购买！');
+
+            if (count($codes) == 0)
+                throw new \Exception('请先选择号码再提交投注');
+
+            $type = $para['type']??null;
+            if(!$type){
+                throw new \Exception("请输入彩种ID!");
+            }
+            $groups = Type::allTypes($type);//参数彩种ID
+            if(!$groups){
+                throw new \Exception("彩种不存在!");                    
+            }
+
+            $types = Type::getAll();
+            $lottery = $types[$type];
+
+            $lottery_phase = $lottery->getGamePhase();
+            $actionTime=strtotime($lottery_phase['actionTime']);
+            $bet_phase = $lottery->getBetPhase();            
+            $actionNo = $bet_phase['actionNo'];
+
+            // 当期期数,已格式化为前端所见,带'-'
+            $actionNo_num = doubleval(str_replace('-', '', $actionNo));//数字化
+
+            //追号时才有多期
+            $actionNos = explode('|', $para['actionNo']);
+            foreach ($actionNos as $action_no) {
+                $action_no_num = doubleval(str_replace('-', '', $action_no)); 
+                if ($action_no_num < $actionNo_num)
+                    throw new \Exception('投注失败：该期投注时间已过'.$action_no_num.'----'.$actionNo_num);               
+            }
+
+            $zhuihao = input('zhuiHao');
+            if($zhuihao){
+                $beishus = explode('|', $para['beishu']);
+                if(count($actionNos)!=count($beishus)){
+                    throw new \Exception('投注失败：追号期数个数和倍数个数不一致!');
+                }
+                $liqType  = 102;
+                $info     = '追号投注';                
+            }else{
+                $beishus = [1];
+                $liqType  = 101;
+                $info     = '投注';                 
+            }
+            
+            // 查检每个注单的数据完整性
+            $amount = 0;
+            $bets = [];//注单,追号,一个投注内容,对应多个期数,则对应多个注单;
+
+            foreach ($codes as $code) {
+
+                $groupId = $code['playedGroup']??null;//input('playedGroup/d');
+                $group = $groups[$groupId]??null;
+                if(!$group){
+                    throw new \Exception("玩法组不存在!");
+                }
+                $playedId = $code['playedId']??null;//input('playedId/d');
+                $played = $group['playeds'][$playedId]??null;
+                if(!$played){
+                    throw new \Exception("玩法不存在!");
+                }
+                if (! $played['enable']){
+                    throw new \Exception('玩法已停!');
+                }
+                
+                //if ($played['type']!=$code['type']){
+                if ($para['type']!=$code['type']){
+                    throw new \Exception('彩种id有误!');
+                }
+
+                $actionData = $code['actionData']??'';
+                if(is_null($actionData)){
+                    throw new \Exception("投注内容不能为空!");
+                }    
+
+                if (floatval($code['mode']) <= 0)
+                    throw new \Exception('倍数模式必须大于0!');
+
+                if($played['is_kqwf']){
+                    $actionData = explode('-',$actionData,2);
+                    if(count($actionData)<2){
+                        throw new \Exception("投注内容格式错误!");
+                    }
+                    $plg = $actionData[0];//赔率组
+                    $bet = $actionData[1];
+
+                    $plid = $code['plid']??0;//input('plid/d');
+                  
+                    $pl = PlayedPl::get($plid);
+                    
+                    if(!$pl){
+                        throw new \Exception("赔率不存在!");
+                    }
+                    if($plg != $pl->plgroup->getAttr('name')){
+                        throw new \Exception("投注内容-赔率组错误!");
+                    }
+
+                    if($pl->plgroup->mode == 2){
+                        if(count(_arr($bet)) != $pl->value){
+                            throw new \Exception("赔率有误!");
+                        }
+                    }
+                    
+                    $bonusProp = $code['bonusProp']??0;                
+                    if($pl->pl != $bonusProp){
+                        throw new \Exception("赔率有误!");
+                    }
+
+                    $money = floatval($code['mode']??0);
+                    if($money<=0){
+                        throw new \Exception("投注额有误!");
+                    }
+
+                    $code['beiShu'] = 1;
+                    $code['fanDian'] = 0.0;                    
+                    $code['flag'] = 0;
+                    //$code['mode'] = 2;
+                }else{
+
+                    // 检查返点
+                    if (floatval($code['fanDian']) > floatval($this->settings['fanDianMax']))
+                    throw new \Exception('返点数据出错，请重新投注!');
+
+                    // 检查赔率
+                    if($played['is_mix']){
+                        $prop_pairs = db('played')->where('id','in',$played['mix_ids'])->field('bonusProp,bonusPropBase')->select();
+                    }else{
+                        $prop_pairs = [['bonusProp'=>$played['bonusProp'],
+                                        'bonusPropBase'=>$played['bonusPropBase'],],];
+                    }
+                    $props = explode('|',$code['bonusProp']);
+                    if(count($props)!=count($prop_pairs)){
+                        throw new \Exception('赔率个数出错，请重新投注!');
+                    }
+                    foreach($prop_pairs as $key => $pair){
+
+                        $convertBlMoney = ($pair['bonusProp'] - $pair['bonusPropBase']) / $this->settings['fanDianMax'];
+                        $chkBonus = ($pair['bonusProp'] - $code['fanDian'] * $convertBlMoney);
+
+                        if ($props[$key] > $pair['bonusProp'])
+                            throw new \Exception('赔率出错，请重新投注 -1');
+                        if ($props[$key] < $pair['bonusPropBase'])
+                            throw new \Exception('赔率出错，请重新投注 -2');
+                        if (intval($chkBonus) != intval($props[$key]))
+                            throw new \Exception('赔率出错，请重新投注 -3');
+
+                    }
+                    
+                    // 检查倍数
+                    if (intval($code['beiShu']) < 1)
+                    throw new \Exception('倍数只能为大于1正整数');                 
+                }
+                
+                $orderId = $code['orderId']??null;
+                if(!$orderId){
+                    throw new \Exception("订单id不能为空!");
+                }
+
+                // 检查注数
+                $betCountFun = $played['betCountFun'];
+                if($betCountFun){
+                    $betCount = bet::$betCountFun($code['actionData']);
+                    if($code['actionNum'] != $betCount){
+                        throw new \Exception('提交数据出错，请重新投注，有效注数' . $betCount);
+                    }                
+                }
+                
+                if($played['rx_mode']!='wym'){
+                    $code['weiShu'] = 0;
+                }
+
+                $betCheckFun = $played['betCheckFun'];
+                if($betCheckFun){
+                    $betCheck = betC::$betCheckFun($code['actionData'],$code['weiShu']);
+                    if(!$betCheck){
+                        throw new \Exception('投注内容有误，请重新投注!');
+                    }                
+                }
+
+                $ip = request()->ip();
+                $code['zhuiHao'] = (bool)$zhuihao;
+                $zhuiHaoMode = isset($para['zhuiHaoMode']) ? $para['zhuiHaoMode'] : '';
+                
+                $time = time();
+                foreach($actionNos as $key=>$actionNo){
+                    $para2 = array(
+                        'actionTime' => $time,
+                        'actionNo' => $actionNo,
+                        'kjTime' => $actionTime,
+                        'actionIP' => $ip,
+                        'uid' => $this->uid,
+                        'username' => $this->username,
+                        'zhuiHaoMode' => $zhuiHaoMode,
+                        'serializeId' => uniqid(),
+                    );
+                    $code['beiShu'] = $code['beiShu'] * $beishus[$key];
+                    $bets[] = array_merge($code, $para2);
+
+                    $money = $code['actionNum'] * $code['mode'] * $code['beiShu'];
+                    $money = $money * $beishus[$key];
+                    $amount += $money;
+                }
+            }    
+
+            $coin = $this->coin;
+            if ($coin < $amount){
+                throw new \Exception('您的可用资金不足，是否充值？');
+            }
+
+            transaction(function() use ($bets,$info){
+                foreach ($bets as $code) {           
+                    $this->bet($code,$info);
+                }
+            });            
+            return true;
+        }catch(\Exception $e){
+            $this->error = $e->getMessage();
+            return false;
+        }
+
+    }
+}

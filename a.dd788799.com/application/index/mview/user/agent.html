@@ -1,0 +1,164 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+    <title>申请代理</title>
+    <link type="text/css" rel="stylesheet" href="/css/personal.css">
+    <style type="text/css">
+        .charge_user.ol_box{
+            margin-bottom:15px;
+        }
+        section.security.margin{
+            background: none;
+        }
+        .charge_user ol li input,.charge_user ol li select{
+            border:none;
+            outline:none;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header class="header">
+        <i class='left' onclick="javascript:history.back(-1);">返回</i>
+        <h1>申请代理</h1>
+    </header>
+    <main class="inner_body">
+      <!--   <section class="charge_user ol_box security">
+          <ol>
+              <li>
+                  <span>代理名称</span>
+                  <input type="text" id="aname" placeholder="请输入代理名称"/>
+              </li>
+              <li>
+                  <span>代理密码</span>
+                  <input type="text" id="apwd" placeholder="请输入代理密码"/>
+              </li>
+              <li>
+                  <span>取款密码</span>
+                  <input type="text" id="wpwd"  placeholder="请填写取款密码"/>
+              </li>
+          </ol>
+      </section> -->
+
+        <!-- <section class="charge_user ol_box security">
+            <ol>
+                <li>
+                    <span>真实姓名</span>
+                    <input type="text" id="rname" placeholder="请输入真实姓名"/>
+                </li>
+                <li>
+                    <span>银行卡号</span>
+                    <input type="text" id="abank" placeholder="请输入银行卡号"/>
+                </li>
+                <li>
+                    <span>开户银行</span>
+                    <select id="abankname">
+                        <option value="">请选择</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                    </select>
+                </li>
+                <li>
+                    <span>开户地址</span>
+                    <input type="text" id="addr"  placeholder="请填写开户地址"/>
+                </li>
+            </ol>
+        </section> -->
+
+        <section class="charge_user ol_box security">
+            <ol>
+           <!--      <li>
+               <span>推广网址</span>
+               <input type="text" id="alink" placeholder="请输入推广网址"/>
+           </li>
+           <li>
+               <span>推广内容</span>
+               <input type="text" id="acontent" placeholder="请输入推广内容"/>
+           </li> -->
+                <li>
+                    <span>代理模式</span>
+                    <select id="agent_mode">
+                        <option value="0">流水模式</option>
+                        <option value="1">盈利模式</option>
+                    </select>
+                </li>
+            </ol>
+        </section>
+
+        <section class="charge_pay sub" style="background: none;">
+            <button>立即申请</button>
+        </section>
+        <div class="tip"><span></span></div>
+        <div class="loading"><img src="/images/loading.gif" alt="loading"/> </div>
+    </main>
+</div>
+<script type="text/javascript" src="/js/jquery-1.8.0.min.js"></script>
+<script type="text/javascript" src="/js/show.js"></script>
+<script type="text/javascript">
+    var _tip = null,_timeout = null;
+    $(function () {
+        _tip = $('.tip').remove();
+    })
+    // 提交数据
+    $('.sub').click(function () {
+        //$(this).attr('disabled','disabled');
+        var obj = {
+           /* aname: $('#aname').val(),
+            apwd:$('#apwd').val(),
+            wpwd:$('#wpwd').val(),
+            rname:$('#rname').val(),
+            abank:$('#abank').val(),
+            abankname:$('#abankname').val(),
+            addr:$('#addr').val(),
+            alink:$('#alink').val(),
+            acontent:$('#acontent').val(),*/
+            agent_mode:$('#agent_mode').val()
+        };
+        /*if(!obj.aname){
+            getErrorMsg('请输入代理名称');return;
+        }else if(!obj.apwd){
+            getErrorMsg('请输入代理密码');return;
+        }else if(!obj.wpwd){
+            getErrorMsg('请输入取款密码');return;
+        }else if(!obj.rname){
+            getErrorMsg('请输入真实姓名');return;
+        }else if(!obj.abank){
+            getErrorMsg('请输入银行卡号');return;
+        }else if(!obj.abankname){
+            getErrorMsg('请选择银行');return;
+        }else if(!obj.addr){
+            getErrorMsg('请输入开户地址');return;
+        }else if(!obj.alink){
+            getErrorMsg('请输入推广链接');return;
+        }else if(!obj.acontent){
+            getErrorMsg('请输入推广内容');return;
+        }else*/ if(!obj.agent_mode){
+            getErrorMsg('请选择推广模式');return;
+        }else{
+
+        }
+        $('.loading').show();
+        $.ajax({
+            url: "/user/agent",
+            data:obj,
+            dataType:'json',
+            type:'POST',
+            success:function(data){
+                getErrorMsg(data.msg);
+            },
+            error:function (err) {
+                console.log(err);
+                alert('ajax error');
+            },
+            complete:function () {
+                $('.loading').hide();
+            }
+        });
+    })
+</script>
+</body>
+</html>

@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>not found</title>
+</head>
+<body>
+	<div class="system-message">
+        <?php switch ($code) {?>
+            <?php case 1:?>
+            <h1>:)</h1>
+            <p class="success"><?php echo(strip_tags($msg));?></p>
+            <?php break;?>
+            <?php case 0:?>
+            <h1>:(</h1>
+            <p class="error"><?php echo(strip_tagmsgs($));?></p>
+            <?php break;?>
+        <?php } ?>
+        <p class="detail"></p>
+        <p class="jump">
+            页面自动 <a id="href" href="<?php echo($url);?>">跳转</a> 等待时间： <b id="wait"><?php echo($wait);?></b>
+        </p>
+    </div>
+    <img src="/__IMG__/error.png" width="100%">
+</body>
+</html>    

@@ -1,0 +1,45 @@
+<input type="hidden" name="playedGroup" value="<?=$groupId?>"/>
+<input type="hidden" name="playedId" value="<?=$playedId?>"/>
+<input type="hidden" name="type" value="<?=$type?>"/>
+<input type="hidden" name="playedName" value="<?=$played['name']?>"/>
+<!-- mobile 江苏快3_三不同 -->
+<div id="sscContent">
+    <div class="lot-content clearfix">
+        <div class="fl main-left re-main-left">
+            <div class="table-common table-common-reset" id="table-common">
+                <script type="text/html" id="k3_3bt">
+                    <table width="100%" border="0" cellspacing="0" cellpadding="0" class="pp sx" action="k3_sbt" min-len="3">
+                        <thead>
+                        <tr>
+                            <th colspan="6"><i>三不同</i><strong>@<span class="pl red" data-plid="{{pls[0].pls[0].id}}">{{pls[0].pls[0].pl}}</span></strong>(请选择3~6个号码)
+                            </th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {{each pls[0].pls val idx}}
+                        <tr>
+                            {{each val value index}}
+                            <td onclick="setQuickPick(this,true)"><strong style="line-height: 26px;">{{index+1}}</strong></td>
+                            <td style="display: none;"><input type="checkbox" data-pl="{{pls[0].pls[0].pl}}"
+                                       data-name="{{pls[0].name}}-{{index+1}}" value="{{index+1}}"></td>
+                            {{/each}}
+                        </tr>
+                        {{/each}}
+                        </tbody>
+                    </table>
+                </script>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    $(function () {
+        var playedId = "<?=$playedId?>";
+        $.getJSON("/game/pl/playedId/" + playedId, function (data) {
+            pls = data;
+            pls[0].pls = group(pls[0].pls,2);
+            var html = template("k3_3bt", {pls: pls});
+            $('.table-common').html(html);
+        });
+    });
+</script>

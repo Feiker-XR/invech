@@ -1,0 +1,48 @@
+<input type="hidden" name="playedGroup" value="<?=$groupId?>"/>
+<input type="hidden" name="playedId" value="<?=$playedId?>"/>
+<input type="hidden" name="type" value="<?=$type?>"/>
+<input type="hidden" name="playedName" value="<?=$played['name']?>"/>
+<!-- mobile 江苏快3_通选 -->
+<div id="sscContent">
+    <div class="lot-content clearfix">
+        <div class="fl main-left">
+            <div class="table-common table-common-reset" id="table-common">
+                <script type="text/html" id="k3_tx">
+                    <table width="100%" border="0" cellspacing="0" cellpadding="0" class="pp" action="pick_dw" length="1">
+                        <thead>
+                        <tr>
+                            <th colspan="6"><i>通选</i></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+
+                        <tr>
+                            {{each pls[0].pls value index}}
+                            <td onclick="setQuickPick(this,true)"><strong>{{value.value}}<br><span class="color-red pl">{{value.pl}}</span></strong>
+                            </td>
+                            <td onclick="setQuickPick(this,true)" style="display: none;"><strong class="color-red pl" data-plid="{{value.id}}">{{value.pl}}</strong>
+                            </td>
+                            <td style="display: none;"><input type="text" oninput="checkAmount()" class="table-txt" data-name="{{pls[0].name}}-{{value.value}}"
+                                       data-plid="{{value.id}}" data-pl="{{value.pl}}"></td>
+                            {{/each}}
+                        </tr>
+                        </tbody>
+                    </table>
+                </script>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    $(function () {
+        var playedId = "<?=$playedId?>";
+        $.getJSON("/game/pl/playedId/" + playedId, function (data) {
+            pls = data;
+            //pls.pls = group(pls.pls,2);
+            console.log(pls);
+            return;
+            var html = template("k3_tx", {pls: pls});
+            $('.table-common').html(html);
+        });
+    });
+</script>

@@ -1,0 +1,406 @@
+
+var _betMode = {												// 注单模型
+
+};
+
+var _postMode = {											// 投注模型
+    code:[],
+    para:{
+        type:1,
+        actionNo:1
+    }
+};
+
+$(".current_play_time_right").click(function (event) {
+    event.stopPropagation();
+    $(".current_lottery_record_wp").toggle();
+});
+// 默认玩法
+handlePlay(_played.type,_played.id,true);
+
+// 选择玩法
+$('.current_play_time_left button').click(function () {
+    var _li = '';
+    $.each(_group,function (index,value) {
+        if(_played.groupId == index){
+            _li += '<li class="active" onclick="chooseToPlay('+index+')">'+value.groupName+'</li>'
+        }else{
+            _li += '<li onclick="chooseToPlay('+index+')">'+value.groupName+'</li>'
+        }
+    });
+    $('.play_group ul:first-child').html(_li);
+    if($('.play_group').is(":hidden")){
+        $('.play_group').show();
+        chooseToPlay(_played.groupId);
+        $('body').css('overflow','hidden');
+        $(this).addClass('up');
+    }else{
+        $('.play_group').hide();
+        $('body').css('overflow','auto');
+        $(this).removeClass('up');
+    }
+});
+
+// 遮罩隐藏
+$(document).on('click','.current_play_btn_mask,.current_play_btn_tip i.iconfont,.current_play_btn_tip a',function(){
+    $('.current_play_btn_tip,.current_play_btn_mask').hide();
+});
+
+// 开奖历史
+$('.current_play_btn_wp button').click(function () {
+    if($('.history_nums').is(":hidden")){
+        $('.history_nums').show();
+        $('body').css('overflow','hidden');
+        var itemLen = 5;		// 获取多少条
+        $.ajax({
+            url:'/game/getHistory/list_rows/'+ itemLen +'/name/'+_typeName,
+            dataType:'json',
+            success:function (data) {
+                //console.log(data);
+                var _data = data.data.data;
+                if(_data){
+                    $.each(_data,function (index,value) {
+                        $('.history_nums p').eq(index).text(value.phase+'期开奖:');
+                        var _rest = value.data.split(',');
+                        $('.history_nums ul').eq(index).find('li').each(function(_index,_value){
+                            $(_value).text(_rest[_index]);
+                        });
+                    });
+                }else{
+                    alert('没有开奖历史');
+                }
+            },
+            error:function (error) {
+                console.log(error);
+                alert('ajax error');
+            }
+        })
+    }else{
+        $('.history_nums').hide();
+        $('body').css('overflow','auto');
+    }
+});
+
+
+function showx(x){
+    if(x==82){$('.ball_write').hide();}else{$('.ball_write').show();}
+}
+// 官网玩法快亲钱玩法切换
+$('.title_cq.gf_title').click(function () {
+    if($(this).hasClass('active')){
+        return;
+    }else{
+        var groudID,_gk;
+        if(_index == '1'){
+            _gk = _gfwf_groups;
+        }else{
+            _gk = _kqwf_groups;
+        }
+        if(JSON.stringify(_gk) == '{}' || JSON.stringify(_gk) == '[]'){
+            alert('该玩法不存在'+(_index == "1" ? '官方' : '快钱')+'玩法!');
+            return;
+        }
+        $.each(_gk,function (key,val) {
+            groudID = key;
+        });
+        location.href ="/game/game/type/"+_type+"/groupId/"+groudID+".html";
+    }
+});
+
+// 右侧子菜单
+$(".zhushou").click(function(){
+    $(".funcList").toggle();
+});
+//投注界面返回顶部按钮
+$("._back-btn").click(function(){
+    $(".tzTrans-wrapper").css("top",'100%');
+    $('.footerNew').show();
+    $('#all-count').text('0');
+    $('#all-amount').text('0.00');
+});
+// 玩法切换
+function chooseToPlay(plays){
+    $(event.target).addClass('active').siblings().removeClass('active');
+    var _li = "";
+    $.each(_group[plays].playeds,function (index,value) {
+        if(index != 'tags'){
+            if(_played.id == index){
+                _li += "<li class='active' onclick='handlePlay("+value.type+ "," +value.id+")'>"+ value.name+"</li>"
+            }else{
+                _li += "<li onclick='handlePlay("+value.type+ "," +value.id+")'>"+ value.name+"</li>"
+            }
+        }
+    });
+    $('.play_group ul:last-child').html(_li);
+}
+function handlePlay(type,playedId,flag){
+    if(!flag){
+        var _groupid = $('.play_group ul:first-child li.active').attr('onclick');
+        _groupid = _groupid.substring(_groupid.indexOf("(")+1,_groupid.indexOf(")"))
+        //console.log(_groupid,playedId);
+        _played = _group[_groupid].playeds[playedId];
+        $('.current_play_time_left p span').text($(event.target).text());
+        $($(event.target)).addClass('active').siblings().removeClass('active');
+        setTimeout(function () {
+            $('.play_group').hide();
+        },200)
+    }
+    $('._shark span:last-child').text(_played.tag+'-'+_played.name);
+    $("#playList").html('');
+    $.ajax({
+        url: "/game/played/type/"+type+"/playedId/"+playedId,
+        dataType:'html',
+        type:'POST',
+        success:function(data){
+            $('body').css('overflow','auto');
+            $("#playList").html(data);
+        }
+    });
+}
+$(function(){
+    // 设置玩法框或开奖历史的高度
+    $('.play_group,.history_nums').height(window.innerHeight-$('header').height() - $('.current_play_wp').height())
+    // 设置默认玩法
+    $('.current_play_time_left p span').text(_played.name);
+    // 快钱或者官方title样式
+    if(_index == '1'){
+        $('.title_cq.gf_title').eq(0).addClass('active').siblings().removeClass('active');
+    }else{
+        $('.title_cq.gf_title').eq(1).addClass('active').siblings().removeClass('active');
+    }
+    // 设置奖金组
+    $('.single-slider').jRange({
+        from: 0,
+        to: maxFandian,
+        step: 0.1,
+        theme: 'theme-green my-slide-theme',
+        format: '%s',
+        width: 150,
+        showLabels: false,
+        showScale: false,
+        snap: true,
+        onstatechange: function () {
+                // 返点比例
+                var fandianBili = parseFloat($(".single-slider").val()).toFixed(1); // 当前滚动条移动的比例
+                var pls = [];
+                $.each(gfwf_pls_pair,function(key,pair){
+                    var prop = parseFloat(pair.bonusProp);
+                    var base = parseFloat(pair.bonusPropBase);
+                    var convertBlMoney = (prop - base) / maxFandian;
+                    var pl = (prop - fandianBili * convertBlMoney).toFixed(3);// 赔率 = 最大配率 - 返点比例 * 转换比例
+                    pls.push(pl);
+                });
+                var plStr = pls.join('|');
+                _betMode.fanDian = fandianBili;
+                _betMode.bonusProp = plStr;
+                $('#bet_cover .content h3+p strong').text(plStr + '-' + fandianBili + '%');
+            }
+    });
+    // 为开奖号码添加样式
+    var _className = '';
+    switch (_type){
+        case '43':			// 香港六合彩
+        case '20':			// pk10
+            _className = 'gr_c';
+            break;
+        /* case '24':			// 北京快乐8
+
+             break;
+         case '9':			// 福彩3d
+         case '10':			// 排列三
+         case '25':			// 江苏快三
+             break;*/
+        default:				// 其他
+            _className = 'gr_s';
+
+    }
+    $('.current_play_btn_wp ul li').addClass(_className);
+    $('.current_play_btn_wp ul li').each(function (index,value) {
+        var _v = $(value).text();
+        $(value).addClass(_className+_v);
+    });
+
+    // 时间倒数
+    gameKanJiangDataC(fptime);
+    // 获取开奖
+    loadKjData();
+    //获取未来期
+    getQiHao(true);
+
+    /*$(".nfdprize_text").click(function(){
+        if(riable==0){
+            riable=1;
+            $(".nfdprize_text b").addClass('cur')
+        }else{
+            riable =0;
+            $(".nfdprize_text b").removeClass('cur')
+        }
+        $(".m-lott-methodBox-list").toggle();
+    });*/
+});
+// 摇一摇
+window.onload = function() {
+    var myShakeEvent = new Shake({
+        threshold: 15
+    });
+    myShakeEvent.start();
+    window.addEventListener('shake', shakeEventDidOccur, false);
+    function shakeEventDidOccur() {
+        gameActionAddCode_random();
+    }
+
+};
+
+// 添加号码/投注未来/我要追号/历史投注
+$('.footerUp p span').click(function () {
+    var _this = $(this);
+    var _index = _this.index();
+    switch (_index){
+        case 0:                     // 添加号码
+            gameActionAddCode('add');
+            break;
+        case 1:                     //投注未来
+            gameActionAddCode('future');
+            /* $('#bet_cover').show();
+            $('#bet_cover .content p').show();*/
+            console.log('d');
+            break;
+        case 2:                     //我要追号
+            console.log('a');
+            break;
+        case 3:                     //历史投注
+            console.log('f');
+            break;
+    }
+});
+
+// 倍数变化   // 模式变化
+$('#times,#model').change(function () {
+    _betMode.beiShu = parseInt($('#times').val());
+    _betMode.mode = parseFloat($('#model').val())*parseInt($('#all-amount').val());
+    var _amount = parseFloat(_betMode.mode*_betMode.actionNum*_betMode.beiShu).toFixed(2);
+    $('.bet_detail table tr td:last-child').text(_amount +'元');
+    $('#bet_cover .content .sum strong').eq(1).text(_amount);
+});
+
+
+// 关闭弹框 重置数据
+$('.cover_all .close').click(function () {
+    $('.cover_all .content p').show();
+    $('.single-slider').jRange('setValue','0');
+    $('#times').val('1');
+    $('#model').val('1');
+    $('#all-amount').val('2');
+    $(".cover_all").hide();
+});
+
+
+// 确认投注
+$('#bet_cover .content button').click(function () {
+    var _type = $(this).attr('_type');
+    switch(_type){
+        case 'add':             // 添加注单
+            _postMode.code.unshift(_betMode);
+            _betMode = {};
+            var _lis = '';
+            _postMode.code.forEach(function (value) {
+                _lis += ('<li><i>'+value.actionData+'</i><button>删除</button></li>');
+            });
+            $('.footerUp').addClass('up');
+            $('.footerUp ul').html('').html(_lis).show();
+            $('#bet_cover .close').trigger('click');
+            break;
+        case 'bet':             // 一键投注 and 批量投注
+            _postMode.para.type = 1;
+            _postMode.para.actionNo = $('#dqqihao').text().replace(/期/,'');
+            console.log(_postMode);
+            wait();
+            $.ajax('/index.php/game/postAll', {
+                data: {
+                    code: typeof _betMode.orderId != 'undefined' ? [_betMode] : _postMode.code, // 单注 or 批量
+                    para: _postMode.para,
+                    zhuiHao: 0,
+                    is_combine: 0
+                },
+                type: 'post',
+                dataType: 'json',
+                error: function (xhr, textStatus, errorThrown) {
+                    console.log(xhr);
+                    alert('ajax error');
+                },
+                success: function (data) {
+                    destroyWait();
+                    var _data = JSON.parse(data)
+                    if(_data.status == 1){
+                        $('#bet_cover .close').trigger('click');
+                        layer.open({
+                            content: _data.info,
+                            timeout: 2,
+                        });
+                        _betMode = {};
+                        _postMode.code = [];
+                        $('.footerUp').removeClass('up');
+                        $('.footerUp ul').text('');
+                    }else{
+                        xingcai(_data.info);
+                    }
+                    /*  gamePostedCode(null, data);
+                      data = eval('(' + data + ')');
+                      if (data.status == 0) xingcai(data.info);
+                      $("#cannel_chckbox").attr("checked", false);//提交初始化*/
+                }
+            });
+            break;
+        default:
+            console.log('default');
+    }
+});
+
+// 删除备选注单
+$('.footerUp ul li button').live('click',function(){
+    var _this = $(this);
+    var _index = _this.parent('li').index();
+    _postMode.code.splice(_index,1);
+    _this.parent('li').remove();
+    console.log(_postMode.code);
+});
+
+// 提交数据
+function postData(data) {
+    _postMode.para.type = 1;
+    _postMode.para.actionNo = $('#dqqihao').text().replace(/期/,'');
+    console.log(_betMode);
+    wait();
+    $.ajax('/index.php/game/postAll', {
+        data: {
+            code: data,
+            para: _postMode.para,
+            zhuiHao: 0,
+            is_combine: 0
+        },
+        type: 'post',
+        dataType: 'json',
+        error: function (xhr, textStatus, errorThrown) {
+            console.log(xhr);
+            alert('ajax error');
+        },
+        success: function (data) {
+            destroyWait();
+            var _data = JSON.parse(data)
+            if(_data.status == 1){
+                $('#bet_cover .close').trigger('click');
+                layer.open({
+                    content: _data.info,
+                    timeout: 2,
+                });
+                _betMode = {};
+            }else{
+                xingcai(_data.info);
+            }
+            /*  gamePostedCode(null, data);
+              data = eval('(' + data + ')');
+              if (data.status == 0) xingcai(data.info);
+              $("#cannel_chckbox").attr("checked", false);//提交初始化*/
+        }
+    });
+}

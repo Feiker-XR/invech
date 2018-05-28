@@ -1,0 +1,988 @@
+<?php
+namespace app\common\model\type;
+
+use app\common\model\DataTime;
+use app\common\model\LhcTime;
+use app\common\model\LotteryTime;
+
+trait QishuTrait
+{    
+    public static $metas = [
+            'cqssc' =>  ['max_num'=>120,'turn_num'=>120,],
+            'xjssc' =>  ['max_num'=>96,'turn_num'=>84,],
+            'cqklsf'=>  ['max_num'=>96,'turn_num'=>84,],
+            'mlaft' =>  ['max_num'=>180,'turn_num'=>132,],        
+            'tjssc' =>  ['max_num'=>84,],
+            'gd11x5'=>  ['max_num'=>84,],
+            'jx11x5'=>  ['max_num'=>78,],
+            'gdklsf'=>  ['max_num'=>84,],
+            'bjpk10'=>  ['max_num'=>179,],
+            'bjkl8' =>  ['max_num'=>179,],
+            'xy28'  =>  ['max_num'=>179,],        
+            'jsk3'  =>  ['max_num'=>82,],        
+            //'fc3d'  =>  ['max_num'=>1,],
+            //'pl3'   =>  ['max_num'=>1,],
+            //'xg6hc' =>  ['max_num'=>1,],
+            'lg5fc' =>  ['max_num'=>288,],
+            'lg2fc' =>  ['max_num'=>720,],
+            'lg1fc' =>  ['max_num'=>1440,],
+            'hgssc' =>  ['max_num'=>960,],            
+            'djssc' =>  ['max_num'=>960,],
+            'txssc' =>  ['max_num'=>1440,],
+        ];
+
+    private function trim_ymd($period){
+        return substr($period,8);
+    }
+
+    private function get_ymd($period){
+        return substr($period,0,8);
+    }
+
+    private function tomorrow_ymd($ymd){
+
+        $year  = substr($ymd,0,4);
+        $month = substr($ymd,4,2);
+        $day   = substr($ymd,6,2);
+        
+        $today = strtotime($year."-".$month."-".$day);
+        $tomorrow = $today + 24 * 3600;
+
+        return date('Ymd',$tomorrow);
+    }
+
+    public function isSix(){
+        return $this->id == 43 && $this->getAttr('name') == 'xg6hc';
+    }
+
+    public function getGamePhaseOld(){
+        $time = time();
+
+        if($this->isSix()){
+            $atime = date('Y-m-d H:i:s', $time);
+            $query = (new LhcTime())->getQuery();
+        }else{
+            $atime  = date('H:i:s', $time + $this->data_ftime);
+            $query = (new DataTime())->getQuery();
+        }
+        $time_model = $query->where('type',$this->id)->where('actionTime','>',$atime)->order('actionTime')->find();
+
+        if(!$time_model){
+            $time_model = $query->where('type',$this->id)->order('actionTime')->find() ;
+            $time   = $time + 24*3600 ;            
+        }
+
+        $actionNo = $time_model->actionNo;
+        $actionTime = $time_model->actionTime;
+
+        $actionNo = $this->qishu($actionNo,$time);        
+        
+        $actionTime = date('Y-m-d ', $time).$actionTime;
+
+        return ['actionNo'=>$actionNo,'actionTime'=>$actionTime];
+    }
+
+    public function getBetPhase($time=null){
+        
+        if(!$time){
+            $time = time();    
+        }
+
+        if($this->isSix()){
+            $atime = date('Y-m-d H:i:s', $time + $this->data_ftime);
+            $query = (new LhcTime())->getQuery();
+            /*
+            $code_key = 'type';
+            $code_val = $this->id;
+            $time_key = 'actionTime'; 
+            */
+            $code_key = 'code';
+            $code_val = $this->data['name'];
+            $time_key = 'kaipan';             
+        }else{
+            $atime  = date('H:i:s', $time + $this->data_ftime);
+            $query = (new LotteryTime())->getQuery();
+            $code_key = 'code';
+            $code_val = $this->data['name'];
+            $time_key = 'kaipan';            
+        }
+
+        //$time_model = $query->where('code',$this->data['name'])->where('kaipan','>',$atime)->order('kaipan')->find();
+        $time_model = $query->where($code_key,$code_val)->where($time_key,'>',$atime)->order($time_key)->find();
+
+        if(!$time_model){
+            if($this->isSix()){
+                throw new \Exception('未设置香港六合彩的下期开奖时间,请联系管理员!');
+            }
+            //$time_model = $query->where('code',$this->data['name'])->order('kaipan')->find();
+            $time_model = $query->where($code_key,$code_val)->order($time_key)->find();
+            $time   = $time + 24*3600 ;
+        }
+
+        $actionNo = $time_model->actionNo;
+        $actionTime = $time_model->actionTime;
+      
+        $actionNo = $this->_d2t($actionNo,$time);
+
+        if(!$this->isSix()){
+            $actionTime = date('Y-m-d ', $time).$actionTime;
+        }
+
+        return ['actionNo'=>$actionNo,'actionTime'=>$actionTime];
+    }
+
+    public function getGamePhase($time=null){
+        
+        if(!$time){
+            $time = time();    
+        }
+
+        if($this->isSix()){
+            $atime = date('Y-m-d H:i:s', $time);
+            $query = (new LhcTime())->getQuery();
+            /*
+            $code_key = 'type';
+            $code_val = $this->id;
+            $time_key = 'actionTime'; 
+            */
+            $code_key = 'code';
+            $code_val = $this->data['name'];
+            $time_key = 'kaipan'; 
+        }else{
+            $atime  = date('H:i:s', $time);
+            $query = (new LotteryTime())->getQuery();
+            $code_key = 'code';
+            $code_val = $this->data['name'];
+            $time_key = 'kaipan';
+        }
+
+        //$time_model = $query->where('code',$this->data['name'])->where('kaipan','>',$atime)->order('kaipan')->find();
+        $time_model = $query->where($code_key,$code_val)->where($time_key,'>',$atime)->order($time_key)->find();
+
+        if(!$time_model){
+            //$time_model = $query->where('code',$this->data['name'])->order('kaipan')->find();
+            $time_model = $query->where($code_key,$code_val)->order($time_key)->find();
+            $time   = $time + 24*3600 ;
+        }
+
+        $actionNo = $time_model->actionNo;
+        $actionTime = $time_model->actionTime;
+      
+        $actionNo = $this->_d2t($actionNo,$time);
+
+        if(!$this->isSix()){
+            $actionTime = date('Y-m-d ', $time).$actionTime;
+        }
+        return ['actionNo'=>$actionNo,'actionTime'=>$actionTime];
+    }
+
+    public function getLastGamePhaseOld(){
+        $time = time();
+
+        if($this->isSix()){
+            $atime = date('Y-m-d H:i:s', $time);
+            $query = (new LhcTime())->getQuery();
+        }else{
+            $atime  = date('H:i:s', $time + $this->data_ftime) ; 
+            $query = (new DataTime())->getQuery();
+        }
+        $time_model = $query->where('type',$this->id)->where('actionTime','<=',$atime)->order('actionTime desc')->find();
+
+        if(!$time_model){
+            $time_model = $query->where('type',$this->id)->order('actionNo desc')->find() ;
+            $time   = $time-24*3600 ;            
+        }
+        
+        if(!$time_model){
+            throw new Exception('没有开奖时间表!');   
+        }        
+        
+        $actionNo = $time_model->actionNo;
+        $actionTime = $time_model->actionTime;
+
+        $actionNo = $this->qishu($actionNo,$time);        
+
+        $actionTime = date('Y-m-d ', $time).$actionTime;
+
+        return ['actionNo'=>$actionNo,'actionTime'=>$actionTime];
+    }
+
+    /**
+     * 获取上期的信息
+     * @param unknown $time
+     * @throws Exception
+     * @return unknown[]|string[]
+     */
+    public function getLastGamePhase($time=null){
+        
+        if(!$time){
+            $time = time();    
+        }
+
+        if($this->isSix()){
+            $atime = date('Y-m-d H:i:s', $time);
+            $query = (new LhcTime())->getQuery();
+            /*
+            $code_key = 'type';
+            $code_val = $this->id;
+            $time_key = 'actionTime'; 
+            */
+            $code_key = 'code';
+            $code_val = $this->data['name'];
+            $time_key = 'kaipan';           
+        }else{
+            $atime  = date('H:i:s', $time);
+            $query = (new LotteryTime())->getQuery();
+            $code_key = 'code';
+            $code_val = $this->data['name'];
+            $time_key = 'kaipan';            
+        }
+        //$time_model = $query->where('code',$this->data['name'])->where('kaipan','<=',$atime)->order('kaipan desc')->find();
+        $time_model = $query->where($code_key,$code_val)->where($time_key,'<=',$atime)->order("{$time_key} desc")->find();
+
+        if(!$time_model){
+            //$time_model = $query->where('code',$this->data['name'])->order('qishu desc')->find() ;
+            $time_model = $query->where($code_key,$code_val)->order("{$time_key} desc")->find() ;            
+            $time   = $time-24*3600 ;            
+        }
+        
+        if(!$time_model){
+            throw new Exception('没有开奖时间表!');   
+        }        
+        
+        $actionNo = $time_model->actionNo;
+        $actionTime = $time_model->actionTime;
+
+        //$actionNo = $this->qishu($actionNo,$time);        
+        $actionNo = $this->_d2t($actionNo,$time);
+
+        if(!$this->isSix()){
+            $actionTime = date('Y-m-d ', $time).$actionTime;
+        }
+
+        return ['actionNo'=>$actionNo,'actionTime'=>$actionTime];
+    }
+
+
+
+    public function getFc3dDiff(){
+
+        $code = $this->data['name'];
+        $times = LotteryTime::where('code',$code)->column('kaipan');
+
+        $ltime = date('Y-m-d') . ' ' . $times[0]['kaipan'];//' 21:20:00' ;
+        $ltime = strtotime($ltime);
+
+        $diff = $ltime - time();
+        if($diff<0){
+            $diff += 86400;    
+        }
+
+        return $diff;
+    }
+
+    public function getNormalDiffOld($period=null){
+        $metas = [
+            'cqssc' =>  ['num'=>120,'turn'=>120,],
+            'xjssc' =>  ['num'=>96,'turn'=>84,],
+            'cqklsf'=>  ['num'=>96,'turn'=>84,],
+            'mlaft' =>  ['num'=>180,'turn'=>132,],        
+            'tjssc' =>  ['num'=>84,],
+            'gd11x5'=>  ['num'=>84,],
+            'jx11x5'=>  ['num'=>78,],
+            'gdklsf'=>  ['num'=>84,],
+            'bjpk10'=>  ['num'=>179,],
+            'bjkl8' =>  ['num'=>179,],
+            'xy28'  =>  ['num'=>179,],        
+            'jsk3'  =>  ['num'=>82,],        
+            'fc3d'  =>  ['num'=>1,],
+            'pl3'   =>  ['num'=>1,],
+            'lg5fc' =>  ['num'=>288,],
+            'lg2fc' =>  ['num'=>720,],
+            'lg1fc' =>  ['num'=>1440,],
+            //'hgssc','txssc','djssc'
+        ];
+
+        $code = $this->data['name'];
+        $times = LotteryTime::where('code',$code)->column('kaipan');
+
+        $num = $metas[$code]['num'];
+        $turn = $metas[$code]['turn']??$num+1;
+
+        date_default_timezone_set('PRC') ;
+
+        $name = $this->data['name'];
+        $qihao = (int)$this->{$name.'_t2d'}($period);
+        $next_qihao = $qihao + 1;
+        if($next_qihao >= $turn){ //下期 是 转点
+            $one_more_day = 1;
+        }        
+        if($next_qihao > $num){
+            $next_qihao = 1;            
+        }
+
+        $next_time = $times[$next_qihao-1];
+        $d = explode(':' , $next_time);
+
+        $date = date('Y-m-d') . ' ' . $d[0] . ':' . $d[1] . ':' . $d[2];
+        $period_timestamp = strtotime($date);
+        if($one_more_day??0){
+            $period_timestamp += 86400;
+        }
+
+        $diff = $period_timestamp - time();
+        
+        if($diff<0){
+            $diff = 0;    
+        }
+
+        return $diff;
+    }
+
+    //当API给老的开奖数据时,导致定时器的下次运行时间有误;
+    public function getNormalDiffOld2($period=null){
+        $code = $this->data['name'];
+        $times = LotteryTime::where('code',$code)->column('kaipan');
+
+        $name = $this->data['name'];
+        $qihao = (int)$this->{$name.'_t2d'}($period);
+        $next_qihao = $qihao + 1;
+        if($next_qihao > count($times)){
+            $next_qihao = 1;            
+        }
+
+        $this_time = $times[$qihao-1];
+        $d = explode(':' , $this_time);
+        $date = date('Y-m-d') . ' ' . $d[0] . ':' . $d[1] . ':' . $d[2];
+        $this_timestamp = strtotime($date);
+
+        $next_time = $times[$next_qihao-1];        
+        $d = explode(':' , $next_time);
+        $date = date('Y-m-d') . ' ' . $d[0] . ':' . $d[1] . ':' . $d[2];
+        $next_timestamp = strtotime($date);
+
+        if($next_timestamp < $this_timestamp){
+            $next_timestamp += 86400;
+        }
+
+        $diff = $next_timestamp - time();
+        
+        if($diff<0){
+            $diff = 0;    
+        }
+
+        return $diff;        
+    }
+
+    //根据时间表 和 本地时间 决定下期时间
+    public function getNormalDiff($period=null){
+        $phase = $this->getGamePhase();
+        $diff = strtotime($phase['actionTime']) - time();
+        return $diff;        
+    }
+
+    //http://data.8889s.com/index/apiplus/type/cqssc
+    //采集接口 比 开奖时间表的开奖时间, 要晚30秒出数据;
+    //延迟10秒 只能采集到 上上期开奖数据,
+    //如果每个彩种的延迟时间不一样,只能单独配置,在外层处理;
+    public function getRerunTimeOld2($period){
+
+        $delay = 0 ; //秒为单位延时10秒
+
+        $phase = $this->getGamePhase();
+        $diff = strtotime($phase['actionTime']) - time();        
+
+        return $diff + $delay;
+    }
+
+    //如果采集接口最新一期 比 上一期(刚开奖) 要小 ,  未开奖的是这一期; 
+    //说明接口有延迟,那么10秒后再采集;
+    public function getRerunTime($period){
+
+        $last_phase = $this->getLastGamePhase();
+        $phase = $this->getGamePhase();
+
+        if( intval($period) < intval($last_phase['actionNo']) ){
+            $diff = 10;
+        }else{
+            $diff = strtotime($phase['actionTime']) - time(); 
+        }
+        //container('logger')->debug('period='.$period.',lastno='.$last_phase['actionNo'].',thisno='.$phase['actionNo'].',diff='.$diff);     
+        return $diff;
+    }
+
+    public function getRerunTimeOld($period){
+
+        $delay = 10 ; //秒为单位延时10秒
+
+        $code = $this->data['name'];
+        if(in_array($code,['fc3d','pl3'])){
+            $diff = $this->getFc3dDiff();
+        }else{
+            $diff = $this->getNormalDiff($period);
+        }
+
+        return $diff + $delay;
+    }
+
+    //当天期数转为总期数
+    private function _d2t($actionNo, $time=null){
+        $name = $this->data['name'];
+        return $this->{$name.'_d2t'}($actionNo, $time);  
+    }
+
+    /**
+     * 总期数转为当天期数
+     */
+    private function _t2d($period){
+        $name = $this->data['name'];
+        return $this->{$name.'_t2d'}($period);       
+    }
+
+    //根据总期数,计算出开奖时间 Y-m-d H:i:s类型;
+    //开奖api可以优化: 漏掉一天的开奖结果,可以继续拉取
+    //从上次采集到的开奖结果的期数继续拉取 而非 根据本地服务器时间 进行拉取;
+    private function _t2date($period){        
+        $date = sprintf('%s-%s-%s',
+            substr($period,0,4),
+            substr($period,4,2),
+            substr($period,6,2)
+        );
+        return 'xxx';
+    }
+
+    //根据当前期号计算出未来多期;
+    public function future_phases($phase){
+        $name = $this->data['name'];
+        $method = $name.'_future_phases';
+        if(method_exists($this,$method)){
+            return $this->$method($phase);
+        }
+        return $this->default_future_phases($phase);
+    }
+
+    //前面8个数字是Ymd格式
+    private function default_future_phases($phase){
+
+        $phases = [];
+
+        $ymd = $this->get_ymd($phase);
+        $tomorrow = $this->tomorrow_ymd($ymd);
+
+        $qishu = $this->trim_ymd($phase);
+        $bit = count(_arr($qishu));
+
+        //$next_qishu = (int)$qishu + 1;
+
+        $max_num = $this->max_num();
+        for($i=0;$i<$max_num;$i++){
+            $next_qishu = (int)$qishu + $i + 1;
+            if($next_qishu<=$max_num){
+                $phases[] = $ymd.fill_zero($next_qishu,$bit);
+            }else{
+                $next_qishu = $next_qishu - $max_num;
+                $phases[] = $tomorrow.fill_zero($next_qishu,$bit);
+            }
+        }
+        
+        return $phases;
+    }
+    
+    //前面4个数字是年
+    private function fc3d_future_phases($phase,$max_num = 365){
+
+        $phases = [];
+ 
+        $year = substr($phase,0,4);
+        $next_year = $year + 1;
+
+        $qishu = substr($phase,4);
+        $bit = count(_arr($qishu));
+
+        //$max_num = 365;//有瑞年,而且fc3d并非每天都开一期
+
+        for($i=0;$i<$max_num;$i++){
+            $next_qishu = (int)$qishu + $i + 1;
+            if($next_qishu <= $max_num){
+                $phases[] = $year.fill_zero($next_qishu,$bit);
+            }else{
+                $next_qishu = $next_qishu - $max_num;
+                $phases[] = $next_year.fill_zero($next_qishu,$bit);
+            }            
+        }
+
+        return $phases;
+    }
+
+    private function pl3_future_phases($phase){
+        return $this->fc3d_future_phases($phase);
+    }
+    //2018047
+    private function xg6hc_future_phases($phase){
+        return $this->fc3d_future_phases($phase,1);
+    }    
+
+    private function max_num(){
+        $name = $this->data['name'];
+        return self::$metas[$name]['max_num'];
+    }
+
+    /*
+    function fill_zero($number,$bit=2){
+        $base = pow(10,$bit);
+        return substr($base+$actionNo,1);
+    }
+
+    function $this->trim_ymd($period){
+        return substr($data['period'],8);
+    }
+    */
+    /*
+    public function qishu_old($actionNo, $time=null){
+        $qishuFun = $this->onGetNoed??'';
+        if($qishuFun&&method_exists($this,$qishuFun)){
+            return $this->{$qishuFun}($actionNo, $time);
+        }        
+    }
+
+    public function qishu($actionNo, $time=null){        
+        return $this->_d2t($actionNo, $time);
+    }
+    */
+
+    //-----------------_d2t---------------------
+    public function cqssc_d2t($actionNo, $time=null) {
+        if($actionNo==120){
+            $time = $time - 24*3600;
+        }
+        return date('Ymd', $time).fill_zero($actionNo,3);        
+    }
+    public function cqssc_t2d($period) {
+        return $this->trim_ymd($period);
+    }
+
+    // 20180502084
+    public function tjssc_d2t($actionNo, $time=null){
+        return date('Ymd', $time).fill_zero($actionNo,3);
+    }
+    public function tjssc_t2d($period){
+        return $this->trim_ymd($period);
+    }
+
+    //20180502084  23:00:00
+    public function gdklsf_d2t($actionNo, $time=null){
+        return $this->tjssc_d2t($actionNo,$time);
+    }
+    public function gdklsf_t2d($period){
+        return $this->trim_ymd($period);
+    }
+
+    //20180502082  22:09:00
+    public function jsk3_d2t($actionNo, $time=null){
+        return $this->cqssc_d2t($actionNo,$time);
+    }
+    public function jsk3_t2d($period){
+        return $this->trim_ymd($period);
+    }
+
+    //幸运飞艇 跨天 每天180期 20180502180 
+    //20180502132  2018-05-03 00:04:00 (5月3号的时间)
+    public function mlaft_d2t($actionNo, $time=null){
+        return date('Ymd', $time).fill_zero($actionNo,3);
+    }      
+    public function mlaft_t2d($period){
+        return $this->trim_ymd($period);
+    }
+
+    //20180502096  02:00:25 跨天
+    public function xjssc_d2t($actionNo, $time=null){
+        return date('Ymd', $time).fill_zero($actionNo,3);
+    }
+    public function xjssc_t2d($period){
+        return $this->trim_ymd($period);
+    }
+
+    //20180502096 02:00:00 跨天 又名重庆幸运农场 每天96期,10分钟一期;
+    public function cqklsf_d2t($actionNo, $time=null){
+        return date('Ymd', $time).fill_zero($actionNo,3);
+    }
+    public function cqklsf_t2d($period){
+        return $this->trim_ymd($period);
+    }
+
+    //-------------教特殊--------------------
+    //广东11选5 2018050279  2018-5-02 22:10:00
+    //广东江西11选5,都是低于100期,不需要补零    
+    public function gd11x5_d2t($actionNo, $time=null){
+        return date('Ymd', $time).fill_zero($actionNo,2);
+    }
+    public function gd11x5_t2d($period){
+        return $this->trim_ymd($period);
+    }
+
+    public function jx11x5_d2t($actionNo, $time=null){        
+        return $this->gd11x5_d2t($actionNo,$time);
+    }
+    public function jx11x5_t2d($period){
+        return $this->trim_ymd($period);
+    }
+    //-------------教特殊--------------------
+
+
+    //288期
+    public function lg5fc_d2t($actionNo, $time=null){
+        return date('Ymd', $time).fill_zero($actionNo,3);
+    }
+    //720期
+    public function lg2fc_d2t($actionNo, $time=null){
+        return date('Ymd', $time).fill_zero($actionNo,3);
+    }
+    //1440
+    public function lg1fc_d2t($actionNo, $time=null){
+        return date('Ymd', $time).fill_zero($actionNo,4);
+    }        
+
+    //重庆11选5
+    public function cq11x5_d2t($actionNo, $time=null){
+        throw new \Exception('无此彩种!');
+    }
+
+    public function bjpk10_d2t($actionNo, $time=null){
+        $days = (strtotime(date('Y-m-d', $time))-strtotime('2018-05-01'))/3600/24;
+        $actionNo = 179*$days + $actionNo + 679450;
+        return $actionNo;
+    }
+    public function bjpk10_t2d($period){
+        $days = (strtotime(date('Y-m-d', $time))-strtotime('2018-05-01'))/3600/24;
+        $number = $period - 179*$days - 679450;
+        return $number;        
+    }
+
+    public function bjkl8_d2t($actionNo, $time=null){
+        $days = (strtotime(date('Y-m-d', $time))-strtotime('2018-05-01'))/3600/24;
+        $actionNo = 179*$days + $actionNo + 885428;
+        return $actionNo;
+    }
+    public function bjkl8_t2d($period){
+        $days = (strtotime(date('Y-m-d', $time))-strtotime('2018-05-01'))/3600/24;
+        $number = $period - 179*$days - 885428;
+        return $number;
+    }
+
+    //960期,20180501001
+    public function hgssc_d2t($actionNo, $time=null){
+        return date('Ymd', $time).fill_zero($actionNo,3);
+    }         
+    public function hgssc_t2d($period){
+        return $this->trim_ymd($period);
+    }    
+
+    public function djssc_d2t($actionNo, $time=null){
+        return $this->hgssc_d2t($actionNo,$time);
+    }
+    public function djssc_t2d($period){
+        return $this->hgssc_t2d($period);
+    }
+
+    //201805030738
+    public function txssc_d2t($actionNo, $time=null){
+        return date('Ymd', $time).fill_zero($actionNo,4);
+    }    
+    public function txssc_t2d($period){
+        return $this->trim_ymd($period);
+    }  
+
+    public function xy28_d2t($actionNo, $time=null){
+        return $this->bjkl8_d2t($actionNo,$time);
+    }
+    public function xy28_t2d($period){
+        return $this->bjkl8_t2d($period);
+    }
+
+    public function xg6hc_d2t($actionNo, $time=null){
+        return $actionNo;
+    }
+    public function xg6hc_t2d($period){
+        return $period;
+    }
+
+    /*
+    福彩3D
+    2018-02-22 21:15:00 2018046
+    2018-02-14 21:15:00 2018045
+
+    排列三
+    2018-02-22 21:15:00 2018046
+    2018-02-14 21:15:00 2018045
+    福彩3D和排列三期数一致,问题是,都在农历年后,相差7天;
+    */
+
+    public function fc3d_d2t($actionNo, $time=null){        
+        $actionNo = date('Yz', $time) - 7;
+        return $actionNo;
+    }
+
+    public function fc3d_t2d($period){
+        return 1;
+    }
+
+    public function pl3_d2t($actionNo, $time=null){        
+        return $this->fc3d_d2t($actionNo,$time);
+    }    
+
+
+/*
+    //----------------旧处理函数--------------------
+    public function onHdXjSsc($actionNo, $time=null){        
+        if($actionNo>=96){
+            $actionNo=date('Ymd-'.$actionNo, $time - 24*3600);
+        }else{
+            $actionNo=date('Ymd-', $time).substr(100+$actionNo,1);
+        }
+        return $actionNo;
+    }
+    
+    public function noHd($actionNo, $time=null){        
+        $actionNo=date('Ymd-', $time).substr(100+$actionNo,1);
+        return $actionNo;
+    }
+
+    public function no6Hd($actionNo, $time=null){
+        $actionNo=substr(date('Yz', $time),0,4).substr(1000+$actionNo,1);
+        return $actionNo;
+    }
+
+    public function no0Hdk3($actionNo, $time=null){        
+        $actionNo=date('md', $time).substr(100+$actionNo,1);
+        return $actionNo;
+    }
+
+    public function no0Hdf($actionNo, $time=null){        
+        $actionNo=date('Ymd-', $time).substr(10000+$actionNo,1);
+        return $actionNo;
+    }
+    
+    public function GXklsf($actionNo, $time=null){        
+        $actionNo=date('Yz', $time).substr(100+$actionNo,1)+100;
+        $actionNo=substr($actionNo,0,4).substr(substr($actionNo,4)+100000,1);
+        return $actionNo;
+    }
+    
+    //北京快乐8
+    public function bjkl8($actionNo, $time=null){        
+        $actionNo = 179*(strtotime(date('Y-m-d', $time))-strtotime('2004-09-19'))/3600/24+$actionNo-3857;
+        return $actionNo;        
+    }
+
+    //澳门快乐8
+    public function amkl8($actionNo, $time=null){        
+        $actionNo = 288*(strtotime(date('Y-m-d', $time))-strtotime('2004-09-19'))/3600/24+$actionNo-1234;
+        return $actionNo;
+    }
+
+    //韩国快乐8
+    public function hgkl8($actionNo, $time=null){        
+        $actionNo = 288*(strtotime(date('Y-m-d', $time))-strtotime('2004-09-19'))/3600/24+$actionNo-4567;
+        return $actionNo;
+    }
+
+    //澳门幸运农场
+    public function amxync($actionNo, $time=null){        
+        $actionNo=date('17md', $time).substr(1000+$actionNo,1);
+        return $actionNo;
+    }   
+    
+    //台湾幸运农场
+    public function twxync($actionNo, $time=null){        
+        $actionNo=date('17md', $time).substr(1000+$actionNo,1);
+        return $actionNo;
+    }       
+
+    //澳门PK10
+    public function ampk10($actionNo, $time=null){        
+        $actionNo = 288*(strtotime(date('Y-m-d', $time))-strtotime('2007-11-11'))/3600/24+$actionNo-6789;
+        return $actionNo;
+    }
+
+    //台湾PK10
+    public function twpk10($actionNo, $time=null){        
+        $actionNo = 288*(strtotime(date('Y-m-d', $time))-strtotime('2007-11-11'))/3600/24+$actionNo-4321;
+        return $actionNo;
+    }   
+
+    //天津时时彩
+    public function tjssc($actionNo, $time=null){        
+        if($actionNo>84){
+            $time-=24*3600;
+        }        
+        $actionNo=date('17md', $time).substr(1000+$actionNo,1);
+        return $actionNo;
+    }   
+
+    //广东11选5
+    public function gd11($actionNo, $time=null){        
+        if($actionNo>84){
+            $time-=24*3600;
+        }        
+        $actionNo=date('17md', $time).substr(100+$actionNo,1);
+        return $actionNo;
+    }   
+
+    //江西11选5
+    public function jx11($actionNo, $time=null){        
+        if($actionNo>84){
+            $time-=24*3600;
+        }        
+        $actionNo=date('Ymd-', $time).substr(100+$actionNo,1);
+        return $actionNo;
+    }   
+
+    //山东11选5
+    public function sd11($actionNo, $time=null){        
+        if($actionNo>90){
+            $time-=24*3600;
+        }        
+        $actionNo=date('17md', $time).substr(100+$actionNo,1);
+        return $actionNo;
+    }   
+
+    //上海11选5
+    public function sh11($actionNo, $time=null){        
+        $actionNo=date('17md', $time).substr(100+$actionNo,1);
+        return $actionNo;
+    }
+
+    //江苏快3
+    public function jsk3($actionNo, $time=null){        
+        $actionNo=date('Ymd', $time).substr(1000+$actionNo,1);
+        return $actionNo;
+    }   
+    
+    public function xjssc($actionNo, $time=null){        
+        if($actionNo>84){
+            $time-=24*3600;
+        }        
+        $actionNo=date('Ymd-', $time).substr(100+$actionNo,1);
+        return $actionNo;
+    }
+    
+
+    //重庆时时彩 后置事件处理函数
+    public function noHdCQSSC($actionNo, $time=null) {        
+        if($actionNo==0||$actionNo==120){
+            $actionNo=date('Ymd-120', $time - 24*3600);
+            //$actionTime=date('Y-m-d 00:00', $time);            
+        }else{
+            $actionNo=date('Ymd-', $time).substr(1000+$actionNo,1);
+        }
+        return $actionNo;
+    }
+
+
+    //江西时时彩
+    public function no0Hd($actionNo, $time=null){        
+        $actionNo=date('Ymd-', $time).substr(1000+$actionNo,1);
+        return $actionNo;
+    }
+    
+    public function noFF0Hd($actionNo, $time=null){        
+        $actionNo=date('Ymd-', $time).substr(10000+$actionNo,1);
+        return $actionNo;
+    }
+    
+    // 韩国1.5分彩
+    public function hgssc($actionNo, $time=null) {        
+        $actionTimeStamps = strtotime(date('Y-m-d 00:00:00', $time)) + ($actionNo-1)*90;
+        $actionTime = date('Y-m-d H:i:s', $actionTimeStamps);
+        $actionNo = intval((strtotime($actionTime) - 30 - strtotime('2016-12-20 23:57:00')) / 90) + 1718360;
+        $actionNo = strval($actionNo);
+        return $actionNo;
+    }
+    
+    // dj1.5分彩
+    public function djssc($actionNo, $time=null) {    
+        $actionTimeStamps = strtotime(date('Y-m-d 00:00:00', $time)) + ($actionNo-1)*90;
+        $actionTime = date('Y-m-d H:i:s', $actionTimeStamps);        
+        $actionNo = intval((strtotime($actionTime) - 30 - strtotime('2016-12-20 23:57:00')) / 90) + 1713161;
+        $actionNo = strval($actionNo);
+        return $actionNo;
+    }
+    
+    //五分 二分彩 //未处理
+    public function noWF0Hd($actionNo, $time=null){        
+        if($actionNo==1 && time()>strtotime(' 23:55:00')){
+            if($time > time()+ 23*3600) $time = $time-24*3600;
+            $actionNo=date('Ymd-001', $time + 24*3600);
+            $actionTime=date('Y-m-d 00:00', $time + 24*3600);
+            
+        }elseif($actionNo==2 && time()>strtotime(' 23:55:00')){
+            $actionNo=date('Ymd-002', strtotime($actionTime) + 24*3600);
+            $actionTime=date('Y-m-d H:i:s', strtotime($actionTime) + 24*3600);
+        }
+        else{
+            $actionNo=date('Ymd-', $time).substr(1000+$actionNo,1);
+        }
+        return $actionNo;
+    }
+    
+    //新疆时时彩
+    public function noxHd($actionNo, $time=null){        
+        if($actionNo>=84){
+            $time-=24*3600;
+        }        
+        $actionNo=date('Ymd-', $time).substr(100+$actionNo,1);
+        return $actionNo;
+    }
+    
+    //福彩3D、排列三
+    public function pai3($actionNo, $time=null){
+        
+        $actionNo=date('Yz', $time);
+        $actionNo=substr($actionNo,0,4).substr(substr($actionNo,4)+994,1);
+        return $actionNo;
+    }
+    
+    //北京PK10,400w中说每天180期;
+    public function BJpk10($actionNo, $time=null){                
+        //$actionNo = 179*(strtotime(date('Y-m-d', $time))-strtotime('2007-11-11'))/3600/24+$actionNo-3774-19;
+        $days = (strtotime(date('Y-m-d', $time))-strtotime('2007-11-11'))/3600/24;
+        $actionNo = 180*$days + $actionNo - 8869;
+        return $actionNo;
+    }
+    
+    //北京快乐8
+    public function Kuai8($actionNo, $time=null){        
+        $actionNo = 179*(strtotime(date('Y-m-d', $time))-strtotime('2004-09-19'))/3600/24+$actionNo-3838;
+        return $actionNo;
+    }
+    
+    //幸运飞艇
+    public function onXyft($actionNo, $time=null){        
+        if($actionNo>132){
+            $actionNo = date("Ymd",$time-60*60*5).substr(1000+$actionNo,1);
+        }else{
+            $actionNo = date("Ymd",$time).substr(1000+$actionNo,1);
+        }
+        return $actionNo;
+    }
+
+    //重庆快乐十分 96期 同新疆时时彩
+    public function onCsf($actionNo, $time=null){
+        self::noxHd($actionNo,$time);
+        return $actionNo;
+    }
+
+    //广东11选  52018050279  2018-5-02 22:10:00
+    //广东江西11选5,都是低于100期,不需要补零    
+    public function onGd11x5($actionNo, $time=null){
+        $actionNo=date('Ymd', $time).$actionNo;
+        return $actionNo;
+    }
+
+    public function onJx11x5($actionNo, $time=null){
+        self::onGd11x5($actionNo,$time);
+        return $actionNo;
+    }
+*/
+}
+

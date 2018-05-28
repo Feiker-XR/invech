@@ -1,0 +1,1579 @@
+﻿body { background:#ebebed;}
+.floatL { float: left; }
+.orange { color:#ff632c;}
+.new { background: url(/images/nsc/home/ico-new.png) no-repeat; width:13px; height:13px;  display: inline-block; vertical-align:middle;}
+.dGameStatus .sGameStatusItem{
+    background: #ff632c;
+    /* width: 55px; */
+}
+
+/*六合彩波色*/
+.lotteryView_bs { padding:0px; }
+.lotteryView_bs .bsBox { /* width:760px; */ /* overflow:hidden; */ border-top:1px solid #e0e0e0; }
+.lotteryView_bs .bsBox dl { width:311px; display:inline; float:left; border-right:1px solid #e0e0e0; border-left: 1px solid #e0e0e0;}
+.lotteryView_bs .bsBox dl.nobd { border:0px; }
+.lotteryView_bs .bsBox dl dt { height:38px; line-height:38px; text-align:center; color:#989797; font-size:14px; background:#f6f6f6; border-bottom:1px solid #e0e0e0; overflow:hidden; }
+.lotteryView_bs .bsBox dl dt span { width:140px; display:inline; float:left; }
+.lotteryView_bs .bsBox dl dd { height:35px; overflow:hidden; padding-top: 5px; }
+.lotteryView_bs .bsBox dl dd span { color: #FFFFFF; font-size:18px; display:inline; float:left;width: 98px; }
+.lotteryView_bs .bsBox dl dd span.red { margin-left:5px; background:url(/images/nsc/lottery/rgb.png) no-repeat; width:28px; height:28px; line-height:28px; color:#fff; text-align:center; font-size:14px; }
+.lotteryView_bs .bsBox dl dd span.green { margin-left:5px; background:url(/images/nsc/lottery/rgb.png) no-repeat left center; width:28px; height:28px; line-height:28px; color:#fff; text-align:center; font-size:14px; }
+.lotteryView_bs .bsBox dl dd span.blue { margin-left:5px; background:url(/images/nsc/lottery/rgb.png) no-repeat left bottom; width:28px; height:28px; line-height:28px; color:#fff; text-align:center; font-size:14px; }
+.lotteryView_bs .bsBox dl dd span.num { width:70px; text-align:center; color: #694d85;height:28px; line-height:28px;}
+.lotteryView_bs .bsBox dl dd span.input { color: #694d85;}
+.lotteryView_bs .bsBox dl dd span input { width:30px; height:21px; border:1px solid #694d85; padding:2px; text-align:center; margin-top:2px; }
+.addOrderLeftsxtw {
+    width: 380px;
+    float: right;
+    display: inline;
+    margin-right: 20px;
+}
+
+/*六合彩生肖头尾*/
+.lotteryView_sxtw { padding:0px; }
+.lotteryView_sxtw .sxtwBox { /* width:460px; */ /* overflow:hidden; */ /* border-top:1px solid #e0e0e0; */ }
+.lotteryView_sxtw .sxtwBox dl { width:368px; display:inline; float:left; border-right:1px solid #e0e0e0; border-left: 1px solid #e0e0e0;border-bottom: 1px solid #e0e0e0;}
+.lotteryView_sxtw .sxtwBox dl.nobd { border:0px; }
+.lotteryView_sxtw .sxtwBox dl dt { height:38px; line-height:38px; text-align:center; color:#989797; font-size:14px; background:#f6f6f6; border-top: 1px solid #e0e0e0; border-bottom: 1px solid #e0e0e0;overflow:hidden; }
+.lotteryView_sxtw .sxtwBox dl dt span { width:50px; display:inline; float:left; }
+.lotteryView_sxtw .sxtwBox dl dd { height:35px; overflow:hidden; padding-top: 5px; }
+.lotteryView_sxtw .sxtwBox dl dd span { color: #FFFFFF; font-size:18px; display:inline; float:left; }
+.lotteryView_sxtw .sxtwBox dl dd span.red { margin-left:5px; background:url(/images/nsc/lottery/rgb.png) no-repeat; width:28px; height:28px; line-height:28px; color:#fff; text-align:center; font-size:14px; }
+.lotteryView_sxtw .sxtwBox dl dd span.green { margin-left:5px; background:url(/images/nsc/lottery/rgb.png) no-repeat left center; width:28px; height:28px; line-height:28px; color:#fff; text-align:center; font-size:14px; }
+.lotteryView_sxtw .sxtwBox dl dd span.blue { margin-left:5px; background:url(/images/nsc/lottery/rgb.png) no-repeat left bottom; width:28px; height:28px; line-height:28px; color:#fff; text-align:center; font-size:14px; }
+.lotteryView_sxtw .sxtwBox dl dd span.num { width:70px; text-align:center; height:28px; line-height:28px;color: #694d85;}
+.lotteryView_sxtw .sxtwBox dl dd span.input {color: #694d85; }
+.lotteryView_sxtw .sxtwBox dl dd span input { width:30px; height:21px; border:1px solid #694d85; padding:2px; text-align:center; margin-top:2px; }
+.addOrderLeftsxtw {
+    width: 380px;
+    float: right;
+    display: inline;
+    margin-right:20px;
+}
+
+/*六合彩*/
+.lotteryView_lhc { padding:0px; }
+.lotteryView_lhc .lhcBox { /* width:760px; */ /* overflow:hidden; */ border-top:1px solid #e0e0e0; }
+.lotteryView_lhc .lhcBox dl { width: 186px; display:inline; float:left; border-right:1px solid #e0e0e0; border-left: 1px solid #e0e0e0;}
+.lotteryView_lhc .lhcBox dl.nobd { border:0px; }
+.lotteryView_lhc .lhcBox dl dt { height:38px; line-height:38px; text-align:center; color:#989797; font-size:14px; background:#f6f6f6; border-bottom:1px solid #e0e0e0; overflow:hidden; }
+.lotteryView_lhc .lhcBox dl dt span { width:50px; display:inline; float:left; }
+.lotteryView_lhc .lhcBox dl dd { height:35px; overflow:hidden; padding-top: 5px; }
+.lotteryView_lhc .lhcBox dl dd span { color: #FFFFFF; font-size:18px; display:inline; float:left; }
+.lotteryView_lhc .lhcBox dl dd span.red { margin-left:5px; background:url(/images/nsc/lottery/rgb.png) no-repeat; width:28px; height:28px; line-height:28px; color:#fff; text-align:center; font-size:14px; }
+.lotteryView_lhc .lhcBox dl dd span.green { margin-left:5px; background:url(/images/nsc/lottery/rgb.png) no-repeat left center; width:28px; height:28px; line-height:28px; color:#fff; text-align:center; font-size:14px; }
+.lotteryView_lhc .lhcBox dl dd span.blue { margin-left:5px; background:url(/images/nsc/lottery/rgb.png) no-repeat left bottom; width:28px; height:28px; line-height:28px; color:#fff; text-align:center; font-size:14px; }
+.lotteryView_lhc .lhcBox dl dd span.num { width:70px; text-align:center; height:28px; line-height:28px;color: #694d85;}
+.lotteryView_lhc .lhcBox dl dd span.input {color: #694d85; }
+.lotteryView_lhc .lhcBox dl dd span input { width:30px; height:21px; border:1px solid #694d85; padding:2px; text-align:center; margin-top:2px; }
+.lhcwf{ color: #694d85;
+    font-size: 18px;
+    display: inline;
+    float: left;}
+	
+.lotteryView_lhc2 .lhcBox2 dl dt span {
+    width: 60px;
+    display: inline;
+    float: left;
+}	
+.lotteryView_lhc2 .lhcBox2 dl dd span.num {
+    width: 70px;
+    text-align: center;
+    height: 28px;
+    line-height: 28px;
+}	
+.lotteryView_lhc2 .lhcBox2 dl {
+    width:186px;
+    display: inline;
+    float: left;
+    border-right: 1px solid #e0e0e0;
+    border-left: 1px solid #e0e0e0;
+}	
+	
+	
+.lotteryView_lhc1 .lhcBox1 dl dt span {
+    width: 60px;
+    display: inline;
+    float: left;
+}	
+.lotteryView_lhc1 .lhcBox1 dl dd span.num {
+    width: 70px;
+    text-align: center;
+    height: 28px;
+    line-height: 28px;
+}	
+.lotteryView_lhc1 .lhcBox1 dl {
+    width:233px;
+    display: inline;
+    float: left;
+    border-right: 1px solid #e0e0e0;
+    border-left: 1px solid #e0e0e0;
+}
+
+.lotteryView_lhc1 .lhcBox1 dl dt {
+    height: 38px;
+    line-height: 38px;
+    text-align: center;
+    color: #989797;
+    font-size: 14px;
+    background: #f6f6f6;
+    border-bottom: 1px solid #e0e0e0;
+    border-top: 1px solid #e0e0e0;
+    overflow: hidden;
+}
+.lotteryView_lhc1 .lhcBox1 dl dd {
+    height: 35px;
+    overflow: hidden;
+    padding-top: 5px;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+
+
+/*六合彩自选不中*/
+.lotteryView_lhc4 { padding:0px; }
+.lotteryView_lhc4 .lhcBox4 { /* width:760px; */ /* overflow:hidden; */ border-top:1px solid #e0e0e0; }
+.lotteryView_lhc4 .lhcBox4 dl { width: 233px; display:inline; float:left; border-right:1px solid #e0e0e0; border-left: 1px solid #e0e0e0;border-bottom: 1px solid #e0e0e0;}
+.lotteryView_lhc4 .lhcBox4 dl.nobd { border:0px; }
+.lotteryView_lhc4 .lhcBox4 dl dt { height:38px; line-height:38px; text-align:center; color:#989797; font-size:14px; background:#f6f6f6; border-bottom:1px solid #e0e0e0; overflow:hidden; }
+.lotteryView_lhc4 .lhcBox4 dl dt span { width:50px; display:inline; float:left; }
+.lotteryView_lhc4 .lhcBox4 dl dd { height:35px; overflow:hidden; padding-top: 5px; /* border-bottom: 1px solid #e0e0e0; */}
+.lotteryView_lhc4 .lhcBox4 dl dd span { color: #FFFFFF; font-size: 14px; display:inline; float:left; }
+.lotteryView_lhc4 .lhcBox4 dl dd span.red { margin-left:5px; background:url(/images/nsc/lottery/rgb.png) no-repeat; width:28px; height:28px; line-height:28px; color:#fff; text-align:center; font-size:14px; }
+.lotteryView_lhc4 .lhcBox4 dl dd span.green { margin-left:5px; background:url(/images/nsc/lottery/rgb.png) no-repeat left center; width:28px; height:28px; line-height:28px; color:#fff; text-align:center; font-size:14px; }
+.lotteryView_lhc4 .lhcBox4 dl dd span.blue { margin-left:5px; background:url(/images/nsc/lottery/rgb.png) no-repeat left bottom; width:28px; height:28px; line-height:28px; color:#fff; text-align:center; font-size:14px; }
+.lotteryView_lhc4 .lhcBox4 dl dd span.num { width:70px; text-align:center; height:28px; line-height:28px;color: #694d85;}
+.lotteryView_lhc4 .lhcBox4 dl dd span.input {color: #694d85; }
+.lotteryView_lhc4 .lhcBox4 dl dd span input { width:30px; height:21px; border:1px solid #694d85; padding:2px; text-align:center; margin-top:2px; }
+/*-----------------------------------------*/
+.lotteryView_lhc5 { padding:0px; }
+.lotteryView_lhc5 .lhcBox5 { /* width:760px; */ /* overflow:hidden; */ border-top:1px solid #e0e0e0; }
+.lotteryView_lhc5 .lhcBox5 dl { width:92px; display:inline; float:left; border-right:1px solid #e0e0e0; border-left: 1px solid #e0e0e0;}
+.lotteryView_lhc5 .lhcBox5 dl.nobd { border:0px; }
+.lotteryView_lhc5 .lhcBox5 dl dt { height:38px; line-height:38px; text-align:center; color:#989797; font-size:14px; background:#f6f6f6; border-bottom:1px solid #e0e0e0; overflow:hidden; }
+.lotteryView_lhc5 .lhcBox5 dl dt span { width: 40px; display:inline; float:left; }
+.lotteryView_lhc5 .lhcBox5 dl dd { height:35px; overflow:hidden; padding-top: 5px; }
+.lotteryView_lhc5 .lhcBox5 dl dd span { color: #FFFFFF; font-size: 14px; display:inline; float:left; }
+.lotteryView_lhc5 .lhcBox5 dl dd span.red { margin-left:5px; background:url(/images/nsc/lottery/rgb.png) no-repeat; width:28px; height:28px; line-height:28px; color:#fff; text-align:center; font-size:14px; }
+.lotteryView_lhc5 .lhcBox5 dl dd span.green { margin-left:5px; background:url(/images/nsc/lottery/rgb.png) no-repeat left center; width:28px; height:28px; line-height:28px; color:#fff; text-align:center; font-size:14px; }
+.lotteryView_lhc5 .lhcBox5 dl dd span.blue { margin-left:5px; background:url(/images/nsc/lottery/rgb.png) no-repeat left bottom; width:28px; height:28px; line-height:28px; color:#fff; text-align:center; font-size:14px; }
+.lotteryView_lhc5 .lhcBox5 dl dd span.num { width:70px; text-align:center; height:28px; line-height:28px;color: #694d85;}
+.lotteryView_lhc5 .lhcBox5 dl dd span.input { color: #694d85;}
+.lotteryView_lhc5 .lhcBox5 dl dd span input { width:30px; height:21px; border:1px solid #694d85; padding:2px; text-align:center; margin-top:2px; }
+/*六合彩连码*/
+.lotteryView_lhc3 { padding:0px; }
+.lotteryView_lhc3 .lhcBox3 { /* width:760px; */ /* overflow:hidden; */ border-top:1px solid #e0e0e0; }
+.lotteryView_lhc3 .lhcBox3 dl { width: 154px; display:inline; float:left; border-right:1px solid #e0e0e0; border-left: 1px solid #e0e0e0;}
+.lotteryView_lhc3 .lhcBox3 dl.nobd { border:0px; }
+.lotteryView_lhc3 .lhcBox3 dl dt { height:38px; line-height:38px; text-align:center; color:#989797; font-size:14px; background:#f6f6f6; border-bottom:1px solid #e0e0e0; overflow:hidden; }
+.lotteryView_lhc3 .lhcBox3 dl dt span { width:50px; display:inline; float:left; }
+.lotteryView_lhc3 .lhcBox3 dl dd { height:35px; overflow:hidden; padding-top: 5px; }
+.lotteryView_lhc3 .lhcBox3 dl dd span { color: #FFFFFF; font-size: 14px; display:inline; float:left; }
+.lotteryView_lhc3 .lhcBox3 dl dd span.red { margin-left:5px; background:url(/images/nsc/lottery/rgb.png) no-repeat; width:28px; height:28px; line-height:28px; color:#fff; text-align:center; font-size:14px; }
+.lotteryView_lhc3 .lhcBox3 dl dd span.green { margin-left:5px; background:url(/images/nsc/lottery/rgb.png) no-repeat left center; width:28px; height:28px; line-height:28px; color:#fff; text-align:center; font-size:14px; }
+.lotteryView_lhc3 .lhcBox3 dl dd span.blue { margin-left:5px; background:url(/images/nsc/lottery/rgb.png) no-repeat left bottom; width:28px; height:28px; line-height:28px; color:#fff; text-align:center; font-size:14px; }
+.lotteryView_lhc3 .lhcBox3 dl dd span.num { width:70px; text-align:center; height:28px; line-height:28px;color: #694d85;}
+.lotteryView_lhc3 .lhcBox3 dl dd span.input {color: #694d85; }
+.lotteryView_lhc3 .lhcBox3 dl dd span input { width:30px; height:21px; border:1px solid #694d85; padding:2px; text-align:center; margin-top:2px; }
+/*六合彩开奖结果*/
+.lotteryView_lhc .lhcBox ul { height:48px; line-height:48px; border-bottom:1px solid #e0e0e0; width:100%; }
+.lotteryView_lhc .lhcBox ul.nobd { border:0px; }
+.lotteryView_lhc .lhcBox ul li { text-align:center; font-size:14px; color:#989797; display:inline; float:left; height:48px; overflow:hidden; cursor: default; }
+.lotteryView_lhc .lhcBox .title { height:29px; line-height:29px; background:#f6f6f6; font-size:14px; color:#989797; overflow:hidden; width:100%; margin:0px; }
+.lotteryView_lhc .lhcBox .title li { height:29px; line-height:29px; overflow:hidden; font-size:14px; }
+.lotteryView_lhc .lhcBox ul li.s-1 { width:150px; }
+.lotteryView_lhc .lhcBox ul li.s-2 { width:150px; }
+.lotteryView_lhc .lhcBox ul li.s-3 { width:430px; }
+.lotteryView_lhc .lhcBox ul li.s-3 span { height:28px; width:28px; line-height:28px; float:left; display:inline; font-size:14px; color:#fff; margin: 10px 10px;}
+.lotteryView_lhc .lhcBox ul li.s-3 .red { background:url(/images/nsc/lottery/rgb.png) no-repeat; }
+.lotteryView_lhc .lhcBox ul li.s-3 .green { background:url(/images/nsc/lottery/rgb.png) no-repeat left center; }
+.lotteryView_lhc .lhcBox ul li.s-3 .blue { background:url(/images/nsc/lottery/rgb.png) no-repeat left bottom; }
+.lotteryView_lhc .lhcBox ul li.s-3 .and { background:url(/images/nsc/lottery/lhc.png) no-repeat; width:16px; height:16px; margin:15px 10px; }
+.lotteryView_lhc .lhcBox ul li.s-4 { width:120px; }
+.lotteryView_lhc .lhcBox ul li.s-5 { width:40px; }
+.lotteryView_lhc .lhcBox ul li.s-6 { width:40px; }
+.lotteryView_lhc .lhcBox ul li.s-7 { width:40px; }
+.lotteryView_lhc .lhcBox ul li.s-8 { width:40px; }
+.lotteryView_lhc .lhcBox ul li.s-9 { width:40px; }
+.lotteryView_lhc .lhcBox ul li.s-10 { width:40px; }
+.lotteryView_lhc .lhcBox ul li.s-11 { width:40px; }
+.lotteryView_lhc .lhcBox ul li.s-12 { width:40px; }
+.lotteryView_lhc .lhcBox ul li.s-6 span,.lotteryView_lhc .lhcBox ul li.s-7 span,.lotteryView_lhc .lhcBox ul li.s-8 span,.lotteryView_lhc .lhcBox ul li.s-9 span,.lotteryView_lhc .lhcBox ul li.s-11 span,.lotteryView_lhc .lhcBox ul li.s-12 span { background:url(/images/nsc/lottery/lhc_yuan.png) no-repeat; width:26px; height:26px; line-height:26px; display:block; margin-top:15px; color:#fff; margin-left:7px; }
+
+.lotteryView_lhc .lhcPageBox { height:65px; background:#fff; padding-top:30px; color:#989797; }
+.lotteryView_lhc .lhcPageBox .refresh { width:47px; height:34px; line-height:34px; background:url(/images/nsc/lottery/refresh.png) no-repeat; padding-left:30px; font-size:14px; color:#989797; left:30px; top:30px; }
+.lotteryView_lhc .lhcPageBox .pageBox { margin:0px auto; text-align:center; vertical-align:middle; height:40px; line-height:40px; }
+.lotteryView_lhc .lhcPageBox .pageBox .lhcBtnBox { display:inline; }
+.lotteryView_lhc .lhcPageBox .pageBox .lhcBtnBox a,.lotteryView_lhc .lhcPageBox .pageBox .lhcBtnBox a:hover { display:inline-block; width:27px; height:27px; vertical-align: -6px; margin-left:3px;}
+.lotteryView_lhc .lhcPageBox .pageBox .lhcBtnBox a.first { background:url(/images/nsc/lottery/first.jpg) no-repeat; }
+.lotteryView_lhc .lhcPageBox .pageBox .lhcBtnBox a.prev { background:url(/images/nsc/lottery/prev.jpg) no-repeat; }
+.lotteryView_lhc .lhcPageBox .pageBox .lhcBtnBox a.next { background:url(/images/nsc/lottery/next.jpg) no-repeat; }
+.lotteryView_lhc .lhcPageBox .pageBox .lhcBtnBox a.last { background:url(/images/nsc/lottery/last.jpg) no-repeat; }
+.lotteryView_lhc .lhcPageBox .lhcSelBox { right:30px; top:30px; }
+.lotteryView_lhc .lhcPageBox .lhcSelBox select { height:25px; border:1px solid #c5c9da; font-size:14px; color:#989797; cursor:pointer; margin-top: 5px; padding: 0px; }
+/*正常高度与625高度*/
+.addOrderLeft {margin-right: 20px;margin-top: 12px;}
+.addOrderLeft625 { width: 380px; float: right; display: inline; }
+.addOrderLeft625 .funding { width: 43px; margin-top: 5px; }
+.addOrderLeft625 .funding a { position: absolute; }
+.addOrderLeft625 .funding a:hover span { display: block; }
+.addOrderLeft625 .funding a:hover span.hover {  background:#eb5f2e url(/images/nsc/lottery/yjf_625.png?123) no-repeat left bottom; text-indent: 0px; color: #fff; }
+.addOrderLeft625 .funding span { background:#fff url(/images/nsc/lottery/yjf_625.png?123) no-repeat left bottom; width: 43px; height: 28px; display: none; }
+.addOrderLeft625 .funding span.hover { background:#fff url(/images/nsc/lottery/yjf_625.png?123) no-repeat; width: 43px; height: 28px; color: #737373; text-indent:-16px; display: block; }
+.addOrderLeft625 .multipleBox { margin-left: 5px; margin-top: 3px; }
+.addOrderLeft625 .chooseMsg { width: 115px; margin: 0px; margin-right: 5px; }
+.addOrderLeft625 .chooseMsg p { margin: 0px; display: block; }
+.addOrderLeft625 .addBtn { margin-right: 0px; margin-top:5px;}
+
+.addOrderRight625 { width: 360px; float: right; display: inline; position: relative; }
+.addOrderRight625 .sendChoose { float: left; display: inline; margin: 0px; margin-left: 3px; margin-top:5px; }
+.addOrderRight625 .sendChoose a {  background: url(/images/nsc/lottery/tjtz.png) no-repeat; width: 98px; line-height: 32px; height: 32px; border: none; cursor: pointer; text-align: center; font-size: 16px; color: #fff; font-weight: bold; }
+.addOrderRight625 .sendChoose a:hover { background: url(/images/nsc/lottery/tjtz.png) no-repeat; width: 98px; line-height: 32px; height: 32px; font-size: 16px; }
+.addOrderRight625 .sendChoose a.sendBtnDisabled,.addOrderRight625 .sendChoose a.sendBtnDisabled:hover { background: url(/images/nsc/lottery/tjtz_disabled.png) no-repeat; cursor: default; }
+.addOrderRight625 .chooseAllMsg { float: right; width: 190px; display: inline; margin: 0px; margin-right: 65px; }
+.addOrderRight625 .chooseAllMsg span { font-size: 14px; }
+.addOrderRight625 .fqzhBox { position: absolute; top:0px; right: 0px; margin: 0px; }
+.addOrderRight625 .qxzhBox { position: absolute; top:20px; right: 0px; margin: 0px; overflow: hidden; }
+.addOrderRight625 .checkZhui .fq { background: none; overflow: hidden; height: 32px; line-height: 28px; margin: 0px; margin-top: -6px; font-weight: normal; display: inline-block; }
+.addOrderRight625 .checkZhui .fq:hover { color:#898989;}
+
+
+
+
+
+body{
+	background-color: #F7F7F7;
+}
+
+
+.clearfix:after{
+	content: '';
+	display: block;
+	visibility: hidden;
+	clear: both;
+}
+.sign-wrapper{
+	width: 100%;
+	padding: 10px 0;
+	text-align: center;
+}
+.sign-wrapper span{
+	display: inline-block;
+	margin:0 5px ;
+	line-height: 30px;
+}
+.sign-wrapper .code_sign{
+	border: 1px solid #F13131;
+	border-radius: 50%;
+	text-align: center;
+	width: 30px;
+	height: 30px;
+	font-size: 12px;
+	line-height: 30px;
+	box-sizing: border-box;
+	background-color: #fff;
+	color: #ca1a1a;
+	border: 1px solid #a9a9a9;
+	
+}
+.pl{
+	color: #A9A9A9;
+}
+
+.sign-wrapper input{
+	width:36px;
+	text-align: center;
+}
+ dl{
+	width: 100% !important;
+	
+}
+ dl dt{
+	display: none;
+}
+
+ .lhcBox dl dd{
+	position: relative;
+	float: left;
+	width: 20%;
+	height: auto !important;
+	overflow: visible;
+	margin: 5px 0;
+}
+.lhcBox dl dd span{
+	display: block !important;
+	float: none !important;
+	background: none !important;
+}
+.lhcBox dl dd span:first-child{
+	margin-left: 0 !important;
+	margin: 0 auto !important;
+	width: 33px !important;
+	height: 33px !important;
+	line-height: 33px !important;
+	font-size: 14px !important;
+}
+.lhcBox dl dd span.num{
+	width: 100% !important;
+	text-align: center;
+	color: #A9A9A9 !important;
+	font-size: 14px !important;
+	padding: 3px 0;
+	margin: 0 !important;
+}
+.lhcBox dl dd span.input{
+	width: 100%;
+	text-align: center;
+}
+.lhcBox dl dd span.input input{
+	width: 80% !important;
+	border-color:#FFA07A;
+	padding: 0;
+	padding: 5px 0;
+	box-sizing: content-box;
+	font-size: 12px;
+}
+.lhcBox dl dd span:first-child{
+	background-color: #fff !important;
+	border-radius: 50%;
+ color: #ca1a1a !important;
+ border: 1px solid #a9a9a9;
+}
+.lhcBox dl dd span.large:first-child{
+	width: 50px !important;
+	border-radius: 5px;
+	text-align: center;
+}
+
+
+.lotteryView_sxtw .sxtwBox dl dd {
+	width: 29% !important;
+	margin: 2%;
+	padding: 0;
+	height: auto !important;
+	float: left;
+	background-color: #fff;
+	border:1px solid #a9a9a9;
+	border-radius: 5px;
+	box-sizing: border-box;
+	text-align: center !important;
+	box-sizing: border-box;
+	padding: 0 3px;
+}
+.lotteryView_sxtw .sxtwBox dl dd span{
+	display: inline-block;
+}
+.lotteryView_sxtw .sxtwBox dl dd .sGameStatusItem{
+	display: block;
+	width: 100%;
+	text-align: center;
+	background-color: transparent;
+	color: #ca1a1a !important;
+	line-height: 2em;
+} 
+.red,.blue,.green{
+	background: none !important;
+	color: #fff000 !important;
+	margin: 0 2px !important;
+	width: auto !important;
+	height: 2em !important;
+	float: none !important;
+}
+
+.lotteryView_sxtw .sxtwBox dl dd span.num{
+margin: 0 !important;
+display: block;
+width: 100% !important;
+text-align: center !important;
+color: #A9A9A9;
+font-size: 14px;
+}
+.lotteryView_sxtw .sxtwBox dl dd span.input{
+	width: 100% !important;
+	display: block;
+	margin-bottom: 5px;
+}
+.lotteryView_sxtw .sxtwBox dl dd span.input input{
+	width: 80%;
+	display: block;
+	margin: 0 auto;
+	border-color: #FFA07A !important;
+	font-size: 14px;
+	padding: 3px 0;
+	box-sizing: content-box;
+}
+.lotteryView_bs .bsBox dl dd{
+	width: 25% !important;
+	float: left !important;
+	height: auto !important;
+	margin: 5px 0;
+}
+.lotteryView_bs .bsBox dl dd span{
+	float: none !important;
+	margin: 0 !important;
+	text-align: center;
+}
+.lotteryView_bs .bsBox dl dd .sGameStatusItem{
+	  background-color: #fff !important;
+    border-radius: 5px;
+    width: 80% !important;
+    height: 26px !important;
+    line-height: 26px;
+    color: #ca1a1a !important;
+    border: 1px solid #a9a9a9;
+    text-align: center;
+    display: block;
+    margin: 0 auto !important;
+}
+.lotteryView_bs .bsBox dl dd .num{
+   color: #A9A9A9 !important;
+   font-size: 14px;
+   width: 100% !important;
+   display: block;
+}
+.lotteryView_bs .bsBox dl dd .input{
+	display: block;
+	width: 100%;
+	margin: 0 !important;
+}
+.lotteryView_bs .bsBox dl dd .input input{
+	width: 80%;
+	display: block;
+	border-color: #FFA07A !important;
+	margin: 0 auto !important;
+	box-sizing: content-box;
+	padding: 3px 0;
+	margin-left: 0 !important;
+	font-size: 12px;
+}
+.lotteryView_sxtw .sxtwBox dl dd span.input{
+	margin: 0 !important;
+}
+.lotteryView_sxtw .sxtwBox dl dd span.input input{
+	margin: 0 auto 5px !important;
+}
+.lotteryView_lhc1 .lhcBox1 dl.no-br-bt dd{
+	border-bottom: none;
+}
+.lotteryView_lhc1 .lhcBox1 dl{
+	border: none;
+}
+.select-quick{
+	text-align: center;
+	line-height: 1.5em;
+	font-weight: 400;
+}
+table.sQuickmenu{
+	width: 100% !important;
+}
+table.sQuickmenu td {
+	text-align: center;
+}
+
+table.sQuickmenu td a{
+	font-size: 14px;
+	display: inline-block;
+	width: 50px;
+	padding: 5px 0;
+	border: 1px solid #CA1A1A;
+	color: #CA1A1A;
+	border-radius: 3px;
+	text-align: center;
+	margin-bottom: 5px;
+}
+table.sQuickmenu td a.checked{
+	background-color: #CA1A1A;
+	color: #fff;
+}
+.anniu-wrapper{
+	text-align: center;
+}
+.num-table .anniu{
+	width: 100px;
+	display: inline-block;
+	background-color: #CA1A1A;
+	color: #fff;
+	height: 30px;
+	line-height: 30px;
+	border: none;
+	border-radius: 3px;
+	margin: 10px 0;
+}
+.chooseMsg1{
+	text-align: center;
+	height: 40px;
+	font-size: 16px;
+	color: #333;
+	line-height: 40pxx;
+	margin-bottom: 10px;
+}
+.chooseMsg1 input{
+	width: 80px;
+	border: none;
+	border-radius: 3px;
+	border:1px solid #eee;
+	margin:5px 5px 0;
+	font-size: 14px;
+	padding: 8px;
+}
+.lotteryView_lhc3 .lhcBox3{
+	border-top:none;
+}
+.lotteryView_lhc3 .lhcBox3 dl{
+	float: left;
+	width: 25% !important;
+	height: auto !important; 
+	border: none !important;
+}
+.lotteryView_lhc3 .lhcBox3 dl dd{
+	height: auto !important;
+}
+.lotteryView_lhc3 .lhcBox3 dl dd span{
+	float: none !important;
+}
+.lotteryView_lhc3 .lhcBox3 dl dd .sGameStatusItem{
+	margin-left: 0 !important;
+	width: 50px !important;
+	height: 33px !important;
+	line-height: 33px !important;
+	font-size: 14px !important;
+	display: block;
+	margin: 5px auto !important;
+	border-radius: 3px;
+	background-color: #fff !important;
+	color: #CA1A1A !important;
+	text-align: center;
+	line-height: 33px;
+	border: 1px solid #a9a9a9;
+}
+.lotteryView_lhc3 .lhcBox3 dl dd .num{
+	display: block;
+	text-align: center;
+	color: #A9A9A9;
+	font-size: 14px;
+	width: 100% !important;
+	margin: 0 !important;
+	padding: 0 !important;
+}
+.lotteryView_lhc3 .lhcBox3 dl dd .input{
+	text-align: center;
+	display: block;
+	margin: 0 !important;
+	padding: 0 !important;
+	width: 100% !important;
+}
+.lotteryView_lhc3 .lhcBox3 dl dd .input input{
+	margin: 0 !important;
+	margin-bottom: 5px !important;
+}
+.lotteryView_lhc4 .lhcBox4{
+	margin-top: -1px;
+	border-top:none;
+}
+.lotteryView_lhc4 .lhcBox4 dl{
+	border:none;
+	float: left;
+	width: 25% !important;
+}
+.lotteryView_lhc4 .lhcBox4 dl:last-child{
+	border-bottom: 1px solid #eee;
+}
+.lotteryView_lhc4 .lhcBox4 dl dd{
+	height: auto !important;
+}
+.lotteryView_lhc4 .lhcBox4 dl dd span{
+	float: none !important;
+}
+.lotteryView_lhc4 .lhcBox4 dl dd .sGameStatusItem{
+	margin-left: 0 !important;
+	width: 60px !important;
+	height: 33px !important;
+	line-height: 33px !important;
+	font-size: 14px !important;
+	display: block;
+	margin: 5px auto !important;
+	border-radius: 3px;
+	background-color: #fff !important;
+	color: #CA1A1A !important;
+	text-align: center;
+	line-height: 33px;
+	border: 1px solid #a9a9a9;
+}
+.lotteryView_lhc4 .lhcBox4 dl dd .num{
+	display: block;
+	text-align: center;
+	color: #A9A9A9;
+	font-size: 14px;
+	width: 100% !important;
+	margin: 0 !important;
+	padding: 0 !important;
+}
+.lotteryView_lhc4 .lhcBox4 dl dd .input{
+	text-align: center;
+	display: block;
+	margin: 0 !important;
+	padding: 0 !important;
+	width: 100% !important;
+}
+.lotteryView_lhc4 .lhcBox4 dl dd .input input{
+	margin: 0 !important;
+	margin-bottom: 5px !important;
+}
+.lotteryView_lhc5 .lhcBox5 dl{
+	border-top: 1px solid #e0e0e0;
+}
+.lotteryView_lhc5 .lhcBox5 dl:last-child{
+	border-bottom: 1px solid #e0e0e0;
+}
+.lotteryView_lhc5 .lhcBox5 dl dd{
+	width: 25% !important;
+	float: left;
+	height: auto !important;
+}
+.lotteryView_lhc5 .lhcBox5 dl dd span:first-child{
+	margin-left: 0 !important;
+	width: 33px !important;
+	height: 33px !important;
+	line-height: 33px !important;
+	font-size: 14px !important;
+	display: block;
+	margin: 5px auto !important;
+	border-radius:50%;
+	background-color: #fff !important;
+	color: #CA1A1A !important;
+	text-align: center;
+	line-height: 33px;
+	border: 1px solid #a9a9a9;
+}
+.lotteryView_lhc5 .lhcBox5 dl dd .input{
+	text-align: center;
+	display: block;
+	margin: 0 !important;
+	padding: 0 !important;
+	width: 100% !important;
+}
+.lotteryView_lhc5 .lhcBox5 dl dd .input input{
+	margin: 0 !important;
+	margin-bottom: 5px !important;
+}
+.lotteryView_lhc1 .lhcBox1 dl.zmtC:first-child{
+	border-top: 1px solid #e0e0e0;
+}
+.lotteryView_lhc1 .lhcBox1 dl.zmtC:last-child{
+	border-bottom: 1px solid #e0e0e0;
+}
+.lotteryView_lhc1 .lhcBox1 dl.zmtC dd{
+	border-bottom: none;
+	width: 33.333% !important;
+}
+.lotteryView_lhc1 .lhcBox1 dl.zmtC dd .sGameStatusItem{
+	width: 60px !important;
+	text-align: center;
+	border-radius: 3px;
+}
+.lotteryView_lhc .lhcBox dl.zm16{
+	border-top: 1px solid #e0e0e0;
+}
+.lotteryView_lhc .lhcBox dl.zm16:last-child{
+	border-bottom: 1px solid #e0e0e0;
+}
+.lotteryView_lhc .lhcBox dl.zm16 .num{
+	position: static;
+}
+.lotteryView_lhc .lhcBox dl.zm16 .input{
+	position: static;
+}
+.lotteryView_lhc .lhcBox dl.zm16 .title{
+	padding: 0 !important;
+}
+.addOrderBox{
+	min-height: 70px;
+	box-sizing: content-box;
+	line-height: 70px;
+}
+.addOrderBox .addOrderLeft{
+	width: 100% !important;
+	float: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    display: block;
+}
+._lhc{
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	background-color: #252525 !important;
+	height: 50px !important;
+	padding: 0 !important;
+	z-index: 500;
+}
+.addOrderBox .addOrderLeft .chooseMsg{
+	width: auto !important;
+	margin: 0 7.357143rem 0 0 !important;
+	text-align: left;
+}
+._lhc .addOrderLeft .chooseMsg{
+	margin-top : 5px !important;
+	margin-left: 5px !important;
+}
+
+.addOrderBox .addOrderLeft .chooseMsg p{
+	color: #333 !important;
+	text-align: left !important;
+	display: inline-block !important;
+	padding: 0 10px;
+	border: 1px solid #CA1A1A;
+	height: 40px;
+	box-sizing: border-box;
+	border-radius: 5px;
+	line-height: 40px;
+	border-color: #fff !important;
+}
+._lhc.addOrderBox .addOrderLeft .chooseMsg p{
+	color: #fff !important;
+}
+.addOrderBox .addOrderLeft .chooseMsg p span{
+	color: #CA1A1A;
+}
+#lt_sel_insert{
+	/*background-color: #CA1A1A;*/
+	/*height:40px !important;*/
+	/*margin-top: 0 !important;*/
+}
+
+
+.Contentbox dd span.active{
+	background-color: #F13031 !important;
+	color: #fff !important;
+	border-color: #F13031 !important;
+	transform: none;
+	-webkit-transform: none;
+	-ms-transform: none;
+}
+.Contentbox dd.active{
+	transform: none;
+	-webkit-transform: none;
+	-ms-transform: none;
+}
+.Contentbox dd.active span{
+	color: #fff !important;
+}
+.lotteryView_sxtw .sxtwBox dl dd.active .sGameStatusItem{
+	color: #fff !important;
+}
+.lotteryView_sxtw .sxtwBox dl dd.active input{
+	color: #333;
+}
+.m-lott-methodBox{
+	margin-top: -5px;
+}
+
+/**
+	新增手机端
+	投注界面
+	样式内容区域
+ */
+/**
+	当前玩法
+ */
+.current_play_wp{    width: 100%;
+	background: #fff;
+	position: fixed;
+	top: 46px;
+	z-index: 2;
+	height: 95px;
+	overflow: hidden;}
+.current_play_wp .current_play_time_wp{
+	display: flex;
+	margin: 0px auto;
+	text-align: center;
+	width: 100%;
+	height: 30px;}
+.current_play_time_left{width: 78%;border-right:1px solid #d7cfc9;margin-top: 20px;height: 42px;text-align: left;text-indent: 1.1rem;}
+.current_play_time_left p{color: #666666;font-size: 0.9rem;}
+.current_play_time_left h3{color: #e40e32;font-size: 0.9rem;margin-top: 6px;}
+.current_play_time_left h3 b,.current_play_time_left h3 i {font-style: normal;font-weight: normal;}
+
+
+.current_play_time_right{width: 22%;height: auto;text-align: center;padding: 11px 0px 7px 0px;}
+.current_play_time_right i{color: #f37032; width: 25px;  height: 20px; font-size: 2rem;margin: 0 auto;float: none;}
+.current_play_time_right h4{color: #f37032;font-weight: normal;text-align: center;margin-top: -6px;}
+
+.current_play_wp .current_play_btn_wp{    width: 100%;
+	height: 40px;
+	background: #fff;
+	display: inline-block;
+	position: relative;
+	padding: 0 9px;
+	height: 64px;
+	border-bottom: 1px solid #ddd;}
+.current_play_wp .current_play_btn_wp span{position: absolute;font-size: 1.5rem;top:11px;}
+.current_play_wp .current_play_btn_wp p{text-align: center;  display: block;  margin: 0 auto;color: #666666;padding-top: 11px;font-size: 1rem;}
+.current_play_btn_left{left: 9px;top: 9px;color: #8a726b}
+.current_play_btn_right{right:9px;top:10px;color: #8a726b;}
+.block_0{width:100%;clear:both;height:0px;overflow:hidden;*zoom:1;}
+/**
+	点击 开奖记录内容区域
+ */
+.current_lottery_record_wp{width: 100%;height: auto;padding:0px 5px 10px 5px;display: none;transition-property: all;  transition-duration: 0.3s;  transition-timing-function: ease;}
+.current_lottery_record{width: 100%;height: auto;background: #f7f3f2;padding: 0px 5px;border-radius: 8px;}
+.current_lottery_record div{display: flex;height: 3rem}
+.current_lottery_record div b{color: #666666; font-weight: normal;line-height: 3rem;}
+.current_lottery_record div span{color: #f37032;font-size: 1rem; font-weight: normal;line-height: 3rem;}
+.current_lottery_record div em{color: #666666;font-size: 1rem; font-weight: normal;line-height: 3rem;font-style: normal;display: flex;margin-top: 7px}
+.current_lottery_record div em i{display: block;float: left;width:2rem; height: 2rem;  border-radius: 50%;  border: 1px solid #ddc2b7;  color: #222222;  box-sizing: border-box;  box-shadow: 0px 1px 5px #cfcccb;  background: linear-gradient(to bottom, #ebdeda 0%,#e0d0ca 100%);  transition-property: background-color;  transition-duration: 0.3s;  transition-timing-function: ease;  background-color: white;margin-left: 0.2rem;text-align: center;font-style: normal;line-height: 2.1rem;color: #f37032;font-size: 1.3rem;font-weight: bolder;margin-left: 8px;}
+
+
+
+.current_lottery_record div p {padding: 0;  display: flex; margin-top: 0.5rem;margin-left: 4px;}
+.current_lottery_record div p i{display: block;float: left;width:2rem; height: 2rem;  border-radius: 50%;  border: 1px solid #ddc2b7;  color: #222222;  box-sizing: border-box;  box-shadow: 0px 1px 5px #cfcccb;  background: linear-gradient(to bottom, #ebdeda 0%,#e0d0ca 100%);  transition-property: background-color;  transition-duration: 0.3s;  transition-timing-function: ease;  background-color: white;margin-left: 0.2rem;text-align: center;font-style: normal;line-height: 2.1rem;color: #f37032;font-size: 1.3rem;font-weight: bolder}
+
+
+/**
+	个十百千万
+	个十百千万
+ */
+.add_a_hundred_million_wp{width: 100%;height: auto;padding: 10px;}
+.add_a_hundred_million{width: 100%;height: auto;background: #f7f3f2;border-radius: 8px;border: 1px solid #dfd9d7}
+/**
+	万位内容
+ */
+.add_Thousands{width: 100%;height: 166px;border-bottom:1px solid #d1c8c6;}
+.add_Thousands:last-child{border-bottom: none}
+.add_Thousands_top{width: 100%;height: 112px;display: flex;}
+.add_Thousands_top p{ width: 16%;  height: 40px;  border-right: 1px solid #d1c8c6;  padding-left: 16px; line-height: 40px;  margin-top: 37px;color: #5d504d;font-weight: bolder;font-size: }
+.add_Thousands_top ul{width: 78%;height: 100%;padding: 10px 5px;}
+.add_Thousands_top ul li{float: left;margin: 0 0 0.5rem 0.65rem ;height: 2.7rem;  border-radius: 50%;  color: #222222;  box-sizing: border-box;background: #eaddd8;border: 1px solid #dec3b8;width: 2.7rem; line-height: 2.8rem; font-size: 1.4rem;  text-align: center;line-height: 2.8rem;}
+.add_Thousands_bottom{width: 100%;height: 45px;overflow: hidden}
+.add_Thousands_bottom ul{width: 287px; height: 39px;  border: 1px solid #ccc4c1;  border-radius: 3px;  border-right: none;  display: flex;  background: #e5dcd9;  margin-left: 74px;}
+.add_Thousands_bottom ul li{width:50%;height: 100%;background: #e5dcd9;border-right:1px solid #cec6c3;float: left;text-align: center;line-height: 39px;font-size: 1.2rem;color: #666666}
+.add_Thousands_bottom ul li:first-child{border-top-left-radius: 3px;border-bottom-left-radius: 3px;}
+.add_Thousands_bottom ul li:last-child{border-radius: 3px;}
+/**
+	底部加入购物车样式
+ */
+.footerNew{background: #fdfcf9}
+.footerNew .tzResult .zushu{color: #5c4f4c; font-size:13px!important;}
+.footerNew .tzResult .m_total_amout{color: #5c4f4c; font-size: 13px!important;}
+.footerNew .tzResult .num{color: #d7373d;font-weight: bolder;font-size: 13px;}
+.footerNew .addBtn{}
+.tzResult i{    display: inline-block;  font-size: 1.7rem;  color: #86726a;  margin-top: 2px;}
+
+/**
+	个十百万
+ */
+/*.selposition{background: #fdfcf9 }*/
+.selposition label{margin-left: 10px;}
+.selposition label:first-child{ margin-left: 15px;  }
+.selposition label:last-child{display: block}
+.selposition label input{
+	width: 18px;
+	height: 18px;
+	background: palevioletred;
+	z-index: 2;
+	left: 0px;
+	top: 0px;
+	color: #5c4f4c;
+	font-size: 1.3rem;
+	border-radius: 8px;
+	box-shadow: 0px 1px 5px #cec6c3 inset;
+	float: left;
+	margin-left: 11px;
+	margin-right: 5px;
+}
+.selposition label b{
+	display: block;
+	float: left;
+	margin-top: -4px;
+	font-weight: normal;
+	font-size: 18px;
+}
+.selposition label input.checked{    width: 15px;
+	height: 15px;
+	background: palevioletred;
+	z-index: 2;
+	left: 0px;
+	top: 0px;
+	color: #5c4f4c;
+	font-size: 1.3rem;
+	border-radius: 8px;
+	box-shadow: 0px 1px 5px #cec6c3 inset;}
+.selposition div{    width: 95%;
+	margin: 0 auto;
+	display: block;
+	clear: both;
+	text-align: left;}
+.selposition div>span{    padding-left: 10px;  line-height: 22px;  margin-left: 11px;color: #6f625f}
+#wei-shu b{
+	font-weight: normal;
+}
+
+.current_play_btn_mask{position: fixed;left: 0px;top: 0px;width: 100%;height: 100%;opacity: 0.3;background: #000;z-index: 888;display: none;}
+.current_play_btn_tip{position: fixed;width: 92%;left: 4%;height: auto;z-index: 999;background: #f7f3f2;display: none;min-height: 300px;border-radius: 5px;padding-bottom: 75px;}
+.current_play_btn_tip i{color: #e2454b;position: absolute;right: -12px;top: -10px;font-size: 25px;}
+.current_play_btn_tip h2{display: block;float: left;width: 100%;height: 50px;text-align: center;font-size: 20px;color: #e2454b;line-height: 50px;background: white;border-top-left-radius: 5px;border-top-right-radius: 5px;}
+.current_play_btn_tip ul{float: left;padding-top: 20px;padding-left: 15px;padding-right: 15px;}
+.current_play_btn_tip a{display: block;position: absolute;bottom: 10px;width: 80%;left: 10%;color: white;font-size: 20px;text-align: center;height: 50px;line-height: 50px;background: linear-gradient(to bottom, #e64f52 0%,#cb2a30 100%); border-radius: 5px;}
+.current_play_btn_tip ul li{line-height: 27px;}
+.current_play_btn_tip ul li:nth-child(1) span:nth-child(1){font-size: 16px;}
+.current_play_btn_tip ul li:nth-child(2) span:nth-child(1){font-size: 16px;}
+.current_play_btn_tip ul li:nth-child(3) span:nth-child(1){font-size: 16px;}
+
+/** 香港六合彩 球样式 **/
+.ball-icon { display: inline-block;width: 27px;height: 27px;background: url("../../images/ball.png") no-repeat;vertical-align: middle; }
+.ball-01 { background-position: 0 0; }
+.ball-02 { background-position: 0 -27px; }
+.ball-03 { background-position: 0 -54px; }
+.ball-04 { background-position: 0 -81px; }
+.ball-05 { background-position: 0 -108px; }
+.ball-06 { background-position: 0 -135px; }
+.ball-07 { background-position: 0 -162px; }
+.ball-08 { background-position: 0 -189px; }
+.ball-09 { background-position: 0 -216px; }
+.ball-10 { background-position: 0 -243px; }
+
+.ball-11 { background-position: -27px 0; }
+.ball-12 { background-position: -27px -27px; }
+.ball-13 { background-position: -27px -54px; }
+.ball-14 { background-position: -27px -81px; }
+.ball-15 { background-position: -27px -108px; }
+.ball-16 { background-position: -27px -135px; }
+.ball-17 { background-position: -27px -162px; }
+.ball-18 { background-position: -27px -189px; }
+.ball-19 { background-position: -27px -216px; }
+.ball-20 { background-position: -27px -243px; }
+
+.ball-21 { background-position: -54px 0; }
+.ball-22 { background-position: -54px -27px; }
+.ball-23 { background-position: -54px -54px; }
+.ball-24 { background-position: -54px -81px; }
+.ball-25 { background-position: -54px -108px; }
+.ball-26 { background-position: -54px -135px; }
+.ball-27 { background-position: -54px -162px; }
+.ball-28 { background-position: -54px -189px; }
+.ball-29 { background-position: -54px -216px; }
+.ball-30 { background-position: -54px -243px; }
+
+.ball-31 { background-position: -81px 0; }
+.ball-32 { background-position: -81px -27px; }
+.ball-33 { background-position: -81px -54px; }
+.ball-34 { background-position: -81px -81px; }
+.ball-35 { background-position: -81px -108px; }
+.ball-36 { background-position: -81px -135px; }
+.ball-37 { background-position: -81px -162px; }
+.ball-38 { background-position: -81px -189px; }
+.ball-39 { background-position: -81px -216px; }
+.ball-40 { background-position: -81px -243px; }
+
+.ball-41 { background-position: -108px 0; }
+.ball-42 { background-position: -108px -27px; }
+.ball-43 { background-position: -108px -54px; }
+.ball-44 { background-position: -108px -81px; }
+.ball-45 { background-position: -108px -108px; }
+.ball-46 { background-position: -108px -135px; }
+.ball-47 { background-position: -108px -162px; }
+.ball-48 { background-position: -108px -189px; }
+.ball-49 { background-position: -108px -216px; }
+
+/*** overwrite by feiker ***/
+.current_play_wp .current_play_btn_wp p{
+	font-size: 12px;
+	text-align: left;
+	margin: 0;
+	margin-left:10px;
+}
+.current_play_wp ul{
+	display: block;
+	width: 100%;
+	margin-left:10px;
+}
+.current_play_wp ul li{
+	display: inline-block;
+	float: left;
+	width: 21px;
+	height: 21px;
+	background: #fbf7f5;
+	margin: 5px 4px;
+	margin-left: 0;
+	color: #ff6a10;
+	line-height: 17px;
+	text-align: center;
+	border: 2px solid #f4efec;
+	border-radius: 50%;
+	font-weight: bold;
+}
+.current_play_wp button{
+	width: 32px;
+	height: 32px;
+	position: absolute;
+	right: 15px;
+	bottom: 3px;
+	border: none;
+	outline: none;
+	color: #999;
+	font-size: 20px;
+	text-indent: -9999px;
+	line-height: 32px;
+	background: url("../../images/nsc_m/lott/right-arrow.png") no-repeat center center;
+	background-size: 16px 16px;
+}
+.current_play_time_left{
+	width: 100%;
+	height: 30px;
+	margin-top: 0;
+	line-height: 30px;
+	border-bottom: 1px solid #e7e7e7;
+	box-shadow: 2px 2px 2px #e7e7e7;
+}
+.current_play_time_left h3{
+	margin-top:0;
+	font-size:12px;
+	color:#666;
+	float: left;
+}
+.current_play_time_left h3 span#count_down{
+	color:#FF4200;
+}
+.current_play_time_left p{
+	font-size:12px;
+	color:#666;
+}
+.current_play_time_left p button{
+	width: 30px;
+	height: 30px;
+	display: inline-block;
+	text-align: center;
+	line-height: 30px;
+	color: #FF4200;
+	position: static;
+	font-size: 12px;
+	padding: 0;
+	background: url("../../images/nsc_m/lott/down_arrow.png") no-repeat center center;
+	text-indent: -9999px;
+	background-size: 9px 7px;
+}
+.current_play_time_left p button.up{
+	transform: rotate(180deg);
+}
+
+.current_play_wp .current_play_btn_wp p span{
+	position: static;
+	font-size: 12px;
+}
+.current_play_wp .current_play_btn_wp p strong{
+	font-weight: normal;
+}
+.play_group,.history_nums{
+    display: none;
+    width: 100%;
+	background: rgba(0,0,0,0.6);
+    position: fixed;
+    top: 141px;
+    z-index: 555;
+    border-bottom: 1px solid lightgray;
+    font-size: 14px;
+	overflow: auto;
+}
+.play_group ul{
+    display: inline-block;
+    width: 50%;
+    float: left;
+	background: #fff;
+}
+.history_nums ul{
+	width: 100%;
+	background: #fff;
+	display: inline-block;
+	border-bottom: 1px solid #ddd;
+	padding: 0 12px;
+}
+.play_group ul li{
+    line-height: 30px;
+    text-align: center;
+    border-right: 1px solid lightgray;
+}
+.play_group ul li.active{
+	background: #FF4200;
+	color: #fff;
+}
+.play_group ul li:last-child{
+    border-bottom:none;
+}
+.play_group ul:last-child li{
+    border-right:none;
+}
+.history_nums p{
+	height: 20px;
+	background: #fff;
+	font-size: 12px;
+	color: #666666;
+	padding-left: 12px;
+	line-height: 20px;
+}
+.history_nums ul li{
+	display: inline-block;
+	float: left;
+	width: 21px;
+	height: 21px;
+	background: #fbf7f5;
+	margin: 5px 4px;
+	margin-left: 0;
+	color: #ff6a10;
+	line-height: 17px;
+	text-align: center;
+	border: 2px solid #f4efec;
+	border-radius: 50%;
+	font-weight: bold;
+}
+.footerNew{
+	background: #fff;
+}
+#lt_sel_insert{
+	background: linear-gradient(to bottom, #FF6C00 0%,#FF4200 100%);
+	box-sizing: border-box;
+	height: 34px;
+	line-height: 34px;
+	margin-top: 3px;
+	width: 70px;
+}
+.tzResult i{
+	display: none;
+}
+.footerNew .tzResult .num{
+	color:#FF4200!important;
+	font-weight: normal;
+	width: 57px;
+	border: none;
+}
+.footerNew .tzResult .zushu,.footerNew .tzResult .m_total_amout{
+	font-size:10px!important;
+	color:#666;
+}
+.footerNew .tzResult .m_total_amout{
+	border: 1px solid #ddd;
+	border-radius: 5px;
+	width: auto;
+	height: 30px;
+	line-height: 30px;
+	display: inline-block;
+	padding: 0 5px!important;
+	padding-right: 20px!important;
+}
+.lt_reset{
+	float: right;
+	margin-right: 84px;
+	margin-top: 7px;
+	height: 34px;
+	background: #ddd;
+	outline: none;
+	padding: 0 5px;
+	border: 1px solid #EAEAEA;
+	color: #757575;
+	border-radius: 5px;
+	font-size: 13px;
+	width: 54px;
+    position: relative;
+    z-index: 9999;
+}
+#all-amount{
+	width: 43px;
+	text-align: left;
+}
+.footerUp{
+	position: fixed;
+	bottom: 50px;
+	/*background: #fff;*/
+	left: 0;
+	width: 100%;
+    /*z-index: 8888;*/
+    text-align: center;
+}
+.footerUp_a{background: white;}
+.footerUp.up{
+	border-bottom: 1px solid #ddd;
+}
+.footerUp p{
+	width: 100%;
+	height: 32px;
+	border-bottom:1px solid #ddd;
+	line-height: 32px;
+	text-align: center;
+	font-size:14px;
+	color:#666666;
+	box-shadow: -1px -1px 1px #ddd;
+}
+.footerUp p span{
+	width: 24%;
+	display: inline-block;
+}
+.footerUp p span:first-child{
+	color:#FF4900;
+}
+.footerUp ul{
+	display: inline-block;
+	max-height: 160px;
+	overflow: auto;
+	display: none;
+}
+.footerUp ul li{
+	width: 100%;
+	height: 32px;
+	overflow: hidden;
+	line-height: 32px;
+	box-sizing: border-box;
+	padding:0 10px;
+	display: inline-block;
+	border-bottom: 1px solid #FFF5F5F5;
+}
+.footerUp ul li:last-child{
+	border-bottom: none;
+}
+.footerUp ul li i{
+	font-style: normal;
+	font-size:14px;
+	color:#666;
+}
+.footerUp ul li button{
+	float: right;
+	border: none;
+	outline: none;
+	background: none;
+	font-size: 12px;
+	color: #666;
+	background: url(../../images/nsc_m/lott/del.png) no-repeat left center;
+	width: 47px;
+	text-align: right;
+	background-size: 12px 13px;
+}
+/*******弹框区*******/
+.cover_all{
+	position: fixed;
+	left:0;
+	right: 0;
+	top:0;
+	bottom:0;
+	background: rgba(0,0,0,0.8);
+	z-index: 2000;
+	display: none;
+}
+.cover_all .content{
+	width: 90%;
+	background: #fff;
+	position: absolute;
+	left: 5%;
+	top: 15%;
+	border-radius: 5px;
+	overflow: visible;
+}
+.cover_all .content .close{
+	width: 18px;
+	height: 18px;
+	line-height: 13px;
+	background: #FF4200;
+	border: 1px solid #fff;
+	text-align: center;
+	color: #fff;
+	position: absolute;
+	right: -9px;
+	top: -9px;
+	border-radius: 50%;
+	font-style: normal;
+}
+.cover_all .content h3{
+	width: 100%;
+	height: 42px;
+	line-height: 42px;
+	text-align: center;
+	color:#FF4200;
+	font-size:16px;
+	border-bottom: 1px solid #ddd;
+	margin-bottom: 5px;
+}
+.cover_all .content p{
+	width: 100%;
+	height: 36px;
+	box-sizing: border-box;
+	padding-left:10px;
+	font-size:13px;
+	color:#666666;
+	line-height: 36px;
+}
+.hide{
+	display: none;
+}
+.cover_all .content p .range{
+	width: 154px;
+	height: 9px;
+	background: #fecfbf;
+	display: inline-block;
+	box-sizing: border-box;
+	padding-top: 2px;
+	border-radius: 5px;
+	padding-left: 2px;
+}
+.cover_all .content p strong{
+	font-weight: normal;
+}
+/*.slider-container .clickable-dummy{
+	background: #fff;
+}*/
+.cover_all .content p select{
+	height: 28px;
+	text-align: center;
+	padding: 3px;
+	box-sizing: border-box;
+	border-color:#ddd;
+	color: #FF4200;
+	border-radius: 5px;
+}
+.cover_all .content p span.last{
+	margin-left:20px;
+}
+.bet_detail{
+	width: 94%;
+	max-height: 155px;
+	overflow: auto;
+	padding: 10px;
+	box-sizing: border-box;
+	border: 1px solid #ddd;
+	margin-left: 3%;
+	border-radius: 5px;
+	color:#5C4F4C;
+	margin: 5px auto;
+}
+
+.bet_detail table tr{
+	height: 23px;
+}
+.bet_detail table th{
+	font-size:12px;
+	font-weight: normal;
+}
+.bet_detail table td{
+	font-size:11px;
+	text-align: center;
+}
+.cover_all .sum{
+	width: 100%;
+	height: 20px;
+	box-sizing: border-box;
+	padding-left: 10px;
+	font-size: 13px;
+	color: #5C4F4C;
+	line-height: 20px;
+	margin: 5px auto;
+}
+.cover_all .sum span.last{
+	margin-left:20px;
+}
+
+.cover_all .sum strong{
+	color: #FF4200;
+	font-size: 18px;
+	position: relative;
+	top: 3px;
+	font-weight: 400;
+}
+.cover_all button{
+	width: 94%;
+	margin-left: 3%;
+	height: 44px;
+	margin-top: 10px;
+	background: linear-gradient(to right, #FF6C00 0%, #FF4200 50%,#FF4200 100%);
+	border: none;
+	outline: none;
+	font-size: 18px;
+	line-height: 44px;
+	color: #fff;
+	border-radius: 5px;
+	margin-bottom: 20px;
+}
+.cover_all#future_nums{
+	top:44px;
+	overflow: auto;
+}
+.cover_all#future_nums .content{
+	width: 100%;
+	top: 0;
+	left: 0;
+	border-radius: 0;
+	background: #F5F5F5;
+}
+.cover_all#future_nums .content p{
+	background: #fff;
+	font-size: 15px;
+	height: 45px;
+	line-height: 45px;
+}
+.cover_all#future_nums .content p input{
+	width: 25%;
+	border: 1px solid #DDDDDD;
+	border-radius: 5px;
+	outline: none;
+	text-align: center;
+	font-size:20px;
+	color:#FF4200;
+	font-weight: normal;
+}
+.cover_all#future_nums .content button{
+	width: 80px;
+	height: 28px;
+	font-size: 13px;
+	line-height: 28px;
+	float: right;
+	margin-right: 14px;
+	margin-top: 3px;
+}
+
+.cover_all#future_nums .content .plans{
+	background: #fff;
+	margin-top: 10px;
+	box-sizing: border-box;
+}
+.cover_all#future_nums .content .plans.more{
+	padding-bottom: 50px;
+}
+.cover_all#future_nums .content .plans table{
+	width: 98%;
+	margin-left:1%;
+	font-size:12px;
+	color:#666;
+}
+.cover_all#future_nums .content .plans table tr th{
+	font-weight: normal;
+	width: 30%;
+	line-height: 30px;
+}
+.cover_all#future_nums .content .plans table tr th:first-child{
+	width: 40%;
+}
+.cover_all#future_nums .content .plans table tr td{
+	border-top:1px solid #ddd;
+	text-align: center;
+	line-height: 40px;
+}
+.cover_all#future_nums .content .plans table tr td input[type=checkbox]{
+	width: 16px;
+	height: 16px;
+	margin-right: 5px;
+	position: relative;
+	top: 4px;
+}
+.cover_all#future_nums .content .plans table tr td input[type=text]{
+	width: 60%;
+	border-radius: 5px;
+	border:1px solid #ddd;
+	height: 25px;
+	text-align: center;
+	font-size: 15px;
+	color:#FF4200;
+}
+.cover_all#future_nums .bottom{
+	width: 100%;
+	height: 45px;
+	background: #fff;
+	position: fixed;
+	bottom: 0;
+	font-size: 12px;
+	line-height: 45px;
+}
+.cover_all#future_nums .bottom button{
+	width: 90px;
+	height: 34px;
+	line-height: 34px;
+	font-size: 13px;
+	float: right;
+	margin-top: 6px;
+	margin-right: 2%;
+}
+.cover_all#future_nums .bottom button:last-child{
+	width: 54px;
+	color:#757575;
+	background: #EAEAEA;
+	border:1px solid #ddd;
+	margin-right: 0px;
+}
+.cover_all#future_nums .bottom input[type=checkbox]{
+	width: 15px;
+	height: 15px;
+	margin-right: 5px;
+	position: relative;
+	top:4px;
+	margin-left:2%;
+}
+
+.num-table .pp #wei-shu, .num-table .bp #wei-shu{
+	text-align: left;
+	margin-top:0px;
+}
+
+.num-table .pp #wei-shu label, .num-table .bp #wei-shu label{
+	width: 36px;
+	height: 36px;
+	margin-right: 10px;
+	background: #fff;
+	border: 1px solid #e7e7e7;
+	border-radius: 5px;
+	text-align: center;
+	line-height: 36px;
+	color: #7e7573;
+	font-size: 18px;
+}
+.num-table .pp #wei-shu label.active, .num-table .bp #wei-shu label.active{
+	color:#fff;
+	background: #ff4a0b;
+}
+.num-table .pp #wei-shu input[type='checkbox'], .num-table .bp #wei-shu input[type='checkbox']{
+	display: none;
+}
+.square_conatiners_addClass,.total_conatiners_addClass{
+	background: none;
+	border: none;
+	box-shadow: none;
+	height: auto;
+}
+input.code.min.square_wp_addClass,input.code.min.total_wp_addClass{
+	margin-top: 0;
+}
+input.code.min.square_wp_addClass.checked,input.code.min.total_wp_addClass.checked{
+	margin-top:0;
+	background:#ff642e;
+}
+input.code.min.ssc_3x_pp5_containers_input.checked{
+	background:#ff642e;
+	color: #fff;
+	height: 2.7rem;
+	line-height: 2.7rem;
+}
+
+#table-common.table-common-reset table tr th{
+	height: 24px;
+	text-align: left;
+	/*background: url("/gfwf/images/nsc_m/lott/touzhu_qian_bg.png") no-repeat left center;
+	background-size: auto 100%;
+	background-position-x: 5px;*/
+	color: #fff;
+	box-sizing: border-box;
+}
+#table-common.table-common-reset table tr th i{
+	display: inline-block;
+	background: url("/gfwf/images/nsc_m/lott/touzhu_qian_bg.png") no-repeat left center;
+	background-size: 94% 100%;
+	background-position-x: 5px;
+	padding-right: 20px;
+	padding-left: 9px;
+	font-style: normal;
+}
+#table-common.table-common-reset table td{
+	height: 40px;
+}
+
+#table-common.table-common-reset table td strong{
+	background: #fff;
+	width: 90%;
+	margin-top: 5px;
+	margin-bottom: -5px;
+	height: 35px;
+	line-height: 13px;
+}

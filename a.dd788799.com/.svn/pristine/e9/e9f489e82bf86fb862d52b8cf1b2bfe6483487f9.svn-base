@@ -1,0 +1,70 @@
+<input type="hidden" name="playedGroup" value="<?=$groupId?>"/>
+<input type="hidden" name="playedId" value="<?=$playedId?>"/>
+<input type="hidden" name="type" value="<?=$type?>"/>
+<input type="hidden" name="playedName" value="<?=$played['name']?>"/>
+<!-- mobile 江苏快3_二同号单选 -->
+<div id="sscContent">
+    <div class="lot-content clearfix">
+        <div class="fl main-left re-main-left">
+            <div class="table-common table-common-reset" id="table-common">
+                <script type="text/html" id="k3_2dx">
+                    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                        <thead>
+                        <tr>
+                            <th colspan="6"><i>二同号单选</i><strong>@<span class="pl red" data-plid="{{pls[0].pls[0].id}}">{{pls[0].pls[0].pl}}</span></strong>
+                            </th>
+                        </tr>
+                        </thead>
+                        <tbody class="tr_check pp" action="k3_2dx" length="2">
+                        {{each pls[0].arr val idx}}
+                            <tr>
+                                {{each val value index}}
+                                <td idx="{{value-1}}"><strong style="line-height: 26px;">{{value}}{{value}}</strong></td>
+                                <td  style="display: none;"><input type="checkbox" data-name="{{pls[0].name}}-{{value}}{{value}}" value="{{value}}{{value}}"></td>
+                                {{/each}}
+                            </tr>
+                        {{/each}}
+                        </tbody>
+                    </table>
+                    <table width="100%" border="0" cellspacing="0" cellpadding="0" style="margin-top:25px;">
+                        <tbody class="tr_check pp" action="k3_2dx" length="2">
+                        {{each pls[0].arr val idx}}
+                        <tr>
+                            {{each val value index}}
+                            <td idx="{{value-1}}"><strong style="line-height: 26px;">{{value}}</strong></td>
+                            <td style="display: none;"><input type="checkbox" data-name="{{pls[0].name}}-{{value}}" value="{{value}}{{value}}"></td>
+                            {{/each}}
+                        </tr>
+                        {{/each}}
+                        </tbody>
+                    </table>
+                </script>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    $(function () {
+        var playedId = "<?=$playedId?>";
+        $.getJSON("/game/pl/playedId/" + playedId, function (data) {
+            pls = data;
+            pls[0].arr = [[1,2],[3,4],[5,6]];
+            console.log(pls);
+            var html = template("k3_2dx", {pls: pls});
+            $('.table-common').html(html);
+        });
+    });
+    // checkbox can not the same at same place of td.
+    $('.table-common table td:visible').live('click', function (evt) {
+
+        var index = $(this).attr('idx');
+        var _sibling = $(this).parents('table').siblings().find('td:visible').eq(index);
+        console.log(_sibling)
+        if(_sibling.hasClass('picked')){
+            //setTimeout(function () {
+            _sibling.trigger('click');
+            //},50);
+        }
+        setQuickPick(this,true);
+    })
+</script>

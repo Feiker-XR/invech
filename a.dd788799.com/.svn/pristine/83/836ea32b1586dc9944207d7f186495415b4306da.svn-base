@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="zh-cn">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>会员中心</title>
+    <link rel="stylesheet" type="text/css" href="/static/theme/memberTheme/theme1/member/css/reset.css?v=20170715">
+    <link rel="stylesheet" type="text/css" href="/static/theme/memberTheme/theme1/member/css/hpn-common.css">
+    <link rel="stylesheet" type="text/css" href="/static/theme/memberTheme/theme1/member/css/index.css?v=20171117">
+    <link rel="stylesheet" type="text/css" href="/static/theme/memberTheme/theme1/member/css/global.css">
+    <script>
+        <!--
+//        window.onerror=function(){return true;}
+        // -->
+    </script>
+    <script>
+    <!--
+    // 屏蔽JS错误
+//    window.onerror = function(){return true;}
+    // -->
+</script>
+<script>
+    var CONFIG = {
+        BASEURL: "/",    // 根路径
+        RESURL: "/static/theme/memberTheme/theme1/"         // 资源路径
+    };
+</script>
+<script src="/static/theme/memberTheme/theme1/js/mobile-detect.min.js"></script><script>
+    var fengge1 = 'f42023';
+</script>
+<style>
+
+        .reResulttBg{background: #f42023;} 
+        .process .layout .monty ul li,.process .layout .list_tems .date:after,.list ul li .slide p.acti,.headmemberbg{background: #f42023;}
+        .process .layout .list_tems .date span, .process .layout .list_tems .date h3,.eveb_amount span,.color-e77c3c,.eveb_setting_table a,.xieyiCss，.gcdtgd{color: #f42023!important;}
+        .eveb_sub_nav_type a:hover, .eveb_sub_nav_type li.on a:link, .eveb_sub_nav_type li.on a:visited{color: #f42023!important;font-weight: 700;border-bottom-color: #e1e1e1;background: #f8f8f8;}
+        .list ul li .slide p:hover,.letterbtn-bg{background: #f42023!important;color: white;}
+        .list h3 a{background: #f42023;border-bottom: 3px solid #a92309; height: 47px; line-height: 47px;}
+        .help_l_menu li .t.sli{border-left: 5px solid #f42023;}
+        .withdraw-bg-input{border: 2px solid #f42023!important;}
+        .clearBet_template .l span i{background: #f42023 url(/static/theme/memberTheme/theme1//img/tm-mdl-icon.png) no-repeat!important; border-radius: 50%;background-position: 0 41%!important;}
+
+
+
+        .eveb_nav_sub .on,.button_1, .button_1:link, .button_1:visited,.alert_col h5,.onlineService,.layui-layer-popup .layui-layer-title,.xzqd,.xzqdlskj,.game_name .box2_stage p span i.acti,.Betting,.Single,.list_ject ul li .Result p a.acti,.list_ject ul li .Result p a.acti:hover,.top{background:#f42023!important}
+        .eveb_nav_sub .on a,.bankInfo .name,.help_l_menu .title p .sum,.help_r_main .light,.game_name .box2_stage p span i,.game_name .box1_name  p i,.Account p a.red{color:#f42023!important}
+        .eveb_nav_sub .on,.game_name .box2_stage p span{border:1px solid #f42023!important;}
+        .eveb_nav_sub .on,.game_name .box2_stage p span i.acti{color:#fff!important;}
+        .eveb_nav_sub .on a{border-top:1px #f42023 solid!important;}
+        .eveb_nav_sub ul{border-bottom:1px #f42023 solid!important;}
+        #apptop{background: #f42023}
+        .alert_col div::-webkit-scrollbar-thumb {background-color: #f42023!important;}
+    </style>
+<style>
+
+
+        .head div h5,.Betting .tabs ul li,.top .nav h1{background:#d51910!important}
+        .jf_box .url a,.eveb_form label.error,.eveb_transfer_box .center_wallet .money,.eveb_transfer_box .wallet_list li p{color:#d51910!important}
+        .Betting .tabs ul li.acti{background:#fff!important}
+        .button_1, .button_1:link, .button_1:visited{border:1px solid #d51910!important;}
+        .copy{float: right}
+        .eveb_form{width: 60%;float: left}
+        .eveb_form1{width: 20%;float: right}
+        .eveb_form_submit{clear: both}
+        .eveb_form1 h4{font-size: 16px; font-weight: bold;}
+        .eveb_form1 p{margin-left: 60px;font-size: 14px}
+    </style>
+</head>
+<body>
+<div class="eveb_content">
+    <div class="eveb_nav_sub">
+        <ul class="clearfix">
+            {foreach $sets as $set}
+            <li {if $set['id']==$id}class='on'{/if}><a href="?id={$set['id']}">{$set['extra']['bank_name']}</a></li>
+            {/foreach}
+        </ul>
+    </div>
+    <form name="resetPasswordForm" novalidate="novalidate" method="post" action="?id={$set['id']}">
+        <ul class="eveb_form">
+        {if $current['type']=='1'}
+            <li id="skxx">
+                <span>收款信息：</span>
+                <div class="bankInfo">
+                    <div class="name">{$current['extra']['bank_name']}</div>
+                    <p class="info">银行账号：
+                    <b class="color-1272e8 fwn">{$current['extra']['bank_account']}</b><a class="copy" href="javascript:;" data-clipboard-text="{$current['extra']['bank_account']}">点我复制</a></p>
+                    <p class="user">开户姓名：<b>{$current['extra']['bank_username']}</b><a class="copy" href="javascript:;" data-clipboard-text="{$current['extra']['bank_username']}">点我复制</a></p>
+                </div>
+            </li>
+            {else}
+            <li id="wxxx">
+            <span>昵称信息：</span>
+                <div class="bankInfo">
+                    <p><img src="{$current['extra']['qrcode']}" alt="" width="240" height="240" class="img-responsive __web-inspector-hide-shortcut__" style="margin:auto;"></p>
+                    <div class="name">请使用{$current['extra']['bank_name']}扫码完成付款，或转账给以下{$current['extra']['bank_name']}账号</div>
+                    <p>收款帐号：{$current['extra']['bank_account']}<a class="copy" href="javascript:;" data-clipboard-text="{$current['extra']['bank_account']}">点我复制</a></p>
+                    <p>收款人：{$current['extra']['bank_username']}<a class="copy" href="javascript:;" data-clipboard-text="{$current['extra']['bank_username']}">点我复制</a></p>
+                    <p>尊敬的400w用户，您好！公司新增财务{$current['extra']['bank_name']}，扫描上方二维码转账成功后提交您的入款订单即可，谢谢！</p>
+                </div>
+            </li>
+            {/if}
+            <li>
+                <span>金额：</span>
+                <input name="amount" id="amount" type="text" size="20" class="passwinp">
+                <label class="error" for="oldPassword">* </label>
+            </li>
+            {if $current['type']=='1'}
+            <li>
+                <span>帐户名：</span>
+                <input name="bank_username" id="newpassword" type="text" size="20" class="passwinp">
+                <label class="error" for="newpassword">* </label>
+            </li>
+            {else}
+            <input name="bank_name" type="hidden" value="{$current['extra']['bank_name']}" class="passwinp">
+            <li>
+                <span>用户名：</span>
+                <input name="bank_account" id="newpassword" type="text" size="20" class="passwinp">
+                <label class="error" for="newpassword">* </label>
+            </li>
+            <li>
+                <span>认证姓名：</span>
+                <input name="bank_username" type="text" size="20" class="passwinp">
+                <label class="error" for="confirmPassword">* </label>
+            </li>
+            {/if}
+        </ul>
+        {if $current['type']=='1'}
+        <div class="eveb_form1">
+            <h4>常用网银网址:</h4>
+            <p><a target="_blank" href="http://www.icbc.com.cn/">工商银行</a></p>
+            <p><a target="_blank" href="http://www.ccb.com/">建设银行</a></p>
+            <p><a target="_blank" href="http://www.abchina.com/cn/">农业银行</a></p>
+            <p><a target="_blank" href="http://www.bankcomm.com">交通银行</a></p>
+            <p><a target="_blank" href="http://www.boc.cn/">中国银行</a></p>
+             <p><a target="_blank" href="http://www.cebbank.com/">光大银行</a></p>
+              <p><a target="_blank" href="http://www.cmbc.com.cn/">民生银行</a></p>
+              <p><a target="_blank" href="http://www.psbc.com/">邮政银行</a></p>
+        </div>
+        {/if}
+        <div class="eveb_form_submit">
+            <input type="submit" value="确认" class="button_medium button_1">
+            <input type="reset" value="返回" class="ml_10 button_medium button_3" onclick="location.href='/pay/index'">
+        </div>
+    </form>
+</div>
+<script type="text/javascript" src="/skin/js/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="/node_modules/clipboard/dist/clipboard.min.js"></script>
+<script type="text/javascript" src="/js/global.js"></script>
+<script>
+    $(function() {
+        parent.hideLoading();
+        var clipboard = new ClipboardJS('.copy');
+        clipboard.on('success', function(e) {
+            e.clearSelection();
+            ShowMsg("已复制");
+        });
+        $("#amount").keyup(function () {
+            var obj = this;
+            obj.value = obj.value.replace(/[^\d.]/g, "");
+            obj.value = obj.value.replace(/^\./g, "");
+            obj.value = obj.value.replace(/^0/g, "");
+            obj.value = obj.value.replace(/\.{2,}/g, ".");
+            //确保只有一次小数点出现
+            obj.value = obj.value.replace(".", "#").replace(/\./g, "").replace("#", ".");
+            //确保小数点后是两位数字
+            if (obj.value.indexOf(".") > 0 && obj.value.indexOf(".") + 4 <= obj.value.length) {
+                obj.value = obj.value.substr(0, obj.value.indexOf(".") + 3);
+            }
+            $("#amount").val(obj.value);
+        });
+    });
+</script>
+</body>
+</html>
